@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Tag Generator | Free AI-Powered Meta Tags</title>
+    <meta name="description"
+        content="Generate perfect SEO meta tags, Open Graph tags, and Twitter cards for your website. Free AI-powered tool — paste your content and get optimized tags instantly.">
+    <meta name="keywords"
+        content="seo tag generator, meta tag generator, open graph generator, twitter card generator, seo tool, free seo">
+    <meta property="og:title" content="SEO Tag Generator | Free AI-Powered Meta Tags">
+    <meta property="og:description" content="Generate optimized SEO tags for any webpage. Free, instant, no signup.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#lg)" stroke-width="2.5" />
+                <path d="M8 12l4-4 4 4M16 12l4-4 4 4M12 24V10M20 24V10" stroke="url(#lg)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <defs>
+                    <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32">
+                        <stop stop-color="#6366f1" />
+                        <stop offset="1" stop-color="#22c55e" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span>MetaForge</span>
+        </div>
+        <nav>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🔍 AI-Powered SEO Tags — Free Forever</div>
+            <h1>SEO <span class="accent">Meta Tag</span> Generator</h1>
+            <p class="subtitle">Describe your page or paste your content. Get optimized title tags, meta descriptions,
+                Open Graph, and Twitter Card markup — ready to copy into your HTML.</p>
+        </section>
+
+        <section class="generator-card" id="generator">
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="page-type">Page Type</label>
+                    <select id="page-type">
+                        <option value="homepage">Homepage</option>
+                        <option value="blog-post">Blog Post</option>
+                        <option value="product">Product Page</option>
+                        <option value="landing-page">Landing Page</option>
+                        <option value="about">About Page</option>
+                        <option value="service">Service Page</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="page-title">Page Title or Topic <span class="required">*</span></label>
+                    <input type="text" id="page-title" placeholder="e.g., Best Running Shoes for Beginners in 2026"
+                        maxlength="200">
+                    <span class="char-count" id="title-count">0 / 200</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="page-description">Page Content or Description <span class="required">*</span></label>
+                    <textarea id="page-description"
+                        placeholder="Describe what this page is about, or paste the main content. The more detail you provide, the better the tags..."
+                        rows="5" maxlength="2000"></textarea>
+                    <span class="char-count" id="desc-count">0 / 2000</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="target-keywords">Target Keywords <span class="optional">(optional)</span></label>
+                        <input type="text" id="target-keywords"
+                            placeholder="e.g., running shoes, beginner runner, 2026">
+                    </div>
+                    <div class="form-group">
+                        <label for="brand-name">Brand / Site Name <span class="optional">(optional)</span></label>
+                        <input type="text" id="brand-name" placeholder="e.g., ShoeWizard">
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="generate-btn" onclick="generateTags()">
+                    <span class="btn-icon">✨</span>
+                    <span class="btn-text">Generate SEO Tags</span>
+                    <span class="btn-loading" style="display:none;">Generating...</span>
+                </button>
+            </div>
+
+            <div id="results" class="results hidden">
+                <div class="result-section">
+                    <div class="result-header">
+                        <h3>📌 Title Tag</h3>
+                        <div class="result-actions">
+                            <span class="tag-length" id="title-tag-length"></span>
+                            <button class="copy-btn" onclick="copyBlock('title-tag')">Copy</button>
+                        </div>
+                    </div>
+                    <pre class="code-block" id="title-tag"></pre>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-header">
+                        <h3>📝 Meta Description</h3>
+                        <div class="result-actions">
+                            <span class="tag-length" id="desc-tag-length"></span>
+                            <button class="copy-btn" onclick="copyBlock('desc-tag')">Copy</button>
+                        </div>
+                    </div>
+                    <pre class="code-block" id="desc-tag"></pre>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-header">
+                        <h3>🌐 Open Graph Tags</h3>
+                        <button class="copy-btn" onclick="copyBlock('og-tags')">Copy</button>
+                    </div>
+                    <pre class="code-block" id="og-tags"></pre>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-header">
+                        <h3>🐦 Twitter Card</h3>
+                        <button class="copy-btn" onclick="copyBlock('twitter-tags')">Copy</button>
+                    </div>
+                    <pre class="code-block" id="twitter-tags"></pre>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-header">
+                        <h3>📋 Complete Head Block</h3>
+                        <button class="copy-btn" onclick="copyBlock('full-block')">Copy All</button>
+                    </div>
+                    <pre class="code-block" id="full-block"></pre>
+                </div>
+
+                <div class="serp-preview">
+                    <h3>🔎 Google SERP Preview</h3>
+                    <div class="serp-card">
+                        <div class="serp-url" id="serp-url">example.com › page</div>
+                        <div class="serp-title" id="serp-title"></div>
+                        <div class="serp-desc" id="serp-desc"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>1. Describe Your Page</h3>
+                    <p>Enter your page title, content description, and optionally target keywords.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>2. AI Generates Tags</h3>
+                    <p>Our engine crafts optimized title tags, meta descriptions, OG tags, and Twitter cards.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>3. Copy & Paste</h3>
+                    <p>Copy the generated HTML tags directly into your website's &lt;head&gt; section.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>4. Rank Higher</h3>
+                    <p>Properly optimized meta tags improve click-through rates from search results.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What are meta tags?</summary>
+                    <p>Meta tags are HTML elements in your page's &lt;head&gt; section that tell search engines and
+                        social media platforms about your page's content, title, and description.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How long should a title tag be?</summary>
+                    <p>Google typically displays the first 50–60 characters of a title tag. MetaForge keeps your titles
+                        within this range for optimal display.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What are Open Graph tags?</summary>
+                    <p>Open Graph (OG) tags control how your page appears when shared on Facebook, LinkedIn, and other
+                        social platforms. They define the title, description, and image shown in the share preview.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is this tool free?</summary>
+                    <p>Yes — MetaForge is completely free with no signup required. Use it as many times as you need.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by <strong>CyberScryb LLC</strong> &copy; 2026. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
