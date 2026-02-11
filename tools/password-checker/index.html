@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker | Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Check your password strength instantly. Real-time entropy analysis, crack time estimates, and improvement suggestions. Free, private — your password never leaves your browser.">
+    <meta name="keywords"
+        content="password strength checker, password tester, password security, how strong is my password, password entropy">
+    <meta property="og:title" content="Password Strength Checker | Free Online Tool">
+    <meta property="og:description"
+        content="Test your password strength with real-time entropy analysis and crack time estimates. 100% private.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <path d="M16 8v8l4 4" stroke="#c41e1e" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <circle cx="16" cy="16" r="7" stroke="#c41e1e" stroke-width="1.5" fill="none" />
+            </svg>
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="../../content-site/index.html">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🔐 100% Private — Nothing Leaves Your Browser</div>
+            <h1>Password <span class="accent">Strength</span> Checker</h1>
+            <p class="subtitle">Test your password with real-time entropy analysis, crack time estimates, and actionable
+                improvement tips.</p>
+        </section>
+
+        <section class="checker-card" id="checker">
+            <div class="input-group">
+                <div class="password-field">
+                    <input type="password" id="passwordInput" placeholder="Enter your password..." autocomplete="off"
+                        spellcheck="false">
+                    <button class="toggle-vis" id="toggleVis" title="Toggle visibility">👁</button>
+                </div>
+                <button class="generate-btn" id="generateBtn" title="Generate strong password">⚡ Generate</button>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="meter-bar">
+                    <div class="meter-fill" id="meterFill"></div>
+                </div>
+                <div class="meter-label" id="meterLabel">Enter a password to check</div>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="results hidden">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Entropy</div>
+                        <div class="stat-value" id="entropy">—</div>
+                        <div class="stat-unit">bits</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Crack Time</div>
+                        <div class="stat-value" id="crackTime">—</div>
+                        <div class="stat-unit" id="crackContext"></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Length</div>
+                        <div class="stat-value" id="length">—</div>
+                        <div class="stat-unit">characters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Charset</div>
+                        <div class="stat-value" id="charset">—</div>
+                        <div class="stat-unit" id="charsetSize">pool size</div>
+                    </div>
+                </div>
+
+                <!-- Composition -->
+                <div class="composition">
+                    <h3>Composition</h3>
+                    <div class="comp-grid">
+                        <div class="comp-item" id="hasLower"><span class="comp-icon">✗</span> Lowercase</div>
+                        <div class="comp-item" id="hasUpper"><span class="comp-icon">✗</span> Uppercase</div>
+                        <div class="comp-item" id="hasDigits"><span class="comp-icon">✗</span> Numbers</div>
+                        <div class="comp-item" id="hasSymbols"><span class="comp-icon">✗</span> Symbols</div>
+                    </div>
+                </div>
+
+                <!-- Warnings -->
+                <div id="warnings" class="warnings hidden">
+                    <h3>⚠️ Warnings</h3>
+                    <ul id="warningList"></ul>
+                </div>
+
+                <!-- Tips -->
+                <div id="tips" class="tips">
+                    <h3>Suggestions</h3>
+                    <ul id="tipsList"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Entropy Analysis</h3>
+                    <p>Calculates the information entropy of your password based on character pool size and length.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱</div>
+                    <h3>Crack Time Estimate</h3>
+                    <p>Estimates how long a brute-force attack would take at 10 billion guesses per second.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡</div>
+                    <h3>Pattern Detection</h3>
+                    <p>Identifies common patterns like dictionary words, keyboard walks, repeated characters, and
+                        sequences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Client-Side</h3>
+                    <p>Your password never leaves your browser. No network requests, no logging, no tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is my password uploaded to a server?</summary>
+                    <p>No. Everything runs in your browser using JavaScript. Your password is never transmitted
+                        anywhere. You can verify by checking the network tab in your browser's developer tools.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is password entropy?</summary>
+                    <p>Entropy measures the unpredictability of a password in bits. A password with 80+ bits of entropy
+                        is considered very strong. The formula is: <code>entropy = log2(pool_size^length)</code>.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How is crack time calculated?</summary>
+                    <p>We estimate based on 10 billion guesses per second (GPU-accelerated brute force). Real-world
+                        attacks may be faster or slower depending on the hashing algorithm used.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is a long password always better?</summary>
+                    <p>Length is the strongest factor, yes. A 16-character password from a large character set is
+                        exponentially harder to crack than an 8-character one. But avoid using common phrases or
+                        patterns even in long passwords.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — Your password never leaves this page.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

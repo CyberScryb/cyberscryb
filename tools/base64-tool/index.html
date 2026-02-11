@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder / Decoder | Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Encode and decode Base64 strings instantly. Free online tool — supports text, URLs, and file encoding. No signup, 100% client-side.">
+    <meta name="keywords"
+        content="base64 encoder, base64 decoder, base64 online, encode base64, decode base64, base64 converter">
+    <meta property="og:title" content="Base64 Encoder / Decoder | Free Online Tool">
+    <meta property="og:description" content="Encode and decode Base64 instantly. Free, private, no signup required.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <text x="8" y="22" font-family="monospace" font-size="14" font-weight="bold" fill="#c41e1e">B64</text>
+            </svg>
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="../../content-site/index.html">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">⚡ Instant — No Signup Required</div>
+            <h1>Base64 <span class="accent">Encoder</span> / Decoder</h1>
+            <p class="subtitle">Encode text to Base64 or decode Base64 back to text. Supports URL-safe encoding. 100%
+                client-side.</p>
+        </section>
+
+        <section class="converter-card" id="converter">
+            <div class="mode-toggle" id="modeToggle">
+                <button class="mode-btn active" data-mode="encode" onclick="setMode('encode')">Encode</button>
+                <button class="mode-btn" data-mode="decode" onclick="setMode('decode')">Decode</button>
+                <div class="toggle-indicator"></div>
+            </div>
+
+            <div class="panels">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 id="inputLabel">Input — Plain Text</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="clearInput()">Clear</button>
+                            <button class="icon-btn" onclick="loadSample()">Sample</button>
+                        </div>
+                    </div>
+                    <textarea id="inputArea" placeholder="Paste your text here..."></textarea>
+                    <div class="panel-footer">
+                        <span class="stats" id="inputStats">0 chars</span>
+                        <div class="options">
+                            <label class="option-label">
+                                <input type="checkbox" id="urlSafe"> URL-safe
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <button class="convert-btn" onclick="convert()">
+                        <span id="btnText">Encode</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 id="outputLabel">Output — Base64</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="copyOutput()">Copy</button>
+                            <button class="icon-btn" onclick="downloadOutput()">Download</button>
+                        </div>
+                    </div>
+                    <textarea id="outputArea" readonly placeholder="Result will appear here..."></textarea>
+                    <div class="panel-footer">
+                        <span class="stats" id="outputStats">0 chars</span>
+                        <span class="stats" id="sizeInfo"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-bar hidden" id="errorBar">
+                <span>⚠️</span>
+                <span id="errorMsg"></span>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Bidirectional</h3>
+                    <p>Encode text to Base64 or decode Base64 back to plain text with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>URL-Safe Mode</h3>
+                    <p>Enable URL-safe encoding that replaces + with - and / with _ for use in URLs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>No Size Limit</h3>
+                    <p>Process any amount of text — everything runs in your browser with no upload limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Private</h3>
+                    <p>Your data never leaves your browser. No server-side processing, no logging.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What is Base64 encoding?</summary>
+                    <p>Base64 is a binary-to-text encoding scheme that converts binary data into ASCII characters. It's
+                        commonly used in email attachments, data URIs, API authentication tokens, and embedding binary
+                        data in text formats like JSON or XML.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is Base64 encryption?</summary>
+                    <p>No. Base64 is encoding, not encryption. It doesn't provide any security — anyone can decode a
+                        Base64 string. It's used for data transport, not data protection.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is URL-safe Base64?</summary>
+                    <p>Standard Base64 uses + and / characters which have special meaning in URLs. URL-safe Base64
+                        replaces + with - and / with _ to make the encoded string safe for use in URLs and filenames.
+                    </p>
+                </details>
+                <details class="faq-item">
+                    <summary>Why does Base64 increase size?</summary>
+                    <p>Base64 encodes 3 bytes into 4 characters, resulting in approximately 33% size increase. This is
+                        the tradeoff for being able to represent binary data as text.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
