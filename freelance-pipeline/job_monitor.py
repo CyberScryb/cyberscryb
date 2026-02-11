@@ -133,7 +133,11 @@ def score_job(job, config):
     combined = title_lower + ' ' + desc_lower
 
     # Positive keyword matches
-    for kw in config['keywords']:
+    keywords = config.get('keywords', {})
+    positive_kw = keywords.get('positive', []) if isinstance(keywords, dict) else keywords
+    negative_kw = keywords.get('negative', []) if isinstance(keywords, dict) else config.get('negative_keywords', [])
+
+    for kw in positive_kw:
         kw_lower = kw.lower()
         if kw_lower in title_lower:
             score += 15  # Title match is strong signal
@@ -141,7 +145,7 @@ def score_job(job, config):
             score += 5
 
     # Negative keyword matches
-    for kw in config.get('negative_keywords', []):
+    for kw in negative_kw:
         if kw.lower() in combined:
             score -= 30
 
@@ -188,7 +192,9 @@ def run(test_mode=False):
 
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M')}] Freelance Pipeline — Starting scan")
     print(f"  Monitoring {len(config['rss_feeds'])} RSS feeds")
-    print(f"  Keywords: {', '.join(config['keywords'][:5])}...")
+    keywords = config.get('keywords', {})
+    kw_list = keywords.get('positive', []) if isinstance(keywords, dict) else keywords
+    print(f"  Keywords: {', '.join(kw_list[:5])}...")
 
     # Fetch jobs from all feeds
     all_jobs = []
