@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON ↔ CSV Converter | Free Online Tool</title>
+    <meta name="description" content="Convert JSON to CSV and CSV to JSON instantly. Free online converter — no signup, no limits. Paste your data and convert in one click.">
+    <meta name="keywords" content="json to csv, csv to json, json converter, csv converter, data converter, free online tool">
+    <meta property="og:title" content="JSON ↔ CSV Converter | Free Online Tool">
+    <meta property="og:description" content="Convert between JSON and CSV formats instantly. Free, no signup required.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logo-grad)" stroke-width="2.5"/>
+                <path d="M10 11h12M10 16h8M10 21h10" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                        <stop stop-color="#6366f1"/>
+                        <stop offset="1" stop-color="#a855f7"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span>DataShift</span>
+        </div>
+        <nav>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">⚡ 100% Free — No Signup Required</div>
+            <h1>JSON <span class="accent">↔</span> CSV Converter</h1>
+            <p class="subtitle">Paste your data, pick a direction, convert instantly. Client-side only — your data never leaves your browser.</p>
+        </section>
+
+        <section class="converter-card" id="converter">
+            <div class="mode-toggle">
+                <button id="btn-json-to-csv" class="mode-btn active" onclick="setMode('json-to-csv')">
+                    <span class="mode-label">JSON → CSV</span>
+                </button>
+                <button id="btn-csv-to-json" class="mode-btn" onclick="setMode('csv-to-json')">
+                    <span class="mode-label">CSV → JSON</span>
+                </button>
+                <div class="toggle-indicator"></div>
+            </div>
+
+            <div class="panels">
+                <div class="panel input-panel">
+                    <div class="panel-header">
+                        <h2 id="input-label">Input JSON</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="loadSample()" title="Load sample data">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                Sample
+                            </button>
+                            <button class="icon-btn" onclick="clearInput()" title="Clear input">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="input-area" placeholder="Paste your JSON here..." spellcheck="false"></textarea>
+                    <div class="panel-footer">
+                        <span id="input-stats" class="stats">0 characters</span>
+                        <label class="file-upload">
+                            <input type="file" id="file-input" accept=".json,.csv,.txt" onchange="handleFileUpload(event)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 6l4-4 4 4M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Upload File
+                        </label>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <button id="convert-btn" class="convert-btn" onclick="convert()">
+                        <span class="btn-text">Convert</span>
+                        <svg class="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+
+                <div class="panel output-panel">
+                    <div class="panel-header">
+                        <h2 id="output-label">Output CSV</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="copyOutput()" title="Copy to clipboard" id="copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3a2 2 0 00-2-2H3a2 2 0 00-2 2v6a2 2 0 002 2h2" stroke="currentColor" stroke-width="1.5"/></svg>
+                                Copy
+                            </button>
+                            <button class="icon-btn" onclick="downloadOutput()" title="Download file" id="download-btn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 10l4 4 4-4M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="output-area" placeholder="Converted output will appear here..." readonly spellcheck="false"></textarea>
+                    <div class="panel-footer">
+                        <span id="output-stats" class="stats">0 characters</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="error-bar" class="error-bar hidden">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span id="error-msg"></span>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>Why Use DataShift?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>All conversion happens in your browser. Your data never touches a server.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Conversion</h3>
+                    <p>Convert thousands of rows in milliseconds. No file size limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Bidirectional</h3>
+                    <p>JSON to CSV or CSV to JSON — one tool does both directions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Copy & Download</h3>
+                    <p>One-click copy to clipboard or download as a file. No signup needed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is my data safe?</summary>
+                    <p>Yes — DataShift runs entirely in your browser. No data is sent to any server. You can even use it offline after the page loads.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What JSON format is supported?</summary>
+                    <p>DataShift accepts an array of flat objects, e.g., <code>[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]</code>. Nested objects will be stringified.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What CSV delimiter is used?</summary>
+                    <p>Standard comma-separated values with RFC 4180 quoting rules. Fields containing commas or quotes are properly escaped.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a file size limit?</summary>
+                    <p>No hard limit — it depends on your browser's memory. Typically handles files up to 50MB+ without issues.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I use this for commercial purposes?</summary>
+                    <p>Absolutely. DataShift is free for personal and commercial use. No attribution required.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by <strong>CyberScryb LLC</strong> &copy; 2026. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
