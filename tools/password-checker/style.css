@@ -327,7 +327,7 @@ h1 {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
     margin-bottom: 24px;
 }
@@ -360,6 +360,83 @@ h1 {
     font-size: 0.65rem;
     color: var(--text-muted);
     margin-top: 2px;
+}
+
+/* Accent Percentile Card */
+.stat-card-accent {
+    border-color: rgba(200, 30, 30, 0.25);
+    background: rgba(200, 30, 30, 0.04);
+    position: relative;
+}
+
+.stat-card-accent::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent-light), var(--accent-dark));
+    border-radius: 2px 2px 0 0;
+}
+
+.stat-card-accent .stat-unit {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Verification Badge */
+.verification-badge {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, rgba(200, 30, 30, 0.04), rgba(10, 10, 10, 0.9));
+    border: 1px solid rgba(200, 30, 30, 0.2);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.verification-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.verify-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.verify-icon {
+    font-size: 1rem;
+}
+
+.verify-title {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--accent-light);
+}
+
+.verify-id {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+.verify-summary {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
 }
 
 /* Composition */

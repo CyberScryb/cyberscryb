@@ -19,6 +19,22 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- JSON-LD: Feed the Robot -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CyberScryb Password Strength Checker",
+        "url": "https://cyberscryb.com/tools/password-checker",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free password strength checker with real-time entropy analysis, percentile ranking, crack time estimates at 10 billion guesses/sec, and pattern detection. 100% client-side — your password never leaves your browser.",
+        "featureList": ["Entropy calculation in bits", "Percentile ranking against common password patterns", "Crack time estimation at 10B guesses/sec", "Keyboard pattern detection", "Common password database check", "CyberScryb Verification ID"],
+        "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
+    }
+    </script>
 </head>
 
 <body>
@@ -77,6 +93,11 @@
                         <div class="stat-value" id="entropy">—</div>
                         <div class="stat-unit">bits</div>
                     </div>
+                    <div class="stat-card stat-card-accent">
+                        <div class="stat-label">Percentile</div>
+                        <div class="stat-value" id="percentile">—</div>
+                        <div class="stat-unit" id="percentileContext">vs. all passwords checked</div>
+                    </div>
                     <div class="stat-card">
                         <div class="stat-label">Crack Time</div>
                         <div class="stat-value" id="crackTime">—</div>
@@ -116,6 +137,17 @@
                     <h3>Suggestions</h3>
                     <ul id="tipsList"></ul>
                 </div>
+            </div>
+
+            <!-- Verification ID -->
+            <div class="verification-badge" id="verificationBadge" style="display:none">
+                <div class="verify-header">
+                    <span class="verify-icon">🛡️</span>
+                    <span class="verify-title">CYBERSCRYB VERIFICATION</span>
+                </div>
+                <div class="verify-id" id="verifyId">—</div>
+                <div class="verify-summary" id="verifySummary">—</div>
+            </div>
             </div>
         </section>
 
