@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Converter | Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Convert Markdown to clean HTML instantly. Live preview, syntax highlighting support, table rendering, and one-click copy. Free, no signup required.">
+    <meta name="keywords"
+        content="markdown to html, markdown converter, md to html, markdown preview, markdown editor online">
+    <meta property="og:title" content="Markdown to HTML Converter | Free Online Tool">
+    <meta property="og:description"
+        content="Convert Markdown to clean HTML with live preview. Free, private, no signup.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <text x="6" y="22" font-family="monospace" font-size="12" font-weight="bold" fill="#c41e1e">MD</text>
+            </svg>
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="../../content-site/index.html">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">📝 Live Preview — No Signup Required</div>
+            <h1>Markdown to <span class="accent">HTML</span> Converter</h1>
+            <p class="subtitle">Write or paste Markdown on the left, get clean HTML output with live preview on the
+                right. 100% client-side.</p>
+        </section>
+
+        <section class="converter-card" id="converter">
+            <div class="toolbar">
+                <div class="view-tabs">
+                    <button class="view-tab active" data-view="preview" onclick="setView('preview')">Preview</button>
+                    <button class="view-tab" data-view="html" onclick="setView('html')">HTML Source</button>
+                </div>
+                <div class="toolbar-actions">
+                    <button class="icon-btn" onclick="loadSample()">Sample</button>
+                    <button class="icon-btn" onclick="clearAll()">Clear</button>
+                    <button class="icon-btn" onclick="copyHtml()">Copy HTML</button>
+                    <button class="icon-btn" onclick="downloadHtml()">Download</button>
+                </div>
+            </div>
+
+            <div class="panels">
+                <div class="panel editor-panel">
+                    <div class="panel-header">
+                        <h2>Markdown</h2>
+                        <span class="stats" id="mdStats">0 chars</span>
+                    </div>
+                    <textarea id="mdInput" placeholder="# Start typing Markdown here...
+
+## Subheading
+
+- List item 1
+- List item 2
+
+**Bold** and *italic* text.
+
+> A blockquote
+
+`inline code` and code blocks:
+
+```
+const x = 42;
+```" spellcheck="false"></textarea>
+                </div>
+
+                <div class="panel output-panel">
+                    <div class="panel-header">
+                        <h2 id="outputLabel">Preview</h2>
+                        <span class="stats" id="htmlStats">0 chars</span>
+                    </div>
+                    <div class="output-wrap">
+                        <div id="preview" class="preview-content"></div>
+                        <textarea id="htmlOutput" class="html-source hidden" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>Supported Syntax</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Full Markdown</h3>
+                    <p>Headers, bold, italic, strikethrough, links, images, blockquotes, and horizontal rules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tables</h3>
+                    <p>Pipe-style tables with alignment support. Clean HTML table output.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Code Blocks</h3>
+                    <p>Fenced code blocks with language tags. Inline code with backtick notation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Task Lists</h3>
+                    <p>GitHub-style task lists with checkboxes. Nested lists with proper indentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is my text stored or uploaded?</summary>
+                    <p>No. All conversion happens in your browser using JavaScript. Nothing is sent to any server. Your
+                        content is completely private.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What Markdown syntax is supported?</summary>
+                    <p>We support CommonMark plus GitHub Flavored Markdown (GFM) extensions: headers, emphasis, lists,
+                        links, images, code blocks, tables, task lists, blockquotes, and horizontal rules.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I use this for blog posts?</summary>
+                    <p>Yes. Write your content in Markdown, copy the HTML output, and paste it into your CMS or blog
+                        editor. The generated HTML is clean and semantic.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a file size limit?</summary>
+                    <p>No hard limit. Since everything runs in your browser, performance depends on your device. Most
+                        documents up to 100,000 characters convert instantly.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

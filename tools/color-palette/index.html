@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Generator | Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Generate beautiful color palettes instantly. Create harmonious, complementary, triadic, and analogous color schemes. Export as CSS, Tailwind, or copy hex codes.">
+    <meta name="keywords"
+        content="color palette generator, color scheme generator, css color palette, hex color palette, complementary colors, color picker">
+    <meta property="og:title" content="Color Palette Generator | Free Online Tool">
+    <meta property="og:description"
+        content="Generate harmonious color palettes in one click. Export as CSS variables. Free, no signup.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <circle cx="12" cy="12" r="4" fill="#c41e1e" opacity="0.8" />
+                <circle cx="20" cy="12" r="4" fill="#e03030" opacity="0.6" />
+                <circle cx="16" cy="20" r="4" fill="#8b1515" opacity="0.7" />
+            </svg>
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="../../content-site/index.html">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🎨 Instant Palettes — No Signup Required</div>
+            <h1>Color <span class="accent">Palette</span> Generator</h1>
+            <p class="subtitle">Generate harmonious color schemes from any base color. Export as CSS variables, Tailwind
+                config, or copy hex codes.</p>
+        </section>
+
+        <section class="generator-card" id="generator">
+            <div class="controls">
+                <div class="control-group">
+                    <label>Base Color</label>
+                    <div class="color-input-wrap">
+                        <input type="color" id="baseColor" value="#c41e1e">
+                        <input type="text" id="hexInput" value="#c41e1e" maxlength="7" spellcheck="false">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Harmony</label>
+                    <select id="harmony">
+                        <option value="complementary">Complementary</option>
+                        <option value="analogous">Analogous</option>
+                        <option value="triadic">Triadic</option>
+                        <option value="split-complementary">Split Complementary</option>
+                        <option value="tetradic">Tetradic</option>
+                        <option value="monochromatic" selected>Monochromatic</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Count</label>
+                    <select id="count">
+                        <option value="5" selected>5 colors</option>
+                        <option value="6">6 colors</option>
+                        <option value="7">7 colors</option>
+                        <option value="8">8 colors</option>
+                        <option value="9">9 colors</option>
+                    </select>
+                </div>
+                <button class="generate-btn" onclick="randomize()">🎲 Random</button>
+            </div>
+
+            <!-- Palette Display -->
+            <div class="palette" id="palette"></div>
+
+            <!-- Export Section -->
+            <div class="export-section">
+                <h3>Export</h3>
+                <div class="export-tabs">
+                    <button class="export-tab active" onclick="switchExport('css')">CSS Variables</button>
+                    <button class="export-tab" onclick="switchExport('tailwind')">Tailwind</button>
+                    <button class="export-tab" onclick="switchExport('scss')">SCSS</button>
+                    <button class="export-tab" onclick="switchExport('array')">Array</button>
+                </div>
+                <div class="export-code-wrap">
+                    <pre><code id="exportCode"></code></pre>
+                    <button class="copy-btn" onclick="copyExport()">Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Color Harmony</h3>
+                    <p>Uses color theory algorithms — complementary, analogous, triadic, and more — to generate visually
+                        balanced palettes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>One-Click Export</h3>
+                    <p>Copy your palette as CSS custom properties, Tailwind config, SCSS variables, or a plain array.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎲</div>
+                    <h3>Random Mode</h3>
+                    <p>Hit the random button to explore unexpected color combinations and discover new palettes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Client-Side</h3>
+                    <p>Everything runs in your browser. No data sent anywhere, no tracking, no analytics.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What is color harmony?</summary>
+                    <p>Color harmony refers to aesthetically pleasing arrangements of colors based on their positions on
+                        the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent
+                        colors), and triadic (evenly spaced).</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I use these palettes commercially?</summary>
+                    <p>Yes. Colors cannot be copyrighted. Any palette generated here is free to use in any personal or
+                        commercial project.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What's the difference between RGB, HSL, and Hex?</summary>
+                    <p>They're all ways to represent colors. Hex (#FF0000) is compact and widely used in CSS. RGB (255,
+                        0, 0) breaks color into red, green, blue channels. HSL (0°, 100%, 50%) uses hue, saturation,
+                        lightness — which is more intuitive for generating harmonies.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How do I pick a good base color?</summary>
+                    <p>Start with your brand's primary color, or use our random generator to explore. A good base color
+                        has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
