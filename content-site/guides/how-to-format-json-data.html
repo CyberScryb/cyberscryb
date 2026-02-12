@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Format & Pretty-Print JSON Data | CyberScryb</title>
+    <meta name="description" content="Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.">
+    <meta name="keywords" content="format json, pretty print json, json formatter, json beautifier, json validator online">
+    <meta property="og:title" content="How to Format & Pretty-Print JSON Data">
+    <meta property="og:description" content="Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Format & Pretty-Print JSON Data">
+    <link rel="canonical" href="https://cyberscryb.com/guides/how-to-format-json-data">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="guide.css">
+    <link rel="stylesheet" href="../tools/shared/email-capture.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Format & Pretty-Print JSON Data",
+        "description": "Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb LLC",
+                "url": "https://cyberscryb.com"
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb LLC"
+        },
+        "datePublished": "2026-02-01",
+        "dateModified": "2026-02-11"
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "What's the difference between JSON and JavaScript objects?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "JSON requires double quotes for keys and strings, doesn't allow trailing commas, and doesn't support functions. JavaScript objects are more flexible."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "How do I validate JSON?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Our converter validates JSON on paste. If parsing fails, it highlights the error. You can also use jsonlint.com for detailed error messages."
+                        }
+                }
+        ]
+}
+    </script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <path d="M10 11h12M10 16h8M10 21h10" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
+        </div>
+        <nav>
+            <a href="../index.html">← All Tools</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="../index.html">Tools</a>
+                    <span>/</span>
+                    <a href="../../tools/json-csv-converter/index.html">JSON ↔ CSV Converter</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1>Format & <span class="accent">Pretty-Print JSON</span> Data</h1>
+                <p class="guide-subtitle">Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.</p>
+                <div class="guide-meta">
+                    <span>📅 Updated February 2026</span>
+                    <span>⏱ 4 min read</span>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Skip the guide — just use the tool:</strong>
+                    <span>Open the free JSON ↔ CSV Converter and get started.</span>
+                </div>
+                <a href="../../tools/json-csv-converter/index.html" class="cta-btn">Open JSON ↔ CSV Converter →</a>
+            </div>
+
+            <div class="guide-content">
+                <h2>Why Format JSON?</h2>
+                <p>Minified JSON is unreadable. API responses, config files, and database exports often come as single-line blobs. Formatting with proper indentation makes the structure visible and errors findable.</p>
+
+                <h2>How to Pretty-Print JSON</h2>
+                <ul>
+                    <li>Open your browser's developer console (F12)</li>
+                    <li>Type: JSON.stringify(JSON.parse(yourJson), null, 2)</li>
+                    <li>Or use our <a href="../../tools/json-csv-converter/index.html">JSON tool</a> — paste your JSON and it auto-formats</li>
+                    <li>In VS Code: Ctrl+Shift+P → "Format Document"</li>
+                    <li>In the terminal: python -m json.tool < input.json</li>
+                </ul>
+
+                <h2>Common JSON Syntax Errors</h2>
+                <ul>
+                    <li>Missing or extra commas after the last element</li>
+                    <li>Using single quotes instead of double quotes</li>
+                    <li>Unquoted keys (valid in JS but not in JSON)</li>
+                    <li>Trailing commas in arrays or objects</li>
+                    <li>Unescaped special characters in strings</li>
+                </ul>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>What's the difference between JSON and JavaScript objects?</summary>
+                    <p>JSON requires double quotes for keys and strings, doesn't allow trailing commas, and doesn't support functions. JavaScript objects are more flexible.</p>
+                </details>
+                <details>
+                    <summary>How do I validate JSON?</summary>
+                    <p>Our converter validates JSON on paste. If parsing fails, it highlights the error. You can also use jsonlint.com for detailed error messages.</p>
+                </details>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Ready to get started?</strong>
+                    <span>Open the free tool now — no signup, no limits.</span>
+                </div>
+                <a href="../../tools/json-csv-converter/index.html" class="cta-btn">Open JSON ↔ CSV Converter →</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+    </footer>
+
+    <script src="../tools/shared/email-capture.js"></script>
+</body>
+
+</html>

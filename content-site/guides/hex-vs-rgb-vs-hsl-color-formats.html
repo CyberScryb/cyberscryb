@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEX vs RGB vs HSL — Color Format Guide | CyberScryb</title>
+    <meta name="description" content="Understand the differences between color formats and when to use each in your CSS.">
+    <meta name="keywords" content="hex vs rgb, hex vs hsl, color format comparison, css color formats, rgb vs hsl">
+    <meta property="og:title" content="HEX vs RGB vs HSL — Color Format Guide">
+    <meta property="og:description" content="Understand the differences between color formats and when to use each in your CSS.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HEX vs RGB vs HSL — Color Format Guide">
+    <link rel="canonical" href="https://cyberscryb.com/guides/hex-vs-rgb-vs-hsl-color-formats">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="guide.css">
+    <link rel="stylesheet" href="../tools/shared/email-capture.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "HEX vs RGB vs HSL — Color Format Guide",
+        "description": "Understand the differences between color formats and when to use each in your CSS.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb LLC",
+                "url": "https://cyberscryb.com"
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb LLC"
+        },
+        "datePublished": "2026-02-01",
+        "dateModified": "2026-02-11"
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "Can I mix color formats in CSS?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes. Browsers handle all formats. But pick one for consistency. HSL is best for design systems because you can easily create shades."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Which format do design tools use?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Figma and Sketch default to HEX. Photoshop uses RGB. CSS-focused designers increasingly prefer HSL."
+                        }
+                }
+        ]
+}
+    </script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
+                <path d="M10 11h12M10 16h8M10 21h10" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
+        </div>
+        <nav>
+            <a href="../index.html">← All Tools</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="../index.html">Tools</a>
+                    <span>/</span>
+                    <a href="../../tools/color-palette/index.html">Color Palette Generator</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1><span class="accent">HEX vs RGB vs HSL</span> Color Formats</h1>
+                <p class="guide-subtitle">Understand the differences between color formats and when to use each in your CSS.</p>
+                <div class="guide-meta">
+                    <span>📅 Updated February 2026</span>
+                    <span>⏱ 5 min read</span>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Skip the guide — just use the tool:</strong>
+                    <span>Open the free Color Palette Generator and get started.</span>
+                </div>
+                <a href="../../tools/color-palette/index.html" class="cta-btn">Open Color Palette Generator →</a>
+            </div>
+
+            <div class="guide-content">
+                <h2>HEX Colors</h2>
+                <p>Format: #RRGGBB (e.g., #c41e1e). The most common CSS format. Compact but hard to modify mentally. Shorthand available: #RGB expands to #RRGGBB.</p>
+
+                <h2>RGB Colors</h2>
+                <p>Format: rgb(196, 30, 30). Defines red, green, blue channels (0-255). More readable than HEX. RGBA adds alpha transparency: rgba(196, 30, 30, 0.8).</p>
+
+                <h2>HSL Colors</h2>
+                <p>Format: hsl(0, 73%, 44%). Defines hue (0-360°), saturation (0-100%), lightness (0-100%). The most intuitive format — easy to create variations by adjusting one value.</p>
+
+                <h2>Which Should You Use?</h2>
+                <ul>
+                    <li>HEX for static colors and design hand-offs</li>
+                    <li>RGB for JavaScript manipulation and canvas</li>
+                    <li>HSL for CSS design systems and dynamic theming</li>
+                    <li>HSLA/RGBA when you need transparency</li>
+                </ul>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>Can I mix color formats in CSS?</summary>
+                    <p>Yes. Browsers handle all formats. But pick one for consistency. HSL is best for design systems because you can easily create shades.</p>
+                </details>
+                <details>
+                    <summary>Which format do design tools use?</summary>
+                    <p>Figma and Sketch default to HEX. Photoshop uses RGB. CSS-focused designers increasingly prefer HSL.</p>
+                </details>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Ready to get started?</strong>
+                    <span>Open the free tool now — no signup, no limits.</span>
+                </div>
+                <a href="../../tools/color-palette/index.html" class="cta-btn">Open Color Palette Generator →</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+    </footer>
+
+    <script src="../tools/shared/email-capture.js"></script>
+</body>
+
+</html>
