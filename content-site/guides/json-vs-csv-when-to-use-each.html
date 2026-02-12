@@ -10,9 +10,13 @@
     <meta property="og:title" content="JSON vs CSV: When to Use Each Format (Comparison)">
     <meta property="og:description" content="Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://feisty-wall-456202-s3.web.app/guides/json-vs-csv-when-to-use-each.html">
+    <meta property="og:site_name" content="CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JSON vs CSV: When to Use Each Format (Comparison)">
-    <link rel="canonical" href="https://cyberscryb.com/guides/json-vs-csv-when-to-use-each">
+    <meta name="twitter:description" content="Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://feisty-wall-456202-s3.web.app/guides/json-vs-csv-when-to-use-each.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,15 +31,53 @@
         "description": "Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.",
         "author": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC",
-                "url": "https://cyberscryb.com"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app/about.html",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
         },
         "publisher": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app"
         },
         "datePublished": "2026-02-01",
-        "dateModified": "2026-02-11"
+        "dateModified": "2026-02-12",
+        "mainEntityOfPage": "https://feisty-wall-456202-s3.web.app/guides/json-vs-csv-when-to-use-each.html",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "json vs csv"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "json or csv"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "csv vs json"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "data format comparison"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "when to use json"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
 }
     </script>
     <script type="application/ld+json">
@@ -62,6 +104,21 @@
         ]
 }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "JSON ↔ CSV Converter",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://feisty-wall-456202-s3.web.app/tools/json-csv-converter/"
+}
+    </script>
 </head>
 
 <body>
@@ -76,12 +133,13 @@
             <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
         </div>
         <nav>
+            <a href="../about.html">About</a>
             <a href="../index.html">← All Tools</a>
         </nav>
     </header>
 
     <main>
-        <article class="guide">
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
             <div class="guide-header">
                 <div class="breadcrumb">
                     <a href="../index.html">Tools</a>
@@ -90,12 +148,21 @@
                     <span>/</span>
                     <span>Guide</span>
                 </div>
-                <h1><span class="accent">JSON vs CSV</span>: Which Format to Use</h1>
-                <p class="guide-subtitle">Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.</p>
+                <h1 itemprop="headline"><span class="accent">JSON vs CSV</span>: Which Format to Use</h1>
+                <p class="guide-subtitle" itemprop="description">Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.</p>
                 <div class="guide-meta">
-                    <span>📅 Updated February 2026</span>
+                    <span>By <a href="../about.html" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-02-12" itemprop="dateModified">February 12, 2026</time></span>
                     <span>⏱ 6 min read</span>
                 </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>JSON is hierarchical (nested objects, arrays, mixed types) — best for APIs, config files, and NoSQL databases. CSV is flat (rows and columns) — best for spreadsheets, data analysis, and bulk imports. CSV parses 3-5x faster for tabular data. For very large datasets, consider Parquet or Avro.</p>
             </div>
 
             <div class="cta-box">
@@ -106,7 +173,7 @@
                 <a href="../../tools/json-csv-converter/index.html" class="cta-btn">Open JSON ↔ CSV Converter →</a>
             </div>
 
-            <div class="guide-content">
+            <div class="guide-content" itemprop="articleBody">
                 <h2>At a Glance</h2>
                 <p>JSON is hierarchical and flexible. CSV is flat and universal. JSON is better for APIs and complex data. CSV is better for spreadsheets and simple tabular data. Need to switch between them? Use our <a href="../../tools/json-csv-converter/index.html">free converter</a>.</p>
 
@@ -156,7 +223,7 @@
     </main>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+        <p><strong><a href="../about.html" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="../about.html" style="color:#888;">About Us</a></p>
     </footer>
 
     <script src="../tools/shared/email-capture.js"></script>

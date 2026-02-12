@@ -10,9 +10,13 @@
     <meta property="og:title" content="HEX vs RGB vs HSL — Color Format Guide">
     <meta property="og:description" content="Understand the differences between color formats and when to use each in your CSS.">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://feisty-wall-456202-s3.web.app/guides/hex-vs-rgb-vs-hsl-color-formats.html">
+    <meta property="og:site_name" content="CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HEX vs RGB vs HSL — Color Format Guide">
-    <link rel="canonical" href="https://cyberscryb.com/guides/hex-vs-rgb-vs-hsl-color-formats">
+    <meta name="twitter:description" content="Understand the differences between color formats and when to use each in your CSS.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://feisty-wall-456202-s3.web.app/guides/hex-vs-rgb-vs-hsl-color-formats.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,15 +31,53 @@
         "description": "Understand the differences between color formats and when to use each in your CSS.",
         "author": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC",
-                "url": "https://cyberscryb.com"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app/about.html",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
         },
         "publisher": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app"
         },
         "datePublished": "2026-02-01",
-        "dateModified": "2026-02-11"
+        "dateModified": "2026-02-12",
+        "mainEntityOfPage": "https://feisty-wall-456202-s3.web.app/guides/hex-vs-rgb-vs-hsl-color-formats.html",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "hex vs rgb"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "hex vs hsl"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "color format comparison"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "css color formats"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "rgb vs hsl"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
 }
     </script>
     <script type="application/ld+json">
@@ -62,6 +104,21 @@
         ]
 }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Color Palette Generator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://feisty-wall-456202-s3.web.app/tools/color-palette/"
+}
+    </script>
 </head>
 
 <body>
@@ -76,12 +133,13 @@
             <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
         </div>
         <nav>
+            <a href="../about.html">About</a>
             <a href="../index.html">← All Tools</a>
         </nav>
     </header>
 
     <main>
-        <article class="guide">
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
             <div class="guide-header">
                 <div class="breadcrumb">
                     <a href="../index.html">Tools</a>
@@ -90,12 +148,21 @@
                     <span>/</span>
                     <span>Guide</span>
                 </div>
-                <h1><span class="accent">HEX vs RGB vs HSL</span> Color Formats</h1>
-                <p class="guide-subtitle">Understand the differences between color formats and when to use each in your CSS.</p>
+                <h1 itemprop="headline"><span class="accent">HEX vs RGB vs HSL</span> Color Formats</h1>
+                <p class="guide-subtitle" itemprop="description">Understand the differences between color formats and when to use each in your CSS.</p>
                 <div class="guide-meta">
-                    <span>📅 Updated February 2026</span>
+                    <span>By <a href="../about.html" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-02-12" itemprop="dateModified">February 12, 2026</time></span>
                     <span>⏱ 5 min read</span>
                 </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>HEX (#RRGGBB) is compact, best for static colors. RGB (0-255 per channel) is best for JavaScript/canvas. HSL (hue 0-360°, saturation %, lightness %) is the most intuitive — easiest to create shade variations. Use HSLA/RGBA when you need transparency. HSL is recommended for CSS design systems.</p>
             </div>
 
             <div class="cta-box">
@@ -106,7 +173,7 @@
                 <a href="../../tools/color-palette/index.html" class="cta-btn">Open Color Palette Generator →</a>
             </div>
 
-            <div class="guide-content">
+            <div class="guide-content" itemprop="articleBody">
                 <h2>HEX Colors</h2>
                 <p>Format: #RRGGBB (e.g., #c41e1e). The most common CSS format. Compact but hard to modify mentally. Shorthand available: #RGB expands to #RRGGBB.</p>
 
@@ -146,7 +213,7 @@
     </main>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+        <p><strong><a href="../about.html" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="../about.html" style="color:#888;">About Us</a></p>
     </footer>
 
     <script src="../tools/shared/email-capture.js"></script>

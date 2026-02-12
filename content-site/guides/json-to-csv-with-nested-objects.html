@@ -10,9 +10,13 @@
     <meta property="og:title" content="How to Convert Nested JSON to Flat CSV">
     <meta property="og:description" content="Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://feisty-wall-456202-s3.web.app/guides/json-to-csv-with-nested-objects.html">
+    <meta property="og:site_name" content="CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="How to Convert Nested JSON to Flat CSV">
-    <link rel="canonical" href="https://cyberscryb.com/guides/json-to-csv-with-nested-objects">
+    <meta name="twitter:description" content="Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://feisty-wall-456202-s3.web.app/guides/json-to-csv-with-nested-objects.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,15 +31,49 @@
         "description": "Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.",
         "author": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC",
-                "url": "https://cyberscryb.com"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app/about.html",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
         },
         "publisher": {
                 "@type": "Organization",
-                "name": "CyberScryb LLC"
+                "name": "CyberScryb",
+                "url": "https://feisty-wall-456202-s3.web.app"
         },
         "datePublished": "2026-02-01",
-        "dateModified": "2026-02-11"
+        "dateModified": "2026-02-12",
+        "mainEntityOfPage": "https://feisty-wall-456202-s3.web.app/guides/json-to-csv-with-nested-objects.html",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "nested json to csv"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "flatten json"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "json nested objects csv"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "deep json to spreadsheet"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
 }
     </script>
     <script type="application/ld+json">
@@ -62,6 +100,21 @@
         ]
 }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "JSON ↔ CSV Converter",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://feisty-wall-456202-s3.web.app/tools/json-csv-converter/"
+}
+    </script>
 </head>
 
 <body>
@@ -76,12 +129,13 @@
             <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
         </div>
         <nav>
+            <a href="../about.html">About</a>
             <a href="../index.html">← All Tools</a>
         </nav>
     </header>
 
     <main>
-        <article class="guide">
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
             <div class="guide-header">
                 <div class="breadcrumb">
                     <a href="../index.html">Tools</a>
@@ -90,12 +144,21 @@
                     <span>/</span>
                     <span>Guide</span>
                 </div>
-                <h1>Convert <span class="accent">Nested JSON</span> to Flat CSV</h1>
-                <p class="guide-subtitle">Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.</p>
+                <h1 itemprop="headline">Convert <span class="accent">Nested JSON</span> to Flat CSV</h1>
+                <p class="guide-subtitle" itemprop="description">Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.</p>
                 <div class="guide-meta">
-                    <span>📅 Updated February 2026</span>
+                    <span>By <a href="../about.html" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-02-12" itemprop="dateModified">February 12, 2026</time></span>
                     <span>⏱ 4 min read</span>
                 </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>Nested JSON objects are flattened to CSV using dot notation (e.g., user.address.city becomes a column header). Arrays become comma-separated cell values. No depth limit — works with any JSON structure.</p>
             </div>
 
             <div class="cta-box">
@@ -106,7 +169,7 @@
                 <a href="../../tools/json-csv-converter/index.html" class="cta-btn">Open JSON ↔ CSV Converter →</a>
             </div>
 
-            <div class="guide-content">
+            <div class="guide-content" itemprop="articleBody">
                 <h2>The Nested JSON Problem</h2>
                 <p>Real-world JSON from APIs is rarely flat. You get nested objects like <code>{"user": {"address": {"city": "Seattle"}}}</code>. Spreadsheets need flat rows and columns. Our tool automatically flattens nested structures using dot notation.</p>
 
@@ -138,7 +201,7 @@
     </main>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
+        <p><strong><a href="../about.html" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="../about.html" style="color:#888;">About Us</a></p>
     </footer>
 
     <script src="../tools/shared/email-capture.js"></script>
