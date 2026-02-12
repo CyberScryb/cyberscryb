@@ -1,0 +1,114 @@
+/* =============================
+   CyberScryb Email Capture Bar
+   Shared across all tool pages
+   ============================= */
+
+.cs-email-bar {
+    background: linear-gradient(135deg, rgba(200, 30, 30, 0.06), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(200, 30, 30, 0.15);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.cs-email-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c41e1e, #8b1515, transparent);
+}
+
+.cs-email-bar h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    color: #d4d4d4;
+}
+
+.cs-email-bar .cs-email-sub {
+    font-size: 0.85rem;
+    color: #707070;
+    margin-bottom: 18px;
+}
+
+.cs-email-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.cs-email-input {
+    flex: 1;
+    padding: 12px 18px;
+    background: rgba(8, 8, 8, 0.95);
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #d4d4d4;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.cs-email-input:focus {
+    border-color: #c41e1e;
+}
+
+.cs-email-input::placeholder {
+    color: #444;
+}
+
+.cs-email-btn {
+    padding: 12px 24px;
+    background: #c41e1e;
+    border: 1px solid #e03030;
+    border-radius: 6px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(200, 30, 30, 0.2);
+}
+
+.cs-email-btn:hover {
+    background: #e03030;
+    box-shadow: 0 6px 20px rgba(200, 30, 30, 0.35);
+}
+
+.cs-email-success {
+    display: none;
+    color: #22c55e;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px;
+}
+
+.cs-email-bar .cs-email-note {
+    font-size: 0.7rem;
+    color: #444;
+    margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+    .cs-email-form {
+        flex-direction: column;
+    }
+
+    .cs-email-bar {
+        padding: 20px 16px;
+    }
+}
