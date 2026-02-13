@@ -435,17 +435,17 @@ function generatePage(page) {
         "author": {
             "@type": "Organization",
             "name": "CyberScryb",
-            "url": "https://feisty-wall-456202-s3.web.app/about.html",
+            "url": "https://cyberscryb.com/about.html",
             "sameAs": ["https://github.com/cyberscryb"]
         },
         "publisher": {
             "@type": "Organization",
             "name": "CyberScryb",
-            "url": "https://feisty-wall-456202-s3.web.app"
+            "url": "https://cyberscryb.com"
         },
         "datePublished": "2026-02-01",
         "dateModified": "2026-02-12",
-        "mainEntityOfPage": `https://feisty-wall-456202-s3.web.app/guides/${page.slug}.html`,
+        "mainEntityOfPage": `https://cyberscryb.com/guides/${page.slug}.html`,
         "about": page.keywords.split(', ').slice(0, 3).map(kw => ({
             "@type": "Thing",
             "name": kw
@@ -475,7 +475,7 @@ function generatePage(page) {
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Web Browser",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "url": `https://feisty-wall-456202-s3.web.app/tools/${page.tool.path}/`
+        "url": `https://cyberscryb.com/tools/${page.tool.path}/`
     }, null, 8) : null;
 
     // TL;DR summary box for AI citation
@@ -500,13 +500,13 @@ function generatePage(page) {
     <meta property="og:title" content="${page.title}">
     <meta property="og:description" content="${page.subtitle}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://feisty-wall-456202-s3.web.app/guides/${page.slug}.html">
+    <meta property="og:url" content="https://cyberscryb.com/guides/${page.slug}.html">
     <meta property="og:site_name" content="CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${page.title}">
     <meta name="twitter:description" content="${page.subtitle}">
     <meta name="author" content="CyberScryb">
-    <link rel="canonical" href="https://feisty-wall-456202-s3.web.app/guides/${page.slug}.html">
+    <link rel="canonical" href="https://cyberscryb.com/guides/${page.slug}.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -598,7 +598,7 @@ ${faqsHtml}
 // ─── Sitemap Generator ───
 
 function generateSitemap(generatedPages) {
-    const baseUrl = 'https://feisty-wall-456202-s3.web.app';
+    const baseUrl = 'https://cyberscryb.com';
     const tools = ['json-csv-converter', 'seo-tag-generator', 'password-checker', 'base64-tool', 'color-palette', 'markdown-html'];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
