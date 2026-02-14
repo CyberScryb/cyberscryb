@@ -36,6 +36,7 @@
         <nav>
             <a href="#tools">Tools</a>
             <a href="#about">About</a>
+            <a href="#" class="nav-pro-btn" onclick="openProModal()">💎 Go Pro</a>
         </nav>
     </header>
 
@@ -48,6 +49,20 @@
         </section>
 
         <section class="tools-grid" id="tools">
+            <a href="../tools/humanizer/index.html" class="tool-card">
+                <div class="tool-icon">✨</div>
+                <div class="tool-info">
+                    <h2>Anti-AI Humanizer <span class="tool-badge-new">NEW</span></h2>
+                    <p>Rewrite robotic AI text to sound like YOU. Remove "delve" and "tapestry" instantly.</p>
+                    <div class="tool-tags">
+                        <span class="tag">Writing</span>
+                        <span class="tag">AI</span>
+                        <span class="tag">Privacy</span>
+                    </div>
+                </div>
+                <div class="tool-arrow">→</div>
+            </a>
+
             <a href="../tools/json-csv-converter/index.html" class="tool-card">
                 <div class="tool-icon">⚡</div>
                 <div class="tool-info">
@@ -199,6 +214,71 @@
         <p><strong>CyberScryb LLC</strong> &copy; 2026 — All rights reserved.</p>
         <p class="footer-sub">Free online tools for developers, marketers, and businesses.</p>
     </footer>
+
+    <!-- Pro Modal -->
+    <div id="proModal" class="modal-overlay" onclick="closeProModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProModal()">×</button>
+            <div class="modal-header">
+                <div class="modal-badge">BECOME A SUPPORTER</div>
+                <h2>CyberScryb <span class="accent">Pro</span></h2>
+            </div>
+            <div class="modal-body">
+                <p>CyberScryb is built by independent developers. Your support helps us keep these tools free, fast, and
+                    private for everyone.</p>
+
+                <div class="pro-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🚀</span>
+                        <div class="feature-text">
+                            <strong>Prioritized Feature Requests</strong>
+                            <span>Your suggestions go to the top of our roadmap.</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💎</span>
+                        <div class="feature-text">
+                            <strong>Pro Badge (Coming Soon)</strong>
+                            <span>Show your support on your profile.</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">❤️</span>
+                        <div class="feature-text">
+                            <strong>Support Open Development</strong>
+                            <span>Help us build more privacy-first tools.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-tag">
+                    <span class="amount">$9</span>
+                    <span class="period">/ month</span>
+                </div>
+
+                <a href="https://buy.stripe.com/7sYcN7fL0e184611gN0sU00" class="pro-cta-btn" target="_blank"
+                    rel="noopener noreferrer">
+                    Upgrade to Pro →
+                </a>
+                <p class="modal-footer">Secure payment via Stripe. Cancel anytime.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openProModal() {
+            document.getElementById('proModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeProModal(e) {
+            // Close if clicking overlay (e exists) or close button (e might usually be undefined but here we can handle both)
+            if (!e || e.target.id === 'proModal') {
+                document.getElementById('proModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
 </body>
 
 </html>
