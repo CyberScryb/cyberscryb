@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
 const roboticInput = document.getElementById('robotic-text');
 const styleSamples = document.querySelectorAll('.style-sample');
 const apiKeyInput = document.getElementById('api-key');
@@ -42,9 +40,6 @@ humanizeBtn.addEventListener('click', async () => {
     outputText.innerHTML = ''; // Clear previous output
 
     try {
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
         const prompt = `
         You are a professional ghostwriter and style mimic.
         
@@ -65,23 +60,39 @@ humanizeBtn.addEventListener('click', async () => {
         6. Do NOT output the analysis, ONLY output the rewritten text.
         `;
 
-        const result = await model.generateContentStream(prompt);
+        // Using standard fetch to avoid module/CDN blocks
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            })
+        });
 
-        let fullText = "";
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error?.message || 'API request failed');
+        }
 
-        for await (const chunk of result.stream) {
-            const chunkText = chunk.text();
-            fullText += chunkText;
+        const data = await response.json();
 
-            // Basic markdown parsing for bold/italic if needed, or just plain text
-            // For now, simple text replacement
-            outputText.innerText = fullText;
-            updateStats(fullText);
+        // Extract text from response
+        const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (generatedText) {
+            outputText.innerText = generatedText;
+            updateStats(generatedText);
+        } else {
+            throw new Error("No text generated from Gemini.");
         }
 
     } catch (error) {
         console.error("Error:", error);
-        outputText.innerHTML = `<span style="color: #ff4444;">Error: ${error.message}</span>`;
+        outputText.innerHTML = `<span style="color: #ff4444;">Error: ${error.message}<br><br>Check your API Key and internet connection.</span>`;
     } finally {
         loadingIndicator.classList.add('hidden');
         humanizeBtn.disabled = false;
@@ -92,6 +103,10 @@ humanizeBtn.addEventListener('click', async () => {
 function updateStats(text) {
     const words = text.trim().split(/\s+/).length;
     wordCount.textContent = `${words} words`;
+    // Dummy cliche count simulation based on length difference
+    const originalWords = roboticInput.value.trim().split(/\s+/).length;
+    const diff = Math.max(0, originalWords - words);
+    document.getElementById('cliche-count').textContent = `${Math.ceil(diff / 5)} clichés removed`; // Heuristic
 }
 
 // Persist API Key in local storage for convenience
