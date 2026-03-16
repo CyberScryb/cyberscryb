@@ -300,6 +300,20 @@ h1 {
     white-space: nowrap;
 }
 
+.tool-badge-new {
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: var(--accent);
+    border: none;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
 /* Content Section */
 .content-section {
     margin-bottom: 80px;
@@ -461,4 +475,188 @@ footer strong {
     .tool-arrow {
         display: none;
     }
+}
+
+/* Pro Button */
+.nav-pro-btn {
+    background: rgba(200, 30, 30, 0.1);
+    border: 1px solid rgba(200, 30, 30, 0.3);
+    padding: 6px 16px;
+    border-radius: 4px;
+    color: var(--accent-light) !important;
+    /* Override standard nav link color */
+    transition: all var(--transition);
+}
+
+.nav-pro-btn:hover {
+    background: rgba(200, 30, 30, 0.2);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(200, 30, 30, 0.15);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #0a0a0a;
+    border: 1px solid var(--steel);
+    border-radius: 12px;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.modal-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent-light);
+    background: rgba(200, 30, 30, 0.1);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.modal-body p {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    padding: 0 20px;
+}
+
+.pro-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+}
+
+.feature-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-text strong {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.feature-text span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.price-tag {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.period {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.pro-cta-btn {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+    margin-bottom: 16px;
+}
+
+.pro-cta-btn:hover {
+    background: var(--accent-light);
+    box-shadow: 0 8px 24px rgba(200, 30, 30, 0.25);
+}
+
+.modal-footer {
+    font-size: 0.75rem !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 0 !important;
 }
