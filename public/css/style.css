@@ -92,6 +92,7 @@ a:hover {
 /* Header and Navigation */
 header {
     background: rgba(10, 10, 10, 0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #333;
     position: fixed;
@@ -675,6 +676,175 @@ footer {
     color: #b0b0b0;
 }
 
+/* ─── Animated Grid Background ─── */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridScroll 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes gridScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+/* ─── Floating Particles ─── */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00d4ff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 8s ease-in-out infinite;
+}
+
+.hero-particles span:nth-child(1) { left: 10%; top: 80%; animation-delay: 0s; animation-duration: 7s; }
+.hero-particles span:nth-child(2) { left: 25%; top: 90%; animation-delay: 1s; animation-duration: 9s; }
+.hero-particles span:nth-child(3) { left: 45%; top: 85%; animation-delay: 2s; animation-duration: 6s; }
+.hero-particles span:nth-child(4) { left: 65%; top: 95%; animation-delay: 0.5s; animation-duration: 8s; }
+.hero-particles span:nth-child(5) { left: 80%; top: 88%; animation-delay: 3s; animation-duration: 10s; }
+.hero-particles span:nth-child(6) { left: 35%; top: 92%; animation-delay: 1.5s; animation-duration: 7.5s; }
+.hero-particles span:nth-child(7) { left: 55%; top: 78%; animation-delay: 2.5s; animation-duration: 9.5s; }
+.hero-particles span:nth-child(8) { left: 90%; top: 82%; animation-delay: 0.8s; animation-duration: 6.5s; }
+
+@keyframes particleFloat {
+    0% { transform: translateY(0) scale(0); opacity: 0; }
+    10% { opacity: 0.6; transform: scale(1); }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger .blog-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-stagger.visible .blog-card:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible .blog-card:nth-child(2) { transition-delay: 0.1s; }
+.reveal-stagger.visible .blog-card:nth-child(3) { transition-delay: 0.15s; }
+.reveal-stagger.visible .blog-card:nth-child(4) { transition-delay: 0.2s; }
+.reveal-stagger.visible .blog-card:nth-child(5) { transition-delay: 0.25s; }
+.reveal-stagger.visible .blog-card:nth-child(6) { transition-delay: 0.3s; }
+.reveal-stagger.visible .blog-card:nth-child(7) { transition-delay: 0.35s; }
+.reveal-stagger.visible .blog-card:nth-child(8) { transition-delay: 0.4s; }
+.reveal-stagger.visible .blog-card:nth-child(9) { transition-delay: 0.45s; }
+
+.reveal-stagger.visible .blog-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─── Tool Card Icons ─── */
+.tool-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    font-size: 1.5rem;
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover .tool-icon {
+    transform: scale(1.15) rotate(-5deg);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    border-color: #00d4ff;
+}
+
+/* ─── Stats Banner ─── */
+.stats-banner {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.5rem 1rem;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.03), transparent);
+    border-top: 1px solid rgba(0, 212, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #00d4ff;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ─── CTA Secondary Button ─── */
+.cta-secondary {
+    display: inline-block;
+    color: #00d4ff;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.cta-secondary:hover {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: #00d4ff;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -712,6 +882,7 @@ footer {
         left: 0;
         right: 0;
         background: rgba(10, 10, 10, 0.98);
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         flex-direction: column;
         padding: 2rem;
@@ -950,6 +1121,7 @@ a:focus {
     border: 1px solid #333;
     border-radius: 16px;
     padding: 2rem;
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     transition: border-color 0.3s ease;
 }

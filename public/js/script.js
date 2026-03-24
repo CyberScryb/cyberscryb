@@ -134,10 +134,11 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// Analytics and tracking (placeholder for future implementation)
+// GA4 Event Tracking
 function trackEvent(eventName, eventData) {
-    // Placeholder for analytics tracking
-    console.log('Event tracked:', eventName, eventData);
+    if (typeof gtag === 'function') {
+        gtag('event', eventName, eventData);
+    }
 }
 
 // Track affiliate link clicks
@@ -149,3 +150,34 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
         });
     });
 });
+
+// Track tool launches
+document.querySelectorAll('a[href*="/tools/"]').forEach(link => {
+    link.addEventListener('click', function () {
+        const toolName = this.closest('.blog-card')?.querySelector('h3')?.textContent?.trim() || 'unknown';
+        trackEvent('tool_launch', { tool_name: toolName });
+    });
+});
+
+// Track newsletter signups
+document.querySelectorAll('form[action*="subscribe"]').forEach(form => {
+    form.addEventListener('submit', function () {
+        trackEvent('newsletter_signup', { source: 'form' });
+    });
+});
+
+// ─── Scroll Reveal Animations ───
+if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+        revealObserver.observe(el);
+    });
+}
