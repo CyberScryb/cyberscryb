@@ -5,6 +5,62 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 
+// ─── Rate Limiter ────────────────────────────────────────
+// In-memory rate limiting (resets on cold start, which is fine for abuse prevention)
+const rateLimitStore = {};  // { ip: { count, resetTime } }
+let globalDailyCount = 0;
+let globalDayReset = Date.now() + 86400000; // 24h from now
+
+const RATE_LIMIT = {
+    perIpPerMinute: 10,     // Max 10 requests per IP per minute
+    globalPerDay: 500,       // Max 500 total AI calls per day across all users
+};
+
+function getClientIP(req) {
+    return req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+           req.connection?.remoteAddress || 'unknown';
+}
+
+function checkRateLimit(req) {
+    const now = Date.now();
+    const ip = getClientIP(req);
+
+    // Reset global daily counter
+    if (now > globalDayReset) {
+        globalDailyCount = 0;
+        globalDayReset = now + 86400000;
+    }
+
+    // Check global daily cap
+    if (globalDailyCount >= RATE_LIMIT.globalPerDay) {
+        return { allowed: false, reason: 'Daily limit reached. Try again tomorrow.' };
+    }
+
+    // Per-IP rate limiting (sliding window per minute)
+    if (!rateLimitStore[ip] || now > rateLimitStore[ip].resetTime) {
+        rateLimitStore[ip] = { count: 0, resetTime: now + 60000 };
+    }
+
+    if (rateLimitStore[ip].count >= RATE_LIMIT.perIpPerMinute) {
+        return { allowed: false, reason: 'Too many requests. Please wait a minute.' };
+    }
+
+    // Allow and increment
+    rateLimitStore[ip].count++;
+    globalDailyCount++;
+    return { allowed: true };
+}
+
+// Clean up old IPs every 5 minutes to prevent memory leak
+setInterval(() => {
+    const now = Date.now();
+    for (const ip in rateLimitStore) {
+        if (now > rateLimitStore[ip].resetTime) {
+            delete rateLimitStore[ip];
+        }
+    }
+}, 300000);
+
 // Ensure you set this config variable: 
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
@@ -22,6 +78,13 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
         if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
             console.warn(`Blocked request from unauthorized referer: ${referer}`);
             return res.status(403).send('Unauthorized Source'); // Enforced security
+        }
+
+        // Rate limit check
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
+            return res.status(429).json({ error: rateCheck.reason });
         }
 
         // Get API Key from Environment Config
@@ -84,6 +147,13 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         const referer = req.get('Referer');
         if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
             return res.status(403).send('Unauthorized Source');
+        }
+
+        // Rate limit check
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
+            return res.status(429).json({ error: rateCheck.reason });
         }
 
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
