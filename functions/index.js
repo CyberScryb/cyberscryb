@@ -3,6 +3,7 @@ const cors = require("cors")({ origin: true });
 const admin = require("firebase-admin");
 
 admin.initializeApp();
+const db = admin.firestore();
 
 // Ensure you set this config variable: 
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
@@ -132,6 +133,50 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         } catch (error) {
             console.error("Function Error:", error);
             res.status(500).send("Internal Server Error: " + error.message);
+        }
+    });
+});
+
+// ─── Email Capture ───────────────────────────────────
+exports.subscribeEmail = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const { email, source } = req.body;
+
+        // Validate email
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ error: 'Valid email is required' });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+
+        try {
+            // Check for duplicate
+            const existing = await db.collection('subscribers')
+                .where('email', '==', normalizedEmail)
+                .limit(1)
+                .get();
+
+            if (!existing.empty) {
+                return res.status(200).json({ message: 'already_subscribed' });
+            }
+
+            // Store the subscriber
+            await db.collection('subscribers').add({
+                email: normalizedEmail,
+                source: source || 'homepage',
+                subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
+                ip: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown'
+            });
+
+            return res.status(200).json({ message: 'subscribed' });
+
+        } catch (error) {
+            console.error('Subscribe Error:', error);
+            return res.status(500).json({ error: 'Internal server error' });
         }
     });
 });
