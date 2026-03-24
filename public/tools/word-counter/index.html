@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word & Character Counter — Free Online Text Analysis | CyberScryb</title>
+    <meta name="description"
+        content="Count words, characters, sentences, paragraphs and estimate reading time instantly. Free, private, 100% client-side word counter tool.">
+    <link rel="canonical" href="https://cyberscryb.com/tools/word-counter/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+
+    <meta property="og:title" content="Word & Character Counter — Free Online Tool | CyberScryb">
+    <meta property="og:description" content="Count words, characters, sentences & more instantly. Free, private, no signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/word-counter/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Word & Character Counter — Free Online Tool | CyberScryb">
+    <meta name="twitter:description" content="Count words, characters, sentences & more instantly. Free, private, no signup.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z347WYM5ZZ"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-Z347WYM5ZZ'); </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Word & Character Counter",
+        "url": "https://cyberscryb.com/tools/word-counter/",
+        "description": "Count words, characters, sentences, paragraphs and estimate reading time.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools.html" },
+            { "@type": "ListItem", "position": 3, "name": "Word Counter", "item": "https://cyberscryb.com/tools/word-counter/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How does the word counter work?", "acceptedAnswer": { "@type": "Answer", "text": "Paste or type your text and the tool instantly counts words, characters (with and without spaces), sentences, paragraphs, and estimates reading time — all in your browser." }},
+            { "@type": "Question", "name": "Is this word counter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. Your text is processed entirely in your browser and never sent to any server." }},
+            { "@type": "Question", "name": "How is reading time calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Reading time is estimated at 200 words per minute (average adult reading speed). Speaking time is estimated at 130 words per minute." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .wc-app { padding: 6rem 0 4rem; background: #0a0a0a; min-height: 100vh; }
+        .wc-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+        .stat-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem; margin: 1.5rem 0;
+        }
+        .stat-card {
+            background: #141414; border: 1px solid #222; border-radius: 12px;
+            padding: 1.2rem; text-align: center; transition: border-color 0.3s, transform 0.2s;
+        }
+        .stat-card:hover { border-color: #00d4ff; transform: translateY(-2px); }
+        .stat-value {
+            font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700;
+            color: #00d4ff; line-height: 1;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            font-size: 0.75rem; color: #666; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-top: 0.5rem;
+        }
+
+        #wc-textarea {
+            width: 100%; min-height: 300px; background: #141414; border: 1px solid #333;
+            border-radius: 12px; color: #e0e0e0; font-family: 'Inter', sans-serif;
+            font-size: 1rem; line-height: 1.7; padding: 1.5rem; resize: vertical; outline: none;
+            transition: border-color 0.3s;
+        }
+        #wc-textarea:focus { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.08); }
+        #wc-textarea::placeholder { color: #333; }
+
+        .action-bar {
+            display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;
+        }
+        .action-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid #333; color: #888;
+            font-family: 'Inter', sans-serif; font-size: 0.8rem; padding: 0.5rem 1rem;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .action-btn:hover { border-color: #00d4ff; color: #00d4ff; }
+
+        /* Keyword density */
+        .density-section { margin-top: 2rem; }
+        .density-section h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .density-bar {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.5rem 0; border-bottom: 1px solid #1a1a1a;
+        }
+        .density-word { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #e0e0e0; min-width: 120px; }
+        .density-fill-bg {
+            flex: 1; height: 8px; background: #1a1a1a; border-radius: 4px; overflow: hidden;
+        }
+        .density-fill {
+            height: 100%; background: linear-gradient(90deg, #00d4ff, #00ff88);
+            border-radius: 4px; transition: width 0.3s;
+        }
+        .density-pct { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #555; min-width: 50px; text-align: right; }
+
+        .faq-section { margin-top: 3rem; }
+        .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary::after { content: '+'; color: #00d4ff; font-weight: 700; }
+        .faq-section details[open] summary::after { content: '−'; }
+        .faq-section details p { padding: 0 1rem 1rem; color: #888; line-height: 1.6; margin: 0; }
+
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb a { color: #00d4ff; text-decoration: none; }
+        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb span { margin: 0 0.4rem; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="logo">
+                            <rect x="2" y="2" width="28" height="28" rx="6" stroke="#00d4ff" stroke-width="2.5" />
+                            <path d="M10 11h12M10 16h8M10 21h10" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../tools.html" class="active">Tools</a></li>
+                    <li><a href="../../guides/best-free-developer-tools-online.html">Guides</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wc-app">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a><span>›</span>
+            <a href="../../tools.html">Tools</a><span>›</span>
+            Word Counter
+        </div>
+        <div class="wc-container">
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Word & Character Counter</h1>
+                <p style="color: #666; margin-bottom: 0;">Instantly count words, characters, sentences, paragraphs and estimate reading & speaking time. 100% private.</p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-value" id="s-words">0</div><div class="stat-label">Words</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-chars">0</div><div class="stat-label">Characters</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-chars-ns">0</div><div class="stat-label">Chars (no space)</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-sentences">0</div><div class="stat-label">Sentences</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-paragraphs">0</div><div class="stat-label">Paragraphs</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-reading">0m</div><div class="stat-label">Reading Time</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-speaking">0m</div><div class="stat-label">Speaking Time</div></div>
+            </div>
+
+            <textarea id="wc-textarea" placeholder="Paste or type your text here to count words, characters, and more..."></textarea>
+
+            <div class="action-bar">
+                <button class="action-btn" id="btn-clear">🗑️ Clear</button>
+                <button class="action-btn" id="btn-copy">📋 Copy</button>
+                <button class="action-btn" id="btn-upper">AA Uppercase</button>
+                <button class="action-btn" id="btn-lower">aa Lowercase</button>
+                <button class="action-btn" id="btn-title">Aa Title Case</button>
+            </div>
+
+            <div class="density-section">
+                <h2>Top Keyword Density</h2>
+                <div id="density-list"></div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How does the word counter work?</summary><p>Paste or type your text and the tool instantly counts words, characters (with and without spaces), sentences, paragraphs, and estimates reading time — all processed in your browser.</p></details>
+                <details><summary>Is this word counter free?</summary><p>Yes, 100% free with no signup. Your text is processed entirely in your browser and never sent to any server.</p></details>
+                <details><summary>How is reading time calculated?</summary><p>Reading time is estimated at 200 words per minute (average adult speed). Speaking time is at 130 WPM.</p></details>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../disclosure.html">Affiliate Disclosure</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script>
+    (function() {
+        const ta = document.getElementById('wc-textarea');
+        const els = {
+            words: document.getElementById('s-words'),
+            chars: document.getElementById('s-chars'),
+            charsNs: document.getElementById('s-chars-ns'),
+            sentences: document.getElementById('s-sentences'),
+            paragraphs: document.getElementById('s-paragraphs'),
+            reading: document.getElementById('s-reading'),
+            speaking: document.getElementById('s-speaking'),
+        };
+        const densityList = document.getElementById('density-list');
+
+        function analyze() {
+            const text = ta.value;
+            const trimmed = text.trim();
+
+            const words = trimmed ? trimmed.split(/\s+/) : [];
+            const wordCount = words.length;
+            const charCount = text.length;
+            const charNoSpace = text.replace(/\s/g, '').length;
+            const sentences = trimmed ? trimmed.split(/[.!?]+/).filter(s => s.trim()).length : 0;
+            const paragraphs = trimmed ? trimmed.split(/\n\n+/).filter(p => p.trim()).length : 0;
+            const readMin = Math.ceil(wordCount / 200);
+            const speakMin = Math.ceil(wordCount / 130);
+
+            els.words.textContent = wordCount.toLocaleString();
+            els.chars.textContent = charCount.toLocaleString();
+            els.charsNs.textContent = charNoSpace.toLocaleString();
+            els.sentences.textContent = sentences.toLocaleString();
+            els.paragraphs.textContent = paragraphs.toLocaleString();
+            els.reading.textContent = readMin < 1 ? '< 1m' : readMin + 'm';
+            els.speaking.textContent = speakMin < 1 ? '< 1m' : speakMin + 'm';
+
+            // Keyword density
+            if (wordCount > 0) {
+                const freq = {};
+                const stopWords = new Set(['the','is','at','which','on','a','an','and','or','but','in','to','of','for','it','that','this','with','as','was','are','be','by','from','has','he','she','they','we','you','do','not','can','will','its','my','their','our','your','his','her','i','me']);
+                words.forEach(w => {
+                    const lw = w.toLowerCase().replace(/[^a-z0-9'-]/g, '');
+                    if (lw.length > 1 && !stopWords.has(lw)) {
+                        freq[lw] = (freq[lw] || 0) + 1;
+                    }
+                });
+                const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 8);
+                const maxCount = sorted[0] ? sorted[0][1] : 1;
+
+                densityList.innerHTML = sorted.map(([word, count]) => {
+                    const pct = ((count / wordCount) * 100).toFixed(1);
+                    const width = ((count / maxCount) * 100).toFixed(0);
+                    return `<div class="density-bar"><span class="density-word">${word} (${count})</span><div class="density-fill-bg"><div class="density-fill" style="width:${width}%"></div></div><span class="density-pct">${pct}%</span></div>`;
+                }).join('');
+            } else {
+                densityList.innerHTML = '<p style="color:#444;font-size:0.9rem;">Start typing to see keyword density...</p>';
+            }
+
+            if (typeof gtag === 'function' && wordCount > 0) {
+                gtag('event', 'tool_use', { tool_name: 'word_counter', word_count: wordCount });
+            }
+        }
+
+        ta.addEventListener('input', analyze);
+
+        document.getElementById('btn-clear').addEventListener('click', () => { ta.value = ''; analyze(); });
+        document.getElementById('btn-copy').addEventListener('click', () => { navigator.clipboard.writeText(ta.value); });
+        document.getElementById('btn-upper').addEventListener('click', () => { ta.value = ta.value.toUpperCase(); analyze(); });
+        document.getElementById('btn-lower').addEventListener('click', () => { ta.value = ta.value.toLowerCase(); analyze(); });
+        document.getElementById('btn-title').addEventListener('click', () => {
+            ta.value = ta.value.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase());
+            analyze();
+        });
+
+        analyze();
+    })();
+    </script>
+</body>
+
+</html>

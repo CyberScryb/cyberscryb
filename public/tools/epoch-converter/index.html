@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epoch/Unix Timestamp Converter — Free Online Tool | CyberScryb</title>
+    <meta name="description" content="Convert Unix timestamps to human-readable dates and vice versa. Live clock, multiple timezone support. Free, private, 100% client-side.">
+    <link rel="canonical" href="https://cyberscryb.com/tools/epoch-converter/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <meta property="og:title" content="Epoch/Unix Timestamp Converter — Free Tool | CyberScryb">
+    <meta property="og:description" content="Convert Unix timestamps to dates and back. Free, private, no signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/epoch-converter/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z347WYM5ZZ"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-Z347WYM5ZZ');</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CyberScryb Epoch Converter","url":"https://cyberscryb.com/tools/epoch-converter/","description":"Convert Unix/Epoch timestamps to human-readable dates and vice versa.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"CyberScryb","url":"https://cyberscryb.com"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cyberscryb.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://cyberscryb.com/tools.html"},{"@type":"ListItem","position":3,"name":"Epoch Converter","item":"https://cyberscryb.com/tools/epoch-converter/"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (also called Epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's widely used in programming to represent dates and times as a single number."}},{"@type":"Question","name":"What is the Year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Systems using 32-bit signed integers to store Unix timestamps will overflow on January 19, 2038 at 03:14:07 UTC. Modern systems use 64-bit integers which won't overflow for billions of years."}},{"@type":"Question","name":"Does this tool support milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool auto-detects whether your input is in seconds or milliseconds. It displays both formats in the output."}}]}</script>
+    <style>
+        .epoch-app{padding:6rem 0 4rem;background:#0a0a0a;min-height:100vh}
+        .epoch-container{max-width:900px;margin:0 auto;padding:0 2rem}
+        .live-clock{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(0,255,136,0.05));border:1px solid #222;border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
+        .clock-epoch{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#00d4ff,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:0.05em}
+        .clock-human{font-family:'JetBrains Mono',monospace;font-size:1rem;color:#888;margin-top:0.5rem}
+        .clock-label{font-size:0.75rem;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem}
+        .converter-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+        .conv-card{background:#141414;border:1px solid #222;border-radius:12px;padding:1.5rem}
+        .conv-card h2{font-size:1rem;margin-bottom:1rem;color:#e0e0e0}
+        .conv-input{width:100%;background:#0a0a0a;border:1px solid #333;color:#e0e0e0;font-family:'JetBrains Mono',monospace;font-size:1rem;padding:0.75rem;border-radius:8px;outline:none;transition:border-color 0.3s}
+        .conv-input:focus{border-color:#00d4ff;box-shadow:0 0 15px rgba(0,212,255,0.08)}
+        .conv-btn{background:linear-gradient(135deg,#00d4ff,#0088ff);border:none;color:#000;font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;transition:all 0.3s;margin-top:0.75rem;width:100%}
+        .conv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(0,212,255,0.3)}
+        .conv-result{margin-top:1rem;background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;padding:1rem}
+        .result-row{display:flex;justify-content:space-between;padding:0.3rem 0;border-bottom:1px solid #151515}
+        .result-row:last-child{border-bottom:none}
+        .result-label{font-size:0.8rem;color:#555}
+        .result-value{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#00d4ff;cursor:pointer}
+        .result-value:hover{color:#fff}
+        .date-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
+        .date-inputs input,.time-inputs input{width:100%;background:#0a0a0a;border:1px solid #333;color:#e0e0e0;font-family:'JetBrains Mono',monospace;font-size:0.9rem;padding:0.5rem;border-radius:6px;outline:none;text-align:center}
+        .time-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.75rem}
+        .input-label{font-size:0.65rem;color:#444;text-align:center;margin-top:2px}
+        .faq-section{margin-top:3rem}.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
+        .faq-section details{background:#141414;border:1px solid #222;border-radius:10px;margin-bottom:0.5rem}
+        .faq-section summary{padding:1rem;cursor:pointer;color:#ccc;font-weight:500;list-style:none;display:flex;justify-content:space-between}
+        .faq-section summary::after{content:'+';color:#00d4ff;font-weight:700}
+        .faq-section details[open] summary::after{content:'−'}
+        .faq-section details p{padding:0 1rem 1rem;color:#888;line-height:1.6;margin:0}
+        .breadcrumb{padding:1rem 0 0;font-size:0.8rem;color:#555;max-width:900px;margin:0 auto;padding-left:2rem}
+        .breadcrumb a{color:#00d4ff;text-decoration:none}.breadcrumb a:hover{color:#fff}.breadcrumb span{margin:0 0.4rem}
+        @media(max-width:768px){.converter-grid{grid-template-columns:1fr}.clock-epoch{font-size:1.5rem}}
+    </style>
+</head>
+<body>
+    <header><nav class="navbar"><div class="nav-container"><div class="nav-logo"><a href="../../index.html" style="display:flex;align-items:center;text-decoration:none"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="logo"><rect x="2" y="2" width="28" height="28" rx="6" stroke="#00d4ff" stroke-width="2.5"/><path d="M10 11h12M10 16h8M10 21h10" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/></svg><span style="font-family:'Orbitron';font-weight:700;font-size:1.2rem;color:#fff;margin-left:10px">CyberScryb</span></a></div><ul class="nav-menu"><li><a href="../../index.html">Home</a></li><li><a href="../../tools.html" class="active">Tools</a></li><li><a href="../../guides/best-free-developer-tools-online.html">Guides</a></li><li><a href="../../about.html">About</a></li></ul><div class="hamburger"><span></span><span></span><span></span></div></div></nav></header>
+
+    <main class="epoch-app">
+        <div class="breadcrumb"><a href="../../index.html">Home</a><span>›</span><a href="../../tools.html">Tools</a><span>›</span>Epoch Converter</div>
+        <div class="epoch-container">
+            <div style="padding:1.5rem 0 0"><h1 style="font-size:2rem;margin-bottom:0.5rem">Epoch / Unix Timestamp Converter</h1><p style="color:#666;margin-bottom:0">Convert Unix timestamps to human dates & back. Live clock included. 100% client-side.</p></div>
+
+            <div class="live-clock">
+                <div class="clock-label">Current Unix Timestamp</div>
+                <div class="clock-epoch" id="live-epoch"></div>
+                <div class="clock-human" id="live-human"></div>
+            </div>
+
+            <div class="converter-grid">
+                <div class="conv-card">
+                    <h2>⏱️ Timestamp → Date</h2>
+                    <input type="text" class="conv-input" id="ts-input" placeholder="e.g. 1711314000">
+                    <button class="conv-btn" id="ts-convert">Convert to Date</button>
+                    <div class="conv-result" id="ts-result"></div>
+                </div>
+                <div class="conv-card">
+                    <h2>📅 Date → Timestamp</h2>
+                    <div class="date-inputs">
+                        <div><input type="number" id="d-year" placeholder="YYYY" value="2026"><div class="input-label">Year</div></div>
+                        <div><input type="number" id="d-month" placeholder="MM" min="1" max="12" value="3"><div class="input-label">Month</div></div>
+                        <div><input type="number" id="d-day" placeholder="DD" min="1" max="31" value="24"><div class="input-label">Day</div></div>
+                    </div>
+                    <div class="time-inputs">
+                        <div><input type="number" id="d-hour" placeholder="HH" min="0" max="23" value="12"><div class="input-label">Hour</div></div>
+                        <div><input type="number" id="d-min" placeholder="MM" min="0" max="59" value="0"><div class="input-label">Minute</div></div>
+                        <div><input type="number" id="d-sec" placeholder="SS" min="0" max="59" value="0"><div class="input-label">Second</div></div>
+                    </div>
+                    <button class="conv-btn" id="dt-convert">Convert to Timestamp</button>
+                    <div class="conv-result" id="dt-result"></div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is a Unix timestamp?</summary><p>A Unix timestamp (Epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's used in virtually all programming languages to represent time as a number.</p></details>
+                <details><summary>What is the Year 2038 problem?</summary><p>Systems using 32-bit signed integers for timestamps will overflow on Jan 19, 2038. Modern 64-bit systems won't have this issue.</p></details>
+                <details><summary>Does this tool support milliseconds?</summary><p>Yes! If the timestamp is 13+ digits, it's auto-detected as milliseconds and converted accordingly.</p></details>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="footer-container"><div class="footer-content"><div class="footer-brand"><span style="font-family:'Orbitron';font-weight:700;font-size:1rem;color:#fff">CyberScryb</span><p>Free, privacy-first developer tools. Your data never leaves your browser.</p></div><div class="footer-links"><a href="../../privacy.html">Privacy Policy</a><a href="../../disclosure.html">Affiliate Disclosure</a><a href="../../contact.html">Contact</a></div></div><div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div></div></footer>
+
+    <script src="../../js/script.js"></script>
+    <script>
+    (function(){
+        // Live clock
+        const liveEpoch=document.getElementById('live-epoch');
+        const liveHuman=document.getElementById('live-human');
+        function updateClock(){
+            const now=new Date();
+            const ts=Math.floor(now.getTime()/1000);
+            liveEpoch.textContent=ts.toLocaleString();
+            liveHuman.textContent=now.toUTCString();
+        }
+        updateClock();
+        setInterval(updateClock,1000);
+
+        // Timestamp to Date
+        document.getElementById('ts-convert').addEventListener('click',()=>{
+            let val=document.getElementById('ts-input').value.trim();
+            if(!val){return}
+            let ts=parseInt(val);
+            if(isNaN(ts)){document.getElementById('ts-result').innerHTML='<div class="result-row"><span class="result-label" style="color:#ef4444">Invalid timestamp</span></div>';return}
+            // Auto-detect ms vs s
+            let isMs=val.length>=13;
+            let dateObj=isMs?new Date(ts):new Date(ts*1000);
+            if(isNaN(dateObj.getTime())){document.getElementById('ts-result').innerHTML='<div class="result-row"><span class="result-label" style="color:#ef4444">Invalid timestamp</span></div>';return}
+
+            const epochSec=Math.floor(dateObj.getTime()/1000);
+            const epochMs=dateObj.getTime();
+            document.getElementById('ts-result').innerHTML=`
+                <div class="result-row"><span class="result-label">UTC</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toUTCString()}</span></div>
+                <div class="result-row"><span class="result-label">Local</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toLocaleString()}</span></div>
+                <div class="result-row"><span class="result-label">ISO 8601</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toISOString()}</span></div>
+                <div class="result-row"><span class="result-label">Epoch (s)</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${epochSec}</span></div>
+                <div class="result-row"><span class="result-label">Epoch (ms)</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${epochMs}</span></div>
+                <div class="result-row"><span class="result-label">Day of Week</span><span class="result-value">${dateObj.toLocaleDateString('en-US',{weekday:'long'})}</span></div>
+                <div class="result-row"><span class="result-label">Relative</span><span class="result-value">${relativeTime(dateObj)}</span></div>
+            `;
+            if(typeof gtag==='function') gtag('event','tool_use',{tool_name:'epoch_converter',direction:'to_date'});
+        });
+
+        // Date to Timestamp
+        document.getElementById('dt-convert').addEventListener('click',()=>{
+            const y=parseInt(document.getElementById('d-year').value)||2026;
+            const mo=(parseInt(document.getElementById('d-month').value)||1)-1;
+            const d=parseInt(document.getElementById('d-day').value)||1;
+            const h=parseInt(document.getElementById('d-hour').value)||0;
+            const mi=parseInt(document.getElementById('d-min').value)||0;
+            const s=parseInt(document.getElementById('d-sec').value)||0;
+            const dateObj=new Date(y,mo,d,h,mi,s);
+            const epochSec=Math.floor(dateObj.getTime()/1000);
+            const epochMs=dateObj.getTime();
+            document.getElementById('dt-result').innerHTML=`
+                <div class="result-row"><span class="result-label">Epoch (seconds)</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)" style="font-size:1.1rem;font-weight:700">${epochSec}</span></div>
+                <div class="result-row"><span class="result-label">Epoch (milliseconds)</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${epochMs}</span></div>
+                <div class="result-row"><span class="result-label">ISO 8601</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toISOString()}</span></div>
+                <div class="result-row"><span class="result-label">UTC</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toUTCString()}</span></div>
+            `;
+            if(typeof gtag==='function') gtag('event','tool_use',{tool_name:'epoch_converter',direction:'to_timestamp'});
+        });
+
+        function relativeTime(date){
+            const now=new Date();
+            const diff=Math.abs(now-date)/1000;
+            const future=date>now;
+            const prefix=future?'in ':'';
+            const suffix=future?'':' ago';
+            if(diff<60) return prefix+Math.round(diff)+' seconds'+suffix;
+            if(diff<3600) return prefix+Math.round(diff/60)+' minutes'+suffix;
+            if(diff<86400) return prefix+Math.round(diff/3600)+' hours'+suffix;
+            if(diff<2592000) return prefix+Math.round(diff/86400)+' days'+suffix;
+            if(diff<31536000) return prefix+Math.round(diff/2592000)+' months'+suffix;
+            return prefix+Math.round(diff/31536000)+' years'+suffix;
+        }
+
+        // Pre-fill with current timestamp
+        document.getElementById('ts-input').value=Math.floor(Date.now()/1000);
+    })();
+    </script>
+</body>
+</html>
