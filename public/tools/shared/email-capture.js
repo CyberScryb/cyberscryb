@@ -23,7 +23,7 @@
     bar.className = 'cs-email-bar';
     bar.innerHTML = `
         <h3>🔥 Get Pro Tips & New Tools First</h3>
-        <p class="cs-email-sub">Join 500+ developers & marketers. One email per week. No spam.</p>
+        <p class="cs-email-sub">Free weekly AI tools, tips & strategies. No spam.</p>
         <form class="cs-email-form" id="csEmailForm">
             <input type="email" class="cs-email-input" id="csEmailInput" placeholder="you@example.com" required>
             <button type="submit" class="cs-email-btn">Subscribe</button>
