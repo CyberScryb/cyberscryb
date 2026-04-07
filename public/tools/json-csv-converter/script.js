@@ -350,3 +350,8 @@ document.addEventListener('keydown', function (e) {
         convert();
     }
 });
+
+// ── Module Exports (for testing) ────────────────────
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { jsonToCsv, csvToJson, parseCsvLines, escapeCsvField };
+}

@@ -276,3 +276,8 @@ function generatePassword() {
 
 // Auto-analyze if there's already a value
 if (input.value) analyze();
+
+// ── Module Exports (for testing) ────────────────────
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { formatTime, getPercentile, generateVerificationId, COMMON_PASSWORDS, KEYBOARD_PATTERNS, PERCENTILE_TABLE };
+}
