@@ -119,14 +119,32 @@
                         style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333;">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">✨ Humanized Result</h2>
-                            <button id="copy-btn" class="icon-btn" title="Copy to Clipboard"
-                                style="background: transparent; border: 1px solid #333; color: #c41e1e;">📋</button>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span id="usage-counter" style="font-size:0.7rem; color:#888; font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard"
+                                    style="background: transparent; border: 1px solid #333; color: #c41e1e;">📋</button>
+                            </div>
                         </div>
                         <div class="output-wrapper">
                             <div id="output-text" class="output-content" contenteditable="true"
                                 style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0;">
                                 <span class="placeholder" style="color: #666;">Your human-sounding text will appear
                                     here...</span>
+                            </div>
+                            <!-- Blurred overlay + email gate -->
+                            <div id="email-gate" class="email-gate hidden">
+                                <div class="email-gate-blur"></div>
+                                <div class="email-gate-card">
+                                    <div class="email-gate-icon">🔓</div>
+                                    <h3>Unlock Your Full Result</h3>
+                                    <p>Enter your email to get the complete humanized text + <strong>3 free rewrites/day</strong></p>
+                                    <form id="gate-email-form" class="gate-form">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <button type="submit" id="gate-submit-btn">Unlock Result</button>
+                                    </form>
+                                    <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
+                                    <p style="font-size:0.7rem; color:#555; margin-top:0.75rem;">No spam. Unsubscribe anytime.</p>
+                                </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
                                 <div class="spinner" style="border-top-color: #c41e1e;"></div>
@@ -167,12 +185,59 @@
                             </tr>
                             <tr style="border-bottom: 1px solid #333;">
                                 <td style="padding: 1rem;"><strong>Cost</strong></td>
-                                <td class="check" style="color: #c41e1e;">✅ Free (No Login)</td>
+                                <td class="check" style="color: #c41e1e;">✅ Free tier + $5/mo Pro</td>
                                 <td style="color: #666;">❌ $20+ /mo</td>
                                 <td style="color: #666;">❌ $15+ /mo</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- ═══ Upgrade Tiers ═══ -->
+                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Rewrites?</h3>
+                    <p style="text-align:center; color:#888; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
+                        <!-- Free Tier -->
+                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#888; margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">with email</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                                <li>&#10003; 3 rewrites / day</li>
+                                <li>&#10003; 500 character limit</li>
+                                <li>&#10003; Style matching</li>
+                                <li style="color:#555;">&#10007; Ads shown</li>
+                            </ul>
+                        </div>
+                        <!-- Pro Monthly -->
+                        <div style="background:#0a0a0a; border:2px solid #c41e1e; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#c41e1e,#e63939); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#c41e1e; margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#888;">/mo</span></div>
+                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                                <li>&#10003; Unlimited rewrites</li>
+                                <li>&#10003; 5,000 character limit</li>
+                                <li>&#10003; Priority speed</li>
+                                <li>&#10003; No ads</li>
+                            </ul>
+                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#c41e1e,#e63939); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Upgrade to Pro</a>
+                        </div>
+                        <!-- Annual -->
+                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#888;">/yr</span></div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                                <li>&#10003; Everything in Pro</li>
+                                <li>&#10003; Batch processing</li>
+                                <li>&#10003; API access</li>
+                                <li>&#10003; Priority support</li>
+                            </ul>
+                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Get Annual</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">

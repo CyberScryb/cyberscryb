@@ -1,7 +1,7 @@
-// Humanizer Logic (Backend Proxy Version)
+// Humanizer Logic — Value-Gated Email Capture + Usage Tracking
 
 document.addEventListener('DOMContentLoaded', () => {
-    const rewriteBtn = document.getElementById('humanize-btn') || document.getElementById('rewrite-btn'); // Handle both IDs
+    const rewriteBtn = document.getElementById('humanize-btn') || document.getElementById('rewrite-btn');
     const roboticText = document.getElementById('robotic-text');
     const outputContent = document.getElementById('output-text') || document.getElementById('output-content');
     const loadingIndicator = document.getElementById('loading-indicator');
@@ -9,14 +9,92 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordCount = document.getElementById('word-count');
     const clicheCount = document.getElementById('cliche-count');
     const styleSamples = document.querySelectorAll('.style-sample');
+    const emailGate = document.getElementById('email-gate');
+    const gateForm = document.getElementById('gate-email-form');
+    const gateInput = document.getElementById('gate-email-input');
+    const gateStatus = document.getElementById('gate-status');
+    const gateSubmitBtn = document.getElementById('gate-submit-btn');
+    const usageCounter = document.getElementById('usage-counter');
 
-    // Auto-resize textarea
+    // ─── Config ───
+    const FREE_CHAR_LIMIT = 500;
+    const FREE_DAILY_LIMIT = 3;
+    const PREVIEW_RATIO = 0.3; // Show 30% of result before gate
+
+    // ─── State ───
+    let pendingFullText = ''; // Stored full result awaiting unlock
+
+    // ─── Cookie/Storage Helpers ───
+    function setCookie(name, val, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + days * 86400000);
+        document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/';
+    }
+    function getCookie(name) {
+        const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return v ? v.pop() : '';
+    }
+
+    function isSubscribed() {
+        return getCookie('cs_subscribed') === '1';
+    }
+
+    // ─── Usage Tracking (localStorage) ───
+    function getUsageToday() {
+        const data = JSON.parse(localStorage.getItem('cs_humanizer_usage') || '{}');
+        const today = new Date().toISOString().slice(0, 10);
+        if (data.date !== today) {
+            return { date: today, count: 0 };
+        }
+        return data;
+    }
+
+    function incrementUsage() {
+        const usage = getUsageToday();
+        usage.count++;
+        localStorage.setItem('cs_humanizer_usage', JSON.stringify(usage));
+        updateUsageDisplay();
+    }
+
+    function updateUsageDisplay() {
+        if (!usageCounter) return;
+        if (!isSubscribed()) {
+            usageCounter.textContent = '';
+            return;
+        }
+        const usage = getUsageToday();
+        const remaining = Math.max(0, FREE_DAILY_LIMIT - usage.count);
+        usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free today';
+        usageCounter.style.color = remaining === 0 ? '#ef4444' : '#888';
+    }
+
+    // ─── Email Submission (reuses existing /api/subscribe) ───
+    async function submitGateEmail(email) {
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'humanizer_gate' })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setCookie('cs_subscribed', '1', 365);
+                return { ok: true, message: data.message };
+            } else {
+                return { ok: false, message: data.error || 'Something went wrong.' };
+            }
+        } catch (e) {
+            return { ok: false, message: 'Network error. Try again.' };
+        }
+    }
+
+    // ─── Auto-resize textarea ───
     roboticText.addEventListener('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
 
-    // Copy to clipboard
+    // ─── Copy to clipboard ───
     copyBtn.addEventListener('click', () => {
         const text = outputContent.innerText;
         if (text && !text.includes('Your human-sounding text will appear here')) {
@@ -28,16 +106,121 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ─── Show preview with gate ───
+    function showPreviewWithGate(fullText) {
+        pendingFullText = fullText;
+
+        // Calculate preview cutoff (30% by words, end at sentence boundary)
+        const words = fullText.split(/\s+/);
+        let previewWordCount = Math.max(3, Math.floor(words.length * PREVIEW_RATIO));
+
+        // Try to end at a sentence boundary
+        const previewText = words.slice(0, previewWordCount).join(' ');
+        const sentenceEnd = previewText.lastIndexOf('.');
+        const cutText = sentenceEnd > previewText.length * 0.5
+            ? previewText.slice(0, sentenceEnd + 1)
+            : previewText + '...';
+
+        // Show preview text with typewriter
+        outputContent.innerHTML = '';
+        let i = 0;
+        const speed = 10;
+        function typeWriter() {
+            if (i < cutText.length) {
+                outputContent.innerHTML += cutText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Show the gate after typing finishes
+                emailGate.classList.remove('hidden');
+                updateStats(cutText);
+            }
+        }
+        typeWriter();
+    }
+
+    // ─── Show full result (no gate) ───
+    function showFullResult(fullText) {
+        pendingFullText = '';
+        outputContent.innerHTML = '';
+        emailGate.classList.add('hidden');
+
+        let i = 0;
+        const speed = 10;
+        function typeWriter() {
+            if (i < fullText.length) {
+                outputContent.innerHTML += fullText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                updateStats(fullText);
+            }
+        }
+        typeWriter();
+    }
+
+    // ─── Unlock after email ───
+    function unlockFullResult() {
+        if (!pendingFullText) return;
+        emailGate.classList.add('hidden');
+        outputContent.innerHTML = '';
+
+        const fullText = pendingFullText;
+        pendingFullText = '';
+        let i = 0;
+        const speed = 5; // Faster since they've waited
+        function typeWriter() {
+            if (i < fullText.length) {
+                outputContent.innerHTML += fullText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                updateStats(fullText);
+                incrementUsage();
+                updateUsageDisplay();
+            }
+        }
+        typeWriter();
+    }
+
+    // ─── Gate form submit ───
+    if (gateForm) {
+        gateForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = gateInput.value.trim();
+            if (!email) return;
+
+            gateSubmitBtn.disabled = true;
+            gateSubmitBtn.textContent = 'Unlocking...';
+
+            const result = await submitGateEmail(email);
+
+            if (result.ok) {
+                gateStatus.style.color = '#22c55e';
+                gateStatus.textContent = "Unlocked! Here's your full result.";
+                setTimeout(() => {
+                    unlockFullResult();
+                }, 800);
+            } else {
+                gateStatus.style.color = '#ef4444';
+                gateStatus.textContent = result.message;
+                gateSubmitBtn.disabled = false;
+                gateSubmitBtn.textContent = 'Unlock Result';
+            }
+        });
+    }
+
+    // ─── Main rewrite handler ───
     if (rewriteBtn) {
         rewriteBtn.addEventListener('click', async () => {
             const text = roboticText.value.trim();
 
             // Collect Style Samples
-            let style = "";
+            let style = '';
             styleSamples.forEach((sample, index) => {
                 const val = sample.value.trim();
                 if (val) {
-                    style += `Sample ${index + 1}: ${val}\n---\n`;
+                    style += 'Sample ' + (index + 1) + ': ' + val + '\n---\n';
                 }
             });
 
@@ -46,58 +229,69 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            if (!style) {
-                // Optional: allow running without samples, but warn?
-                // For now, let's just proceed with "Casual" default if empty, 
-                // or encourage user.
-                // alert('Adding a style sample helps us sound like YOU!');
+            // Check character limit for free users
+            if (!isSubscribed() || true) { // Always enforce free limit for now (no paid tier backend yet)
+                if (text.length > FREE_CHAR_LIMIT && !isSubscribed()) {
+                    alert('Free tier supports up to ' + FREE_CHAR_LIMIT + ' characters. Please shorten your text or enter your email to unlock more.');
+                    return;
+                }
+            }
+
+            // Check daily usage limit (only for subscribed free users)
+            if (isSubscribed()) {
+                const usage = getUsageToday();
+                if (usage.count >= FREE_DAILY_LIMIT) {
+                    outputContent.innerHTML = '<span style="color: #ef4444;">Daily limit reached (3/3 free rewrites used today).</span>';
+                    // Scroll to upgrade tiers
+                    const tiers = document.getElementById('upgrade-tiers');
+                    if (tiers) {
+                        tiers.style.animation = 'none';
+                        tiers.offsetHeight; // trigger reflow
+                        tiers.style.border = '2px solid #c41e1e';
+                        tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        setTimeout(() => { tiers.style.border = ''; }, 3000);
+                    }
+                    return;
+                }
             }
 
             // Show loading state
             loadingIndicator.classList.remove('hidden');
+            emailGate.classList.add('hidden');
             rewriteBtn.disabled = true;
             outputContent.innerHTML = '';
 
             try {
-                // Call Backend Proxy
                 const response = await fetch('/api/rewrite', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         text: text,
-                        style: style || "Casual and conversational"
+                        style: style || 'Casual and conversational'
                     })
                 });
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error || `Server Error: ${response.statusText}`);
+                    throw new Error(errorData.error || 'Server Error: ' + response.statusText);
                 }
 
                 const data = await response.json();
                 const rewrittenText = data.result;
 
-                // Typewriter effect
-                let i = 0;
-                const speed = 10;
-
-                function typeWriter() {
-                    if (i < rewrittenText.length) {
-                        outputContent.innerHTML += rewrittenText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, speed);
-                    } else {
-                        updateStats(rewrittenText);
-                    }
+                // Decision: gate or show full?
+                if (!isSubscribed()) {
+                    // First-time user: show 30% preview, gate the rest
+                    showPreviewWithGate(rewrittenText);
+                } else {
+                    // Subscribed user: show full, count usage
+                    showFullResult(rewrittenText);
+                    incrementUsage();
                 }
-
-                typeWriter();
 
             } catch (error) {
                 console.error('Error:', error);
-                outputContent.innerHTML = `<span style="color: #ef4444;">Error: ${error.message}. Please try again later.</span>`;
+                outputContent.innerHTML = '<span style="color: #ef4444;">Error: ' + error.message + '. Please try again later.</span>';
             } finally {
                 loadingIndicator.classList.add('hidden');
                 rewriteBtn.disabled = false;
@@ -108,15 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateStats(text) {
         if (!wordCount) return;
         const words = text.trim().split(/\s+/).length;
-        wordCount.textContent = `${words} words`;
+        wordCount.textContent = words + ' words';
 
-        // Cliche count heuristic
         if (clicheCount) {
-            const originalWords = roboticText.value.trim().split(/\s+/).length;
-            const diff = Math.max(0, originalWords - words); // Assuming humanized is shorter?
-            // Just a dummy number for UI satisfaction
             const removed = Math.max(2, Math.floor(words * 0.05));
-            clicheCount.textContent = `${removed} clichés removed`;
+            clicheCount.textContent = removed + ' clichés removed';
         }
     }
+
+    // ─── Init ───
+    updateUsageDisplay();
 });
