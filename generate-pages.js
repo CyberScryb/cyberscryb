@@ -513,6 +513,8 @@ function generatePage(page) {
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="guide.css">
     <link rel="stylesheet" href="../tools/shared/email-capture.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <script type="application/ld+json">
     ${jsonLd}
     </script>
@@ -571,6 +573,13 @@ ${tldrHtml}
 
             <div class="guide-content" itemprop="articleBody">
 ${sectionsHtml}
+
+                <!-- AdSense: Mid-Content -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
                 <h2>Frequently Asked Questions</h2>
 ${faqsHtml}
             </div>
@@ -584,6 +593,12 @@ ${faqsHtml}
             </div>
         </article>
     </main>
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
 
     <footer>
         <p><strong><a href="../about.html" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="../about.html" style="color:#888;">About Us</a></p>
