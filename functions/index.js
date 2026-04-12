@@ -108,8 +108,8 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
       Return ONLY the rewritten text. Do not include quotes or explanations.
       `;
 
-            // Call Gemini 1.5 Flash API
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            // Call Gemini 1.5 Pro API (higher quality for humanizer output)
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -203,6 +203,237 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         } catch (error) {
             console.error("Function Error:", error);
             res.status(500).send("Internal Server Error: " + error.message);
+        }
+    });
+});
+
+// ─── Generic AI Generator ─────────────────────────────
+// Single endpoint, multiple AI tools via `tool` parameter.
+// Adding a new AI tool = adding a new entry to AI_PROMPTS.
+
+const AI_PROMPTS = {
+    'summarizer': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are an expert summarizer. Summarize the following text into ${params.length || '3-5 sentences'}.
+Keep the key points, facts, and conclusions. Remove fluff. Use clear, simple language.
+${params.bullet ? 'Return the summary as a bulleted list.' : ''}
+
+Text to summarize:
+"""
+${input}
+"""
+
+Return ONLY the summary. No preamble, no "Here is the summary:", just the summary text.`
+    },
+    'email-writer': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are a professional email writer. Write a ${params.tone || 'professional'} email based on this brief:
+
+Brief: "${input}"
+${params.recipient ? `Recipient: ${params.recipient}` : ''}
+${params.purpose ? `Purpose: ${params.purpose}` : ''}
+
+Requirements:
+- Clear subject line (start with "Subject: ...")
+- Appropriate greeting
+- 2-4 short paragraphs
+- Clear call to action
+- Professional sign-off
+- Natural, human tone (not AI-sounding)
+
+Return ONLY the email text with the subject line at the top.`
+    },
+    'bio-generator': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are an expert at writing compelling social media bios. Write ${params.count || '3'} ${params.platform || 'LinkedIn'} bios for this person.
+
+Person's background:
+"${input}"
+
+Requirements:
+- Each bio under ${params.charLimit || 160} characters (${params.platform || 'LinkedIn'} limit)
+- Each bio should have a different angle/tone
+- Include relevant emojis sparingly (1-2 max per bio)
+- Focus on value to the reader, not just titles
+- Mix of professional + personality
+
+Return each bio on its own line, numbered 1/2/3 etc. No extra commentary.`
+    },
+    'product-description': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are an expert e-commerce copywriter. Write a compelling product description for this product:
+
+Product: "${input}"
+${params.audience ? `Target audience: ${params.audience}` : ''}
+${params.tone ? `Tone: ${params.tone}` : 'Tone: Persuasive and benefit-focused'}
+
+Requirements:
+- Start with a scroll-stopping hook (1 sentence)
+- 3-5 bullet points highlighting key BENEFITS (not just features)
+- End with a subtle urgency or call to action
+- ${params.length || '120-180 words total'}
+- No clichés like "premium quality" or "the best"
+- Use sensory language where relevant
+
+Return ONLY the product description, formatted with the hook, bullet points, and CTA.`
+    },
+    'code-explainer': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are a patient senior developer explaining code to a beginner. Explain the following code clearly:
+
+\`\`\`${params.language || ''}
+${input}
+\`\`\`
+
+Requirements:
+- Start with a 1-sentence TL;DR of what the code does
+- Break it into logical sections and explain each
+- Use simple, conversational language — no jargon without explanation
+- Point out any interesting patterns, gotchas, or best practices
+- Mention what inputs it expects and what outputs it produces
+- Keep it under 400 words
+
+Return ONLY the explanation in markdown format with clear sections.`
+    },
+    'meta-description': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are an SEO expert. Write ${params.count || '3'} meta descriptions for this page:
+
+Page topic / content: "${input}"
+${params.keyword ? `Primary keyword to include: ${params.keyword}` : ''}
+
+Requirements for each:
+- Exactly 140-160 characters (critical)
+- Include the primary keyword naturally
+- Include a clear benefit or CTA
+- Be specific, not generic
+- Each one takes a DIFFERENT angle (benefit-focused, curiosity, urgency, etc.)
+
+Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`
+    },
+    'resume-bullets': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
+
+Raw accomplishments:
+"${input}"
+
+${params.role ? `Target role: ${params.role}` : ''}
+
+Requirements:
+- Start each bullet with a strong action verb (Led, Architected, Shipped, Reduced, Grew, etc.)
+- Include measurable results wherever possible (% improvements, $ saved, users impacted)
+- Use the STAR framework mindset (Situation/Task/Action/Result) but in 1-2 lines
+- Remove passive voice
+- Return 4-6 bullet points
+
+Return ONLY the bullet points, each starting with "• ". No preamble.`
+    },
+    'tweet-generator': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
+
+Topic: "${input}"
+${params.angle ? `Angle: ${params.angle}` : ''}
+
+Requirements:
+- Each tweet under 280 characters
+- Mix of formats: hot take, list, question, story hook, data/stat
+- Hook must stop the scroll in the first line
+- No hashtag spam — max 1-2 relevant hashtags per tweet
+- Sound human, not corporate
+
+Return each tweet on its own line, separated by "---". No numbering, no commentary.`
+    },
+    'paraphraser': {
+        model: 'gemini-1.5-pro',
+        build: (input, params) => `You are a skilled editor. Paraphrase the following text in ${params.tone || 'a clear, natural'} tone.
+Keep the meaning 100% intact but rephrase the words and sentence structure.
+${params.length === 'shorter' ? 'Make it shorter than the original.' : ''}
+${params.length === 'longer' ? 'Expand it slightly with more detail.' : ''}
+
+Text:
+"""
+${input}
+"""
+
+Return ONLY the paraphrased text. No quotes, no preamble.`
+    }
+};
+
+exports.generateAI = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'POST') {
+            return res.status(405).send('Method Not Allowed');
+        }
+
+        const { tool, input, params } = req.body;
+
+        // Security: Referer check
+        const referer = req.get('Referer');
+        if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
+            return res.status(403).send('Unauthorized Source');
+        }
+
+        // Validate tool
+        if (!tool || !AI_PROMPTS[tool]) {
+            return res.status(400).json({ error: 'Invalid tool. Valid: ' + Object.keys(AI_PROMPTS).join(', ') });
+        }
+
+        // Validate input
+        if (!input || typeof input !== 'string' || input.length < 1) {
+            return res.status(400).json({ error: 'Input text is required' });
+        }
+
+        if (input.length > 5000) {
+            return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
+        }
+
+        // Rate limit check
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
+            return res.status(429).json({ error: rateCheck.reason });
+        }
+
+        // Get API Key
+        const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+        if (!apiKey) {
+            console.error("API Key not found in functions config.");
+            return res.status(500).send("Server Configuration Error");
+        }
+
+        try {
+            const toolConfig = AI_PROMPTS[tool];
+            const prompt = toolConfig.build(input, params || {});
+            const model = toolConfig.model || 'gemini-1.5-flash';
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 1024
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error(`Gemini API Error (${tool}):`, errorData);
+                return res.status(500).json({ error: `AI Error: ${errorData.error?.message || response.statusText}` });
+            }
+
+            const data = await response.json();
+            const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing input.";
+
+            res.status(200).json({ result, tool });
+
+        } catch (error) {
+            console.error(`Function Error (${tool}):`, error);
+            res.status(500).json({ error: 'Internal Server Error: ' + error.message });
         }
     });
 });

@@ -651,7 +651,8 @@ function generateSitemap(generatedPages) {
         'humanizer', 'gig-auto-pilot', 'json-csv-converter', 'seo-tag-generator',
         'password-checker', 'base64-tool', 'color-palette', 'markdown-html',
         'regex-tester', 'qr-generator', 'word-counter', 'uuid-generator',
-        'lorem-ipsum', 'epoch-converter', 'cron-builder', 'privacy-generator'
+        'lorem-ipsum', 'epoch-converter', 'cron-builder', 'privacy-generator',
+        'json-formatter', 'text-diff', 'slug-generator', 'html-entity'
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
