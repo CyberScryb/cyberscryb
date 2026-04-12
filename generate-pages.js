@@ -509,12 +509,34 @@ function generatePage(page) {
     <link rel="canonical" href="https://cyberscryb.com/guides/${page.slug}.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="guide.css">
     <link rel="stylesheet" href="../tools/shared/email-capture.css">
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
     <script type="application/ld+json">
     ${jsonLd}
     </script>
@@ -614,25 +636,44 @@ ${faqsHtml}
 
 function generateSitemap(generatedPages) {
     const baseUrl = 'https://cyberscryb.com';
-    const tools = ['json-csv-converter', 'seo-tag-generator', 'password-checker', 'base64-tool', 'color-palette', 'markdown-html'];
+    const today = new Date().toISOString().slice(0, 10);
+    const mainPages = [
+        { path: '/', priority: '1.0', freq: 'weekly' },
+        { path: '/tools.html', priority: '0.9', freq: 'weekly' },
+        { path: '/guides/', priority: '0.9', freq: 'weekly' },
+        { path: '/about.html', priority: '0.7', freq: 'monthly' },
+        { path: '/contact.html', priority: '0.4', freq: 'yearly' },
+        { path: '/privacy.html', priority: '0.3', freq: 'yearly' },
+        { path: '/terms.html', priority: '0.3', freq: 'yearly' },
+        { path: '/disclosure.html', priority: '0.3', freq: 'yearly' }
+    ];
+    const tools = [
+        'humanizer', 'gig-auto-pilot', 'json-csv-converter', 'seo-tag-generator',
+        'password-checker', 'base64-tool', 'color-palette', 'markdown-html',
+        'regex-tester', 'qr-generator', 'word-counter', 'uuid-generator',
+        'lorem-ipsum', 'epoch-converter', 'cron-builder', 'privacy-generator'
+    ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    xml += '  <!-- Main Pages -->\n';
 
-    // Homepage
-    xml += `  <url><loc>${baseUrl}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n`;
+    mainPages.forEach(p => {
+        xml += `  <url><loc>${baseUrl}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.freq}</changefreq><priority>${p.priority}</priority></url>\n`;
+    });
 
-    // Tools
+    xml += '\n  <!-- Tools -->\n';
     tools.forEach(t => {
-        xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
+        xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
     });
 
     // Guide pages
+    xml += '\n  <!-- Guides -->\n';
     generatedPages.forEach(p => {
-        xml += `  <url><loc>${baseUrl}/guides/${p.slug}.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+        xml += `  <url><loc>${baseUrl}/guides/${p.slug}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
     });
 
-    xml += '</urlset>';
+    xml += '</urlset>\n';
     return xml;
 }
 
