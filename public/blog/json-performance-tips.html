@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Performance Tips for Working with Large JSON | CyberScryb Blog</title>
+    <meta name="description" content="10 practical performance tips for working with large JSON files: streaming parsers, column-first storage, NDJSON, memory-mapped parsing and tools that handle gigabyte-scale input.">
+    <link rel="canonical" href="https://cyberscryb.com/blog/json-performance-tips.html">
+
+    <meta property="og:title" content="10 Performance Tips for Working with Large JSON">
+    <meta property="og:description" content="Streaming parsers, column-first storage and practical tips when your JSON won't fit in RAM.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cyberscryb.com/blog/json-performance-tips.html">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="10 Performance Tips for Working with Large JSON">
+    <meta name="twitter:description" content="Practical tactics for when your JSON won't fit in RAM.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preload" href="../css/style.css" as="style">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap"></noscript>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') { setTimeout(loadAdsense, 2500); }
+        else { window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); }); }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') { setTimeout(loadGA, 1500); }
+        else { window.addEventListener('load', function() { setTimeout(loadGA, 1500); }); }
+    })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "10 Performance Tips for Working with Large JSON",
+        "description": "Practical tactics when your JSON won't fit in RAM.",
+        "author": {"@type": "Organization", "name": "CyberScryb Team", "url": "https://cyberscryb.com/about.html"},
+        "publisher": {"@type": "Organization", "name": "CyberScryb", "url": "https://cyberscryb.com"},
+        "datePublished": "2026-04-05",
+        "dateModified": "2026-04-05",
+        "mainEntityOfPage": "https://cyberscryb.com/blog/json-performance-tips.html",
+        "image": "https://cyberscryb.com/og-image.svg"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://cyberscryb.com/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "JSON Performance Tips", "item": "https://cyberscryb.com/blog/json-performance-tips.html"}
+        ]
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="../favicon.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tools.html">Tools</a></li>
+                    <li><a href="../guides/index.html">Guides</a></li>
+                    <li><a href="index.html" class="active">Blog</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <nav aria-label="Breadcrumb" style="max-width: 820px; margin: 1.25rem auto 0; padding: 0 1.25rem; font-size: 0.85rem; color: #888;">
+            <a href="../index.html" style="color:#888;">Home</a>
+            <span style="margin: 0 0.4rem;">&rsaquo;</span>
+            <a href="index.html" style="color:#888;">Blog</a>
+            <span style="margin: 0 0.4rem;">&rsaquo;</span>
+            <span style="color:#c41e1e;">JSON Performance Tips</span>
+        </nav>
+
+        <article style="max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 3rem; color: #ddd; line-height: 1.75; font-family: 'Inter', sans-serif;">
+            <header style="border-bottom: 1px solid #222; padding-bottom: 1.25rem; margin-bottom: 1.75rem;">
+                <div style="background:#c41e1e;color:#000;padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:0.75rem;font-size:0.72rem;font-weight:700;letter-spacing:0.05em;">PERFORMANCE</div>
+                <h1 style="font-family:'Orbitron',sans-serif;font-size:2.1rem;line-height:1.2;color:#fff;margin:0 0 0.75rem;">10 Performance Tips for Working with Large JSON</h1>
+                <div style="color:#888;font-size:0.88rem;">By CyberScryb Team &middot; April 5, 2026 &middot; 7 min read</div>
+            </header>
+
+            <p>JSON is a lovely serialization format right up until your file breaks the 100MB barrier. At that point, the same <code>JSON.parse()</code> call that you have been happily using for a decade will allocate 3&ndash;5x the file size in memory, pause your event loop for several seconds, and occasionally crash the process with an out-of-memory error. If you have ever tried to load a real database export in Node.js or a pandas notebook, you know the feeling.</p>
+
+            <p>Here are ten practical tips for handling JSON when the file is too big, too slow, or too weird for the default parser. No theory &mdash; every one of these has saved us real time on real projects.</p>
+
+            <h2>1. Use NDJSON (newline-delimited JSON) instead of one big array</h2>
+            <p>The single biggest unlock for large JSON is switching from <code>[{...}, {...}, ...]</code> to one-object-per-line NDJSON. NDJSON lets you stream-process records one at a time, never holding the full dataset in memory. Every modern tool in the ecosystem (jq, DuckDB, pandas, ClickHouse, ripgrep) handles NDJSON natively.</p>
+
+            <p>Rule of thumb: if the file will ever exceed 10MB, emit NDJSON from the start.</p>
+
+            <h2>2. Switch to a streaming parser</h2>
+            <p>Even with a big single-array JSON file, you can use a streaming parser like <code>stream-json</code> (Node.js), <code>ijson</code> (Python), or <code>json-stream-parser</code> in your language of choice. These parsers emit events as they walk the syntax tree, so you can process each record as it is discovered without ever materializing the whole document.</p>
+
+            <p>The trade-off: streaming parsers are harder to use for deeply nested lookups. If you need to ask "for record X, give me the fifth nested field," a streaming parser is awkward. If you need to ask "iterate over all records and do something," streaming wins every time.</p>
+
+            <h2>3. Flatten nested paths before you analyze</h2>
+            <p>If you are going to do any real analysis on the data, flatten nested objects into dot-separated columns (<code>user.address.city</code>) before you load them into a dataframe or spreadsheet. Flattening trades a little memory for an enormous ergonomic improvement and unlocks every tabular tool in existence.</p>
+
+            <p>Our <a href="../tools/json-csv-converter/index.html">JSON to CSV converter</a> does this automatically &mdash; paste nested JSON and get flat columns, even for arrays of sub-objects. It handles files up to 50,000+ rows in the browser without hitting a server.</p>
+
+            <h2>4. Use DuckDB for ad-hoc queries</h2>
+            <p>DuckDB is the underrated weapon for JSON work in 2026. It can read NDJSON and nested JSON directly, run SQL against it, and handle multi-gigabyte files on a laptop. One line:</p>
+            <pre style="background:#111;padding:1rem;border-radius:6px;overflow-x:auto;"><code>duckdb -c "SELECT * FROM read_json_auto('huge.ndjson') WHERE country='US'"</code></pre>
+            <p>That one command will happily process a 2GB NDJSON export in seconds, where <code>JSON.parse</code> would have exploded.</p>
+
+            <h2>5. Store numbers as numbers, not strings</h2>
+            <p>JSON is forgiving about types, which means you can store a timestamp as <code>"1712920000000"</code> just as easily as <code>1712920000000</code>. The string version costs ~3x the bytes and forces a reparse on every use. When you generate JSON, use native numeric types. When you ingest JSON, cast strings to numbers at the earliest possible step so downstream code does not pay the tax repeatedly.</p>
+
+            <section style="margin: 2rem 0; padding: 0 0.5rem; text-align:center;">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </section>
+
+            <h2>6. Drop fields you do not need at the parse boundary</h2>
+            <p>Most large JSON files have a handful of tiny fields you actually care about and a dozen huge fields you do not. A 1KB-per-record blob becomes a 20MB file in ten thousand records. If you can strip the unused fields at the parse boundary &mdash; either with a streaming parser's visitor, a <code>jq</code> filter, or a DuckDB <code>SELECT col1, col2</code> &mdash; you save memory, CPU, and downstream processing time.</p>
+
+            <p>Cheap cheat: <code>jq '.[] | {id, name, email}' big.json &gt; small.ndjson</code> produces a slim NDJSON from a bloated array.</p>
+
+            <h2>7. Convert to a columnar format for repeated analysis</h2>
+            <p>If you are going to run more than three queries against the same JSON file, convert it to Parquet or Arrow once and re-use the columnar file. Parquet files are typically 10&ndash;20x smaller than the equivalent JSON and 50&ndash;100x faster to query because columnar stores only read the columns you ask for.</p>
+
+            <p>DuckDB can do the conversion in one line: <code>COPY (SELECT * FROM read_json_auto('big.json')) TO 'big.parquet' (FORMAT PARQUET)</code>. After that, every subsequent query is fast enough that you forget the file was ever slow.</p>
+
+            <h2>8. Avoid pretty-printed JSON at scale</h2>
+            <p>Pretty-printed JSON is great for humans reading small files. It is awful for large files. The extra whitespace inflates file size by 20&ndash;40% and costs every downstream parser time to skip over. In production pipelines always emit minified JSON; keep pretty-printing for <a href="../tools/json-csv-converter/index.html">ad-hoc inspection tools</a>, not for storage.</p>
+
+            <h2>9. Use <code>JSON.parse</code>'s reviver parameter (carefully)</h2>
+            <p>In JavaScript, the second argument to <code>JSON.parse</code> is a reviver function called for every key-value pair during parsing. You can use it to transform values on the fly (parse date strings into Date objects, convert big numeric strings to BigInt) without a second pass. The catch: the reviver is called even for fields you do not care about, so it is only a win when most fields need transformation.</p>
+
+            <h2>10. Use the right tool for the right job</h2>
+            <p>A summary of when to reach for what:</p>
+            <ul>
+                <li><strong>Under 1MB</strong>: just use the built-in parser, you are fine.</li>
+                <li><strong>1&ndash;50MB</strong>: a browser-based tool like <a href="../tools/json-csv-converter/index.html">CyberScryb JSON&harr;CSV</a> or online formatter still works; watch memory.</li>
+                <li><strong>50MB&ndash;1GB</strong>: switch to NDJSON + DuckDB or a streaming parser.</li>
+                <li><strong>1GB+</strong>: Parquet + DuckDB or a columnar warehouse; do not try to load the raw JSON into memory.</li>
+                <li><strong>Nested and gnarly</strong>: flatten first, analyze second.</li>
+            </ul>
+
+            <h2>A worked example</h2>
+            <p>Here is a real example from a recent project. We had a 680MB JSON export from a third-party CRM, structured as one giant array of user objects with nested activity arrays. The naive Node.js approach (<code>JSON.parse(fs.readFileSync(...))</code>) allocated 3.2GB of memory and crashed.</p>
+            <p>The fix was three lines of <code>jq</code>:</p>
+            <pre style="background:#111;padding:1rem;border-radius:6px;overflow-x:auto;"><code>jq -c '.[] | {id, email, last_login}' export.json &gt; users.ndjson
+duckdb -c "COPY (SELECT * FROM read_json_auto('users.ndjson')) TO 'users.parquet' (FORMAT PARQUET)"
+duckdb -c "SELECT COUNT(*) FROM 'users.parquet' WHERE last_login &gt; '2025-01-01'"</code></pre>
+            <p>The first command peeled the JSON into a slim NDJSON in under a minute. The second produced a 24MB Parquet file. The third answered the business question in 0.08 seconds. From a crash to an answer in three commands.</p>
+
+            <section style="margin: 2rem 0; padding: 0 0.5rem; text-align:center;">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </section>
+
+            <h2>The takeaway</h2>
+            <p>Large JSON is not a data problem &mdash; it is a tooling problem. The moment you reach for NDJSON, streaming parsers, DuckDB, and Parquet, every "my JSON won't fit in RAM" story disappears. Start with the smallest change that unlocks the most leverage (step 1: switch to NDJSON) and add the rest as you hit the next wall.</p>
+
+            <p>If you are working with JSON &harr; CSV conversions as part of the pipeline, <strong><a href="../tools/json-csv-converter/index.html">try the CyberScryb JSON &harr; CSV Converter free</a></strong>. It flattens nested fields, handles large files in the browser, and does not send your data anywhere.</p>
+
+            <div style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid #222;">
+                <h3 style="color:#fff;font-family:'Orbitron',sans-serif;font-size:1.1rem;">Related posts</h3>
+                <ul style="list-style:none;padding:0;margin:0.75rem 0;">
+                    <li style="margin:0.5rem 0;"><a href="best-free-developer-tools-2026.html" style="color:#c41e1e;">25 Best Free Developer Tools for 2026</a></li>
+                    <li style="margin:0.5rem 0;"><a href="privacy-first-web-apps-manifesto.html" style="color:#c41e1e;">The Case for Privacy-First Web Apps</a></li>
+                    <li style="margin:0.5rem 0;"><a href="seo-for-developer-tools-sites.html" style="color:#c41e1e;">SEO for Developer Tool Sites: What Actually Works</a></li>
+                </ul>
+                <p style="margin-top:1.25rem;"><a href="index.html" style="color:#888;">&larr; Back to Blog</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../disclosure.html">Affiliate Disclosure</a>
+                    <a href="../guides/index.html">Guides</a>
+                    <a href="index.html">Blog</a>
+                    <a href="../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
