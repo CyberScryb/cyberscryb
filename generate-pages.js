@@ -648,6 +648,7 @@ function generateSitemap(generatedPages) {
         { path: '/disclosure.html', priority: '0.3', freq: 'yearly' }
     ];
     const tools = [
+        'summarizer', 'email-writer', 'bio-generator', 'code-explainer', 'product-description',
         'humanizer', 'gig-auto-pilot', 'json-csv-converter', 'seo-tag-generator',
         'password-checker', 'base64-tool', 'color-palette', 'markdown-html',
         'regex-tester', 'qr-generator', 'word-counter', 'uuid-generator',
