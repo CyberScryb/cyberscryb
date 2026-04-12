@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Converter — Free Online Text Case Tool | CyberScryb</title>
+    <meta name="description"
+        content="Free online case converter. Convert text to camelCase, snake_case, kebab-case, PascalCase, Title Case, UPPERCASE, lowercase, CONSTANT_CASE instantly. 100% client-side.">
+    <link rel="canonical" href="https://cyberscryb.com/tools/case-converter/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+
+    <meta property="og:title" content="Case Converter — Free Online Text Case Tool | CyberScryb">
+    <meta property="og:description" content="Convert text to camelCase, snake_case, kebab-case, PascalCase and more. 100% private.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/case-converter/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Converter — Free Online Text Case Tool | CyberScryb">
+    <meta name="twitter:description" content="Convert text to camelCase, snake_case, kebab-case, PascalCase and more. 100% private.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadGA, 1500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+    })();
+    </script>
+
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "SoftwareApplication",
+        "name": "CyberScryb Case Converter",
+        "url": "https://cyberscryb.com/tools/case-converter/",
+        "description": "Convert text to camelCase, snake_case, kebab-case, PascalCase, Title Case, UPPERCASE, lowercase and CONSTANT_CASE.",
+        "applicationCategory": "DeveloperApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools.html" },
+            { "@type": "ListItem", "position": 3, "name": "Case Converter", "item": "https://cyberscryb.com/tools/case-converter/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is camelCase?", "acceptedAnswer": { "@type": "Answer", "text": "camelCase joins words by capitalizing every word after the first, e.g. helloWorld. It is widely used for variable names in JavaScript and Java." }},
+            { "@type": "Question", "name": "What is the difference between snake_case and kebab-case?", "acceptedAnswer": { "@type": "Answer", "text": "Both lowercase every word. snake_case separates words with underscores (hello_world), while kebab-case uses hyphens (hello-world)." }},
+            { "@type": "Question", "name": "Is this case converter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It runs 100% in your browser, is free forever, and never sends your text to any server." }},
+            { "@type": "Question", "name": "What is CONSTANT_CASE?", "acceptedAnswer": { "@type": "Answer", "text": "CONSTANT_CASE (also SCREAMING_SNAKE_CASE) uppercases every letter and separates words with underscores. It is commonly used for constants and environment variables." }},
+            { "@type": "Question", "name": "Can I convert code identifiers?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The converter intelligently splits existing camelCase, PascalCase, snake_case, kebab-case and spaced text into individual words before re-joining them in the selected format." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .cc-app { padding: 6rem 0 4rem; background: #0a0a0a; min-height: 100vh; }
+        .cc-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+        textarea.cc-box {
+            width: 100%; min-height: 180px; background: #141414; border: 1px solid #333;
+            border-radius: 12px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem; line-height: 1.6; padding: 1.25rem; resize: vertical; outline: none;
+            transition: border-color 0.3s;
+        }
+        textarea.cc-box:focus { border-color: #c41e1e; }
+        textarea.cc-box::placeholder { color: #333; }
+
+        .case-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.6rem; margin: 1.25rem 0;
+        }
+        .case-btn {
+            background: #141414; border: 1px solid #2a2a2a; color: #ccc;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer;
+            transition: all 0.2s; text-align: center;
+        }
+        .case-btn:hover { border-color: #c41e1e; color: #fff; transform: translateY(-1px); }
+        .case-btn.active { border-color: #c41e1e; color: #c41e1e; background: rgba(196, 30, 30, 0.08); }
+
+        .stats-row { display: flex; gap: 1.5rem; color: #666; font-size: 0.85rem; margin: 0.75rem 0; }
+        .stats-row span strong { color: #c41e1e; }
+
+        .copy-btn {
+            background: rgba(196, 30, 30, 0.12); border: 1px solid #c41e1e; color: #c41e1e;
+            padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            transition: all 0.2s; margin-top: 0.75rem;
+        }
+        .copy-btn:hover { background: #c41e1e; color: #fff; }
+
+        .faq-section { margin-top: 3rem; }
+        .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section details[open] summary::after { content: '−'; }
+        .faq-section details p { padding: 0 1rem 1rem; color: #888; line-height: 1.6; margin: 0; }
+
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb span { margin: 0 0.4rem; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="../../favicon.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../tools.html" class="active">Tools</a></li>
+                    <li><a href="../../guides/index.html">Guides</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cc-app">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a><span>›</span>
+            <a href="../../tools.html">Tools</a><span>›</span>
+            Case Converter
+        </div>
+        <div class="cc-container">
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Case Converter</h1>
+                <p style="color: #666; margin-bottom: 0;">Convert text between camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE, Title Case and more. 100% private.</p>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <label style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em;">Input Text</label>
+                <textarea id="cc-input" class="cc-box" placeholder="Type or paste your text here..."></textarea>
+                <div class="stats-row">
+                    <span>Characters: <strong id="cc-chars">0</strong></span>
+                    <span>Words: <strong id="cc-words">0</strong></span>
+                </div>
+            </div>
+
+            <div class="case-grid" id="case-buttons">
+                <button class="case-btn" data-case="camel">camelCase</button>
+                <button class="case-btn" data-case="pascal">PascalCase</button>
+                <button class="case-btn" data-case="snake">snake_case</button>
+                <button class="case-btn" data-case="kebab">kebab-case</button>
+                <button class="case-btn" data-case="constant">CONSTANT_CASE</button>
+                <button class="case-btn" data-case="title">Title Case</button>
+                <button class="case-btn" data-case="sentence">Sentence case</button>
+                <button class="case-btn" data-case="upper">UPPERCASE</button>
+                <button class="case-btn" data-case="lower">lowercase</button>
+                <button class="case-btn" data-case="alt">aLtErNaTiNg</button>
+                <button class="case-btn" data-case="inverse">iNVERSE</button>
+            </div>
+
+            <div>
+                <label style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em;">Output</label>
+                <textarea id="cc-output" class="cc-box" readonly placeholder="Click a case button above to convert..."></textarea>
+                <button class="copy-btn" id="cc-copy">📋 Copy Output</button>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is camelCase?</summary><p>camelCase joins words by capitalizing every word after the first, e.g. <code>helloWorld</code>. It is widely used for variable names in JavaScript and Java.</p></details>
+                <details><summary>What is the difference between snake_case and kebab-case?</summary><p>Both lowercase every word. snake_case separates words with underscores (<code>hello_world</code>), while kebab-case uses hyphens (<code>hello-world</code>).</p></details>
+                <details><summary>Is this case converter free?</summary><p>Yes. It runs 100% in your browser, is free forever, and never sends your text to any server.</p></details>
+                <details><summary>What is CONSTANT_CASE?</summary><p>CONSTANT_CASE (also SCREAMING_SNAKE_CASE) uppercases every letter and separates words with underscores. It is commonly used for constants and environment variables.</p></details>
+                <details><summary>Can I convert code identifiers?</summary><p>Yes. The converter intelligently splits existing camelCase, PascalCase, snake_case, kebab-case and spaced text into individual words before re-joining them in the selected format.</p></details>
+            </div>
+        </div>
+    </main>
+
+    <!-- AdSense: Below Tool -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #333; border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color:#888;">Count words, characters and reading time.</span>
+            </a>
+            <a href="../url-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">URL Encoder / Decoder</strong>
+                <span style="font-size:0.85rem; color:#888;">Percent-encode and decode URL strings.</span>
+            </a>
+            <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
+                <span style="font-size:0.85rem; color:#888;">Encode and decode Base64 strings.</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../terms.html">Terms of Service</a>
+                    <a href="../../disclosure.html">Affiliate Disclosure</a>
+                    <a href="../../guides/index.html">Guides</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="../../js/script.js"></script>
+    <script>
+    (function() {
+        const input = document.getElementById('cc-input');
+        const output = document.getElementById('cc-output');
+        const charsEl = document.getElementById('cc-chars');
+        const wordsEl = document.getElementById('cc-words');
+        const buttons = document.querySelectorAll('.case-btn');
+        let currentCase = 'camel';
+
+        function tokenize(text) {
+            if (!text) return [];
+            // Split on non-alphanumeric AND camelCase/PascalCase boundaries
+            return text
+                .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+                .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+                .split(/[^a-zA-Z0-9]+/)
+                .filter(Boolean);
+        }
+
+        function convert(text, type) {
+            if (type === 'upper') return text.toUpperCase();
+            if (type === 'lower') return text.toLowerCase();
+            if (type === 'alt') {
+                return text.split('').map((c, i) => i % 2 === 0 ? c.toLowerCase() : c.toUpperCase()).join('');
+            }
+            if (type === 'inverse') {
+                return text.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('');
+            }
+            if (type === 'sentence') {
+                return text.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, s => s.toUpperCase());
+            }
+
+            const words = tokenize(text);
+            if (words.length === 0) return '';
+
+            switch (type) {
+                case 'camel':
+                    return words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+                case 'pascal':
+                    return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+                case 'snake':
+                    return words.map(w => w.toLowerCase()).join('_');
+                case 'kebab':
+                    return words.map(w => w.toLowerCase()).join('-');
+                case 'constant':
+                    return words.map(w => w.toUpperCase()).join('_');
+                case 'title':
+                    return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+            }
+            return text;
+        }
+
+        function updateStats() {
+            const t = input.value;
+            charsEl.textContent = t.length.toLocaleString();
+            const w = t.trim() ? t.trim().split(/\s+/).length : 0;
+            wordsEl.textContent = w.toLocaleString();
+        }
+
+        function render() {
+            updateStats();
+            output.value = convert(input.value, currentCase);
+        }
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentCase = btn.dataset.case;
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                render();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'tool_use', { tool_name: 'case_converter', case_type: currentCase });
+                }
+            });
+        });
+
+        input.addEventListener('input', render);
+
+        document.getElementById('cc-copy').addEventListener('click', () => {
+            if (!output.value) return;
+            navigator.clipboard.writeText(output.value);
+            const btn = document.getElementById('cc-copy');
+            const orig = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => btn.textContent = orig, 1500);
+        });
+
+        // Activate default
+        document.querySelector('.case-btn[data-case="camel"]').classList.add('active');
+        render();
+    })();
+    </script>
+</body>
+
+</html>

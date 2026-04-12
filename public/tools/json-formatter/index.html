@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Validator — Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Free JSON formatter and validator. Beautify, minify, and validate JSON instantly. Detects syntax errors with line numbers. 100% client-side. No signup required.">
+    <link rel="canonical" href="https://cyberscryb.com/tools/json-formatter/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+
+    <meta property="og:title" content="JSON Formatter & Validator — Free Online Tool | CyberScryb">
+    <meta property="og:description" content="Beautify, minify, and validate JSON with precise error detection. 100% client-side.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/json-formatter/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSON Formatter & Validator — Free Online Tool | CyberScryb">
+    <meta name="twitter:description" content="Beautify, minify, and validate JSON with precise error detection. 100% client-side.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadGA, 1500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+    })();
+    </script>
+
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "SoftwareApplication",
+        "name": "CyberScryb JSON Formatter & Validator",
+        "url": "https://cyberscryb.com/tools/json-formatter/",
+        "description": "Free JSON formatter and validator. Beautify, minify, and validate JSON with precise error detection.",
+        "applicationCategory": "DeveloperApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools.html" },
+            { "@type": "ListItem", "position": 3, "name": "JSON Formatter", "item": "https://cyberscryb.com/tools/json-formatter/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How does the JSON formatter work?", "acceptedAnswer": { "@type": "Answer", "text": "Paste your JSON into the input box and click Format to pretty-print it with your chosen indentation, Minify to strip whitespace, or Validate to check for syntax errors. Everything runs in your browser." }},
+            { "@type": "Question", "name": "Is my JSON data sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. All formatting, minification, and validation happens 100% client-side in JavaScript. Your data never leaves your device." }},
+            { "@type": "Question", "name": "What JSON errors does this tool detect?", "acceptedAnswer": { "@type": "Answer", "text": "The tool uses JSON.parse and reports syntax issues such as missing commas, unquoted keys, trailing commas, mismatched brackets, and invalid escape sequences. It attempts to pinpoint the line and column of the first error." }},
+            { "@type": "Question", "name": "What is the difference between formatting and minifying?", "acceptedAnswer": { "@type": "Answer", "text": "Formatting adds indentation and line breaks for readability. Minifying removes all unnecessary whitespace to reduce file size, which is useful for production APIs and embedded JSON." }},
+            { "@type": "Question", "name": "Can I use tabs instead of spaces?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, the tool supports 2-space, 4-space, and tab indentation. Pick whichever matches your project's style." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .jf-app { padding: 6rem 0 4rem; background: #0a0a0a; min-height: 100vh; }
+        .jf-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        .jf-label { display: block; font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin: 1rem 0 0.5rem; }
+        .jf-textarea {
+            width: 100%; min-height: 220px; background: #141414; border: 1px solid #333;
+            border-radius: 12px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem; line-height: 1.55; padding: 1.2rem; resize: vertical; outline: none;
+            transition: border-color 0.3s; white-space: pre;
+        }
+        .jf-textarea:focus { border-color: #c41e1e; }
+        .jf-textarea::placeholder { color: #333; }
+        .jf-btnrow { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+        .jf-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid #333; color: #ccc;
+            font-family: 'Inter', sans-serif; font-size: 0.82rem; padding: 0.6rem 1rem;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .jf-btn:hover { border-color: #c41e1e; color: #c41e1e; }
+        .jf-btn.primary { background: #c41e1e; border-color: #c41e1e; color: #fff; }
+        .jf-btn.primary:hover { background: #a01818; color: #fff; }
+        .jf-error { background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #fca5a5; padding: 0.9rem 1rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin: 0.5rem 0; display: none; }
+        .jf-ok { background: rgba(34,197,94,0.1); border: 1px solid #22c55e; color: #86efac; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.85rem; margin: 0.5rem 0; display: none; }
+        .jf-stats { display: flex; gap: 1.5rem; font-size: 0.78rem; color: #666; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; }
+        .jf-stats span strong { color: #c41e1e; }
+        .faq-section { margin-top: 3rem; }
+        .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section details[open] summary::after { content: '−'; }
+        .faq-section details p { padding: 0 1rem 1rem; color: #888; line-height: 1.6; margin: 0; }
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb span { margin: 0 0.4rem; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="../../favicon.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../tools.html" class="active">Tools</a></li>
+                    <li><a href="../../guides/index.html">Guides</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="jf-app">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a><span>›</span>
+            <a href="../../tools.html">Tools</a><span>›</span>
+            JSON Formatter
+        </div>
+        <div class="jf-container">
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">JSON Formatter & Validator</h1>
+                <p style="color: #666; margin-bottom: 0;">Beautify, minify, and validate JSON instantly. Syntax errors are pinpointed by line and column. 100% private.</p>
+            </div>
+
+            <label class="jf-label" for="jf-input">Input JSON</label>
+            <textarea id="jf-input" class="jf-textarea" placeholder='{"name":"Claude","skills":["json","regex"],"active":true}'></textarea>
+
+            <div class="jf-btnrow">
+                <button class="jf-btn primary" id="jf-format2">Format (2 spaces)</button>
+                <button class="jf-btn" id="jf-format4">Format (4 spaces)</button>
+                <button class="jf-btn" id="jf-formatTab">Format (Tab)</button>
+                <button class="jf-btn" id="jf-minify">Minify</button>
+                <button class="jf-btn" id="jf-validate">Validate</button>
+                <button class="jf-btn" id="jf-sample">Load Sample</button>
+                <button class="jf-btn" id="jf-clear">Clear</button>
+            </div>
+
+            <div class="jf-error" id="jf-err"></div>
+            <div class="jf-ok" id="jf-ok"></div>
+
+            <label class="jf-label" for="jf-output">Output</label>
+            <textarea id="jf-output" class="jf-textarea" readonly placeholder="Formatted JSON will appear here..."></textarea>
+
+            <div class="jf-stats">
+                <span>Input: <strong id="jf-in-count">0</strong> chars</span>
+                <span>Output: <strong id="jf-out-count">0</strong> chars</span>
+            </div>
+
+            <div class="jf-btnrow">
+                <button class="jf-btn" id="jf-copy">Copy Output</button>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How does the JSON formatter work?</summary><p>Paste JSON, click Format / Minify / Validate. JSON.parse runs in your browser and the output is pretty-printed with your chosen indentation.</p></details>
+                <details><summary>Is my data uploaded anywhere?</summary><p>No. Everything is processed 100% client-side in JavaScript. Your JSON never leaves your device.</p></details>
+                <details><summary>What JSON errors are detected?</summary><p>Missing commas, unquoted keys, trailing commas, mismatched brackets, and invalid escape sequences — with the approximate line and column of the first error.</p></details>
+                <details><summary>Format vs. minify — which should I use?</summary><p>Format for readable debug output. Minify to shrink payloads for APIs and embedded configs where every byte counts.</p></details>
+                <details><summary>Does it support JSON5 or comments?</summary><p>No. This tool validates strict RFC 8259 JSON. Comments and trailing commas are reported as errors.</p></details>
+            </div>
+        </div>
+    </main>
+
+    <!-- AdSense: Below Tool -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #333; border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON ↔ CSV Converter</strong>
+                <span style="font-size:0.85rem; color:#888;">Convert JSON to CSV and back with nested object flattening.</span>
+            </a>
+            <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
+                <span style="font-size:0.85rem; color:#888;">Encode or decode strings and files to Base64 offline.</span>
+            </a>
+            <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <span style="font-size:0.85rem; color:#888;">Test regular expressions with live match highlighting.</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../terms.html">Terms of Service</a>
+                    <a href="../../disclosure.html">Affiliate Disclosure</a>
+                    <a href="../../guides/index.html">Guides</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="../../js/script.js"></script>
+    <script>
+    (function() {
+        const $ = id => document.getElementById(id);
+        const input = $('jf-input'), output = $('jf-output');
+        const errBox = $('jf-err'), okBox = $('jf-ok');
+        const inCount = $('jf-in-count'), outCount = $('jf-out-count');
+
+        function updateCounts() {
+            inCount.textContent = input.value.length.toLocaleString();
+            outCount.textContent = output.value.length.toLocaleString();
+        }
+        function clearStatus() { errBox.style.display = 'none'; okBox.style.display = 'none'; }
+        function showError(msg) { errBox.textContent = 'Error: ' + msg; errBox.style.display = 'block'; okBox.style.display = 'none'; }
+        function showOk(msg) { okBox.textContent = msg; okBox.style.display = 'block'; errBox.style.display = 'none'; }
+
+        function locateError(text, errMsg) {
+            // Try to extract position from "at position N"
+            const m = errMsg.match(/position\s+(\d+)/i);
+            if (!m) return '';
+            const pos = parseInt(m[1], 10);
+            let line = 1, col = 1;
+            for (let i = 0; i < pos && i < text.length; i++) {
+                if (text[i] === '\n') { line++; col = 1; } else { col++; }
+            }
+            return ' (line ' + line + ', column ' + col + ')';
+        }
+
+        function parse() {
+            const text = input.value.trim();
+            if (!text) { showError('Input is empty.'); return null; }
+            try { return JSON.parse(text); }
+            catch (e) { showError(e.message + locateError(input.value, e.message)); return null; }
+        }
+
+        function formatWith(indent) {
+            clearStatus();
+            const obj = parse();
+            if (obj === null && errBox.style.display === 'block') return;
+            try {
+                output.value = JSON.stringify(obj, null, indent);
+                showOk('Valid JSON. Formatted successfully.');
+                updateCounts();
+            } catch (e) { showError(e.message); }
+        }
+
+        $('jf-format2').addEventListener('click', () => formatWith(2));
+        $('jf-format4').addEventListener('click', () => formatWith(4));
+        $('jf-formatTab').addEventListener('click', () => formatWith('\t'));
+        $('jf-minify').addEventListener('click', () => {
+            clearStatus();
+            const obj = parse();
+            if (obj === null && errBox.style.display === 'block') return;
+            output.value = JSON.stringify(obj);
+            showOk('Valid JSON. Minified successfully.');
+            updateCounts();
+        });
+        $('jf-validate').addEventListener('click', () => {
+            clearStatus();
+            const obj = parse();
+            if (obj !== null) {
+                const type = Array.isArray(obj) ? 'array' : typeof obj;
+                showOk('Valid JSON (' + type + ').');
+            }
+        });
+        $('jf-sample').addEventListener('click', () => {
+            input.value = '{\n  "name": "CyberScryb",\n  "tools": 20,\n  "features": ["privacy", "fast", "free"],\n  "stats": {"users": 15000, "active": true},\n  "launched": "2026-01-01"\n}';
+            updateCounts();
+            clearStatus();
+        });
+        $('jf-clear').addEventListener('click', () => {
+            input.value = ''; output.value = ''; clearStatus(); updateCounts();
+        });
+        $('jf-copy').addEventListener('click', () => {
+            if (!output.value) return;
+            navigator.clipboard.writeText(output.value);
+            showOk('Output copied to clipboard.');
+        });
+        input.addEventListener('input', updateCounts);
+        updateCounts();
+    })();
+    </script>
+</body>
+
+</html>
