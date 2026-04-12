@@ -154,28 +154,41 @@
     </header>
 
     <main>
-        <section class="hero">
+        <section class="hero" style="padding-top: 3rem; padding-bottom: 2rem;">
             <div class="hero-particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="hero-container" style="position:relative;z-index:2;">
-                <h1 class="hero-title">Free AI & Developer Tools. Privacy-First. No Signup.</h1>
-                <p class="hero-subtitle">Humanize AI text, convert JSON↔CSV, generate SEO tags, check password strength, encode Base64, build color palettes — most tools run entirely in your browser. AI-powered tools use secure server-side processing.</p>
-                <div class="hero-cta">
-                    <a href="tools.html" class="cta-button">Explore All Tools</a>
-                    <a href="#tools-overview" class="cta-secondary">See What's Available</a>
+                <h1 class="hero-title" style="margin-bottom: 0.75rem;">17 Free Tools. No Signup. No BS.</h1>
+                <p class="hero-subtitle" style="margin-bottom: 1.25rem;">Humanize AI text, convert JSON, build regex, generate SEO tags &mdash; instantly in your browser.</p>
+                <div class="hero-cta" style="margin-bottom: 1.5rem;">
+                    <a href="tools/humanizer/index.html" class="cta-button">🤖 Humanize AI Text &rarr;</a>
+                    <a href="#tools-overview" class="cta-secondary">Browse All Tools</a>
+                </div>
+
+                <!-- Quick tool jumper -->
+                <div class="quick-jump" style="max-width: 560px; margin: 0 auto; background: rgba(20,20,20,0.6); border: 1px solid #2a2a2a; border-radius: 10px; padding: 0.9rem 1rem; backdrop-filter: blur(6px);">
+                    <label for="tool-jumper" style="display:block; font-size: 0.78rem; color: #b0b0b0; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;">What do you need?</label>
+                    <select id="tool-jumper" onchange="if(this.value) window.location.href=this.value;" style="width:100%; padding: 0.7rem 0.9rem; background: #0a0a0a; color: #fff; border: 1px solid #333; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.95rem; cursor: pointer;">
+                        <option value="">Pick a task &mdash; jump straight to the tool</option>
+                        <option value="tools/humanizer/index.html">🤖 Make AI text sound human</option>
+                        <option value="tools/gig-auto-pilot/index.html">🚀 Win a freelance gig (auto proposal)</option>
+                        <option value="tools/json-csv-converter/index.html">📊 Convert JSON ↔ CSV</option>
+                        <option value="tools/seo-tag-generator/index.html">🔍 Generate SEO meta tags</option>
+                        <option value="tools/password-checker/index.html">🔒 Check password strength</option>
+                        <option value="tools/regex-tester/index.html">⚡ Test a regex pattern</option>
+                        <option value="tools/cron-builder/index.html">⏰ Build a cron expression</option>
+                        <option value="tools/base64-tool/index.html">🔤 Encode / decode Base64</option>
+                        <option value="tools/color-palette/index.html">🎨 Generate a color palette</option>
+                        <option value="tools/markdown-html/index.html">📝 Convert Markdown to HTML</option>
+                        <option value="tools/privacy-generator/index.html">📋 Generate a privacy policy</option>
+                    </select>
                 </div>
             </div>
         </section>
 
-        <section class="stats-banner reveal">
-            <div class="stat-item"><span class="stat-number">17</span><span class="stat-label">Free Tools</span></div>
-            <div class="stat-item"><span class="stat-number">20</span><span class="stat-label">Developer Guides</span></div>
-            <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Signup Required</span></div>
-            <div class="stat-item"><span class="stat-number">∞</span><span class="stat-label">Unlimited Uses</span></div>
-        </section>
-
-        <section id="tools-overview" class="featured-posts">
+        <section id="tools-overview" class="featured-posts" style="padding-top: 2rem;">
             <div class="container">
-                <h2>Our Tool Suite</h2>
+                <h2 style="margin-bottom: 0.5rem;">Pick Your Tool</h2>
+                <p style="text-align:center; color:#b0b0b0; margin-bottom: 1.5rem; font-size: 0.95rem;">Click any card below to launch &mdash; no signup, no wait.</p>
                 <div class="posts-grid reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
 
                     <!-- Humanizer -->
@@ -295,6 +308,13 @@
 
                 </div>
             </div>
+        </section>
+
+        <section class="stats-banner reveal">
+            <div class="stat-item"><span class="stat-number">17</span><span class="stat-label">Free Tools</span></div>
+            <div class="stat-item"><span class="stat-number">20</span><span class="stat-label">Developer Guides</span></div>
+            <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Signup Required</span></div>
+            <div class="stat-item"><span class="stat-number">∞</span><span class="stat-label">Unlimited Uses</span></div>
         </section>
 
         <!-- AdSense Ad Unit -->

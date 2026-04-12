@@ -22,9 +22,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6"></script>
-    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-73LQZEDNR6'); </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadGA, 1500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+    })();
+    </script>
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
 
     <script type="application/ld+json">
     { "@context": "https://schema.org", "@type": "WebApplication", "name": "CyberScryb UUID Generator", "url": "https://cyberscryb.com/tools/uuid-generator/", "description": "Generate UUIDs (v4) and GUIDs instantly.", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" } }
