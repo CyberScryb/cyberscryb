@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Diff Checker — Free Online Tool | CyberScryb</title>
+    <meta name="description"
+        content="Free text diff checker. Compare two blocks of text and see differences highlighted. Character-level and line-level comparison. 100% client-side, no signup.">
+    <link rel="canonical" href="https://cyberscryb.com/tools/text-diff/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+
+    <meta property="og:title" content="Text Diff Checker — Free Online Tool | CyberScryb">
+    <meta property="og:description" content="Compare two blocks of text line-by-line with added/removed highlighting. 100% private.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/text-diff/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Text Diff Checker — Free Online Tool | CyberScryb">
+    <meta name="twitter:description" content="Compare two blocks of text with added/removed line highlighting. Free & private.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadGA, 1500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+    })();
+    </script>
+
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "SoftwareApplication",
+        "name": "CyberScryb Text Diff Checker",
+        "url": "https://cyberscryb.com/tools/text-diff/",
+        "description": "Compare two text blocks and see added, removed, and unchanged lines highlighted.",
+        "applicationCategory": "DeveloperApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools.html" },
+            { "@type": "ListItem", "position": 3, "name": "Text Diff Checker", "item": "https://cyberscryb.com/tools/text-diff/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How does the text diff checker work?", "acceptedAnswer": { "@type": "Answer", "text": "Paste your original text on the left and the modified text on the right, then click Compare. The tool runs a line-based LCS (longest common subsequence) diff in your browser and highlights added lines in green, removed lines in red, and unchanged lines in gray." }},
+            { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. All comparison runs 100% client-side in vanilla JavaScript. Your text never leaves your browser." }},
+            { "@type": "Question", "name": "What's the difference between line-level and character-level diffs?", "acceptedAnswer": { "@type": "Answer", "text": "Line-level diff treats each line as a unit: if a single character in a line changes, the whole line is marked as removed and the new version as added. Character-level diff highlights individual characters. This tool uses line-level comparison, which is the format Git and most code review tools use." }},
+            { "@type": "Question", "name": "Can I diff code files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the old version and new version of your source code. The tool handles any plain text input — code, markdown, config files, prose, logs." }},
+            { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but the LCS algorithm is O(n*m). For best performance keep each side under a few thousand lines." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .td-app { padding: 6rem 0 4rem; background: #0a0a0a; min-height: 100vh; }
+        .td-container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        .td-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .td-grid { grid-template-columns: 1fr; } }
+
+        .td-pane label {
+            display: block; font-size: 0.75rem; color: #888; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.5rem;
+        }
+        .td-pane textarea {
+            width: 100%; min-height: 240px; background: #141414; border: 1px solid #333;
+            border-radius: 12px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem; line-height: 1.6; padding: 1rem; resize: vertical; outline: none;
+            transition: border-color 0.3s;
+        }
+        .td-pane textarea:focus { border-color: #c41e1e; }
+
+        .action-bar {
+            display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; align-items: center;
+        }
+        .action-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid #333; color: #ccc;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .action-btn:hover { border-color: #c41e1e; color: #c41e1e; }
+        .action-btn.primary { background: #c41e1e; border-color: #c41e1e; color: #fff; }
+        .action-btn.primary:hover { background: #a01818; }
+
+        .td-stats {
+            display: flex; gap: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: #888; margin-top: 1.5rem; flex-wrap: wrap;
+        }
+        .td-stats strong.add { color: #22c55e; }
+        .td-stats strong.rem { color: #ef4444; }
+        .td-stats strong.same { color: #888; }
+
+        .td-output {
+            margin-top: 1rem; background: #0f0f0f; border: 1px solid #222;
+            border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem; line-height: 1.6;
+        }
+        .diff-line {
+            display: flex; padding: 0.2rem 0; border-bottom: 1px solid #161616;
+        }
+        .diff-line:last-child { border-bottom: none; }
+        .diff-line .gutter {
+            flex: 0 0 2rem; text-align: center; color: #555; user-select: none; font-weight: 700;
+        }
+        .diff-line .content {
+            flex: 1; padding-right: 1rem; white-space: pre-wrap; word-break: break-word; color: #ddd;
+        }
+        .diff-line.add { background: #22c55e22; }
+        .diff-line.add .gutter { color: #22c55e; }
+        .diff-line.rem { background: #ef444422; }
+        .diff-line.rem .gutter { color: #ef4444; }
+        .diff-line.same .content { color: #777; }
+
+        .td-placeholder { padding: 2rem; text-align: center; color: #444; }
+
+        .faq-section { margin-top: 3rem; }
+        .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section details[open] summary::after { content: '−'; }
+        .faq-section details p { padding: 0 1rem 1rem; color: #888; line-height: 1.6; margin: 0; }
+
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 1100px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb span { margin: 0 0.4rem; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="../../favicon.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../tools.html" class="active">Tools</a></li>
+                    <li><a href="../../guides/index.html">Guides</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="td-app">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a><span>›</span>
+            <a href="../../tools.html">Tools</a><span>›</span>
+            Text Diff Checker
+        </div>
+        <div class="td-container">
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Text Diff Checker</h1>
+                <p style="color: #666; margin-bottom: 0;">Compare two blocks of text and see added, removed, and unchanged lines — line-level LCS diff, 100% client-side.</p>
+            </div>
+
+            <div class="td-grid">
+                <div class="td-pane">
+                    <label>Original</label>
+                    <textarea id="td-left" placeholder="Paste the original text here..."></textarea>
+                </div>
+                <div class="td-pane">
+                    <label>Modified</label>
+                    <textarea id="td-right" placeholder="Paste the modified text here..."></textarea>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="action-btn primary" id="td-compare">Compare</button>
+                <button class="action-btn" id="td-sample">Load Sample</button>
+                <button class="action-btn" id="td-swap">Swap Sides</button>
+                <button class="action-btn" id="td-clear">Clear</button>
+                <button class="action-btn" id="td-copy">Copy Diff</button>
+            </div>
+
+            <div class="td-stats" id="td-stats">
+                <span><strong class="add" id="td-added">0</strong> lines added</span>
+                <span><strong class="rem" id="td-removed">0</strong> lines removed</span>
+                <span><strong class="same" id="td-unchanged">0</strong> lines unchanged</span>
+            </div>
+
+            <div class="td-output" id="td-output">
+                <div class="td-placeholder">Paste text in both panes and click Compare to see the diff.</div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How does the text diff checker work?</summary><p>It runs a line-based LCS (longest common subsequence) algorithm in your browser to find the longest matching sequence of lines. Anything not in that sequence is marked as added or removed.</p></details>
+                <details><summary>Is my text uploaded anywhere?</summary><p>No. All processing is 100% client-side in vanilla JavaScript. Your text never leaves your device.</p></details>
+                <details><summary>What's the difference between line-level and character-level diffs?</summary><p>Line-level compares whole lines as units, which is faster and matches how Git and most code review tools display diffs. Character-level highlights individual characters.</p></details>
+                <details><summary>Can I diff code files?</summary><p>Yes. Paste the old and new versions of any plain text — source code, config, markdown, or logs.</p></details>
+                <details><summary>Is there a size limit?</summary><p>No hard limit, but LCS is O(n*m). Keep each side under a few thousand lines for instant results.</p></details>
+            </div>
+        </div>
+    </main>
+
+    <!-- AdSense: Below Tool -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #333; border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Word & Character Counter</strong>
+                <span style="font-size:0.85rem; color:#888;">Count words, sentences, and reading time before/after edits.</span>
+            </a>
+            <a href="../json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
+                <span style="font-size:0.85rem; color:#888;">Beautify, minify and validate JSON with error locations.</span>
+            </a>
+            <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <span style="font-size:0.85rem; color:#888;">Test regular expressions with live match highlighting.</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../terms.html">Terms of Service</a>
+                    <a href="../../disclosure.html">Affiliate Disclosure</a>
+                    <a href="../../guides/index.html">Guides</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="../../js/script.js"></script>
+    <script>
+    (function() {
+        const left = document.getElementById('td-left');
+        const right = document.getElementById('td-right');
+        const out = document.getElementById('td-output');
+        const addedEl = document.getElementById('td-added');
+        const removedEl = document.getElementById('td-removed');
+        const unchangedEl = document.getElementById('td-unchanged');
+
+        // Line-based LCS diff (under 50 lines)
+        function diffLines(aLines, bLines) {
+            const n = aLines.length, m = bLines.length;
+            // LCS DP table
+            const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+            for (let i = 1; i <= n; i++) {
+                for (let j = 1; j <= m; j++) {
+                    if (aLines[i - 1] === bLines[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+                    else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+            // Backtrack to build ops
+            const ops = [];
+            let i = n, j = m;
+            while (i > 0 && j > 0) {
+                if (aLines[i - 1] === bLines[j - 1]) { ops.push({ t: 'same', v: aLines[i - 1] }); i--; j--; }
+                else if (dp[i - 1][j] >= dp[i][j - 1]) { ops.push({ t: 'rem', v: aLines[i - 1] }); i--; }
+                else { ops.push({ t: 'add', v: bLines[j - 1] }); j--; }
+            }
+            while (i > 0) { ops.push({ t: 'rem', v: aLines[i - 1] }); i--; }
+            while (j > 0) { ops.push({ t: 'add', v: bLines[j - 1] }); j--; }
+            ops.reverse();
+            return ops;
+        }
+
+        function escapeHtml(s) {
+            return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function render(ops) {
+            let added = 0, removed = 0, same = 0;
+            const html = ops.map(op => {
+                if (op.t === 'add') { added++; return `<div class="diff-line add"><span class="gutter">+</span><span class="content">${escapeHtml(op.v) || '&nbsp;'}</span></div>`; }
+                if (op.t === 'rem') { removed++; return `<div class="diff-line rem"><span class="gutter">−</span><span class="content">${escapeHtml(op.v) || '&nbsp;'}</span></div>`; }
+                same++; return `<div class="diff-line same"><span class="gutter"> </span><span class="content">${escapeHtml(op.v) || '&nbsp;'}</span></div>`;
+            }).join('');
+            out.innerHTML = html || '<div class="td-placeholder">Both inputs are identical or empty.</div>';
+            addedEl.textContent = added;
+            removedEl.textContent = removed;
+            unchangedEl.textContent = same;
+            return { added, removed, same };
+        }
+
+        function compare() {
+            const a = left.value.split('\n');
+            const b = right.value.split('\n');
+            // Trim single trailing empty line added by split when input ends with \n
+            if (a.length && a[a.length - 1] === '' && left.value.endsWith('\n')) a.pop();
+            if (b.length && b[b.length - 1] === '' && right.value.endsWith('\n')) b.pop();
+            const ops = diffLines(a, b);
+            const stats = render(ops);
+            if (typeof gtag === 'function') {
+                gtag('event', 'tool_use', { tool_name: 'text_diff', lines_added: stats.added, lines_removed: stats.removed });
+            }
+        }
+
+        document.getElementById('td-compare').addEventListener('click', compare);
+        document.getElementById('td-clear').addEventListener('click', () => {
+            left.value = ''; right.value = '';
+            out.innerHTML = '<div class="td-placeholder">Paste text in both panes and click Compare to see the diff.</div>';
+            addedEl.textContent = '0'; removedEl.textContent = '0'; unchangedEl.textContent = '0';
+        });
+        document.getElementById('td-swap').addEventListener('click', () => {
+            const tmp = left.value; left.value = right.value; right.value = tmp;
+        });
+        document.getElementById('td-copy').addEventListener('click', () => {
+            const text = Array.from(out.querySelectorAll('.diff-line')).map(el => {
+                const g = el.querySelector('.gutter').textContent.trim() || ' ';
+                const c = el.querySelector('.content').textContent;
+                return g + ' ' + c;
+            }).join('\n');
+            if (text) navigator.clipboard.writeText(text);
+        });
+        document.getElementById('td-sample').addEventListener('click', () => {
+            left.value = 'function greet(name) {\n  console.log("Hello, " + name);\n  return true;\n}\n\ngreet("world");';
+            right.value = 'function greet(name) {\n  console.log(`Hi, ${name}!`);\n  return { ok: true };\n}\n\ngreet("CyberScryb");';
+            compare();
+        });
+    })();
+    </script>
+</body>
+
+</html>
