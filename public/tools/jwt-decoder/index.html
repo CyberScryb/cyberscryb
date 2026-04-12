@@ -344,12 +344,28 @@
 
         function highlightJson(obj) {
             const json = JSON.stringify(obj, null, 2);
-            return escapeHtml(json).replace(/(&quot;[^&]*?&quot;)(\s*:)?|\b(true|false|null)\b|(-?\d+\.?\d*)/g, (m, str, colon, bool, num) => {
-                if (str) return colon ? '<span class="jk">' + str + '</span>' + colon : '<span class="js">' + str + '</span>';
-                if (bool) return '<span class="jb">' + bool + '</span>';
-                if (num) return '<span class="jn">' + num + '</span>';
-                return m;
-            });
+            // Tokenize BEFORE escaping so string boundaries are unambiguous.
+            // Matches a JSON string (with escaped quotes), optionally followed by ":",
+            // or true/false/null, or a number.
+            const tokenRe = /("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g;
+            let out = '';
+            let last = 0;
+            let m;
+            while ((m = tokenRe.exec(json)) !== null) {
+                out += escapeHtml(json.slice(last, m.index));
+                if (m[1]) {
+                    const esc = escapeHtml(m[1]);
+                    if (m[2]) out += '<span class="jk">' + esc + '</span>' + m[2];
+                    else out += '<span class="js">' + esc + '</span>';
+                } else if (m[3]) {
+                    out += '<span class="jb">' + m[3] + '</span>';
+                } else if (m[4]) {
+                    out += '<span class="jn">' + m[4] + '</span>';
+                }
+                last = tokenRe.lastIndex;
+            }
+            out += escapeHtml(json.slice(last));
+            return out;
         }
 
         function formatDate(ts) {
@@ -434,8 +450,8 @@
                 const ms = (payloadObj.exp < 1e12 ? payloadObj.exp * 1000 : payloadObj.exp);
                 const expired = ms < Date.now();
                 const cls = expired ? 'expired' : 'valid';
-                const label = expired ? 'Expired' : 'Expires in';
-                metaLines.push('<div><span class="label">Expires at (exp):</span> <span class="value ' + cls + '">' + escapeHtml(formatDate(payloadObj.exp)) + ' — ' + label + ' ' + escapeHtml(relativeTime(payloadObj.exp)).replace('in ', '').replace(' ago', '') + (expired ? ' ago' : '') + '</span></div>');
+                const statusLabel = expired ? 'EXPIRED' : 'valid';
+                metaLines.push('<div><span class="label">Expires at (exp):</span> <span class="value ' + cls + '">' + escapeHtml(formatDate(payloadObj.exp)) + ' — ' + escapeHtml(relativeTime(payloadObj.exp)) + ' (' + statusLabel + ')</span></div>');
             }
             if (payloadObj.iss) metaLines.push('<div><span class="label">Issuer (iss):</span> <span class="value">' + escapeHtml(payloadObj.iss) + '</span></div>');
             if (payloadObj.aud) metaLines.push('<div><span class="label">Audience (aud):</span> <span class="value">' + escapeHtml(Array.isArray(payloadObj.aud) ? payloadObj.aud.join(', ') : payloadObj.aud) + '</span></div>');
