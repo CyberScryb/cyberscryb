@@ -311,12 +311,27 @@ header {
     transition: all 0.3s ease;
     border: 1px solid #333;
     position: relative;
+    cursor: pointer;
 }
 
 .blog-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(196, 30, 30, 0.1);
     border-color: #c41e1e;
+}
+
+/* Stretched link: makes entire card clickable via the .read-more link */
+.blog-card .read-more::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Keep heading link on top so it's still individually clickable */
+.blog-card h3 a {
+    position: relative;
+    z-index: 2;
 }
 
 .blog-card::before {
