@@ -267,3 +267,44 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 ## BUILD THIS FILE OVER TIME
 
 Every time a new mistake happens or a new rule emerges, add it here. This file is the project's institutional memory.
+
+---
+
+## POST-CHANGE AUDIT REQUIREMENT (MANDATORY)
+
+**After ANY change to the site (tools, content, design, config), run a multi-agent audit.** Do not consider work "done" until the audit runs.
+
+### Audit workflow (launch in parallel via Agent tool)
+
+**Agent 1 — Broken Things Audit:**
+- Check every page modified or added for: missing CSS links, missing JS links, broken `href` paths, 404s
+- Verify nav includes Blog link on all tool pages
+- Verify deferred AdSense + GA4 loaders present
+- Check for Schema.org JSON-LD on tool pages (SoftwareApplication)
+- Check for trailing slash issues (root pages must use `/css/style.css`, not relative)
+- Test that any new AI tool's `toolId` matches a key in `AI_PROMPTS` in `functions/index.js`
+- Verify `/api/ai-generate`, `/api/rewrite`, `/api/subscribe` rewrites in `firebase.json`
+- Look for leftover placeholder text, TODO comments, or broken images
+
+**Agent 2 — Value Improvement Opportunities:**
+- What's missing that could drive traffic? (new tools, missing guides, missing internal links)
+- What's underperforming? (old meta descriptions, thin content, weak CTAs)
+- What could convert better? (email gates, Pro upsells, affiliate panels)
+- Are there audience segments we're missing? (specifically for Life Tools — caregivers, co-parents, hardship)
+- Suggest 5-10 specific improvements ranked by impact
+
+**Agent 3 — Consistency Check:**
+- Are all tool cards in tools.html linked correctly?
+- Does the homepage dropdown include every new tool?
+- Is the sitemap.xml up to date?
+- Are meta descriptions consistent length (120-160 chars)?
+- Are og:image tags present on every page?
+- Any pages still using outdated model names, old GA4 ID, or fake content?
+
+### After audit:
+1. Present findings to user with CRITICAL / WARNING / INFO priority
+2. Fix CRITICAL issues immediately
+3. Add WARNING items to a running TODO list
+4. Save INFO suggestions for future improvement rounds
+
+### Never skip this. Every time.
