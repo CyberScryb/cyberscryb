@@ -109,7 +109,7 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
       `;
 
             // Call Gemini 3.1 Pro API (highest quality for humanizer output)
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -179,7 +179,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
             Return ONLY valid JSON.
             `;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -213,7 +213,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
 
 const AI_PROMPTS = {
     'summarizer': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an expert summarizer. Summarize the following text into ${params.length || '3-5 sentences'}.
 Keep the key points, facts, and conclusions. Remove fluff. Use clear, simple language.
 ${params.bullet ? 'Return the summary as a bulleted list.' : ''}
@@ -226,7 +226,7 @@ ${input}
 Return ONLY the summary. No preamble, no "Here is the summary:", just the summary text.`
     },
     'email-writer': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a professional email writer. Write a ${params.tone || 'professional'} email based on this brief:
 
 Brief: "${input}"
@@ -244,7 +244,7 @@ Requirements:
 Return ONLY the email text with the subject line at the top.`
     },
     'bio-generator': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an expert at writing compelling social media bios. Write ${params.count || '3'} ${params.platform || 'LinkedIn'} bios for this person.
 
 Person's background:
@@ -260,7 +260,7 @@ Requirements:
 Return each bio on its own line, numbered 1/2/3 etc. No extra commentary.`
     },
     'product-description': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an expert e-commerce copywriter. Write a compelling product description for this product:
 
 Product: "${input}"
@@ -278,7 +278,7 @@ Requirements:
 Return ONLY the product description, formatted with the hook, bullet points, and CTA.`
     },
     'code-explainer': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a patient senior developer explaining code to a beginner. Explain the following code clearly:
 
 \`\`\`${params.language || ''}
@@ -296,7 +296,7 @@ Requirements:
 Return ONLY the explanation in markdown format with clear sections.`
     },
     'meta-description': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an SEO expert. Write ${params.count || '3'} meta descriptions for this page:
 
 Page topic / content: "${input}"
@@ -312,7 +312,7 @@ Requirements for each:
 Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`
     },
     'ai-detector': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an AI text detection expert. Analyze the following text and determine how likely it was written by an AI language model.
 
 Score the text from 0 to 100:
@@ -342,7 +342,7 @@ Be specific about which phrases, patterns, or structural elements triggered your
     },
     // ─── Life Tools ───
     'hardship-letter': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an empathetic but professional letter writer who has helped hundreds of people write hardship letters. Write a ${params.type || 'general'} hardship letter based on this person's situation.
 
 Their situation:
@@ -364,7 +364,7 @@ Requirements:
 Return ONLY the letter text, ready to copy. Include [YOUR NAME] and [DATE] placeholders.`
     },
     'appeal-letter': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an experienced advocate who helps people write appeal letters. Write a ${params.type || 'general'} appeal letter based on this situation.
 
 Their situation and what they're appealing:
@@ -386,7 +386,7 @@ Requirements:
 Return ONLY the letter text, ready to copy.`
     },
     'custody-document': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a family law paralegal assistant helping a parent draft custody-related documents. Generate a ${params.docType || 'parenting plan'} based on the following details.
 
 Parent's situation and details:
@@ -407,7 +407,7 @@ Requirements:
 Return the document with clear section headers. End with: "DISCLAIMER: This is a draft created to help organize your thoughts. It is not legal advice. Consult a family law attorney before filing any documents with the court."`
     },
     'caregiver-report': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are an experienced caregiver helping write a professional shift report. Convert these informal notes into a structured caregiver report.
 
 Caregiver's notes:
@@ -435,7 +435,7 @@ Requirements:
 Return the formatted report ready to print or email.`
     },
     'budget-planner': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a compassionate financial counselor helping someone create a survival budget during a difficult time. Based on their situation, create a personalized budget plan.
 
 Their financial situation:
@@ -456,7 +456,7 @@ Requirements:
 Format with clear headers and bullet points. End with: "Remember: this is a starting point, not a final plan. Call 211 for local assistance programs you may qualify for."`
     },
     'resume-bullets': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
 
 Raw accomplishments:
@@ -474,7 +474,7 @@ Requirements:
 Return ONLY the bullet points, each starting with "• ". No preamble.`
     },
     'tweet-generator': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
 
 Topic: "${input}"
@@ -490,7 +490,7 @@ Requirements:
 Return each tweet on its own line, separated by "---". No numbering, no commentary.`
     },
     'paraphraser': {
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-2.5-pro',
         build: (input, params) => `You are a skilled editor. Paraphrase the following text in ${params.tone || 'a clear, natural'} tone.
 Keep the meaning 100% intact but rephrase the words and sentence structure.
 ${params.length === 'shorter' ? 'Make it shorter than the original.' : ''}
