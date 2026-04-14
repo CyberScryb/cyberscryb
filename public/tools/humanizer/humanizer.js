@@ -310,6 +310,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ─── Prefill from AI Detector funnel ───
+    (function prefillFromDetector() {
+        let prefillText = '';
+        try {
+            prefillText = localStorage.getItem('cs_humanizer_prefill') || '';
+            if (prefillText) localStorage.removeItem('cs_humanizer_prefill');
+        } catch (e) { /* ignore */ }
+        // Fallback: check URL query param
+        if (!prefillText) {
+            const params = new URLSearchParams(window.location.search);
+            prefillText = params.get('prefill') || '';
+        }
+        if (prefillText && roboticText) {
+            roboticText.value = prefillText;
+            roboticText.style.height = 'auto';
+            roboticText.style.height = (roboticText.scrollHeight) + 'px';
+            // Clean the URL without reloading
+            if (window.history.replaceState) {
+                const cleanUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState(null, '', cleanUrl);
+            }
+        }
+    })();
+
     // ─── Init ───
     updateUsageDisplay();
 });
