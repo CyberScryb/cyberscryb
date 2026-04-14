@@ -36,7 +36,7 @@ Direct. No-BS. Short sentences. Like texting a smart friend. Use contractions. U
 | Google Search Console | `40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24` |
 | Dev branch | `claude/edit-cyberscryb-website-p3pnz` (but currently pushing to `main`) |
 
-**AI model in use:** `gemini-3.1-pro` (all AI tools). User has $10 prepaid + $100 cap on Google Cloud billing.
+**AI model in use:** `gemini-3.1-pro-preview` (all AI tools). **CRITICAL: Must use the `-preview` suffix.** Gemini 3.1 Pro is in preview status as of April 2026 — the stable name `gemini-3.1-pro` does NOT exist and returns 404 from Google API. User has $10 prepaid + $100 cap on Google Cloud billing.
 
 ---
 
@@ -259,6 +259,8 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 | Suggested more of the same genre when asked to expand | Think about different audiences and lived experience |
 | Didn't check AdSense approval before assuming ads show | Ads take 24-72h after approval to serve |
 | Kept trying to deploy from Claude Code web env | It's blocked by Google — use GitHub Actions or local |
+| Used `gemini-3.1-pro` as model name (wrong) | Correct name is `gemini-3.1-pro-preview` — the model is in preview |
+| Cloud Function returned plain text errors, frontend tried to JSON.parse | ALL error responses must use `res.status(N).json({ error: '...' })` never `res.send()` |
 
 ---
 
