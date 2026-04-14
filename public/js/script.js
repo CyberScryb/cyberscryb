@@ -181,3 +181,32 @@ if ('IntersectionObserver' in window) {
         revealObserver.observe(el);
     });
 }
+
+// ─── Cloudflare AI Chatbot ───
+(function() {
+    // Load the chatbot after page is interactive
+    function loadChatbot() {
+        if (document.querySelector('chat-bubble-snippet')) return;
+
+        // Add the script
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://722da820-be39-4721-bc14-4e498d45d78b.search.ai.cloudflare.com/assets/v0.0.30/search-snippet.es.js';
+        document.head.appendChild(s);
+
+        // Add the element
+        var chat = document.createElement('chat-bubble-snippet');
+        document.body.appendChild(chat);
+
+        // Add styling to match CyberScryb dark theme
+        var style = document.createElement('style');
+        style.textContent = 'chat-bubble-snippet { --search-snippet-primary-color: #141414; --search-snippet-primary-hover: #c41e1e; --search-snippet-focus-ring: #c41e1e; --search-snippet-text-color: #e0e0e0; --search-snippet-text-secondary: #ffffff; --search-snippet-text-description: #888; --search-snippet-border-color: #333; }';
+        document.head.appendChild(style);
+    }
+
+    if (document.readyState === 'complete') {
+        setTimeout(loadChatbot, 3000);
+    } else {
+        window.addEventListener('load', function() { setTimeout(loadChatbot, 3000); });
+    }
+})();
