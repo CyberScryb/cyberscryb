@@ -35,6 +35,28 @@
     }
     </script>
     <link rel="stylesheet" href="../shared/email-capture.css">
+    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <script>
+    (function() {
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-73LQZEDNR6');
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadGA, 1500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+    })();
+    </script>
     <!-- Google AdSense — delayed load to protect LCP -->
     <script>
     (function() {
@@ -79,6 +101,7 @@
         <nav>
             <a href="#how-it-works">How It Works</a>
             <a href="#faq">FAQ</a>
+            <a href="/blog/">Blog</a>
         </nav>
     </header>
 
