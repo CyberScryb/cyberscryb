@@ -340,6 +340,121 @@ ANALYSIS:
 
 Be specific about which phrases, patterns, or structural elements triggered your score. Look for: repetitive sentence openers, formulaic transitions, lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words (leverage, delve, furthermore, etc.).`
     },
+    // ─── Life Tools ───
+    'hardship-letter': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are an empathetic but professional letter writer who has helped hundreds of people write hardship letters. Write a ${params.type || 'general'} hardship letter based on this person's situation.
+
+Their situation:
+"${input}"
+
+${params.recipient ? `Recipient/addressed to: ${params.recipient}` : ''}
+${params.type ? `Letter type: ${params.type}` : ''}
+
+Requirements:
+- Open with a clear statement of who you are and why you're writing
+- Be honest and specific about the hardship — dates, amounts, circumstances
+- Show what steps you've already taken to address the situation
+- Make a specific, reasonable request
+- Close with gratitude and willingness to provide documentation
+- Tone: dignified, not begging. Honest, not dramatic. Human, not corporate.
+- Length: 300-500 words (one page)
+- Do NOT exaggerate or fabricate details — only use what the person provided
+
+Return ONLY the letter text, ready to copy. Include [YOUR NAME] and [DATE] placeholders.`
+    },
+    'appeal-letter': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are an experienced advocate who helps people write appeal letters. Write a ${params.type || 'general'} appeal letter based on this situation.
+
+Their situation and what they're appealing:
+"${input}"
+
+${params.type ? `Appeal type: ${params.type}` : ''}
+${params.recipient ? `Addressed to: ${params.recipient}` : ''}
+
+Requirements:
+- State clearly what decision you are appealing and the date of that decision
+- Reference any relevant case/claim/account numbers if mentioned
+- Present your argument logically with specific facts
+- Reference any relevant laws, policies, or guidelines if applicable
+- Request a specific outcome
+- Tone: firm but respectful. Factual, not emotional. Clear, not rambling.
+- Length: 400-600 words
+- Include placeholders for [YOUR NAME], [DATE], [CASE NUMBER]
+
+Return ONLY the letter text, ready to copy.`
+    },
+    'custody-document': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are a family law paralegal assistant helping a parent draft custody-related documents. Generate a ${params.docType || 'parenting plan'} based on the following details.
+
+Parent's situation and details:
+"${input}"
+
+${params.docType ? `Document type: ${params.docType}` : 'Document type: parenting plan'}
+${params.childrenAges ? `Children's ages: ${params.childrenAges}` : ''}
+
+Requirements:
+- For parenting plans: include custody schedule, holiday rotation, communication rules, decision-making authority, transportation arrangements, and dispute resolution
+- For custody declarations: include factual statements supporting the parent's position, organized chronologically
+- For modification requests: state the substantial change in circumstances and proposed new arrangement
+- Use clear, court-appropriate language
+- Include section headers for easy reading
+- Note: This is a DRAFT to help organize thoughts — not legal advice. Include a disclaimer.
+- Tone: factual, organized, professional
+
+Return the document with clear section headers. End with: "DISCLAIMER: This is a draft created to help organize your thoughts. It is not legal advice. Consult a family law attorney before filing any documents with the court."`
+    },
+    'caregiver-report': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are an experienced caregiver helping write a professional shift report. Convert these informal notes into a structured caregiver report.
+
+Caregiver's notes:
+"${input}"
+
+${params.patientName ? `Patient/client name: ${params.patientName}` : 'Patient: [Patient Name]'}
+${params.shiftType ? `Shift: ${params.shiftType}` : ''}
+
+Requirements:
+- Structure the report with these sections:
+  * Shift Information (date, time, caregiver name placeholder)
+  * Patient Status at Start of Shift
+  * Vitals / Measurements (if mentioned)
+  * Activities & Care Provided
+  * Medications Administered (if mentioned)
+  * Meals & Nutrition
+  * Behavioral / Mood Notes
+  * Incidents or Concerns
+  * Status at End of Shift / Handoff Notes
+- Use professional medical-adjacent language but keep it readable
+- Only include sections relevant to the notes provided — don't fabricate observations
+- If something wasn't mentioned, note "Not reported this shift"
+- Tone: professional, factual, concise
+
+Return the formatted report ready to print or email.`
+    },
+    'budget-planner': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are a compassionate financial counselor helping someone create a survival budget during a difficult time. Based on their situation, create a personalized budget plan.
+
+Their financial situation:
+"${input}"
+
+${params.situation ? `Situation type: ${params.situation}` : ''}
+
+Requirements:
+- List their income sources (unemployment, reduced hours, savings, etc.)
+- Categorize expenses into: Essential (housing, food, utilities, medication) and Non-essential
+- Identify specific expenses to cut or reduce with realistic suggestions
+- Prioritize debts using the avalanche method (highest interest first)
+- List specific free resources they may not know about (food banks, LIHEAP, 211 hotline, Medicaid, SNAP)
+- Create a week-by-week action plan for the first month
+- Tone: honest and direct but not judgmental. Practical, not preachy.
+- Do NOT give generic advice like "make a budget" — give SPECIFIC action items based on what they told you
+
+Format with clear headers and bullet points. End with: "Remember: this is a starting point, not a final plan. Call 211 for local assistance programs you may qualify for."`
+    },
     'resume-bullets': {
         model: 'gemini-3.1-pro',
         build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
