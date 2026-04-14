@@ -311,6 +311,35 @@ Requirements for each:
 
 Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`
     },
+    'ai-detector': {
+        model: 'gemini-3.1-pro',
+        build: (input, params) => `You are an AI text detection expert. Analyze the following text and determine how likely it was written by an AI language model.
+
+Score the text from 0 to 100:
+- 0-20: Almost certainly human-written
+- 21-40: Likely human with some AI-like patterns
+- 41-60: Mixed signals, could be either
+- 61-80: Likely AI-generated
+- 81-100: Almost certainly AI-generated
+
+Text to analyze:
+"""
+${input}
+"""
+
+Return your response in this EXACT format:
+SCORE: [number]
+
+MARKERS FOUND:
+- [marker 1]
+- [marker 2]
+- [marker 3]
+
+ANALYSIS:
+[2-3 sentences explaining your assessment]
+
+Be specific about which phrases, patterns, or structural elements triggered your score. Look for: repetitive sentence openers, formulaic transitions, lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words (leverage, delve, furthermore, etc.).`
+    },
     'resume-bullets': {
         model: 'gemini-3.1-pro',
         build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
