@@ -261,6 +261,8 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 | Kept trying to deploy from Claude Code web env | It's blocked by Google — use GitHub Actions or local |
 | Used `gemini-3.1-pro` as model name (wrong) | Correct name is `gemini-3.1-pro-preview` — the model is in preview |
 | Cloud Function returned plain text errors, frontend tried to JSON.parse | ALL error responses must use `res.status(N).json({ error: '...' })` never `res.send()` |
+| Used `referer.includes('cyberscryb.com')` for security check | Use `new URL(referer).hostname` against allowlist — string.includes is bypassable via query params |
+| Used `Math.random()` in password generator | Use `crypto.getRandomValues()` for anything security-related |
 
 ---
 
