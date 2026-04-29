@@ -250,23 +250,33 @@ function generatePassword() {
     const length = 20;
     let password = '';
 
-    // Ensure at least one of each type
+    function secureRandom(max) {
+        const arr = new Uint32Array(1);
+        crypto.getRandomValues(arr);
+        return arr[0] % max;
+    }
+
     const lower = 'abcdefghijklmnopqrstuvwxyz';
     const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const digits = '0123456789';
     const symbols = '!@#$%^&*()-_=+[]{}|;:,.<>?';
 
-    password += lower[Math.floor(Math.random() * lower.length)];
-    password += upper[Math.floor(Math.random() * upper.length)];
-    password += digits[Math.floor(Math.random() * digits.length)];
-    password += symbols[Math.floor(Math.random() * symbols.length)];
+    password += lower[secureRandom(lower.length)];
+    password += upper[secureRandom(upper.length)];
+    password += digits[secureRandom(digits.length)];
+    password += symbols[secureRandom(symbols.length)];
 
     for (let i = 4; i < length; i++) {
-        password += chars[Math.floor(Math.random() * chars.length)];
+        password += chars[secureRandom(chars.length)];
     }
 
-    // Shuffle
-    password = password.split('').sort(() => Math.random() - 0.5).join('');
+    // Fisher-Yates shuffle with crypto.getRandomValues
+    const arr = password.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = secureRandom(i + 1);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    password = arr.join('');
 
     input.value = password;
     input.type = 'text';

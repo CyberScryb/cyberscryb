@@ -61,7 +61,20 @@ setInterval(() => {
     }
 }, 300000);
 
-// Ensure you set this config variable: 
+// ─── Referer Validation ─────────────────────────────────
+const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen-lang-client-0384486156.web.app'];
+
+function isAllowedReferer(referer) {
+    if (!referer) return true;
+    try {
+        const hostname = new URL(referer).hostname;
+        return ALLOWED_HOSTS.some(h => hostname === h || hostname.endsWith('.' + h));
+    } catch (e) {
+        return false;
+    }
+}
+
+// Ensure you set this config variable:
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
 exports.rewriteText = functions.https.onRequest((req, res) => {
@@ -75,7 +88,7 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
 
         // Basic security: Check if request comes from our domain
         // Allow localhost for testing
-        if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
+        if (!isAllowedReferer(referer)) {
             console.warn(`Blocked request from unauthorized referer: ${referer}`);
             return res.status(403).send('Unauthorized Source'); // Enforced security
         }
@@ -145,7 +158,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
 
         // Security: Check Referer
         const referer = req.get('Referer');
-        if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
+        if (!isAllowedReferer(referer)) {
             return res.status(403).send('Unauthorized Source');
         }
 
@@ -515,7 +528,7 @@ exports.generateAI = functions.https.onRequest((req, res) => {
 
         // Security: Referer check
         const referer = req.get('Referer');
-        if (referer && !referer.includes('cyberscryb.com') && !referer.includes('localhost') && !referer.includes('web.app')) {
+        if (!isAllowedReferer(referer)) {
             return res.status(403).send('Unauthorized Source');
         }
 
