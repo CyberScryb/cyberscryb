@@ -151,6 +151,15 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
     });
 });
 
+// Whole-card click — navigate to the first link in any .blog-card
+document.querySelectorAll('.blog-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return; // let real links handle themselves
+        const link = card.querySelector('a[href]');
+        if (link) window.location.href = link.href;
+    });
+});
+
 // Track tool launches
 document.querySelectorAll('a[href*="/tools/"]').forEach(link => {
     link.addEventListener('click', function () {
