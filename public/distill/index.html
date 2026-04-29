@@ -374,16 +374,19 @@
             border: 1px solid rgba(99,102,241,0.2);
             border-radius: 12px;
             padding: 36px 40px;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 20px 28px;
-            align-items: start;
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
         }
 
         .privacy-strip .lock {
             font-size: 2rem;
-            grid-row: span 2;
+            flex-shrink: 0;
             padding-top: 4px;
+        }
+
+        .privacy-strip .lock + div {
+            flex: 1;
         }
 
         .privacy-strip h3 {
@@ -594,10 +597,7 @@
                     <div>
                         <h3>Works entirely on your device</h3>
                         <p>Distill doesn't send page content anywhere. It doesn't track you. It doesn't talk to any servers. Your settings and saved articles live in your browser's local storage — no account required, nothing leaves your machine.</p>
-                    </div>
-                    <div></div>
-                    <div>
-                        <p><strong style="color:#94a3b8;">Permissions used:</strong> <code style="color:#818cf8; font-size:0.82rem;">activeTab</code> (read current page when you trigger it), <code style="color:#818cf8; font-size:0.82rem;">storage</code> (save settings and library locally), <code style="color:#818cf8; font-size:0.82rem;">scripting</code> (inject the reader). No host permissions. No background tracking. <a href="/distill-privacy/">Full privacy policy →</a></p>
+                        <p style="margin-top:14px;"><strong style="color:#94a3b8;">Permissions used:</strong> <code style="color:#818cf8; font-size:0.82rem;">activeTab</code> (read current page when you trigger it), <code style="color:#818cf8; font-size:0.82rem;">storage</code> (save settings and library locally), <code style="color:#818cf8; font-size:0.82rem;">scripting</code> (inject the reader). No host permissions. No background tracking. <a href="/distill-privacy/">Full privacy policy →</a></p>
                     </div>
                 </div>
             </div>
