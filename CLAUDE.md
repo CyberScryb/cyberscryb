@@ -30,7 +30,7 @@ Direct. No-BS. Short sentences. Like texting a smart friend. Use contractions. U
 | Thing | Value |
 |---|---|
 | Firebase project ID | `gen-lang-client-0384486156` |
-| Google Analytics 4 | `G-Z347WYM5ZZ` |
+| Google Analytics 4 | `G-73LQZEDNR6` |
 | Google AdSense | `ca-pub-5721233331247292` |
 | Cloudflare AI chatbot | `722da820-be39-4721-bc14-4e498d45d78b.search.ai.cloudflare.com` |
 | Google Search Console | `40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24` |
@@ -78,8 +78,8 @@ Tool pages in subdirectories can use `../../css/style.css` because they're 2 lev
 ### 3. `functions/` directory needs `npm install` before deploy
 Missing `firebase-functions` package causes deploy errors. GitHub Actions now runs `npm install` in `./functions` automatically.
 
-### 4. GA4 measurement ID must be `G-Z347WYM5ZZ`
-Previously used `G-73LQZEDNR6` which was the wrong property. Swapped to `G-Z347WYM5ZZ` across all 51 pages on 2026-04-30.
+### 4. GA4 measurement ID must be `G-73LQZEDNR6`
+The correct property is `G-73LQZEDNR6`. The other ID `G-Z347WYM5ZZ` is a different property — do not use it.
 
 ### 5. Cloudflare OWASP Core Ruleset
 Nate has it enabled. It CAN block legitimate tool usage (pasting JSON, code, etc. can trigger it). If users report random blocks, suggest turning it off — but he decided to leave it on.
