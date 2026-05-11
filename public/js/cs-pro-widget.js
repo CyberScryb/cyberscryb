@@ -1,6 +1,18 @@
-/* CyberScryb Pro Upgrade Widget — auto-injects bottom-right pill + modal */
+/* CyberScryb Pro Upgrade Widget — auto-injects bottom-right pill + modal
+   Variants supported:
+   - Default Pro (Pro Lifetime $29 + Pro Monthly $9)
+   - CNA Power Pack ($19) — set window.CS_WIDGET = 'cna' before this script loads */
 (function() {
-  if (document.getElementById('cs-pro-modal-bg')) return; // guard against duplicates
+  if (document.getElementById('cs-pro-modal-bg')) return;
+  var path = location.pathname || '';
+  var utmSource = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '_').replace(/\.html$/i, '') || 'home';
+  var isCna = (window.CS_WIDGET === 'cna') || /caregiver|hardship|appeal|custody|resume-bullets/.test(path);
+
+  var STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
+  var STRIPE_MONTHLY  = 'https://buy.stripe.com/dRm5kF7eue189qlbVr0sU06';
+  var STRIPE_CNA      = 'https://buy.stripe.com/6oU9AV7eu9KS5a56B70sU09';
+  function tag(url){ return url + (url.indexOf('?') > -1 ? '&' : '?') + 'utm_source=' + encodeURIComponent(utmSource) + '&utm_medium=widget&utm_campaign=pro_pill'; }
+
   var css = `
 .cs-pro-pill{position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#0a0e1a;padding:12px 20px;border-radius:999px;font:700 14px/1 'Orbitron','Inter',sans-serif;box-shadow:0 4px 20px rgba(0,212,255,0.35);cursor:pointer;z-index:9998;transition:transform .2s,box-shadow .2s;border:none;display:flex;align-items:center;gap:8px;letter-spacing:.5px}
 .cs-pro-pill:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.55)}
@@ -12,6 +24,7 @@
 .cs-pro-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#8892a8;padding:4px 10px;border-radius:6px}
 .cs-pro-close:hover{background:rgba(255,255,255,.05);color:#e6e9f0}
 .cs-plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.cs-plans.cs-single{grid-template-columns:1fr}
 @media(max-width:480px){.cs-plans{grid-template-columns:1fr}}
 .cs-plan{border:2px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;text-align:center;text-decoration:none;color:#e6e9f0;transition:all .2s;position:relative;display:block;background:rgba(255,255,255,.02)}
 .cs-plan:hover{border-color:#00d4ff;transform:translateY(-2px)}
@@ -28,7 +41,37 @@
 .cs-foot a{color:#00d4ff;text-decoration:none}`;
   var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
-  var html = `
+  var html;
+  if (isCna) {
+    html = `
+<button class="cs-pro-pill" id="cs-pro-open" aria-label="Unlock CNA Power Pack">
+  <span>💙</span><span>Unlock CNA Pack</span>
+</button>
+<div class="cs-pro-modal-bg" id="cs-pro-modal-bg">
+  <div class="cs-pro-modal">
+    <button class="cs-pro-close" id="cs-pro-close" aria-label="Close">×</button>
+    <h2>Built by a CNA. For caregivers, aides, PCTs, HHA, LPN-bound.</h2>
+    <p class="cs-sub">The free tools work great. The CNA Power Pack removes limits + adds shift report, hardship letter, appeal letter, and resume builder all unlocked.</p>
+    <div class="cs-plans cs-single">
+      <a class="cs-plan cs-best" href="${tag(STRIPE_CNA)}" target="_blank" rel="noopener">
+        <div class="cs-name">CNA Power Pack</div>
+        <div class="cs-price">$19</div>
+        <div class="cs-tag">One-time · Lifetime unlock</div>
+      </a>
+    </div>
+    <ul class="cs-features">
+      <li>Pro Caregiver Shift Report Generator (unlimited)</li>
+      <li>Pro Hardship Letter Writer (unlimited)</li>
+      <li>Pro Appeal Letter Writer (unlimited)</li>
+      <li>Pro Resume Bullet Builder (unlimited)</li>
+      <li>$10 off the done-for-you CNA Resume Kit</li>
+      <li>Ad-free across the site</li>
+    </ul>
+    <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro.html">See all plans →</a></p>
+  </div>
+</div>`;
+  } else {
+    html = `
 <button class="cs-pro-pill" id="cs-pro-open" aria-label="Upgrade to Pro">
   <span>✨</span><span>Unlock Pro</span>
 </button>
@@ -38,12 +81,12 @@
     <h2>Go Pro. Keep the tools free for everyone else.</h2>
     <p class="cs-sub">29+ tools, no ads, no signup. Pro removes limits and supports independent development.</p>
     <div class="cs-plans">
-      <a class="cs-plan" href="https://buy.stripe.com/dRm5kF7eue189qlbVr0sU06" target="_blank" rel="noopener">
+      <a class="cs-plan" href="${tag(STRIPE_MONTHLY)}" target="_blank" rel="noopener">
         <div class="cs-name">Monthly</div>
         <div class="cs-price">$9<small>/mo</small></div>
         <div class="cs-tag">Cancel anytime</div>
       </a>
-      <a class="cs-plan cs-best" href="https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08" target="_blank" rel="noopener">
+      <a class="cs-plan cs-best" href="${tag(STRIPE_LIFETIME)}" target="_blank" rel="noopener">
         <div class="cs-name">Lifetime</div>
         <div class="cs-price">$29</div>
         <div class="cs-tag">One-time · Launch price</div>
@@ -60,8 +103,18 @@
     <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro.html">See all plans →</a></p>
   </div>
 </div>`;
+  }
   var wrap = document.createElement('div'); wrap.innerHTML = html; while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
-  document.getElementById('cs-pro-open').addEventListener('click', function(){ document.getElementById('cs-pro-modal-bg').classList.add('cs-active'); });
+  document.getElementById('cs-pro-open').addEventListener('click', function(){
+    document.getElementById('cs-pro-modal-bg').classList.add('cs-active');
+    if (window.gtag) window.gtag('event', 'pro_modal_open', { source: utmSource, variant: isCna?'cna':'default' });
+  });
   document.getElementById('cs-pro-close').addEventListener('click', function(){ document.getElementById('cs-pro-modal-bg').classList.remove('cs-active'); });
   document.getElementById('cs-pro-modal-bg').addEventListener('click', function(e){ if (e.target === this) this.classList.remove('cs-active'); });
+  // Track checkout clicks
+  document.querySelectorAll('.cs-plan').forEach(function(el){
+    el.addEventListener('click', function(){
+      if (window.gtag) window.gtag('event', 'pro_checkout_click', { source: utmSource, plan: el.querySelector('.cs-name').textContent });
+    });
+  });
 })();
