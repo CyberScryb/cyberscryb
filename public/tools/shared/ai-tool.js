@@ -256,7 +256,15 @@
                     }
 
                     if (!isSubscribed()) {
-                        showPreviewWithGate(result);
+                        // Give every browser ONE genuinely free full result before gating.
+                        // This proves the tool works before asking for an email — the email
+                        // gate exists because every AI call costs real money on the backend.
+                        if (!localStorage.getItem('cs_free_trial_used')) {
+                            localStorage.setItem('cs_free_trial_used', '1');
+                            showFullResult(result);
+                        } else {
+                            showPreviewWithGate(result);
+                        }
                     } else {
                         showFullResult(result);
                         incrementUsage();
