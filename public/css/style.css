@@ -1521,3 +1521,120 @@ a:focus {
     background: rgba(52, 245, 197, 0.15);
     border-color: #34F5C5;
 }
+
+/* ========================================
+   WAVE 12: V2 Polish — utility classes
+   ======================================== */
+
+/* Glow utilities matching V2 accent-glow */
+.text-glow {
+    text-shadow: 0 0 10px rgba(52, 245, 197, 0.5), 0 0 20px rgba(52, 245, 197, 0.3);
+}
+
+.box-glow {
+    box-shadow: 0 0 15px rgba(52, 245, 197, 0.15), inset 0 0 10px rgba(52, 245, 197, 0.05);
+}
+
+.box-glow-strong {
+    box-shadow: 0 0 24px rgba(52, 245, 197, 0.35), 0 0 48px rgba(52, 245, 197, 0.15);
+}
+
+/* V2 interactive card pattern — soft border, mint on hover */
+.interactive-card {
+    transition: border-color 150ms ease-out, transform 150ms ease-out, box-shadow 200ms ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background-color: #0a0a0a;
+    border-radius: 12px;
+}
+.interactive-card:hover {
+    border-color: rgba(52, 245, 197, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(52, 245, 197, 0.2);
+}
+
+/* Soften default .blog-card hover to match V2 subtlety (was 6px lift, now 2px) */
+.blog-card {
+    transition: border-color 150ms ease-out, transform 150ms ease-out, box-shadow 200ms ease-out;
+}
+.blog-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(52, 245, 197, 0.2);
+    border-color: rgba(52, 245, 197, 0.4);
+}
+
+/* V2 sticky navbar with backdrop blur */
+.navbar {
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Reveal-on-scroll animation (paired with js/script.js IntersectionObserver) */
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Soften hero particles for V2 calmer feel */
+.hero-particles span {
+    opacity: 0.3 !important;
+}
+
+/* Hero background subtle radial glow matching V2 */
+.hero {
+    background-image:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(52, 245, 197, 0.08), transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(52, 245, 197, 0.04), transparent 70%);
+}
+
+/* V2 button refinements — flat fill primary, outlined secondary */
+.btn-v2-primary {
+    display: inline-block;
+    background: #34F5C5;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    border: 1px solid #34F5C5;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+.btn-v2-primary:hover {
+    background: transparent;
+    color: #34F5C5;
+}
+
+.btn-v2-secondary {
+    display: inline-block;
+    background: transparent;
+    color: #34F5C5;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(52, 245, 197, 0.4);
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+.btn-v2-secondary:hover {
+    border-color: #34F5C5;
+    background: rgba(52, 245, 197, 0.08);
+}
+
+/* Focus ring for accessibility, V2-style */
+*:focus-visible {
+    outline: 2px solid rgba(52, 245, 197, 0.5);
+    outline-offset: 2px;
+    border-radius: 4px;
+}

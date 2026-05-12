@@ -219,3 +219,32 @@ if ('IntersectionObserver' in window) {
         window.addEventListener('load', function() { setTimeout(loadChatbot, 3000); });
     }
 })();
+
+
+// Wave 12: Reveal-on-scroll via IntersectionObserver
+// Adds .visible class to .reveal elements when they enter viewport.
+(function() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    var targets = document.querySelectorAll('.reveal, .reveal-stagger > *, .blog-card');
+    if (!targets.length) return;
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Stagger: add slight delay per index within parent
+                var idx = Array.prototype.indexOf.call(entry.target.parentNode.children, entry.target);
+                if (idx > 0 && idx < 12) {
+                    entry.target.style.transitionDelay = (idx * 60) + 'ms';
+                }
+                io.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    targets.forEach(function(t) {
+        // Don't double-init if already revealed
+        if (!t.classList.contains('visible')) {
+            t.classList.add('reveal');
+            io.observe(t);
+        }
+    });
+})();
