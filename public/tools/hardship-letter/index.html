@@ -64,10 +64,10 @@
 </head>
 
 <body>
-    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#666;">
-        <a href="../../index.html" style="color:#888; text-decoration:none;">Home</a>
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="../../index.html" style="color:#878787; text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="../../tools.html" style="color:#888; text-decoration:none;">Tools</a>
+        <a href="../../tools.html" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color:#34F5C5;">Hardship Letter Writer</span>
     </nav>
@@ -112,7 +112,7 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333;">
+                    <div class="panel input-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34F5C5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -122,13 +122,13 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #e0e0e0;">Describe your situation (what happened, when, how it affected you financially)</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0; height:180px;" placeholder="Example: I was diagnosed with cancer in March 2025 and had to stop working for 6 months. My medical bills exceeded $45,000 and I fell behind on my mortgage payments by 3 months..."></textarea>
+                            <label for="tool-input" style="color: #ededed;">Describe your situation (what happened, when, how it affected you financially)</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:180px;" placeholder="Example: I was diagnosed with cancer in March 2025 and had to stop working for 6 months. My medical bills exceeded $45,000 and I fell behind on my mortgage payments by 3 months..."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="letter-type" style="color: #e0e0e0;">Letter Type</label>
-                            <select id="letter-type" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
+                            <label for="letter-type" style="color: #ededed;">Letter Type</label>
+                            <select id="letter-type" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
                                 <option value="mortgage">Mortgage / Loan Modification</option>
                                 <option value="medical">Medical Bills</option>
                                 <option value="immigration">Immigration</option>
@@ -139,8 +139,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="addressed-to" style="color: #e0e0e0;">Addressed To <span style="color:#666; font-weight:400;">(optional)</span></label>
-                            <input type="text" id="addressed-to" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif; box-sizing: border-box;" placeholder="e.g., Chase Bank Loan Modification Department">
+                            <label for="addressed-to" style="color: #ededed;">Addressed To <span style="color:#555555; font-weight:400;">(optional)</span></label>
+                            <input type="text" id="addressed-to" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif; box-sizing: border-box;" placeholder="e.g., Chase Bank Loan Modification Department">
                         </div>
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #34F5C5, #2dd4a7); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
@@ -150,20 +150,20 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333;">
+                    <div class="panel output-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34F5C5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
                                 Your Letter
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#888; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #333; color: #34F5C5;">Copy</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0;">
-                                <span class="placeholder" style="color: #666;">Your hardship letter will appear here...</span>
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                                <span class="placeholder" style="color: #555555;">Your hardship letter will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
                                 <div class="email-gate-blur"></div>
@@ -186,7 +186,7 @@
                                 <p style="color: #34F5C5;">Drafting your letter with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid #333; color: #888;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
                             <span id="word-count">0 words</span>
                             <span id="char-count">0 characters</span>
                         </div>
@@ -194,15 +194,15 @@
                 </div>
 
                 <!-- Upgrade Tiers -->
-                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Letters?</h3>
-                    <p style="text-align:center; color:#888; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
-                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#888; margin-bottom:0.5rem;">Free</div>
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
-                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; 3 letters / day</li>
                                 <li>&#10003; 500 character input limit</li>
                                 <li>&#10003; All letter types</li>
@@ -212,9 +212,9 @@
                         <div style="background:#0a0a0a; border:2px solid #34F5C5; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
                             <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#34F5C5; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#888;">/mo</span></div>
-                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; Unlimited letters</li>
                                 <li>&#10003; 20,000 character input</li>
                                 <li>&#10003; Priority speed</li>
@@ -222,11 +222,11 @@
                             </ul>
                             <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
-                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#888;">/yr</span></div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
                             <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
                                 <li>&#10003; Batch processing</li>
                                 <li>&#10003; API access</li>
@@ -238,7 +238,7 @@
                 </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#34F5C5; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is a hardship letter?</h4><p>A hardship letter is a formal document you send to a lender, creditor, or institution explaining why you cannot meet your financial obligations. It describes your circumstances — job loss, medical emergency, divorce, natural disaster — and requests relief such as a loan modification, payment plan, or debt reduction.</p></div>
                     <div class="faq-item"><h4>Will this letter work for my mortgage company?</h4><p>This tool generates a professional, well-structured letter following the format mortgage servicers expect. However, every lender has different requirements. Use the generated letter as a strong starting point, then customize it with your specific account details and any documentation your servicer requests.</p></div>
@@ -281,20 +281,20 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #333; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../appeal-letter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../appeal-letter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">Appeal Letter Writer</strong>
-                <span style="font-size:0.85rem; color:#888;">Draft insurance or financial appeal letters.</span>
+                <span style="font-size:0.85rem; color:#878787;">Draft insurance or financial appeal letters.</span>
             </a>
-            <a href="../email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
-                <span style="font-size:0.85rem; color:#888;">Draft polished emails in seconds.</span>
+                <span style="font-size:0.85rem; color:#878787;">Draft polished emails in seconds.</span>
             </a>
-            <a href="../resume-bullets/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../resume-bullets/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">Resume Bullet Writer</strong>
-                <span style="font-size:0.85rem; color:#888;">Turn experience into powerful resume bullets.</span>
+                <span style="font-size:0.85rem; color:#878787;">Turn experience into powerful resume bullets.</span>
             </a>
         </div>
     </section>

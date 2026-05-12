@@ -56,10 +56,10 @@
 </head>
 
 <body>
-    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#666;">
-        <a href="../../index.html" style="color:#888; text-decoration:none;">Home</a>
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="../../index.html" style="color:#878787; text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="../../tools.html" style="color:#888; text-decoration:none;">Tools</a>
+        <a href="../../tools.html" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color:#34F5C5;">AI Code Explainer</span>
     </nav>
@@ -99,7 +99,7 @@
         <section class="tool-content" style="padding: 2rem 0;">
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333;">
+                    <div class="panel input-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34F5C5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -109,13 +109,13 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #e0e0e0;">Paste Code Snippet</label>
-                            <textarea id="tool-input" spellcheck="false" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0; height:260px; font-family:'JetBrains Mono','Courier New',monospace;" placeholder="function fibonacci(n) {&#10;  if (n <= 1) return n;&#10;  return fibonacci(n - 1) + fibonacci(n - 2);&#10;}"></textarea>
+                            <label for="tool-input" style="color: #ededed;">Paste Code Snippet</label>
+                            <textarea id="tool-input" spellcheck="false" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:260px; font-family:'JetBrains Mono','Courier New',monospace;" placeholder="function fibonacci(n) {&#10;  if (n <= 1) return n;&#10;  return fibonacci(n - 1) + fibonacci(n - 2);&#10;}"></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="language" style="color: #e0e0e0;">Language</label>
-                            <select id="language" style="width:100%; background:#0a0a0a; border:1px solid #333; color:#e0e0e0; padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            <label for="language" style="color: #ededed;">Language</label>
+                            <select id="language" style="width:100%; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); color:#ededed; padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="auto">Auto-detect</option>
                                 <option value="JavaScript">JavaScript</option>
                                 <option value="TypeScript">TypeScript</option>
@@ -142,20 +142,20 @@
                         </button>
                     </div>
 
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333;">
+                    <div class="panel output-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34F5C5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
                                 Explanation
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#888; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #333; color: #34F5C5;">Copy</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid #333; color: #e0e0e0;">
-                                <span class="placeholder" style="color: #666;">A plain-English explanation of your code will appear here...</span>
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                                <span class="placeholder" style="color: #555555;">A plain-English explanation of your code will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
                                 <div class="email-gate-blur"></div>
@@ -178,22 +178,22 @@
                                 <p style="color: #34F5C5;">Reading your code with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid #333; color: #888;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
                             <span id="word-count">0 words</span>
                             <span id="lang-label">Language: auto</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Explanations?</h3>
-                    <p style="text-align:center; color:#888; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
-                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#888; margin-bottom:0.5rem;">Free</div>
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
-                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; 3 explanations / day</li>
                                 <li>&#10003; 500 character limit</li>
                                 <li>&#10003; All languages</li>
@@ -203,9 +203,9 @@
                         <div style="background:#0a0a0a; border:2px solid #34F5C5; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
                             <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#34F5C5; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#888;">/mo</span></div>
-                            <div style="color:#666; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; Unlimited explanations</li>
                                 <li>&#10003; 20,000 character limit</li>
                                 <li>&#10003; Priority speed</li>
@@ -213,11 +213,11 @@
                             </ul>
                             <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
-                        <div style="background:#0a0a0a; border:1px solid #333; border-radius:12px; padding:1.5rem; text-align:center;">
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#888;">/yr</span></div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
                             <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#b0b0b0; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
                                 <li>&#10003; Batch processing</li>
                                 <li>&#10003; API access</li>
@@ -228,7 +228,7 @@
                     </div>
                 </div>
 
-                <div class="geo-card" style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#34F5C5; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Which languages are supported?</h4><p>All major languages — JavaScript, TypeScript, Python, Java, C++, C#, Go, Rust, PHP, Ruby, Swift, Kotlin, SQL, Bash, HTML, CSS, and more. Auto-detect picks the right one automatically.</p></div>
                     <div class="faq-item"><h4>Who is this for?</h4><p>Beginners trying to understand a snippet, code reviewers, and senior devs onboarding to unfamiliar codebases.</p></div>
@@ -248,20 +248,20 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #333; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
-                <span style="font-size:0.85rem; color:#888;">Test regular expressions live.</span>
+                <span style="font-size:0.85rem; color:#878787;">Test regular expressions live.</span>
             </a>
-            <a href="../json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
-                <span style="font-size:0.85rem; color:#888;">Pretty-print and validate JSON.</span>
+                <span style="font-size:0.85rem; color:#878787;">Pretty-print and validate JSON.</span>
             </a>
-            <a href="../jwt-decoder/" style="display:block; padding:1rem; background:#0a0a0a; border:1px solid #333; border-radius:8px; text-decoration:none; color:#e0e0e0;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
+            <a href="../jwt-decoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#34F5C5'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#34F5C5; display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
-                <span style="font-size:0.85rem; color:#888;">Inspect JWT tokens instantly.</span>
+                <span style="font-size:0.85rem; color:#878787;">Inspect JWT tokens instantly.</span>
             </a>
         </div>
     </section>
