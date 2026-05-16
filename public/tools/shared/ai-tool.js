@@ -35,6 +35,12 @@
         const usageCounter = document.getElementById('usage-counter');
 
         let pendingFullText = '';
+        let _typeTimer = null;
+
+        function cancelTypewriter() {
+            clearTimeout(_typeTimer);
+            _typeTimer = null;
+        }
 
         function getUsageToday() {
             const data = JSON.parse(localStorage.getItem(storageKey) || '{}');
@@ -93,6 +99,7 @@
             const cutText = sentenceEnd > previewText.length * 0.5
                 ? previewText.slice(0, sentenceEnd + 1)
                 : previewText + '...';
+            cancelTypewriter();
             outputContent.innerHTML = '';
             let i = 0;
             const speed = 10;
@@ -100,7 +107,7 @@
                 if (i < cutText.length) {
                     outputContent.innerHTML += escapeHtml(cutText.charAt(i));
                     i++;
-                    setTimeout(type, speed);
+                    _typeTimer = setTimeout(type, speed);
                 } else {
                     emailGate.classList.remove('hidden');
                     updateStats(cutText);
@@ -110,6 +117,7 @@
 
         function showFullResult(fullText) {
             pendingFullText = '';
+            cancelTypewriter();
             outputContent.innerHTML = '';
             emailGate.classList.add('hidden');
             let i = 0;
@@ -118,7 +126,7 @@
                 if (i < fullText.length) {
                     outputContent.innerHTML += escapeHtml(fullText.charAt(i));
                     i++;
-                    setTimeout(type, speed);
+                    _typeTimer = setTimeout(type, speed);
                 } else {
                     updateStats(fullText);
                 }
@@ -127,6 +135,7 @@
 
         function unlockFullResult() {
             if (!pendingFullText) return;
+            cancelTypewriter();
             emailGate.classList.add('hidden');
             outputContent.innerHTML = '';
             const fullText = pendingFullText;
@@ -137,7 +146,7 @@
                 if (i < fullText.length) {
                     outputContent.innerHTML += escapeHtml(fullText.charAt(i));
                     i++;
-                    setTimeout(type, speed);
+                    _typeTimer = setTimeout(type, speed);
                 } else {
                     updateStats(fullText);
                     incrementUsage();
@@ -227,6 +236,7 @@
                     }
                 }
 
+                cancelTypewriter();
                 loadingIndicator.classList.remove('hidden');
                 emailGate.classList.add('hidden');
                 generateBtn.disabled = true;

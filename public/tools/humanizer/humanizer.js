@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const PREVIEW_RATIO = 0.3; // Show 30% of result before gate
 
     // ─── State ───
-    let pendingFullText = ''; // Stored full result awaiting unlock
+    let pendingFullText = '';
+    let _typeTimer = null;
+    function cancelTypewriter() { clearTimeout(_typeTimer); _typeTimer = null; } // Stored full result awaiting unlock
 
     // ─── Cookie/Storage Helpers ───
     function setCookie(name, val, days) {
@@ -122,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : previewText + '...';
 
         // Show preview text with typewriter
+        cancelTypewriter();
         outputContent.innerHTML = '';
         let i = 0;
         const speed = 10;
@@ -129,9 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i < cutText.length) {
                 outputContent.innerHTML += cutText.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                _typeTimer = setTimeout(typeWriter, speed);
             } else {
-                // Show the gate after typing finishes
                 emailGate.classList.remove('hidden');
                 updateStats(cutText);
             }
@@ -142,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── Show full result (no gate) ───
     function showFullResult(fullText) {
         pendingFullText = '';
+        cancelTypewriter();
         outputContent.innerHTML = '';
         emailGate.classList.add('hidden');
 
@@ -151,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i < fullText.length) {
                 outputContent.innerHTML += fullText.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                _typeTimer = setTimeout(typeWriter, speed);
             } else {
                 updateStats(fullText);
             }
@@ -162,18 +165,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── Unlock after email ───
     function unlockFullResult() {
         if (!pendingFullText) return;
+        cancelTypewriter();
         emailGate.classList.add('hidden');
         outputContent.innerHTML = '';
 
         const fullText = pendingFullText;
         pendingFullText = '';
         let i = 0;
-        const speed = 5; // Faster since they've waited
+        const speed = 5;
         function typeWriter() {
             if (i < fullText.length) {
                 outputContent.innerHTML += fullText.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                _typeTimer = setTimeout(typeWriter, speed);
             } else {
                 updateStats(fullText);
                 incrementUsage();
