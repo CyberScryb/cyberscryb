@@ -395,28 +395,17 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
-    <!-- Google Analytics 4 — deferred to improve LCP -->
+    <!-- Google Analytics 4 -->
     <script>
-    (function() {
-        function loadGA() {
-            if (window._gaLoaded) return;
-            window._gaLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6';
-            document.head.appendChild(s);
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = function(){dataLayer.push(arguments);};
-            window.gtag('js', new Date());
-            window.gtag('config', 'G-73LQZEDNR6');
-        }
-        if (document.readyState === 'complete') {
-            setTimeout(loadGA, 1500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
-        }
-    })();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-73LQZEDNR6'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-73LQZEDNR6');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6"></script>
 </head>
 
 <body>
