@@ -1,6 +1,6 @@
 # CLAUDE.md — CyberScryb Project Rules
 
-**Last updated:** 2026-04-14
+**Last updated:** 2026-05-16
 **Purpose:** Prevent repeat mistakes and wasted time. Read this FIRST every session.
 
 ---
@@ -188,7 +188,7 @@ The dev tools space (JSON converter, Base64, password checker, AI humanizer) is 
 These target audiences that generic dev tool sites don't reach: caregivers (53M in US), co-parents in custody situations, people in financial hardship. Low competition, high demand, built from Nate's lived experience (former CNA, dealt with custody, currently in hardship).
 
 ### Distribution is the bottleneck
-Building more tools won't move the needle alone. The site has ~90 real users/month. Getting TRAFFIC is the blocker. Options:
+Building more tools won't move the needle alone. The site has 3,000+ unique visitors/month (as of May 2026). Getting TRAFFIC is the blocker. Options:
 - Reddit posts (niche subreddits for each tool)
 - Product Hunt launch
 - Dev.to articles
