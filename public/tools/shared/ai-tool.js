@@ -109,7 +109,7 @@
                     i++;
                     _typeTimer = setTimeout(type, speed);
                 } else {
-                    emailGate.classList.remove('hidden');
+                    if (emailGate) emailGate.classList.remove('hidden');
                     updateStats(cutText);
                 }
             })();
@@ -119,7 +119,7 @@
             pendingFullText = '';
             cancelTypewriter();
             outputContent.innerHTML = '';
-            emailGate.classList.add('hidden');
+            if (emailGate) emailGate.classList.add('hidden');
             let i = 0;
             const speed = 10;
             (function type() {
@@ -136,7 +136,7 @@
         function unlockFullResult() {
             if (!pendingFullText) return;
             cancelTypewriter();
-            emailGate.classList.add('hidden');
+            if (emailGate) emailGate.classList.add('hidden');
             outputContent.innerHTML = '';
             const fullText = pendingFullText;
             pendingFullText = '';
@@ -238,7 +238,7 @@
 
                 cancelTypewriter();
                 loadingIndicator.classList.remove('hidden');
-                emailGate.classList.add('hidden');
+                if (emailGate) emailGate.classList.add('hidden');
                 generateBtn.disabled = true;
                 outputContent.innerHTML = '';
 

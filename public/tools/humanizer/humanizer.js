@@ -60,10 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateUsageDisplay() {
         if (!usageCounter) return;
-        if (!isSubscribed()) {
-            usageCounter.textContent = '';
-            return;
-        }
         const usage = getUsageToday();
         const remaining = Math.max(0, FREE_DAILY_LIMIT - usage.count);
         usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free today';
@@ -118,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Try to end at a sentence boundary
         const previewText = words.slice(0, previewWordCount).join(' ');
-        const sentenceEnd = previewText.lastIndexOf('.');
+        const sentenceEnd = Math.max(previewText.lastIndexOf('.'), previewText.lastIndexOf('?'), previewText.lastIndexOf('!'));
         const cutText = sentenceEnd > previewText.length * 0.5
             ? previewText.slice(0, sentenceEnd + 1)
             : previewText + '...';
@@ -234,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Check character limit for free users
-            if (!isSubscribed() || true) { // Always enforce free limit for now (no paid tier backend yet)
+            if (!isSubscribed()) { // Enforce free limit — Pro tier will bypass this
                 if (text.length > FREE_CHAR_LIMIT && !isSubscribed()) {
                     alert('Free tier supports up to ' + FREE_CHAR_LIMIT + ' characters. Please shorten your text or enter your email to unlock more.');
                     return;
