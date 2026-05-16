@@ -15,7 +15,7 @@
 ### What the site is
 - 38+ tools: developer utilities, AI writing tools, and **Life Tools** (hardship letters, appeal letters, custody docs, caregiver reports)
 - 21 SEO guides, blog section (currently empty — fake posts were deleted)
-- AdSense on every page, affiliate panels on select tools, email gate on AI tools, Pro tier buttons (Stripe not wired up yet)
+- AdSense on every page (publisher ID active, re-review submitted ~May 14 2026 after denial for low-quality content — site was fully overhauled, awaiting approval), affiliate panels on select tools, email gate on AI tools, Pro tier buttons (Stripe not wired up yet)
 - Cloudflare AI chatbot on every page
 
 ### Brand voice (CRITICAL)
