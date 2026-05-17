@@ -59,7 +59,5 @@
         document.getElementById('csEmailForm').style.display = 'none';
         document.getElementById('csEmailSuccess').style.display = 'block';
 
-        // Log for analytics
-        console.log('[CyberScryb] New subscriber:', email);
     });
 })();

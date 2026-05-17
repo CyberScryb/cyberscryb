@@ -50,6 +50,21 @@
         });
     })();
     </script>
+    <style media="print">
+        * { visibility: hidden; }
+        #output-text, #output-text * { visibility: visible; }
+        #output-text { position: fixed; top: 0; left: 0; width: 100%; font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff; padding: 1in; box-sizing: border-box; white-space: pre-wrap; }
+    </style>
+    <script>
+    function printLetter() {
+        const out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+            alert('Generate a letter first, then print.');
+            return;
+        }
+        window.print();
+    }
+    </script>
 </head>
 
 <body>
@@ -149,6 +164,7 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
@@ -210,7 +226,7 @@
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
@@ -222,7 +238,7 @@
                                 <li>&#10003; API access</li>
                                 <li>&#10003; Priority support</li>
                             </ul>
-                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
                         </div>
                     </div>
                 </div>
@@ -243,6 +259,33 @@
             </div>
         </section>
     </main>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does a formal appeal letter actually work?","acceptedAnswer":{"@type":"Answer","text":"Yes — especially when the original denial was based on missing documentation or a misclassification. Institutions have formal review processes and are legally required to consider appeals in many cases (unemployment, financial aid, insurance). A clear, specific letter that directly addresses the denial reason has a real chance of reversal."}},{"@type":"Question","name":"What's the most important thing to include in an appeal letter?","acceptedAnswer":{"@type":"Answer","text":"The denial reason, directly refuted. Don't write a general letter about your situation — find the exact reason they gave for the denial and argue against it specifically. Include supporting documents (termination letters, medical records, policy documents) and reference them in the letter."}},{"@type":"Question","name":"How long should an appeal letter be?","acceptedAnswer":{"@type":"Answer","text":"One page is ideal. Two pages max. Decision-makers read hundreds of these — brevity signals that you know what matters. State your case, provide your evidence, make your request. Don't pad it."}},{"@type":"Question","name":"Who should I address the appeal letter to?","acceptedAnswer":{"@type":"Answer","text":"The specific department or person named in your denial letter. If the denial says 'contact the Claims Review Board,' address it there. Generic addressing ('To Whom It May Concern') is weaker — call the office if you don't have a name."}},{"@type":"Question","name":"What if my appeal is denied again?","acceptedAnswer":{"@type":"Answer","text":"Most institutions have multiple levels of appeal. Ask specifically about your next escalation option — an ombudsman, a supervisor review, a formal hearing, or in some cases a regulatory complaint. Document every interaction in writing."}}]}</script>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does a formal appeal letter actually work?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes — especially when the original denial was based on missing documentation or a misclassification. A clear, specific letter that directly addresses the denial reason has a real chance of reversal. Institutions have formal review processes and are legally required to consider appeals in many cases.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">What's the most important thing to include?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The denial reason, directly refuted. Don't write a general letter — find the exact reason they gave for the denial and argue against it specifically. Include supporting documents and reference them in the letter.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">How long should an appeal letter be?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">One page is ideal, two pages max. Decision-makers read hundreds of these — brevity signals that you know what matters. State your case, provide evidence, make your request. Don't pad it.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Who should I address it to?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The specific department or person named in your denial letter. If it says "contact the Claims Review Board," address it there. Generic addressing is weaker — call the office if you don't have a name.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">What if my appeal is denied again?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Most institutions have multiple levels of appeal. Ask specifically about your next escalation option — a supervisor review, ombudsman, formal hearing, or regulatory complaint. Document every interaction in writing.</p>
+            </details>
+        </div>
+    </section>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">

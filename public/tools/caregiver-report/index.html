@@ -50,6 +50,21 @@
         });
     })();
     </script>
+    <style media="print">
+        * { visibility: hidden; }
+        #output-text, #output-text * { visibility: visible; }
+        #output-text { position: fixed; top: 0; left: 0; width: 100%; font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff; padding: 1in; box-sizing: border-box; white-space: pre-wrap; }
+    </style>
+    <script>
+    function printLetter() {
+        const out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+            alert('Generate a letter first, then print.');
+            return;
+        }
+        window.print();
+    }
+    </script>
 </head>
 
 <body>
@@ -147,6 +162,7 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #34F5C5;">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
@@ -208,7 +224,7 @@
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#34F5C5,#2dd4a7); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
                             <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
@@ -220,7 +236,7 @@
                                 <li>&#10003; API access</li>
                                 <li>&#10003; Priority support</li>
                             </ul>
-                            <a href="#" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
                         </div>
                     </div>
                 </div>
@@ -241,6 +257,33 @@
             </div>
         </section>
     </main>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so — and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format — use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}}]}</script>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">What should a caregiver shift report include?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Date and shift time, patient name, vital signs if applicable, meals eaten, medications administered (with times), activities, behavioral observations, any incidents or falls, pain levels, and what was left unfinished for the next shift.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Who reads these reports?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The incoming caregiver, the patient's family, supervising nurses, and in some cases insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">How detailed should the report be?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say what you offered instead. If there was a behavioral change, describe what triggered it. Vague reports create gaps that lead to mistakes.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Is this format accepted by care agencies?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The output follows standard caregiver documentation conventions. Your specific agency may have a required form — use this as a draft and transfer the information to their template if needed.</p>
+            </details>
+            <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does this work for home care, memory care, and skilled nursing?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes. The tool adapts to the level of care you describe. For memory care, include behavioral observations. For skilled nursing, include vitals and wound notes. The output reflects what you put in.</p>
+            </details>
+        </div>
+    </section>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
