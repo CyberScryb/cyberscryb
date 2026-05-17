@@ -248,3 +248,23 @@ if ('IntersectionObserver' in window) {
         }
     });
 })();
+
+// CJ Affiliate page-based tracking (loads after user interaction to protect LCP)
+(function() {
+    function loadCJ() {
+        if (window._cjLoaded) return;
+        window._cjLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.anrdoezrs.net/am/101754535/include/allCj/impressions/page/am.js';
+        s.async = true;
+        document.body.appendChild(s);
+    }
+    if (document.readyState === 'complete') {
+        setTimeout(loadCJ, 3000);
+    } else {
+        window.addEventListener('load', function() { setTimeout(loadCJ, 3000); });
+    }
+    ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+        window.addEventListener(ev, loadCJ, { once: true, passive: true });
+    });
+})();
