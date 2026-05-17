@@ -515,6 +515,34 @@ ${input}
 """
 
 Return ONLY the paraphrased text. No quotes, no preamble.`
+    },
+    'voice-writer': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const voice = params.voice || 'conversational';
+            const refinement = params.refinement ? `\n\nUser refinement request: "${params.refinement}"` : '';
+
+            const voiceInstructions = {
+                conversational: `Write in a warm, direct, conversational tone — like you're texting a smart friend who's going through something real. Short sentences. Contractions everywhere. No corporate speak. No fluff. Use "you" and "your". Be specific, not generic. Sound like a real person, not a brand. Slightly confrontational when it serves the point.`,
+                educational: `Write in a clear teaching voice — structured, confident, and practical. Use numbered steps or clear sections when it helps. Define terms without being condescending. Give concrete examples. Sound like a sharp instructor who respects the reader's time. No filler phrases, no padding.`,
+                strategic: `Write in a strategic, framework-driven tone — like a business operator who's figured something out and is sharing the system. Use frameworks, sequences, and clear logic. Be direct about what works and what doesn't. Sound like someone who's done the reps, not someone theorizing. Bullet points and numbered lists where they add clarity.`
+            };
+
+            const instructions = voiceInstructions[voice] || voiceInstructions.conversational;
+
+            return `You are a professional content writer who can match specific tones and registers precisely.
+
+Voice instructions:
+${instructions}
+
+Topic / brief:
+"${input}"
+${refinement}
+
+Write a focused piece on this topic in the voice described above. Aim for 150-250 words unless the topic naturally calls for more or less.
+
+Return ONLY the written content. No title, no meta commentary, no "here's the piece:".`;
+        }
     }
 };
 

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Writer — Generate Content in Your Tone | CyberScryb</title>
+    <meta name="description" content="Free AI content writer with 3 voice modes: conversational, educational, and strategic. Give it a topic, pick your tone, get ready-to-use content. No signup required.">
+    <meta property="og:title" content="AI Voice Writer | CyberScryb">
+    <meta property="og:description" content="Generate content in your voice. Conversational, educational, or strategic — pick your tone and let AI write it.">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.svg">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://cyberscryb.com/tools/voice-writer/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../humanizer/style.css">
+
+    <!-- Google Analytics 4 -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-73LQZEDNR6'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-73LQZEDNR6');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6"></script>
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "AI Voice Writer",
+                "applicationCategory": "UtilitiesApplication",
+                "operatingSystem": "Web",
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                "url": "https://cyberscryb.com/tools/voice-writer/",
+                "description": "AI content writer that generates text in your chosen voice: conversational, educational, or strategic."
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "AI Voice Writer", "item": "https://cyberscryb.com/tools/voice-writer/" }
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is an AI voice writer?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "An AI voice writer generates content in a specific tone or register. Instead of generic AI output, you choose the voice — conversational, educational, or strategic — and the tool writes in that style." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What are the three voice modes?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Conversational writes like you're talking to a smart friend — short sentences, direct, no fluff. Educational writes like a sharp instructor — structured, clear, with examples. Strategic writes like a business operator — framework-driven, systematic, result-focused." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What can I use this for?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Social media posts, blog intro paragraphs, newsletter sections, Reddit posts, email drafts, LinkedIn content — anything where tone matters and you want a starting point you can actually use." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is it free?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Yes. 3 free generations per day after providing your email. No credit card required." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is my content stored?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "No. Your input is processed and discarded. We never store or train on your content." }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+</head>
+
+<body>
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="../../index.html" style="color:#878787; text-decoration:none;">Home</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <a href="../../tools.html" style="color:#878787; text-decoration:none;">Tools</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="color:#a78bfa;">AI Voice Writer</span>
+    </nav>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="../../favicon.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../tools.html">Tools</a></li>
+                    <li><a href="../../guides/index.html">Guides</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="min-height: 40vh; padding-top: 80px;">
+            <div class="hero-container">
+                <div class="badge" style="background: rgba(167,139,250,0.1); color: #a78bfa; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(167,139,250,0.3);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    AI-Powered
+                </div>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: #a78bfa;">Voice Writer</span></h1>
+                <p class="hero-subtitle">Pick your tone. Give it a topic. Get content that sounds like a real person wrote it.</p>
+            </div>
+        </section>
+
+        <section class="tool-content" style="padding: 2rem 0;">
+            <div class="container">
+                <div class="humanizer-container" style="background: transparent; box-shadow: none;">
+                    <!-- Left Panel: Inputs -->
+                    <div class="panel input-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                Your Brief
+                            </h2>
+                            <span class="step-badge" style="background: #a78bfa; color: #000;">Step 1</span>
+                        </div>
+
+                        <!-- Voice Mode -->
+                        <div class="input-group">
+                            <label style="color: #ededed;">Voice Mode</label>
+                            <div style="display:flex; gap:8px; flex-direction:column;">
+                                <label id="voice-conversational-label" style="display:flex; align-items:flex-start; gap:10px; background:#0d0d0d; padding:12px 14px; border: 2px solid #a78bfa; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="voice" value="conversational" checked style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
+                                    <div>
+                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Conversational</div>
+                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Short sentences. Direct. Like texting a smart friend. No fluff.</div>
+                                    </div>
+                                </label>
+                                <label id="voice-educational-label" style="display:flex; align-items:flex-start; gap:10px; background:#0a0a0a; padding:12px 14px; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="voice" value="educational" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
+                                    <div>
+                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Educational</div>
+                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Clear, structured, confident. Sharp instructor who respects your time.</div>
+                                    </div>
+                                </label>
+                                <label id="voice-strategic-label" style="display:flex; align-items:flex-start; gap:10px; background:#0a0a0a; padding:12px 14px; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="voice" value="strategic" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
+                                    <div>
+                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Strategic</div>
+                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Framework-driven, systematic. Like someone who's done the reps.</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Topic Input -->
+                        <div class="input-group" style="margin-top:1.25rem;">
+                            <label for="tool-input" style="color: #ededed;">Topic or Brief</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:120px;" placeholder="e.g. Why most people never finish what they start&#10;&#10;or: The biggest mistake freelancers make with their rates&#10;&#10;or: How to write a caregiver shift report"></textarea>
+                            <div style="font-size:0.75rem; color:#555; margin-top:4px;" id="char-count">0 / 500 characters</div>
+                        </div>
+
+                        <!-- Refinement -->
+                        <div class="input-group" style="margin-top:1rem;">
+                            <label for="refinement-input" style="color: #878787; font-size:0.85rem;">Refine the output <span style="color:#555;">(optional — after first generation)</span></label>
+                            <input type="text" id="refinement-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
+                        </div>
+
+                        <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: #fff; font-family: 'Orbitron'; font-weight: 600;">
+                            <span class="btn-text">Generate</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+
+                    <!-- Right Panel: Output -->
+                    <div class="panel output-panel" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
+                                Output
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #a78bfa;">Copy</button>
+                            </div>
+                        </div>
+                        <div class="output-wrapper">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; white-space: pre-wrap;">
+                                <span class="placeholder" style="color: #555555;">Your content will appear here...</span>
+                            </div>
+                            <div id="email-gate" class="email-gate hidden">
+                                <div class="email-gate-blur"></div>
+                                <div class="email-gate-card">
+                                    <div class="email-gate-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    </div>
+                                    <h3>Unlock the Full Output</h3>
+                                    <p>Enter your email to get the full result + <strong>3 free generations/day</strong></p>
+                                    <form id="gate-email-form" class="gate-form">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <button type="submit" id="gate-submit-btn" style="background: linear-gradient(135deg, #a78bfa, #7c3aed);">Unlock Result</button>
+                                    </form>
+                                    <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
+                                    <p style="font-size:0.7rem; color:#555; margin-top:0.75rem;">No spam. Unsubscribe anytime.</p>
+                                </div>
+                            </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: #a78bfa;"></div>
+                                <p style="color: #a78bfa;">Writing with Gemini 3.1 Pro...</p>
+                            </div>
+                        </div>
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                            <span id="word-count">0 words</span>
+                            <span id="char-out-count">0 chars</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upgrade Tiers -->
+                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Generations?</h3>
+                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and no ads</p>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                                <li>&#10003; 3 generations / day</li>
+                                <li>&#10003; All 3 voice modes</li>
+                                <li>&#10003; Refinement loop</li>
+                                <li style="color:#555;">&#10007; Ads shown</li>
+                            </ul>
+                        </div>
+                        <div style="background:#0a0a0a; border:2px solid #a78bfa; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#a78bfa; margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                                <li>&#10003; Unlimited generations</li>
+                                <li>&#10003; Priority speed</li>
+                                <li>&#10003; No ads</li>
+                                <li>&#10003; All tools included</li>
+                            </ul>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                        </div>
+                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
+                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                                <li>&#10003; Everything in Pro</li>
+                                <li>&#10003; Batch processing</li>
+                                <li>&#10003; API access</li>
+                                <li>&#10003; Priority support</li>
+                            </ul>
+                            <a href="/pro.html" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AdSense -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
+                <!-- FAQ -->
+                <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="color:#a78bfa; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <div class="faq-item"><h4>What is an AI voice writer?</h4><p>It generates content in a specific tone or register. Instead of generic AI output, you choose the voice — conversational, educational, or strategic — and it writes in that style consistently.</p></div>
+                    <div class="faq-item"><h4>What are the three voice modes?</h4><p><strong>Conversational</strong> writes like you're talking to a smart friend — short sentences, direct, no fluff. <strong>Educational</strong> writes like a sharp instructor — structured, clear. <strong>Strategic</strong> writes like a business operator — framework-driven, systematic, result-focused.</p></div>
+                    <div class="faq-item"><h4>What can I use this for?</h4><p>Social media posts, blog intros, newsletter sections, Reddit posts, email drafts, LinkedIn content — anything where tone matters and you want a starting point you can actually use without rewriting from scratch.</p></div>
+                    <div class="faq-item"><h4>Is it free?</h4><p>Yes. 3 free generations per day after providing your email. No credit card required.</p></div>
+                    <div class="faq-item"><h4>Is my content stored?</h4><p>No. Your input is processed in real time and discarded. We never store or train on your content.</p></div>
+                </div>
+
+                <div class="related-tools" style="text-align: center; margin-top: 2rem;">
+                    <p>Related: <a href="../humanizer/">AI Humanizer</a> | <a href="../paraphraser/">Paraphraser</a> | <a href="../email-writer/">Email Writer</a> | <a href="../tweet-generator/">Tweet Generator</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/disclosure">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+    <script src="../shared/ai-tool.js"></script>
+    <script src="voice-writer.js"></script>
+</body>
+
+</html>
