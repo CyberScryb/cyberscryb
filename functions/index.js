@@ -616,9 +616,32 @@ exports.generateAI = functions.https.onRequest((req, res) => {
 
             res.status(200).json({ result, tool });
 
+            // Fire-and-forget: persist usage count (non-blocking)
+            db.doc('stats/global').set(
+                { totalGenerations: admin.firestore.FieldValue.increment(1), lastUpdated: admin.firestore.FieldValue.serverTimestamp() },
+                { merge: true }
+            ).catch(err => console.error('Stats write failed:', err));
+
         } catch (error) {
             console.error(`Function Error (${tool}):`, error);
             res.status(500).json({ error: 'Internal Server Error: ' + error.message });
+        }
+    });
+});
+
+// ─── Stats Endpoint ──────────────────────────────────
+exports.getStats = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+        try {
+            const doc = await db.doc('stats/global').get();
+            const data = doc.exists ? doc.data() : {};
+            return res.status(200).json({ totalGenerations: data.totalGenerations || 0 });
+        } catch (error) {
+            console.error('Stats read failed:', error);
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
     });
 });

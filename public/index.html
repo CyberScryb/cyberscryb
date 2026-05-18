@@ -420,7 +420,18 @@
             <div class="stat-item"><span class="stat-number">21</span><span class="stat-label">Developer Guides</span></div>
             <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Signup Required</span></div>
             <div class="stat-item"><span class="stat-number">∞</span><span class="stat-label">Unlimited Uses</span></div>
+            <div class="stat-item" id="ai-gen-stat" style="display:none;"><span class="stat-number" id="ai-gen-count">—</span><span class="stat-label">AI Docs Generated</span></div>
         </section>
+        <script>
+        fetch('/api/stats').then(r => r.json()).then(function(d) {
+            if (d.totalGenerations > 0) {
+                var n = d.totalGenerations;
+                var label = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K+' : n.toString();
+                document.getElementById('ai-gen-count').textContent = label;
+                document.getElementById('ai-gen-stat').style.display = '';
+            }
+        }).catch(function(){});
+        </script>
 
         <!-- AdSense Ad Unit -->
         <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center;">
