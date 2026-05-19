@@ -1,5 +1,6 @@
 import React, { Suspense, useState, useEffect, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link, Outlet, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { addRecentTool } from './src/lib/recentTools';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Terminal, Search, Github, Settings, SearchCode, Sparkles } from 'lucide-react';
 import { TOOLS } from './src/lib/tools.registry';
@@ -182,6 +183,11 @@ const Layout = () => {
 const ToolRouteWrapper = ({ tool }: { tool: any }) => {
   const Component = tool.component;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    addRecentTool(tool.slug);
+  }, [tool.slug]);
+
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       <Helmet>

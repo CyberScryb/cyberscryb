@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Sparkles, Clock, Globe, Github, Compass, Hash, FileText } from 'lucide-react';
 import { TOOLS as tools } from '../lib/tools.registry';
 import { POSTS as posts } from '../lib/blog.data';
+import { getRecentTools } from '../lib/recentTools';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type SearchResult = {
@@ -51,15 +52,25 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
 
   const results = useMemo(() => {
     if (!query.trim()) {
-      // Return recent tools or defaults when empty
-      return allItems.filter(i => i.section === 'Tools').slice(0, 5);
+      const recentSlugs = getRecentTools();
+      const toolItems = allItems.filter(i => i.section === 'Tools');
+      if (recentSlugs.length > 0) {
+        const recentItems = recentSlugs
+          .map(slug => toolItems.find(i => i.id === `tool_${tools.find(t => t.slug === slug)?.id}`))
+          .filter((i): i is SearchResult => !!i);
+        return recentItems.length > 0 ? recentItems : toolItems.slice(0, 5);
+      }
+      return toolItems.slice(0, 5);
     }
     const lowerQ = query.toLowerCase();
-    return allItems.filter(item => 
-      item.title.toLowerCase().includes(lowerQ) || 
-      (item.section.toLowerCase().includes(lowerQ)) ||
-      (item.subtitle && item.subtitle.toLowerCase().includes(lowerQ))
-    ).slice(0, 15);
+    return allItems.filter(item => {
+      if (item.title.toLowerCase().includes(lowerQ)) return true;
+      if (item.section.toLowerCase().includes(lowerQ)) return true;
+      if (item.subtitle && item.subtitle.toLowerCase().includes(lowerQ)) return true;
+      const tool = tools.find(t => `tool_${t.id}` === item.id);
+      if (tool?.keywords?.some(k => k.toLowerCase().includes(lowerQ))) return true;
+      return false;
+    }).slice(0, 15);
   }, [query, allItems]);
 
   useEffect(() => {
@@ -159,7 +170,7 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
                     {Object.entries(groupedResults).map(([section, items]) => (
                        <div key={section}>
                           <div className="px-3 py-2 text-[10px] font-bold text-muted tracking-widest uppercase">
-                             {query === '' && section === 'Tools' ? 'Recent Tools' : section}
+                             {query === '' && section === 'Tools' ? (getRecentTools().length > 0 ? 'Recently Used' : 'Popular Tools') : section}
                           </div>
                           <div className="space-y-1">
                              {items.map(item => {

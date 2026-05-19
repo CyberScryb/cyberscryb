@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ArrowRight, ShieldCheck, Cpu, Database, Zap, BookOpen } from 'lucide-react';
+import { Search, ArrowRight, ShieldCheck, Cpu, Database, Zap, BookOpen, Clock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { TOOLS } from '../lib/tools.registry';
+import { getRecentTools } from '../lib/recentTools';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,11 +47,19 @@ export default function Home() {
 
   const tags = Array.from(new Set(TOOLS.map(t => t.category)));
 
+  const recentSlugs = getRecentTools();
+  const recentTools = recentSlugs.map(s => TOOLS.find(t => t.slug === s)).filter(Boolean) as typeof TOOLS;
+
   const filteredTools = TOOLS.filter(tool => {
-    const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          tool.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTag = selectedTag ? tool.category === selectedTag : true;
-    return matchesSearch && matchesTag;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      const matchesSearch = tool.name.toLowerCase().includes(q) ||
+                            tool.description.toLowerCase().includes(q) ||
+                            tool.tagline.toLowerCase().includes(q) ||
+                            tool.keywords?.some(k => k.toLowerCase().includes(q));
+      if (!matchesSearch) return false;
+    }
+    return selectedTag ? tool.category === selectedTag : true;
   });
 
   return (
@@ -201,6 +210,28 @@ export default function Home() {
                ))}
              </div>
           </div>
+
+          {recentTools.length > 0 && !searchQuery && !selectedTag && (
+            <div className="flex flex-col gap-3 pt-2 pb-2">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted">
+                <Clock size={12} className="text-accent" /> Continue where you left off
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {recentTools.map(tool => (
+                  <Link
+                    to={`/tools/${tool.slug}`}
+                    key={tool.slug}
+                    className="flex items-center gap-2 px-3 py-2 bg-surface border border-subtle hover:border-accent hover:text-accent text-primary rounded-xl text-sm transition-all duration-200 group"
+                  >
+                    <span className="text-accent group-hover:scale-110 transition-transform">
+                      {React.createElement(tool.icon as any, { size: 14 })}
+                    </span>
+                    {tool.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
             <AnimatePresence>
