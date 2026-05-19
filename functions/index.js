@@ -529,6 +529,109 @@ ${input}
 
 Return ONLY the paraphrased text. No quotes, no preamble.`
     },
+    'linkedin-post': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a LinkedIn ghostwriter who's helped executives get millions of impressions. Write a ${params.style || 'thought leadership'} LinkedIn post about this topic:
+
+Topic: "${input}"
+${params.hook ? `Hook style: ${params.hook}` : 'Hook style: Contrarian or surprising'}
+${params.cta ? `Call to action: ${params.cta}` : ''}
+
+Requirements:
+- Start with a scroll-stopping first line (under 10 words, no fluff)
+- Use short paragraphs (1-2 sentences max)
+- Include line breaks for readability
+- Add 1-2 relevant emojis (sparingly)
+- End with a question or CTA to drive comments
+- Length: 150-250 words
+- Tone: Authentic, not corporate. Personal, not preachy.
+- NO hashtag spam — max 3 relevant hashtags at the very end
+
+Return ONLY the post text, ready to copy and paste into LinkedIn.`
+    },
+    'cold-email': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a sales copywriter who writes cold emails that get 40%+ response rates. Write a personalized cold email based on this brief:
+
+Brief: "${input}"
+${params.recipient ? `Recipient: ${params.recipient}` : ''}
+${params.value ? `Value proposition: ${params.value}` : ''}
+
+Requirements:
+- Subject line: 4-7 words, curiosity-driven or benefit-focused (start with "Subject: ")
+- Opening: Reference something specific about them (their company, recent post, achievement)
+- Body: 2-3 short paragraphs max
+- Focus on THEIR problem, not your product
+- Include ONE clear, low-friction CTA (not "schedule a call" — something easier)
+- Length: Under 120 words total
+- Tone: Conversational, not salesy. Helpful, not pushy.
+- NO: "I hope this email finds you well", "reaching out", "I'd love to pick your brain"
+
+Return ONLY the email with subject line at the top.`
+    },
+    'job-description': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a talent acquisition expert who writes job descriptions that attract A-players. Write a compelling job description for this role:
+
+Role details: "${input}"
+${params.company ? `Company: ${params.company}` : ''}
+${params.culture ? `Culture: ${params.culture}` : ''}
+
+Requirements:
+- Job title (clear and standard, not "Rockstar" or "Ninja")
+- 2-3 sentence company intro (what you do, why it matters)
+- Role overview (1 paragraph, what they'll actually do day-to-day)
+- Key responsibilities (5-7 bullets, start with action verbs)
+- Requirements (must-haves only, 4-6 bullets)
+- Nice-to-haves (2-3 bullets)
+- What makes this role special (perks, growth, impact — be specific)
+- Compensation range if provided
+- Tone: Exciting but honest. Ambitious but realistic.
+- NO: "Fast-paced environment", "wear many hats", "competitive salary"
+
+Return the full job description with clear section headers.`
+    },
+    'press-release': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a PR professional who writes press releases for major publications. Write a professional press release for this announcement:
+
+Announcement: "${input}"
+${params.company ? `Company: ${params.company}` : ''}
+${params.quote ? `Executive quote: ${params.quote}` : ''}
+
+Requirements:
+- Headline: 10-15 words, newsworthy and specific
+- Dateline: [CITY, STATE — DATE]
+- Lead paragraph: Who, what, when, where, why (most important info first)
+- 2-3 body paragraphs with details, context, and impact
+- Include 1-2 quotes from executives or stakeholders
+- Boilerplate "About [Company]" section at the end
+- Contact information section
+- Standard press release format and structure
+- Length: 400-600 words
+- Tone: Professional, factual, newsworthy (not promotional)
+
+Return the complete press release ready to distribute.`
+    },
+    'seo-title': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are an SEO expert who writes titles that rank #1 and get clicked. Generate ${params.count || '5'} SEO-optimized page titles for this topic:
+
+Topic/page content: "${input}"
+${params.keyword ? `Primary keyword: ${params.keyword}` : ''}
+${params.intent ? `Search intent: ${params.intent}` : ''}
+
+Requirements for each title:
+- 50-60 characters (critical for Google display)
+- Include the primary keyword naturally near the beginning
+- Use power words (Ultimate, Complete, Proven, Essential, etc.)
+- Include a number or year if relevant
+- Create urgency or curiosity
+- Each title takes a DIFFERENT angle (how-to, list, comparison, guide, etc.)
+- Be specific, not generic
+
+Return each title on its own line, numbered 1-5. Then show character count in parentheses, e.g. "(57 chars)".`
+    },
     'voice-writer': {
         model: 'gemini-3.1-pro-preview',
         build: (input, params) => {
