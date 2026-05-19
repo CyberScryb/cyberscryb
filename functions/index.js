@@ -67,9 +67,21 @@ const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen
 function isAllowedReferer(referer) {
     if (!referer) return true;
     try {
-        const hostname = new URL(referer).hostname;
-        return ALLOWED_HOSTS.some(h => hostname === h || hostname.endsWith('.' + h));
+        const url = new URL(referer);
+        const hostname = url.hostname.toLowerCase();
+        
+        // Exact match or valid subdomain match
+        return ALLOWED_HOSTS.some(allowedHost => {
+            const lowerHost = allowedHost.toLowerCase();
+            // Exact match
+            if (hostname === lowerHost) return true;
+            // Subdomain match: must end with .allowedHost (not just contain it)
+            if (hostname.endsWith('.' + lowerHost)) return true;
+            return false;
+        });
     } catch (e) {
+        // Invalid URL format - reject
+        console.warn('Invalid referer URL format:', referer);
         return false;
     }
 }
