@@ -9,7 +9,7 @@
     function setCookie(name, val, days) {
         const d = new Date();
         d.setTime(d.getTime() + days * 86400000);
-        document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/';
+        document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
     }
     function getCookie(name) {
         const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');

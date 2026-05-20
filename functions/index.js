@@ -74,13 +74,41 @@ function isAllowedReferer(referer) {
     }
 }
 
+// ─── Params Sanitization ─────────────────────────────────
+// Prevents prompt injection via params fields and caps token cost from oversized inputs.
+const MAX_PARAM_LENGTH = 300;
+const PARAM_ALLOWLISTS = {
+    voice: ['conversational', 'educational', 'strategic'],
+    platform: ['LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'TikTok', 'YouTube'],
+    docType: ['parenting plan', 'custody declaration', 'modification request'],
+};
+
+function sanitizeParams(params) {
+    if (!params || typeof params !== 'object' || Array.isArray(params)) return {};
+    const clean = {};
+    for (const [key, val] of Object.entries(params)) {
+        if (typeof val === 'boolean') {
+            clean[key] = val;
+        } else if (typeof val === 'number') {
+            clean[key] = Math.max(1, Math.min(20, Math.floor(val)));
+        } else if (typeof val === 'string') {
+            if (PARAM_ALLOWLISTS[key]) {
+                if (PARAM_ALLOWLISTS[key].includes(val)) clean[key] = val;
+            } else {
+                clean[key] = val.slice(0, MAX_PARAM_LENGTH);
+            }
+        }
+    }
+    return clean;
+}
+
 // Ensure you set this config variable:
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
 exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
-            return res.status(405).send('Method Not Allowed');
+            return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
         const { text, style } = req.body;
@@ -90,7 +118,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         // Allow localhost for testing
         if (!isAllowedReferer(referer)) {
             console.warn(`Blocked request from unauthorized referer: ${referer}`);
-            return res.status(403).send('Unauthorized Source'); // Enforced security
+            return res.status(403).json({ error: 'Unauthorized source' });
         }
 
         // Rate limit check
@@ -105,7 +133,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 
         if (!apiKey) {
             console.error("API Key not found in functions config.");
-            return res.status(500).send("Server Configuration Error: Missing API Key");
+            return res.status(500).json({ error: 'Server configuration error' });
         }
 
         try {
@@ -144,7 +172,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 
         } catch (error) {
             console.error("Function Error:", error);
-            res.status(500).send("Internal Server Error");
+            res.status(500).json({ error: 'Internal server error' });
         }
     });
 });
@@ -152,7 +180,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
-            return res.status(405).send('Method Not Allowed');
+            return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
         const { jobDescription, freelancerProfile } = req.body;
@@ -160,7 +188,7 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
         // Security: Check Referer
         const referer = req.get('Referer');
         if (!isAllowedReferer(referer)) {
-            return res.status(403).send('Unauthorized Source');
+            return res.status(403).json({ error: 'Unauthorized source' });
         }
 
         // Rate limit check
@@ -171,7 +199,7 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
         }
 
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
-        if (!apiKey) return res.status(500).send("Missing API Key");
+        if (!apiKey) return res.status(500).json({ error: 'Server configuration error' });
 
         try {
             const prompt = `
@@ -205,7 +233,7 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error("Gemini API Error:", errorData);
-                return res.status(500).send("AI Generation Failed");
+                return res.status(500).json({ error: 'AI generation failed' });
             }
 
             const data = await response.json();
@@ -216,7 +244,7 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
 
         } catch (error) {
             console.error("Function Error:", error);
-            res.status(500).send("Internal Server Error: " + error.message);
+            res.status(500).json({ error: 'Internal server error' });
         }
     });
 });
@@ -558,7 +586,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         // Security: Referer check
         const referer = req.get('Referer');
         if (!isAllowedReferer(referer)) {
-            return res.status(403).send('Unauthorized Source');
+            return res.status(403).json({ error: 'Unauthorized source' });
         }
 
         // Validate tool
@@ -586,12 +614,12 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
         if (!apiKey) {
             console.error("API Key not found in functions config.");
-            return res.status(500).send("Server Configuration Error");
+            return res.status(500).json({ error: 'Server configuration error' });
         }
 
         try {
             const toolConfig = AI_PROMPTS[tool];
-            const prompt = toolConfig.build(input, params || {});
+            const prompt = toolConfig.build(input, sanitizeParams(params));
             const model = toolConfig.model || 'gemini-3.1-pro-preview';
 
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
@@ -631,6 +659,11 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
             return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
+        const referer = req.get('Referer');
+        if (!isAllowedReferer(referer)) {
+            return res.status(403).json({ error: 'Unauthorized source' });
+        }
+
         const { email, source } = req.body;
 
         // Validate email
@@ -651,12 +684,11 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
                 return res.status(200).json({ message: 'already_subscribed' });
             }
 
-            // Store the subscriber
+            // Store the subscriber — email and source only (no IP, per privacy policy)
             await db.collection('subscribers').add({
                 email: normalizedEmail,
                 source: source || 'homepage',
                 subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
-                ip: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown'
             });
 
             return res.status(200).json({ message: 'subscribed' });
