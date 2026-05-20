@@ -77,7 +77,7 @@ function isAllowedReferer(referer) {
 // Ensure you set this config variable:
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
-exports.rewriteText = functions.https.onRequest((req, res) => {
+exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
             return res.status(405).send('Method Not Allowed');
@@ -126,7 +126,8 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: { maxOutputTokens: 8192 }
                 })
             });
 
@@ -148,7 +149,7 @@ exports.rewriteText = functions.https.onRequest((req, res) => {
     });
 });
 
-exports.generateGigWork = functions.https.onRequest((req, res) => {
+exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
             return res.status(405).send('Method Not Allowed');
@@ -197,7 +198,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { responseMimeType: "application/json" }
+                    generationConfig: { responseMimeType: "application/json", maxOutputTokens: 8192 }
                 })
             });
 

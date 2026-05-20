@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // Call Firebase Function (Placeholder URL for now)
             // Ideally: https://us-central1-YOUR-PROJECT.cloudfunctions.net/generateGigWork
-            const response = await fetch('https://us-central1-feisty-wall-456202-s3.cloudfunctions.net/generateGigWork', {
+            const response = await fetch('/api/gig', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
