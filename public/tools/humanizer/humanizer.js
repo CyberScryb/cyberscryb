@@ -336,4 +336,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ─── Init ───
     updateUsageDisplay();
+
+    // ─── Example loading (prefill + button) ───
+    (function setupExample() {
+        const ex = window.CSExamples && window.CSExamples['humanizer'];
+        if (!ex || !rewriteBtn) return;
+
+        function fill() {
+            if (roboticText) {
+                roboticText.value = ex.input || '';
+                roboticText.style.height = 'auto';
+                roboticText.style.height = (roboticText.scrollHeight) + 'px';
+            }
+        }
+
+        // Prefill if input is empty
+        if (roboticText && !roboticText.value.trim()) {
+            fill();
+        }
+
+        // Inject "Run example" button
+        if (!document.getElementById('cs-example-btn')) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.id = 'cs-example-btn';
+            btn.textContent = '✨ Run example';
+            btn.title = 'Load an AI-sounding sample and humanize it — uses your one free try';
+            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #34F5C5;color:#34F5C5;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;';
+            btn.addEventListener('mouseover', () => { btn.style.background = '#34F5C5'; btn.style.color = '#000'; });
+            btn.addEventListener('mouseout', () => { btn.style.background = 'transparent'; btn.style.color = '#34F5C5'; });
+            btn.addEventListener('click', () => {
+                fill();
+                rewriteBtn.click();
+            });
+            if (rewriteBtn.parentNode) {
+                rewriteBtn.parentNode.insertBefore(btn, rewriteBtn.nextSibling);
+            }
+        }
+    })();
 });
