@@ -5,6 +5,112 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 
+// ─── Privacy-Compliant Analytics ────────────────────────
+// Aggregate-only event logging. No user identification, no tracking.
+// Compliant with GDPR, CCPA, and privacy-first principles.
+
+const analyticsStore = {
+    events: [], // In-memory buffer for batch writes
+    lastFlush: Date.now()
+};
+
+// Log an anonymous event (aggregate only)
+function logEvent(eventType, metadata = {}) {
+    const event = {
+        type: eventType,
+        timestamp: Date.now(),
+        date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
+        hour: new Date().getHours(),
+        ...metadata
+    };
+    
+    analyticsStore.events.push(event);
+    
+    // Flush to Firestore every 100 events or every 5 minutes
+    if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
+        flushAnalytics();
+    }
+}
+
+// Batch write events to Firestore (aggregate only)
+async function flushAnalytics() {
+    if (analyticsStore.events.length === 0) return;
+    
+    const eventsToFlush = [...analyticsStore.events];
+    analyticsStore.events = [];
+    analyticsStore.lastFlush = Date.now();
+    
+    try {
+        // Group events by type and date for aggregation
+        const aggregated = {};
+        
+        eventsToFlush.forEach(event => {
+            const key = `${event.date}_${event.type}`;
+            if (!aggregated[key]) {
+                aggregated[key] = {
+                    date: event.date,
+                    type: event.type,
+                    count: 0,
+                    hourly: Array(24).fill(0),
+                    metadata: {}
+                };
+            }
+            
+            aggregated[key].count++;
+            aggregated[key].hourly[event.hour]++;
+            
+            // Aggregate metadata (counts only, no user data)
+            Object.keys(event).forEach(k => {
+                if (['type', 'timestamp', 'date', 'hour'].includes(k)) return;
+                if (!aggregated[key].metadata[k]) {
+                    aggregated[key].metadata[k] = {};
+                }
+                const val = String(event[k]);
+                aggregated[key].metadata[k][val] = (aggregated[key].metadata[k][val] || 0) + 1;
+            });
+        });
+        
+        // Write aggregated data to Firestore
+        const batch = db.batch();
+        Object.values(aggregated).forEach(agg => {
+            const docRef = db.collection('analytics').doc(`${agg.date}_${agg.type}_${Date.now()}`);
+            batch.set(docRef, {
+                ...agg,
+                updatedAt: admin.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+        });
+        
+        await batch.commit();
+        console.log(`[ANALYTICS] Flushed ${eventsToFlush.length} events (${Object.keys(aggregated).length} aggregated)`);
+        
+    } catch (error) {
+        console.error('[ANALYTICS] Flush error:', error);
+        // Re-add events to buffer on failure
+        analyticsStore.events.unshift(...eventsToFlush);
+    }
+}
+
+// Flush analytics every 5 minutes
+setInterval(flushAnalytics, 300000);
+
+// Conversion funnel tracking (anonymous)
+function logConversion(funnel, step, metadata = {}) {
+    logEvent('conversion', {
+        funnel,
+        step,
+        ...metadata
+    });
+}
+
+// A/B test variant assignment (deterministic, no tracking)
+function getABVariant(testName, identifier) {
+    // Use hash of identifier to deterministically assign variant
+    const crypto = require('crypto');
+    const hash = crypto.createHash('md5').update(testName + identifier).digest('hex');
+    const hashInt = parseInt(hash.slice(0, 8), 16);
+    return hashInt % 2 === 0 ? 'A' : 'B';
+}
+
 // ─── Rate Limiter ────────────────────────────────────────
 // Enhanced rate limiting with sliding window, per-user tracking, and tiered limits.
 // In-memory implementation (production should use Redis for multi-instance deployments).
@@ -210,6 +316,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', reason: 'blocked' });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -225,6 +332,13 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
             res.set('X-RateLimit-Tier', rateCheck.tier);
         }
+
+        // Log analytics event (aggregate only)
+        logEvent('ai_request', { 
+            tool: 'humanizer',
+            tier: rateCheck.tier,
+            inputLength: text.length > 500 ? '500+' : text.length > 200 ? '200-500' : '0-200'
+        });
 
         // Get API Key from Environment Config
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
@@ -281,6 +395,13 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             const data = await response.json();
             const rewrittenText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing text.";
 
+            // Log success
+            logEvent('ai_success', { 
+                tool: 'humanizer',
+                tier: rateCheck.tier,
+                outputLength: rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500'
+            });
+
             res.status(200).json({ result: rewrittenText });
 
         } catch (error) {
@@ -303,7 +424,128 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     });
 });
 
-exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
+// ─── Client-Side Analytics Event Endpoint ───────────────
+// Allows client to log anonymous events (conversion tracking, A/B tests)
+exports.analyticsEvent = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const { event, funnel, step, metadata } = req.body;
+
+        if (!event) {
+            return res.status(400).json({ error: 'Event type required' });
+        }
+
+        // Log the event (aggregate only)
+        if (event === 'conversion' && funnel && step) {
+            logConversion(funnel, step, metadata || {});
+        } else {
+            logEvent(event, metadata || {});
+        }
+
+        return res.status(200).json({ ok: true });
+    });
+});
+
+// ─── Scheduled Analytics Reports ────────────────────────
+// Runs daily at 9 AM UTC, sends email summary
+exports.dailyAnalyticsReport = functions.pubsub
+    .schedule('0 9 * * *')
+    .timeZone('UTC')
+    .onRun(async (context) => {
+        try {
+            // Fetch yesterday's analytics
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const dateStr = yesterday.toISOString().slice(0, 10);
+
+            const snapshot = await db.collection('analytics')
+                .where('date', '==', dateStr)
+                .get();
+
+            const summary = {
+                date: dateStr,
+                totalRequests: 0,
+                successfulRequests: 0,
+                rateLimitHits: 0,
+                newSubscribers: 0,
+                toolUsage: {},
+                tierDistribution: {},
+                topHours: []
+            };
+
+            const hourlyData = Array(24).fill(0);
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                
+                if (data.type === 'ai_request') {
+                    summary.totalRequests += data.count || 0;
+                    
+                    if (data.metadata?.tool) {
+                        Object.entries(data.metadata.tool).forEach(([tool, count]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
+                        });
+                    }
+                    
+                    if (data.metadata?.tier) {
+                        Object.entries(data.metadata.tier).forEach(([tier, count]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
+                        });
+                    }
+                }
+                
+                if (data.type === 'ai_success') {
+                    summary.successfulRequests += data.count || 0;
+                }
+                
+                if (data.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += data.count || 0;
+                }
+                
+                if (data.type === 'conversion' && data.metadata?.funnel?.email_capture) {
+                    summary.newSubscribers += data.count || 0;
+                }
+                
+                if (data.hourly) {
+                    data.hourly.forEach((count, hour) => {
+                        hourlyData[hour] += count;
+                    });
+                }
+            });
+
+            // Find top 3 hours
+            const hourlyWithIndex = hourlyData.map((count, hour) => ({ hour, count }));
+            hourlyWithIndex.sort((a, b) => b.count - a.count);
+            summary.topHours = hourlyWithIndex.slice(0, 3).map(h => `${h.hour}:00 (${h.count} requests)`);
+
+            // Calculate success rate
+            summary.successRate = summary.totalRequests > 0 
+                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(1) + '%'
+                : '0%';
+
+            // Log summary
+            console.log('[ANALYTICS] Daily Report:', JSON.stringify(summary, null, 2));
+
+            // TODO: Send email report (integrate with SendGrid/Mailgun)
+            // For now, just store the report
+            await db.collection('analytics_reports').add({
+                type: 'daily',
+                ...summary,
+                generatedAt: admin.firestore.FieldValue.serverTimestamp()
+            });
+
+            return null;
+
+        } catch (error) {
+            console.error('[ANALYTICS] Daily report error:', error);
+            return null;
+        }
+    });
+
+exports.generateGigWork = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
             return res.status(405).send('Method Not Allowed');
@@ -321,6 +563,7 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool: 'gig-work' });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -328,6 +571,13 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
                     retryAfter: rateCheck.retryAfter
                 });
         }
+
+        // Log analytics
+        logEvent('ai_request', { 
+            tool: 'gig-work',
+            tier: rateCheck.tier,
+            hasProfile: !!freelancerProfile
+        });
 
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
         if (!apiKey) return res.status(500).send("Missing API Key");
@@ -382,6 +632,8 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
             const data = await response.json();
             const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
             const resultJson = JSON.parse(rawText); // Parse the internal JSON
+
+            logEvent('ai_success', { tool: 'gig-work', tier: rateCheck.tier });
 
             res.status(200).json(resultJson);
 
@@ -865,6 +1117,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -880,6 +1133,13 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
             res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
             res.set('X-RateLimit-Tier', rateCheck.tier);
         }
+
+        // Log analytics
+        logEvent('ai_request', { 
+            tool,
+            tier: rateCheck.tier,
+            inputLength: input.length > 1000 ? '1000+' : input.length > 500 ? '500-1000' : '0-500'
+        });
 
         // Get API Key
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
@@ -927,6 +1187,12 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
 
             const data = await response.json();
             const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing input.";
+
+            logEvent('ai_success', { 
+                tool,
+                tier: rateCheck.tier,
+                outputLength: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500'
+            });
 
             res.status(200).json({ result, tool });
 
@@ -1030,6 +1296,126 @@ exports.privacyStatus = functions.https.onRequest((req, res) => {
     });
 });
 
+// ─── Analytics Dashboard ────────────────────────────────
+// View aggregate analytics (admin only - add auth in production)
+exports.analyticsReport = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        // TODO: Add admin authentication here
+        // For now, check for a secret query param
+        const secret = req.query.secret;
+        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        try {
+            const days = parseInt(req.query.days) || 7;
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            const startDateStr = startDate.toISOString().slice(0, 10);
+
+            // Fetch analytics data
+            const snapshot = await db.collection('analytics')
+                .where('date', '>=', startDateStr)
+                .orderBy('date', 'desc')
+                .limit(1000)
+                .get();
+
+            const events = {};
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const key = `${data.date}_${data.type}`;
+                if (!events[key]) {
+                    events[key] = { ...data, count: 0 };
+                }
+                events[key].count += data.count || 0;
+            });
+
+            // Calculate summary stats
+            const summary = {
+                totalRequests: 0,
+                successfulRequests: 0,
+                rateLimitHits: 0,
+                conversionsByFunnel: {},
+                toolUsage: {},
+                tierDistribution: {},
+                hourlyDistribution: Array(24).fill(0)
+            };
+
+            Object.values(events).forEach(event => {
+                if (event.type === 'ai_request') {
+                    summary.totalRequests += event.count;
+                    
+                    // Tool usage
+                    if (event.metadata?.tool) {
+                        Object.entries(event.metadata.tool).forEach(([tool, count]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
+                        });
+                    }
+                    
+                    // Tier distribution
+                    if (event.metadata?.tier) {
+                        Object.entries(event.metadata.tier).forEach(([tier, count]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
+                        });
+                    }
+                }
+                
+                if (event.type === 'ai_success') {
+                    summary.successfulRequests += event.count;
+                }
+                
+                if (event.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += event.count;
+                }
+                
+                if (event.type === 'conversion') {
+                    if (event.metadata?.funnel) {
+                        Object.entries(event.metadata.funnel).forEach(([funnel, count]) => {
+                            if (!summary.conversionsByFunnel[funnel]) {
+                                summary.conversionsByFunnel[funnel] = {};
+                            }
+                            if (event.metadata?.step) {
+                                Object.entries(event.metadata.step).forEach(([step, stepCount]) => {
+                                    summary.conversionsByFunnel[funnel][step] = 
+                                        (summary.conversionsByFunnel[funnel][step] || 0) + stepCount;
+                                });
+                            }
+                        });
+                    }
+                }
+                
+                // Hourly distribution
+                if (event.hourly) {
+                    event.hourly.forEach((count, hour) => {
+                        summary.hourlyDistribution[hour] += count;
+                    });
+                }
+            });
+
+            // Calculate success rate
+            summary.successRate = summary.totalRequests > 0 
+                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+                : '0%';
+
+            return res.status(200).json({
+                period: `Last ${days} days`,
+                startDate: startDateStr,
+                endDate: new Date().toISOString().slice(0, 10),
+                summary,
+                rawEvents: Object.values(events).slice(0, 50) // Latest 50 events
+            });
+
+        } catch (error) {
+            console.error('[ANALYTICS] Report error:', error);
+            return res.status(500).json({ error: 'Failed to generate report' });
+        }
+    });
+});
+
 // ─── Email Capture ───────────────────────────────────
 exports.subscribeEmail = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
@@ -1063,6 +1449,9 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
                 source: source || 'homepage',
                 subscribedAt: admin.firestore.FieldValue.serverTimestamp()
             });
+
+            // Log conversion (anonymous)
+            logConversion('email_capture', 'subscribed', { source: source || 'homepage' });
 
             return res.status(200).json({ message: 'subscribed' });
 

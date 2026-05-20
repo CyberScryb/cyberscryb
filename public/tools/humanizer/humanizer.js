@@ -69,6 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── Email Submission (reuses existing /api/subscribe) ───
     async function submitGateEmail(email) {
         try {
+            // Track conversion funnel: gate shown
+            if (window.fetch) {
+                fetch('/api/analytics-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        event: 'conversion',
+                        funnel: 'email_gate',
+                        step: 'form_submitted'
+                    })
+                }).catch(() => {}); // Fire and forget
+            }
+
             const res = await fetch('/api/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -107,6 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── Show preview with gate ───
     function showPreviewWithGate(fullText) {
         pendingFullText = fullText;
+
+        // Track conversion funnel: gate shown
+        if (window.fetch) {
+            fetch('/api/analytics-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    event: 'conversion',
+                    funnel: 'email_gate',
+                    step: 'gate_shown'
+                })
+            }).catch(() => {}); // Fire and forget
+        }
 
         // Calculate preview cutoff (30% by words, end at sentence boundary)
         const words = fullText.split(/\s+/);
