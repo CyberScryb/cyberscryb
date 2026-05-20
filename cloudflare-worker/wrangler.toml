@@ -1,0 +1,14 @@
+name = "cyberscryb-ai-router"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Route: intercept /api/ai-generate on cyberscryb.com
+# All other paths pass through to Firebase origin unchanged
+routes = [
+  { pattern = "cyberscryb.com/api/ai-generate", zone_name = "cyberscryb.com" }
+]
+
+# Cloudflare Workers AI binding (free tier: 10k neurons/day)
+[ai]
+binding = "AI"

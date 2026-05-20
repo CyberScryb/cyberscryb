@@ -547,7 +547,7 @@ Return ONLY the written content. No title, no meta commentary, no "here's the pi
     }
 };
 
-exports.generateAI = functions.https.onRequest((req, res) => {
+exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
             return res.status(405).send('Method Not Allowed');
@@ -601,7 +601,7 @@ exports.generateAI = functions.https.onRequest((req, res) => {
                     contents: [{ parts: [{ text: prompt }] }],
                     generationConfig: {
                         temperature: 0.7,
-                        maxOutputTokens: 1024
+                        maxOutputTokens: 8192
                     }
                 })
             });
