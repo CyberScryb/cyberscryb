@@ -6,24 +6,58 @@ admin.initializeApp();
 const db = admin.firestore();
 
 // ─── Rate Limiter ────────────────────────────────────────
-// In-memory rate limiting (resets on cold start, which is fine for abuse prevention)
-const rateLimitStore = {};  // { ip: { count, resetTime } }
+// Enhanced rate limiting with sliding window, per-user tracking, and tiered limits.
+// In-memory implementation (production should use Redis for multi-instance deployments).
+
+const rateLimitStore = new Map();  // Map<string, { requests: number[], tier: string }>
 let globalDailyCount = 0;
 let globalDayReset = Date.now() + 86400000; // 24h from now
 
-const RATE_LIMIT = {
-    perIpPerMinute: 10,     // Max 10 requests per IP per minute
-    globalPerDay: 500,       // Max 500 total AI calls per day across all users
+// Tiered rate limits (requests per minute)
+const RATE_LIMIT_TIERS = {
+    anonymous: { perMinute: 5, perHour: 20, perDay: 50 },
+    free: { perMinute: 10, perHour: 60, perDay: 200 },
+    subscribed: { perMinute: 20, perHour: 200, perDay: 1000 },
+    premium: { perMinute: 100, perHour: 2000, perDay: 10000 },
 };
 
-function getClientIP(req) {
-    return req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-           req.connection?.remoteAddress || 'unknown';
+const GLOBAL_LIMITS = {
+    perDay: 5000,  // Increased from 500 to support growth
+    perHour: 500,  // New: prevent sudden spikes
+};
+
+// Extract client identifier (IP + optional user ID from cookie/header)
+function getClientIdentifier(req) {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+               req.connection?.remoteAddress || 'unknown';
+    
+    // Check for user identifier (from cookie or auth header)
+    const userId = req.headers['x-user-id'] || req.cookies?.cs_user_id || null;
+    
+    return userId ? `user:${userId}` : `ip:${ip}`;
 }
 
+// Determine user tier based on cookies/headers
+function getUserTier(req) {
+    const subscribed = req.cookies?.cs_subscribed === '1';
+    const premium = req.cookies?.cs_premium === '1' || req.headers['x-premium'] === '1';
+    
+    if (premium) return 'premium';
+    if (subscribed) return 'subscribed';
+    
+    // Check if they have a user ID (free tier)
+    const userId = req.headers['x-user-id'] || req.cookies?.cs_user_id;
+    if (userId) return 'free';
+    
+    return 'anonymous';
+}
+
+// Sliding window rate limit check
 function checkRateLimit(req) {
     const now = Date.now();
-    const ip = getClientIP(req);
+    const identifier = getClientIdentifier(req);
+    const tier = getUserTier(req);
+    const limits = RATE_LIMIT_TIERS[tier];
 
     // Reset global daily counter
     if (now > globalDayReset) {
@@ -31,35 +65,105 @@ function checkRateLimit(req) {
         globalDayReset = now + 86400000;
     }
 
-    // Check global daily cap
-    if (globalDailyCount >= RATE_LIMIT.globalPerDay) {
-        return { allowed: false, reason: 'Daily limit reached. Try again tomorrow.' };
+    // Check global daily cap (applies to all users)
+    if (globalDailyCount >= GLOBAL_LIMITS.perDay) {
+        console.warn(`[RATE_LIMIT] Global daily limit reached: ${globalDailyCount}/${GLOBAL_LIMITS.perDay}`);
+        return { 
+            allowed: false, 
+            reason: 'Service capacity reached. Try again in a few hours.',
+            retryAfter: Math.ceil((globalDayReset - now) / 1000)
+        };
     }
 
-    // Per-IP rate limiting (sliding window per minute)
-    if (!rateLimitStore[ip] || now > rateLimitStore[ip].resetTime) {
-        rateLimitStore[ip] = { count: 0, resetTime: now + 60000 };
+    // Get or create user's request history
+    if (!rateLimitStore.has(identifier)) {
+        rateLimitStore.set(identifier, { requests: [], tier });
     }
 
-    if (rateLimitStore[ip].count >= RATE_LIMIT.perIpPerMinute) {
-        return { allowed: false, reason: 'Too many requests. Please wait a minute.' };
+    const userData = rateLimitStore.get(identifier);
+    
+    // Update tier if changed (user upgraded)
+    userData.tier = tier;
+
+    // Remove requests older than 24 hours (sliding window)
+    const dayAgo = now - 86400000;
+    const hourAgo = now - 3600000;
+    const minuteAgo = now - 60000;
+    
+    userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
+
+    // Count requests in each window
+    const requestsLastMinute = userData.requests.filter(t => t > minuteAgo).length;
+    const requestsLastHour = userData.requests.filter(t => t > hourAgo).length;
+    const requestsLastDay = userData.requests.length;
+
+    // Check per-minute limit
+    if (requestsLastMinute >= limits.perMinute) {
+        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`);
+        return { 
+            allowed: false, 
+            reason: `Rate limit: ${limits.perMinute} requests per minute. Slow down.`,
+            retryAfter: 60
+        };
     }
 
-    // Allow and increment
-    rateLimitStore[ip].count++;
+    // Check per-hour limit
+    if (requestsLastHour >= limits.perHour) {
+        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`);
+        return { 
+            allowed: false, 
+            reason: `Hourly limit reached (${limits.perHour} requests). Try again soon.`,
+            retryAfter: 3600
+        };
+    }
+
+    // Check per-day limit
+    if (requestsLastDay >= limits.perDay) {
+        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded daily limit: ${requestsLastDay}/${limits.perDay}`);
+        return { 
+            allowed: false, 
+            reason: `Daily limit reached (${limits.perDay} requests). Upgrade or try tomorrow.`,
+            retryAfter: Math.ceil((dayAgo + 86400000 - now) / 1000)
+        };
+    }
+
+    // Allow request and record timestamp
+    userData.requests.push(now);
     globalDailyCount++;
-    return { allowed: true };
+
+    return { 
+        allowed: true,
+        remaining: {
+            minute: limits.perMinute - requestsLastMinute - 1,
+            hour: limits.perHour - requestsLastHour - 1,
+            day: limits.perDay - requestsLastDay - 1
+        },
+        tier
+    };
 }
 
-// Clean up old IPs every 5 minutes to prevent memory leak
+// Clean up old entries every 10 minutes to prevent memory bloat
 setInterval(() => {
     const now = Date.now();
-    for (const ip in rateLimitStore) {
-        if (now > rateLimitStore[ip].resetTime) {
-            delete rateLimitStore[ip];
+    const dayAgo = now - 86400000;
+    let cleaned = 0;
+
+    for (const [identifier, userData] of rateLimitStore.entries()) {
+        // Remove requests older than 24 hours
+        const before = userData.requests.length;
+        userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
+        
+        // If no recent requests, remove the entry entirely
+        if (userData.requests.length === 0) {
+            rateLimitStore.delete(identifier);
+            cleaned++;
         }
     }
-}, 300000);
+
+    if (cleaned > 0) {
+        console.log(`[RATE_LIMIT] Cleaned ${cleaned} inactive entries. Active users: ${rateLimitStore.size}`);
+    }
+}, 600000); // Every 10 minutes
 
 // ─── Referer Validation ─────────────────────────────────
 const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen-lang-client-0384486156.web.app'];
@@ -108,8 +212,22 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         // Rate limit check
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
-            return res.status(429).json({ error: rateCheck.reason });
+            const identifier = getClientIdentifier(req);
+            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({ 
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
+        }
+
+        // Add rate limit info to response headers (for client-side display)
+        if (rateCheck.remaining) {
+            res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
+            res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
+            res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
+            res.set('X-RateLimit-Tier', rateCheck.tier);
         }
 
         // Get API Key from Environment Config
@@ -178,8 +296,14 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
         // Rate limit check
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
-            return res.status(429).json({ error: rateCheck.reason });
+            const identifier = getClientIdentifier(req);
+            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({ 
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
         }
 
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
@@ -693,8 +817,22 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         // Rate limit check
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            console.warn(`Rate limited IP: ${getClientIP(req)} - ${rateCheck.reason}`);
-            return res.status(429).json({ error: rateCheck.reason });
+            const identifier = getClientIdentifier(req);
+            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({ 
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
+        }
+
+        // Add rate limit info to response headers
+        if (rateCheck.remaining) {
+            res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
+            res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
+            res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
+            res.set('X-RateLimit-Tier', rateCheck.tier);
         }
 
         // Get API Key
