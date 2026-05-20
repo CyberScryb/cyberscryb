@@ -26,28 +26,25 @@ const GLOBAL_LIMITS = {
     perHour: 500,  // New: prevent sudden spikes
 };
 
-// Extract client identifier (IP + optional user ID from cookie/header)
+// Extract anonymous client identifier (hashed IP only - privacy-first)
 function getClientIdentifier(req) {
     const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
                req.connection?.remoteAddress || 'unknown';
     
-    // Check for user identifier (from cookie or auth header)
-    const userId = req.headers['x-user-id'] || req.cookies?.cs_user_id || null;
+    // Hash the IP to prevent storing raw IPs (privacy-first approach)
+    const crypto = require('crypto');
+    const hash = crypto.createHash('sha256').update(ip + 'salt_v1').digest('hex').slice(0, 16);
     
-    return userId ? `user:${userId}` : `ip:${ip}`;
+    return `anon:${hash}`;
 }
 
-// Determine user tier based on cookies/headers
+// Determine user tier based on cookies/headers (no user ID tracking)
 function getUserTier(req) {
     const subscribed = req.cookies?.cs_subscribed === '1';
     const premium = req.cookies?.cs_premium === '1' || req.headers['x-premium'] === '1';
     
     if (premium) return 'premium';
     if (subscribed) return 'subscribed';
-    
-    // Check if they have a user ID (free tier)
-    const userId = req.headers['x-user-id'] || req.cookies?.cs_user_id;
-    if (userId) return 'free';
     
     return 'anonymous';
 }
@@ -97,9 +94,9 @@ function checkRateLimit(req) {
     const requestsLastHour = userData.requests.filter(t => t > hourAgo).length;
     const requestsLastDay = userData.requests.length;
 
-    // Check per-minute limit
+    // Check per-minute limit (no identifier logging - privacy-first)
     if (requestsLastMinute >= limits.perMinute) {
-        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`);
+        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`);
         return { 
             allowed: false, 
             reason: `Rate limit: ${limits.perMinute} requests per minute. Slow down.`,
@@ -109,7 +106,7 @@ function checkRateLimit(req) {
 
     // Check per-hour limit
     if (requestsLastHour >= limits.perHour) {
-        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`);
+        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`);
         return { 
             allowed: false, 
             reason: `Hourly limit reached (${limits.perHour} requests). Try again soon.`,
@@ -119,7 +116,7 @@ function checkRateLimit(req) {
 
     // Check per-day limit
     if (requestsLastDay >= limits.perDay) {
-        console.warn(`[RATE_LIMIT] ${identifier} (${tier}) exceeded daily limit: ${requestsLastDay}/${limits.perDay}`);
+        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded daily limit: ${requestsLastDay}/${limits.perDay}`);
         return { 
             allowed: false, 
             reason: `Daily limit reached (${limits.perDay} requests). Upgrade or try tomorrow.`,
@@ -209,11 +206,10 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             return res.status(403).send('Unauthorized Source'); // Enforced security
         }
 
-        // Rate limit check
+        // Rate limit check (no identifier logging)
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            const identifier = getClientIdentifier(req);
-            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -293,11 +289,10 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
             return res.status(403).send('Unauthorized Source');
         }
 
-        // Rate limit check
+        // Rate limit check (no identifier logging)
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            const identifier = getClientIdentifier(req);
-            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -814,11 +809,10 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
             return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
         }
 
-        // Rate limit check
+        // Rate limit check (no identifier logging)
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            const identifier = getClientIdentifier(req);
-            console.warn(`[RATE_LIMIT] Blocked ${identifier} - ${rateCheck.reason}`);
+            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
                 .json({ 
@@ -904,12 +898,11 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
                 return res.status(200).json({ message: 'already_subscribed' });
             }
 
-            // Store the subscriber
+            // Store the subscriber (no IP tracking - privacy-first)
             await db.collection('subscribers').add({
                 email: normalizedEmail,
                 source: source || 'homepage',
-                subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
-                ip: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown'
+                subscribedAt: admin.firestore.FieldValue.serverTimestamp()
             });
 
             return res.status(200).json({ message: 'subscribed' });
