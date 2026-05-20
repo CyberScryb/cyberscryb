@@ -1,18 +1,19 @@
 ---
 plan_id: 01-E
 phase: 1
-title: "Lighthouse audit on top 10 pages + ship critical fixes for any score below 90"
+title: "Lighthouse audit on top 10 pages + cross-browser AI tool verification + ship critical fixes"
 wave: 2
-depends_on: [01-A]
+depends_on: [01-A, 01-D]
 files_modified:
   - .planning/phases/01-audit-triage/LIGHTHOUSE-REPORT.md
+  - .planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md
   - scripts/lighthouse-audit.sh
   - public/tools.html
   - public/index.html
   - public/og-image.png
   - public/css/style.css
 autonomous: false
-requirements: [AUDIT-04]
+requirements: [AUDIT-04, AUDIT-05]
 must_haves:
   - "LIGHTHOUSE-REPORT.md exists and lists Lighthouse scores (Performance, Accessibility, Best Practices, SEO) for the top 10 pages: homepage, tools.html, summarizer, hardship-letter, humanizer, email-writer, json-csv-converter, password-checker, about.html, /guides/ index"
   - "Every score below 90 in Performance, Accessibility, or SEO is either fixed in this plan OR explicitly deferred to a named later phase with reason"
@@ -20,6 +21,7 @@ must_haves:
   - "tools.html GA4 loader is deferred matching the index.html pattern (closes CONCERNS.md INFO)"
   - "Lighthouse-flagged accessibility issues are fixed in this plan if the fix is non-disruptive (alt text, button labels, contrast tweaks via CSS variables already in place)"
   - "Phase 1 success criterion #3 (top 10 pages score >=90 on Lighthouse perf/a11y/SEO) is satisfied OR every gap has a tracked disposition"
+  - "CROSSBROWSER-REPORT.md exists and documents end-to-end functional verification of the top 5 AI tools (summarizer, hardship-letter, humanizer, email-writer, paraphraser) in Chrome, Safari, Firefox, and mobile (375px viewport) — covers AUDIT-05"
 ---
 
 <objective>
@@ -145,6 +147,50 @@ that Nate runs after pushing main (GitHub Actions auto-deploys).
     7. Optional: open one of the audited pages in Chrome DevTools Lighthouse and run a manual audit to spot-check the PSI API scores match.
   </how-to-verify>
   <resume-signal>Type "approved" when verified, or describe what's missing.</resume-signal>
+</task>
+
+<task id="5.4" type="checkpoint:human-verify" gate="blocking">
+  <description>Cross-browser functional verification of the top 5 AI tools — satisfies AUDIT-05.</description>
+  <files>.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md</files>
+  <read_first>
+    - /home/user/cyberscryb/.planning/REQUIREMENTS.md (AUDIT-05 exact requirement text)
+    - /home/user/cyberscryb/public/tools/shared/ai-tool.js (the shared core that drives every AI tool — understand the email gate / generation / copy flow)
+  </read_first>
+  <action>Create .planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md as a manual verification log. Nate runs this checklist on the deployed site at cyberscryb.com for each of the top 5 AI tools (summarizer, hardship-letter, humanizer, email-writer, paraphraser) in 4 environments (Chrome desktop, Safari desktop, Firefox desktop, mobile 375px viewport — use Chrome DevTools device mode if no physical device). For each tool × environment cell, run this flow and record PASS or FAIL with notes: (1) load the tool page, (2) paste 100-300 chars of test input, (3) click Generate, (4) confirm a result appears (typewriter animation OK), (5) if the email gate appears, enter a test email and confirm it unlocks the result, (6) click Copy and confirm the system clipboard now contains the output. The report file template (Claude writes the template, Nate fills in PASS/FAIL):
+
+```
+# Cross-Browser AI Tool Verification — Phase 1
+
+| Tool             | Chrome | Safari | Firefox | Mobile 375px |
+|------------------|--------|--------|---------|--------------|
+| summarizer       |        |        |         |              |
+| hardship-letter  |        |        |         |              |
+| humanizer        |        |        |         |              |
+| email-writer     |        |        |         |              |
+| paraphraser      |        |        |         |              |
+
+## Failures and Workarounds
+(For each FAIL, document the tool, browser, what broke, and any workaround or follow-up task.)
+
+## Approved
+- Verifier: Nate
+- Date:
+- All FAILs have either fixes in this phase or follow-up phase assignments: yes/no
+```
+
+Nate runs the verification, fills in the table, and types "approved" to resume. If any cell fails AND the fix is cheap, add it to LIGHTHOUSE-REPORT.md disposition as fix-in-task-5.2 and re-loop. If the fix is expensive, defer to a named later phase (e.g., Phase 2 UX polish for mobile layout issues, Phase 3 AI quality for cross-browser streaming behavior).</action>
+  <verify>
+    <automated>test -f /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md && grep -c "| summarizer" /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md</automated>
+  </verify>
+  <acceptance_criteria>
+    - source assertion: file .planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md exists
+    - source assertion: CROSSBROWSER-REPORT.md has a table row for each of: summarizer, hardship-letter, humanizer, email-writer, paraphraser
+    - source assertion: CROSSBROWSER-REPORT.md has 4 verification columns: Chrome, Safari, Firefox, Mobile 375px
+    - behavior assertion: after Nate fills in the table, every cell is PASS or has a documented FAIL with a follow-up disposition
+    - source assertion: CROSSBROWSER-REPORT.md includes an "Approved" block with Nate's name and date once verification is complete
+  </acceptance_criteria>
+  <verification>Read the file. Confirm the table exists and every cell either says PASS or has a documented FAIL with a disposition (fix-now or defer-to-phase-N).</verification>
+  <resume-signal>Type "approved" when Nate has filled in the table and recorded outcomes for all 20 cells.</resume-signal>
 </task>
 
 </tasks>

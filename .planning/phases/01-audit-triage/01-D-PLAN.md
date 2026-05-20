@@ -23,6 +23,7 @@ must_haves:
   - "public/tools.html canonical link points to https://cyberscryb.com/tools (no .html suffix)"
   - "Tool count claims in public/index.html and public/tools.html match the actual count derived from the inventory; index.html hero/trust-bar/stat-counter and tools.html meta/og/JSON-LD numberOfItems all show the same number"
   - "Running scripts/audit-inventory.js exits 0 (no orphans remain except documented exceptions)"
+  - "Existing tool pages flagged by AUDIT-INVENTORY.md as missing nav/JSON-LD/breadcrumbs are swept and fixed (or documented as structural exceptions / deferred to Phase 2). AUDIT-INVENTORY.md gets a ## Existing-Page Sweep section listing every page touched. Closes Phase 1 success criterion #4 for ALL tool pages, not just budget-planner."
 ---
 
 <objective>
@@ -144,6 +145,28 @@ applicationCategory "FinanceApplication".
   <verification>Run scripts/audit-inventory.js — confirm exit 0 and empty orphan sections. Read tools.html line 11 area to confirm canonical fix. grep sitemap.xml for distill.</verification>
 </task>
 
+<task id="4.4">
+  <description>Sweep existing tool pages flagged by AUDIT-INVENTORY.md as missing nav links, JSON-LD, or breadcrumbs — apply the fixes. Closes Phase 1 success criterion #4 for every tool page, not just budget-planner.</description>
+  <files>public/tools/*/index.html (only those flagged by AUDIT-INVENTORY.md as has_json_ld=no, has_blog_nav_link=no, or has_breadcrumbs=no)</files>
+  <read_first>
+    - /home/user/cyberscryb/.planning/phases/01-audit-triage/AUDIT-INVENTORY.md (the report from Plan A — the columns has_json_ld, has_blog_nav_link, has_breadcrumbs identify which existing pages need fixes)
+    - /home/user/cyberscryb/public/tools/summarizer/index.html (the canonical template — copy the nav structure, JSON-LD block, and breadcrumb block exactly from here)
+    - /home/user/cyberscryb/.planning/codebase/CONVENTIONS.md (the convention for tool-page nav, breadcrumbs, JSON-LD)
+  </read_first>
+  <action>For each tool page where AUDIT-INVENTORY.md flags has_json_ld=no, has_blog_nav_link=no, or has_breadcrumbs=no, apply the missing element by copying from public/tools/summarizer/index.html. Specifically: (a) For has_blog_nav_link=no — add an `<li><a href="/blog/">Blog</a></li>` element to the nav-menu ul, placed before the Pro link if it exists, otherwise after Guides. (b) For has_breadcrumbs=no — add the BreadcrumbList JSON-LD block + the visible breadcrumb nav element using the summarizer pattern, with the current tool's name and URL substituted. (c) For has_json_ld=no — add the SoftwareApplication Schema.org JSON-LD block using the summarizer pattern, with the current tool's name, description, applicationCategory, and offers replaced with this tool's values (read the tool's existing title and meta description to derive these — don't fabricate). Do NOT modify pages where the inventory column is "yes" — leave working pages alone. If a tool page has a completely different structure (e.g., fluid-sim, distill) and the standard pattern doesn't fit, document the deviation in AUDIT-INVENTORY.md as "structural-exception" and move on. If the sweep would touch more than 15 pages, do the 10 most-trafficked tool pages first (look at sitemap.xml priority values) and surface the rest in 01-D-SUMMARY.md as a follow-up for Phase 2. Append a ## Existing-Page Sweep section to AUDIT-INVENTORY.md listing every page touched with which elements were added.</action>
+  <verify>
+    <automated>cd /home/user/cyberscryb && grep -c '## Existing-Page Sweep' .planning/phases/01-audit-triage/AUDIT-INVENTORY.md</automated>
+  </verify>
+  <acceptance_criteria>
+    - source assertion: AUDIT-INVENTORY.md contains a ## Existing-Page Sweep section
+    - source assertion: every tool page listed under ## Existing-Page Sweep can be re-checked and the previously missing element is now present (verifiable by re-running scripts/audit-inventory.js)
+    - behavior assertion: after the sweep, scripts/audit-inventory.js re-run shows fewer pages with has_json_ld=no, has_blog_nav_link=no, or has_breadcrumbs=no than before
+    - source assertion: any structural exceptions are documented in AUDIT-INVENTORY.md with a reason
+    - source assertion: no edits to pages where the inventory column was already "yes" (don't break working pages)
+  </acceptance_criteria>
+  <verification>Re-run scripts/audit-inventory.js after the sweep. Compare the has_json_ld / has_blog_nav_link / has_breadcrumbs columns to the pre-sweep counts. Confirm the gap closed for at least 10 pages OR the rest are documented as structural exceptions / phase-2 follow-ups.</verification>
+</task>
+
 <task id="4.3" type="checkpoint:human-verify" gate="blocking">
   <what-built>Plan D delivered: budget-planner tool page wired into tools.html + sitemap.xml + homepage dropdown, humanizer/index_v1.html resolved per triage, ai-writing-suite resolved per triage, tools.html canonical fixed, /distill/ added to sitemap, tool counts standardized across index.html and tools.html.</what-built>
   <how-to-verify>
@@ -154,7 +177,8 @@ applicationCategory "FinanceApplication".
     5. Open public/tools.html line 11 area — confirm canonical uses /tools (no .html).
     6. Read the AUDIT-INVENTORY.md ## Triage Decisions table and confirm every disposition has been acted on.
     7. Confirm tool counts: grep for the chosen number N in index.html (hero, trust bar, stat counter contexts) and tools.html (meta, og:description, JSON-LD numberOfItems) — all should match.
-    8. (Optional, requires deploy) After push to main and GitHub Actions completes, visit https://cyberscryb.com/tools/budget-planner/ and submit a real prompt to confirm the end-to-end flow returns a budget plan from Gemini.
+    8. Read AUDIT-INVENTORY.md ## Existing-Page Sweep section — confirm at least 10 tool pages had missing nav/JSON-LD/breadcrumbs fixed, or that the remaining gaps are documented as structural exceptions / deferred to Phase 2.
+    9. (Optional, requires deploy) After push to main and GitHub Actions completes, visit https://cyberscryb.com/tools/budget-planner/ and submit a real prompt to confirm the end-to-end flow returns a budget plan from Gemini.
   </how-to-verify>
   <resume-signal>Type "approved" when verified, or describe what's missing.</resume-signal>
 </task>
@@ -174,7 +198,7 @@ applicationCategory "FinanceApplication".
 
 <success_criteria>
 - Phase 1 success criterion #5 ("no orphan tools or orphan prompts") is verifiable by running scripts/audit-inventory.js
-- Phase 1 success criterion #4 ("every tool page has working nav") is reinforced — the new budget-planner page is built to the convention from day one
+- Phase 1 success criterion #4 ("every tool page has working nav, footer, JSON-LD, breadcrumbs") is closed for the new budget-planner page AND for every existing tool page the inventory flagged as missing those elements (sweep applied in task 4.4)
 - One new Life Tool ships and hits cyberscryb.com after the next push to main
 - Tool count inconsistency (CONCERNS.md INFO) is resolved
 - Distill is now indexable by Google (CONCERNS.md INFO resolved)
