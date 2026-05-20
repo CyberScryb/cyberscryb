@@ -19,8 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.addEventListener('click', () => {
             // Deactivate all
             tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            c.classList.add('hidden'); // Add hidden class for safety
+            tabContents.forEach(c => {
+                c.classList.remove('active');
+                c.classList.add('hidden');
+            });
 
             // Activate clicked
             tab.classList.add('active');
