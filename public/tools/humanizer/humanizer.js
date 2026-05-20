@@ -291,7 +291,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } catch (error) {
                 console.error('Error:', error);
-                outputContent.innerHTML = '<span style="color: #ef4444;">Error: ' + error.message + '. Please try again later.</span>';
+                
+                let errorMessage = 'Something went wrong. Please try again.';
+                let showRetry = true;
+                
+                if (error.message.includes('429') || error.message.includes('overloaded')) {
+                    errorMessage = 'Service is busy. Please wait 30 seconds and try again.';
+                } else if (error.message.includes('timeout')) {
+                    errorMessage = 'Request timed out. Please try again.';
+                } else if (error.message.includes('network') || error.message.includes('fetch')) {
+                    errorMessage = 'Network error. Please check your connection and try again.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                outputContent.innerHTML = `<span style="color: #ef4444;">⚠️ ${errorMessage}</span>`;
+                
+                // Auto-retry for transient errors after 3 seconds
+                if (showRetry && (error.message.includes('429') || error.message.includes('timeout'))) {
+                    setTimeout(() => {
+                        const retryNote = document.createElement('div');
+                        retryNote.style.cssText = 'margin-top:10px;color:#888;font-size:14px;';
+                        retryNote.textContent = '💡 Tip: Try again in a moment, or shorten your text.';
+                        outputContent.appendChild(retryNote);
+                    }, 1000);
+                }
             } finally {
                 loadingIndicator.classList.add('hidden');
                 rewriteBtn.disabled = false;

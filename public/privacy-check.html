@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Check - CyberScryb</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #34F5C5, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            color: #34F5C5;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        .status-label {
+            color: #888;
+            font-weight: 500;
+        }
+        .status-value {
+            color: #e5e5e5;
+            font-weight: 600;
+        }
+        .status-value.good {
+            color: #34F5C5;
+        }
+        .status-value.warning {
+            color: #fbbf24;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #34F5C5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .email-check {
+            margin-top: 20px;
+        }
+        .email-check input {
+            width: 100%;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e5e5e5;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .email-check button {
+            width: 100%;
+            padding: 12px;
+            background: #34F5C5;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .email-check button:hover {
+            background: #2dd4b0;
+        }
+        .email-check button:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .guarantee {
+            background: #1a2a1a;
+            border-left: 4px solid #34F5C5;
+            padding: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        .guarantee strong {
+            color: #34F5C5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Privacy Check</h1>
+        <p class="subtitle">See exactly what data CyberScryb stores about you. We're privacy-first.</p>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Checking your privacy status...</p>
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="card">
+                <h2>Privacy Guarantees</h2>
+                <div class="status-item">
+                    <span class="status-label">User Tracking</span>
+                    <span class="status-value good" id="tracking">None</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">IP Address Storage</span>
+                    <span class="status-value good" id="ip-storage">Hashed only</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Data Retention</span>
+                    <span class="status-value good" id="retention">24 hours max</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Third-Party Sharing</span>
+                    <span class="status-value good" id="sharing">Never</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Cookies Used</span>
+                    <span class="status-value" id="cookies">None</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Your Current Session</h2>
+                <div class="status-item">
+                    <span class="status-label">Account Tier</span>
+                    <span class="status-value" id="tier">Anonymous</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Session Identifier</span>
+                    <span class="status-value" id="identifier">None</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Requests Stored</span>
+                    <span class="status-value" id="requests">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Data Expires</span>
+                    <span class="status-value" id="expires">N/A</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Check Email Subscription</h2>
+                <p style="color: #888; margin-bottom: 16px;">
+                    Enter your email to see if you're subscribed to our newsletter. We only store your email if you explicitly subscribed.
+                </p>
+                <div class="email-check">
+                    <input type="email" id="email-input" placeholder="your@email.com">
+                    <button id="check-email-btn">Check Email Status</button>
+                    <div id="email-result" style="margin-top: 12px; color: #888;"></div>
+                </div>
+            </div>
+
+            <div class="guarantee">
+                <strong>Our Privacy Promise:</strong> All rate-limiting data is ephemeral and expires within 24 hours. We never store raw IP addresses, never track users across sessions, and never share data with third parties. Your email is only stored if you explicitly subscribe, and you can unsubscribe anytime.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadPrivacyStatus() {
+            try {
+                const response = await fetch('/api/privacy-status');
+                if (!response.ok) throw new Error('Failed to load privacy status');
+                
+                const data = await response.json();
+                
+                // Update privacy guarantees
+                document.getElementById('tracking').textContent = data.privacy.tracking;
+                document.getElementById('ip-storage').textContent = data.privacy.ipStorage;
+                document.getElementById('retention').textContent = data.privacy.dataRetention;
+                document.getElementById('sharing').textContent = data.privacy.thirdPartySharing;
+                document.getElementById('cookies').textContent = data.privacy.cookies.length > 0 
+                    ? data.privacy.cookies.join(', ') 
+                    : 'None';
+                
+                // Update session info
+                document.getElementById('tier').textContent = data.rateLimit.tier;
+                document.getElementById('identifier').textContent = data.rateLimit.hashedIdentifier || 'None';
+                document.getElementById('requests').textContent = data.rateLimit.requestsStored;
+                document.getElementById('expires').textContent = data.rateLimit.dataExpiresAt 
+                    ? new Date(data.rateLimit.dataExpiresAt).toLocaleString()
+                    : 'N/A';
+                
+                // Show results
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading privacy status:', error);
+                document.getElementById('loading').innerHTML = '<p style="color: #ef4444;">Failed to load privacy status. Please refresh the page.</p>';
+            }
+        }
+
+        document.getElementById('check-email-btn').addEventListener('click', async () => {
+            const email = document.getElementById('email-input').value.trim();
+            const resultDiv = document.getElementById('email-result');
+            const btn = document.getElementById('check-email-btn');
+            
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                resultDiv.textContent = '⚠️ Please enter a valid email address.';
+                resultDiv.style.color = '#fbbf24';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Checking...';
+            resultDiv.textContent = '';
+            
+            try {
+                const response = await fetch('/api/privacy-status?email=' + encodeURIComponent(email));
+                if (!response.ok) throw new Error('Failed to check email');
+                
+                const data = await response.json();
+                
+                if (data.email && data.email.subscribed) {
+                    resultDiv.innerHTML = `✅ <strong>Subscribed</strong> since ${new Date(data.email.subscribedAt).toLocaleDateString()}<br>Source: ${data.email.source}`;
+                    resultDiv.style.color = '#34F5C5';
+                } else {
+                    resultDiv.textContent = '❌ Not subscribed. No data stored for this email.';
+                    resultDiv.style.color = '#888';
+                }
+                
+            } catch (error) {
+                resultDiv.textContent = '⚠️ Error checking email. Please try again.';
+                resultDiv.style.color = '#ef4444';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Check Email Status';
+            }
+        });
+
+        // Load on page load
+        loadPrivacyStatus();
+    </script>
+</body>
+</html>

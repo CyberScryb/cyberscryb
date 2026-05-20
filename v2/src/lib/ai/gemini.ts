@@ -67,11 +67,22 @@ export const ai = {
 
     if (!response.ok) {
       let errBody = '';
+      let retryable = false;
+      let retryAfter = null;
+      
       try {
         const err = await response.json();
         errBody = err.error || '';
+        retryable = err.retryable || false;
+        retryAfter = err.retryAfter || null;
       } catch {}
-      throw new Error(errBody || `AI request failed: HTTP ${response.status}`);
+      
+      const errorMessage = errBody || `AI request failed: HTTP ${response.status}`;
+      const error = new Error(errorMessage) as any;
+      error.retryable = retryable;
+      error.retryAfter = retryAfter;
+      error.status = response.status;
+      throw error;
     }
 
     const reader = response.body?.getReader();
@@ -163,11 +174,22 @@ export const ai = {
 
     if (!response.ok) {
       let errBody = '';
+      let retryable = false;
+      let retryAfter = null;
+      
       try {
         const err = await response.json();
         errBody = err.error || '';
+        retryable = err.retryable || false;
+        retryAfter = err.retryAfter || null;
       } catch {}
-      throw new Error(errBody || `AI request failed: HTTP ${response.status}`);
+      
+      const errorMessage = errBody || `AI request failed: HTTP ${response.status}`;
+      const error = new Error(errorMessage) as any;
+      error.retryable = retryable;
+      error.retryAfter = retryAfter;
+      error.status = response.status;
+      throw error;
     }
 
     const data = await response.json();

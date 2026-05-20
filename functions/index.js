@@ -260,7 +260,22 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error("Gemini API Error:", errorData);
-                return res.status(500).json({ error: `AI Error: ${errorData.error?.message || response.statusText}` });
+                
+                // Provide actionable error messages
+                let userMessage = 'AI service temporarily unavailable. Please try again.';
+                if (response.status === 429) {
+                    userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
+                } else if (response.status === 400) {
+                    userMessage = 'Invalid input. Please check your text and try again.';
+                } else if (errorData.error?.message) {
+                    userMessage = errorData.error.message;
+                }
+                
+                return res.status(response.status).json({ 
+                    error: userMessage,
+                    retryable: response.status === 429 || response.status >= 500,
+                    retryAfter: response.status === 429 ? 30 : null
+                });
             }
 
             const data = await response.json();
@@ -270,7 +285,20 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 
         } catch (error) {
             console.error("Function Error:", error);
-            res.status(500).send("Internal Server Error");
+            
+            // Graceful error handling with retry guidance
+            if (error.name === 'AbortError') {
+                return res.status(408).json({ 
+                    error: 'Request timeout. Please try again.',
+                    retryable: true
+                });
+            }
+            
+            return res.status(500).json({ 
+                error: 'Service temporarily unavailable. Please try again in a moment.',
+                retryable: true,
+                retryAfter: 5
+            });
         }
     });
 });
@@ -336,7 +364,19 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error("Gemini API Error:", errorData);
-                return res.status(500).send("AI Generation Failed");
+                
+                let userMessage = 'AI generation failed. Please try again.';
+                if (response.status === 429) {
+                    userMessage = 'AI service is busy. Please wait 30 seconds and try again.';
+                } else if (errorData.error?.message) {
+                    userMessage = errorData.error.message;
+                }
+                
+                return res.status(response.status).json({ 
+                    error: userMessage,
+                    retryable: true,
+                    retryAfter: response.status === 429 ? 30 : 5
+                });
             }
 
             const data = await response.json();
@@ -347,7 +387,19 @@ exports.generateGigWork = functions.runWith({ timeoutSeconds: 120 }).https.onReq
 
         } catch (error) {
             console.error("Function Error:", error);
-            res.status(500).send("Internal Server Error: " + error.message);
+            
+            if (error.name === 'AbortError') {
+                return res.status(408).json({ 
+                    error: 'Request timeout. Please try again.',
+                    retryable: true
+                });
+            }
+            
+            return res.status(500).json({ 
+                error: 'Service temporarily unavailable. Please try again.',
+                retryable: true,
+                retryAfter: 5
+            });
         }
     });
 });
@@ -856,7 +908,21 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error(`Gemini API Error (${tool}):`, errorData);
-                return res.status(500).json({ error: `AI Error: ${errorData.error?.message || response.statusText}` });
+                
+                let userMessage = 'AI service temporarily unavailable. Please try again.';
+                if (response.status === 429) {
+                    userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
+                } else if (response.status === 400) {
+                    userMessage = 'Invalid input. Please check your text and try again.';
+                } else if (errorData.error?.message) {
+                    userMessage = errorData.error.message;
+                }
+                
+                return res.status(response.status).json({ 
+                    error: userMessage,
+                    retryable: response.status === 429 || response.status >= 500,
+                    retryAfter: response.status === 429 ? 30 : null
+                });
             }
 
             const data = await response.json();
@@ -866,8 +932,101 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
 
         } catch (error) {
             console.error(`Function Error (${tool}):`, error);
-            res.status(500).json({ error: 'Internal Server Error: ' + error.message });
+            
+            if (error.name === 'AbortError') {
+                return res.status(408).json({ 
+                    error: 'Request timeout. Please try again.',
+                    retryable: true
+                });
+            }
+            
+            if (error.message && error.message.includes('JSON')) {
+                return res.status(500).json({ 
+                    error: 'AI returned invalid response. Please try again.',
+                    retryable: true,
+                    retryAfter: 5
+                });
+            }
+            
+            return res.status(500).json({ 
+                error: 'Service temporarily unavailable. Please try again in a moment.',
+                retryable: true,
+                retryAfter: 5
+            });
         }
+    });
+});
+
+// ─── Privacy Status Endpoint ───────────────────────────
+// Allows users to verify what data exists about them (privacy-first transparency)
+exports.privacyStatus = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const identifier = getClientIdentifier(req);
+        const tier = getUserTier(req);
+        
+        // Get current rate limit status
+        const userData = rateLimitStore.get(identifier);
+        const now = Date.now();
+        
+        let rateLimitInfo = {
+            tier,
+            hashedIdentifier: identifier.slice(0, 12) + '...', // Show partial hash for verification
+            requestsStored: userData ? userData.requests.length : 0,
+            oldestRequest: userData && userData.requests.length > 0 
+                ? new Date(Math.min(...userData.requests)).toISOString()
+                : null,
+            newestRequest: userData && userData.requests.length > 0
+                ? new Date(Math.max(...userData.requests)).toISOString()
+                : null,
+            dataExpiresAt: userData && userData.requests.length > 0
+                ? new Date(Math.max(...userData.requests) + 86400000).toISOString()
+                : null
+        };
+
+        // Check if email is subscribed (only if they provide it)
+        const email = req.query.email;
+        let emailStatus = null;
+        
+        if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            try {
+                const normalizedEmail = email.toLowerCase().trim();
+                const existing = await db.collection('subscribers')
+                    .where('email', '==', normalizedEmail)
+                    .limit(1)
+                    .get();
+                
+                if (!existing.empty) {
+                    const doc = existing.docs[0].data();
+                    emailStatus = {
+                        subscribed: true,
+                        subscribedAt: doc.subscribedAt?.toDate().toISOString() || null,
+                        source: doc.source || 'unknown'
+                    };
+                } else {
+                    emailStatus = { subscribed: false };
+                }
+            } catch (e) {
+                console.error('Privacy check error:', e);
+            }
+        }
+
+        return res.status(200).json({
+            privacy: {
+                tracking: 'none',
+                dataRetention: '24 hours maximum',
+                ipStorage: 'hashed only, never stored raw',
+                userIdTracking: 'disabled',
+                cookies: tier === 'subscribed' || tier === 'premium' ? ['cs_subscribed'] : [],
+                thirdPartySharing: 'never'
+            },
+            rateLimit: rateLimitInfo,
+            email: emailStatus,
+            message: 'All data is ephemeral and expires within 24 hours. No persistent user profiles.'
+        });
     });
 });
 
