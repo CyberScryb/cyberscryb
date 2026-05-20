@@ -378,11 +378,11 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
                 // Provide actionable error messages
                 let userMessage = 'AI service temporarily unavailable. Please try again.';
                 if (response.status === 429) {
-                    userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
+                    userMessage = '⏳ Our AI is overloaded right now. Please wait 30 seconds and try again. (Tip: Shorter text processes faster!)';
                 } else if (response.status === 400) {
-                    userMessage = 'Invalid input. Please check your text and try again.';
+                    userMessage = '❌ Invalid input detected. Please check your text for special characters or try shortening it.';
                 } else if (errorData.error?.message) {
-                    userMessage = errorData.error.message;
+                    userMessage = '⚠️ ' + errorData.error.message;
                 }
                 
                 return res.status(response.status).json({ 

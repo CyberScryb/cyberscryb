@@ -344,16 +344,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 let showRetry = true;
                 
                 if (error.message.includes('429') || error.message.includes('overloaded')) {
-                    errorMessage = 'Service is busy. Please wait 30 seconds and try again.';
+                    errorMessage = '⏳ Service is busy right now. Please wait 30 seconds and try again.';
                 } else if (error.message.includes('timeout')) {
-                    errorMessage = 'Request timed out. Please try again.';
+                    errorMessage = '⏱️ Request timed out. Your text might be too long—try shortening it.';
                 } else if (error.message.includes('network') || error.message.includes('fetch')) {
-                    errorMessage = 'Network error. Please check your connection and try again.';
+                    errorMessage = '📡 Network error. Check your internet connection and try again.';
                 } else if (error.message) {
                     errorMessage = error.message;
                 }
                 
-                outputContent.innerHTML = `<span style="color: #ef4444;">⚠️ ${errorMessage}</span>`;
+                outputContent.innerHTML = `
+                    <div style="color: #ef4444; padding: 16px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <strong>${errorMessage}</strong>
+                    </div>
+                `;
                 
                 // Auto-retry for transient errors after 3 seconds
                 if (showRetry && (error.message.includes('429') || error.message.includes('timeout'))) {
