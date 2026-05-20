@@ -1,5 +1,10 @@
 // Shared AI Tool Core — email gate, usage tracking, typewriter, API caller
 // Usage: window.CSAITool.init({ toolId, collectInput, collectParams, onStats, loadingText, placeholderText })
+//
+// GA4 custom events fired:
+//   tool_used        { tool_id, gate_shown }  — successful generation
+//   email_captured   { tool_id, source }       — email gate submitted
+//   result_copied    { tool_id }               — copy button clicked
 
 (function () {
     const FREE_CHAR_LIMIT = 500;
@@ -83,6 +88,12 @@
                 return { ok: false, message: data.error || 'Something went wrong.' };
             } catch (e) {
                 return { ok: false, message: 'Network error. Try again.' };
+            }
+        }
+
+        function trackEvent(name, params) {
+            if (typeof gtag === 'function') {
+                gtag('event', name, params);
             }
         }
 
@@ -175,6 +186,7 @@
                 const text = outputContent.innerText;
                 if (text && !text.toLowerCase().includes('will appear here')) {
                     navigator.clipboard.writeText(text).then(() => {
+                        trackEvent('result_copied', { tool_id: toolId });
                         const orig = copyBtn.innerText;
                         copyBtn.innerText = 'Copied!';
                         setTimeout(() => { copyBtn.innerText = orig; }, 1500);
@@ -194,6 +206,7 @@
                 if (result.ok) {
                     gateStatus.style.color = '#22c55e';
                     gateStatus.textContent = "Unlocked! Here's your full result.";
+                    trackEvent('email_captured', { tool_id: toolId, source: toolId + '_gate' });
                     setTimeout(unlockFullResult, 800);
                 } else {
                     gateStatus.style.color = '#ef4444';
@@ -271,11 +284,14 @@
                         // gate exists because every AI call costs real money on the backend.
                         if (!localStorage.getItem('cs_free_trial_used')) {
                             localStorage.setItem('cs_free_trial_used', '1');
+                            trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'new_anon' });
                             showFullResult(result);
                         } else {
+                            trackEvent('tool_used', { tool_id: toolId, gate_shown: 'yes', user_type: 'anon' });
                             showPreviewWithGate(result);
                         }
                     } else {
+                        trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'subscribed' });
                         showFullResult(result);
                         incrementUsage();
                     }
