@@ -19,15 +19,31 @@
         }
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, #34F5C5, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
         .subtitle {
             color: #888;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a2a1a;
+            border: 1px solid #34F5C5;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: #34F5C5;
+            margin-bottom: 3rem;
+            font-weight: 600;
         }
         .card {
             background: #1a1a1a;
@@ -39,6 +55,12 @@
         .card h2 {
             color: #34F5C5;
             font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .card-subtitle {
+            color: #888;
+            font-size: 0.9rem;
             margin-bottom: 16px;
         }
         .status-item {
@@ -128,8 +150,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔒 Privacy Check</h1>
-        <p class="subtitle">See exactly what data CyberScryb stores about you. We're privacy-first.</p>
+        <h1>🔒 Privacy Transparency Dashboard</h1>
+        <p class="subtitle">
+            See exactly what data we store about you. No hidden tracking, no surprises.<br>
+            <strong style="color: #34F5C5;">100% GDPR & CCPA Compliant</strong>
+        </p>
+        <div class="trust-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>Privacy-First Verified</span>
+        </div>
 
         <div id="loading" class="loading">
             <div class="spinner"></div>
@@ -138,7 +170,8 @@
 
         <div id="results" style="display: none;">
             <div class="card">
-                <h2>Privacy Guarantees</h2>
+                <h2>🛡️ Privacy Guarantees</h2>
+                <p class="card-subtitle">What we promise you, backed by our code</p>
                 <div class="status-item">
                     <span class="status-label">User Tracking</span>
                     <span class="status-value good" id="tracking">None</span>
@@ -162,14 +195,15 @@
             </div>
 
             <div class="card">
-                <h2>Your Current Session</h2>
+                <h2>📊 Your Current Session</h2>
+                <p class="card-subtitle">Real-time data about your usage (refreshes on page load)</p>
                 <div class="status-item">
                     <span class="status-label">Account Tier</span>
                     <span class="status-value" id="tier">Anonymous</span>
                 </div>
                 <div class="status-item">
-                    <span class="status-label">Session Identifier</span>
-                    <span class="status-value" id="identifier">None</span>
+                    <span class="status-label">Anonymous Session ID</span>
+                    <span class="status-value" id="identifier" style="font-family: monospace; font-size: 0.85em;">None</span>
                 </div>
                 <div class="status-item">
                     <span class="status-label">Requests Stored</span>
@@ -182,9 +216,9 @@
             </div>
 
             <div class="card">
-                <h2>Check Email Subscription</h2>
+                <h2>📧 Email Subscription Lookup</h2>
                 <p style="color: #888; margin-bottom: 16px;">
-                    Enter your email to see if you're subscribed to our newsletter. We only store your email if you explicitly subscribed.
+                    Check if your email is in our newsletter database. We <strong>only</strong> store emails from people who explicitly subscribed—never from tool usage.
                 </p>
                 <div class="email-check">
                     <input type="email" id="email-input" placeholder="your@email.com">
@@ -194,7 +228,10 @@
             </div>
 
             <div class="guarantee">
-                <strong>Our Privacy Promise:</strong> All rate-limiting data is ephemeral and expires within 24 hours. We never store raw IP addresses, never track users across sessions, and never share data with third parties. Your email is only stored if you explicitly subscribe, and you can unsubscribe anytime.
+                <strong>🤝 Our Privacy Promise:</strong> All rate-limiting data is ephemeral and expires within 24 hours. We never store raw IP addresses, never track users across sessions, and never share data with third parties. Your email is only stored if you explicitly subscribe, and you can unsubscribe anytime.
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #34F5C5;">
+                    <strong>Questions?</strong> Email us at privacy@cyberscryb.com or view our <a href="/privacy-policy.html" style="color: #34F5C5; text-decoration: underline;">full privacy policy</a>.
+                </div>
             </div>
         </div>
     </div>

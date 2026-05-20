@@ -251,41 +251,63 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!text) {
-                alert('Please enter some text to rewrite.');
+                outputContent.innerHTML = '<span style="color: #fbbf24;">💡 Tip: Paste some AI-generated text above to get started. Try the example button!</span>';
+                roboticText.focus();
                 return;
             }
 
             // Check character limit for free users
-            if (!isSubscribed()) { // Enforce free limit — Pro tier will bypass this
-                if (text.length > FREE_CHAR_LIMIT && !isSubscribed()) {
-                    alert('Free tier supports up to ' + FREE_CHAR_LIMIT + ' characters. Please shorten your text or enter your email to unlock more.');
-                    return;
-                }
+            if (!isSubscribed() && text.length > FREE_CHAR_LIMIT) {
+                outputContent.innerHTML = `
+                    <div style="color: #fbbf24; padding: 20px; background: rgba(251, 191, 36, 0.1); border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3);">
+                        <strong style="font-size: 1.1em;">📏 Text Too Long for Free Tier</strong>
+                        <p style="margin: 12px 0; line-height: 1.6;">
+                            Your text is <strong>${text.length} characters</strong>. Free tier supports up to <strong>${FREE_CHAR_LIMIT} characters</strong>.
+                        </p>
+                        <p style="margin: 12px 0; color: #888;">
+                            <strong>Options:</strong><br>
+                            • Shorten your text to ${FREE_CHAR_LIMIT} characters<br>
+                            • Enter your email below to unlock ${FREE_DAILY_LIMIT} free rewrites per day (no credit card)
+                        </p>
+                    </div>
+                `;
+                emailGate.classList.remove('hidden');
+                emailGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
             }
 
             // Check daily usage limit (only for subscribed free users)
             if (isSubscribed()) {
                 const usage = getUsageToday();
                 if (usage.count >= FREE_DAILY_LIMIT) {
-                    outputContent.innerHTML = '<span style="color: #ef4444;">Daily limit reached (3/3 free rewrites used today).</span>';
+                    outputContent.innerHTML = `
+                        <div style="color: #ef4444; padding: 20px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                            <strong style="font-size: 1.1em;">🎯 Daily Limit Reached</strong>
+                            <p style="margin: 12px 0; line-height: 1.6;">
+                                You've used all <strong>${FREE_DAILY_LIMIT} free rewrites</strong> today. Great job! 🎉
+                            </p>
+                            <p style="margin: 12px 0; color: #888;">
+                                <strong>Come back tomorrow</strong> for ${FREE_DAILY_LIMIT} more free rewrites, or upgrade for unlimited access.
+                            </p>
+                        </div>
+                    `;
                     // Scroll to upgrade tiers
                     const tiers = document.getElementById('upgrade-tiers');
                     if (tiers) {
-                        tiers.style.animation = 'none';
-                        tiers.offsetHeight; // trigger reflow
-                        tiers.style.border = '2px solid #c41e1e';
-                        tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        setTimeout(() => { tiers.style.border = ''; }, 3000);
+                        setTimeout(() => {
+                            tiers.style.animation = 'pulse 1s ease-in-out 3';
+                            tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 500);
                     }
                     return;
                 }
             }
 
-            // Show loading state
+            // Show loading state with progress message
             loadingIndicator.classList.remove('hidden');
             emailGate.classList.add('hidden');
             rewriteBtn.disabled = true;
-            outputContent.innerHTML = '';
+            outputContent.innerHTML = '<span style="color: #888;">🤖 AI is rewriting your text... This takes 3-5 seconds.</span>';
 
             try {
                 const response = await fetch('/api/rewrite', {

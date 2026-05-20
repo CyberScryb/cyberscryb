@@ -17,15 +17,35 @@ type SearchResult = {
 export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  // Quick actions
+  // Load recent searches from localStorage
+  useEffect(() => {
+    try {
+      const recent = JSON.parse(localStorage.getItem('cs_recent_searches') || '[]');
+      setRecentSearches(recent.slice(0, 5));
+    } catch {}
+  }, [isOpen]);
+
+  // Save search to recent
+  const saveSearch = (searchQuery: string) => {
+    if (!searchQuery.trim()) return;
+    try {
+      const recent = JSON.parse(localStorage.getItem('cs_recent_searches') || '[]');
+      const updated = [searchQuery, ...recent.filter((s: string) => s !== searchQuery)].slice(0, 10);
+      localStorage.setItem('cs_recent_searches', JSON.stringify(updated));
+    } catch {}
+  };
+
+  // Quick actions with better descriptions
   const quickActions: SearchResult[] = [
-    { id: 'act_gh', title: 'Open GitHub Repository', icon: Github, section: 'System', action: () => { window.open('https://github.com', '_blank'); onClose(); } },
-    { id: 'act_url', title: 'Copy Current URL', icon: Globe, section: 'System', action: () => { navigator.clipboard.writeText(window.location.href); onClose(); } },
-    { id: 'act_home', title: 'Go to Home', icon: Compass, section: 'System', action: () => { navigate('/'); onClose(); } },
+    { id: 'act_gh', title: 'View Source Code', subtitle: 'Open GitHub repository', icon: Github, section: 'Quick Actions', action: () => { window.open('https://github.com/yourusername/cyberscryb', '_blank'); onClose(); } },
+    { id: 'act_url', title: 'Share This Page', subtitle: 'Copy current URL to clipboard', icon: Globe, section: 'Quick Actions', action: () => { navigator.clipboard.writeText(window.location.href); onClose(); } },
+    { id: 'act_home', title: 'Back to Home', subtitle: 'Return to homepage', icon: Compass, section: 'Quick Actions', action: () => { navigate('/'); onClose(); } },
+    { id: 'act_privacy', title: 'Privacy Check', subtitle: 'See what data we store about you', icon: Hash, section: 'Quick Actions', action: () => { window.open('/privacy-check.html', '_blank'); onClose(); } },
   ];
 
   // Map everything to SearchResult
@@ -51,16 +71,23 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
 
   const results = useMemo(() => {
     if (!query.trim()) {
-      // Return recent tools or defaults when empty
-      return allItems.filter(i => i.section === 'Tools').slice(0, 5);
+      // Show popular tools + quick actions when empty
+      const popularTools = allItems.filter(i => i.section === 'Tools').slice(0, 6);
+      return [...popularTools, ...quickActions];
     }
     const lowerQ = query.toLowerCase();
-    return allItems.filter(item => 
+    const filtered = allItems.filter(item => 
       item.title.toLowerCase().includes(lowerQ) || 
       (item.section.toLowerCase().includes(lowerQ)) ||
       (item.subtitle && item.subtitle.toLowerCase().includes(lowerQ))
-    ).slice(0, 15);
-  }, [query, allItems]);
+    );
+    
+    // Prioritize exact matches
+    const exactMatches = filtered.filter(i => i.title.toLowerCase() === lowerQ);
+    const otherMatches = filtered.filter(i => i.title.toLowerCase() !== lowerQ);
+    
+    return [...exactMatches, ...otherMatches].slice(0, 15);
+  }, [query, allItems, quickActions]);
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -91,6 +118,7 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
       }
       if (e.key === 'Enter' && results[selectedIndex]) {
         e.preventDefault();
+        saveSearch(query);
         results[selectedIndex].action();
       }
     };
@@ -137,29 +165,59 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
             className="relative w-full max-w-2xl bg-elevated/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-strong overflow-hidden flex flex-col max-h-[80vh]"
           >
             <div className="flex items-center px-4 py-4 border-b border-subtle bg-base/50">
-               <Search size={20} className="text-muted mr-3" />
+               <Search size={20} className="text-accent mr-3" />
                <input
                  ref={inputRef}
                  className="flex-1 bg-transparent border-none text-primary text-lg focus:outline-none placeholder-muted/50 font-sans"
-                 placeholder="Search tools, read blogs, or type a command..."
+                 placeholder="Search 17 AI tools, blog posts, or quick actions..."
                  value={query}
                  onChange={(e) => setQuery(e.target.value)}
                />
-               <kbd className="text-[10px] font-mono text-muted tracking-widest uppercase border border-subtle bg-surface px-1.5 py-0.5 rounded">ESC</kbd>
+               <div className="flex items-center gap-2">
+                 {query && (
+                   <button 
+                     onClick={() => setQuery('')}
+                     className="text-muted hover:text-primary text-sm px-2 py-1 rounded hover:bg-surface transition-colors"
+                   >
+                     Clear
+                   </button>
+                 )}
+                 <kbd className="text-[10px] font-mono text-muted tracking-widest uppercase border border-subtle bg-surface px-1.5 py-0.5 rounded">ESC</kbd>
+               </div>
             </div>
             
             <div ref={listRef} className="overflow-y-auto flex-1 p-2 scrollbar-hide">
                {results.length === 0 ? (
                  <div className="p-12 text-center text-muted flex flex-col items-center">
                     <Search className="w-12 h-12 opacity-20 mb-4" />
-                    <p>No matches found for "{query}"</p>
+                    <p className="text-lg font-medium mb-2">No matches found</p>
+                    <p className="text-sm text-muted/70 mb-4">Try searching for "humanizer", "email", or "blog"</p>
+                    {recentSearches.length > 0 && (
+                      <div className="mt-4 w-full max-w-sm">
+                        <p className="text-xs uppercase tracking-wider text-muted/50 mb-2">Recent Searches</p>
+                        <div className="flex flex-wrap gap-2">
+                          {recentSearches.map((search, i) => (
+                            <button
+                              key={i}
+                              onClick={() => setQuery(search)}
+                              className="px-3 py-1 text-sm bg-surface hover:bg-accent/10 border border-subtle hover:border-accent/30 rounded-full transition-colors"
+                            >
+                              {search}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                  </div>
                ) : (
                  <div className="space-y-4 pb-2">
                     {Object.entries(groupedResults).map(([section, items]) => (
                        <div key={section}>
-                          <div className="px-3 py-2 text-[10px] font-bold text-muted tracking-widest uppercase">
-                             {query === '' && section === 'Tools' ? 'Recent Tools' : section}
+                          <div className="px-3 py-2 text-[10px] font-bold text-muted tracking-widest uppercase flex items-center justify-between">
+                             <span>{query === '' && section === 'Tools' ? '⭐ Popular Tools' : section}</span>
+                             {query === '' && section === 'Tools' && (
+                               <span className="text-accent/50 text-[9px]">Most Used</span>
+                             )}
                           </div>
                           <div className="space-y-1">
                              {items.map(item => {
@@ -194,10 +252,13 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean, onClose: 
                )}
             </div>
             <div className="px-4 py-2 flex items-center justify-between border-t border-subtle bg-base/50 text-[10px] uppercase font-mono tracking-widest text-muted/50">
-               <div>CyberScryb OS</div>
+               <div className="flex items-center gap-2">
+                 <Sparkles size={12} className="text-accent" />
+                 <span>CyberScryb Command Center</span>
+               </div>
                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1"><span className="px-1 border border-subtle rounded text-muted">↑↓</span> Navigate</span>
-                  <span className="flex items-center gap-1"><span className="px-1 border border-subtle rounded text-muted">TAB</span> Actions</span>
+                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 border border-subtle rounded text-muted bg-surface">↑↓</kbd> Navigate</span>
+                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 border border-subtle rounded text-muted bg-surface">↵</kbd> Select</span>
                </div>
             </div>
           </motion.div>

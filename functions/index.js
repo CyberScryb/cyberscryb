@@ -410,15 +410,16 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             // Graceful error handling with retry guidance
             if (error.name === 'AbortError') {
                 return res.status(408).json({ 
-                    error: 'Request timeout. Please try again.',
-                    retryable: true
+                    error: '⏱️ Request timeout. Your text might be too long—try shortening it or try again.',
+                    retryable: true,
+                    retryAfter: 5
                 });
             }
             
             return res.status(500).json({ 
-                error: 'Service temporarily unavailable. Please try again in a moment.',
+                error: '🔧 Our AI service hit a snag. Please try again in a moment. If this persists, contact support.',
                 retryable: true,
-                retryAfter: 5
+                retryAfter: 10
             });
         }
     });

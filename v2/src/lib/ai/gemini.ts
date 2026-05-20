@@ -77,8 +77,23 @@ export const ai = {
         retryAfter = err.retryAfter || null;
       } catch {}
       
-      const errorMessage = errBody || `AI request failed: HTTP ${response.status}`;
-      const error = new Error(errorMessage) as any;
+      // User-friendly error messages
+      let userMessage = errBody;
+      if (response.status === 429) {
+        userMessage = '⏳ Too many requests. Please wait a moment and try again.';
+        retryable = true;
+        retryAfter = retryAfter || 30;
+      } else if (response.status === 403) {
+        userMessage = '🔒 Access denied. Please refresh the page and try again.';
+      } else if (response.status >= 500) {
+        userMessage = '🔧 Our AI service is temporarily down. Please try again in a minute.';
+        retryable = true;
+        retryAfter = 60;
+      } else if (!userMessage) {
+        userMessage = `❌ Request failed (Error ${response.status}). Please try again.`;
+      }
+      
+      const error = new Error(userMessage) as any;
       error.retryable = retryable;
       error.retryAfter = retryAfter;
       error.status = response.status;
