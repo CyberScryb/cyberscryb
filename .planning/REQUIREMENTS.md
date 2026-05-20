@@ -123,16 +123,69 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-Populated by the roadmapper agent during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| AUDIT-01 | Phase 1 | Pending |
+| AUDIT-02 | Phase 1 | Pending |
+| AUDIT-03 | Phase 1 | Pending |
+| AUDIT-04 | Phase 1 | Pending |
+| AUDIT-05 | Phase 1 | Pending |
+| AUDIT-06 | Phase 1 | Pending |
+| UX-01 | Phase 2 | Pending |
+| UX-02 | Phase 2 | Pending |
+| UX-03 | Phase 2 | Pending |
+| UX-04 | Phase 2 | Pending |
+| UX-05 | Phase 2 | Pending |
+| UX-06 | Phase 2 | Pending |
+| UX-07 | Phase 2 | Pending |
+| UX-08 | Phase 2 | Pending |
+| UX-09 | Phase 2 | Pending |
+| UX-10 | Phase 2 | Pending |
+| UX-11 | Phase 2 | Pending |
+| UX-12 | Phase 2 | Pending |
+| BRAND-01 | Phase 2 | Pending |
+| BRAND-04 | Phase 2 | Pending |
+| BRAND-06 | Phase 2 | Pending |
+| AI-01 | Phase 3 | Pending |
+| AI-02 | Phase 3 | Pending |
+| AI-03 | Phase 3 | Pending |
+| AI-04 | Phase 3 | Pending |
+| AI-05 | Phase 3 | Pending |
+| AI-06 | Phase 3 | Pending |
+| AI-07 | Phase 3 | Pending |
+| UX-13 | Phase 4 | Pending |
+| UX-14 | Phase 4 | Pending |
+| UX-15 | Phase 4 | Pending |
+| UX-16 | Phase 4 | Pending |
+| UX-17 | Phase 4 | Pending |
+| UX-18 | Phase 4 | Pending |
+| UX-19 | Phase 4 | Pending |
+| UX-20 | Phase 4 | Pending |
+| UX-21 | Phase 4 | Pending |
+| SEO-01 | Phase 5 | Pending |
+| SEO-02 | Phase 5 | Pending |
+| SEO-03 | Phase 5 | Pending |
+| SEO-04 | Phase 5 | Pending |
+| SEO-05 | Phase 5 | Pending |
+| SEO-06 | Phase 5 | Pending |
+| SEO-07 | Phase 5 | Pending |
+| SEO-08 | Phase 5 | Pending |
+| SEO-09 | Phase 5 | Pending |
+| BRAND-02 | Phase 6 | Pending |
+| BRAND-03 | Phase 6 | Pending |
+| BRAND-05 | Phase 6 | Pending |
+| RET-01 | Phase 7 | Pending |
+| RET-02 | Phase 7 | Pending |
+| RET-03 | Phase 7 | Pending |
+| RET-04 | Phase 7 | Pending |
+| RET-05 | Phase 7 | Pending |
+| RET-06 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 50 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 50 ⚠️ (will be 0 after roadmap)
+- v1 requirements: 55 total
+- Mapped to phases: 55 (100%)
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-20*
-*Last updated: 2026-05-20 after initial definition*
+*Last updated: 2026-05-20 — traceability populated by roadmapper*
