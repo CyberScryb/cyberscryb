@@ -1,7 +1,48 @@
 # CLAUDE.md — CyberScryb Project Rules
 
-**Last updated:** 2026-05-16
+**Last updated:** 2026-05-13
 **Purpose:** Prevent repeat mistakes and wasted time. Read this FIRST every session.
+
+---
+
+## LAST SESSION HANDOFF (2026-05-13)
+
+**Un-pushed work in working tree** (commit message at `_commit_msg14.txt`):
+- New: `public/tools/shared/ai-examples.js` — example registry for 17 AI tools.
+- Modified: `public/tools/shared/ai-tool.js` — prefills input on page load, injects `✨ Run example` button after Generate.
+- Modified: `public/tools/humanizer/humanizer.js` — same pattern.
+- Rewrote: `public/tools/gig-auto-pilot/gig-auto-pilot.js` — bug fix below + example loading.
+- Modified: 16 tool `index.html` files to load `ai-examples.js`.
+
+**To push from PowerShell:**
+```
+cd cyberscryb
+git add -A
+git commit -F _commit_msg14.txt
+git push origin main
+```
+
+**Recent commits on main:**
+- `992a6e2` — V2 React codebase copied into `/v2` subdirectory, Gemini client moved server-side. V1 untouched.
+
+**Verified live on 2026-05-13 (POST tests via Chrome console):**
+- `/api/ai-generate` → 200 OK, real Gemini output
+- `/api/gig-work` → 200 OK, real proposal/draftWork/interviewQuestions
+- `/api/rewrite` → 200 OK, real rewritten text
+- Google API key is configured and the AI is firing.
+
+**V2 migration still pending (tasks #43–48):**
+- #43 Firebase Hosting preview channel for V2
+- #44 Port AdSense slots + Pro widget as React components
+- #45 React Router URL structure matching V1 (SEO preservation)
+- #46 Port 5 missing CNA tools (Hardship/Appeal/Custody/Caregiver/Resume)
+- #47 Cutover to V2 at cyberscryb.com
+- #48 Hybrid AI: Cloudflare Workers AI Llama for flash tools, Gemini for Pro tools
+- Locked decision: Gemini only for Gig Auto-Pilot, Workers AI for everything else.
+
+**Reddit distribution:** User reversed earlier "no posting" stance — wants me to post to r/SideProject, r/CNA, r/povertyfinance, r/freelance via Chrome MCP. Pending user logged in.
+
+**AI model reality check:** functions/index.js currently uses `gemini-2.5-flash-lite` for ALL tools (not `gemini-3.1-pro-preview` as documented in the credentials table below). The "preview" name is for V2 hybrid planning only — current production code uses 2.5-flash-lite everywhere.
 
 ---
 
@@ -15,7 +56,7 @@
 ### What the site is
 - 38+ tools: developer utilities, AI writing tools, and **Life Tools** (hardship letters, appeal letters, custody docs, caregiver reports)
 - 21 SEO guides, blog section (currently empty — fake posts were deleted)
-- AdSense on every page (publisher ID active, re-review submitted ~May 14 2026 after denial for low-quality content — site was fully overhauled, awaiting approval), affiliate panels on select tools, email gate on AI tools, Pro tier buttons (Stripe not wired up yet)
+- AdSense on every page, affiliate panels on select tools, email gate on AI tools, Pro tier buttons (Stripe not wired up yet)
 - Cloudflare AI chatbot on every page
 
 ### Brand voice (CRITICAL)
@@ -188,7 +229,7 @@ The dev tools space (JSON converter, Base64, password checker, AI humanizer) is 
 These target audiences that generic dev tool sites don't reach: caregivers (53M in US), co-parents in custody situations, people in financial hardship. Low competition, high demand, built from Nate's lived experience (former CNA, dealt with custody, currently in hardship).
 
 ### Distribution is the bottleneck
-Building more tools won't move the needle alone. The site has 3,000+ unique visitors/month (as of May 2026). Getting TRAFFIC is the blocker. Options:
+Building more tools won't move the needle alone. The site has ~90 real users/month. Getting TRAFFIC is the blocker. Options:
 - Reddit posts (niche subreddits for each tool)
 - Product Hunt launch
 - Dev.to articles
@@ -279,6 +320,8 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 | Told Nate "you need to create Stripe products" when the Stripe MCP was available to do it myself | Check for an MCP tool first. Only ask Nate for something a connected tool can't do. |
 | Assumed Stripe was "still going to `#`" because `CLAUDE.md` said so, without checking the live site | Stale notes in CLAUDE.md aren't truth. Grep the actual codebase or hit the live URL when the fact is verifiable. |
 | Defended the current dated cyberpunk aesthetic when Nate said v2 (Vercel/Raycast/Perplexity style) looked sharper | Nate's design instincts are usually right. Concede the aesthetic argument fast and focus on *how to ship it safely*, not whether to. |
+| Gig Auto-Pilot client POSTed to wrong Firebase project entirely — tool was fully broken since launch | Use the `/api/gig-work` rewrite. Never hardcode cross-project Firebase URLs. Always route through Hosting rewrites. Fixed 2026-05-13. |
+| AI tools shipped with empty input fields — blank page friction killed first-time engagement | Every AI tool must have a curated example in `public/tools/shared/ai-examples.js` and prefill via the shared CSAITool loader. |
 
 ---
 

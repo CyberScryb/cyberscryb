@@ -306,6 +306,86 @@
         }
 
         updateUsageDisplay();
+
+        // ── Example loading ──────────────────────────────────
+        // Prefills the main input + dropdowns from window.CSExamples on page load
+        // (only if input is empty). Also injects a "Run example" button next to
+        // Generate that re-loads the example and immediately runs it. The run
+        // counts as the user's free trial use because it hits the real API.
+        function applyExample(triggerRun) {
+            const ex = window.CSExamples && window.CSExamples[toolId];
+            if (!ex) return false;
+
+            const inputEl = document.getElementById('tool-input')
+                || document.querySelector('textarea[id$="-input"]')
+                || document.querySelector('textarea');
+            if (inputEl) {
+                inputEl.value = ex.input || '';
+                // trigger input event so auto-resize listeners fire
+                inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+
+            if (ex.fields && typeof ex.fields === 'object') {
+                Object.keys(ex.fields).forEach((fieldId) => {
+                    const el = document.getElementById(fieldId);
+                    if (!el) return;
+                    el.value = ex.fields[fieldId];
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+            }
+
+            if (triggerRun && generateBtn) {
+                // Scroll the output panel into view so user sees the result land
+                if (outputContent && outputContent.scrollIntoView) {
+                    setTimeout(() => outputContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+                }
+                generateBtn.click();
+            }
+            return true;
+        }
+
+        function injectExampleButton() {
+            if (!window.CSExamples || !window.CSExamples[toolId]) return;
+            if (!generateBtn || document.getElementById('cs-example-btn')) return;
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.id = 'cs-example-btn';
+            btn.className = 'cs-example-btn';
+            btn.textContent = '✨ Run example';
+            btn.title = 'Load a sample input and run it through the tool — uses your one free try';
+            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #34F5C5;color:#34F5C5;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
+            btn.addEventListener('mouseover', () => {
+                btn.style.background = '#34F5C5';
+                btn.style.color = '#000';
+            });
+            btn.addEventListener('mouseout', () => {
+                btn.style.background = 'transparent';
+                btn.style.color = '#34F5C5';
+            });
+            btn.addEventListener('click', () => applyExample(true));
+
+            // Insert after the Generate button
+            if (generateBtn.parentNode) {
+                generateBtn.parentNode.insertBefore(btn, generateBtn.nextSibling);
+            }
+        }
+
+        // Prefill input on first visit (only if empty)
+        function prefillIfEmpty() {
+            const inputEl = document.getElementById('tool-input')
+                || document.querySelector('textarea[id$="-input"]')
+                || document.querySelector('textarea');
+            if (!inputEl) return;
+            if (inputEl.value && inputEl.value.trim().length > 0) return;
+            applyExample(false);
+        }
+
+        injectExampleButton();
+        prefillIfEmpty();
+
+        // Expose for tools that want to wire their own "Load example" link
+        window.CSAITool._currentApplyExample = applyExample;
     }
 
     window.CSAITool = { init, isSubscribed, getCookie, setCookie };
