@@ -223,6 +223,18 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 - Use descriptive commit messages with context
 - If a commit is blocked by hooks, fix the issue — don't bypass with `--no-verify`
 
+### Never leave Nate work I can do myself
+- Nate is paying for Claude. The point is to take work off his plate, not generate todo lists.
+- Before asking Nate to do something, check whether I have an MCP/tool to do it myself:
+  - **Stripe products / prices / payment links** → `mcp__fce2083b-...` (create_product, create_price, create_payment_link, list_products, list_prices, etc.)
+  - **GitHub issues / PRs / actions** → `gh` CLI via Bash
+  - **Firebase deploys** → push to main, GitHub Actions handles it
+  - **File edits, refactors, content writes** → Edit/Write tools
+  - **WebSearch / WebFetch** for any time-sensitive fact
+- If a connector is disconnected/expired, say so explicitly and ask him to reconnect — don't pretend I can't do the task.
+- Only ask Nate to do something himself when it's *genuinely* blocked: a password he needs to type, a billing decision only he can make, a creative direction call, or a security-sensitive action Claude is prohibited from (per system prompt: bank data, ID data, creating accounts, modifying access controls).
+- "I need X from you" is the last resort, not the first.
+
 ### When launching parallel agents
 - Agents time out on long tasks — keep scope focused per agent
 - Blog posts with WebSearch + 1000+ word output TEND to time out. Break into smaller chunks.
@@ -236,7 +248,7 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
    - "Life Happens: Why I Built CyberScryb's Life Tools" (Life Tools spotlight, NOT fake founder story)
    - Honest AI tool comparisons (current models)
    - Guides for the 4 Life Tools (hardship letter examples, appeal letter strategies, etc.)
-2. **Stripe payment links:** Pro tier buttons still go to `#`. Need two links (monthly $5, annual $29) from Nate.
+2. **Stripe payment links:** WIRED but products charge the WRONG price. Current Stripe products are $9/mo and $29 lifetime. Site copy advertises $5/mo and $29/yr (the intended price). Need to create new Stripe products at $5/mo recurring and $29/yr recurring, then swap the URLs in `public/js/cs-pro-widget.js` (STRIPE_MONTHLY, STRIPE_LIFETIME — rename to STRIPE_ANNUAL) and `public/pro.html` (2 button hrefs + 2 schema.org offer urls). Use the Stripe MCP to do this — don't hand it back to Nate.
 3. **Affiliate programs:** Affiliate panel has placeholder URLs. Need real links after Nate applies to CJ Affiliate, Impact, etc.
 4. **Usage counter:** Backend has 9 AI prompts but no Firestore counter or `/api/stats` endpoint yet.
 5. **OWASP ruleset:** User-aware, decided to leave on.
@@ -263,6 +275,10 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 | Cloud Function returned plain text errors, frontend tried to JSON.parse | ALL error responses must use `res.status(N).json({ error: '...' })` never `res.send()` |
 | Used `referer.includes('cyberscryb.com')` for security check | Use `new URL(referer).hostname` against allowlist — string.includes is bypassable via query params |
 | Used `Math.random()` in password generator | Use `crypto.getRandomValues()` for anything security-related |
+| Edited blog post pricing to match an audit report without verifying the actual Stripe products | Always verify against the source of truth (Stripe API via MCP) before editing pricing/product copy |
+| Told Nate "you need to create Stripe products" when the Stripe MCP was available to do it myself | Check for an MCP tool first. Only ask Nate for something a connected tool can't do. |
+| Assumed Stripe was "still going to `#`" because `CLAUDE.md` said so, without checking the live site | Stale notes in CLAUDE.md aren't truth. Grep the actual codebase or hit the live URL when the fact is verifiable. |
+| Defended the current dated cyberpunk aesthetic when Nate said v2 (Vercel/Raycast/Perplexity style) looked sharper | Nate's design instincts are usually right. Concede the aesthetic argument fast and focus on *how to ship it safely*, not whether to. |
 
 ---
 
