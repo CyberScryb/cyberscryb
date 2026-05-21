@@ -9,7 +9,7 @@
   var isCna = (window.CS_WIDGET === 'cna') || /caregiver|hardship|appeal|custody|resume-bullets/.test(path);
 
   var STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
-  var STRIPE_MONTHLY  = 'https://buy.stripe.com/dRm5kF7eue189qlbVr0sU06';
+  var STRIPE_MONTHLY  = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
   var STRIPE_CNA      = 'https://buy.stripe.com/6oU9AV7eu9KS5a56B70sU09';
   function tag(url){ return url + (url.indexOf('?') > -1 ? '&' : '?') + 'utm_source=' + encodeURIComponent(utmSource) + '&utm_medium=widget&utm_campaign=pro_pill'; }
 

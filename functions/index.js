@@ -1462,3 +1462,81 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
         }
     });
 });
+
+
+// ─── Pro Unlock — Stripe Session Validator ───────────────────────────────
+// Called by /pro-success page after Stripe redirects with ?session_id=...
+// Validates payment, stores session to prevent reuse, returns ok signal.
+exports.validateStripeSession = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        const sessionId = req.query.session_id || (req.body && req.body.session_id);
+
+        if (!sessionId || !sessionId.startsWith('cs_')) {
+            return res.status(400).json({ error: 'Invalid session_id' });
+        }
+
+        // Check Firestore — reject replayed sessions
+        const sessionRef = db.collection('pro_sessions').doc(sessionId);
+        const existing = await sessionRef.get();
+        if (existing.exists) {
+            const data = existing.data();
+            // Already validated — still return success so page can set cookie on refresh
+            return res.status(200).json({ ok: true, status: data.status, replayed: true });
+        }
+
+        // Get Stripe secret from Firebase runtime config
+        const stripeSecret = functions.config().stripe && functions.config().stripe.secret;
+        if (!stripeSecret) {
+            console.error('[PRO] Stripe secret not configured. Run: firebase functions:config:set stripe.secret="sk_live_..."');
+            return res.status(500).json({ error: 'Payment validation not configured' });
+        }
+
+        // Call Stripe REST API — no package needed, just https
+        const https = require('https');
+        const stripeRes = await new Promise((resolve, reject) => {
+            const options = {
+                hostname: 'api.stripe.com',
+                path: `/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${stripeSecret}`,
+                    'Stripe-Version': '2023-10-16'
+                }
+            };
+            const req2 = https.request(options, (r) => {
+                let body = '';
+                r.on('data', d => body += d);
+                r.on('end', () => resolve({ status: r.statusCode, body: JSON.parse(body) }));
+            });
+            req2.on('error', reject);
+            req2.end();
+        });
+
+        if (stripeRes.status !== 200) {
+            console.error('[PRO] Stripe API error:', stripeRes.body);
+            return res.status(400).json({ error: 'Could not verify payment' });
+        }
+
+        const session = stripeRes.body;
+        const paid = session.payment_status === 'paid';
+
+        // Store result in Firestore regardless (audit trail)
+        await sessionRef.set({
+            status: session.payment_status,
+            customerEmail: session.customer_details && session.customer_details.email,
+            amountTotal: session.amount_total,
+            currency: session.currency,
+            validatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            paid
+        });
+
+        if (!paid) {
+            return res.status(402).json({ error: 'Payment not completed', status: session.payment_status });
+        }
+
+        // Log it (anonymous aggregate)
+        logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
+
+        return res.status(200).json({ ok: true, status: 'paid' });
+    });
+});

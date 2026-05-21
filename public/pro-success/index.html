@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Activated — CyberScryb</title>
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: #0a0e1a;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #e6e9f0;
+      padding: 20px;
+    }
+    .card {
+      max-width: 480px; width: 100%;
+      background: #0f1423;
+      border: 1px solid rgba(0,212,255,.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,.6);
+    }
+    .icon { font-size: 56px; margin-bottom: 20px; line-height: 1; }
+    h1 {
+      font-size: 28px; font-weight: 800;
+      background: linear-gradient(135deg,#00d4ff,#7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    p { color: #8892a8; line-height: 1.6; margin-bottom: 8px; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(0,212,255,.15);
+      border-top-color: #00d4ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      display: inline-block; margin-top: 28px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg,#00d4ff,#7c3aed);
+      color: #0a0e1a; font-weight: 700; font-size: 15px;
+      border-radius: 999px; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.4); }
+    .error { color: #ff6b6b; }
+    #status-msg { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+<div class="card" id="card">
+  <div id="loading-state">
+    <div class="spinner"></div>
+    <h1>Activating Your Pro Access</h1>
+    <p id="status-msg">Verifying your payment…</p>
+  </div>
+  <div id="success-state" style="display:none">
+    <div class="icon">🚀</div>
+    <h1>Pro Activated!</h1>
+    <p>Your Pro access is now live on this device.</p>
+    <p style="margin-top:8px;font-size:13px;color:#6b7280">All tools are now unlocked. No limits.</p>
+    <a href="/tools/" class="btn">Start Using Pro →</a>
+  </div>
+  <div id="error-state" style="display:none">
+    <div class="icon">⚠️</div>
+    <h1 class="error">Something Went Wrong</h1>
+    <p id="error-msg">We couldn't verify your payment.</p>
+    <p style="margin-top:12px;font-size:13px">
+      Email <a href="mailto:support@cyberscryb.com" style="color:#00d4ff">support@cyberscryb.com</a>
+      and we'll sort it out fast.
+    </p>
+    <a href="/pro/" class="btn" style="background:rgba(255,255,255,.08);color:#e6e9f0;margin-top:20px">Back to Pro Page</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(location.search);
+  var sessionId = params.get('session_id');
+
+  function show(id) {
+    ['loading-state','success-state','error-state'].forEach(function(s) {
+      document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
+    });
+  }
+
+  function setCookie(name, value, days) {
+    var expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + value + '; expires=' + expires + '; path=/; SameSite=Lax';
+  }
+
+  function activatePro() {
+    setCookie('cs_subscribed', '1', 365);
+    setCookie('cs_pro_source', 'stripe', 365);
+    show('success-state');
+    // Clean URL without leaking session_id
+    history.replaceState(null, '', '/pro-success/');
+  }
+
+  if (!sessionId) {
+    // No session_id — maybe they bookmarked the page or refreshed after activation
+    var alreadyPro = document.cookie.indexOf('cs_subscribed=1') > -1;
+    if (alreadyPro) {
+      activatePro();
+    } else {
+      document.getElementById('error-msg').textContent = 'No payment session found. If you just paid, check your email for a receipt and contact support.';
+      show('error-state');
+    }
+    return;
+  }
+
+  document.getElementById('status-msg').textContent = 'Confirming with Stripe…';
+
+  // Call Firebase function to validate
+  fetch('/api/validate-pro?session_id=' + encodeURIComponent(sessionId))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        activatePro();
+      } else {
+        document.getElementById('error-msg').textContent = data.error || 'Payment could not be confirmed.';
+        show('error-state');
+      }
+    })
+    .catch(function(err) {
+      console.error(err);
+      document.getElementById('error-msg').textContent = 'Network error. Please try refreshing.';
+      show('error-state');
+    });
+})();
+</script>
+</body>
+</html>
