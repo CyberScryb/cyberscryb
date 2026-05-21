@@ -1,6 +1,6 @@
 /* CyberScryb Pro Upgrade Widget — auto-injects bottom-right pill + modal
    Variants supported:
-   - Default Pro (Pro Lifetime $29 + Pro Monthly $9)
+   - Default Pro (Pro Annual $29/yr + Pro Monthly $5/mo)
    - CNA Power Pack ($19) — set window.CS_WIDGET = 'cna' before this script loads */
 (function() {
   if (document.getElementById('cs-pro-modal-bg')) return;
@@ -83,13 +83,13 @@
     <div class="cs-plans">
       <a class="cs-plan" href="${tag(STRIPE_MONTHLY)}" target="_blank" rel="noopener">
         <div class="cs-name">Monthly</div>
-        <div class="cs-price">$9<small>/mo</small></div>
+        <div class="cs-price">$5<small>/mo</small></div>
         <div class="cs-tag">Cancel anytime</div>
       </a>
       <a class="cs-plan cs-best" href="${tag(STRIPE_LIFETIME)}" target="_blank" rel="noopener">
-        <div class="cs-name">Lifetime</div>
-        <div class="cs-price">$29</div>
-        <div class="cs-tag">One-time · Launch price</div>
+        <div class="cs-name">Annual</div>
+        <div class="cs-price">$29<small>/yr</small></div>
+        <div class="cs-tag">Save 51% · Billed yearly</div>
       </a>
     </div>
     <ul class="cs-features">
