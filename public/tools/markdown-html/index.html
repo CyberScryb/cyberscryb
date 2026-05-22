@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -206,7 +206,35 @@ const x = 42;
                 </details>
             </div>
         </section>
-    </main>
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why Convert Markdown to HTML?</h2>
+        <p>Markdown is a lightweight markup language created by John Gruber in 2004 with the explicit goal of making it easy to write for the web. The core idea: plain text that looks like natural email formatting — asterisks for bold, hyphens for lists, pound signs for headings — that converts cleanly to HTML without requiring you to write HTML tags by hand.</p>
+        <p>The conversion to HTML is necessary when you need to render Markdown in a browser or inject it into a web page. Most CMS platforms (WordPress, Ghost, Contentful) accept Markdown natively. But for custom applications, email templates, documentation sites, or any situation where you control the HTML directly, you need to convert Markdown to HTML yourself before rendering.</p>
+        <p>This tool handles GitHub Flavored Markdown (GFM), which extends standard CommonMark with tables, task lists, strikethrough, and fenced code blocks — the syntax used by GitHub, GitLab, and most technical documentation platforms.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Use Cases</h2>
+        <p>The most common reason to use a Markdown-to-HTML converter is copying output from a notes app or documentation tool into an HTML context. Notion, Obsidian, Bear, and Typora all export Markdown. If you're moving content to a custom website, pasting the raw Markdown won't render — you need the HTML equivalent. Convert it here, paste the HTML output, done.</p>
+        <p>Developers also use Markdown-to-HTML conversion for generating README pages, building documentation sites without a full CMS, writing email templates in a readable format, and previewing documentation before committing to a repository.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Frequently Asked Questions</h2>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">What Markdown flavors does this support?</summary>
+            <p style="margin-top:0.75rem;">This tool supports GitHub Flavored Markdown (GFM), which includes CommonMark plus tables, strikethrough text, fenced code blocks with language highlighting, task list checkboxes, and autolinks. It does not support every custom Markdown extension — for example, Obsidian's callout syntax or Hugo shortcodes are not standard GFM.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Will the converted HTML include a full page structure?</summary>
+            <p style="margin-top:0.75rem;">No. The output is an HTML fragment — the content tags only (headings, paragraphs, lists, code blocks), without wrapping html, head, or body tags. This is intentional: fragment output can be pasted directly into any existing HTML page without breaking your document structure.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Is the conversion done in my browser or on a server?</summary>
+            <p style="margin-top:0.75rem;">Entirely in your browser. No text is uploaded to any server. The conversion runs using JavaScript — your Markdown never leaves your machine. This also means the tool works offline once the page has loaded.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Can I paste the HTML output directly into WordPress?</summary>
+            <p style="margin-top:0.75rem;">Yes, using WordPress's HTML/Code Editor mode (not the Visual Editor). Switch the block to HTML mode, paste the converted output, and it renders exactly as intended. The Visual Editor may try to reformat your HTML; the Code Editor preserves it exactly as pasted.</p>
+        </details>
+    </section>
+</main>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">

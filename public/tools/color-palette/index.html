@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -211,7 +211,30 @@
                 </details>
             </div>
         </section>
-    </main>
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How Color Palettes Work in Web Design</h2>
+        <p>A color palette is a curated set of colors that work together visually, derived from principles of color theory. The three most useful palette types for web projects are complementary (colors opposite each other on the color wheel, which create high contrast and visual tension — good for calls-to-action), analogous (colors adjacent on the wheel, which feel harmonious and calm — good for backgrounds and content areas), and triadic (three colors equally spaced on the wheel, which create vibrant, balanced schemes).</p>
+        <p>When building a UI, most designers work with a base color (your primary brand color), a complementary or triadic accent (for buttons, links, and highlights), and a set of neutral tones (for backgrounds, text, and borders). The exact hues matter less than their relationship to each other — a well-structured palette keeps your interface coherent even as elements change across different pages and states.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Using the Output in Your Project</h2>
+        <p>This tool generates palettes in HEX, RGB, and HSL formats. HEX values are the most common in web projects — paste them directly into CSS or your design system variables. HSL values are more useful when you need to programmatically adjust lightness or saturation (for hover states, active states, or dark mode variants), since the L and S values map directly to perceived brightness and color intensity. RGB values are most useful in CSS color functions that accept individual channel values, or when working with canvas drawing APIs in JavaScript.</p>
+        <p>The recommended workflow: generate a palette, pick your base and accent colors, then create a CSS custom properties (variables) file at the root of your project. Define colors as --color-primary, --color-accent, --color-surface, and so on. Reference those variables throughout your stylesheets rather than hardcoding hex values. When your brand colors change, you update one file instead of searching and replacing across dozens of CSS files.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Frequently Asked Questions</h2>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">What makes two colors "work together"?</summary>
+            <p style="margin-top:0.75rem;">Colors work together when they maintain sufficient contrast for readability (WCAG AA requires a contrast ratio of at least 4.5:1 for normal text), while sharing a coherent relationship on the color wheel. Colors that are too similar in both hue and value blend into each other. Colors that are too different without a structural relationship (complementary, triadic, split-complementary) look chaotic. The goal is controlled tension — enough difference to create visual hierarchy, enough relationship to feel intentional.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">How many colors should a UI color palette have?</summary>
+            <p style="margin-top:0.75rem;">Most practical UI design systems use 5-9 colors: one primary brand color in 5-9 tints and shades, one accent color, one semantic set (success green, warning yellow, error red, info blue), and 2-3 neutral grays. Fewer colors mean tighter consistency — systems with 30+ colors usually end up with inconsistent usage and visual clutter. Start minimal and add colors only when you have a specific design need they solve.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">How do I test if my palette meets WCAG accessibility requirements?</summary>
+            <p style="margin-top:0.75rem;">After generating your palette, check text-on-background combinations with the CyberScryb <a href="/guides/color-contrast-checker-wcag/" style="color:#00d4ff;">WCAG Color Contrast Checker guide</a>. WCAG AA compliance requires 4.5:1 for normal text, 3:1 for large text. WCAG AAA requires 7:1 for normal text. Always test your actual text color against your actual background color — not just your palette colors against each other.</p>
+        </details>
+    </section>
+</main>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">

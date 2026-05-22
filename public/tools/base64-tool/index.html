@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -212,7 +212,35 @@
                 </details>
             </div>
         </section>
-    </main>
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Is Base64 Encoding and Why Does It Exist?</h2>
+        <p>Base64 is an encoding scheme that converts binary data into a set of 64 printable ASCII characters. It exists because many communication protocols — email (SMTP), HTTP headers, HTML attributes — were designed to handle text, not arbitrary binary data. When you need to transmit binary data (an image, a PDF, a public key) through a text-based channel, you encode it as Base64 first.</p>
+        <p>The name comes from the 64 characters used: A-Z (26), a-z (26), 0-9 (10), plus + and /. Every three bytes of binary input produce four characters of Base64 output, which means Base64-encoded data is about 33% larger than the original. This overhead is a deliberate trade-off for universal compatibility across text channels.</p>
+        <p>Base64 is not encryption. The encoding is completely reversible and publicly known — anyone with a Base64 decoder can retrieve the original data. Do not use Base64 to protect sensitive information. Use it only to encode data for transmission, not to secure it.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Practical Uses in Web Development</h2>
+        <p>The most common use in front-end development is data URIs — embedding small images or fonts directly in CSS or HTML as Base64-encoded strings, eliminating a separate HTTP request. A small icon encoded as Base64 in a CSS background-image property loads instantly without a network round-trip, which matters for performance on mobile connections.</p>
+        <p>On the backend, Base64 appears in API authentication (HTTP Basic Auth sends credentials as Base64), JSON Web Tokens (the header and payload sections are Base64url encoded), and when passing binary payloads through REST APIs that accept only JSON strings. Developers also use it to encode configuration values containing special characters in environment variables and CI/CD pipelines.</p>
+
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Frequently Asked Questions</h2>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">What is the difference between Base64 and Base64url?</summary>
+            <p style="margin-top:0.75rem;">Standard Base64 uses + and / as the 63rd and 64th characters. These characters have special meaning in URLs, which causes problems when Base64 strings appear in query parameters or path segments. Base64url replaces + with - and / with _, making the output URL-safe. JWT tokens use Base64url. This tool supports both; select URL-safe mode if you need the output to appear in a URL.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Is Base64 encoding secure?</summary>
+            <p style="margin-top:0.75rem;">No. Base64 is not a security measure. It is trivially reversible — anyone can decode Base64 with any standard tool in under a second. It provides obfuscation at best and should never be used to protect sensitive data like passwords, API keys, or personal information. For security, use encryption (AES, RSA) or proper secrets management.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Why does my Base64 output sometimes end with = or ==?</summary>
+            <p style="margin-top:0.75rem;">Base64 encodes every 3 bytes into 4 characters. If your input length is not divisible by 3, padding characters (=) are added to make the output length a multiple of 4. One = means there was one remaining byte; == means two remaining bytes. This padding is required by the RFC 4648 standard, though some implementations omit it.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Can this tool encode images to Base64?</summary>
+            <p style="margin-top:0.75rem;">This tool encodes and decodes text. For encoding image files as Base64 data URIs (for use in CSS or HTML), use the CyberScryb <a href="/guides/base64-image-encoder/" style="color:#00d4ff;">Base64 Image Encoder guide</a>, which walks through the process of converting image files to inline data URIs.</p>
+        </details>
+    </section>
+</main>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
