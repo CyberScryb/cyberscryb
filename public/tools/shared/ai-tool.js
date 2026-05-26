@@ -354,14 +354,14 @@
             btn.className = 'cs-example-btn';
             btn.textContent = '✨ Run example';
             btn.title = 'Load a sample input and run it through the tool — uses your one free try';
-            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #34F5C5;color:#34F5C5;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
+            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #c41e1e;color:#c41e1e;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
             btn.addEventListener('mouseover', () => {
-                btn.style.background = '#34F5C5';
+                btn.style.background = '#c41e1e';
                 btn.style.color = '#000';
             });
             btn.addEventListener('mouseout', () => {
                 btn.style.background = 'transparent';
-                btn.style.color = '#34F5C5';
+                btn.style.color = '#c41e1e';
             });
             btn.addEventListener('click', () => applyExample(true));
 

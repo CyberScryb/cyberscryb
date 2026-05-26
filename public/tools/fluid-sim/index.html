@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/favicon-tight.svg">
+    <link rel="icon" type="image/webp" href="/mascot.webp">
     <link rel="stylesheet" href="/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LS46B9J1XK');</script>
@@ -30,20 +30,20 @@
         .fluid-layout{display:grid;grid-template-columns:1fr 280px;gap:1.5rem;max-width:1200px;margin:0 auto;padding:0 2rem}
         .fluid-canvas-wrap{position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid #333;aspect-ratio:1}
         #fluidCanvas{width:100%;height:100%;display:block;cursor:crosshair}
-        #fpsCounter{position:absolute;top:8px;left:8px;font:600 12px 'JetBrains Mono','Fira Code',monospace;color:#34F5C5;background:rgba(0,0,0,0.6);padding:3px 8px;border-radius:4px}
+        #fpsCounter{position:absolute;top:8px;left:8px;font:600 12px 'JetBrains Mono','Fira Code',monospace;color:#c41e1e;background:rgba(0,0,0,0.6);padding:3px 8px;border-radius:4px}
         .fluid-controls{display:flex;flex-direction:column;gap:1rem}
         .ctrl-group{background:linear-gradient(145deg,#1a1a1a,#0f0f0f);border:1px solid #333;border-radius:10px;padding:1rem}
-        .ctrl-group h3{font-family:'Orbitron',sans-serif;font-size:0.75rem;color:#34F5C5;margin:0 0 0.75rem;text-transform:uppercase;letter-spacing:1px}
+        .ctrl-group h3{font-family:'Orbitron',sans-serif;font-size:0.75rem;color:#c41e1e;margin:0 0 0.75rem;text-transform:uppercase;letter-spacing:1px}
         .ctrl-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
         .ctrl-row label{font-size:0.8rem;color:#b0b0b0}
-        .ctrl-row span{font-size:0.75rem;color:#34F5C5;font-family:monospace}
-        input[type="range"]{width:100%;accent-color:#34F5C5;margin-bottom:0.5rem}
+        .ctrl-row span{font-size:0.75rem;color:#c41e1e;font-family:monospace}
+        input[type="range"]{width:100%;accent-color:#c41e1e;margin-bottom:0.5rem}
         .palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
         .palette-btn{width:100%;aspect-ratio:1;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:all 0.2s}
-        .palette-btn.active{border-color:#34F5C5;box-shadow:0 0 8px rgba(52,245,197,0.3)}
+        .palette-btn.active{border-color:#c41e1e;box-shadow:0 0 8px rgba(196,30,30,0.3)}
         .btn-row{display:flex;gap:0.5rem}
         .fluid-btn{flex:1;padding:0.5rem;border:1px solid #333;border-radius:6px;background:#1a1a1a;color:#e0e0e0;font-family:'Inter',sans-serif;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
-        .fluid-btn:hover{border-color:#34F5C5;color:#34F5C5}
+        .fluid-btn:hover{border-color:#c41e1e;color:#c41e1e}
         @media(max-width:768px){.fluid-layout{grid-template-columns:1fr}.fluid-canvas-wrap{max-height:60vh}}
     </style>
 </head>
@@ -51,7 +51,7 @@
     <header>
         <nav class="navbar"><div class="nav-container">
             <div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none;">
-                <img src="/favicon-tight.svg" alt="CyberScryb" width="32" height="32" class="logo">
+                <img src="/mascot.webp" alt="CyberScryb" width="32" height="32" class="logo">
                 <span style="font-family:'Orbitron';font-weight:700;font-size:1.2rem;color:#fff;margin-left:10px;">CyberScryb</span>
             </a></div>
             <ul class="nav-menu">
@@ -68,7 +68,7 @@
 
     <main class="fluid-app">
         <div style="max-width:1200px;margin:0 auto;padding:0 2rem 1rem;">
-            <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color:#34F5C5;">Simulator</span></h1>
+            <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color:#c41e1e;">Simulator</span></h1>
             <p style="color:#b0b0b0;max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side — no data leaves your browser.</p>
         </div>
         <div class="fluid-layout">
@@ -80,7 +80,7 @@
                 <div class="ctrl-group">
                     <h3>Color Palette</h3>
                     <div class="palette-grid">
-                        <button class="palette-btn active" data-palette="cyber" style="background:linear-gradient(135deg,#00d4ff,#34F5C5)" title="Cyber"></button>
+                        <button class="palette-btn active" data-palette="cyber" style="background:linear-gradient(135deg,#00d4ff,#c41e1e)" title="Cyber"></button>
                         <button class="palette-btn" data-palette="fire" style="background:linear-gradient(135deg,#ff4400,#ffaa00)" title="Fire"></button>
                         <button class="palette-btn" data-palette="plasma" style="background:linear-gradient(135deg,#ff00ff,#00ffff)" title="Plasma"></button>
                         <button class="palette-btn" data-palette="ocean" style="background:linear-gradient(135deg,#0044ff,#00ddaa)" title="Ocean"></button>
@@ -114,15 +114,15 @@
         <!-- SEO Content -->
         <section style="max-width:900px;margin:3rem auto 0;padding:0 2rem;">
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">What Are the Navier-Stokes Equations?</h2>
-            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color:#fff;">computational fluid dynamics (CFD)</strong> — one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color:#34F5C5;">seven Millennium Prize Problems</a> in mathematics.</p>
+            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color:#fff;">computational fluid dynamics (CFD)</strong> — one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color:#c41e1e;">seven Millennium Prize Problems</a> in mathematics.</p>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">How This Simulator Works</h2>
             <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color:#fff;">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
             <ol style="color:#b0b0b0;line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color:#34F5C5;">Add Forces</strong> — Your mouse input is added to the velocity field</li>
-                <li><strong style="color:#34F5C5;">Diffuse</strong> — Viscosity equalizes neighboring velocities</li>
-                <li><strong style="color:#34F5C5;">Advect</strong> — The velocity field moves itself and dye through back-tracing</li>
-                <li><strong style="color:#34F5C5;">Project</strong> — Pressure solve ensures divergence-free (mass-conserving) flow</li>
+                <li><strong style="color:#c41e1e;">Add Forces</strong> — Your mouse input is added to the velocity field</li>
+                <li><strong style="color:#c41e1e;">Diffuse</strong> — Viscosity equalizes neighboring velocities</li>
+                <li><strong style="color:#c41e1e;">Advect</strong> — The velocity field moves itself and dye through back-tracing</li>
+                <li><strong style="color:#c41e1e;">Project</strong> — Pressure solve ensures divergence-free (mass-conserving) flow</li>
             </ol>
             <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color:#fff;">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
 
