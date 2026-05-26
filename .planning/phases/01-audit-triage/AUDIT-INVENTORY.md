@@ -1,11 +1,11 @@
 # CyberScryb Tool Inventory Audit
 
-**Generated:** 2026-05-26 06:49:49 UTC
-**Total tool directories:** 43 (including `shared`)
+**Generated:** 2026-05-26 07:09:48 UTC
+**Total tool directories:** 44 (including `shared`)
 **AI_PROMPTS keys:** 21
-**tools.html entries:** 41
-**sitemap.xml tool entries:** 42
-**Homepage dropdown options:** 26
+**tools.html entries:** 42
+**sitemap.xml tool entries:** 43
+**Homepage dropdown options:** 28
 
 ---
 
@@ -14,11 +14,11 @@
 | tool | category | has_directory | in_AI_PROMPTS | in_tools_html | in_sitemap | in_homepage_dropdown | has_index_html | has_json_ld | has_blog_nav_link | has_breadcrumbs | has_canonical | legacy_files |
 |------|----------|---------------|---------------|---------------|------------|----------------------|----------------|-------------|-------------------|-----------------|---------------|--------------|
 | ai-detector | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| ai-writing-suite | special | yes | no | yes | yes | no | yes | no | no | yes | yes |  |
+| ai-writing-suite | special | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | appeal-letter | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | base64-tool | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | bio-generator | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| budget-planner | life-tool | no | yes | no | no | no | no | no | no | no | no |  |
+| budget-planner | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | caregiver-report | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | case-converter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
 | code-explainer | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
@@ -34,7 +34,7 @@
 | hardship-letter | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | hash-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
 | html-entity | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| humanizer | ai-writing | yes | no | yes | yes | yes | yes | no | yes | yes | yes | index_v1.html |
+| humanizer | ai-writing | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | job-description | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
 | json-csv-converter | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | json-formatter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
@@ -46,7 +46,7 @@
 | paraphraser | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | password-checker | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | press-release | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
-| privacy-generator | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | no | yes |  |
+| privacy-generator | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | product-description | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
 | qr-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
 | regex-tester | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
@@ -70,14 +70,13 @@ These prompts are defined in `functions/index.js` but have no frontend UI.
 
 | key | in_tools_html | in_sitemap | in_homepage_dropdown | exception? |
 |-----|---------------|------------|----------------------|------------|
-| budget-planner | no | no | no | no |
 | linkedin-post | no | no | no | no |
 | cold-email | no | no | no | no |
 | job-description | no | no | no | no |
 | press-release | no | no | no | no |
 | seo-title | no | no | no | no |
 
-**New orphans (not in allowlist):** budget-planner, linkedin-post, cold-email, job-description, press-release, seo-title
+**New orphans (not in allowlist):** linkedin-post, cold-email, job-description, press-release, seo-title
 
 ## Orphan Frontends
 
@@ -96,12 +95,12 @@ Discrepancies between the advertised tool count and the actual directory count.
 
 | source | claimed count |
 |--------|--------------|
-| `public/index.html` meta description | 41 |
-| `public/index.html` H1 text | 41 |
-| `public/tools.html` meta description | 39+ |
-| Actual tool directories (excluding `shared` + `distill`) | **41** |
+| `public/index.html` meta description | 42 |
+| `public/index.html` H1 text | 42 |
+| `public/tools.html` meta description | 42+ |
+| Actual tool directories (excluding `shared` + `distill`) | **42** |
 
-**Finding:** index.html claims "41" tools and tools.html meta says "39+" — actual functional tool directories (excluding `shared` helper and `distill` landing page) total **41**. Count drift exists across multiple pages.
+**Finding:** index.html claims "41" tools and tools.html meta says "39+" — actual functional tool directories (excluding `shared` helper and `distill` landing page) total **42**. Count drift exists across multiple pages.
 
 ## Legacy Files
 
@@ -110,7 +109,7 @@ These should be removed to avoid confusion.
 
 | tool | legacy_files |
 |------|--------------|
-| humanizer | index_v1.html |
+| — | — |
 
 ## Triage Decisions
 
@@ -133,3 +132,16 @@ Disposition for every flagged finding. Plans referenced: D = 01-D-PLAN.md (wirin
 | `humanizer` — no JSON-LD SoftwareApplication schema | `fix-in-plan-D` | Add Schema.org markup |
 | `privacy-generator` — no breadcrumbs | `fix-in-plan-D` | Add breadcrumb nav for consistency |
 | `fluid-sim` — no JSON-LD, no breadcrumbs | `accepted` | Visual/interactive demo — schema less critical, low SEO priority |
+
+## Existing-Page Sweep
+
+Pages touched in Plan D (2026-05-26):
+
+| Page | Fix Applied |
+|------|-------------|
+| `public/tools/ai-writing-suite/index.html` | Added Blog + Guides nav links; changed JSON-LD from WebApplication to SoftwareApplication; updated breadcrumb nav and BreadcrumbList JSON-LD to use absolute paths |
+| `public/tools/humanizer/index.html` | Changed JSON-LD `@type` from WebApplication to SoftwareApplication |
+| `public/tools/privacy-generator/index.html` | Added breadcrumb nav (HTML) + BreadcrumbList JSON-LD schema |
+
+**Phase 2 follow-ups (deferred — all other tools already compliant per audit):**
+- `fluid-sim` — accepted: visual/interactive tool, schema deferred by triage decision

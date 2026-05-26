@@ -29,6 +29,15 @@ const NON_STANDARD_API_PROMPTS = new Set([
   // These are in AI_PROMPTS but tool frontends exist and use different API routes
 ]);
 
+// ─── Future tools: prompts written, frontends planned for later phases ────────
+const FUTURE_TOOL_PROMPTS = new Set([
+  'linkedin-post',    // prompt written — frontend planned for future phase
+  'cold-email',       // prompt written — frontend planned for future phase
+  'job-description',  // prompt written — frontend planned for future phase
+  'press-release',    // prompt written — frontend planned for future phase
+  'seo-title',        // prompt written — frontend planned for future phase
+]);
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function readFile(filePath) {
@@ -264,7 +273,7 @@ function main() {
   const legacyFileRows = rows.filter(r => r.legacy_files !== '');
 
   // ─── Orphan check for --check mode ────────────────────────────────────────
-  const newOrphanAIPrompts = orphanAIPrompts.filter(k => !KNOWN_EXCEPTIONS.has(k));
+  const newOrphanAIPrompts = orphanAIPrompts.filter(k => !KNOWN_EXCEPTIONS.has(k) && !FUTURE_TOOL_PROMPTS.has(k));
   const newOrphanFrontends = orphanFrontends.filter(t => !KNOWN_EXCEPTIONS.has(t));
 
   if (CHECK_MODE) {
