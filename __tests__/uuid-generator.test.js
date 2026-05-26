@@ -66,10 +66,14 @@ describe('generateUUID — uniqueness', () => {
 // ── CRITICAL security test ───────────────────────────────
 
 describe('security audit', () => {
-    test('CRITICAL: source file does NOT use Math.random()', () => {
+    test('CRITICAL: source file does NOT call Math.random()', () => {
         const sourcePath = path.resolve(__dirname, '../public/tools/uuid-generator/script.js');
         const source = fs.readFileSync(sourcePath, 'utf8');
-        expect(source).not.toContain('Math.random');
+        // Strip comments first, then check for Math.random() calls in actual code
+        const noComments = source
+            .replace(/\/\*[\s\S]*?\*\//g, '')   // remove block comments
+            .replace(/\/\/.*/g, '');              // remove line comments
+        expect(noComments).not.toContain('Math.random');
     });
 
     test('source file uses crypto.getRandomValues()', () => {

@@ -12,8 +12,8 @@ describe('epochToISO', () => {
     });
 
     test('known epoch returns correct ISO string', () => {
-        // 2026-01-01T00:00:00.000Z = 1735689600
-        expect(epochToISO(1735689600)).toBe('2026-01-01T00:00:00.000Z');
+        // 2026-01-01T00:00:00.000Z = 1767225600
+        expect(epochToISO(1767225600)).toBe('2026-01-01T00:00:00.000Z');
     });
 
     test('returns a string ending in Z (UTC)', () => {
@@ -35,7 +35,7 @@ describe('isoToEpoch', () => {
     });
 
     test('"2026-01-01T00:00:00.000Z" returns correct timestamp', () => {
-        expect(isoToEpoch('2026-01-01T00:00:00.000Z')).toBe(1735689600);
+        expect(isoToEpoch('2026-01-01T00:00:00.000Z')).toBe(1767225600);
     });
 
     test('returns an integer (floor of milliseconds/1000)', () => {
@@ -48,7 +48,7 @@ describe('isoToEpoch', () => {
 
 describe('round-trip', () => {
     test('epochToISO then isoToEpoch returns original epoch', () => {
-        const original = 1735689600;
+        const original = 1767225600;
         const iso = epochToISO(original);
         const back = isoToEpoch(iso);
         expect(back).toBe(original);
@@ -71,13 +71,13 @@ describe('tsToDate', () => {
     });
 
     test('milliseconds timestamp (13 digits) returns correct Date', () => {
-        const date = tsToDate(1735689600000);
+        const date = tsToDate(1767225600000);
         expect(date.toISOString()).toBe('2026-01-01T00:00:00.000Z');
     });
 
     test('auto-detects ms vs seconds correctly', () => {
-        const secDate = tsToDate(1735689600);
-        const msDate = tsToDate(1735689600000);
+        const secDate = tsToDate(1767225600);
+        const msDate = tsToDate(1767225600000);
         expect(secDate.toISOString()).toBe(msDate.toISOString());
     });
 });
