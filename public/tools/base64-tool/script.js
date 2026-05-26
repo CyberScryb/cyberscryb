@@ -152,3 +152,27 @@ document.addEventListener('keydown', (e) => {
         convert();
     }
 });
+
+// ── Pure encoding/decoding functions (exported for testing) ──────────────────
+
+function encodeBase64(input, urlSafe) {
+    let result = btoa(unescape(encodeURIComponent(input)));
+    if (urlSafe) {
+        result = result.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+    return result;
+}
+
+function decodeBase64(input, urlSafe) {
+    let b64 = input.trim();
+    if (urlSafe) {
+        b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+    }
+    return decodeURIComponent(escape(atob(b64)));
+}
+
+// ── Module Exports (for testing) ─────────────────────────────────────────────
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { encodeBase64, decodeBase64 };
+}

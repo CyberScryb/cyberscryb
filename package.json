@@ -4,7 +4,7 @@
   "description": "<div align=\"center\">",
   "main": "generate-pages.js",
   "scripts": {
-    "test": "jest --verbose"
+    "test": "jest --verbose --forceExit"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,11 @@
   },
   "dependencies": {
     "@datadog/browser-rum": "^7.1.0"
+  },
+  "jest": {
+    "modulePaths": [
+      "<rootDir>/functions/node_modules"
+    ],
+    "testEnvironment": "node"
   }
 }
