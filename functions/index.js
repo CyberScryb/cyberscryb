@@ -321,7 +321,7 @@ function sanitizeParams(params) {
 exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
-            return res.status(405).send('Method Not Allowed');
+            return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
         const { text, style } = req.body;
@@ -331,7 +331,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         // Allow localhost for testing
         if (!isAllowedReferer(referer)) {
             console.warn(`Blocked request from unauthorized referer: ${referer}`);
-            return res.status(403).send('Unauthorized Source'); // Enforced security
+            return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
         }
 
         // Rate limit check (no identifier logging)
@@ -367,7 +367,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 
         if (!apiKey) {
             console.error("API Key not found in functions config.");
-            return res.status(500).send("Server Configuration Error: Missing API Key");
+            return res.status(500).json({ error: "Server Configuration Error: Missing API Key" });
         }
 
         try {
@@ -571,7 +571,7 @@ exports.dailyAnalyticsReport = functions.pubsub
 exports.generateGigWork = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
-            return res.status(405).send('Method Not Allowed');
+            return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
         const { jobDescription, freelancerProfile } = req.body;
@@ -579,7 +579,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         // Security: Check Referer
         const referer = req.get('Referer');
         if (!isAllowedReferer(referer)) {
-            return res.status(403).send('Unauthorized Source');
+            return res.status(403).json({ error: 'Unauthorized Source' });
         }
 
         // Rate limit check (no identifier logging)
@@ -603,7 +603,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         });
 
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
-        if (!apiKey) return res.status(500).send("Missing API Key");
+        if (!apiKey) return res.status(500).json({ error: "Missing API Key" });
 
         try {
             const prompt = `
@@ -1111,7 +1111,7 @@ Return ONLY the written content. No title, no meta commentary, no "here's the pi
 exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
-            return res.status(405).send('Method Not Allowed');
+            return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
         const { tool, input, params } = req.body;
@@ -1119,7 +1119,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         // Security: Referer check
         const referer = req.get('Referer');
         if (!isAllowedReferer(referer)) {
-            return res.status(403).send('Unauthorized Source');
+            return res.status(403).json({ error: 'Unauthorized Source' });
         }
 
         // Validate tool
@@ -1168,7 +1168,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
         if (!apiKey) {
             console.error("API Key not found in functions config.");
-            return res.status(500).send("Server Configuration Error");
+            return res.status(500).json({ error: "Server Configuration Error" });
         }
 
         try {
@@ -1562,3 +1562,8 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         return res.status(200).json({ ok: true, status: 'paid' });
     });
 });
+
+// ─── Test Export (NODE_ENV=test only) ──────────────────
+if (process.env.NODE_ENV === 'test') {
+    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS };
+}
