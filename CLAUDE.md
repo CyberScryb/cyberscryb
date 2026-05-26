@@ -198,6 +198,12 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 - AdSense on tool pages (revenue = traffic indicator; amount unknown)
 - Stripe product ID prefix: `fce2083b` (when Stripe MCP reconnected)
 
+## Critical IDs
+- Firebase project: `gen-lang-client-0384486156`
+- GA4 measurement ID: `G-LS46B9J1XK` (confirmed correct property — updated 2026-05-26)
+- AdSense publisher: `ca-pub-5721233331247292`
+- Gemini model: `gemini-3.1-pro-preview` (MUST use `-preview` suffix — stable name returns 404)
+
 ## Key Files (from previous sessions)
 - STORY-POST.md — `local_3aeaca2c` outputs — 3-version launch post, ready to publish
 - LAUNCH-TONIGHT.md — `local_3aeaca2c` outputs — original launch plan (partially executed)

@@ -293,6 +293,28 @@ function isAllowedReferer(referer) {
     }
 }
 
+// ─── Param Sanitization ─────────────────────────────────
+const MAX_PARAM_LENGTH = 300;
+const PARAM_ALLOWLISTS = {
+    voice: ['conversational', 'educational', 'strategic'],
+    platform: ['LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'TikTok', 'YouTube'],
+    docType: ['parenting plan', 'custody declaration', 'modification request'],
+};
+
+function sanitizeParams(params) {
+    if (!params || typeof params !== 'object' || Array.isArray(params)) return {};
+    const clean = {};
+    for (const [key, val] of Object.entries(params)) {
+        if (typeof val === 'boolean') { clean[key] = val; }
+        else if (typeof val === 'number') { clean[key] = Math.max(1, Math.min(20, Math.floor(val))); }
+        else if (typeof val === 'string') {
+            if (PARAM_ALLOWLISTS[key]) { if (PARAM_ALLOWLISTS[key].includes(val)) clean[key] = val; }
+            else { clean[key] = val.slice(0, MAX_PARAM_LENGTH); }
+        }
+    }
+    return clean;
+}
+
 // Ensure you set this config variable:
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
@@ -1151,7 +1173,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
 
         try {
             const toolConfig = AI_PROMPTS[tool];
-            const prompt = toolConfig.build(input, params || {});
+            const prompt = toolConfig.build(input, sanitizeParams(params));
             const model = toolConfig.model || 'gemini-3.1-pro-preview';
 
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
