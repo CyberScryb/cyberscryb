@@ -30,7 +30,7 @@ Direct. No-BS. Short sentences. Like texting a smart friend. Use contractions. U
 | Thing | Value |
 |---|---|
 | Firebase project ID | `gen-lang-client-0384486156` |
-| Google Analytics 4 | `G-73LQZEDNR6` |
+| Google Analytics 4 | `G-LS46B9J1XK` |
 | Google AdSense | `ca-pub-5721233331247292` |
 | Cloudflare AI chatbot | `722da820-be39-4721-bc14-4e498d45d78b.search.ai.cloudflare.com` |
 | Google Search Console | `40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24` |
@@ -263,6 +263,7 @@ If asked for expansion ideas, don't keep suggesting tools in the same genre the 
 | Cloud Function returned plain text errors, frontend tried to JSON.parse | ALL error responses must use `res.status(N).json({ error: '...' })` never `res.send()` |
 | Used `referer.includes('cyberscryb.com')` for security check | Use `new URL(referer).hostname` against allowlist — string.includes is bypassable via query params |
 | Used `Math.random()` in password generator | Use `crypto.getRandomValues()` for anything security-related |
+| Hardcoded GA4 ID `G-73LQZEDNR6` across site (was wrong property) | Correct ID is `G-LS46B9J1XK` — Firebase auto-creates duplicate GA4 properties, causing confusion |
 
 ---
 
