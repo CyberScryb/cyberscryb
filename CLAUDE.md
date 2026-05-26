@@ -1,313 +1,217 @@
-# CLAUDE.md — CyberScryb Project Rules
-
-**Last updated:** 2026-05-16
-**Purpose:** Prevent repeat mistakes and wasted time. Read this FIRST every session.
+# CyberScryb / Lazy Hustler — Working Memory
+*Last updated: 2026-05-21*
 
 ---
 
-## About this project
+## ⚡ OPERATING DIRECTIVE — READ THIS FIRST, EVERY SESSION
 
-**Site:** cyberscryb.com
-**Owner:** Nate Ady (sole founder, operating CyberScryb LLC)
-**Stack:** Firebase Hosting + Cloud Functions + Cloudflare CDN, vanilla JS, no build step
-**Goal:** Traffic + revenue. Owner is in financial hardship — every decision should serve that.
+### How Claude Works on This Project
 
-### What the site is
-- 38+ tools: developer utilities, AI writing tools, and **Life Tools** (hardship letters, appeal letters, custody docs, caregiver reports)
-- 21 SEO guides, blog section (currently empty — fake posts were deleted)
-- AdSense on every page (publisher ID active, re-review submitted ~May 14 2026 after denial for low-quality content — site was fully overhauled, awaiting approval), affiliate panels on select tools, email gate on AI tools, Pro tier buttons (Stripe not wired up yet)
-- Cloudflare AI chatbot on every page
+**Act, don't advise.** If there's a problem, fix it. If there's an obvious improvement, make it. Stop creating patch files and handing them back — find the file, edit it, deploy it, confirm it's live. The only time to ask first is when the action is irreversible, ambiguous in its intent, or touches money. Everything else: do it.
 
-### Brand voice (CRITICAL)
-Direct. No-BS. Short sentences. Like texting a smart friend. Use contractions. Use "you" and "your". Slightly confrontational when warranted. No corporate speak. No fluff.
+**No more loops.** If the same issue appears in two consecutive sessions without being resolved, that's a failure. Escalate it, make noise, find a different path — don't just note it again.
 
-**Never use AI-slop words:** leverage, utilize, delve, tapestry, landscape, foster, moreover, furthermore, cutting-edge, game-changer, revolutionary, robust, seamless, innovative, empower, holistic, synergy, unlock, harness, thin, elevate, pivotal, nuanced
+**Own the outcome.** Don't stop at "I created a file you need to paste." That's half a job. Push through to the live state. Use GitHub, Vercel, Netlify, Cloudflare, Stripe — whatever MCP is available — to make the change land in production.
+
+**GitHub is connected.** Authenticate via `/mcp` if the GitHub MCP shows unauthenticated. Once connected, commit changes directly to the repo. Don't create patch files when you can push commits.
 
 ---
 
-## CRITICAL IDs & CREDENTIALS
+## 🎯 THE MISSION — What We're Actually Building
 
-| Thing | Value |
-|---|---|
-| Firebase project ID | `gen-lang-client-0384486156` |
-| Google Analytics 4 | `G-LS46B9J1XK` |
-| Google AdSense | `ca-pub-5721233331247292` |
-| Cloudflare AI chatbot | `722da820-be39-4721-bc14-4e498d45d78b.search.ai.cloudflare.com` |
-| Google Search Console | `40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24` |
-| Dev branch | `claude/edit-cyberscryb-website-p3pnz` (but currently pushing to `main`) |
+This isn't a side project. This is a real business built on a real story — a CNA on night shifts who shipped 29 AI tools between patient rounds. That story is the competitive moat. No VC-backed competitor can replicate it. No agency can fake it. It's the kind of authentic origin that Google, Reddit, and real humans respond to, and it needs to be everywhere.
 
-**AI model in use:** `gemini-3.1-pro-preview` (all AI tools). **CRITICAL: Must use the `-preview` suffix.** Gemini 3.1 Pro is in preview status as of April 2026 — the stable name `gemini-3.1-pro` does NOT exist and returns 404 from Google API. User has $10 prepaid + $100 cap on Google Cloud billing.
+**The north star:** Build tools so genuinely useful that users would miss them if they disappeared. Not "another AI wrapper" — tools that solve real problems for real people who are struggling, working, hustling, and need help fast. The humanizer helps a student avoid a failing grade. The hardship letter helps someone keep their lights on. The CNA shift report helps an exhausted healthcare worker go home ten minutes earlier. That's what we're doing. Those people are the point.
+
+**Every decision runs through this filter:** Does this make the product better for the user? Does it get more people to discover it? Does it make them trust it more? If yes, do it. If no, cut it.
 
 ---
 
-## DEPLOYMENT (the thing that's burned the most time)
+## 🚦 ACTION PROTOCOL
 
-### Auto-deploy is active
-GitHub Actions workflow at `.github/workflows/deploy.yml` deploys BOTH hosting AND functions on every push to `main`. This was broken until 2026-04-14 — it only deployed hosting. Now it deploys both.
+### When Claude finds an issue:
+- **Clearly fixable + low-risk** → Fix it immediately, note what was done
+- **Fixable but ambiguous** → State the issue and proposed fix in one sentence, ask for a yes/no, then execute
+- **Irreversible or touches payments/security** → Always ask before touching it
 
-### To trigger a deploy:
-1. `git add -A && git commit -m "..." && git push origin main`
-2. Check status at `github.com/CyberScryb/cyberscryb/actions`
-3. Auto-deploys in 3-5 min
+### What "done" means:
+Not "I created a file." Not "here's what you need to do." Done means: the change is live, confirmed, and noted in this CLAUDE.md under recent changes.
 
-### If you need to manually deploy from Nate's PowerShell:
-```
-cd cyberscryb
-git pull origin main
-npx firebase deploy --project gen-lang-client-0384486156
-```
-(Omit `--token` flag — local login is already saved.)
+### Organic traffic is the current #1 priority:
+Every session should move at least one needle on organic reach. This means:
+- Fix SEO issues on pages that have them (directly in the repo, not in patch files)
+- Build content (blog posts, FAQs, landing pages) that targets real search queries
+- Distribute on platforms where the audience already is (Reddit, Quora, Product Hunt, niche forums)
+- Pursue every legitimate organic technique: schema markup, internal linking, content depth, long-tail keyword pages, programmatic SEO for tool variations, community engagement
+- Nothing spammy. Nothing that risks a Google penalty. Everything that a real business with real users would do.
 
-### You CANNOT deploy from the Claude Code web environment
-Google Cloud API returns **403 Forbidden** to requests from this environment. Don't waste time trying. Either use GitHub Actions or have Nate deploy locally.
-
----
-
-## CRITICAL TECHNICAL RULES
-
-### 1. `firebase.json` uses `trailingSlash: true` + `cleanUrls: true`
-This means URLs become `/tools/foo/` (with slash). **Root-level pages (tools.html, about.html, etc.) MUST use absolute paths** for CSS/JS/favicon or they'll 404:
-- ✅ `/css/style.css`, `/js/script.js`, `/favicon.svg`
-- ❌ `css/style.css`, `js/script.js`, `favicon.svg`
-
-Tool pages in subdirectories can use `../../css/style.css` because they're 2 levels deep.
-
-### 2. Cloud Functions need their own deploy
-`firebase deploy --only hosting` does NOT deploy new AI prompts in `functions/index.js`. The GitHub Actions workflow now deploys both, but if you're debugging why a new AI tool returns "Something went wrong" — it's almost always because functions weren't deployed.
-
-### 3. `functions/` directory needs `npm install` before deploy
-Missing `firebase-functions` package causes deploy errors. GitHub Actions now runs `npm install` in `./functions` automatically.
-
-### 4. GA4 measurement ID must be `G-73LQZEDNR6`
-The correct property is `G-73LQZEDNR6`. The other ID `G-Z347WYM5ZZ` is a different property — do not use it.
-
-### 5. Cloudflare OWASP Core Ruleset
-Nate has it enabled. It CAN block legitimate tool usage (pasting JSON, code, etc. can trigger it). If users report random blocks, suggest turning it off — but he decided to leave it on.
-
-### 6. Cloudflare challenge loop on dash.cloudflare.com
-Nate's PC had this issue caused by NextDNS filtering Turnstile. Phone works fine. Not a site issue.
-
-### 7. Performance optimizations in place (don't undo them)
-- AdSense deferred 2.5s or until first user interaction
-- GA4 deferred 1.5s after load
-- Google Fonts load async via `<link rel="preload" ... onload=...>`
-- Don't add blocking third-party scripts to `<head>`
+### Build for longevity:
+Don't optimize for today's metric at the expense of next year's foundation. No black-hat shortcuts. No dark patterns on users. Build the kind of product that earns loyalty — fast tools, honest copy, zero dark patterns, real value delivery. Users are not a means to revenue. Revenue is a byproduct of genuinely serving users.
 
 ---
 
-## CONTENT RULES (content mistakes have been the most painful)
+## 🔥 WHAT GREAT LOOKS LIKE HERE
 
-### NEVER
-- **Never fabricate a founder story** — the fake "why-i-built-cyberscryb.html" was deleted. Don't recreate.
-- **Never make up stats or numbers** — if you don't know, say "a lot" or skip it. Don't invent "73% of developers..."
-- **Never use outdated model names** — check current Claude, Gemini, GPT versions via WebSearch before mentioning them.
-- **Never write blog content without WebSearch first** — always verify current facts, prices, competitor info before writing.
+Not adequate. Not "fine for a one-person shop." Actually great. Every page should load fast, look clean, and do exactly what it promises. Every tool should work on the first try. Every email, every landing page, every Reddit comment — written like someone cares, because someone does.
 
-### ALWAYS
-- **WebSearch before writing blog posts** — models, prices, stats, competitors change fast.
-- **Use Nate's real voice** — direct, no-BS, short sentences. Writing that reads like AI is worse than no writing.
-- **Cite current info** — date-stamped facts (e.g., "as of April 2026") are better than undated claims.
+The standard is: would a first-time visitor trust this with their resume, their hardship letter, their professional reputation? If the answer is anything less than "immediately, yes" — fix it.
 
-### Current model landscape (April 2026 — verify before writing about)
-- Claude Opus 4.6 (released Feb 5, 2026)
-- GPT-5.4 (released March 5, 2026)
-- Gemini 3.1 Pro (released Feb 2026)
-- Claude Sonnet 4.6, GPT-5.3-Codex, Gemini 2.5 Pro/Flash
-
-### Blog posts are CURRENTLY DELETED
-All 8 original posts were AI slop with outdated info. Starting fresh with real research required.
+Innovate where it matters. The AI humanizer isn't just a text rewriter — it could be the tool that learns your voice over time, gets smarter with every use, becomes genuinely irreplaceable. The CNA tools aren't just templates — they're a product built by someone who has done the job, and that shows in every field and every phrase. Push on those differentiators. That's where competitors can't follow.
 
 ---
 
-## SITE STRUCTURE
+## 🛑 THINGS THAT MUST STOP
 
-```
-public/
-├── index.html              # Homepage (uses absolute paths)
-├── tools.html              # All tools listing (uses absolute paths)
-├── about.html, contact.html, privacy.html, terms.html, disclosure.html, 404.html
-├── css/style.css           # Global styles, unified button system
-├── js/script.js            # Global scripts + Cloudflare chatbot loader
-├── favicon.svg, og-image.svg, robots.txt, sitemap.xml, feed.xml
-├── tools/
-│   ├── {tool-name}/
-│   │   ├── index.html      # Uses ../../css/style.css
-│   │   └── {tool-name}.js or script.js
-│   └── shared/
-│       ├── ai-tool.js          # Shared AI tool core (CSAITool.init)
-│       ├── ai-tool.css         # AI tool styles
-│       ├── affiliate-panel.js  # Contextual affiliate recommendations
-│       └── email-capture.js    # Email capture bar
-├── blog/
-│   └── index.html          # (All blog posts deleted — need to write new ones)
-└── guides/                 # 21 SEO guide pages (generated by generate-pages.js)
-
-functions/
-└── index.js                # Cloud Functions: rewriteText, generateGigWork, generateAI, subscribeEmail
-                            # AI_PROMPTS object has 14 tool prompts
-
-.github/workflows/
-└── deploy.yml              # Auto-deploys hosting + functions on push to main
-
-firebase.json               # trailingSlash:true, cleanUrls:true
-.firebaserc                 # { "default": "gen-lang-client-0384486156" }
-generate-pages.js           # Generates SEO guide pages
-```
-
-### AI tools follow the summarizer pattern
-Use `public/tools/summarizer/index.html` + `summarizer.js` as the template for any new AI tool:
-- Deferred AdSense/GA4 in head
-- Two-panel layout (input left, output right)
-- Email gate overlay via `../shared/ai-tool.js` `CSAITool.init()`
-- Breadcrumbs, navbar with Blog link, footer
-- Schema.org SoftwareApplication + BreadcrumbList JSON-LD
-- 2 AdSense units, Related Tools section, FAQ with 5 questions
-
-### Adding a new AI tool
-1. Add prompt to `AI_PROMPTS` in `functions/index.js` with `toolId` key
-2. Create `public/tools/{tool-id}/index.html` following summarizer template
-3. Create `public/tools/{tool-id}/{tool-id}.js` calling `CSAITool.init({toolId: ...})`
-4. Add to `public/tools.html` tool grid
-5. Add to `public/sitemap.xml`
-6. Add option to homepage dropdown in `public/index.html`
-7. Push to main — auto-deploys hosting + functions
+- Creating files and calling it done
+- Identifying the same issue across multiple sessions without resolving it
+- Writing "here's what you need to do" when the tools exist to do it directly
+- Spending tokens on analysis and recaps instead of execution
+- Any recommendation that starts with "you could consider" — if it's worth saying, it's worth doing
 
 ---
 
-## STRATEGIC RULES
+## 🤖 EFFICIENCY SYSTEM — Agents, Tokens, Tools, Automation
 
-### What CyberScryb is differentiating on
-The dev tools space (JSON converter, Base64, password checker, AI humanizer) is SATURATED. Competing there is losing.
+### Sub-Agents: Use Them, Don't Hoard the Work
 
-**The differentiator: "Life Tools"** — AI-powered tools for real life situations where no good free tool exists:
-- Hardship letters (mortgage, medical, immigration, student loans)
-- Appeal letters (unemployment, insurance, housing)
-- Custody documents (parenting plans, declarations)
-- Caregiver shift reports
+Spawn sub-agents when work is parallelizable, specialized, or would benefit from isolation. Concrete triggers:
 
-These target audiences that generic dev tool sites don't reach: caregivers (53M in US), co-parents in custody situations, people in financial hardship. Low competition, high demand, built from Nate's lived experience (former CNA, dealt with custody, currently in hardship).
+- **Parallel independent tasks** — e.g., auditing 5 tool pages for SEO at the same time, not sequentially. Launch them in one message as parallel agents.
+- **Heavy research + execution simultaneously** — one agent researches while another deploys.
+- **Specialized work** — use `searchfit-seo` agents for deep SEO analysis, `engineering` agents for code review, `brand-voice` agents for content generation. Don't reinvent what a skill already does well.
+- **Verification** — always spawn a verification agent after significant changes rather than self-reviewing. Fresh context catches things the original agent misses.
+- **Long file analysis** — if reading + analyzing multiple large files, delegate to a `general-purpose` agent rather than burning the main context window.
 
-### Distribution is the bottleneck
-Building more tools won't move the needle alone. The site has 3,000+ unique visitors/month (as of May 2026). Getting TRAFFIC is the blocker. Options:
-- Reddit posts (niche subreddits for each tool)
-- Product Hunt launch
-- Dev.to articles
-- Hacker News Show HN
-- Organic SEO (takes 2-12 weeks to rank)
+When NOT to spawn: simple one-step tasks, pure conversation, anything that needs real-time back-and-forth with Nathan.
 
-### Don't suggest more of the same genre
-If asked for expansion ideas, don't keep suggesting tools in the same genre the site already has. Look for different audiences and lived-experience niches.
+### Token Cost — Save Without Cutting Quality
 
----
+**Cache aggressively.** CLAUDE.md is read every session — its content hits the cache after the first read. Keep it well-structured so repeated reads stay cheap. Don't re-read files that haven't changed.
 
-## WORKING STYLE RULES
+**Batch tool calls.** Independent tool calls (file reads, web fetches, API calls) go in a single message block. Never fire them sequentially when they can run in parallel. One round-trip instead of five.
 
-### Voice when responding to Nate
-- Direct. Don't hedge.
-- If I'm wrong, I'm wrong. Admit it. Don't defend.
-- Don't use filler words or corporate hedging.
-- Short sentences > long ones.
+**Don't recap.** Never open a response with a summary of what was just done. The user can see the previous message. Get to the next action.
 
-### Before stating facts
-- WebSearch first if the claim is time-sensitive (prices, versions, stats, features)
-- Don't dismiss something Nate says just because I don't recognize it — look it up
-- My knowledge cutoff is behind current date — assume I'm outdated on anything post-May 2025
+**Skip intermediate verification for simple changes.** A single-line string replacement doesn't need a 200-line file re-read to confirm. Trust the tool's success response. Reserve verification reads for complex multi-step changes.
 
-### When making mistakes
-- Acknowledge them directly. Don't explain them away.
-- Fix the mistake. Don't just apologize.
-- If the same pattern happens twice, add a rule to this file.
+**Use the right model.** Haiku-tier tasks (formatting, simple lookups, short writes) don't need Sonnet. When spawning sub-agents for lightweight tasks, note the task is simple so the agent can use lighter inference.
 
-### Commit discipline
-- Always commit and push after meaningful work (triggers auto-deploy)
-- Use descriptive commit messages with context
-- If a commit is blocked by hooks, fix the issue — don't bypass with `--no-verify`
+**Compact proactively.** When context is getting long (approaching 80% of the window) and there's a natural pause — end of a major task, before starting a new unrelated one — trigger `/compact`. Don't wait to be asked. Note the compact happened in the next message so Nathan knows.
 
-### When launching parallel agents
-- Agents time out on long tasks — keep scope focused per agent
-- Blog posts with WebSearch + 1000+ word output TEND to time out. Break into smaller chunks.
-- Commit after each agent completes, not at the end
+### Tools and Skills — Discover, Use, Create
+
+**Before doing something manually, check if a tool exists for it.** Search MCP registry before scraping manually. Check available skills before writing from scratch. The installed plugin stack (Ahrefs, Semrush, Stripe, Vercel, Cloudflare, Netlify, Notion, Slack, Gmail, HubSpot, ActiveCampaign, and more) covers most workflows — use them.
+
+**Create skills when a workflow repeats.** If the same sequence of steps happens more than twice (e.g., "audit a tool page and push SEO fixes"), build a skill for it. Skills live at `C:\Users\natea\AppData\Roaming\Claude\local-agent-mode-sessions\skills-plugin\...\skills\`. Use the `skill-creator` skill to scaffold them properly.
+
+**Scheduled tasks are automation, not reminders.** If something needs to happen regularly, create a scheduled task that actually does the work — not one that reminds Nathan to do it. The difference: a good scheduled task produces a commit, a sent message, or a live change. A bad one produces a note saying "you should do X."
+
+**The automation stack already running:**
+- Reddit opportunity monitor → daily 7:09 AM (scans 13 subs, emails ranked list + pre-written replies)
+- Weekly content generator → Sundays (SEO blog post + newsletter draft)
+- Lazy Hustler content pipeline → Mondays
+- Daily briefing → daily
+- Gmail opportunity scanner → daily
+- Daily revenue check → ❌ BROKEN (Stripe MCP disconnected — reconnect via Cowork → Connectors)
+
+Every session: look at this list. If something is broken, fix it. If something is missing that should be automated, build it.
+
+### The Automation Dream
+
+The goal is: Nathan describes what he wants, it gets done, he finds the result waiting for him. Zero back-and-forth on execution. He reviews outcomes, not steps. Every session should move closer to that. Every manual step Nathan currently does is a candidate for automation. Every file Claude creates manually is a candidate for a scheduled task. Every SEO fix that took 30 minutes is a candidate for a skill that does it in 2.
 
 ---
 
-## OPEN TODOS / UNFINISHED WORK
+## Recent Changes (Session 2026-05-21)
+| File | Change |
+|------|--------|
+| `public/pro.html` | Fixed dead monthly checkout link → `https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b` ($5/mo active). Schema price corrected 9.00 → 5.00. |
+| `public/tools/humanizer/index.html` | Added canonical, full OG tags, Twitter card, upgraded schema to WebApplication + featureList, injected 1,000-word SEO content block + FAQ section. |
+| `CLAUDE.md` (repo) | Merged lesson entries from both session and remote. |
+| Commit | `3af1f5f` pushed to `main` on `github.com/CyberScryb/cyberscryb` |
 
-1. **Blog posts:** All 8 deleted. Need new ones written with research. Topics to consider:
-   - "Life Happens: Why I Built CyberScryb's Life Tools" (Life Tools spotlight, NOT fake founder story)
-   - Honest AI tool comparisons (current models)
-   - Guides for the 4 Life Tools (hardship letter examples, appeal letter strategies, etc.)
-2. **Stripe payment links:** Pro tier buttons still go to `#`. Need two links (monthly $5, annual $29) from Nate.
-3. **Affiliate programs:** Affiliate panel has placeholder URLs. Need real links after Nate applies to CJ Affiliate, Impact, etc.
-4. **Usage counter:** Backend has 9 AI prompts but no Firestore counter or `/api/stats` endpoint yet.
-5. **OWASP ruleset:** User-aware, decided to leave on.
-
----
-
-## HISTORICAL MISTAKES (don't repeat)
-
-| Mistake | What to do instead |
-|---|---|
-| Claimed Gemini 3.1 Pro didn't exist | WebSearch when user mentions an unfamiliar version |
-| Used outdated model names in blog content | WebSearch current model versions before writing |
-| Made up AdSense RPM estimates ($1-5 instead of $5-15+ for tech) | WebSearch current niche CPMs before quoting |
-| Got DigitalOcean affiliate structure wrong | WebSearch affiliate terms before quoting payouts |
-| GitHub Actions only deployed hosting | Workflow now deploys both hosting + functions |
-| Root-level pages broke with trailingSlash:true | Use absolute paths for root pages |
-| Made relative paths from Google Fonts preload | `../css/style.css` for blog/, absolute for root |
-| Created fake founder story | NEVER fabricate personal history |
-| Wrote AI-slop blog content | Use banned word list, write in Nate's direct voice |
-| Suggested more of the same genre when asked to expand | Think about different audiences and lived experience |
-| Didn't check AdSense approval before assuming ads show | Ads take 24-72h after approval to serve |
-| Kept trying to deploy from Claude Code web env | It's blocked by Google — use GitHub Actions or local |
-| Used `gemini-3.1-pro` as model name (wrong) | Correct name is `gemini-3.1-pro-preview` — the model is in preview |
-| Cloud Function returned plain text errors, frontend tried to JSON.parse | ALL error responses must use `res.status(N).json({ error: '...' })` never `res.send()` |
-| Used `referer.includes('cyberscryb.com')` for security check | Use `new URL(referer).hostname` against allowlist — string.includes is bypassable via query params |
-| Used `Math.random()` in password generator | Use `crypto.getRandomValues()` for anything security-related |
-| Hardcoded GA4 ID `G-73LQZEDNR6` across site (was wrong property) | Correct ID is `G-LS46B9J1XK` — Firebase auto-creates duplicate GA4 properties, causing confusion |
+**Pending:** GitHub Dependabot flagged 9 vulnerabilities (4 high, 4 moderate, 1 low) on the repo. Run `npm audit fix` or review at github.com/CyberScryb/cyberscryb/security. Address high severity items next session.
 
 ---
 
-## BUILD THIS FILE OVER TIME
+## Who You Are
+- **Nathan Ady** (Nathaniel Ady) — cyberscryb@gmail.com
+- CNA (Certified Nursing Assistant), works night shifts
+- Author: "The Lazy Hustler's Playbook"
+- Brands: **CyberScryb LLC** (tools/SaaS) + **Lazy Hustler** (content/newsletter)
+- Stats: 68+ AI systems, 229 Suno music tracks
 
-Every time a new mistake happens or a new rule emerges, add it here. This file is the project's institutional memory.
+## CyberScryb Products
+**Site:** cyberscryb.com — 29 AI tools total
 
----
+### Hero Tools (highest commercial value)
+| Tool | Notes |
+|------|-------|
+| Anti-AI Humanizer | Most popular tool; competitors charge $20-50/mo |
+| Gig Auto-Pilot | Freelance proposal generator; Upwork market |
+| AI Text Detector | Pairs with humanizer |
+| Resume Bullet Writer | |
+| Caregiver Shift Report Generator | **Unique wedge** — CNA-built, no competitor has it |
+| Hardship Letter Generator | |
+| Appeal Letter Generator | |
 
-## POST-CHANGE AUDIT REQUIREMENT (MANDATORY)
+### Dev Tools (bundle filler)
+JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, password checker, privacy policy gen, SEO meta tag gen, and others.
 
-**After ANY change to the site (tools, content, design, config), run a multi-agent audit.** Do not consider work "done" until the audit runs.
+## Pricing (as of session)
+| Tier | Price | Link |
+|------|-------|------|
+| Monthly | $5/mo | cyberscryb.com/pro |
+| Annual | $29/yr | cyberscryb.com/pro |
+| CNA Resume Kit | $39 one-time | https://buy.stripe.com/00w3cx56m3mueKF3oV0sU01 |
+| CyberScryb Pro (lifetime promo) | listed on site | https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08 |
 
-### Audit workflow (launch in parallel via Agent tool)
+**Note:** A $29 lifetime and $19 CNA pack were created and then **deactivated** in April 2026 because they conflicted with existing $29/yr tier.
 
-**Agent 1 — Broken Things Audit:**
-- Check every page modified or added for: missing CSS links, missing JS links, broken `href` paths, 404s
-- Verify nav includes Blog link on all tool pages
-- Verify deferred AdSense + GA4 loaders present
-- Check for Schema.org JSON-LD on tool pages (SoftwareApplication)
-- Check for trailing slash issues (root pages must use `/css/style.css`, not relative)
-- Test that any new AI tool's `toolId` matches a key in `AI_PROMPTS` in `functions/index.js`
-- Verify `/api/ai-generate`, `/api/rewrite`, `/api/subscribe` rewrites in `firebase.json`
-- Look for leftover placeholder text, TODO comments, or broken images
+## Automated Systems (Scheduled Tasks)
+| Task | Schedule | Status |
+|------|----------|--------|
+| Reddit opportunity monitor | Daily 7:09 AM | ✅ Running — scans 13 subs, emails ranked list + pre-written replies |
+| Cyberscryb weekly content generator | Weekly (Sundays) | ✅ Running — SEO blog post + newsletter draft |
+| Weekly content pipeline (Lazy Hustler) | Mondays | ✅ Running — newsletter + 5 social posts + Notion update |
+| Daily briefing | Daily | ✅ Running |
+| Gmail opportunity scanner | Daily | ✅ Running |
+| Daily revenue check | Daily | ❌ BROKEN — Stripe MCP (fce2083b) disconnected |
 
-**Agent 2 — Value Improvement Opportunities:**
-- What's missing that could drive traffic? (new tools, missing guides, missing internal links)
-- What's underperforming? (old meta descriptions, thin content, weak CTAs)
-- What could convert better? (email gates, Pro upsells, affiliate panels)
-- Are there audience segments we're missing? (specifically for Life Tools — caregivers, co-parents, hardship)
-- Suggest 5-10 specific improvements ranked by impact
+## Critical Open Items
+1. **Reconnect Stripe MCP** — daily revenue check failing. Go to Cowork → Connectors → find Stripe and reconnect.
+2. **Publish the story post** — 3 versions drafted in STORY-POST.md (Indie Hackers long-form, X thread, r/CNA). This is highest-leverage single action. Fill in 2 blanks (unit type, state) and post IH version.
+3. **Launch newsletter container** — Beehiiv or Substack still not live as of late April. Weekly content packs are generating unread inventory.
+4. **cyberscryb.com Pro landing page** — hasn't been optimized for conversion.
 
-**Agent 3 — Consistency Check:**
-- Are all tool cards in tools.html linked correctly?
-- Does the homepage dropdown include every new tool?
-- Is the sitemap.xml up to date?
-- Are meta descriptions consistent length (120-160 chars)?
-- Are og:image tags present on every page?
-- Any pages still using outdated model names, old GA4 ID, or fake content?
+## 2026 Strategy (research-backed)
+- **Traditional SEO is broken** — AI Overviews cut CTR 34.5%, 60% zero-click searches
+- **Personal brand = SEO** — Google E-E-A-T rewards real human expertise/story
+- **80.5% of AI tool traffic is direct** — brand + repeat users > search
+- **Reddit ranks on Google** for commercial intent queries — authentic comments compound over weeks
+- **Your wedge:** "CNA on night shift who shipped 29 AI tools between patient rounds" — no competitor can copy this angle
+- **ChatGPT/Claude cite Reddit** at 7% conversion vs Google's 5%
 
-### After audit:
-1. Present findings to user with CRITICAL / WARNING / INFO priority
-2. Fix CRITICAL issues immediately
-3. Add WARNING items to a running TODO list
-4. Save INFO suggestions for future improvement rounds
+## Active Revenue Channels
+- CyberScryb Pro subscriptions ($5/mo, $29/yr)
+- CNA Resume Kit ($39)
+- AdSense on tool pages (revenue = traffic indicator; amount unknown)
+- Stripe product ID prefix: `fce2083b` (when Stripe MCP reconnected)
 
-### Never skip this. Every time.
+## Critical IDs
+- Firebase project: `gen-lang-client-0384486156`
+- GA4 measurement ID: `G-LS46B9J1XK` (confirmed correct property — updated 2026-05-26)
+- AdSense publisher: `ca-pub-5721233331247292`
+- Gemini model: `gemini-3.1-pro-preview` (MUST use `-preview` suffix — stable name returns 404)
+
+## Key Files (from previous sessions)
+- STORY-POST.md — `local_3aeaca2c` outputs — 3-version launch post, ready to publish
+- LAUNCH-TONIGHT.md — `local_3aeaca2c` outputs — original launch plan (partially executed)
+- Weekly content packs — `local_dc107099` outputs — content already written
+
+## Notion
+- CyberScryb Command Center: https://app.notion.com/p/f8bcfddc1cc748e7819049b183fff3aa
+- Lazy Hustler Newsletter: https://app.notion.com/p/3259ea9bcd7a81448127ea1fe44943fe
+
+## Context for New Sessions
+Start any new session by reading this file. Key constraint: **Stripe MCP must be reconnected** before revenue monitoring works. The Reddit monitor is the core compounding automation — check its daily email output to know if it's driving engagement. The story post is the single highest-leverage human action still pending.
