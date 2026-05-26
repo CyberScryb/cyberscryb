@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -251,6 +251,32 @@
                     <p>Related: <a href="../humanizer/">AI Humanizer</a> | <a href="../email-writer/">AI Email Writer</a> | <a href="../word-counter/">Word Counter</a></p>
                 </div>
             </div>
+        </section>
+        <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How AI Summarization Actually Works</h2>
+            <p>Modern AI summarizers use transformer-based language models — the same architecture behind ChatGPT and Gemini — but tuned for a specific task: compressing long text into shorter text without losing the core meaning. There are two fundamentally different approaches.</p>
+            <p><strong>Extractive summarization</strong> pulls the most important sentences directly from the original text. It never generates new words — it just picks the sentences that carry the most information. The upside is perfect accuracy. The downside is choppy output that reads like a highlight reel.</p>
+            <p><strong>Abstractive summarization</strong> is what this tool uses. The AI reads the entire input, builds an internal representation of the meaning, and writes a new summary in its own words. This produces more natural, readable output — but introduces a small risk of hallucination. Always spot-check the output against your source.</p>
+
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">When to Use a Summarizer (and When Not To)</h2>
+            <p>Summarizers work best on informational text: news articles, research papers, meeting transcripts, blog posts, and documentation. They struggle with highly technical content that relies on precise definitions — legal contracts and medical protocols lose critical nuance when compressed. They also don't handle creative writing well.</p>
+            <p>The most productive workflow is using the summarizer as a first pass: compress the text, read the summary to decide if the full document is worth your time, then go back and read the sections that matter.</p>
+
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Tips for Getting Better Summaries</h2>
+            <p><strong>Clean your input.</strong> Remove headers, footers, navigation text, and boilerplate before pasting. The model treats everything as content to summarize, so noise in means noise out.</p>
+            <p><strong>Choose the right length.</strong> Short summaries (1-2 sentences) work for deciding whether to read something. Medium (3-5 sentences) for briefing someone else. Long (paragraph) for creating reference notes.</p>
+            <p><strong>Use bullet points for action items.</strong> Meeting notes and project updates extract more cleanly in bullet format than paragraph format.</p>
+            <p><strong>Break long documents into sections.</strong> Summarizing a 10,000-word document in one pass forces heavy compression. Summarizing each section individually produces better results.</p>
+
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How This Compares to ChatGPT</h2>
+            <p>You can paste text into ChatGPT and ask it to summarize, but there are practical differences. ChatGPT's context window competes with your conversation history — long documents can get truncated. This tool sends your text directly to a summarization-optimized endpoint with the full context window dedicated to your input. You also get structured controls (length, format) and word count metrics.</p>
+            <p>The bigger difference is privacy. ChatGPT retains conversation data for model improvement unless you opt out. This tool processes your text and discards it — nothing is logged or used for training.</p>
+
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Use Cases</h2>
+            <p><strong>Students</strong> use it to digest research papers during exam prep. Summarizing 20 papers into one-paragraph abstracts makes literature reviews manageable.</p>
+            <p><strong>Professionals</strong> use it for email triage — paste a long thread and get the key decisions and action items in seconds.</p>
+            <p><strong>Content creators</strong> use it to generate meta descriptions, social media previews, and newsletter blurbs from full-length articles.</p>
+            <p><strong>Researchers</strong> use it to screen papers during systematic reviews. Summarize 50 abstracts, then only read the 8 that are relevant.</p>
         </section>
     </main>
 

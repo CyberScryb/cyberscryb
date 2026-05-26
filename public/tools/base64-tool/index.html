@@ -240,7 +240,29 @@
             <p style="margin-top:0.75rem;">This tool encodes and decodes text. For encoding image files as Base64 data URIs (for use in CSS or HTML), use the CyberScryb <a href="/guides/base64-image-encoder/" style="color:#00d4ff;">Base64 Image Encoder guide</a>, which walks through the process of converting image files to inline data URIs.</p>
         </details>
     </section>
-</main>
+
+    <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Is Base64 Encoding</h2>
+        <p>Base64 is a binary-to-text encoding scheme that converts binary data into a string of ASCII characters. It uses 64 characters — A-Z, a-z, 0-9, plus (+) and slash (/) — to represent binary data in a text-safe format. The equals sign (=) is used for padding at the end when the input length isn't divisible by 3.</p>
+<p>Base64 exists because many systems — email protocols, JSON, XML, URLs — can only handle text data safely. If you need to embed a binary file (an image, a PDF, a cryptographic key) inside a text-based format, Base64 encoding is the standard solution. The tradeoff is size: Base64 encoding increases the data size by approximately 33%, because every 3 bytes of binary data become 4 bytes of Base64 text.</p>
+<p>Base64 is <strong>not encryption</strong>. It provides zero security. Anyone can decode a Base64 string instantly. It's a transport encoding, not a security mechanism. If you see API keys or passwords stored as Base64 in configuration files, that's a security problem, not a solution.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Uses for Base64</h2>
+        <p><strong>Data URIs in HTML/CSS.</strong> You can embed small images directly in HTML or CSS using Base64 data URIs: <code>data:image/png;base64,iVBOR...</code>. This eliminates an HTTP request for each image, which can improve page load times for small icons and graphics. For images larger than ~2KB, a separate file with proper caching is usually faster.</p>
+<p><strong>Email attachments.</strong> MIME email encoding uses Base64 to embed binary attachments inside text-based email messages. When you attach a PDF to an email, your email client Base64-encodes it before sending and the recipient's client decodes it on arrival.</p>
+<p><strong>API authentication.</strong> HTTP Basic Authentication encodes the username:password pair as Base64 in the Authorization header. Again, this is encoding for transport, not security — the credentials are only protected if the connection uses HTTPS.</p>
+<p><strong>JWT tokens.</strong> JSON Web Tokens use Base64url encoding (a URL-safe variant that replaces + with - and / with _) for the header and payload sections. The signature section is also Base64url-encoded.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Base64 Variants</h2>
+        <p>Standard Base64 (RFC 4648) uses +, /, and = characters that have special meaning in URLs and filenames. <strong>Base64url</strong> replaces + with - and / with _, making it safe for URLs and filenames without percent-encoding. This is what JWTs and many modern APIs use.</p>
+<p><strong>MIME Base64</strong> inserts line breaks every 76 characters, as required by the MIME email specification. Standard Base64 has no line breaks. If you're decoding Base64 and getting errors, check whether the input has unexpected line breaks or whitespace.</p>
+<p>This tool handles both standard and URL-safe Base64. It automatically detects the variant when decoding and lets you choose the variant when encoding.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Reading</h2>
+        <ul style="padding-left:1.2rem;">
+            <li><a href="/guides/" style="color:#34F5C5;">Browse All CyberScryb Guides</a></li>
+            <li><a href="/blog/" style="color:#34F5C5;">Read the CyberScryb Blog</a></li>
+            <li><a href="/tools" style="color:#34F5C5;">Explore All Free Tools</a></li>
+        </ul>
+    </section>
+    </main>
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
