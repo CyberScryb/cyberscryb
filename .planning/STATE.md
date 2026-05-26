@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+last_updated: "2026-05-26T06:58:47.609Z"
+progress:
+  total_phases: 7
+  completed_phases: 0
+  total_plans: 5
+  completed_plans: 4
+  percent: 0
+---
+
 # State: CyberScryb — AI-First Tool Suite
 
 **Last updated:** 2026-05-20
@@ -53,6 +67,8 @@
 - **AI tools as primary identity** — dev tools attract SEO, AI tools convert
 - **Email newsletter > accounts (initially)** — list already exists; accounts add friction
 - **Skip Stripe Pro wiring this round** — needs retention proof first; tracked as v2
+- **Jest test export via NODE_ENV=test guard** — functions/index.js exports AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS for testing; never exposed in production
+- **jest modulePaths in package.json** — points to functions/node_modules so firebase-admin resolves in tests; requires `cd functions && npm install` before running tests in CI
 - **Brand foundation in Phase 2, brand polish in Phase 6** — tokens first, flourishes after UX has earned them
 
 ### Constraints to Remember
@@ -69,7 +85,7 @@
 - **CRITICAL**: Pro tier has no server-side fulfillment (Stripe webhook missing) — out of scope this round
 - **CRITICAL**: Affiliate links are placeholder URLs — out of scope this round (depends on CJ approval)
 - **CRITICAL**: AdSense approval pending — external blocker
-- **WARNING**: Cloud Function error responses use `res.send()` instead of `res.json()` in several places — address in Phase 1
+- ~~**WARNING**: Cloud Function error responses use `res.send()` instead of `res.json()` in several places~~ — RESOLVED in Plan 01-B (all errors use res.json, regression test added)
 - **WARNING**: Pro check is client-side cookie only (bypassable) — address in Phase 1 or document as v2
 - **WARNING**: In-memory rate limiter is per-instance — address in Phase 3 (touches AI infra)
 - **WARNING**: og:image is SVG (rejected by FB/LinkedIn) — address in Phase 6
@@ -87,11 +103,12 @@
 
 ## Session Continuity
 
-**Last session:** Roadmap created from REQUIREMENTS.md (50 v1 requirements mapped to 7 phases).
+**Last session:** 2026-05-26 — Completed Phase 1 Plans A, B, C. Plan A: audit inventory script. Plan B: AI prompt builder + error shape Jest tests. Plan C: client-side dev tool tests.
 
-**Next action:** Run `/gsd:plan-phase 1` to decompose Phase 1 (Audit & Triage) into executable plans.
+**Next action:** Continue Phase 1 with Plan D or E.
 
 **Files of record:**
+
 - `/home/user/cyberscryb/.planning/PROJECT.md`
 - `/home/user/cyberscryb/.planning/REQUIREMENTS.md`
 - `/home/user/cyberscryb/.planning/ROADMAP.md`
