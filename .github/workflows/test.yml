@@ -17,6 +17,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      # Jest tests import firebase-admin from functions/node_modules
+      # (root package.json maps modulePaths there), so install it.
+      - name: Install Functions dependencies
+        run: npm install
+        working-directory: ./functions
       - run: npx jest --verbose --coverage
 
   python-tests:

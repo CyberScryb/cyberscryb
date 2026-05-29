@@ -255,7 +255,7 @@ setInterval(() => {
         // Remove requests older than 24 hours
         const before = userData.requests.length;
         userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
-        
+
         // If no recent requests, remove the entry entirely
         if (userData.requests.length === 0) {
             rateLimitStore.delete(identifier);
@@ -267,6 +267,116 @@ setInterval(() => {
         console.log(`[RATE_LIMIT] Cleaned ${cleaned} inactive entries. Active users: ${rateLimitStore.size}`);
     }
 }, 600000); // Every 10 minutes
+
+// ─── Firestore-Backed Rate Limiter (cross-instance) ─────────
+// WHY: Cloud Functions scale to many instances, each with its own memory.
+// The in-memory `checkRateLimit` above CANNOT enforce a global daily cap or
+// per-IP limits across instances — a traffic spike multiplies allowed Gemini
+// calls by the instance count, risking unbounded spend. These Firestore
+// counters are shared across every instance, so the caps actually hold.
+//
+// TRADEOFF: this adds two Firestore ops per AI request (one global counter
+// increment, one per-IP counter increment), each typically a few ms inside the
+// same region — negligible next to a multi-second Gemini call. We use atomic
+// FieldValue.increment so concurrent instances can't race past the cap.
+
+// Keep the original 500/day global semantics, now enforced across instances.
+const GLOBAL_DAILY_CAP = 500;
+
+// Per-IP daily caps by tier (requests per IP per UTC day). Mirrors the intent
+// of the in-memory per-day limits but is now durable across instances.
+const PER_IP_DAILY_CAP = {
+    anonymous: 50,
+    free: 200,
+    subscribed: 1000,
+    premium: 10000,
+};
+
+// UTC day string (YYYY-MM-DD) so all instances agree on the same window.
+function utcDayString(now = new Date()) {
+    return now.toISOString().slice(0, 10);
+}
+
+// sha256 of the client IP (privacy-first: we never persist a raw IP).
+function hashIp(req) {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+               req.connection?.remoteAddress || 'unknown';
+    const crypto = require('crypto');
+    return crypto.createHash('sha256').update(ip + 'salt_v1').digest('hex').slice(0, 32);
+}
+
+// Firestore-backed limit check. Atomically increments a shared global daily
+// counter and a per-IP daily counter, then compares against the caps.
+//
+// FAIL BEHAVIOR (deliberate):
+//   - Global cap: fail CLOSED. The whole point is to bound spend, so if the
+//     global counter can't be read/written we block rather than risk an
+//     unbounded bill.
+//   - Per-IP cap: fail OPEN. A transient Firestore hiccup on a single user's
+//     counter shouldn't break the tool for a legitimate visitor; the global
+//     cap is still the hard ceiling on total spend.
+async function checkRateLimitFirestore(req, tier) {
+    const day = utcDayString();
+    const ipHash = hashIp(req);
+    const globalRef = db.collection('usage').doc(`daily-${day}`);
+    const ipRef = db.collection('rateLimits').doc(`${ipHash}-${day}`);
+    const perIpCap = PER_IP_DAILY_CAP[tier] || PER_IP_DAILY_CAP.anonymous;
+
+    // ── Global daily cap (fail closed) ──
+    let globalCount;
+    try {
+        // Atomic increment, then read back the post-increment value.
+        await globalRef.set(
+            { count: admin.firestore.FieldValue.increment(1), updatedAt: admin.firestore.FieldValue.serverTimestamp() },
+            { merge: true }
+        );
+        const snap = await globalRef.get();
+        globalCount = snap.data()?.count || 0;
+    } catch (e) {
+        console.error('[RATE_LIMIT] Global counter error — failing closed:', e);
+        return {
+            allowed: false,
+            reason: 'Service capacity reached. Try again in a few hours.',
+            retryAfter: 3600,
+            tier,
+        };
+    }
+
+    if (globalCount > GLOBAL_DAILY_CAP) {
+        console.warn(`[RATE_LIMIT] Global daily cap reached: ${globalCount}/${GLOBAL_DAILY_CAP}`);
+        return {
+            allowed: false,
+            reason: 'Service capacity reached. Try again in a few hours.',
+            retryAfter: 3600,
+            tier,
+        };
+    }
+
+    // ── Per-IP daily cap (fail open on Firestore error) ──
+    try {
+        await ipRef.set(
+            { count: admin.firestore.FieldValue.increment(1), updatedAt: admin.firestore.FieldValue.serverTimestamp() },
+            { merge: true }
+        );
+        const ipSnap = await ipRef.get();
+        const ipCount = ipSnap.data()?.count || 0;
+
+        if (ipCount > perIpCap) {
+            console.warn(`[RATE_LIMIT] Per-IP daily cap reached (tier ${tier}): ${ipCount}/${perIpCap}`);
+            return {
+                allowed: false,
+                reason: `Daily limit reached (${perIpCap} requests). Upgrade or try again tomorrow.`,
+                retryAfter: 3600,
+                tier,
+            };
+        }
+
+        return { allowed: true, tier, globalCount, ipCount, remainingDay: perIpCap - ipCount };
+    } catch (e) {
+        console.error('[RATE_LIMIT] Per-IP counter error — failing open (global cap still enforced):', e);
+        return { allowed: true, tier, globalCount };
+    }
+}
 
 // ─── Referer Validation ─────────────────────────────────
 const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen-lang-client-0384486156.web.app'];
@@ -334,16 +444,31 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
             return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
         }
 
-        // Rate limit check (no identifier logging)
+        // In-memory burst guard (per-minute/per-hour within this instance).
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', reason: 'blocked' });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({ 
+                .json({
                     error: rateCheck.reason,
                     retryAfter: rateCheck.retryAfter
+                });
+        }
+
+        // Cross-instance Firestore caps (global daily + per-IP daily). This is
+        // the authoritative spend ceiling; the in-memory check above only
+        // smooths bursts inside a single instance.
+        const fsCheck = await checkRateLimitFirestore(req, rateCheck.tier);
+        if (!fsCheck.allowed) {
+            console.warn(`[RATE_LIMIT] Request blocked (Firestore) - ${fsCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: fsCheck.tier || 'unknown', reason: 'firestore' });
+            return res.status(429)
+                .set('Retry-After', fsCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: fsCheck.reason,
+                    retryAfter: fsCheck.retryAfter
                 });
         }
 
@@ -356,7 +481,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         }
 
         // Log analytics event (aggregate only)
-        logEvent('ai_request', { 
+        logEvent('ai_request', {
             tool: 'humanizer',
             tier: rateCheck.tier,
             inputLength: text.length > 500 ? '500+' : text.length > 200 ? '200-500' : '0-200'
@@ -582,21 +707,34 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
             return res.status(403).json({ error: 'Unauthorized Source' });
         }
 
-        // Rate limit check (no identifier logging)
+        // In-memory burst guard (per-minute/per-hour within this instance).
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool: 'gig-work' });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({ 
+                .json({
                     error: rateCheck.reason,
                     retryAfter: rateCheck.retryAfter
                 });
         }
 
+        // Cross-instance Firestore caps (authoritative spend ceiling).
+        const fsCheck = await checkRateLimitFirestore(req, rateCheck.tier);
+        if (!fsCheck.allowed) {
+            console.warn(`[RATE_LIMIT] Request blocked (Firestore) - ${fsCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: fsCheck.tier || 'unknown', tool: 'gig-work', reason: 'firestore' });
+            return res.status(429)
+                .set('Retry-After', fsCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: fsCheck.reason,
+                    retryAfter: fsCheck.retryAfter
+                });
+        }
+
         // Log analytics
-        logEvent('ai_request', { 
+        logEvent('ai_request', {
             tool: 'gig-work',
             tier: rateCheck.tier,
             hasProfile: !!freelancerProfile
@@ -1136,16 +1274,29 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
             return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
         }
 
-        // Rate limit check (no identifier logging)
+        // In-memory burst guard (per-minute/per-hour within this instance).
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
             console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
             logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool });
             return res.status(429)
                 .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({ 
+                .json({
                     error: rateCheck.reason,
                     retryAfter: rateCheck.retryAfter
+                });
+        }
+
+        // Cross-instance Firestore caps (authoritative spend ceiling).
+        const fsCheck = await checkRateLimitFirestore(req, rateCheck.tier);
+        if (!fsCheck.allowed) {
+            console.warn(`[RATE_LIMIT] Request blocked (Firestore) - ${fsCheck.reason}`);
+            logEvent('rate_limit_hit', { tier: fsCheck.tier || 'unknown', tool, reason: 'firestore' });
+            return res.status(429)
+                .set('Retry-After', fsCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: fsCheck.reason,
+                    retryAfter: fsCheck.retryAfter
                 });
         }
 
@@ -1565,5 +1716,15 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
 
 // ─── Test Export (NODE_ENV=test only) ──────────────────
 if (process.env.NODE_ENV === 'test') {
-    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS };
+    module.exports.__testing = {
+        AI_PROMPTS,
+        sanitizeParams,
+        isAllowedReferer,
+        ALLOWED_HOSTS,
+        checkRateLimitFirestore,
+        hashIp,
+        utcDayString,
+        GLOBAL_DAILY_CAP,
+        PER_IP_DAILY_CAP,
+    };
 }

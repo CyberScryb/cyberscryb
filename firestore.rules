@@ -4,5 +4,13 @@ service cloud.firestore {
     match /subscribers/{docId} {
       allow read, write: if false;
     }
+    // Rate-limit counters written/read only by Cloud Functions via the
+    // Admin SDK (which bypasses these rules). Deny all client access.
+    match /usage/{docId} {
+      allow read, write: if false;
+    }
+    match /rateLimits/{docId} {
+      allow read, write: if false;
+    }
   }
 }
