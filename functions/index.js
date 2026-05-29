@@ -1563,7 +1563,161 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
     });
 });
 
+// ─── Stripe Pro Fulfillment ─────────────────────────────────────────────
+// Pro is sold via Stripe payment links on /pro (e.g. $5/mo, $29/yr). Stripe
+// fires webhook events to /api/stripe-webhook; we verify the signature and
+// record active subscribers in Firestore `pro_subscribers` (doc id = email).
+// /api/verify-pro lets the client confirm Pro status by email.
+//
+// Secrets (read the same way as the Gemini key — functions.config() with a
+// process.env fallback): set with
+//   firebase functions:secrets:set STRIPE_SECRET_KEY
+//   firebase functions:secrets:set STRIPE_WEBHOOK_SECRET
+// or via `firebase functions:config:set stripe.secret_key=... stripe.webhook_secret=...`.
+
+function getStripeSecretKey() {
+    return functions.config().stripe?.secret_key || process.env.STRIPE_SECRET_KEY;
+}
+
+function getStripeWebhookSecret() {
+    return functions.config().stripe?.webhook_secret || process.env.STRIPE_WEBHOOK_SECRET;
+}
+
+// Map a Stripe session to a human-readable plan label. Best-effort only;
+// falls back to 'pro' so fulfillment never blocks on an unrecognized price.
+function resolvePlan(session) {
+    const metaPlan = session?.metadata?.plan;
+    if (metaPlan) return metaPlan;
+    const amount = session?.amount_total;
+    if (amount === 500) return 'monthly';
+    if (amount === 2900) return 'annual';
+    return 'pro';
+}
+
+// Core webhook logic — exported for testing. Verifies the signature, then on
+// checkout.session.completed writes the subscriber, and on
+// customer.subscription.deleted marks them canceled.
+async function handleStripeWebhook(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    const webhookSecret = getStripeWebhookSecret();
+    const secretKey = getStripeSecretKey();
+    if (!webhookSecret || !secretKey) {
+        console.error('[PRO] Stripe secrets not configured (STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET).');
+        return res.status(500).json({ error: 'Payment fulfillment not configured' });
+    }
+
+    const stripe = require('stripe')(secretKey);
+    const signature = req.headers['stripe-signature'];
+
+    let event;
+    try {
+        // Firebase onRequest exposes the unparsed body on req.rawBody — required
+        // for signature verification (a re-serialized JSON body would not match).
+        const payload = req.rawBody || JSON.stringify(req.body);
+        event = stripe.webhooks.constructEvent(payload, signature, webhookSecret);
+    } catch (err) {
+        console.warn('[PRO] Webhook signature verification failed:', err.message);
+        return res.status(400).json({ error: 'Invalid signature' });
+    }
+
+    try {
+        if (event.type === 'checkout.session.completed') {
+            const session = event.data.object;
+            const email = (session.customer_details?.email || session.customer_email || '').toLowerCase().trim();
+
+            if (!email) {
+                console.warn('[PRO] checkout.session.completed without an email; cannot fulfill.');
+                // Still 200 so Stripe stops retrying — nothing actionable on our side.
+                return res.status(200).json({ received: true, fulfilled: false });
+            }
+
+            await db.collection('pro_subscribers').doc(email).set({
+                email,
+                plan: resolvePlan(session),
+                status: 'active',
+                stripeCustomerId: session.customer || null,
+                stripeSessionId: session.id || null,
+                activatedAt: admin.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+
+            logConversion('pro_unlock', 'webhook_fulfilled', { plan: resolvePlan(session) });
+            return res.status(200).json({ received: true, fulfilled: true });
+        }
+
+        if (event.type === 'customer.subscription.deleted') {
+            const subscription = event.data.object;
+            const customerId = subscription.customer;
+            let email = null;
+
+            // Resolve the email from the Stripe customer record.
+            try {
+                const customer = await stripe.customers.retrieve(customerId);
+                email = (customer?.email || '').toLowerCase().trim() || null;
+            } catch (e) {
+                console.warn('[PRO] Could not retrieve customer for cancellation:', e.message);
+            }
+
+            if (email) {
+                await db.collection('pro_subscribers').doc(email).set({
+                    status: 'canceled',
+                    canceledAt: admin.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+            }
+            return res.status(200).json({ received: true, canceled: !!email });
+        }
+
+        // Unhandled event types: acknowledge so Stripe doesn't retry.
+        return res.status(200).json({ received: true });
+    } catch (error) {
+        console.error('[PRO] Webhook handler error:', error);
+        return res.status(500).json({ error: 'Webhook processing error' });
+    }
+}
+
+exports.stripeWebhook = functions.https.onRequest((req, res) => handleStripeWebhook(req, res));
+
+// Core verify-pro logic — exported for testing. Looks up pro_subscribers by
+// email and returns only { pro, plan } (no other subscriber data leaks).
+async function handleVerifyPro(req, res) {
+    if (req.method !== 'GET' && req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    const rawEmail = req.method === 'POST'
+        ? (req.body && req.body.email)
+        : (req.query && req.query.email);
+
+    if (!rawEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail)) {
+        return res.status(400).json({ error: 'Valid email is required' });
+    }
+
+    const email = rawEmail.toLowerCase().trim();
+
+    try {
+        const doc = await db.collection('pro_subscribers').doc(email).get();
+        if (!doc.exists) {
+            return res.status(200).json({ pro: false, plan: null });
+        }
+        const data = doc.data();
+        const isActive = data.status === 'active';
+        return res.status(200).json({ pro: isActive, plan: isActive ? (data.plan || 'pro') : null });
+    } catch (error) {
+        console.error('[PRO] verify-pro error:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+exports.verifyPro = functions.https.onRequest((req, res) => {
+    cors(req, res, () => handleVerifyPro(req, res));
+});
+
 // ─── Test Export (NODE_ENV=test only) ──────────────────
 if (process.env.NODE_ENV === 'test') {
-    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS };
+    module.exports.__testing = {
+        AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS,
+        handleStripeWebhook, handleVerifyPro, resolvePlan
+    };
 }
