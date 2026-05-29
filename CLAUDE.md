@@ -140,7 +140,7 @@ Each session: scan this list. Broken → fix. Missing-but-should-exist → build
 
 ## 🔴 Open Items (work these down)
 1. **Reconnect Stripe MCP** — daily revenue check failing. Cowork → Connectors → Stripe → reconnect.
-2. **Dependabot: 9 vulns** (4 high, 4 mod, 1 low). `npm audit fix` / review github.com/CyberScryb/cyberscryb/security. Clear highs first.
+2. **npm vulns** (verified 2026-05-29): root = **0**; `functions/` = **12 moderate** (transitive `uuid` via `firebase-admin` → firestore → teeny-request). No highs remain. Needs a `firebase-admin` major bump to clear — review before forcing.
 3. **Publish the story post** — highest-leverage human action. Fill 2 blanks (unit type, state) in `STORY-POST.md`, post the IH version.
 4. **Launch newsletter container** — Beehiiv/Substack not live; weekly packs piling up unread.
 5. **Pro landing page** — not yet conversion-optimized.
