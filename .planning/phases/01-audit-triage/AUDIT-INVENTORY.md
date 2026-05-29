@@ -1,6 +1,6 @@
 # CyberScryb Tool Inventory Audit
 
-**Generated:** 2026-05-26 07:09:48 UTC
+**Generated:** 2026-05-29 04:55:30 UTC
 **Total tool directories:** 44 (including `shared`)
 **AI_PROMPTS keys:** 21
 **tools.html entries:** 42
@@ -76,7 +76,7 @@ These prompts are defined in `functions/index.js` but have no frontend UI.
 | press-release | no | no | no | no |
 | seo-title | no | no | no | no |
 
-**New orphans (not in allowlist):** linkedin-post, cold-email, job-description, press-release, seo-title
+**New orphans (not in allowlist):** none
 
 ## Orphan Frontends
 
