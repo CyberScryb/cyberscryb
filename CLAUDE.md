@@ -127,7 +127,7 @@ Active monthly checkout: `https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b`. A $29
 | Lazy Hustler content pipeline | Mondays | ✅ newsletter + 5 social + Notion |
 | Daily briefing | Daily | ✅ |
 | Gmail opportunity scanner | Daily | ✅ |
-| Daily revenue check | Daily | ❌ BROKEN — Stripe MCP (`fce2083b`) disconnected |
+| Daily revenue check | Daily | ⚠️ Stripe MCP (`fce2083b`) reconnected 2026-05-29 — re-verify the task actually runs |
 
 Each session: scan this list. Broken → fix. Missing-but-should-exist → build.
 
@@ -139,11 +139,13 @@ Each session: scan this list. Broken → fix. Missing-but-should-exist → build
 ---
 
 ## 🔴 Open Items (work these down)
-1. **Reconnect Stripe MCP** — daily revenue check failing. Cowork → Connectors → Stripe → reconnect.
-2. **npm vulns** (verified 2026-05-29, per-lockfile): root = **0**; `functions/` = **12 moderate** (transitive `uuid` via `firebase-admin` → firestore → teeny-request); `v2/` = **1 high + 2 moderate**. Dependabot aggregates these across lockfiles. Clear the `v2/` high first; `functions/` needs a `firebase-admin` major bump — review before forcing.
-3. **Publish the story post** — highest-leverage human action. Fill 2 blanks (unit type, state) in `STORY-POST.md`, post the IH version.
-4. **Launch newsletter container** — Beehiiv/Substack not live; weekly packs piling up unread.
-5. **Pro landing page** — not yet conversion-optimized.
+1. **Merge open PRs #4–#8** (all draft, opened 2026-05-29 — see Recent Changes). **Merge #4 first**: it carries the Jest CI fix that all other branches depend on (each currently cherry-picks it).
+2. **Stripe Pro fulfillment — finish go-live** (PR #8 implements the webhook backend). Before it works: set `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` (`firebase functions:secrets:set`), register the `https://cyberscryb.com/api/stripe-webhook` endpoint in the Stripe dashboard (`checkout.session.completed` + `customer.subscription.deleted`), enable email collection on the payment links, deploy, then send a test event and confirm a `pro_subscribers` doc is written. Follow-up: client gate (`ai-tool.js`) should call `/api/verify-pro` after redirect.
+3. **npm vulns** (verified 2026-05-29, per-lockfile): root = **0**; `functions/` = **12 moderate** (transitive `uuid` via `firebase-admin` → firestore → teeny-request); `v2/` = **1 high + 2 moderate**. Dependabot aggregates these across lockfiles. Clear the `v2/` high first; `functions/` needs a `firebase-admin` major bump — review before forcing.
+4. **Stripe MCP reconnected 2026-05-29** — re-verify the daily revenue-check task actually runs now (was the long-standing blocker).
+5. **Publish the story post** — highest-leverage human action. Fill 2 blanks (unit type, state) in `STORY-POST.md`, post the IH version.
+6. **Launch newsletter container** — Beehiiv/Substack not live; weekly packs piling up unread.
+7. **Pro landing page** — not yet conversion-optimized.
 
 ## 2026 Strategy (research-backed)
 - Traditional SEO is eroding — AI Overviews cut CTR ~34.5%, ~60% zero-click.
@@ -155,6 +157,19 @@ Each session: scan this list. Broken → fix. Missing-but-should-exist → build
 ---
 
 ## Recent Changes
+
+### Session 2026-05-29 — 5 draft PRs opened (each on its own branch, base `main`)
+| PR | Scope | Notes |
+|----|-------|-------|
+| **#4** | CLAUDE.md rewrite for Opus 4.8 + **Jest CI fix** + corrected vuln note | `test.yml` now installs `functions/` deps before Jest (root cause of CI failures on every branch). **Merge first.** |
+| **#5** | SEO: OG/Twitter tags on all 42 tool pages (177 tags) + SVG→PNG `og:image` (87 files) | Reproducible generators `scripts/gen-og-image.py`, `scripts/seo-fix-tags.js`. Fixes blank social previews. |
+| **#6** | Repo hygiene: 11 legacy Windows scripts → `scripts/legacy/` + README; gitignore `.claude/worktrees/` | Verified zero references before moving. |
+| **#7** | Abuse hardening: Firestore-backed global + per-IP rate caps (replaces per-instance in-memory limiter) on all 3 Gemini endpoints | sha256-hashed IPs (no raw IPs). Global fails closed, per-IP fails open. `firestore.rules` updated. +14 tests. |
+| **#8** | Stripe Pro fulfillment backend: `/api/stripe-webhook` + `/api/verify-pro` + `pro_subscribers` | **Review-gated** — needs secrets + Stripe dashboard config before go-live (see Open Item #2). +13 tests. |
+
+*Verified live: root `npm audit` = 0; SEO coverage now 42/42 tool pages. #7/#8 built by parallel sub-agents in isolated worktrees.*
+
+### Prior
 | Date | File | Change |
 |------|------|--------|
 | 2026-05-29 | `CLAUDE.md` | Restructured + tuned for Opus 4.8: deduped 5 overlapping directive sections into one, added Technical Reference (stack/commands/deploy/layout), preserved all reference data. |
