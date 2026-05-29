@@ -59,10 +59,13 @@ A real business on a real story: a CNA on night shifts who shipped 29 AI tools b
 
 **Commands:**
 ```bash
-npm test                 # Jest (all JS tests)
-npx jest <file>          # single suite
+npm test                                     # Jest (all JS tests; needs functions/ deps installed)
+npx jest <file>                              # single suite
 python -m pytest freelance-pipeline/tests/ -v
-firebase emulators:start --only functions   # local functions (from functions/)
+firebase emulators:start --only functions    # local functions (from functions/)
+node scripts/audit-inventory.js              # audit tool inventory, find orphans
+node generate-pages.js                       # regenerate tool/content pages
+node expand-guides.js                        # expand the guides set
 ```
 
 **Deploy:** Automatic. Push to `main` → `.github/workflows/deploy.yml` runs `firebase deploy --only hosting,functions` to project `gen-lang-client-0384486156`. `test.yml` runs Jest + pytest on every push/PR to `main`. **CI is the gate — keep it green.**
