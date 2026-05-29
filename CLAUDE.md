@@ -67,6 +67,12 @@ Innovate where it matters. The AI humanizer isn't just a text rewriter — it co
 - Writing "here's what you need to do" when the tools exist to do it directly
 - Spending tokens on analysis and recaps instead of execution
 - Any recommendation that starts with "you could consider" — if it's worth saying, it's worth doing
+- **Auto-picking files from Downloads when there's ambiguity.** 2026-05-26: grabbed a random PNG instead of asking which file = "alien" on the homepage. If multiple candidate files exist, ASK before deploying.
+- **Drawing the mascot from scratch in SVG.** Nathan rejected three different SVG approximations I made ("the ones you made are shit"). Always use his actual raster files (`mascot.webp`, `mascot-hero.png`, `mascot-icon.png/webp`). If a new size is needed, crop from the source via `crop_mascot.py` — don't redraw.
+- **Putting big illustrations on every page hero.** 2026-05-26: big mascot on home + about + 404 was overkill. Pattern: big illustration on **homepage hero only**, navbar icon + favicon carry the brand everywhere else.
+- **Using raster images with baked-in backgrounds on gradient pages.** A mascot with pure `#000` bg on a `#0a0a0a` page renders as a hard black square. Either make the image transparent (PIL flood-fill from corners) or match the page bg exactly. Always preview against the actual page bg before declaring a swap done.
+- **Pitching speed as a feature.** Quality always — don't rank options by "faster to ship." See `~/.claude/projects/C--claude/memory/feedback_quality_over_speed.md`.
+- **Treating CLAUDE.md updates as optional.** "Every time a new mistake happens or a new rule emerges, add it here." Update CLAUDE.md in the same commit as the fix — not next session.
 
 ---
 
@@ -119,6 +125,42 @@ Every session: look at this list. If something is broken, fix it. If something i
 ### The Automation Dream
 
 The goal is: Nathan describes what he wants, it gets done, he finds the result waiting for him. Zero back-and-forth on execution. He reviews outcomes, not steps. Every session should move closer to that. Every manual step Nathan currently does is a candidate for automation. Every file Claude creates manually is a candidate for a scheduled task. Every SEO fix that took 30 minutes is a candidate for a skill that does it in 2.
+
+---
+
+## Recent Changes (Session 2026-05-26)
+
+**Phase 1 of full site overhaul (responding to competitor audit).** 11 commits, all pushed to main.
+
+| Area | Change |
+|------|--------|
+| Life Tool guides | Created 10 long-form guides in `/guides/` (mortgage/medical/student-loan hardship, unemployment/insurance/housing appeals, parenting plan, custody modification, caregiver handoff, cognitive decline). 2,000-3,500 words each with full schema (Article + FAQPage + BreadcrumbList + SoftwareApplication + speakable). Real WebSearch research from HUD, CFPB, FCRA, ERISA, Joint Commission sources. |
+| Blog rebrand | All 5 existing blog posts (`public/blog/*.html`) + blog index rebranded from legacy cyan/purple to V2 mint/teal, then again to red (see below). |
+| **Brand color** | **Switched site accent from mint/teal `#34F5C5` BACK to red `#c41e1e`** to stop clashing with the new togabot mascot. Site has been: cyan/purple → red → mint/teal → red. The mascot is now the brand anchor. |
+| Mascot variants | Source `mascot.webp` (1024×1024 full lockup) cropped via `crop_mascot.py` into purpose-built sizes — see "Mascot Asset Map" below. |
+| Big mascot placement | **Homepage hero only.** Removed from about and 404 because putting big mascot on every page is amateur — navbar icon + favicon already carry brand presence everywhere. |
+| sitemap.xml | 10 new guide URLs at priority 0.9 |
+| `guides/index.html` | New "Life Tools" section at top of guides directory |
+
+### Mascot Asset Map (use the right file for the right job)
+
+| File | Purpose | Notes |
+|------|---------|-------|
+| `public/mascot.webp` | Full original lockup (bot + wordmark + black bg) | Use for OG image, social profiles, email sigs |
+| `public/mascot-hero.png` | Bot + toga, **transparent bg** | Homepage hero only — alpha channel prevents the hard black square against page gradient |
+| `public/mascot-bot.webp` | Bot + toga, no wordmark, **black bg** | On disk but not currently referenced. Use only where page bg is pure `#000`. |
+| `public/mascot-icon.png` | Head-only square 256×256 | Favicon `<link rel="icon">` — PNG for universal browser support |
+| `public/mascot-icon.webp` | Head-only square 256×256 | Navbar 32×32 small icon next to wordmark |
+| `public/favicon.svg` | Legacy hand-drawn fallback | Kept on disk; not currently referenced |
+| `crop_mascot.py` | Reproducible cropping pipeline (PIL) | Run from repo root to regenerate variants from source |
+
+### Pending punch list (next session)
+- Phase 2: Build 4 missing tools the audit flagged — child-support-calculator (all 50 states), spousal-support-calculator (all 50 states), med-administration-log (real MAR fields), behavioral-log (ABC framework)
+- Phase 3: 5 audit-recommended blog posts (dementia/custody evidence, vanilla JS architecture, unemployment Board of Review hearing, why SEO generators gate meta tags, behavioral spike tracking in memory care)
+- Phase 4: Meta/schema/internal-link tightening pass
+- GA4 ID drift — 10 new guides hardcode `G-73LQZEDNR6`, live site uses `G-LS46B9J1XK`. Fix in Phase 4.
+- "POPULAR"/"NEW" pill bg is red after rebrand; some still have black text. Should be white for legibility.
+- Verify homepage hero looks right (transparent mascot on gradient bg) — last unresolved aesthetic feedback
 
 ---
 
