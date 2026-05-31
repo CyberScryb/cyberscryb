@@ -268,3 +268,28 @@ if ('IntersectionObserver' in window) {
         window.addEventListener(ev, loadCJ, { once: true, passive: true });
     });
 })();
+
+// V3 — Cursor-follow spotlight on .blog-card tool cards
+(function() {
+    if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+    function bind() {
+        document.querySelectorAll('.blog-card').forEach(function(card) {
+            if (card.dataset.spotlightBound) return;
+            card.dataset.spotlightBound = '1';
+            card.addEventListener('mousemove', function(e) {
+                var r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+                card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+            }, { passive: true });
+            card.addEventListener('mouseleave', function() {
+                card.style.setProperty('--mx', '50%');
+                card.style.setProperty('--my', '50%');
+            });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bind);
+    } else {
+        bind();
+    }
+})();
