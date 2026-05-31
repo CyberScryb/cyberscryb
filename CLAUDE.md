@@ -158,7 +158,8 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 - Phase 2: Build 4 missing tools the audit flagged — child-support-calculator (all 50 states), spousal-support-calculator (all 50 states), med-administration-log (real MAR fields), behavioral-log (ABC framework)
 - Phase 3: 5 audit-recommended blog posts (dementia/custody evidence, vanilla JS architecture, unemployment Board of Review hearing, why SEO generators gate meta tags, behavioral spike tracking in memory care)
 - Phase 4: Meta/schema/internal-link tightening pass
-- GA4 ID drift — 10 new guides hardcode `G-73LQZEDNR6`, live site uses `G-LS46B9J1XK`. Fix in Phase 4.
+- ✅ DONE (2026-05-30, branch `fix/ga4-property-drift`) GA4 ID drift — standardized all 10 guides `G-73LQZEDNR6` → `G-LS46B9J1XK`. `public/**/*.html` now contains only the correct ID (verified, 0 stray).
+- ⚠️ OPEN — GA4 third property `G-Z347WYM5ZZ` fires page_views during navigation but is **NOT in the codebase** (grepped public + js for literal, fragments, dynamic concat, atob/base64, GTM — nothing). Almost certainly a **Connected Site Tag / linked Google tag set in GA4 Admin** for `G-LS46B9J1XK` (Google auto-forwards to it when the correct tag loads). Remove in GA4 Admin → Data Streams → web stream → Google tag → *Configure tag settings* → *Manage connected site tags*. Not fixable in code; legacy `content-site/` (not deployed) still hardcodes `G-73LQZEDNR6` if that tree is ever revived.
 - "POPULAR"/"NEW" pill bg is red after rebrand; some still have black text. Should be white for legibility.
 - Verify homepage hero looks right (transparent mascot on gradient bg) — last unresolved aesthetic feedback
 
@@ -242,7 +243,7 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 
 ## Critical IDs
 - Firebase project: `gen-lang-client-0384486156`
-- GA4 measurement ID: `G-LS46B9J1XK` (confirmed correct property — updated 2026-05-26)
+- GA4 measurement ID: `G-LS46B9J1XK` (confirmed correct property — updated 2026-05-26). NOTE: `G-Z347WYM5ZZ` shows up as a stray Connected Site Tag (configured in GA4 Admin, not in code) — remove via GA4 Admin if unwanted.
 - AdSense publisher: `ca-pub-5721233331247292`
 - Gemini model: `gemini-3.1-pro-preview` (MUST use `-preview` suffix — stable name returns 404)
 
