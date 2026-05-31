@@ -1523,7 +1523,7 @@ a:focus {
 }
 
 /* ========================================
-   WAVE 12: V2 Polish � utility classes
+   WAVE 12: V2 Polish � utility classes
    ======================================== */
 
 /* Glow utilities matching V2 accent-glow */
@@ -1539,7 +1539,7 @@ a:focus {
     box-shadow: 0 0 24px rgba(196,30,30, 0.35), 0 0 48px rgba(196,30,30, 0.15);
 }
 
-/* V2 interactive card pattern � soft border, mint on hover */
+/* V2 interactive card pattern � soft border, mint on hover */
 .interactive-card {
     transition: border-color 150ms ease-out, transform 150ms ease-out, box-shadow 200ms ease-out;
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1593,7 +1593,7 @@ a:focus {
         radial-gradient(ellipse 40% 40% at 80% 80%, rgba(196,30,30, 0.04), transparent 70%);
 }
 
-/* V2 button refinements � flat fill primary, outlined secondary */
+/* V2 button refinements � flat fill primary, outlined secondary */
 .btn-v2-primary {
     display: inline-block;
     background: #c41e1e;
@@ -1637,4 +1637,314 @@ a:focus {
     outline: 2px solid rgba(196,30,30, 0.5);
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+/* =============================================================
+   V3 — PREMIUM TOOL CARDS  (added 2026-05-29)
+   Modernizes .blog-card / .tool-icon used on /, /tools, /blog.
+   Techniques: cursor-spotlight, conic gradient-ring border,
+   glass edge highlight, refined hover, bento layout for hero tools.
+   Layered on top of V2 dark + red — brand color unchanged.
+   ============================================================= */
+
+@property --ring-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.blog-card {
+    --mx: 50%;
+    --my: 50%;
+    --card-radius: 18px;
+    background: linear-gradient(180deg, #131313 0%, #0a0a0a 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--card-radius);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        0 1px 2px rgba(0,0,0,0.4);
+    overflow: hidden;
+    isolation: isolate;
+    position: relative;
+    transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 260ms ease-out,
+        box-shadow 320ms ease-out;
+}
+
+/* Conic gradient ring border — overrides old 3px top strip */
+.blog-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    height: auto;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+        from var(--ring-angle, 0deg),
+        transparent 0deg,
+        rgba(196,30,30, 0.55) 80deg,
+        rgba(224,48,48, 0.95) 130deg,
+        rgba(196,30,30, 0.4) 200deg,
+        transparent 320deg
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 320ms ease-out;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.blog-card:hover::before {
+    opacity: 1;
+    animation: cs-ring-spin 6s linear infinite;
+}
+
+@keyframes cs-ring-spin {
+    to { --ring-angle: 360deg; }
+}
+
+/* Cursor-follow spotlight — soft red glow tracks the mouse */
+.blog-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+        260px circle at var(--mx) var(--my),
+        rgba(224, 48, 48, 0.16),
+        rgba(196, 30, 30, 0.06) 35%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 280ms ease-out;
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+.blog-card:hover::after { opacity: 1; }
+
+.blog-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(196,30,30, 0.32);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        0 18px 40px -12px rgba(0,0,0,0.7),
+        0 8px 20px -8px rgba(196,30,30, 0.28);
+}
+
+.blog-card-content {
+    position: relative;
+    z-index: 3;
+    padding: 1.5rem 1.4rem 1.4rem;
+}
+
+.blog-card h3 {
+    font-size: 1.18rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.55rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.blog-card h3 a {
+    color: #fafafa;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 280ms ease-out;
+}
+
+.blog-card:hover h3 a {
+    background-size: 100% 1px;
+}
+
+.blog-card p {
+    color: #9a9a9a;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0 0 1.1rem;
+}
+
+.blog-card .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #e03030;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: gap 220ms ease-out, color 200ms ease-out;
+}
+
+.blog-card:hover .read-more {
+    color: #ff5050;
+    gap: 0.7rem;
+    text-shadow: none;
+}
+
+/* Icon — premium radial gradient with inner highlight */
+.tool-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 35% 25%, rgba(255,255,255,0.10), transparent 60%),
+        linear-gradient(155deg, rgba(196,30,30, 0.22), rgba(196,30,30, 0.06));
+    border: 1px solid rgba(196,30,30, 0.22);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 4px 10px -4px rgba(196,30,30, 0.3);
+    color: #ff5050;
+    margin-bottom: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 320ms ease-out,
+        border-color 260ms ease-out;
+}
+
+.tool-icon svg {
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+}
+
+.blog-card:hover .tool-icon {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        0 8px 18px -4px rgba(196,30,30, 0.45),
+        0 0 0 1px rgba(196,30,30, 0.35);
+    border-color: rgba(224, 48, 48, 0.55);
+}
+
+/* Preserve per-tool accent colors (green/orange/purple/indigo) but
+   add the same depth treatment */
+.tool-icon[style*="color: #00ff88"] {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 12px -4px rgba(0,255,136,0.35);
+}
+.tool-icon[style*="color: #ff6b35"] {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 12px -4px rgba(255,107,53,0.35);
+}
+.tool-icon[style*="color: #8b5cf6"] {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 12px -4px rgba(139,92,246,0.35);
+}
+.tool-icon[style*="color: #818cf8"] {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 12px -4px rgba(129,140,248,0.35);
+}
+
+/* Modernize the NEW / POPULAR / EXTENSION badge pills */
+.blog-card-content > div[style*="border-radius: 4px"][style*="padding: 2px 8px"] {
+    border-radius: 999px !important;
+    padding: 3px 11px !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif !important;
+    background: transparent !important;
+    border: 1px solid currentColor;
+    box-shadow: inset 0 0 14px -3px currentColor;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* PRO badge — refined pill, same family */
+.cs-pro-badge {
+    background: linear-gradient(135deg, rgba(196,30,30,0.95), rgba(224,48,48,0.95)) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.18) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 4px 12px rgba(196,30,30,0.35) !important;
+    padding: 4px 10px !important;
+    font: 700 9px/1 'Orbitron', sans-serif !important;
+    letter-spacing: 1.2px !important;
+}
+
+/* === BENTO — hero tools span wider columns on desktop === */
+#tools-overview .posts-grid,
+.tools-grid .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+    #tools-overview .posts-grid,
+    .tools-grid .posts-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    }
+    .blog-card--hero {
+        grid-column: span 2;
+    }
+    .blog-card--hero .blog-card-content {
+        padding: 1.8rem 1.7rem 1.6rem;
+    }
+    .blog-card--hero h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.7rem;
+    }
+    .blog-card--hero p {
+        font-size: 0.98rem;
+        max-width: 540px;
+    }
+    .blog-card--hero .tool-icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 16px;
+    }
+    .blog-card--hero .tool-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #tools-overview .posts-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    #tools-overview .blog-card--hero {
+        grid-column: span 3;
+    }
+    #tools-overview .blog-card:not(.blog-card--hero) {
+        grid-column: span 2;
+    }
+}
+
+/* Reduce motion — no spin, no spotlight */
+@media (prefers-reduced-motion: reduce) {
+    .blog-card,
+    .blog-card::before,
+    .blog-card::after,
+    .tool-icon {
+        transition: none !important;
+        animation: none !important;
+    }
+    .blog-card::after { display: none; }
+}
+
+/* Touch — no spotlight (no cursor), preserve press feedback */
+@media (hover: none) {
+    .blog-card::after { display: none; }
+    .blog-card:hover { transform: none; }
+    .blog-card:hover::before { animation: none; }
 }
