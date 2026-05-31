@@ -16,7 +16,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            functions/package-lock.json
       - run: npm ci
+      # Cloud Functions deps (firebase-admin, firebase-functions, cors) install
+      # into functions/node_modules. The ai-prompts and ai-generate-handler
+      # suites require ../functions/index.js, which pulls these in, and the root
+      # Jest config maps modulePaths to functions/node_modules. Without this the
+      # two suites fail to load with "Cannot find module 'firebase-admin'".
+      - run: npm ci
+        working-directory: ./functions
       - run: npx jest --verbose --coverage
 
   python-tests:
