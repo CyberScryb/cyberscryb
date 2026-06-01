@@ -1491,6 +1491,7 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
 // Validates payment, stores session to prevent reuse, returns ok signal.
 exports.validateStripeSession = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
+      try {
         const sessionId = req.query.session_id || (req.body && req.body.session_id);
 
         if (!sessionId || !sessionId.startsWith('cs_')) {
@@ -1506,11 +1507,11 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
             return res.status(200).json({ ok: true, status: data.status, replayed: true });
         }
 
-        // Get Stripe secret from Firebase runtime config
-        const stripeSecret = functions.config().stripe && functions.config().stripe.secret;
+        // Get Stripe secret — env var first (functions.config() was removed in firebase-functions v6)
+        const stripeSecret = process.env.STRIPE_SECRET || (functions.config().stripe && functions.config().stripe.secret);
         if (!stripeSecret) {
-            console.error('[PRO] Stripe secret not configured. Run: firebase functions:config:set stripe.secret="sk_live_..."');
-            return res.status(500).json({ error: 'Payment validation not configured' });
+            console.error('[PRO] Stripe secret not configured. Set STRIPE_SECRET in functions/.env (sk_live_...).');
+            return res.status(500).json({ error: 'Payment validation not configured. Email support@cyberscryb.com.' });
         }
 
         // Call Stripe REST API — no package needed, just https
@@ -1528,9 +1529,13 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
             const req2 = https.request(options, (r) => {
                 let body = '';
                 r.on('data', d => body += d);
-                r.on('end', () => resolve({ status: r.statusCode, body: JSON.parse(body) }));
+                r.on('end', () => {
+                    try { resolve({ status: r.statusCode, body: JSON.parse(body) }); }
+                    catch (e) { reject(new Error('Invalid JSON from Stripe')); }
+                });
             });
             req2.on('error', reject);
+            req2.setTimeout(15000, () => req2.destroy(new Error('Stripe API request timed out')));
             req2.end();
         });
 
@@ -1560,6 +1565,13 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
 
         return res.status(200).json({ ok: true, status: 'paid' });
+      } catch (err) {
+        // Never leave the request hanging — always send a response so the client never spins forever
+        console.error('[PRO] validateStripeSession failed:', err);
+        if (!res.headersSent) {
+            return res.status(500).json({ error: 'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.' });
+        }
+      }
     });
 });
 
