@@ -128,6 +128,28 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-01)
+
+**GSC index-coverage follow-up (branch `fix/gsc-redirects-canonicals-20260601`).** Triggered by `cyberscryb.com-Coverage-2026-06-01.zip` (chart ends 2026-05-28, so counts are mostly the *pre-* PR#13/#14 state). Re-scanned the whole `public/` tree for crawl offenders and fixed the code-level ones:
+
+| File | Change |
+|------|--------|
+| `tools/humanizer/index.html` | 2 inline "Related:" links `*.html` → trailing-slash (redirect hops PR#14 missed because they're inside the SEO block, not the nav/sitemap path the crawl followed) |
+| `tools/humanizer/remove-ai-detection.html` | Added self-canonical + fixed `.html` redirect link |
+| `tools/humanizer/rewrite-chatgpt-text.html` | Added self-canonical + fixed `.html` redirect link |
+| `tools/ai-writing-suite/index.html` | 3 footer links `../../X.html` → `/X/` (redirect hops; this page is an orphan — not in sitemap, only reachable via the homepage dropdown) |
+| `pro-success/index.html` | Added `<meta name="robots" content="noindex">` — post-Stripe success page should never be indexed |
+| `index.html` | 28 tool-jumper dropdown `value="tools/X/index.html"` → `/tools/X/` — each selection was firing a 301 hop for real users (not a crawl issue; `<option>` values aren't crawled) |
+
+**Result:** ZERO internal `.html` links remain site-wide (grep-verified). cleanUrls+trailingSlash means any `*.html` or `index.html` internal link is a guaranteed 301 — keep all internal links in `/path/` form.
+
+**NOT code-fixable — Nathan's action:**
+- **404×36 + redirect-bucket remainder** = stale pre-fix URLs Google still holds (no broken internal links exist in the repo now). → Click **Validate Fix** in GSC on the 404 + redirect issues, then wait for re-crawl.
+- **403×19** = the disabled `security-shield` worker. Clears on re-crawl.
+- **5xx×14** = transient API cold-starts, not reproducible.
+- **`privacy-check.html`** = orphan page (legacy inline styling + legacy `#00d4ff`, not in sitemap, unlinked). **OPEN DECISION:** promote (add to sitemap + canonical) vs. noindex/delete. Pulled from this PR pending intent — don't guess.
+- Brand nit spotted, out of scope: `tools.html:767` still uses legacy cyan `#00d4ff` on the AI Writing Suite "Launch Tool" link.
+
 ## Recent Changes (Session 2026-05-26)
 
 **Phase 1 of full site overhaul (responding to competitor audit).** 11 commits, all pushed to main.
