@@ -121,9 +121,12 @@
 
   document.getElementById('status-msg').textContent = 'Confirming with Stripe…';
 
-  // Call Firebase function to validate
-  fetch('/api/validate-pro?session_id=' + encodeURIComponent(sessionId))
-    .then(function(r) { return r.json(); })
+  // Call Firebase function to validate — with a timeout so the spinner never hangs forever
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, 20000);
+
+  fetch('/api/validate-pro?session_id=' + encodeURIComponent(sessionId), { signal: controller.signal })
+    .then(function(r) { clearTimeout(timeoutId); return r.json(); })
     .then(function(data) {
       if (data.ok) {
         activatePro();
@@ -133,8 +136,12 @@
       }
     })
     .catch(function(err) {
+      clearTimeout(timeoutId);
       console.error(err);
-      document.getElementById('error-msg').textContent = 'Network error. Please try refreshing.';
+      var aborted = err && err.name === 'AbortError';
+      document.getElementById('error-msg').textContent = aborted
+        ? 'This is taking longer than expected. Your payment may still be processing — check your email for a receipt, or email support@cyberscryb.com and we\'ll activate you manually.'
+        : 'Network error. Please try refreshing.';
       show('error-state');
     });
 })();
