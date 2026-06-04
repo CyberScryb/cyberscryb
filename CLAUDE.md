@@ -128,6 +128,12 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-04)
+
+**Source Synchronization, Build & Firebase Deployment**
+- **Content-Site Source Alignment**: Copied the 5 tool pages (`bio-generator`, `code-explainer`, `humanizer/remove-ai-detection`, `humanizer/rewrite-chatgpt-text`, and `product-description`) from `public/` to `content-site/` to preserve their custom, human-written editorial content sections from being overwritten by future builds.
+- **Rebuilt & Deployed**: Ran `sync_and_build.py` to regenerate the production `public/` files, committed the source updates, pushed to `origin/main`, and deployed to Firebase Hosting.
+
 ## Recent Changes (Session 2026-06-03)
 
 **SEO Meta Tag & Social Preview Standardization (Organic CTR Optimization)**
