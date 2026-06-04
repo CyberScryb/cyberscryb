@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Quest | Interactive Pattern Matching Game | CyberScryb</title>
+    <meta name="description"
+        content="Bypass mainframe security systems by writing exact regular expressions. Master regex patterns in this timed, client-side puzzle game.">
+    <link rel="canonical" href="https://cyberscryb.com/games/regex-quest/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Regex Quest | CyberScryb Arcade">
+    <meta property="og:description"
+        content="breach mainframe databases using regular expressions. Timed levels with visual indicators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/games/regex-quest/">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+
+    <!-- Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-LS46B9J1XK');
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span
+                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/games/" class="active">Games</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" style="color:#0066ff;font-weight:700;">⭐ Pro</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="game-main">
+        <div class="game-container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="/games/">Arcade</a> &rarr; <span>Regex Quest</span>
+            </div>
+
+            <!-- Terminal Header -->
+            <div class="terminal-bar">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="terminal-title">MAINFRAME://REGEX_QUEST.EXE</div>
+                <div class="audio-toggle-btn" id="audioToggle">
+                    <span class="audio-icon">🔊</span> AUDIO: ON
+                </div>
+            </div>
+
+            <!-- Terminal Body -->
+            <div class="terminal-body">
+                <!-- Status Panel -->
+                <div class="stats-panel">
+                    <div class="stat-box">
+                        <div class="stat-lbl">SECTOR</div>
+                        <div class="stat-val" id="levelNum">01 / 03</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-lbl">SCORE</div>
+                        <div class="stat-val" id="score">0000</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-lbl">FIREWALL SECONDS</div>
+                        <div class="stat-val text-red" id="timer">45s</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-lbl">TARGET STATUS</div>
+                        <div class="stat-val" id="targetStatus">0 / 0</div>
+                    </div>
+                </div>
+
+                <!-- Level Description -->
+                <div class="level-info-card">
+                    <h3 id="levelName">Loading Sector Objective...</h3>
+                    <p id="levelDesc">Write a regular expression pattern to target matching nodes and unlock network access.</p>
+                </div>
+
+                <!-- Game Area -->
+                <div class="game-play-area">
+                    <!-- Target and Decoy string list -->
+                    <div class="targets-decoys-grid">
+                        <div class="list-column">
+                            <h4 class="text-green">TARGETS (MATCH ALL)</h4>
+                            <div class="string-list" id="targetsList">
+                                <!-- Target items populated here -->
+                            </div>
+                        </div>
+                        <div class="list-column">
+                            <h4 class="text-red">DECOYS (MATCH NONE)</h4>
+                            <div class="string-list" id="decoysList">
+                                <!-- Decoy items populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Editor Panel -->
+                    <div class="regex-input-panel">
+                        <div class="regex-wrapper">
+                            <span class="regex-slash">/</span>
+                            <input type="text" class="regex-field" id="regexInput" placeholder="Enter regular expression pattern..." autocomplete="off" spellcheck="false">
+                            <span class="regex-slash">/g</span>
+                        </div>
+                        <button class="btn btn-bypass" id="bypassBtn" disabled>BYPASS FIREWALL</button>
+                    </div>
+                    <div class="regex-error-msg" id="regexError"></div>
+                </div>
+
+                <!-- Start Screen Overlay -->
+                <div class="screen-overlay" id="startScreen">
+                    <div class="overlay-content">
+                        <h2>SYSTEM BREACH INITIATION</h2>
+                        <p class="overlay-desc">Use standard Javascript regular expression patterns to match all values in the Green Target column while avoiding any matches in the Red Decoy column. Master regex to bypass security controls.</p>
+                        <button class="btn btn-start" id="startBtn">START SYSTEM BREACH</button>
+                    </div>
+                </div>
+
+                <!-- Game Over / Level Win Overlay -->
+                <div class="screen-overlay hidden" id="gameOverScreen">
+                    <div class="overlay-content">
+                        <h2 id="gameOverTitle" class="text-red">OVERRIDE TRACE</h2>
+                        <p class="overlay-desc" id="gameOverDesc">Your pattern configuration took too long and the connection was severed.</p>
+                        
+                        <div class="end-stats">
+                            <div class="end-stat-box">
+                                <div class="lbl">Final Score</div>
+                                <div class="val" id="finalScore">0000</div>
+                            </div>
+                            <div class="end-stat-box">
+                                <div class="lbl">Level Reached</div>
+                                <div class="val" id="finalLevel">1</div>
+                            </div>
+                            <div class="end-stat-box">
+                                <div class="lbl">High Score</div>
+                                <div class="val" id="highScore">0</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-start" id="restartBtn">INITIATE RE-ENTRY</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js?v=20260604"></script>
+    <script src="script.js"></script>
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

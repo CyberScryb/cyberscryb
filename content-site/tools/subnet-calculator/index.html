@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subnet Calculator — Free CIDR Analyzer | CyberScryb</title>
+    <meta name="description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
+    <meta name="keywords"
+        content="subnet calculator, cidr calculator, ip subnet calculator, network calculator, ip address range, cidr notation">
+    
+    <meta property="og:title" content="Subnet Calculator — Free CIDR Analyzer | CyberScryb">
+    <meta property="og:description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta property="og:url" content="https://cyberscryb.com/tools/subnet-calculator/">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Subnet Calculator — Free CIDR Analyzer | CyberScryb">
+    <meta name="twitter:description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    
+    <link rel="canonical" href="https://cyberscryb.com/tools/subnet-calculator/">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- JSON-LD: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb CIDR Subnet Calculator",
+        "url": "https://cyberscryb.com/tools/subnet-calculator/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "An interactive subnetting and CIDR calculator that computes subnet masks, usable host ranges, broadcast addresses, and binary notations directly in the browser.",
+        "featureList": ["CIDR to Subnet Conversion", "Usable Host Range Computation", "Detailed Binary Mapping", "Wildcard Mask Calculation", "Interactive CIDR Dropdown Selector"],
+        "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="../shared/email-capture.css">
+    <!-- Google Analytics -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    
+    <!-- Google AdSense -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <meta property="og:site_name" content="CyberScryb">
+</head>
+
+<body>
+    <!-- Navigation Breadcrumbs -->
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="color:#a855f7;">Subnet Calculator</span>
+    </nav>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span
+                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/games/">Games</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" style="color:#0066ff;font-weight:700;">⭐ Pro</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🌐 100% Client-Side — Instant Subnet Parsing</div>
+            <h1>Subnet <span class="accent">Calculator</span> &amp; CIDR Analyzer</h1>
+            <p class="subtitle">Quickly partition IPv4 networks, calculate ranges, total hosts, wildcard masks, and binary layouts.</p>
+        </section>
+
+        <section class="calculator-card">
+            <div class="input-panel">
+                <div class="input-group">
+                    <label for="ipInput">IP Address</label>
+                    <input type="text" id="ipInput" value="192.168.1.1" placeholder="e.g. 10.0.0.1" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="cidrSelect">CIDR Prefix</label>
+                    <select id="cidrSelect">
+                        <!-- Will be populated dynamically via script -->
+                    </select>
+                </div>
+            </div>
+            
+            <div class="error-msg" id="calcError"></div>
+
+            <!-- Results Grid -->
+            <div class="results-grid" id="calcResults">
+                <div class="result-tile">
+                    <div class="tile-label">Subnet Mask</div>
+                    <div class="tile-value" id="resSubnet">—</div>
+                </div>
+                <div class="result-tile">
+                    <div class="tile-label">Network Address</div>
+                    <div class="tile-value" id="resNetwork">—</div>
+                </div>
+                <div class="result-tile">
+                    <div class="tile-label">Usable Host Range</div>
+                    <div class="tile-value" id="resRange">—</div>
+                </div>
+                <div class="result-tile">
+                    <div class="tile-label">Broadcast Address</div>
+                    <div class="tile-value" id="resBroadcast">—</div>
+                </div>
+                <div class="result-tile">
+                    <div class="tile-label">Usable Hosts</div>
+                    <div class="tile-value text-cyan" id="resHosts">—</div>
+                </div>
+                <div class="result-tile">
+                    <div class="tile-label">Wildcard Mask</div>
+                    <div class="tile-value" id="resWildcard">—</div>
+                </div>
+            </div>
+
+            <!-- Binary Layout Visualization -->
+            <div class="binary-section" id="binaryVisual">
+                <h3>Binary Visualization</h3>
+                <div class="binary-row">
+                    <span class="bin-label">IP Address:</span>
+                    <span class="bin-value" id="binIp">—</span>
+                </div>
+                <div class="binary-row">
+                    <span class="bin-label">Subnet Mask:</span>
+                    <span class="bin-value" id="binMask">—</span>
+                </div>
+                <div class="binary-row">
+                    <span class="bin-label">Network Addr:</span>
+                    <span class="bin-value text-purple" id="binNet">—</span>
+                </div>
+                <div class="binary-row">
+                    <span class="bin-label">Broadcast Addr:</span>
+                    <span class="bin-value text-cyan" id="binBroad">—</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational content (SEO / AdSense Wedge) -->
+        <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:#cbd5e1; font-family:'Inter',sans-serif; line-height:1.75;">
+            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding IPv4 Subnetting &amp; CIDR Notation</h2>
+            <p>Subnetting is the practice of dividing a physical network into multiple logical sub-networks (subnets). In modern networking, this partitioning is essential for conserving IP address ranges, optimizing routing efficiency, and enforcing security policies. Without subnetting, all devices connected to an organization's network would inhabit the same broadcast domain, leading to excessive network congestion and security vulnerabilities.</p>
+            <p>An IPv4 address consists of 32 bits, divided into four octets of 8 bits each, usually written in dotted-decimal format (e.g., 192.168.1.1). Subnetting works by taking bits from the host portion of an IP address and utilizing them to identify the specific subnet. This division is defined by a subnet mask, which dictates which portion of the address belongs to the network routing path and which belongs to the individual device (host).</p>
+            
+            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Shift from Classful Routing to CIDR</h2>
+            <p>In the early days of the internet, IP addresses were allocated in strict classes (Class A, B, and C). Class A networks used a default 8-bit mask (/8), allowing for over 16 million host addresses. Class B used a 16-bit mask (/16) with 65,534 hosts, and Class C used a 24-bit mask (/24) supporting 254 hosts. This system was highly inefficient. An organization needing 500 IP addresses would be forced to request a Class B network block, wasting over 65,000 potential IP addresses.</p>
+            <p>To solve this scaling crisis, Classless Inter-Domain Routing (CIDR) was introduced in 1993. CIDR allows subnet masks to be partitioned at any bit boundary, rather than just 8-bit octet increments. A network prefix is denoted with a slash followed by the number of network bits (e.g., 192.168.1.0/25). This slash number represents the network mask. For example, a /25 network borrows one bit from the fourth octet, splitting a standard /24 network block into two distinct subnets, each offering 126 usable host addresses.</p>
+
+            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How to Calculate a Subnet Manually</h2>
+            <p>Manual subnetting calculations require converting dotted-decimal IP addresses into binary form, performing bitwise operations, and converting back to decimal. Here are the core metrics calculated by this tool:</p>
+            <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
+                <li style="margin-bottom:0.5rem;"><strong>Network Address:</strong> Calculated by performing a bitwise AND operation between the IP address and the subnet mask. This represents the starting boundary of the subnet range and cannot be assigned to an active host.</li>
+                <li style="margin-bottom:0.5rem;"><strong>Broadcast Address:</strong> Calculated by taking the network address and setting all the host bits to 1. Packets sent to this address are received by all devices on the subnet. Like the network address, this is reserved and cannot be assigned to a host.</li>
+                <li style="margin-bottom:0.5rem;"><strong>Usable Host Range:</strong> The address block starting immediately after the network address (+1) and ending immediately before the broadcast address (-1).</li>
+                <li style="margin-bottom:0.5rem;"><strong>Wildcard Mask:</strong> The bitwise inverse of the subnet mask. Used in Router Access Control Lists (ACLs) and routing protocols like OSPF.</li>
+            </ul>
+            <p>By understanding binary alignment, network engineers can easily calculate block sizes and design robust network architectures suited for secure, modern enterprise operations.</p>
+            
+            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
+            <ul style="padding-left:1.5rem;">
+                <li><a href="/tools/regex-tester/" style="color:#06b6d4;">Regex Tester</a> — Test network validation filters.</li>
+                <li><a href="/tools/password-checker/" style="color:#06b6d4;">Password Strength Checker</a> — Evaluate system credentials securely.</li>
+                <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb Network Architecture Guides</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- AdSense Slot -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <!-- Related Tools Grid -->
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:#0f1016; border: 1px solid rgba(255,255,255,0.08); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Network Tools</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../uuid-generator/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+                <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
+                <span style="font-size:0.85rem; color:#878787;">Generate secure random UUIDs for network tokens.</span>
+            </a>
+            <a href="../base64-tool/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+                <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
+                <span style="font-size:0.85rem; color:#878787;">Encode or decode network requests using Base64.</span>
+            </a>
+            <a href="../regex-tester/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+                <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <span style="font-size:0.85rem; color:#878787;">Validate network IP matches with regex parameters.</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All network calculations run locally in your browser.</p>
+        <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
+    </footer>
+
+    <!-- AdSense Footer Slot -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="../shared/email-capture.js"></script>
+    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/js/cs-pro-widget.js?v=2" defer></script>
+</body>
+
+</html>

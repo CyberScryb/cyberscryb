@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberScryb — Free AI & Developer Tools | Privacy-First</title>
     <meta name="description"
-        content="42 free AI and developer tools — plus Life Tools for hardship letters, appeal letters, custody docs, caregiver reports, and budget planning. No signup. No BS. Runs in your browser.">
+        content="Free, privacy-first developer tools: AI Humanizer, JSON↔CSV Converter, SEO Meta Generator, Password Checker, Base64 Encoder, Color Palette Generator, Markdown→HTML. No signup. Runs in your browser.">
     <link rel="canonical" href="https://cyberscryb.com/">
 
     <!-- Open Graph -->
@@ -16,73 +16,31 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/">
     <meta property="og:site_name" content="CyberScryb">
-    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CyberScryb — Free AI & Developer Tools">
     <meta name="twitter:description"
         content="Free, privacy-first developer tools that run entirely in your browser. No signup required.">
-    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
 
-    <link rel="alternate" type="application/rss+xml" title="CyberScryb Guides" href="feed.xml">
-
-    <!-- Resource hints for faster third-party connections -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-
-    <!-- Preload critical CSS -->
-    <link rel="preload" href="/css/style.css?v=20260531" as="style">
-
-    <!-- Async font load to avoid render blocking -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap"></noscript>
-
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260531">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
 
-    <!-- Google AdSense — delayed load to protect LCP -->
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        // Load after page is interactive OR on first user interaction (whichever comes first)
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
-        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
-
     <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73LQZEDNR6"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-73LQZEDNR6');
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -94,7 +52,7 @@
         "description": "Free, privacy-first developer tools that run entirely in your browser.",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://cyberscryb.com/tools/",
+            "target": "https://cyberscryb.com/tools.html",
             "query-input": "required name=search_term_string"
         }
     }
@@ -105,7 +63,7 @@
         "@type": "Organization",
         "name": "CyberScryb",
         "url": "https://cyberscryb.com",
-        "description": "Free, privacy-first developer tools and guides. Most tools run client-side; AI-powered tools use secure server-side processing.",
+        "description": "Free, privacy-first developer tools and guides. All tools run entirely client-side.",
         "foundingDate": "2026",
         "contactPoint": {
             "@type": "ContactPoint",
@@ -114,13 +72,6 @@
         }
     }
     </script>
-
-<style id="cs-pro-badge-style">
-.cs-pro-badge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#0a0e1a;font:700 9px/1 'Orbitron','Inter',sans-serif;padding:5px 9px;border-radius:999px;letter-spacing:1px;z-index:5;box-shadow:0 2px 8px rgba(0,212,255,0.4);pointer-events:none}
-.blog-card{position:relative}
-</style>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
 </head>
 
 <body>
@@ -128,20 +79,21 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                    <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="logo">
+                            <rect x="2" y="2" width="28" height="28" rx="6" stroke="#00d4ff" stroke-width="2.5" />
+                            <path d="M10 11h12M10 16h8M10 21h10" stroke="#00d4ff" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
                         <span
                             style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="/" class="active">Home</a></li>
-                    <li><a href="/tools/">Tools</a></li>
-                    <li><a href="/guides/">Guides</a></li>
-                    <li><a href="/blog/">Blog</a></li>
-                    <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">⭐ Pro</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="guides/best-free-developer-tools-online.html">Guides</a></li>
+                    <li><a href="about.html">About</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -153,284 +105,93 @@
     </header>
 
     <main>
-        <section class="hero" style="padding-top: 3rem; padding-bottom: 2rem;">
-            <div class="hero-particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="hero-container" style="position:relative;z-index:2;">
-                <img src="/mascot-hero.webp" alt="CyberScryb mascot — bot in toga with laurel wreath" width="360" height="253" style="display:block;margin:0 auto 1rem;max-width:180px;height:auto;" loading="eager" fetchpriority="high">
-                <h1 class="hero-title" style="margin-bottom: 0.75rem;">42+ Free Tools. No Signup. No BS.</h1>
-                <p class="hero-subtitle" style="margin-bottom: 1.25rem;">AI writing tools, Life Tools for real-life situations, and developer utilities &mdash; instantly in your browser.</p>
-                <div class="hero-cta" style="margin-bottom: 1.5rem;">
-                    <a href="/tools/humanizer/" class="cta-button">🤖 Humanize AI Text &rarr;</a>
-                    <a href="#tools-overview" class="cta-secondary">Browse All Tools</a>
-                </div>
-
-                <!-- Quick tool jumper -->
-                <div class="quick-jump" style="max-width: 560px; margin: 0 auto; background: rgba(20,20,20,0.6); border: 1px solid #2a2a2a; border-radius: 10px; padding: 0.9rem 1rem; backdrop-filter: blur(6px);">
-                    <label for="tool-jumper" style="display:block; font-size: 0.78rem; color: #878787; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;">What do you need?</label>
-                    <select id="tool-jumper" onchange="if(this.value) window.location.href=this.value;" style="width:100%; padding: 0.7rem 0.9rem; background: #0a0a0a; color: #fff; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.95rem; cursor: pointer;">
-                        <option value="">Pick a task &mdash; jump straight to the tool</option>
-                        <option value="/tools/summarizer/">📄 Summarize a long article</option>
-                        <option value="/tools/email-writer/">✉️ Write a professional email</option>
-                        <option value="/tools/bio-generator/">👤 Generate a social media bio</option>
-                        <option value="/tools/code-explainer/">💡 Explain a code snippet</option>
-                        <option value="/tools/product-description/">🛍️ Write a product description</option>
-                        <option value="/tools/humanizer/">🤖 Make AI text sound human</option>
-                        <option value="/tools/gig-auto-pilot/">🚀 Win a freelance gig (auto proposal)</option>
-                        <option value="/tools/json-csv-converter/">📊 Convert JSON ↔ CSV</option>
-                        <option value="/tools/seo-tag-generator/">🔍 Generate SEO meta tags</option>
-                        <option value="/tools/meta-description/">🏷️ Generate SEO meta descriptions</option>
-                        <option value="/tools/paraphraser/">✍️ Rewrite/paraphrase text</option>
-                        <option value="/tools/password-checker/">🔒 Check password strength</option>
-                        <option value="/tools/regex-tester/">⚡ Test a regex pattern</option>
-                        <option value="/tools/cron-builder/">⏰ Build a cron expression</option>
-                        <option value="/tools/base64-tool/">🔤 Encode / decode Base64</option>
-                        <option value="/tools/color-palette/">🎨 Generate a color palette</option>
-                        <option value="/tools/markdown-html/">📝 Convert Markdown to HTML</option>
-                        <option value="/tools/privacy-generator/">📋 Generate a privacy policy</option>
-                        <option value="/tools/tweet-generator/">🐦 Generate viral tweets & posts</option>
-                        <option value="/tools/resume-bullets/">📄 Write resume bullet points</option>
-                        <option value="/tools/ai-detector/">🔎 Check if text sounds like AI</option>
-                        <option value="/tools/ai-writing-suite/">✍️ AI Writing Suite — detect &amp; humanize</option>
-                        <option value="/tools/budget-planner/">💰 Build a survival budget</option>
-                        <option value="/tools/hardship-letter/">📝 Write a hardship letter</option>
-                        <option value="/tools/appeal-letter/">⚖️ Write an appeal letter</option>
-                        <option value="/tools/caregiver-report/">📋 Write a caregiver shift report</option>
-                        <option value="/tools/custody-document/">👨‍👩‍👧‍👦 Draft a custody or parenting plan</option>
-                        <option value="/tools/voice-writer/">🎙️ Write content in your voice</option>
-                    </select>
+        <section class="hero">
+            <div class="hero-container">
+                <h1 class="hero-title">Free AI & Developer Tools. Privacy-First. No Signup.</h1>
+                <p class="hero-subtitle">Humanize AI text, convert JSON↔CSV, generate SEO tags, check password strength, encode Base64, build color palettes — all running in your browser. Your data never leaves your machine.</p>
+                <div class="hero-cta">
+                    <a href="tools.html" class="cta-button">Explore All Tools</a>
+                    <a href="#tools-overview" class="cta-secondary">See What's Available</a>
                 </div>
             </div>
         </section>
 
-        
-        <!-- TRUST BAR -->
-        <section style="padding: 1rem 1rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
-            <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; align-items: center;">
-                <div style="display:flex; align-items:center; gap:0.5rem; color:#8892a8; font-size:0.88rem;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <span><strong style="color:#e6e9f0;">3,000+</strong> people use CyberScryb every month</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:0.5rem; color:#8892a8; font-size:0.88rem;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    <span><strong style="color:#e6e9f0;">42 free tools.</strong> No signup required.</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:0.5rem; color:#8892a8; font-size:0.88rem;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    <span><strong style="color:#e6e9f0;">Privacy-first.</strong> Most tools run in your browser.</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- PRO UPSELL HERO STRIP -->
-        <section class="pro-upsell-strip" style="padding: 1.5rem 1rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(124,58,237,0.08)); border-top: 1px solid rgba(0,212,255,0.2); border-bottom: 1px solid rgba(0,212,255,0.2); margin: 1rem 0;">
-            <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
-                <div style="flex: 1; min-width: 280px;">
-                    <p style="margin: 0 0 4px; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: #00d4ff; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">CyberScryb Pro</p>
-                    <p style="margin: 0; font-size: 1.05rem; color: #e6e9f0; font-weight: 600;">Unlock unlimited Humanizer + Gig Auto-Pilot. No ads. $5/month or $29/year.</p>
-                    <p style="margin: 4px 0 0; font-size: 0.85rem; color: #8892a8;">Launch pricing — first 50 buyers only.</p>
-                </div>
-                <a href="/pro/" style="background: linear-gradient(135deg, #00d4ff, #7c3aed); color: #0a0e1a; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; box-shadow: 0 4px 16px rgba(0,212,255,0.3); white-space: nowrap;">Unlock Pro →</a>
-            </div>
-        </section>
-
-<!-- CURATOR PRIME — WEALTH & HERITAGE ENGINE -->
-<section style="padding: 2rem 1rem; background: linear-gradient(135deg, rgba(212,168,85,0.06), rgba(180,130,60,0.04)); border-top: 1px solid rgba(212,168,85,0.2); border-bottom: 1px solid rgba(212,168,85,0.15);">
-    <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;">
-        <div style="flex: 1; min-width: 300px;">
-            <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <span style="font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: #d4a855; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Curator Prime</span>
-            </div>
-            <h3 style="margin: 0 0 0.5rem; font-size: 1.4rem; color: #e6e9f0; font-weight: 700;">Antique &amp; Heritage Wealth Engine</h3>
-            <p style="margin: 0; font-size: 0.95rem; color: #8892a8; max-width: 520px;">AI-powered valuation, provenance tracking, and collection management for antiques, fine art, and heritage assets. Your private curator, always on.</p>
-        </div>
-        <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #d4a855, #b8860b); color: #0a0e1a; padding: 14px 28px; border-radius: 999px; text-decoration: none; font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; box-shadow: 0 4px 16px rgba(212,168,85,0.3); white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(212,168,85,0.45)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(212,168,85,0.3)'">Launch Curator →</a>
-    </div>
-</section>
-
-<!-- LIFE TOOLS FEATURED SECTION -->
-<section style="padding: 2.5rem 1rem 2rem; background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(124,58,237,0.04)); border-top: 1px solid rgba(0,212,255,0.1); border-bottom: 1px solid rgba(0,212,255,0.1);">
-    <div style="max-width: 1100px; margin: 0 auto;">
-        <div style="text-align:center; margin-bottom: 1.75rem;">
-            <div style="display:inline-block; background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.25); border-radius: 999px; padding: 4px 14px; font-size: 0.75rem; font-family: 'Orbitron', sans-serif; color: #00d4ff; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-bottom: 0.75rem;">Life Tools</div>
-            <h2 style="margin: 0 0 0.5rem; font-size: 1.8rem;">When Life Hands You Paperwork</h2>
-            <p style="color:#8892a8; max-width: 560px; margin: 0 auto; font-size: 0.95rem;">Most free tools are built for developers. These are built for everyone else &mdash; caregivers, co-parents, people in hardship, anyone fighting a bad decision.</p>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;" class="reveal-stagger">
-            <a href="/tools/hardship-letter/" style="text-decoration:none;">
-                <div style="background: rgba(10,14,26,0.8); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='rgba(0,212,255,0.15)'">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📝</div>
-                    <h3 style="margin: 0 0 0.4rem; font-size: 1rem; color: #fff;">Hardship Letter</h3>
-                    <p style="color:#8892a8; font-size: 0.88rem; margin: 0 0 0.75rem;">Mortgage forbearance, medical debt, student loans. Get a real letter, not a template.</p>
-                    <span style="color:#00d4ff; font-size: 0.85rem; font-weight: 600;">Write My Letter &rarr;</span>
-                </div>
-            </a>
-            <a href="/tools/appeal-letter/" style="text-decoration:none;">
-                <div style="background: rgba(10,14,26,0.8); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='rgba(0,212,255,0.15)'">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">⚖️</div>
-                    <h3 style="margin: 0 0 0.4rem; font-size: 1rem; color: #fff;">Appeal Letter</h3>
-                    <p style="color:#8892a8; font-size: 0.88rem; margin: 0 0 0.75rem;">Unemployment denied. Insurance denied. Housing denied. Fight back in writing.</p>
-                    <span style="color:#00d4ff; font-size: 0.85rem; font-weight: 600;">Write My Appeal &rarr;</span>
-                </div>
-            </a>
-            <a href="/tools/custody-document/" style="text-decoration:none;">
-                <div style="background: rgba(10,14,26,0.8); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='rgba(0,212,255,0.15)'">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">👨‍👩‍👧</div>
-                    <h3 style="margin: 0 0 0.4rem; font-size: 1rem; color: #fff;">Custody Document</h3>
-                    <p style="color:#8892a8; font-size: 0.88rem; margin: 0 0 0.75rem;">Parenting plans, custody declarations, and co-parenting agreements. Clear and organized.</p>
-                    <span style="color:#00d4ff; font-size: 0.85rem; font-weight: 600;">Draft Document &rarr;</span>
-                </div>
-            </a>
-            <a href="/tools/caregiver-report/" style="text-decoration:none;">
-                <div style="background: rgba(10,14,26,0.8); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='rgba(0,212,255,0.4)'" onmouseout="this.style.borderColor='rgba(0,212,255,0.15)'">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📋</div>
-                    <h3 style="margin: 0 0 0.4rem; font-size: 1rem; color: #fff;">Caregiver Report</h3>
-                    <p style="color:#8892a8; font-size: 0.88rem; margin: 0 0 0.75rem;">Professional shift reports in minutes. Built by a former CNA, for family and professional caregivers.</p>
-                    <span style="color:#00d4ff; font-size: 0.85rem; font-weight: 600;">Write My Report &rarr;</span>
-                </div>
-            </a>
-        </div>
-        <p style="text-align:center; margin: 1.25rem 0 0; font-size: 0.85rem; color: #8892a8;">Free to use. <a href="/tools/" style="color:#00d4ff;">Browse all 42 tools &rarr;</a></p>
-    </div>
-</section>
-
-<section id="tools-overview" class="featured-posts" style="padding-top: 2rem;">
+        <section id="tools-overview" class="featured-posts">
             <div class="container">
-                <h2 style="margin-bottom: 0.5rem;">Pick Your Tool</h2>
-                <p style="text-align:center; color:#878787; margin-bottom: 1.5rem; font-size: 0.95rem;">Click any card below to launch &mdash; no signup, no wait.</p>
-                <div class="posts-grid reveal-stagger">
+                <h2>Our Tool Suite</h2>
+                <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
 
                     <!-- Humanizer -->
-                    <div class="blog-card blog-card--hero">
+                    <div class="blog-card" style="border: 1px solid #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg></div>
-                            <div style="background: #c41e1e; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">POPULAR</div>
-                            <span class="cs-pro-badge">PRO ✨</span>
-
-                            <h3><a href="/tools/humanizer/" style="color: #fff;">Anti-AI Humanizer</a></h3>
-                            <p>Rewrite AI-generated text to match your personal writing style for more natural, authentic content.</p>
-                            <a href="/tools/humanizer/" class="read-more">Launch Tool &rarr;</a>
+                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">POPULAR</div>
+                            <h3><a href="tools/humanizer/index.html" style="color: #fff;">Anti-AI Humanizer</a></h3>
+                            <p>Rewrite ChatGPT text to sound human. Remove AI detection and bypass filters.</p>
+                            <a href="tools/humanizer/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Gig Auto-Pilot -->
-                    <div class="blog-card blog-card--hero">
+                    <div class="blog-card" style="border: 1px solid #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);">
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(0, 255, 136, 0.08); border-color: rgba(0, 255, 136, 0.15); color: #00ff88;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
                             <div style="background: #00ff88; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <span class="cs-pro-badge">PRO ✨</span>
-
-                            <h3><a href="/tools/gig-auto-pilot/" style="color: #fff;">Gig Auto-Pilot</a></h3>
+                            <h3><a href="tools/gig-auto-pilot/index.html" style="color: #fff;">Gig Auto-Pilot</a></h3>
                             <p>Win freelance jobs instantly. Generates proposals AND drafts the work for you.</p>
-                            <a href="/tools/gig-auto-pilot/" class="read-more" style="color: #00ff88;">Launch Tool &rarr;</a>
+                            <a href="tools/gig-auto-pilot/index.html" class="read-more" style="color: #00ff88;">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- JSON Converter -->
                     <div class="blog-card">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div>
-                            <h3><a href="/tools/json-csv-converter/" style="color: #fff;">JSON ↔ CSV Converter</a></h3>
+                            <h3><a href="tools/json-csv-converter/index.html" style="color: #fff;">JSON ↔ CSV Converter</a></h3>
                             <p>Bidirectional conversion with nested object flattening and 50K+ row support.</p>
-                            <a href="/tools/json-csv-converter/" class="read-more">Launch Tool &rarr;</a>
+                            <a href="tools/json-csv-converter/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- SEO Meta Generator -->
                     <div class="blog-card">
-                        
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></div>
-                            <span class="cs-pro-badge">PRO ✨</span>
-
-                            <h3><a href="/tools/seo-tag-generator/" style="color: #fff;">SEO Meta Generator</a></h3>
+                            <h3><a href="tools/seo-tag-generator/index.html" style="color: #fff;">SEO Meta Generator</a></h3>
                             <p>Generate perfect title tags, meta descriptions, Open Graph, and Twitter Card tags.</p>
-                            <a href="/tools/seo-tag-generator/" class="read-more">Launch Tool &rarr;</a>
+                            <a href="tools/seo-tag-generator/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Password Checker -->
                     <div class="blog-card">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
-                            <h3><a href="/tools/password-checker/" style="color: #fff;">Password Strength Checker</a></h3>
+                            <h3><a href="tools/password-checker/index.html" style="color: #fff;">Password Strength Checker</a></h3>
                             <p>Entropy analysis, crack time estimation, and pattern detection. 100% client-side.</p>
-                            <a href="/tools/password-checker/" class="read-more">Launch Tool &rarr;</a>
+                            <a href="tools/password-checker/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Base64 Tool -->
                     <div class="blog-card">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 9-3 3 3 3"/><path d="m14 15 3-3-3-3"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
-                            <h3><a href="/tools/base64-tool/" style="color: #fff;">Base64 Encoder/Decoder</a></h3>
+                            <h3><a href="tools/base64-tool/index.html" style="color: #fff;">Base64 Encoder/Decoder</a></h3>
                             <p>Encode and decode Base64 text instantly. Standard and URL-safe alphabets supported.</p>
-                            <a href="/tools/base64-tool/" class="read-more">Launch Tool &rarr;</a>
+                            <a href="tools/base64-tool/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Color Palette -->
                     <div class="blog-card">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg></div>
-                            <h3><a href="/tools/color-palette/" style="color: #fff;">Color Palette Generator</a></h3>
+                            <h3><a href="tools/color-palette/index.html" style="color: #fff;">Color Palette Generator</a></h3>
                             <p>Generate harmonious color schemes with WCAG contrast checking and CSS export.</p>
-                            <a href="/tools/color-palette/" class="read-more">Launch Tool &rarr;</a>
+                            <a href="tools/color-palette/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Markdown to HTML -->
                     <div class="blog-card">
                         <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
-                            <h3><a href="/tools/markdown-html/" style="color: #fff;">Markdown → HTML</a></h3>
+                            <h3><a href="tools/markdown-html/index.html" style="color: #fff;">Markdown → HTML</a></h3>
                             <p>Convert GitHub Flavored Markdown to clean HTML with live preview.</p>
-                            <a href="/tools/markdown-html/" class="read-more">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Regex Tester -->
-                    <div class="blog-card" >
-                        <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(255, 107, 53, 0.08); border-color: rgba(255, 107, 53, 0.15); color: #ff6b35;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3v10"/><path d="m12.67 5.5 8.66 5"/><path d="m12.67 10.5 8.66-5"/><path d="M9 17a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2z"/></svg></div>
-                            <div style="background: #ff6b35; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/regex-tester/" style="color: #fff;">Regex Tester</a></h3>
-                            <p>Test regular expressions in real-time with match highlighting, group capture, and a cheat sheet.</p>
-                            <a href="/tools/regex-tester/" class="read-more" style="color: #ff6b35;">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Cron Builder -->
-                    <div class="blog-card" >
-                        <div class="blog-card-content">
-                            <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-                            <div style="background: #c41e1e; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/cron-builder/" style="color: #fff;">Cron Expression Builder</a></h3>
-                            <p>Visual cron schedule builder with presets, human-readable output, and next 5 runs preview.</p>
-                            <a href="/tools/cron-builder/" class="read-more" style="color: #c41e1e;">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Privacy Policy Generator -->
-                    <div class="blog-card" >
-                        <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.15); color: #8b5cf6;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
-                            <div style="background: #8b5cf6; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <span class="cs-pro-badge">PRO ✨</span>
-
-                            <h3><a href="/tools/privacy-generator/" style="color: #fff;">Privacy Policy Generator</a></h3>
-                            <p>Generate a complete privacy policy with GDPR, CCPA, and COPPA compliance options.</p>
-                            <a href="/tools/privacy-generator/" class="read-more" style="color: #8b5cf6;">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="blog-card" >
-                        <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(79, 70, 229, 0.08); border-color: rgba(79, 70, 229, 0.15); color: #818cf8;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                            <div style="background: #4f46e5; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">EXTENSION</div>
-                            <h3><a href="/distill/" style="color: #fff;">Distill Reader</a></h3>
-                            <p>Chrome extension that strips any article down to a clean, distraction-free reading view. Themes, read aloud, library, Markdown export.</p>
-                            <a href="/distill/" class="read-more" style="color: #818cf8;">Learn More &rarr;</a>
+                            <a href="tools/markdown-html/index.html" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -438,103 +199,16 @@
             </div>
         </section>
 
-        <section class="stats-banner reveal">
-            <div class="stat-item"><span class="stat-number">42</span><span class="stat-label">Free Tools</span></div>
-            <div class="stat-item"><span class="stat-number">21</span><span class="stat-label">Developer Guides</span></div>
-            <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Signup Required</span></div>
-            <div class="stat-item"><span class="stat-number">∞</span><span class="stat-label">Unlimited Uses</span></div>
-        </section>
-
-        <!-- AdSense Ad Unit -->
-        <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center;">
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-5721233331247292"
-                data-ad-slot="9198647442"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </section>
-
         <section id="newsletter" class="newsletter">
             <div class="container">
-                <div class="newsletter-glow"></div>
-                <div class="newsletter-badge">📬 FREE NEWSLETTER</div>
                 <h2>Stay Ahead of the AI Curve</h2>
-                <p>Get weekly insights on the latest AI tools, developer strategies, and ways to leverage AI for real income.</p>
-                <form class="newsletter-form" id="email-capture-form">
-                    <div class="form-row">
-                        <input type="email" id="subscribe-email" name="email" placeholder="you@example.com" required autocomplete="email">
-                        <button type="submit" id="subscribe-btn">
-                            <span class="btn-text">Subscribe</span>
-                            <span class="btn-loader" style="display:none;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20">
-                                        <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/>
-                                    </circle>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                    <div id="subscribe-status" class="subscribe-status"></div>
+                <p>Get weekly insights on the latest AI tools and developer strategies.</p>
+                <form class="newsletter-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
                 </form>
-                <p class="newsletter-privacy">🔒 No spam. Unsubscribe anytime. Your email stays private.</p>
             </div>
         </section>
-
-        <script>
-        (function() {
-            const form = document.getElementById('email-capture-form');
-            const btn = document.getElementById('subscribe-btn');
-            const btnText = btn.querySelector('.btn-text');
-            const btnLoader = btn.querySelector('.btn-loader');
-            const status = document.getElementById('subscribe-status');
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('subscribe-email').value.trim();
-                if (!email) return;
-
-                // Show loading state
-                btn.disabled = true;
-                btnText.style.display = 'none';
-                btnLoader.style.display = 'inline-flex';
-                status.className = 'subscribe-status';
-                status.textContent = '';
-
-                try {
-                    const res = await fetch('/api/subscribe', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, source: 'homepage' })
-                    });
-                    const data = await res.json();
-
-                    if (res.ok) {
-                        if (data.message === 'already_subscribed') {
-                            status.textContent = "You're already on the list! 🎉";
-                            status.className = 'subscribe-status status-info';
-                        } else {
-                            status.textContent = "You're in! Welcome aboard. 🚀";
-                            status.className = 'subscribe-status status-success';
-                            form.reset();
-                        }
-                    } else {
-                        status.textContent = data.error || 'Something went wrong. Try again.';
-                        status.className = 'subscribe-status status-error';
-                    }
-                } catch (err) {
-                    status.textContent = 'Network error. Check your connection and try again.';
-                    status.className = 'subscribe-status status-error';
-                }
-
-                // Reset button
-                btn.disabled = false;
-                btnText.style.display = 'inline';
-                btnLoader.style.display = 'none';
-            });
-        })();
-        </script>
     </main>
 
     <footer>
@@ -543,15 +217,12 @@
                 <div class="footer-brand">
                     <span
                         style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>Free, privacy-first developer tools.</p>
+                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/privacy/">Privacy Policy</a>
-                    <a href="/terms/">Terms of Service</a>
-                    <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
-                    <a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;">Curator Prime</a>
-                    <a href="/contact/">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="disclosure.html">Affiliate Disclosure</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -560,37 +231,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260531"></script>
-
-    <!-- ═══ Cookie Consent Banner ═══ -->
-    <div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9997; background:linear-gradient(180deg, rgba(10,10,10,0.98), rgba(5,5,5,0.99)); border-top: 1px solid rgba(255,255,255,0.08); padding:1rem 1.5rem; box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-        <div style="max-width:900px; margin:0 auto; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
-            <p style="margin:0; color:#878787; font-size:0.85rem; flex:1; min-width:200px;">We use cookies for analytics (Google Analytics) and advertising (Google AdSense). By continuing to use this site, you consent to our use of cookies. <a href="/privacy/" style="color:#c41e1e;">Privacy Policy</a></p>
-            <div style="display:flex; gap:0.5rem;">
-                <button onclick="acceptCookies()" style="background:linear-gradient(135deg,#c41e1e,#e03030); color:#000; border:none; padding:0.5rem 1.2rem; border-radius:6px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.75rem; text-transform:uppercase; cursor:pointer;">Accept</button>
-                <button onclick="declineCookies()" style="background:transparent; color:#878787; border: 1px solid rgba(255,255,255,0.12); padding:0.5rem 1.2rem; border-radius:6px; font-family:'Inter',sans-serif; font-size:0.75rem; cursor:pointer;">Decline</button>
-            </div>
-        </div>
-    </div>
-    <script>
-    (function(){
-        if (!localStorage.getItem('cs_cookie_consent')) {
-            document.getElementById('cookie-consent').style.display = 'block';
-        }
-    })();
-    function acceptCookies() {
-        localStorage.setItem('cs_cookie_consent', 'accepted');
-        document.getElementById('cookie-consent').style.display = 'none';
-    }
-    function declineCookies() {
-        localStorage.setItem('cs_cookie_consent', 'declined');
-        document.getElementById('cookie-consent').style.display = 'none';
-        // Disable GA if user declines
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    </script>
-
-    <!-- Entry popup and sticky bar removed — email capture moved to tool result moments -->
+    <script src="js/script.js"></script>
 </body>
 
 </html>

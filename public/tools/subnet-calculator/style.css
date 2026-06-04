@@ -1,0 +1,226 @@
+/* Subnet Calculator CSS Stylesheet */
+
+.hero {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: #07070a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(168, 85, 247, 0.1);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+}
+
+.hero h1 {
+    font-size: 2.75rem;
+    margin-bottom: 10px;
+}
+
+.hero .accent {
+    color: #a855f7;
+}
+
+.hero .subtitle {
+    font-size: 1.05rem;
+    color: #9ba1b4;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Calculator Card Frame */
+.calculator-card {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: #0f1016;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Input Fields Grid */
+.input-panel {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #5a5f73;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.input-group input,
+.input-group select {
+    background: #07070a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.15);
+}
+
+.error-msg {
+    color: #ef4444;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    min-height: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Results Grid layout */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.result-tile {
+    background: #07070a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 14px 18px;
+    min-height: 80px;
+}
+
+.result-tile .tile-label {
+    font-size: 0.7rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #5a5f73;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.result-tile .tile-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    word-break: break-all;
+}
+
+.text-cyan {
+    color: #06b6d4 !important;
+}
+
+/* Binary section visualization */
+.binary-section {
+    background: #07070a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 1.5rem;
+}
+
+.binary-section h3 {
+    font-size: 0.95rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #a855f7;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 8px;
+}
+
+.binary-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.02);
+}
+
+.binary-row:last-child {
+    border-bottom: none;
+}
+
+.bin-label {
+    font-size: 0.75rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #5a5f73;
+    letter-spacing: 0.05em;
+}
+
+.bin-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: #9ba1b4;
+    letter-spacing: 1px;
+    word-break: break-all;
+}
+
+.text-purple {
+    color: #a855f7 !important;
+}
+
+/* Footer & Global Elements matching */
+footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: #07070a;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #5a5f73;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #9ba1b4;
+    margin: 0 8px;
+}
+
+footer a:hover {
+    color: #a855f7;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .input-panel {
+        grid-template-columns: 1fr;
+    }
+    .results-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .binary-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}

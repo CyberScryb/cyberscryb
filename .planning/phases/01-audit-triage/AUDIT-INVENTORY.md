@@ -1,11 +1,11 @@
 # CyberScryb Tool Inventory Audit
 
-**Generated:** 2026-05-26 07:09:48 UTC
+**Generated:** 2026-06-02 21:00:02 UTC
 **Total tool directories:** 44 (including `shared`)
 **AI_PROMPTS keys:** 21
 **tools.html entries:** 42
-**sitemap.xml tool entries:** 43
-**Homepage dropdown options:** 28
+**sitemap.xml tool entries:** 29
+**Homepage dropdown options:** 0
 
 ---
 
@@ -13,55 +13,55 @@
 
 | tool | category | has_directory | in_AI_PROMPTS | in_tools_html | in_sitemap | in_homepage_dropdown | has_index_html | has_json_ld | has_blog_nav_link | has_breadcrumbs | has_canonical | legacy_files |
 |------|----------|---------------|---------------|---------------|------------|----------------------|----------------|-------------|-------------------|-----------------|---------------|--------------|
-| ai-detector | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| ai-writing-suite | special | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| appeal-letter | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| base64-tool | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| bio-generator | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| budget-planner | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| caregiver-report | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| case-converter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| code-explainer | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
+| ai-detector | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| ai-writing-suite | special | yes | no | yes | no | no | yes | no | yes | yes | yes |  |
+| appeal-letter | life-tool | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| base64-tool | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| bio-generator | ai-writing | yes | yes | yes | yes | no | yes | no | yes | yes | yes |  |
+| budget-planner | life-tool | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| caregiver-report | life-tool | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| case-converter | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| code-explainer | ai-writing | yes | yes | yes | yes | no | yes | no | yes | yes | yes |  |
 | cold-email | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
-| color-palette | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| cron-builder | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| custody-document | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| distill | special | yes | no | no | yes | no | no | no | no | no | no |  |
-| email-writer | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| epoch-converter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| fluid-sim | special | yes | no | yes | yes | no | yes | no | yes | no | yes |  |
-| gig-auto-pilot | special | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| hardship-letter | life-tool | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| hash-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| html-entity | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| humanizer | ai-writing | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
+| color-palette | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| cron-builder | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| custody-document | life-tool | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| distill | special | yes | no | no | no | no | no | no | no | no | no |  |
+| email-writer | ai-writing | yes | yes | yes | yes | no | yes | no | yes | yes | yes |  |
+| epoch-converter | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| fluid-sim | special | yes | no | yes | no | no | yes | no | yes | no | yes |  |
+| gig-auto-pilot | special | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| hardship-letter | life-tool | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| hash-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| html-entity | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| humanizer | ai-writing | yes | no | yes | yes | no | yes | no | yes | yes | yes | index_v1.html |
 | job-description | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
-| json-csv-converter | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| json-formatter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| jwt-decoder | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
+| json-csv-converter | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| json-formatter | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| jwt-decoder | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
 | linkedin-post | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
-| lorem-ipsum | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| markdown-html | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| meta-description | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| paraphraser | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| password-checker | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
+| lorem-ipsum | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| markdown-html | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| meta-description | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| paraphraser | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| password-checker | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
 | press-release | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
-| privacy-generator | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| product-description | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| qr-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| regex-tester | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| resume-bullets | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| seo-tag-generator | dev-tool | yes | no | yes | yes | yes | yes | yes | yes | yes | yes |  |
+| privacy-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| product-description | ai-writing | yes | yes | yes | yes | no | yes | no | yes | yes | yes |  |
+| qr-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| regex-tester | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| resume-bullets | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| seo-tag-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
 | seo-title | ai-writing | no | yes | no | no | no | no | no | no | no | no |  |
 | shared | special | yes | no | no | no | no | no | no | no | no | no |  |
-| slug-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| summarizer | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| text-diff | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| tweet-generator | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| url-encoder | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| uuid-generator | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
-| voice-writer | ai-writing | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |  |
-| word-counter | dev-tool | yes | no | yes | yes | no | yes | yes | yes | yes | yes |  |
+| slug-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| summarizer | ai-writing | yes | yes | yes | yes | no | yes | no | yes | yes | yes |  |
+| text-diff | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| tweet-generator | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| url-encoder | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| uuid-generator | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
+| voice-writer | ai-writing | yes | yes | yes | no | no | yes | no | yes | yes | yes |  |
+| word-counter | dev-tool | yes | no | yes | yes | no | yes | no | yes | yes | yes |  |
 
 ## Orphan AI_PROMPTS
 
@@ -76,7 +76,7 @@ These prompts are defined in `functions/index.js` but have no frontend UI.
 | press-release | no | no | no | no |
 | seo-title | no | no | no | no |
 
-**New orphans (not in allowlist):** linkedin-post, cold-email, job-description, press-release, seo-title
+**New orphans (not in allowlist):** none
 
 ## Orphan Frontends
 
@@ -85,6 +85,7 @@ Tool directories that exist on disk but are missing from ALL registries
 
 | tool | has_index_html | has_json_ld | exception? |
 |------|----------------|-------------|------------|
+| distill | no | no | yes |
 | shared | no | no | yes |
 
 **New orphans (not in allowlist):** none
@@ -109,7 +110,7 @@ These should be removed to avoid confusion.
 
 | tool | legacy_files |
 |------|--------------|
-| — | — |
+| humanizer | index_v1.html |
 
 ## Triage Decisions
 

@@ -22,8 +22,8 @@ const pages = [
         tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
         keywords: 'json to csv excel, import json excel, json to spreadsheet, convert json to csv for excel',
         sections: [
-            { h2: 'Why Convert JSON to CSV for Excel?', p: 'Excel can\'t natively open JSON files. By converting JSON to CSV first, you can open your API data, database exports, or config files directly in Excel. Our <a href="../../tools/json-csv-converter/index.html">free converter</a> handles this in seconds.' },
-            { h2: 'Step-by-Step: JSON to Excel via CSV', list: ['Open the <a href="../../tools/json-csv-converter/index.html">JSON ↔ CSV Converter</a>', 'Select "JSON → CSV" mode', 'Paste your JSON data into the input panel', 'Click Convert (or press Ctrl+Enter)', 'Download the CSV file', 'Open the .csv file in Excel — data auto-populates into columns'] },
+            { h2: 'Why Convert JSON to CSV for Excel?', p: 'Excel can\'t natively open JSON files. By converting JSON to CSV first, you can open your API data, database exports, or config files directly in Excel. Our <a href="/tools/json-csv-converter/">free converter</a> handles this in seconds.' },
+            { h2: 'Step-by-Step: JSON to Excel via CSV', list: ['Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>', 'Select "JSON → CSV" mode', 'Paste your JSON data into the input panel', 'Click Convert (or press Ctrl+Enter)', 'Download the CSV file', 'Open the .csv file in Excel — data auto-populates into columns'] },
             { h2: 'Handling Nested JSON for Excel', p: 'If your JSON contains nested objects (like <code>address.city</code>), our tool flattens them using dot notation. Each nested key becomes its own Excel column. Arrays are comma-separated within cells.' },
             { h2: 'Large Dataset Support', p: 'No file size limits. The converter runs entirely in your browser, so a 50,000-row JSON file converts instantly without uploading anything to a server.' }
         ],
@@ -47,7 +47,7 @@ const pages = [
         keywords: 'csv to json, csv to json converter, convert csv to json online, spreadsheet to json',
         sections: [
             { h2: 'When Do You Need CSV to JSON?', p: 'Many APIs and modern databases expect JSON format, but your data lives in spreadsheets. Converting CSV to JSON is essential when importing data into MongoDB, posting to REST APIs, or building web applications.' },
-            { h2: 'How to Convert CSV to JSON', list: ['Open the <a href="../../tools/json-csv-converter/index.html">JSON ↔ CSV Converter</a>', 'Click "CSV → JSON" mode', 'Paste your CSV data (or copy from Excel/Google Sheets)', 'Click Convert — JSON appears instantly', 'Copy to clipboard or download as .json file'] },
+            { h2: 'How to Convert CSV to JSON', list: ['Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>', 'Click "CSV → JSON" mode', 'Paste your CSV data (or copy from Excel/Google Sheets)', 'Click Convert — JSON appears instantly', 'Copy to clipboard or download as .json file'] },
             { h2: 'Automatic Type Detection', p: 'Our converter automatically detects data types. Numbers become JSON numbers (not strings), "true"/"false" become booleans, and empty cells become null.' }
         ],
         faqs: [
@@ -131,7 +131,7 @@ const pages = [
         tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
         keywords: 'meta tag generator, seo meta tags, open graph generator, twitter card generator, meta description tool',
         sections: [
-            { h2: 'Why Meta Tags Matter for SEO', p: 'Meta tags are the first thing Google and social platforms read about your page. A well-crafted title tag can increase click-through rates by 20-30%. Our <a href="../../tools/seo-tag-generator/index.html">free generator</a> creates all essential tags in one click.' },
+            { h2: 'Why Meta Tags Matter for SEO', p: 'Meta tags are the first thing Google and social platforms read about your page. A well-crafted title tag can increase click-through rates by 20-30%. Our <a href="/tools/seo-tag-generator/">free generator</a> creates all essential tags in one click.' },
             { h2: 'What Tags Does This Tool Generate?', list: ['Title tag — the clickable headline in search results', 'Meta description — the snippet below your title', 'Open Graph tags — controls how your page looks on Facebook/LinkedIn', 'Twitter Card tags — optimizes your page preview on Twitter/X', 'Canonical URL — prevents duplicate content issues', 'Robots meta — controls search engine indexing behavior'] },
             { h2: 'Best Practices for Title Tags', list: ['Keep titles under 60 characters (Google truncates longer ones)', 'Put your primary keyword near the beginning', 'Include your brand name at the end (separated by | or —)', 'Make it compelling — you\'re competing for clicks', 'Each page should have a unique title'] },
             { h2: 'Meta Description Tips', p: 'Write 150-160 characters. Include a call-to-action. Use the primary keyword naturally. Google sometimes rewrites descriptions, but a good one increases click-through rates by up to 30%.' }
@@ -153,7 +153,7 @@ const pages = [
         sections: [
             { h2: 'What Are Open Graph Tags?', p: 'Open Graph is a protocol created by Facebook that controls how your web page appears when shared on social media. Without OG tags, platforms guess your title and image — often getting it wrong.' },
             { h2: 'Essential Open Graph Tags', list: ['og:title — The title displayed in the social share card', 'og:description — A brief summary (2-4 sentences)', 'og:image — The preview image (1200×630px recommended)', 'og:url — The canonical URL of the page', 'og:type — Usually "website" or "article"', 'og:site_name — Your website\'s name'] },
-            { h2: 'Testing Your OG Tags', p: 'Use Facebook\'s Sharing Debugger or Twitter\'s Card Validator to preview how your page will appear. Our <a href="../../tools/seo-tag-generator/index.html">SEO tag generator</a> creates all these tags for you automatically.' }
+            { h2: 'Testing Your OG Tags', p: 'Use Facebook\'s Sharing Debugger or Twitter\'s Card Validator to preview how your page will appear. Our <a href="/tools/seo-tag-generator/">SEO tag generator</a> creates all these tags for you automatically.' }
         ],
         faqs: [
             { q: 'What image size should I use for og:image?', a: '1200×630 pixels is the recommended size. Facebook, LinkedIn, and Twitter all display it well at this resolution.' },
@@ -172,7 +172,7 @@ const pages = [
         sections: [
             { h2: 'What Is Base64 Encoding?', p: 'Base64 converts binary data into a text-safe ASCII string using 64 characters (A-Z, a-z, 0-9, +, /). It\'s used when you need to transmit binary data through text-only channels like email, JSON, or HTML.' },
             { h2: 'Common Use Cases', list: ['Embedding images in HTML/CSS using data URIs', 'Encoding file attachments in email (MIME)', 'Storing binary data in JSON APIs', 'Encoding authentication credentials (Basic Auth headers)', 'Data URL schemes in web applications', 'Encoding cryptographic keys and certificates'] },
-            { h2: 'How to Use Our Tool', list: ['Open the <a href="../../tools/base64-tool/index.html">Base64 Encoder/Decoder</a>', 'Select Encode or Decode mode', 'Paste your text or Base64 string', 'Click the action button — result appears instantly', 'Copy the output with one click'] },
+            { h2: 'How to Use Our Tool', list: ['Open the <a href="/tools/base64-tool/">Base64 Encoder/Decoder</a>', 'Select Encode or Decode mode', 'Paste your text or Base64 string', 'Click the action button — result appears instantly', 'Copy the output with one click'] },
             { h2: 'Base64 vs Other Encodings', p: 'Base64 increases data size by ~33% but ensures safe transport across any text channel. URL-safe Base64 replaces + and / with - and _ for use in URLs. Our tool handles both variants.' }
         ],
         faqs: [
@@ -251,7 +251,7 @@ const pages = [
         keywords: 'markdown to html, convert markdown, markdown converter, markdown preview, md to html',
         sections: [
             { h2: 'What Is Markdown?', p: 'Markdown is a lightweight markup language that uses plain text formatting. Created by John Gruber in 2004, it\'s used by GitHub, Reddit, Stack Overflow, and millions of developers for documentation, READMEs, and content writing.' },
-            { h2: 'How to Convert Markdown to HTML', list: ['Open the <a href="../../tools/markdown-html/index.html">Markdown to HTML Converter</a>', 'Type or paste your Markdown in the left panel', 'See the HTML output instantly in the right panel', 'Switch between rendered preview and raw HTML', 'Copy the HTML or download as a .html file'] },
+            { h2: 'How to Convert Markdown to HTML', list: ['Open the <a href="/tools/markdown-html/">Markdown to HTML Converter</a>', 'Type or paste your Markdown in the left panel', 'See the HTML output instantly in the right panel', 'Switch between rendered preview and raw HTML', 'Copy the HTML or download as a .html file'] },
             { h2: 'Supported Markdown Features', list: ['Headings (# through ######)', 'Bold, italic, and strikethrough text', 'Ordered and unordered lists', 'Code blocks with syntax highlighting', 'Links and images', 'Tables (GitHub Flavored Markdown)', 'Blockquotes and horizontal rules'] }
         ],
         faqs: [
@@ -292,11 +292,11 @@ const pages = [
         keywords: 'free developer tools, online dev tools, free programming tools, web developer tools 2026',
         sections: [
             { h2: 'Why Use Online Developer Tools?', p: 'Online tools eliminate setup, work on any device, and handle quick tasks without installing software. They\'re perfect for format conversions, data transformations, encoding, and quick calculations.' },
-            { h2: 'Data Conversion Tools', p: 'Convert between JSON, CSV, XML, YAML, and other formats instantly. CyberScryb\'s <a href="../../tools/json-csv-converter/index.html">JSON ↔ CSV Converter</a> handles nested objects, large datasets, and bidirectional conversion — all client-side.' },
-            { h2: 'Encoding & Decoding', p: 'Base64 encode/decode, URL encode, HTML entity encoding. Our <a href="../../tools/base64-tool/index.html">Base64 tool</a> supports text encoding/decoding with instant results.' },
-            { h2: 'Security Tools', p: 'Password strength checkers, hash generators, encryption tools. CyberScryb\'s <a href="../../tools/password-checker/index.html">Password Checker</a> provides entropy analysis, crack time estimates, and pattern detection.' },
-            { h2: 'SEO & Web Tools', p: 'Meta tag generators, sitemap builders, robots.txt validators. Our <a href="../../tools/seo-tag-generator/index.html">SEO Meta Tag Generator</a> creates title tags, descriptions, Open Graph, and Twitter Card tags.' },
-            { h2: 'Design Tools', p: 'Color palette generators, gradient builders, typography testers. CyberScryb\'s <a href="../../tools/color-palette/index.html">Color Palette Generator</a> creates harmonious schemes with CSS export.' }
+            { h2: 'Data Conversion Tools', p: 'Convert between JSON, CSV, XML, YAML, and other formats instantly. CyberScryb\'s <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a> handles nested objects, large datasets, and bidirectional conversion — all client-side.' },
+            { h2: 'Encoding & Decoding', p: 'Base64 encode/decode, URL encode, HTML entity encoding. Our <a href="/tools/base64-tool/">Base64 tool</a> supports text encoding/decoding with instant results.' },
+            { h2: 'Security Tools', p: 'Password strength checkers, hash generators, encryption tools. CyberScryb\'s <a href="/tools/password-checker/">Password Checker</a> provides entropy analysis, crack time estimates, and pattern detection.' },
+            { h2: 'SEO & Web Tools', p: 'Meta tag generators, sitemap builders, robots.txt validators. Our <a href="/tools/seo-tag-generator/">SEO Meta Tag Generator</a> creates title tags, descriptions, Open Graph, and Twitter Card tags.' },
+            { h2: 'Design Tools', p: 'Color palette generators, gradient builders, typography testers. CyberScryb\'s <a href="/tools/color-palette/">Color Palette Generator</a> creates harmonious schemes with CSS export.' }
         ],
         faqs: [
             { q: 'Are these tools really free?', a: 'Yes. CyberScryb tools are 100% free with no signup required. All processing happens in your browser.' },
@@ -313,7 +313,7 @@ const pages = [
         tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
         keywords: 'json vs csv, json or csv, csv vs json, data format comparison, when to use json',
         sections: [
-            { h2: 'At a Glance', p: 'JSON is hierarchical and flexible. CSV is flat and universal. JSON is better for APIs and complex data. CSV is better for spreadsheets and simple tabular data. Need to switch between them? Use our <a href="../../tools/json-csv-converter/index.html">free converter</a>.' },
+            { h2: 'At a Glance', p: 'JSON is hierarchical and flexible. CSV is flat and universal. JSON is better for APIs and complex data. CSV is better for spreadsheets and simple tabular data. Need to switch between them? Use our <a href="/tools/json-csv-converter/">free converter</a>.' },
             { h2: 'Structure Comparison', p: 'JSON supports nested objects, arrays, and mixed types. CSV is strictly rows and columns. JSON files are larger but more expressive. CSV files are smaller and faster to parse for tabular data.' },
             { h2: 'Performance', p: 'CSV parsing is ~3-5x faster than JSON parsing for flat data. JSON is more efficient for hierarchical data because CSV requires column duplication for repeated structures.' },
             { h2: 'Best Use Cases for JSON', list: ['API responses and requests', 'Configuration files', 'Complex or nested data structures', 'Real-time data streaming', 'NoSQL database storage (MongoDB, CouchDB)'] },
@@ -354,7 +354,7 @@ const pages = [
         keywords: 'password leak check, has my password been leaked, password breach checker, compromised password',
         sections: [
             { h2: 'How Passwords Get Leaked', p: 'Data breaches expose millions of passwords each year. Major breaches (LinkedIn, Adobe, Yahoo, Equifax) have leaked over 3 billion credentials. Attackers use these leaked passwords to break into other accounts — because most people reuse passwords.' },
-            { h2: 'How to Check for Leaks', list: ['Visit HaveIBeenPwned.com and enter your email', 'Use our <a href="../../tools/password-checker/index.html">Password Strength Checker</a> to test if your password appears in common breach databases', 'Check Google Chrome\'s built-in password checkup in Settings → Passwords', 'Enable Firefox Monitor for automatic breach alerts'] },
+            { h2: 'How to Check for Leaks', list: ['Visit HaveIBeenPwned.com and enter your email', 'Use our <a href="/tools/password-checker/">Password Strength Checker</a> to test if your password appears in common breach databases', 'Check Google Chrome\'s built-in password checkup in Settings → Passwords', 'Enable Firefox Monitor for automatic breach alerts'] },
             { h2: 'What to Do If Your Password Was Leaked', list: ['Change the password immediately — on ALL sites where you used it', 'Enable two-factor authentication (2FA) on every important account', 'Use a password manager to generate unique passwords', 'Monitor your accounts for suspicious activity', 'Consider credit monitoring if financial data was exposed'] }
         ],
         faqs: [
@@ -372,7 +372,7 @@ const pages = [
         keywords: 'seo checklist, new website seo, seo for beginners, how to rank on google, website seo guide',
         sections: [
             { h2: 'Technical SEO Foundation', list: ['Submit sitemap to Google Search Console', 'Ensure all pages have unique title tags and meta descriptions', 'Set up canonical URLs to prevent duplicate content', 'Enable HTTPS (free with Let\'s Encrypt or Firebase Hosting)', 'Achieve Core Web Vitals scores in the green zone', 'Create a clean URL structure (no query parameters for content pages)', 'Add structured data (JSON-LD) for rich snippets'] },
-            { h2: 'On-Page SEO', list: ['Use one H1 per page with your primary keyword', 'Write compelling meta descriptions (150-160 chars) — use our <a href="../../tools/seo-tag-generator/index.html">free generator</a>', 'Include internal links between related pages', 'Optimize images: compress, add alt text, use modern formats (WebP)', 'Ensure content is longer and more comprehensive than competitors', 'Use semantic HTML (header, main, article, footer, nav)'] },
+            { h2: 'On-Page SEO', list: ['Use one H1 per page with your primary keyword', 'Write compelling meta descriptions (150-160 chars) — use our <a href="/tools/seo-tag-generator/">free generator</a>', 'Include internal links between related pages', 'Optimize images: compress, add alt text, use modern formats (WebP)', 'Ensure content is longer and more comprehensive than competitors', 'Use semantic HTML (header, main, article, footer, nav)'] },
             { h2: 'Content Strategy', list: ['Target long-tail keywords with lower competition first', 'Answer specific questions your audience is searching for', 'Create "pillar" pages that link to detailed subtopic pages', 'Update content regularly — Google favors freshness', 'Write for humans first, search engines second'] }
         ],
         faqs: [
@@ -390,7 +390,7 @@ const pages = [
         keywords: 'format json, pretty print json, json formatter, json beautifier, json validator online',
         sections: [
             { h2: 'Why Format JSON?', p: 'Minified JSON is unreadable. API responses, config files, and database exports often come as single-line blobs. Formatting with proper indentation makes the structure visible and errors findable.' },
-            { h2: 'How to Pretty-Print JSON', list: ['Open your browser\'s developer console (F12)', 'Type: JSON.stringify(JSON.parse(yourJson), null, 2)', 'Or use our <a href="../../tools/json-csv-converter/index.html">JSON tool</a> — paste your JSON and it auto-formats', 'In VS Code: Ctrl+Shift+P → "Format Document"', 'In the terminal: python -m json.tool < input.json'] },
+            { h2: 'How to Pretty-Print JSON', list: ['Open your browser\'s developer console (F12)', 'Type: JSON.stringify(JSON.parse(yourJson), null, 2)', 'Or use our <a href="/tools/json-csv-converter/">JSON tool</a> — paste your JSON and it auto-formats', 'In VS Code: Ctrl+Shift+P → "Format Document"', 'In the terminal: python -m json.tool < input.json'] },
             { h2: 'Common JSON Syntax Errors', list: ['Missing or extra commas after the last element', 'Using single quotes instead of double quotes', 'Unquoted keys (valid in JS but not in JSON)', 'Trailing commas in arrays or objects', 'Unescaped special characters in strings'] }
         ],
         faqs: [
@@ -403,7 +403,7 @@ const pages = [
 // ─── HTML Template Generator ───
 
 function generatePage(page) {
-    const toolLink = page.tool.path ? `../../tools/${page.tool.path}/index.html` : '../index.html';
+    const toolLink = page.tool.path ? `/tools/${page.tool.path}/` : '/';
 
     const sectionsHtml = page.sections.map(s => {
         let content = '';
@@ -435,7 +435,7 @@ function generatePage(page) {
         "author": {
             "@type": "Organization",
             "name": "CyberScryb",
-            "url": "https://cyberscryb.com/about.html",
+            "url": "https://cyberscryb.com/about/",
             "sameAs": ["https://github.com/cyberscryb"]
         },
         "publisher": {
@@ -445,7 +445,7 @@ function generatePage(page) {
         },
         "datePublished": "2026-02-01",
         "dateModified": "2026-02-12",
-        "mainEntityOfPage": `https://cyberscryb.com/guides/${page.slug}.html`,
+        "mainEntityOfPage": `https://cyberscryb.com/guides/${page.slug}/`,
         "about": page.keywords.split(', ').slice(0, 3).map(kw => ({
             "@type": "Thing",
             "name": kw
@@ -500,21 +500,21 @@ function generatePage(page) {
     <meta property="og:title" content="${page.title}">
     <meta property="og:description" content="${page.subtitle}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://cyberscryb.com/guides/${page.slug}.html">
+    <meta property="og:url" content="https://cyberscryb.com/guides/${page.slug}/">
     <meta property="og:site_name" content="CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${page.title}">
     <meta name="twitter:description" content="${page.subtitle}">
     <meta name="author" content="CyberScryb">
-    <link rel="canonical" href="https://cyberscryb.com/guides/${page.slug}.html">
+    <link rel="canonical" href="https://cyberscryb.com/guides/${page.slug}/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="guide.css">
-    <link rel="stylesheet" href="../tools/shared/email-capture.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/guides/guide.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google AdSense — delayed load to protect LCP -->
     <script>
     (function() {
@@ -554,14 +554,14 @@ function generatePage(page) {
     <header>
         <div class="logo">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#c41e1e" stroke-width="2.5" />
-                <path d="M10 11h12M10 16h8M10 21h10" stroke="#c41e1e" stroke-width="2" stroke-linecap="round" />
+                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#0066ff" stroke-width="2.5" />
+                <path d="M10 11h12M10 16h8M10 21h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <a href="../index.html" style="color: inherit; text-decoration: none;">CyberScryb</a>
+            <a href="/" style="color: inherit; text-decoration: none;">CyberScryb</a>
         </div>
         <nav>
-            <a href="../about.html">About</a>
-            <a href="../index.html">← All Tools</a>
+            <a href="/about/">About</a>
+            <a href="/">← All Tools</a>
         </nav>
     </header>
 
@@ -569,7 +569,7 @@ function generatePage(page) {
         <article class="guide" itemscope itemtype="https://schema.org/Article">
             <div class="guide-header">
                 <div class="breadcrumb">
-                    <a href="../index.html">Tools</a>
+                    <a href="/">Tools</a>
                     <span>/</span>
                     <a href="${toolLink}">${page.tool.name}</a>
                     <span>/</span>
@@ -578,7 +578,7 @@ function generatePage(page) {
                 <h1 itemprop="headline">${page.h1}</h1>
                 <p class="guide-subtitle" itemprop="description">${page.subtitle}</p>
                 <div class="guide-meta">
-                    <span>By <a href="../about.html" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
                     <span>📅 Updated <time datetime="2026-02-12" itemprop="dateModified">February 12, 2026</time></span>
                     <span>⏱ ${Math.ceil(page.sections.length * 1.2)} min read</span>
                 </div>
@@ -623,7 +623,7 @@ ${faqsHtml}
     </section>
 
     <footer>
-        <p><strong><a href="../about.html" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="../about.html" style="color:#888;">About Us</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#888;">About Us</a></p>
     </footer>
 
     <script src="../tools/shared/email-capture.js"></script>
@@ -639,22 +639,29 @@ function generateSitemap(generatedPages) {
     const today = new Date().toISOString().slice(0, 10);
     const mainPages = [
         { path: '/', priority: '1.0', freq: 'weekly' },
-        { path: '/tools.html', priority: '0.9', freq: 'weekly' },
+        { path: '/tools/', priority: '0.9', freq: 'weekly' },
         { path: '/guides/', priority: '0.9', freq: 'weekly' },
-        { path: '/about.html', priority: '0.7', freq: 'monthly' },
-        { path: '/contact.html', priority: '0.4', freq: 'yearly' },
-        { path: '/privacy.html', priority: '0.3', freq: 'yearly' },
-        { path: '/terms.html', priority: '0.3', freq: 'yearly' },
-        { path: '/disclosure.html', priority: '0.3', freq: 'yearly' }
+        { path: '/blog/', priority: '0.9', freq: 'weekly' },
+        { path: '/about/', priority: '0.7', freq: 'monthly' },
+        { path: '/pro/', priority: '0.8', freq: 'monthly' },
+        { path: '/distill/', priority: '0.8', freq: 'monthly' },
+        { path: '/distill-privacy/', priority: '0.3', freq: 'yearly' },
+        { path: '/contact/', priority: '0.4', freq: 'yearly' },
+        { path: '/privacy/', priority: '0.3', freq: 'yearly' },
+        { path: '/terms/', priority: '0.3', freq: 'yearly' },
+        { path: '/disclosure/', priority: '0.3', freq: 'yearly' }
     ];
     const tools = [
-        'summarizer', 'email-writer', 'bio-generator', 'code-explainer', 'product-description',
-        'humanizer', 'gig-auto-pilot', 'json-csv-converter', 'seo-tag-generator',
-        'password-checker', 'base64-tool', 'color-palette', 'markdown-html',
-        'regex-tester', 'qr-generator', 'word-counter', 'uuid-generator',
-        'lorem-ipsum', 'epoch-converter', 'cron-builder', 'privacy-generator',
-        'json-formatter', 'text-diff', 'slug-generator', 'html-entity',
-        'case-converter', 'url-encoder', 'jwt-decoder', 'hash-generator'
+        'ai-detector', 'ai-writing-suite', 'appeal-letter', 'base64-tool', 'behavioral-log', 'bio-generator',
+        'budget-planner', 'caregiver-report', 'case-converter', 'child-support-calculator', 'code-explainer', 'color-palette',
+        'contrast-checker',
+        'cron-builder', 'custody-document', 'email-writer', 'epoch-converter', 'fluid-sim',
+        'gig-auto-pilot', 'glassmorphism-generator', 'hardship-letter', 'hash-generator', 'html-entity', 'humanizer',
+        'json-csv-converter', 'json-formatter', 'jwt-decoder', 'lorem-ipsum', 'markdown-html',
+        'med-administration-log', 'meta-description', 'paraphraser', 'password-checker', 'privacy-generator', 'product-description',
+        'qr-generator', 'regex-tester', 'resume-bullets', 'seo-tag-generator', 'slug-generator',
+        'spousal-support-calculator', 'subnet-calculator', 'summarizer', 'text-diff', 'tweet-generator', 'url-encoder', 'uuid-generator',
+        'voice-writer', 'word-counter'
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -670,10 +677,53 @@ function generateSitemap(generatedPages) {
         xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
     });
 
+    // Add sub-pages of humanizer tool
+    xml += `  <url><loc>${baseUrl}/tools/humanizer/rewrite-chatgpt-text/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
+    xml += `  <url><loc>${baseUrl}/tools/humanizer/remove-ai-detection/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
+
     // Guide pages
     xml += '\n  <!-- Guides -->\n';
+
+    // Static guides
+    const staticGuides = [
+        'caregiver-shift-handoff-standards',
+        'css-glassmorphism-generator-guide',
+        'documenting-cognitive-decline-for-doctors-and-courts',
+        'how-to-appeal-a-housing-denial',
+        'how-to-appeal-an-insurance-claim-denial',
+        'how-to-appeal-an-unemployment-denial',
+        'how-to-write-a-medical-hardship-letter',
+        'how-to-write-a-mortgage-hardship-letter',
+        'how-to-write-a-parenting-plan',
+        'how-to-write-a-student-loan-hardship-letter',
+        'when-to-request-a-custody-modification',
+        'json-to-csv'
+    ];
+    staticGuides.forEach(slug => {
+        xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+    });
+
+    // Generated guides
     generatedPages.forEach(p => {
-        xml += `  <url><loc>${baseUrl}/guides/${p.slug}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+        xml += `  <url><loc>${baseUrl}/guides/${p.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+    });
+
+    // Blog posts
+    xml += '\n  <!-- Blog Posts -->\n';
+    const blogPosts = [
+        'behavioral-spike-tracking-memory-care-2026',
+        'dementia-custody-evidence-guide-2026',
+        'free-upwork-proposal-generator-2026',
+        'how-to-appeal-unemployment-denial-2026',
+        'how-to-make-ai-text-sound-human-2026',
+        'how-to-write-a-hardship-letter-2026',
+        'seo-tag-generators-gate-meta-2026',
+        'unemployment-hearing-checklist-2026',
+        'what-goes-in-a-caregiver-shift-report-2026',
+        'why-vanilla-js-no-frameworks-2026'
+    ];
+    blogPosts.forEach(post => {
+        xml += `  <url><loc>${baseUrl}/blog/${post}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
     });
 
     xml += '</urlset>\n';
@@ -706,7 +756,8 @@ pages.forEach(page => {
 // Generate sitemap
 const sitemap = generateSitemap(pages);
 fs.writeFileSync(path.join(__dirname, 'public', 'sitemap.xml'), sitemap, 'utf-8');
-console.log(`\n  📍 sitemap.xml generated (${7 + pages.length} URLs)`);
+fs.writeFileSync(path.join(__dirname, 'content-site', 'sitemap.xml'), sitemap, 'utf-8');
+console.log(`\n  📍 sitemap.xml generated.`);
 
 console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 console.log(`✅ Generated ${pages.length} SEO pages + sitemap`);

@@ -306,7 +306,16 @@ function sanitizeParams(params) {
     const clean = {};
     for (const [key, val] of Object.entries(params)) {
         if (typeof val === 'boolean') { clean[key] = val; }
-        else if (typeof val === 'number') { clean[key] = Math.max(1, Math.min(20, Math.floor(val))); }
+        else if (typeof val === 'number') {
+            if (Number.isFinite(val)) {
+                const clampKeys = ['paragraphs', 'sentences', 'count', 'length', 'limit', 'offset', 'page'];
+                if (clampKeys.includes(key)) {
+                    clean[key] = Math.max(1, Math.min(20, Math.floor(val)));
+                } else {
+                    clean[key] = Math.max(-100000000, Math.min(100000000, val));
+                }
+            }
+        }
         else if (typeof val === 'string') {
             if (PARAM_ALLOWLISTS[key]) { if (PARAM_ALLOWLISTS[key].includes(val)) clean[key] = val; }
             else { clean[key] = val.slice(0, MAX_PARAM_LENGTH); }
@@ -1105,6 +1114,89 @@ Write a focused piece on this topic in the voice described above. Aim for 150-25
 
 Return ONLY the written content. No title, no meta commentary, no "here's the piece:".`;
         }
+    },
+    'child-support-calculator': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a family law expert specializing in state child support guidelines. Based on the provided financial inputs, analyze the child support details:
+
+State: ${params.state || 'General Income Shares model'}
+Parent A Monthly Gross Income: $${params.incomeA || '0'}
+Parent B Monthly Gross Income: $${params.incomeB || '0'}
+Custody/Timeshare Arrangement: ${params.custody || 'Shared'} (${params.nights || '0'} nights with Parent B)
+Health Insurance / Child Care Expenses: $${params.childcare || '0'}
+Client-Side Calculated Baseline Support: $${params.baseline || '0'}
+
+Requirements:
+1. Provide a detailed, state-specific child support analysis. Explain the typical guidelines for ${params.state || 'this state'}.
+2. Compare the client-side calculated baseline ($${params.baseline || '0'}) with state calculation methods (e.g., Income Shares or Percentage of Income model).
+3. Outline common deviation factors (e.g., extraordinary medical expenses, travel costs, special needs, high incomes) that a court might consider to adjust the support amount.
+4. Detail the next steps required to file or request child support, including forms or worksheets commonly used in ${params.state || 'this state'}.
+5. Tone: professional, informative, objective, and clear. Avoid legalese without explanation.
+
+End with: "DISCLAIMER: This analysis is based on provided figures and standard guidelines. It does not constitute legal advice. Please consult a qualified family law attorney or your state's Department of Child Support Services for official calculations."`
+    },
+    'spousal-support-calculator': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a family law expert. Analyze spousal support (alimony) considerations for the following scenario:
+
+State: ${params.state || 'General statutory model'}
+Parent A (Payor) Monthly Income: $${params.incomeA || '0'}
+Parent B (Payee) Monthly Income: $${params.incomeB || '0'}
+Length of Marriage: ${params.marriageDuration || '0'} years
+Client-Side Estimated Alimony Amount: $${params.estimate || '0'}
+
+Requirements:
+1. Explain the state-specific statutory guidelines and formula standards for alimony in ${params.state || 'this state'}.
+2. Outline how the duration of the marriage (${params.marriageDuration || '0'} years) impacts the duration of support under ${params.state || 'this state'} law (e.g., short-term vs. long-term marriage rules).
+3. Discuss tax implications (specifically IRS rules post-2018 where alimony is generally non-deductible for the payor and tax-free for the payee, and any state-specific tax differences).
+4. Detail the factors courts use to determine alimony (e.g., standard of living, age/health, earning capacity, contribution to spouse's education, fault if applicable).
+5. Outline modification and termination factors (e.g., remarriage, cohabitation, retirement, significant income changes).
+6. Tone: objective, authoritative, easy to understand.
+
+End with: "DISCLAIMER: This calculation and analysis are for educational purposes. Alimony is highly discretionary and varies by court. Consult a family law attorney or tax professional for advice."`
+    },
+    'med-administration-log': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a professional nurse or clinical coordinator. Analyze the following medication administration log or notes:
+
+Log/Notes:
+"""
+${input}
+"""
+
+Audit/Task Type: ${params.auditType || 'safety-audit'} (either 'safety-audit' or 'handoff-summary')
+
+Requirements:
+- If 'safety-audit':
+  1. Identify any potential drug-drug interactions, scheduling concerns (e.g. meds that should be taken with food, spaced apart, or at specific times), or potential safety warnings.
+  2. Highlight any missed/incomplete entries or patterns (e.g., PRN meds given too frequently).
+  3. Suggest clinical best practices or questions to ask the prescribing physician/pharmacist.
+- If 'handoff-summary':
+  1. Create a structured, clear, and professional Caregiver Handoff Summary.
+  2. Organize by: Patient Status, Medications Administered (including times and doses), PRN Medications Given, Important Observations/Vitals, and Pending Tasks for the next shift.
+  3. Ensure a supportive, clinical, and precise tone that minimizes transition errors.
+
+Tone: objective, professional, supportive, and clinical. Avoid definitive medical diagnoses.
+
+End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`
+    },
+    'behavioral-log': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
+
+Log Entries:
+"""
+${input}
+"""
+
+Requirements:
+1. Analyze behavioral trends: identify potential triggers, environmental factors, or scheduling spikes (e.g., sundowning patterns in the late afternoon/evening).
+2. Evaluate current interventions: comment on the efficacy of current consequences/redirection techniques used by caregivers.
+3. Generate a Care Plan Strategy: provide 3-5 specific, evidence-based, non-pharmacological interventions for this behavior (e.g., sensory stimulation, calming music, dietary changes, quiet routines).
+4. Outline safety precautions and monitoring advice for the care team.
+5. Tone: compassionate, clinical, actionable, and structured.
+
+End with: "DISCLAIMER: This analysis is based on behavioral observations. It is not a clinical diagnosis or treatment plan. Consult a neurologist, psychiatrist, or geriatric specialist for formal medical evaluation."`
     }
 };
 

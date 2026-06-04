@@ -1,5 +1,5 @@
 # CyberScryb / Lazy Hustler — Working Memory
-*Last updated: 2026-05-21*
+*Last updated: 2026-06-03*
 
 ---
 
@@ -127,6 +127,23 @@ Every session: look at this list. If something is broken, fix it. If something i
 The goal is: Nathan describes what he wants, it gets done, he finds the result waiting for him. Zero back-and-forth on execution. He reviews outcomes, not steps. Every session should move closer to that. Every manual step Nathan currently does is a candidate for automation. Every file Claude creates manually is a candidate for a scheduled task. Every SEO fix that took 30 minutes is a candidate for a skill that does it in 2.
 
 ---
+
+## Recent Changes (Session 2026-06-03)
+
+**SEO Meta Tag & Social Preview Standardization (Organic CTR Optimization)**
+- **Search-Query Optimized Metadata**: Updated `<title>` and `<meta name="description">` tags for all 52 tool-related HTML pages in `content-site` to target exact, high-CTR search intent keywords (titles ≤ 60 chars; descriptions 120–155 chars).
+- **Automated Social & Canonical Alignment**: Wrote and executed `patch_seo.py` to insert and update missing `og:title`, `og:description`, `og:type`, `og:url`, `og:site_name`, `og:image`, `twitter:card`, `twitter:title`, `twitter:description`, and absolute canonical link tags (`https://cyberscryb.com/tools/...`) across 36 tools that lacked full coverage.
+- **Rebuilt & Synced Site**: Compiled changes via `sync_and_build.py`, synchronizing assets and templates into `public/`, and bumped the cache-busting version query string.
+- **Automated Validation**: Created and executed `verify_seo.py` to run programmatic checks across all 52 pages in both `content-site/` and `public/`, certifying 100% compliance with zero errors.
+
+## Recent Changes (Session 2026-06-02)
+
+**Cyberpunk Rebranding & Technical SEO Optimization.** Rebranded the website from the legacy red accent to a premium cyberpunk palette (purple/cyan) and fully optimized the site structure for Google indexing.
+- **Cyberpunk Rebranding**: Updated CSS variables across all stylesheets (including tools) to map old red variables (`#ef4444`, `#c41e1e`, etc.) to new cyberpunk values: Indigo/Black backgrounds, Purple (`#a855f7`) primary accent, and Cyan (`#06b6d4`) highlight/hover color.
+- **Color Sweep**: Ran bulk scan and migration scripts to ensure all inline styles, text color utilities, SVG icons, and scripts across all 42 tools conform to the new theme.
+- **Unified Navigation & Header**: Aligned the navbar and headers on all main pages, tools, and guides to use consistent layouts, brand logos, and unified trailing-slashes.
+- **Sitemap & Canonicals**: Reconciled `generate-pages.js` to catalog and index all pages on the site, including missing static guides (such as `json-to-csv`), blog posts, and sub-pages (e.g. `/pro/`, `/distill/`, `/distill-privacy/`). Verified matching trailing-slash canonical URLs across all pages to prevent duplicate content indexing.
+- **Hosting Deploy**: Successfully deployed the finalized files to Firebase Hosting (active project `gen-lang-client-0384486156`) and verified live functionality (tools, navigation, styles) via browser automation.
 
 ## Recent Changes (Session 2026-06-01)
 
