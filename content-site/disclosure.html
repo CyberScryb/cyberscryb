@@ -32,6 +32,28 @@
         gtag('config', 'G-73LQZEDNR6');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
 </head>
 
 <body>
@@ -94,7 +116,7 @@
                     <p>We are committed to providing honest, unbiased information. If we recommend a product, it's because we believe it genuinely helps developers and creators — not because of a commission. Our tools will always remain free and privacy-first regardless of affiliate partnerships.</p>
 
                     <h2>Questions?</h2>
-                    <p>If you have questions about our affiliate relationships, contact us at <strong><a href="mailto:hello@cyberscryb.com">hello@cyberscryb.com</a></strong>.</p>
+                    <p>If you have questions about our affiliate relationships, contact us at <strong><a href="mailto:support@cyberscryb.com">support@cyberscryb.com</a></strong>.</p>
                 </div>
             </div>
         </section>
@@ -120,6 +142,11 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <!-- AdSense auto ad unit -->
+    <div style="text-align:center;margin:20px auto;max-width:970px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 </body>
 
 </html>

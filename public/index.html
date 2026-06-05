@@ -67,12 +67,34 @@
         "foundingDate": "2026",
         "contactPoint": {
             "@type": "ContactPoint",
-            "email": "hello@cyberscryb.com",
+            "email": "support@cyberscryb.com",
             "contactType": "customer support"
         }
     }
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
 </head>
 
 <body>
@@ -233,6 +255,11 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <!-- AdSense auto ad unit -->
+    <div style="text-align:center;margin:20px auto;max-width:970px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 </body>
 
 </html>

@@ -45,6 +45,28 @@
     </script>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
 </head>
 
 <body>
@@ -126,7 +148,7 @@
                     <p>If we update this policy, the "Last updated" date above will change. Material changes will also be noted in the extension's Chrome Web Store listing.</p>
 
                     <h2>Contact</h2>
-                    <p>Questions? Email us: <strong><a href="mailto:hello@cyberscryb.com">hello@cyberscryb.com</a></strong></p>
+                    <p>Questions? Email us: <strong><a href="mailto:support@cyberscryb.com">support@cyberscryb.com</a></strong></p>
                     <p>You can also reach us through the <a href="/contact/">contact page</a> on CyberScryb.com.</p>
                 </div>
             </div>
@@ -172,6 +194,11 @@
     </footer>
 
     <script src="/js/script.js?v=20260604" defer></script>
+    <!-- AdSense auto ad unit -->
+    <div style="text-align:center;margin:20px auto;max-width:970px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 </body>
 
 </html>

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | CyberScryb</title>
-    <meta name="description" content="Get in touch with CyberScryb. Questions, feedback, or partnership inquiries — reach us at hello@cyberscryb.com.">
+    <meta name="description" content="Get in touch with CyberScryb. Questions, feedback, or partnership inquiries — reach us at support@cyberscryb.com.">
     <link rel="canonical" href="https://cyberscryb.com/contact/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Contact Us | CyberScryb">
-    <meta property="og:description" content="Questions, feedback, or partnership inquiries — reach us at hello@cyberscryb.com.">
+    <meta property="og:description" content="Questions, feedback, or partnership inquiries — reach us at support@cyberscryb.com.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/contact/">
     <meta property="og:site_name" content="CyberScryb">
@@ -32,6 +32,28 @@
         gtag('config', 'G-73LQZEDNR6');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
 </head>
 
 <body>
@@ -75,11 +97,11 @@
                         <div style="font-size: 3rem; margin-bottom: 1rem;">✉️</div>
                         <h2 style="margin-top: 0;">Email Us</h2>
                         <p>The best way to reach us:</p>
-                        <a href="mailto:hello@cyberscryb.com"
+                        <a href="mailto:support@cyberscryb.com"
                             style="display: inline-block; font-family: 'Orbitron', monospace; font-size: 1.2rem; color: #00d4ff; padding: 0.75rem 1.5rem; border: 1px solid #00d4ff; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;"
                             onmouseover="this.style.background='rgba(0,212,255,0.1)'; this.style.boxShadow='0 0 20px rgba(0,212,255,0.3)'"
                             onmouseout="this.style.background='transparent'; this.style.boxShadow='none'">
-                            hello@cyberscryb.com
+                            support@cyberscryb.com
                         </a>
                     </div>
 
@@ -111,6 +133,11 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <!-- AdSense auto ad unit -->
+    <div style="text-align:center;margin:20px auto;max-width:970px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 </body>
 
 </html>
