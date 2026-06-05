@@ -1,5 +1,5 @@
 # CyberScryb / Lazy Hustler — Working Memory
-*Last updated: 2026-06-03*
+*Last updated: 2026-06-05*
 
 ---
 
@@ -127,6 +127,16 @@ Every session: look at this list. If something is broken, fix it. If something i
 The goal is: Nathan describes what he wants, it gets done, he finds the result waiting for him. Zero back-and-forth on execution. He reviews outcomes, not steps. Every session should move closer to that. Every manual step Nathan currently does is a candidate for automation. Every file Claude creates manually is a candidate for a scheduled task. Every SEO fix that took 30 minutes is a candidate for a skill that does it in 2.
 
 ---
+
+## Recent Changes (Session 2026-06-05)
+
+**SEO Meta Tag Sweep — All 75 Pages Fixed & Deployed**
+- **Audited all 115 HTML pages** site-wide using a Python audit script. Found 76 pages with missing meta tags.
+- **Fixed 75 pages** in one automated pass: added `<link rel="icon" type="image/png" href="/mascot-icon.png">` (favicon) to 72 pages; `og:image` (`https://cyberscryb.com/og-image.png`) to 33 pages; `og:title` (derived from each page's `<title>`) to 16 tool pages; meta description to pro-success (noindex).
+- **Zero issues remain** on any indexable page. Only intentional exceptions: `404.html` (error page), `pro-success/` (noindex), `v2.html` (dev page).
+- **Deployed via merge to main** → GitHub Actions fired `deploy.yml` → Firebase Hosting updated automatically.
+
+**Deploy rule confirmed:** Push/merge to `main` branch → GitHub Actions auto-deploys hosting + functions to Firebase. No manual `firebase deploy` needed. `firebase` CLI is not installed in the remote Claude Code environment — always deploy by merging to `main`.
 
 ## Recent Changes (Session 2026-06-04)
 
