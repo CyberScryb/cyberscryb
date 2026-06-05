@@ -17,6 +17,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      # Jest resolves firebase-admin/firebase-functions via modulePaths → functions/node_modules,
+      # so the functions deps must be installed too (or the ai-* suites fail to resolve the mocks).
+      - run: npm ci
+        working-directory: ./functions
       - run: npx jest --verbose --coverage
 
   python-tests:

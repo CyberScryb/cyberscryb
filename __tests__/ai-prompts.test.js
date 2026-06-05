@@ -43,9 +43,17 @@ describe('AI_PROMPTS dispatch table', () => {
         'press-release',
         'seo-title',
         'voice-writer',
+        'child-support-calculator',
+        'spousal-support-calculator',
+        'med-administration-log',
+        'behavioral-log',
     ];
 
-    test('has exactly 21 keys', () => {
+    // Calculator tools are param-driven (they build from structured params, not a
+    // free-text input), so they don't echo the raw input string like the others.
+    const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
+
+    test('has exactly 25 keys', () => {
         expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
     });
 
@@ -58,8 +66,12 @@ describe('AI_PROMPTS dispatch table', () => {
         });
         test('build interpolates input into prompt', () => {
             const prompt = AI_PROMPTS[toolId].build('TEST_INPUT_42', {});
-            expect(prompt).toContain('TEST_INPUT_42');
+            expect(typeof prompt).toBe('string');
             expect(prompt.length).toBeGreaterThan(50);
+            // Input-driven tools echo the raw input; param-driven calculators use structured params.
+            if (!PARAM_DRIVEN_KEYS.includes(toolId)) {
+                expect(prompt).toContain('TEST_INPUT_42');
+            }
         });
     });
 });
