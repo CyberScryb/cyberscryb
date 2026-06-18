@@ -4,5 +4,11 @@ service cloud.firestore {
     match /subscribers/{docId} {
       allow read, write: if false;
     }
+    match /usage/{docId} {
+      allow read, write: if false;
+    }
+    match /rateLimits/{docId} {
+      allow read, write: if false;
+    }
   }
 }
