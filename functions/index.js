@@ -1739,18 +1739,10 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         // Get Stripe secret — env var first (functions.config() was removed in firebase-functions v6)
         const stripeSecret = process.env.STRIPE_SECRET || (functions.config().stripe && functions.config().stripe.secret);
         if (!stripeSecret) {
-            // No Stripe secret configured → fall back to trusting the post-checkout redirect.
-            // Pro is gated by a client-side cookie anyway, so this is a pragmatic unlock, not a
-            // security regression. Setting STRIPE_SECRET automatically restores strict verification.
-            console.warn('[PRO] No STRIPE_SECRET — unlocking on redirect trust. Set STRIPE_SECRET for strict Stripe verification.');
-            await sessionRef.set({
-                status: 'redirect_trust',
-                verified: false,
-                validatedAt: admin.firestore.FieldValue.serverTimestamp(),
-                paid: null
-            });
-            logConversion('pro_unlock', 'redirect_trust', {});
-            return res.status(200).json({ ok: true, status: 'redirect_trust', verified: false });
+            // STRICT FAIL-CLOSED: never unlock without server-side verification.
+            // STRIPE_SECRET is provisioned the same way GOOGLE_API_KEY is (process.env).
+            console.error('[PRO] CRITICAL: No STRIPE_SECRET configured. Failing closed.');
+            return res.status(500).json({ error: 'Server configuration error' });
         }
 
         // Call Stripe REST API — no package needed, just https
