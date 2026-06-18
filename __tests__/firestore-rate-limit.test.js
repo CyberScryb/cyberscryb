@@ -13,6 +13,16 @@ function createFakeDb() {
                 data: () => data,
             };
         },
+        set: async (data) => {
+            const existing = store.get(path) || {};
+            let count = existing.count || 0;
+            if (data.count && data.count.__increment !== undefined) {
+                count += data.count.__increment;
+            } else if (typeof data.count === 'number') {
+                count = data.count;
+            }
+            store.set(path, { ...existing, ...data, count });
+        },
     });
 
     const db = {
@@ -161,8 +171,19 @@ describe('Firestore-backed rate limiting', () => {
     });
 
     test('global cap check fails CLOSED on Firestore error', async () => {
-        mockFakeDb.runTransaction = async () => {
-            throw new Error('Firestore unavailable');
+        // per-IP transaction succeeds; global get/set throws
+        const realCollection = mockFakeDb.collection.bind(mockFakeDb);
+        mockFakeDb.collection = (name) => {
+            const col = realCollection(name);
+            if (name === 'usage') {
+                return {
+                    doc: (id) => ({
+                        ...col.doc(id),
+                        get: async () => { throw new Error('Firestore unavailable'); },
+                    }),
+                };
+            }
+            return col;
         };
 
         const result = await checkFirestoreRateLimit(makeReq({ ip: '7.7.7.7' }));
@@ -170,17 +191,10 @@ describe('Firestore-backed rate limiting', () => {
         expect(typeof result.retryAfter).toBe('number');
     });
 
-    test('per-IP cap check fails OPEN on Firestore error after global succeeds', async () => {
+    test('per-IP cap check fails OPEN on Firestore error, global still increments', async () => {
         const dateStr = getDateString();
-        let callCount = 0;
-        const realRunTransaction = mockFakeDb.runTransaction.bind(mockFakeDb);
-        mockFakeDb.runTransaction = async (fn) => {
-            callCount++;
-            if (callCount === 1) {
-                // global check succeeds
-                return realRunTransaction(fn);
-            }
-            // per-IP check fails
+        // per-IP transaction throws; global get/set succeeds normally
+        mockFakeDb.runTransaction = async () => {
             throw new Error('Firestore unavailable for per-IP doc');
         };
 

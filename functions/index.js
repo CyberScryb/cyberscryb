@@ -265,49 +265,21 @@ function getIpHash(req) {
     const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
                req.connection?.remoteAddress || 'unknown';
     const crypto = require('crypto');
-    return crypto.createHash('sha256').update(ip + 'salt_v1').digest('hex');
+    const salt = process.env.IP_HASH_SALT || 'salt_v1';
+    return crypto.createHash('sha256').update(ip + salt).digest('hex');
 }
 
 // Checks and increments Firestore-backed global + per-IP daily counters.
 // Returns { allowed: true } or { allowed: false, reason, retryAfter }.
-// Global cap fails CLOSED (Firestore error => block). Per-IP cap fails OPEN.
+// Per-IP cap is checked FIRST (fail OPEN) so an abusive IP that's already
+// over its own cap can't keep burning the shared global counter.
+// Global cap fails CLOSED (Firestore error => block) and uses a
+// non-transactional read + atomic increment to avoid write contention on
+// a single hot document (Firestore caps single-doc writes at ~1/sec).
 async function checkFirestoreRateLimit(req) {
     const dateStr = getDateString();
     const tier = getUserTier(req);
     const ipHash = getIpHash(req);
-
-    // Global daily cap — fail CLOSED
-    try {
-        const globalRef = db.collection('usage').doc(`daily-${dateStr}`);
-        const result = await db.runTransaction(async (tx) => {
-            const snap = await tx.get(globalRef);
-            const current = snap.exists ? (snap.data().count || 0) : 0;
-            if (current >= GLOBAL_DAILY_CAP) {
-                return { exceeded: true, count: current };
-            }
-            tx.set(globalRef, {
-                count: admin.firestore.FieldValue.increment(1),
-                updatedAt: admin.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-            return { exceeded: false, count: current + 1 };
-        });
-
-        if (result.exceeded) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Global daily cap reached: ${result.count}/${GLOBAL_DAILY_CAP}`);
-            return {
-                allowed: false,
-                reason: 'Service capacity reached. Try again in a few hours.',
-                retryAfter: 3600
-            };
-        }
-    } catch (err) {
-        console.error('[FIRESTORE_RATE_LIMIT] Global cap check failed, failing closed:', err.message);
-        return {
-            allowed: false,
-            reason: 'Service temporarily unavailable. Try again shortly.',
-            retryAfter: 60
-        };
-    }
 
     // Per-IP daily cap — fail OPEN
     try {
@@ -338,6 +310,34 @@ async function checkFirestoreRateLimit(req) {
     } catch (err) {
         console.error('[FIRESTORE_RATE_LIMIT] Per-IP cap check failed, failing open:', err.message);
         // fail open - don't block on transient per-IP errors
+    }
+
+    // Global daily cap — fail CLOSED
+    try {
+        const globalRef = db.collection('usage').doc(`daily-${dateStr}`);
+        const globalSnap = await globalRef.get();
+        const current = globalSnap.exists ? (globalSnap.data().count || 0) : 0;
+
+        if (current >= GLOBAL_DAILY_CAP) {
+            console.warn(`[FIRESTORE_RATE_LIMIT] Global daily cap reached: ${current}/${GLOBAL_DAILY_CAP}`);
+            return {
+                allowed: false,
+                reason: 'Service capacity reached. Try again in a few hours.',
+                retryAfter: 3600
+            };
+        }
+
+        await globalRef.set({
+            count: admin.firestore.FieldValue.increment(1),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+    } catch (err) {
+        console.error('[FIRESTORE_RATE_LIMIT] Global cap check failed, failing closed:', err.message);
+        return {
+            allowed: false,
+            reason: 'Service temporarily unavailable. Try again shortly.',
+            retryAfter: 60
+        };
     }
 
     return { allowed: true };
