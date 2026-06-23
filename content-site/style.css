@@ -12,24 +12,24 @@
 }
 
 :root {
-    --bg-primary: #050505;
-    --bg-card: rgba(12, 12, 12, 0.85);
-    --bg-panel: rgba(8, 8, 8, 0.95);
-    --border: rgba(200, 30, 30, 0.12);
-    --border-hover: rgba(200, 30, 30, 0.35);
-    --text-primary: #d4d4d4;
-    --text-secondary: #707070;
-    --text-muted: #444444;
-    --accent: #c41e1e;
-    --accent-light: #e03030;
-    --accent-dark: #8b1515;
-    --steel: #2a2a2a;
+    --bg-primary: #030307;
+    --bg-card: rgba(13, 14, 28, 0.45);
+    --bg-panel: rgba(8, 8, 16, 0.85);
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(0, 212, 255, 0.25);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #7b2cff;
+    --accent-light: #00d4ff;
+    --accent-dark: #5219c4;
+    --steel: rgba(255, 255, 255, 0.06);
     --green: #22c55e;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --radius: 8px;
-    --radius-sm: 6px;
-    --transition: 0.2s ease;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -49,8 +49,8 @@ body {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(200, 30, 30, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200, 30, 30, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
@@ -62,19 +62,19 @@ body {
     height: 500px;
     border-radius: 50%;
     filter: blur(180px);
-    opacity: 0.06;
+    opacity: 0.08;
     pointer-events: none;
     z-index: 0;
 }
 
 .glow-1 {
-    background: var(--accent);
+    background: var(--accent-light);
     top: -250px;
     left: -150px;
 }
 
 .glow-2 {
-    background: var(--accent-dark);
+    background: var(--accent);
     bottom: -250px;
     right: -150px;
 }
