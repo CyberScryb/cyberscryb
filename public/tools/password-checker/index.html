@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Strength Checker — Free, No Signup | CyberScryb</title>
+    <title>Password Strength Checker &mdash; Free, No Signup | CyberScryb</title>
     <meta name="description" content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="password strength checker, password tester, password security, how strong is my password, password entropy">
-    <meta property="og:title" content="Password Strength Checker — Free, No Signup | CyberScryb">
+    <meta property="og:title" content="Password Strength Checker &mdash; Free, No Signup | CyberScryb">
     <meta property="og:description"
         content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/password-checker/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Password Strength Checker — Free, No Signup | CyberScryb">
+    <meta name="twitter:title" content="Password Strength Checker &mdash; Free, No Signup | CyberScryb">
     <meta name="twitter:description" content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/password-checker/">
@@ -35,7 +35,7 @@
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web Browser",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Free password strength checker with real-time entropy analysis, percentile ranking, crack time estimates at 10 billion guesses/sec, and pattern detection. 100% client-side — your password never leaves your browser.",
+        "description": "Free password strength checker with real-time entropy analysis, percentile ranking, crack time estimates at 10 billion guesses/sec, and pattern detection. 100% client-side &mdash; your password never leaves your browser.",
         "featureList": ["Entropy calculation in bits", "Percentile ranking against common password patterns", "Crack time estimation at 10B guesses/sec", "Keyboard pattern detection", "Common password database check", "CyberScryb Verification ID"],
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" },
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
@@ -53,11 +53,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -107,7 +112,7 @@
 
     <main>
         <section class="hero">
-            <div class="badge">🔐 100% Private — Nothing Leaves Your Browser</div>
+            <div class="badge">🔐 100% Private &mdash; Nothing Leaves Your Browser</div>
             <h1>Password <span class="accent">Strength</span> Checker</h1>
             <p class="subtitle">Test your password with real-time entropy analysis, crack time estimates, and actionable
                 improvement tips.</p>
@@ -136,27 +141,27 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-label">Entropy</div>
-                        <div class="stat-value" id="entropy">—</div>
+                        <div class="stat-value" id="entropy">&mdash;</div>
                         <div class="stat-unit">bits</div>
                     </div>
                     <div class="stat-card stat-card-accent">
                         <div class="stat-label">Percentile</div>
-                        <div class="stat-value" id="percentile">—</div>
+                        <div class="stat-value" id="percentile">&mdash;</div>
                         <div class="stat-unit" id="percentileContext">vs. all passwords checked</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Crack Time</div>
-                        <div class="stat-value" id="crackTime">—</div>
+                        <div class="stat-value" id="crackTime">&mdash;</div>
                         <div class="stat-unit" id="crackContext"></div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Length</div>
-                        <div class="stat-value" id="length">—</div>
+                        <div class="stat-value" id="length">&mdash;</div>
                         <div class="stat-unit">characters</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Charset</div>
-                        <div class="stat-value" id="charset">—</div>
+                        <div class="stat-value" id="charset">&mdash;</div>
                         <div class="stat-unit" id="charsetSize">pool size</div>
                     </div>
                 </div>
@@ -191,8 +196,8 @@
                     <span class="verify-icon">🛡️</span>
                     <span class="verify-title">CYBERSCRYB VERIFICATION</span>
                 </div>
-                <div class="verify-id" id="verifyId">—</div>
-                <div class="verify-summary" id="verifySummary">—</div>
+                <div class="verify-id" id="verifyId">&mdash;</div>
+                <div class="verify-summary" id="verifySummary">&mdash;</div>
             </div>
             </div>
         </section>
@@ -253,17 +258,17 @@
     
     <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How Passwords Get Cracked in 2026</h2>
-        <p>Password cracking has evolved far beyond simple guessing. Modern attackers use GPU-accelerated brute force that can test 10 billion password combinations per second using hardware that costs under $5,000. At that speed, an 8-character password using only lowercase letters falls in under 3 seconds. Add uppercase, numbers, and symbols and you buy more time — but not as much as you'd think.</p>
-<p><strong>Dictionary attacks</strong> are the first thing any cracker tries. They run through lists of the most common passwords — "password123," "qwerty," "letmein" — and variations with common substitutions like @ for a, 3 for e, and 0 for o. These substitutions feel clever but every cracking tool has them built in. If your password is "P@ssw0rd!" you're not fooling anyone.</p>
+        <p>Password cracking has evolved far beyond simple guessing. Modern attackers use GPU-accelerated brute force that can test 10 billion password combinations per second using hardware that costs under $5,000. At that speed, an 8-character password using only lowercase letters falls in under 3 seconds. Add uppercase, numbers, and symbols and you buy more time &mdash; but not as much as you'd think.</p>
+<p><strong>Dictionary attacks</strong> are the first thing any cracker tries. They run through lists of the most common passwords &mdash; "password123," "qwerty," "letmein" &mdash; and variations with common substitutions like @ for a, 3 for e, and 0 for o. These substitutions feel clever but every cracking tool has them built in. If your password is "P@ssw0rd!" you're not fooling anyone.</p>
 <p><strong>Rainbow tables</strong> are precomputed lookup tables that map hashed passwords back to their plaintext. If a website stores passwords as unsalted MD5 or SHA-1 hashes and gets breached, attackers can look up millions of passwords instantly without any computation. Modern password storage uses salted bcrypt or Argon2 specifically to defeat rainbow tables, but many older systems still use weak hashing.</p>
 <p><strong>Credential stuffing</strong> is the most common attack in practice. Attackers take username/password pairs leaked from one breach and try them on other services. If you reuse the same password across Gmail, Netflix, and your bank, a single breach exposes all three. This is why unique passwords per service matter more than password complexity.</p>
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Makes a Password Actually Strong</h2>
-        <p>Password strength comes down to one concept: entropy — the mathematical unpredictability of your password measured in bits. Every bit of entropy doubles the number of guesses an attacker needs. A password with 40 bits of entropy requires about 1 trillion guesses. A password with 80 bits requires over a sextillion guesses — more than any current hardware can process in a human lifetime.</p>
+        <p>Password strength comes down to one concept: entropy &mdash; the mathematical unpredictability of your password measured in bits. Every bit of entropy doubles the number of guesses an attacker needs. A password with 40 bits of entropy requires about 1 trillion guesses. A password with 80 bits requires over a sextillion guesses &mdash; more than any current hardware can process in a human lifetime.</p>
 <p>Entropy depends on two factors: the size of the character pool you draw from, and the length of the password. Using lowercase letters only gives you a pool of 26 characters. Add uppercase (52), numbers (62), and symbols (95). But length matters exponentially more than pool size. A 20-character lowercase password has more entropy than a 10-character password using all character types.</p>
-<p>The best practical approach in 2026 is passphrases: four or five random words strung together, like "correct horse battery staple" (but actually random — don't use that one, it's famous). A four-word passphrase from a 7,776-word dictionary has about 51 bits of entropy. Five words gives you 64 bits. Six words gives you 77 bits. They're easier to remember and harder to crack than short complex passwords.</p>
+<p>The best practical approach in 2026 is passphrases: four or five random words strung together, like "correct horse battery staple" (but actually random &mdash; don't use that one, it's famous). A four-word passphrase from a 7,776-word dictionary has about 51 bits of entropy. Five words gives you 64 bits. Six words gives you 77 bits. They're easier to remember and harder to crack than short complex passwords.</p>
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Password Managers: The Real Solution</h2>
-        <p>No human can remember unique, high-entropy passwords for 50+ accounts. Password managers solve this by generating and storing random passwords for every service, locked behind one strong master password. The major options — 1Password, Bitwarden, and KeePass — all use AES-256 encryption on your vault. Bitwarden is open-source and free. 1Password has better UX and costs $3/month.</p>
-<p>The most important thing you can do for your security in 2026 is use a password manager with unique passwords per site, enable two-factor authentication on your email and financial accounts, and never reuse passwords across services. This tool helps you understand how strong your passwords are — but the real defense is never relying on a single password to protect anything important.</p>
+        <p>No human can remember unique, high-entropy passwords for 50+ accounts. Password managers solve this by generating and storing random passwords for every service, locked behind one strong master password. The major options &mdash; 1Password, Bitwarden, and KeePass &mdash; all use AES-256 encryption on your vault. Bitwarden is open-source and free. 1Password has better UX and costs $3/month.</p>
+<p>The most important thing you can do for your security in 2026 is use a password manager with unique passwords per site, enable two-factor authentication on your email and financial accounts, and never reuse passwords across services. This tool helps you understand how strong your passwords are &mdash; but the real defense is never relying on a single password to protect anything important.</p>
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Reading</h2>
         <ul style="padding-left:1.2rem;">
             <li><a href="/guides/" style="color:#c41e1e;">Browse All CyberScryb Guides</a></li>
@@ -317,7 +322,7 @@
     </section>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — Your password never leaves this page.</p>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; Your password never leaves this page.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
 

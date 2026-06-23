@@ -31,6 +31,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -69,12 +74,12 @@
     </script>
     <script type="application/ld+json">
     {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [
-        {"@type": "Question", "name": "What's the difference between legal custody and physical custody?", "acceptedAnswer": {"@type": "Answer", "text": "Legal custody is about decision-making authority — who decides on schooling, healthcare, religion, and major life choices. Physical custody is about where the child lives and the time-sharing schedule. A common setup is joint legal custody (both parents make major decisions together) with one parent having more physical time. Courts increasingly favor joint legal custody unless there's documented abuse, neglect, or extreme conflict."}},
+        {"@type": "Question", "name": "What's the difference between legal custody and physical custody?", "acceptedAnswer": {"@type": "Answer", "text": "Legal custody is about decision-making authority &mdash; who decides on schooling, healthcare, religion, and major life choices. Physical custody is about where the child lives and the time-sharing schedule. A common setup is joint legal custody (both parents make major decisions together) with one parent having more physical time. Courts increasingly favor joint legal custody unless there's documented abuse, neglect, or extreme conflict."}},
         {"@type": "Question", "name": "Does a parenting plan need to be filed with the court?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, to be enforceable. A signed agreement between parents has moral force but no legal teeth unless a court incorporates it into a custody order. File it as a Joint Stipulated Parenting Plan if you both agree, or submit it as part of contested custody filings. Once entered as an order, it's enforceable through contempt proceedings."}},
         {"@type": "Question", "name": "What if my co-parent and I can't agree on the schedule?", "acceptedAnswer": {"@type": "Answer", "text": "Most states require mediation before a contested custody hearing. The mediator helps you draft a workable plan; if you still can't agree, the court will impose one after a hearing. Many parents end up with a 2-2-5-5 or week-on/week-off schedule even after starting at extreme positions. Document your preferred schedule in writing before mediation so you don't get pushed off it under pressure."}},
         {"@type": "Question", "name": "How specific should the schedule be?", "acceptedAnswer": {"@type": "Answer", "text": "Specific enough that two parents who barely speak to each other could execute it without conversation. Vague plans like 'reasonable visitation' become court fights within months. Name the days, the times, the exchange location, the transportation responsibility, who handles each holiday, who has summer break, and who handles teacher conferences. Specificity is protection for both parents and predictability for the child."}},
-        {"@type": "Question", "name": "Can the parenting plan change later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, but only through a court-approved modification. Either parent can file for modification when there's a 'substantial change in circumstances' — moves, job changes, school changes, the child's evolving needs, evidence of harm. See the modification guide for the specific triggers. Until modified by court order, the original plan is binding even if both parents informally agree to change something."}},
-        {"@type": "Question", "name": "Do parenting plans address holidays and birthdays?", "acceptedAnswer": {"@type": "Answer", "text": "They should. Most plans alternate major holidays year to year (one parent gets Thanksgiving even-numbered years, the other odd-numbered) and split religious or culturally significant days. School breaks (winter, spring, summer) usually get split or alternated by week. The child's birthday is often split — half the day with each parent — or alternated."}}
+        {"@type": "Question", "name": "Can the parenting plan change later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, but only through a court-approved modification. Either parent can file for modification when there's a 'substantial change in circumstances' &mdash; moves, job changes, school changes, the child's evolving needs, evidence of harm. See the modification guide for the specific triggers. Until modified by court order, the original plan is binding even if both parents informally agree to change something."}},
+        {"@type": "Question", "name": "Do parenting plans address holidays and birthdays?", "acceptedAnswer": {"@type": "Answer", "text": "They should. Most plans alternate major holidays year to year (one parent gets Thanksgiving even-numbered years, the other odd-numbered) and split religious or culturally significant days. School breaks (winter, spring, summer) usually get split or alternated by week. The child's birthday is often split &mdash; half the day with each parent &mdash; or alternated."}}
     ]}
     </script>
     <script type="application/ld+json">
@@ -126,7 +131,7 @@
                     <span class="tldr-icon">⚡</span>
                     <strong>Key Takeaways (TL;DR)</strong>
                 </div>
-                <p>A court-ready parenting plan has eight sections: parties and children identified, legal custody (decision-making), physical custody / residential schedule, holiday and school break rotation, exchange logistics, communication rules, travel and relocation rules, and dispute resolution. Be specific — vague plans become litigation. Name the days, times, exchange locations, and who handles which holiday in which year. File the plan with the court so it becomes an enforceable custody order. Build the plan around the child's stability, not the parents' convenience.</p>
+                <p>A court-ready parenting plan has eight sections: parties and children identified, legal custody (decision-making), physical custody / residential schedule, holiday and school break rotation, exchange logistics, communication rules, travel and relocation rules, and dispute resolution. Be specific &mdash; vague plans become litigation. Name the days, times, exchange locations, and who handles which holiday in which year. File the plan with the court so it becomes an enforceable custody order. Build the plan around the child's stability, not the parents' convenience.</p>
             </div>
 
             <div class="cta-box">
@@ -134,7 +139,7 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a court-ready parenting plan draft in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool →</a>
+                <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
@@ -154,14 +159,14 @@
                 <h2>The 8 sections every parenting plan needs</h2>
 
                 <ol>
-                    <li><strong>Parties and children</strong> — full legal names of both parents, full legal names and DOBs of each child</li>
-                    <li><strong>Legal custody / decision-making</strong> — who decides what, in which categories</li>
-                    <li><strong>Physical custody / time-sharing schedule</strong> — the regular weekly/biweekly pattern</li>
-                    <li><strong>Holiday and school break schedule</strong> — overrides the regular schedule</li>
-                    <li><strong>Exchange logistics</strong> — location, time, transportation responsibility, late-arrival rules</li>
-                    <li><strong>Communication</strong> — between parents and between each parent and child</li>
-                    <li><strong>Travel and relocation</strong> — notice requirements, consent, passport handling</li>
-                    <li><strong>Dispute resolution and modification</strong> — what happens when there's a disagreement</li>
+                    <li><strong>Parties and children</strong> &mdash; full legal names of both parents, full legal names and DOBs of each child</li>
+                    <li><strong>Legal custody / decision-making</strong> &mdash; who decides what, in which categories</li>
+                    <li><strong>Physical custody / time-sharing schedule</strong> &mdash; the regular weekly/biweekly pattern</li>
+                    <li><strong>Holiday and school break schedule</strong> &mdash; overrides the regular schedule</li>
+                    <li><strong>Exchange logistics</strong> &mdash; location, time, transportation responsibility, late-arrival rules</li>
+                    <li><strong>Communication</strong> &mdash; between parents and between each parent and child</li>
+                    <li><strong>Travel and relocation</strong> &mdash; notice requirements, consent, passport handling</li>
+                    <li><strong>Dispute resolution and modification</strong> &mdash; what happens when there's a disagreement</li>
                 </ol>
 
                 <h2>Section 1: Parties and children</h2>
@@ -172,11 +177,11 @@
 
                 <p>Separate decision-making by category. The common categories:</p>
                 <ul>
-                    <li><strong>Education</strong> — choice of school, enrollment, tutoring, IEP/504 plans, post-secondary planning</li>
-                    <li><strong>Healthcare</strong> — choice of providers, non-emergency procedures, prescription medications, mental health treatment, dental, vision, orthodontic</li>
-                    <li><strong>Religion</strong> — religious upbringing, religious education, religious rites</li>
-                    <li><strong>Extracurricular activities</strong> — sports, lessons, summer camps</li>
-                    <li><strong>Day-to-day</strong> — bedtimes, diet, screen time, friends, transportation (usually decided by whichever parent has the child at the moment)</li>
+                    <li><strong>Education</strong> &mdash; choice of school, enrollment, tutoring, IEP/504 plans, post-secondary planning</li>
+                    <li><strong>Healthcare</strong> &mdash; choice of providers, non-emergency procedures, prescription medications, mental health treatment, dental, vision, orthodontic</li>
+                    <li><strong>Religion</strong> &mdash; religious upbringing, religious education, religious rites</li>
+                    <li><strong>Extracurricular activities</strong> &mdash; sports, lessons, summer camps</li>
+                    <li><strong>Day-to-day</strong> &mdash; bedtimes, diet, screen time, friends, transportation (usually decided by whichever parent has the child at the moment)</li>
                 </ul>
 
                 <p>For each category, specify: joint (both parents must agree), one parent has final say after consultation, or one parent has sole authority. Most plans use joint for major categories with tiebreaker authority going to the primary residential parent if you can't agree after good-faith discussion.</p>
@@ -189,9 +194,9 @@
 
                 <h3>50/50 schedules</h3>
                 <ul>
-                    <li><strong>2-2-3:</strong> Parent A has Mon-Tues; Parent B has Wed-Thurs; Parent A has Fri-Sun. Next week, swap. Works well for younger kids — no parent is gone more than 3 nights.</li>
+                    <li><strong>2-2-3:</strong> Parent A has Mon-Tues; Parent B has Wed-Thurs; Parent A has Fri-Sun. Next week, swap. Works well for younger kids &mdash; no parent is gone more than 3 nights.</li>
                     <li><strong>2-2-5-5:</strong> Parent A Mon-Tues, Parent B Wed-Thurs, Parent A Fri-Tues (5 nights), Parent B Wed-Sun (5 nights). Then repeat. School-age kids handle this well.</li>
-                    <li><strong>Week-on/week-off:</strong> Each parent has the child for a full week, switching Sunday or Friday. Best for older kids and parents who live far apart. Hardest on younger kids — too long away from each parent.</li>
+                    <li><strong>Week-on/week-off:</strong> Each parent has the child for a full week, switching Sunday or Friday. Best for older kids and parents who live far apart. Hardest on younger kids &mdash; too long away from each parent.</li>
                     <li><strong>3-4-4-3:</strong> Parent A Mon-Wed (3), Parent B Thu-Sun (4); next week, swap. Same total count, slightly different rhythm.</li>
                 </ul>
 
@@ -222,13 +227,13 @@
                     <li>Three-day weekends from school</li>
                 </ul>
 
-                <p>Summer break gets its own treatment — usually a different schedule than the school year. Common patterns: 2-week alternating blocks, two long uninterrupted blocks with each parent (parent A weeks 1-3, parent B weeks 4-6, parent A weeks 7-8, parent B weeks 9-10), or maintaining the school-year schedule with extended summer vacation blocks of 1-2 weeks for each parent.</p>
+                <p>Summer break gets its own treatment &mdash; usually a different schedule than the school year. Common patterns: 2-week alternating blocks, two long uninterrupted blocks with each parent (parent A weeks 1-3, parent B weeks 4-6, parent A weeks 7-8, parent B weeks 9-10), or maintaining the school-year schedule with extended summer vacation blocks of 1-2 weeks for each parent.</p>
 
                 <h2>Section 5: Exchange logistics</h2>
 
                 <p>Specify for every exchange:</p>
                 <ul>
-                    <li><strong>Location.</strong> Often a neutral place — school, daycare, a coffee shop. If there's any DV history, a public location like a police station or designated "safe exchange" facility.</li>
+                    <li><strong>Location.</strong> Often a neutral place &mdash; school, daycare, a coffee shop. If there's any DV history, a public location like a police station or designated "safe exchange" facility.</li>
                     <li><strong>Time.</strong> Exact start and end. "6:00 PM" not "evening."</li>
                     <li><strong>Transportation.</strong> Who drives. Common: each parent provides transportation TO their own parenting time. Alternative: split the driving meet-in-the-middle if you live far apart.</li>
                     <li><strong>Late-arrival rule.</strong> If a parent is more than 30/60/90 minutes late, what happens? Some plans forfeit the parenting time to the other parent for that day; some allow makeup time; some require advance notification.</li>
@@ -245,14 +250,14 @@
                 <p>Two sub-categories:</p>
 
                 <h3>Between parents</h3>
-                <p>Most modern plans require all parent-to-parent communication about the child go through a co-parenting app (OurFamilyWizard, TalkingParents, AppClose, etc.). The apps timestamp messages, prevent editing/deletion, and provide a record the court can read. They also dampen escalation — parents type less inflammatory things when they know a judge might read it later.</p>
+                <p>Most modern plans require all parent-to-parent communication about the child go through a co-parenting app (OurFamilyWizard, TalkingParents, AppClose, etc.). The apps timestamp messages, prevent editing/deletion, and provide a record the court can read. They also dampen escalation &mdash; parents type less inflammatory things when they know a judge might read it later.</p>
 
                 <p>Specify: which app, expected response time for non-urgent matters (24-48 hours common), what counts as "urgent" requiring immediate response, what subjects are appropriate.</p>
 
                 <h3>Between parent and child</h3>
-                <p>Specify that the non-residential parent can call/video the child during the other parent's time (typically once daily or as the child's age allows). Reciprocal — both parents agree to support the child's relationship with the other parent.</p>
+                <p>Specify that the non-residential parent can call/video the child during the other parent's time (typically once daily or as the child's age allows). Reciprocal &mdash; both parents agree to support the child's relationship with the other parent.</p>
 
-                <p>Older kids often have their own phones — specify that the resident parent doesn't monitor or restrict communication between the child and the other parent during scheduled call times.</p>
+                <p>Older kids often have their own phones &mdash; specify that the resident parent doesn't monitor or restrict communication between the child and the other parent during scheduled call times.</p>
 
                 <h2>Section 7: Travel and relocation</h2>
 
@@ -268,7 +273,7 @@
                 <p>Two paths:</p>
                 <ul>
                     <li><strong>Day-to-day disputes:</strong> Direct communication via co-parenting app first; if not resolved in 7 days, both parents attend mediation with an agreed-upon mediator before either parent files in court. Many courts require this as a pre-filing step.</li>
-                    <li><strong>Major changes:</strong> Substantial changes to the plan require court modification (see the modification guide). Informal changes between parents — even agreed — aren't enforceable.</li>
+                    <li><strong>Major changes:</strong> Substantial changes to the plan require court modification (see the modification guide). Informal changes between parents &mdash; even agreed &mdash; aren't enforceable.</li>
                 </ul>
 
                 <h2>What courts look for when approving the plan</h2>
@@ -287,7 +292,7 @@
                     <li><strong>No tiebreaker on legal decisions.</strong> Without one, every disagreement is a return to court.</li>
                     <li><strong>No language about new partners.</strong> Many plans include a "morality clause" or a clause about introducing new romantic partners to the child (sometimes "no overnight guests of the opposite sex during parenting time"). Decide upfront whether you want this.</li>
                     <li><strong>No first-right-of-refusal language.</strong> If a parent will be unavailable for more than X hours during their parenting time, the other parent gets first chance to take the child. Specify the threshold (4 hours? 8 hours? overnight?).</li>
-                    <li><strong>Imbalanced holiday list.</strong> Count holidays — make sure the alternating schedule actually gives each parent equal access to major holidays over a 2-year cycle.</li>
+                    <li><strong>Imbalanced holiday list.</strong> Count holidays &mdash; make sure the alternating schedule actually gives each parent equal access to major holidays over a 2-year cycle.</li>
                     <li><strong>No language about social media posts of the child.</strong> Increasingly common: rules about what each parent can post publicly, especially photos.</li>
                 </ul>
 
@@ -301,20 +306,20 @@
                     <li>Once signed by the judge, the plan is enforceable through contempt proceedings</li>
                 </ol>
 
-                <p>If parents don't agree, the plan becomes part of contested custody filings — typically attached as an exhibit to a Petition for Custody or a Motion for Temporary Orders. The judge will hear evidence and either adopt your proposed plan, the other parent's, or craft their own.</p>
+                <p>If parents don't agree, the plan becomes part of contested custody filings &mdash; typically attached as an exhibit to a Petition for Custody or a Motion for Temporary Orders. The judge will hear evidence and either adopt your proposed plan, the other parent's, or craft their own.</p>
 
                 <div class="cta-box bottom">
                     <div class="cta-text">
                         <strong>Don't stare at the blank page</strong>
                         <span>The CyberScryb Custody Document Tool drafts a complete, court-ready parenting plan in 60 seconds. Free to start.</span>
                     </div>
-                    <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool →</a>
+                    <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
                 <details>
                     <summary>What's the difference between legal custody and physical custody?</summary>
-                    <p>Legal custody is decision-making authority — schooling, healthcare, religion. Physical custody is where the child lives and the time-sharing schedule. Joint legal custody with one parent having more physical time is common.</p>
+                    <p>Legal custody is decision-making authority &mdash; schooling, healthcare, religion. Physical custody is where the child lives and the time-sharing schedule. Joint legal custody with one parent having more physical time is common.</p>
                 </details>
                 <details>
                     <summary>Does a parenting plan need to be filed with the court?</summary>
@@ -376,7 +381,7 @@
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

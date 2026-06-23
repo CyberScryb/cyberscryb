@@ -23,15 +23,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -84,7 +89,7 @@
         <section class="legal-section">
             <div class="container">
                 <div class="legal-content">
-                    <h1>Distill — Privacy Policy</h1>
+                    <h1>Distill &mdash; Privacy Policy</h1>
                     <p><strong>Last updated:</strong> April 16, 2026</p>
 
                     <h2>The Short Version</h2>
@@ -107,9 +112,9 @@
                     <h2>Permissions</h2>
                     <p>Distill requests the following browser permissions:</p>
                     <ul>
-                        <li><strong>activeTab</strong> — To access the current page content when you activate Distill</li>
-                        <li><strong>storage</strong> — To save your preferences (theme, font size) locally in your browser</li>
-                        <li><strong>scripting</strong> — To inject the reading view overlay into the current page</li>
+                        <li><strong>activeTab</strong> &mdash; To access the current page content when you activate Distill</li>
+                        <li><strong>storage</strong> &mdash; To save your preferences (theme, font size) locally in your browser</li>
+                        <li><strong>scripting</strong> &mdash; To inject the reading view overlay into the current page</li>
                     </ul>
                     <p>These permissions are used solely to provide the reading mode functionality. No data leaves your browser.</p>
 

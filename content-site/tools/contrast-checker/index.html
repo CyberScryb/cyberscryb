@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WCAG Contrast Checker — Free Accessibility | CyberScryb</title>
+    <title>WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb</title>
     <meta name="description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="contrast checker, wcag contrast, color contrast checker, web accessibility, relative luminance, aa aaa standards">
     
-    <meta property="og:title" content="WCAG Contrast Checker — Free Accessibility | CyberScryb">
+    <meta property="og:title" content="WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb">
     <meta property="og:description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/contrast-checker/">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WCAG Contrast Checker — Free Accessibility | CyberScryb">
+    <meta name="twitter:title" content="WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb">
     <meta name="twitter:description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     
@@ -27,7 +27,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -64,6 +64,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -232,8 +237,8 @@
             
             <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
-                <li><a href="/tools/subnet-calculator/" style="color:#06b6d4;">Subnet Calculator</a> — Map server networks cleanly.</li>
-                <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> — Create beautiful palettes.</li>
+                <li><a href="/tools/subnet-calculator/" style="color:#06b6d4;">Subnet Calculator</a> &mdash; Map server networks cleanly.</li>
+                <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> &mdash; Create beautiful palettes.</li>
                 <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb CSS &amp; Accessibility Design Guides</a></li>
             </ul>
         </section>
@@ -265,7 +270,7 @@
     </section>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — Accessibility analysis runs client-side in the browser.</p>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; Accessibility analysis runs client-side in the browser.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
 

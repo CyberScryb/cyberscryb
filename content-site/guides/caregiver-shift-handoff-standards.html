@@ -30,6 +30,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -70,8 +75,8 @@
     {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [
         {"@type": "Question", "name": "What is SBAR?", "acceptedAnswer": {"@type": "Answer", "text": "SBAR stands for Situation, Background, Assessment, Recommendation. It's a standardized communication tool originally developed by the US Navy and adopted by The Joint Commission as a healthcare handoff standard since the mid-2000s. It forces the giver of the report to lead with the immediate situation, then build context, share their professional read, and propose a next step."}},
         {"@type": "Question", "name": "How is SBAR different from I-PASS?", "acceptedAnswer": {"@type": "Answer", "text": "Both are structured handoff frameworks. SBAR (Situation-Background-Assessment-Recommendation) is faster and good for nurse-to-provider calls or short shift reports. I-PASS (Illness severity, Patient summary, Action list, Situation awareness/contingencies, Synthesis by receiver) is more comprehensive and standard for inpatient end-of-shift handoffs. Many facilities use SBAR for urgent calls and I-PASS for shift change."}},
-        {"@type": "Question", "name": "Do family caregivers need to use these frameworks?", "acceptedAnswer": {"@type": "Answer", "text": "Not formally, but yes — they work. Family caregivers handing off care to another family member, a respite caregiver, or a paid aide reduce missed medications, falls, and emergency-room trips when they use a structured handoff. Even a 3-minute SBAR-style verbal handoff beats 'how was she today' / 'fine.'"}},
-        {"@type": "Question", "name": "What's a 'change in condition' and why does it matter?", "acceptedAnswer": {"@type": "Answer", "text": "A change in condition is any significant deviation from the patient's baseline — new confusion, increased pain, new bruising, decreased intake, behavioral changes, vital sign changes, falls, or any new symptoms. CMS regulations require timely physician notification of significant changes in nursing-home residents. Catching and flagging changes early prevents most hospitalizations. The shift handoff is the primary mechanism."}},
+        {"@type": "Question", "name": "Do family caregivers need to use these frameworks?", "acceptedAnswer": {"@type": "Answer", "text": "Not formally, but yes &mdash; they work. Family caregivers handing off care to another family member, a respite caregiver, or a paid aide reduce missed medications, falls, and emergency-room trips when they use a structured handoff. Even a 3-minute SBAR-style verbal handoff beats 'how was she today' / 'fine.'"}},
+        {"@type": "Question", "name": "What's a 'change in condition' and why does it matter?", "acceptedAnswer": {"@type": "Answer", "text": "A change in condition is any significant deviation from the patient's baseline &mdash; new confusion, increased pain, new bruising, decreased intake, behavioral changes, vital sign changes, falls, or any new symptoms. CMS regulations require timely physician notification of significant changes in nursing-home residents. Catching and flagging changes early prevents most hospitalizations. The shift handoff is the primary mechanism."}},
         {"@type": "Question", "name": "Should a shift report be written or verbal?", "acceptedAnswer": {"@type": "Answer", "text": "Both. The verbal handoff is the live conversation between outgoing and incoming caregivers. The written report is the documentation that goes in the chart (paper or EHR). The verbal report covers urgent action items and clinical nuance; the written report creates the legal record. Skipping either creates risk. The verbal can be brief if the written is thorough."}},
         {"@type": "Question", "name": "How long should a shift handoff take?", "acceptedAnswer": {"@type": "Answer", "text": "For a single patient or resident: 3-5 minutes verbal plus a written report that takes ~5 minutes to prepare. For a CNA covering 8-12 residents in long-term care: 15-25 minutes total, with each resident getting 1-2 minutes verbal + a written report line per resident. The goal is enough detail that the incoming caregiver can safely start care without re-asking basic questions."}}
     ]}
@@ -125,7 +130,7 @@
                     <span class="tldr-icon">⚡</span>
                     <strong>Key Takeaways (TL;DR)</strong>
                 </div>
-                <p>Use SBAR (Situation, Background, Assessment, Recommendation) for short verbal handoffs and I-PASS for full end-of-shift reports. Every shift report covers: vitals from last check, intake/output, ADLs completed, meal consumption, toileting, mobility status, mood/behavior, medications given or refused, any falls or incidents, and any change in condition. Flag changes early — Joint Commission research shows ineffective handoff contributes to up to 70% of sentinel events. Both verbal AND written reports are required for safe transitions of care.</p>
+                <p>Use SBAR (Situation, Background, Assessment, Recommendation) for short verbal handoffs and I-PASS for full end-of-shift reports. Every shift report covers: vitals from last check, intake/output, ADLs completed, meal consumption, toileting, mobility status, mood/behavior, medications given or refused, any falls or incidents, and any change in condition. Flag changes early &mdash; Joint Commission research shows ineffective handoff contributes to up to 70% of sentinel events. Both verbal AND written reports are required for safe transitions of care.</p>
             </div>
 
             <div class="cta-box">
@@ -133,20 +138,20 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a structured caregiver shift report in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool →</a>
+                <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
 
                 <h2>Why the handoff matters</h2>
 
-                <p>Joint Commission research consistently shows that up to 70% of sentinel events (preventable injuries, deaths, or major incidents) in healthcare are connected to ineffective handoff communication. The cause isn't always a clinical error — it's information not getting from one caregiver to the next.</p>
+                <p>Joint Commission research consistently shows that up to 70% of sentinel events (preventable injuries, deaths, or major incidents) in healthcare are connected to ineffective handoff communication. The cause isn't always a clinical error &mdash; it's information not getting from one caregiver to the next.</p>
 
-                <p>The pattern: outgoing caregiver knows the patient had a low blood sugar at 2pm and skipped the snack. Doesn't mention it on handoff. Incoming caregiver gives insulin at 6pm. Patient drops further. ER trip. That's a real incident — every CNA who's worked long-term care has seen the same shape repeat.</p>
+                <p>The pattern: outgoing caregiver knows the patient had a low blood sugar at 2pm and skipped the snack. Doesn't mention it on handoff. Incoming caregiver gives insulin at 6pm. Patient drops further. ER trip. That's a real incident &mdash; every CNA who's worked long-term care has seen the same shape repeat.</p>
 
                 <p>Standardized handoff frameworks exist because freeform "tell me about the patient" produces inconsistent reports. The frameworks force the same elements every time.</p>
 
-                <h2>SBAR — for verbal handoffs and urgent calls</h2>
+                <h2>SBAR &mdash; for verbal handoffs and urgent calls</h2>
 
                 <p>SBAR stands for Situation, Background, Assessment, Recommendation. It works best for:</p>
                 <ul>
@@ -174,7 +179,7 @@ ASSESSMENT (30 seconds)
 - What you observed, vital signs if available, your clinical read
 - Example: "She landed on her left side. No obvious deformity,
   but she's reporting 7/10 left hip pain. BP 142/88, HR 98,
-  responding appropriately. No head strike — fell to the side,
+  responding appropriately. No head strike &mdash; fell to the side,
   caught by gait belt."
 
 RECOMMENDATION (15 seconds)
@@ -185,32 +190,32 @@ RECOMMENDATION (15 seconds)
 
                 <p>Total: ~90 seconds for a focused handoff on a specific issue. The structure forces clarity. The nurse or doctor on the other end gets exactly what they need without playing 20 questions.</p>
 
-                <h2>I-PASS — for full end-of-shift handoffs</h2>
+                <h2>I-PASS &mdash; for full end-of-shift handoffs</h2>
 
                 <p>I-PASS is a more comprehensive framework developed at Boston Children's Hospital and validated in multi-center studies. It's the standard for inpatient end-of-shift handoffs in many hospitals.</p>
 
                 <p>I-PASS template:</p>
 
-                <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">I — ILLNESS SEVERITY
+                <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">I &mdash; ILLNESS SEVERITY
 - One-word status: Stable, Watcher, Unstable
-- Example: "Stable" / "Watcher — monitor for fluid overload"
+- Example: "Stable" / "Watcher &mdash; monitor for fluid overload"
 
-P — PATIENT SUMMARY
+P &mdash; PATIENT SUMMARY
 - 1-2 sentences: who they are, current diagnosis, why they're here
 - Brief course of stay/shift
 
-A — ACTION LIST
+A &mdash; ACTION LIST
 - To-dos for the incoming caregiver with timing
 - Example: "Wound dressing change at 18:00. Recheck blood
   sugar before dinner. PT scheduled at 14:00 tomorrow."
 
-S — SITUATION AWARENESS / CONTINGENCIES
+S &mdash; SITUATION AWARENESS / CONTINGENCIES
 - What to watch for; what to do IF
 - Example: "If BP drops below 100 systolic, hold the
   lisinopril and notify the RN. He had two episodes of
   near-syncope this shift."
 
-S — SYNTHESIS BY RECEIVER
+S &mdash; SYNTHESIS BY RECEIVER
 - Incoming caregiver READS BACK key items
 - Confirms understanding
 - Asks questions before the outgoing caregiver leaves</pre>
@@ -222,7 +227,7 @@ S — SYNTHESIS BY RECEIVER
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </section>
 
-                <h2>The CNA / direct-care shift report — what to include</h2>
+                <h2>The CNA / direct-care shift report &mdash; what to include</h2>
 
                 <p>For CNAs and home health aides handing off a resident or patient, the report should cover:</p>
 
@@ -265,7 +270,7 @@ S — SYNTHESIS BY RECEIVER
                     <li>Confusion, agitation, withdrawal, depression signs</li>
                     <li>Sundowning episodes in dementia patients</li>
                     <li>Interactions with family or visitors</li>
-                    <li>Sleep — last shift hours, naps, restlessness</li>
+                    <li>Sleep &mdash; last shift hours, naps, restlessness</li>
                 </ul>
 
                 <h3>Falls and incidents</h3>
@@ -285,11 +290,11 @@ S — SYNTHESIS BY RECEIVER
                     <li>New pain or worsening of existing pain</li>
                     <li>New bruising, especially unexplained or in areas not typical of falls</li>
                     <li>Decreased intake of food or fluids over more than one meal</li>
-                    <li>Sudden behavioral change — withdrawn, agitated, lethargic, restless</li>
+                    <li>Sudden behavioral change &mdash; withdrawn, agitated, lethargic, restless</li>
                     <li>Vital sign changes: BP drop or spike, HR irregularity, temp above 100.4°F, O2 sat under 92%</li>
                     <li>New skin breakdown or worsening of existing breakdown</li>
                     <li>Falls, near-falls, or any incident</li>
-                    <li>Change in urinary or bowel patterns — new incontinence, no BM in 3+ days, dark urine</li>
+                    <li>Change in urinary or bowel patterns &mdash; new incontinence, no BM in 3+ days, dark urine</li>
                     <li>New respiratory symptoms: cough, wheezing, shortness of breath, audible congestion</li>
                     <li>Refusal of medications, especially psychotropic or cardiac meds</li>
                     <li>Family report of any concerning new symptoms</li>
@@ -303,7 +308,7 @@ S — SYNTHESIS BY RECEIVER
 SHIFT: 7a-3p, May 24, 2026
 CAREGIVER: [name], CNA
 
-ILLNESS SEVERITY: Watcher (per nurse — slight congestion,
+ILLNESS SEVERITY: Watcher (per nurse &mdash; slight congestion,
 monitoring for early UTI signs)
 
 PATIENT SUMMARY: 84F, advanced dementia, on hospice 60 days,
@@ -320,7 +325,7 @@ INTAKE:
 
 OUTPUT:
 - Voided 4x, continent. No BM today; last BM 5/22.
-- Urine appeared darker than usual at 13:30 — reported
+- Urine appeared darker than usual at 13:30 &mdash; reported
   to nurse, urine specimen collected for analysis.
 
 ADLs:
@@ -332,13 +337,13 @@ ADLs:
 
 SKIN:
 - New redness on sacrum, blanchable, applied barrier cream
-- Q2H turn schedule maintained — turns documented at
+- Q2H turn schedule maintained &mdash; turns documented at
   08:00, 10:00, 12:00, 14:00
 - No skin breakdown noted
 
 MOOD/BEHAVIOR:
 - Calm AM, increased confusion after lunch (baseline)
-- Repetitive questioning about deceased husband — redirected
+- Repetitive questioning about deceased husband &mdash; redirected
 - Mild sundowning starting ~14:30
 
 MEDS:
@@ -349,25 +354,25 @@ INCIDENTS:
 - None
 
 CHANGE IN CONDITION FLAGS:
-- Darker urine — UTI workup in progress
-- New sacral redness — monitor
+- Darker urine &mdash; UTI workup in progress
+- New sacral redness &mdash; monitor
 
 ACTION LIST FOR NEXT SHIFT:
 - 16:00 vitals
-- 18:00 dinner — encourage thickened fluids
+- 18:00 dinner &mdash; encourage thickened fluids
 - Continue Q2H turns
 - 20:00 meds
 - Monitor urine specimen result, family update if positive
 
 FAMILY:
-- Daughter called at 11:00, requested update — provided.
+- Daughter called at 11:00, requested update &mdash; provided.
   Will visit Sunday at 14:00.
 
 SYNTHESIS (incoming CNA confirms):
 ✓ UTI workup in progress, darker urine
 ✓ Sacral redness, continue Q2H
 ✓ Sundowning starting earlier today
-✓ Mild congestion per nurse — Watcher status</pre>
+✓ Mild congestion per nurse &mdash; Watcher status</pre>
 
                 <h2>Documentation rules</h2>
 
@@ -388,19 +393,19 @@ SYNTHESIS (incoming CNA confirms):
                 <ol>
                     <li>Cover vitals (BP/HR/temp if measured), intake and output, meds, mood/behavior, ADLs, anything new</li>
                     <li>Flag any change in condition since the last handoff</li>
-                    <li>Cover the upcoming shift's schedule — meds, appointments, expected visitors</li>
+                    <li>Cover the upcoming shift's schedule &mdash; meds, appointments, expected visitors</li>
                     <li>Confirm the incoming caregiver knows where supplies, medications, and emergency contacts are</li>
                     <li>Have the incoming caregiver read back the critical items</li>
                 </ol>
 
-                <p>A 5-minute structured handoff between family members covering these areas reduces missed meds and missed warning signs by a wide margin compared to "how was she today" — "fine."</p>
+                <p>A 5-minute structured handoff between family members covering these areas reduces missed meds and missed warning signs by a wide margin compared to "how was she today" &mdash; "fine."</p>
 
                 <div class="cta-box bottom">
                     <div class="cta-text">
                         <strong>Don't stare at the blank page</strong>
-                        <span>The CyberScryb Caregiver Report Tool drafts a professional shift report in 60 seconds — for CNAs, HHAs, and family caregivers. Free to start.</span>
+                        <span>The CyberScryb Caregiver Report Tool drafts a professional shift report in 60 seconds &mdash; for CNAs, HHAs, and family caregivers. Free to start.</span>
                     </div>
-                    <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool →</a>
+                    <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
@@ -418,7 +423,7 @@ SYNTHESIS (incoming CNA confirms):
                 </details>
                 <details>
                     <summary>What's a 'change in condition' and why does it matter?</summary>
-                    <p>Any significant deviation from baseline — new confusion, increased pain, vital sign changes, falls. CMS regulations require timely physician notification of significant changes in nursing home residents.</p>
+                    <p>Any significant deviation from baseline &mdash; new confusion, increased pain, vital sign changes, falls. CMS regulations require timely physician notification of significant changes in nursing home residents.</p>
                 </details>
                 <details>
                     <summary>Should a shift report be written or verbal?</summary>
@@ -468,7 +473,7 @@ SYNTHESIS (incoming CNA confirms):
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

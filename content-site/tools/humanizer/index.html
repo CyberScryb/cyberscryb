@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Text Humanizer — Free & No Signup | CyberScryb</title>
+    <title>AI Text Humanizer &mdash; Free & No Signup | CyberScryb</title>
     <meta name="description" content="Convert robotic generated text to natural writing with our AI text humanizer. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="AI Text Humanizer — Free & No Signup | CyberScryb">
+    <meta property="og:title" content="AI Text Humanizer &mdash; Free & No Signup | CyberScryb">
     <meta property="og:description" content="Convert robotic generated text to natural writing with our AI text humanizer. Free, instant, runs in your browser. No signup.">
     <meta property="og:url" content="https://cyberscryb.com/tools/humanizer/">
     <meta property="og:type" content="website">
     <link rel="canonical" href="https://cyberscryb.com/tools/humanizer/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Text Humanizer — Free & No Signup | CyberScryb">
+    <meta name="twitter:title" content="AI Text Humanizer &mdash; Free & No Signup | CyberScryb">
     <meta name="twitter:description" content="Convert robotic generated text to natural writing with our AI text humanizer. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="style.css">
 
     <!-- Google Search Console Verification -->
@@ -38,11 +38,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -293,7 +298,7 @@
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why this AI Humanizer Exists</h2>
             <p>AI detection got serious in 2025. Turnitin rolled out their second-generation detector across most major universities, GPTZero hit version 5, and Originality.ai 4 became the standard in freelance content marketplaces. The result: writers who lean on GPT-5, Claude, or Gemini for first drafts started getting their work flagged at rates close to 95 percent when they submitted the raw output. Students were called into academic integrity hearings. Freelancers were dropped from agencies. Marketers watched their blog posts get demoted in search.</p>
-            <p>The CyberScryb Anti-AI Humanizer was built specifically against the patterns those detectors flag. It rewrites your text to break the statistical fingerprint that gives away machine-generated writing: low perplexity, predictable sentence lengths, over-reliance on transition words like "moreover" and "furthermore," compulsive contraction expansion, and surgically clean punctuation. The output reads natural because real human writing isn't statistically clean — it bounces around, contradicts itself, uses fragments, and skips perfect grammar in places.</p>
+            <p>The CyberScryb Anti-AI Humanizer was built specifically against the patterns those detectors flag. It rewrites your text to break the statistical fingerprint that gives away machine-generated writing: low perplexity, predictable sentence lengths, over-reliance on transition words like "moreover" and "furthermore," compulsive contraction expansion, and surgically clean punctuation. The output reads natural because real human writing isn't statistically clean &mdash; it bounces around, contradicts itself, uses fragments, and skips perfect grammar in places.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How the Tool Works</h2>
             <p>Paste any AI-generated paragraph into the input box and hit the humanize button. The tool sends your text to a tuned Gemini endpoint that runs seven specific transformations: it varies sentence length aggressively, swaps out the most-flagged transition words for natural alternatives, adds contractions, injects deliberate small imperfections, replaces vague phrases with specific examples, rewrites the first and last sentences (which detectors weight most heavily), and applies inconsistent punctuation patterns that match how real people type. The whole process runs in under three seconds. Your text is never logged, stored, or used to train future models. Your first generation runs free without an email so you can verify the output is actually useful. After the first one, the tool asks for an email because every AI call has a real backend cost.</p>
@@ -301,7 +306,7 @@
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Mistakes People Make</h2>
             <p>The biggest one is running the same text through the humanizer multiple times and expecting a better score each pass. The first pass moves the score by 40 to 70 points typically. The second pass only adds another 5 to 15 points because the easy patterns are already gone. After three passes you start losing readability faster than you gain detection bypass.</p>
             <p>The second mistake is humanizing text that's still factually wrong or poorly argued. The humanizer changes how your writing reads, not what it says. If your AI draft has the wrong facts, made-up citations, or confused logic, the humanizer makes it harder to detect as AI but doesn't fix the actual content problems. Always edit for substance before humanizing for style.</p>
-            <p>The third mistake is pasting massive blocks of text at once. The free tier limits you to 500 characters per pass for a reason — short focused passes produce cleaner output than dumping a 2,000-word essay in one shot. Break your text into paragraphs, humanize each one, and reassemble. The result reads better and scores lower across detectors.</p>
+            <p>The third mistake is pasting massive blocks of text at once. The free tier limits you to 500 characters per pass for a reason &mdash; short focused passes produce cleaner output than dumping a 2,000-word essay in one shot. Break your text into paragraphs, humanize each one, and reassemble. The result reads better and scores lower across detectors.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Who Uses This</h2>
             <p>The biggest user group is freelance writers and content marketers whose clients run output through Originality.ai before paying. The second is graduate students who use AI for first drafts but need the final submission to pass Turnitin. The third is small business owners writing their own marketing copy who don't want Google to demote their pages for looking machine-generated. Job seekers also use it for cover letters, since major ATS systems now flag obviously AI-generated text.</p>
@@ -314,19 +319,19 @@
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will AI detectors flag text humanized by this tool?","acceptedAnswer":{"@type":"Answer","text":"On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. That said, detection technology improves monthly. No tool can guarantee permanent invisibility — if you need text no detector will ever flag, write it yourself."}},{"@type":"Question","name":"Does this work on text from ChatGPT, Claude, and Gemini?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works on AI-generated text from any source — ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites surface patterns (sentence structure, word choice, rhythm) that detectors look for, regardless of which AI wrote the original."}},{"@type":"Question","name":"Is the humanized text original or will it trigger plagiarism checks?","acceptedAnswer":{"@type":"Answer","text":"Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources in a plagiarism database. However, the underlying ideas still came from the original AI output — if you're submitting academic work, check your institution's policy on AI-assisted writing."}},{"@type":"Question","name":"How many times can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"Free users get 3 rewrites per day, with a 500-character input limit. Enter your email to unlock the full output when you hit the gate. Pro users get unlimited rewrites with no character cap."}},{"@type":"Question","name":"Does submitting my email sign me up for a newsletter?","acceptedAnswer":{"@type":"Answer","text":"Yes — you'll get occasional updates about new tools and improvements. You can unsubscribe any time. We don't sell email addresses or spam."}}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will AI detectors flag text humanized by this tool?","acceptedAnswer":{"@type":"Answer","text":"On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. That said, detection technology improves monthly. No tool can guarantee permanent invisibility &mdash; if you need text no detector will ever flag, write it yourself."}},{"@type":"Question","name":"Does this work on text from ChatGPT, Claude, and Gemini?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works on AI-generated text from any source &mdash; ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites surface patterns (sentence structure, word choice, rhythm) that detectors look for, regardless of which AI wrote the original."}},{"@type":"Question","name":"Is the humanized text original or will it trigger plagiarism checks?","acceptedAnswer":{"@type":"Answer","text":"Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources in a plagiarism database. However, the underlying ideas still came from the original AI output &mdash; if you're submitting academic work, check your institution's policy on AI-assisted writing."}},{"@type":"Question","name":"How many times can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"Free users get 3 rewrites per day, with a 500-character input limit. Enter your email to unlock the full output when you hit the gate. Pro users get unlimited rewrites with no character cap."}},{"@type":"Question","name":"Does submitting my email sign me up for a newsletter?","acceptedAnswer":{"@type":"Answer","text":"Yes &mdash; you'll get occasional updates about new tools and improvements. You can unsubscribe any time. We don't sell email addresses or spam."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Will AI detectors flag text humanized by this tool?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. Detection technology improves monthly though — no tool can guarantee permanent invisibility.</p>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. Detection technology improves monthly though &mdash; no tool can guarantee permanent invisibility.</p>
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does this work on text from ChatGPT, Claude, and Gemini?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes. It works on AI-generated text from any source — ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites the patterns detectors look for, regardless of which AI wrote the original.</p>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes. It works on AI-generated text from any source &mdash; ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites the patterns detectors look for, regardless of which AI wrote the original.</p>
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Is the humanized text original — will it trigger plagiarism checks?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources. The underlying ideas still came from the original AI output though — check your institution's policy on AI-assisted writing.</p>
+                <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Is the humanized text original &mdash; will it trigger plagiarism checks?</summary>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources. The underlying ideas still came from the original AI output though &mdash; check your institution's policy on AI-assisted writing.</p>
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">How many times can I use it for free?</summary>
@@ -334,7 +339,7 @@
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does submitting my email sign me up for a newsletter?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes — occasional updates about new tools. You can unsubscribe any time. We don't sell addresses or spam.</p>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Yes &mdash; occasional updates about new tools. You can unsubscribe any time. We don't sell addresses or spam.</p>
             </details>
         </div>
     </section>
@@ -357,7 +362,7 @@
                 <span style="font-size:0.85rem; color:#878787;">Count words, characters, and reading time instantly.</span>
             </a>
             <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown ↔ HTML</strong>
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML and back in seconds.</span>
             </a>
         </div>
@@ -422,28 +427,28 @@
         "Matches your personal writing style",
         "Bypasses GPTZero and Turnitin AI detection",
         "No signup required",
-        "Privacy-first — nothing is stored"
+        "Privacy-first &mdash; nothing is stored"
       ]
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="humanizer.js"></script>
     <script src="../shared/affiliate-panel.js"></script>
 
 <section style="max-width:720px; margin:3rem auto; padding:0 1.5rem; font-family:inherit; line-height:1.7; color:inherit;">
   <h2>What This AI Humanizer Does</h2>
-  <p>This tool takes text generated by ChatGPT, Claude, Gemini, or any other AI model and rewrites it to sound like a real person wrote it — specifically, like <em>you</em> wrote it. You paste in a few samples of your own writing (emails, tweets, messages), and the tool analyzes your sentence length, vocabulary, and rhythm. The rewrite mirrors that pattern instead of producing the generic, over-structured output that AI detection tools flag in seconds.</p>
+  <p>This tool takes text generated by ChatGPT, Claude, Gemini, or any other AI model and rewrites it to sound like a real person wrote it &mdash; specifically, like <em>you</em> wrote it. You paste in a few samples of your own writing (emails, tweets, messages), and the tool analyzes your sentence length, vocabulary, and rhythm. The rewrite mirrors that pattern instead of producing the generic, over-structured output that AI detection tools flag in seconds.</p>
 
   <h2>Why AI Text Gets Detected</h2>
-  <p>AI detection tools like GPTZero, Turnitin's AI writing module, and Copyleaks don't look for copied text — they look for statistical patterns. AI models produce text with unusually low "perplexity" (predictable word choices) and low "burstiness" (uniform sentence length). Human writers naturally vary both. A sentence that starts with "Certainly!" or contains phrases like "it's worth noting that" or "in conclusion" is almost certainly AI-generated. This tool strips those patterns out and introduces the variation that makes text register as human-authored.</p>
+  <p>AI detection tools like GPTZero, Turnitin's AI writing module, and Copyleaks don't look for copied text &mdash; they look for statistical patterns. AI models produce text with unusually low "perplexity" (predictable word choices) and low "burstiness" (uniform sentence length). Human writers naturally vary both. A sentence that starts with "Certainly!" or contains phrases like "it's worth noting that" or "in conclusion" is almost certainly AI-generated. This tool strips those patterns out and introduces the variation that makes text register as human-authored.</p>
 
   <h2>Best Uses for This Tool</h2>
   <p>Students use it to rewrite AI-assisted drafts before submitting to Turnitin. Freelance writers use it to match client voice when writing blog posts or newsletters. Content marketers use it to make bulk AI-generated SEO content readable and less robotic. Job seekers use it to humanize cover letters and LinkedIn summaries that were drafted with ChatGPT. Social media managers use it to keep branded content sounding personal rather than corporate.</p>
 
   <h2>How the Style Matching Works</h2>
-  <p>Most AI humanizer tools apply a generic "make it sound casual" transformation. This one is different. When you paste two or three examples of your own writing — even a few tweets or a short email — the tool performs a few-shot analysis of your style before rewriting. It extracts your average sentence length, your preferred punctuation style, whether you tend toward active or passive voice, how often you use contractions, and roughly how formal your vocabulary is. The rewrite then uses those parameters instead of defaults. The result reads like you wrote it on a good day, not like a robot doing an impression of a human.</p>
+  <p>Most AI humanizer tools apply a generic "make it sound casual" transformation. This one is different. When you paste two or three examples of your own writing &mdash; even a few tweets or a short email &mdash; the tool performs a few-shot analysis of your style before rewriting. It extracts your average sentence length, your preferred punctuation style, whether you tend toward active or passive voice, how often you use contractions, and roughly how formal your vocabulary is. The rewrite then uses those parameters instead of defaults. The result reads like you wrote it on a good day, not like a robot doing an impression of a human.</p>
 
   <h2>Privacy</h2>
   <p>Your input is sent to the AI model for processing and immediately discarded. Nothing you type is stored, logged, or used for training. Your text never touches a database. The style samples you provide are used in the same request and not retained.</p>
@@ -451,13 +456,13 @@
   <h2>Frequently Asked Questions</h2>
 
   <h3>Does this bypass Turnitin's AI detection?</h3>
-  <p>In most cases, yes — but no tool can guarantee 100% accuracy against every detector or every version of a detector. Turnitin, GPTZero, and similar tools update their models regularly. This humanizer is effective because it rewrites at the sentence structure level, not just word substitution. However, you should always review the output before submitting anything important.</p>
+  <p>In most cases, yes &mdash; but no tool can guarantee 100% accuracy against every detector or every version of a detector. Turnitin, GPTZero, and similar tools update their models regularly. This humanizer is effective because it rewrites at the sentence structure level, not just word substitution. However, you should always review the output before submitting anything important.</p>
 
   <h3>How is this different from just asking ChatGPT to "rewrite this more naturally"?</h3>
   <p>When you ask ChatGPT to rewrite its own output, the result is still generated by the same model, with the same statistical patterns that detectors flag. This tool uses your style samples as a constraint, which forces the output away from the model's default patterns and toward your actual writing voice.</p>
 
   <h3>Is there a word limit?</h3>
-  <p>The free tier handles standard-length inputs — roughly 500–1,000 words. Pro removes the cap entirely and supports longer documents. You can try the free version first to see if the output quality works for your use case before upgrading.</p>
+  <p>The free tier handles standard-length inputs &mdash; roughly 500&ndash;1,000 words. Pro removes the cap entirely and supports longer documents. You can try the free version first to see if the output quality works for your use case before upgrading.</p>
 
   <h3>Will the meaning of my text change?</h3>
   <p>The tool is instructed to preserve meaning while changing phrasing and structure. In rare cases with very technical text, a word or phrase may shift slightly. Always read the output carefully before using it.</p>

@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distill Chrome Extension — Privacy Policy | CyberScryb</title>
+    <title>Distill Chrome Extension &mdash; Privacy Policy | CyberScryb</title>
     <meta name="description" content="Privacy policy for the Distill Chrome extension by CyberScryb. Clear explanation of what data is collected, how it's used, and your rights.">
     <link rel="canonical" href="https://cyberscryb.com/distill-privacy/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Distill Chrome Extension — Privacy Policy | CyberScryb">
+    <meta property="og:title" content="Distill Chrome Extension &mdash; Privacy Policy | CyberScryb">
     <meta property="og:description" content="Privacy policy for the Distill Chrome extension by CyberScryb.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/distill-privacy">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Distill Chrome Extension — Privacy Policy | CyberScryb">
+    <meta name="twitter:title" content="Distill Chrome Extension &mdash; Privacy Policy | CyberScryb">
     <meta name="twitter:description" content="Privacy policy for the Distill Chrome extension by CyberScryb.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
 
@@ -25,7 +25,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="icon" href="/mascot-icon.png" type="image/png">
 
     <!-- Deferred GA4 -->
@@ -45,11 +45,16 @@
     </script>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -103,7 +108,7 @@
         <section class="legal-section">
             <div class="container">
                 <div class="legal-content">
-                    <h1>Distill — Privacy Policy</h1>
+                    <h1>Distill &mdash; Privacy Policy</h1>
                     <p><strong>Extension:</strong> Distill (Chrome Extension)<br>
                     <strong>Developer:</strong> CyberScryb LLC<br>
                     <strong>Last updated:</strong> April 29, 2026</p>
@@ -112,7 +117,7 @@
                     <p>Distill does not collect, store, or transmit your personal data. It does not track you. It does not phone home. What you do in your browser stays in your browser.</p>
 
                     <h2>What Distill Does</h2>
-                    <p>Distill is a Chrome extension that processes web page content locally in your browser. It reads the content of the current tab when you activate it — and only when you activate it. Nothing runs in the background without your action.</p>
+                    <p>Distill is a Chrome extension that processes web page content locally in your browser. It reads the content of the current tab when you activate it &mdash; and only when you activate it. Nothing runs in the background without your action.</p>
 
                     <h2>Data Collection</h2>
                     <p><strong>We collect nothing.</strong> Specifically:</p>
@@ -128,17 +133,17 @@
                     <h2>Permissions Explained</h2>
                     <p>Chrome extensions must declare permissions upfront. Here's what Distill requests and why:</p>
                     <ul>
-                        <li><strong>activeTab</strong> — Lets the extension read the content of the tab you're currently viewing, but only when you click the extension icon. It cannot access tabs you're not actively using.</li>
-                        <li><strong>storage</strong> — Used to save your preferences (like settings or options you've configured) locally on your device using Chrome's built-in storage. This data stays on your machine.</li>
-                        <li><strong>scripting</strong> — Allows the extension to run its processing logic on the current page when you activate it.</li>
+                        <li><strong>activeTab</strong> &mdash; Lets the extension read the content of the tab you're currently viewing, but only when you click the extension icon. It cannot access tabs you're not actively using.</li>
+                        <li><strong>storage</strong> &mdash; Used to save your preferences (like settings or options you've configured) locally on your device using Chrome's built-in storage. This data stays on your machine.</li>
+                        <li><strong>scripting</strong> &mdash; Allows the extension to run its processing logic on the current page when you activate it.</li>
                     </ul>
                     <p>If Distill does not need a specific permission, it doesn't request it. We follow the principle of least privilege.</p>
 
                     <h2>Local Storage Only</h2>
-                    <p>Any data Distill saves — such as your preferences or settings — is stored locally in your browser using Chrome's built-in <code>chrome.storage.local</code> API. This data never leaves your device. You can clear it at any time by uninstalling the extension or clearing your browser's extension data.</p>
+                    <p>Any data Distill saves &mdash; such as your preferences or settings &mdash; is stored locally in your browser using Chrome's built-in <code>chrome.storage.local</code> API. This data never leaves your device. You can clear it at any time by uninstalling the extension or clearing your browser's extension data.</p>
 
                     <h2>No Third-Party Sharing</h2>
-                    <p>We do not sell, rent, or share any data with third parties. There is no data to share — we don't collect any.</p>
+                    <p>We do not sell, rent, or share any data with third parties. There is no data to share &mdash; we don't collect any.</p>
 
                     <h2>No Background Activity</h2>
                     <p>Distill only activates when you explicitly click the extension icon. It does not run scripts in the background, does not monitor your browsing activity passively, and does not communicate with external servers unless you trigger an action that requires it.</p>
@@ -171,10 +176,10 @@
                     <div class="footer-col">
                         <h4>Tools</h4>
                         <ul>
-                            <li><a href="/tools/json-csv-converter/">JSON ↔ CSV</a></li>
+                            <li><a href="/tools/json-csv-converter/">JSON &harr; CSV</a></li>
                             <li><a href="/tools/humanizer/">AI Humanizer</a></li>
                             <li><a href="/tools/password-checker/">Password Checker</a></li>
-                            <li><a href="/tools/">All Tools →</a></li>
+                            <li><a href="/tools/">All Tools &rarr;</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -195,7 +200,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260604" defer></script>
+    <script src="/js/script.js?v=20260623" defer></script>
     <!-- AdSense auto ad unit -->
     <div style="text-align:center;margin:20px auto;max-width:970px;">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>

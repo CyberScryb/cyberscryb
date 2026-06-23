@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNA Shift Report Generator — Free & Online | CyberScryb</title>
+    <title>CNA Shift Report Generator &mdash; Free & Online | CyberScryb</title>
     <meta name="description" content="Create structured patient care notes using this CNA shift report generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="CNA Shift Report Generator — Free &amp; Online | CyberScryb">
+    <meta property="og:title" content="CNA Shift Report Generator &mdash; Free &amp; Online | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CNA Shift Report Generator — Free & Online | CyberScryb">
+    <meta name="twitter:title" content="CNA Shift Report Generator &mdash; Free & Online | CyberScryb">
     <meta name="twitter:description" content="Create structured patient care notes using this CNA shift report generator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/caregiver-report/">
@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -33,11 +33,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -279,13 +284,13 @@
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why Documentation Matters Beyond the Next Shift</h2>
             <p>Shift reports are not just for the next caregiver. They are a legal record. If an incident happens, if a family questions care, if Medicare or an insurance reviewer audits the file, your shift report is the primary evidence of what was done and what was observed. A report that says "patient seemed fine, no issues" is worth nothing in a chart review. A report with specific observations, times, and actions is what protects you, your agency, and the patient.</p>
-            <p>If you also have to write a hardship letter, appeal an insurance denial for a client, or document something for a custody or guardianship case related to a patient's care, the <a href="../hardship-letter/">Hardship Letter Writer</a> and <a href="../appeal-letter/">Appeal Letter Writer</a> on this site cover those workflows too. They were built for the same audience and the same reason — care work generates a paper trail nobody trained you to write, and the AI tools that exist either cost money or do not understand the domain.</p>
+            <p>If you also have to write a hardship letter, appeal an insurance denial for a client, or document something for a custody or guardianship case related to a patient's care, the <a href="../hardship-letter/">Hardship Letter Writer</a> and <a href="../appeal-letter/">Appeal Letter Writer</a> on this site cover those workflows too. They were built for the same audience and the same reason &mdash; care work generates a paper trail nobody trained you to write, and the AI tools that exist either cost money or do not understand the domain.</p>
         </section>
     </main>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so — and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format — use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so &mdash; and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format &mdash; use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">What should a caregiver shift report include?</summary>
@@ -301,7 +306,7 @@
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Is this format accepted by care agencies?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The output follows standard caregiver documentation conventions. Your specific agency may have a required form — use this as a draft and transfer the information to their template if needed.</p>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">The output follows standard caregiver documentation conventions. Your specific agency may have a required form &mdash; use this as a draft and transfer the information to their template if needed.</p>
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does this work for home care, memory care, and skilled nursing?</summary>
@@ -392,7 +397,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="caregiver-report.js"></script>

@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medication Administration Log — Free Template | CyberScryb</title>
-    <meta property="og:title" content="Medication Administration Log — Free Template | CyberScryb">
+    <title>Medication Administration Log &mdash; Free Template | CyberScryb</title>
+    <meta property="og:title" content="Medication Administration Log &mdash; Free Template | CyberScryb">
     <meta name="description" content="Track dosage schedules and caregivers logs with this medication administration log template. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Medication Administration Log — Free Template | CyberScryb">
+    <meta name="twitter:title" content="Medication Administration Log &mdash; Free Template | CyberScryb">
     <meta name="twitter:description" content="Track dosage schedules and caregivers logs with this medication administration log template. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/med-administration-log/">
@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -33,11 +33,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -332,7 +337,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="med-administration-log.js"></script>

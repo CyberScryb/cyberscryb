@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Detector — Check AI Content | CyberScryb</title>
+    <title>Free AI Detector &mdash; Check AI Content | CyberScryb</title>
     <meta name="description" content="Use our free AI detector to check AI content and identify writing patterns. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="Free AI Detector — Check AI Content | CyberScryb">
+    <meta property="og:title" content="Free AI Detector &mdash; Check AI Content | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free AI Detector — Check AI Content | CyberScryb">
+    <meta name="twitter:title" content="Free AI Detector &mdash; Check AI Content | CyberScryb">
     <meta name="twitter:description" content="Use our free AI detector to check AI content and identify writing patterns. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/ai-detector/">
@@ -18,7 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -32,11 +32,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -236,7 +241,7 @@
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #c41e1e, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Analyze Text</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon">&rarr;</span>
                         </button>
                     </div>
 
@@ -356,7 +361,7 @@
                 <!-- FAQ -->
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#c41e1e; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>How accurate is the AI detection?</h4><p>Our detector uses Gemini 3.1 Pro to analyze writing patterns, not statistical classifiers. It identifies specific markers like formulaic transitions, repetitive sentence openers, and AI-favorite vocabulary. Accuracy depends on text length — 200+ words gives the best results.</p></div>
+                    <div class="faq-item"><h4>How accurate is the AI detection?</h4><p>Our detector uses Gemini 3.1 Pro to analyze writing patterns, not statistical classifiers. It identifies specific markers like formulaic transitions, repetitive sentence openers, and AI-favorite vocabulary. Accuracy depends on text length &mdash; 200+ words gives the best results.</p></div>
                     <div class="faq-item"><h4>What does the score mean?</h4><p>The 0-100 score represents AI likelihood: 0-20 is almost certainly human, 21-40 is mostly human with some AI-like patterns, 41-60 is mixed signals, 61-80 is likely AI-generated, and 81-100 is almost certainly AI.</p></div>
                     <div class="faq-item"><h4>What AI patterns does it look for?</h4><p>It checks for repetitive sentence openers, formulaic transitions ("Furthermore," "Moreover"), lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words like "leverage," "delve," "comprehensive," and "utilize."</p></div>
                     <div class="faq-item"><h4>Is my text stored or used for training?</h4><p>No. Your text is processed and immediately discarded. We never store, log, or train on your content. Privacy-first, always.</p></div>
@@ -448,7 +453,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="ai-detector.js"></script>

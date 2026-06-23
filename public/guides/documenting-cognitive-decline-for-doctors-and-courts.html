@@ -30,6 +30,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -68,12 +73,12 @@
     </script>
     <script type="application/ld+json">
     {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [
-        {"@type": "Question", "name": "What's the difference between the MMSE and the MoCA?", "acceptedAnswer": {"@type": "Answer", "text": "Both are clinician-administered cognitive screening tools. MMSE (Mini-Mental State Examination, 30-point scale) tests orientation, memory, attention, language. Scores under 24 suggest impairment. MoCA (Montreal Cognitive Assessment, 30-point scale) is more sensitive for mild cognitive impairment — tests executive function, abstraction, and naming in addition to orientation and memory. Scores under 26 are suggestive of impairment. The MoCA catches early decline the MMSE misses."}},
-        {"@type": "Question", "name": "Why do caregiver observations matter if there's a cognitive test?", "acceptedAnswer": {"@type": "Answer", "text": "Tests are 30-minute snapshots. They show what the person can do in a quiet exam room, often after stimulant coffee, in their best clothes. Caregivers see the daily reality — forgetting medication doses, leaving the stove on, getting lost driving familiar routes, asking the same question every 10 minutes. Cognitive decline is established by the combination of objective testing AND functional decline observed by people who see the person daily. Courts give significant weight to caregiver journals."}},
-        {"@type": "Question", "name": "What are ADLs and IADLs in the context of cognitive decline?", "acceptedAnswer": {"@type": "Answer", "text": "ADLs (Activities of Daily Living) are basic self-care: bathing, dressing, toileting, transferring, continence, feeding. IADLs (Instrumental Activities of Daily Living) are more complex: managing finances, managing medications, using transportation, shopping, preparing meals, housekeeping, using the phone. IADLs decline first in dementia — losing the ability to balance a checkbook precedes losing the ability to feed yourself by years. Tracking which IADLs the person can still do is one of the strongest signals of decline."}},
+        {"@type": "Question", "name": "What's the difference between the MMSE and the MoCA?", "acceptedAnswer": {"@type": "Answer", "text": "Both are clinician-administered cognitive screening tools. MMSE (Mini-Mental State Examination, 30-point scale) tests orientation, memory, attention, language. Scores under 24 suggest impairment. MoCA (Montreal Cognitive Assessment, 30-point scale) is more sensitive for mild cognitive impairment &mdash; tests executive function, abstraction, and naming in addition to orientation and memory. Scores under 26 are suggestive of impairment. The MoCA catches early decline the MMSE misses."}},
+        {"@type": "Question", "name": "Why do caregiver observations matter if there's a cognitive test?", "acceptedAnswer": {"@type": "Answer", "text": "Tests are 30-minute snapshots. They show what the person can do in a quiet exam room, often after stimulant coffee, in their best clothes. Caregivers see the daily reality &mdash; forgetting medication doses, leaving the stove on, getting lost driving familiar routes, asking the same question every 10 minutes. Cognitive decline is established by the combination of objective testing AND functional decline observed by people who see the person daily. Courts give significant weight to caregiver journals."}},
+        {"@type": "Question", "name": "What are ADLs and IADLs in the context of cognitive decline?", "acceptedAnswer": {"@type": "Answer", "text": "ADLs (Activities of Daily Living) are basic self-care: bathing, dressing, toileting, transferring, continence, feeding. IADLs (Instrumental Activities of Daily Living) are more complex: managing finances, managing medications, using transportation, shopping, preparing meals, housekeeping, using the phone. IADLs decline first in dementia &mdash; losing the ability to balance a checkbook precedes losing the ability to feed yourself by years. Tracking which IADLs the person can still do is one of the strongest signals of decline."}},
         {"@type": "Question", "name": "How long should I document before raising concerns?", "acceptedAnswer": {"@type": "Answer", "text": "If safety is at risk, raise concerns now and document going forward. Otherwise, 4-8 weeks of dated daily entries before a doctor's appointment gives the clinician enough pattern to act on. Single incidents are easy to dismiss as 'a bad day.' A documented pattern is not."}},
         {"@type": "Question", "name": "What documentation do courts need for guardianship?", "acceptedAnswer": {"@type": "Answer", "text": "Most states require a recent (usually within 6 months) physician's affidavit or capacity evaluation, plus supporting evidence of incapacity. Caregiver journals showing repeated patterns of unsafe behavior, financial mismanagement, or inability to make decisions form the supporting evidence. Court-appointed guardian ad litem often interviews caregivers; the journal helps you give a complete account."}},
-        {"@type": "Question", "name": "Should I record video or audio of incidents?", "acceptedAnswer": {"@type": "Answer", "text": "Sometimes useful but legally tricky. Most states allow recording in your own home with one-party consent (the recorder counts), but 11 states are two-party consent — California, Connecticut, Delaware, Florida, Illinois, Maryland, Massachusetts, Montana, Nevada, New Hampshire, Pennsylvania, Washington. Recording the person who can't consent to recording raises concerns. When in doubt, written documentation by a witness is the safer evidence and works for almost every legal purpose."}}
+        {"@type": "Question", "name": "Should I record video or audio of incidents?", "acceptedAnswer": {"@type": "Answer", "text": "Sometimes useful but legally tricky. Most states allow recording in your own home with one-party consent (the recorder counts), but 11 states are two-party consent &mdash; California, Connecticut, Delaware, Florida, Illinois, Maryland, Massachusetts, Montana, Nevada, New Hampshire, Pennsylvania, Washington. Recording the person who can't consent to recording raises concerns. When in doubt, written documentation by a witness is the safer evidence and works for almost every legal purpose."}}
     ]}
     </script>
     <script type="application/ld+json">
@@ -125,7 +130,7 @@
                     <span class="tldr-icon">⚡</span>
                     <strong>Key Takeaways (TL;DR)</strong>
                 </div>
-                <p>Document daily with dates, times, and specific incidents — not vague impressions. Track ADLs and IADLs (Instrumental Activities of Daily Living usually decline first). Use the ABC framework for behavioral incidents (Antecedent, Behavior, Consequence). Note medications taken, missed, or repeated. Record specific examples of disorientation, repeated questions, financial mistakes, or safety concerns. Bring 4-8 weeks of dated entries to the doctor before assessment. Caregiver observations carry significant weight in capacity hearings — written contemporaneous documentation beats memory and impression every time.</p>
+                <p>Document daily with dates, times, and specific incidents &mdash; not vague impressions. Track ADLs and IADLs (Instrumental Activities of Daily Living usually decline first). Use the ABC framework for behavioral incidents (Antecedent, Behavior, Consequence). Note medications taken, missed, or repeated. Record specific examples of disorientation, repeated questions, financial mistakes, or safety concerns. Bring 4-8 weeks of dated entries to the doctor before assessment. Caregiver observations carry significant weight in capacity hearings &mdash; written contemporaneous documentation beats memory and impression every time.</p>
             </div>
 
             <div class="cta-box">
@@ -133,7 +138,7 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a professional caregiver report draft in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool →</a>
+                <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
@@ -144,14 +149,14 @@
 
                 <p>Three audiences use the documentation you create:</p>
                 <ul>
-                    <li><strong>Doctors</strong> — to support a clinical diagnosis, choose appropriate treatment, and refer to specialists</li>
-                    <li><strong>Lawyers</strong> — for capacity-related decisions: durable power of attorney, healthcare proxy, financial POA, will updates</li>
-                    <li><strong>Courts</strong> — for guardianship or conservatorship proceedings, contested capacity hearings, custody disputes where a parent's cognitive status is at issue</li>
+                    <li><strong>Doctors</strong> &mdash; to support a clinical diagnosis, choose appropriate treatment, and refer to specialists</li>
+                    <li><strong>Lawyers</strong> &mdash; for capacity-related decisions: durable power of attorney, healthcare proxy, financial POA, will updates</li>
+                    <li><strong>Courts</strong> &mdash; for guardianship or conservatorship proceedings, contested capacity hearings, custody disputes where a parent's cognitive status is at issue</li>
                 </ul>
 
                 <p>The same documentation serves all three. Written contemporaneously, in caregiver hands, with dates and specifics, it has more credibility than a clinician's brief impression after a 20-minute office visit.</p>
 
-                <h2>The clinical instruments — what they do and don't show</h2>
+                <h2>The clinical instruments &mdash; what they do and don't show</h2>
 
                 <h3>MMSE (Mini-Mental State Examination)</h3>
                 <p>30-point clinician-administered test. Covers orientation (time, place), short-term recall, attention/calculation, language, simple visuospatial copy. Takes 5-10 minutes. Scores:</p>
@@ -171,10 +176,10 @@
                     <li>10-17: moderate impairment</li>
                     <li>Below 10: severe impairment</li>
                 </ul>
-                <p>The MoCA catches subtle executive function declines the MMSE misses. It's now the more commonly used screening tool for suspected early decline. Available at mocacognition.com — the official version requires clinician certification to administer.</p>
+                <p>The MoCA catches subtle executive function declines the MMSE misses. It's now the more commonly used screening tool for suspected early decline. Available at mocacognition.com &mdash; the official version requires clinician certification to administer.</p>
 
                 <h3>Clinical Dementia Rating (CDR)</h3>
-                <p>Used after diagnosis to stage severity. Includes informant interview (the caregiver) — so what you write down feeds directly into the rating. CDR 0 = none, 0.5 = questionable, 1 = mild, 2 = moderate, 3 = severe.</p>
+                <p>Used after diagnosis to stage severity. Includes informant interview (the caregiver) &mdash; so what you write down feeds directly into the rating. CDR 0 = none, 0.5 = questionable, 1 = mild, 2 = moderate, 3 = severe.</p>
 
                 <h3>What the tests miss</h3>
                 <p>Test performance can be:</p>
@@ -182,12 +187,12 @@
                     <li>Better than reality if the person is alert, well-rested, on coffee, or in a familiar morning routine</li>
                     <li>Worse than reality if the person is sundowning, post-illness, sleep-deprived, depressed, or anxious about being tested</li>
                     <li>Affected by hearing loss, vision loss, low literacy, or language barriers</li>
-                    <li>Affected by sandbagging or denial — some patients are good at giving acceptable test answers while their function is collapsing at home</li>
+                    <li>Affected by sandbagging or denial &mdash; some patients are good at giving acceptable test answers while their function is collapsing at home</li>
                 </ul>
 
                 <p>This is why caregiver documentation matters. Your daily observations show real-world function, not test-room performance.</p>
 
-                <h2>ADLs and IADLs — the functional decline track</h2>
+                <h2>ADLs and IADLs &mdash; the functional decline track</h2>
 
                 <p>Cognitive decline shows up as functional decline. The Instrumental Activities of Daily Living (IADLs) decline first, then the basic Activities of Daily Living (ADLs).</p>
 
@@ -213,7 +218,7 @@
                     <li>Feeding (recognizing food, eating without choking)</li>
                 </ul>
 
-                <p>For each, track over time: independent → needs reminder → needs prompting → needs supervision → needs assistance → totally dependent. Note the date when each transition happens.</p>
+                <p>For each, track over time: independent &rarr; needs reminder &rarr; needs prompting &rarr; needs supervision &rarr; needs assistance &rarr; totally dependent. Note the date when each transition happens.</p>
 
                 <h2>The daily log format</h2>
 
@@ -233,11 +238,11 @@ MORNING (08:00-12:00):
   for 50+ years)
 
 AFTERNOON (12:00-17:00):
-- Lunch 60%, stated "I haven't eaten today" — was
+- Lunch 60%, stated "I haven't eaten today" &mdash; was
   reminded gently she had just finished lunch
 - Asked about deceased husband 4 times between 13:00-15:00
 - Restless, pacing 14:00-15:00
-- 14:30 — became agitated, accused me (caregiver) of
+- 14:30 &mdash; became agitated, accused me (caregiver) of
   stealing her purse. Purse was in normal location.
   Took 15 minutes to redirect. Agitation resolved by 15:30.
 
@@ -270,8 +275,8 @@ INCIDENTS:
 - 14:30 agitation re: purse (described above)
 
 SAFETY CONCERNS:
-- Sundowning earlier — adjust afternoon supervision
-- Phone recognition concerning — call screening may help
+- Sundowning earlier &mdash; adjust afternoon supervision
+- Phone recognition concerning &mdash; call screening may help
 
 CAREGIVER: [Signature]</pre>
 
@@ -305,7 +310,7 @@ BEHAVIOR:
 CONSEQUENCE / INTERVENTION:
 - Caregiver remained calm, did not argue
 - Validated emotion: "I can see you're upset. Let's
-  look together — I want to help find it"
+  look together &mdash; I want to help find it"
 - Walked with patient to bedroom, opened drawer where
   purse normally kept, showed patient the purse
 - Offered tea and a chair in different room
@@ -314,7 +319,7 @@ CONSEQUENCE / INTERVENTION:
 
 NOTES:
 - First documented accusation of theft involving caregiver
-- TV may have been triggering — consider screen content
+- TV may have been triggering &mdash; consider screen content
 - Validating emotion + showing physical evidence worked
 - Will repeat strategy if it recurs</pre>
 
@@ -332,35 +337,35 @@ NOTES:
                     <li>Refills and pharmacy interactions (lost meds, calling pharmacy multiple times)</li>
                 </ul>
 
-                <p>The medication log becomes evidence in capacity decisions — the inability to safely self-administer is a clear functional deficit.</p>
+                <p>The medication log becomes evidence in capacity decisions &mdash; the inability to safely self-administer is a clear functional deficit.</p>
 
                 <h2>Specific events to always document</h2>
 
                 <p>These are the events doctors, lawyers, and courts care most about. When any of them happen, write a dated entry the same day:</p>
                 <ul>
-                    <li><strong>Getting lost</strong> — anywhere, including familiar places. Note where, when, how long, who found them.</li>
-                    <li><strong>Driving incidents</strong> — accidents, near-misses, traffic stops, getting lost while driving, family members removing keys</li>
-                    <li><strong>Financial events</strong> — paying scammers, repeated payment of the same bill, missed bills causing service shutoff, large unexplained withdrawals, falling for telephone fraud</li>
-                    <li><strong>Stove/fire/safety</strong> — left stove on, started fires, water left running, locked self out</li>
-                    <li><strong>Wandering</strong> — found in pajamas outside, found in neighbor's house</li>
-                    <li><strong>Falls</strong> — every fall, whether injurious or not</li>
-                    <li><strong>Aggressive incidents</strong> — verbal or physical, especially toward caregivers or family</li>
-                    <li><strong>Delusions or hallucinations</strong> — believing dead relatives are alive, seeing intruders, paranoid accusations</li>
-                    <li><strong>Repeated questions</strong> — note specific examples and how soon they repeat</li>
-                    <li><strong>Misidentification of family</strong> — not recognizing a child, spouse, or longtime friend</li>
-                    <li><strong>Refusal of essential care</strong> — refusing meds, refusing meals, refusing medical appointments</li>
+                    <li><strong>Getting lost</strong> &mdash; anywhere, including familiar places. Note where, when, how long, who found them.</li>
+                    <li><strong>Driving incidents</strong> &mdash; accidents, near-misses, traffic stops, getting lost while driving, family members removing keys</li>
+                    <li><strong>Financial events</strong> &mdash; paying scammers, repeated payment of the same bill, missed bills causing service shutoff, large unexplained withdrawals, falling for telephone fraud</li>
+                    <li><strong>Stove/fire/safety</strong> &mdash; left stove on, started fires, water left running, locked self out</li>
+                    <li><strong>Wandering</strong> &mdash; found in pajamas outside, found in neighbor's house</li>
+                    <li><strong>Falls</strong> &mdash; every fall, whether injurious or not</li>
+                    <li><strong>Aggressive incidents</strong> &mdash; verbal or physical, especially toward caregivers or family</li>
+                    <li><strong>Delusions or hallucinations</strong> &mdash; believing dead relatives are alive, seeing intruders, paranoid accusations</li>
+                    <li><strong>Repeated questions</strong> &mdash; note specific examples and how soon they repeat</li>
+                    <li><strong>Misidentification of family</strong> &mdash; not recognizing a child, spouse, or longtime friend</li>
+                    <li><strong>Refusal of essential care</strong> &mdash; refusing meds, refusing meals, refusing medical appointments</li>
                 </ul>
 
                 <h2>What courts need for guardianship</h2>
 
                 <p>Guardianship (sometimes called conservatorship) is a court order giving someone legal authority over an incapacitated adult's decisions. Standards vary by state, but most require:</p>
                 <ul>
-                    <li><strong>A recent physician's evaluation</strong> — usually a sworn affidavit or "physician's certificate" stating the alleged incapacitated person lacks decision-making capacity, including the basis for that determination</li>
-                    <li><strong>Evidence of incapacity</strong> — your caregiver journal, witness statements, financial records showing unsafe decisions, medical records documenting falls or hospital admissions</li>
+                    <li><strong>A recent physician's evaluation</strong> &mdash; usually a sworn affidavit or "physician's certificate" stating the alleged incapacitated person lacks decision-making capacity, including the basis for that determination</li>
+                    <li><strong>Evidence of incapacity</strong> &mdash; your caregiver journal, witness statements, financial records showing unsafe decisions, medical records documenting falls or hospital admissions</li>
                     <li><strong>A petition</strong> identifying the proposed guardian, the proposed ward, and the relief sought (full guardianship, limited guardianship for specific decisions, financial conservatorship only)</li>
-                    <li><strong>Notice to interested parties</strong> — usually the alleged incapacitated person, all adult children and spouse, sometimes other close family</li>
-                    <li><strong>A hearing</strong> — the alleged incapacitated person has the right to attend, be represented by counsel, and contest the petition</li>
-                    <li><strong>An independent investigator</strong> in many states — a court-appointed guardian ad litem, court visitor, or attorney for the alleged ward who interviews everyone and reports back</li>
+                    <li><strong>Notice to interested parties</strong> &mdash; usually the alleged incapacitated person, all adult children and spouse, sometimes other close family</li>
+                    <li><strong>A hearing</strong> &mdash; the alleged incapacitated person has the right to attend, be represented by counsel, and contest the petition</li>
+                    <li><strong>An independent investigator</strong> in many states &mdash; a court-appointed guardian ad litem, court visitor, or attorney for the alleged ward who interviews everyone and reports back</li>
                 </ul>
 
                 <p>The court visitor or GAL will read your caregiver journal. A clear, dated, factual log of specific incidents is more persuasive than verbal recollections of "she's been getting worse for a while."</p>
@@ -380,10 +385,10 @@ NOTES:
                 <h2>Where to keep the documentation</h2>
 
                 <ul>
-                    <li><strong>Paper notebook</strong> — old school, works, can't be hacked. Date every entry. Don't erase, don't tear out pages.</li>
-                    <li><strong>Dedicated app</strong> — CareSmartz, CareZone, OurFamilyWizard (mostly co-parenting but works), or a simple shared note in a family password manager</li>
-                    <li><strong>Email yourself</strong> — write the entry as an email to yourself with date in subject. Timestamps are automatic and verifiable.</li>
-                    <li><strong>Word/Google doc</strong> — simple, sortable, but pay attention to whether the file metadata preserves edit history</li>
+                    <li><strong>Paper notebook</strong> &mdash; old school, works, can't be hacked. Date every entry. Don't erase, don't tear out pages.</li>
+                    <li><strong>Dedicated app</strong> &mdash; CareSmartz, CareZone, OurFamilyWizard (mostly co-parenting but works), or a simple shared note in a family password manager</li>
+                    <li><strong>Email yourself</strong> &mdash; write the entry as an email to yourself with date in subject. Timestamps are automatic and verifiable.</li>
+                    <li><strong>Word/Google doc</strong> &mdash; simple, sortable, but pay attention to whether the file metadata preserves edit history</li>
                 </ul>
 
                 <p>Whatever you choose, back it up. Photos of paper entries to cloud storage. A shared family folder. The work isn't useful if the records are lost.</p>
@@ -393,17 +398,17 @@ NOTES:
                         <strong>Don't stare at the blank page</strong>
                         <span>The CyberScryb Caregiver Report Tool drafts professional shift reports and behavioral observation logs in 60 seconds. Free to start.</span>
                     </div>
-                    <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool →</a>
+                    <a href="/tools/caregiver-report/" class="cta-btn">Open Caregiver Report Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
                 <details>
                     <summary>What's the difference between the MMSE and the MoCA?</summary>
-                    <p>Both are clinician-administered cognitive screening tools. MMSE focuses on orientation, memory, attention, and language. MoCA is more sensitive for mild cognitive impairment — tests executive function and abstraction.</p>
+                    <p>Both are clinician-administered cognitive screening tools. MMSE focuses on orientation, memory, attention, and language. MoCA is more sensitive for mild cognitive impairment &mdash; tests executive function and abstraction.</p>
                 </details>
                 <details>
                     <summary>Why do caregiver observations matter if there's a cognitive test?</summary>
-                    <p>Tests are 30-minute snapshots. Caregivers see daily reality — forgetting meds, leaving the stove on, getting lost on familiar routes. Cognitive decline is established by objective testing AND functional decline.</p>
+                    <p>Tests are 30-minute snapshots. Caregivers see daily reality &mdash; forgetting meds, leaving the stove on, getting lost on familiar routes. Cognitive decline is established by objective testing AND functional decline.</p>
                 </details>
                 <details>
                     <summary>What are ADLs and IADLs?</summary>
@@ -461,7 +466,7 @@ NOTES:
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

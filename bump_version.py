@@ -3,8 +3,8 @@ import os
 def bump_version():
     root_dir = os.path.dirname(os.path.abspath(__file__))
     target_folders = ["content-site", "public"]
-    old_version = "20260531"
-    new_version = "20260604"
+    old_version = "20260604"
+    new_version = "20260623"
     
     count = 0
     for folder in target_folders:

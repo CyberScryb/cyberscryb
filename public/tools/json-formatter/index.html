@@ -2,28 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Formatter & Validator — Free Online | CyberScryb</title>
+    <title>JSON Formatter & Validator &mdash; Free Online | CyberScryb</title>
     <meta name="description" content="Pretty print, validate, and clean up complex structures with our JSON formatter & validator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/json-formatter/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="JSON Formatter & Validator — Free Online | CyberScryb">
+    <meta property="og:title" content="JSON Formatter & Validator &mdash; Free Online | CyberScryb">
     <meta property="og:description" content="Pretty print, validate, and clean up complex structures with our JSON formatter & validator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/json-formatter/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSON Formatter & Validator — Free Online | CyberScryb">
+    <meta name="twitter:title" content="JSON Formatter & Validator &mdash; Free Online | CyberScryb">
     <meta name="twitter:description" content="Pretty print, validate, and clean up complex structures with our JSON formatter & validator. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -204,8 +209,8 @@
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>How does the JSON formatter work?</summary><p>Paste JSON, click Format / Minify / Validate. JSON.parse runs in your browser and the output is pretty-printed with your chosen indentation.</p></details>
                 <details><summary>Is my data uploaded anywhere?</summary><p>No. Everything is processed 100% client-side in JavaScript. Your JSON never leaves your device.</p></details>
-                <details><summary>What JSON errors are detected?</summary><p>Missing commas, unquoted keys, trailing commas, mismatched brackets, and invalid escape sequences — with the approximate line and column of the first error.</p></details>
-                <details><summary>Format vs. minify — which should I use?</summary><p>Format for readable debug output. Minify to shrink payloads for APIs and embedded configs where every byte counts.</p></details>
+                <details><summary>What JSON errors are detected?</summary><p>Missing commas, unquoted keys, trailing commas, mismatched brackets, and invalid escape sequences &mdash; with the approximate line and column of the first error.</p></details>
+                <details><summary>Format vs. minify &mdash; which should I use?</summary><p>Format for readable debug output. Minify to shrink payloads for APIs and embedded configs where every byte counts.</p></details>
                 <details><summary>Does it support JSON5 or comments?</summary><p>No. This tool validates strict RFC 8259 JSON. Comments and trailing commas are reported as errors.</p></details>
             </div>
         </div>
@@ -221,7 +226,7 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="../json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON ↔ CSV Converter</strong>
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert JSON to CSV and back with nested object flattening.</span>
             </a>
             <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
@@ -275,7 +280,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function() {
         const $ = id => document.getElementById(id);

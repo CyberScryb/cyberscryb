@@ -29,11 +29,16 @@
     <link rel="stylesheet" href="/guides/guide.css">
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
     
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -195,10 +200,10 @@
 
             <div class="cta-box">
                 <div class="cta-text">
-                    <strong>Skip the guide — build it visually:</strong>
+                    <strong>Skip the guide &mdash; build it visually:</strong>
                     <span>Use our free CSS Glassmorphism Generator to design and copy code instantly.</span>
                 </div>
-                <a href="/tools/glassmorphism-generator/" class="cta-btn">Open Glassmorphism Generator →</a>
+                <a href="/tools/glassmorphism-generator/" class="cta-btn">Open Glassmorphism Generator &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
@@ -285,7 +290,7 @@
                     <strong>Ready to start designing?</strong>
                     <span>Open our free CSS Glassmorphism Generator to configure colors and export CSS in seconds.</span>
                 </div>
-                <a href="/tools/glassmorphism-generator/" class="cta-btn">Open Glassmorphism Generator →</a>
+                <a href="/tools/glassmorphism-generator/" class="cta-btn">Open Glassmorphism Generator &rarr;</a>
             </div>
         </article>
     </main>
@@ -297,7 +302,7 @@
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#888;">About Us</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#888;">About Us</a></p>
     </footer>
 
     <script src="../tools/shared/email-capture.js"></script>

@@ -31,6 +31,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -95,7 +100,7 @@
                 "name": "What's the difference between charity care and bill negotiation?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Charity care is free or heavily discounted treatment given to qualifying low-income patients. Negotiation is a settlement on what you already owe. Charity care wipes out 50–100% of the balance for income-eligible patients. Negotiation usually lands at 25–60% of the billed amount. If you might qualify for charity care, apply for that first — you can negotiate later if you're denied."
+                    "text": "Charity care is free or heavily discounted treatment given to qualifying low-income patients. Negotiation is a settlement on what you already owe. Charity care wipes out 50&ndash;100% of the balance for income-eligible patients. Negotiation usually lands at 25&ndash;60% of the billed amount. If you might qualify for charity care, apply for that first &mdash; you can negotiate later if you're denied."
                 }
             },
             {
@@ -103,7 +108,7 @@
                 "name": "Is every hospital required to offer financial assistance?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Every nonprofit hospital is required by IRS Section 501(r)(4) to have a written Financial Assistance Policy (FAP) and to make it widely publicized. For-profit hospitals are not required to, but many do — and most state laws require some form of charity care from any hospital that takes Medicare or state-funded patients. If you don't know whether your hospital is nonprofit, search the IRS Tax Exempt Organization Search."
+                    "text": "Every nonprofit hospital is required by IRS Section 501(r)(4) to have a written Financial Assistance Policy (FAP) and to make it widely publicized. For-profit hospitals are not required to, but many do &mdash; and most state laws require some form of charity care from any hospital that takes Medicare or state-funded patients. If you don't know whether your hospital is nonprofit, search the IRS Tax Exempt Organization Search."
                 }
             },
             {
@@ -111,7 +116,7 @@
                 "name": "Should I send a hardship letter before the bill goes to collections?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes — and faster than you think. Most hospital FAPs have application windows of 120-240 days from first post-discharge bill. Once the account is sold to a third-party collector, you're negotiating with the collector, not the hospital, and charity care is usually off the table. Send the letter the moment you know the bill is unaffordable, not when collections starts calling."
+                    "text": "Yes &mdash; and faster than you think. Most hospital FAPs have application windows of 120-240 days from first post-discharge bill. Once the account is sold to a third-party collector, you're negotiating with the collector, not the hospital, and charity care is usually off the table. Send the letter the moment you know the bill is unaffordable, not when collections starts calling."
                 }
             },
             {
@@ -119,7 +124,7 @@
                 "name": "Will applying for financial assistance hurt my credit?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No. Applying for charity care or negotiating a bill doesn't appear on your credit report. The CFPB rules (effective 2025) prohibit unpaid medical debt under $500 from being reported, and many credit reporting changes have reduced the impact of medical debt generally. What hurts your credit is letting the bill go unpaid until a collector lists it — which is exactly what hardship review is supposed to prevent."
+                    "text": "No. Applying for charity care or negotiating a bill doesn't appear on your credit report. The CFPB rules (effective 2025) prohibit unpaid medical debt under $500 from being reported, and many credit reporting changes have reduced the impact of medical debt generally. What hurts your credit is letting the bill go unpaid until a collector lists it &mdash; which is exactly what hardship review is supposed to prevent."
                 }
             },
             {
@@ -135,7 +140,7 @@
                 "name": "How much should my first settlement offer be?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Roughly 25-33% of the post-itemization balance, paid as a lump sum. Hospital billing departments are authorized to settle on prompt-pay terms — they prefer 30 cents on the dollar today over chasing you for years. If you can't pay a lump sum, offer a low monthly payment plan tied to a written agreement that pauses interest and locks the reduced total."
+                    "text": "Roughly 25-33% of the post-itemization balance, paid as a lump sum. Hospital billing departments are authorized to settle on prompt-pay terms &mdash; they prefer 30 cents on the dollar today over chasing you for years. If you can't pay a lump sum, offer a low monthly payment plan tied to a written agreement that pauses interest and locks the reduced total."
                 }
             }
         ]
@@ -196,7 +201,7 @@
                     <span>Medical Hardship Letter</span>
                 </div>
                 <h1 itemprop="headline">How to Write a <span class="accent">Medical Hardship Letter</span> (2026 Guide)</h1>
-                <p class="guide-subtitle" itemprop="description">Most patients overpay because they never asked. Here's the exact letter that triggers a charity care review or a 60–80% settlement — with samples for both paths.</p>
+                <p class="guide-subtitle" itemprop="description">Most patients overpay because they never asked. Here's the exact letter that triggers a charity care review or a 60&ndash;80% settlement &mdash; with samples for both paths.</p>
                 <div class="guide-meta">
                     <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
                     <span>📅 Updated <time datetime="2026-05-24" itemprop="dateModified">May 24, 2026</time></span>
@@ -209,7 +214,7 @@
                     <span class="tldr-icon">⚡</span>
                     <strong>Key Takeaways (TL;DR)</strong>
                 </div>
-                <p>Two paths: charity care (free/discounted treatment for low-income patients, required at every nonprofit hospital under IRS 501(r)) and bill negotiation (a settlement on what you already owe). Always request an itemized bill first — it surfaces errors and gives you leverage. Apply for charity care before the bill goes to collections. If you don't qualify, negotiate. First settlement offer should be 25–33% of the post-itemization balance. Get any agreement in writing before paying a dollar.</p>
+                <p>Two paths: charity care (free/discounted treatment for low-income patients, required at every nonprofit hospital under IRS 501(r)) and bill negotiation (a settlement on what you already owe). Always request an itemized bill first &mdash; it surfaces errors and gives you leverage. Apply for charity care before the bill goes to collections. If you don't qualify, negotiate. First settlement offer should be 25&ndash;33% of the post-itemization balance. Get any agreement in writing before paying a dollar.</p>
             </div>
 
             <div class="cta-box">
@@ -217,21 +222,21 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a personalized medical hardship letter in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/hardship-letter/" class="cta-btn">Open Hardship Letter Tool →</a>
+                <a href="/tools/hardship-letter/" class="cta-btn">Open Hardship Letter Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
 
-                <h2>Two letters, two paths — know which one you're writing</h2>
+                <h2>Two letters, two paths &mdash; know which one you're writing</h2>
 
                 <p>A medical hardship letter isn't one thing. Depending on what you want, you're writing one of two different documents:</p>
 
                 <ul>
-                    <li><strong>Charity care / financial assistance application.</strong> A formal request under the hospital's Financial Assistance Policy (FAP) for free or discounted care. Approved patients get 50–100% of the balance written off. This is the one most people don't know exists.</li>
-                    <li><strong>Negotiation / settlement letter.</strong> An offer to settle the bill for less than billed amount. Approved settlements usually land at 25–60% of the original total. This is what you use if you don't qualify for charity care or if the account already went to collections.</li>
+                    <li><strong>Charity care / financial assistance application.</strong> A formal request under the hospital's Financial Assistance Policy (FAP) for free or discounted care. Approved patients get 50&ndash;100% of the balance written off. This is the one most people don't know exists.</li>
+                    <li><strong>Negotiation / settlement letter.</strong> An offer to settle the bill for less than billed amount. Approved settlements usually land at 25&ndash;60% of the original total. This is what you use if you don't qualify for charity care or if the account already went to collections.</li>
                 </ul>
 
-                <p>The letters look similar — same header, same hardship paragraph, same tone — but the ask is different. If you might qualify for charity care, always apply for that first. You can always negotiate later. You can't usually claim charity care after the bill is settled or sent to a third-party collector.</p>
+                <p>The letters look similar &mdash; same header, same hardship paragraph, same tone &mdash; but the ask is different. If you might qualify for charity care, always apply for that first. You can always negotiate later. You can't usually claim charity care after the bill is settled or sent to a third-party collector.</p>
 
                 <h2>Why nonprofit hospitals must offer charity care</h2>
 
@@ -241,47 +246,47 @@
 
                 <p>Most nonprofit hospitals offer:</p>
                 <ul>
-                    <li><strong>100% write-off</strong> for patients below 200% of the Federal Poverty Level (the threshold varies by hospital — some go up to 300% or 400%)</li>
+                    <li><strong>100% write-off</strong> for patients below 200% of the Federal Poverty Level (the threshold varies by hospital &mdash; some go up to 300% or 400%)</li>
                     <li><strong>Sliding-scale discount</strong> for patients between 200% and 400% of FPL</li>
-                    <li><strong>Amounts Generally Billed (AGB) cap</strong> for FAP-eligible patients — limits the maximum the hospital can charge to roughly what an insured patient would have been charged for the same care</li>
+                    <li><strong>Amounts Generally Billed (AGB) cap</strong> for FAP-eligible patients &mdash; limits the maximum the hospital can charge to roughly what an insured patient would have been charged for the same care</li>
                 </ul>
 
                 <p>If you're below the income threshold and you don't apply, the hospital will still send the bill to collections eventually. Most people in financial hardship qualify for at least partial discount. The application takes 20 minutes.</p>
 
                 <h2>For-profit and out-of-network providers</h2>
 
-                <p>For-profit hospitals, urgent care centers, freestanding ERs, and physician groups aren't bound by 501(r). They're not required to have an FAP. But many large for-profit chains (HCA, Tenet, Community Health Systems, etc.) have voluntary charity care policies that look similar — ask. State laws also vary: California, Washington, Illinois, New York, New Jersey, and others have state-mandated charity care or hospital financial assistance laws that apply even to for-profit facilities.</p>
+                <p>For-profit hospitals, urgent care centers, freestanding ERs, and physician groups aren't bound by 501(r). They're not required to have an FAP. But many large for-profit chains (HCA, Tenet, Community Health Systems, etc.) have voluntary charity care policies that look similar &mdash; ask. State laws also vary: California, Washington, Illinois, New York, New Jersey, and others have state-mandated charity care or hospital financial assistance laws that apply even to for-profit facilities.</p>
 
-                <p>If the hospital has no FAP and no state mandate, you're in pure negotiation territory. The letter is the same — just don't reference "charity care" or "501(r)." Reference "financial hardship" and "settlement."</p>
+                <p>If the hospital has no FAP and no state mandate, you're in pure negotiation territory. The letter is the same &mdash; just don't reference "charity care" or "501(r)." Reference "financial hardship" and "settlement."</p>
 
-                <h2>Step 1: Get the itemized bill — always</h2>
+                <h2>Step 1: Get the itemized bill &mdash; always</h2>
 
-                <p>Before you write anything, request the itemized bill in writing. The standard summary statement most patients get is useless — it just says "Hospital Services: $42,000." The itemized version lists every CPT code, every HCPCS code, every revenue code, with quantity and per-unit price.</p>
+                <p>Before you write anything, request the itemized bill in writing. The standard summary statement most patients get is useless &mdash; it just says "Hospital Services: $42,000." The itemized version lists every CPT code, every HCPCS code, every revenue code, with quantity and per-unit price.</p>
 
                 <p>What you'll find on an itemized bill more than half the time:</p>
                 <ul>
                     <li>Duplicate charges (same service billed twice)</li>
                     <li>Services you didn't receive (the OR billed a procedure that was canceled, the floor billed a med you refused)</li>
-                    <li>Surgical supply line items priced 10–100x retail ("$77 for a saline IV bag")</li>
+                    <li>Surgical supply line items priced 10&ndash;100x retail ("$77 for a saline IV bag")</li>
                     <li>Room and board charges for nights you weren't admitted</li>
-                    <li>"Unbundled" charges — services that should have been billed as one CPT code but were broken into pieces to inflate the bill</li>
+                    <li>"Unbundled" charges &mdash; services that should have been billed as one CPT code but were broken into pieces to inflate the bill</li>
                     <li>Codes for the wrong patient, wrong room, or wrong date</li>
                 </ul>
 
-                <p>Compare the codes against <a href="https://www.cms.gov/medicare/physician-fee-schedule/search" target="_blank" rel="nofollow noopener">CMS's Physician Fee Schedule</a> — what Medicare pays for that same code is often 1/5 to 1/20 of what you were charged. That gap is the basis of your negotiation.</p>
+                <p>Compare the codes against <a href="https://www.cms.gov/medicare/physician-fee-schedule/search" target="_blank" rel="nofollow noopener">CMS's Physician Fee Schedule</a> &mdash; what Medicare pays for that same code is often 1/5 to 1/20 of what you were charged. That gap is the basis of your negotiation.</p>
 
-                <p>Federal law (the No Surprises Act and most state pricing transparency rules) requires hospitals to provide an itemized bill on request. Ask for it before you write the hardship letter — the itemized bill might cut your number by 30% before you even open negotiation.</p>
+                <p>Federal law (the No Surprises Act and most state pricing transparency rules) requires hospitals to provide an itemized bill on request. Ask for it before you write the hardship letter &mdash; the itemized bill might cut your number by 30% before you even open negotiation.</p>
 
                 <h2>The structure of a medical hardship letter</h2>
 
                 <p>Whether you're applying for charity care or negotiating a settlement, the letter follows the same five-section structure:</p>
 
                 <ol>
-                    <li><strong>Header</strong> — patient name, account/MRN, date of service, total billed, contact info</li>
-                    <li><strong>Statement of hardship</strong> — what happened and when</li>
-                    <li><strong>Financial picture</strong> — household income, household expenses, household size, gap</li>
-                    <li><strong>The specific ask</strong> — full FAP review OR settlement offer with proposed amount and terms</li>
-                    <li><strong>Close</strong> — willingness to provide documents, hold on collections, contact info</li>
+                    <li><strong>Header</strong> &mdash; patient name, account/MRN, date of service, total billed, contact info</li>
+                    <li><strong>Statement of hardship</strong> &mdash; what happened and when</li>
+                    <li><strong>Financial picture</strong> &mdash; household income, household expenses, household size, gap</li>
+                    <li><strong>The specific ask</strong> &mdash; full FAP review OR settlement offer with proposed amount and terms</li>
+                    <li><strong>Close</strong> &mdash; willingness to provide documents, hold on collections, contact info</li>
                 </ol>
 
                 <p>Where the two letter types differ is in section 4. Charity care letters request a formal review and include language about the hospital's FAP. Negotiation letters propose a specific dollar settlement.</p>
@@ -290,7 +295,7 @@
 
                 <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">[Your Name]
 [Address]
-[Phone] · [Email]
+[Phone] &middot; [Email]
 Patient MRN: [number]
 Account #: [number]
 Date(s) of Service: [date]
@@ -303,7 +308,7 @@ Financial Assistance / Charity Care Office
 [Address]
 
 RE: Request for Financial Assistance Policy (FAP) Review
-    Patient MRN [number] · Account #[number]
+    Patient MRN [number] &middot; Account #[number]
 
 I'm writing to formally request a review of the above account under
 your Financial Assistance Policy, in accordance with IRC Section
@@ -352,7 +357,7 @@ Sincerely,
 
                 <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">[Your Name]
 [Address]
-[Phone] · [Email]
+[Phone] &middot; [Email]
 Patient MRN: [number]
 Account #: [number]
 Date(s) of Service: [date]
@@ -364,7 +369,7 @@ May 24, 2026
 Patient Financial Services
 [Address]
 
-RE: Settlement Offer — Account #[number]
+RE: Settlement Offer &mdash; Account #[number]
 
 I'm writing to propose a lump-sum settlement of the above account
 based on financial hardship.
@@ -407,21 +412,21 @@ Sincerely,
 
                 <h2>The settlement math</h2>
 
-                <p>Hospital billing departments are routinely authorized to settle accounts at deep discounts for prompt payment. The internal target is recovery — getting some money fast usually beats trying to collect the full bill over years (with the risk of getting nothing if you file bankruptcy).</p>
+                <p>Hospital billing departments are routinely authorized to settle accounts at deep discounts for prompt payment. The internal target is recovery &mdash; getting some money fast usually beats trying to collect the full bill over years (with the risk of getting nothing if you file bankruptcy).</p>
 
                 <p>Typical settlement ranges, post-itemization:</p>
                 <ul>
-                    <li><strong>Aggressive opening offer:</strong> 20–25% of the billed amount (lump sum)</li>
-                    <li><strong>Common landing range:</strong> 30–50% of the billed amount</li>
-                    <li><strong>Collections-stage settlement:</strong> 10–30% of the billed amount (the collector bought the debt cheap, has room to discount)</li>
+                    <li><strong>Aggressive opening offer:</strong> 20&ndash;25% of the billed amount (lump sum)</li>
+                    <li><strong>Common landing range:</strong> 30&ndash;50% of the billed amount</li>
+                    <li><strong>Collections-stage settlement:</strong> 10&ndash;30% of the billed amount (the collector bought the debt cheap, has room to discount)</li>
                 </ul>
 
-                <p>If you can pay a lump sum, lead with one. If you need a payment plan, propose 6–24 months with interest frozen. Don't ever agree verbally — get every term in writing before the first dollar moves.</p>
+                <p>If you can pay a lump sum, lead with one. If you need a payment plan, propose 6&ndash;24 months with interest frozen. Don't ever agree verbally &mdash; get every term in writing before the first dollar moves.</p>
 
                 <h2>What to attach</h2>
 
                 <ul>
-                    <li>The hospital's FAP application (download from their website — every nonprofit must have one)</li>
+                    <li>The hospital's FAP application (download from their website &mdash; every nonprofit must have one)</li>
                     <li>Last 30 days of pay stubs OR award letter (unemployment, SSDI/SSI, VA benefits, pension)</li>
                     <li>Last 2 months of bank statements (all accounts)</li>
                     <li>Most recent federal tax return</li>
@@ -437,26 +442,26 @@ Sincerely,
                     <li>Within 30 days, the hospital must either approve, deny, or request more documentation</li>
                     <li>While the application is pending, the hospital is barred from "extraordinary collection actions" (lawsuits, garnishment, credit reporting, liens)</li>
                     <li>If approved, the discount is applied retroactively to the account</li>
-                    <li>If denied, you can usually appeal — and at that point you can also propose a settlement</li>
+                    <li>If denied, you can usually appeal &mdash; and at that point you can also propose a settlement</li>
                 </ul>
 
                 <p>For a negotiation letter to a billing office:</p>
                 <ul>
-                    <li>Most respond within 2–4 weeks</li>
+                    <li>Most respond within 2&ndash;4 weeks</li>
                     <li>Common path: counter-offer at a higher percentage, you counter back, settle in the middle</li>
-                    <li>If they refuse to negotiate, escalate to a billing supervisor — front-line reps often have lower authority than they admit</li>
+                    <li>If they refuse to negotiate, escalate to a billing supervisor &mdash; front-line reps often have lower authority than they admit</li>
                     <li>Get the final agreement in writing on hospital letterhead before paying</li>
                 </ul>
 
                 <h2>If the account is already in collections</h2>
 
-                <p>A third-party collection agency bought the debt for pennies on the dollar (usually 5–15% of face value). They have room to settle at 20–30% of the billed amount and still profit.</p>
+                <p>A third-party collection agency bought the debt for pennies on the dollar (usually 5&ndash;15% of face value). They have room to settle at 20&ndash;30% of the billed amount and still profit.</p>
 
                 <p>Important rules:</p>
                 <ul>
-                    <li>Send the offer in writing — never agree to anything by phone</li>
-                    <li>Demand a "pay for delete" if it's been reported to credit bureaus (some collectors will agree, some won't — newer FCRA medical debt rules limit reporting on debts under $500 and require longer wait periods)</li>
-                    <li>Verify the debt first by sending a written debt validation request — the collector must produce documentation that the debt is yours and the amount is accurate</li>
+                    <li>Send the offer in writing &mdash; never agree to anything by phone</li>
+                    <li>Demand a "pay for delete" if it's been reported to credit bureaus (some collectors will agree, some won't &mdash; newer FCRA medical debt rules limit reporting on debts under $500 and require longer wait periods)</li>
+                    <li>Verify the debt first by sending a written debt validation request &mdash; the collector must produce documentation that the debt is yours and the amount is accurate</li>
                     <li>Never pay anything to a collector without a written settlement agreement that states "payment in full" or "full and final settlement of Account #X"</li>
                 </ul>
 
@@ -464,9 +469,9 @@ Sincerely,
 
                 <ul>
                     <li><strong>Don't pay the bill in full thinking you'll negotiate later.</strong> Once paid, no negotiation, no charity care, no refund.</li>
-                    <li><strong>Don't put a hospital bill on a credit card.</strong> Now it's no longer "medical debt" with consumer protections — it's credit card debt with high interest and full reporting.</li>
+                    <li><strong>Don't put a hospital bill on a credit card.</strong> Now it's no longer "medical debt" with consumer protections &mdash; it's credit card debt with high interest and full reporting.</li>
                     <li><strong>Don't sign up for a hospital-promoted medical credit card</strong> (CareCredit, Synchrony Health, etc.) at billing without reading the deferred-interest terms. Missed payment triggers retroactive interest going back to day one.</li>
-                    <li><strong>Don't ignore the bills.</strong> Charity care has a window — usually 240 days from first post-discharge bill. Ignored bills go to collections fast.</li>
+                    <li><strong>Don't ignore the bills.</strong> Charity care has a window &mdash; usually 240 days from first post-discharge bill. Ignored bills go to collections fast.</li>
                     <li><strong>Don't say you'll pay anything verbally.</strong> "Implied agreement" or "promise to pay" can reset the statute of limitations and restart collections.</li>
                 </ul>
 
@@ -476,34 +481,34 @@ Sincerely,
                 <p>Reapply with updated income documentation. Make sure you included household size correctly (children, dependents). If a recent event (job loss, disability) changed your income after the date of service, write a cover letter explaining the current situation, not the situation when you were treated.</p>
 
                 <h3>"Missing documentation"</h3>
-                <p>The hospital must specify what's missing. Re-submit only the missing pieces — don't restart the whole application.</p>
+                <p>The hospital must specify what's missing. Re-submit only the missing pieces &mdash; don't restart the whole application.</p>
 
                 <h3>"Application window closed"</h3>
                 <p>Push back if it's been less than 240 days from the first post-discharge bill. The 240-day Notification Period under 26 CFR 1.501(r)-6(c)(6) is a federal minimum. If they're enforcing a shorter window, that may be a violation.</p>
 
                 <h3>Negotiation rejected</h3>
-                <p>Counter at a slightly higher percentage. Ask to escalate to a billing supervisor. If still rejected, ask for a payment plan with interest frozen. If still nothing, wait — once the bill ages 90+ days, leverage increases as the hospital faces selling the debt for pennies.</p>
+                <p>Counter at a slightly higher percentage. Ask to escalate to a billing supervisor. If still rejected, ask for a payment plan with interest frozen. If still nothing, wait &mdash; once the bill ages 90+ days, leverage increases as the hospital faces selling the debt for pennies.</p>
 
                 <div class="cta-box bottom">
                     <div class="cta-text">
                         <strong>Don't stare at the blank page</strong>
-                        <span>The CyberScryb Hardship Letter Tool drafts a medical hardship letter — charity care or negotiation — in 60 seconds. Free to start.</span>
+                        <span>The CyberScryb Hardship Letter Tool drafts a medical hardship letter &mdash; charity care or negotiation &mdash; in 60 seconds. Free to start.</span>
                     </div>
-                    <a href="/tools/hardship-letter/" class="cta-btn">Open Hardship Letter Tool →</a>
+                    <a href="/tools/hardship-letter/" class="cta-btn">Open Hardship Letter Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
                 <details>
                     <summary>What's the difference between charity care and bill negotiation?</summary>
-                    <p>Charity care is free or heavily discounted treatment given to qualifying low-income patients. Negotiation is a settlement on what you already owe. Charity care wipes out 50–100% of the balance for income-eligible patients. Negotiation usually lands at 25–60% of the billed amount. If you might qualify for charity care, apply for that first — you can negotiate later if you're denied.</p>
+                    <p>Charity care is free or heavily discounted treatment given to qualifying low-income patients. Negotiation is a settlement on what you already owe. Charity care wipes out 50&ndash;100% of the balance for income-eligible patients. Negotiation usually lands at 25&ndash;60% of the billed amount. If you might qualify for charity care, apply for that first &mdash; you can negotiate later if you're denied.</p>
                 </details>
                 <details>
                     <summary>Is every hospital required to offer financial assistance?</summary>
-                    <p>Every nonprofit hospital is required by IRS Section 501(r)(4) to have a written Financial Assistance Policy and to make it widely publicized. For-profit hospitals are not required to, but many do — and most state laws require some form of charity care from any hospital that takes Medicare or state-funded patients.</p>
+                    <p>Every nonprofit hospital is required by IRS Section 501(r)(4) to have a written Financial Assistance Policy and to make it widely publicized. For-profit hospitals are not required to, but many do &mdash; and most state laws require some form of charity care from any hospital that takes Medicare or state-funded patients.</p>
                 </details>
                 <details>
                     <summary>Should I send a hardship letter before the bill goes to collections?</summary>
-                    <p>Yes — and faster than you think. Most hospital FAPs have application windows of 120–240 days from first post-discharge bill. Once the account is sold to a third-party collector, you're negotiating with the collector, not the hospital, and charity care is usually off the table.</p>
+                    <p>Yes &mdash; and faster than you think. Most hospital FAPs have application windows of 120&ndash;240 days from first post-discharge bill. Once the account is sold to a third-party collector, you're negotiating with the collector, not the hospital, and charity care is usually off the table.</p>
                 </details>
                 <details>
                     <summary>Will applying for financial assistance hurt my credit?</summary>
@@ -511,15 +516,15 @@ Sincerely,
                 </details>
                 <details>
                     <summary>Do I need an itemized bill before negotiating?</summary>
-                    <p>Yes. Always. An itemized bill routinely reveals duplicates, billing errors, services you didn't receive, and prices that are 2–10x what insurance would have paid. Federal law and most state laws require hospitals to provide the itemized bill on request.</p>
+                    <p>Yes. Always. An itemized bill routinely reveals duplicates, billing errors, services you didn't receive, and prices that are 2&ndash;10x what insurance would have paid. Federal law and most state laws require hospitals to provide the itemized bill on request.</p>
                 </details>
                 <details>
                     <summary>How much should my first settlement offer be?</summary>
-                    <p>Roughly 25–33% of the post-itemization balance, paid as a lump sum. Hospital billing departments are authorized to settle on prompt-pay terms — they prefer 30 cents on the dollar today over chasing you for years.</p>
+                    <p>Roughly 25&ndash;33% of the post-itemization balance, paid as a lump sum. Hospital billing departments are authorized to settle on prompt-pay terms &mdash; they prefer 30 cents on the dollar today over chasing you for years.</p>
                 </details>
                 <details>
                     <summary>What if I already have insurance but the bill is still huge?</summary>
-                    <p>Many hospitals still offer financial assistance to insured patients — especially for high deductibles, copays, or out-of-network "balance billing." Ask for the FAP application even with insurance. Separately, dispute any balance billing under the No Surprises Act if the provider was out-of-network and you didn't consent in writing.</p>
+                    <p>Many hospitals still offer financial assistance to insured patients &mdash; especially for high deductibles, copays, or out-of-network "balance billing." Ask for the FAP application even with insurance. Separately, dispute any balance billing under the No Surprises Act if the provider was out-of-network and you didn't consent in writing.</p>
                 </details>
 
                 <h2>Related guides</h2>
@@ -562,7 +567,7 @@ Sincerely,
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

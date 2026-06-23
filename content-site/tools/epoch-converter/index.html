@@ -4,11 +4,11 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unix Timestamp Converter — Free & Online | CyberScryb</title>
+    <title>Unix Timestamp Converter &mdash; Free & Online | CyberScryb</title>
     <meta name="description" content="Convert timestamps to dates and vice versa with this unix timestamp converter. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/epoch-converter/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <meta property="og:title" content="Unix Timestamp Converter — Free & Online | CyberScryb">
+    <meta property="og:title" content="Unix Timestamp Converter &mdash; Free & Online | CyberScryb">
     <meta property="og:description" content="Convert timestamps to dates and vice versa with this unix timestamp converter. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/epoch-converter/">
@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <!-- Google Analytics 4 -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -30,11 +30,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -128,13 +133,13 @@
 
             <div class="converter-grid">
                 <div class="conv-card">
-                    <h2>⏱️ Timestamp → Date</h2>
+                    <h2>⏱️ Timestamp &rarr; Date</h2>
                     <input type="text" class="conv-input" id="ts-input" placeholder="e.g. 1711314000">
                     <button class="conv-btn" id="ts-convert">Convert to Date</button>
                     <div class="conv-result" id="ts-result"></div>
                 </div>
                 <div class="conv-card">
-                    <h2>📅 Date → Timestamp</h2>
+                    <h2>📅 Date &rarr; Timestamp</h2>
                     <div class="date-inputs">
                         <div><input type="number" id="d-year" placeholder="YYYY" value="2026"><div class="input-label">Year</div></div>
                         <div><input type="number" id="d-month" placeholder="MM" min="1" max="12" value="3"><div class="input-label">Month</div></div>
@@ -159,17 +164,17 @@
         </div>
         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Is a Unix Timestamp?</h2>
-        <p>A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970, 00:00:00 UTC — a date referred to as the Unix epoch. This convention was established in the early days of Unix operating systems as a simple, unambiguous way to represent any point in time using a single integer, with no dependence on locale, calendar format, or timezone.</p>
+        <p>A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970, 00:00:00 UTC &mdash; a date referred to as the Unix epoch. This convention was established in the early days of Unix operating systems as a simple, unambiguous way to represent any point in time using a single integer, with no dependence on locale, calendar format, or timezone.</p>
         <p>Every major programming language has built-in support for Unix timestamps. In JavaScript, <code>Date.now()</code> returns the current timestamp in milliseconds. In Python, <code>time.time()</code> returns it in seconds. In databases, Unix timestamps are often preferred for storing dates because integer comparisons are faster than string comparisons, and there is no ambiguity about date format (no DD/MM/YYYY vs MM/DD/YYYY confusion).</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Seconds vs Milliseconds — A Common Source of Bugs</h2>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Seconds vs Milliseconds &mdash; A Common Source of Bugs</h2>
         <p>The single most common bug involving Unix timestamps is confusing seconds and milliseconds. The Unix standard uses seconds, but JavaScript's <code>Date.now()</code> and many modern APIs return milliseconds. A current timestamp in seconds is a 10-digit number (approximately 1,700,000,000). In milliseconds, it is 13 digits (approximately 1,700,000,000,000). If you see a date rendering as 1970 or as a date in the year 2500+, you almost certainly mixed up seconds and milliseconds somewhere in your code.</p>
         <p>When in doubt, check the magnitude: 10 digits = seconds, 13 digits = milliseconds. Convert accordingly before passing timestamps between systems that may use different conventions.</p>
 
         <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Frequently Asked Questions</h2>
         <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">Does Unix time account for timezones?</summary>
-            <p style="margin-top:0.75rem;">Unix timestamps are always in UTC — they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
+            <p style="margin-top:0.75rem;">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
         </details>
         <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color:#e6e9f0;">What is the Year 2038 problem?</summary>
@@ -196,7 +201,7 @@
                 <span style="font-size:0.85rem; color:#878787;">Generate time-based UUIDs to pair with epoch timestamps.</span>
             </a>
             <a href="../json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON ↔ CSV Converter</strong>
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert timestamped datasets between JSON and CSV.</span>
             </a>
             <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
@@ -214,7 +219,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function(){
         // Live clock

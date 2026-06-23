@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Glassmorphism Generator — Free UI tool | CyberScryb</title>
+    <title>CSS Glassmorphism Generator &mdash; Free UI tool | CyberScryb</title>
     <meta name="description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="glassmorphism generator, css glassmorphism, frosted glass css, glass card maker, css glass generator, backdrop filter blur, glassmorphism code">
     
-    <meta property="og:title" content="CSS Glassmorphism Generator — Free UI tool | CyberScryb">
+    <meta property="og:title" content="CSS Glassmorphism Generator &mdash; Free UI tool | CyberScryb">
     <meta property="og:description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/glassmorphism-generator/">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CSS Glassmorphism Generator — Free UI tool | CyberScryb">
+    <meta name="twitter:title" content="CSS Glassmorphism Generator &mdash; Free UI tool | CyberScryb">
     <meta name="twitter:description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     
@@ -27,7 +27,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -64,6 +64,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -121,7 +126,7 @@
 
     <main>
         <section class="hero">
-            <div class="badge">💎 100% Client-Side — Visual CSS Designer</div>
+            <div class="badge">💎 100% Client-Side &mdash; Visual CSS Designer</div>
             <h1>CSS Glassmorphism <span class="accent">Generator</span></h1>
             <p class="subtitle">Visually create premium frosted-glass components, configure filters, and export clean, cross-browser CSS code.</p>
         </section>
@@ -302,8 +307,8 @@
             
             <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
-                <li><a href="/tools/contrast-checker/" style="color:#06b6d4;">WCAG Color Contrast Checker</a> — Ensure your glassmorphic text matches accessibility ratios.</li>
-                <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> — Design harmonious color schemes for web backdrops.</li>
+                <li><a href="/tools/contrast-checker/" style="color:#06b6d4;">WCAG Color Contrast Checker</a> &mdash; Ensure your glassmorphic text matches accessibility ratios.</li>
+                <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> &mdash; Design harmonious color schemes for web backdrops.</li>
                 <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb CSS &amp; UI Design Guides</a></li>
             </ul>
         </section>
@@ -335,7 +340,7 @@
     </section>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All UI calculations run locally in your browser.</p>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All UI calculations run locally in your browser.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
 

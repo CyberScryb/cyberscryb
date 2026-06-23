@@ -32,11 +32,16 @@
         gtag('config', 'G-73LQZEDNR6');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -98,7 +103,7 @@
                     <p><strong>Last updated:</strong> March 16, 2026</p>
 
                     <h2>FTC Compliance</h2>
-                    <p>In accordance with the <strong>Federal Trade Commission (FTC)</strong> guidelines, CyberScryb discloses that some of the links on this website are affiliate links. This means we may earn a small commission if you click through and make a purchase — at <strong>no additional cost to you</strong>.</p>
+                    <p>In accordance with the <strong>Federal Trade Commission (FTC)</strong> guidelines, CyberScryb discloses that some of the links on this website are affiliate links. This means we may earn a small commission if you click through and make a purchase &mdash; at <strong>no additional cost to you</strong>.</p>
 
                     <h2>What This Means for You</h2>
                     <ul>
@@ -111,13 +116,13 @@
                     <h2>How We Earn Revenue</h2>
                     <p>CyberScryb may earn revenue through:</p>
                     <ul>
-                        <li><strong>Affiliate links</strong> — Commissions from products or services we recommend in our guides</li>
-                        <li><strong>Sponsored content</strong> — Clearly labeled sponsored articles or tool recommendations (if any)</li>
+                        <li><strong>Affiliate links</strong> &mdash; Commissions from products or services we recommend in our guides</li>
+                        <li><strong>Sponsored content</strong> &mdash; Clearly labeled sponsored articles or tool recommendations (if any)</li>
                     </ul>
                     <p>All affiliate relationships are disclosed at the point of recommendation. Revenue earned supports the continued development and maintenance of our free tools.</p>
 
                     <h2>Our Commitment</h2>
-                    <p>We are committed to providing honest, unbiased information. If we recommend a product, it's because we believe it genuinely helps developers and creators — not because of a commission. Our tools will always remain free and privacy-first regardless of affiliate partnerships.</p>
+                    <p>We are committed to providing honest, unbiased information. If we recommend a product, it's because we believe it genuinely helps developers and creators &mdash; not because of a commission. Our tools will always remain free and privacy-first regardless of affiliate partnerships.</p>
 
                     <h2>Questions?</h2>
                     <p>If you have questions about our affiliate relationships, contact us at <strong><a href="mailto:support@cyberscryb.com">support@cyberscryb.com</a></strong>.</p>

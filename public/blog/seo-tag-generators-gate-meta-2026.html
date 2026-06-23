@@ -16,20 +16,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260604">
+<link rel="stylesheet" href="/css/style.css?v=20260623">
 
-<!-- Google AdSense — delayed load to protect LCP -->
+<!-- Google AdSense &mdash; delayed load to protect LCP -->
 <script>
 (function() {
     function loadAdsense() {
-        if (window._adsenseLoaded) return;
-        window._adsenseLoaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-        s.crossOrigin = 'anonymous';
-        document.head.appendChild(s);
-    }
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
     if (document.readyState === 'complete') {
         setTimeout(loadAdsense, 2500);
     } else {
@@ -133,7 +138,7 @@ gtag('config', 'G-LS46B9J1XK');
 <article class="article-wrap">
 <p><a href="/blog/">← Back to blog</a></p>
 <h1>Why Online SEO Generators Gate Meta Tags (Behind the Scenes)</h1>
-<p class="meta">Published June 2, 2026 · 6 min read</p>
+<p class="meta">Published June 2, 2026 &middot; 6 min read</p>
 
 <p>You've likely been there: you search for a "free meta tag generator" or "schema markup creator." You fill in your site's title, description, and target URL. But when you click "Generate," the code block is blurred out. A popup appears: "Enter your email to copy your tags."</p>
 
@@ -144,7 +149,7 @@ gtag('config', 'G-LS46B9J1XK');
 <div class="cta-box">
   <strong style="color:#0066ff;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-size:0.85rem;">ZERO FRICTION METAS</strong>
   <p style="margin:8px 0 0;">Create clean, compliant Meta Tags and JSON-LD schema without signups or blurred results. Try CyberScryb's <a href="/tools/meta-tag-generator/">free Meta Tag Generator</a>.</p>
-  <a class="cta-btn" href="/tools/meta-tag-generator/">Generate Meta Tags Free →</a>
+  <a class="cta-btn" href="/tools/meta-tag-generator/">Generate Meta Tags Free &rarr;</a>
 </div>
 
 <h2>The Economics of the "Free" SEO Tool</h2>
@@ -170,7 +175,7 @@ gtag('config', 'G-LS46B9J1XK');
 <h3>Why do some tools limit usage per day?</h3>
 <p>Tools that use AI models (like our Humanizer or Caregiver Report generator) run on cloud servers that charge per generation. We limit free users to 3 generations per day to keep the site sustainable without locking utility features entirely.</p>
 
-<p style="text-align:center;margin-top:48px;"><a href="/tools/meta-tag-generator/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Create Meta Tags Free →</a></p>
+<p style="text-align:center;margin-top:48px;"><a href="/tools/meta-tag-generator/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Create Meta Tags Free &rarr;</a></p>
 </article>
 
 <!-- AdSense Multiplex -->
@@ -186,7 +191,7 @@ gtag('config', 'G-LS46B9J1XK');
 </div>
 </main>
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;text-align:center;color:#878787;font-size:0.9rem;margin-top:60px;">
-  <p>© 2026 CyberScryb LLC · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a> · <a href="/pro/" style="color:#0066ff;">Pro</a></p>
+  <p>© 2026 CyberScryb LLC &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a> &middot; <a href="/pro/" style="color:#0066ff;">Pro</a></p>
 </footer>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>

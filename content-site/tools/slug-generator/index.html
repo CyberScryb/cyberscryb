@@ -5,25 +5,25 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Slug Generator — Free & No Signup | CyberScryb</title>
+    <title>URL Slug Generator &mdash; Free & No Signup | CyberScryb</title>
     <meta name="description" content="Convert any title text into SEO-friendly web links using our URL slug generator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/slug-generator/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="URL Slug Generator — Free & No Signup | CyberScryb">
+    <meta property="og:title" content="URL Slug Generator &mdash; Free & No Signup | CyberScryb">
     <meta property="og:description" content="Convert any title text into SEO-friendly web links using our URL slug generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/slug-generator/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="URL Slug Generator — Free & No Signup | CyberScryb">
+    <meta name="twitter:title" content="URL Slug Generator &mdash; Free & No Signup | CyberScryb">
     <meta name="twitter:description" content="Convert any title text into SEO-friendly web links using our URL slug generator. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -87,9 +92,9 @@
         "mainEntity": [
             { "@type": "Question", "name": "What is a URL slug?", "acceptedAnswer": { "@type": "Answer", "text": "A URL slug is the final, human-readable portion of a web address that identifies a specific page, like 'my-awesome-blog-post' in cyberscryb.com/blog/my-awesome-blog-post. Clean slugs improve SEO and shareability." }},
             { "@type": "Question", "name": "How does the slug generator handle accents?", "acceptedAnswer": { "@type": "Answer", "text": "Accented characters like é, ü, ñ, and å are automatically transliterated to their ASCII equivalents (e, u, n, a) using Unicode NFD normalization. This produces clean, universally compatible URLs." }},
-            { "@type": "Question", "name": "Should I remove stop words from slugs?", "acceptedAnswer": { "@type": "Answer", "text": "Removing common words like 'the', 'a', 'of', 'for' creates shorter, more keyword-dense slugs — which is generally considered better for SEO. Enable the 'Remove stop words' option." }},
+            { "@type": "Question", "name": "Should I remove stop words from slugs?", "acceptedAnswer": { "@type": "Answer", "text": "Removing common words like 'the', 'a', 'of', 'for' creates shorter, more keyword-dense slugs &mdash; which is generally considered better for SEO. Enable the 'Remove stop words' option." }},
             { "@type": "Question", "name": "Why use hyphens instead of underscores?", "acceptedAnswer": { "@type": "Answer", "text": "Google treats hyphens as word separators but underscores as word-joiners. 'my-blog-post' is read as three words, while 'my_blog_post' is read as one long token. Hyphens are the SEO standard." }},
-            { "@type": "Question", "name": "Is this tool free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. 100% free with no signup. All processing happens in your browser with vanilla JavaScript — nothing is ever uploaded." }}
+            { "@type": "Question", "name": "Is this tool free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. 100% free with no signup. All processing happens in your browser with vanilla JavaScript &mdash; nothing is ever uploaded." }}
         ]
     }
     </script>
@@ -200,7 +205,7 @@
             </div>
 
             <div style="margin-top: 1.5rem;">
-                <input type="text" class="sg-input" id="sg-input" placeholder="Type or paste your title here — e.g. My Awesome Blog Post!">
+                <input type="text" class="sg-input" id="sg-input" placeholder="Type or paste your title here &mdash; e.g. My Awesome Blog Post!">
             </div>
 
             <div class="sg-output-box">
@@ -238,7 +243,7 @@
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is a URL slug?</summary><p>A URL slug is the final, human-readable part of a web address that identifies a page, like "my-awesome-blog-post" in cyberscryb.com/blog/my-awesome-blog-post.</p></details>
                 <details><summary>How are accents handled?</summary><p>Accented characters (é, ü, ñ, å) are transliterated to ASCII equivalents (e, u, n, a) using Unicode NFD normalization, producing clean, universally compatible URLs.</p></details>
-                <details><summary>Should I remove stop words?</summary><p>Removing words like "the", "a", "of", "for" creates shorter, more keyword-dense slugs — generally better for SEO.</p></details>
+                <details><summary>Should I remove stop words?</summary><p>Removing words like "the", "a", "of", "for" creates shorter, more keyword-dense slugs &mdash; generally better for SEO.</p></details>
                 <details><summary>Why hyphens instead of underscores?</summary><p>Google treats hyphens as word separators but underscores as joiners. "my-blog-post" is read as three words; "my_blog_post" as one token. Hyphens are the SEO standard.</p></details>
                 <details><summary>Is this tool free and private?</summary><p>Yes. 100% free, no signup. All processing is client-side in vanilla JavaScript.</p></details>
             </div>
@@ -259,7 +264,7 @@
                 <span style="font-size:0.85rem; color:#878787;">Build meta title, description, and Open Graph tags for your new URL.</span>
             </a>
             <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown ↔ HTML</strong>
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown drafts into publish-ready HTML.</span>
             </a>
             <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
@@ -294,7 +299,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function() {
         const input = document.getElementById('sg-input');
@@ -377,7 +382,7 @@
             }
         });
         document.getElementById('sg-sample').addEventListener('click', () => {
-            input.value = 'My Awesome Blog Post! — 10 Tips for Développeurs in 2026';
+            input.value = 'My Awesome Blog Post! &mdash; 10 Tips for Développeurs in 2026';
             update();
         });
 

@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Support Calculator — Free Estimate | CyberScryb</title>
-    <meta property="og:title" content="Child Support Calculator — Free Estimate | CyberScryb">
+    <title>Child Support Calculator &mdash; Free Estimate | CyberScryb</title>
+    <meta property="og:title" content="Child Support Calculator &mdash; Free Estimate | CyberScryb">
     <meta name="description" content="Estimate monthly payments and parenting expenses using our child support calculator. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Child Support Calculator — Free Estimate | CyberScryb">
+    <meta name="twitter:title" content="Child Support Calculator &mdash; Free Estimate | CyberScryb">
     <meta name="twitter:description" content="Estimate monthly payments and parenting expenses using our child support calculator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/child-support-calculator/">
@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -33,11 +33,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -291,7 +296,7 @@
             <p>Furthermore, adjustments are almost always made for direct expenses paid by one parent, such as health insurance premiums and work-related child care costs. These expenses are added to the basic obligation and shared proportionally, with the parent who pays them directly receiving a credit against their cash support obligation.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#0066ff;margin-top:2rem;">Filing and Enforcing Child Support Orders</h2>
-            <p>To establish a formal child support order, a parent must file a petition with their local family court or apply for services through their state's child support enforcement agency (often part of the Department of Social Services or Attorney General's office). Once ordered, child support is typically collected via income withholding (wage garnishment) directly from the paying parent's paycheck. If circumstances change significantly—such as a job loss or a shift in the physical custody schedule—either parent can request a formal modification of the child support order.</p>
+            <p>To establish a formal child support order, a parent must file a petition with their local family court or apply for services through their state's child support enforcement agency (often part of the Department of Social Services or Attorney General's office). Once ordered, child support is typically collected via income withholding (wage garnishment) directly from the paying parent's paycheck. If circumstances change significantly&mdash;such as a job loss or a shift in the physical custody schedule&mdash;either parent can request a formal modification of the child support order.</p>
         </section>
     </main>
 
@@ -332,7 +337,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="child-support-calculator.js"></script>

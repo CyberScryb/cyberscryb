@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>Pro Activated — CyberScryb</title>
+  <title>Pro Activated &mdash; CyberScryb</title>
   <link rel="icon" href="/favicon.ico">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,7 +70,7 @@
     <h1>Pro Activated!</h1>
     <p>Your Pro access is now live on this device.</p>
     <p style="margin-top:8px;font-size:13px;color:#6b7280">All tools are now unlocked. No limits.</p>
-    <a href="/tools/" class="btn">Start Using Pro →</a>
+    <a href="/tools/" class="btn">Start Using Pro &rarr;</a>
   </div>
   <div id="error-state" style="display:none">
     <div class="icon">⚠️</div>
@@ -109,7 +109,7 @@
   }
 
   if (!sessionId) {
-    // No session_id — maybe they bookmarked the page or refreshed after activation
+    // No session_id &mdash; maybe they bookmarked the page or refreshed after activation
     var alreadyPro = document.cookie.indexOf('cs_subscribed=1') > -1;
     if (alreadyPro) {
       activatePro();
@@ -122,7 +122,7 @@
 
   document.getElementById('status-msg').textContent = 'Confirming with Stripe…';
 
-  // Call Firebase function to validate — with a timeout so the spinner never hangs forever
+  // Call Firebase function to validate &mdash; with a timeout so the spinner never hangs forever
   var controller = new AbortController();
   var timeoutId = setTimeout(function() { controller.abort(); }, 20000);
 
@@ -141,7 +141,7 @@
       console.error(err);
       var aborted = err && err.name === 'AbortError';
       document.getElementById('error-msg').textContent = aborted
-        ? 'This is taking longer than expected. Your payment may still be processing — check your email for a receipt, or email support@cyberscryb.com and we\'ll activate you manually.'
+        ? 'This is taking longer than expected. Your payment may still be processing &mdash; check your email for a receipt, or email support@cyberscryb.com and we\'ll activate you manually.'
         : 'Network error. Please try refreshing.';
       show('error-state');
     });

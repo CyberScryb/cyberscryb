@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Text Summarizer — Free Online Tool | CyberScryb</title>
+    <title>AI Text Summarizer &mdash; Free Online Tool | CyberScryb</title>
     <meta name="description" content="Condense long articles and essays into quick bullet points using this AI text summarizer. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="AI Text Summarizer — Free Online Tool | CyberScryb">
+    <meta property="og:title" content="AI Text Summarizer &mdash; Free Online Tool | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Text Summarizer — Free Online Tool | CyberScryb">
+    <meta name="twitter:title" content="AI Text Summarizer &mdash; Free Online Tool | CyberScryb">
     <meta name="twitter:description" content="Condense long articles and essays into quick bullet points using this AI text summarizer. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/summarizer/">
@@ -18,7 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -32,11 +32,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -154,7 +159,7 @@
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #c41e1e, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Summarize Now</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon">&rarr;</span>
                         </button>
                     </div>
 
@@ -250,8 +255,8 @@
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#c41e1e; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Is the AI summarizer free?</h4><p>Yes. You get 3 free summaries per day after providing your email. No credit card required.</p></div>
-                    <div class="faq-item"><h4>What model powers it?</h4><p>Gemini 3.1 Pro — Google's latest frontier model tuned for long-context comprehension.</p></div>
-                    <div class="faq-item"><h4>Can I summarize PDFs?</h4><p>Not directly yet — paste the extracted text. PDF upload is coming on Pro.</p></div>
+                    <div class="faq-item"><h4>What model powers it?</h4><p>Gemini 3.1 Pro &mdash; Google's latest frontier model tuned for long-context comprehension.</p></div>
+                    <div class="faq-item"><h4>Can I summarize PDFs?</h4><p>Not directly yet &mdash; paste the extracted text. PDF upload is coming on Pro.</p></div>
                     <div class="faq-item"><h4>Is my text stored?</h4><p>No. Inputs are processed and discarded. We never train on your content.</p></div>
                     <div class="faq-item"><h4>How long can the input be?</h4><p>Free tier supports up to 500 characters. Pro unlocks 20,000 characters per request.</p></div>
                 </div>
@@ -263,12 +268,12 @@
         </section>
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How AI Summarization Actually Works</h2>
-            <p>Modern AI summarizers use transformer-based language models — the same architecture behind ChatGPT and Gemini — but tuned for a specific task: compressing long text into shorter text without losing the core meaning. There are two fundamentally different approaches.</p>
-            <p><strong>Extractive summarization</strong> pulls the most important sentences directly from the original text. It never generates new words — it just picks the sentences that carry the most information. The upside is perfect accuracy. The downside is choppy output that reads like a highlight reel.</p>
-            <p><strong>Abstractive summarization</strong> is what this tool uses. The AI reads the entire input, builds an internal representation of the meaning, and writes a new summary in its own words. This produces more natural, readable output — but introduces a small risk of hallucination. Always spot-check the output against your source.</p>
+            <p>Modern AI summarizers use transformer-based language models &mdash; the same architecture behind ChatGPT and Gemini &mdash; but tuned for a specific task: compressing long text into shorter text without losing the core meaning. There are two fundamentally different approaches.</p>
+            <p><strong>Extractive summarization</strong> pulls the most important sentences directly from the original text. It never generates new words &mdash; it just picks the sentences that carry the most information. The upside is perfect accuracy. The downside is choppy output that reads like a highlight reel.</p>
+            <p><strong>Abstractive summarization</strong> is what this tool uses. The AI reads the entire input, builds an internal representation of the meaning, and writes a new summary in its own words. This produces more natural, readable output &mdash; but introduces a small risk of hallucination. Always spot-check the output against your source.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">When to Use a Summarizer (and When Not To)</h2>
-            <p>Summarizers work best on informational text: news articles, research papers, meeting transcripts, blog posts, and documentation. They struggle with highly technical content that relies on precise definitions — legal contracts and medical protocols lose critical nuance when compressed. They also don't handle creative writing well.</p>
+            <p>Summarizers work best on informational text: news articles, research papers, meeting transcripts, blog posts, and documentation. They struggle with highly technical content that relies on precise definitions &mdash; legal contracts and medical protocols lose critical nuance when compressed. They also don't handle creative writing well.</p>
             <p>The most productive workflow is using the summarizer as a first pass: compress the text, read the summary to decide if the full document is worth your time, then go back and read the sections that matter.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Tips for Getting Better Summaries</h2>
@@ -278,12 +283,12 @@
             <p><strong>Break long documents into sections.</strong> Summarizing a 10,000-word document in one pass forces heavy compression. Summarizing each section individually produces better results.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How This Compares to ChatGPT</h2>
-            <p>You can paste text into ChatGPT and ask it to summarize, but there are practical differences. ChatGPT's context window competes with your conversation history — long documents can get truncated. This tool sends your text directly to a summarization-optimized endpoint with the full context window dedicated to your input. You also get structured controls (length, format) and word count metrics.</p>
-            <p>The bigger difference is privacy. ChatGPT retains conversation data for model improvement unless you opt out. This tool processes your text and discards it — nothing is logged or used for training.</p>
+            <p>You can paste text into ChatGPT and ask it to summarize, but there are practical differences. ChatGPT's context window competes with your conversation history &mdash; long documents can get truncated. This tool sends your text directly to a summarization-optimized endpoint with the full context window dedicated to your input. You also get structured controls (length, format) and word count metrics.</p>
+            <p>The bigger difference is privacy. ChatGPT retains conversation data for model improvement unless you opt out. This tool processes your text and discards it &mdash; nothing is logged or used for training.</p>
 
             <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Use Cases</h2>
             <p><strong>Students</strong> use it to digest research papers during exam prep. Summarizing 20 papers into one-paragraph abstracts makes literature reviews manageable.</p>
-            <p><strong>Professionals</strong> use it for email triage — paste a long thread and get the key decisions and action items in seconds.</p>
+            <p><strong>Professionals</strong> use it for email triage &mdash; paste a long thread and get the key decisions and action items in seconds.</p>
             <p><strong>Content creators</strong> use it to generate meta descriptions, social media previews, and newsletter blurbs from full-length articles.</p>
             <p><strong>Researchers</strong> use it to screen papers during systematic reviews. Summarize 50 abstracts, then only read the 8 that are relevant.</p>
         </section>
@@ -356,7 +361,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="summarizer.js"></script>

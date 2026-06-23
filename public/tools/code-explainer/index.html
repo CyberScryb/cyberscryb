@@ -5,12 +5,12 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Code Explainer — Free Online Tool | CyberScryb</title>
+    <title>AI Code Explainer &mdash; Free Online Tool | CyberScryb</title>
     <meta name="description" content="Understand code step-by-step in plain English with this AI code explainer. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="AI Code Explainer — Free Online Tool | CyberScryb">
+    <meta property="og:title" content="AI Code Explainer &mdash; Free Online Tool | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Code Explainer — Free Online Tool | CyberScryb">
+    <meta name="twitter:title" content="AI Code Explainer &mdash; Free Online Tool | CyberScryb">
     <meta name="twitter:description" content="Understand code step-by-step in plain English with this AI code explainer. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/code-explainer/">
@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -37,6 +37,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -142,7 +147,7 @@
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #c41e1e, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Explain Code</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon">&rarr;</span>
                         </button>
                     </div>
 
@@ -234,9 +239,9 @@
 
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#c41e1e; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>Which languages are supported?</h4><p>All major languages — JavaScript, TypeScript, Python, Java, C++, C#, Go, Rust, PHP, Ruby, Swift, Kotlin, SQL, Bash, HTML, CSS, and more. Auto-detect picks the right one automatically.</p></div>
+                    <div class="faq-item"><h4>Which languages are supported?</h4><p>All major languages &mdash; JavaScript, TypeScript, Python, Java, C++, C#, Go, Rust, PHP, Ruby, Swift, Kotlin, SQL, Bash, HTML, CSS, and more. Auto-detect picks the right one automatically.</p></div>
                     <div class="faq-item"><h4>Who is this for?</h4><p>Beginners trying to understand a snippet, code reviewers, and senior devs onboarding to unfamiliar codebases.</p></div>
-                    <div class="faq-item"><h4>Does it rewrite the code?</h4><p>No — it explains what the code does, step by step, in plain English. For rewriting, try our <a href="../humanizer/" style="color:#c41e1e;">humanizer</a> or ask for a refactor via Pro.</p></div>
+                    <div class="faq-item"><h4>Does it rewrite the code?</h4><p>No &mdash; it explains what the code does, step by step, in plain English. For rewriting, try our <a href="../humanizer/" style="color:#c41e1e;">humanizer</a> or ask for a refactor via Pro.</p></div>
                     <div class="faq-item"><h4>Is my code kept private?</h4><p>Yes. We don't store code or train on it.</p></div>
                 </div>
 
@@ -317,7 +322,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="code-explainer.js"></script>

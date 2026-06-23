@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tweet Generator — Free Twitter Writer | CyberScryb</title>
+    <title>AI Tweet Generator &mdash; Free Twitter Writer | CyberScryb</title>
     <meta name="description" content="Write engaging social media posts and ideas in seconds with this AI tweet generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-    <meta property="og:title" content="AI Tweet Generator — Free Twitter Writer | CyberScryb">
+    <meta property="og:title" content="AI Tweet Generator &mdash; Free Twitter Writer | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Tweet Generator — Free Twitter Writer | CyberScryb">
+    <meta name="twitter:title" content="AI Tweet Generator &mdash; Free Twitter Writer | CyberScryb">
     <meta name="twitter:description" content="Write engaging social media posts and ideas in seconds with this AI tweet generator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/tweet-generator/">
@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -33,11 +33,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -153,7 +158,7 @@
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #c41e1e, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Generate Tweets</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon">&rarr;</span>
                         </button>
                     </div>
 
@@ -252,7 +257,7 @@
                     <div class="faq-item"><h4>What is the character limit for tweets?</h4><p>Twitter/X allows 280 characters per tweet. Our generator keeps each tweet within that limit by default so you can copy and post directly.</p></div>
                     <div class="faq-item"><h4>Can I use these tweets on LinkedIn or other platforms?</h4><p>Absolutely. The generated content works great on Twitter/X, LinkedIn, Threads, Mastodon, and Bluesky. Adjust the angle to match the platform's tone.</p></div>
                     <div class="faq-item"><h4>How do I write tweets that go viral?</h4><p>Viral tweets typically have a strong hook in the first line, offer a contrarian or surprising take, and end with a call to action. Our "hot take" angle is optimized for engagement.</p></div>
-                    <div class="faq-item"><h4>What model powers the tweet generator?</h4><p>Gemini 3.1 Pro — Google's latest frontier model, tuned for creative short-form writing with high engagement patterns.</p></div>
+                    <div class="faq-item"><h4>What model powers the tweet generator?</h4><p>Gemini 3.1 Pro &mdash; Google's latest frontier model, tuned for creative short-form writing with high engagement patterns.</p></div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
@@ -329,7 +334,7 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-examples.js"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="tweet-generator.js"></script>

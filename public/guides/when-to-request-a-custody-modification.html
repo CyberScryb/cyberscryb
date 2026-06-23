@@ -30,6 +30,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -69,11 +74,11 @@
     <script type="application/ld+json">
     {"@context": "https://schema.org","@type": "FAQPage","mainEntity": [
         {"@type": "Question", "name": "What is a 'substantial change in circumstances'?", "acceptedAnswer": {"@type": "Answer", "text": "A material, significant change that has happened since the existing custody order was entered. It must be a change the original judge couldn't reasonably have foreseen, and it must materially affect the child's welfare or the parents' ability to follow the order. Minor inconveniences, growing pains, and ordinary life events don't qualify."}},
-        {"@type": "Question", "name": "How soon after an order can I request modification?", "acceptedAnswer": {"@type": "Answer", "text": "Most states impose a waiting period — commonly 2 years — before you can re-litigate custody, unless the child is in immediate danger or there's a major event. The waiting period exists to give stability. Emergency motions can be filed any time if you can document an immediate threat to the child."}},
+        {"@type": "Question", "name": "How soon after an order can I request modification?", "acceptedAnswer": {"@type": "Answer", "text": "Most states impose a waiting period &mdash; commonly 2 years &mdash; before you can re-litigate custody, unless the child is in immediate danger or there's a major event. The waiting period exists to give stability. Emergency motions can be filed any time if you can document an immediate threat to the child."}},
         {"@type": "Question", "name": "Does relocation count as a substantial change?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, especially relocations of more than 50-100 miles or out of state. Most states have specific relocation statutes requiring written notice to the other parent (commonly 60 days) and either consent or a court hearing. A planned move that disrupts the existing parenting schedule is almost always a material change."}},
         {"@type": "Question", "name": "Does my child get a say in custody modification?", "acceptedAnswer": {"@type": "Answer", "text": "The weight given to a child's preference depends on age and maturity. Most states formally consider preferences from age 12+. Some states allow children 14+ to choose their primary residential parent (subject to a best-interest check). Younger children's preferences may be heard through a guardian ad litem or custody evaluator rather than directly."}},
         {"@type": "Question", "name": "Can I modify custody without going to court?", "acceptedAnswer": {"@type": "Answer", "text": "You can informally agree to changes, but informal agreements aren't enforceable. If your co-parent backs out, the original order is what the court enforces. Any change you want to be enforceable must be filed as a stipulated modification with the court and entered as a new custody order."}},
-        {"@type": "Question", "name": "What if the other parent is violating the existing order?", "acceptedAnswer": {"@type": "Answer", "text": "That's an enforcement issue, not a modification issue. File a Motion for Contempt or a Motion to Enforce. Document every violation with dates and evidence — co-parenting app messages, witness statements, photos. Repeated documented violations can become evidence supporting a modification later if the violations show the current arrangement isn't working."}}
+        {"@type": "Question", "name": "What if the other parent is violating the existing order?", "acceptedAnswer": {"@type": "Answer", "text": "That's an enforcement issue, not a modification issue. File a Motion for Contempt or a Motion to Enforce. Document every violation with dates and evidence &mdash; co-parenting app messages, witness statements, photos. Repeated documented violations can become evidence supporting a modification later if the violations show the current arrangement isn't working."}}
     ]}
     </script>
     <script type="application/ld+json">
@@ -133,7 +138,7 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a custody modification motion draft in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool →</a>
+                <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
@@ -147,16 +152,16 @@
                     <li>The proposed modification is in the <strong>best interest of the child</strong>.</li>
                 </ol>
 
-                <p>Both prongs have to be satisfied. A change without a best-interest benefit doesn't justify modification. A best-interest argument without a substantial change doesn't either — courts won't re-litigate a custody order just because you have new arguments.</p>
+                <p>Both prongs have to be satisfied. A change without a best-interest benefit doesn't justify modification. A best-interest argument without a substantial change doesn't either &mdash; courts won't re-litigate a custody order just because you have new arguments.</p>
 
-                <p>The burden of proof is on the party seeking modification. The existing order has a presumption in its favor based on stability — courts don't want children's lives disrupted unless there's a real reason.</p>
+                <p>The burden of proof is on the party seeking modification. The existing order has a presumption in its favor based on stability &mdash; courts don't want children's lives disrupted unless there's a real reason.</p>
 
                 <h2>What courts consider "material and substantial"</h2>
 
                 <h3>Strong triggers (almost always sufficient)</h3>
                 <ul>
                     <li><strong>Relocation.</strong> One parent plans to move 50+ miles or out of state, disrupting the existing schedule. Most states have specific relocation statutes requiring 60-day written notice plus consent or court approval.</li>
-                    <li><strong>Significant health change in a parent.</strong> A diagnosis affecting ability to parent — serious illness, mental health crisis, substance use disorder relapse, physical disability affecting child care.</li>
+                    <li><strong>Significant health change in a parent.</strong> A diagnosis affecting ability to parent &mdash; serious illness, mental health crisis, substance use disorder relapse, physical disability affecting child care.</li>
                     <li><strong>Significant change in the child's needs.</strong> New medical diagnosis, special education plan, mental health needs, developmental needs the current arrangement doesn't accommodate.</li>
                     <li><strong>Documented safety concerns.</strong> Abuse, neglect, exposure to domestic violence, substance use during parenting time, dangerous individuals in the home, firearm storage issues, leaving the child unsupervised.</li>
                     <li><strong>Repeated documented violations of the existing order.</strong> A pattern of missed exchanges, refusing communication, withholding the child, denying make-up time. Document each incident.</li>
@@ -184,15 +189,15 @@
                     <li>The child's normal growing pains and complaints</li>
                 </ul>
 
-                <p>Cumulative changes can sometimes add up. A judge may find that five "weak" things over two years collectively reach the substantial threshold. But you can't rely on it — bring strong evidence.</p>
+                <p>Cumulative changes can sometimes add up. A judge may find that five "weak" things over two years collectively reach the substantial threshold. But you can't rely on it &mdash; bring strong evidence.</p>
 
                 <h2>When you can file</h2>
 
                 <p>Most states impose a waiting period before re-litigating custody. Common rules:</p>
                 <ul>
-                    <li><strong>2 years from the last order</strong> in many states — you can file before 2 years only if you can show emergency or immediate threat</li>
-                    <li><strong>No waiting period for emergency modifications</strong> — abuse, abduction risk, immediate health threat. These can be filed any time and heard quickly.</li>
-                    <li><strong>Relocation triggers</strong> — exempt from waiting periods because they're statutorily defined events</li>
+                    <li><strong>2 years from the last order</strong> in many states &mdash; you can file before 2 years only if you can show emergency or immediate threat</li>
+                    <li><strong>No waiting period for emergency modifications</strong> &mdash; abuse, abduction risk, immediate health threat. These can be filed any time and heard quickly.</li>
+                    <li><strong>Relocation triggers</strong> &mdash; exempt from waiting periods because they're statutorily defined events</li>
                 </ul>
 
                 <p>Even outside the waiting period, the threshold is the same: material change in circumstances + best interest. The 2-year rule mostly affects whether the court hears the motion at all.</p>
@@ -216,7 +221,7 @@
                     <li>Service certification (proof the other parent was served with the motion)</li>
                 </ol>
 
-                <p>File in the same court that entered the original order (continuing jurisdiction). Pay the filing fee or apply for a fee waiver if eligible. Serve the other parent per state rules — usually personal service for initial filings.</p>
+                <p>File in the same court that entered the original order (continuing jurisdiction). Pay the filing fee or apply for a fee waiver if eligible. Serve the other parent per state rules &mdash; usually personal service for initial filings.</p>
 
                 <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -228,12 +233,12 @@
                 <p>Don't argue in legal jargon. Tell the story chronologically with documented facts:</p>
 
                 <ol>
-                    <li><strong>What the original order said</strong> — schedule, decision-making, key terms</li>
-                    <li><strong>What worked initially</strong> — set the baseline</li>
-                    <li><strong>What changed and when</strong> — specific dates, specific events</li>
-                    <li><strong>How the change affects the child</strong> — with evidence (school records, medical records, child's own statements documented at the time)</li>
-                    <li><strong>What you propose</strong> — specific new schedule or terms attached as an exhibit</li>
-                    <li><strong>Why your proposal addresses the change</strong> — direct, point-by-point</li>
+                    <li><strong>What the original order said</strong> &mdash; schedule, decision-making, key terms</li>
+                    <li><strong>What worked initially</strong> &mdash; set the baseline</li>
+                    <li><strong>What changed and when</strong> &mdash; specific dates, specific events</li>
+                    <li><strong>How the change affects the child</strong> &mdash; with evidence (school records, medical records, child's own statements documented at the time)</li>
+                    <li><strong>What you propose</strong> &mdash; specific new schedule or terms attached as an exhibit</li>
+                    <li><strong>Why your proposal addresses the change</strong> &mdash; direct, point-by-point</li>
                 </ol>
 
                 <p>Evidence types judges respect:</p>
@@ -257,7 +262,7 @@
                     <li>"I just feel like..."</li>
                 </ul>
 
-                <h2>The relocation case — its own thing</h2>
+                <h2>The relocation case &mdash; its own thing</h2>
 
                 <p>Relocation has its own statutory treatment in most states. The parent who wants to move usually must:</p>
                 <ol>
@@ -269,7 +274,7 @@
 
                 <p>Courts consider:</p>
                 <ul>
-                    <li>The reason for the move (job, family, education, safety) — bona fide reasons help</li>
+                    <li>The reason for the move (job, family, education, safety) &mdash; bona fide reasons help</li>
                     <li>Whether the move is to be closer to a support network or away from the other parent specifically</li>
                     <li>The child's ties to the current community (school, extracurricular, friends)</li>
                     <li>Whether a workable long-distance schedule can preserve the relationship with the non-moving parent</li>
@@ -281,7 +286,7 @@
 
                 <h2>Emergency motions</h2>
 
-                <p>For immediate threats — abduction risk, abuse, severe substance use, suicide attempts in the home — file an Emergency Motion for Temporary Custody. Most states will:</p>
+                <p>For immediate threats &mdash; abduction risk, abuse, severe substance use, suicide attempts in the home &mdash; file an Emergency Motion for Temporary Custody. Most states will:</p>
                 <ul>
                     <li>Hear it on shortened notice (sometimes ex parte for very short orders)</li>
                     <li>Issue temporary orders pending a full hearing</li>
@@ -316,9 +321,9 @@
                 <div class="cta-box bottom">
                     <div class="cta-text">
                         <strong>Don't stare at the blank page</strong>
-                        <span>The CyberScryb Custody Document Tool drafts a modification petition in 60 seconds — relocation, schedule, decision-making, or emergency. Free to start.</span>
+                        <span>The CyberScryb Custody Document Tool drafts a modification petition in 60 seconds &mdash; relocation, schedule, decision-making, or emergency. Free to start.</span>
                     </div>
-                    <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool →</a>
+                    <a href="/tools/custody-document/" class="cta-btn">Open Custody Document Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
@@ -328,7 +333,7 @@
                 </details>
                 <details>
                     <summary>How soon after an order can I request modification?</summary>
-                    <p>Most states impose a waiting period — commonly 2 years — before re-litigating custody, unless the child is in immediate danger.</p>
+                    <p>Most states impose a waiting period &mdash; commonly 2 years &mdash; before re-litigating custody, unless the child is in immediate danger.</p>
                 </details>
                 <details>
                     <summary>Does relocation count as a substantial change?</summary>
@@ -386,7 +391,7 @@
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

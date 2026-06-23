@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Page Not Found | CyberScryb</title>
-    <meta name="description" content="Lost? This page doesn't exist — but our free developer tools do. Jump to the homepage or pick a popular tool: Humanizer, JSON/CSV, SEO tags, and more.">
+    <title>404 &mdash; Page Not Found | CyberScryb</title>
+    <meta name="description" content="Lost? This page doesn't exist &mdash; but our free developer tools do. Jump to the homepage or pick a popular tool: Humanizer, JSON/CSV, SEO tags, and more.">
     <meta name="robots" content="noindex, follow">
     <!-- Open Graph -->
-    <meta property="og:title" content="404 — Page Not Found | CyberScryb">
+    <meta property="og:title" content="404 &mdash; Page Not Found | CyberScryb">
     <meta property="og:description" content="Lost? Browse our free, privacy-first developer tools or head back to the homepage.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/404/">
@@ -19,7 +19,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="404 — Page Not Found | CyberScryb">
+    <meta name="twitter:title" content="404 &mdash; Page Not Found | CyberScryb">
     <meta name="twitter:description" content="Lost? Browse our free, privacy-first developer tools or head back to the homepage.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
 
@@ -30,20 +30,25 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="/css/style.css?v=20260604" as="style">
+    <link rel="preload" href="/css/style.css?v=20260623" as="style">
 
     <!-- Async font load to avoid render blocking -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap"></noscript>
 
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -265,7 +270,7 @@
                 <div class="error-code">404</div>
                 <h1 class="error-title">Lost?</h1>
                 <p class="error-message">
-                    This page drifted off the grid — but you're one click away from every free tool on CyberScryb. Pick a popular one below, or head home.
+                    This page drifted off the grid &mdash; but you're one click away from every free tool on CyberScryb. Pick a popular one below, or head home.
                 </p>
                 <div class="error-buttons">
                     <a href="/" class="error-btn error-btn-primary">Go Home</a>

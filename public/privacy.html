@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | CyberScryb</title>
-    <meta name="description" content="CyberScryb privacy policy. All tools run client-side — your inputs never leave your browser. We use Google Analytics and Google AdSense. See full details here.">
+    <meta name="description" content="CyberScryb privacy policy. All tools run client-side &mdash; your inputs never leave your browser. We use Google Analytics and Google AdSense. See full details here.">
     <link rel="canonical" href="https://cyberscryb.com/privacy/">
 
     <!-- Open Graph -->
@@ -32,11 +32,16 @@
         gtag('config', 'G-LS46B9J1XK');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -98,10 +103,10 @@
                     <p><strong>Last updated:</strong> June 5, 2026</p>
 
                     <h2>The Short Version</h2>
-                    <p>Your tool inputs stay on your machine — every CyberScryb tool runs <strong>100% client-side</strong> in your browser. Nothing you type is uploaded or stored. However, like most websites, we use third-party services (Google Analytics, Google AdSense) that may place cookies on your device. Details below.</p>
+                    <p>Your tool inputs stay on your machine &mdash; every CyberScryb tool runs <strong>100% client-side</strong> in your browser. Nothing you type is uploaded or stored. However, like most websites, we use third-party services (Google Analytics, Google AdSense) that may place cookies on your device. Details below.</p>
 
                     <h2>What Your Tool Inputs Are Never Used For</h2>
-                    <p>When you use any CyberScryb tool — the AI Humanizer, JSON Converter, Password Checker, or any other tool — all processing happens entirely in your browser using client-side JavaScript. This means:</p>
+                    <p>When you use any CyberScryb tool &mdash; the AI Humanizer, JSON Converter, Password Checker, or any other tool &mdash; all processing happens entirely in your browser using client-side JavaScript. This means:</p>
                     <ul>
                         <li>Your text, passwords, JSON data, and all other inputs are <strong>never transmitted</strong> to our servers</li>
                         <li>We have <strong>no server-side processing</strong> of your tool inputs</li>
@@ -109,7 +114,7 @@
                     </ul>
 
                     <h2>Analytics</h2>
-                    <p>We use <strong>Google Analytics 4 (GA4)</strong> to understand aggregate traffic patterns — which pages are visited, general geographic regions, and device types. GA4 may use cookies to distinguish unique visitors. You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+                    <p>We use <strong>Google Analytics 4 (GA4)</strong> to understand aggregate traffic patterns &mdash; which pages are visited, general geographic regions, and device types. GA4 may use cookies to distinguish unique visitors. You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
 
                     <h2>Advertising</h2>
                     <p>We use <strong>Google AdSense</strong> to display advertisements on this site. Google AdSense uses cookies, including the DoubleClick cookie, to serve ads based on your prior visits to this and other websites. These cookies enable Google and its partners to serve ads based on your visit to our site and/or other sites on the Internet.</p>
@@ -121,10 +126,10 @@
 
                     <h2>Third-Party Services</h2>
                     <ul>
-                        <li><strong>Google AdSense</strong> — Displays ads on our pages. Uses cookies for ad personalization. <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</li>
-                        <li><strong>Google Analytics 4</strong> — Aggregate traffic analysis. <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</li>
-                        <li><strong>Google Fonts</strong> — We load fonts (Inter, Orbitron) from Google Fonts. <a href="https://developers.google.com/fonts/faq/privacy" rel="noopener">Font privacy policy</a>.</li>
-                        <li><strong>Firebase Hosting</strong> — Our site is hosted on Google Firebase. Firebase may log standard server access logs (IP address, timestamp, URL requested).</li>
+                        <li><strong>Google AdSense</strong> &mdash; Displays ads on our pages. Uses cookies for ad personalization. <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</li>
+                        <li><strong>Google Analytics 4</strong> &mdash; Aggregate traffic analysis. <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</li>
+                        <li><strong>Google Fonts</strong> &mdash; We load fonts (Inter, Orbitron) from Google Fonts. <a href="https://developers.google.com/fonts/faq/privacy" rel="noopener">Font privacy policy</a>.</li>
+                        <li><strong>Firebase Hosting</strong> &mdash; Our site is hosted on Google Firebase. Firebase may log standard server access logs (IP address, timestamp, URL requested).</li>
                     </ul>
 
                     <h2>External Links</h2>

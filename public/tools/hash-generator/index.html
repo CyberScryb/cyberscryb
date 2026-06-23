@@ -2,28 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHA256 Hash Generator — Free Online Tool | CyberScryb</title>
+    <title>SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb</title>
     <meta name="description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/hash-generator/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="SHA256 Hash Generator — Free Online Tool | CyberScryb">
+    <meta property="og:title" content="SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb">
     <meta property="og:description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/hash-generator/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SHA256 Hash Generator — Free Online Tool | CyberScryb">
+    <meta name="twitter:title" content="SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb">
     <meta name="twitter:description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -88,7 +93,7 @@
             { "@type": "Question", "name": "What is a cryptographic hash?", "acceptedAnswer": { "@type": "Answer", "text": "A cryptographic hash is a fixed-length fingerprint of some input data. The same input always produces the same hash, but even a tiny change in the input produces a completely different hash." }},
             { "@type": "Question", "name": "Which hash algorithm should I use?", "acceptedAnswer": { "@type": "Answer", "text": "Use SHA-256 or SHA-512 for anything security-related. MD5 and SHA-1 are cryptographically broken and should only be used for simple data integrity checks, never for passwords or signatures." }},
             { "@type": "Question", "name": "Is this hash generator private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. SHA-1, SHA-256, and SHA-512 use the browser's built-in Web Crypto API, and MD5 is computed in JavaScript. Your input never leaves your browser." }},
-            { "@type": "Question", "name": "Why is MD5 considered broken?", "acceptedAnswer": { "@type": "Answer", "text": "MD5 is vulnerable to practical collision attacks — attackers can produce two different inputs that hash to the same value. It should not be used for signatures, password storage, or integrity checks against an adversary." }},
+            { "@type": "Question", "name": "Why is MD5 considered broken?", "acceptedAnswer": { "@type": "Answer", "text": "MD5 is vulnerable to practical collision attacks &mdash; attackers can produce two different inputs that hash to the same value. It should not be used for signatures, password storage, or integrity checks against an adversary." }},
             { "@type": "Question", "name": "Can I hash a file?", "acceptedAnswer": { "@type": "Answer", "text": "This tool hashes text input. Paste any string and all four hashes are computed instantly. For file hashing use a dedicated tool or command-line utility." }}
         ]
     }
@@ -211,7 +216,7 @@
             </div>
 
             <div class="warning-banner">
-                <strong>⚠ Security notice:</strong> MD5 and SHA-1 are cryptographically broken — use <strong>SHA-256</strong> or <strong>SHA-512</strong> for any security-sensitive purpose (password storage, signatures, integrity against an adversary).
+                <strong>⚠ Security notice:</strong> MD5 and SHA-1 are cryptographically broken &mdash; use <strong>SHA-256</strong> or <strong>SHA-512</strong> for any security-sensitive purpose (password storage, signatures, integrity against an adversary).
             </div>
 
             <textarea id="hg-input" placeholder="Type or paste any text to hash..."></textarea>
@@ -223,22 +228,22 @@
 
             <div class="hash-row weak">
                 <div class="hash-label">MD5</div>
-                <div class="hash-value empty" id="hash-md5">—</div>
+                <div class="hash-value empty" id="hash-md5">&mdash;</div>
                 <button class="copy-btn" data-copy="hash-md5">📋 Copy</button>
             </div>
             <div class="hash-row weak">
                 <div class="hash-label">SHA-1</div>
-                <div class="hash-value empty" id="hash-sha1">—</div>
+                <div class="hash-value empty" id="hash-sha1">&mdash;</div>
                 <button class="copy-btn" data-copy="hash-sha1">📋 Copy</button>
             </div>
             <div class="hash-row strong">
                 <div class="hash-label">SHA-256</div>
-                <div class="hash-value empty" id="hash-sha256">—</div>
+                <div class="hash-value empty" id="hash-sha256">&mdash;</div>
                 <button class="copy-btn" data-copy="hash-sha256">📋 Copy</button>
             </div>
             <div class="hash-row strong">
                 <div class="hash-label">SHA-512</div>
-                <div class="hash-value empty" id="hash-sha512">—</div>
+                <div class="hash-value empty" id="hash-sha512">&mdash;</div>
                 <button class="copy-btn" data-copy="hash-sha512">📋 Copy</button>
             </div>
 
@@ -247,7 +252,7 @@
                 <details><summary>What is a cryptographic hash?</summary><p>A cryptographic hash is a fixed-length fingerprint of some input. The same input always produces the same hash, but even a one-character change produces a completely different hash.</p></details>
                 <details><summary>Which hash algorithm should I use?</summary><p>Use <strong>SHA-256</strong> or <strong>SHA-512</strong> for anything security-related. MD5 and SHA-1 are broken and should only be used for non-adversarial checksums.</p></details>
                 <details><summary>Is this hash generator private?</summary><p>Yes. SHA variants use the browser's built-in Web Crypto API, and MD5 is computed in JavaScript locally. Nothing is uploaded.</p></details>
-                <details><summary>Why is MD5 considered broken?</summary><p>MD5 is vulnerable to practical collision attacks — two different inputs can produce the same hash. Never use it for signatures, password hashing, or integrity against an attacker.</p></details>
+                <details><summary>Why is MD5 considered broken?</summary><p>MD5 is vulnerable to practical collision attacks &mdash; two different inputs can produce the same hash. Never use it for signatures, password hashing, or integrity against an attacker.</p></details>
                 <details><summary>Can I hash a file?</summary><p>This tool hashes text. For files, use a dedicated tool or a command like <code>sha256sum file.bin</code> on your terminal.</p></details>
             </div>
         </div>
@@ -302,10 +307,10 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
-    /* MD5 — based on the public-domain blueimp-md5 (Sebastian Tschan) implementation.
-       https://github.com/blueimp/JavaScript-MD5 — MIT license. Handles UTF-8 correctly. */
+    /* MD5 &mdash; based on the public-domain blueimp-md5 (Sebastian Tschan) implementation.
+       https://github.com/blueimp/JavaScript-MD5 &mdash; MIT license. Handles UTF-8 correctly. */
     function md5(str) {
         function safeAdd(x, y) { var lsw = (x & 0xffff) + (y & 0xffff); var msw = (x >> 16) + (y >> 16) + (lsw >> 16); return (msw << 16) | (lsw & 0xffff); }
         function rol(n, c) { return (n << c) | (n >>> (32 - c)); }
@@ -396,14 +401,14 @@
             const text = input.value;
             const runId = ++currentRun;
             if (!text) {
-                md5El.textContent = '—'; md5El.classList.add('empty');
-                sha1El.textContent = '—'; sha1El.classList.add('empty');
-                sha256El.textContent = '—'; sha256El.classList.add('empty');
-                sha512El.textContent = '—'; sha512El.classList.add('empty');
+                md5El.textContent = '&mdash;'; md5El.classList.add('empty');
+                sha1El.textContent = '&mdash;'; sha1El.classList.add('empty');
+                sha256El.textContent = '&mdash;'; sha256El.classList.add('empty');
+                sha512El.textContent = '&mdash;'; sha512El.classList.add('empty');
                 return;
             }
 
-            // MD5 — sync
+            // MD5 &mdash; sync
             md5El.textContent = md5(text); md5El.classList.remove('empty');
 
             const bytes = encoder.encode(text);

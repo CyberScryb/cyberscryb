@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | CyberScryb</title>
-    <meta name="description" content="Get in touch with CyberScryb. Questions, feedback, or partnership inquiries — reach us at support@cyberscryb.com.">
+    <meta name="description" content="Get in touch with CyberScryb. Questions, feedback, or partnership inquiries &mdash; reach us at support@cyberscryb.com.">
     <link rel="canonical" href="https://cyberscryb.com/contact/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Contact Us | CyberScryb">
-    <meta property="og:description" content="Questions, feedback, or partnership inquiries — reach us at support@cyberscryb.com.">
+    <meta property="og:description" content="Questions, feedback, or partnership inquiries &mdash; reach us at support@cyberscryb.com.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/contact/">
     <meta property="og:site_name" content="CyberScryb">
@@ -32,11 +32,16 @@
         gtag('config', 'G-73LQZEDNR6');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -110,7 +115,7 @@
                     </div>
 
                     <div style="margin-top: 2rem; padding: 1.5rem; border-left: 3px solid #00d4ff; background: rgba(0, 212, 255, 0.05); border-radius: 0 8px 8px 0;">
-                        <p style="margin: 0; color: #b0b0b0;"><strong style="color: #fff;">Response time:</strong> We typically respond within 24–48 hours on business days.</p>
+                        <p style="margin: 0; color: #b0b0b0;"><strong style="color: #fff;">Response time:</strong> We typically respond within 24&ndash;48 hours on business days.</p>
                     </div>
                 </div>
             </div>

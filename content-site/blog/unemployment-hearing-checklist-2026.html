@@ -16,20 +16,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260604">
+<link rel="stylesheet" href="/css/style.css?v=20260623">
 
-<!-- Google AdSense — delayed load to protect LCP -->
+<!-- Google AdSense &mdash; delayed load to protect LCP -->
 <script>
 (function() {
     function loadAdsense() {
-        if (window._adsenseLoaded) return;
-        window._adsenseLoaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-        s.crossOrigin = 'anonymous';
-        document.head.appendChild(s);
-    }
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
     if (document.readyState === 'complete') {
         setTimeout(loadAdsense, 2500);
     } else {
@@ -133,16 +138,16 @@ gtag('config', 'G-LS46B9J1XK');
 <article class="article-wrap">
 <p><a href="/blog/">← Back to blog</a></p>
 <h1>Unemployment Board of Review Hearing Checklist</h1>
-<p class="meta">Published June 2, 2026 · 8 min read</p>
+<p class="meta">Published June 2, 2026 &middot; 8 min read</p>
 
-<p>When you appeal a denial of unemployment benefits, your case eventually moves to a formal administrative hearing. This hearing is often called the "Board of Review" or "Appeals Tribunal" hearing. It is run by an Administrative Law Judge (ALJ) or hearing officer, and it is a de novo hearing—meaning the judge starts from scratch, under oath, to review all facts.</p>
+<p>When you appeal a denial of unemployment benefits, your case eventually moves to a formal administrative hearing. This hearing is often called the "Board of Review" or "Appeals Tribunal" hearing. It is run by an Administrative Law Judge (ALJ) or hearing officer, and it is a de novo hearing&mdash;meaning the judge starts from scratch, under oath, to review all facts.</p>
 
 <p>Since you are representing yourself, you need to prepare like a trial attorney. Here is the exact checklist to ensure you do not miss a single critical step.</p>
 
 <div class="cta-box">
   <strong style="color:#0066ff;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-size:0.85rem;">DRAFT YOUR APPEAL BRIEF</strong>
   <p style="margin:8px 0 0;">Need to write a formal appeal letter or hardship statement for the Board of Review? Use CyberScryb's <a href="/tools/appeal-letter/">AI Appeal Letter Writer</a> to build a structured, professional statement that clearly lays out your case factors.</p>
-  <a class="cta-btn" href="/tools/appeal-letter/">Draft Appeal Letter Free →</a>
+  <a class="cta-btn" href="/tools/appeal-letter/">Draft Appeal Letter Free &rarr;</a>
 </div>
 
 <h2>Phase 1: Pre-Hearing Evidence Gathering</h2>
@@ -159,7 +164,7 @@ gtag('config', 'G-LS46B9J1XK');
 <p>In unemployment law, the side that has the "burden of proof" depends on how you separated from the company:</p>
 
 <blockquote>
-  <strong>If you were fired:</strong> The employer has the burden of proof. They must prove you committed "wilful misconduct"—intentional disregard of the employer's interests. Minor mistakes or simple inability to perform the job do not qualify as misconduct.<br><br>
+  <strong>If you were fired:</strong> The employer has the burden of proof. They must prove you committed "wilful misconduct"&mdash;intentional disregard of the employer's interests. Minor mistakes or simple inability to perform the job do not qualify as misconduct.<br><br>
   <strong>If you quit:</strong> You have the burden of proof. You must prove you had "good cause attributable to the work" (e.g., unpaid wages, unsafe working conditions, or a substantial, unilateral change in your job duties). You must also prove you gave the employer a chance to fix the issue before walking out.
 </blockquote>
 
@@ -181,7 +186,7 @@ gtag('config', 'G-LS46B9J1XK');
 <h3>Can I submit new evidence during the phone call?</h3>
 <p>No. You must submit all evidence to both the judge and the employer **prior to the hearing**. If you try to read a document or refer to an email during the call that was not sent in advance, the judge will exclude it from the record.</p>
 
-<p style="text-align:center;margin-top:48px;"><a href="/tools/appeal-letter/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Draft Appeal Letter (Free) →</a></p>
+<p style="text-align:center;margin-top:48px;"><a href="/tools/appeal-letter/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Draft Appeal Letter (Free) &rarr;</a></p>
 </article>
 
 <!-- AdSense Multiplex -->
@@ -197,7 +202,7 @@ gtag('config', 'G-LS46B9J1XK');
 </div>
 </main>
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;text-align:center;color:#878787;font-size:0.9rem;margin-top:60px;">
-  <p>© 2026 CyberScryb LLC · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a> · <a href="/pro/" style="color:#0066ff;">Pro</a></p>
+  <p>© 2026 CyberScryb LLC &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a> &middot; <a href="/pro/" style="color:#0066ff;">Pro</a></p>
 </footer>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>

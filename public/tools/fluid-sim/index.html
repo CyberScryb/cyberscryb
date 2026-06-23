@@ -4,11 +4,11 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluid Dynamics Simulator — Free in Browser | CyberScryb</title>
+    <title>Fluid Dynamics Simulator &mdash; Free in Browser | CyberScryb</title>
     <meta name="description" content="Run real-time interactive physics simulations in this fluid dynamics simulator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/fluid-sim/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Fluid Dynamics Simulator — Free in Browser | CyberScryb">
+    <meta property="og:title" content="Fluid Dynamics Simulator &mdash; Free in Browser | CyberScryb">
     <meta property="og:description" content="Run real-time interactive physics simulations in this fluid dynamics simulator. Free, instant, runs in your browser. No signup.">
     <meta property="og:url" content="https://cyberscryb.com/tools/fluid-sim/">
     <meta property="og:site_name" content="CyberScryb">
@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LS46B9J1XK');</script>
     <script type="application/ld+json">
@@ -50,11 +50,16 @@
     </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -97,7 +102,7 @@
     <main class="fluid-app">
         <div style="max-width:1200px;margin:0 auto;padding:0 2rem 1rem;">
             <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color:#c41e1e;">Simulator</span></h1>
-            <p style="color:#b0b0b0;max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side — no data leaves your browser.</p>
+            <p style="color:#b0b0b0;max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side &mdash; no data leaves your browser.</p>
         </div>
         <div class="fluid-layout">
             <div class="fluid-canvas-wrap">
@@ -142,32 +147,32 @@
         <!-- SEO Content -->
         <section style="max-width:900px;margin:3rem auto 0;padding:0 2rem;">
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">What Are the Navier-Stokes Equations?</h2>
-            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color:#fff;">computational fluid dynamics (CFD)</strong> — one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color:#c41e1e;">seven Millennium Prize Problems</a> in mathematics.</p>
+            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color:#fff;">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color:#c41e1e;">seven Millennium Prize Problems</a> in mathematics.</p>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">How This Simulator Works</h2>
             <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color:#fff;">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
             <ol style="color:#b0b0b0;line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color:#c41e1e;">Add Forces</strong> — Your mouse input is added to the velocity field</li>
-                <li><strong style="color:#c41e1e;">Diffuse</strong> — Viscosity equalizes neighboring velocities</li>
-                <li><strong style="color:#c41e1e;">Advect</strong> — The velocity field moves itself and dye through back-tracing</li>
-                <li><strong style="color:#c41e1e;">Project</strong> — Pressure solve ensures divergence-free (mass-conserving) flow</li>
+                <li><strong style="color:#c41e1e;">Add Forces</strong> &mdash; Your mouse input is added to the velocity field</li>
+                <li><strong style="color:#c41e1e;">Diffuse</strong> &mdash; Viscosity equalizes neighboring velocities</li>
+                <li><strong style="color:#c41e1e;">Advect</strong> &mdash; The velocity field moves itself and dye through back-tracing</li>
+                <li><strong style="color:#c41e1e;">Project</strong> &mdash; Pressure solve ensures divergence-free (mass-conserving) flow</li>
             </ol>
             <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color:#fff;">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">Real-World Applications</h2>
             <ul style="color:#b0b0b0;line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color:#fff;">Aerospace</strong> — Airflow optimization reducing fuel consumption by up to 15%</li>
-                <li><strong style="color:#fff;">Weather</strong> — Atmospheric fluid models predict storms days in advance</li>
-                <li><strong style="color:#fff;">Medical</strong> — Blood flow simulation for heart valve design</li>
-                <li><strong style="color:#fff;">Film & VFX</strong> — Realistic water, fire, and smoke effects</li>
-                <li><strong style="color:#fff;">Games</strong> — Real-time fluid effects in modern titles</li>
+                <li><strong style="color:#fff;">Aerospace</strong> &mdash; Airflow optimization reducing fuel consumption by up to 15%</li>
+                <li><strong style="color:#fff;">Weather</strong> &mdash; Atmospheric fluid models predict storms days in advance</li>
+                <li><strong style="color:#fff;">Medical</strong> &mdash; Blood flow simulation for heart valve design</li>
+                <li><strong style="color:#fff;">Film & VFX</strong> &mdash; Realistic water, fire, and smoke effects</li>
+                <li><strong style="color:#fff;">Games</strong> &mdash; Real-time fluid effects in modern titles</li>
             </ul>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">Frequently Asked Questions</h2>
             <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
                 <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color:#fff;font-weight:600;font-size:0.95rem;">Is this a real physics simulation?</summary>
-                    <p style="color:#b0b0b0;line-height:1.7;margin:0.75rem 0 0;">Yes — it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
+                    <p style="color:#b0b0b0;line-height:1.7;margin:0.75rem 0 0;">Yes &mdash; it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
                 </details>
                 <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color:#fff;font-weight:600;font-size:0.95rem;">Is my data sent anywhere?</summary>
@@ -201,7 +206,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="fluid.js"></script>
     <script>
     (function(){

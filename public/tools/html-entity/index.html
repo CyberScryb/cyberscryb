@@ -5,25 +5,25 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Entity Encoder Decoder — Free Online | CyberScryb</title>
+    <title>HTML Entity Encoder Decoder &mdash; Free Online | CyberScryb</title>
     <meta name="description" content="Convert special characters for clean code using this HTML entity encoder decoder. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/html-entity/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="HTML Entity Encoder Decoder — Free Online | CyberScryb">
+    <meta property="og:title" content="HTML Entity Encoder Decoder &mdash; Free Online | CyberScryb">
     <meta property="og:description" content="Convert special characters for clean code using this HTML entity encoder decoder. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/html-entity/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HTML Entity Encoder Decoder — Free Online | CyberScryb">
+    <meta name="twitter:title" content="HTML Entity Encoder Decoder &mdash; Free Online | CyberScryb">
     <meta name="twitter:description" content="Convert special characters for clean code using this HTML entity encoder decoder. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -237,7 +242,7 @@
                 <span style="font-size:0.85rem; color:#878787;">Encode or decode strings and files to Base64 offline.</span>
             </a>
             <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown ↔ HTML</strong>
+                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML and back, with GFM support.</span>
             </a>
             <a href="../json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
@@ -272,7 +277,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function() {
         const input = document.getElementById('he-input');
@@ -287,7 +292,7 @@
         // Named entity map for common reserved chars (both ways)
         const RESERVED_ENC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
-        // For decode — a broader named-entity map
+        // For decode &mdash; a broader named-entity map
         const NAMED_DECODE = {
             amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00A0', copy: '\u00A9',
             reg: '\u00AE', trade: '\u2122', hellip: '\u2026', mdash: '\u2014', ndash: '\u2013',
@@ -331,7 +336,7 @@
                     try { return String.fromCodePoint(cp); } catch (e) { return match; }
                 }
                 if (NAMED_DECODE.hasOwnProperty(body)) return NAMED_DECODE[body];
-                // Unknown named entity — leave untouched
+                // Unknown named entity &mdash; leave untouched
                 return match;
             });
         }
@@ -378,7 +383,7 @@
         });
         document.getElementById('he-sample').addEventListener('click', () => {
             if (mode === 'encode') {
-                input.value = '<script>alert("Hello & welcome to CyberScryb!");<\/script> — café résumé 🚀';
+                input.value = '<script>alert("Hello & welcome to CyberScryb!");<\/script> &mdash; café résumé 🚀';
             } else {
                 input.value = '&lt;script&gt;alert(&quot;Hello &amp; welcome!&quot;);&lt;/script&gt; &mdash; caf&#233; r&eacute;sum&eacute; &#128640;';
             }

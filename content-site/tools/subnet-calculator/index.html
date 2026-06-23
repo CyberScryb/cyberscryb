@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subnet Calculator — Free CIDR Analyzer | CyberScryb</title>
+    <title>Subnet Calculator &mdash; Free CIDR Analyzer | CyberScryb</title>
     <meta name="description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="subnet calculator, cidr calculator, ip subnet calculator, network calculator, ip address range, cidr notation">
     
-    <meta property="og:title" content="Subnet Calculator — Free CIDR Analyzer | CyberScryb">
+    <meta property="og:title" content="Subnet Calculator &mdash; Free CIDR Analyzer | CyberScryb">
     <meta property="og:description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/subnet-calculator/">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Subnet Calculator — Free CIDR Analyzer | CyberScryb">
+    <meta name="twitter:title" content="Subnet Calculator &mdash; Free CIDR Analyzer | CyberScryb">
     <meta name="twitter:description" content="Analyze CIDR blocks and find network IP ranges using this interactive subnet calculator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     
@@ -28,7 +28,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -65,6 +65,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -122,7 +127,7 @@
 
     <main>
         <section class="hero">
-            <div class="badge">🌐 100% Client-Side — Instant Subnet Parsing</div>
+            <div class="badge">🌐 100% Client-Side &mdash; Instant Subnet Parsing</div>
             <h1>Subnet <span class="accent">Calculator</span> &amp; CIDR Analyzer</h1>
             <p class="subtitle">Quickly partition IPv4 networks, calculate ranges, total hosts, wildcard masks, and binary layouts.</p>
         </section>
@@ -147,27 +152,27 @@
             <div class="results-grid" id="calcResults">
                 <div class="result-tile">
                     <div class="tile-label">Subnet Mask</div>
-                    <div class="tile-value" id="resSubnet">—</div>
+                    <div class="tile-value" id="resSubnet">&mdash;</div>
                 </div>
                 <div class="result-tile">
                     <div class="tile-label">Network Address</div>
-                    <div class="tile-value" id="resNetwork">—</div>
+                    <div class="tile-value" id="resNetwork">&mdash;</div>
                 </div>
                 <div class="result-tile">
                     <div class="tile-label">Usable Host Range</div>
-                    <div class="tile-value" id="resRange">—</div>
+                    <div class="tile-value" id="resRange">&mdash;</div>
                 </div>
                 <div class="result-tile">
                     <div class="tile-label">Broadcast Address</div>
-                    <div class="tile-value" id="resBroadcast">—</div>
+                    <div class="tile-value" id="resBroadcast">&mdash;</div>
                 </div>
                 <div class="result-tile">
                     <div class="tile-label">Usable Hosts</div>
-                    <div class="tile-value text-cyan" id="resHosts">—</div>
+                    <div class="tile-value text-cyan" id="resHosts">&mdash;</div>
                 </div>
                 <div class="result-tile">
                     <div class="tile-label">Wildcard Mask</div>
-                    <div class="tile-value" id="resWildcard">—</div>
+                    <div class="tile-value" id="resWildcard">&mdash;</div>
                 </div>
             </div>
 
@@ -176,19 +181,19 @@
                 <h3>Binary Visualization</h3>
                 <div class="binary-row">
                     <span class="bin-label">IP Address:</span>
-                    <span class="bin-value" id="binIp">—</span>
+                    <span class="bin-value" id="binIp">&mdash;</span>
                 </div>
                 <div class="binary-row">
                     <span class="bin-label">Subnet Mask:</span>
-                    <span class="bin-value" id="binMask">—</span>
+                    <span class="bin-value" id="binMask">&mdash;</span>
                 </div>
                 <div class="binary-row">
                     <span class="bin-label">Network Addr:</span>
-                    <span class="bin-value text-purple" id="binNet">—</span>
+                    <span class="bin-value text-purple" id="binNet">&mdash;</span>
                 </div>
                 <div class="binary-row">
                     <span class="bin-label">Broadcast Addr:</span>
-                    <span class="bin-value text-cyan" id="binBroad">—</span>
+                    <span class="bin-value text-cyan" id="binBroad">&mdash;</span>
                 </div>
             </div>
         </section>
@@ -215,8 +220,8 @@
             
             <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
-                <li><a href="/tools/regex-tester/" style="color:#06b6d4;">Regex Tester</a> — Test network validation filters.</li>
-                <li><a href="/tools/password-checker/" style="color:#06b6d4;">Password Strength Checker</a> — Evaluate system credentials securely.</li>
+                <li><a href="/tools/regex-tester/" style="color:#06b6d4;">Regex Tester</a> &mdash; Test network validation filters.</li>
+                <li><a href="/tools/password-checker/" style="color:#06b6d4;">Password Strength Checker</a> &mdash; Evaluate system credentials securely.</li>
                 <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb Network Architecture Guides</a></li>
             </ul>
         </section>
@@ -248,7 +253,7 @@
     </section>
 
     <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 — All network calculations run locally in your browser.</p>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All network calculations run locally in your browser.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
 

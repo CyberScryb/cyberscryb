@@ -2,28 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Diff Checker — Free Online Comparison | CyberScryb</title>
+    <title>Text Diff Checker &mdash; Free Online Comparison | CyberScryb</title>
     <meta name="description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/text-diff/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="Text Diff Checker — Free Online Comparison | CyberScryb">
+    <meta property="og:title" content="Text Diff Checker &mdash; Free Online Comparison | CyberScryb">
     <meta property="og:description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/text-diff/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Text Diff Checker — Free Online Comparison | CyberScryb">
+    <meta name="twitter:title" content="Text Diff Checker &mdash; Free Online Comparison | CyberScryb">
     <meta name="twitter:description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -88,7 +93,7 @@
             { "@type": "Question", "name": "How does the text diff checker work?", "acceptedAnswer": { "@type": "Answer", "text": "Paste your original text on the left and the modified text on the right, then click Compare. The tool runs a line-based LCS (longest common subsequence) diff in your browser and highlights added lines in green, removed lines in red, and unchanged lines in gray." }},
             { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. All comparison runs 100% client-side in vanilla JavaScript. Your text never leaves your browser." }},
             { "@type": "Question", "name": "What's the difference between line-level and character-level diffs?", "acceptedAnswer": { "@type": "Answer", "text": "Line-level diff treats each line as a unit: if a single character in a line changes, the whole line is marked as removed and the new version as added. Character-level diff highlights individual characters. This tool uses line-level comparison, which is the format Git and most code review tools use." }},
-            { "@type": "Question", "name": "Can I diff code files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the old version and new version of your source code. The tool handles any plain text input — code, markdown, config files, prose, logs." }},
+            { "@type": "Question", "name": "Can I diff code files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the old version and new version of your source code. The tool handles any plain text input &mdash; code, markdown, config files, prose, logs." }},
             { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but the LCS algorithm is O(n*m). For best performance keep each side under a few thousand lines." }}
         ]
     }
@@ -210,7 +215,7 @@
         <div class="td-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Text Diff Checker</h1>
-                <p style="color: #555555; margin-bottom: 0;">Compare two blocks of text and see added, removed, and unchanged lines — line-level LCS diff, 100% client-side.</p>
+                <p style="color: #555555; margin-bottom: 0;">Compare two blocks of text and see added, removed, and unchanged lines &mdash; line-level LCS diff, 100% client-side.</p>
             </div>
 
             <div class="td-grid">
@@ -247,7 +252,7 @@
                 <details><summary>How does the text diff checker work?</summary><p>It runs a line-based LCS (longest common subsequence) algorithm in your browser to find the longest matching sequence of lines. Anything not in that sequence is marked as added or removed.</p></details>
                 <details><summary>Is my text uploaded anywhere?</summary><p>No. All processing is 100% client-side in vanilla JavaScript. Your text never leaves your device.</p></details>
                 <details><summary>What's the difference between line-level and character-level diffs?</summary><p>Line-level compares whole lines as units, which is faster and matches how Git and most code review tools display diffs. Character-level highlights individual characters.</p></details>
-                <details><summary>Can I diff code files?</summary><p>Yes. Paste the old and new versions of any plain text — source code, config, markdown, or logs.</p></details>
+                <details><summary>Can I diff code files?</summary><p>Yes. Paste the old and new versions of any plain text &mdash; source code, config, markdown, or logs.</p></details>
                 <details><summary>Is there a size limit?</summary><p>No hard limit, but LCS is O(n*m). Keep each side under a few thousand lines for instant results.</p></details>
             </div>
         </div>
@@ -302,7 +307,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function() {
         const left = document.getElementById('td-left');

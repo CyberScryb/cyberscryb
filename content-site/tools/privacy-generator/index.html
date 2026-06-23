@@ -5,11 +5,11 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Privacy Policy Generator — No Signup | CyberScryb</title>
+    <title>Free Privacy Policy Generator &mdash; No Signup | CyberScryb</title>
     <meta name="description" content="Draft GDPR-compliant site terms and disclosures with our free privacy policy generator. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="privacy policy generator, free privacy policy, GDPR privacy policy, CCPA compliance, COPPA, website privacy policy, app privacy policy">
-    <meta property="og:title" content="Free Privacy Policy Generator — No Signup | CyberScryb">
+    <meta property="og:title" content="Free Privacy Policy Generator &mdash; No Signup | CyberScryb">
     <meta property="og:description"
         content="Draft GDPR-compliant site terms and disclosures with our free privacy policy generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://cyberscryb.com/tools/privacy-generator/">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free Privacy Policy Generator — No Signup | CyberScryb">
+    <meta name="twitter:title" content="Free Privacy Policy Generator &mdash; No Signup | CyberScryb">
     <meta name="twitter:description"
         content="Draft GDPR-compliant site terms and disclosures with our free privacy policy generator. Free, instant, runs in your browser. No signup.">
     <link rel="icon" href="/mascot-icon.png" type="image/png">
@@ -90,11 +90,16 @@
       ]
     }
     </script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -1000,7 +1005,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Privacy Policy Generator — No Signup | CyberScryb</title>
+    <title>Free Privacy Policy Generator &mdash; No Signup | CyberScryb</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; line-height: 1.7; color: #333; }
         h1 { font-size: 1.8rem; margin-bottom: 8px; }

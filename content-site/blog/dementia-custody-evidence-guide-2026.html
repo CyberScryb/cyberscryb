@@ -16,20 +16,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260604">
+<link rel="stylesheet" href="/css/style.css?v=20260623">
 
-<!-- Google AdSense — delayed load to protect LCP -->
+<!-- Google AdSense &mdash; delayed load to protect LCP -->
 <script>
 (function() {
     function loadAdsense() {
-        if (window._adsenseLoaded) return;
-        window._adsenseLoaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-        s.crossOrigin = 'anonymous';
-        document.head.appendChild(s);
-    }
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
     if (document.readyState === 'complete') {
         setTimeout(loadAdsense, 2500);
     } else {
@@ -133,14 +138,14 @@ gtag('config', 'G-LS46B9J1XK');
 <article class="article-wrap">
 <p><a href="/blog/">← Back to blog</a></p>
 <h1>Collecting Custody Evidence for a Co-parent with Dementia</h1>
-<p class="meta">Published June 2, 2026 · 8 min read</p>
+<p class="meta">Published June 2, 2026 &middot; 8 min read</p>
 
 <p>Co-parenting is already a challenge, but navigating it when your former spouse is experiencing cognitive decline or early-onset dementia is a profound emotional and legal ordeal. Your main priority is protecting the safety and well-being of your children without appearing malicious or vindictive in family court. To do this, you must build an objective, fact-based custody case that focuses on child safety, using clear, documented logs rather than emotional accusations.</p>
 
 <div class="cta-box">
   <strong style="color:#0066ff;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-size:0.85rem;">DOCUMENT CUSTODY CONCERNS</strong>
   <p style="margin:8px 0 0;">Need to draft a structured letter for custody modifications, child support recalculations, or guardianship requests? CyberScryb's <a href="/tools/custody-document/">AI Custody Document Drafter</a> helps you organize your evidence and generate legal briefs instantly.</p>
-  <a class="cta-btn" href="/tools/custody-document/">Draft Custody Document Free →</a>
+  <a class="cta-btn" href="/tools/custody-document/">Draft Custody Document Free &rarr;</a>
 </div>
 
 <h2>The Unique Challenge of Cognitive Decline in Custody Cases</h2>
@@ -179,7 +184,7 @@ gtag('config', 'G-LS46B9J1XK');
 <h3>What custody modifications are typical in dementia cases?</h3>
 <p>Courts rarely cut off a parent completely unless there is active danger. Instead, judges will order **supervised visitation** (where another adult or professional supervisor is present), prohibit the parent from driving the children, or adjust schedules so that visitation occurs during daylight hours (to avoid sundowning symptoms).</p>
 
-<p style="text-align:center;margin-top:48px;"><a href="/tools/custody-document/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Draft Custody Document (Free) →</a></p>
+<p style="text-align:center;margin-top:48px;"><a href="/tools/custody-document/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Draft Custody Document (Free) &rarr;</a></p>
 </article>
 
 <!-- AdSense Multiplex -->
@@ -195,7 +200,7 @@ gtag('config', 'G-LS46B9J1XK');
 </div>
 </main>
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;text-align:center;color:#878787;font-size:0.9rem;margin-top:60px;">
-  <p>© 2026 CyberScryb LLC · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a> · <a href="/pro/" style="color:#0066ff;">Pro</a></p>
+  <p>© 2026 CyberScryb LLC &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a> &middot; <a href="/pro/" style="color:#0066ff;">Pro</a></p>
 </footer>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>

@@ -16,20 +16,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260604">
+<link rel="stylesheet" href="/css/style.css?v=20260623">
 
-<!-- Google AdSense — delayed load to protect LCP -->
+<!-- Google AdSense &mdash; delayed load to protect LCP -->
 <script>
 (function() {
     function loadAdsense() {
-        if (window._adsenseLoaded) return;
-        window._adsenseLoaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-        s.crossOrigin = 'anonymous';
-        document.head.appendChild(s);
-    }
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
     if (document.readyState === 'complete') {
         setTimeout(loadAdsense, 2500);
     } else {
@@ -86,7 +91,7 @@ gtag('config', 'G-LS46B9J1XK');
       "name": "How does logging help manage sundowning?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Logging tracks exactly when behaviors happen, what occurred beforehand, and what calmed the resident down. Over a week, patterns emerge—such as agitation peaking when shift changes occur or when lights are dimmed too early."
+        "text": "Logging tracks exactly when behaviors happen, what occurred beforehand, and what calmed the resident down. Over a week, patterns emerge&mdash;such as agitation peaking when shift changes occur or when lights are dimmed too early."
       }
     }
   ]
@@ -133,7 +138,7 @@ gtag('config', 'G-LS46B9J1XK');
 <article class="article-wrap">
 <p><a href="/blog/">← Back to blog</a></p>
 <h1>Tracking Behavioral Spikes in Memory Care</h1>
-<p class="meta">Published June 2, 2026 · 9 min read</p>
+<p class="meta">Published June 2, 2026 &middot; 9 min read</p>
 
 <p>In memory care units and home care settings, behavioral changes in dementia patients are rarely random. A sudden spike in agitation, pacing, physical combativeness, or crying is usually a form of communication. Because individuals with mid-to-late stage dementia lose the ability to express complex physical sensations verbally, their pain, fear, or frustration manifests as behavioral challenges.</p>
 
@@ -142,11 +147,11 @@ gtag('config', 'G-LS46B9J1XK');
 <div class="cta-box">
   <strong style="color:#0066ff;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-size:0.85rem;">FREE BEHAVIORAL LOG UTILITY</strong>
   <p style="margin:8px 0 0;">Need a simple, HIPAA-compliant way to track behavioral changes without slow software? Use CyberScryb's <a href="/tools/behavioral-log/">free Behavioral Log tool</a>, built specifically for fast, offline care logging.</p>
-  <a class="cta-btn" href="/tools/behavioral-log/">Use Behavioral Log Tool →</a>
+  <a class="cta-btn" href="/tools/behavioral-log/">Use Behavioral Log Tool &rarr;</a>
 </div>
 
 <h2>The Anatomy of a Behavioral Spike</h2>
-<p>In memory care, behaviors often follow a daily cycle. One of the most common spikes is **sundowning**—a state of confusion, anxiety, and aggression that begins or worsens in the late afternoon and early evening. Other spikes are triggered by physiological events:</p>
+<p>In memory care, behaviors often follow a daily cycle. One of the most common spikes is **sundowning**&mdash;a state of confusion, anxiety, and aggression that begins or worsens in the late afternoon and early evening. Other spikes are triggered by physiological events:</p>
 
 <ul>
   <li><strong>Silent Infections:</strong> A sudden, massive shift in behavior (like a sweet-tempered resident suddenly screaming or hitting) is the number-one symptom of a Urinary Tract Infection (UTI) in elderly patients.</li>
@@ -179,7 +184,7 @@ gtag('config', 'G-LS46B9J1XK');
 <h3>When should behavioral spikes trigger a doctor's call?</h3>
 <p>If a behavior changes drastically overnight (such as sudden incontinence, hallucinations, or combativeness), contact a doctor immediately to check for a UTI or other acute medical issue. Do not wait to log patterns if the change is sudden and severe.</p>
 
-<p style="text-align:center;margin-top:48px;"><a href="/tools/behavioral-log/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Start Behavioral Log (Free) →</a></p>
+<p style="text-align:center;margin-top:48px;"><a href="/tools/behavioral-log/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Start Behavioral Log (Free) &rarr;</a></p>
 </article>
 
 <!-- AdSense Multiplex -->
@@ -195,7 +200,7 @@ gtag('config', 'G-LS46B9J1XK');
 </div>
 </main>
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;text-align:center;color:#878787;font-size:0.9rem;margin-top:60px;">
-  <p>© 2026 CyberScryb LLC · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a> · <a href="/pro/" style="color:#0066ff;">Pro</a></p>
+  <p>© 2026 CyberScryb LLC &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a> &middot; <a href="/pro/" style="color:#0066ff;">Pro</a></p>
 </footer>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>

@@ -31,6 +31,11 @@
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -95,7 +100,7 @@
                 "name": "How long do I have to appeal a health insurance denial?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "180 days from the date of the denial notice to file an internal appeal. Then four months from the final internal appeal decision to request external review. Don't wait — start the internal appeal within the first 30-45 days while the records are fresh."
+                    "text": "180 days from the date of the denial notice to file an internal appeal. Then four months from the final internal appeal decision to request external review. Don't wait &mdash; start the internal appeal within the first 30-45 days while the records are fresh."
                 }
             },
             {
@@ -196,7 +201,7 @@
                     <span>Insurance Appeal</span>
                 </div>
                 <h1 itemprop="headline">How to Appeal a <span class="accent">Health Insurance Claim Denial</span> (2026 Guide)</h1>
-                <p class="guide-subtitle" itemprop="description">Most denials reverse on appeal. The system counts on you not asking. Here's the exact two-step process: internal appeal then external review — with sample letters and the EOB language to attack.</p>
+                <p class="guide-subtitle" itemprop="description">Most denials reverse on appeal. The system counts on you not asking. Here's the exact two-step process: internal appeal then external review &mdash; with sample letters and the EOB language to attack.</p>
                 <div class="guide-meta">
                     <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
                     <span>📅 Updated <time datetime="2026-05-24" itemprop="dateModified">May 24, 2026</time></span>
@@ -217,12 +222,12 @@
                     <strong>Skip the blank page</strong>
                     <span>Get a personalized insurance appeal letter in 60 seconds. Free to start, no signup.</span>
                 </div>
-                <a href="/tools/appeal-letter/" class="cta-btn">Open Appeal Letter Tool →</a>
+                <a href="/tools/appeal-letter/" class="cta-btn">Open Appeal Letter Tool &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
 
-                <h2>Start with the EOB — read the denial reason word for word</h2>
+                <h2>Start with the EOB &mdash; read the denial reason word for word</h2>
 
                 <p>Pull the Explanation of Benefits (EOB) or the denial letter. Find the exact denial reason and the reason code. Insurance appeals only succeed when you address the specific reason cited. A general "this was medically necessary" letter doesn't work against a specific "this service is not covered for diagnosis code Z12.31" denial.</p>
 
@@ -230,10 +235,10 @@
                 <ul>
                     <li><strong>"Not medically necessary."</strong> The insurer thinks the service or medication isn't clinically required. This is the most common medical-judgment denial. Eligible for external review.</li>
                     <li><strong>"Experimental or investigational."</strong> The insurer says the treatment doesn't have enough clinical evidence behind it. Also eligible for external review.</li>
-                    <li><strong>"Not covered under this plan."</strong> The service is excluded by the plan's terms. NOT eligible for external review on its own — but if the exclusion is being applied incorrectly, that's appealable internally.</li>
+                    <li><strong>"Not covered under this plan."</strong> The service is excluded by the plan's terms. NOT eligible for external review on its own &mdash; but if the exclusion is being applied incorrectly, that's appealable internally.</li>
                     <li><strong>"Prior authorization not obtained."</strong> Procedural denial. Often appealable if the situation was urgent or if there's evidence prior auth was actually obtained.</li>
                     <li><strong>"Out of network."</strong> Service was performed by a non-network provider. Appeals work if it was emergency care, if there was no in-network option, or under the No Surprises Act for ancillary providers.</li>
-                    <li><strong>"Incorrect billing code."</strong> Provider billed something the insurer didn't recognize. Usually fixed by having the provider rebill with a corrected code — not a real appeal.</li>
+                    <li><strong>"Incorrect billing code."</strong> Provider billed something the insurer didn't recognize. Usually fixed by having the provider rebill with a corrected code &mdash; not a real appeal.</li>
                     <li><strong>"Maximum benefit reached."</strong> Plan-level limit. Hard to appeal but check the EOB for math errors.</li>
                 </ul>
 
@@ -253,12 +258,12 @@
                 <h2>The appeal letter structure</h2>
 
                 <ol>
-                    <li><strong>Header</strong> — name, address, member ID, claim number, date of service, denial date</li>
-                    <li><strong>Subject / RE: line</strong> — "Internal Appeal of Denial — Claim #X, Date of Service Y"</li>
-                    <li><strong>Statement of appeal</strong> — what you're appealing and the specific denial reason cited</li>
-                    <li><strong>Reason the denial is wrong</strong> — address the specific reason with documentation</li>
-                    <li><strong>Supporting clinical/factual evidence</strong> — letter of medical necessity, records, guidelines</li>
-                    <li><strong>Specific relief requested</strong> — "Reverse denial of Claim #X and process for payment of $Y"</li>
+                    <li><strong>Header</strong> &mdash; name, address, member ID, claim number, date of service, denial date</li>
+                    <li><strong>Subject / RE: line</strong> &mdash; "Internal Appeal of Denial &mdash; Claim #X, Date of Service Y"</li>
+                    <li><strong>Statement of appeal</strong> &mdash; what you're appealing and the specific denial reason cited</li>
+                    <li><strong>Reason the denial is wrong</strong> &mdash; address the specific reason with documentation</li>
+                    <li><strong>Supporting clinical/factual evidence</strong> &mdash; letter of medical necessity, records, guidelines</li>
+                    <li><strong>Specific relief requested</strong> &mdash; "Reverse denial of Claim #X and process for payment of $Y"</li>
                     <li><strong>Request for expedited review</strong> if applicable</li>
                     <li><strong>Signature, date, contact info</strong></li>
                 </ol>
@@ -267,7 +272,7 @@
 
                 <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">[Your Name]
 [Address]
-[Phone] · [Email]
+[Phone] &middot; [Email]
 Member ID: [number]
 Claim #: [number]
 Date of Service: [date]
@@ -279,8 +284,8 @@ May 24, 2026
 Member Appeals / Grievances Department
 [Address]
 
-RE: Internal Appeal — Denial of Claim #[number]
-    Date of Service: [date] · Member ID: [number]
+RE: Internal Appeal &mdash; Denial of Claim #[number]
+    Date of Service: [date] &middot; Member ID: [number]
     Denial Reason Code: [code from EOB]
 
 I'm formally appealing the denial of the above claim. The denial
@@ -291,7 +296,7 @@ The denial is incorrect for the following reasons:
 
 1. The treatment is the recommended standard of care for my
    diagnosis [ICD-10 code, condition name] per [cite specific
-   guideline — NCCN, AHA, AMA, AAOS, etc.].
+   guideline &mdash; NCCN, AHA, AMA, AAOS, etc.].
 
 2. My treating physician has determined the treatment is
    medically necessary and has documented this in the attached
@@ -331,7 +336,7 @@ Sincerely,
 
                 <pre style="background:rgba(255,255,255,0.04);border:1px solid rgba(0, 102, 255, 0.15);border-radius:8px;padding:18px;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:1.6;overflow-x:auto;">[Your Name]
 [Address]
-[Phone] · [Email]
+[Phone] &middot; [Email]
 Member ID: [number]
 Claim #: [number]
 
@@ -341,7 +346,7 @@ May 24, 2026
 Member Appeals Department
 [Address]
 
-RE: Internal Appeal — Denial of Claim #[number]
+RE: Internal Appeal &mdash; Denial of Claim #[number]
     Denial Reason: Prior Authorization Not Obtained
 
 I'm appealing the denial of the above claim, which was denied for
@@ -400,7 +405,7 @@ Sincerely,
                     <li>The physician's credentials (specialty, board certification)</li>
                 </ul>
 
-                <p>If your physician's office is slow, offer to write the draft. Hand them a 1-page letter with the citations done — they sign or edit. Most office managers prefer this.</p>
+                <p>If your physician's office is slow, offer to write the draft. Hand them a 1-page letter with the citations done &mdash; they sign or edit. Most office managers prefer this.</p>
 
                 <h2>Internal appeal timelines</h2>
 
@@ -412,11 +417,11 @@ Sincerely,
                     <li><strong>Standard pre-service:</strong> 30 days under HHS rules, 45 days under ERISA in some cases</li>
                 </ul>
 
-                <p>Most plans give you one or two levels of internal appeal. Read the denial letter — it should spell out how many levels are available and the timeline for each. You must "exhaust" internal appeals before requesting external review.</p>
+                <p>Most plans give you one or two levels of internal appeal. Read the denial letter &mdash; it should spell out how many levels are available and the timeline for each. You must "exhaust" internal appeals before requesting external review.</p>
 
-                <h2>External review — the binding second opinion</h2>
+                <h2>External review &mdash; the binding second opinion</h2>
 
-                <p>If the insurer upholds the denial after internal appeals, you can request external review. An independent medical reviewer — not employed by the insurer — looks at the file and decides. About 40-50% of external reviews reverse the denial. The insurer is bound by the decision.</p>
+                <p>If the insurer upholds the denial after internal appeals, you can request external review. An independent medical reviewer &mdash; not employed by the insurer &mdash; looks at the file and decides. About 40-50% of external reviews reverse the denial. The insurer is bound by the decision.</p>
 
                 <p>What's eligible for external review:</p>
                 <ul>
@@ -435,7 +440,7 @@ Sincerely,
                     <li>Standard external review: decided within 45 days. Expedited: 72 hours.</li>
                 </ul>
 
-                <p>External review costs you nothing in most cases — the insurer pays the IRO fee.</p>
+                <p>External review costs you nothing in most cases &mdash; the insurer pays the IRO fee.</p>
 
                 <h2>If you're under ERISA</h2>
 
@@ -443,8 +448,8 @@ Sincerely,
                 <ul>
                     <li>You must exhaust the plan's internal appeals before you can sue</li>
                     <li>Once exhausted, you have a limited window (typically 1-3 years per plan terms) to file federal suit</li>
-                    <li>The court reviews the administrative record only — if you didn't put a document in during internal appeals, you usually can't add it later</li>
-                    <li>So load every document, every guideline, every clinical reference into your internal appeal — your appeal letter is building the trial record</li>
+                    <li>The court reviews the administrative record only &mdash; if you didn't put a document in during internal appeals, you usually can't add it later</li>
+                    <li>So load every document, every guideline, every clinical reference into your internal appeal &mdash; your appeal letter is building the trial record</li>
                 </ul>
 
                 <h2>What not to do</h2>
@@ -473,7 +478,7 @@ Sincerely,
                         <strong>Don't stare at the blank page</strong>
                         <span>The CyberScryb Appeal Letter Tool drafts a denial-specific insurance appeal in 60 seconds. Free to start.</span>
                     </div>
-                    <a href="/tools/appeal-letter/" class="cta-btn">Open Appeal Letter Tool →</a>
+                    <a href="/tools/appeal-letter/" class="cta-btn">Open Appeal Letter Tool &rarr;</a>
                 </div>
 
                 <h2>Frequently Asked Questions</h2>
@@ -541,7 +546,7 @@ Sincerely,
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#878787;">About</a> · <a href="/privacy/" style="color:#878787;">Privacy</a> · <a href="/terms/" style="color:#878787;">Terms</a> · <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
+        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 &mdash; All rights reserved. | <a href="/about/" style="color:#878787;">About</a> &middot; <a href="/privacy/" style="color:#878787;">Privacy</a> &middot; <a href="/terms/" style="color:#878787;">Terms</a> &middot; <a href="/disclosure/" style="color:#878787;">Disclosure</a></p>
     </footer>
 
     <script src="/tools/shared/email-capture.js"></script>

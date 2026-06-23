@@ -5,13 +5,13 @@
     <meta name="robots" content="noindex, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator — Free Online QR Maker | CyberScryb</title>
+    <title>QR Code Generator &mdash; Free Online QR Maker | CyberScryb</title>
     <meta name="description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/qr-generator/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="QR Code Generator — Free Online QR Maker | CyberScryb">
+    <meta property="og:title" content="QR Code Generator &mdash; Free Online QR Maker | CyberScryb">
     <meta property="og:description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/qr-generator/">
@@ -19,13 +19,13 @@
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="QR Code Generator — Free Online QR Maker | CyberScryb">
+    <meta name="twitter:title" content="QR Code Generator &mdash; Free Online QR Maker | CyberScryb">
     <meta name="twitter:description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -39,11 +39,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -91,7 +96,7 @@
                 "name": "How do I generate a QR code?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Simply type or paste any text, URL, WiFi credentials, or email address into the input field. The QR code generates instantly in your browser — no server needed."
+                    "text": "Simply type or paste any text, URL, WiFi credentials, or email address into the input field. The QR code generates instantly in your browser &mdash; no server needed."
                 }
             },
             {
@@ -107,7 +112,7 @@
                 "name": "Is this QR code generator free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "100% free, no signup, no watermarks. The QR code is generated entirely in your browser — your data never leaves your device."
+                    "text": "100% free, no signup, no watermarks. The QR code is generated entirely in your browser &mdash; your data never leaves your device."
                 }
             }
         ]
@@ -280,7 +285,7 @@
         <div class="qr-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">QR Code Generator</h1>
-                <p style="color: #555555; margin-bottom: 0;">Generate QR codes for URLs, text, WiFi, email & more. 100% client-side — your data stays in your browser.</p>
+                <p style="color: #555555; margin-bottom: 0;">Generate QR codes for URLs, text, WiFi, email & more. 100% client-side &mdash; your data stays in your browser.</p>
             </div>
 
             <div class="qr-grid">
@@ -336,7 +341,7 @@
                 <h2>Frequently Asked Questions</h2>
                 <details>
                     <summary>How do I generate a QR code?</summary>
-                    <p>Simply type or paste any text, URL, WiFi credentials, or email address into the input field. The QR code generates instantly in your browser — no server needed.</p>
+                    <p>Simply type or paste any text, URL, WiFi credentials, or email address into the input field. The QR code generates instantly in your browser &mdash; no server needed.</p>
                 </details>
                 <details>
                     <summary>Can I customize QR code colors?</summary>
@@ -344,7 +349,7 @@
                 </details>
                 <details>
                     <summary>Is this QR code generator free?</summary>
-                    <p>100% free, no signup, no watermarks. The QR code is generated entirely in your browser — your data never leaves your device.</p>
+                    <p>100% free, no signup, no watermarks. The QR code is generated entirely in your browser &mdash; your data never leaves your device.</p>
                 </details>
                 <details>
                     <summary>What formats can I download?</summary>
@@ -405,7 +410,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <!-- QR Code library (lightweight, MIT license) -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <script>

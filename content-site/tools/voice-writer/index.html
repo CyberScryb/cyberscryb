@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Voice Writer — Free Voice Mode Writer | CyberScryb</title>
+    <title>AI Voice Writer &mdash; Free Voice Mode Writer | CyberScryb</title>
     <meta name="description" content="Dictate or generate transcripts in multiple voice styles using this AI voice writer. Free, instant, runs in your browser. No signup.">
-    <meta property="og:title" content="AI Voice Writer — Free Voice Mode Writer | CyberScryb">
+    <meta property="og:title" content="AI Voice Writer &mdash; Free Voice Mode Writer | CyberScryb">
     <meta property="og:description" content="Dictate or generate transcripts in multiple voice styles using this AI voice writer. Free, instant, runs in your browser. No signup.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/voice-writer/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Voice Writer — Free Voice Mode Writer | CyberScryb">
+    <meta name="twitter:title" content="AI Voice Writer &mdash; Free Voice Mode Writer | CyberScryb">
     <meta name="twitter:description" content="Dictate or generate transcripts in multiple voice styles using this AI voice writer. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/voice-writer/">
@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
     <link rel="stylesheet" href="../humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -35,11 +35,16 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -86,17 +91,17 @@
                     {
                         "@type": "Question",
                         "name": "What is an AI voice writer?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "An AI voice writer generates content in a specific tone or register. Instead of generic AI output, you choose the voice — conversational, educational, or strategic — and the tool writes in that style." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "An AI voice writer generates content in a specific tone or register. Instead of generic AI output, you choose the voice &mdash; conversational, educational, or strategic &mdash; and the tool writes in that style." }
                     },
                     {
                         "@type": "Question",
                         "name": "What are the three voice modes?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Conversational writes like you're talking to a smart friend — short sentences, direct, no fluff. Educational writes like a sharp instructor — structured, clear, with examples. Strategic writes like a business operator — framework-driven, systematic, result-focused." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "Conversational writes like you're talking to a smart friend &mdash; short sentences, direct, no fluff. Educational writes like a sharp instructor &mdash; structured, clear, with examples. Strategic writes like a business operator &mdash; framework-driven, systematic, result-focused." }
                     },
                     {
                         "@type": "Question",
                         "name": "What can I use this for?",
-                        "acceptedAnswer": { "@type": "Answer", "text": "Social media posts, blog intro paragraphs, newsletter sections, Reddit posts, email drafts, LinkedIn content — anything where tone matters and you want a starting point you can actually use." }
+                        "acceptedAnswer": { "@type": "Answer", "text": "Social media posts, blog intro paragraphs, newsletter sections, Reddit posts, email drafts, LinkedIn content &mdash; anything where tone matters and you want a starting point you can actually use." }
                     },
                     {
                         "@type": "Question",
@@ -216,13 +221,13 @@
 
                         <!-- Refinement -->
                         <div class="input-group" style="margin-top:1rem;">
-                            <label for="refinement-input" style="color: #878787; font-size:0.85rem;">Refine the output <span style="color:#555;">(optional — after first generation)</span></label>
+                            <label for="refinement-input" style="color: #878787; font-size:0.85rem;">Refine the output <span style="color:#555;">(optional &mdash; after first generation)</span></label>
                             <input type="text" id="refinement-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
                         </div>
 
                         <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: #fff; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Generate</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon">&rarr;</span>
                         </button>
                     </div>
 
@@ -323,9 +328,9 @@
                 <!-- FAQ -->
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#a78bfa; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>What is an AI voice writer?</h4><p>It generates content in a specific tone or register. Instead of generic AI output, you choose the voice — conversational, educational, or strategic — and it writes in that style consistently.</p></div>
-                    <div class="faq-item"><h4>What are the three voice modes?</h4><p><strong>Conversational</strong> writes like you're talking to a smart friend — short sentences, direct, no fluff. <strong>Educational</strong> writes like a sharp instructor — structured, clear. <strong>Strategic</strong> writes like a business operator — framework-driven, systematic, result-focused.</p></div>
-                    <div class="faq-item"><h4>What can I use this for?</h4><p>Social media posts, blog intros, newsletter sections, Reddit posts, email drafts, LinkedIn content — anything where tone matters and you want a starting point you can actually use without rewriting from scratch.</p></div>
+                    <div class="faq-item"><h4>What is an AI voice writer?</h4><p>It generates content in a specific tone or register. Instead of generic AI output, you choose the voice &mdash; conversational, educational, or strategic &mdash; and it writes in that style consistently.</p></div>
+                    <div class="faq-item"><h4>What are the three voice modes?</h4><p><strong>Conversational</strong> writes like you're talking to a smart friend &mdash; short sentences, direct, no fluff. <strong>Educational</strong> writes like a sharp instructor &mdash; structured, clear. <strong>Strategic</strong> writes like a business operator &mdash; framework-driven, systematic, result-focused.</p></div>
+                    <div class="faq-item"><h4>What can I use this for?</h4><p>Social media posts, blog intros, newsletter sections, Reddit posts, email drafts, LinkedIn content &mdash; anything where tone matters and you want a starting point you can actually use without rewriting from scratch.</p></div>
                     <div class="faq-item"><h4>Is it free?</h4><p>Yes. 3 free generations per day after providing your email. No credit card required.</p></div>
                     <div class="faq-item"><h4>Is my content stored?</h4><p>No. Your input is processed in real time and discarded. We never store or train on your content.</p></div>
                 </div>
@@ -358,7 +363,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script src="../shared/ai-tool.js"></script>
     <script src="voice-writer.js"></script>
 </body>

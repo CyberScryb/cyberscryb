@@ -728,7 +728,11 @@ function generateSitemap(generatedPages) {
 function manageRobotsMeta() {
     const indexableTools = new Set([
         'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
-        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter'
+        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter',
+        'child-support-calculator', 'spousal-support-calculator', 'custody-document', 'hardship-letter', 'med-administration-log',
+        'caregiver-report', 'behavioral-log', 'budget-planner', 'email-writer', 'appeal-letter', 'voice-writer', 'paraphraser',
+        'bio-generator', 'resume-bullets', 'product-description', 'tweet-generator', 'cron-builder', 'regex-tester',
+        'subnet-calculator', 'json-formatter', 'jwt-decoder', 'hash-generator', 'case-converter', 'text-diff'
     ]);
 
     const dirsToProcess = [

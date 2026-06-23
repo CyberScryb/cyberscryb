@@ -2,28 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta name="robots" content="noindex, follow">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT Decoder — Free Online Parser | CyberScryb</title>
+    <title>JWT Decoder &mdash; Free Online Parser | CyberScryb</title>
     <meta name="description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/jwt-decoder/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-    <meta property="og:title" content="JWT Decoder — Free Online Parser | CyberScryb">
+    <meta property="og:title" content="JWT Decoder &mdash; Free Online Parser | CyberScryb">
     <meta property="og:description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/jwt-decoder/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JWT Decoder — Free Online Parser | CyberScryb">
+    <meta name="twitter:title" content="JWT Decoder &mdash; Free Online Parser | CyberScryb">
     <meta name="twitter:description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260604">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -37,11 +37,16 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
-    <!-- Google AdSense — delayed load to protect LCP -->
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -85,9 +90,9 @@
     {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
-            { "@type": "Question", "name": "What is a JWT?", "acceptedAnswer": { "@type": "Answer", "text": "A JSON Web Token (JWT) is a compact, URL-safe token format used to transmit claims between parties. It has three parts — header, payload, and signature — separated by dots." }},
+            { "@type": "Question", "name": "What is a JWT?", "acceptedAnswer": { "@type": "Answer", "text": "A JSON Web Token (JWT) is a compact, URL-safe token format used to transmit claims between parties. It has three parts &mdash; header, payload, and signature &mdash; separated by dots." }},
             { "@type": "Question", "name": "Does this tool verify JWT signatures?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only DECODES the token to show its contents. Signature verification requires the signing secret or public key, which should be done on your trusted backend." }},
-            { "@type": "Question", "name": "Is it safe to paste tokens here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — decoding is done entirely in your browser using vanilla JavaScript. Your token is never sent over the network. Still, avoid pasting production tokens into any online tool when possible." }},
+            { "@type": "Question", "name": "Is it safe to paste tokens here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes &mdash; decoding is done entirely in your browser using vanilla JavaScript. Your token is never sent over the network. Still, avoid pasting production tokens into any online tool when possible." }},
             { "@type": "Question", "name": "What do iat, exp, and sub mean?", "acceptedAnswer": { "@type": "Answer", "text": "iat is 'issued at' (Unix timestamp when the token was created). exp is 'expiration time'. sub is the 'subject', typically a user identifier." }},
             { "@type": "Question", "name": "Can a JWT be edited without breaking it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Changing the header or payload invalidates the signature. A properly verified server will reject any modified token." }}
         ]
@@ -216,7 +221,7 @@
             </div>
 
             <div class="warning-banner">
-                <strong>⚠ Security notice:</strong> This tool only <em>decodes</em> JWTs — it does <strong>not</strong> verify signatures. Signature verification requires the signing key and should only be done on a trusted backend. Your token never leaves this browser tab.
+                <strong>⚠ Security notice:</strong> This tool only <em>decodes</em> JWTs &mdash; it does <strong>not</strong> verify signatures. Signature verification requires the signing key and should only be done on a trusted backend. Your token never leaves this browser tab.
             </div>
 
             <label style="display:block; font-size:0.75rem; color:#555555; text-transform:uppercase; letter-spacing:0.08em; margin:1rem 0 0.5rem;" for="jwt-input">JWT Token</label>
@@ -253,8 +258,8 @@
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is a JWT?</summary><p>A JSON Web Token is a compact, URL-safe token format used to transmit claims between two parties. It is made of three Base64URL-encoded parts separated by dots: header, payload, and signature.</p></details>
                 <details><summary>Does this tool verify JWT signatures?</summary><p>No. This tool only decodes the token to display its contents. Verifying a signature requires the signing secret or public key and must be performed on a trusted backend.</p></details>
-                <details><summary>Is it safe to paste tokens here?</summary><p>Yes — decoding is done entirely in your browser. Your token is never sent over the network. Still, avoid pasting real production tokens into any third-party tool when you can avoid it.</p></details>
-                <details><summary>What do iat, exp, and sub mean?</summary><p><code>iat</code> is "issued at" (Unix timestamp when the token was created). <code>exp</code> is the expiration timestamp. <code>sub</code> is the subject — typically a user identifier.</p></details>
+                <details><summary>Is it safe to paste tokens here?</summary><p>Yes &mdash; decoding is done entirely in your browser. Your token is never sent over the network. Still, avoid pasting real production tokens into any third-party tool when you can avoid it.</p></details>
+                <details><summary>What do iat, exp, and sub mean?</summary><p><code>iat</code> is "issued at" (Unix timestamp when the token was created). <code>exp</code> is the expiration timestamp. <code>sub</code> is the subject &mdash; typically a user identifier.</p></details>
                 <details><summary>Can I edit a JWT without breaking it?</summary><p>No. Any change to the header or payload invalidates the signature. A properly configured server will reject any modified token.</p></details>
             </div>
         </div>
@@ -271,7 +276,7 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
-                <span style="font-size:0.85rem; color:#878787;">JWTs are Base64URL-encoded — decode any Base64 string.</span>
+                <span style="font-size:0.85rem; color:#878787;">JWTs are Base64URL-encoded &mdash; decode any Base64 string.</span>
             </a>
             <a href="../hash-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Hash Generator</strong>
@@ -309,7 +314,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20260604"></script>
+    <script src="/js/script.js?v=20260623"></script>
     <script>
     (function() {
         const input = document.getElementById('jwt-input');
@@ -446,7 +451,7 @@
                 const expired = ms < Date.now();
                 const cls = expired ? 'expired' : 'valid';
                 const statusLabel = expired ? 'EXPIRED' : 'valid';
-                metaLines.push('<div><span class="label">Expires at (exp):</span> <span class="value ' + cls + '">' + escapeHtml(formatDate(payloadObj.exp)) + ' — ' + escapeHtml(relativeTime(payloadObj.exp)) + ' (' + statusLabel + ')</span></div>');
+                metaLines.push('<div><span class="label">Expires at (exp):</span> <span class="value ' + cls + '">' + escapeHtml(formatDate(payloadObj.exp)) + ' &mdash; ' + escapeHtml(relativeTime(payloadObj.exp)) + ' (' + statusLabel + ')</span></div>');
             }
             if (payloadObj.iss) metaLines.push('<div><span class="label">Issuer (iss):</span> <span class="value">' + escapeHtml(payloadObj.iss) + '</span></div>');
             if (payloadObj.aud) metaLines.push('<div><span class="label">Audience (aud):</span> <span class="value">' + escapeHtml(Array.isArray(payloadObj.aud) ? payloadObj.aud.join(', ') : payloadObj.aud) + '</span></div>');
