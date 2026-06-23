@@ -626,7 +626,8 @@ ${faqsHtml}
         <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#888;">About Us</a></p>
     </footer>
 
-    <script src="../tools/shared/email-capture.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
 </body>
 
 </html>`;
@@ -651,17 +652,9 @@ function generateSitemap(generatedPages) {
         { path: '/terms/', priority: '0.3', freq: 'yearly' },
         { path: '/disclosure/', priority: '0.3', freq: 'yearly' }
     ];
-    const tools = [
-        'ai-detector', 'ai-writing-suite', 'appeal-letter', 'base64-tool', 'behavioral-log', 'bio-generator',
-        'budget-planner', 'caregiver-report', 'case-converter', 'child-support-calculator', 'code-explainer', 'color-palette',
-        'contrast-checker',
-        'cron-builder', 'custody-document', 'email-writer', 'epoch-converter', 'fluid-sim',
-        'gig-auto-pilot', 'glassmorphism-generator', 'hardship-letter', 'hash-generator', 'html-entity', 'humanizer',
-        'json-csv-converter', 'json-formatter', 'jwt-decoder', 'lorem-ipsum', 'markdown-html',
-        'med-administration-log', 'meta-description', 'paraphraser', 'password-checker', 'privacy-generator', 'product-description',
-        'qr-generator', 'regex-tester', 'resume-bullets', 'seo-tag-generator', 'slug-generator',
-        'spousal-support-calculator', 'subnet-calculator', 'summarizer', 'text-diff', 'tweet-generator', 'url-encoder', 'uuid-generator',
-        'voice-writer', 'word-counter'
+    const indexableTools = [
+        'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
+        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter'
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -673,7 +666,7 @@ function generateSitemap(generatedPages) {
     });
 
     xml += '\n  <!-- Tools -->\n';
-    tools.forEach(t => {
+    indexableTools.forEach(t => {
         xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
     });
 
@@ -730,6 +723,82 @@ function generateSitemap(generatedPages) {
     return xml;
 }
 
+// ─── Robots Meta Manager (Indexation Pruning) ───
+
+function manageRobotsMeta() {
+    const indexableTools = new Set([
+        'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
+        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter'
+    ]);
+
+    const dirsToProcess = [
+        path.join(__dirname, 'content-site', 'tools'),
+        path.join(__dirname, 'public', 'tools')
+    ];
+
+    function processDirectory(dirPath, baseDir) {
+        if (!fs.existsSync(dirPath)) return;
+        const items = fs.readdirSync(dirPath);
+        items.forEach(item => {
+            const fullPath = path.join(dirPath, item);
+            const stat = fs.statSync(fullPath);
+
+            if (stat.isDirectory()) {
+                if (item === 'shared') return;
+                processDirectory(fullPath, baseDir);
+            } else if (stat.isFile() && item.endsWith('.html')) {
+                const relativeToTools = path.relative(baseDir, fullPath);
+                const firstPart = relativeToTools.split(path.sep)[0];
+
+                const isIndexable = indexableTools.has(firstPart);
+                let content = fs.readFileSync(fullPath, 'utf8');
+
+                const robotsRegex = /<meta\s+name=["']robots["']\s+content=["']([^"']*)["']\s*\/?>/i;
+
+                if (isIndexable) {
+                    // Remove any robots tag if it has noindex
+                    if (robotsRegex.test(content)) {
+                        const match = content.match(robotsRegex);
+                        if (match && match[1].toLowerCase().includes('noindex')) {
+                            content = content.replace(robotsRegex, '');
+                            fs.writeFileSync(fullPath, content, 'utf8');
+                            console.log(`  🟢 Restored indexability for page: ${relativeToTools}`);
+                        }
+                    }
+                } else {
+                    // Add <meta name="robots" content="noindex, follow"> if not already set to noindex
+                    if (robotsRegex.test(content)) {
+                        const match = content.match(robotsRegex);
+                        if (match && !match[1].toLowerCase().includes('noindex')) {
+                            content = content.replace(robotsRegex, '<meta name="robots" content="noindex, follow">');
+                            fs.writeFileSync(fullPath, content, 'utf8');
+                            console.log(`  🔴 Set noindex on existing robots tag for page: ${relativeToTools}`);
+                        }
+                    } else {
+                        // Find <head> to insert it early in the head
+                        const headRegex = /<head>/i;
+                        if (headRegex.test(content)) {
+                            content = content.replace(/<head>/i, '<head>\n    <meta name="robots" content="noindex, follow">');
+                            fs.writeFileSync(fullPath, content, 'utf8');
+                            console.log(`  🔴 Injected noindex robots tag for page: ${relativeToTools}`);
+                        } else {
+                            console.warn(`  ⚠️ Could not find <head> tag in ${relativeToTools}`);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    console.log(`\n🤖 Running Robots Meta Manager...`);
+    dirsToProcess.forEach(baseDir => {
+        if (fs.existsSync(baseDir)) {
+            console.log(`  Scanning directory: ${baseDir}`);
+            processDirectory(baseDir, baseDir);
+        }
+    });
+}
+
 // ─── Execute ───
 
 const guidesDir = path.join(__dirname, 'content-site', 'guides');
@@ -758,6 +827,9 @@ const sitemap = generateSitemap(pages);
 fs.writeFileSync(path.join(__dirname, 'public', 'sitemap.xml'), sitemap, 'utf-8');
 fs.writeFileSync(path.join(__dirname, 'content-site', 'sitemap.xml'), sitemap, 'utf-8');
 console.log(`\n  📍 sitemap.xml generated.`);
+
+// Run robots meta manager
+manageRobotsMeta();
 
 console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 console.log(`✅ Generated ${pages.length} SEO pages + sitemap`);

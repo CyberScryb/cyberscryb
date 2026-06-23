@@ -1,7 +1,7 @@
 import os
 
 def bump_version():
-    root_dir = r"C:\claude\cyberscryb"
+    root_dir = os.path.dirname(os.path.abspath(__file__))
     target_folders = ["content-site", "public"]
     old_version = "20260531"
     new_version = "20260604"

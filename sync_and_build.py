@@ -32,7 +32,7 @@ def sync_directories(src_dir, dst_dir):
                 print(f"Copied: {os.path.relpath(d, dst_dir)}")
 
 def run_build():
-    root = r"C:\claude\cyberscryb"
+    root = os.path.dirname(os.path.abspath(__file__))
     src_dir = os.path.join(root, "content-site")
     dst_dir = os.path.join(root, "public")
     

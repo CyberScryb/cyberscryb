@@ -128,6 +128,15 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-23)
+
+**Indexation Pruning & Content Enrichment (AdSense "Low Value Content" Fix)**
+- **Indexation Pruning Strategy (Content SEO Pruning)**: Implemented partition of utility tools to target Google AdSense's "low value content" rejection. Configured 13 high-value developer/content tools as indexable, and pruned 37 thin/utility/calculator tools via robots meta tags.
+- **Automated Robots Meta Management**: Added `manageRobotsMeta()` routine to [generate-pages.js](file:///c:/Users/natea/cyberscryb-cyberscryb/cyberscryb/generate-pages.js) to scan tool pages during build, injecting `<meta name="robots" content="noindex, follow">` into the 37 thin tools and removing them from indexable tools.
+- **Sitemap Filtering**: Updated sitemap generator in [generate-pages.js](file:///c:/Users/natea/cyberscryb-cyberscryb/cyberscryb/generate-pages.js) to exclude the 37 thin tools, keeping `public/sitemap.xml` focused on high-quality content.
+- **Content Enrichment**: Enriched [word-counter/index.html](file:///c:/Users/natea/cyberscryb-cyberscryb/cyberscryb/content-site/tools/word-counter/index.html) with over 600 words of SEO-optimized educational content.
+- **Rebuilt & Compiled**: Executed `sync_and_build.py` to compile all changes into the production `public/` directory.
+
 ## Recent Changes (Session 2026-06-05)
 
 **SEO Meta Tag Sweep — All 75 Pages Fixed & Deployed**
