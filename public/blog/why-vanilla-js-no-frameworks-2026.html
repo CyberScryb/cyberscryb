@@ -83,15 +83,15 @@ gtag('config', 'G-LS46B9J1XK');
       "name": "Is Vanilla JS faster than React or Next.js?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yeah, by a lot. There's no virtual DOM, no framework runtime to download, no bundle to parse. The page loads and it's already interactive. Our tools are typically under 5KB of JavaScript total."
+        "text": "Yes, by a wide margin. There is no virtual DOM, no framework runtime to download, and no bundle to parse. Pages load instantly and are interactive immediately. Our tools typically run under 5KB of total JavaScript."
       }
     },
     {
       "@type": "Question",
-      "name": "Can you build complex applications without frameworks?",
+      "name": "Is building complex applications without frameworks feasible?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Definitely. Modern browsers have native DOM selection, fetch(), template literals, CSS grid, and custom properties built in. You can build interactive tools, editors, and calculators without importing a single dependency."
+        "text": "Definitely. Modern browsers include native DOM selection, fetch(), template literals, CSS grid, and custom properties. Developers build interactive tools, editors, and calculators without importing dependencies."
       }
     }
   ]
@@ -140,9 +140,9 @@ gtag('config', 'G-LS46B9J1XK');
 <h1>Why CyberScryb Uses Vanilla JS (No Frameworks)</h1>
 <p class="meta">Published June 2, 2026 &middot; 7 min read</p>
 
-<p>If you build web apps in 2026, everyone expects you to reach for React, Next.js, Vue, or Svelte. Writing raw HTML, CSS, and JavaScript gets you weird looks. But CyberScryb &mdash; which has 40+ working tools &mdash; doesn't use any frameworks. The whole thing runs on native browser APIs.</p>
+<p>If you build web apps in 2026, everyone expects you to reach for React, Next.js, Vue, or Svelte. Writing raw HTML, CSS, and JavaScript gets you weird looks. But CyberScryb, which has 40+ working tools, does not use frameworks. The site runs entirely on native browser APIs.</p>
 
-<p>Here's why I went that route, why it actually works well, and why you might want to consider it for your next project.</p>
+<p>This article explains the decision, the benefits of native code, and reasons to avoid frameworks in your next project.</p>
 
 <div class="cta-box">
   <strong style="color:#0066ff;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-size:0.85rem;">SPEED AND ACCESSIBILITY</strong>
@@ -151,17 +151,17 @@ gtag('config', 'G-LS46B9J1XK');
 </div>
 
 <h2>The Origin: A CNA's Night Shift Constraints</h2>
-<p>To understand why CyberScryb is framework-free, you have to understand how it was built. The founder was a Certified Nursing Assistant (CNA) working grueling 12-hour night shifts in memory care. During patient rounds, quiet times, and late-night breaks, there were brief 15-minute windows to write code.</p>
+<p>To understand why CyberScryb is framework-free, you must understand the backstory. The founder worked night shifts as a CNA in a memory care facility. During patient rounds, quiet times, and breaks, the work offered fifteen-minute windows to write code.</p>
 
-<p>If you're writing code on hospital computer terminals, slow laptops, or tablets during brief breaks, you don't have time to run `npm install` and wait for 400MB of `node_modules` to download. You don't want to fight webpack, babel configurations, or Next.js build errors. You want to open a text editor, write a script, hit refresh in the browser, and see it work. Vanilla JS made rapid building possible in low-resource environments.</p>
+<p>Coding on slow devices leaves no time to run package installs or download heavy modules. You want to open a text editor, write a script, refresh the page, and see results. Vanilla JS made rapid building possible in low-resource environments.</p>
 
 <h2>Speed is a Product Feature</h2>
-<p>Modern web users are impatient. A site that takes 3 seconds to load on a mobile connection loses over half of its traffic. In addition, Google's Core Web Vitals directly impact search rankings. By using native code, we keep page sizes tiny:</p>
+<p>Modern web users are impatient. A site taking three seconds to load loses traffic. By using native code, we keep page sizes small:</p>
 
 <ul>
-  <li><strong>No Hydration Lag:</strong> React apps download a large bundle, parse it, and then "hydrate" the page to make it interactive. CyberScryb's calculators are interactive the exact millisecond the HTML is displayed.</li>
-  <li><strong>Minimal Network Payload:</strong> The total script size for most of our tools is under 5KB. A typical React app starts at 150KB+ of framework core before you write a single line of application code.</li>
-  <li><strong>Long-Term Stability:</strong> The web platform is backward-compatible. A Vanilla JS calculator written in 2020 will still run perfectly in 2030. An app built on React 16 or Next.js 10 requires constant refactoring to compile with newer node versions.</li>
+  <li><strong>No Hydration Lag:</strong> React apps download a bundle, parse code, and then process the page. CyberScryb calculators run the millisecond the HTML displays.</li>
+  <li><strong>Minimal Network Payload:</strong> The total script size for most tools stays under 5KB. Framework configurations require much more setup.</li>
+  <li><strong>Long-Term Stability:</strong> The web platform maintains backward compatibility. A Vanilla JS utility runs for years without compilation problems.</li>
 </ul>
 
 <h2>Modern Browser APIs are Incredible</h2>
@@ -178,10 +178,10 @@ gtag('config', 'G-LS46B9J1XK');
 
 <h2>FAQ</h2>
 <h3>Isn't code organization harder without components?</h3>
-<p>If you're sloppy about it, sure. But I organize each tool as its own self-contained HTML page with its own script file. Shared utilities live in <code>/tools/shared/</code>. I keep inputs, calculations, and UI updates in separate functions with clear comments. It's not that different from how you'd organize React components &mdash; just without the abstraction layer.</p>
+<p>Sloppy coding causes problems. I organize each tool as a self-contained HTML page with a dedicated script file. Shared utilities live in <code>/tools/shared/</code>. I separate inputs, calculations, and UI updates into functions with clear comments. The organization mirrors React component structure without the abstraction layer.</p>
 
 <h3>Do you use any build steps?</h3>
-<p>A few small ones. I have a Node.js script that generates static pages from templates and builds the sitemap. But everything the browser actually loads is plain HTML, CSS, and JS. No webpack, no babel, no transpilation. The output is the source.</p>
+<p>A few small ones. A Node.js script generates static pages from templates and builds the sitemap. Everything the browser loads remains plain HTML, CSS, and JS. No webpack, no babel, no transpilation. The output is the source.</p>
 
 <p style="text-align:center;margin-top:48px;"><a href="/tools/" class="cta-btn" style="display:inline-block;background:#0066ff;color:#000;padding:14px 32px;border-radius:999px;text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;">Try Our Fast Tools Now &rarr;</a></p>
 </article>

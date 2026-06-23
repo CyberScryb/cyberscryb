@@ -133,23 +133,23 @@
                     <p style="font-size: 1.2rem; color: #b0b0b0; text-align: center; margin-bottom: 2rem;">One person, a laptop, and a lot of late nights.</p>
 
                     <div style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #00d4ff; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
-                        <p style="margin: 0;"><strong style="color: #00d4ff;">&#9889; Quick version:</strong> CyberScryb is a collection of 40+ free tools I built because I kept needing them and couldn't find good ones that didn't require an account or try to harvest my data. Everything runs client-side in your browser. I don't see what you type, and I don't want to.</p>
+                        <p style="margin: 0;"><strong style="color: #00d4ff;">&#9889; Quick version:</strong> CyberScryb is a collection of 40+ free tools I built because I needed them. I found no good options without accounts or data harvesting. Everything runs client-side in your browser. I do not see your inputs.</p>
                     </div>
 
                     <h2>Why this exists</h2>
-                    <p>I'm a solo founder. I started building these tools in 2026 while working night shifts as a CNA in a memory care facility. During 12-hour overnights, I'd get 10-15 minute windows between patient rounds, and I'd write code on whatever device I could get my hands on.</p>
-                    <p>Most "free" developer tools online are really just email-gated lead magnets. You paste in your data, they slurp it up, then they ask for $15/month. I got tired of that, so I started building my own. Every tool on this site processes your data in your browser. There's no server call, no database entry, no tracking pixel watching what you paste.</p>
+                    <p>I am a solo founder. I started building these tools in 2026 while working night shifts as a CNA in a memory care facility. During 12-hour overnights, I had 10-15 minute windows between patient rounds to write code on my phone or laptop.</p>
+                    <p>Most free developer tools online gate access with email forms. You paste your data, the companies collect your info, then they ask for subscription fees. I built alternatives to stop this. Every tool on this site processes data in your browser. No server calls, no database entries, no tracking pixels.</p>
 
                     <h2>What's here</h2>
                     <ul>
-                        <li><strong><a href="tools/humanizer/index.html">Anti-AI Humanizer</a></strong> &mdash; paste ChatGPT output, get text that sounds like you actually wrote it</li>
-                        <li><strong><a href="tools/json-csv-converter/index.html">JSON &harr; CSV Converter</a></strong> &mdash; goes both directions, handles nested objects, won't die on 50K rows</li>
-                        <li><strong><a href="tools/password-checker/index.html">Password Strength Checker</a></strong> &mdash; shows entropy and estimated crack time without sending your password anywhere</li>
-                        <li><strong><a href="tools/seo-tag-generator/index.html">SEO Meta Tag Generator</a></strong> &mdash; spits out title, description, OG, and Twitter tags ready to paste</li>
-                        <li><strong><a href="tools/base64-tool/index.html">Base64 Encoder/Decoder</a></strong> &mdash; text in, Base64 out (or the reverse)</li>
-                        <li><strong><a href="tools/color-palette/index.html">Color Palette Generator</a></strong> &mdash; pick a base color, get matching shades with contrast scores</li>
-                        <li><strong><a href="tools/markdown-html/index.html">Markdown to HTML Converter</a></strong> &mdash; type markdown, see the HTML render live</li>
-                        <li><strong><a href="tools/gig-auto-pilot/index.html">Gig Auto-Pilot</a></strong> &mdash; writes freelance proposals and drafts the deliverable too</li>
+                        <li><strong><a href="tools/humanizer/index.html">Anti-AI Humanizer</a></strong>: paste ChatGPT output for text in your own voice</li>
+                        <li><strong><a href="tools/json-csv-converter/index.html">JSON to CSV Converter</a></strong>: convert in both directions, handle nested objects, process 50,000 rows</li>
+                        <li><strong><a href="tools/password-checker/index.html">Password Strength Checker</a></strong>: view entropy and estimated crack time without sending data online</li>
+                        <li><strong><a href="tools/seo-tag-generator/index.html">SEO Meta Tag Generator</a></strong>: generate title, description, OG, and Twitter tags</li>
+                        <li><strong><a href="tools/base64-tool/index.html">Base64 Encoder/Decoder</a></strong>: encode or decode text</li>
+                        <li><strong><a href="tools/color-palette/index.html">Color Palette Generator</a></strong>: pick a base color for matching shades with contrast scores</li>
+                        <li><strong><a href="tools/markdown-html/index.html">Markdown to HTML Converter</a></strong>: type markdown to see live HTML rendering</li>
+                        <li><strong><a href="tools/gig-auto-pilot/index.html">Gig Auto-Pilot</a></strong>: write freelance proposals and draft deliverables</li>
                     </ul>
 
                     <h2>How the math works</h2>
@@ -157,13 +157,13 @@
                     <ul>
                         <li><strong>Password entropy</strong> uses Shannon's formula: <code>H = L &times; log&#8322;(N)</code> where L is the length and N is the pool of possible characters</li>
                         <li><strong>Crack time estimates</strong> assume modern GPU speeds (RTX 4090-class, roughly 121 billion MD5 hashes per second)</li>
-                        <li><strong>Color contrast ratios</strong> follow WCAG 2.1 &mdash; not my own opinion of what's readable</li>
+                        <li><strong>Color contrast ratios</strong> follow WCAG 2.1 compliance</li>
                         <li><strong>JSON and CSV parsing</strong> follows RFC 8259 and RFC 4180 respectively</li>
                         <li><strong>Base64</strong> implements RFC 4648, both standard and URL-safe</li>
                     </ul>
 
                     <h2>Privacy, for real</h2>
-                    <p>Every tool runs <strong>in your browser</strong> using JavaScript. There is no server-side processing. What that means in practice:</p>
+                    <p>Every tool runs in your browser with JavaScript. No server-side processing. The benefits:</p>
                     <ul>
                         <li>Your passwords never leave your computer</li>
                         <li>Your JSON and CSV data stays on your machine</li>
@@ -175,10 +175,10 @@
                     <h2>Under the hood</h2>
                     <p>The whole site is vanilla HTML, CSS, and JavaScript. No React, no Next.js, no build step. I did this on purpose:</p>
                     <ul>
-                        <li><strong>It loads fast</strong> &mdash; there's no framework overhead to download</li>
-                        <li><strong>It works offline</strong> &mdash; no server calls needed once the page loads</li>
-                        <li><strong>No supply chain risk</strong> &mdash; zero npm dependencies in the browser code</li>
-                        <li><strong>You can read it</strong> &mdash; right-click, view source, see exactly what's running</li>
+                        <li><strong>Loads fast</strong>: no framework overhead to download</li>
+                        <li><strong>Works offline</strong>: no server calls needed once loaded</li>
+                        <li><strong>No supply chain risk</strong>: zero npm dependencies in the browser code</li>
+                        <li><strong>Read the code</strong>: right-click, view source, see running scripts</li>
                     </ul>
 
                     <h2>Get in touch</h2>
