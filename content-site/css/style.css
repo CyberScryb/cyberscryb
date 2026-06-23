@@ -226,6 +226,7 @@ header {
     border-radius: var(--radius-sm);
     transition: var(--transition-smooth);
     position: relative;
+    display: inline-block;
 }
 
 .nav-menu li a:hover,
@@ -679,4 +680,123 @@ footer {
         flex-wrap: wrap;
         gap: 1.5rem;
     }
+}
+
+/* Blog List Tags & Details Overrides */
+.blog-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+    background: rgba(0, 212, 255, 0.06);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    transition: var(--transition-smooth);
+    width: fit-content;
+}
+
+.blog-card:hover .blog-tag {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+}
+
+/* Legacy Blog Post overrides (higher specificity to override inline style sheets) */
+body .article-wrap {
+    max-width: 800px !important;
+    padding: 3rem 1.5rem 6rem !important;
+    font-family: var(--font-sans) !important;
+}
+
+body .article-wrap h1 {
+    font-family: var(--font-heading) !important;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 0.8rem !important;
+}
+
+body .article-wrap h2 {
+    font-family: var(--font-heading) !important;
+    color: var(--accent-cyan) !important;
+    font-size: 1.65rem !important;
+    font-weight: 700 !important;
+    margin-top: 3rem !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+body .article-wrap h3 {
+    font-family: var(--font-heading) !important;
+    color: var(--text-primary) !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+body .article-wrap a {
+    color: var(--accent-cyan) !important;
+    text-decoration: none !important;
+    border-bottom: 1px dashed rgba(0, 212, 255, 0.4) !important;
+    transition: var(--transition-smooth) !important;
+}
+
+body .article-wrap a:hover {
+    color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+
+body .article-wrap blockquote {
+    border-left: 3px solid var(--accent-cyan) !important;
+    background: rgba(0, 212, 255, 0.03) !important;
+    padding: 1.2rem 1.5rem !important;
+    margin: 2rem 0 !important;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
+    color: var(--text-secondary) !important;
+}
+
+body .article-wrap code {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #e2e8f0 !important;
+    font-family: var(--font-mono) !important;
+}
+
+body .article-wrap .cta-box {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(123, 44, 255, 0.08)) !important;
+    border: 1px solid var(--border-hover) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+    padding: 2rem !important;
+    margin: 2.5rem 0 !important;
+}
+
+body .article-wrap .cta-box .cta-btn {
+    display: inline-block !important;
+    background: linear-gradient(135deg, var(--accent-cyan), #00a8ff) !important;
+    color: #030307 !important;
+    padding: 12px 28px !important;
+    border-radius: 999px !important;
+    text-decoration: none !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em !important;
+    box-shadow: 0 4px 14px rgba(0, 212, 255, 0.3) !important;
+    border: none !important;
+    transition: var(--transition-smooth) !important;
+    margin-top: 1rem !important;
+}
+
+body .article-wrap .cta-box .cta-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5) !important;
+    color: #030307 !important;
 }
