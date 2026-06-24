@@ -844,14 +844,18 @@ footer {
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
 }
 
-/* Legacy Blog Post overrides (higher specificity to override inline style sheets) */
-body .article-wrap {
+/* Legacy Blog Post & Legal/Contact Page overrides (higher specificity) */
+body .article-wrap,
+body .legal-content,
+body .contact-content {
     max-width: 800px !important;
     padding: 3rem 1.5rem 6rem !important;
     font-family: var(--font-sans) !important;
 }
 
-body .article-wrap h1 {
+body .article-wrap h1,
+body .legal-content h1,
+body .contact-content h1 {
     font-family: var(--font-heading) !important;
     background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan)) !important;
     -webkit-background-clip: text !important;
@@ -860,9 +864,12 @@ body .article-wrap h1 {
     font-weight: 800 !important;
     letter-spacing: -0.02em !important;
     margin-bottom: 0.8rem !important;
+    text-shadow: none !important;
 }
 
-body .article-wrap h2 {
+body .article-wrap h2,
+body .legal-content h2,
+body .contact-content h2 {
     font-family: var(--font-heading) !important;
     color: var(--accent-cyan) !important;
     font-size: 1.65rem !important;
@@ -870,9 +877,14 @@ body .article-wrap h2 {
     margin-top: 3rem !important;
     margin-bottom: 1rem !important;
     letter-spacing: -0.01em !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
 }
 
-body .article-wrap h3 {
+body .article-wrap h3,
+body .legal-content h3,
+body .contact-content h3 {
     font-family: var(--font-heading) !important;
     color: var(--text-primary) !important;
     font-size: 1.25rem !important;
@@ -881,19 +893,26 @@ body .article-wrap h3 {
     margin-bottom: 0.75rem !important;
 }
 
-body .article-wrap a {
+body .article-wrap a,
+body .legal-content a,
+body .contact-content a {
     color: var(--accent-cyan) !important;
     text-decoration: none !important;
     border-bottom: 1px dashed rgba(0, 212, 255, 0.4) !important;
     transition: var(--transition-smooth) !important;
 }
 
-body .article-wrap a:hover {
+body .article-wrap a:hover,
+body .legal-content a:hover,
+body .contact-content a:hover {
     color: #fff !important;
     border-bottom-color: #fff !important;
+    text-shadow: none !important;
 }
 
-body .article-wrap blockquote {
+body .article-wrap blockquote,
+body .legal-content blockquote,
+body .contact-content blockquote {
     border-left: 3px solid var(--accent-cyan) !important;
     background: rgba(0, 212, 255, 0.03) !important;
     padding: 1.2rem 1.5rem !important;
@@ -902,11 +921,37 @@ body .article-wrap blockquote {
     color: var(--text-secondary) !important;
 }
 
-body .article-wrap code {
+body .article-wrap code,
+body .legal-content code,
+body .contact-content code {
     background: rgba(255, 255, 255, 0.06) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     color: #e2e8f0 !important;
     font-family: var(--font-mono) !important;
+}
+
+body .article-wrap ul,
+body .article-wrap ol,
+body .legal-content ul,
+body .legal-content ol,
+body .contact-content ul,
+body .contact-content ol {
+    margin: 1.5rem 0 1.5rem 2rem !important;
+    color: var(--text-secondary) !important;
+}
+
+body .article-wrap li,
+body .legal-content li,
+body .contact-content li {
+    margin-bottom: 0.75rem !important;
+    line-height: 1.7 !important;
+    color: var(--text-secondary) !important;
+}
+
+body .article-wrap li strong,
+body .legal-content li strong,
+body .contact-content li strong {
+    color: var(--text-primary) !important;
 }
 
 body .article-wrap .cta-box {

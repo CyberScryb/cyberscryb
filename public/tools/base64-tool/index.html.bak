@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder Decoder &mdash; Free Online Tool | CyberScryb</title>
+    <meta name="description" content="Convert your data with this fast base64 encoder decoder tool client-side. Free, instant, runs in your browser. No signup.">
+    <meta name="keywords"
+        content="base64 encoder, base64 decoder, base64 online, encode base64, decode base64, base64 converter">
+    <meta property="og:title" content="Base64 Encoder Decoder &mdash; Free Online Tool | CyberScryb">
+    <meta property="og:description" content="Convert your data with this fast base64 encoder decoder tool client-side. Free, instant, runs in your browser. No signup.">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta property="og:url" content="https://cyberscryb.com/tools/base64-tool/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Base64 Encoder Decoder &mdash; Free Online Tool | CyberScryb">
+    <meta name="twitter:description" content="Convert your data with this fast base64 encoder decoder tool client-side. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <link rel="canonical" href="https://cyberscryb.com/tools/base64-tool/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb Base64 Encoder / Decoder",
+        "url": "https://cyberscryb.com/tools/base64-tool",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free Base64 encoder and decoder with URL-safe mode, UTF-8 support, clipboard copy, and file download. Shows size comparison statistics. 100% client-side &mdash; your data never leaves your browser.",
+        "featureList": ["Bidirectional Base64 encode/decode", "URL-safe encoding mode", "UTF-8 support", "Size comparison statistics", "Clipboard copy", "File download", "CyberScryb Verification ID"],
+        "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <link rel="stylesheet" href="../shared/email-capture.css">
+    <!-- Google Analytics 4 -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <!-- Ahrefs Web Analytics -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <link rel="icon" type="image/png" href="/mascot-icon.png">
+</head>
+
+<body>
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="color:#7b2cff;">Base64 Encoder/Decoder</span>
+    </nav>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="/tools/">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+            <a href="/blog/">Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">⚡ Instant &mdash; No Signup Required</div>
+            <h1>Base64 <span class="accent">Encoder</span> / Decoder</h1>
+            <p class="subtitle">Encode text to Base64 or decode Base64 back to text. Supports URL-safe encoding. 100%
+                client-side.</p>
+        </section>
+
+        <section class="converter-card" id="converter">
+            <div class="mode-toggle" id="modeToggle">
+                <button class="mode-btn active" data-mode="encode" onclick="setMode('encode')">Encode</button>
+                <button class="mode-btn" data-mode="decode" onclick="setMode('decode')">Decode</button>
+                <div class="toggle-indicator"></div>
+            </div>
+
+            <div class="panels">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 id="inputLabel">Input &mdash; Plain Text</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="clearInput()">Clear</button>
+                            <button class="icon-btn" onclick="loadSample()">Sample</button>
+                        </div>
+                    </div>
+                    <textarea id="inputArea" placeholder="Paste your text here..."></textarea>
+                    <div class="panel-footer">
+                        <span class="stats" id="inputStats">0 chars</span>
+                        <div class="options">
+                            <label class="option-label">
+                                <input type="checkbox" id="urlSafe"> URL-safe
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <button class="convert-btn" onclick="convert()">
+                        <span id="btnText">Encode</span>
+                        <span class="btn-arrow">&rarr;</span>
+                    </button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 id="outputLabel">Output &mdash; Base64</h2>
+                        <div class="panel-actions">
+                            <button class="icon-btn" onclick="copyOutput()">Copy</button>
+                            <button class="icon-btn" onclick="downloadOutput()">Download</button>
+                        </div>
+                    </div>
+                    <textarea id="outputArea" readonly placeholder="Result will appear here..."></textarea>
+                    <div class="panel-footer">
+                        <span class="stats" id="outputStats">0 chars</span>
+                        <span class="stats" id="sizeInfo"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-bar hidden" id="errorBar">
+                <span>⚠️</span>
+                <span id="errorMsg"></span>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Bidirectional</h3>
+                    <p>Encode text to Base64 or decode Base64 back to plain text with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>URL-Safe Mode</h3>
+                    <p>Enable URL-safe encoding that replaces + with - and / with _ for use in URLs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>No Size Limit</h3>
+                    <p>Process any amount of text &mdash; everything runs in your browser with no upload limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Private</h3>
+                    <p>Your data never leaves your browser. No server-side processing, no logging.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What is Base64 encoding?</summary>
+                    <p>Base64 is a binary-to-text encoding scheme that converts binary data into ASCII characters. It's
+                        commonly used in email attachments, data URIs, API authentication tokens, and embedding binary
+                        data in text formats like JSON or XML.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is Base64 encryption?</summary>
+                    <p>No. Base64 is encoding, not encryption. It doesn't provide any security &mdash; anyone can decode a
+                        Base64 string. It's used for data transport, not data protection.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is URL-safe Base64?</summary>
+                    <p>Standard Base64 uses + and / characters which have special meaning in URLs. URL-safe Base64
+                        replaces + with - and / with _ to make the encoded string safe for use in URLs and filenames.
+                    </p>
+                </details>
+                <details class="faq-item">
+                    <summary>Why does Base64 increase size?</summary>
+                    <p>Base64 encodes 3 bytes into 4 characters, resulting in approximately 33% size increase. This is
+                        the tradeoff for being able to represent binary data as text.</p>
+                </details>
+            </div>
+        </section>
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">Understanding Base64 Encoding: What It Is and How It Works</h2>
+        <p>Base64 is a binary-to-text encoding scheme that converts binary data (such as files, images, or byte streams) into a sequence of 64 printable ASCII characters. This character set consists of uppercase letters A-Z, lowercase letters a-z, numbers 0-9, and the characters "+" and "/". The equals sign (=) is appended at the end as padding when the size of the binary input is not divisible by three bytes.</p>
+        <p>The primary purpose of Base64 is to transmit binary data over media that are designed to handle only text data. Many legacy communication protocols, such as SMTP email headers or JSON API endpoints, are structured exclusively around text characters. If you attempt to send raw binary data through these systems, the data can be modified or corrupted. By encoding it to Base64, you guarantee the data remains intact during transit.</p>
+        <p>It is important to remember that Base64 is <strong>not encryption</strong>. Encoding is a public, standard algorithm (defined in RFC 4648) and can be easily reversed in a split second by anyone using a basic decoder. Never use Base64 to secure passwords, credentials, or sensitive user information.</p>
+
+        <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">Common Use Cases in Modern Web Development</h2>
+        <p><strong>Inline Data URIs:</strong> Developers frequently embed small assets (like SVG icons, PNG badges, or web fonts) directly inside HTML or CSS files using Base64-encoded strings (e.g., <code>data:image/png;base64,...</code>). This eliminates the need for separate HTTP requests, resulting in faster rendering times for small resources.</p>
+        <p><strong>API Communication:</strong> When posting files or binary keys via REST APIs that accept only JSON request bodies, Base64 is the industry standard format. The binary file is converted to a string and safely embedded within the JSON properties.</p>
+        <p><strong>Basic Authentication:</strong> HTTP Basic access authentication uses Base64 to encode the username and password pair before sending it in the request's Authorization header (e.g., <code>Authorization: Basic YWRtaW46cGFzc3dvcmQ=</code>). Note that this is only secure when wrapped inside an encrypted HTTPS connection.</p>
+        <p><strong>CI/CD Variables:</strong> Many build systems and environment configuration setups restrict special characters. Base64 is used to encode certificates, keys, or complex configurations to prevent shell interpretation issues during builds.</p>
+
+        <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">Standard Base64 vs. URL-Safe Base64</h2>
+        <p>Standard Base64 encoding utilizes the "+" and "/" characters, which carry specific semantic meanings in URLs (representing spaces and path separators respectively). If you pass a standard Base64 string inside a URL query parameter, it will often break or require percentage encoding.</p>
+        <p>To solve this, <strong>URL-Safe Base64</strong> (or Base64url) replaces "+" with "-" and "/" with "_", and typically strips the trailing padding "=" characters. This makes the string safe to pass in query parameters, path variables, or headers. Our tool supports both standards: toggle the "URL-safe" checkbox to instantly change the format.</p>
+
+        <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">Base64 Encoding FAQ</h2>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">Why does Base64 increase file size?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">Base64 works by grouping binary data into 6-bit chunks, representing each chunk as a single ASCII character. Since 8 bits make up a standard byte, this conversion results in a size overhead of approximately 33%. For instance, a 75KB binary image will compile into a 100KB Base64 text string.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">How does browser-side decoding work?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">This utility executes entirely client-side using standard Web APIs like <code>btoa()</code> and <code>atob()</code>. Since all computations are processed locally inside your web browser, no raw text or binary data is sent over the internet to CyberScryb servers. Your data remains fully private.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">What does the trailing '=' padding character mean?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">Base64 requires the input bits to align perfectly in 24-bit blocks (which maps to 4 characters of output). If your input ends and leaves remaining bytes, padding characters (=) are appended to complete the block. One "=" indicates there was one remaining byte; "==" indicates two remaining bytes.</p>
+        </details>
+    </section>
+    </main>
+
+    <!-- AdSense: Below Tool -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
+                <span style="font-size:0.85rem; color:#878787;">Convert data between JSON and CSV formats instantly.</span>
+            </a>
+            <a href="../uuid-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
+                <span style="font-size:0.85rem; color:#878787;">Generate unique identifiers for keys, tokens, and records.</span>
+            </a>
+            <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+                <span style="font-size:0.85rem; color:#878787;">Convert Markdown to clean HTML and back.</span>
+            </a>
+        </div>
+    </section>
+
+    
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/guides/base64-encode-decode-guide/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Base64 Encoding & Decoding Guide</strong>
+                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            </a>
+            <a href="/guides/base64-image-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Base64 Image Encoder Guide</strong>
+                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All rights reserved.</p>
+        <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="../shared/email-capture.js"></script>
+    <script src="../shared/affiliate-panel.js"></script>
+
+<script src="/js/cs-pro-widget.js?v=2" defer></script>
+</html>

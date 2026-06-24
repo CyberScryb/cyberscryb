@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (parsed.markers.length > 0) {
             markersSection.classList.remove('hidden');
             markersList.innerHTML = '';
-            const color = parsed.score !== null ? getScoreColor(parsed.score) : '#c41e1e';
+            const color = parsed.score !== null ? getScoreColor(parsed.score) : '#7b2cff';
             parsed.markers.forEach(m => {
                 const li = document.createElement('li');
                 li.textContent = m;

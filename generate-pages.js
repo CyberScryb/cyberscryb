@@ -510,9 +510,9 @@ function generatePage(page) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/guides/guide.css">
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google AdSense — delayed load to protect LCP -->
@@ -552,16 +552,26 @@ function generatePage(page) {
     <div class="bg-grid"></div>
 
     <header>
-        <div class="logo">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="2" y="2" width="28" height="28" rx="6" stroke="#00d4ff" stroke-width="2.5" />
-                <path d="M10 11h12M10 16h8M10 21h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <a href="/" style="color: inherit; text-decoration: none;">CyberScryb</a>
-        </div>
-        <nav>
-            <a href="/about/">About</a>
-            <a href="/">← All Tools</a>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/products/">Products</a></li>
+                    <li><a href="/guides/" class="active">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
         </nav>
     </header>
 
@@ -587,10 +597,10 @@ ${tldrHtml}
 
             <div class="cta-box">
                 <div class="cta-text">
-                    <strong>Skip the guide — just use the tool:</strong>
-                    <span>Open the free ${page.tool.name} and get started.</span>
+                    <strong>Skip the reading — just use the tool:</strong>
+                    <span>Jump straight to our free, privacy-first ${page.tool.name}.</span>
                 </div>
-                <a href="${toolLink}" class="cta-btn">Open ${page.tool.name} →</a>
+                <a href="${toolLink}" class="cta-btn">Open ${page.tool.name} &rarr;</a>
             </div>
 
             <div class="guide-content" itemprop="articleBody">
@@ -608,10 +618,10 @@ ${faqsHtml}
 
             <div class="cta-box bottom">
                 <div class="cta-text">
-                    <strong>Ready to get started?</strong>
-                    <span>Open the free tool now — no signup, no limits.</span>
+                    <strong>Ready to start?</strong>
+                    <span>Open the tool now to process your data. It runs 100% in your browser.</span>
                 </div>
-                <a href="${toolLink}" class="cta-btn">Open ${page.tool.name} →</a>
+                <a href="${toolLink}" class="cta-btn">Open ${page.tool.name} &rarr;</a>
             </div>
         </article>
     </main>
@@ -623,7 +633,23 @@ ${faqsHtml}
     </section>
 
     <footer>
-        <p><strong><a href="/about/" style="color:inherit;text-decoration:none;">CyberScryb</a></strong> &copy; 2026 — All rights reserved. | <a href="/about/" style="color:#888;">About Us</a></p>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="/js/script.js"></script>
@@ -654,7 +680,11 @@ function generateSitemap(generatedPages) {
     ];
     const indexableTools = [
         'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
-        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter'
+        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter',
+        'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
+        'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
+        'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
+        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator'
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -729,10 +759,10 @@ function manageRobotsMeta() {
     const indexableTools = new Set([
         'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
         'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter',
-        'child-support-calculator', 'spousal-support-calculator', 'custody-document', 'hardship-letter', 'med-administration-log',
-        'caregiver-report', 'behavioral-log', 'budget-planner', 'email-writer', 'appeal-letter', 'voice-writer', 'paraphraser',
-        'bio-generator', 'resume-bullets', 'product-description', 'tweet-generator', 'cron-builder', 'regex-tester',
-        'subnet-calculator', 'json-formatter', 'jwt-decoder', 'hash-generator', 'case-converter', 'text-diff'
+        'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
+        'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
+        'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
+        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator'
     ]);
 
     const dirsToProcess = [

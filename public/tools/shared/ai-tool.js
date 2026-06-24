@@ -241,7 +241,7 @@
                         outputContent.innerHTML = '<span style="color:#ef4444;">Daily limit reached (' + FREE_DAILY_LIMIT + '/' + FREE_DAILY_LIMIT + ' free used today).</span>';
                         const tiers = document.getElementById('upgrade-tiers');
                         if (tiers) {
-                            tiers.style.border = '2px solid #c41e1e';
+                            tiers.style.border = '2px solid #7b2cff';
                             tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             setTimeout(() => { tiers.style.border = ''; }, 3000);
                         }
@@ -354,14 +354,14 @@
             btn.className = 'cs-example-btn';
             btn.textContent = '✨ Run example';
             btn.title = 'Load a sample input and run it through the tool — uses your one free try';
-            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #c41e1e;color:#c41e1e;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
+            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #7b2cff;color:#7b2cff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
             btn.addEventListener('mouseover', () => {
-                btn.style.background = '#c41e1e';
+                btn.style.background = '#7b2cff';
                 btn.style.color = '#000';
             });
             btn.addEventListener('mouseout', () => {
                 btn.style.background = 'transparent';
-                btn.style.color = '#c41e1e';
+                btn.style.color = '#7b2cff';
             });
             btn.addEventListener('click', () => applyExample(true));
 

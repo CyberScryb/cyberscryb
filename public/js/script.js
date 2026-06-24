@@ -131,7 +131,7 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: linear-gradient(135deg, #00d4ff, #0066ff);
+            background: linear-gradient(135deg, #00d4ff, #7b2cff);
             color: #000;
             border: none;
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);

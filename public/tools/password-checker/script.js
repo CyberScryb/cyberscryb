@@ -144,7 +144,7 @@ function analyze() {
     // Strength level
     let strength, strengthLabel, strengthColor;
     if (entropy < 28 || COMMON_PASSWORDS.has(pw.toLowerCase())) {
-        strength = 'very-weak'; strengthLabel = 'VERY WEAK'; strengthColor = '#c41e1e';
+        strength = 'very-weak'; strengthLabel = 'VERY WEAK'; strengthColor = '#7b2cff';
     } else if (entropy < 36) {
         strength = 'weak'; strengthLabel = 'WEAK'; strengthColor = '#f97316';
     } else if (entropy < 60) {
