@@ -3,6 +3,7 @@
 
 <head>
     
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABC Behavioral Log Generator &mdash; Dementia | CyberScryb</title>
@@ -20,7 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="../humanizer/style.css">
+    <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -82,6 +83,32 @@
     <meta property="og:url" content="https://cyberscryb.com/tools/behavioral-log/">
     <meta property="og:site_name" content="CyberScryb">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -90,7 +117,7 @@
         <span style="margin:0 8px; color:#444;">&#8250;</span>
         <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <span style="color:#0066ff;">ABC Behavioral Log</span>
+        <span style="color:#7b2cff;">ABC Behavioral Log</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -123,11 +150,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(0, 102, 255, 0.1); color: #0066ff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(0, 102, 255, 0.3);">
+                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     Caregiver Tools
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">ABC Behavioral <span style="color: #0066ff;">Log</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">ABC Behavioral <span style="color: #7b2cff;">Log</span></h1>
                 <p class="hero-subtitle">Interactive Antecedent-Behavior-Consequence tracker &amp; AI care plan generator.</p>
             </div>
         </section>
@@ -140,10 +167,10 @@
                     <div class="panel input-panel" style="background: #18181b; border: 1px solid rgba(255,255,255,0.12); width:100%;">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 ABC Tracker
                             </h2>
-                            <span class="step-badge" style="background: #0066ff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
                         </div>
 
                         <!-- Resident basic background -->
@@ -176,7 +203,7 @@
                                 <input type="text" id="log-consequence" placeholder="e.g. Backed off, offered a warm beverage, re-approached in 15 minutes." required style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                             </div>
 
-                            <button type="submit" style="background: rgba(0, 102, 255, 0.15); border: 1px solid #0066ff; color: #fff; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; width:100%;">Add ABC Entry</button>
+                            <button type="submit" style="background: rgba(123, 44, 255, 0.15); border: 1px solid #7b2cff; color: #fff; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; width:100%;">Add ABC Entry</button>
                         </form>
 
                         <!-- Past Log list -->
@@ -197,7 +224,7 @@
                             </table>
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: #0066ff; border: none; color: #000; font-family: 'Orbitron'; font-weight: 600; margin-top: 1.5rem;">
+                        <button id="generate-btn" class="primary-btn" style="background: #7b2cff; border: none; color: #000; font-family: 'Orbitron'; font-weight: 600; margin-top: 1.5rem;">
                             <span class="btn-text">Build Care Interventions Plan</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -207,13 +234,13 @@
                     <div class="panel output-panel" style="background: #18181b; border: 1px solid rgba(255,255,255,0.12); width:100%;">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
                                 Care Plan &amp; Interventions
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #0066ff;">Copy</button>
-                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #0066ff;">Print / PDF</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
@@ -224,7 +251,7 @@
                                 <div class="email-gate-blur"></div>
                                 <div class="email-gate-card">
                                     <div class="email-gate-icon">
-                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                                     </div>
                                     <h3>Unlock Your Care Plan</h3>
                                     <p>Enter your email to get the full result + <strong>3 free reports/day</strong></p>
@@ -237,8 +264,8 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #0066ff;"></div>
-                                <p style="color: #0066ff;">Analyzing triggers &amp; creating care plan...</p>
+                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
+                                <p style="color: #7b2cff;">Analyzing triggers &amp; creating care plan...</p>
                             </div>
                         </div>
                         <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
@@ -249,26 +276,26 @@
 
                 <!-- FAQ -->
                 <div class="geo-card" style="background: #18181b; border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#0066ff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is the ABC model of behavior?</h4><p>The ABC model stands for **Antecedent** (what triggered the behavior), **Behavior** (the action or agitation itself), and **Consequence** (what occurred immediately following the behavior, or how staff/family responded). It is the gold standard for tracking behavioral changes in dementia.</p></div>
                     <div class="faq-item"><h4>How does the AI model build a care plan?</h4><p>By reviewing multiple logged behavioral events, the AI identifies recurring patterns (e.g. sundowning, bathing resistance, or noise sensitivity) and proposes targeted non-pharmacological interventions to mitigate future occurrences.</p></div>
                     <div class="faq-item"><h4>Why track antecedents?</h4><p>In memory care, most behaviors are forms of communication. Residents act out when they cannot verbally express pain, fatigue, bathroom needs, or sensory overload. Identifying the antecedent allows you to eliminate the root cause.</p></div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
-                    <p>Related: <a href="../caregiver-report/">Caregiver Shift Report</a> | <a href="../med-administration-log/">Medication Log</a> | <a href="../daily-schedule/">Dementia Schedule Planner</a></p>
+                    <p>Related: <a href="/tools/caregiver-report/">Caregiver Shift Report</a> | <a href="/tools/med-administration-log/">Medication Log</a> | <a href="/tools/daily-schedule/">Dementia Schedule Planner</a></p>
                 </div>
             </div>
         </section>
 
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#0066ff;margin-top:2rem;">Understanding the ABC Behavioral Framework</h2>
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Understanding the ABC Behavioral Framework</h2>
             <p>For individuals with cognitive decline, traditional verbal expression becomes difficult or impossible. Behavioral expressions&mdash;including shouting, pacing, resisting care, or repeating questions&mdash;are usually attempts to communicate an unmet physical or emotional need. The **Antecedent-Behavior-Consequence (ABC)** model helps caregivers decode this communication. By methodically tracking what happened right before the behavior (Antecedent), the behavior itself (Behavior), and what resolved it (Consequence), you can identify subtle patterns that are otherwise missed.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#0066ff;margin-top:2rem;">Identifying Common Triggers in Dementia</h2>
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Identifying Common Triggers in Dementia</h2>
             <p>Antecedents often fall into several predictable categories. Physical triggers include pain, constipation, hunger, thirst, or fatigue. Environmental triggers include loud noises, bright lighting, crowded rooms, or an unfamiliar room layout. Caregiver approach triggers include rushing the resident, using complex language, or failing to introduce oneself. Sundowning&mdash;a state of increased confusion and anxiety occurring in the late afternoon or early evening&mdash;is also a major factor. Documenting the exact time of behaviors helps identify sundowning patterns so caregivers can plan calming activities ahead of time.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#0066ff;margin-top:2rem;">Implementing Non-Pharmacological Care Plans</h2>
+            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Implementing Non-Pharmacological Care Plans</h2>
             <p>Medical guidelines strongly advocate for non-pharmacological interventions as the first line of treatment for dementia-related behaviors, reserving antipsychotic or sedative medications for severe danger. Effective interventions include validation therapy (agreeing with their reality rather than correcting them), redirecting attention to meaningful tasks (like folding laundry or listening to favorite music), and maintaining a strict, predictable daily routine. An AI-driven care plan helps compile these custom strategies into a unified protocol that can be shared with all shifts to ensure consistent, gentle care.</p>
         </section>
     </main>
@@ -311,10 +338,10 @@
     </script>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="../shared/ai-examples.js"></script>
-    <script src="../shared/ai-tool.js"></script>
-    <script src="behavioral-log.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/shared/ai-examples.js"></script>
+    <script src="/tools/shared/ai-tool.js"></script>
+    <script src="/tools/behavioral-log/behavioral-log.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>
 

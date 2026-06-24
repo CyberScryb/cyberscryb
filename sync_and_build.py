@@ -36,7 +36,10 @@ def run_build():
     src_dir = os.path.join(root, "content-site")
     dst_dir = os.path.join(root, "public")
     
-    print("Step 1: Syncing content-site to public...")
+    print("Step 0: Normalizing relative paths and compliance tags...")
+    subprocess.run(["node", "scripts/normalize-tool-paths.js"], cwd=root)
+    
+    print("\nStep 1: Syncing content-site to public...")
     sync_directories(src_dir, dst_dir)
     
     print("\nStep 2: Generating pages via node generate-pages.js...")

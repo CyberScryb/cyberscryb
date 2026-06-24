@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side | CyberScryb</title>
+    <meta name="description" content="Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.">
+    <meta name="keywords" content="jwt decoder, decode jwt in browser, client-side hash generator, sha-256 web crypto">
+    <meta property="og:title" content="How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side">
+    <meta property="og:description" content="Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cyberscryb.com/guides/json-web-token-decoder-hash-generator/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side">
+    <meta name="twitter:description" content="Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://cyberscryb.com/guides/json-web-token-decoder-hash-generator/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/guides/guide.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
+    <!-- Google AdSense — delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side",
+        "description": "Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com/about/",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com"
+        },
+        "datePublished": "2026-02-01",
+        "dateModified": "2026-02-12",
+        "mainEntityOfPage": "https://cyberscryb.com/guides/json-web-token-decoder-hash-generator/",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "jwt decoder"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "decode jwt in browser"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "client-side hash generator"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "sha-256 web crypto"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "Why is browser-side decoding safer?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Online services that process tokens server-side can read and log your secrets. Browser-side tools run the decoding script locally inside your browser sandbox, ensuring no token data is transmitted over the internet."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "What algorithms does the Web Crypto API support?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "It natively supports SHA-1, SHA-256, SHA-384, and SHA-512 for cryptographic hashing, as well as modern encryption standards like AES-GCM and RSA-PSS."
+                        }
+                }
+        ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "JWT Decoder",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://cyberscryb.com/tools/jwt-decoder/"
+}
+    </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/products/">Products</a></li>
+                    <li><a href="/guides/" class="active">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="/">Tools</a>
+                    <span>/</span>
+                    <a href="/tools/jwt-decoder/">JWT Decoder</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1 itemprop="headline">Safely Inspect <span class="accent">JWTs</span> & Generate Hashes</h1>
+                <p class="guide-subtitle" itemprop="description">Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.</p>
+                <div class="guide-meta">
+                    <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-02-12" itemprop="dateModified">February 12, 2026</time></span>
+                    <span>⏱ 5 min read</span>
+                </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>To inspect JWTs safely: decode the base64url payload locally in the browser using atob(). For hashes: use the native Web Crypto API. This ensures sensitive API keys and tokens never cross the network.</p>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Skip the reading — just use the tool:</strong>
+                    <span>Jump straight to our free, privacy-first JWT Decoder.</span>
+                </div>
+                <a href="/tools/jwt-decoder/" class="cta-btn">Open JWT Decoder &rarr;</a>
+            </div>
+
+            <div class="guide-content" itemprop="articleBody">
+                <h2>The Security Risk of Third-Party Token Decoders</h2>
+                <p>Many online developer tools require you to paste JSON Web Tokens (JWT) or private data keys to inspect their parameters. If these utilities transmit your strings back to their servers, your tokens can be intercepted or logged. If your JWT contains access claims, session IDs, or private scopes, anyone who captures it can hijack your users' sessions. This guide details how to leverage client-side cryptography to decode tokens and generate standard cryptographic hashes (like SHA-256) safely in your own browser.</p>
+
+                <h2>How to Decode a JWT in the Browser (No Server Requests)</h2>
+                <p>A JWT consists of three parts separated by periods: Header (defines token type and algorithm), Payload (contains authorization claims), and Signature (verifies token integrity). These blocks are simply Base64URL-encoded strings. You can inspect the payload client-side in seconds using the native atob() method:<br><br><pre><code class="language-javascript">function decodeJWTPayload(token) {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    throw new Error("Invalid JWT layout");
+  }
+  
+  const base64Url = parts[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+
+  return JSON.parse(jsonPayload);
+}</code></pre></p>
+
+                <h2>Browser-Side Cryptographic Hashing with Web Crypto API</h2>
+                <p>Instead of sending strings to a server to generate an MD5 or SHA-256 signature, utilize your browser's native, high-performance Web Crypto API:<br><br><pre><code class="language-javascript">async function generateSHA256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}</code></pre><br>By performing operations 100% client-side, your development payloads never cross the wire.</p>
+
+                <h2>Direct Utilities on CyberScryb</h2>
+                <p>If you need to analyze tokens or generate cryptographic checksums immediately, launch our zero-server tools:</p>
+                <ul>
+                    <li><a href="/tools/jwt-decoder/">Client-Side JWT Decoder</a></li>
+                    <li><a href="/tools/hash-generator/">In-Browser Cryptographic Hash Generator</a></li>
+                </ul>
+
+
+                <!-- AdSense: Mid-Content -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>Why is browser-side decoding safer?</summary>
+                    <p>Online services that process tokens server-side can read and log your secrets. Browser-side tools run the decoding script locally inside your browser sandbox, ensuring no token data is transmitted over the internet.</p>
+                </details>
+                <details>
+                    <summary>What algorithms does the Web Crypto API support?</summary>
+                    <p>It natively supports SHA-1, SHA-256, SHA-384, and SHA-512 for cryptographic hashing, as well as modern encryption standards like AES-GCM and RSA-PSS.</p>
+                </details>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Ready to start?</strong>
+                    <span>Open the tool now to process your data. It runs 100% in your browser.</span>
+                </div>
+                <a href="/tools/jwt-decoder/" class="cta-btn">Open JWT Decoder &rarr;</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
+</body>
+
+</html>

@@ -397,6 +397,25 @@ const pages = [
             { q: 'What\'s the difference between JSON and JavaScript objects?', a: 'JSON requires double quotes for keys and strings, doesn\'t allow trailing commas, and doesn\'t support functions. JavaScript objects are more flexible.' },
             { q: 'How do I validate JSON?', a: 'Our converter validates JSON on paste. If parsing fails, it highlights the error. You can also use jsonlint.com for detailed error messages.' }
         ]
+    },
+    {
+        slug: 'json-web-token-decoder-hash-generator',
+        title: 'How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side',
+        h1: 'Safely Inspect <span class="accent">JWTs</span> & Generate Hashes',
+        subtitle: 'Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.',
+        tldr: 'To inspect JWTs safely: decode the base64url payload locally in the browser using atob(). For hashes: use the native Web Crypto API. This ensures sensitive API keys and tokens never cross the network.',
+        tool: { name: 'JWT Decoder', path: 'jwt-decoder' },
+        keywords: 'jwt decoder, decode jwt in browser, client-side hash generator, sha-256 web crypto',
+        sections: [
+            { h2: 'The Security Risk of Third-Party Token Decoders', p: 'Many online developer tools require you to paste JSON Web Tokens (JWT) or private data keys to inspect their parameters. If these utilities transmit your strings back to their servers, your tokens can be intercepted or logged. If your JWT contains access claims, session IDs, or private scopes, anyone who captures it can hijack your users\' sessions. This guide details how to leverage client-side cryptography to decode tokens and generate standard cryptographic hashes (like SHA-256) safely in your own browser.' },
+            { h2: 'How to Decode a JWT in the Browser (No Server Requests)', p: 'A JWT consists of three parts separated by periods: Header (defines token type and algorithm), Payload (contains authorization claims), and Signature (verifies token integrity). These blocks are simply Base64URL-encoded strings. You can inspect the payload client-side in seconds using the native atob() method:<br><br><pre><code class="language-javascript">function decodeJWTPayload(token) {\n  const parts = token.split(\'.\');\n  if (parts.length !== 3) {\n    throw new Error("Invalid JWT layout");\n  }\n  \n  const base64Url = parts[1];\n  const base64 = base64Url.replace(/-/g, \'+\').replace(/_/g, \'/\');\n  \n  const jsonPayload = decodeURIComponent(\n    atob(base64)\n      .split(\'\')\n      .map(c => \'%\' + (\'00\' + c.charCodeAt(0).toString(16)).slice(-2))\n      .join(\'\')\n  );\n\n  return JSON.parse(jsonPayload);\n}</code></pre>' },
+            { h2: 'Browser-Side Cryptographic Hashing with Web Crypto API', p: 'Instead of sending strings to a server to generate an MD5 or SHA-256 signature, utilize your browser\'s native, high-performance Web Crypto API:<br><br><pre><code class="language-javascript">async function generateSHA256(message) {\n  const msgBuffer = new TextEncoder().encode(message);\n  const hashBuffer = await crypto.subtle.digest(\'SHA-256\', msgBuffer);\n  const hashArray = Array.from(new Uint8Array(hashBuffer));\n  const hashHex = hashArray.map(b => b.toString(16).padStart(2, \'0\')).join(\'\');\n  return hashHex;\n}</code></pre><br>By performing operations 100% client-side, your development payloads never cross the wire.' },
+            { h2: 'Direct Utilities on CyberScryb', p: 'If you need to analyze tokens or generate cryptographic checksums immediately, launch our zero-server tools:', list: ['<a href="/tools/jwt-decoder/">Client-Side JWT Decoder</a>', '<a href="/tools/hash-generator/">In-Browser Cryptographic Hash Generator</a>'] }
+        ],
+        faqs: [
+            { q: 'Why is browser-side decoding safer?', a: 'Online services that process tokens server-side can read and log your secrets. Browser-side tools run the decoding script locally inside your browser sandbox, ensuring no token data is transmitted over the internet.' },
+            { q: 'What algorithms does the Web Crypto API support?', a: 'It natively supports SHA-1, SHA-256, SHA-384, and SHA-512 for cryptographic hashing, as well as modern encryption standards like AES-GCM and RSA-PSS.' }
+        ]
     }
 ];
 
@@ -546,6 +565,32 @@ function generatePage(page) {
     <script type="application/ld+json">
     ${softwareJsonLd}
     </script>` : ''}
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -684,7 +729,7 @@ function generateSitemap(generatedPages) {
         'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
         'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
         'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
-        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator'
+        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator', 'jwt-decoder', 'hash-generator'
     ];
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -743,7 +788,8 @@ function generateSitemap(generatedPages) {
         'seo-tag-generators-gate-meta-2026',
         'unemployment-hearing-checklist-2026',
         'what-goes-in-a-caregiver-shift-report-2026',
-        'why-vanilla-js-no-frameworks-2026'
+        'why-vanilla-js-no-frameworks-2026',
+        'court-admissible-parenting-plan-guide'
     ];
     blogPosts.forEach(post => {
         xml += `  <url><loc>${baseUrl}/blog/${post}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
@@ -762,7 +808,7 @@ function manageRobotsMeta() {
         'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
         'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
         'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
-        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator'
+        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator', 'jwt-decoder', 'hash-generator'
     ]);
 
     const dirsToProcess = [

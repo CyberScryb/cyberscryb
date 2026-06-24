@@ -165,6 +165,32 @@
     </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>

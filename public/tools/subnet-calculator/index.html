@@ -30,7 +30,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/tools/subnet-calculator/style.css">
     
     <!-- JSON-LD: WebApplication -->
     <script type="application/ld+json">
@@ -48,7 +48,7 @@
     }
     </script>
     
-    <link rel="stylesheet" href="../shared/email-capture.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -90,6 +90,32 @@
     </script>
     <meta property="og:site_name" content="CyberScryb">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -264,9 +290,9 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="script.js"></script>
-    <script src="../shared/email-capture.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/subnet-calculator/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
     <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>
 

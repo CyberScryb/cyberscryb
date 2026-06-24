@@ -17,18 +17,18 @@
     --bg-secondary: #0c0c0c;
     --bg-card: rgba(12, 12, 12, 0.85);
     --bg-panel: rgba(8, 8, 8, 0.95);
-    --border: rgba(0, 102, 255, 0.12);
-    --border-hover: rgba(0, 102, 255, 0.35);
+    --border: rgba(123, 44, 255, 0.12);
+    --border-hover: rgba(123, 44, 255, 0.35);
     --text-primary: #d4d4d4;
     --text-secondary: #707070;
     --text-muted: #444444;
-    --accent: #0066ff;
-    --accent-light: #0066ff;
+    --accent: #7b2cff;
+    --accent-light: #7b2cff;
     --accent-dark: #1e3a8a;
     --steel: #2a2a2a;
     --steel-light: #383838;
     --green: #22c55e;
-    --red: #0066ff;
+    --red: #7b2cff;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     --radius: 8px;
@@ -53,8 +53,8 @@ body {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(0, 102, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 102, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(123, 44, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 44, 255, 0.02) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
@@ -97,7 +97,7 @@ body {
 }
 
 /* Header */
-header {
+.deactivated-header {
     position: relative;
     z-index: 10;
     display: flex;
@@ -109,7 +109,7 @@ header {
     background: rgba(5, 5, 5, 0.9);
 }
 
-.logo {
+.deactivated-logo {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -119,12 +119,12 @@ header {
     text-transform: uppercase;
 }
 
-nav {
+.deactivated-nav {
     display: flex;
     gap: 24px;
 }
 
-nav a {
+.deactivated-nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.8rem;
@@ -134,7 +134,7 @@ nav a {
     transition: color var(--transition);
 }
 
-nav a:hover {
+.deactivated-nav a:hover {
     color: var(--accent-light);
 }
 
@@ -156,8 +156,8 @@ main {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 4px;
-    background: rgba(0, 102, 255, 0.08);
-    border: 1px solid rgba(0, 102, 255, 0.2);
+    background: rgba(123, 44, 255, 0.08);
+    border: 1px solid rgba(123, 44, 255, 0.2);
     color: var(--accent-light);
     font-size: 0.75rem;
     font-weight: 600;
@@ -343,14 +343,14 @@ h1 {
     margin-bottom: 20px;
 }
 
-.result-header {
+.result-.deactivated-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.result-header h3 {
+.result-.deactivated-header h3 {
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -379,7 +379,7 @@ h1 {
 
 .copy-btn {
     padding: 4px 12px;
-    background: rgba(0, 102, 255, 0.08);
+    background: rgba(123, 44, 255, 0.08);
     border: 1px solid var(--steel);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
@@ -393,9 +393,9 @@ h1 {
 }
 
 .copy-btn:hover {
-    background: rgba(0, 102, 255, 0.15);
+    background: rgba(123, 44, 255, 0.15);
     color: var(--text-primary);
-    border-color: rgba(0, 102, 255, 0.3);
+    border-color: rgba(123, 44, 255, 0.3);
 }
 
 .copy-btn.copied {
@@ -578,7 +578,7 @@ h1 {
     line-height: 1.6;
 }
 
-footer {
+.deactivated-footer {
     position: relative;
     z-index: 10;
     text-align: center;
@@ -590,12 +590,12 @@ footer {
     letter-spacing: 0.04em;
 }
 
-footer strong {
+.deactivated-footer strong {
     color: var(--accent-light);
 }
 
 @media (max-width: 600px) {
-    header {
+    .deactivated-header {
         padding: 16px 20px;
     }
 

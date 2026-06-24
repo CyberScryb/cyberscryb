@@ -30,6 +30,32 @@
 
         gtag('config', 'G-73LQZEDNR6');
     </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -225,7 +251,8 @@
     <footer>
         <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All rights reserved.</p>
         <p class="footer-sub">Free online tools for developers, marketers, and businesses.</p>
-    </footer>
+        <div style="margin-top:10px;"><a href="/privacy/">Privacy Policy</a></div>
+</footer>
 
     <!-- Pro Modal -->
     <div id="proModal" class="modal-overlay" onclick="closeProModal(event)">

@@ -12,8 +12,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/tools/humanizer/style.css">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:title" content="Remove AI Detection Free &mdash; Online Humanizer | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
@@ -50,6 +50,32 @@
         });
     })();
     </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -63,8 +89,8 @@
             <span>CyberScryb</span>
         </div>
         <nav>
-            <a href="../../index.html#tools">Tools</a>
-            <a href="../../index.html#about">About</a>
+            <a href="/index.html#tools">Tools</a>
+            <a href="/index.html#about">About</a>
         </nav>
     </header>
 
@@ -251,7 +277,7 @@
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
 
-    <script src="humanizer.js"></script>
+    <script src="/tools/humanizer/humanizer.js"></script>
     <!-- AdSense auto ad unit -->
     <div style="text-align:center;margin:20px auto;max-width:970px;">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>

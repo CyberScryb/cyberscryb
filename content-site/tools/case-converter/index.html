@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="robots" content="noindex, follow">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,7 +110,7 @@
             font-size: 0.95rem; line-height: 1.6; padding: 1.25rem; resize: vertical; outline: none;
             transition: border-color 0.3s;
         }
-        textarea.cc-box:focus { border-color: #c41e1e; }
+        textarea.cc-box:focus { border-color: #7b2cff; }
         textarea.cc-box::placeholder { color: #333; }
 
         .case-grid {
@@ -122,35 +123,61 @@
             padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer;
             transition: all 0.2s; text-align: center;
         }
-        .case-btn:hover { border-color: #c41e1e; color: #fff; transform: translateY(-1px); }
-        .case-btn.active { border-color: #c41e1e; color: #c41e1e; background: rgba(196,30,30, 0.08); }
+        .case-btn:hover { border-color: #7b2cff; color: #fff; transform: translateY(-1px); }
+        .case-btn.active { border-color: #7b2cff; color: #7b2cff; background: rgba(123, 44, 255, 0.08); }
 
         .stats-row { display: flex; gap: 1.5rem; color: #555555; font-size: 0.85rem; margin: 0.75rem 0; }
-        .stats-row span strong { color: #c41e1e; }
+        .stats-row span strong { color: #7b2cff; }
 
         .copy-btn {
-            background: rgba(196,30,30, 0.12); border: 1px solid #c41e1e; color: #c41e1e;
+            background: rgba(123, 44, 255, 0.12); border: 1px solid #7b2cff; color: #7b2cff;
             padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer;
             font-family: 'Inter', sans-serif; font-size: 0.85rem;
             transition: all 0.2s; margin-top: 0.75rem;
         }
-        .copy-btn:hover { background: #c41e1e; color: #fff; }
+        .copy-btn:hover { background: #7b2cff; color: #fff; }
 
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a { color: #7b2cff; text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -239,16 +266,16 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Word Counter</strong>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Count words, characters and reading time.</span>
             </a>
-            <a href="../url-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">URL Encoder / Decoder</strong>
+            <a href="/tools/url-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">URL Encoder / Decoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Percent-encode and decode URL strings.</span>
             </a>
-            <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Encode and decode Base64 strings.</span>
             </a>
         </div>

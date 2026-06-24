@@ -247,13 +247,13 @@
                     background: rgba(255,255,255,0.03);
                 }
                 .affiliate-link.primary {
-                    background: #0066ff;
+                    background: #7b2cff;
                     color: #000;
                     border-color: transparent;
                 }
                 .affiliate-link:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.2);
+                    box-shadow: 0 4px 16px rgba(123, 44, 255, 0.2);
                 }
                 .affiliate-subtitle {
                     font-size: 0.7rem;

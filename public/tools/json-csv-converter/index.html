@@ -18,13 +18,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css?v=20260623">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/tools/json-csv-converter/style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "DataShift &mdash; JSON &harr; CSV Converter",
+        "name": "CyberScryb &mdash; JSON &harr; CSV Converter",
         "url": "https://cyberscryb.com/tools/json-csv-converter",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Web Browser",
@@ -34,7 +34,7 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    <link rel="stylesheet" href="../shared/email-capture.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics 4 -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -76,6 +76,32 @@
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -223,7 +249,7 @@
         </section>
 
         <section class="features" id="how-it-works">
-            <h2>Why Use DataShift?</h2>
+            <h2>Why Use CyberScryb?</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
@@ -253,12 +279,12 @@
             <div class="faq-list">
                 <details class="faq-item">
                     <summary>Is my data safe?</summary>
-                    <p>Yes &mdash; DataShift runs entirely in your browser. No data is sent to any server. You can even use it
+                    <p>Yes &mdash; CyberScryb runs entirely in your browser. No data is sent to any server. You can even use it
                         offline after the page loads.</p>
                 </details>
                 <details class="faq-item">
                     <summary>What JSON format is supported?</summary>
-                    <p>DataShift accepts an array of flat objects, e.g.,
+                    <p>CyberScryb accepts an array of flat objects, e.g.,
                         <code>[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]</code>. Nested objects will be
                         stringified.
                     </p>
@@ -275,7 +301,7 @@
                 </details>
                 <details class="faq-item">
                     <summary>Can I use this for commercial purposes?</summary>
-                    <p>Absolutely. DataShift is free for personal and commercial use. No attribution required.</p>
+                    <p>Absolutely. CyberScryb is free for personal and commercial use. No attribution required.</p>
                 </details>
             </div>
         </section>
@@ -382,9 +408,9 @@
     </section>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="script.js"></script>
-    <script src="../shared/email-capture.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/json-csv-converter/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </html>

@@ -15,13 +15,13 @@
     --bg-primary: #050505;
     --bg-card: rgba(12, 12, 12, 0.85);
     --bg-panel: rgba(8, 8, 8, 0.95);
-    --border: rgba(0, 102, 255, 0.12);
-    --border-hover: rgba(0, 102, 255, 0.35);
+    --border: rgba(123, 44, 255, 0.12);
+    --border-hover: rgba(123, 44, 255, 0.35);
     --text-primary: #d4d4d4;
     --text-secondary: #707070;
     --text-muted: #444444;
-    --accent: #0066ff;
-    --accent-light: #0066ff;
+    --accent: #7b2cff;
+    --accent-light: #7b2cff;
     --accent-dark: #1e3a8a;
     --steel: #2a2a2a;
     --green: #22c55e;
@@ -48,7 +48,7 @@ body {
 .bg-grid {
     position: fixed;
     inset: 0;
-    background-image: linear-gradient(rgba(0, 102, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 102, 255, 0.02) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(123, 44, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(123, 44, 255, 0.02) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
@@ -78,7 +78,7 @@ body {
     right: -100px;
 }
 
-header {
+.deactivated-header {
     position: relative;
     z-index: 10;
     display: flex;
@@ -90,7 +90,7 @@ header {
     background: rgba(5, 5, 5, 0.9);
 }
 
-.logo {
+.deactivated-logo {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -100,12 +100,12 @@ header {
     text-transform: uppercase;
 }
 
-nav {
+.deactivated-nav {
     display: flex;
     gap: 24px;
 }
 
-nav a {
+.deactivated-nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.75rem;
@@ -115,7 +115,7 @@ nav a {
     transition: color var(--transition);
 }
 
-nav a:hover {
+.deactivated-nav a:hover {
     color: var(--accent-light);
 }
 
@@ -136,8 +136,8 @@ main {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 4px;
-    background: rgba(0, 102, 255, 0.08);
-    border: 1px solid rgba(0, 102, 255, 0.2);
+    background: rgba(123, 44, 255, 0.08);
+    border: 1px solid rgba(123, 44, 255, 0.2);
     color: var(--accent-light);
     font-size: 0.7rem;
     font-weight: 700;
@@ -427,7 +427,7 @@ select:focus {
     top: 12px;
     right: 12px;
     padding: 6px 14px;
-    background: rgba(0, 102, 255, 0.08);
+    background: rgba(123, 44, 255, 0.08);
     border: 1px solid var(--steel);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
@@ -441,7 +441,7 @@ select:focus {
 }
 
 .copy-btn:hover {
-    background: rgba(0, 102, 255, 0.15);
+    background: rgba(123, 44, 255, 0.15);
     color: var(--text-primary);
 }
 
@@ -564,7 +564,7 @@ select:focus {
     line-height: 1.6;
 }
 
-footer {
+.deactivated-footer {
     position: relative;
     z-index: 10;
     text-align: center;
@@ -576,12 +576,12 @@ footer {
     letter-spacing: 0.04em;
 }
 
-footer strong {
+.deactivated-footer strong {
     color: var(--accent-light);
 }
 
 @media (max-width: 700px) {
-    header {
+    .deactivated-header {
         padding: 16px 20px;
     }
 

@@ -11,9 +11,35 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/tools/humanizer/style.css">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -30,8 +56,8 @@
             <span>CyberScryb</span>
         </div>
         <nav>
-            <a href="../../index.html#tools">Tools</a>
-            <a href="../../index.html#about">About</a>
+            <a href="/index.html#tools">Tools</a>
+            <a href="/index.html#about">About</a>
         </nav>
     </header>
 
@@ -185,8 +211,8 @@
             </div>
 
             <div class="related-tools">
-                <p>Related: <a href="rewrite-chatgpt-text.html">Rewrite ChatGPT
-                        Text</a> | <a href="remove-ai-detection.html">Remove AI
+                <p>Related: <a href="/tools/humanizer/rewrite-chatgpt-text.html">Rewrite ChatGPT
+                        Text</a> | <a href="/tools/humanizer/remove-ai-detection.html">Remove AI
                         Detection</a></p>
             </div>
         </section>
@@ -238,9 +264,10 @@
     <footer>
         <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All rights reserved.</p>
         <p class="footer-sub">Privacy First: Your style samples stay in your browser.</p>
-    </footer>
+        <div style="margin-top:10px;"><a href="/privacy/">Privacy Policy</a></div>
+</footer>
 
-    <script src="humanizer.js"></script>
+    <script src="/tools/humanizer/humanizer.js"></script>
 </body>
 
 </html>

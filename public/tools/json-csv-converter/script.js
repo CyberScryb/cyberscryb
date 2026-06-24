@@ -1,4 +1,4 @@
-// DataShift — JSON ↔ CSV Converter
+// CyberScryb — JSON ↔ CSV Converter
 // 100% client-side conversion logic
 
 let currentMode = 'json-to-csv';

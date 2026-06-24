@@ -26,6 +26,32 @@
         gtag('config', 'G-73LQZEDNR6');
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -81,7 +107,7 @@
                         <div class="blog-card-content">
                             <h3><a href="#">The AI Humanizer</a></h3>
                             <p>Remove AI detection and make your content sound human. Free tool included.</p>
-                            <a href="tools/humanizer/index.html" class="read-more">Use Tool &rarr;</a>
+                            <a href="/tools/humanizer/" class="read-more">Use Tool &rarr;</a>
                         </div>
                     </div>
                     <div class="blog-card">
@@ -115,9 +141,9 @@
                     <p>No social media. No distractions. Just tools that work.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="disclosure.html">Affiliate Disclosure</a>
-                    <a href="contact.html">Contact</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/contact/">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">

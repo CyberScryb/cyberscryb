@@ -104,7 +104,7 @@
         .ue-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a { color: #7b2cff; text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
 
@@ -114,11 +114,11 @@
             font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
             padding: 0.55rem 1.4rem; border-radius: 7px; cursor: pointer; transition: all 0.2s;
         }
-        .mode-toggle button.active { background: #c41e1e; color: #fff; }
+        .mode-toggle button.active { background: #7b2cff; color: #fff; }
 
         .radio-row { display: flex; gap: 1.5rem; margin: 0.5rem 0 1rem; flex-wrap: wrap; }
         .radio-row label { color: #aaa; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
-        .radio-row input[type="radio"] { accent-color: #c41e1e; }
+        .radio-row input[type="radio"] { accent-color: #7b2cff; }
 
         .io-area {
             width: 100%; min-height: 180px; background: #141414; border: 1px solid rgba(255,255,255,0.12);
@@ -127,7 +127,7 @@
             padding: 1.2rem; resize: vertical; outline: none; transition: border-color 0.3s;
             word-break: break-all;
         }
-        .io-area:focus { border-color: #c41e1e; box-shadow: 0 0 20px rgba(196,30,30,0.1); }
+        .io-area:focus { border-color: #7b2cff; box-shadow: 0 0 20px rgba(123, 44, 255,0.1); }
         .io-area::placeholder { color: #333; }
 
         .io-label {
@@ -141,7 +141,7 @@
             font-family: 'Inter', sans-serif; font-size: 0.8rem; padding: 0.5rem 1rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .action-btn:hover { border-color: #c41e1e; color: #c41e1e; }
+        .action-btn:hover { border-color: #7b2cff; color: #7b2cff; }
 
         .examples { margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .ex-btn {
@@ -149,13 +149,13 @@
             font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
             padding: 0.4rem 0.7rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }
-        .ex-btn:hover { border-color: #c41e1e; color: #ccc; border-style: solid; }
+        .ex-btn:hover { border-color: #7b2cff; color: #ccc; border-style: solid; }
 
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
 
@@ -163,6 +163,32 @@
     </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -252,16 +278,16 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Encode and decode Base64 strings for APIs and URLs.</span>
             </a>
-            <a href="../html-entity/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">HTML Entity Encoder</strong>
+            <a href="/tools/html-entity/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">HTML Entity Encoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Escape special characters for HTML output.</span>
             </a>
-            <a href="../jwt-decoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
+            <a href="/tools/jwt-decoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Inspect JSON Web Tokens safely in your browser.</span>
             </a>
         </div>

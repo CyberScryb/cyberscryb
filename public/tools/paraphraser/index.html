@@ -21,7 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="../humanizer/style.css">
+    <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -64,6 +64,32 @@
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -383,10 +409,10 @@
     </script>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="../shared/ai-examples.js"></script>
-    <script src="../shared/ai-tool.js"></script>
-    <script src="paraphraser.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/shared/ai-examples.js"></script>
+    <script src="/tools/shared/ai-tool.js"></script>
+    <script src="/tools/paraphraser/paraphraser.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </body>
 

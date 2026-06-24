@@ -59,6 +59,32 @@
         });
     })();
     </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -67,11 +93,7 @@
             <div class="nav-container">
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="logo">
-                            <rect x="2" y="2" width="28" height="28" rx="6" stroke="#00d4ff" stroke-width="2.5" />
-                            <path d="M10 11h12M10 16h8M10 21h10" stroke="#00d4ff" stroke-width="2"
-                                stroke-linecap="round" />
-                        </svg>
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
                             style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
@@ -139,9 +161,9 @@
                     <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/privacy.html">Privacy Policy</a>
-                    <a href="/disclosure.html">Affiliate Disclosure</a>
-                    <a href="/contact.html">Contact</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/contact/">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">

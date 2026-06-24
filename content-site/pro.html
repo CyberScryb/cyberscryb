@@ -34,24 +34,24 @@
     --bg: #020205;
     --fg: #f1f3f9;
     --muted: #9ba1b4;
-    --accent: #0066ff;
-    --accent2: #0066ff;
-    --line: rgba(0, 102, 255, 0.15);
+    --accent: #7b2cff;
+    --accent2: #00d4ff;
+    --line: rgba(123, 44, 255, 0.15);
     --card: rgba(10, 11, 16, 0.6);
 }
 * { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); background-image: radial-gradient(circle at 20% 20%, rgba(30, 64, 175,0.08), transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 102, 255,0.08), transparent 50%); min-height: 100vh; }
+body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); background-image: radial-gradient(circle at 20% 20%, rgba(123, 44, 255, 0.08), transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.08), transparent 50%); min-height: 100vh; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
 .hero { text-align: center; padding: 60px 0 50px; }
-.hero .eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-family: 'Orbitron', sans-serif; }
+.hero .eyebrow { color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-family: 'Orbitron', sans-serif; }
 .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 52px; font-weight: 900; line-height: 1.1; margin: 16px 0 20px; color: #ffffff; }
 .hero p { font-size: 18px; color: var(--muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
 @media (max-width: 600px) { .hero h1 { font-size: 36px; } }
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; margin: 0 auto 40px; }
 @media (max-width: 600px) { .plans { grid-template-columns: 1fr; } }
 .plan { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; text-align: center; text-decoration: none; color: inherit; position: relative; transition: all 0.3s ease; }
-.plan:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15); }
-.plan.featured { border-color: var(--accent); background: rgba(0, 102, 255, 0.08); }
+.plan:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(123, 44, 255, 0.15); }
+.plan.featured { border-color: var(--accent); background: rgba(123, 44, 255, 0.08); }
 .plan.featured::before { content: "★ BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #ffffff; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; font-family: 'Orbitron'; }
 .plan .name { font-weight: 600; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-family: 'Orbitron'; }
 .plan .price { font-size: 60px; font-weight: 900; color: var(--accent); margin: 16px 0 4px; line-height: 1; font-family: 'Orbitron'; }
@@ -104,6 +104,32 @@ footer a:hover { color: var(--accent); }
         ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
             window.addEventListener(ev, loadAdsense, { once: true, passive: true });
         });
+    })();
+    </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
     })();
     </script>
 </head>

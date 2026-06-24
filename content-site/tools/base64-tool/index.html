@@ -17,12 +17,11 @@
     <meta name="twitter:description" content="Convert your data with this fast base64 encoder decoder tool client-side. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/base64-tool/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/tools/base64-tool/style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -37,7 +36,7 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    <link rel="stylesheet" href="../shared/email-capture.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics 4 -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -79,6 +78,32 @@
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -87,22 +112,37 @@
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#c41e1e;">Base64 Encoder/Decoder</span>
+        <span style="color:#7b2cff;">Base64 Encoder/Decoder</span>
     </nav>
     <div class="bg-grid"></div>
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
 
-    <header>
-        <div class="logo">
-            <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-            <span>CyberScryb</span>
-        </div>
-        <nav>
-            <a href="/tools/">All Tools</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#faq">FAQ</a>
-            <a href="/blog/">Blog</a>
+        <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/products/">Products</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -264,16 +304,16 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
+            <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert data between JSON and CSV formats instantly.</span>
             </a>
-            <a href="../uuid-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
+            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
                 <span style="font-size:0.85rem; color:#878787;">Generate unique identifiers for keys, tokens, and records.</span>
             </a>
-            <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown to clean HTML and back.</span>
             </a>
         </div>
@@ -283,20 +323,36 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/base64-encode-decode-guide/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">?? Base64 Encoding & Decoding Guide</strong>
+            <a href="/guides/base64-encode-decode-guide/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Base64 Encoding & Decoding Guide</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
-            <a href="/guides/base64-image-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">?? Base64 Image Encoder Guide</strong>
+            <a href="/guides/base64-image-encoder/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Base64 Image Encoder Guide</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
         </div>
     </section>
 
-    <footer>
-        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All rights reserved.</p>
-        <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
+        <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <p>No social media. No distractions. Just tools that work.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- AdSense: After Footer -->
@@ -305,9 +361,10 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="script.js"></script>
-    <script src="../shared/email-capture.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/js/script.js?v=20260623"></script>
+    <script src="/tools/base64-tool/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </html>

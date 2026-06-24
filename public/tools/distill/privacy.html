@@ -54,6 +54,32 @@
         });
     })();
     </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -140,7 +166,8 @@
         <div class="container">
             <p>&copy; 2026 CyberScryb LLC. All rights reserved.</p>
         </div>
-    </footer>
+        <div style="margin-top:10px;"><a href="/privacy/">Privacy Policy</a></div>
+</footer>
     <!-- AdSense auto ad unit -->
     <div style="text-align:center;margin:20px auto;max-width:970px;">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>

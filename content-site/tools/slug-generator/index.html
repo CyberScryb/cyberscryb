@@ -108,17 +108,17 @@
             color: #ededed; font-family: 'Inter', sans-serif; font-size: 1.1rem;
             padding: 1.25rem 1.5rem; outline: none; transition: border-color 0.3s;
         }
-        .sg-input:focus { border-color: #c41e1e; }
+        .sg-input:focus { border-color: #7b2cff; }
         .sg-input::placeholder { color: #333; }
 
         .sg-output-box {
             margin-top: 1.5rem; background: linear-gradient(145deg, #111111, #0a0a0a);
-            border: 1px solid #c41e1e; border-radius: 12px; padding: 1.5rem;
+            border: 1px solid #7b2cff; border-radius: 12px; padding: 1.5rem;
             display: flex; align-items: center; gap: 1rem; justify-content: space-between;
             flex-wrap: wrap;
         }
         .sg-output {
-            font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: #c41e1e;
+            font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: #7b2cff;
             word-break: break-all; flex: 1 1 300px;
         }
         .sg-output.empty { color: #444; font-size: 1rem; }
@@ -135,17 +135,17 @@
             width: 100%; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
             color: #ededed; font-family: 'Inter', sans-serif; padding: 0.5rem 0.75rem; outline: none;
         }
-        .sg-option select:focus, .sg-option input[type="number"]:focus { border-color: #c41e1e; }
+        .sg-option select:focus, .sg-option input[type="number"]:focus { border-color: #7b2cff; }
         .sg-toggle { display: flex; align-items: center; gap: 0.5rem; color: #ccc; font-size: 0.9rem; cursor: pointer; }
-        .sg-toggle input { width: 18px; height: 18px; accent-color: #c41e1e; }
+        .sg-toggle input { width: 18px; height: 18px; accent-color: #7b2cff; }
 
         .action-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #ccc;
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .action-btn:hover { border-color: #c41e1e; color: #c41e1e; }
-        .action-btn.primary { background: #c41e1e; border-color: #c41e1e; color: #fff; }
+        .action-btn:hover { border-color: #7b2cff; color: #7b2cff; }
+        .action-btn.primary { background: #7b2cff; border-color: #7b2cff; color: #fff; }
         .action-btn.primary:hover { background: #a01818; }
 
         .sg-meta { font-size: 0.8rem; color: #555555; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; }
@@ -154,17 +154,43 @@
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #c41e1e; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #c41e1e; text-decoration: none; }
+        .breadcrumb a { color: #7b2cff; text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -259,16 +285,16 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
                 <span style="font-size:0.85rem; color:#878787;">Build meta title, description, and Open Graph tags for your new URL.</span>
             </a>
-            <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown drafts into publish-ready HTML.</span>
             </a>
-            <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Word Counter</strong>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Count words & characters before you trim a title.</span>
             </a>
         </div>

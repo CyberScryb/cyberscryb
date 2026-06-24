@@ -1,5 +1,5 @@
 /* =============================
-   DataShift — JSON ↔ CSV Converter
+   CyberScryb — JSON ↔ CSV Converter
    DARTH VADER EDITION
    Deep black / Imperial red / Gunmetal steel
    ============================= */
@@ -17,19 +17,19 @@
     --bg-secondary: #0c0c0c;
     --bg-card: rgba(12, 12, 12, 0.85);
     --bg-panel: rgba(8, 8, 8, 0.95);
-    --border: rgba(0, 102, 255, 0.12);
-    --border-hover: rgba(0, 102, 255, 0.35);
+    --border: rgba(123, 44, 255, 0.12);
+    --border-hover: rgba(123, 44, 255, 0.35);
     --text-primary: #d4d4d4;
     --text-secondary: #707070;
     --text-muted: #444444;
-    --accent: #0066ff;
-    --accent-light: #0066ff;
-    --accent-glow: rgba(0, 102, 255, 0.2);
+    --accent: #7b2cff;
+    --accent-light: #7b2cff;
+    --accent-glow: rgba(123, 44, 255, 0.2);
     --accent-dark: #1e3a8a;
     --steel: #2a2a2a;
     --steel-light: #383838;
     --green: #22c55e;
-    --red: #0066ff;
+    --red: #7b2cff;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     --radius: 8px;
@@ -56,8 +56,8 @@ body {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(0, 102, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 102, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(123, 44, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 44, 255, 0.02) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
@@ -100,7 +100,7 @@ body {
 }
 
 /* Header */
-header {
+.deactivated-header {
     position: relative;
     z-index: 10;
     display: flex;
@@ -112,7 +112,7 @@ header {
     background: rgba(5, 5, 5, 0.9);
 }
 
-.logo {
+.deactivated-logo {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -123,12 +123,12 @@ header {
     color: var(--text-primary);
 }
 
-nav {
+.deactivated-nav {
     display: flex;
     gap: 24px;
 }
 
-nav a {
+.deactivated-nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.8rem;
@@ -138,7 +138,7 @@ nav a {
     transition: color var(--transition);
 }
 
-nav a:hover {
+.deactivated-nav a:hover {
     color: var(--accent-light);
 }
 
@@ -161,8 +161,8 @@ main {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 4px;
-    background: rgba(0, 102, 255, 0.08);
-    border: 1px solid rgba(0, 102, 255, 0.2);
+    background: rgba(123, 44, 255, 0.08);
+    border: 1px solid rgba(123, 44, 255, 0.2);
     color: var(--accent-light);
     font-size: 0.75rem;
     font-weight: 600;
@@ -256,8 +256,8 @@ h1 {
     left: 3px;
     width: calc(50% - 3px);
     height: calc(100% - 6px);
-    background: rgba(0, 102, 255, 0.12);
-    border: 1px solid rgba(0, 102, 255, 0.25);
+    background: rgba(123, 44, 255, 0.12);
+    border: 1px solid rgba(123, 44, 255, 0.25);
     border-radius: var(--radius-sm);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
@@ -289,16 +289,16 @@ h1 {
     border-color: var(--border-hover);
 }
 
-.panel-header {
+.panel-.deactivated-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 14px 18px;
     border-bottom: 1px solid var(--steel);
-    background: rgba(0, 102, 255, 0.03);
+    background: rgba(123, 44, 255, 0.03);
 }
 
-.panel-header h2 {
+.panel-.deactivated-header h2 {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -316,7 +316,7 @@ h1 {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(0, 102, 255, 0.06);
+    background: rgba(123, 44, 255, 0.06);
     border: 1px solid var(--steel);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
@@ -330,9 +330,9 @@ h1 {
 }
 
 .icon-btn:hover {
-    background: rgba(0, 102, 255, 0.12);
+    background: rgba(123, 44, 255, 0.12);
     color: var(--text-primary);
-    border-color: rgba(0, 102, 255, 0.3);
+    border-color: rgba(123, 44, 255, 0.3);
 }
 
 .icon-btn.success {
@@ -369,11 +369,11 @@ textarea::-webkit-scrollbar-track {
 }
 
 textarea::-webkit-scrollbar-thumb {
-    background: rgba(0, 102, 255, 0.2);
+    background: rgba(123, 44, 255, 0.2);
     border-radius: 2px;
 }
 
-.panel-footer {
+.panel-.deactivated-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -392,7 +392,7 @@ textarea::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(0, 102, 255, 0.06);
+    background: rgba(123, 44, 255, 0.06);
     border: 1px solid var(--steel);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
@@ -406,7 +406,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .file-upload:hover {
-    background: rgba(0, 102, 255, 0.12);
+    background: rgba(123, 44, 255, 0.12);
     color: var(--text-primary);
 }
 
@@ -484,8 +484,8 @@ textarea::-webkit-scrollbar-thumb {
     gap: 10px;
     padding: 12px 18px;
     margin-top: 16px;
-    background: rgba(0, 102, 255, 0.08);
-    border: 1px solid rgba(0, 102, 255, 0.2);
+    background: rgba(123, 44, 255, 0.08);
+    border: 1px solid rgba(123, 44, 255, 0.2);
     border-radius: var(--radius-sm);
     color: var(--accent-light);
     font-size: 0.85rem;
@@ -625,7 +625,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .faq-item code {
-    background: rgba(0, 102, 255, 0.08);
+    background: rgba(123, 44, 255, 0.08);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: var(--font-mono);
@@ -634,7 +634,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 /* Footer */
-footer {
+.deactivated-footer {
     position: relative;
     z-index: 10;
     text-align: center;
@@ -646,13 +646,13 @@ footer {
     letter-spacing: 0.04em;
 }
 
-footer strong {
+.deactivated-footer strong {
     color: var(--accent-light);
 }
 
 /* Responsive */
 @media (max-width: 800px) {
-    header {
+    .deactivated-header {
         padding: 16px 20px;
     }
 

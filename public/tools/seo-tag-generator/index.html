@@ -21,8 +21,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css?v=20260623">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/tools/seo-tag-generator/style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -37,7 +37,7 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    <link rel="stylesheet" href="../shared/email-capture.css">
+    <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics 4 -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -79,6 +79,32 @@
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -381,9 +407,9 @@
     </section>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="script.js"></script>
-    <script src="../shared/email-capture.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/seo-tag-generator/script.js"></script>
+    <script src="/tools/shared/email-capture.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 
 <script src="/js/cs-pro-widget.js?v=2" defer></script>
 </html>

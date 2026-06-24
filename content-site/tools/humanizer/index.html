@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
@@ -68,6 +68,32 @@
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -76,7 +102,7 @@
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#c41e1e;">AI Humanizer</span>
+        <span style="color:#7b2cff;">AI Humanizer</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -111,9 +137,9 @@
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
                 <div class="badge"
-                    style="background: rgba(196,30,30, 0.1); color: #c41e1e; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(196,30,30, 0.3);">
+                    style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
                     ✨ New Tool</div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">Anti-AI <span style="color: #c41e1e;">Humanizer</span>
+                <h1 class="hero-title" style="font-size: 2.5rem;">Anti-AI <span style="color: #7b2cff;">Humanizer</span>
                 </h1>
                 <p class="hero-subtitle">Stop sounding like a robot. Rewrite AI text with your unique voice.</p>
             </div>
@@ -127,7 +153,7 @@
                         style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">📥 Input</h2>
-                            <span class="step-badge" style="background: #c41e1e; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
                         </div>
 
                         <div class="input-group">
@@ -156,7 +182,7 @@
                         </div>
 
                         <button id="humanize-btn" class="primary-btn"
-                            style="background: linear-gradient(135deg, #c41e1e, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
+                            style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
                             <span class="btn-text">Humanize Text</span>
                             <span class="btn-icon">✨</span>
                         </button>
@@ -170,7 +196,7 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard"
-                                    style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #c41e1e;">📋</button>
+                                    style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">📋</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
@@ -195,8 +221,8 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #c41e1e;"></div>
-                                <p style="color: #c41e1e;">Analyzing style & rewriting...</p>
+                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
+                                <p style="color: #7b2cff;">Analyzing style & rewriting...</p>
                             </div>
                         </div>
                         <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
@@ -213,7 +239,7 @@
                         <thead>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                                 <th style="padding: 1rem; color: #fff;">Feature</th>
-                                <th class="highlight" style="padding: 1rem; color: #c41e1e;">CyberScryb Humanizer</th>
+                                <th class="highlight" style="padding: 1rem; color: #7b2cff;">CyberScryb Humanizer</th>
                                 <th style="padding: 1rem; color: #878787;">ChatGPT / Claude</th>
                                 <th style="padding: 1rem; color: #878787;">Other "Humanizers"</th>
                             </tr>
@@ -221,19 +247,19 @@
                         <tbody>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                                 <td style="padding: 1rem;"><strong>Style Matching</strong></td>
-                                <td class="check" style="color: #c41e1e;">✅ Custom (Few-Shot)</td>
+                                <td class="check" style="color: #7b2cff;">✅ Custom (Few-Shot)</td>
                                 <td style="color: #555555;">❌ Generic</td>
                                 <td style="color: #555555;">❌ Random</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                                 <td style="padding: 1rem;"><strong>Privacy</strong></td>
-                                <td class="check" style="color: #c41e1e;">✅ Secure Backend</td>
+                                <td class="check" style="color: #7b2cff;">✅ Secure Backend</td>
                                 <td style="color: #555555;">❌ Cloud (Logged)</td>
                                 <td style="color: #555555;">❌ Cloud (Logged)</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                                 <td style="padding: 1rem;"><strong>Cost</strong></td>
-                                <td class="check" style="color: #c41e1e;">✅ Free tier + $5/mo Pro</td>
+                                <td class="check" style="color: #7b2cff;">✅ Free tier + $5/mo Pro</td>
                                 <td style="color: #555555;">❌ $20+ /mo</td>
                                 <td style="color: #555555;">❌ $15+ /mo</td>
                             </tr>
@@ -259,9 +285,9 @@
                             </ul>
                         </div>
                         <!-- Pro Monthly -->
-                        <div style="background:#0a0a0a; border:2px solid #c41e1e; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#c41e1e,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#c41e1e; margin-bottom:0.5rem;">Pro</div>
+                        <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -270,7 +296,7 @@
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#c41e1e,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Upgrade to Pro</a>
                         </div>
                         <!-- Annual -->
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
@@ -353,16 +379,16 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="../gig-auto-pilot/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Gig Auto-Pilot</strong>
+            <a href="/tools/gig-auto-pilot/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Gig Auto-Pilot</strong>
                 <span style="font-size:0.85rem; color:#878787;">Automate freelance gig workflows and proposals.</span>
             </a>
-            <a href="../word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Word Counter</strong>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Count words, characters, and reading time instantly.</span>
             </a>
-            <a href="../markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML and back in seconds.</span>
             </a>
         </div>
@@ -372,8 +398,8 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#c41e1e'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#c41e1e; display:block; margin-bottom:0.25rem;">?? Best Free Developer Tools Online</strong>
+            <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Best Free Developer Tools Online</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
         </div>
@@ -383,7 +409,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="../../images/cyberscryb-logo.png" alt="CyberScryb" class="footer-logo"
+                    <img src="/images/cyberscryb-logo.png" alt="CyberScryb" class="footer-logo"
                         style="display:none;"> <!-- Hidden broken img, rely on text until fixed -->
                     <span
                         style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
@@ -433,9 +459,9 @@
     </script>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="../shared/ai-examples.js"></script>
-    <script src="humanizer.js"></script>
-    <script src="../shared/affiliate-panel.js"></script>
+    <script src="/tools/shared/ai-examples.js"></script>
+    <script src="/tools/humanizer/humanizer.js"></script>
+    <script src="/tools/shared/affiliate-panel.js"></script>
 
 <section style="max-width:720px; margin:3rem auto; padding:0 1.5rem; font-family:inherit; line-height:1.7; color:inherit;">
   <h2>What This AI Humanizer Does</h2>
