@@ -238,7 +238,7 @@ const LegacySlugRedirect = () => {
 export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <AIOptInModal />
         <Routes>
           <Route path="/" element={<Layout />}>
