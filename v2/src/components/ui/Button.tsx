@@ -6,18 +6,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   isLoading?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ 
-  className, variant = 'primary', size = 'md', isLoading, children, disabled, ...props 
+  className, variant = 'primary', size = 'md', isLoading, leftIcon, rightIcon, children, disabled, ...props 
 }, ref) => {
-  const baseStyles = 'inline-flex items-center justify-center whitespace-nowrap rounded font-bold uppercase tracking-widest transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#34F5C5] disabled:pointer-events-none disabled:opacity-50';
+  const baseStyles = 'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base disabled:pointer-events-none disabled:opacity-50 cursor-pointer';
   
   const variants = {
-    primary: 'bg-[#34F5C5]/20 text-[#34F5C5] hover:bg-[#34F5C5]/30 border border-[#34F5C5]/50 shadow-[0_0_10px_rgba(52,245,197,0)] hover:shadow-[0_0_10px_rgba(52,245,197,0.2)]',
-    secondary: 'bg-elevated border border-strong text-muted hover:text-primary hover:border-subtle hover:bg-surface',
+    primary: 'bg-accent text-white hover:bg-hover border border-accent/20 shadow-[0_0_12px_var(--color-accent-glow)] hover:shadow-[0_0_15px_var(--color-hover-glow)] hover:scale-[1.01] active:scale-[0.99]',
+    secondary: 'bg-elevated border border-strong text-muted hover:text-primary hover:border-subtle hover:bg-surface hover:scale-[1.01] active:scale-[0.99]',
     ghost: 'hover:bg-surface hover:text-primary text-muted',
-    destructive: 'bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20'
+    destructive: 'bg-danger/10 text-danger hover:bg-danger/20 border border-danger/20 active:scale-[0.99]'
   };
 
   const sizes = {
@@ -34,8 +36,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
       disabled={isLoading || disabled}
       {...props}
     >
-      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin text-current" />}
+      {!isLoading && leftIcon && <span className="mr-2 inline-flex shrink-0">{leftIcon}</span>}
       {children}
+      {!isLoading && rightIcon && <span className="ml-2 inline-flex shrink-0">{rightIcon}</span>}
     </button>
   );
 });

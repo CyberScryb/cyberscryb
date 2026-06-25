@@ -9,6 +9,8 @@
 
 **Act, don't advise.** If there's a problem, fix it. If there's an obvious improvement, make it. Stop creating patch files and handing them back — find the file, edit it, deploy it, confirm it's live. The only time to ask first is when the action is irreversible, ambiguous in its intent, or touches money. Everything else: do it.
 
+**Always push to main to deploy.** Do NOT attempt manual Firebase CLI deployments (e.g. `firebase deploy`). All deployments must be triggered by pushing or merging to the `main` branch, which runs the GitHub Actions workflow (`deploy.yml`).
+
 **No more loops.** If the same issue appears in two consecutive sessions without being resolved, that's a failure. Escalate it, make noise, find a different path — don't just note it again.
 
 **Own the outcome.** Don't stop at "I created a file you need to paste." That's half a job. Push through to the live state. Use GitHub, Vercel, Netlify, Cloudflare, Stripe — whatever MCP is available — to make the change land in production.
