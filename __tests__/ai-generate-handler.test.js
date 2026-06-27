@@ -23,10 +23,15 @@ const { isAllowedReferer, sanitizeParams, AI_PROMPTS, ALLOWED_HOSTS } = require(
 // ─── isAllowedReferer ────────────────────────────────────
 
 describe('isAllowedReferer', () => {
-    test('allows null/undefined referer (direct access)', () => {
-        expect(isAllowedReferer(null)).toBe(true);
-        expect(isAllowedReferer(undefined)).toBe(true);
-        expect(isAllowedReferer('')).toBe(true);
+    test('rejects requests with no referer and no origin (fail closed against scripted abuse)', () => {
+        expect(isAllowedReferer(null)).toBe(false);
+        expect(isAllowedReferer(undefined)).toBe(false);
+        expect(isAllowedReferer('')).toBe(false);
+    });
+
+    test('falls back to Origin header when Referer is absent', () => {
+        expect(isAllowedReferer(null, 'https://cyberscryb.com')).toBe(true);
+        expect(isAllowedReferer(undefined, 'https://evil.com')).toBe(false);
     });
 
     test('allows requests from cyberscryb.com', () => {

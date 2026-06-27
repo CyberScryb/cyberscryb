@@ -130,6 +130,17 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-27)
+
+**Gemini model tiering + security hardening + SEO crawlability checklist**
+- **Gemini three-tier model strategy**: `functions/index.js` now routes every AI call through `GEMINI_MODEL_PRO` (`gemini-3.1-pro-preview`, reserved for legal/financial/medical accuracy-critical tools: humanizer, gig-work, ai-detector, hardship-letter, appeal-letter, custody-document, caregiver-report, budget-planner, child/spousal-support calculators, med-administration-log, behavioral-log), `GEMINI_MODEL_FLASH` (`gemini-3.5-flash`, general copywriting default), and `GEMINI_MODEL_LITE` (`gemini-3.1-flash-lite`, short/formulaic high-volume outputs: bio-generator, meta-description, resume-bullets, tweet-generator, seo-title). Confirmed via WebSearch that "Gemini 3.5 Flash-Lite" does not exist — used `gemini-3.1-flash-lite` instead.
+- **Critical security fix**: `isAllowedReferer()` previously failed OPEN when no Referer header was present (any script could bypass the domain check by omitting it). Now fails CLOSED, with an `Origin` header fallback for legitimate referer-less browser requests.
+- **Input validation parity**: added length/presence validation (max 5000 chars) to `rewriteText` (humanizer) and `generateGigWork` endpoints, matching protection the generic AI generator already had.
+- **Fabricated structured data removed**: deleted invisible/fake `aggregateRating` JSON-LD fields (no corresponding visible rating UI) from `password-checker`, `humanizer/rewrite-chatgpt-text`, and `humanizer/remove-ai-detection` pages — this was a genuine Google Rich Results policy violation.
+- **Internal linking gap fixed**: added `ai-detector` and `resume-bullets` to `about.html`'s tool list — both were under-linked site-wide per audit (4 and 7 inbound links respectively, missing from about.html, footer, and guides).
+- **Verified clean**: robots.txt allows crawling site-wide; firebase.json has no crawler-blocking headers; page-experience fundamentals (viewport, font-display swap, delayed AdSense, no interstitials) already solid.
+- Rebuilt via `sync_and_build.py`, full Jest suite 326/326 passing, pushed to `main`.
+
 ## Recent Changes (Session 2026-06-23)
 
 **Indexation Pruning & Content Enrichment (AdSense "Low Value Content" Fix)**
