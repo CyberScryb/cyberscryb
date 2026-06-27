@@ -32,13 +32,17 @@ function logEvent(eventType, metadata = {}) {
         hour: new Date().getHours(),
         ...metadata
     };
-    
+
     analyticsStore.events.push(event);
-    
-    // Flush to Firestore every 100 events or every 5 minutes
+
+    // Flush to Firestore every 100 events or every 5 minutes.
+    // Return the promise so serverless callers can await it before the
+    // response is sent — otherwise the container may pause before the
+    // write completes.
     if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
-        flushAnalytics();
+        return flushAnalytics();
     }
+    return Promise.resolve();
 }
 
 // Batch write events to Firestore (aggregate only)
@@ -104,7 +108,7 @@ setInterval(flushAnalytics, 300000);
 
 // Conversion funnel tracking (anonymous)
 function logConversion(funnel, step, metadata = {}) {
-    logEvent('conversion', {
+    return logEvent('conversion', {
         funnel,
         step,
         ...metadata
@@ -597,7 +601,12 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
 
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
         }
 
         const { event, funnel, step, metadata } = req.body;
@@ -615,11 +624,12 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
         const safeMetadata = (metadata && typeof metadata === 'object' && !Array.isArray(metadata)
             && JSON.stringify(metadata).length <= 2000) ? metadata : {};
 
-        // Log the event (aggregate only)
+        // Log the event (aggregate only) — await so a serverless container
+        // doesn't get paused/throttled before the Firestore flush completes.
         if (event === 'conversion' && funnel && step) {
-            logConversion(funnel, step, safeMetadata);
+            await logConversion(funnel, step, safeMetadata);
         } else {
-            logEvent(event, safeMetadata);
+            await logEvent(event, safeMetadata);
         }
 
         return res.status(200).json({ ok: true });
@@ -1719,20 +1729,29 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
 
         const rateCheck = checkRateLimit(req);
         if (!rateCheck.allowed) {
-            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
         }
 
         const { email, source } = req.body;
 
+        // Trim before validating — leading/trailing whitespace from typing or
+        // autofill would otherwise cause a valid address to fail the regex.
+        const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+
         // Validate email
-        if (!email || typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (!trimmedEmail || trimmedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
             return res.status(400).json({ error: 'Valid email is required' });
         }
         if (source !== undefined && (typeof source !== 'string' || source.length > 100)) {
             return res.status(400).json({ error: 'Invalid source' });
         }
 
-        const normalizedEmail = email.toLowerCase().trim();
+        const normalizedEmail = trimmedEmail.toLowerCase();
 
         try {
             // Check for duplicate
