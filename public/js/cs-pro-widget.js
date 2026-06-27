@@ -67,7 +67,7 @@
       <li>$10 off the done-for-you CNA Resume Kit</li>
       <li>Ad-free across the site</li>
     </ul>
-    <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro.html">See all plans →</a></p>
+    <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro/">See all plans →</a></p>
   </div>
 </div>`;
   } else {
@@ -100,7 +100,7 @@
       <li>Early access to new tools</li>
       <li>Priority feature requests</li>
     </ul>
-    <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro.html">See all plans →</a></p>
+    <p class="cs-foot">Secure checkout via Stripe · CyberScryb LLC · <a href="/pro/">See all plans →</a></p>
   </div>
 </div>`;
   }

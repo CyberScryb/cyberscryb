@@ -52,7 +52,6 @@ if (consentState === 'accepted') {
 } else if (consentState === 'declined') {
     mixpanel.opt_out_tracking();
     window['ga-disable-G-LS46B9J1XK'] = true;
-    window['ga-disable-G-73LQZEDNR6'] = true;
 } else {
     // If consent hasn't been given/declined, display banner on load
     if (document.readyState === 'complete') {
@@ -191,7 +190,6 @@ function showCookieConsentBanner() {
         localStorage.setItem('cs_cookie_consent', 'declined');
         mixpanel.opt_out_tracking();
         window['ga-disable-G-LS46B9J1XK'] = true;
-        window['ga-disable-G-73LQZEDNR6'] = true;
         banner.classList.remove('cs-show');
         setTimeout(() => banner.remove(), 400);
     });
