@@ -595,17 +595,31 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
             return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+        }
+
         const { event, funnel, step, metadata } = req.body;
 
-        if (!event) {
+        if (!event || typeof event !== 'string' || event.length > 100) {
             return res.status(400).json({ error: 'Event type required' });
         }
+        if (funnel !== undefined && (typeof funnel !== 'string' || funnel.length > 100)) {
+            return res.status(400).json({ error: 'Invalid funnel' });
+        }
+        if (step !== undefined && (typeof step !== 'string' || step.length > 100)) {
+            return res.status(400).json({ error: 'Invalid step' });
+        }
+        // Cap metadata payload size to prevent memory/storage abuse via oversized objects
+        const safeMetadata = (metadata && typeof metadata === 'object' && !Array.isArray(metadata)
+            && JSON.stringify(metadata).length <= 2000) ? metadata : {};
 
         // Log the event (aggregate only)
         if (event === 'conversion' && funnel && step) {
-            logConversion(funnel, step, metadata || {});
+            logConversion(funnel, step, safeMetadata);
         } else {
-            logEvent(event, metadata || {});
+            logEvent(event, safeMetadata);
         }
 
         return res.status(200).json({ ok: true });
@@ -1703,11 +1717,19 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
             return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+        }
+
         const { email, source } = req.body;
 
         // Validate email
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (!email || typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             return res.status(400).json({ error: 'Valid email is required' });
+        }
+        if (source !== undefined && (typeof source !== 'string' || source.length > 100)) {
+            return res.status(400).json({ error: 'Invalid source' });
         }
 
         const normalizedEmail = email.toLowerCase().trim();
