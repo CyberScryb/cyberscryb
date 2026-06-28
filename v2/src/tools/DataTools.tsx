@@ -116,7 +116,7 @@ export const DataTools = [
     proTip: 'Drag & drop a file directly into the input pane.',
     component: function JsonCsvTool({ onClose, config }: any) {
       const [{input, mode}, setState, shareUrl, copyShareLink] = useToolState(config.id, {
-        input: '[\n  {"id": 1, "name": "AI Studio", "type": "Editor"}\n]',
+        input: '[\n  {"id": 1, "name": "CyberScryb", "type": "Tool"}\n]',
         mode: 'csv' as 'csv' | 'yaml'
       });
       const [output, setOutput] = useState('');
@@ -142,7 +142,7 @@ export const DataTools = [
         <ToolShell config={config} onClose={onClose} shareMethod={copyShareLink} sampleBanner={showSample} onDismissSample={()=>setShowSample(false)} rightSidebar={{
           whyItMatters: "Data moves when it's flat. Excel rules the corporate world, while JSON dominates the API space. Being able to shift flawlessly without sending data to a remote server saves hours of PII anxiety.",
           presets: [
-             { label: "Sample Array", onClick: () => { setState({input: '[\n  {"id": 1, "name": "AI Studio", "type": "Editor"}\n]', mode: 'csv'}); setShowSample(false); }}
+            { label: "Sample Array", onClick: () => { setState({input: '[\n  {"id": 1, "name": "CyberScryb", "type": "Tool"}\n]', mode: 'csv'}); setShowSample(false); }}
           ]
         }}>
           <SplitPane
