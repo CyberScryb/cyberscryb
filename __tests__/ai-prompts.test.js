@@ -18,7 +18,7 @@ jest.mock('firebase-functions/v1', () => ({
     },
 }));
 
-const { AI_PROMPTS } = require('../functions/index.js').__testing;
+const { AI_PROMPTS, GEMINI_MODEL_PRO, GEMINI_MODEL_FLASH, GEMINI_MODEL_LITE } = require('../functions/index.js').__testing;
 
 describe('AI_PROMPTS dispatch table', () => {
     const EXPECTED_KEYS = [
@@ -53,13 +53,17 @@ describe('AI_PROMPTS dispatch table', () => {
     // free-text input), so they don't echo the raw input string like the others.
     const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
+    // Tiered model strategy: Pro for accuracy-critical legal/financial/medical tools,
+    // Flash for general copywriting, Lite for short/formulaic/high-volume outputs.
+    const VALID_MODELS = [GEMINI_MODEL_PRO, GEMINI_MODEL_FLASH, GEMINI_MODEL_LITE];
+
     test('has exactly 25 keys', () => {
         expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
     });
 
     describe.each(EXPECTED_KEYS)('tool: %s', (toolId) => {
-        test('has gemini-3.1-pro-preview model', () => {
-            expect(AI_PROMPTS[toolId].model).toBe('gemini-3.1-pro-preview');
+        test('has a valid tiered Gemini model', () => {
+            expect(VALID_MODELS).toContain(AI_PROMPTS[toolId].model);
         });
         test('build is a function', () => {
             expect(typeof AI_PROMPTS[toolId].build).toBe('function');

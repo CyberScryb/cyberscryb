@@ -5,6 +5,15 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 
+// ─── Gemini Model Tiers ──────────────────────────────────
+// PRO: reserved for high-power tasks — legal/financial/medical accuracy,
+//      the flagship humanizer, or anything where a wrong answer has real cost.
+// FLASH: default tier for general copywriting/rewriting tasks.
+// LITE: short, formulaic, high-volume outputs (titles, tags, one-liners).
+const GEMINI_MODEL_PRO = 'gemini-3.1-pro-preview';
+const GEMINI_MODEL_FLASH = 'gemini-3.5-flash';
+const GEMINI_MODEL_LITE = 'gemini-3.1-flash-lite';
+
 // ─── Privacy-Compliant Analytics ────────────────────────
 // Aggregate-only event logging. No user identification, no tracking.
 // Compliant with GDPR, CCPA, and privacy-first principles.
@@ -23,13 +32,17 @@ function logEvent(eventType, metadata = {}) {
         hour: new Date().getHours(),
         ...metadata
     };
-    
+
     analyticsStore.events.push(event);
-    
-    // Flush to Firestore every 100 events or every 5 minutes
+
+    // Flush to Firestore every 100 events or every 5 minutes.
+    // Return the promise so serverless callers can await it before the
+    // response is sent — otherwise the container may pause before the
+    // write completes.
     if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
-        flushAnalytics();
+        return flushAnalytics();
     }
+    return Promise.resolve();
 }
 
 // Batch write events to Firestore (aggregate only)
@@ -95,7 +108,7 @@ setInterval(flushAnalytics, 300000);
 
 // Conversion funnel tracking (anonymous)
 function logConversion(funnel, step, metadata = {}) {
-    logEvent('conversion', {
+    return logEvent('conversion', {
         funnel,
         step,
         ...metadata
@@ -369,10 +382,13 @@ setInterval(() => {
 // ─── Referer Validation ─────────────────────────────────
 const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen-lang-client-0384486156.web.app'];
 
-function isAllowedReferer(referer) {
-    if (!referer) return true;
+function isAllowedReferer(referer, origin) {
+    // Fail closed: a request with neither header is almost certainly a script/curl
+    // hitting the endpoint directly, not a real browser page load.
+    const candidate = referer || origin;
+    if (!candidate) return false;
     try {
-        const url = new URL(referer);
+        const url = new URL(candidate);
         const hostname = url.hostname.toLowerCase();
         
         // Exact match or valid subdomain match
@@ -436,9 +452,17 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
 
         // Basic security: Check if request comes from our domain
         // Allow localhost for testing
-        if (!isAllowedReferer(referer)) {
+        if (!isAllowedReferer(referer, req.get('Origin'))) {
             console.warn(`Blocked request from unauthorized referer: ${referer}`);
             return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
+        }
+
+        // Validate input (prevents undefined.length crashes + cost-abuse via oversized prompts)
+        if (!text || typeof text !== 'string' || text.length < 1) {
+            return res.status(400).json({ error: 'Text is required' });
+        }
+        if (text.length > 5000) {
+            return res.status(400).json({ error: 'Text too long. Max 5000 characters.' });
         }
 
         // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
@@ -504,7 +528,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
       `;
 
             // Call Gemini 3.1 Pro API (highest quality for humanizer output)
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_PRO}:generateContent?key=${apiKey}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -575,17 +599,37 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
             return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
-        const { event, funnel, step, metadata } = req.body;
-
-        if (!event) {
-            return res.status(400).json({ error: 'Event type required' });
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
         }
 
-        // Log the event (aggregate only)
+        const { event, funnel, step, metadata } = req.body;
+
+        if (!event || typeof event !== 'string' || event.length > 100) {
+            return res.status(400).json({ error: 'Event type required' });
+        }
+        if (funnel !== undefined && (typeof funnel !== 'string' || funnel.length > 100)) {
+            return res.status(400).json({ error: 'Invalid funnel' });
+        }
+        if (step !== undefined && (typeof step !== 'string' || step.length > 100)) {
+            return res.status(400).json({ error: 'Invalid step' });
+        }
+        // Cap metadata payload size to prevent memory/storage abuse via oversized objects
+        const safeMetadata = (metadata && typeof metadata === 'object' && !Array.isArray(metadata)
+            && JSON.stringify(metadata).length <= 2000) ? metadata : {};
+
+        // Log the event (aggregate only) — await so a serverless container
+        // doesn't get paused/throttled before the Firestore flush completes.
         if (event === 'conversion' && funnel && step) {
-            logConversion(funnel, step, metadata || {});
+            await logConversion(funnel, step, safeMetadata);
         } else {
-            logEvent(event, metadata || {});
+            await logEvent(event, safeMetadata);
         }
 
         return res.status(200).json({ ok: true });
@@ -698,8 +742,16 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
 
         // Security: Check Referer
         const referer = req.get('Referer');
-        if (!isAllowedReferer(referer)) {
+        if (!isAllowedReferer(referer, req.get('Origin'))) {
             return res.status(403).json({ error: 'Unauthorized Source' });
+        }
+
+        // Validate input (prevents undefined.length crashes + cost-abuse via oversized prompts)
+        if (!jobDescription || typeof jobDescription !== 'string' || jobDescription.length < 1) {
+            return res.status(400).json({ error: 'Job description is required' });
+        }
+        if (jobDescription.length > 5000 || (freelancerProfile && typeof freelancerProfile === 'string' && freelancerProfile.length > 5000)) {
+            return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
         }
 
         // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
@@ -758,7 +810,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
             Return ONLY valid JSON.
             `;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_PRO}:generateContent?key=${apiKey}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -818,7 +870,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
 
 const AI_PROMPTS = {
     'summarizer': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are an expert summarizer. Summarize the following text into ${params.length || '3-5 sentences'}.
 Keep the key points, facts, and conclusions. Remove fluff. Use clear, simple language.
 ${params.bullet ? 'Return the summary as a bulleted list.' : ''}
@@ -831,7 +883,7 @@ ${input}
 Return ONLY the summary. No preamble, no "Here is the summary:", just the summary text.`
     },
     'email-writer': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a professional email writer. Write a ${params.tone || 'professional'} email based on this brief:
 
 Brief: "${input}"
@@ -849,7 +901,7 @@ Requirements:
 Return ONLY the email text with the subject line at the top.`
     },
     'bio-generator': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_LITE,
         build: (input, params) => `You are an expert at writing compelling social media bios. Write ${params.count || '3'} ${params.platform || 'LinkedIn'} bios for this person.
 
 Person's background:
@@ -865,7 +917,7 @@ Requirements:
 Return each bio on its own line, numbered 1/2/3 etc. No extra commentary.`
     },
     'product-description': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are an expert e-commerce copywriter. Write a compelling product description for this product:
 
 Product: "${input}"
@@ -883,7 +935,7 @@ Requirements:
 Return ONLY the product description, formatted with the hook, bullet points, and CTA.`
     },
     'code-explainer': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a patient senior developer explaining code to a beginner. Explain the following code clearly:
 
 \`\`\`${params.language || ''}
@@ -901,7 +953,7 @@ Requirements:
 Return ONLY the explanation in markdown format with clear sections.`
     },
     'meta-description': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_LITE,
         build: (input, params) => `You are an SEO expert. Write ${params.count || '3'} meta descriptions for this page:
 
 Page topic / content: "${input}"
@@ -917,7 +969,7 @@ Requirements for each:
 Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`
     },
     'ai-detector': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are an AI text detection expert. Analyze the following text and determine how likely it was written by an AI language model.
 
 Score the text from 0 to 100:
@@ -947,7 +999,7 @@ Be specific about which phrases, patterns, or structural elements triggered your
     },
     // ─── Life Tools ───
     'hardship-letter': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are an empathetic but professional letter writer who has helped hundreds of people write hardship letters. Write a ${params.type || 'general'} hardship letter based on this person's situation.
 
 Their situation:
@@ -969,7 +1021,7 @@ Requirements:
 Return ONLY the letter text, ready to copy. Include [YOUR NAME] and [DATE] placeholders.`
     },
     'appeal-letter': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are an experienced advocate who helps people write appeal letters. Write a ${params.type || 'general'} appeal letter based on this situation.
 
 Their situation and what they're appealing:
@@ -991,7 +1043,7 @@ Requirements:
 Return ONLY the letter text, ready to copy.`
     },
     'custody-document': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a family law paralegal assistant helping a parent draft custody-related documents. Generate a ${params.docType || 'parenting plan'} based on the following details.
 
 Parent's situation and details:
@@ -1012,7 +1064,7 @@ Requirements:
 Return the document with clear section headers. End with: "DISCLAIMER: This is a draft created to help organize your thoughts. It is not legal advice. Consult a family law attorney before filing any documents with the court."`
     },
     'caregiver-report': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are an experienced caregiver helping write a professional shift report. Convert these informal notes into a structured caregiver report.
 
 Caregiver's notes:
@@ -1040,7 +1092,7 @@ Requirements:
 Return the formatted report ready to print or email.`
     },
     'budget-planner': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a compassionate financial counselor helping someone create a survival budget during a difficult time. Based on their situation, create a personalized budget plan.
 
 Their financial situation:
@@ -1061,7 +1113,7 @@ Requirements:
 Format with clear headers and bullet points. End with: "Remember: this is a starting point, not a final plan. Call 211 for local assistance programs you may qualify for."`
     },
     'resume-bullets': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_LITE,
         build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
 
 Raw accomplishments:
@@ -1079,7 +1131,7 @@ Requirements:
 Return ONLY the bullet points, each starting with "• ". No preamble.`
     },
     'tweet-generator': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_LITE,
         build: (input, params) => `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
 
 Topic: "${input}"
@@ -1095,7 +1147,7 @@ Requirements:
 Return each tweet on its own line, separated by "---". No numbering, no commentary.`
     },
     'paraphraser': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a skilled editor. Paraphrase the following text in ${params.tone || 'a clear, natural'} tone.
 Keep the meaning 100% intact but rephrase the words and sentence structure.
 ${params.length === 'shorter' ? 'Make it shorter than the original.' : ''}
@@ -1109,7 +1161,7 @@ ${input}
 Return ONLY the paraphrased text. No quotes, no preamble.`
     },
     'linkedin-post': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a LinkedIn ghostwriter who's helped executives get millions of impressions. Write a ${params.style || 'thought leadership'} LinkedIn post about this topic:
 
 Topic: "${input}"
@@ -1129,7 +1181,7 @@ Requirements:
 Return ONLY the post text, ready to copy and paste into LinkedIn.`
     },
     'cold-email': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a sales copywriter who writes cold emails that get 40%+ response rates. Write a personalized cold email based on this brief:
 
 Brief: "${input}"
@@ -1149,7 +1201,7 @@ Requirements:
 Return ONLY the email with subject line at the top.`
     },
     'job-description': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a talent acquisition expert who writes job descriptions that attract A-players. Write a compelling job description for this role:
 
 Role details: "${input}"
@@ -1171,7 +1223,7 @@ Requirements:
 Return the full job description with clear section headers.`
     },
     'press-release': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => `You are a PR professional who writes press releases for major publications. Write a professional press release for this announcement:
 
 Announcement: "${input}"
@@ -1193,7 +1245,7 @@ Requirements:
 Return the complete press release ready to distribute.`
     },
     'seo-title': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_LITE,
         build: (input, params) => `You are an SEO expert who writes titles that rank #1 and get clicked. Generate ${params.count || '5'} SEO-optimized page titles for this topic:
 
 Topic/page content: "${input}"
@@ -1212,7 +1264,7 @@ Requirements for each title:
 Return each title on its own line, numbered 1-5. Then show character count in parentheses, e.g. "(57 chars)".`
     },
     'voice-writer': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_FLASH,
         build: (input, params) => {
             const voice = params.voice || 'conversational';
             const refinement = params.refinement ? `\n\nUser refinement request: "${params.refinement}"` : '';
@@ -1240,7 +1292,7 @@ Return ONLY the written content. No title, no meta commentary, no "here's the pi
         }
     },
     'child-support-calculator': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a family law expert specializing in state child support guidelines. Based on the provided financial inputs, analyze the child support details:
 
 State: ${params.state || 'General Income Shares model'}
@@ -1260,7 +1312,7 @@ Requirements:
 End with: "DISCLAIMER: This analysis is based on provided figures and standard guidelines. It does not constitute legal advice. Please consult a qualified family law attorney or your state's Department of Child Support Services for official calculations."`
     },
     'spousal-support-calculator': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a family law expert. Analyze spousal support (alimony) considerations for the following scenario:
 
 State: ${params.state || 'General statutory model'}
@@ -1280,7 +1332,7 @@ Requirements:
 End with: "DISCLAIMER: This calculation and analysis are for educational purposes. Alimony is highly discretionary and varies by court. Consult a family law attorney or tax professional for advice."`
     },
     'med-administration-log': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a professional nurse or clinical coordinator. Analyze the following medication administration log or notes:
 
 Log/Notes:
@@ -1305,7 +1357,7 @@ Tone: objective, professional, supportive, and clinical. Avoid definitive medica
 End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`
     },
     'behavioral-log': {
-        model: 'gemini-3.1-pro-preview',
+        model: GEMINI_MODEL_PRO,
         build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
 
 Log Entries:
@@ -1334,7 +1386,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
 
         // Security: Referer check
         const referer = req.get('Referer');
-        if (!isAllowedReferer(referer)) {
+        if (!isAllowedReferer(referer, req.get('Origin'))) {
             return res.status(403).json({ error: 'Unauthorized Source' });
         }
 
@@ -1403,7 +1455,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         try {
             const toolConfig = AI_PROMPTS[tool];
             const prompt = toolConfig.build(input, sanitizeParams(params));
-            const model = toolConfig.model || 'gemini-3.1-pro-preview';
+            const model = toolConfig.model || GEMINI_MODEL_FLASH;
 
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
                 method: "POST",
@@ -1675,14 +1727,31 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
             return res.status(405).json({ error: 'Method Not Allowed' });
         }
 
-        const { email, source } = req.body;
-
-        // Validate email
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return res.status(400).json({ error: 'Valid email is required' });
+        const rateCheck = checkRateLimit(req);
+        if (!rateCheck.allowed) {
+            return res.status(429)
+                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+                .json({
+                    error: rateCheck.reason,
+                    retryAfter: rateCheck.retryAfter
+                });
         }
 
-        const normalizedEmail = email.toLowerCase().trim();
+        const { email, source } = req.body;
+
+        // Trim before validating — leading/trailing whitespace from typing or
+        // autofill would otherwise cause a valid address to fail the regex.
+        const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+
+        // Validate email
+        if (!trimmedEmail || trimmedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+            return res.status(400).json({ error: 'Valid email is required' });
+        }
+        if (source !== undefined && (typeof source !== 'string' || source.length > 100)) {
+            return res.status(400).json({ error: 'Invalid source' });
+        }
+
+        const normalizedEmail = trimmedEmail.toLowerCase();
 
         try {
             // Check for duplicate
@@ -1816,5 +1885,5 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
 
 // ─── Test Export (NODE_ENV=test only) ──────────────────
 if (process.env.NODE_ENV === 'test') {
-    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS, checkFirestoreRateLimit, getIpHash, getDateString, GLOBAL_DAILY_CAP, FIRESTORE_TIER_CAPS, getUserTier };
+    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS, checkFirestoreRateLimit, getIpHash, getDateString, GLOBAL_DAILY_CAP, FIRESTORE_TIER_CAPS, getUserTier, GEMINI_MODEL_PRO, GEMINI_MODEL_FLASH, GEMINI_MODEL_LITE };
 }

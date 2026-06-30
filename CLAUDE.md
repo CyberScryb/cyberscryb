@@ -130,6 +130,26 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-27, cont'd — PR #32 CI fix + Gemini bot review)
+
+**CI break fix + analytics endpoint hardening (branch `claude/website-audit-adsense-ow13h3`, PR #32)**
+- **CI-breaking dependency conflict fixed**: a prior commit (`be40af0`, "Fix Dependabot vulnerabilities") ran `npm audit fix --force` and bumped `functions/package.json`'s `firebase-admin` to `^14.1.0`. This passed locally (`npm install --force` silently ignores peer conflicts) but broke `npm ci` in CI — no released `firebase-functions` version (checked every release through `7.2.6-rc.0`) supports `firebase-admin` 14.x as a peer. **Fix**: pinned `firebase-admin` back to `^13.10.0`, regenerated `package-lock.json`, ran `npm audit fix` (non-force; 8 moderate transitive vulnerabilities remain as an accepted tradeoff vs. an uninstallable build). Verified clean `rm -rf node_modules && npm ci`.
+- **`subscribeEmail` + `analyticsEvent` hardened**: added rate limiting with `Retry-After` header (matching the existing `rewriteText` pattern), input length validation, and metadata payload size capping (2KB cap on `analyticsEvent` metadata to prevent storage abuse).
+- **Serverless write-loss bug fixed**: `logEvent`/`logConversion` now return their `flushAnalytics()` promise instead of firing-and-forgetting it; `analyticsEvent` now `await`s the log call before responding. Root cause: Cloud Functions containers can pause/throttle CPU immediately after the HTTP response is sent, so un-awaited Firestore writes were getting silently dropped.
+- **Email trimming**: `subscribeEmail` now trims whitespace before regex validation (mobile autofill commonly adds leading/trailing spaces).
+- All 4 fixes came from a Gemini Code Assist bot review on PR #32; all 326 Jest tests still pass. Pushed as `fc9f3d5`, review threads resolved.
+
+## Recent Changes (Session 2026-06-27)
+
+**Gemini model tiering + security hardening + SEO crawlability checklist**
+- **Gemini three-tier model strategy**: `functions/index.js` now routes every AI call through `GEMINI_MODEL_PRO` (`gemini-3.1-pro-preview`, reserved for legal/financial/medical accuracy-critical tools: humanizer, gig-work, ai-detector, hardship-letter, appeal-letter, custody-document, caregiver-report, budget-planner, child/spousal-support calculators, med-administration-log, behavioral-log), `GEMINI_MODEL_FLASH` (`gemini-3.5-flash`, general copywriting default), and `GEMINI_MODEL_LITE` (`gemini-3.1-flash-lite`, short/formulaic high-volume outputs: bio-generator, meta-description, resume-bullets, tweet-generator, seo-title). Confirmed via WebSearch that "Gemini 3.5 Flash-Lite" does not exist — used `gemini-3.1-flash-lite` instead.
+- **Critical security fix**: `isAllowedReferer()` previously failed OPEN when no Referer header was present (any script could bypass the domain check by omitting it). Now fails CLOSED, with an `Origin` header fallback for legitimate referer-less browser requests.
+- **Input validation parity**: added length/presence validation (max 5000 chars) to `rewriteText` (humanizer) and `generateGigWork` endpoints, matching protection the generic AI generator already had.
+- **Fabricated structured data removed**: deleted invisible/fake `aggregateRating` JSON-LD fields (no corresponding visible rating UI) from `password-checker`, `humanizer/rewrite-chatgpt-text`, and `humanizer/remove-ai-detection` pages — this was a genuine Google Rich Results policy violation.
+- **Internal linking gap fixed**: added `ai-detector` and `resume-bullets` to `about.html`'s tool list — both were under-linked site-wide per audit (4 and 7 inbound links respectively, missing from about.html, footer, and guides).
+- **Verified clean**: robots.txt allows crawling site-wide; firebase.json has no crawler-blocking headers; page-experience fundamentals (viewport, font-display swap, delayed AdSense, no interstitials) already solid.
+- Rebuilt via `sync_and_build.py`, full Jest suite 326/326 passing, pushed to `main`.
+
 ## Recent Changes (Session 2026-06-23)
 
 **Indexation Pruning & Content Enrichment (AdSense "Low Value Content" Fix)**
