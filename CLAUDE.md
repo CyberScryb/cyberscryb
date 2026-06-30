@@ -130,6 +130,15 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 
 ---
 
+## Recent Changes (Session 2026-06-27, cont'd — PR #32 CI fix + Gemini bot review)
+
+**CI break fix + analytics endpoint hardening (branch `claude/website-audit-adsense-ow13h3`, PR #32)**
+- **CI-breaking dependency conflict fixed**: a prior commit (`be40af0`, "Fix Dependabot vulnerabilities") ran `npm audit fix --force` and bumped `functions/package.json`'s `firebase-admin` to `^14.1.0`. This passed locally (`npm install --force` silently ignores peer conflicts) but broke `npm ci` in CI — no released `firebase-functions` version (checked every release through `7.2.6-rc.0`) supports `firebase-admin` 14.x as a peer. **Fix**: pinned `firebase-admin` back to `^13.10.0`, regenerated `package-lock.json`, ran `npm audit fix` (non-force; 8 moderate transitive vulnerabilities remain as an accepted tradeoff vs. an uninstallable build). Verified clean `rm -rf node_modules && npm ci`.
+- **`subscribeEmail` + `analyticsEvent` hardened**: added rate limiting with `Retry-After` header (matching the existing `rewriteText` pattern), input length validation, and metadata payload size capping (2KB cap on `analyticsEvent` metadata to prevent storage abuse).
+- **Serverless write-loss bug fixed**: `logEvent`/`logConversion` now return their `flushAnalytics()` promise instead of firing-and-forgetting it; `analyticsEvent` now `await`s the log call before responding. Root cause: Cloud Functions containers can pause/throttle CPU immediately after the HTTP response is sent, so un-awaited Firestore writes were getting silently dropped.
+- **Email trimming**: `subscribeEmail` now trims whitespace before regex validation (mobile autofill commonly adds leading/trailing spaces).
+- All 4 fixes came from a Gemini Code Assist bot review on PR #32; all 326 Jest tests still pass. Pushed as `fc9f3d5`, review threads resolved.
+
 ## Recent Changes (Session 2026-06-27)
 
 **Gemini model tiering + security hardening + SEO crawlability checklist**
