@@ -10,6 +10,18 @@
 const fs = require('fs');
 const path = require('path');
 
+// Strip HTML tags and decode entities for plain-text JSON-LD fields — script content
+// isn't HTML-parsed, so a raw "&lt;"/"&mdash;" would show up literally instead of the intended character.
+const HTML_ENTITIES = {
+    '&lt;': '<', '&gt;': '>', '&amp;': '&', '&quot;': '"', '&#39;': "'", '&apos;': "'",
+    '&mdash;': '—', '&ndash;': '–', '&rarr;': '→', '&harr;': '↔'
+};
+function toPlainText(html) {
+    return html
+        .replace(/<[^>]*>/g, '')
+        .replace(/&lt;|&gt;|&amp;|&quot;|&#39;|&apos;|&mdash;|&ndash;|&rarr;|&harr;/g, m => HTML_ENTITIES[m]);
+}
+
 // ─── Page Data: Each entry generates one complete SEO page ───
 const pages = [
     // ═══ JSON & CSV ═══
@@ -442,7 +454,7 @@ function generatePage(page) {
     const faqSchemaItems = page.faqs.map(f => ({
         "@type": "Question",
         "name": f.q,
-        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]*>/g, '') }
+        "acceptedAnswer": { "@type": "Answer", "text": toPlainText(f.a) }
     }));
 
     // Enhanced JSON-LD with E-E-A-T signals, speakable schema, and citations
