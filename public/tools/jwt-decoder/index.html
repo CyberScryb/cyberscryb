@@ -91,9 +91,9 @@
     {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
-            { "@type": "Question", "name": "What is a JWT?", "acceptedAnswer": { "@type": "Answer", "text": "A JSON Web Token (JWT) is a compact, URL-safe token format used to transmit claims between parties. It has three parts &mdash; header, payload, and signature &mdash; separated by dots." }},
+            { "@type": "Question", "name": "What is a JWT?", "acceptedAnswer": { "@type": "Answer", "text": "A JSON Web Token (JWT) is a compact, URL-safe token format used to transmit claims between parties. It has three parts — header, payload, and signature — separated by dots." }},
             { "@type": "Question", "name": "Does this tool verify JWT signatures?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only DECODES the token to show its contents. Signature verification requires the signing secret or public key, which should be done on your trusted backend." }},
-            { "@type": "Question", "name": "Is it safe to paste tokens here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes &mdash; decoding is done entirely in your browser using vanilla JavaScript. Your token is never sent over the network. Still, avoid pasting production tokens into any online tool when possible." }},
+            { "@type": "Question", "name": "Is it safe to paste tokens here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — decoding is done entirely in your browser using vanilla JavaScript. Your token is never sent over the network. Still, avoid pasting production tokens into any online tool when possible." }},
             { "@type": "Question", "name": "What do iat, exp, and sub mean?", "acceptedAnswer": { "@type": "Answer", "text": "iat is 'issued at' (Unix timestamp when the token was created). exp is 'expiration time'. sub is the 'subject', typically a user identifier." }},
             { "@type": "Question", "name": "Can a JWT be edited without breaking it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Changing the header or payload invalidates the signature. A properly verified server will reject any modified token." }}
         ]
