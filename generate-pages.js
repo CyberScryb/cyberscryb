@@ -17,6 +17,7 @@ const HTML_ENTITIES = {
     '&mdash;': '—', '&ndash;': '–', '&rarr;': '→', '&harr;': '↔'
 };
 function toPlainText(html) {
+    if (typeof html !== 'string') return '';
     return html
         .replace(/<[^>]*>/g, '')
         .replace(/&lt;|&gt;|&amp;|&quot;|&#39;|&apos;|&mdash;|&ndash;|&rarr;|&harr;/g, m => HTML_ENTITIES[m]);
