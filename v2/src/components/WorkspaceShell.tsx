@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Star, History, HelpCircle, Share2, Link as LinkIcon, Check } from 'lucide-react';
+import { ChevronRight, Star, History, HelpCircle, Share2, Link as LinkIcon, Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/Button';
 import { Badge } from './ui/Skeleton';
@@ -181,16 +181,44 @@ export const SplitPane = ({ left, right, leftConfig, rightConfig }: any) => {
   );
 };
 
-export const CodeEditor = ({ value, onChange, placeholder, readOnly = false, className, spellCheck=false }: any) => (
-  <textarea
-     value={value}
-     onChange={e => onChange && onChange(e.target.value)}
-     readOnly={readOnly}
-     placeholder={placeholder}
-     spellCheck={spellCheck}
-     className={`w-full h-full p-4 bg-transparent text-primary font-mono text-sm resize-none focus:outline-none placeholder:text-muted/50 ${readOnly ? 'opacity-90' : ''} ${className || ''}`}
-  />
-);
+export const CodeEditor = ({ value, onChange, placeholder, readOnly = false, className, spellCheck=false }: any) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = async () => {
+    if (!value) return;
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  return (
+    <div className="group/editor relative w-full h-full">
+      <textarea
+        value={value}
+        onChange={e => onChange && onChange(e.target.value)}
+        readOnly={readOnly}
+        placeholder={placeholder}
+        spellCheck={spellCheck}
+        className={`w-full h-full p-4 bg-transparent text-primary font-mono text-sm resize-none focus:outline-none placeholder:text-muted/50 ${readOnly ? 'opacity-90' : ''} ${className || ''}`}
+      />
+      {value && (
+        <div className="absolute top-3 right-3 opacity-0 group-hover/editor:opacity-100 transition-opacity">
+          <button
+            onClick={handleCopy}
+            title="Copy to clipboard"
+            className="p-1.5 rounded-md bg-surface border border-subtle text-muted hover:text-accent hover:border-accent/30 transition-all flex items-center justify-center shadow-sm"
+          >
+            {copied ? <Check size={14} className="text-accent" /> : <Copy size={14} />}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
 // We export ActionButton for backwards compat in tools until refactored completely
 export const ActionButton = ({ onClick, icon: Icon, label, primary }: any) => (
