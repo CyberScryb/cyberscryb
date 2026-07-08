@@ -19,18 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Copy to clipboard
     copyBtn.addEventListener('click', () => {
         const text = outputContent.innerText;
-        if (text && !text.includes('Your human-sounding text will appear here')) {
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = copyBtn.innerText;
-                const originalLabel = copyBtn.getAttribute('aria-label');
-                copyBtn.innerText = '✅';
-                copyBtn.setAttribute('aria-label', 'Copied to clipboard');
-                setTimeout(() => {
-                    copyBtn.innerText = originalText;
-                    copyBtn.setAttribute('aria-label', originalLabel);
-                }, 2000);
-            });
+        if (!text || text.includes('Your human-sounding text will appear here') || !navigator.clipboard) {
+            return;
         }
+        navigator.clipboard.writeText(text).then(() => {
+            if (copyBtn._copyResetTimeout) {
+                clearTimeout(copyBtn._copyResetTimeout);
+            } else {
+                copyBtn._originalText = copyBtn.innerText;
+                copyBtn._originalLabel = copyBtn.getAttribute('aria-label');
+            }
+            copyBtn.innerText = '✅';
+            copyBtn.setAttribute('aria-label', 'Copied to clipboard');
+            copyBtn._copyResetTimeout = setTimeout(() => {
+                copyBtn.innerText = copyBtn._originalText;
+                copyBtn.setAttribute('aria-label', copyBtn._originalLabel);
+                copyBtn._copyResetTimeout = null;
+            }, 2000);
+        }).catch((err) => console.error('Copy to clipboard failed:', err));
     });
 
     if (rewriteBtn) {
