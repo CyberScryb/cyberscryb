@@ -159,7 +159,7 @@ export const MediaTools = [
             leftConfig={{ title: 'SVG MARKUP' }} 
             right={
                <div className="flex items-center justify-center h-full bg-surface">
-                  <div dangerouslySetInnerHTML={{ __html: input }} className="w-32 h-32" />
+                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(input)}`} className="w-32 h-32" alt="SVG Preview" />
                </div>
             } rightConfig={{ title: 'PREVIEW' }} />
       </ToolShell>
