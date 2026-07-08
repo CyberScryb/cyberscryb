@@ -1,6 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import LZString from 'lz-string';
 
+/**
+ * useToolState - A hook for managing persistent tool state.
+ * Optimized by Bolt:
+ * - Moved expensive LZString compression out of the render/effect loop.
+ * - Compression only happens on-demand when "Share" is clicked.
+ * - Added debounced localStorage sync to reduce I/O during rapid typing.
+ */
 export function useToolState<T>(toolId: string, initialState: T): [T, (state: T | ((val: T) => T)) => void, string, () => void] {
   const [state, setState] = useState<T>(() => {
     // 0. Check for injected example state
@@ -33,23 +40,33 @@ export function useToolState<T>(toolId: string, initialState: T): [T, (state: T 
     return initialState;
   });
 
-  const [shareUrl, setShareUrl] = useState<string>('');
+  // Keep a ref to the latest state for the on-demand share link generation
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   useEffect(() => {
-    // Sync state changes to localStorage and update share link
-    localStorage.setItem(`cyberscryb_tool_${toolId}`, JSON.stringify(state));
-    const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(state));
-    const url = new URL(window.location.href);
-    url.hash = compressed;
-    setShareUrl(url.toString());
-    
-    // We intentionally do NOT update the window location hash on every keystroke
-    // because it fills up history and can be slow. The share URL is generated for explicit copying.
+    // Sync state changes to localStorage
+    // Optimization: Using a timeout to debounce localStorage writes during rapid typing
+    const timeoutId = setTimeout(() => {
+      localStorage.setItem(`cyberscryb_tool_${toolId}`, JSON.stringify(state));
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
   }, [state, toolId]);
 
-  const copyShareLink = async () => {
-    await navigator.clipboard.writeText(shareUrl);
-  };
+  const copyShareLink = useCallback(async () => {
+    // Optimization: Calculate the compressed URL only when explicitly requested
+    const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(stateRef.current));
+    const url = new URL(window.location.href);
+    url.hash = compressed;
+    const finalUrl = url.toString();
+    
+    await navigator.clipboard.writeText(finalUrl);
+  }, []);
 
-  return [state, setState, shareUrl, copyShareLink];
+  // shareUrl is now always an empty string as it's no longer used by the UI components directly.
+  // They call copyShareLink which handles the generation and copying internally.
+  return [state, setState, '', copyShareLink];
 }
