@@ -22,8 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text && !text.includes('Your human-sounding text will appear here')) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = copyBtn.innerText;
+                const originalLabel = copyBtn.getAttribute('aria-label');
                 copyBtn.innerText = '✅';
-                setTimeout(() => copyBtn.innerText = originalText, 2000);
+                copyBtn.setAttribute('aria-label', 'Copied to clipboard');
+                setTimeout(() => {
+                    copyBtn.innerText = originalText;
+                    copyBtn.setAttribute('aria-label', originalLabel);
+                }, 2000);
             });
         }
     });
