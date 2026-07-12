@@ -1559,7 +1559,8 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
         // TODO: Add admin authentication here
         // For now, check for a secret query param
         const secret = req.query.secret;
-        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
             return res.status(403).json({ error: 'Unauthorized' });
         }
 
@@ -1680,7 +1681,8 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
         }
 
         const secret = req.query.secret;
-        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
             return res.status(403).json({ error: 'Unauthorized' });
         }
 
@@ -1693,18 +1695,8 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
             const snapshot = await db.collection('analytics')
                 .where('date', '>=', startDateStr)
                 .orderBy('date', 'desc')
-                .limit(1000)
+                .limit(5000)
                 .get();
-
-            const events = {};
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const key = `${data.date}_${data.type}`;
-                if (!events[key]) {
-                    events[key] = { ...data, count: 0 };
-                }
-                events[key].count += data.count || 0;
-            });
 
             const summary = {
                 totalRequests: 0,
@@ -1715,34 +1707,33 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
                 hourlyDistribution: Array(24).fill(0)
             };
 
-            Object.values(events).forEach(event => {
+            snapshot.forEach(doc => {
+                const event = doc.data();
+                const count = event.count || 0;
+
                 if (event.type === 'ai_request') {
-                    summary.totalRequests += event.count;
+                    summary.totalRequests += count;
 
                     if (event.metadata?.tool) {
-                        Object.entries(event.metadata.tool).forEach(([tool, count]) => {
-                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
+                        Object.entries(event.metadata.tool).forEach(([tool, toolCount]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + toolCount;
                         });
                     }
 
                     if (event.metadata?.tier) {
-                        Object.entries(event.metadata.tier).forEach(([tier, count]) => {
-                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
+                        Object.entries(event.metadata.tier).forEach(([tier, tierCount]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + tierCount;
                         });
                     }
-                }
-
-                if (event.type === 'ai_success') {
-                    summary.successfulRequests += event.count;
-                }
-
-                if (event.type === 'rate_limit_hit') {
-                    summary.rateLimitHits += event.count;
+                } else if (event.type === 'ai_success') {
+                    summary.successfulRequests += count;
+                } else if (event.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += count;
                 }
 
                 if (event.hourly) {
-                    event.hourly.forEach((count, hour) => {
-                        summary.hourlyDistribution[hour] += count;
+                    event.hourly.forEach((hourlyCount, hour) => {
+                        summary.hourlyDistribution[hour] += hourlyCount;
                     });
                 }
             });
