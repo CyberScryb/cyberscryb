@@ -1668,6 +1668,103 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
     });
 });
 
+// ─── Public Metrics (dashboard-facing) ─────────────────
+// Same aggregate/anonymized data as analyticsReport, exposed under a
+// dedicated /api/metrics route for external dashboards. `cors({origin:true})`
+// reflects the request Origin back in Access-Control-Allow-Origin and
+// auto-handles the OPTIONS preflight, so any origin can GET this route.
+exports.getMetrics = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const secret = req.query.secret;
+        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        try {
+            const days = parseInt(req.query.days) || 7;
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            const startDateStr = startDate.toISOString().slice(0, 10);
+
+            const snapshot = await db.collection('analytics')
+                .where('date', '>=', startDateStr)
+                .orderBy('date', 'desc')
+                .limit(1000)
+                .get();
+
+            const events = {};
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const key = `${data.date}_${data.type}`;
+                if (!events[key]) {
+                    events[key] = { ...data, count: 0 };
+                }
+                events[key].count += data.count || 0;
+            });
+
+            const summary = {
+                totalRequests: 0,
+                successfulRequests: 0,
+                rateLimitHits: 0,
+                toolUsage: {},
+                tierDistribution: {},
+                hourlyDistribution: Array(24).fill(0)
+            };
+
+            Object.values(events).forEach(event => {
+                if (event.type === 'ai_request') {
+                    summary.totalRequests += event.count;
+
+                    if (event.metadata?.tool) {
+                        Object.entries(event.metadata.tool).forEach(([tool, count]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
+                        });
+                    }
+
+                    if (event.metadata?.tier) {
+                        Object.entries(event.metadata.tier).forEach(([tier, count]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
+                        });
+                    }
+                }
+
+                if (event.type === 'ai_success') {
+                    summary.successfulRequests += event.count;
+                }
+
+                if (event.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += event.count;
+                }
+
+                if (event.hourly) {
+                    event.hourly.forEach((count, hour) => {
+                        summary.hourlyDistribution[hour] += count;
+                    });
+                }
+            });
+
+            summary.successRate = summary.totalRequests > 0
+                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+                : '0%';
+
+            return res.status(200).json({
+                period: `Last ${days} days`,
+                startDate: startDateStr,
+                endDate: new Date().toISOString().slice(0, 10),
+                summary
+            });
+
+        } catch (error) {
+            console.error('[METRICS] Report error:', error);
+            return res.status(500).json({ error: 'Failed to generate metrics' });
+        }
+    });
+});
+
 // ─── Email Capture ───────────────────────────────────
 exports.subscribeEmail = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
