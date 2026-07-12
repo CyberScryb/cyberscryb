@@ -1559,7 +1559,8 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
         // TODO: Add admin authentication here
         // For now, check for a secret query param
         const secret = req.query.secret;
-        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
             return res.status(403).json({ error: 'Unauthorized' });
         }
 
@@ -1664,6 +1665,93 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
         } catch (error) {
             console.error('[ANALYTICS] Report error:', error);
             return res.status(500).json({ error: 'Failed to generate report' });
+        }
+    });
+});
+
+// ─── Public Metrics (dashboard-facing) ─────────────────
+// Same aggregate/anonymized data as analyticsReport, exposed under a
+// dedicated /api/metrics route for external dashboards. `cors({origin:true})`
+// reflects the request Origin back in Access-Control-Allow-Origin and
+// auto-handles the OPTIONS preflight, so any origin can GET this route.
+exports.getMetrics = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const secret = req.query.secret;
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        try {
+            const days = parseInt(req.query.days) || 7;
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            const startDateStr = startDate.toISOString().slice(0, 10);
+
+            const snapshot = await db.collection('analytics')
+                .where('date', '>=', startDateStr)
+                .orderBy('date', 'desc')
+                .limit(5000)
+                .get();
+
+            const summary = {
+                totalRequests: 0,
+                successfulRequests: 0,
+                rateLimitHits: 0,
+                toolUsage: {},
+                tierDistribution: {},
+                hourlyDistribution: Array(24).fill(0)
+            };
+
+            snapshot.forEach(doc => {
+                const event = doc.data();
+                const count = event.count || 0;
+
+                if (event.type === 'ai_request') {
+                    summary.totalRequests += count;
+
+                    if (event.metadata?.tool) {
+                        Object.entries(event.metadata.tool).forEach(([tool, toolCount]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + toolCount;
+                        });
+                    }
+
+                    if (event.metadata?.tier) {
+                        Object.entries(event.metadata.tier).forEach(([tier, tierCount]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + tierCount;
+                        });
+                    }
+                } else if (event.type === 'ai_success') {
+                    summary.successfulRequests += count;
+                } else if (event.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += count;
+                }
+
+                if (event.hourly) {
+                    event.hourly.forEach((hourlyCount, hour) => {
+                        summary.hourlyDistribution[hour] += hourlyCount;
+                    });
+                }
+            });
+
+            summary.successRate = summary.totalRequests > 0
+                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+                : '0%';
+
+            return res.status(200).json({
+                period: `Last ${days} days`,
+                startDate: startDateStr,
+                endDate: new Date().toISOString().slice(0, 10),
+                summary
+            });
+
+        } catch (error) {
+            console.error('[METRICS] Report error:', error);
+            return res.status(500).json({ error: 'Failed to generate metrics' });
         }
     });
 });
