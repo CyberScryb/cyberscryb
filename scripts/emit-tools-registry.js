@@ -1,7 +1,5 @@
 /**
  * Emit client-side tools registry from scripts/toolsConfig.js
- * Writes content-site + public mirrors.
- *
  * Usage: node scripts/emit-tools-registry.js
  */
 
@@ -21,11 +19,18 @@ const clientTools = tools.map((t) => ({
   id: t.id,
   slug: t.slug,
   title: t.title,
-  chainsTo: t.chainsTo || [],
+  chainsTo: (t.chainsTo || []).map((c) => ({
+    id: c.id,
+    label: c.label,
+    toField: c.toField || null,
+    map: c.map || null,
+  })),
   shareKind: t.shareKind == null ? null : t.shareKind,
   offline: !!t.offline,
   persistPolicy: t.persistPolicy || null,
   shareRequiresConfirm: !!t.shareRequiresConfirm,
+  primaryInputId: t.primaryInputId || null,
+  primaryOutputId: t.primaryOutputId || null,
 }));
 
 const body =

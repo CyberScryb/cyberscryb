@@ -1,6 +1,10 @@
 /**
  * CyberScryb workspace — zero-auth persistence + tool chaining.
- * Depends on window.CSToolsRegistry (tools-registry.js) for chains.
+ * Depends on window.CSToolsRegistry (tools-registry.js).
+ *
+ * Registry fields used:
+ *   primaryInputId, primaryOutputId, chainsTo[{id,label,toField?}],
+ *   persistPolicy: null | 'metrics-only' | 'none'
  */
 (function () {
   'use strict';
@@ -12,7 +16,6 @@
 
   function detectToolId() {
     var parts = (location.pathname || '').split('/').filter(Boolean);
-    // /tools/{slug}/ → slug
     if (parts[0] === 'tools' && parts[1] && parts[1] !== 'shared') {
       return parts[1];
     }
@@ -33,8 +36,22 @@
     return null;
   }
 
+  function cssEscape(s) {
+    if (window.CSS && typeof CSS.escape === 'function') return CSS.escape(String(s));
+    return String(s).replace(/[^a-zA-Z0-9_\-]/g, function (ch) {
+      return '\\' + ch;
+    });
+  }
+
+  function byId(id) {
+    if (!id) return null;
+    return document.getElementById(id);
+  }
+
   function save(toolId, state) {
     if (!toolId || !state) return;
+    var meta = getRegistryTool(toolId);
+    if (meta && meta.persistPolicy === 'none') return;
     try {
       var payload = {
         v: 1,
@@ -49,6 +66,8 @@
 
   function load(toolId) {
     if (!toolId) return null;
+    var meta = getRegistryTool(toolId);
+    if (meta && meta.persistPolicy === 'none') return null;
     try {
       var raw = localStorage.getItem(draftKey(toolId));
       if (!raw) return null;
@@ -91,9 +110,7 @@
     try {
       sessionStorage.setItem(
         BRIDGE_KEY,
-        JSON.stringify(
-          Object.assign({ at: Date.now() }, payload || {})
-        )
+        JSON.stringify(Object.assign({ at: Date.now() }, payload || {}))
       );
     } catch (e) {
       /* */
@@ -111,17 +128,27 @@
     }
   }
 
+  function peekBridge() {
+    try {
+      var raw = sessionStorage.getItem(BRIDGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
   function shouldSkipField(el, persistPolicy) {
     if (!el || !el.tagName) return true;
+    if (persistPolicy === 'none') return true;
     if (el.getAttribute && el.getAttribute('data-cs-no-persist') != null) return true;
     var type = (el.type || '').toLowerCase();
     if (type === 'password') return true;
     if (type === 'hidden' || type === 'submit' || type === 'button' || type === 'file') return true;
-    if (el.id === 'gate-email-input') return true;
+    if (el.id === 'gate-email-input' || el.id === 'passwordInput') return true;
     if (persistPolicy === 'metrics-only') {
       if (el.tagName === 'TEXTAREA') return true;
       if (type === 'text' || type === 'search' || type === 'email' || !type) {
-        // allow non-password metric fields only if marked
         if (!el.getAttribute || el.getAttribute('data-cs-persist-ok') == null) return true;
       }
     }
@@ -129,6 +156,7 @@
   }
 
   function collectFields(root, persistPolicy) {
+    if (persistPolicy === 'none') return {};
     var fields = {};
     var nodes = root.querySelectorAll('textarea, input, select');
     for (var i = 0; i < nodes.length; i++) {
@@ -148,20 +176,37 @@
     return fields;
   }
 
-  function applyFields(root, fields) {
+  /**
+   * Apply field values into the form.
+   * @param {boolean} force - when true (bridge handoff), overwrite existing values
+   */
+  function applyFields(root, fields, force) {
     if (!fields) return;
     Object.keys(fields).forEach(function (key) {
       var val = fields[key];
-      var el = root.querySelector('#' + cssEscape(key));
-      if (!el) el = root.querySelector('[name="' + cssEscape(key) + '"]');
+      var el = byId(key);
+      if (!el && root) {
+        try {
+          el = root.querySelector('[name="' + cssEscape(key) + '"]');
+        } catch (e) {
+          el = null;
+        }
+      }
       if (!el) {
-        // radio groups often share name
-        var radio = root.querySelector(
-          'input[type="radio"][name="' + cssEscape(key) + '"][value="' + cssEscape(String(val)) + '"]'
-        );
-        if (radio) {
-          radio.checked = true;
-          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        try {
+          var radio = document.querySelector(
+            'input[type="radio"][name="' +
+              cssEscape(key) +
+              '"][value="' +
+              cssEscape(String(val)) +
+              '"]'
+          );
+          if (radio) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        } catch (e2) {
+          /* */
         }
         return;
       }
@@ -170,60 +215,115 @@
         el.checked = !!val;
       } else if (type === 'radio') {
         if (String(el.value) === String(val)) el.checked = true;
-      } else if (!el.value || !String(el.value).trim()) {
-        el.value = val;
       } else {
-        // keep user/example value if already filled
-        return;
+        if (force || !el.value || !String(el.value).trim()) {
+          el.value = val == null ? '' : String(val);
+        } else {
+          return;
+        }
       }
       el.dispatchEvent(new Event('input', { bubbles: true }));
       el.dispatchEvent(new Event('change', { bubbles: true }));
     });
   }
 
-  function cssEscape(s) {
-    if (window.CSS && CSS.escape) return CSS.escape(s);
-    return String(s).replace(/"/g, '\\"');
+  function readOutputText(meta) {
+    if (!meta) return '';
+    var outId = meta.primaryOutputId;
+    if (outId) {
+      var el = byId(outId);
+      if (el) {
+        if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+          return (el.value || '').trim();
+        }
+        return (el.innerText || el.textContent || '').trim();
+      }
+    }
+    // Fallbacks for AI tools
+    var out = byId('output-text') || document.querySelector('.output-content');
+    if (out) {
+      var t = (out.innerText || out.textContent || '').trim();
+      if (t && t.toLowerCase().indexOf('will appear here') === -1 && t !== 'Cancelled.') {
+        return t;
+      }
+    }
+    return '';
   }
 
   function bindForm(rootEl, toolId) {
     if (!rootEl || !toolId) return;
     var meta = getRegistryTool(toolId);
-    var persistPolicy = meta && meta.persistPolicy;
+    var persistPolicy = (meta && meta.persistPolicy) || null;
 
-    var timer = null;
-    function scheduleSave() {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        save(toolId, { fields: collectFields(rootEl, persistPolicy) });
-      }, SAVE_DEBOUNCE_MS);
+    if (persistPolicy !== 'none') {
+      var timer = null;
+      function scheduleSave() {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          save(toolId, { fields: collectFields(rootEl, persistPolicy) });
+        }, SAVE_DEBOUNCE_MS);
+      }
+      rootEl.addEventListener('input', scheduleSave, true);
+      rootEl.addEventListener('change', scheduleSave, true);
     }
 
-    rootEl.addEventListener('input', scheduleSave, true);
-    rootEl.addEventListener('change', scheduleSave, true);
+    // Draft first, then bridge overlays (bridge wins per key)
+    var draft = load(toolId);
+    if (draft) applyFields(rootEl, draft, false);
 
-    // Bridge first (handoff wins over draft for mapped fields)
     var bridge = consumeBridge();
-    if (bridge && bridge.fields) {
-      applyFields(rootEl, bridge.fields);
+    if (bridge && bridge.fields && Object.keys(bridge.fields).length > 0) {
+      applyFields(rootEl, bridge.fields, true);
       if (typeof gtag === 'function') {
         gtag('event', 'tool_chain_received', {
           tool_id: toolId,
           from: bridge.from || '',
         });
       }
-    } else {
-      var draft = load(toolId);
-      if (draft) applyFields(rootEl, draft);
     }
 
     touchRecent(toolId);
+    wireResultHooks(toolId, meta);
+  }
+
+  function buildBridgeFields(fromToolId, target, chain, outputText) {
+    var fields = {};
+    var map = chain.map;
+    if (map && typeof map === 'object' && Object.keys(map).length) {
+      // map: { destFieldId: 'output' | sourceFieldId }
+      Object.keys(map).forEach(function (destId) {
+        var src = map[destId];
+        if (src === 'output' || src === true || src == null) {
+          fields[destId] = outputText;
+        } else {
+          var srcEl = byId(src);
+          fields[destId] = srcEl
+            ? srcEl.tagName === 'TEXTAREA' || srcEl.tagName === 'INPUT'
+              ? srcEl.value
+              : srcEl.innerText || ''
+            : outputText;
+        }
+      });
+    } else {
+      // Default: send whole result into target's primary input
+      var dest =
+        chain.toField ||
+        (target && target.primaryInputId) ||
+        'tool-input';
+      fields[dest] = outputText;
+    }
+    return fields;
   }
 
   function showChainBar(fromToolId, outputText) {
     var meta = getRegistryTool(fromToolId);
     if (!meta || !meta.chainsTo || !meta.chainsTo.length) return;
     if (!outputText || !String(outputText).trim()) return;
+
+    // Strip common placeholder noise
+    var text = String(outputText).trim();
+    if (text.toLowerCase().indexOf('will appear here') !== -1) return;
+    if (text === 'Cancelled.') return;
 
     var existing = document.getElementById('cs-chain-bar');
     if (existing) existing.remove();
@@ -247,12 +347,7 @@
       btn.className = 'cs-chain-btn';
       btn.textContent = chain.label || target.title;
       btn.addEventListener('click', function () {
-        var fields = {};
-        var map = chain.map || { 'tool-input': 'output' };
-        Object.keys(map).forEach(function (fieldId) {
-          // map target field ← output
-          fields[fieldId] = outputText;
-        });
+        var fields = buildBridgeFields(fromToolId, target, chain, text);
         setBridge({ from: fromToolId, fields: fields });
         if (typeof gtag === 'function') {
           gtag('event', 'tool_chain', { from: fromToolId, to: target.id });
@@ -263,10 +358,12 @@
     });
 
     var anchor =
-      document.getElementById('output-text') ||
+      (meta.primaryOutputId && byId(meta.primaryOutputId)) ||
+      byId('output-text') ||
       document.querySelector('.output-content') ||
       document.querySelector('.output-wrapper') ||
       document.querySelector('main');
+
     if (anchor && anchor.parentNode) {
       if (anchor.nextSibling) {
         anchor.parentNode.insertBefore(bar, anchor.nextSibling);
@@ -278,10 +375,72 @@
     }
   }
 
+  /** Call after any tool produces a result (AI or offline). */
+  function notifyResult(toolId, text) {
+    var id = toolId || detectToolId();
+    if (!id) return;
+    showChainBar(id, text);
+  }
+
+  /**
+   * Offline tools: after convert/format clicks (and primary output changes),
+   * show chain bar when we have result text.
+   */
+  function wireResultHooks(toolId, meta) {
+    if (!meta || !meta.chainsTo || !meta.chainsTo.length) return;
+
+    var lastShown = '';
+    function maybeShow() {
+      var text = readOutputText(meta);
+      if (text && text !== lastShown && text.length > 0) {
+        lastShown = text;
+        showChainBar(toolId, text);
+      }
+    }
+
+    // After any button click in the tool UI, re-check output
+    document.addEventListener(
+      'click',
+      function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        if (!t.closest('button, input[type="button"], input[type="submit"], .primary-btn, .cs-example-btn')) {
+          return;
+        }
+        // Allow tool handlers to finish
+        setTimeout(maybeShow, 50);
+        setTimeout(maybeShow, 250);
+        setTimeout(maybeShow, 600);
+      },
+      true
+    );
+
+    // Live updates on primary output element
+    var outId = meta.primaryOutputId;
+    if (outId) {
+      var outEl = byId(outId);
+      if (outEl) {
+        outEl.addEventListener('input', function () {
+          setTimeout(maybeShow, 30);
+        });
+        // contenteditable / mutated divs
+        if (typeof MutationObserver !== 'undefined') {
+          var mo = new MutationObserver(function () {
+            setTimeout(maybeShow, 30);
+          });
+          mo.observe(outEl, { childList: true, characterData: true, subtree: true });
+        }
+      }
+    }
+  }
+
   function autoInit() {
     var toolId = detectToolId();
     if (!toolId) return;
-    var root = document.querySelector('.tool-content') || document.querySelector('main') || document.body;
+    var root =
+      document.querySelector('.tool-content') ||
+      document.querySelector('main') ||
+      document.body;
     bindForm(root, toolId);
   }
 
@@ -293,8 +452,12 @@
     touchRecent: touchRecent,
     setBridge: setBridge,
     consumeBridge: consumeBridge,
+    peekBridge: peekBridge,
     bindForm: bindForm,
     showChainBar: showChainBar,
+    notifyResult: notifyResult,
+    readOutputText: readOutputText,
+    applyFields: applyFields,
     autoInit: autoInit,
   };
 

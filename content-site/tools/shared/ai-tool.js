@@ -162,7 +162,9 @@
                     updateStats(fullText);
                     incrementUsage();
                     updateUsageDisplay();
-                    if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
+                    if (window.CSWorkspace && typeof window.CSWorkspace.notifyResult === 'function') {
+                        try { window.CSWorkspace.notifyResult(toolId, fullText); } catch (e) { /* non-fatal */ }
+                    } else if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
                         try { window.CSWorkspace.showChainBar(toolId, fullText); } catch (e) { /* non-fatal */ }
                     }
                 }
@@ -294,7 +296,9 @@
                     }
 
                     function showChainIfReady(text) {
-                        if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
+                        if (window.CSWorkspace && typeof window.CSWorkspace.notifyResult === 'function') {
+                            try { window.CSWorkspace.notifyResult(toolId, text); } catch (e) { /* non-fatal */ }
+                        } else if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
                             try { window.CSWorkspace.showChainBar(toolId, text); } catch (e) { /* non-fatal */ }
                         }
                     }

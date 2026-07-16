@@ -9,29 +9,28 @@ window.CSToolsRegistry = {
         {
           "id": "base64-tool",
           "label": "Encode as Base64",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "json-csv-converter",
           "label": "Convert to CSV",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "regex-tester",
           "label": "Test with Regex",
-          "map": {
-            "test-string": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "jf-input",
+      "primaryOutputId": "jf-output"
     },
     {
       "id": "json-csv-converter",
@@ -41,22 +40,22 @@ window.CSToolsRegistry = {
         {
           "id": "json-formatter",
           "label": "Format JSON",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "base64-tool",
           "label": "Base64 encode",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "input-area",
+      "primaryOutputId": "output-area"
     },
     {
       "id": "regex-tester",
@@ -66,15 +65,16 @@ window.CSToolsRegistry = {
         {
           "id": "slug-generator",
           "label": "Build a slug",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "test-string",
+      "primaryOutputId": "highlight-output"
     },
     {
       "id": "base64-tool",
@@ -84,22 +84,22 @@ window.CSToolsRegistry = {
         {
           "id": "url-encoder",
           "label": "URL-encode",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "hash-generator",
           "label": "Hash it",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "inputArea",
+      "primaryOutputId": "outputArea"
     },
     {
       "id": "password-checker",
@@ -109,7 +109,9 @@ window.CSToolsRegistry = {
       "shareKind": "metric",
       "offline": true,
       "persistPolicy": "metrics-only",
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "passwordInput",
+      "primaryOutputId": null
     },
     {
       "id": "url-encoder",
@@ -119,15 +121,16 @@ window.CSToolsRegistry = {
         {
           "id": "base64-tool",
           "label": "Base64 encode",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "ue-input",
+      "primaryOutputId": "ue-output"
     },
     {
       "id": "hash-generator",
@@ -137,7 +140,9 @@ window.CSToolsRegistry = {
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "hg-input",
+      "primaryOutputId": "hash-md5"
     },
     {
       "id": "slug-generator",
@@ -147,15 +152,16 @@ window.CSToolsRegistry = {
         {
           "id": "url-encoder",
           "label": "URL-encode slug",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "sg-input",
+      "primaryOutputId": "sg-output"
     },
     {
       "id": "jwt-decoder",
@@ -165,15 +171,16 @@ window.CSToolsRegistry = {
         {
           "id": "json-formatter",
           "label": "Format claims JSON",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "jwt-input",
+      "primaryOutputId": "jwt-payload"
     },
     {
       "id": "markdown-html",
@@ -183,15 +190,16 @@ window.CSToolsRegistry = {
         {
           "id": "html-entity",
           "label": "HTML entities",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "mdInput",
+      "primaryOutputId": "htmlOutput"
     },
     {
       "id": "html-entity",
@@ -201,7 +209,9 @@ window.CSToolsRegistry = {
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "he-input",
+      "primaryOutputId": "he-output"
     },
     {
       "id": "word-counter",
@@ -211,15 +221,16 @@ window.CSToolsRegistry = {
         {
           "id": "summarizer",
           "label": "Summarize text",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "metric",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "wc-textarea",
+      "primaryOutputId": "wc-textarea"
     },
     {
       "id": "seo-tag-generator",
@@ -229,7 +240,9 @@ window.CSToolsRegistry = {
       "shareKind": "code",
       "offline": true,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "page-description",
+      "primaryOutputId": null
     },
     {
       "id": "humanizer",
@@ -239,29 +252,28 @@ window.CSToolsRegistry = {
         {
           "id": "ai-detector",
           "label": "Check for AI patterns",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "paraphraser",
           "label": "Paraphrase again",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "summarizer",
           "label": "Summarize",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "shareRequiresConfirm": true,
+      "primaryInputId": "robotic-text",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "ai-detector",
@@ -271,15 +283,16 @@ window.CSToolsRegistry = {
         {
           "id": "humanizer",
           "label": "Humanize this text",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "metric",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "summarizer",
@@ -289,22 +302,22 @@ window.CSToolsRegistry = {
         {
           "id": "email-writer",
           "label": "Email this summary",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "tweet-generator",
           "label": "Make a post",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "email-writer",
@@ -314,15 +327,16 @@ window.CSToolsRegistry = {
         {
           "id": "humanizer",
           "label": "Make it more human",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "paraphraser",
@@ -332,22 +346,22 @@ window.CSToolsRegistry = {
         {
           "id": "humanizer",
           "label": "Humanize further",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "ai-detector",
           "label": "Run AI check",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "tweet-generator",
@@ -357,7 +371,9 @@ window.CSToolsRegistry = {
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "hardship-letter",
@@ -367,22 +383,22 @@ window.CSToolsRegistry = {
         {
           "id": "appeal-letter",
           "label": "Turn into an appeal",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         },
         {
           "id": "budget-planner",
           "label": "Build a survival budget",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": null,
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "appeal-letter",
@@ -392,15 +408,16 @@ window.CSToolsRegistry = {
         {
           "id": "hardship-letter",
           "label": "Hardship letter version",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": null,
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "budget-planner",
@@ -409,8 +426,10 @@ window.CSToolsRegistry = {
       "chainsTo": [],
       "shareKind": null,
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "caregiver-report",
@@ -419,8 +438,10 @@ window.CSToolsRegistry = {
       "chainsTo": [],
       "shareKind": null,
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "bio-generator",
@@ -430,7 +451,9 @@ window.CSToolsRegistry = {
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "code-explainer",
@@ -440,15 +463,16 @@ window.CSToolsRegistry = {
         {
           "id": "summarizer",
           "label": "Summarize explanation",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "resume-bullets",
@@ -457,8 +481,10 @@ window.CSToolsRegistry = {
       "chainsTo": [],
       "shareKind": "text",
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "product-description",
@@ -468,7 +494,9 @@ window.CSToolsRegistry = {
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "meta-description",
@@ -478,15 +506,16 @@ window.CSToolsRegistry = {
         {
           "id": "seo-tag-generator",
           "label": "Full meta tag pack",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "custody-document",
@@ -495,8 +524,10 @@ window.CSToolsRegistry = {
       "chainsTo": [],
       "shareKind": null,
       "offline": false,
-      "persistPolicy": null,
-      "shareRequiresConfirm": true
+      "persistPolicy": "none",
+      "shareRequiresConfirm": true,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     },
     {
       "id": "voice-writer",
@@ -506,15 +537,16 @@ window.CSToolsRegistry = {
         {
           "id": "humanizer",
           "label": "Humanize output",
-          "map": {
-            "tool-input": "output"
-          }
+          "toField": null,
+          "map": null
         }
       ],
       "shareKind": "text",
       "offline": false,
       "persistPolicy": null,
-      "shareRequiresConfirm": false
+      "shareRequiresConfirm": false,
+      "primaryInputId": "tool-input",
+      "primaryOutputId": "output-text"
     }
   ]
 };

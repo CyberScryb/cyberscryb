@@ -21,11 +21,21 @@
 - `node scripts/seo-assert.js` → 30 tools, 0 errors, 0 warnings
 - `node scripts/emit-tools-registry.js` → wrote both registries
 
-## Not done (later)
-- Push / PR / production deploy
+## Follow-up (review fixes — same PR branch)
+
+Fixed all PR #39 review bugs:
+- `primaryInputId` / `primaryOutputId` on every tool; chains resolve to real DOM ids
+- Bridge merges over draft (force apply on handoff fields)
+- Offline tools: click/output hooks show chain bar without per-tool copy/paste
+- Humanizer: `notifyResult` after rewrite; input id `robotic-text`
+- Sensitive tools: `persistPolicy: 'none'`
+- seo-assert validates field ids in HTML + registry drift
+- CI: emit registry then assert
+
+## Not done (later sprints)
 - Satori OG share pipeline
 - PWA
-- Alias landing pages from config
+- Alias landing pages / delete `v2/` folder
 
 ## Note
-Nothing was pushed to `main` (auto-deploys). Review then PR or merge when ready.
+PR branch auto-updates on push. Merge to `main` still deploys production.

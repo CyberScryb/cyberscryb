@@ -1,12 +1,9 @@
 /**
- * CyberScryb tools registry — source of truth for SEO metadata, chaining,
- * share policy, and offline eligibility.
+ * CyberScryb tools registry — source of truth for SEO, chaining, share, offline.
  *
- * Consumed by:
- *   - scripts/emit-tools-registry.js → content-site/tools/shared/tools-registry.js
- *   - scripts/seo-assert.js
- *
- * Live tool URLs stay at /tools/{slug}/ (do not rename ranked slugs).
+ * primaryInputId / primaryOutputId must match real DOM ids in content-site/tools/{slug}/
+ * chainsTo: { id, label, toField? } — toField overrides target primaryInputId
+ * persistPolicy: null | 'metrics-only' | 'none'
  */
 
 'use strict';
@@ -22,10 +19,12 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'jf-input',
+    primaryOutputId: 'jf-output',
     chainsTo: [
-      { id: 'base64-tool', label: 'Encode as Base64', map: { 'tool-input': 'output' } },
-      { id: 'json-csv-converter', label: 'Convert to CSV', map: { 'tool-input': 'output' } },
-      { id: 'regex-tester', label: 'Test with Regex', map: { 'test-string': 'output' } },
+      { id: 'base64-tool', label: 'Encode as Base64' },
+      { id: 'json-csv-converter', label: 'Convert to CSV' },
+      { id: 'regex-tester', label: 'Test with Regex' },
     ],
   },
   {
@@ -38,9 +37,11 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'input-area',
+    primaryOutputId: 'output-area',
     chainsTo: [
-      { id: 'json-formatter', label: 'Format JSON', map: { 'tool-input': 'output' } },
-      { id: 'base64-tool', label: 'Base64 encode', map: { 'tool-input': 'output' } },
+      { id: 'json-formatter', label: 'Format JSON' },
+      { id: 'base64-tool', label: 'Base64 encode' },
     ],
   },
   {
@@ -53,8 +54,10 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'test-string',
+    primaryOutputId: 'highlight-output',
     chainsTo: [
-      { id: 'slug-generator', label: 'Build a slug', map: { 'tool-input': 'output' } },
+      { id: 'slug-generator', label: 'Build a slug' },
     ],
   },
   {
@@ -66,9 +69,11 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'inputArea',
+    primaryOutputId: 'outputArea',
     chainsTo: [
-      { id: 'url-encoder', label: 'URL-encode', map: { 'tool-input': 'output' } },
-      { id: 'hash-generator', label: 'Hash it', map: { 'tool-input': 'output' } },
+      { id: 'url-encoder', label: 'URL-encode' },
+      { id: 'hash-generator', label: 'Hash it' },
     ],
   },
   {
@@ -82,6 +87,8 @@ const tools = [
     offline: true,
     shareKind: 'metric',
     persistPolicy: 'metrics-only',
+    primaryInputId: 'passwordInput',
+    primaryOutputId: null,
     chainsTo: [],
   },
   {
@@ -93,8 +100,10 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'ue-input',
+    primaryOutputId: 'ue-output',
     chainsTo: [
-      { id: 'base64-tool', label: 'Base64 encode', map: { 'tool-input': 'output' } },
+      { id: 'base64-tool', label: 'Base64 encode' },
     ],
   },
   {
@@ -106,6 +115,8 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'hg-input',
+    primaryOutputId: 'hash-md5',
     chainsTo: [],
   },
   {
@@ -117,8 +128,10 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'text',
+    primaryInputId: 'sg-input',
+    primaryOutputId: 'sg-output',
     chainsTo: [
-      { id: 'url-encoder', label: 'URL-encode slug', map: { 'tool-input': 'output' } },
+      { id: 'url-encoder', label: 'URL-encode slug' },
     ],
   },
   {
@@ -131,8 +144,11 @@ const tools = [
     offline: true,
     shareKind: 'code',
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'jwt-input',
+    primaryOutputId: 'jwt-payload',
     chainsTo: [
-      { id: 'json-formatter', label: 'Format claims JSON', map: { 'tool-input': 'output' } },
+      { id: 'json-formatter', label: 'Format claims JSON' },
     ],
   },
   {
@@ -144,8 +160,10 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'mdInput',
+    primaryOutputId: 'htmlOutput',
     chainsTo: [
-      { id: 'html-entity', label: 'HTML entities', map: { 'tool-input': 'output' } },
+      { id: 'html-entity', label: 'HTML entities' },
     ],
   },
   {
@@ -157,6 +175,8 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'he-input',
+    primaryOutputId: 'he-output',
     chainsTo: [],
   },
   {
@@ -168,8 +188,10 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'metric',
+    primaryInputId: 'wc-textarea',
+    primaryOutputId: 'wc-textarea',
     chainsTo: [
-      { id: 'summarizer', label: 'Summarize text', map: { 'tool-input': 'output' } },
+      { id: 'summarizer', label: 'Summarize text' },
     ],
   },
   {
@@ -181,6 +203,8 @@ const tools = [
     indexable: true,
     offline: true,
     shareKind: 'code',
+    primaryInputId: 'page-description',
+    primaryOutputId: null,
     chainsTo: [],
   },
   {
@@ -194,10 +218,12 @@ const tools = [
     offline: false,
     shareKind: 'text',
     shareRequiresConfirm: true,
+    primaryInputId: 'robotic-text',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'ai-detector', label: 'Check for AI patterns', map: { 'tool-input': 'output' } },
-      { id: 'paraphraser', label: 'Paraphrase again', map: { 'tool-input': 'output' } },
-      { id: 'summarizer', label: 'Summarize', map: { 'tool-input': 'output' } },
+      { id: 'ai-detector', label: 'Check for AI patterns' },
+      { id: 'paraphraser', label: 'Paraphrase again' },
+      { id: 'summarizer', label: 'Summarize' },
     ],
   },
   {
@@ -209,8 +235,10 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'metric',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'humanizer', label: 'Humanize this text', map: { 'tool-input': 'output' } },
+      { id: 'humanizer', label: 'Humanize this text' },
     ],
   },
   {
@@ -222,9 +250,11 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'email-writer', label: 'Email this summary', map: { 'tool-input': 'output' } },
-      { id: 'tweet-generator', label: 'Make a post', map: { 'tool-input': 'output' } },
+      { id: 'email-writer', label: 'Email this summary' },
+      { id: 'tweet-generator', label: 'Make a post' },
     ],
   },
   {
@@ -237,8 +267,10 @@ const tools = [
     offline: false,
     shareKind: 'text',
     shareRequiresConfirm: true,
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'humanizer', label: 'Make it more human', map: { 'tool-input': 'output' } },
+      { id: 'humanizer', label: 'Make it more human' },
     ],
   },
   {
@@ -250,9 +282,11 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'humanizer', label: 'Humanize further', map: { 'tool-input': 'output' } },
-      { id: 'ai-detector', label: 'Run AI check', map: { 'tool-input': 'output' } },
+      { id: 'humanizer', label: 'Humanize further' },
+      { id: 'ai-detector', label: 'Run AI check' },
     ],
   },
   {
@@ -264,6 +298,8 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -277,9 +313,12 @@ const tools = [
     offline: false,
     shareKind: null,
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'appeal-letter', label: 'Turn into an appeal', map: { 'tool-input': 'output' } },
-      { id: 'budget-planner', label: 'Build a survival budget', map: { 'tool-input': 'output' } },
+      { id: 'appeal-letter', label: 'Turn into an appeal' },
+      { id: 'budget-planner', label: 'Build a survival budget' },
     ],
   },
   {
@@ -292,8 +331,11 @@ const tools = [
     offline: false,
     shareKind: null,
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'hardship-letter', label: 'Hardship letter version', map: { 'tool-input': 'output' } },
+      { id: 'hardship-letter', label: 'Hardship letter version' },
     ],
   },
   {
@@ -306,6 +348,9 @@ const tools = [
     offline: false,
     shareKind: null,
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -318,6 +363,9 @@ const tools = [
     offline: false,
     shareKind: null,
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -329,6 +377,8 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -340,8 +390,10 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'summarizer', label: 'Summarize explanation', map: { 'tool-input': 'output' } },
+      { id: 'summarizer', label: 'Summarize explanation' },
     ],
   },
   {
@@ -354,6 +406,9 @@ const tools = [
     offline: false,
     shareKind: 'text',
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -365,6 +420,8 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -376,8 +433,10 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'seo-tag-generator', label: 'Full meta tag pack', map: { 'tool-input': 'output' } },
+      { id: 'seo-tag-generator', label: 'Full meta tag pack' },
     ],
   },
   {
@@ -391,6 +450,9 @@ const tools = [
     offline: false,
     shareKind: null,
     shareRequiresConfirm: true,
+    persistPolicy: 'none',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [],
   },
   {
@@ -402,8 +464,10 @@ const tools = [
     indexable: true,
     offline: false,
     shareKind: 'text',
+    primaryInputId: 'tool-input',
+    primaryOutputId: 'output-text',
     chainsTo: [
-      { id: 'humanizer', label: 'Humanize output', map: { 'tool-input': 'output' } },
+      { id: 'humanizer', label: 'Humanize output' },
     ],
   },
 ];

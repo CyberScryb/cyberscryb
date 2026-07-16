@@ -90,6 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(typeWriter, speed);
                     } else {
                         updateStats(rewrittenText);
+                        if (window.CSWorkspace && typeof window.CSWorkspace.notifyResult === 'function') {
+                            try { window.CSWorkspace.notifyResult('humanizer', rewrittenText); } catch (e) { /* non-fatal */ }
+                        }
                     }
                 }
 

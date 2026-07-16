@@ -22,8 +22,8 @@ jobs:
       - run: npm ci
         working-directory: ./functions
       - run: npx jest --verbose --coverage
-      - run: node scripts/seo-assert.js
       - run: node scripts/emit-tools-registry.js
+      - run: node scripts/seo-assert.js
 
   python-tests:
     name: Python Tests (pytest)
