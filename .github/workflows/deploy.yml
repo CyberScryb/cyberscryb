@@ -23,14 +23,8 @@ jobs:
         run: npm ci
         working-directory: ./functions
 
-      - name: Build React App (v2)
-        run: |
-          cd v2
-          npm ci
-          npm run build
-          cd ..
-          mkdir -p public/v2
-          cp -r v2/dist/* public/v2/
+      # REMOVED: "Build React App (v2)" step (npm build + copy to public/v2).
+      # Static site only. Do not re-add a v2 build here.
 
       - name: Deploy Hosting + Functions
         run: firebase deploy --only hosting,functions --project gen-lang-client-0384486156 --non-interactive --force

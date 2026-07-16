@@ -367,3 +367,24 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
         });
     });
 });
+
+// Growth stack: zero-auth workspace + tool chaining on tool pages only
+(function loadGrowthStack() {
+    if (!/\/tools\//.test(location.pathname)) return;
+    if (location.pathname.indexOf('/tools/shared') !== -1) return;
+
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/tools/shared/workspace.css?v=20260716';
+    document.head.appendChild(link);
+
+    var r = document.createElement('script');
+    r.src = '/tools/shared/tools-registry.js?v=20260716';
+    r.onload = function () {
+        var w = document.createElement('script');
+        w.src = '/tools/shared/workspace.js?v=20260716';
+        w.defer = true;
+        document.body.appendChild(w);
+    };
+    document.head.appendChild(r);
+})();

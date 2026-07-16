@@ -162,6 +162,9 @@
                     updateStats(fullText);
                     incrementUsage();
                     updateUsageDisplay();
+                    if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
+                        try { window.CSWorkspace.showChainBar(toolId, fullText); } catch (e) { /* non-fatal */ }
+                    }
                 }
             })();
         }
@@ -255,6 +258,18 @@
                 generateBtn.disabled = true;
                 outputContent.innerHTML = '';
 
+                // Persist draft before spend (workspace growth stack)
+                if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+                    try {
+                        var draftFields = {};
+                        var mainIn = document.getElementById('tool-input')
+                            || document.querySelector('textarea[id$="-input"]')
+                            || document.querySelector('textarea');
+                        if (mainIn) draftFields[mainIn.id || 'tool-input'] = mainIn.value;
+                        window.CSWorkspace.save(toolId, { fields: draftFields });
+                    } catch (wsErr) { /* non-fatal */ }
+                }
+
                 try {
                     const response = await fetch('/api/ai-generate', {
                         method: 'POST',
@@ -278,6 +293,12 @@
                         throw new Error('Empty response. Please try again.');
                     }
 
+                    function showChainIfReady(text) {
+                        if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
+                            try { window.CSWorkspace.showChainBar(toolId, text); } catch (e) { /* non-fatal */ }
+                        }
+                    }
+
                     if (!isSubscribed()) {
                         // Give every browser ONE genuinely free full result before gating.
                         // This proves the tool works before asking for an email — the email
@@ -286,14 +307,17 @@
                             localStorage.setItem('cs_free_trial_used', '1');
                             trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'new_anon' });
                             showFullResult(result);
+                            showChainIfReady(result);
                         } else {
                             trackEvent('tool_used', { tool_id: toolId, gate_shown: 'yes', user_type: 'anon' });
                             showPreviewWithGate(result);
+                            // Still offer chains for full result path; preview users unlock first
                         }
                     } else {
                         trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'subscribed' });
                         showFullResult(result);
                         incrementUsage();
+                        showChainIfReady(result);
                     }
                 } catch (error) {
                     console.error('[ai-tool]', error);
