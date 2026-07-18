@@ -78,8 +78,8 @@
 <div class="cs-pro-modal-bg" id="cs-pro-modal-bg">
   <div class="cs-pro-modal">
     <button class="cs-pro-close" id="cs-pro-close" aria-label="Close">×</button>
-    <h2>Go Pro. Keep the tools free for everyone else.</h2>
-    <p class="cs-sub">29+ tools, no ads, no signup. Pro removes limits and supports independent development.</p>
+    <h2>Unlock full results</h2>
+    <p class="cs-sub">Free shows a sample. Pro unlocks full Humanizer rewrites, full Gig proposals, and unlimited AI tools — no daily cap.</p>
     <div class="cs-plans">
       <a class="cs-plan" href="${tag(STRIPE_MONTHLY)}" target="_blank" rel="noopener">
         <div class="cs-name">Monthly</div>
@@ -93,8 +93,8 @@
       </a>
     </div>
     <ul class="cs-features">
-      <li>Unlimited Anti-AI Humanizer (no word cap)</li>
-      <li>Unlimited Gig Auto-Pilot proposals</li>
+      <li>Full Humanizer results (not previews)</li>
+      <li>Full Gig Auto-Pilot proposals + drafts</li>
       <li>Bulk SEO Meta Generator (CSV import)</li>
       <li>Ad-free across the entire site</li>
       <li>Early access to new tools</li>

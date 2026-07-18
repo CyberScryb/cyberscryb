@@ -150,10 +150,53 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const data = await response.json();
 
-            // Populate Outputs
-            outputProposal.innerHTML = formatText(data.proposal);
-            outputDraft.innerHTML = formatText(data.draftWork);
-            outputInterview.innerHTML = formatText(data.interviewQuestions);
+            const isPro = (function () {
+                if (document.cookie.indexOf('cs_pro=1') > -1) return true;
+                if (document.cookie.indexOf('cs_pro_source=stripe') > -1) return true;
+                try { return localStorage.getItem('cs_pro') === '1'; } catch (e) { return false; }
+            })();
+
+            const usageKey = 'cs_gig_full_usage';
+            const today = new Date().toISOString().slice(0, 10);
+            let usage = { date: today, count: 0 };
+            try {
+                usage = JSON.parse(localStorage.getItem(usageKey) || '{}');
+                if (usage.date !== today) usage = { date: today, count: 0 };
+            } catch (e) { usage = { date: today, count: 0 }; }
+
+            // Free: 1 full kit per day. After that, preview + Pro CTA.
+            const allowFull = isPro || usage.count < 1;
+
+            function preview(text) {
+                if (!text) return '';
+                const words = text.split(/\s+/);
+                const n = Math.max(8, Math.floor(words.length * 0.28));
+                return words.slice(0, n).join(' ') + '...';
+            }
+
+            if (allowFull) {
+                outputProposal.innerHTML = formatText(data.proposal);
+                outputDraft.innerHTML = formatText(data.draftWork);
+                outputInterview.innerHTML = formatText(data.interviewQuestions);
+                if (!isPro) {
+                    usage.count += 1;
+                    try { localStorage.setItem(usageKey, JSON.stringify(usage)); } catch (e) {}
+                }
+            } else {
+                const paywall =
+                    '<div style="margin-top:12px;padding:14px;border:1px solid #7b2cff;border-radius:10px;background:rgba(123,44,255,0.08);">' +
+                    '<strong style="color:#fff;">Free full kit used for today</strong>' +
+                    '<p style="color:#8892a8;margin:8px 0 12px;font-size:14px;">Preview below. Pro unlocks the full proposal, draft, and interview questions with no daily cap.</p>' +
+                    '<a href="https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b?utm_source=gig_auto_pilot&utm_medium=paywall&utm_campaign=pro_conversion" target="_blank" rel="noopener" ' +
+                    'style="display:inline-block;background:#7b2cff;color:#fff;padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;margin-right:8px;">Unlock · $5/mo</a>' +
+                    '<a href="/pro/" style="color:#c4a0ff;font-size:13px;">See plans</a></div>';
+                outputProposal.innerHTML = formatText(preview(data.proposal)) + paywall;
+                outputDraft.innerHTML = formatText(preview(data.draftWork)) + paywall;
+                outputInterview.innerHTML = formatText(preview(data.interviewQuestions)) + paywall;
+                if (typeof gtag === 'function') {
+                    gtag('event', 'paywall_shown', { tool_id: 'gig-auto-pilot', mode: 'daily_limit' });
+                }
+            }
 
             // UX: Switch to first tab result
             document.querySelector('[data-tab="proposal"]').click();

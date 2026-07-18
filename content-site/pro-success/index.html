@@ -127,16 +127,21 @@
   }
 
   function activatePro() {
+    // cs_pro is the real unlimited flag. cs_subscribed alone is free email tier.
+    setCookie('cs_pro', '1', 365);
     setCookie('cs_subscribed', '1', 365);
     setCookie('cs_pro_source', 'stripe', 365);
+    try { localStorage.setItem('cs_pro', '1'); } catch (e) {}
     show('success-state');
     // Clean URL without leaking session_id
     history.replaceState(null, '', '/pro-success/');
   }
 
   if (!sessionId) {
-    // No session_id &mdash; maybe they bookmarked the page or refreshed after activation
-    var alreadyPro = document.cookie.indexOf('cs_subscribed=1') > -1;
+    // No session_id — bookmark/refresh after activation
+    var alreadyPro = document.cookie.indexOf('cs_pro=1') > -1
+      || document.cookie.indexOf('cs_pro_source=stripe') > -1
+      || (function(){ try { return localStorage.getItem('cs_pro') === '1'; } catch(e){ return false; } })();
     if (alreadyPro) {
       activatePro();
     } else {
