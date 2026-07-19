@@ -86,11 +86,14 @@
 }
 
 .hz-workspace {
-    background: #161616;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 28%), #161616;
     border: 1px solid var(--hz-border);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 16px 48px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
 .hz-pane { display: flex; flex-direction: column; }
@@ -229,7 +232,7 @@ textarea.hz-editor.input-error {
     gap: 8px;
     min-width: 148px;
     padding: 12px 22px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     cursor: pointer;
     font-family: inherit;
@@ -237,11 +240,18 @@ textarea.hz-editor.input-error {
     font-size: 0.95rem;
     color: #F2EFE8;
     background: var(--hz-green);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.12) inset,
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 24px rgba(27, 107, 69, 0.15);
     transition: 0.2s ease;
 }
 .hz-primary-btn:hover:not(:disabled) {
     background: var(--hz-green-hover);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.1) inset,
+        0 12px 32px rgba(0, 0, 0, 0.45),
+        0 0 32px rgba(27, 107, 69, 0.25);
 }
 .hz-primary-btn:disabled,
 .hz-primary-btn.is-loading {
@@ -433,9 +443,12 @@ textarea.hz-editor.input-error {
     font-weight: 700;
     text-decoration: none !important;
     font-size: 14px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 0 24px rgba(217, 119, 6, 0.2);
+    transition: background 0.2s, box-shadow 0.2s;
 }
 .cs-pro-cta-primary:hover {
     background: var(--hz-amber-hover);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 0 32px rgba(217, 119, 6, 0.28);
 }
 .cs-pro-cta-secondary {
     display: block;
@@ -468,11 +481,18 @@ textarea.hz-editor.input-error {
 }
 .hz-price-card {
     position: relative;
-    background: #161616;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), #161616;
     border: 1px solid var(--hz-border);
     border-radius: 14px;
     padding: 20px 16px;
     text-align: center;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px rgba(0, 0, 0, 0.35);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.hz-price-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(232, 226, 214, 0.16);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 .hz-price-featured {
     border-color: rgba(217, 119, 6, 0.45);
