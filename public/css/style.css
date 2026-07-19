@@ -355,23 +355,62 @@ header {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%), var(--card-glass);
     backdrop-filter: blur(14px) saturate(130%);
     -webkit-backdrop-filter: blur(14px) saturate(130%);
-    border: 1px solid var(--border);
+    /* Resting outline: readable edge so cards don't blend into the page */
+    border: 1px solid rgba(232, 226, 214, 0.14);
     border-radius: var(--radius);
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 0 0 1px rgba(0, 0, 0, 0.35),
         0 12px 40px rgba(0, 0, 0, 0.4);
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    transition:
+        border-color 0.22s ease,
+        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.22s ease,
+        background 0.22s ease;
 }
 
+/* Hover / focus: lift + brand outline ring + soft green glow (not neon) */
 .blog-card:hover,
 .tool-card:hover,
-.glass-card:hover {
-    border-color: rgba(232, 226, 214, 0.18);
-    transform: translateY(-3px);
+.glass-card:hover,
+.hz-price-card:hover,
+.blog-card:focus-within,
+.tool-card:focus-within,
+.glass-card:focus-within {
+    border-color: rgba(42, 107, 74, 0.75);
+    transform: translateY(-4px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 42%), var(--card-glass);
     box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.07) inset,
-        0 20px 50px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(15, 77, 50, 0.18);
+        /* inner top edge light */
+        0 1px 0 rgba(255, 255, 255, 0.1) inset,
+        /* crisp brand outline ring outside the border */
+        0 0 0 1px rgba(42, 107, 74, 0.45),
+        /* soft outer glow */
+        0 0 0 4px rgba(15, 77, 50, 0.14),
+        0 0 28px rgba(15, 77, 50, 0.28),
+        0 0 56px rgba(15, 77, 50, 0.12),
+        /* depth lift */
+        0 22px 48px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blog-card:hover,
+    .tool-card:hover,
+    .glass-card:hover,
+    .hz-price-card:hover,
+    .blog-card:focus-within,
+    .tool-card:focus-within,
+    .glass-card:focus-within {
+        transform: none;
+    }
+}
+
+/* Keyboard: visible ring without relying on mouse hover alone */
+.blog-card:focus-visible,
+.tool-card:focus-visible,
+.glass-card:focus-visible {
+    outline: 2px solid var(--primary-soft);
+    outline-offset: 3px;
 }
 
 .blog-card {
@@ -871,9 +910,34 @@ select:focus-visible,
 }
 
 /* Read-more arrow slides when hovering the whole card */
-.blog-card:hover .read-more {
+.blog-card:hover .read-more,
+.blog-card:focus-within .read-more,
+.tool-card:hover .read-more,
+.glass-card:hover .read-more {
     gap: 12px;
     color: var(--text);
+}
+
+/* Card title brightens on hover for clearer affordance */
+.blog-card:hover h3 a,
+.blog-card:focus-within h3 a,
+.blog-card:hover h2 a,
+.blog-card:focus-within h2 a {
+    color: var(--primary-soft);
+}
+
+/* Top accent bar intensifies on hover */
+.blog-card:hover::before,
+.blog-card:focus-within::before {
+    opacity: 1;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-soft), rgba(42, 107, 74, 0.35), transparent 90%);
+}
+.blog-card[data-category="seo"]:hover::before,
+.blog-card[data-category="freelance"]:hover::before,
+.blog-card[data-category="seo"]:focus-within::before,
+.blog-card[data-category="freelance"]:focus-within::before {
+    background: linear-gradient(90deg, #FBBF24, rgba(217, 119, 6, 0.35), transparent 90%);
 }
 
 @media (hover: none), (pointer: coarse) {
