@@ -3,6 +3,22 @@
    - Default Pro (Pro Annual $29/yr + Pro Monthly $5/mo)
    - CNA Power Pack ($19) — set window.CS_WIDGET = 'cna' before this script loads */
 (function() {
+  // Ensure Pro badge / restore helpers load with the widget
+  if (!window.CSProStatus && !document.querySelector('script[src*="cs-pro-status"]')) {
+    var s = document.createElement('script');
+    s.src = '/js/cs-pro-status.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  function cookiePro() {
+    return document.cookie.indexOf('cs_pro=1') > -1
+      || document.cookie.indexOf('cs_pro_source=stripe') > -1
+      || (function () { try { return localStorage.getItem('cs_pro') === '1'; } catch (e) { return false; } })();
+  }
+  // Don't show upgrade pill if already Pro
+  if (cookiePro()) return;
+
   if (document.getElementById('cs-pro-modal-bg')) return;
   var path = location.pathname || '';
   var utmSource = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '_').replace(/\.html$/i, '') || 'home';

@@ -165,15 +165,19 @@
             if (!container || container.querySelector('.cs-pro-gate-btns')) return;
             const wrap = document.createElement('div');
             wrap.className = 'cs-pro-gate-btns';
-            wrap.style.cssText = 'margin-top:14px;display:flex;flex-direction:column;gap:8px;';
+            wrap.style.cssText = 'margin-top:14px;display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);';
             wrap.innerHTML =
-                '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, toolId, 'gate_monthly') + '" target="_blank" rel="noopener" ' +
-                'style="display:block;text-align:center;background:linear-gradient(135deg,#7b2cff,#5b1fd1);color:#fff;padding:12px 14px;border-radius:8px;font-weight:700;text-decoration:none;font-size:14px;">' +
-                'Unlock full result · $5/mo</a>' +
-                '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, toolId, 'gate_lifetime') + '" target="_blank" rel="noopener" ' +
-                'style="display:block;text-align:center;background:transparent;color:#22c55e;padding:10px 14px;border-radius:8px;border:1px solid #22c55e;font-weight:600;text-decoration:none;font-size:13px;">' +
-                'Lifetime Pro · $29 one-time</a>' +
-                '<a href="/pro/" style="text-align:center;color:#8892a8;font-size:12px;text-decoration:underline;margin-top:2px;">What is Pro?</a>';
+                '<p style="margin:0 0 4px;font-size:12px;color:#8892a8;text-align:center;line-height:1.4;">'
+                + 'Full result · unlimited AI tools · cancel anytime</p>'
+                + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, toolId, 'gate_monthly') + '" target="_blank" rel="noopener" '
+                + 'style="display:block;text-align:center;background:linear-gradient(135deg,#7b2cff,#5b1fd1);color:#fff;padding:14px 14px;border-radius:10px;font-weight:700;text-decoration:none;font-size:15px;">'
+                + 'Go Pro · $5/mo</a>'
+                + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, toolId, 'gate_lifetime') + '" target="_blank" rel="noopener" '
+                + 'style="display:block;text-align:center;background:transparent;color:#22c55e;padding:11px 14px;border-radius:10px;border:1px solid #22c55e;font-weight:600;text-decoration:none;font-size:13px;">'
+                + 'Lifetime · $29 (best if you hate subscriptions)</a>'
+                + '<p style="margin:4px 0 0;font-size:11px;color:#6b7280;text-align:center;line-height:1.4;">'
+                + 'Stripe secure · 14-day refund · <a href="/pro-restore/" style="color:#8892a8;">Already paid?</a></p>'
+                + '<a href="/pro/" style="text-align:center;color:#8892a8;font-size:12px;text-decoration:underline;">See what Pro includes</a>';
             container.appendChild(wrap);
             wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
                 a.addEventListener('click', function () {
