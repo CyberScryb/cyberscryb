@@ -355,21 +355,25 @@ header {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%), var(--card-glass);
     backdrop-filter: blur(14px) saturate(130%);
     -webkit-backdrop-filter: blur(14px) saturate(130%);
-    /* Resting outline: readable edge so cards don't blend into the page */
-    border: 1px solid rgba(232, 226, 214, 0.14);
+    /* Visible resting outline (was too faint / clipped by overflow:hidden) */
+    border: 1px solid rgba(232, 226, 214, 0.24);
     border-radius: var(--radius);
+    /* Must stay visible so hover glow/outline rings are not clipped */
+    overflow: visible;
     box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.05) inset,
-        0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 0 0 1px rgba(232, 226, 214, 0.06),
         0 12px 40px rgba(0, 0, 0, 0.4);
     transition:
         border-color 0.22s ease,
         transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.22s ease,
-        background 0.22s ease;
+        background 0.22s ease,
+        outline-color 0.22s ease,
+        outline-offset 0.22s ease;
 }
 
-/* Hover / focus: lift + brand outline ring + soft green glow (not neon) */
+/* Hover / focus: lift + brand outline + soft green glow (not neon) */
 .blog-card:hover,
 .tool-card:hover,
 .glass-card:hover,
@@ -377,19 +381,17 @@ header {
 .blog-card:focus-within,
 .tool-card:focus-within,
 .glass-card:focus-within {
-    border-color: rgba(42, 107, 74, 0.75);
+    border-color: rgba(42, 107, 74, 0.9);
+    outline: 2px solid rgba(42, 107, 74, 0.55);
+    outline-offset: 3px;
     transform: translateY(-4px);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 42%), var(--card-glass);
     box-shadow:
-        /* inner top edge light */
-        0 1px 0 rgba(255, 255, 255, 0.1) inset,
-        /* crisp brand outline ring outside the border */
-        0 0 0 1px rgba(42, 107, 74, 0.45),
-        /* soft outer glow */
-        0 0 0 4px rgba(15, 77, 50, 0.14),
-        0 0 28px rgba(15, 77, 50, 0.28),
-        0 0 56px rgba(15, 77, 50, 0.12),
-        /* depth lift */
+        0 1px 0 rgba(255, 255, 255, 0.12) inset,
+        0 0 0 1px rgba(42, 107, 74, 0.5),
+        0 0 0 5px rgba(15, 77, 50, 0.16),
+        0 0 32px rgba(15, 77, 50, 0.35),
+        0 0 64px rgba(15, 77, 50, 0.16),
         0 22px 48px rgba(0, 0, 0, 0.55);
 }
 
@@ -818,10 +820,11 @@ textarea, input[type="text"], input[type="email"], select {
     opacity: 1;
 }
 
-/* Cards light up toward the pointer */
+/* Cards light up toward the pointer.
+   Do NOT use overflow:hidden here — it clips outline + box-shadow glow on tools/blog cards. */
 .cs-interactive {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     --spot-x: 50%;
     --spot-y: 50%;
 }
@@ -833,6 +836,8 @@ textarea, input[type="text"], input[type="email"], select {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.35s ease;
+    /* Clip spotlight to rounded card without clipping parent glow */
+    clip-path: inset(0 round var(--radius));
     background: radial-gradient(
         480px circle at var(--spot-x) var(--spot-y),
         rgba(232, 226, 214, 0.09) 0%,
@@ -1068,7 +1073,7 @@ select:focus-visible,
 }
 .blog-card {
     position: relative;
-    overflow: hidden;
+    /* overflow stays visible so outline/glow rings show on tools + blog grids */
 }
 .blog-card::before {
     content: '';
@@ -1077,8 +1082,11 @@ select:focus-visible,
     left: 0;
     right: 0;
     height: 2px;
+    border-radius: var(--radius) var(--radius) 0 0;
     background: linear-gradient(90deg, rgba(15, 77, 50, 0.75), rgba(42, 107, 74, 0.25), transparent 85%);
     opacity: 0.85;
+    pointer-events: none;
+    z-index: 3;
 }
 .blog-card[data-category="seo"]::before,
 .blog-card[data-category="freelance"]::before {

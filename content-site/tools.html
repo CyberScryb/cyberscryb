@@ -29,7 +29,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260719q">
+    <link rel="stylesheet" href="/css/style.css?v=20260719r">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
@@ -345,7 +345,22 @@
 
 <style id="cs-pro-badge-style">
 .cs-pro-badge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#0a0e1a;font:700 9px/1 'Orbitron','Inter',sans-serif;padding:5px 9px;border-radius:999px;letter-spacing:1px;z-index:5;box-shadow:0 2px 8px rgba(15, 77, 50,0.4);pointer-events:none}
-.blog-card{position:relative}
+.blog-card{position:relative;overflow:visible}
+/* Tools page: force clear card edge + hover ring (beats any stale cache / overrides) */
+.posts-grid .blog-card,
+.section .blog-card{
+  border:1px solid rgba(232,226,214,0.26)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 0 0 1px rgba(232,226,214,0.08),0 12px 40px rgba(0,0,0,0.4)!important;
+}
+.posts-grid .blog-card:hover,
+.section .blog-card:hover,
+.posts-grid .blog-card:focus-within,
+.section .blog-card:focus-within{
+  border-color:rgba(42,107,74,0.9)!important;
+  outline:2px solid rgba(42,107,74,0.55);
+  outline-offset:3px;
+  box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 0 0 1px rgba(42,107,74,0.5),0 0 0 5px rgba(15,77,50,0.16),0 0 32px rgba(15,77,50,0.35),0 22px 48px rgba(0,0,0,0.55)!important;
+}
 </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
