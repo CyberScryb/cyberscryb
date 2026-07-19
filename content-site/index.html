@@ -18,7 +18,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260719r">
+    <link rel="stylesheet" href="/css/style.css?v=20260719s">
+    <link rel="preload" as="image" href="/images/product/hero-humanizer.webp" type="image/webp" fetchpriority="high">
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>
@@ -98,20 +99,34 @@
     </header>
 
     <main>
-        <!-- HERO: value prop + dual path free try / paid -->
-        <section class="hero">
+        <!-- HERO: value prop + real product screenshot -->
+        <section class="hero hero-product">
             <div class="hero-container">
-                <div class="hero-eyebrow">Free to try · Pro when you need more</div>
-                <h1 class="hero-title">Rewrite stiff drafts. Ship the bid. Keep the utilities free.</h1>
-                <p class="hero-subtitle">
-                    Clean up ChatGPT paste jobs. Draft freelance proposals. Dozens of browser tools with no account.
-                    <strong style="color:var(--text);font-weight:600;">Pro is for unlimited full AI results</strong> when free caps get in the way.
-                </p>
-                <div class="hero-cta">
-                    <a href="/pro/" class="cta-attention">Get Pro — Unlimited Access</a>
-                    <a href="/tools/humanizer/" class="cta-secondary">Try Humanizer free</a>
+                <div class="hero-copy">
+                    <div class="hero-eyebrow">Free to try · Pro when you need more</div>
+                    <h1 class="hero-title">Rewrite stiff drafts. Ship the bid. Keep the utilities free.</h1>
+                    <p class="hero-subtitle">
+                        Clean up ChatGPT paste jobs. Draft freelance proposals. Dozens of browser tools with no account.
+                        <strong style="color:var(--text);font-weight:600;">Pro is for unlimited full AI results</strong> when free caps get in the way.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="/pro/" class="cta-attention">Get Pro — Unlimited Access</a>
+                        <a href="/tools/humanizer/" class="cta-secondary">Try Humanizer free</a>
+                    </div>
+                    <p class="hero-trust">$5/mo · Cancel anytime · 14-day refund · Secure checkout</p>
                 </div>
-                <p class="hero-trust">$5/mo · Cancel anytime · 14-day refund · Secure checkout</p>
+                <div>
+                    <a class="hero-shot" href="/tools/humanizer/" aria-label="Open the AI Humanizer tool">
+                        <img
+                            src="/images/product/hero-humanizer.webp"
+                            width="1100"
+                            height="612"
+                            alt="CyberScryb AI Humanizer product screenshot — paste stiff AI text and rewrite it in your browser"
+                            fetchpriority="high"
+                            decoding="async">
+                    </a>
+                    <p class="hero-shot-caption">Real product UI · runs in your browser</p>
+                </div>
             </div>
         </section>
 
@@ -134,6 +149,9 @@
                 <div class="posts-grid">
                     <article class="blog-card">
                         <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/humanizer/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/humanizer-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
                             <span class="badge-attention">Most popular</span>
                             <h3><a href="/tools/humanizer/">AI Humanizer</a></h3>
                             <p>Take the stiff ChatGPT paste and make it read like you. Free run first. Pro if you need this all day.</p>
@@ -142,6 +160,9 @@
                     </article>
                     <article class="blog-card">
                         <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/gig-auto-pilot/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/gig-auto-pilot-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
                             <span class="badge-pill">Freelance</span>
                             <h3><a href="/tools/gig-auto-pilot/">Gig Auto-Pilot</a></h3>
                             <p>Turn job posts into proposals, draft deliverables, and interview prep — faster bids, more wins.</p>
@@ -150,10 +171,13 @@
                     </article>
                     <article class="blog-card">
                         <div class="blog-card-content">
-                            <span class="badge-pill">Writing</span>
-                            <h3><a href="/tools/ai-writing-suite/">AI Writing Suite</a></h3>
-                            <p>Detect AI patterns and fix flagged sentences in one flow — built for freelancers shipping client work.</p>
-                            <a href="/tools/ai-writing-suite/" class="read-more">Launch Writing Suite →</a>
+                            <a class="blog-card-media" href="/tools/password-checker/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/password-checker-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
+                            <span class="badge-pill">Security</span>
+                            <h3><a href="/tools/password-checker/">Password Strength</a></h3>
+                            <p>Entropy and crack-time estimates in your browser — credentials never leave your device.</p>
+                            <a href="/tools/password-checker/" class="read-more">Launch Password Checker →</a>
                         </div>
                     </article>
                 </div>
@@ -198,9 +222,42 @@
                 <div class="posts-grid">
                     <article class="blog-card">
                         <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/json-csv-converter/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/json-csv-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
                             <h3><a href="/tools/json-csv-converter/">JSON ↔ CSV</a></h3>
                             <p>Convert nested JSON and large files without choking. Runs in your browser.</p>
                             <a href="/tools/json-csv-converter/" class="read-more">Launch tool →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/password-checker/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/password-checker-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
+                            <h3><a href="/tools/password-checker/">Password Strength</a></h3>
+                            <p>Crack-time estimates and checks — credentials never leave your device.</p>
+                            <a href="/tools/password-checker/" class="read-more">Launch tool →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/gig-auto-pilot/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/gig-auto-pilot-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
+                            <h3><a href="/tools/gig-auto-pilot/">Gig Auto-Pilot</a></h3>
+                            <p>Job post → proposal, drafts, and interview prep. Free run first.</p>
+                            <a href="/tools/gig-auto-pilot/" class="read-more">Launch tool →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <a class="blog-card-media" href="/tools/humanizer/" tabindex="-1" aria-hidden="true">
+                                <img src="/images/product/humanizer-card.webp" width="720" height="450" alt="" loading="lazy" decoding="async">
+                            </a>
+                            <h3><a href="/tools/humanizer/">AI Humanizer</a></h3>
+                            <p>Strip stiff AI paste so it reads like you wrote it.</p>
+                            <a href="/tools/humanizer/" class="read-more">Launch tool →</a>
                         </div>
                     </article>
                     <article class="blog-card">
@@ -212,30 +269,9 @@
                     </article>
                     <article class="blog-card">
                         <div class="blog-card-content">
-                            <h3><a href="/tools/password-checker/">Password Strength</a></h3>
-                            <p>Crack-time estimates and checks — credentials never leave your device.</p>
-                            <a href="/tools/password-checker/" class="read-more">Launch tool →</a>
-                        </div>
-                    </article>
-                    <article class="blog-card">
-                        <div class="blog-card-content">
                             <h3><a href="/tools/base64-tool/">Base64 Encode/Decode</a></h3>
                             <p>Standard and URL-safe alphabets. Instant, client-side.</p>
                             <a href="/tools/base64-tool/" class="read-more">Launch tool →</a>
-                        </div>
-                    </article>
-                    <article class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/markdown-html/">Markdown → HTML</a></h3>
-                            <p>Live preview with GitHub-flavored markdown support.</p>
-                            <a href="/tools/markdown-html/" class="read-more">Launch tool →</a>
-                        </div>
-                    </article>
-                    <article class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/color-palette/">Color Palette</a></h3>
-                            <p>Generate palettes, check WCAG contrast, export CSS.</p>
-                            <a href="/tools/color-palette/" class="read-more">Launch tool →</a>
                         </div>
                     </article>
                 </div>
