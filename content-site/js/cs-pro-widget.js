@@ -43,18 +43,18 @@
 .cs-plans.cs-single{grid-template-columns:1fr}
 @media(max-width:480px){.cs-plans{grid-template-columns:1fr}}
 .cs-plan{border:2px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;text-align:center;text-decoration:none;color:#e6e9f0;transition:all .2s;position:relative;display:block;background:rgba(255,255,255,.02)}
-.cs-plan:hover{border-color:#7b2cff;transform:translateY(-2px)}
-.cs-plan.cs-best{border-color:#7b2cff;background:rgba(123, 44, 255,.08)}
-.cs-plan.cs-best::before{content:"BEST VALUE";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#7b2cff;color:#ffffff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.5px;font-family:'Orbitron'}
-.cs-plan .cs-price{font-size:32px;font-weight:900;color:#7b2cff;margin:8px 0;font-family:'Orbitron'}
+.cs-plan:hover{border-color:#C4A574;transform:translateY(-2px)}
+.cs-plan.cs-best{border-color:#C4A574;background:rgba(196, 165, 116,.08)}
+.cs-plan.cs-best::before{content:"BEST VALUE";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#C4A574;color:#1A1510;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.5px;font-family:DM Sans,system-ui,sans-serif}
+.cs-plan .cs-price{font-size:32px;font-weight:900;color:#C4A574;margin:8px 0;font-family:DM Sans,system-ui,sans-serif}
 .cs-plan .cs-price small{font-size:14px;font-weight:500;color:#8892a8}
-.cs-plan .cs-name{font-weight:600;font-size:15px;font-family:'Orbitron';letter-spacing:1px;text-transform:uppercase}
+.cs-plan .cs-name{font-weight:600;font-size:15px;font-family:DM Sans,system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase}
 .cs-plan .cs-tag{font-size:11px;color:#8892a8;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
 .cs-features{list-style:none;padding:0;margin:16px 0 0;font-size:13px}
 .cs-features li{padding:6px 0;color:#cbd5e1}
 .cs-features li::before{content:"✓ ";color:#10b981;font-weight:700;margin-right:4px}
 .cs-foot{font-size:11px;color:#8892a8;text-align:center;margin-top:16px}
-.cs-foot a{color:#7b2cff;text-decoration:none}`;
+.cs-foot a{color:#C4A574;text-decoration:none}`;
   var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
   var html;
