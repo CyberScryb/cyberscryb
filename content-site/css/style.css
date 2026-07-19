@@ -1,43 +1,43 @@
 /* ═══════════════════════════════════════════════════════════
-   CyberScryb — "Ink & Ledger"
-   Dark green-black · bone type · deep green brand · oxblood RARE attention only
-   No gradients. Solid fills.
+   CyberScryb — clean near-black · bone type · deep green brand
+   Attention: warm amber (rare) — not red, not brown haze
+   No colored atmosphere overlays. No gradients on UI chrome.
    ═══════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
 
 :root {
-    /* Surfaces — green-black ink (not brown, not navy-teal) */
-    --bg: #0B0F0D;
-    --bg-elevated: #111814;
-    --card: #161D19;
-    --card-glass: rgba(22, 29, 25, 0.9);
+    /* Surfaces — true near-black (neutral, no green/brown cast) */
+    --bg: #0A0A0A;
+    --bg-elevated: #111111;
+    --card: #161616;
+    --card-glass: rgba(22, 22, 22, 0.92);
 
     /* Type — bone */
     --text: #E8E2D6;
-    --text-muted: #9A958C;
-    --text-faint: #6F6A62;
+    --text-muted: #A39E94;
+    --text-faint: #73706A;
 
-    /* Brand — deep forest green (default CTAs, links, focus) */
+    /* Brand — deep green (everyday CTAs, links) — not used on page wash */
     --primary: #2F6B52;
     --primary-hover: #245542;
     --primary-soft: #5C8F76;
-    --primary-ink: #E8E2D6;
-    --primary-glow: rgba(47, 107, 82, 0.2);
+    --primary-ink: #F2EFE8;
+    --primary-glow: rgba(47, 107, 82, 0.18);
 
-    /* Attention — oxblood ONLY for rare “look here / pay” moments */
-    --attention: #8B2E2E;
-    --attention-hover: #6F2424;
-    --attention-ink: #F5F0E8;
-    --attention-glow: rgba(139, 46, 46, 0.18);
+    /* Attention — amber / soft orange, rare only (pay / Get Pro) */
+    --attention: #D97706;
+    --attention-hover: #B45309;
+    --attention-ink: #0A0A0A;
+    --attention-glow: rgba(217, 119, 6, 0.16);
 
     /* Semantic */
-    --success: #3D6B54;
-    --danger: var(--attention);
+    --success: #2F6B52;
+    --danger: #B91C1C;
 
     --border: rgba(232, 226, 214, 0.1);
     --border-strong: rgba(232, 226, 214, 0.18);
-    --shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    --shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
     --radius: 12px;
     --radius-sm: 9px;
     --font: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -81,16 +81,9 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Soft depth only — faint green breath, no color circus */
+/* No color haze / tinted fog — flat near-black stage */
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 70% 45% at 50% -15%, rgba(47, 107, 82, 0.07), transparent 50%),
-        radial-gradient(ellipse 50% 40% at 100% 100%, rgba(11, 15, 13, 0.95), transparent 55%);
-    pointer-events: none;
-    z-index: -1;
+    display: none;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -127,9 +120,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(12, 14, 18, 0.88);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
 }
 
@@ -326,9 +319,9 @@ header {
 .blog-card:hover,
 .tool-card:hover,
 .glass-card:hover {
-    border-color: rgba(47, 107, 82, 0.4);
+    border-color: rgba(232, 226, 214, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(47, 107, 82, 0.12);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
 }
 
 .blog-card {
@@ -373,7 +366,7 @@ header {
     background: rgba(47, 107, 82, 0.14);
     color: var(--primary-soft);
 }
-/* Rare: money / urgency chip */
+/* Rare: money / urgency chip — amber */
 .badge-attention {
     display: inline-block;
     font-size: 0.68rem;
@@ -383,9 +376,9 @@ header {
     padding: 0.25rem 0.55rem;
     border-radius: 999px;
     margin-bottom: 0.65rem;
-    background: rgba(139, 46, 46, 0.2);
-    color: #E8B4B4;
-    border: 1px solid rgba(139, 46, 46, 0.4);
+    background: rgba(217, 119, 6, 0.15);
+    color: #FBBF24;
+    border: 1px solid rgba(217, 119, 6, 0.4);
 }
 
 /* ─── Hero ─── */
@@ -505,8 +498,8 @@ header {
 .pro-band-card {
     text-align: center;
     padding: 1.5rem;
-    background: rgba(11, 15, 13, 0.55);
-    border: 1px solid rgba(47, 107, 82, 0.35);
+    background: #111111;
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius);
 }
 .pro-band-price {
@@ -599,7 +592,7 @@ footer {
     border-top: 1px solid var(--border);
     padding: 2.5rem 0 1.5rem;
     margin-top: 1rem;
-    background: rgba(12, 14, 18, 0.75);
+    background: #0A0A0A;
 }
 .footer-container {
     max-width: var(--max);
@@ -709,8 +702,8 @@ textarea, input[type="text"], input[type="email"], select {
         right: 0;
         flex-direction: column;
         align-items: stretch;
-        background: rgba(12, 14, 18, 0.97);
-        backdrop-filter: blur(16px);
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border);
         padding: 0.75rem 1rem 1rem;
         gap: 0.25rem;

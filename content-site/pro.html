@@ -31,15 +31,15 @@
 </script>
 <style>
 :root {
-    --bg: #0B0F0D;
+    --bg: #0A0A0A;
     --fg: #E8E2D6;
-    --muted: #9A958C;
+    --muted: #A39E94;
     --accent: #2F6B52;
     --accent2: #5C8F76;
-    --attention: #8B2E2E;
-    --attention-hover: #6F2424;
+    --attention: #D97706;
+    --attention-hover: #B45309;
     --line: rgba(232, 226, 214, 0.1);
-    --card: rgba(22, 29, 25, 0.9);
+    --card: #161616;
 }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); min-height: 100vh; }
@@ -53,16 +53,16 @@ body { margin: 0; font-family: "DM Sans", system-ui, -apple-system, BlinkMacSyst
 @media (max-width: 600px) { .plans { grid-template-columns: 1fr; } }
 .plan { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; text-align: center; text-decoration: none; color: inherit; position: relative; transition: border-color 0.2s, transform 0.2s; }
 .plan:hover { border-color: var(--accent); transform: translateY(-3px); }
-.plan.featured { border-color: rgba(139, 46, 46, 0.5); background: rgba(139, 46, 46, 0.06); }
-.plan.featured::before { content: "BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--attention); color: #F5F0E8; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
+.plan.featured { border-color: rgba(217, 119, 6, 0.45); background: #161616; }
+.plan.featured::before { content: "BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--attention); color: #0A0A0A; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
 .plan .name { font-weight: 600; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
 .plan .price { font-size: 52px; font-weight: 800; color: var(--fg); margin: 16px 0 4px; line-height: 1; letter-spacing: -0.03em; }
 .plan .price small { font-size: 18px; font-weight: 500; color: var(--muted); }
 .plan .meta { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
 .plan .cta { display: block; background: var(--accent); color: #E8E2D6; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: background 0.2s; letter-spacing: 0.02em; }
 .plan .cta:hover { background: #245542; }
-.plan.featured .cta { background: var(--attention); color: #F5F0E8; }
-.plan.featured .cta:hover { background: var(--attention-hover); }
+.plan.featured .cta { background: var(--attention); color: #0A0A0A; }
+.plan.featured .cta:hover { background: var(--attention-hover); color: #0A0A0A; }
 .features { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; margin: 60px 0 40px; }
 .features h2 { margin: 0 0 24px; font-size: 22px; font-weight: 700; }
 .features ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
