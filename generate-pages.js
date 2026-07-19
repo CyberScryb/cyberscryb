@@ -793,7 +793,9 @@ function generateSitemap(generatedPages) {
     xml += '\n  <!-- Blog Posts -->\n';
     const blogPosts = [
         'behavioral-spike-tracking-memory-care-2026',
+        'cron-expression-builder-online-2026',
         'dementia-custody-evidence-guide-2026',
+        'free-password-strength-checker-2026',
         'free-upwork-proposal-generator-2026',
         'how-to-appeal-unemployment-denial-2026',
         'how-to-make-ai-text-sound-human-2026',
