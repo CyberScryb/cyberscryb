@@ -30,12 +30,12 @@
   function tag(url){ return url + (url.indexOf('?') > -1 ? '&' : '?') + 'utm_source=' + encodeURIComponent(utmSource) + '&utm_medium=widget&utm_campaign=pro_pill'; }
 
   var css = `
-.cs-pro-pill{position:fixed;bottom:20px;right:20px;background:#14B8A6;color:#042f2e;padding:12px 20px;border-radius:999px;font:700 14px/1 Inter,system-ui,sans-serif;box-shadow:0 4px 20px rgba(20,184,166,0.35);cursor:pointer;z-index:9998;transition:transform .2s,box-shadow .2s,background .2s;border:none;display:flex;align-items:center;gap:8px}
-.cs-pro-pill:hover{transform:translateY(-2px);background:#0F766E;color:#fff;box-shadow:0 8px 30px rgba(20,184,166,.45)}
-.cs-pro-modal-bg{position:fixed;inset:0;background:rgba(10,20,40,.88);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
+.cs-pro-pill{position:fixed;bottom:20px;right:20px;background:#C4A574;color:#1A1510;padding:12px 20px;border-radius:999px;font:700 14px/1 Inter,system-ui,sans-serif;box-shadow:0 4px 20px rgba(196,165,116,0.35);cursor:pointer;z-index:9998;transition:transform .2s,box-shadow .2s,background .2s;border:none;display:flex;align-items:center;gap:8px}
+.cs-pro-pill:hover{transform:translateY(-2px);background:#A88B5C;color:#fff;box-shadow:0 8px 30px rgba(196,165,116,.45)}
+.cs-pro-modal-bg{position:fixed;inset:0;background:rgba(12,14,18,.88);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
 .cs-pro-modal-bg.cs-active{display:flex}
-.cs-pro-modal{background:rgba(30,42,68,.92);max-width:540px;width:100%;border-radius:20px;padding:36px 32px 28px;font:14px/1.5 Inter,system-ui,sans-serif;color:#E2E8F0;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(148,163,184,.15);backdrop-filter:blur(12px)}
-.cs-pro-modal h2{margin:0 0 8px;font-size:22px;font-weight:800;font-family:Inter,system-ui,sans-serif;color:#E2E8F0}
+.cs-pro-modal{background:rgba(24,28,36,.92);max-width:540px;width:100%;border-radius:20px;padding:36px 32px 28px;font:14px/1.5 Inter,system-ui,sans-serif;color:#EDE9E1;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(237,233,225,.15);backdrop-filter:blur(12px)}
+.cs-pro-modal h2{margin:0 0 8px;font-size:22px;font-weight:800;font-family:Inter,system-ui,sans-serif;color:#EDE9E1}
 .cs-pro-modal .cs-sub{color:#8892a8;margin:0 0 24px;font-size:14px}
 .cs-pro-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#8892a8;padding:4px 10px;border-radius:6px}
 .cs-pro-close:hover{background:rgba(255,255,255,.05);color:#e6e9f0}

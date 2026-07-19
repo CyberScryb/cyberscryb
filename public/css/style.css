@@ -1,33 +1,45 @@
 /* ═══════════════════════════════════════════════════════════
-   CyberScryb Design System 2026
-   Minimal dark · glass cards · teal CTAs (no cyan)
-   Conversion-first: hierarchy, trust, one primary action
+   CyberScryb — "Scribe After Dark"
+   Warm ink desk: paper text, brass signal, no gradients, no teal/cyan/purple clichés
+   Trustworthy, ownable, quiet quality
    ═══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
 
 :root {
-    --bg: #0A1428;
-    --bg-elevated: #0f1b33;
-    --text: #E2E8F0;
-    --text-muted: #94A3B8;
-    --text-faint: #64748B;
-    --primary: #14B8A6;
-    --primary-hover: #0F766E;
-    --primary-soft: #5EEAD4;
-    --primary-glow: rgba(20, 184, 166, 0.18);
-    --card: #1E2A44;
-    --card-glass: rgba(30, 42, 68, 0.72);
-    --border: rgba(148, 163, 184, 0.15);
-    --border-strong: rgba(148, 163, 184, 0.28);
-    --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    --radius: 14px;
-    --radius-sm: 10px;
-    --font: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --transition: 0.22s ease;
+    /* Surfaces — cool-near-black with a hint of blue-ink, not navy-teal SaaS */
+    --bg: #0C0E12;
+    --bg-elevated: #12151B;
+    --card: #181C24;
+    --card-glass: rgba(24, 28, 36, 0.88);
+
+    /* Type — warm paper, not cold slate */
+    --text: #EDE9E1;
+    --text-muted: #9C968A;
+    --text-faint: #6F6A62;
+
+    /* Signal — antique brass (one accent only, solid fills, no gradients) */
+    --primary: #C4A574;
+    --primary-hover: #A88B5C;
+    --primary-soft: #D9C4A0;
+    --primary-ink: #1A1510;
+    --primary-glow: rgba(196, 165, 116, 0.14);
+
+    /* Semantic (quiet) */
+    --success: #7D9B8A;
+    --danger: #C47A6A;
+
+    --border: rgba(237, 233, 225, 0.09);
+    --border-strong: rgba(237, 233, 225, 0.16);
+    --shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    --radius: 12px;
+    --radius-sm: 9px;
+    --font: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-brand: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --transition: 0.2s ease;
     --max: 1120px;
 
-    /* Legacy aliases used across tool pages */
+    /* Legacy aliases (tools / older pages) */
     --bg-primary: var(--bg);
     --bg-secondary: var(--bg-elevated);
     --card-bg: var(--card-glass);
@@ -39,8 +51,8 @@
     --border-thin: var(--border);
     --font-sans: var(--font);
     --font-heading: var(--font);
-    --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
-    --radius-lg: 16px;
+    --font-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+    --radius-lg: 14px;
     --radius-md: var(--radius);
     --transition-smooth: all var(--transition);
 }
@@ -63,14 +75,14 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Soft depth only — no colorful gradient washes */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(20, 184, 166, 0.12), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 100% 50%, rgba(20, 184, 166, 0.05), transparent 50%),
-        radial-gradient(ellipse 40% 30% at 0% 80%, rgba(30, 42, 68, 0.8), transparent 45%);
+        radial-gradient(ellipse 70% 45% at 50% -15%, rgba(196, 165, 116, 0.06), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 100% 100%, rgba(18, 21, 27, 0.9), transparent 55%);
     pointer-events: none;
     z-index: -1;
 }
@@ -109,9 +121,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 20, 40, 0.82);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    background: rgba(12, 14, 18, 0.88);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
     border-bottom: 1px solid var(--border);
 }
 
@@ -132,9 +144,10 @@ header {
     align-items: center;
     gap: 0.6rem;
     color: var(--text);
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
 }
 .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
 
@@ -164,7 +177,7 @@ header {
 .nav-menu a.nav-pro,
 .nav-menu a[href="/pro/"] {
     background: var(--primary) !important;
-    color: #042f2e !important;
+    color: var(--primary-ink) !important;
     font-weight: 700 !important;
     padding: 0.45rem 0.95rem !important;
     margin-left: 0.35rem;
@@ -172,7 +185,7 @@ header {
 .nav-menu a.nav-pro:hover,
 .nav-menu a[href="/pro/"]:hover {
     background: var(--primary-hover) !important;
-    color: #fff !important;
+    color: var(--primary-ink) !important;
 }
 
 .hamburger {
@@ -200,7 +213,7 @@ header {
     justify-content: center;
     gap: 0.4rem;
     background: var(--primary);
-    color: #042f2e;
+    color: var(--primary-ink);
     padding: 0.9rem 1.5rem;
     border-radius: var(--radius-sm);
     font-family: var(--font);
@@ -210,16 +223,16 @@ header {
     cursor: pointer;
     text-decoration: none;
     transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-    box-shadow: 0 4px 20px var(--primary-glow);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 .cta-button:hover,
 .btn-primary:hover,
 .pro-cta-btn:hover,
 .btn-cta:hover {
     background: var(--primary-hover);
-    color: #fff;
+    color: var(--primary-ink);
     transform: translateY(-1px);
-    box-shadow: 0 8px 28px rgba(20, 184, 166, 0.28);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
 .cta-secondary,
@@ -278,9 +291,9 @@ header {
 .blog-card:hover,
 .tool-card:hover,
 .glass-card:hover {
-    border-color: rgba(20, 184, 166, 0.35);
-    transform: translateY(-3px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(20, 184, 166, 0.12);
+    border-color: rgba(196, 165, 116, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(196, 165, 116, 0.1);
 }
 
 .blog-card {
@@ -317,12 +330,12 @@ header {
     padding: 0.25rem 0.55rem;
     border-radius: 999px;
     margin-bottom: 0.65rem;
-    background: rgba(20, 184, 166, 0.15);
+    background: rgba(196, 165, 116, 0.12);
     color: var(--primary-soft);
-    border: 1px solid rgba(20, 184, 166, 0.3);
+    border: 1px solid rgba(196, 165, 116, 0.28);
 }
 .tool-badge.new {
-    background: rgba(94, 234, 212, 0.1);
+    background: rgba(196, 165, 116, 0.1);
     color: var(--primary-soft);
 }
 
@@ -347,8 +360,8 @@ header {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--primary-soft);
-    background: rgba(20, 184, 166, 0.1);
-    border: 1px solid rgba(20, 184, 166, 0.25);
+    background: rgba(196, 165, 116, 0.1);
+    border: 1px solid rgba(196, 165, 116, 0.22);
     padding: 0.35rem 0.85rem;
     border-radius: 999px;
     margin-bottom: 1.25rem;
@@ -437,14 +450,14 @@ header {
     content: '✓';
     position: absolute;
     left: 0;
-    color: var(--primary);
+    color: var(--success);
     font-weight: 700;
 }
 .pro-band-card {
     text-align: center;
     padding: 1.5rem;
-    background: rgba(10, 20, 40, 0.5);
-    border: 1px solid rgba(20, 184, 166, 0.3);
+    background: rgba(12, 14, 18, 0.55);
+    border: 1px solid rgba(196, 165, 116, 0.28);
     border-radius: var(--radius);
 }
 .pro-band-price {
@@ -519,7 +532,7 @@ header {
 .newsletter-form button {
     padding: 0.85rem 1.35rem;
     background: var(--primary);
-    color: #042f2e;
+    color: var(--primary-ink);
     border: none;
     border-radius: var(--radius-sm);
     font-weight: 700;
@@ -529,7 +542,7 @@ header {
 }
 .newsletter-form button:hover {
     background: var(--primary-hover);
-    color: #fff;
+    color: var(--primary-ink);
 }
 
 /* ─── Footer ─── */
@@ -537,7 +550,7 @@ footer {
     border-top: 1px solid var(--border);
     padding: 2.5rem 0 1.5rem;
     margin-top: 1rem;
-    background: rgba(10, 20, 40, 0.6);
+    background: rgba(12, 14, 18, 0.75);
 }
 .footer-container {
     max-width: var(--max);
@@ -610,7 +623,7 @@ textarea, input[type="text"], input[type="email"], select {
 }
 .filter-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 .filter-btn.active {
-    background: rgba(20, 184, 166, 0.18);
+    background: rgba(196, 165, 116, 0.14);
     color: var(--primary-soft);
 }
 
@@ -629,6 +642,14 @@ textarea, input[type="text"], input[type="email"], select {
     box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
+/* Brand wordmark helper */
+.brand-mark {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
     .nav-menu {
@@ -639,7 +660,7 @@ textarea, input[type="text"], input[type="email"], select {
         right: 0;
         flex-direction: column;
         align-items: stretch;
-        background: rgba(10, 20, 40, 0.96);
+        background: rgba(12, 14, 18, 0.97);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
         padding: 0.75rem 1rem 1rem;
