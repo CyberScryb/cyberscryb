@@ -20,7 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -94,7 +94,7 @@
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">AI Email Writer</span>
+        <span style="color: var(--primary-soft);">AI Email Writer</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -102,7 +102,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -113,7 +113,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -123,11 +123,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
+                <div class="badge" style="background: rgba(15, 77, 50, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(15, 77, 50, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     AI-Powered
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: #7b2cff;">Email Writer</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: var(--primary-soft);">Email Writer</span></h1>
                 <p class="hero-subtitle">Describe what you want to say. Get a polished email in seconds.</p>
             </div>
         </section>
@@ -141,7 +141,7 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                 Compose
                             </h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
                         </div>
 
                         <div class="input-group">
@@ -170,7 +170,7 @@
                             <input type="text" id="purpose" placeholder="e.g. request a meeting, follow up on proposal" style="width:100%; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); color:#ededed; padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Write Email</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -184,7 +184,7 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
@@ -208,8 +208,8 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Drafting your email with Gemini 3.1 Pro...</p>
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary-soft);">Drafting your email with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
                         <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
@@ -224,7 +224,7 @@
                     <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -235,8 +235,8 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--primary-soft); margin-bottom:0.5rem;">Pro</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -245,10 +245,10 @@
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
                             <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -257,13 +257,13 @@
                                 <li>&#10003; API access</li>
                                 <li>&#10003; Priority support</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>How does the AI email writer work?</h4><p>Describe what you need to say, pick a tone, and our AI drafts a polished, professional email in seconds using Gemini 3.1 Pro.</p></div>
                     <div class="faq-item"><h4>Is it really free?</h4><p>Yes. 3 free emails per day after entering your email. No credit card.</p></div>
                     <div class="faq-item"><h4>Can I edit the result?</h4><p>Of course. The output is a starting point &mdash; click inside the result box to tweak it.</p></div>
@@ -278,22 +278,22 @@
         </section>
     
     <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Makes a Professional Email Effective</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Makes a Professional Email Effective</h2>
         <p>The average professional receives 121 emails per day. Most get skimmed in under 5 seconds. The emails that get read and acted on share three traits: a clear subject line that previews the ask, a first sentence that states the purpose, and a specific call to action at the end. Everything else is optional.</p>
 <p>The biggest mistake people make is burying the point. "I hope this email finds you well. As per our last discussion regarding the Q3 budget review, I wanted to follow up on..." &mdash; by the time you get to the actual request, the reader has already moved on. Lead with the ask. "Can you approve the Q3 budget by Friday? Details below." That's a complete email. Everything after is supporting context.</p>
 <p>Tone matters more than most people realize. Too formal reads as stiff and robotic. Too casual can seem unprofessional. The sweet spot for most business communication is "friendly professional" &mdash; contractions are fine, first names are fine, but slang and emojis usually aren't (unless your company culture specifically embraces them).</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Email Templates That Get Replies</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Email Templates That Get Replies</h2>
         <p><strong>The follow-up email.</strong> "Hi [Name], checking in on [specific thing] from [date]. Let me know if you need anything else from me to move forward." Short, specific, not pushy. Send 3-5 business days after the original email.</p>
 <p><strong>The cold outreach email.</strong> Lead with something specific about the recipient &mdash; not "I love your company" but "I saw your post about [specific topic] and have a question about [related thing]." Personalization that shows you actually did research gets responses. Generic templates get deleted.</p>
 <p><strong>The apology email.</strong> State what happened, take responsibility without over-explaining, describe what you're doing to fix it, and offer a concrete next step. "We shipped the wrong order. I've already sent the correct items via overnight delivery. They'll arrive by Thursday. I've also credited your account $20 for the inconvenience."</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">When to Use AI for Email Writing</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When to Use AI for Email Writing</h2>
         <p>AI email writers are most useful for three scenarios: drafting routine emails faster (meeting confirmations, status updates, thank-you notes), overcoming writer's block on important emails (job applications, client proposals, difficult conversations), and non-native English speakers who need grammatically correct professional English.</p>
 <p>Where AI falls short is emotional nuance. If you're writing a sensitive email &mdash; delivering bad news, resolving a conflict, negotiating a raise &mdash; the AI draft is a starting point, not a final product. Read the output aloud and ask yourself: "Would I actually say this to this person?" If it sounds like a corporate press release, rewrite the parts that matter most in your own words.</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Reading</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Related Reading</h2>
         <ul style="padding-left:1.2rem;">
-            <li><a href="/guides/" style="color:#7b2cff;">Browse All CyberScryb Guides</a></li>
-            <li><a href="/blog/" style="color:#7b2cff;">Read the CyberScryb Blog</a></li>
-            <li><a href="/tools/" style="color:#7b2cff;">Explore All Free Tools</a></li>
+            <li><a href="/guides/" style="color: var(--primary-soft);">Browse All CyberScryb Guides</a></li>
+            <li><a href="/blog/" style="color: var(--primary-soft);">Read the CyberScryb Blog</a></li>
+            <li><a href="/tools/" style="color: var(--primary-soft);">Explore All Free Tools</a></li>
         </ul>
     </section>
     </main>
@@ -307,15 +307,15 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
                 <span style="font-size:0.85rem; color:#878787;">Rewrite AI text to sound human.</span>
             </a>
             <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
                 <span style="font-size:0.85rem; color:#878787;">Turn long text into crisp summaries.</span>
             </a>
             <a href="/tools/bio-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Bio Generator</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Bio Generator</strong>
                 <span style="font-size:0.85rem; color:#878787;">Craft compelling social bios instantly.</span>
             </a>
         </div>
@@ -325,7 +325,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>No social media. No distractions. Just tools that work.</p>
                 </div>
                 <div class="footer-links">

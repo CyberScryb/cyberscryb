@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -164,7 +164,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -175,7 +175,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -252,7 +252,7 @@
                             <input type="text" id="refinement-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: #fff; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: #fff; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Generate</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -308,7 +308,7 @@
                     <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and no ads</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -319,8 +319,8 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #a78bfa; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#a78bfa; margin-bottom:0.5rem;">Pro</div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#a78bfa; margin-bottom:0.5rem;">Pro</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -329,10 +329,10 @@
                                 <li>&#10003; No ads</li>
                                 <li>&#10003; All tools included</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
                             <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
                             <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
                             <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
@@ -341,7 +341,7 @@
                                 <li>&#10003; API access</li>
                                 <li>&#10003; Priority support</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
                         </div>
                     </div>
                 </div>
@@ -373,7 +373,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>Free, privacy-first developer tools.</p>
                 </div>
                 <div class="footer-links">

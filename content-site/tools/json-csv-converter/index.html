@@ -18,7 +18,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
     <link rel="stylesheet" href="/tools/json-csv-converter/style.css">
     <script type="application/ld+json">
     {
@@ -114,7 +114,7 @@
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">JSON &harr; CSV Converter</span>
+        <span style="color: var(--primary-soft);">JSON &harr; CSV Converter</span>
     </nav>
         <header>
         <nav class="navbar">
@@ -122,7 +122,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                 <ul class="nav-menu">
@@ -133,7 +133,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -307,28 +307,28 @@
         </section>
 
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">When to Use JSON vs. CSV</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When to Use JSON vs. CSV</h2>
             <p>JSON and CSV solve different problems. CSV is a flat, row-column format &mdash; perfect for spreadsheets, database exports, and any data that fits neatly into a table. JSON supports nesting, arrays, and mixed types &mdash; ideal for APIs, configuration files, and hierarchical data. The right choice depends on what you're doing with the data.</p>
             <p>Use CSV when you need to import into Excel, Google Sheets, SQL databases, or any tool that expects tabular data. Use JSON when you're working with APIs, storing application state, or dealing with data that has variable-depth relationships like user profiles with nested address objects and arrays of order history.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How JSON-to-CSV Conversion Works</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How JSON-to-CSV Conversion Works</h2>
             <p>Converting JSON to CSV requires flattening hierarchical data into rows and columns. Each top-level object in a JSON array becomes a row. Each unique key across all objects becomes a column header. When objects have nested sub-objects, this tool flattens them using dot notation &mdash; so <code>{"address": {"city": "NYC"}}</code> becomes a column called <code>address.city</code> with value <code>NYC</code>.</p>
             <p>Arrays inside objects get stringified because CSV has no native concept of a multi-value cell. If your JSON contains deeply nested arrays of objects, consider extracting those into separate CSV files rather than trying to flatten everything into one table.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How CSV-to-JSON Conversion Works</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How CSV-to-JSON Conversion Works</h2>
             <p>The reverse direction is more straightforward. The first row of your CSV becomes the JSON keys. Every subsequent row becomes an object. The tool auto-detects data types &mdash; numbers stay as numbers, not strings. Empty cells become null values rather than empty strings, which is usually what you want for database imports.</p>
             <p>One common gotcha: CSV files exported from Excel sometimes include a BOM (byte order mark) at the start that can corrupt your first column name. This tool strips BOMs automatically.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">RFC 4180 and Why It Matters</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">RFC 4180 and Why It Matters</h2>
             <p>RFC 4180 is the closest thing CSV has to a formal specification. It defines rules for quoting fields that contain commas, handling line breaks inside quoted fields, and escaping double quotes by doubling them. Not all CSV tools follow RFC 4180 &mdash; Excel, for instance, has its own quirks around encoding and line endings. This converter follows RFC 4180 strictly, which means your output will work correctly with any standards-compliant parser.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Use Cases</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Common Use Cases</h2>
             <p><strong>API data analysis.</strong> Pull JSON from a REST API, convert to CSV, open in Excel or Google Sheets for pivot tables and charting.</p>
             <p><strong>Database migration.</strong> Export a NoSQL collection as JSON, convert to CSV, import into PostgreSQL or MySQL.</p>
             <p><strong>Spreadsheet to API.</strong> Build data in a spreadsheet, export as CSV, convert to JSON, POST to your API endpoint.</p>
             <p><strong>Log analysis.</strong> Convert structured JSON logs to CSV for filtering and sorting in spreadsheet tools.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Privacy and Security</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Privacy and Security</h2>
             <p>This tool runs entirely in your browser using client-side JavaScript. Your data is never transmitted to any server. You can verify this by opening your browser's Network tab &mdash; no requests are made during conversion. This makes it safe for converting sensitive data like customer records, financial exports, or internal API responses.</p>
         </section>
     </main>
@@ -343,15 +343,15 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Encode and decode Base64 data instantly.</span>
             </a>
             <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">UUID Generator</strong>
                 <span style="font-size:0.85rem; color:#878787;">Generate RFC 4122 UUIDs for your data rows.</span>
             </a>
             <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color:#878787;">Test and debug regular expressions live.</span>
             </a>
         </div>
@@ -362,19 +362,19 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/csv-to-json-converter-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? CSV to JSON Converter Guide</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? CSV to JSON Converter Guide</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
             <a href="/guides/json-vs-csv-when-to-use-each/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? JSON vs CSV: When to Use Each</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? JSON vs CSV: When to Use Each</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
             <a href="/guides/how-to-convert-json-to-csv-in-excel/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? How to Convert JSON to CSV in Excel</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? How to Convert JSON to CSV in Excel</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
             <a href="/guides/json-to-csv-with-nested-objects/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? JSON to CSV with Nested Objects</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? JSON to CSV with Nested Objects</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
         </div>
@@ -384,7 +384,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>No social media. No distractions. Just tools that work.</p>
                 </div>
                 <div class="footer-links">

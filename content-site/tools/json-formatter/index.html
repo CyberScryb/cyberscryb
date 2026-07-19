@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -110,7 +110,7 @@
             font-size: 0.88rem; line-height: 1.55; padding: 1.2rem; resize: vertical; outline: none;
             transition: border-color 0.3s; white-space: pre;
         }
-        .jf-textarea:focus { border-color: #7b2cff; }
+        .jf-textarea:focus { border-color: var(--primary-soft); }
         .jf-textarea::placeholder { color: #333; }
         .jf-btnrow { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
         .jf-btn {
@@ -118,22 +118,22 @@
             font-family: 'Inter', sans-serif; font-size: 0.82rem; padding: 0.6rem 1rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .jf-btn:hover { border-color: #7b2cff; color: #7b2cff; }
-        .jf-btn.primary { background: #7b2cff; border-color: #7b2cff; color: #fff; }
+        .jf-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .jf-btn.primary { background: var(--primary); border-color: var(--primary-soft); color: #fff; }
         .jf-btn.primary:hover { background: #a01818; color: #fff; }
         .jf-error { background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #fca5a5; padding: 0.9rem 1rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin: 0.5rem 0; display: none; }
         .jf-ok { background: rgba(34,197,94,0.1); border: 1px solid #22c55e; color: #86efac; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.85rem; margin: 0.5rem 0; display: none; }
         .jf-stats { display: flex; gap: 1.5rem; font-size: 0.78rem; color: #555555; margin: 0.5rem 0; font-family: 'JetBrains Mono', monospace; }
-        .jf-stats span strong { color: #7b2cff; }
+        .jf-stats span strong { color: var(--primary-soft); }
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #7b2cff; text-decoration: none; }
+        .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
@@ -174,7 +174,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -185,7 +185,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -253,15 +253,15 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Convert JSON to CSV and back with nested object flattening.</span>
             </a>
             <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
                 <span style="font-size:0.85rem; color:#878787;">Encode or decode strings and files to Base64 offline.</span>
             </a>
             <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color:#878787;">Test regular expressions with live match highlighting.</span>
             </a>
         </div>
@@ -272,24 +272,24 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/how-to-format-json-data/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? How to Format JSON Data</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? How to Format JSON Data</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
             <a href="/guides/json-vs-csv-when-to-use-each/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? JSON vs CSV: When to Use Each</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? JSON vs CSV: When to Use Each</strong>
                 <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
             </a>
         </div>
     </section>
 
     <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Is a JSON Formatter and Why Is It Essential?</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Is a JSON Formatter and Why Is It Essential?</h2>
         <p>JSON (JavaScript Object Notation) has become the de facto standard data interchange format for modern APIs, web applications, and database configurations. Because JSON is designed to be parsed efficiently by machines, it is often minified—compressed onto a single line with all spaces and line breaks removed to reduce payload sizes during transmission. While computers process minified JSON easily, humans find it nearly impossible to read, debug, or validate. A JSON formatter restores readability by breaking the data into a structured tree layout with clear line indentations, clean spacing, and colorized markup.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How to Format and Pretty-Print JSON Data</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Format and Pretty-Print JSON Data</h2>
         <p>Pretty-printing JSON data is straightforward. Simply paste your raw, minified, or messy JSON into the input editor of our free tool. Choose your preferred indentation level (such as 2 spaces, 4 spaces, or tab indentation) and click the **Format** button. The utility parses the string client-side, restructures it, and displays the formatted result. You can then copy the output to your clipboard with a single click. In addition to formatting, the editor highlights the nested structure, making it simple to map out key-value hierarchies and nested arrays at a glance.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Understanding JSON Syntax Validation & Troubleshooting</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Understanding JSON Syntax Validation & Troubleshooting</h2>
         <p>A key feature of a professional JSON formatter is real-time syntax validation. JSON is a strict standard defined by RFC 8259, and even minor typos will prevent a parser from reading it. The most common validation errors include:
         <ul style="margin-top:1rem; padding-left:1.5rem; list-style-type:disc;">
             <li><strong>Missing or Trailing Commas:</strong> Commas must separate properties inside objects and elements inside arrays, but a trailing comma at the end of a list is strictly forbidden.</li>
@@ -299,10 +299,10 @@
         </ul>
         When our formatter detects a syntax error, it immediately stops processing, alerts you to the error type, and points out the exact line and column location of the issue so you can fix it instantly.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Format vs. Minify: When to Use Each</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Format vs. Minify: When to Use Each</h2>
         <p>Formatting and minification serve opposite goals. **Formatting** adds whitespace, line breaks, and indentation, increasing readability for development, debugging, and configuration audits. **Minification** strips all unnecessary characters to compress the payload. Minification should be used when deploying configurations to production environments or sending payloads to APIs to optimize bandwidth and speed up network requests. Use our **Minify** button to automatically compress your JSON code when you are ready to ship.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why Browser-Side JSON Formatting is Safer</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Browser-Side JSON Formatting is Safer</h2>
         <p>Many online developers rely on tools that send pasted data to a backend server for parsing. This represents a significant security risk, as your configurations, keys, credentials, or personal payloads are sent across the internet to third-party databases. CyberScryb’s JSON Formatter executes **100% in your browser**. The data is processed locally on your machine via JavaScript, meaning your JSON never leaves your device and is never logged or stored. This guarantees full data privacy and security for all your developer workflows.</p>
     </section>
 
@@ -310,7 +310,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">

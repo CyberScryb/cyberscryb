@@ -27,7 +27,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
     <link rel="stylesheet" href="/tools/contrast-checker/style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -133,7 +133,7 @@
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -144,7 +144,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
             </div>
         </nav>
@@ -231,18 +231,18 @@
 
         <!-- Educational Content Section -->
         <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:#cbd5e1; font-family:'Inter',sans-serif; line-height:1.75;">
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Crucial Role of Color Contrast in Modern Design</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Crucial Role of Color Contrast in Modern Design</h2>
             <p>Web accessibility (often abbreviated as a11y) ensures that digital services can be navigated, read, and understood by everyone, including individuals with low vision, color blindness, or age-related vision degeneration. Color contrast represents one of the most common design failures on the internet, directly affecting readability and search index crawling optimization.</p>
             <p>When foreground text does not contrast sufficiently with the background, reading comprehension drops drastically. This affects users not only with clinical visual impairments but also users viewing screens under direct sunlight or using screens in power-saving low-brightness configurations. CyberScryb's WCAG Color Contrast Checker calculates the precise mathematical contrast between text components to guarantee universal readability.</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding WCAG 2.1 &amp; 2.2 Standards</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding WCAG 2.1 &amp; 2.2 Standards</h2>
             <p>The Web Content Accessibility Guidelines (WCAG) categorize design compliance into three main levels: A (minimal), AA (mid-level / industry standard), and AAA (highest criteria). Here is how color contrast thresholds are defined:</p>
             <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
                 <li style="margin-bottom:0.5rem;"><strong>WCAG AA Compliance:</strong> Normal text elements require a minimum contrast ratio of 4.5:1. Large text (defined as 18pt/24px or larger, or 14pt/18.67px bold or larger) requires a 3.0:1 ratio. Graphical elements and UI controls also require a 3.0:1 ratio.</li>
                 <li style="margin-bottom:0.5rem;"><strong>WCAG AAA Compliance:</strong> Normal text elements require a minimum contrast ratio of 7.0:1. Large text elements require a minimum of 4.5:1. This level ensures maximum legibility for low-vision readers.</li>
             </ul>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How Relative Luminance &amp; Contrast Ratio Are Calculated</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How Relative Luminance &amp; Contrast Ratio Are Calculated</h2>
             <p>The relative luminance of any color is calculated based on its RGB values, representing the perceived brightness of a color relative to absolute white. The formula normalizes sRGB values and adjusts for gamma correction:</p>
             <p style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:12px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem;">
                 If C &lt;= 0.03928: c = C / 12.92<br>
@@ -258,10 +258,10 @@
             </p>
             <p>Where L1 is the lighter color (larger luminance value) and L2 is the darker color (smaller luminance value). Adding 0.05 acts as a light ambient bias to prevent division-by-zero errors when dealing with absolute black.</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How the Auto-Optimize Tool Works</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How the Auto-Optimize Tool Works</h2>
             <p>If your color combination fails compliance checks, you don't have to guess how to correct it. CyberScryb's contrast engine adjusts the lightness channel (L) of the foreground color in HSL space, step-by-step, until it hits the exact target ratio (4.5 or 7.0) relative to your background color. This preserves your color's hue and saturation, giving you the closest accessible match.</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
                 <li><a href="/tools/subnet-calculator/" style="color:#06b6d4;">Subnet Calculator</a> &mdash; Map server networks cleanly.</li>
                 <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> &mdash; Create beautiful palettes.</li>

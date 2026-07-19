@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -120,7 +120,7 @@
             font-size: 0.9rem; line-height: 1.6; padding: 1rem; resize: vertical; outline: none;
             transition: border-color 0.3s;
         }
-        .td-pane textarea:focus { border-color: #7b2cff; }
+        .td-pane textarea:focus { border-color: var(--primary-soft); }
 
         .action-bar {
             display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; align-items: center;
@@ -130,8 +130,8 @@
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .action-btn:hover { border-color: #7b2cff; color: #7b2cff; }
-        .action-btn.primary { background: #7b2cff; border-color: #7b2cff; color: #fff; }
+        .action-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .action-btn.primary { background: var(--primary); border-color: var(--primary-soft); color: #fff; }
         .action-btn.primary:hover { background: #a01818; }
 
         .td-stats {
@@ -169,12 +169,12 @@
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 1100px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #7b2cff; text-decoration: none; }
+        .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
@@ -215,7 +215,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -226,7 +226,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -295,15 +295,15 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word & Character Counter</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word & Character Counter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Count words, sentences, and reading time before/after edits.</span>
             </a>
             <a href="/tools/json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
                 <span style="font-size:0.85rem; color:#878787;">Beautify, minify and validate JSON with error locations.</span>
             </a>
             <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color:#878787;">Test regular expressions with live match highlighting.</span>
             </a>
         </div>
@@ -313,7 +313,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">

@@ -1,19 +1,28 @@
-// Humanizer — rewrite + free/Pro access gates (matches site-wide conversion model)
+// Humanizer — rewrite + free/Pro gates + product UX (sample, actions, shortcuts)
 
 document.addEventListener('DOMContentLoaded', () => {
     const FREE_CHAR_LIMIT = 500;
     const FREE_DAILY_LIMIT = 1;
-    const PREVIEW_RATIO = 0.28;
+    // Show enough of their real output that they care — not full blur, not full free
+    const PREVIEW_RATIO = 0.42;
     const STRIPE_MONTHLY = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
     const STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
     const TOOL_ID = 'humanizer';
     const usageKey = 'cs_humanizer_usage';
 
+    const SAMPLE_TEXT =
+        'In today\'s rapidly evolving digital landscape, it is imperative that organizations leverage synergies across cross-functional teams in order to drive meaningful outcomes and unlock unprecedented value for stakeholders at scale.';
+
     const rewriteBtn = document.getElementById('humanize-btn') || document.getElementById('rewrite-btn');
+    const rewriteBtnMobile = document.getElementById('humanize-btn-mobile');
     const roboticText = document.getElementById('robotic-text');
     const outputContent = document.getElementById('output-text') || document.getElementById('output-content');
     const loadingIndicator = document.getElementById('loading-indicator');
     const copyBtn = document.getElementById('copy-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const againBtn = document.getElementById('again-btn');
+    const trySampleBtn = document.getElementById('try-sample-btn');
+    const resultActions = document.getElementById('hz-result-actions');
     const wordCount = document.getElementById('word-count');
     const clicheCount = document.getElementById('cliche-count');
     const styleSamples = document.querySelectorAll('.style-sample');
@@ -27,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modeButtons = document.querySelectorAll('.hz-mode');
 
     let pendingFullText = '';
+    let lastFullText = '';
     let typeTimer = null;
     let selectedStyle = 'Casual, conversational, natural human writing with varied sentence length and contractions';
 
-    // Real modes → API `style` (never decorative-only)
     modeButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
             modeButtons.forEach(function (b) { b.classList.remove('is-active'); });
@@ -92,30 +101,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!usageCounter) return;
         if (isPro()) {
             usageCounter.textContent = 'Pro · unlimited';
-            usageCounter.style.color = '#22c55e';
+            usageCounter.style.color = '#3D9B6A';
             return;
         }
         if (!isSubscribed()) {
             usageCounter.textContent = localStorage.getItem('cs_free_trial_used')
-                ? 'Sample used · unlock below'
+                ? 'Free run used'
                 : '1 free full result';
-            usageCounter.style.color = '#878787';
+            usageCounter.style.color = '#A39E94';
             return;
         }
         const usage = getUsageToday();
         const remaining = Math.max(0, FREE_DAILY_LIMIT - usage.count);
-        usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free full today';
-        usageCounter.style.color = remaining === 0 ? '#ef4444' : '#878787';
+        usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free today';
+        usageCounter.style.color = remaining === 0 ? '#B91C1C' : '#A39E94';
     }
     function updateCharCounter() {
         if (!charCounter || !roboticText) return;
         const n = roboticText.value.length;
         const over = !isPro() && n > FREE_CHAR_LIMIT;
         charCounter.textContent = n + (isPro() ? ' chars' : ' / ' + FREE_CHAR_LIMIT + ' free');
-        charCounter.style.color = over ? '#ef4444' : '#878787';
-        if (rewriteBtn) {
-            rewriteBtn.classList.toggle('is-over-limit', over);
-        }
+        charCounter.style.color = over ? '#B91C1C' : '#A39E94';
+        if (rewriteBtn) rewriteBtn.classList.toggle('is-over-limit', over);
+        if (rewriteBtnMobile) rewriteBtnMobile.classList.toggle('is-over-limit', over);
     }
     function cancelType() {
         clearTimeout(typeTimer);
@@ -123,10 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function cutPreview(fullText) {
         const words = fullText.split(/\s+/);
-        const n = Math.max(3, Math.floor(words.length * PREVIEW_RATIO));
+        // Always show a meaningful chunk of THEIR output (idea 2)
+        const n = Math.max(12, Math.floor(words.length * PREVIEW_RATIO));
         const preview = words.slice(0, n).join(' ');
         const end = preview.lastIndexOf('.');
-        return end > preview.length * 0.5 ? preview.slice(0, end + 1) : preview + '...';
+        return end > preview.length * 0.4 ? preview.slice(0, end + 1) : preview + '…';
     }
     function typeInto(text, speed, done) {
         cancelType();
@@ -147,15 +156,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ch === '\n') return '<br>';
         return ch;
     }
+    function showResultActions(show) {
+        if (!resultActions) return;
+        if (show) resultActions.removeAttribute('hidden');
+        else resultActions.setAttribute('hidden', '');
+    }
+    function getPlainOutput() {
+        return (outputContent && outputContent.innerText || '').trim();
+    }
     function ensureProButtons(card) {
         if (!card || card.querySelector('.cs-pro-gate-btns')) return;
         const wrap = document.createElement('div');
         wrap.className = 'cs-pro-gate-btns';
         wrap.innerHTML =
-            '<p class="cs-gate-trust">Full result · unlimited rewrites · cancel anytime</p>'
-            + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Get Pro — Unlimited · $5/mo</a>'
+            '<p class="cs-gate-trust">Full text · no daily cap · cancel anytime</p>'
+            + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Get Pro · $5/mo</a>'
             + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, 'gate_lifetime') + '" target="_blank" rel="noopener">Lifetime · $29</a>'
-            + '<p class="cs-gate-fine">Stripe secure · 14-day refund · <a href="/pro-restore/">Already paid?</a></p>';
+            + '<p class="cs-gate-fine">Stripe · 14-day refund · <a href="/pro-restore/">Already paid?</a></p>';
         card.appendChild(wrap);
         wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
             a.addEventListener('click', function () {
@@ -172,14 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mode === 'pro_only') {
             if (title) title.textContent = 'Free unlock used for today';
             if (blurb) {
-                blurb.innerHTML = 'Preview above. <strong>Pro</strong> unlocks the full rewrite with no daily cap.';
+                blurb.innerHTML = 'You can still read the start above. <strong>Pro</strong> unlocks the rest with no daily cap.';
             }
             if (form) form.style.display = 'none';
             if (gateStatus) gateStatus.textContent = '';
         } else {
-            if (title) title.textContent = 'Unlock your full result';
+            if (title) title.textContent = 'Rest of your rewrite is locked';
             if (blurb) {
-                blurb.innerHTML = 'One free full unlock today with email — or <strong>Pro</strong> for unlimited.';
+                blurb.innerHTML = 'You can read the start above. Unlock the full text free once today with email, or go Pro if you need this every day.';
             }
             if (form) form.style.display = '';
         }
@@ -187,43 +204,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function showPreviewWithGate(fullText, mode) {
         pendingFullText = fullText;
-        typeInto(cutPreview(fullText), 8, function () {
+        lastFullText = fullText;
+        const preview = cutPreview(fullText);
+        typeInto(preview, 6, function () {
             if (emailGate) {
                 emailGate.classList.remove('hidden');
                 setGateMode(mode || 'email');
                 trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: mode || 'email' });
             }
-            updateStats(cutPreview(fullText));
+            updateStats(preview);
+            showResultActions(true);
         });
     }
     function showFullResult(fullText) {
         pendingFullText = '';
+        lastFullText = fullText;
         if (emailGate) emailGate.classList.add('hidden');
-        typeInto(fullText, 8, function () {
+        typeInto(fullText, 6, function () {
             updateStats(fullText);
+            showResultActions(true);
         });
     }
     function unlockFullResult() {
         if (!pendingFullText) return;
         const full = pendingFullText;
         pendingFullText = '';
+        lastFullText = full;
         if (emailGate) emailGate.classList.add('hidden');
-        typeInto(full, 5, function () {
+        typeInto(full, 4, function () {
             updateStats(full);
             incrementUsage();
+            showResultActions(true);
         });
     }
 
-    // Collapsible style samples
+    // Style samples toggle
     const styleToggle = document.getElementById('style-samples-toggle');
     const styleBody = document.getElementById('style-samples-body');
     if (styleToggle && styleBody) {
         styleToggle.addEventListener('click', function () {
             const open = styleBody.classList.toggle('is-open');
             styleToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            styleToggle.querySelector('.toggle-label').textContent = open
-                ? 'Hide style samples'
-                : 'Add your writing style (optional)';
+            const lab = styleToggle.querySelector('.toggle-label');
+            if (lab) lab.textContent = open ? 'Hide style samples' : '+ Match my writing style';
+        });
+    }
+
+    // Idea 1: Try sample
+    if (trySampleBtn && roboticText) {
+        trySampleBtn.addEventListener('click', function () {
+            roboticText.value = SAMPLE_TEXT;
+            roboticText.dispatchEvent(new Event('input', { bubbles: true }));
+            trackEvent('humanizer_try_sample', { tool_id: TOOL_ID });
+            runHumanize();
         });
     }
 
@@ -236,26 +269,48 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCharCounter();
     }
 
-    if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            const text = outputContent.innerText;
-            if (text && !text.includes('will appear here')) {
-                navigator.clipboard.writeText(text).then(() => {
-                    trackEvent('result_copied', { tool_id: TOOL_ID });
-                    const originalText = copyBtn.innerText;
-                    copyBtn.innerText = 'Copied';
-                    copyBtn.classList.add('copied');
-                    setTimeout(() => {
-                        copyBtn.innerText = originalText;
-                        copyBtn.classList.remove('copied');
-                    }, 1600);
-                });
+    function copyOutput() {
+        const text = getPlainOutput();
+        if (!text || text.indexOf('Nothing here yet') !== -1 || text.indexOf('will show here') !== -1) return;
+        navigator.clipboard.writeText(text).then(function () {
+            trackEvent('result_copied', { tool_id: TOOL_ID });
+            if (copyBtn) {
+                const originalText = copyBtn.innerText;
+                copyBtn.innerText = 'Copied';
+                copyBtn.classList.add('copied');
+                setTimeout(function () {
+                    copyBtn.innerText = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 1600);
             }
         });
     }
 
+    if (copyBtn) copyBtn.addEventListener('click', copyOutput);
+
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function () {
+            const text = getPlainOutput();
+            if (!text || text.indexOf('Nothing here yet') !== -1) return;
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'humanized.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            trackEvent('result_download', { tool_id: TOOL_ID });
+        });
+    }
+
+    if (againBtn) {
+        againBtn.addEventListener('click', function () {
+            runHumanize();
+        });
+    }
+
     if (gateForm) {
-        gateForm.addEventListener('submit', async (e) => {
+        gateForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             if (isPro()) {
                 unlockFullResult();
@@ -265,8 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isSubscribed() && usage.count >= FREE_DAILY_LIMIT) {
                 setGateMode('pro_only');
                 if (gateStatus) {
-                    gateStatus.style.color = '#ef4444';
-                    gateStatus.textContent = 'Free unlock already used today. Go Pro for unlimited.';
+                    gateStatus.style.color = '#B91C1C';
+                    gateStatus.textContent = 'Free unlock already used today. Pro removes the cap.';
                 }
                 return;
             }
@@ -282,33 +337,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, source: TOOL_ID + '_gate' })
                 });
-                const data = await res.json().catch(() => ({}));
+                const data = await res.json().catch(function () { return {}; });
                 if (res.ok) {
                     setCookie('cs_subscribed', '1', 365);
                     if (gateStatus) {
-                        gateStatus.style.color = '#22c55e';
-                        gateStatus.textContent = 'Unlocked — full result below.';
+                        gateStatus.style.color = '#3D9B6A';
+                        gateStatus.textContent = 'Unlocked — full text below.';
                     }
                     trackEvent('email_captured', { tool_id: TOOL_ID, source: TOOL_ID + '_gate' });
-                    setTimeout(unlockFullResult, 600);
+                    setTimeout(unlockFullResult, 500);
                 } else {
                     if (gateStatus) {
-                        gateStatus.style.color = '#ef4444';
+                        gateStatus.style.color = '#B91C1C';
                         gateStatus.textContent = data.error || 'Something went wrong.';
                     }
                     if (gateSubmitBtn) {
                         gateSubmitBtn.disabled = false;
-                        gateSubmitBtn.textContent = 'Unlock free (1/day)';
+                        gateSubmitBtn.textContent = 'Unlock free';
                     }
                 }
             } catch (err) {
                 if (gateStatus) {
-                    gateStatus.style.color = '#ef4444';
+                    gateStatus.style.color = '#B91C1C';
                     gateStatus.textContent = 'Network error. Try again.';
                 }
                 if (gateSubmitBtn) {
                     gateSubmitBtn.disabled = false;
-                    gateSubmitBtn.textContent = 'Unlock free (1/day)';
+                    gateSubmitBtn.textContent = 'Unlock free';
                 }
             }
         });
@@ -319,123 +374,153 @@ document.addEventListener('DOMContentLoaded', () => {
         if (card) ensureProButtons(card);
     }
 
-    if (rewriteBtn) {
-        rewriteBtn.addEventListener('click', async () => {
-            const text = roboticText.value.trim();
+    async function runHumanize() {
+        if (!roboticText || !outputContent) return;
+        const text = roboticText.value.trim();
 
-            let sampleBlock = '';
-            styleSamples.forEach((sample, index) => {
-                const val = sample.value.trim();
-                if (val) sampleBlock += 'Sample ' + (index + 1) + ': ' + val + '\n---\n';
-            });
-            // Mode chip style + optional few-shot samples
-            let style = selectedStyle;
-            if (sampleBlock) {
-                style = selectedStyle + '\n\nMatch the voice in these writing samples:\n' + sampleBlock;
-            }
+        let sampleBlock = '';
+        styleSamples.forEach(function (sample, index) {
+            const val = sample.value.trim();
+            if (val) sampleBlock += 'Sample ' + (index + 1) + ': ' + val + '\n---\n';
+        });
+        let style = selectedStyle;
+        if (sampleBlock) {
+            style = selectedStyle + '\n\nMatch the voice in these writing samples:\n' + sampleBlock;
+        }
 
-            if (!text) {
-                roboticText.focus();
-                roboticText.classList.add('input-error');
-                setTimeout(() => roboticText.classList.remove('input-error'), 1200);
-                return;
-            }
+        if (!text) {
+            roboticText.focus();
+            roboticText.classList.add('input-error');
+            setTimeout(function () { roboticText.classList.remove('input-error'); }, 1200);
+            return;
+        }
 
-            if (!isPro() && text.length > FREE_CHAR_LIMIT) {
-                alert('Free tier supports up to ' + FREE_CHAR_LIMIT + ' characters. Shorten your text or go Pro for longer rewrites.');
-                const tiers = document.getElementById('upgrade-tiers');
-                if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'char_limit' });
-                return;
-            }
+        if (!isPro() && text.length > FREE_CHAR_LIMIT) {
+            alert('Free tier is ' + FREE_CHAR_LIMIT + ' characters. Shorten the text, or open Pro for longer drafts.');
+            const tiers = document.getElementById('upgrade-tiers');
+            if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'char_limit' });
+            return;
+        }
 
-            if (!isPro() && isSubscribed()) {
-                const usage = getUsageToday();
-                if (usage.count >= FREE_DAILY_LIMIT) {
-                    if (emailGate) {
-                        emailGate.classList.remove('hidden');
-                        setGateMode('pro_only');
-                    }
-                    outputContent.innerHTML = '<span style="color:#ef4444;">Free full unlock used for today.</span> '
-                        + '<span style="color:#8892a8;">Upgrade to Pro for unlimited rewrites.</span>';
-                    trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'daily_limit' });
-                    const tiers = document.getElementById('upgrade-tiers');
-                    if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    return;
+        if (!isPro() && isSubscribed()) {
+            const usage = getUsageToday();
+            if (usage.count >= FREE_DAILY_LIMIT) {
+                if (emailGate) {
+                    emailGate.classList.remove('hidden');
+                    setGateMode('pro_only');
                 }
+                if (lastFullText) {
+                    outputContent.innerHTML = '';
+                    typeInto(cutPreview(lastFullText), 4, function () {
+                        updateStats(cutPreview(lastFullText));
+                    });
+                    pendingFullText = lastFullText;
+                } else {
+                    outputContent.innerHTML = '<span style="color:#B91C1C;">Free full unlock used for today.</span> '
+                        + '<span style="color:#A39E94;">Pro removes the daily cap.</span>';
+                }
+                trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'daily_limit' });
+                return;
             }
+        }
 
-            loadingIndicator.classList.remove('hidden');
+        if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+        if (rewriteBtn) {
             rewriteBtn.disabled = true;
             rewriteBtn.classList.add('is-loading');
-            if (emailGate) emailGate.classList.add('hidden');
-            outputContent.innerHTML = '';
-            pendingFullText = '';
+        }
+        if (rewriteBtnMobile) {
+            rewriteBtnMobile.disabled = true;
+            rewriteBtnMobile.classList.add('is-loading');
+        }
+        if (emailGate) emailGate.classList.add('hidden');
+        showResultActions(false);
+        outputContent.innerHTML = '';
+        pendingFullText = '';
 
-            // Scroll output into view on mobile
-            if (window.matchMedia('(max-width: 900px)').matches && outputContent.scrollIntoView) {
-                setTimeout(() => {
-                    document.querySelector('.output-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 80);
+        if (window.matchMedia('(max-width: 900px)').matches) {
+            const out = document.querySelector('.output-panel');
+            if (out) setTimeout(function () { out.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+        }
+
+        try {
+            const response = await fetch('/api/rewrite', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text, style: style })
+            });
+
+            if (!response.ok) {
+                let errMsg = 'Server error';
+                try {
+                    const errorData = await response.json();
+                    errMsg = errorData.error || errMsg;
+                } catch (e) { /* ignore */ }
+                if (response.status === 429) errMsg = 'Busy right now — try again in a minute.';
+                throw new Error(errMsg);
             }
 
-            try {
-                const response = await fetch('/api/rewrite', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        text: text,
-                        style: style
-                    })
-                });
+            const data = await response.json();
+            const rewrittenText = data.result || '';
+            if (!rewrittenText) throw new Error('Empty response. Please try again.');
 
-                if (!response.ok) {
-                    let errMsg = 'Server error';
-                    try {
-                        const errorData = await response.json();
-                        errMsg = errorData.error || errMsg;
-                    } catch (e) { /* ignore */ }
-                    if (response.status === 429) errMsg = 'Busy right now — try again in a minute.';
-                    throw new Error(errMsg);
-                }
-
-                const data = await response.json();
-                const rewrittenText = data.result || '';
-                if (!rewrittenText) throw new Error('Empty response. Please try again.');
-
-                if (isPro()) {
-                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'pro' });
+            if (isPro()) {
+                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'pro' });
+                showFullResult(rewrittenText);
+            } else if (!localStorage.getItem('cs_free_trial_used')) {
+                localStorage.setItem('cs_free_trial_used', '1');
+                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'new_anon' });
+                showFullResult(rewrittenText);
+            } else if (isSubscribed()) {
+                const usage = getUsageToday();
+                if (usage.count < FREE_DAILY_LIMIT) {
+                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'subscribed' });
                     showFullResult(rewrittenText);
-                } else if (!localStorage.getItem('cs_free_trial_used')) {
-                    localStorage.setItem('cs_free_trial_used', '1');
-                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'new_anon' });
-                    showFullResult(rewrittenText);
-                } else if (isSubscribed()) {
-                    const usage = getUsageToday();
-                    if (usage.count < FREE_DAILY_LIMIT) {
-                        trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'subscribed' });
-                        showFullResult(rewrittenText);
-                        incrementUsage();
-                    } else {
-                        trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'limit' });
-                        showPreviewWithGate(rewrittenText, 'pro_only');
-                    }
+                    incrementUsage();
                 } else {
-                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'anon' });
-                    showPreviewWithGate(rewrittenText, 'email');
+                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'limit' });
+                    showPreviewWithGate(rewrittenText, 'pro_only');
                 }
-                updateUsageDisplay();
-            } catch (error) {
-                console.error('Error:', error);
-                outputContent.innerHTML = '<span style="color:#ef4444;">Error: '
-                    + (error.message || 'Please try again later.') + '</span>';
-            } finally {
-                loadingIndicator.classList.add('hidden');
+            } else {
+                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'anon' });
+                showPreviewWithGate(rewrittenText, 'email');
+            }
+            updateUsageDisplay();
+        } catch (error) {
+            console.error('Error:', error);
+            outputContent.innerHTML = '<span style="color:#B91C1C;">Error: '
+                + (error.message || 'Please try again later.') + '</span>';
+            showResultActions(false);
+        } finally {
+            if (loadingIndicator) loadingIndicator.classList.add('hidden');
+            if (rewriteBtn) {
                 rewriteBtn.disabled = false;
                 rewriteBtn.classList.remove('is-loading');
             }
-        });
+            if (rewriteBtnMobile) {
+                rewriteBtnMobile.disabled = false;
+                rewriteBtnMobile.classList.remove('is-loading');
+            }
+        }
     }
+
+    if (rewriteBtn) rewriteBtn.addEventListener('click', runHumanize);
+    if (rewriteBtnMobile) rewriteBtnMobile.addEventListener('click', runHumanize);
+
+    // Idea 8: keyboard shortcuts
+    document.addEventListener('keydown', function (e) {
+        const meta = e.metaKey || e.ctrlKey;
+        if (meta && e.key === 'Enter') {
+            e.preventDefault();
+            runHumanize();
+            return;
+        }
+        if (meta && e.shiftKey && (e.key === 'c' || e.key === 'C')) {
+            e.preventDefault();
+            copyOutput();
+        }
+    });
 
     function updateStats(text) {
         if (!wordCount) return;
@@ -443,8 +528,17 @@ document.addEventListener('DOMContentLoaded', () => {
         wordCount.textContent = words + ' words';
         if (clicheCount) {
             const removed = Math.max(2, Math.floor(words * 0.05));
-            clicheCount.textContent = removed + ' clichés removed';
+            clicheCount.textContent = removed + ' clichés cut';
         }
+    }
+
+    // Pro active banner (idea 7) if cookie present
+    if (isPro()) {
+        const bar = document.createElement('div');
+        bar.className = 'hz-pro-banner';
+        bar.textContent = 'Pro is on this device — unlimited full results. No daily cap.';
+        const shell = document.querySelector('.hz-shell');
+        if (shell) shell.insertBefore(bar, shell.firstChild);
     }
 
     updateUsageDisplay();

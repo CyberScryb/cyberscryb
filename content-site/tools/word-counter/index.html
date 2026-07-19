@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260719n">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -108,10 +108,10 @@
             background: #141414; border: 1px solid #222; border-radius: 12px;
             padding: 1.2rem; text-align: center; transition: border-color 0.3s, transform 0.2s;
         }
-        .stat-card:hover { border-color: #7b2cff; transform: translateY(-2px); }
+        .stat-card:hover { border-color: var(--primary-soft); transform: translateY(-2px); }
         .stat-value {
-            font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700;
-            color: #7b2cff; line-height: 1;
+            font-family: var(--font-brand), Georgia, serif; font-size: 2rem; font-weight: 700;
+            color: var(--primary-soft); line-height: 1;
             background: linear-gradient(135deg, #7b2cff, #00ff88);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
@@ -126,7 +126,7 @@
             font-size: 1rem; line-height: 1.7; padding: 1.5rem; resize: vertical; outline: none;
             transition: border-color 0.3s;
         }
-        #wc-textarea:focus { border-color: #7b2cff; box-shadow: 0 0 20px rgba(0,212,255,0.08); }
+        #wc-textarea:focus { border-color: var(--primary-soft); box-shadow: 0 0 20px rgba(15, 77, 50,0.08); }
         #wc-textarea::placeholder { color: #333; }
 
         .action-bar {
@@ -137,7 +137,7 @@
             font-family: 'Inter', sans-serif; font-size: 0.8rem; padding: 0.5rem 1rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .action-btn:hover { border-color: #7b2cff; color: #7b2cff; }
+        .action-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
 
         /* Keyword density */
         .density-section { margin-top: 2rem; }
@@ -160,12 +160,12 @@
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
+        .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #7b2cff; text-decoration: none; }
+        .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
         .breadcrumb a:hover { color: #fff; }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
@@ -217,7 +217,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -228,7 +228,7 @@
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -281,19 +281,19 @@
         </div>
     
     <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why Word Count Matters in Modern Writing</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Word Count Matters in Modern Writing</h2>
         <p>Word count is far more than a simple metric&mdash;it serves as a direct indicator of depth, format constraints, and search visibility. In the realm of Search Engine Optimization (SEO), long-form content is highly prioritized by search engines. Studies of organic rankings consistently show that pages landing in the top-10 positions on Google average between 1,400 and 2,000 words. This occurs because comprehensive content is more likely to answer searcher intent fully and address semantic subtopics in detail. However, quality must accompany quantity; adding fluff just to hit a high word target will harm your dwell times and bounce rates.</p>
         <p>In professional and academic environments, word count boundaries are set to guide authors toward the appropriate level of detail. A 500-word essay requires conciseness and rapid point-making. A 5,000-word dissertation requires deep analysis, extensive source evaluation, and carefully qualified conclusions. Meeting the count limits precisely shows discipline and respect for the medium's expectations.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Understanding Reading and Speaking Time Estimates</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Understanding Reading and Speaking Time Estimates</h2>
         <p>Estimated reading time is calculated based on the average silent reading speed of adults, which typically falls around 200 to 250 words per minute (WPM). Speaking time estimates are based on conversational speech speeds, averaging about 130 to 150 WPM. These projections are invaluable for content creators planning presentations, video scripts, audio ads, or podcast segments. If you are preparing a 5-minute keynote speech, your script should be approximately 650 words. Writing 1,000 words will inevitably cause you to rush or overrun your slot.</p>
         <p>Readability is just as critical as length. A 2,000-word article with short paragraphs, clear headings, and active bullet points is processed much faster than a 1,000-word continuous block of text. To maximize reader engagement, aim to break paragraphs every 3 to 4 sentences, insert descriptive H2 headings every 300 words, and utilize bulleted lists to summarize complex groups of information.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Keyword Density and SEO Content Analysis</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Keyword Density and SEO Content Analysis</h2>
         <p>Keyword density measures the frequency of specific words or phrases in your text relative to the total word count. It is calculated using the formula: <code>Density % = (Keyword Count / Total Words) * 100</code>. For example, if a target phrase appears 10 times in a 1,000-word article, the keyword density is 1.0%.</p>
         <p>In early search engine algorithms, high density was the primary ranking factor, leading to "keyword stuffing" where developers repeated terms compulsively. Modern search engines penalize this behavior. Today, the consensus among SEO professionals is to maintain a natural primary keyword density of 1.0% to 2.0% while focusing heavily on Latent Semantic Indexing (LSI) keywords&mdash;related terms and synonyms that prove you are covering the topic holistically. CyberScryb's word counter provides real-time keyword frequency tracking, filtering out standard grammatical stop words (like "the", "and", "is") so you can see exactly which conceptual terms dominate your draft.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Character Counts for Leading Digital Platforms</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Character Counts for Leading Digital Platforms</h2>
         <p>When drafting copy for social media or search engine metadata, character counts are strict limits that determine whether your content is displayed correctly or cut off with ellipses:</p>
         <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
             <li style="margin-bottom:0.5rem;"><strong>Twitter / X:</strong> 280 characters per tweet. Links are automatically counted as 23 characters regardless of their actual length, and media attachments do not count against the limit.</li>
@@ -303,14 +303,14 @@
             <li style="margin-bottom:0.5rem;"><strong>LinkedIn Posts:</strong> 3,000 characters. The first 140 to 210 characters serve as the hook before the "see more" cutoff.</li>
         </ul>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">100% Browser-Side Privacy and Security</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">100% Browser-Side Privacy and Security</h2>
         <p>Many online word counters send your inputted text to their servers for processing. This presents significant security risks if you are drafting private emails, proprietary code blocks, sensitive legal filings, or copyrighted manuscript materials. CyberScryb is built on a strict privacy-first model: all calculations, character counting, and keyword frequency tracking are performed entirely in your local browser using client-side JavaScript. Absolutely zero data is transmitted over the network or logged on a server. You can safely count words and format text with complete confidence that your proprietary drafts remain completely private.</p>
 
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Resources</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Related Resources</h2>
         <ul style="padding-left:1.2rem;">
-            <li><a href="/tools/seo-tag-generator/" style="color:#7b2cff;">SEO Tag Generator</a> &mdash; Build meta tags with ideal character bounds.</li>
-            <li><a href="/tools/markdown-html/" style="color:#7b2cff;">Markdown &harr; HTML Converter</a> &mdash; Convert formatted drafts to clean code.</li>
-            <li><a href="/guides/" style="color:#7b2cff;">Explore CyberScryb Content Writing and Design Guides</a></li>
+            <li><a href="/tools/seo-tag-generator/" style="color: var(--primary-soft);">SEO Tag Generator</a> &mdash; Build meta tags with ideal character bounds.</li>
+            <li><a href="/tools/markdown-html/" style="color: var(--primary-soft);">Markdown &harr; HTML Converter</a> &mdash; Convert formatted drafts to clean code.</li>
+            <li><a href="/guides/" style="color: var(--primary-soft);">Explore CyberScryb Content Writing and Design Guides</a></li>
         </ul>
     </section>
     </main>
@@ -325,15 +325,15 @@
         <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
                 <span style="font-size:0.85rem; color:#878787;">Rewrite AI content to sound natural and human.</span>
             </a>
             <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color:#878787;">Turn counted Markdown into styled HTML for publishing.</span>
             </a>
             <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
                 <span style="font-size:0.85rem; color:#878787;">Craft metadata with ideal character counts.</span>
             </a>
         </div>
@@ -343,7 +343,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
                     <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">
