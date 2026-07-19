@@ -10,8 +10,9 @@
 - **Muted:** `#A39E94`
 
 ## Brand (everyday)
-- **Deep green:** `#2F6B52` — default buttons, links, Humanize, free unlock
-- Hover: `#245542`
+- **Deep green:** `#1B6B45` — strong on `#0A0A0A`, clear next to bone text
+- Hover: `#145536`
+- Soft (links/chips): `#3D9B6A`
 
 ## Attention (rare only)
 - **Amber:** `#D97706` — Get Pro, pay CTAs, “most popular” money badge only
