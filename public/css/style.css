@@ -749,6 +749,137 @@ textarea, input[type="text"], input[type="email"], select {
     color: var(--text);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   Live interactions — respond to pointer before click
+   "Hover" = cursor is over an element (not pressed yet)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Soft cursor light (follows mouse, very quiet) */
+.cs-cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 420px;
+    margin: -210px 0 0 -210px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    background: radial-gradient(
+        circle,
+        rgba(232, 226, 214, 0.06) 0%,
+        rgba(15, 77, 50, 0.05) 35%,
+        transparent 70%
+    );
+    transition: opacity 0.35s ease;
+    will-change: transform;
+}
+.cs-cursor-glow.is-on {
+    opacity: 1;
+}
+
+/* Cards light up toward the pointer */
+.cs-interactive {
+    position: relative;
+    overflow: hidden;
+    --spot-x: 50%;
+    --spot-y: 50%;
+}
+.cs-interactive::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+        480px circle at var(--spot-x) var(--spot-y),
+        rgba(232, 226, 214, 0.09) 0%,
+        rgba(15, 77, 50, 0.06) 28%,
+        transparent 55%
+    );
+    z-index: 1;
+}
+.cs-interactive.is-hot::after {
+    opacity: 1;
+}
+.cs-interactive > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Magnetic CTAs — JS nudges transform; keep transitions smooth */
+.cs-magnetic {
+    transition:
+        transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+        background var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition),
+        color var(--transition) !important;
+    will-change: transform;
+}
+
+/* Nav links grow underline on hover (before click) */
+.nav-menu a.cs-nav-link {
+    position: relative;
+}
+.nav-menu a.cs-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.2rem;
+    height: 1.5px;
+    border-radius: 2px;
+    background: var(--primary-soft);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.85;
+}
+.nav-menu a.cs-nav-link:hover::after,
+.nav-menu a.cs-nav-link:focus-visible::after,
+.nav-menu a.cs-nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* Inputs feel alive on hover/focus before typing */
+input[type="email"],
+input[type="text"],
+textarea,
+select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+input[type="email"]:hover,
+input[type="text"]:hover,
+textarea:hover,
+select:hover {
+    border-color: rgba(232, 226, 214, 0.22);
+}
+input[type="email"]:focus-visible,
+input[type="text"]:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.cta-button:focus-visible,
+.cta-attention:focus-visible,
+.cta-secondary:focus-visible,
+.btn-primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* Read-more arrow slides when hovering the whole card */
+.blog-card:hover .read-more {
+    gap: 12px;
+    color: var(--text);
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cs-cursor-glow { display: none !important; }
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
     .nav-menu {
