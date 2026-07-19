@@ -91,8 +91,8 @@ const lane = `
 
 if (!tools.includes('id="money-tools"')) {
   tools = tools.replace(
-    '<section class="tools-grid" style="padding: 1rem 0 4rem;">',
-    lane + '\n        <section class="tools-grid" style="padding: 1rem 0 4rem;">'
+    '<section class="section" style="padding: 1rem 0 4rem;">',
+    lane + '\n        <section class="section" style="padding: 1rem 0 4rem;">'
   );
 }
 fs.writeFileSync(toolsPath, tools);
