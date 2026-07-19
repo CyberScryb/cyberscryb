@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20260719b">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20260719c">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
@@ -134,88 +134,95 @@
     </header>
 
     <main class="hz-app">
-        <!-- Full-bleed tool (QuillBot-style workspace) -->
+        <!--
+          Conversion layout (see DECISIONS.md):
+          single column + light editor + real mode chips + one purple CTA
+        -->
         <section class="hz-shell" aria-label="AI Humanizer editor">
             <div class="hz-topbar">
                 <div class="hz-brand">
                     <h1>AI Humanizer</h1>
-                    <p>Rewrite AI text so it sounds natural</p>
+                    <p>Paste AI text. Get a natural rewrite. Free to try.</p>
                 </div>
                 <div class="hz-topbar-actions">
                     <span id="usage-counter" class="hz-pill">1 free full result</span>
-                    <a href="/pro/" class="hz-link-pro">Pro · $5/mo</a>
+                    <a href="/pro/" class="hz-link-pro">Unlimited · $5/mo</a>
                 </div>
             </div>
 
-            <div class="hz-workspace">
-                <div class="hz-split">
-                    <!-- Input pane -->
-                    <div class="hz-pane hz-pane-input">
-                        <div class="hz-pane-head">
-                            <span class="hz-pane-title">Original</span>
-                            <span id="char-counter" class="hz-meta">0 / 500 free</span>
-                        </div>
-                        <textarea id="robotic-text" class="hz-editor"
-                            placeholder="Paste ChatGPT, Claude, Gemini, or any AI text here…"
-                            rows="12"
-                            spellcheck="true"></textarea>
-                        <div class="hz-pane-foot">
-                            <button type="button" id="style-samples-toggle" class="hz-ghost-btn" aria-expanded="false" aria-controls="style-samples-body">
-                                <span class="toggle-label">+ Match my writing style</span>
-                                <span class="chevron" aria-hidden="true">▾</span>
-                            </button>
-                            <span class="hz-hint">Free: 500 characters</span>
-                        </div>
-                        <div id="style-samples-body" class="hz-style-drawer">
-                            <p class="hz-hint" style="margin-bottom:10px;">Optional — a few lines you actually wrote helps the rewrite sound like you.</p>
-                            <div class="style-samples-container">
-                                <textarea class="style-sample" placeholder="Sample 1"></textarea>
-                                <textarea class="style-sample" placeholder="Sample 2 (optional)"></textarea>
-                                <textarea class="style-sample" placeholder="Sample 3 (optional)"></textarea>
-                            </div>
-                        </div>
+            <div class="hz-workspace" id="hz-workspace">
+                <!-- 1) INPUT (full width) -->
+                <div class="hz-pane hz-pane-input">
+                    <div class="hz-pane-head">
+                        <span class="hz-pane-title">Original text</span>
+                        <span id="char-counter" class="hz-meta">0 / 500 free</span>
                     </div>
-
-                    <!-- Center action (desktop) / bar (mobile) -->
-                    <div class="hz-rail">
-                        <button type="button" id="humanize-btn" class="hz-primary-btn">
-                            <span class="btn-text">Humanize</span>
-                            <span class="btn-icon" aria-hidden="true">→</span>
+                    <textarea id="robotic-text" class="hz-editor"
+                        placeholder="Paste ChatGPT, Claude, Gemini, or any AI-generated text…"
+                        rows="10"
+                        spellcheck="true"
+                        autofocus></textarea>
+                    <div class="hz-pane-foot">
+                        <button type="button" id="style-samples-toggle" class="hz-ghost-btn" aria-expanded="false" aria-controls="style-samples-body">
+                            <span class="toggle-label">+ Match my writing style</span>
+                            <span class="chevron" aria-hidden="true">▾</span>
                         </button>
+                        <span class="hz-hint">Free tier: 500 characters per run</span>
                     </div>
+                    <div id="style-samples-body" class="hz-style-drawer">
+                        <p class="hz-hint" style="margin-bottom:10px;">Optional. A few lines you wrote helps the rewrite sound like you — not generic AI.</p>
+                        <div class="style-samples-container">
+                            <textarea class="style-sample" placeholder="Sample 1"></textarea>
+                            <textarea class="style-sample" placeholder="Sample 2 (optional)"></textarea>
+                            <textarea class="style-sample" placeholder="Sample 3 (optional)"></textarea>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Output pane -->
-                    <div class="hz-pane hz-pane-output output-panel">
-                        <div class="hz-pane-head">
-                            <span class="hz-pane-title">Humanized</span>
-                            <div class="hz-pane-tools">
-                                <span id="word-count" class="hz-meta">0 words</span>
-                                <span id="cliche-count" class="hz-meta hz-meta-hide-sm">0 clichés</span>
-                                <button type="button" id="copy-btn" class="hz-ghost-btn hz-copy" title="Copy result">Copy</button>
+                <!-- 2) ACTION BAR: real modes + primary CTA -->
+                <div class="hz-actionbar" role="toolbar" aria-label="Rewrite options">
+                    <div class="hz-modes" role="group" aria-label="Rewrite mode">
+                        <button type="button" class="hz-mode is-active" data-mode="natural" data-style="Casual, conversational, natural human writing with varied sentence length and contractions">Natural</button>
+                        <button type="button" class="hz-mode" data-mode="professional" data-style="Professional but clearly human — like a skilled colleague writing email or docs. Clear, confident, no corporate AI fluff">Professional</button>
+                        <button type="button" class="hz-mode" data-mode="shorter" data-style="Natural and concise: about 25% shorter, keep meaning, cut filler and AI padding">Shorter</button>
+                    </div>
+                    <button type="button" id="humanize-btn" class="hz-primary-btn">
+                        <span class="btn-text">Humanize</span>
+                        <span class="btn-icon" aria-hidden="true">→</span>
+                    </button>
+                </div>
+
+                <!-- 3) OUTPUT (full width) — paywall lives here after value -->
+                <div class="hz-pane hz-pane-output output-panel">
+                    <div class="hz-pane-head">
+                        <span class="hz-pane-title">Humanized result</span>
+                        <div class="hz-pane-tools">
+                            <span id="word-count" class="hz-meta">0 words</span>
+                            <span id="cliche-count" class="hz-meta hz-meta-hide-sm">—</span>
+                            <button type="button" id="copy-btn" class="hz-ghost-btn hz-copy" title="Copy result">Copy</button>
+                        </div>
+                    </div>
+                    <div class="hz-output-wrap output-wrapper">
+                        <div id="output-text" class="hz-editor hz-output output-content" contenteditable="true" role="textbox" aria-label="Humanized result">
+                            <span class="placeholder">Your rewrite will show here. Paste text above, pick a mode, then Humanize.</span>
+                        </div>
+                        <div id="email-gate" class="email-gate hidden">
+                            <div class="email-gate-blur"></div>
+                            <div class="email-gate-card">
+                                <div class="email-gate-icon">✦</div>
+                                <h3>Get the full rewrite</h3>
+                                <p>You&rsquo;ve seen a preview. Unlock the complete text free once today, or go <strong>Pro</strong> for unlimited full results.</p>
+                                <form id="gate-email-form" class="gate-form">
+                                    <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                    <button type="submit" id="gate-submit-btn">Unlock free</button>
+                                </form>
+                                <div id="gate-status" class="gate-status"></div>
+                                <p class="gate-fine">No spam · 14-day refund on Pro · Stripe secure</p>
                             </div>
                         </div>
-                        <div class="hz-output-wrap output-wrapper">
-                            <div id="output-text" class="hz-editor hz-output output-content" contenteditable="true" role="textbox" aria-label="Humanized result" data-placeholder="Your rewrite will appear here…">
-                                <span class="placeholder">Your rewrite will appear here…</span>
-                            </div>
-                            <div id="email-gate" class="email-gate hidden">
-                                <div class="email-gate-blur"></div>
-                                <div class="email-gate-card">
-                                    <div class="email-gate-icon">✦</div>
-                                    <h3>Unlock full result</h3>
-                                    <p>One free unlock today with email — or <strong>Pro</strong> for unlimited.</p>
-                                    <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
-                                        <button type="submit" id="gate-submit-btn">Unlock free</button>
-                                    </form>
-                                    <div id="gate-status" class="gate-status"></div>
-                                    <p class="gate-fine">No spam · Unsubscribe anytime</p>
-                                </div>
-                            </div>
-                            <div id="loading-indicator" class="hz-loading hidden">
-                                <div class="spinner"></div>
-                                <p>Rewriting…</p>
-                            </div>
+                        <div id="loading-indicator" class="hz-loading hidden">
+                            <div class="spinner"></div>
+                            <p>Rewriting…</p>
                         </div>
                     </div>
                 </div>
@@ -421,7 +428,7 @@
     </script>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="/tools/humanizer/humanizer.js?v=20260719b"></script>
+    <script src="/tools/humanizer/humanizer.js?v=20260719c"></script>
     <script src="/tools/shared/affiliate-panel.js"></script>
 
 <section style="max-width:720px; margin:3rem auto; padding:0 1.5rem; font-family:inherit; line-height:1.7; color:inherit;">

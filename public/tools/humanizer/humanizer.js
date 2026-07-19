@@ -24,9 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const gateSubmitBtn = document.getElementById('gate-submit-btn');
     const usageCounter = document.getElementById('usage-counter');
     const charCounter = document.getElementById('char-counter');
+    const modeButtons = document.querySelectorAll('.hz-mode');
 
     let pendingFullText = '';
     let typeTimer = null;
+    let selectedStyle = 'Casual, conversational, natural human writing with varied sentence length and contractions';
+
+    // Real modes → API `style` (never decorative-only)
+    modeButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            modeButtons.forEach(function (b) { b.classList.remove('is-active'); });
+            btn.classList.add('is-active');
+            selectedStyle = btn.getAttribute('data-style') || selectedStyle;
+            trackEvent('humanizer_mode_select', { mode: btn.getAttribute('data-mode') || 'natural' });
+        });
+    });
+    const activeMode = document.querySelector('.hz-mode.is-active');
+    if (activeMode && activeMode.getAttribute('data-style')) {
+        selectedStyle = activeMode.getAttribute('data-style');
+    }
 
     function getCookie(name) {
         const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -307,11 +323,16 @@ document.addEventListener('DOMContentLoaded', () => {
         rewriteBtn.addEventListener('click', async () => {
             const text = roboticText.value.trim();
 
-            let style = '';
+            let sampleBlock = '';
             styleSamples.forEach((sample, index) => {
                 const val = sample.value.trim();
-                if (val) style += 'Sample ' + (index + 1) + ': ' + val + '\n---\n';
+                if (val) sampleBlock += 'Sample ' + (index + 1) + ': ' + val + '\n---\n';
             });
+            // Mode chip style + optional few-shot samples
+            let style = selectedStyle;
+            if (sampleBlock) {
+                style = selectedStyle + '\n\nMatch the voice in these writing samples:\n' + sampleBlock;
+            }
 
             if (!text) {
                 roboticText.focus();
@@ -364,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         text: text,
-                        style: style || 'Casual and conversational'
+                        style: style
                     })
                 });
 
