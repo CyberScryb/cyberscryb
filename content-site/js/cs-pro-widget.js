@@ -30,12 +30,12 @@
   function tag(url){ return url + (url.indexOf('?') > -1 ? '&' : '?') + 'utm_source=' + encodeURIComponent(utmSource) + '&utm_medium=widget&utm_campaign=pro_pill'; }
 
   var css = `
-.cs-pro-pill{position:fixed;bottom:20px;right:20px;background:#C4A574;color:#1A1510;padding:12px 20px;border-radius:999px;font:700 14px/1 Inter,system-ui,sans-serif;box-shadow:0 4px 20px rgba(196,165,116,0.35);cursor:pointer;z-index:9998;transition:transform .2s,box-shadow .2s,background .2s;border:none;display:flex;align-items:center;gap:8px}
-.cs-pro-pill:hover{transform:translateY(-2px);background:#A88B5C;color:#fff;box-shadow:0 8px 30px rgba(196,165,116,.45)}
+.cs-pro-pill{position:fixed;bottom:20px;right:20px;background:#8B2E2E;color:#F5F0E8;padding:12px 20px;border-radius:999px;font:700 14px/1 Inter,system-ui,sans-serif;box-shadow:0 4px 20px rgba(139,46,46,0.35);cursor:pointer;z-index:9998;transition:transform .2s,box-shadow .2s,background .2s;border:none;display:flex;align-items:center;gap:8px}
+.cs-pro-pill:hover{transform:translateY(-2px);background:#6F2424;color:#fff;box-shadow:0 8px 30px rgba(139,46,46,.45)}
 .cs-pro-modal-bg{position:fixed;inset:0;background:rgba(12,14,18,.88);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
 .cs-pro-modal-bg.cs-active{display:flex}
-.cs-pro-modal{background:rgba(24,28,36,.92);max-width:540px;width:100%;border-radius:20px;padding:36px 32px 28px;font:14px/1.5 Inter,system-ui,sans-serif;color:#EDE9E1;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(237,233,225,.15);backdrop-filter:blur(12px)}
-.cs-pro-modal h2{margin:0 0 8px;font-size:22px;font-weight:800;font-family:Inter,system-ui,sans-serif;color:#EDE9E1}
+.cs-pro-modal{background:rgba(22,29,25,.92);max-width:540px;width:100%;border-radius:20px;padding:36px 32px 28px;font:14px/1.5 Inter,system-ui,sans-serif;color:#E8E2D6;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(237,233,225,.15);backdrop-filter:blur(12px)}
+.cs-pro-modal h2{margin:0 0 8px;font-size:22px;font-weight:800;font-family:Inter,system-ui,sans-serif;color:#E8E2D6}
 .cs-pro-modal .cs-sub{color:#8892a8;margin:0 0 24px;font-size:14px}
 .cs-pro-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#8892a8;padding:4px 10px;border-radius:6px}
 .cs-pro-close:hover{background:rgba(255,255,255,.05);color:#e6e9f0}
@@ -43,10 +43,10 @@
 .cs-plans.cs-single{grid-template-columns:1fr}
 @media(max-width:480px){.cs-plans{grid-template-columns:1fr}}
 .cs-plan{border:2px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;text-align:center;text-decoration:none;color:#e6e9f0;transition:all .2s;position:relative;display:block;background:rgba(255,255,255,.02)}
-.cs-plan:hover{border-color:#C4A574;transform:translateY(-2px)}
-.cs-plan.cs-best{border-color:#C4A574;background:rgba(196, 165, 116,.08)}
-.cs-plan.cs-best::before{content:"BEST VALUE";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#C4A574;color:#1A1510;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.5px;font-family:DM Sans,system-ui,sans-serif}
-.cs-plan .cs-price{font-size:32px;font-weight:900;color:#C4A574;margin:8px 0;font-family:DM Sans,system-ui,sans-serif}
+.cs-plan:hover{border-color:#8B2E2E;transform:translateY(-2px)}
+.cs-plan.cs-best{border-color:#8B2E2E;background:rgba(139, 46, 46,.08)}
+.cs-plan.cs-best::before{content:"BEST VALUE";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#8B2E2E;color:#F5F0E8;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.5px;font-family:DM Sans,system-ui,sans-serif}
+.cs-plan .cs-price{font-size:32px;font-weight:900;color:#8B2E2E;margin:8px 0;font-family:DM Sans,system-ui,sans-serif}
 .cs-plan .cs-price small{font-size:14px;font-weight:500;color:#8892a8}
 .cs-plan .cs-name{font-weight:600;font-size:15px;font-family:DM Sans,system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase}
 .cs-plan .cs-tag{font-size:11px;color:#8892a8;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
@@ -54,7 +54,7 @@
 .cs-features li{padding:6px 0;color:#cbd5e1}
 .cs-features li::before{content:"✓ ";color:#10b981;font-weight:700;margin-right:4px}
 .cs-foot{font-size:11px;color:#8892a8;text-align:center;margin-top:16px}
-.cs-foot a{color:#C4A574;text-decoration:none}`;
+.cs-foot a{color:#8B2E2E;text-decoration:none}`;
   var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
   var html;

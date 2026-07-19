@@ -1,17 +1,19 @@
-/* Humanizer — dark glass workspace aligned to CyberScryb 2026 system */
+/* Humanizer — Ink & Ledger (green brand, oxblood rare) */
 
 .hz-app {
-    --hz-bg: #0C0E12;
-    --hz-surface: rgba(30, 42, 68, 0.72);
-    --hz-solid: #181C24;
-    --hz-border: rgba(148, 163, 184, 0.15);
-    --hz-text: #EDE9E1;
-    --hz-muted: #9C968A;
+    --hz-bg: #0B0F0D;
+    --hz-surface: rgba(22, 29, 25, 0.92);
+    --hz-solid: #161D19;
+    --hz-border: rgba(232, 226, 214, 0.1);
+    --hz-text: #E8E2D6;
+    --hz-muted: #9A958C;
     --hz-faint: #6F6A62;
-    --hz-teal: #C4A574;
-    --hz-teal-hover: #A88B5C;
-    --hz-teal-soft: #D9C4A0;
-    --hz-glow: rgba(196, 165, 116, 0.18);
+    --hz-green: #2F6B52;
+    --hz-green-hover: #245542;
+    --hz-green-soft: #5C8F76;
+    --hz-oxblood: #8B2E2E;
+    --hz-oxblood-hover: #6F2424;
+    --hz-glow: rgba(47, 107, 82, 0.2);
     --hz-font: "DM Sans", system-ui, -apple-system, sans-serif;
 
     min-height: calc(100vh - 64px);
@@ -69,19 +71,20 @@
     border-radius: 999px;
 }
 
+/* Rare attention: top-bar Pro only */
 .hz-link-pro {
     font-size: 0.8rem;
     font-weight: 700;
-    color: #1A1510;
+    color: #F5F0E8;
     text-decoration: none;
     padding: 7px 14px;
     border-radius: 999px;
-    background: var(--hz-teal);
+    background: var(--hz-oxblood);
     transition: background 0.2s;
 }
 .hz-link-pro:hover {
-    background: var(--hz-teal-hover);
-    color: #fff;
+    background: var(--hz-oxblood-hover);
+    color: #F5F0E8;
 }
 
 .hz-workspace {
@@ -91,7 +94,7 @@
     border: 1px solid var(--hz-border);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .hz-pane { display: flex; flex-direction: column; }
@@ -103,7 +106,7 @@
     gap: 12px;
     padding: 11px 16px;
     border-bottom: 1px solid var(--hz-border);
-    background: rgba(12, 14, 18, 0.35);
+    background: rgba(11, 15, 13, 0.4);
 }
 
 .hz-pane-title {
@@ -151,7 +154,7 @@
 .hz-editor:focus { outline: none !important; }
 
 textarea.hz-editor.input-error {
-    background: rgba(239, 68, 68, 0.08) !important;
+    background: rgba(139, 46, 46, 0.08) !important;
 }
 
 .hz-output {
@@ -180,7 +183,7 @@ textarea.hz-editor.input-error {
     gap: 12px;
     padding: 10px 14px 12px;
     border-top: 1px solid var(--hz-border);
-    background: rgba(12, 14, 18, 0.25);
+    background: rgba(11, 15, 13, 0.3);
     flex-wrap: wrap;
 }
 
@@ -195,7 +198,7 @@ textarea.hz-editor.input-error {
     padding: 12px 14px;
     border-top: 1px solid var(--hz-border);
     border-bottom: 1px solid var(--hz-border);
-    background: rgba(12, 14, 18, 0.4);
+    background: rgba(11, 15, 13, 0.45);
 }
 
 .hz-modes { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -203,7 +206,7 @@ textarea.hz-editor.input-error {
 .hz-mode {
     appearance: none;
     border: 1px solid var(--hz-border);
-    background: rgba(30, 42, 68, 0.6);
+    background: rgba(22, 29, 25, 0.8);
     color: var(--hz-muted);
     font-family: inherit;
     font-size: 0.8rem;
@@ -214,15 +217,16 @@ textarea.hz-editor.input-error {
     transition: 0.2s ease;
 }
 .hz-mode:hover {
-    border-color: rgba(196, 165, 116, 0.4);
+    border-color: rgba(47, 107, 82, 0.45);
     color: var(--hz-text);
 }
 .hz-mode.is-active {
-    border-color: var(--hz-teal);
-    background: rgba(196, 165, 116, 0.15);
-    color: var(--hz-teal-soft);
+    border-color: var(--hz-green);
+    background: rgba(47, 107, 82, 0.2);
+    color: var(--hz-green-soft);
 }
 
+/* Everyday action = green */
 .hz-primary-btn {
     display: inline-flex;
     align-items: center;
@@ -236,14 +240,14 @@ textarea.hz-editor.input-error {
     font-family: inherit;
     font-weight: 700;
     font-size: 0.95rem;
-    color: #1A1510;
-    background: var(--hz-teal);
-    box-shadow: 0 4px 20px var(--hz-glow);
+    color: #E8E2D6;
+    background: var(--hz-green);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: 0.2s ease;
 }
 .hz-primary-btn:hover:not(:disabled) {
-    background: var(--hz-teal-hover);
-    color: #fff;
+    background: var(--hz-green-hover);
+    color: #E8E2D6;
 }
 .hz-primary-btn:disabled,
 .hz-primary-btn.is-loading {
@@ -268,12 +272,12 @@ textarea.hz-editor.input-error {
     transition: 0.2s ease;
 }
 .hz-ghost-btn:hover {
-    border-color: var(--hz-teal);
-    color: var(--hz-teal-soft);
+    border-color: var(--hz-green);
+    color: var(--hz-green-soft);
 }
 .hz-ghost-btn.copied {
-    border-color: var(--hz-teal);
-    color: var(--hz-teal-soft);
+    border-color: var(--hz-green);
+    color: var(--hz-green-soft);
 }
 .hz-ghost-btn .chevron { font-size: 0.65rem; transition: transform 0.2s; }
 .hz-ghost-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
@@ -281,7 +285,7 @@ textarea.hz-editor.input-error {
 .hz-style-drawer {
     display: none;
     padding: 0 16px 14px;
-    background: rgba(12, 14, 18, 0.3);
+    background: rgba(11, 15, 13, 0.35);
     border-top: 1px solid var(--hz-border);
 }
 .hz-style-drawer.is-open { display: block; }
@@ -295,7 +299,7 @@ textarea.hz-editor.input-error {
 .style-sample {
     width: 100%;
     min-height: 48px;
-    background: rgba(12, 14, 18, 0.55) !important;
+    background: rgba(11, 15, 13, 0.55) !important;
     border: 1px solid var(--hz-border) !important;
     border-radius: 8px !important;
     color: var(--hz-text) !important;
@@ -305,7 +309,7 @@ textarea.hz-editor.input-error {
     resize: vertical;
 }
 .style-sample:focus {
-    border-color: var(--hz-teal) !important;
+    border-color: var(--hz-green) !important;
     outline: none !important;
     box-shadow: 0 0 0 3px var(--hz-glow) !important;
 }
@@ -319,13 +323,13 @@ textarea.hz-editor.input-error {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: rgba(12, 14, 18, 0.88);
+    background: rgba(11, 15, 13, 0.88);
     backdrop-filter: blur(6px);
 }
 .hz-loading p {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--hz-teal-soft);
+    color: var(--hz-green-soft);
     font-weight: 600;
 }
 .hz-loading.hidden,
@@ -334,8 +338,8 @@ textarea.hz-editor.input-error {
 .spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid rgba(196, 165, 116, 0.2);
-    border-top-color: var(--hz-teal);
+    border: 3px solid rgba(47, 107, 82, 0.25);
+    border-top-color: var(--hz-green);
     border-radius: 50%;
     animation: hz-spin 0.75s linear infinite;
 }
@@ -355,7 +359,7 @@ textarea.hz-editor.input-error {
 .email-gate-blur {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(12, 14, 18, 0.97) 42%, rgba(12, 14, 18, 0.55));
+    background: linear-gradient(to top, rgba(11, 15, 13, 0.97) 42%, rgba(11, 15, 13, 0.55));
     backdrop-filter: blur(3px);
     pointer-events: none;
 }
@@ -368,13 +372,12 @@ textarea.hz-editor.input-error {
     text-align: center;
     padding: 1.4rem 1.25rem 1.35rem;
     background: var(--hz-solid);
-    border: 1px solid rgba(196, 165, 116, 0.3);
+    border: 1px solid var(--hz-border);
     border-radius: 16px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
 }
 
-.email-gate-icon { font-size: 1.1rem; color: var(--hz-teal-soft); margin-bottom: 0.25rem; }
+.email-gate-icon { font-size: 1.1rem; color: var(--hz-green-soft); margin-bottom: 0.25rem; }
 .email-gate-card h3 {
     margin: 0 0 0.4rem;
     font-size: 1.1rem;
@@ -387,13 +390,13 @@ textarea.hz-editor.input-error {
     color: var(--hz-muted);
     line-height: 1.5;
 }
-.email-gate-card > p strong { color: var(--hz-teal-soft); }
+.email-gate-card > p strong { color: var(--hz-green-soft); }
 
 .gate-form { display: flex; gap: 8px; }
 .gate-form input {
     flex: 1;
     padding: 0.7rem 0.9rem;
-    background: rgba(12, 14, 18, 0.8);
+    background: rgba(11, 15, 13, 0.8);
     border: 1px solid var(--hz-border);
     border-radius: 10px;
     color: var(--hz-text);
@@ -401,13 +404,14 @@ textarea.hz-editor.input-error {
 }
 .gate-form input:focus {
     outline: none;
-    border-color: var(--hz-teal);
+    border-color: var(--hz-green);
     box-shadow: 0 0 0 3px var(--hz-glow);
 }
+/* Free unlock stays green — calm */
 .gate-form button {
     padding: 0.7rem 0.95rem;
-    background: var(--hz-teal);
-    color: #1A1510;
+    background: var(--hz-green);
+    color: #E8E2D6;
     border: none;
     border-radius: 10px;
     font-weight: 700;
@@ -427,25 +431,30 @@ textarea.hz-editor.input-error {
     border-top: 1px solid var(--hz-border);
 }
 .cs-gate-trust { margin: 0; font-size: 12px; color: var(--hz-muted); text-align: center; }
+
+/* Oxblood: paid unlock only */
 .cs-pro-cta-primary {
     display: block;
     text-align: center;
-    background: var(--hz-teal);
-    color: #1A1510 !important;
+    background: var(--hz-oxblood);
+    color: #F5F0E8 !important;
     padding: 13px;
     border-radius: 10px;
     font-weight: 700;
     text-decoration: none !important;
     font-size: 14px;
 }
+.cs-pro-cta-primary:hover {
+    background: var(--hz-oxblood-hover);
+}
 .cs-pro-cta-secondary {
     display: block;
     text-align: center;
     background: transparent;
-    color: var(--hz-teal-soft) !important;
+    color: var(--hz-green-soft) !important;
     padding: 11px;
     border-radius: 10px;
-    border: 1px solid var(--hz-teal);
+    border: 1px solid var(--hz-green);
     font-weight: 600;
     text-decoration: none !important;
     font-size: 13px;
@@ -469,7 +478,7 @@ textarea.hz-editor.input-error {
 }
 .hz-price-card {
     position: relative;
-    background: rgba(30, 42, 68, 0.72);
+    background: rgba(22, 29, 25, 0.9);
     backdrop-filter: blur(12px);
     border: 1px solid var(--hz-border);
     border-radius: 14px;
@@ -477,8 +486,8 @@ textarea.hz-editor.input-error {
     text-align: center;
 }
 .hz-price-featured {
-    border-color: rgba(196, 165, 116, 0.45);
-    box-shadow: 0 0 0 1px rgba(196, 165, 116, 0.2), 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-color: rgba(139, 46, 46, 0.45);
+    box-shadow: 0 0 0 1px rgba(139, 46, 46, 0.15);
 }
 .hz-price-badge {
     position: absolute;
@@ -489,8 +498,8 @@ textarea.hz-editor.input-error {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    background: var(--hz-teal);
-    color: #1A1510;
+    background: var(--hz-oxblood);
+    color: #F5F0E8;
     padding: 3px 10px;
     border-radius: 999px;
 }
@@ -518,24 +527,26 @@ textarea.hz-editor.input-error {
     color: var(--hz-muted);
     line-height: 1.8;
 }
-.hz-price-card ul li::before { content: "✓ "; color: var(--hz-teal); font-weight: 700; }
+.hz-price-card ul li::before { content: "✓ "; color: var(--hz-green-soft); font-weight: 700; }
+
+/* Featured plan CTA = oxblood (pay attention) */
 .hz-price-cta {
     display: block;
     text-align: center;
     padding: 11px;
     border-radius: 10px;
-    background: var(--hz-teal);
-    color: #1A1510 !important;
+    background: var(--hz-oxblood);
+    color: #F5F0E8 !important;
     font-weight: 700;
     text-decoration: none !important;
 }
 .hz-price-cta-outline {
     background: transparent;
-    border: 1px solid var(--hz-teal);
-    color: var(--hz-teal-soft) !important;
+    border: 1px solid var(--hz-green);
+    color: var(--hz-green-soft) !important;
 }
 .hz-restore { text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--hz-muted); }
-.hz-restore a { color: var(--hz-teal-soft); font-weight: 600; }
+.hz-restore a { color: var(--hz-green-soft); font-weight: 600; }
 
 .hz-compare { margin: 40px 0 28px; }
 .hz-compare h2 { text-align: center; font-size: 1.1rem; color: var(--hz-text); margin: 0 0 14px; }
@@ -547,8 +558,7 @@ textarea.hz-editor.input-error {
 .hz-compare-grid > div {
     padding: 16px;
     border-radius: 12px;
-    background: rgba(30, 42, 68, 0.72);
-    backdrop-filter: blur(12px);
+    background: rgba(22, 29, 25, 0.9);
     border: 1px solid var(--hz-border);
 }
 .hz-compare-grid h3 { margin: 0 0 6px; font-size: 0.92rem; color: var(--hz-text); }
@@ -568,7 +578,7 @@ textarea.hz-editor.input-error {
         position: sticky;
         bottom: 0;
         z-index: 20;
-        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
     }
     .hz-primary-btn { width: 100%; min-width: 0; padding: 14px 18px; }
     .hz-modes { width: 100%; }

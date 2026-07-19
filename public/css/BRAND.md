@@ -1,29 +1,34 @@
-# CyberScryb brand color — "Scribe After Dark"
-
-## Idea
-**Cyber + scribe**: night desk, warm paper, one brass instrument accent.  
-Not teal SaaS, not purple AI, not cyan cyberpunk, **no gradients**.
+# CyberScryb — Ink & Ledger
 
 ## Palette
 
-| Role | Hex | Why |
+| Role | Hex | Use |
 |------|-----|-----|
-| Background | `#0C0E12` | Quiet ink black |
-| Elevated / cards | `#12151B` / `#181C24` | Soft depth without neon panels |
-| Text | `#EDE9E1` | Warm paper (trust + readability) |
-| Muted text | `#9C968A` | Warm gray, less “corporate blue-gray” |
-| Primary (only loud color) | `#C4A574` | Antique brass — craft, quality, uncommon in AI tools |
-| Primary hover | `#A88B5C` | Solid darken only |
-| Soft accent | `#D9C4A0` | Links / chips |
-| CTA text on brass | `#1A1510` | High contrast on gold |
-| Success (checks only) | `#7D9B8A` | Quiet sage — not competing with brass |
+| Background | `#0B0F0D` | Page |
+| Card | `#161D19` | Surfaces |
+| Bone text | `#E8E2D6` | Headings, body emphasis |
+| Muted | `#9A958C` | Secondary type |
+| **Deep green (brand)** | `#2F6B52` | Default CTAs, links, focus, chips |
+| Green hover | `#245542` | |
+| Green soft | `#5C8F76` | Hover links, badges |
+| **Oxblood (attention)** | `#8B2E2E` | **Rare only** — see below |
+| Oxblood hover | `#6F2424` | |
+
+## Oxblood is scarce on purpose
+
+Use **only** for things that must pull the eye toward money / unlock:
+
+1. Sticky nav **Get Pro**
+2. Homepage hero **Get Pro — Unlimited Access** (the paid path)
+3. Paywall / pricing card **primary paid CTA** when free is exhausted
+4. Optional: “Most popular” money-tool badge (not every badge)
+
+**Do not** use oxblood for: Humanize, Subscribe, Browse tools, secondary buttons, body links, success checks.
+
+Default action color is **deep green**. That’s the trustworthy everyday brand.
+Red stays special so when it appears, people notice.
 
 ## Rules
-1. **One accent.** Brass does CTAs, links, focus, featured borders.
-2. **No gradients** on buttons, heroes, or logos.
-3. **Warm neutrals** for type; cool near-black for structure.
-4. **Serif only for brand wordmark** (Source Serif 4); UI is DM Sans.
-5. Don’t reintroduce cyan / electric purple / lime.
-
-## Conversion note
-Calm + distinctive builds *ownable* trust. Loud palettes get attention; brass-on-ink feels like a tool you’d pay for without screaming “marketing page.”
+- No gradients on buttons
+- Solid fills only
+- One brand (green) + one attention (oxblood)
