@@ -10,9 +10,9 @@
 - **Muted:** `#A39E94`
 
 ## Brand (everyday)
-- **Deep green:** `#1B6B45` — strong on `#0A0A0A`, clear next to bone text
-- Hover: `#145536`
-- Soft (links/chips): `#3D9B6A`
+- **Deep green:** `#0F4D32` — strong on `#0A0A0A`, clear next to bone text
+- Hover: `#0A3A26`
+- Soft (links/chips): `#2A6B4A`
 
 ## Attention (rare only)
 - **Amber:** `#D97706` — Get Pro, pay CTAs, “most popular” money badge only
