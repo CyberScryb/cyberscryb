@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wrap.className = 'cs-pro-gate-btns';
         wrap.innerHTML =
             '<p class="cs-gate-trust">Full result · unlimited rewrites · cancel anytime</p>'
-            + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Go Pro · $5/mo</a>'
+            + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Get Pro — Unlimited · $5/mo</a>'
             + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, 'gate_lifetime') + '" target="_blank" rel="noopener">Lifetime · $29</a>'
             + '<p class="cs-gate-fine">Stripe secure · 14-day refund · <a href="/pro-restore/">Already paid?</a></p>';
         card.appendChild(wrap);

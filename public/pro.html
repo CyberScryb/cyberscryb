@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v=20260623">
 <script type="application/ld+json">
 {
@@ -31,20 +31,20 @@
 </script>
 <style>
 :root {
-    --bg: #020205;
-    --fg: #f1f3f9;
-    --muted: #9ba1b4;
-    --accent: #7b2cff;
-    --accent2: #00d4ff;
-    --line: rgba(123, 44, 255, 0.15);
-    --card: rgba(10, 11, 16, 0.6);
+    --bg: #0A1428;
+    --fg: #E2E8F0;
+    --muted: #94A3B8;
+    --accent: #14B8A6;
+    --accent2: #5EEAD4;
+    --line: rgba(148, 163, 184, 0.15);
+    --card: rgba(30, 42, 68, 0.72);
 }
 * { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); background-image: radial-gradient(circle at 20% 20%, rgba(123, 44, 255, 0.08), transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.08), transparent 50%); min-height: 100vh; }
+body { margin: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(20, 184, 166, 0.12), transparent 55%); min-height: 100vh; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
 .hero { text-align: center; padding: 60px 0 50px; }
-.hero .eyebrow { color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-family: 'Orbitron', sans-serif; }
-.hero h1 { font-family: 'Orbitron', sans-serif; font-size: 52px; font-weight: 900; line-height: 1.1; margin: 16px 0 20px; color: #ffffff; }
+.hero .eyebrow { color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; }
+.hero h1 { font-family: Inter, system-ui, sans-serif; font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin: 16px 0 20px; color: #E2E8F0; letter-spacing: -0.02em; }
 .hero p { font-size: 18px; color: var(--muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
 @media (max-width: 600px) { .hero h1 { font-size: 36px; } }
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; margin: 0 auto 40px; }
@@ -52,20 +52,20 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 .plan { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; text-align: center; text-decoration: none; color: inherit; position: relative; transition: all 0.3s ease; }
 .plan:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(123, 44, 255, 0.15); }
 .plan.featured { border-color: var(--accent); background: rgba(123, 44, 255, 0.08); }
-.plan.featured::before { content: "★ BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #ffffff; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; font-family: 'Orbitron'; }
-.plan .name { font-weight: 600; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-family: 'Orbitron'; }
-.plan .price { font-size: 60px; font-weight: 900; color: var(--accent); margin: 16px 0 4px; line-height: 1; font-family: 'Orbitron'; }
+.plan.featured::before { content: "BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #042f2e; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
+.plan .name { font-weight: 600; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
+.plan .price { font-size: 52px; font-weight: 800; color: var(--accent); margin: 16px 0 4px; line-height: 1; letter-spacing: -0.03em; }
 .plan .price small { font-size: 18px; font-weight: 500; color: var(--muted); }
 .plan .meta { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-.plan .cta { display: block; background: var(--accent); color: #ffffff; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: opacity 0.2s; font-family: 'Orbitron'; letter-spacing: 1px; }
-.plan .cta:hover { opacity: 0.9; }
+.plan .cta { display: block; background: var(--accent); color: #042f2e; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s; letter-spacing: 0.02em; }
+.plan .cta:hover { background: #0F766E; color: #fff; }
 .features { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; margin: 60px 0 40px; }
-.features h2 { margin: 0 0 24px; font-size: 24px; font-family: 'Orbitron'; }
+.features h2 { margin: 0 0 24px; font-size: 22px; font-weight: 700; }
 .features ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
 @media (max-width: 600px) { .features ul { grid-template-columns: 1fr; } }
 .features li { padding-left: 28px; position: relative; color: var(--fg); }
 .features li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 18px; }
-.faq h2 { font-size: 24px; margin-bottom: 24px; font-family: 'Orbitron'; }
+.faq h2 { font-size: 22px; margin-bottom: 24px; font-weight: 700; }
 .faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
 .faq summary { cursor: pointer; font-weight: 600; padding: 8px 0; color: var(--fg); }
 .faq summary:hover { color: var(--accent); }
