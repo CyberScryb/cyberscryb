@@ -277,15 +277,16 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 ### Dev Tools (bundle filler)
 JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, password checker, privacy policy gen, SEO meta tag gen, and others.
 
-## Pricing (as of session)
+## Pricing (canonical — keep site-wide)
 | Tier | Price | Link |
 |------|-------|------|
 | Monthly | $5/mo | cyberscryb.com/pro |
-| Annual | $29/yr | cyberscryb.com/pro |
+| Lifetime | $29 one-time (first 50 buyers, then $49) | cyberscryb.com/pro |
 | CNA Resume Kit | $39 one-time | https://buy.stripe.com/00w3cx56m3mueKF3oV0sU01 |
-| CyberScryb Pro (lifetime promo) | listed on site | https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08 |
 
-**Note:** A $29 lifetime and $19 CNA pack were created and then **deactivated** in April 2026 because they conflicted with existing $29/yr tier.
+**Stripe Payment Links:** Monthly `https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b` · Lifetime `https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08`
+
+**Do not advertise annual/$29/yr or $9/mo.** Historical notes: old $9 monthly copy was fixed to $5; stale tool pages once said "Pro Annual $29/yr" while `/pro/` sold lifetime — fixed to Lifetime $29 site-wide.
 
 ## Automated Systems (Scheduled Tasks)
 | Task | Schedule | Status |
@@ -312,7 +313,7 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 - **ChatGPT/Claude cite Reddit** at 7% conversion vs Google's 5%
 
 ## Active Revenue Channels
-- CyberScryb Pro subscriptions ($5/mo, $29/yr)
+- CyberScryb Pro ($5/mo or $29 lifetime)
 - CNA Resume Kit ($39)
 - AdSense on tool pages (revenue = traffic indicator; amount unknown)
 - Stripe product ID prefix: `fce2083b` (when Stripe MCP reconnected)

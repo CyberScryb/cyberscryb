@@ -1,6 +1,6 @@
 /* CyberScryb Pro Upgrade Widget — auto-injects bottom-right pill + modal
    Variants supported:
-   - Default Pro (Pro Annual $29/yr + Pro Monthly $5/mo)
+   - Default Pro (Pro Lifetime $29 one-time + Pro Monthly $5/mo)
    - CNA Power Pack ($19) — set window.CS_WIDGET = 'cna' before this script loads */
 (function() {
   // Ensure Pro badge / restore helpers load with the widget
