@@ -260,8 +260,8 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 - Brands: **CyberScryb LLC** (tools/SaaS) + **Lazy Hustler** (content/newsletter)
 - Stats: 68+ AI systems, 229 Suno music tracks
 
-## CyberScryb Products
-**Site:** cyberscryb.com — 29 AI tools total
+## CyberScryb Products (on-site tools only)
+**Site:** cyberscryb.com — tools hub + Pro. The `/products/` Gumroad/pre-order page was removed (301 → `/tools/`). No external product storefront on-site.
 
 ### Hero Tools (highest commercial value)
 | Tool | Notes |

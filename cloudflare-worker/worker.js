@@ -269,7 +269,7 @@ export default {
       // Route to Cloudflare Workers AI (free Llama 3.1)
       try {
         const prompt = buildPrompt(tool, input, params || {});
-        const aiResult = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+        const aiResult = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8', {
           messages: [
             {
               role: 'system',
