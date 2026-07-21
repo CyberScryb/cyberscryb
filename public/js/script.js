@@ -77,10 +77,10 @@ function showCookieConsentBanner() {
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(26, 24, 20, 0.2);
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(26, 24, 20, 0.1);
             z-index: 99999;
             font-family: 'Inter', sans-serif;
             color: #cbd5e1;
@@ -130,14 +130,14 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: linear-gradient(135deg, #00d4ff, #7b2cff);
+            background: linear-gradient(135deg, #1A1814, #7b2cff);
             color: #000;
             border: none;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 10px rgba(26, 24, 20, 0.2);
         }
         .cs-cookie-btn-accept:hover {
             transform: translateY(-1px);
-            box-shadow: 0 0 18px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 18px rgba(26, 24, 20, 0.5);
         }
         .cs-cookie-btn-decline {
             background: transparent;

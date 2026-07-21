@@ -18,14 +18,14 @@ for (const f of walk(root)) {
   let c = fs.readFileSync(f, 'utf8');
   const o = c;
   c = c.replace(/font-family:\s*['"]Orbitron['"][^;"']*/gi, 'font-family: var(--font-brand), Georgia, serif');
-  c = c.replace(/style="color:#00d4ff;font-weight:700;"/gi, 'class="nav-pro"');
-  c = c.replace(/style="color:#00d4ff;font-weight:700"/gi, 'class="nav-pro"');
-  c = c.replace(/color:\s*#00d4ff/gi, 'color: var(--primary-soft)');
+  c = c.replace(/style="color:#1A1814;font-weight:700;"/gi, 'class="nav-pro"');
+  c = c.replace(/style="color:#1A1814;font-weight:700"/gi, 'class="nav-pro"');
+  c = c.replace(/color:\s*#1A1814/gi, 'color: var(--primary-soft)');
   c = c.replace(/color:\s*#7b2cff/gi, 'color: var(--primary-soft)');
-  c = c.replace(/background:\s*#00d4ff/gi, 'background: var(--primary)');
+  c = c.replace(/background:\s*#1A1814/gi, 'background: var(--primary)');
   c = c.replace(/background:\s*#7b2cff/gi, 'background: var(--primary)');
-  c = c.replace(/rgba\(0,\s*212,\s*255/gi, 'rgba(15, 77, 50');
-  c = c.replace(/rgba\(123,\s*44,\s*255/gi, 'rgba(15, 77, 50');
+  c = c.replace(/rgba\(0,\s*212,\s*255/gi, 'rgba(26, 24, 20');
+  c = c.replace(/rgba\(123,\s*44,\s*255/gi, 'rgba(26, 24, 20');
   // Cache-bust shared style if old version pin
   c = c.replace(/\/css\/style\.css\?v=\d+/g, '/css/style.css?v=20260719n');
   c = c.replace(/href="\/css\/style\.css"/g, 'href="/css/style.css?v=20260719n"');
