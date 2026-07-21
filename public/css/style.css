@@ -14,10 +14,10 @@
     --card: #FFFFFF;
     --card-glass: rgba(255, 252, 247, 0.94);
 
-    /* Type — espresso brown ink (not pure black, not bone-on-black) */
+    /* Type — espresso brown ink (dark enough for WCAG AA on white/linen) */
     --text: #2C1810;
-    --text-muted: #6B5344;
-    --text-faint: #9A8578;
+    --text-muted: #3D2B1F;   /* was #6B5344 — too light on white cards */
+    --text-faint: #5C4A3D;   /* was #9A8578 — failed AA for body-sized text */
 
     /* Brand — terracotta clay (the actual brand color) */
     --primary: #C2410C;
@@ -82,7 +82,7 @@ html { scroll-behavior: smooth; }
 body {
     font-family: var(--font);
     background: var(--bg);
-    color: var(--text-muted);
+    color: var(--text);
     line-height: 1.6;
     font-size: 16px;
     min-height: 100vh;
@@ -136,11 +136,11 @@ h3 { font-size: 1.15rem; }
 p { margin-bottom: 1rem; color: var(--text-muted); }
 
 a {
-    color: var(--primary-soft);
+    color: var(--primary); /* primary-soft #E05A2B fails AA on white (~3.7:1) */
     text-decoration: none;
     transition: color var(--transition);
 }
-a:hover { color: var(--text); }
+a:hover { color: var(--primary-hover); }
 
 .container {
     max-width: var(--max);

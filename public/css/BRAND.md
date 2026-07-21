@@ -8,16 +8,16 @@ Completely new system (not dark/green Humanizer, not teal, not charcoal paper).
 - **Cards:** `#FFFFFF`
 
 ## Type
-- **Espresso ink:** `#2C1810`
-- **Muted clay:** `#6B5344`
-- **Faint:** `#9A8578`
+- **Espresso ink:** `#2C1810` (body default, headings)
+- **Muted clay:** `#3D2B1F` (paragraphs / secondary — AA on white & linen)
+- **Faint:** `#5C4A3D` (meta, trust lines — AA for body-sized text)
 - **UI:** Outfit
 - **Wordmark:** Cormorant Garamond
 
 ## Brand
-- **Terracotta:** `#C2410C` — primary CTAs, links, focus
+- **Terracotta:** `#C2410C` — primary CTAs, links, focus (use for links, not soft)
 - Hover: `#9A3412`
-- Soft: `#E05A2B`
+- Soft: `#E05A2B` (icons / large accents only — not small body links)
 
 ## Pro / pay only
 - **Slate blue:** `#1B3A4B`
