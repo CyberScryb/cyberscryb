@@ -1,25 +1,21 @@
-# CyberScryb brand — Studio Paper (2026-07-21)
-
-## Direction
-Warm editorial **light** theme. Deliberate break from dark-void + green AI tooling defaults.
-Clarity from Stripe, type/spacing discipline from Linear, warm surfaces from Notion/editorial brands.
+# CyberScryb brand — Studio Paper (no teal)
 
 ## Surfaces
 - **Background:** `#F4F1EB` warm paper
-- **Elevated / footer:** `#FFFEFC`
+- **Elevated:** `#FFFEFC`
 - **Cards:** `#FFFFFF`
 
 ## Type
 - **Ink:** `#161411`
 - **Muted:** `#5C574F`
 - **Faint:** `#8B857A`
-- **UI font:** Plus Jakarta Sans
-- **Brand mark:** Fraunces (serif)
+- **UI:** Plus Jakarta Sans
+- **Brand mark:** Fraunces
 
-## Brand
-- **Teal:** `#0B6E6A` — primary actions, links, focus
-- Hover: `#085854`
-- Soft: `#0F8A84`
+## Brand (everyday)
+- **Charcoal:** `#1A1814` — primary CTAs, focus
+- Hover: `#000000`
+- Soft (links/chips): `#3D3830`
 
 ## Attention (rare — Pro / pay only)
 - **Copper:** `#C2410C`
@@ -27,7 +23,6 @@ Clarity from Stripe, type/spacing discipline from Linear, warm surfaces from Not
 - Ink on copper: `#FFFFFF`
 
 ## Rules
-1. Paper canvas stays warm-neutral — teal lives in components.
-2. Copper is scarce so money CTAs stay loud.
-3. Prefer soft elevation (`--shadow`) over neon glow.
-4. WCAG AA: body text on paper, white text on teal/copper.
+1. No teal, no neon green, no purple AI defaults.
+2. Charcoal CTAs on paper (Stripe-style). Copper only for money moments.
+3. Soft elevation over colored glow.
