@@ -424,12 +424,19 @@ header {
 .blog-card-content { display: flex; flex-direction: column; flex: 1; }
 .blog-card h3 { margin: 0 0 0.5rem; }
 .blog-card h3 a { color: var(--text); }
-.blog-card h3 a:hover { color: var(--primary-soft); }
+.blog-card h3 a:hover { color: var(--primary); }
 .blog-card p {
     font-size: 0.92rem;
+    /* Explicit dark ink on white cards — do not use faint tokens here */
     color: var(--text-muted);
     flex: 1;
     margin-bottom: 1rem;
+}
+.tool-card h3 a,
+.tool-card .tool-title { color: var(--text); }
+.tool-card p,
+.tool-card .tool-desc {
+    color: var(--text-muted);
 }
 
 .posts-grid,
