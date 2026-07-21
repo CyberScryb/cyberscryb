@@ -1,19 +1,19 @@
 /* Humanizer — near-black canvas, green actions, amber rare pay */
 
 .hz-app {
-    --hz-bg: #0A0A0A;
-    --hz-surface: #161616;
-    --hz-solid: #161616;
-    --hz-border: rgba(232, 226, 214, 0.1);
-    --hz-text: #E8E2D6;
-    --hz-muted: #A39E94;
-    --hz-faint: #73706A;
-    --hz-green: #0F4D32;
-    --hz-green-hover: #0A3A26;
-    --hz-green-soft: #2A6B4A;
-    --hz-amber: #D97706;
-    --hz-amber-hover: #B45309;
-    --hz-glow: rgba(15, 77, 50, 0.32);
+    --hz-bg: var(--bg, #F4F1EB);
+    --hz-surface: var(--card, #FFFFFF);
+    --hz-solid: var(--card, #FFFFFF);
+    --hz-border: rgba(22, 20, 17, 0.1);
+    --hz-text: var(--text, #161411);
+    --hz-muted: var(--text-muted, #5C574F);
+    --hz-faint: var(--text-faint, #8B857A);
+    --hz-green: var(--primary, #0B6E6A);
+    --hz-green-hover: var(--primary-hover, #085854);
+    --hz-green-soft: var(--primary-soft, #0F8A84);
+    --hz-amber: var(--attention, #C2410C);
+    --hz-amber-hover: var(--attention-hover, #9A3412);
+    --hz-glow: rgba(11, 110, 106, 0.32);
     --hz-font: "DM Sans", system-ui, -apple-system, sans-serif;
 
     min-height: calc(100vh - 64px);
@@ -64,7 +64,7 @@
     font-size: 0.72rem;
     font-weight: 600;
     color: var(--hz-muted);
-    background: #161616;
+    background: var(--card, #FFFFFF);
     border: 1px solid var(--hz-border);
     padding: 6px 11px;
     border-radius: 999px;
@@ -73,7 +73,7 @@
 .hz-link-pro {
     font-size: 0.8rem;
     font-weight: 700;
-    color: #0A0A0A;
+    color: var(--bg, #F4F1EB);
     text-decoration: none;
     padding: 7px 14px;
     border-radius: 999px;
@@ -82,11 +82,11 @@
 }
 .hz-link-pro:hover {
     background: var(--hz-amber-hover);
-    color: #0A0A0A;
+    color: var(--bg, #F4F1EB);
 }
 
 .hz-workspace {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 28%), #161616;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 28%), var(--card, #FFFFFF);
     border: 1px solid var(--hz-border);
     border-radius: 16px;
     overflow: hidden;
@@ -205,7 +205,7 @@ textarea.hz-editor.input-error {
 .hz-mode {
     appearance: none;
     border: 1px solid var(--hz-border);
-    background: #161616;
+    background: var(--card, #FFFFFF);
     color: var(--hz-muted);
     font-family: inherit;
     font-size: 0.8rem;
@@ -216,12 +216,12 @@ textarea.hz-editor.input-error {
     transition: 0.2s ease;
 }
 .hz-mode:hover {
-    border-color: rgba(232, 226, 214, 0.22);
+    border-color: rgba(22, 20, 17, 0.22);
     color: var(--hz-text);
 }
 .hz-mode.is-active {
     border-color: var(--hz-green);
-    background: rgba(15, 77, 50, 0.22);
+    background: rgba(11, 110, 106, 0.22);
     color: var(--hz-green-soft);
 }
 
@@ -243,7 +243,7 @@ textarea.hz-editor.input-error {
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.12) inset,
         0 8px 24px rgba(0, 0, 0, 0.4),
-        0 0 24px rgba(15, 77, 50, 0.15);
+        0 0 24px rgba(11, 110, 106, 0.15);
     transition: 0.2s ease;
 }
 .hz-primary-btn:hover:not(:disabled) {
@@ -251,7 +251,7 @@ textarea.hz-editor.input-error {
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.1) inset,
         0 12px 32px rgba(0, 0, 0, 0.45),
-        0 0 32px rgba(15, 77, 50, 0.25);
+        0 0 32px rgba(11, 110, 106, 0.25);
 }
 .hz-primary-btn:disabled,
 .hz-primary-btn.is-loading {
@@ -303,7 +303,7 @@ textarea.hz-editor.input-error {
 .style-sample {
     width: 100%;
     min-height: 48px;
-    background: #0A0A0A !important;
+    background: var(--bg, #F4F1EB) !important;
     border: 1px solid var(--hz-border) !important;
     border-radius: 8px !important;
     color: var(--hz-text) !important;
@@ -341,7 +341,7 @@ textarea.hz-editor.input-error {
 .spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid rgba(15, 77, 50, 0.28);
+    border: 3px solid rgba(11, 110, 106, 0.28);
     border-top-color: var(--hz-green);
     border-radius: 50%;
     animation: hz-spin 0.75s linear infinite;
@@ -373,7 +373,7 @@ textarea.hz-editor.input-error {
     max-width: 400px;
     text-align: center;
     padding: 1.4rem 1.25rem 1.35rem;
-    background: #161616;
+    background: var(--card, #FFFFFF);
     border: 1px solid var(--hz-border);
     border-radius: 16px;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
@@ -398,7 +398,7 @@ textarea.hz-editor.input-error {
 .gate-form input {
     flex: 1;
     padding: 0.7rem 0.9rem;
-    background: #0A0A0A;
+    background: var(--bg, #F4F1EB);
     border: 1px solid var(--hz-border);
     border-radius: 10px;
     color: var(--hz-text);
@@ -437,7 +437,7 @@ textarea.hz-editor.input-error {
     display: block;
     text-align: center;
     background: var(--hz-amber);
-    color: #0A0A0A !important;
+    color: var(--bg, #F4F1EB) !important;
     padding: 13px;
     border-radius: 10px;
     font-weight: 700;
@@ -481,7 +481,7 @@ textarea.hz-editor.input-error {
 }
 .hz-price-card {
     position: relative;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), #161616;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), var(--card, #FFFFFF);
     border: 1px solid var(--hz-border);
     border-radius: 14px;
     padding: 20px 16px;
@@ -491,7 +491,7 @@ textarea.hz-editor.input-error {
 }
 .hz-price-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(232, 226, 214, 0.16);
+    border-color: rgba(22, 20, 17, 0.16);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 .hz-price-featured {
@@ -507,7 +507,7 @@ textarea.hz-editor.input-error {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     background: var(--hz-amber);
-    color: #0A0A0A;
+    color: var(--bg, #F4F1EB);
     padding: 3px 10px;
     border-radius: 999px;
 }
@@ -543,7 +543,7 @@ textarea.hz-editor.input-error {
     padding: 11px;
     border-radius: 10px;
     background: var(--hz-amber);
-    color: #0A0A0A !important;
+    color: var(--bg, #F4F1EB) !important;
     font-weight: 700;
     text-decoration: none !important;
 }
@@ -565,7 +565,7 @@ textarea.hz-editor.input-error {
 .hz-compare-grid > div {
     padding: 16px;
     border-radius: 12px;
-    background: #161616;
+    background: var(--card, #FFFFFF);
     border: 1px solid var(--hz-border);
 }
 .hz-compare-grid h3 { margin: 0 0 6px; font-size: 0.92rem; color: var(--hz-text); }
@@ -616,7 +616,7 @@ textarea.hz-editor.input-error {
     padding: 12px 14px;
 }
 .hz-compare-after {
-    border-color: rgba(15, 77, 50, 0.4);
+    border-color: rgba(11, 110, 106, 0.4);
 }
 .hz-compare-label {
     display: block;
@@ -661,7 +661,7 @@ textarea.hz-editor.input-error {
 .hz-action-btn {
     appearance: none;
     border: 1px solid var(--hz-border);
-    background: #161616;
+    background: var(--card, #FFFFFF);
     color: var(--hz-text);
     font-family: inherit;
     font-size: 0.82rem;
@@ -678,17 +678,17 @@ textarea.hz-editor.input-error {
 }
 .hz-action-pro {
     background: var(--hz-amber);
-    color: #0A0A0A !important;
+    color: var(--bg, #F4F1EB) !important;
     border-color: transparent;
 }
 .hz-action-pro:hover {
     background: var(--hz-amber-hover);
-    color: #0A0A0A !important;
+    color: var(--bg, #F4F1EB) !important;
 }
 
 .hz-pro-banner {
-    background: rgba(15, 77, 50, 0.25);
-    border: 1px solid rgba(15, 77, 50, 0.45);
+    background: rgba(11, 110, 106, 0.25);
+    border: 1px solid rgba(11, 110, 106, 0.45);
     color: var(--hz-text);
     font-size: 0.88rem;
     font-weight: 600;
@@ -745,6 +745,6 @@ textarea.hz-editor.input-error {
         top: 64px;
         z-index: 15;
         padding-bottom: 8px;
-        background: linear-gradient(to bottom, #0A0A0A 70%, transparent);
+        background: linear-gradient(to bottom, var(--bg, #F4F1EB) 70%, transparent);
     }
 }

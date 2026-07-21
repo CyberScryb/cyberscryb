@@ -14,8 +14,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260719q">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20260721studio">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -30,53 +30,52 @@
 }
 </script>
 <style>
+/* Studio Paper — page-local plan cards (inherits global tokens from style.css) */
 :root {
-    --bg: #0A0A0A;
-    --fg: #E8E2D6;
-    --muted: #A39E94;
-    --accent: #0F4D32;
-    --accent2: #2A6B4A;
-    --attention: #D97706;
-    --attention-hover: #B45309;
-    --line: rgba(232, 226, 214, 0.1);
-    --card: #161616;
+    --fg: var(--text, #161411);
+    --muted: var(--text-muted, #5C574F);
+    --accent: var(--primary, #0B6E6A);
+    --accent2: var(--primary-soft, #0F8A84);
+    --line: var(--border, rgba(22, 20, 17, 0.10));
 }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif; color: var(--fg); background: var(--bg); min-height: 100vh; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
 .hero { text-align: center; padding: 60px 0 50px; }
 .hero .eyebrow { color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; }
-.hero h1 { font-family: "DM Sans", system-ui, sans-serif; font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin: 16px 0 20px; color: #E8E2D6; letter-spacing: -0.02em; }
+.hero h1 { font-family: var(--font, "Plus Jakarta Sans", system-ui, sans-serif); font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin: 16px 0 20px; color: var(--text); letter-spacing: -0.02em; }
 .hero p { font-size: 18px; color: var(--muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
 @media (max-width: 600px) { .hero h1 { font-size: 36px; } }
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; margin: 0 auto 40px; }
 @media (max-width: 600px) { .plans { grid-template-columns: 1fr; } }
-.plan { background: var(--card); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; text-align: center; text-decoration: none; color: inherit; position: relative; transition: border-color 0.2s, transform 0.2s; }
-.plan:hover { border-color: var(--accent); transform: translateY(-3px); }
-.plan.featured { border-color: rgba(217, 119, 6, 0.45); background: #161616; }
-.plan.featured::before { content: "BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--attention); color: #0A0A0A; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
+.plan { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; text-align: center; text-decoration: none; color: inherit; position: relative; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; box-shadow: var(--shadow, 0 12px 40px rgba(22,20,17,0.08)); }
+.plan:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-lg, 0 24px 56px rgba(22,20,17,0.12)); }
+.plan.featured { border-color: rgba(194, 65, 12, 0.45); background: #FFFFFF; }
+.plan.featured::before { content: "BEST VALUE"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--attention); color: var(--attention-ink, #fff); padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
 .plan .name { font-weight: 600; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
 .plan .price { font-size: 52px; font-weight: 800; color: var(--fg); margin: 16px 0 4px; line-height: 1; letter-spacing: -0.03em; }
 .plan .price small { font-size: 18px; font-weight: 500; color: var(--muted); }
 .plan .meta { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-.plan .cta { display: block; background: var(--accent); color: #E8E2D6; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: background 0.2s; letter-spacing: 0.02em; }
-.plan .cta:hover { background: #0A3A26; }
-.plan.featured .cta { background: var(--attention); color: #0A0A0A; }
-.plan.featured .cta:hover { background: var(--attention-hover); color: #0A0A0A; }
-.features { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; margin: 60px 0 40px; }
-.features h2 { margin: 0 0 24px; font-size: 22px; font-weight: 700; }
+.plan .cta { display: block; background: var(--accent); color: #fff; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: background 0.2s; letter-spacing: 0.02em; }
+.plan .cta:hover { background: var(--primary-hover, #085854); }
+.plan.featured .cta { background: var(--attention); color: #fff; }
+.plan.featured .cta:hover { background: var(--attention-hover); color: #fff; }
+.features { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 40px; margin: 60px 0 40px; box-shadow: var(--shadow, 0 12px 40px rgba(22,20,17,0.08)); }
+.features h2 { margin: 0 0 24px; font-size: 22px; font-weight: 700; color: var(--text); }
 .features ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
 @media (max-width: 600px) { .features ul { grid-template-columns: 1fr; } }
 .features li { padding-left: 28px; position: relative; color: var(--fg); }
 .features li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 18px; }
-.faq h2 { font-size: 22px; margin-bottom: 24px; font-weight: 700; }
+.faq h2 { font-size: 22px; margin-bottom: 24px; font-weight: 700; color: var(--text); }
 .faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
 .faq summary { cursor: pointer; font-weight: 600; padding: 8px 0; color: var(--fg); }
 .faq summary:hover { color: var(--accent); }
 .faq p { color: var(--muted); margin: 8px 0 0; line-height: 1.6; }
-footer { text-align: center; color: var(--muted); font-size: 13px; padding-top: 40px; border-top: 1px solid var(--line); margin-top: 60px; }
-footer a { color: var(--muted); margin: 0 8px; text-decoration: none; }
-footer a:hover { color: var(--accent); }
+.wrap + footer,
+.wrap ~ footer,
+footer.pro-local { text-align: center; color: var(--muted); font-size: 13px; padding-top: 40px; border-top: 1px solid var(--line); margin-top: 60px; background: transparent; }
+footer.pro-local a,
+.wrap ~ footer a { color: var(--muted); margin: 0 8px; text-decoration: none; }
+footer.pro-local a:hover,
+.wrap ~ footer a:hover { color: var(--accent); }
 .back { color: var(--muted); text-decoration: none; font-size: 14px; }
 .back:hover { color: var(--accent); }
 </style>
@@ -182,7 +181,7 @@ footer a:hover { color: var(--accent); }
     <details><summary>Should I buy one rewrite or subscribe?</summary><p>There is no separate one-result product. <strong>$5/mo</strong> is the simple plan for full unlimited results. Lifetime is $29 if you don't want a subscription. That keeps pricing honest — you never pay more for less.</p></details>
   </div>
   <p style="text-align:center;margin:24px 0 0;"><a href="/pro-restore/" style="color:var(--accent2);font-weight:600;">Already paid? Restore Pro on this device →</a></p>
-  <footer>
+  <footer class="pro-local">
     <p>Secure checkout by Stripe &middot; CyberScryb LLC &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/contact/">Contact</a> &middot; <a href="/pro-restore/">Restore Pro</a></p>
   </footer>
 </div>

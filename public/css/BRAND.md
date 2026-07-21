@@ -1,25 +1,33 @@
-# CyberScryb brand
+# CyberScryb brand — Studio Paper (2026-07-21)
+
+## Direction
+Warm editorial **light** theme. Deliberate break from dark-void + green AI tooling defaults.
+Clarity from Stripe, type/spacing discipline from Linear, warm surfaces from Notion/editorial brands.
 
 ## Surfaces
-- **Background:** `#0A0A0A` (near black — **no green/brown page tint**)
-- **Cards:** `#161616`
-- **No atmospheric color haze** on the body (no tinted radial fog)
+- **Background:** `#F4F1EB` warm paper
+- **Elevated / footer:** `#FFFEFC`
+- **Cards:** `#FFFFFF`
 
 ## Type
-- **Bone:** `#E8E2D6`
-- **Muted:** `#A39E94`
+- **Ink:** `#161411`
+- **Muted:** `#5C574F`
+- **Faint:** `#8B857A`
+- **UI font:** Plus Jakarta Sans
+- **Brand mark:** Fraunces (serif)
 
-## Brand (everyday)
-- **Deep green:** `#0F4D32` — strong on `#0A0A0A`, clear next to bone text
-- Hover: `#0A3A26`
-- Soft (links/chips): `#2A6B4A`
+## Brand
+- **Teal:** `#0B6E6A` — primary actions, links, focus
+- Hover: `#085854`
+- Soft: `#0F8A84`
 
-## Attention (rare only)
-- **Amber:** `#D97706` — Get Pro, pay CTAs, “most popular” money badge only
-- Hover: `#B45309`
-- Text on amber: `#0A0A0A`
+## Attention (rare — Pro / pay only)
+- **Copper:** `#C2410C`
+- Hover: `#9A3412`
+- Ink on copper: `#FFFFFF`
 
 ## Rules
-1. Page bg stays neutral near-black — green lives in components, not the canvas.
-2. No gradients on buttons; no colored fog overlays.
-3. Amber is scarce so it stays loud when used.
+1. Paper canvas stays warm-neutral — teal lives in components.
+2. Copper is scarce so money CTAs stay loud.
+3. Prefer soft elevation (`--shadow`) over neon glow.
+4. WCAG AA: body text on paper, white text on teal/copper.
