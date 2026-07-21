@@ -148,7 +148,7 @@ class MemoryBuffer:
     content: '';
     grid-column: 1 / -1;
     height: 4px;
-    background: linear-gradient(90deg, #a855f7, #1A1814);
+    background: linear-gradient(90deg, #a855f7, #C2410C);
     box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
 }`
 };
