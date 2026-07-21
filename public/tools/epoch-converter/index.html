@@ -281,7 +281,7 @@
                 <div class="result-row"><span class="result-label">Day of Week</span><span class="result-value">${dateObj.toLocaleDateString('en-US',{weekday:'long'})}</span></div>
                 <div class="result-row"><span class="result-label">Relative</span><span class="result-value">${relativeTime(dateObj)}</span></div>
             `;
-            if(typeof gtag==='function') gtag('event','tool_use',{tool_name:'epoch_converter',direction:'to_date'});
+            if(typeof gtag==='function') gtag('event','tool_used',{tool_name:'epoch_converter',direction:'to_date'});
         });
 
         // Date to Timestamp
@@ -301,7 +301,7 @@
                 <div class="result-row"><span class="result-label">ISO 8601</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toISOString()}</span></div>
                 <div class="result-row"><span class="result-label">UTC</span><span class="result-value" onclick="navigator.clipboard.writeText(this.textContent)">${dateObj.toUTCString()}</span></div>
             `;
-            if(typeof gtag==='function') gtag('event','tool_use',{tool_name:'epoch_converter',direction:'to_timestamp'});
+            if(typeof gtag==='function') gtag('event','tool_used',{tool_name:'epoch_converter',direction:'to_timestamp'});
         });
 
         function relativeTime(date){

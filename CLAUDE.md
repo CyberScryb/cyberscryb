@@ -5,9 +5,26 @@
 
 ## 🏗️ ACTIVE INITIATIVE — Site Rebuild (started 2026-07-21)
 
-Nathan handed down `Rebuild.CLAUDE.md` (repo root) as a full rebuild/redesign master brief — read it before doing any design or content work on cyberscryb.com. It's phased and explicitly gated: **Phase 0 (baseline audit) is done** — see `PHASE0-AUDIT-2026-07-21.md` in the repo root for full findings. Highlights: `/pro/` pricing and Stripe billing config are both already clean (the brief's flagged issue was stale); the `tool_use`/`tool_used` analytics split is real and confirmed; tool count is a 3-way split (29+/40+/50+, actual = 51); `about.html` makes a false "everything runs client-side" claim; Cloudflare is blocking ClaudeBot/GPTBot site-wide (robots.txt Content-Signal `ai-train=no`) which conflicts with the AI-citation growth strategy below — needs Nathan's call; PSI API is rate-limited and Ahrefs/Semrush are both blocked (plan tier / exhausted units) so no fresh CWV or search-traffic baseline exists yet.
+Nathan handed down `Rebuild.CLAUDE.md` (repo root) as a full rebuild/redesign master brief — read it before any design/content work. **Phase 0 audit is done** (`PHASE0-AUDIT-2026-07-21.md`). Branch: `rebuild/phase1-foundation`.
 
-**Do not start Phase 1 (design tokens, rebuild work) until Nathan has reviewed the Phase 0 report and given a go-ahead** — the brief is explicit that phases don't chain without his review in between. This supersedes the general "act, don't advise" bias below for this specific initiative only; everything else in this file (deploy protocol, IDs, pricing, asset map) still applies as normal.
+### P0 status (as of 2026-07-21 handoff, continued after Claude rate-limit)
+
+| Item | Status |
+|---|---|
+| `/pro/` pricing + Stripe | Clean (stale brief finding) |
+| `tool_use` → `tool_used` analytics | **Fixed** on all 14 standalone dev tools (public + content-site) |
+| One tool count | **Fixed → 50** (exact dir count under `public/tools/` excl. `shared`) |
+| About privacy claim | **Fixed** — AI vs client-side tools scoped correctly |
+| Humanizer privacy copy | **Fixed** on humanizer + rewrite/remove landing pages |
+| Canonical nav | Partial (homepage nav aligned toward interior; full component still Phase 1) |
+| `privacy-check.html` | Gone from tree (resolved by absence) |
+| AI crawler block (ClaudeBot/GPTBot) | **Still needs Nathan decision** (Cloudflare dashboard) |
+| PSI / CWV baseline | Still blocked without PSI key or local Lighthouse |
+| Ahrefs/Semrush/GSC export | Still blocked — need Nathan export for SEO floor |
+| Tool shell spec | Written: `public/tools/shared/tool-shell-spec.md` (spec only, not applied) |
+| Design tokens / Phase 1 visual rebuild | **Not started** — needs go-ahead + Digital Obsidian decision |
+
+**Deploy rule for this initiative:** never push to `main` / ship without explicit "ship it" from Nathan, checkpoint by checkpoint (`Rebuild.CLAUDE.md` hard constraint).
 
 ---
 

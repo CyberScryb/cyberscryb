@@ -378,7 +378,7 @@
             output.value = result;
             meta.textContent = `Input: ${src.length.toLocaleString()} chars • Output: ${result.length.toLocaleString()} chars`;
             if (typeof gtag === 'function' && src.length > 0) {
-                gtag('event', 'tool_use', { tool_name: 'html_entity', mode: mode });
+                gtag('event', 'tool_used', { tool_name: 'html_entity', mode: mode });
             }
         }
 

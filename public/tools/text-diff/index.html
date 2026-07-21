@@ -395,7 +395,7 @@
             const ops = diffLines(a, b);
             const stats = render(ops);
             if (typeof gtag === 'function') {
-                gtag('event', 'tool_use', { tool_name: 'text_diff', lines_added: stats.added, lines_removed: stats.removed });
+                gtag('event', 'tool_used', { tool_name: 'text_diff', lines_added: stats.added, lines_removed: stats.removed });
             }
         }
 

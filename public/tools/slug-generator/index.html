@@ -403,7 +403,7 @@
                 const old = btn.textContent;
                 btn.textContent = 'Copied!';
                 setTimeout(() => { btn.textContent = old; }, 1200);
-                if (typeof gtag === 'function') gtag('event', 'tool_use', { tool_name: 'slug_generator' });
+                if (typeof gtag === 'function') gtag('event', 'tool_used', { tool_name: 'slug_generator' });
             }
         });
         document.getElementById('sg-sample').addEventListener('click', () => {
