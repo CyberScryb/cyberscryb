@@ -1007,7 +1007,7 @@ def build_html(t: dict) -> str:
             <label class="lt-label" for="tool-input">Situation details (facts, dates, amounts)</label>
             <div class="lt-examples" aria-label="Example scenarios">{examples_html}</div>
             <textarea id="tool-input" class="lt-area" placeholder="{esc(t["placeholder"])}"></textarea>
-            <p class="lt-hint"><span id="char-live">0</span> characters · <strong>Be specific. Never invent facts the AI should invent.</strong></p>
+            <p class="lt-hint"><span id="char-live">0</span> characters · Use real dates and amounts only — leave blanks if you do not know.</p>
           </div>
 
           <button type="button" id="generate-btn" class="lt-gen">
@@ -1022,8 +1022,8 @@ def build_html(t: dict) -> str:
         </div>
       </div>
 
-      <div>
-        <div class="lt-card" style="margin-bottom:1rem;">
+      <div class="lt-rail">
+        <div class="lt-card">
           <div class="lt-card-h">
             <h2>Your letter</h2>
             <div class="lt-toolbar">
@@ -1056,13 +1056,15 @@ def build_html(t: dict) -> str:
             <div class="lt-stats"><span id="word-count">0 words</span><span id="char-count">0 characters</span></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="lt-card">
-          <div class="lt-card-h"><h2>{esc(t["checklist_title"])}</h2></div>
-          <div class="lt-body">
-            <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
-            <ul class="lt-check">{checks}</ul>
-          </div>
+    <div class="lt-checklist-band">
+      <div class="lt-card">
+        <div class="lt-card-h"><h2>{esc(t["checklist_title"])}</h2></div>
+        <div class="lt-body">
+          <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
+          <ul class="lt-check">{checks}</ul>
         </div>
       </div>
     </div>

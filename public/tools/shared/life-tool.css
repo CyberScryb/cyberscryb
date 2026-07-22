@@ -18,11 +18,22 @@
 
 .lt-grid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 1.25rem;
   align-items: start;
+  /* Prevent tall form column from painting over the right rail */
+  isolation: isolate;
 }
 @media (max-width: 920px) { .lt-grid { grid-template-columns: 1fr; } }
+.lt-grid > * {
+  min-width: 0;
+  max-width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.lt-grid > .lt-rail {
+  z-index: 2;
+}
 
 .lt-card {
   background: linear-gradient(180deg, #FFFFFF 0%, var(--card) 100%);
@@ -30,6 +41,7 @@
   border-radius: 16px;
   box-shadow: 0 12px 36px rgba(44, 24, 16, 0.07);
   overflow: hidden;
+  max-width: 100%;
 }
 .lt-card-h {
   display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
@@ -61,7 +73,14 @@
   font-size: 0.94rem;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
-.lt-area { min-height: 128px; resize: vertical; line-height: 1.55; }
+.lt-area {
+  min-height: 128px;
+  max-height: 280px;
+  resize: vertical;
+  line-height: 1.55;
+  max-width: 100%;
+  display: block;
+}
 .lt-input:focus, .lt-select:focus, .lt-area:focus {
   outline: none;
   border-color: var(--primary);
@@ -130,7 +149,19 @@
 .lt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 @media (max-width: 560px) { .lt-row { grid-template-columns: 1fr; } }
 
-.lt-hint { font-size: 0.76rem; color: var(--text-faint); margin: 0.28rem 0 0; }
+.lt-hint {
+  font-size: 0.74rem;
+  color: var(--text-faint);
+  margin: 0.35rem 0 0;
+  line-height: 1.4;
+  /* Never look like a blocking panel over the right rail */
+  position: static;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  max-width: 100%;
+}
 .lt-hint strong { color: var(--text-muted); font-weight: 600; }
 
 /* Readiness meter */
@@ -249,6 +280,12 @@
 }
 
 /* Interactive checklist */
+/* Full-width checklist under the form/output grid — never under the tall form */
+.lt-checklist-band {
+  margin-top: 1.25rem;
+  position: relative;
+  z-index: 3;
+}
 .lt-check { list-style: none; padding: 0; margin: 0.5rem 0 0; }
 .lt-check li {
   display: flex; align-items: flex-start; gap: 0.55rem;
@@ -262,6 +299,8 @@
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
   user-select: none;
+  position: relative;
+  z-index: 1;
 }
 .lt-check li:hover { border-color: rgba(194, 65, 12, 0.3); }
 .lt-check li.is-done {

@@ -182,7 +182,7 @@
             <div class="lt-examples" aria-label="Example scenarios"><button type="button" class="lt-ex" data-payload='{&quot;mode&quot;: &quot;not-medically-necessary&quot;, &quot;fields&quot;: {&quot;plan_name&quot;: &quot;Blue Cross PPO&quot;, &quot;member_id&quot;: &quot;XYZ123456&quot;, &quot;claim_id&quot;: &quot;PA-99102&quot;, &quot;denial_date&quot;: &quot;March 20, 2026&quot;, &quot;service&quot;: &quot;Humira (adalimumab)&quot;, &quot;denial_reason&quot;: &quot;Not medically necessary; step therapy incomplete&quot;, &quot;clinician&quot;: &quot;Dr. Patel, Rheumatology, 555-0100&quot;, &quot;deadline&quot;: &quot;180 days from March 20, 2026&quot;}, &quot;story&quot;: &quot;Rheumatologist ordered Humira after documented failure of methotrexate and sulfasalazine with side effects. Diagnosis rheumatoid arthritis. Request internal appeal approval and peer-to-peer with treating rheumatologist.&quot;, &quot;addressedTo&quot;: &quot;Appeals &amp; Grievances Department&quot;, &quot;sender&quot;: &quot;Member on file&quot;}'>Med denial after step therapy</button>
 <button type="button" class="lt-ex" data-payload='{&quot;mode&quot;: &quot;prior-auth&quot;, &quot;fields&quot;: {&quot;plan_name&quot;: &quot;UnitedHealthcare&quot;, &quot;member_id&quot;: &quot;UHC998877&quot;, &quot;claim_id&quot;: &quot;AUTH-44102&quot;, &quot;denial_date&quot;: &quot;Feb 8, 2026&quot;, &quot;service&quot;: &quot;MRI lumbar spine without contrast&quot;, &quot;denial_reason&quot;: &quot;Does not meet clinical criteria; conservative care incomplete&quot;, &quot;clinician&quot;: &quot;Dr. Ng, Orthopedics&quot;, &quot;deadline&quot;: &quot;60 days from notice&quot;}, &quot;story&quot;: &quot;Six weeks of physical therapy completed. Orthopedist notes red-flag symptoms and requests MRI. Denial claims conservative care incomplete. Request reversal with PT records attached.&quot;, &quot;addressedTo&quot;: &quot;Prior Authorization Appeals&quot;, &quot;sender&quot;: &quot;C. Morgan&quot;}'>Imaging denial</button></div>
             <textarea id="tool-input" class="lt-area" placeholder="Example: Blue Cross denied prior auth for Humira on March 20, 2026 (Auth #PA-99102). Reason: not medically necessary. Rheumatologist ordered after failed methotrexate and sulfasalazine. Diagnosis RA. Request peer-to-peer."></textarea>
-            <p class="lt-hint"><span id="char-live">0</span> characters · <strong>Be specific. Never invent facts the AI should invent.</strong></p>
+            <p class="lt-hint"><span id="char-live">0</span> characters · Use real dates and amounts only — leave blanks if you do not know.</p>
           </div>
 
           <button type="button" id="generate-btn" class="lt-gen">
@@ -197,8 +197,8 @@
         </div>
       </div>
 
-      <div>
-        <div class="lt-card" style="margin-bottom:1rem;">
+      <div class="lt-rail">
+        <div class="lt-card">
           <div class="lt-card-h">
             <h2>Your letter</h2>
             <div class="lt-toolbar">
@@ -231,19 +231,21 @@
             <div class="lt-stats"><span id="word-count">0 words</span><span id="char-count">0 characters</span></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="lt-card">
-          <div class="lt-card-h"><h2>Appeal packet checklist</h2></div>
-          <div class="lt-body">
-            <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
-            <ul class="lt-check"><li>Denial letter / EOB — all pages (deadline is usually on it)</li>
+    <div class="lt-checklist-band">
+      <div class="lt-card">
+        <div class="lt-card-h"><h2>Appeal packet checklist</h2></div>
+        <div class="lt-body">
+          <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
+          <ul class="lt-check"><li>Denial letter / EOB — all pages (deadline is usually on it)</li>
 <li>Prescription, order, or pre-auth request copy</li>
 <li>Clinician letter of medical necessity (strongest piece)</li>
 <li>Chart notes showing failed alternatives / step therapy</li>
 <li>Relevant imaging, labs, or specialist notes</li>
 <li>Request peer-to-peer if the plan allows it</li>
 <li>Calendar the internal appeal deadline; ask about external review rights if denied again</li></ul>
-          </div>
         </div>
       </div>
     </div>

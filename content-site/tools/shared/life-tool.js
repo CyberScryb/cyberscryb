@@ -146,7 +146,7 @@
     if (toolInput) {
       toolInput.addEventListener('input', function () {
         this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 380) + 'px';
+        this.style.height = Math.min(this.scrollHeight, 280) + 'px';
         if (charLive) charLive.textContent = String(this.value.length);
         markFilled(this);
         updateReady();
