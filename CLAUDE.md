@@ -360,3 +360,11 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 
 ## Context for New Sessions
 Start any new session by reading this file. Key constraint: **Stripe MCP must be reconnected** before revenue monitoring works. The Reddit monitor is the core compounding automation — check its daily email output to know if it's driving engagement. The story post is the single highest-leverage human action still pending.
+
+## Recent (2026-07-22 full site audit + fix)
+- Fixed AI Tools filter: life/AI letter tools were categorized legal-only so AI filter hid them (~12 tools). Full category map + longest-slug match.
+- Added 7 missing tools to /tools/ listing (contrast, glassmorphism, subnet, child/spousal support, behavioral log, med log).
+- Sitemap: +14 missing tool URLs. Broken links fixed (meta-tag-generator, daily-schedule, medical-history, favicon).
+- Privacy copy: about/contact/privacy/disclosure/tools footers + best-free-dev-tools FAQ + llms.txt no longer claim all tools are client-side only.
+- GA consent gate on tools.html, ai-writing-suite, fluid-sim. Homepage logo alt text. Filter dock mobile wrap. Email capture Substack copy polish.
+
