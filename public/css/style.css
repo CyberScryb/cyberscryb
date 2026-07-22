@@ -705,6 +705,169 @@ header {
 }
 .proof-item strong { color: var(--text-muted); font-weight: 600; }
 
+/* ─── How free works (homepage) ─── */
+.how-free {
+    padding: 0 0 2rem;
+}
+.how-free-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.how-free-step {
+    background: var(--card);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 1.15rem 1.2rem;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 10px 28px rgba(44,24,16,0.06);
+}
+.how-free-step .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 999px;
+    background: rgba(194, 65, 12, 0.12);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 0.55rem;
+}
+.how-free-step h3 {
+    font-size: 0.98rem;
+    margin: 0 0 0.35rem;
+    color: var(--text);
+}
+.how-free-step p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+@media (max-width: 720px) {
+    .how-free-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Free vs Pro comparison ─── */
+.compare-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--card);
+    box-shadow: 0 12px 36px rgba(44, 24, 16, 0.07);
+}
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 480px;
+}
+.compare-table th,
+.compare-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+.compare-table th {
+    background: var(--bg-elevated);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+}
+.compare-table th:nth-child(3) {
+    color: var(--attention);
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child {
+    font-weight: 600;
+    color: var(--text);
+    width: 42%;
+}
+.compare-table .yes { color: var(--success); font-weight: 700; }
+.compare-table .no { color: var(--text-faint); }
+.compare-table .partial { color: var(--primary); font-weight: 600; }
+.compare-caption {
+    text-align: center;
+    margin: 0.85rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.compare-caption a { color: var(--primary-soft); font-weight: 600; }
+
+/* ─── Start here strip (tools page) ─── */
+.start-here {
+    margin: 0 0 1.75rem;
+    padding: 1.25rem 1.35rem 1.4rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(194, 65, 12, 0.22);
+    background:
+        linear-gradient(135deg, rgba(194, 65, 12, 0.07) 0%, transparent 55%),
+        var(--card);
+    box-shadow: 0 14px 36px rgba(44, 24, 16, 0.06);
+}
+.start-here-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+.start-here-head h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    text-align: left;
+}
+.start-here-head p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 28rem;
+}
+.start-here .posts-grid {
+    margin: 0;
+}
+
+/* Curator product card accent */
+.blog-card.card-curator {
+    border-color: rgba(27, 58, 75, 0.35);
+    background:
+        linear-gradient(145deg, rgba(27, 58, 75, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #FFFFFF 0%, var(--card) 100%);
+}
+.blog-card.card-curator:hover,
+.blog-card.card-curator:focus-within {
+    border-color: rgba(27, 58, 75, 0.75);
+    outline-color: rgba(27, 58, 75, 0.45);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.22) inset,
+        0 0 0 1px rgba(27, 58, 75, 0.35),
+        0 0 28px rgba(27, 58, 75, 0.2),
+        0 22px 48px rgba(22, 20, 17, 0.1);
+}
+.badge-curator {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.65rem;
+    background: rgba(27, 58, 75, 0.14);
+    color: var(--attention);
+    border: 1px solid rgba(27, 58, 75, 0.22);
+}
+
 /* ─── Newsletter ─── */
 .newsletter {
     padding: 3rem 0 4rem;
