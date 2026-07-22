@@ -322,6 +322,12 @@
                     gateStatus.style.color = '#22c55e';
                     gateStatus.textContent = "Unlocked! Here's your full result.";
                     trackEvent('email_captured', { tool_id: toolId, source: toolId + '_gate' });
+                    // Newsletter: Substack blocks cloud servers — offer one-tap join in browser
+                    try {
+                        if (typeof window.CSSubstackJoin === 'function') {
+                            window.CSSubstackJoin(email);
+                        }
+                    } catch (e) { /* non-fatal */ }
                     setTimeout(unlockFullResult, 800);
                 } else {
                     gateStatus.style.color = '#ef4444';

@@ -2005,7 +2005,170 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
     });
 });
 
+// ─── Substack newsletter sync ─────────────────────────
+// Substack has no official public subscribe API. We use the same
+// free-subscribe endpoint their own forms call:
+//   POST https://{publication}.substack.com/api/v1/free
+// Configure with SUBSTACK_PUBLICATION (subdomain only), e.g. "lazyhustler".
+// Set SUBSTACK_PUBLICATION="" or "off" to disable without code changes.
+
+function getSubstackPublication() {
+    const raw = (process.env.SUBSTACK_PUBLICATION || process.env.SUBSTACK_SUBDOMAIN || 'lazyhustler')
+        .trim()
+        .toLowerCase();
+    if (!raw || raw === 'off' || raw === 'false' || raw === '0') return null;
+    return raw
+        .replace(/^https?:\/\//, '')
+        .replace(/\.substack\.com.*$/, '')
+        .replace(/\/$/, '');
+}
+
+/**
+ * Push email to Substack free list. Never throws — returns a result object.
+ * Substack typically replies requires_confirmation:true and emails a confirm link.
+ *
+ * Substack blocks Node.js TLS fingerprints (403). curl works. Prefer curl binary
+ * (present on GCF Node images as `curl`, Windows as `curl.exe`), fall back to https.
+ */
+function pushToSubstack(email) {
+    const publication = getSubstackPublication();
+    if (!publication) {
+        return Promise.resolve({ ok: false, skipped: true, reason: 'not_configured' });
+    }
+
+    const fs = require('fs');
+    const os = require('os');
+    const path = require('path');
+    const { execFile } = require('child_process');
+    const https = require('https');
+
+    const baseHost = `${publication}.substack.com`;
+    const baseUrl = `https://${baseHost}`;
+    const payloadObj = {
+        email,
+        first_url: 'https://cyberscryb.com/',
+        first_referrer: '',
+        current_url: 'https://cyberscryb.com/',
+        current_referrer: 'https://cyberscryb.com/',
+    };
+    const payload = JSON.stringify(payloadObj);
+    const ua =
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+    function parseResult(statusCode, raw) {
+        let data = null;
+        try { data = JSON.parse(raw); } catch (_) { data = null; }
+        if (statusCode < 200 || statusCode >= 300) {
+            console.warn('[substack] subscribe failed', statusCode, String(raw || '').slice(0, 200));
+            return {
+                ok: false,
+                skipped: false,
+                status: statusCode,
+                reason: (data && (data.error || data.message)) || `http_${statusCode}`,
+                publication,
+            };
+        }
+        return {
+            ok: true,
+            skipped: false,
+            status: statusCode,
+            publication,
+            requiresConfirmation: !!(data && data.requires_confirmation),
+            subscriptionId: data && data.subscription_id ? data.subscription_id : null,
+        };
+    }
+
+    function viaHttps() {
+        return new Promise((resolve) => {
+            const req = https.request(
+                {
+                    hostname: baseHost,
+                    path: '/api/v1/free',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Content-Length': Buffer.byteLength(payload),
+                        'User-Agent': ua,
+                        Origin: baseUrl,
+                        Referer: `${baseUrl}/`,
+                    },
+                    timeout: 15000,
+                },
+                (res) => {
+                    let raw = '';
+                    res.on('data', (chunk) => { raw += chunk; });
+                    res.on('end', () => resolve(parseResult(res.statusCode, raw)));
+                }
+            );
+            req.on('error', (err) => {
+                console.error('[substack] https error', err && err.message);
+                resolve({ ok: false, skipped: false, reason: 'network_error', publication });
+            });
+            req.on('timeout', () => {
+                req.destroy();
+                resolve({ ok: false, skipped: false, reason: 'timeout', publication });
+            });
+            req.write(payload);
+            req.end();
+        });
+    }
+
+    function viaCurl(bin) {
+        return new Promise((resolve) => {
+            const tmp = path.join(os.tmpdir(), `ss-${Date.now()}-${Math.random().toString(36).slice(2)}.json`);
+            try {
+                fs.writeFileSync(tmp, payload, 'utf8');
+            } catch (e) {
+                resolve({ ok: false, skipped: false, reason: 'tmp_write_failed', publication });
+                return;
+            }
+            const args = [
+                '-sS', '-X', 'POST', `${baseUrl}/api/v1/free`,
+                '-H', 'Content-Type: application/json',
+                '-H', 'Accept: application/json',
+                '-H', `User-Agent: ${ua}`,
+                '-H', `Origin: ${baseUrl}`,
+                '-H', `Referer: ${baseUrl}/`,
+                '--data-binary', `@${tmp}`,
+                '-w', '\n__HTTP__%{http_code}',
+                '--max-time', '15',
+            ];
+            execFile(bin, args, { timeout: 20000, maxBuffer: 256 * 1024 }, (err, stdout) => {
+                try { fs.unlinkSync(tmp); } catch (_) { /* ignore */ }
+                if (err && !stdout) {
+                    resolve({ ok: false, skipped: false, reason: `curl_error:${err.message}`, publication });
+                    return;
+                }
+                const text = String(stdout || '');
+                const m = text.match(/\n__HTTP__(\d+)\s*$/);
+                const status = m ? parseInt(m[1], 10) : (err ? 0 : 200);
+                const body = m ? text.replace(/\n__HTTP__\d+\s*$/, '') : text;
+                resolve(parseResult(status, body));
+            });
+        });
+    }
+
+    // Prefer curl (works against Substack bot filter). Try unix then Windows name.
+    return viaCurl('curl').then((r) => {
+        if (r.ok) return r;
+        if (r.reason && String(r.reason).includes('curl_error')) {
+            return viaCurl('curl.exe').then((r2) => {
+                if (r2.ok) return r2;
+                if (r2.reason && String(r2.reason).includes('curl_error')) {
+                    return viaHttps();
+                }
+                return r2;
+            });
+        }
+        // curl ran but Substack rejected — still try https as last resort
+        return viaHttps().then((h) => (h.ok ? h : r));
+    });
+}
+
 // ─── Email Capture ───────────────────────────────────
+// 1) Always store in Firestore `subscribers`
+// 2) Also add to Substack free list (Lazy Hustler by default)
 exports.subscribeEmail = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
@@ -2022,31 +2185,156 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
         const normalizedEmail = email.toLowerCase().trim();
 
         try {
-            // Check for duplicate
+            // Check for duplicate in our DB
             const existing = await db.collection('subscribers')
                 .where('email', '==', normalizedEmail)
                 .limit(1)
                 .get();
 
             if (!existing.empty) {
-                return res.status(200).json({ message: 'already_subscribed' });
+                const doc = existing.docs[0];
+                const data = doc.data() || {};
+                let substack = { ok: true, skipped: true, reason: 'already_synced' };
+
+                // Re-try Substack if we never synced this row (or last attempt failed)
+                if (!data.substackSynced) {
+                    substack = await pushToSubstack(normalizedEmail);
+                    await doc.ref.update({
+                        substackSynced: !!substack.ok,
+                        substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                        substackStatus: substack.ok ? 'ok' : (substack.reason || 'error'),
+                        substackPublication: substack.publication || getSubstackPublication() || null,
+                    });
+                }
+
+                return res.status(200).json({
+                    message: 'already_subscribed',
+                    substack: {
+                        ok: !!substack.ok,
+                        requiresConfirmation: !!substack.requiresConfirmation,
+                        publication: substack.publication || getSubstackPublication(),
+                    },
+                });
             }
+
+            // Push to Substack first so a confirm email can go out
+            const substack = await pushToSubstack(normalizedEmail);
 
             // Store the subscriber (no IP tracking - privacy-first)
             await db.collection('subscribers').add({
                 email: normalizedEmail,
                 source: source || 'homepage',
-                subscribedAt: admin.firestore.FieldValue.serverTimestamp()
+                subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
+                substackSynced: !!substack.ok,
+                substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                substackStatus: substack.ok
+                    ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
+                    : (substack.skipped ? 'skipped' : (substack.reason || 'error')),
+                substackPublication: substack.publication || getSubstackPublication() || null,
+                substackSubscriptionId: substack.subscriptionId
+                    ? String(substack.subscriptionId)
+                    : null,
             });
 
             // Log conversion (anonymous)
-            logConversion('email_capture', 'subscribed', { source: source || 'homepage' });
+            logConversion('email_capture', 'subscribed', {
+                source: source || 'homepage',
+                substack: substack.ok ? 'ok' : 'fail',
+            });
 
-            return res.status(200).json({ message: 'subscribed' });
+            return res.status(200).json({
+                message: 'subscribed',
+                // Front-end can show: check email for Substack confirm
+                substack: {
+                    ok: !!substack.ok,
+                    requiresConfirmation: !!substack.requiresConfirmation,
+                    publication: substack.publication || getSubstackPublication(),
+                },
+            });
 
         } catch (error) {
             console.error('Subscribe Error:', error);
             return res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
+
+// One-shot / on-demand: push unsynced Firestore subscribers to Substack.
+// GET /api/substack-backfill?secret=ANALYTICS_SECRET&limit=50
+exports.substackBackfill = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET' && req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const secret = req.query.secret || (req.body && req.body.secret);
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        if (!getSubstackPublication()) {
+            return res.status(400).json({ error: 'SUBSTACK_PUBLICATION not configured' });
+        }
+
+        const limit = Math.min(parseInt(req.query.limit || '50', 10) || 50, 200);
+        const dryRun = req.query.dry === '1' || req.query.dry === 'true';
+
+        try {
+            const snap = await db.collection('subscribers').limit(500).get();
+            const pending = [];
+            snap.forEach((doc) => {
+                const d = doc.data() || {};
+                if (d.email && !d.substackSynced) {
+                    pending.push({ id: doc.id, email: d.email, ref: doc.ref });
+                }
+            });
+
+            const batch = pending.slice(0, limit);
+            const results = { attempted: 0, ok: 0, failed: 0, skipped: dryRun ? batch.length : 0, details: [] };
+
+            if (dryRun) {
+                return res.status(200).json({
+                    dryRun: true,
+                    pendingTotal: pending.length,
+                    wouldProcess: batch.map((b) => b.email),
+                });
+            }
+
+            for (const row of batch) {
+                results.attempted++;
+                const substack = await pushToSubstack(row.email);
+                // small delay so Substack rate limits are less likely
+                await new Promise((r) => setTimeout(r, 400));
+
+                await row.ref.update({
+                    substackSynced: !!substack.ok,
+                    substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                    substackStatus: substack.ok
+                        ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
+                        : (substack.reason || 'error'),
+                    substackPublication: substack.publication || getSubstackPublication() || null,
+                    substackSubscriptionId: substack.subscriptionId
+                        ? String(substack.subscriptionId)
+                        : null,
+                });
+
+                if (substack.ok) results.ok++;
+                else results.failed++;
+                results.details.push({
+                    email: row.email,
+                    ok: !!substack.ok,
+                    reason: substack.reason || null,
+                });
+            }
+
+            return res.status(200).json({
+                pendingTotal: pending.length,
+                ...results,
+            });
+        } catch (error) {
+            console.error('[substack] backfill error', error);
+            return res.status(500).json({ error: 'Backfill failed' });
         }
     });
 });
