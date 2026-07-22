@@ -1,78 +1,15 @@
-// payment-demand-letter — CSAITool + structured life-tool UX
-document.addEventListener('DOMContentLoaded', () => {
-  const toolInput = document.getElementById('tool-input');
-  const modeValue = document.getElementById('mode-value');
-  const chips = document.querySelectorAll('#mode-chips .lt-chip');
-  const wordCountEl = document.getElementById('word-count');
-  const charCountEl = document.getElementById('char-count');
-  const charLive = document.getElementById('char-live');
-  const fieldIds = ["debtor", "amount", "invoice", "due_date", "prior", "deadline"];
-  const modeLabels = {"friendly": "1st \u2014 friendly reminder", "firm": "2nd \u2014 firm follow-up", "final": "Final notice", "personal": "Personal / roommate debt"};
-
-  function setMode(mode) {
-    modeValue.value = mode;
-    chips.forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-mode') === mode));
+// payment-demand-letter — flagship life tool boot
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.LifeTool) {
+    console.error('LifeTool missing');
+    return;
   }
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => setMode(chip.getAttribute('data-mode')));
-  });
-  if (chips[0]) setMode(chips[0].getAttribute('data-mode'));
-
-  document.querySelectorAll('.lt-ex').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      toolInput.value = btn.getAttribute('data-ex') || '';
-      toolInput.dispatchEvent(new Event('input'));
-      toolInput.focus();
-    });
-  });
-
-  toolInput.addEventListener('input', function () {
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 360) + 'px';
-    if (charLive) charLive.textContent = String(this.value.length);
-  });
-
-  function assembleInput() {
-    const parts = [];
-    const mode = modeValue.value;
-    parts.push('LETTER MODE: ' + (modeLabels[mode] || mode));
-    fieldIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el && el.value.trim()) {
-        const label = el.previousElementSibling ? el.previousElementSibling.textContent : id;
-        parts.push(label.replace(/\s+/g, ' ').trim() + ': ' + el.value.trim());
-      }
-    });
-    const story = toolInput.value.trim();
-    if (story) parts.push('SITUATION DETAILS:\n' + story);
-    const addressed = (document.getElementById('addressed-to') || {}).value;
-    if (addressed && addressed.trim()) parts.push('ADDRESSED TO: ' + addressed.trim());
-    return parts.join('\n');
-  }
-
-  // Show loading via shared hook: observe generate button
-  const genBtn = document.getElementById('generate-btn');
-  const loading = document.getElementById('loading-indicator');
-  if (genBtn && loading) {
-    const obs = new MutationObserver(() => {
-      loading.classList.toggle('show', genBtn.disabled);
-    });
-    obs.observe(genBtn, { attributes: true, attributeFilter: ['disabled'] });
-  }
-
-  window.CSAITool.init({
-    toolId: 'payment-demand-letter',
+  LifeTool.mount({
+    toolId: "payment-demand-letter",
     emptyMessage: "Enter who owes what, due dates, and which notice stage you need.",
-    collectInput: () => assembleInput(),
-    collectParams: () => ({
-      mode: modeValue.value,
-      modeLabel: modeLabels[modeValue.value] || modeValue.value,
-      addressedTo: (document.getElementById('addressed-to') || {}).value || ''
-    }),
-    onStats: (text) => {
-      const words = text.trim().split(/\s+/).filter(Boolean).length;
-      if (wordCountEl) wordCountEl.textContent = words + ' words';
-      if (charCountEl) charCountEl.textContent = text.length + ' characters';
-    }
+    fieldIds: ["debtor", "amount", "invoice", "due_date", "prior", "deadline", "pay_method", "next_step"],
+    modeLabels: {"friendly": "1st \u2014 friendly reminder", "firm": "2nd \u2014 firm follow-up", "final": "Final notice", "personal": "Personal / roommate debt"},
+    modeTips: {"friendly": {"title": "Friendly reminder", "body": "Assume good intent. Restate invoice #, amount, original due date, and a simple pay-by date. Attach the invoice. Short and warm wins first contact."}, "firm": {"title": "Firm follow-up", "body": "Reference prior reminders with dates. Restate amount and a clear deadline. Mention pause of work or late fee only if your contract allows it and you will actually do it."}, "final": {"title": "Final notice", "body": "Last written chance before escalation. Stay professional. Only mention collections, small claims, or stopping work if that is a real next step you are prepared to take \u2014 never invent legal threats."}, "personal": {"title": "Personal / roommate", "body": "Keep it factual: what was agreed, what\u2019s unpaid, total, and a friendly but clear pay-by date. Preserve the relationship if possible; still create a dated record."}},
+    criticalFields: ["debtor", "amount", "due_date", "deadline"]
   });
 });

@@ -1,78 +1,15 @@
-// landlord-tenant-letter — CSAITool + structured life-tool UX
-document.addEventListener('DOMContentLoaded', () => {
-  const toolInput = document.getElementById('tool-input');
-  const modeValue = document.getElementById('mode-value');
-  const chips = document.querySelectorAll('#mode-chips .lt-chip');
-  const wordCountEl = document.getElementById('word-count');
-  const charCountEl = document.getElementById('char-count');
-  const charLive = document.getElementById('char-live');
-  const fieldIds = ["landlord", "property", "dates", "ask"];
-  const modeLabels = {"repair": "Repair request", "deposit": "Security deposit", "rent-plan": "Late rent plan", "habitability": "Habitability / conditions", "move-out": "Move-out notice"};
-
-  function setMode(mode) {
-    modeValue.value = mode;
-    chips.forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-mode') === mode));
+// landlord-tenant-letter — flagship life tool boot
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.LifeTool) {
+    console.error('LifeTool missing');
+    return;
   }
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => setMode(chip.getAttribute('data-mode')));
-  });
-  if (chips[0]) setMode(chips[0].getAttribute('data-mode'));
-
-  document.querySelectorAll('.lt-ex').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      toolInput.value = btn.getAttribute('data-ex') || '';
-      toolInput.dispatchEvent(new Event('input'));
-      toolInput.focus();
-    });
-  });
-
-  toolInput.addEventListener('input', function () {
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 360) + 'px';
-    if (charLive) charLive.textContent = String(this.value.length);
-  });
-
-  function assembleInput() {
-    const parts = [];
-    const mode = modeValue.value;
-    parts.push('LETTER MODE: ' + (modeLabels[mode] || mode));
-    fieldIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el && el.value.trim()) {
-        const label = el.previousElementSibling ? el.previousElementSibling.textContent : id;
-        parts.push(label.replace(/\s+/g, ' ').trim() + ': ' + el.value.trim());
-      }
-    });
-    const story = toolInput.value.trim();
-    if (story) parts.push('SITUATION DETAILS:\n' + story);
-    const addressed = (document.getElementById('addressed-to') || {}).value;
-    if (addressed && addressed.trim()) parts.push('ADDRESSED TO: ' + addressed.trim());
-    return parts.join('\n');
-  }
-
-  // Show loading via shared hook: observe generate button
-  const genBtn = document.getElementById('generate-btn');
-  const loading = document.getElementById('loading-indicator');
-  if (genBtn && loading) {
-    const obs = new MutationObserver(() => {
-      loading.classList.toggle('show', genBtn.disabled);
-    });
-    obs.observe(genBtn, { attributes: true, attributeFilter: ['disabled'] });
-  }
-
-  window.CSAITool.init({
-    toolId: 'landlord-tenant-letter',
+  LifeTool.mount({
+    toolId: "landlord-tenant-letter",
     emptyMessage: "Pick a letter type and describe the issue with dates and unit address.",
-    collectInput: () => assembleInput(),
-    collectParams: () => ({
-      mode: modeValue.value,
-      modeLabel: modeLabels[modeValue.value] || modeValue.value,
-      addressedTo: (document.getElementById('addressed-to') || {}).value || ''
-    }),
-    onStats: (text) => {
-      const words = text.trim().split(/\s+/).filter(Boolean).length;
-      if (wordCountEl) wordCountEl.textContent = words + ' words';
-      if (charCountEl) charCountEl.textContent = text.length + ' characters';
-    }
+    fieldIds: ["landlord", "property", "dates", "ask", "prior", "lease_note"],
+    modeLabels: {"repair": "Repair request", "deposit": "Security deposit", "rent-plan": "Late rent plan", "habitability": "Habitability / conditions", "move-out": "Move-out notice"},
+    modeTips: {"repair": {"title": "Repair request", "body": "State the defect, when it started, prior notices (texts/emails), and a clear deadline for access/repair. Attach photos. Stay factual \u2014 courts and housing agencies love timelines."}, "deposit": {"title": "Security deposit", "body": "Include move-out date, forwarding address, and demand itemized deductions + return of remaining deposit by the statutory window for your state. Do not invent the number of days \u2014 check local law."}, "rent-plan": {"title": "Late rent plan", "body": "Propose a specific catch-up schedule with dates and amounts. Landlords respond better to a written plan than silence. Keep paying what you can if that is your strategy."}, "habitability": {"title": "Habitability", "body": "No heat, no water, severe mold, infestations \u2014 document dates and health impact. The letter creates a paper trail; local housing code enforcement may be the next step. Do not invent statute citations."}, "move-out": {"title": "Move-out notice", "body": "State the intended last day of occupancy, unit address, and request for move-out inspection / deposit return process. Match notice length to your lease if known."}},
+    criticalFields: ["property", "dates", "ask"]
   });
 });

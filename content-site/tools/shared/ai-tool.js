@@ -349,8 +349,12 @@
                 }
 
                 const inputString = typeof input === 'string' ? input : JSON.stringify(input);
-                if (!isPro() && inputString.length > FREE_CHAR_LIMIT) {
-                    alert('Free tier supports up to ' + FREE_CHAR_LIMIT + ' characters. Shorten your input, or upgrade to Pro for longer text.');
+                // Per-tool override (life tools need structured facts >> 500 chars)
+                const freeCharLimit = (typeof config.freeCharLimit === 'number' && config.freeCharLimit > 0)
+                    ? config.freeCharLimit
+                    : FREE_CHAR_LIMIT;
+                if (!isPro() && inputString.length > freeCharLimit) {
+                    alert('Free tier supports up to ' + freeCharLimit + ' characters. Shorten your input, or upgrade to Pro for longer text.');
                     const tiers = document.getElementById('upgrade-tiers');
                     if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     trackEvent('paywall_shown', { tool_id: toolId, mode: 'char_limit' });

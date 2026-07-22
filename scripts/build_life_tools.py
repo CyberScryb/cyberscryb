@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Scaffold 5 flagship AI life tools (frontend + note backend keys).
-Backend AI_PROMPTS are patched into functions/index.js separately.
+Scaffold 5 flagship AI life tools — research-backed prompts live in functions/index.js.
+Frontend: structured fields, mode tips, readiness meter, draft autosave, checklists, FAQ.
 """
 from __future__ import annotations
 
@@ -10,9 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS_DIR = ROOT / "content-site" / "tools"
-CSS_V = "20260721life-tools-v1"
+CSS_V = "20260721life-tools-v2"
 
-# Shared chrome pieces
 HEAD_SCRIPTS = """
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -43,15 +42,22 @@ HEAD_SCRIPTS = """
     })();
     </script>
     <style media="print">
-        * { visibility: hidden; }
-        #output-text, #output-text * { visibility: visible; }
-        #output-text { position: fixed; top: 0; left: 0; width: 100%; font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff; padding: 1in; box-sizing: border-box; white-space: pre-wrap; }
+        * { visibility: hidden !important; }
+        #output-text, #output-text * { visibility: visible !important; }
+        #output-text {
+            position: fixed; top: 0; left: 0; width: 100%;
+            font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff;
+            padding: 0.85in; box-sizing: border-box; white-space: pre-wrap;
+            border: none !important; min-height: auto !important;
+        }
+        .lt-sticky-gen, nav, header, footer, .lt-toolbar, .email-gate { display: none !important; }
     </style>
     <script>
     function printLetter() {
         var out = document.getElementById('output-text');
         if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
-            alert('Generate a letter first, then print.');
+            if (window.LifeTool) LifeTool.toast('Generate a letter first, then print');
+            else alert('Generate a letter first, then print.');
             return;
         }
         window.print();
@@ -113,151 +119,9 @@ FOOTER = """
     </footer>
 """
 
-LIFE_CSS = """
-    <style>
-    .lt-wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem 3rem; }
-    .lt-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.25rem; align-items: start; }
-    @media (max-width: 900px) { .lt-grid { grid-template-columns: 1fr; } }
-    .lt-card {
-        background: linear-gradient(180deg, #FFFFFF 0%, var(--card) 100%);
-        border: 1px solid var(--border-strong);
-        border-radius: 16px;
-        box-shadow: 0 12px 36px rgba(44,24,16,0.07);
-        overflow: hidden;
-    }
-    .lt-card-h {
-        display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
-        padding: 1rem 1.2rem; border-bottom: 1px solid var(--border);
-        background: var(--bg-elevated);
-    }
-    .lt-card-h h2 { margin: 0; font-size: 1.1rem; color: var(--text); }
-    .lt-body { padding: 1.15rem 1.2rem 1.35rem; }
-    .lt-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 0 0 0.4rem; }
-    .lt-field { margin-bottom: 1rem; }
-    .lt-input, .lt-select, .lt-area {
-        width: 100%; box-sizing: border-box;
-        padding: 0.75rem 0.9rem;
-        border: 1px solid var(--border-strong);
-        border-radius: 11px;
-        background: #fff;
-        color: var(--text);
-        font-family: var(--font);
-        font-size: 0.95rem;
-        transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    .lt-area { min-height: 120px; resize: vertical; line-height: 1.5; }
-    .lt-input:focus, .lt-select:focus, .lt-area:focus {
-        outline: none; border-color: var(--primary);
-        box-shadow: 0 0 0 3px var(--primary-glow);
-    }
-    .lt-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1rem; }
-    .lt-chip {
-        border: 1px solid var(--border-strong);
-        background: #fff;
-        color: var(--text-muted);
-        border-radius: 999px;
-        padding: 0.45rem 0.85rem;
-        font-size: 0.82rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.15s;
-    }
-    .lt-chip:hover { border-color: rgba(194,65,12,0.45); color: var(--text); }
-    .lt-chip.is-on {
-        background: rgba(194,65,12,0.12);
-        border-color: rgba(194,65,12,0.5);
-        color: var(--primary);
-    }
-    .lt-examples { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.35rem 0 1rem; }
-    .lt-ex {
-        border: 1px dashed var(--border-strong);
-        background: var(--bg-elevated);
-        color: var(--text-muted);
-        border-radius: 8px;
-        padding: 0.35rem 0.65rem;
-        font-size: 0.78rem;
-        cursor: pointer;
-    }
-    .lt-ex:hover { border-color: var(--primary-soft); color: var(--text); }
-    .lt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    @media (max-width: 560px) { .lt-row { grid-template-columns: 1fr; } }
-    .lt-hint { font-size: 0.78rem; color: var(--text-faint); margin: 0.25rem 0 0; }
-    .lt-gen {
-        width: 100%;
-        margin-top: 0.35rem;
-        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-        padding: 0.95rem 1.25rem;
-        border: none; border-radius: 12px;
-        background: var(--attention);
-        color: #fff;
-        font-family: var(--font);
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        box-shadow: 0 10px 28px rgba(27,58,75,0.28);
-        transition: transform 0.15s, background 0.15s;
-    }
-    .lt-gen:hover { background: var(--attention-hover); transform: translateY(-1px); }
-    .lt-gen:disabled { opacity: 0.65; cursor: wait; transform: none; }
-    .lt-out {
-        min-height: 320px;
-        padding: 1rem 1.1rem;
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        color: var(--text);
-        white-space: pre-wrap;
-        line-height: 1.65;
-        font-size: 0.95rem;
-    }
-    .lt-out .placeholder { color: var(--text-faint); }
-    .lt-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
-    .lt-icon-btn {
-        background: #fff; border: 1px solid var(--border-strong); color: var(--primary);
-        border-radius: 8px; padding: 0.4rem 0.7rem; font-size: 0.8rem; font-weight: 600; cursor: pointer;
-    }
-    .lt-icon-btn:hover { border-color: var(--primary); }
-    .lt-stats { display: flex; gap: 1rem; padding: 0.65rem 0 0; font-size: 0.8rem; color: var(--text-faint); }
-    .lt-check {
-        list-style: none; padding: 0; margin: 0.5rem 0 0;
-    }
-    .lt-check li {
-        position: relative;
-        padding: 0.5rem 0.55rem 0.5rem 1.85rem;
-        margin-bottom: 0.35rem;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: var(--bg-elevated);
-        font-size: 0.86rem;
-        color: var(--text);
-    }
-    .lt-check li::before { content: "☐"; position: absolute; left: 0.55rem; color: var(--primary); }
-    .lt-side-note {
-        font-size: 0.82rem; color: var(--text-muted); margin: 0 0 0.75rem; line-height: 1.5;
-    }
-    .lt-disc {
-        margin: 1rem 0 0; padding: 0.75rem 0.9rem;
-        background: rgba(185,28,28,0.06); border: 1px solid rgba(185,28,28,0.15);
-        border-radius: 10px; font-size: 0.8rem; color: var(--text-muted);
-    }
-    .lt-steps { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0 0 1rem; }
-    .lt-step {
-        font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-        color: var(--text-faint); padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--border);
-    }
-    .lt-step.on { color: var(--primary); border-color: rgba(194,65,12,0.35); background: rgba(194,65,12,0.08); }
-    .lt-loading { display: none; text-align: center; padding: 2rem 1rem; color: var(--primary); }
-    .lt-loading.show { display: block; }
-    .lt-spin {
-        width: 28px; height: 28px; margin: 0 auto 0.75rem;
-        border: 3px solid rgba(194,65,12,0.2); border-top-color: var(--primary);
-        border-radius: 50%; animation: ltspin 0.7s linear infinite;
-    }
-    @keyframes ltspin { to { transform: rotate(360deg); } }
-    /* reuse email-gate from humanizer if present; fallback */
-    .email-gate.hidden { display: none !important; }
-    </style>
-"""
+# ═══════════════════════════════════════════════════════════
+# TOOL DEFINITIONS — research-informed structure & copy
+# ═══════════════════════════════════════════════════════════
 
 TOOLS = [
     {
@@ -265,45 +129,141 @@ TOOLS = [
         "title": "Electric Shutoff Hardship Letter Generator — Free AI | CyberScryb",
         "h1": "Electric / utility shutoff letter",
         "h1_accent": "generator",
-        "subtitle": "Disconnect notice? Build a payment-arrangement letter, call script, and document list in one pass.",
+        "subtitle": "Disconnect notice on the fridge? Build a payment-arrangement letter, call script, and document list before the lights go out.",
         "crumb": "Utility Shutoff Letter",
-        "seo_desc": "Free AI electric shutoff hardship letter and payment arrangement request. Utility disconnect notice helper with call script and document checklist. Not legal advice.",
+        "seo_desc": "Free AI electric shutoff hardship letter and payment arrangement request. Utility disconnect notice helper with LIHEAP tips, medical certificate checklist, and call script. Not legal advice.",
         "empty": "Add your utility name, disconnect date, and what you can pay so we can draft a useful letter.",
         "placeholder": "Example: Eversource account 4829103. Disconnect date April 18. Balance $847. I can pay $200 on Friday and $150/month. Hours cut at warehouse since March 2. Household of 3, child with asthma — asking about medical certificate form.",
+        "critical": ["utility_name", "disconnect_date", "balance", "can_pay"],
         "modes": [
             ("payment-plan", "Payment plan"),
             ("hardship-hold", "Hardship hold"),
             ("medical-cert", "Medical protection"),
             ("restore-service", "Restore after shutoff"),
         ],
+        "mode_tips": {
+            "payment-plan": {
+                "title": "Payment plan mode",
+                "body": "Utilities almost always want a concrete first payment + a realistic monthly amount. Vague “I’ll pay when I can” gets denied. State the disconnect date and account number in the first lines.",
+            },
+            "hardship-hold": {
+                "title": "Hardship hold mode",
+                "body": "Many states allow temporary holds for documented hardship (job loss, medical crisis). Pair this letter with LIHEAP / local energy-aid applications the same day — the letter alone rarely freezes the account.",
+            },
+            "medical-cert": {
+                "title": "Medical protection mode",
+                "body": "Most IOUs require a physician/PA/NP form certifying that loss of service would be life-threatening or seriously harmful. Ask the utility for their exact form; do not invent a diagnosis in the letter.",
+            },
+            "restore-service": {
+                "title": "Restore service mode",
+                "body": "After shutoff, re-connect often needs a deposit + partial payment of arrears. State what you can pay today and request written reconnection terms and a same-day or next-business-day restore window.",
+            },
+        },
         "fields": [
-            ("utility_name", "Utility company", "text", "e.g. Eversource, PG&E, ConEd"),
-            ("account", "Account number", "text", "From your bill or notice"),
+            ("utility_name", "Utility company", "text", "e.g. Eversource, PG&E, ConEd, Duke"),
+            ("account", "Account number", "text", "From bill or disconnect notice"),
             ("disconnect_date", "Disconnect / due date", "text", "e.g. April 18, 2026"),
             ("balance", "Amount owed", "text", "e.g. $847"),
             ("can_pay", "What you can pay now", "text", "e.g. $200 Friday"),
             ("plan", "Ongoing offer", "text", "e.g. $150/month until current"),
+            ("household", "Household / special needs", "text", "e.g. 3 people, infant, oxygen"),
+            ("state", "State (optional)", "text", "e.g. MA, CA, TX"),
         ],
         "checklist_title": "Do this with the letter",
         "checklist": [
-            "Call utility before the disconnect date — ask for hardship / arrangements",
-            "Apply to LIHEAP or local energy aid the same day if eligible",
-            "Ask for medical certificate form if someone is seriously ill",
-            "Get every promise in writing (email confirmation)",
-            "Keep the disconnect notice PDF + payment receipts",
+            "Call the utility before the disconnect date — ask for hardship / payment arrangements desk",
+            "Apply to LIHEAP or local energy aid the same day if income-eligible (energyhelp.us or state HHS)",
+            "Request their medical certificate form if anyone is seriously ill or on life-supporting equipment",
+            "Get every verbal promise in writing (email confirmation or portal screenshot)",
+            "Keep the disconnect notice PDF, payment receipts, and call reference numbers",
+            "Ask about budget billing / levelized payment once arrears are addressed",
         ],
         "examples": [
-            ("Job loss + can pay partial", "Laid off March 1. UI $380/week. Electric balance $620, disconnect April 12. Can pay $150 tomorrow and $120/month. Account on notice."),
-            ("Medical + fixed income", "Social Security only. Notice for $410. Spouse recovering from surgery — need medical form and 60-day arrangement. Can pay $75 now."),
+            {
+                "label": "Job loss + can pay partial",
+                "mode": "payment-plan",
+                "fields": {
+                    "utility_name": "Eversource",
+                    "account": "4829103",
+                    "disconnect_date": "April 12, 2026",
+                    "balance": "$620",
+                    "can_pay": "$150 tomorrow",
+                    "plan": "$120/month until current",
+                    "household": "2 adults",
+                    "state": "MA",
+                },
+                "story": "Laid off March 1 from warehouse. Unemployment $380/week just started. Electric balance $620 with disconnect notice for April 12. Can pay $150 tomorrow and $120/month. Request written payment arrangement confirmation.",
+                "addressedTo": "Customer Care / Payment Arrangements",
+                "sender": "Jordan Lee",
+            },
+            {
+                "label": "Medical + fixed income",
+                "mode": "medical-cert",
+                "fields": {
+                    "utility_name": "PG&E",
+                    "account": "10928447",
+                    "disconnect_date": "May 2, 2026",
+                    "balance": "$410",
+                    "can_pay": "$75 this Friday",
+                    "plan": "$80/month",
+                    "household": "2 adults; spouse recovering from surgery",
+                    "state": "CA",
+                },
+                "story": "Social Security only. Notice for $410. Spouse recovering from surgery — need medical certificate process and temporary hardship hold while we set a plan. Can pay $75 now.",
+                "addressedTo": "Medical Baseline / Customer Relations",
+                "sender": "A. Rivera",
+            },
+            {
+                "label": "Already shut off",
+                "mode": "restore-service",
+                "fields": {
+                    "utility_name": "Con Edison",
+                    "account": "7781204",
+                    "disconnect_date": "Shut off March 28, 2026",
+                    "balance": "$1,120",
+                    "can_pay": "$300 today",
+                    "plan": "$200/month + deposit if required",
+                    "household": "1 adult + school-age child",
+                    "state": "NY",
+                },
+                "story": "Service disconnected March 28 for arrears $1,120. Child in household. Can pay $300 today via phone. Request reconnection today or next business day and written terms for remaining balance.",
+                "addressedTo": "Restoration / Collections",
+                "sender": "Sam Okonkwo",
+            },
+        ],
+        "knowledge": [
+            {
+                "h": "Why specifics win",
+                "p": "Utility CSRs and hardship desks process volume. Letters that open with account #, disconnect date, and a dollar offer get acted on. Emotional-only letters get filed.",
+            },
+            {
+                "h": "LIHEAP & local aid",
+                "p": "Low Income Home Energy Assistance Program (LIHEAP) and state crisis funds can pay vendors directly. Apply the same day you call — funding windows close. Search energyhelp.us or your state human services site.",
+            },
+            {
+                "h": "Medical certificates",
+                "p": "Rules vary by state and utility. Usually a licensed clinician must certify that disconnection would be especially dangerous. The utility provides the form; the letter should request that process, not invent a diagnosis.",
+            },
+            {
+                "h": "Get it in writing",
+                "p": "Verbal “we’ll put a hold” evaporates. Ask for email confirmation, a case/reference number, and the exact date any hold or plan expires.",
+            },
         ],
         "faq": [
-            ("Will this stop a shutoff by itself?", "No. The letter supports a request. Call the utility, confirm arrangements, and submit any medical forms they require before the disconnect date."),
-            ("Is this legal advice?", "No. Utility rules vary by state and company. Use the letter as a draft and follow your utility’s process."),
+            ("Will this letter stop a shutoff by itself?", "No. The letter supports a request. Call the utility, confirm any arrangement, and submit medical forms they require before the disconnect date."),
+            ("What should I say on the phone?", "Account number first, then: “I received a disconnect notice for [date]. I can pay $X by [day] and $Y per month. Please put me on a hardship/payment arrangement and email confirmation.” Then send this letter as follow-up."),
+            ("Is LIHEAP only for winter heat?", "Many states also fund cooling and crisis electric. Eligibility and seasons vary — check your state program the day you get a notice."),
+            ("Is this legal advice?", "No. Utility rules vary by state and company. Use the letter as a draft and follow your utility’s process and your state’s consumer protections."),
         ],
         "related": [
-            ("/tools/hardship-letter/", "General Hardship Letter"),
-            ("/tools/appeal-letter/", "Appeal Letter Writer"),
-            ("/tools/budget-planner/", "Budget Planner"),
+            ("/tools/hardship-letter/", "General Hardship Letter", "Mortgage, medical, school hardship drafts"),
+            ("/tools/budget-planner/", "Budget Planner", "Map what you can actually pay"),
+            ("/tools/appeal-letter/", "Appeal Letter Writer", "Other formal appeals"),
+        ],
+        "how": [
+            ("Pick mode", "Payment plan, medical hold, or restore — each changes the ask."),
+            ("Drop facts", "Account, dates, dollars, household. Examples pre-fill if you’re stuck."),
+            ("Generate & act", "Copy/print the letter, call the utility, check off the list."),
         ],
     },
     {
@@ -311,46 +271,125 @@ TOOLS = [
         "title": "Insurance Denial Appeal Letter Generator — Prior Auth | CyberScryb",
         "h1": "Insurance denial / prior auth",
         "h1_accent": "appeal letter",
-        "subtitle": "Denied as not medically necessary? Draft a member internal appeal with claim numbers, facts, and a packet list.",
+        "subtitle": "Denied as not medically necessary? Draft a member internal appeal with claim numbers, facts, and a packet checklist plans actually review.",
         "crumb": "Insurance Denial Appeal",
-        "seo_desc": "Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft + document checklist. Not medical or legal advice.",
+        "seo_desc": "Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft, external review notes, document checklist. Not medical or legal advice.",
         "empty": "Describe the denial, claim/auth number, and what was prescribed so we can draft your appeal.",
         "placeholder": "Example: Blue Cross denied prior auth for Humira on March 20, 2026 (Auth #PA-99102). Reason: not medically necessary. Rheumatologist ordered after failed methotrexate and sulfasalazine. Diagnosis RA. Request peer-to-peer.",
+        "critical": ["plan_name", "claim_id", "denial_date", "service"],
         "modes": [
             ("prior-auth", "Prior authorization"),
             ("not-medically-necessary", "Not medically necessary"),
             ("out-of-network", "Out of network"),
             ("quantity-limit", "Quantity / refill limit"),
         ],
+        "mode_tips": {
+            "prior-auth": {
+                "title": "Prior auth denial",
+                "body": "Open with member ID + auth number + service. Ask for reconsideration and a peer-to-peer between the plan medical director and your clinician. Attach the denial letter and clinic medical-necessity note.",
+            },
+            "not-medically-necessary": {
+                "title": "Not medically necessary",
+                "body": "Attack the gap between the plan’s stated criteria and your documented history of failed alternatives. Do not invent guidelines — quote only what is on the denial or what your clinician cites.",
+            },
+            "out-of-network": {
+                "title": "Out-of-network",
+                "body": "Argue network inadequacy (no timely in-network specialist) or continuity of care if applicable. Request single-case agreement or in-network rate exception with dates of search for in-network options.",
+            },
+            "quantity-limit": {
+                "title": "Quantity / refill limit",
+                "body": "Explain clinical need for dose/frequency above the plan’s limit using the prescriber’s rationale. Request exception under the plan’s quantity-limit exception process.",
+            },
+        },
         "fields": [
-            ("plan_name", "Insurance plan", "text", "e.g. Blue Cross PPO"),
-            ("member_id", "Member ID", "text", "From your card"),
+            ("plan_name", "Insurance plan", "text", "e.g. Blue Cross PPO, UHC, Aetna"),
+            ("member_id", "Member ID", "text", "From insurance card"),
             ("claim_id", "Claim / auth number", "text", "From denial letter"),
             ("denial_date", "Denial date", "text", "e.g. March 20, 2026"),
             ("service", "Drug or procedure", "text", "e.g. Humira / MRI lumbar"),
+            ("denial_reason", "Denial reason (as written)", "text", "Copy key phrase from letter"),
             ("clinician", "Prescribing clinician", "text", "Name / clinic phone"),
+            ("deadline", "Appeal deadline (if listed)", "text", "e.g. 180 days from notice"),
         ],
-        "checklist_title": "Attach with the appeal",
+        "checklist_title": "Appeal packet checklist",
         "checklist": [
-            "Denial letter / EOB (all pages)",
-            "Prescription or order",
-            "Clinician letter of medical necessity",
-            "Notes showing failed alternatives",
-            "Ask clinic for peer-to-peer if available",
-            "Calendar the internal appeal deadline on the notice",
+            "Denial letter / EOB — all pages (deadline is usually on it)",
+            "Prescription, order, or pre-auth request copy",
+            "Clinician letter of medical necessity (strongest piece)",
+            "Chart notes showing failed alternatives / step therapy",
+            "Relevant imaging, labs, or specialist notes",
+            "Request peer-to-peer if the plan allows it",
+            "Calendar the internal appeal deadline; ask about external review rights if denied again",
         ],
         "examples": [
-            ("Med denial after failed step therapy", "Denied Enbrel as not medically necessary. Failed two oral DMARDs with side effects documented. Rheum clinic letter ready. Auth #…"),
-            ("Imaging denial", "Denied lumbar MRI. Six weeks PT completed, red-flag symptoms listed by orthopedist. Claim #…"),
+            {
+                "label": "Med denial after step therapy",
+                "mode": "not-medically-necessary",
+                "fields": {
+                    "plan_name": "Blue Cross PPO",
+                    "member_id": "XYZ123456",
+                    "claim_id": "PA-99102",
+                    "denial_date": "March 20, 2026",
+                    "service": "Humira (adalimumab)",
+                    "denial_reason": "Not medically necessary; step therapy incomplete",
+                    "clinician": "Dr. Patel, Rheumatology, 555-0100",
+                    "deadline": "180 days from March 20, 2026",
+                },
+                "story": "Rheumatologist ordered Humira after documented failure of methotrexate and sulfasalazine with side effects. Diagnosis rheumatoid arthritis. Request internal appeal approval and peer-to-peer with treating rheumatologist.",
+                "addressedTo": "Appeals & Grievances Department",
+                "sender": "Member on file",
+            },
+            {
+                "label": "Imaging denial",
+                "mode": "prior-auth",
+                "fields": {
+                    "plan_name": "UnitedHealthcare",
+                    "member_id": "UHC998877",
+                    "claim_id": "AUTH-44102",
+                    "denial_date": "Feb 8, 2026",
+                    "service": "MRI lumbar spine without contrast",
+                    "denial_reason": "Does not meet clinical criteria; conservative care incomplete",
+                    "clinician": "Dr. Ng, Orthopedics",
+                    "deadline": "60 days from notice",
+                },
+                "story": "Six weeks of physical therapy completed. Orthopedist notes red-flag symptoms and requests MRI. Denial claims conservative care incomplete. Request reversal with PT records attached.",
+                "addressedTo": "Prior Authorization Appeals",
+                "sender": "C. Morgan",
+            },
+        ],
+        "knowledge": [
+            {
+                "h": "Internal then external",
+                "p": "Most plans require an internal appeal first. If that fails, many commercial plans allow independent external review under state or federal rules. Deadlines are short — put them on a calendar the day the denial arrives.",
+            },
+            {
+                "h": "Clinician letter wins",
+                "p": "Member letters set the frame; a medical-necessity letter from the treating clinician citing failed alternatives and clinical criteria is what medical directors weigh most heavily.",
+            },
+            {
+                "h": "Quote the denial",
+                "p": "Copy the plan’s exact denial reason. Then answer that reason point-by-point. Invented policy language hurts credibility.",
+            },
+            {
+                "h": "Peer-to-peer",
+                "p": "Ask for a peer-to-peer between the plan’s medical director and your specialist. Put the clinic phone number in the letter so scheduling is easy.",
+            },
         ],
         "faq": [
             ("Should my doctor write this?", "Strongest packets include a clinician letter of medical necessity. This tool drafts your member appeal and reminds you what to request from the clinic."),
-            ("What if internal appeal fails?", "Many plans allow external review. Your denial letter should explain rights and deadlines."),
+            ("What if the internal appeal fails?", "Many plans allow external review. Your denial letter should explain rights and deadlines. Ask the plan or your state insurance department."),
+            ("How long do I have?", "Often 180 days for internal appeals on commercial plans — but always use the deadline printed on your notice. Some plans are shorter."),
+            ("Is this medical or legal advice?", "No. It is an educational draft. Follow your plan documents and your clinician’s recommendations."),
         ],
         "related": [
-            ("/tools/appeal-letter/", "General Appeal Letter"),
-            ("/tools/hardship-letter/", "Hardship Letter"),
-            ("/tools/email-writer/", "Email Writer"),
+            ("/guides/how-to-appeal-an-insurance-claim-denial/", "Insurance Appeal Guide", "Full process walkthrough"),
+            ("/tools/appeal-letter/", "General Appeal Letter", "Other appeal types"),
+            ("/tools/hardship-letter/", "Hardship Letter", "Billing hardship requests"),
+        ],
+        "how": [
+            ("Mode + IDs", "Prior auth, medical necessity, OON, or quantity limit."),
+            ("Paste denial facts", "Auth #, reason phrase, clinician, deadline."),
+            ("Send packet", "Letter + denial + clinician note before the deadline."),
         ],
     },
     {
@@ -358,45 +397,124 @@ TOOLS = [
         "title": "SAP Appeal Letter Generator — Financial Aid | CyberScryb",
         "h1": "SAP financial aid",
         "h1_accent": "appeal letter",
-        "subtitle": "Aid suspended for Satisfactory Academic Progress? Draft a letter with circumstance + academic plan schools actually look for.",
+        "subtitle": "Aid suspended for Satisfactory Academic Progress? Draft the circumstance + academic plan structure committees actually score.",
         "crumb": "SAP Appeal Letter",
-        "seo_desc": "Free AI SAP appeal letter generator for financial aid suspension. Includes academic plan structure, GPA/pace appeals, and checklist. Not legal advice.",
+        "seo_desc": "Free AI SAP appeal letter generator for financial aid suspension. GPA, pace, max timeframe appeals with academic plan structure and document checklist. Not legal advice.",
         "empty": "Explain which SAP rule you failed and what happened, plus your plan for next term.",
         "placeholder": "Example: Suspended after Fall 2025 — cumulative GPA 1.8, pace 58%. Hospitalization Sept 12–28 for appendectomy with complications. Registered with disability services. Plan: 12 credits Spring with tutoring 2x/week, target term GPA 2.7.",
+        "critical": ["school", "term", "sap_metric", "next_term"],
         "modes": [
             ("gpa", "GPA shortfall"),
             ("pace", "Pace / completion rate"),
             ("max-time", "Max time frame"),
             ("combined", "Multiple SAP rules"),
         ],
+        "mode_tips": {
+            "gpa": {
+                "title": "GPA appeal",
+                "body": "Committees look for a documented extenuating circumstance with dates, plus a term-by-term plan to raise GPA (credit load, tutoring, reduced work hours). Emotion without a plan rarely succeeds.",
+            },
+            "pace": {
+                "title": "Pace / completion rate",
+                "body": "Pace = completed credits ÷ attempted credits. Explain W/F grades with dates, then show how next-term schedule recovers pace (fewer withdrawals, support services).",
+            },
+            "max-time": {
+                "title": "Maximum timeframe",
+                "body": "You’re near or past 150% of program length. Justify remaining credits needed for degree and a realistic graduation term. Degree audit or advisor map helps.",
+            },
+            "combined": {
+                "title": "Multiple rules",
+                "body": "Address each failed metric separately, then one unified academic plan. Don’t bury numbers — put GPA/pace/timeframe in plain view.",
+            },
+        },
         "fields": [
             ("school", "School / college", "text", "e.g. State University"),
-            ("student_id", "Student ID", "text", "Optional"),
+            ("student_id", "Student ID", "text", "Optional but helpful"),
+            ("program", "Program / major", "text", "e.g. Nursing AS"),
             ("term", "Term affected", "text", "e.g. Fall 2025"),
             ("sap_metric", "SAP issue in numbers", "text", "e.g. GPA 1.8, pace 58%"),
+            ("circumstance_dates", "Circumstance dates", "text", "e.g. Sept 12–28 hospitalization"),
             ("support", "Support in place now", "text", "tutoring, reduced work, accommodations"),
             ("next_term", "Next-term plan", "text", "credits + courses + target GPA"),
         ],
         "checklist_title": "School packet",
         "checklist": [
-            "Official SAP form if your school requires one",
-            "Documentation of circumstance (medical, death, housing, etc.)",
-            "Advisor meeting notes or proposed schedule",
-            "Disability services registration if relevant",
-            "Submit before the published SAP deadline",
+            "Official SAP appeal form if your school requires one (letter alone may not be enough)",
+            "Documentation of circumstance (medical notes, death certificate, housing eviction, etc.)",
+            "Advisor meeting notes or proposed class schedule",
+            "Disability services registration letter if relevant",
+            "Degree audit / remaining requirements for max-timeframe appeals",
+            "Submit before the published SAP deadline (often before the next term starts)",
         ],
         "examples": [
-            ("Medical + GPA", "GPA fell after surgery midterms. Docs attached. 9 credits next term + weekly tutor for stats."),
-            ("Work hours + pace", "Forced OT caused two W grades. Hours cut to 20/week. Pace recovery plan listed."),
+            {
+                "label": "Medical + GPA",
+                "mode": "gpa",
+                "fields": {
+                    "school": "State University",
+                    "student_id": "S1029384",
+                    "program": "Biology BS",
+                    "term": "Fall 2025",
+                    "sap_metric": "Cumulative GPA 1.8 (need 2.0)",
+                    "circumstance_dates": "Sept 12–28 hospitalization",
+                    "support": "Disability services + weekly tutoring for stats",
+                    "next_term": "12 credits Spring; target term GPA 2.7",
+                },
+                "story": "Hospitalized Sept 12–28 for appendectomy with complications; missed midterms. Registered with disability services. Plan: 12 credits Spring with tutoring 2x/week for Statistics, meet advisor biweekly, target term GPA 2.7 to restore cumulative 2.0.",
+                "addressedTo": "Office of Financial Aid — SAP Committee",
+                "sender": "Alex Kim",
+            },
+            {
+                "label": "Work hours + pace",
+                "mode": "pace",
+                "fields": {
+                    "school": "Community College of Metro",
+                    "student_id": "C77821",
+                    "program": "Business AAS",
+                    "term": "Spring 2025",
+                    "sap_metric": "Pace 58% (need 67%)",
+                    "circumstance_dates": "Jan–May forced OT at job",
+                    "support": "Work cut to 20 hrs/week; success coaching",
+                    "next_term": "9 credits; no withdrawals; weekly success coach",
+                },
+                "story": "Forced overtime caused two W grades in Spring 2025. Employer reduced hours to 20/week starting June. Pace recovery plan: 9 carefully chosen credits, no mid-term withdrawals, weekly success coaching.",
+                "addressedTo": "Financial Aid SAP Appeals",
+                "sender": "M. Torres",
+            },
+        ],
+        "knowledge": [
+            {
+                "h": "Federal SAP framework",
+                "p": "Federal student aid requires schools to measure qualitative (GPA) and quantitative (pace) progress, plus maximum timeframe. Exact thresholds are set in each school’s SAP policy — always read that PDF.",
+            },
+            {
+                "h": "Circumstance + change + plan",
+                "p": "Winning appeals usually have three parts: what happened (dated), what is different now, and a specific academic plan (credits, supports, targets). Missing any leg sinks most letters.",
+            },
+            {
+                "h": "Documentation",
+                "p": "Committees verify claims. Medical, bereavement, military, and housing crises need third-party documents. Self-statement alone is weak.",
+            },
+            {
+                "h": "Deadlines",
+                "p": "Many schools require appeals before the next payment period. Late appeals may wait a full term — check the financial-aid calendar.",
+            },
         ],
         "faq": [
             ("Is emotion enough?", "No. Committees look for documentation and a realistic academic plan, not only a hard story."),
-            ("Can I appeal twice?", "Many schools allow another appeal with new information. Read your SAP policy PDF."),
+            ("Can I appeal twice?", "Many schools allow another appeal with new information or after a probation period. Read your SAP policy PDF."),
+            ("What is pace?", "Completed credits divided by attempted credits (including withdrawals/failures, depending on policy). Below the school’s % threshold triggers suspension."),
+            ("Is this financial-aid advice?", "No. Follow your school’s SAP policy, forms, and deadlines. This is an educational draft."),
         ],
         "related": [
-            ("/tools/appeal-letter/", "General Appeal Letter"),
-            ("/tools/hardship-letter/", "Hardship Letter"),
-            ("/tools/budget-planner/", "Budget Planner"),
+            ("/tools/appeal-letter/", "General Appeal Letter", "Other formal appeals"),
+            ("/tools/hardship-letter/", "Hardship Letter", "Broader hardship narratives"),
+            ("/tools/budget-planner/", "Budget Planner", "Aid + work hour planning"),
+        ],
+        "how": [
+            ("Name the rule", "GPA, pace, max time, or combined."),
+            ("Dates + numbers", "When it happened and exact SAP metrics."),
+            ("Plan next term", "Credits, supports, target GPA — then generate."),
         ],
     },
     {
@@ -404,11 +522,12 @@ TOOLS = [
         "title": "Landlord Tenant Letter Generator — Repair, Deposit, Rent | CyberScryb",
         "h1": "Landlord &amp; tenant",
         "h1_accent": "letter generator",
-        "subtitle": "Repair requests, security deposit demands, late-rent plans, and habitability notices — calm, specific, dated.",
+        "subtitle": "Repair requests, security deposit demands, late-rent plans, and habitability notices — calm, specific, and dated.",
         "crumb": "Landlord Tenant Letter",
         "seo_desc": "Free AI landlord tenant letter generator for repair requests, security deposit demand, late rent payment plans, and habitability complaints. Not legal advice.",
         "empty": "Pick a letter type and describe the issue with dates and unit address.",
         "placeholder": "Example: Unit 4B, 120 Oak St. Heat out since Jan 3. Texted landlord Jan 3 and Jan 5, no repair. Outdoor temp teens. Request heat restored within 24 hours and written confirmation.",
+        "critical": ["property", "dates", "ask"],
         "modes": [
             ("repair", "Repair request"),
             ("deposit", "Security deposit"),
@@ -416,32 +535,125 @@ TOOLS = [
             ("habitability", "Habitability / conditions"),
             ("move-out", "Move-out notice"),
         ],
+        "mode_tips": {
+            "repair": {
+                "title": "Repair request",
+                "body": "State the defect, when it started, prior notices (texts/emails), and a clear deadline for access/repair. Attach photos. Stay factual — courts and housing agencies love timelines.",
+            },
+            "deposit": {
+                "title": "Security deposit",
+                "body": "Include move-out date, forwarding address, and demand itemized deductions + return of remaining deposit by the statutory window for your state. Do not invent the number of days — check local law.",
+            },
+            "rent-plan": {
+                "title": "Late rent plan",
+                "body": "Propose a specific catch-up schedule with dates and amounts. Landlords respond better to a written plan than silence. Keep paying what you can if that is your strategy.",
+            },
+            "habitability": {
+                "title": "Habitability",
+                "body": "No heat, no water, severe mold, infestations — document dates and health impact. The letter creates a paper trail; local housing code enforcement may be the next step. Do not invent statute citations.",
+            },
+            "move-out": {
+                "title": "Move-out notice",
+                "body": "State the intended last day of occupancy, unit address, and request for move-out inspection / deposit return process. Match notice length to your lease if known.",
+            },
+        },
         "fields": [
             ("landlord", "Landlord / manager", "text", "Name or company"),
-            ("property", "Property / unit", "text", "Address + unit"),
-            ("dates", "Key dates", "text", "When issue started / notices sent"),
-            ("ask", "What you want", "text", "e.g. repair in 48h, deposit return itemized"),
+            ("property", "Property / unit", "text", "Address + unit #"),
+            ("dates", "Key dates", "text", "Issue started / notices sent / move-out"),
+            ("ask", "What you want", "text", "e.g. repair in 48h, itemized deposit"),
+            ("prior", "Prior contact", "text", "Texts, emails, work orders"),
+            ("lease_note", "Lease note (optional)", "text", "Relevant clause if known"),
         ],
         "checklist_title": "Before you send",
         "checklist": [
             "Photos or video of the issue (timestamped if possible)",
-            "Prior texts/emails saved as PDF",
-            "Lease section if relevant (repairs, deposit timeline)",
-            "Send in a trackable way if required in your state",
-            "Keep a dated copy of everything",
+            "Prior texts/emails exported or screenshotted",
+            "Lease PDF handy (repairs, notice periods, deposit rules)",
+            "Send in a trackable way if your state or lease requires written notice",
+            "Keep a dated copy of everything you send",
+            "For serious habitability issues, note local housing code enforcement contacts",
         ],
         "examples": [
-            ("No heat", "Heat out 4 days, kids in home, prior texts ignored. Demand restoration + hotel costs discussion."),
-            ("Deposit not returned", "Moved out March 1, forwarding address given, 45 days passed, no itemization."),
+            {
+                "label": "No heat",
+                "mode": "habitability",
+                "fields": {
+                    "landlord": "Oak Street Property Mgmt",
+                    "property": "120 Oak St, Unit 4B",
+                    "dates": "Heat out since Jan 3; texts Jan 3 and Jan 5",
+                    "ask": "Restore heat within 24 hours; written confirmation",
+                    "prior": "Text thread attached; no repair visit scheduled",
+                    "lease_note": "Landlord maintains heating system per lease §8",
+                },
+                "story": "Outdoor temps in the teens. Two school-age children in unit. Request emergency repair and confirmation of access window. Will document if unresolved.",
+                "addressedTo": "Oak Street Property Management",
+                "sender": "Taylor Brooks",
+            },
+            {
+                "label": "Deposit not returned",
+                "mode": "deposit",
+                "fields": {
+                    "landlord": "Rivera Holdings LLC",
+                    "property": "88 Pine Ave #2",
+                    "dates": "Moved out March 1, 2026; keys returned same day",
+                    "ask": "Return deposit or provide itemized deductions",
+                    "prior": "Forwarding address emailed March 1",
+                    "lease_note": "",
+                },
+                "story": "Security deposit $1,800. Forwarding address provided in writing. More than 45 days have passed with no itemization or check. Request full return or statutory itemization within 10 days.",
+                "addressedTo": "Rivera Holdings LLC — Security Deposits",
+                "sender": "Jamie Chen",
+            },
+            {
+                "label": "Late rent plan",
+                "mode": "rent-plan",
+                "fields": {
+                    "landlord": "Greenfield Apartments",
+                    "property": "15 Maple Ct #9",
+                    "dates": "April rent due April 1; partial paid April 5",
+                    "ask": "Accept catch-up plan for remaining $650",
+                    "prior": "Spoke with office April 6",
+                    "lease_note": "",
+                },
+                "story": "Hours cut at work March 20. Paid $400 of $1,050 April rent on April 5. Offer $325 on April 15 and $325 on April 30 to become current. Request written acceptance and no eviction filing while plan is honored.",
+                "addressedTo": "Greenfield Apartments — Leasing Office",
+                "sender": "R. Diaz",
+            },
+        ],
+        "knowledge": [
+            {
+                "h": "Paper trails win",
+                "p": "Housing disputes turn on dates, photos, and prior written notice. A calm letter with a timeline is more powerful than a heated rant.",
+            },
+            {
+                "h": "Repair vs rent",
+                "p": "Rent withholding and “repair and deduct” rules vary wildly by state and city. This tool does not advise illegal withholding. Stay current on rent unless a lawyer or legal-aid clinic advises otherwise.",
+            },
+            {
+                "h": "Deposit timelines",
+                "p": "States set different windows for deposit return and itemization (often 14–60 days). Check your state attorney general or housing site before asserting a number of days.",
+            },
+            {
+                "h": "Habitability next steps",
+                "p": "After written notice, many cities allow code-enforcement complaints for heat, water, and severe conditions. Keep the letter — agencies and courts ask for it.",
+            },
         ],
         "faq": [
-            ("Is this a court filing?", "No. These are communication drafts. Court or legal aid may be needed for formal claims."),
-            ("Should I stop paying rent?", "Rules vary widely. Do not withhold rent without understanding your local law. The letter can request repair while you stay current if that is your plan."),
+            ("Is this a court filing?", "No. These are communication drafts. Court, small claims, or legal aid may be needed for formal claims."),
+            ("Should I stop paying rent?", "Rules vary widely. Do not withhold rent without understanding local law. The letter can request repair while you stay current if that is your plan."),
+            ("Certified mail?", "Often wise for deposit and habitability notices. Check your lease and local practice."),
+            ("Is this legal advice?", "No. Housing law is local. Use this as a draft and verify rights for your city/state."),
         ],
         "related": [
-            ("/tools/hardship-letter/", "Hardship Letter"),
-            ("/tools/appeal-letter/", "Appeal Letter"),
-            ("/tools/payment-demand-letter/", "Payment Demand Letter"),
+            ("/tools/payment-demand-letter/", "Payment Demand Letter", "When someone owes you money"),
+            ("/tools/hardship-letter/", "Hardship Letter", "Broader hardship narratives"),
+            ("/tools/appeal-letter/", "Appeal Letter", "Housing denial appeals"),
+        ],
+        "how": [
+            ("Choose letter type", "Repair, deposit, rent plan, habitability, move-out."),
+            ("Dates + unit", "When it started, what you already said, exact ask."),
+            ("Send & save", "Trackable delivery + photos + this letter on file."),
         ],
     },
     {
@@ -449,17 +661,36 @@ TOOLS = [
         "title": "Payment Demand Letter Generator — Unpaid Invoice | CyberScryb",
         "h1": "Payment demand / unpaid invoice",
         "h1_accent": "letter",
-        "subtitle": "Friendly reminder → firm demand → final notice. Clear amounts, dates, and next steps — without sounding unhinged.",
+        "subtitle": "Friendly reminder → firm follow-up → final notice. Clear amounts, dates, and next steps — professional, not unhinged.",
         "crumb": "Payment Demand Letter",
-        "seo_desc": "Free AI payment demand letter for unpaid invoices and overdue bills. 1st, 2nd, and final notice templates. Not legal advice.",
+        "seo_desc": "Free AI payment demand letter for unpaid invoices and overdue bills. 1st, 2nd, and final notice templates with amount, due date, and paper-trail checklist. Not legal advice.",
         "empty": "Enter who owes what, due dates, and which notice stage you need.",
         "placeholder": "Example: Client Acme Co owes $2,400 for website redesign, invoice #1042 due Feb 1. Two email reminders sent Feb 8 and Feb 20. Request payment in 10 days or pause support.",
+        "critical": ["debtor", "amount", "due_date", "deadline"],
         "modes": [
             ("friendly", "1st — friendly reminder"),
             ("firm", "2nd — firm follow-up"),
             ("final", "Final notice"),
             ("personal", "Personal / roommate debt"),
         ],
+        "mode_tips": {
+            "friendly": {
+                "title": "Friendly reminder",
+                "body": "Assume good intent. Restate invoice #, amount, original due date, and a simple pay-by date. Attach the invoice. Short and warm wins first contact.",
+            },
+            "firm": {
+                "title": "Firm follow-up",
+                "body": "Reference prior reminders with dates. Restate amount and a clear deadline. Mention pause of work or late fee only if your contract allows it and you will actually do it.",
+            },
+            "final": {
+                "title": "Final notice",
+                "body": "Last written chance before escalation. Stay professional. Only mention collections, small claims, or stopping work if that is a real next step you are prepared to take — never invent legal threats.",
+            },
+            "personal": {
+                "title": "Personal / roommate",
+                "body": "Keep it factual: what was agreed, what’s unpaid, total, and a friendly but clear pay-by date. Preserve the relationship if possible; still create a dated record.",
+            },
+        },
         "fields": [
             ("debtor", "Who owes you", "text", "Name or company"),
             ("amount", "Amount owed", "text", "e.g. $2,400"),
@@ -467,6 +698,8 @@ TOOLS = [
             ("due_date", "Original due date", "text", "e.g. Feb 1, 2026"),
             ("prior", "Prior reminders", "text", "What you already sent/said"),
             ("deadline", "New pay-by date", "text", "e.g. 10 days from today"),
+            ("pay_method", "How to pay", "text", "e.g. ACH, Venmo, link on invoice"),
+            ("next_step", "If unpaid (optional)", "text", "e.g. pause work, small claims"),
         ],
         "checklist_title": "Paper trail",
         "checklist": [
@@ -474,20 +707,95 @@ TOOLS = [
             "Contract / SOW if it exists",
             "Prior reminder emails saved",
             "One clear pay-by date in the letter",
-            "Decide next step if ignored (pause work, collections, small claims) — state only what you will actually do",
+            "Decide next step if ignored — state only what you will actually do",
+            "Log delivery (email read receipt, certified mail, etc.)",
         ],
         "examples": [
-            ("Freelance unpaid", "Web project done, invoice 30 days late, client ghosting after ‘next week’ texts."),
-            ("Roommate utilities", "Agreed 50/50 electric, they haven’t paid 3 months, total $360."),
+            {
+                "label": "Freelance unpaid",
+                "mode": "firm",
+                "fields": {
+                    "debtor": "Acme Co",
+                    "amount": "$2,400",
+                    "invoice": "Invoice #1042",
+                    "due_date": "February 1, 2026",
+                    "prior": "Email reminders Feb 8 and Feb 20",
+                    "deadline": "March 15, 2026",
+                    "pay_method": "ACH details on invoice",
+                    "next_step": "Pause ongoing support until paid",
+                },
+                "story": "Website redesign delivered Jan 20 per SOW. Client said “next week” twice. Request payment in full by March 15 or support work pauses.",
+                "addressedTo": "Accounts Payable — Acme Co",
+                "sender": "Nova Design LLC",
+            },
+            {
+                "label": "Roommate utilities",
+                "mode": "personal",
+                "fields": {
+                    "debtor": "Chris (roommate)",
+                    "amount": "$360",
+                    "invoice": "Electric share Jan–Mar",
+                    "due_date": "End of each month",
+                    "prior": "Texts March 1 and March 12",
+                    "deadline": "April 5, 2026",
+                    "pay_method": "Venmo @you",
+                    "next_step": "",
+                },
+                "story": "We agreed 50/50 on electric. Three months unpaid at $120/month = $360. Please Venmo by April 5 so I can keep the account current.",
+                "addressedTo": "Chris",
+                "sender": "Sam",
+            },
+            {
+                "label": "Final notice client",
+                "mode": "final",
+                "fields": {
+                    "debtor": "BrightPath Marketing",
+                    "amount": "$5,800",
+                    "invoice": "INV-2201",
+                    "due_date": "January 15, 2026",
+                    "prior": "Friendly email Jan 22; firm letter Feb 5",
+                    "deadline": "March 1, 2026",
+                    "pay_method": "Wire or card link previously sent",
+                    "next_step": "Small claims filing if unpaid after March 1",
+                },
+                "story": "Project complete and accepted Dec 2025. Two written reminders ignored. Final notice: pay $5,800 by March 1 or I will file in small claims for the amount due plus costs as allowed.",
+                "addressedTo": "BrightPath Marketing — Owner",
+                "sender": "L. Okada",
+            },
+        ],
+        "knowledge": [
+            {
+                "h": "Tone ladder",
+                "p": "Friendly → firm → final. Jumping straight to threats burns bridges and can look bad if you later need a judge. Match mode to how many prior contacts you already made.",
+            },
+            {
+                "h": "One clear ask",
+                "p": "Every demand letter needs amount, reference, original due date, and a new pay-by date. Ambiguity is why invoices age.",
+            },
+            {
+                "h": "Only real next steps",
+                "p": "Never invent lawsuits, “collections tomorrow,” or criminal claims. State only actions you are willing and able to take.",
+            },
+            {
+                "h": "Keep the trail",
+                "p": "Save invoices, SOWs, and each reminder. Small claims and collections start with documents, not volume of anger.",
+            },
         ],
         "faq": [
             ("Will this guarantee payment?", "No. A clear paper trail improves odds and prepares you if you escalate."),
+            ("Should I use certified mail?", "Useful for final notices and larger amounts. Email is fine for friendly reminders if that is how you already work."),
+            ("Late fees?", "Only charge late fees if your contract or invoice terms allow them. Don’t invent penalties."),
             ("Is this legal advice?", "No. For large amounts or disputes, consult a lawyer or small-claims resources in your area."),
         ],
         "related": [
-            ("/tools/email-writer/", "Email Writer"),
-            ("/tools/gig-auto-pilot/", "Gig Auto-Pilot"),
-            ("/tools/landlord-tenant-letter/", "Landlord Tenant Letter"),
+            ("/tools/email-writer/", "Email Writer", "Shorter follow-up emails"),
+            ("/tools/gig-auto-pilot/", "Gig Auto-Pilot", "Freelance proposals & outreach"),
+            ("/tools/landlord-tenant-letter/", "Landlord Tenant Letter", "Housing-side payment issues"),
+        ],
+        "how": [
+            ("Pick stage", "Friendly, firm, final, or personal."),
+            ("Amount + dates", "Invoice #, due date, new deadline, pay method."),
+            ("Send once cleanly", "Attach invoice; log delivery; don’t spam."),
         ],
     },
 ]
@@ -504,16 +812,10 @@ def esc(s: str) -> str:
 
 def build_html(t: dict) -> str:
     chips = "\n".join(
-        f'<button type="button" class="lt-chip" data-mode="{m[0]}">{esc(m[1])}</button>'
+        f'<button type="button" class="lt-chip" data-mode="{m[0]}" aria-pressed="false">{esc(m[1])}</button>'
         for m in t["modes"]
     )
-    fields_html = []
-    for fid, label, ftype, ph in t["fields"]:
-        if ftype == "text":
-            fields_html.append(
-                f'<div class="lt-field"><label class="lt-label" for="{fid}">{esc(label)}</label>'
-                f'<input class="lt-input" id="{fid}" type="text" placeholder="{esc(ph)}" autocomplete="off"></div>'
-            )
+
     # pair fields in rows of 2
     paired = []
     fs = t["fields"]
@@ -524,9 +826,9 @@ def build_html(t: dict) -> str:
             paired.append(
                 f'<div class="lt-row">'
                 f'<div class="lt-field"><label class="lt-label" for="{a[0]}">{esc(a[1])}</label>'
-                f'<input class="lt-input" id="{a[0]}" type="text" placeholder="{esc(a[3])}"></div>'
+                f'<input class="lt-input" id="{a[0]}" type="text" placeholder="{esc(a[3])}" data-label="{esc(a[1])}" autocomplete="off"></div>'
                 f'<div class="lt-field"><label class="lt-label" for="{b[0]}">{esc(b[1])}</label>'
-                f'<input class="lt-input" id="{b[0]}" type="text" placeholder="{esc(b[3])}"></div>'
+                f'<input class="lt-input" id="{b[0]}" type="text" placeholder="{esc(b[3])}" data-label="{esc(b[1])}" autocomplete="off"></div>'
                 f"</div>"
             )
             i += 2
@@ -534,26 +836,51 @@ def build_html(t: dict) -> str:
             a = fs[i]
             paired.append(
                 f'<div class="lt-field"><label class="lt-label" for="{a[0]}">{esc(a[1])}</label>'
-                f'<input class="lt-input" id="{a[0]}" type="text" placeholder="{esc(a[3])}"></div>'
+                f'<input class="lt-input" id="{a[0]}" type="text" placeholder="{esc(a[3])}" data-label="{esc(a[1])}" autocomplete="off"></div>'
             )
             i += 1
     fields_block = "\n".join(paired)
 
-    examples = "\n".join(
-        f'<button type="button" class="lt-ex" data-ex="{esc(ex[1])}">{esc(ex[0])}</button>'
-        for ex in t["examples"]
-    )
+    examples = []
+    for ex in t["examples"]:
+        payload = {
+            "mode": ex.get("mode"),
+            "fields": ex.get("fields", {}),
+            "story": ex.get("story", ""),
+            "addressedTo": ex.get("addressedTo", ""),
+            "sender": ex.get("sender", ""),
+        }
+        examples.append(
+            f'<button type="button" class="lt-ex" data-payload=\'{esc(json.dumps(payload, ensure_ascii=True))}\'>{esc(ex["label"])}</button>'
+        )
+    examples_html = "\n".join(examples)
+
     checks = "\n".join(f"<li>{esc(c)}</li>" for c in t["checklist"])
+
     faq_html = "\n".join(
-        f'<div style="margin-bottom:1rem;"><h4 style="margin:0 0 0.35rem;color:var(--text);">{esc(q)}</h4>'
-        f'<p style="margin:0;color:var(--text-muted);font-size:0.92rem;">{esc(a)}</p></div>'
+        f'<details class="lt-faq-item"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>'
         for q, a in t["faq"]
     )
+
     related = "\n".join(
-        f'<a href="{href}" style="display:block;padding:0.9rem 1rem;background:var(--card);border:1px solid var(--border-strong);border-radius:10px;text-decoration:none;color:var(--text-muted);">'
-        f'<strong style="color:var(--primary);display:block;margin-bottom:0.2rem;">{esc(label)}</strong></a>'
-        for href, label in t["related"]
+        f'<a href="{href}"><strong>{esc(label)}</strong><small>{esc(desc)}</small></a>'
+        for href, label, desc in t["related"]
     )
+
+    knowledge = "\n".join(
+        f'<div class="lt-know-card"><h3>{esc(k["h"])}</h3><p>{esc(k["p"])}</p></div>'
+        for k in t["knowledge"]
+    )
+
+    how = "\n".join(
+        f'<div class="lt-how-item"><span class="lt-how-n">{i+1}</span><strong>{esc(h[0])}</strong><span>{esc(h[1])}</span></div>'
+        for i, h in enumerate(t["how"])
+    )
+
+    # first mode tip for SSR
+    first_mode = t["modes"][0][0]
+    first_tip = t["mode_tips"].get(first_mode, {"title": "Tip", "body": ""})
+
     faq_ld = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -574,6 +901,17 @@ def build_html(t: dict) -> str:
         "operatingSystem": "Web",
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
         "url": f"https://cyberscryb.com/tools/{t['id']}/",
+        "description": t["seo_desc"],
+    }
+
+    how_to_ld = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": f"How to use the {t['crumb']}",
+        "step": [
+            {"@type": "HowToStep", "position": i + 1, "name": h[0], "text": h[1]}
+            for i, h in enumerate(t["how"])
+        ],
     }
 
     return f"""<!DOCTYPE html>
@@ -583,68 +921,104 @@ def build_html(t: dict) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(t["title"])}</title>
 <meta name="description" content="{esc(t["seo_desc"])}">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://cyberscryb.com/tools/{t["id"]}/">
 <meta property="og:title" content="{esc(t["title"])}">
 <meta property="og:description" content="{esc(t["seo_desc"])}">
 <meta property="og:url" content="https://cyberscryb.com/tools/{t["id"]}/">
 <meta property="og:image" content="https://cyberscryb.com/og-image.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(t["title"])}">
+<meta name="twitter:description" content="{esc(t["seo_desc"])}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css?v={CSS_V}">
 <link rel="stylesheet" href="/tools/humanizer/style.css">
 <link rel="stylesheet" href="/tools/shared/ai-tool.css">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v={CSS_V}">
 {HEAD_SCRIPTS}
-{LIFE_CSS}
-<script type="application/ld+json">{json.dumps(app_ld)}</script>
-<script type="application/ld+json">{json.dumps(faq_ld)}</script>
+<script type="application/ld+json">{json.dumps(app_ld, ensure_ascii=True)}</script>
+<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=True)}</script>
+<script type="application/ld+json">{json.dumps(how_to_ld, ensure_ascii=True)}</script>
 </head>
 <body>
 {NAV.format(crumb=esc(t["crumb"]))}
 <main>
-  <section class="hero" style="min-height:auto;padding:2.5rem 1.25rem 1.25rem;">
+  <section class="hero" style="min-height:auto;padding:2.25rem 1.25rem 0.75rem;">
     <div class="hero-container">
-      <div class="hero-eyebrow">AI life tool · free to try</div>
-      <h1 class="hero-title" style="font-size:clamp(1.75rem,4vw,2.4rem);">{t["h1"]} <span style="color:var(--primary-soft);">{t["h1_accent"]}</span></h1>
-      <p class="hero-subtitle" style="max-width:36rem;">{esc(t["subtitle"])}</p>
+      <div class="hero-eyebrow">AI life tool · free to try · Pro unlimited</div>
+      <h1 class="hero-title" style="font-size:clamp(1.75rem,4vw,2.45rem);">{t["h1"]} <span style="color:var(--primary-soft);">{t["h1_accent"]}</span></h1>
+      <p class="hero-subtitle" style="max-width:38rem;">{esc(t["subtitle"])}</p>
     </div>
   </section>
 
   <div class="lt-wrap">
-    <div class="lt-steps" aria-hidden="true">
-      <span class="lt-step on">1 · Situation</span>
-      <span class="lt-step on">2 · Details</span>
-      <span class="lt-step">3 · Letter</span>
+    <div class="lt-trust" aria-label="Product promises">
+      <span><i></i> Research-informed structure</span>
+      <span><i></i> Draft autosaved on this device</span>
+      <span><i></i> Copy · print · download</span>
+      <span><i></i> Not legal advice</span>
     </div>
+
+    <div class="lt-how">{how}</div>
+
+    <div class="lt-steps" aria-label="Progress">
+      <span class="lt-step on" id="lt-step-1">1 · Mode</span>
+      <span class="lt-step" id="lt-step-2">2 · Facts</span>
+      <span class="lt-step" id="lt-step-3">3 · Letter</span>
+    </div>
+
     <div class="lt-grid">
       <div class="lt-card">
-        <div class="lt-card-h"><h2>Build your letter</h2><span class="badge-pill" style="margin:0;">Step by step</span></div>
+        <div class="lt-card-h">
+          <h2>Build your letter</h2>
+          <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+        </div>
         <div class="lt-body">
-          <label class="lt-label">Letter mode</label>
-          <div class="lt-chips" id="mode-chips" role="group" aria-label="Letter mode">{chips}</div>
-          <input type="hidden" id="mode-value" value="{t["modes"][0][0]}">
+          <label class="lt-label" id="mode-label">Letter mode</label>
+          <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">{chips}</div>
+          <input type="hidden" id="mode-value" value="{first_mode}">
+
+          <div class="lt-mode-tip" id="lt-mode-tip"><strong>{esc(first_tip.get("title", "Tip"))}</strong>{esc(first_tip.get("body", ""))}</div>
+
+          <div class="lt-ready" id="lt-ready" aria-live="polite">
+            <div class="lt-ready-top"><span>Brief strength</span><span id="lt-ready-pct">0%</span></div>
+            <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+            <p class="lt-ready-msg" id="lt-ready-msg">Add a few key facts to unlock a strong draft.</p>
+          </div>
+
+          <div class="lt-row">
+            <div class="lt-field">
+              <label class="lt-label" for="sender-name">Your name / business <span class="opt">(optional)</span></label>
+              <input class="lt-input" id="sender-name" type="text" placeholder="Appears as the sender" data-label="Sender" autocomplete="name">
+            </div>
+            <div class="lt-field">
+              <label class="lt-label" for="addressed-to">Addressed to <span class="opt">(optional)</span></label>
+              <input class="lt-input" id="addressed-to" type="text" placeholder="Department, company, or person" data-label="Addressed to" autocomplete="off">
+            </div>
+          </div>
 
           {fields_block}
 
           <div class="lt-field">
-            <label class="lt-label" for="tool-input">Your story (facts, dates, amounts)</label>
-            <div class="lt-examples">{examples}</div>
+            <label class="lt-label" for="tool-input">Situation details (facts, dates, amounts)</label>
+            <div class="lt-examples" aria-label="Example scenarios">{examples_html}</div>
             <textarea id="tool-input" class="lt-area" placeholder="{esc(t["placeholder"])}"></textarea>
-            <p class="lt-hint"><span id="char-live">0</span> characters · Be specific. Do not invent facts.</p>
-          </div>
-
-          <div class="lt-field">
-            <label class="lt-label" for="addressed-to">Addressed to <span style="font-weight:500;color:var(--text-faint);">(optional)</span></label>
-            <input class="lt-input" id="addressed-to" type="text" placeholder="Department, company, or person">
+            <p class="lt-hint"><span id="char-live">0</span> characters · <strong>Be specific. Never invent facts the AI should invent.</strong></p>
           </div>
 
           <button type="button" id="generate-btn" class="lt-gen">
             <span class="btn-text">Generate letter</span>
             <span aria-hidden="true">→</span>
           </button>
-          <div class="lt-disc"><strong style="color:var(--danger);">Not legal, medical, or financial advice.</strong> Review, personalize, and verify deadlines for your state and institution before sending.</div>
+          <p class="lt-gen-sub">Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> · <span id="lt-save-hint">Autosaves as you type</span></p>
+          <div class="lt-actions">
+            <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+          </div>
+          <div class="lt-disc"><strong style="color:var(--danger);">Not legal, medical, or financial advice.</strong> Review, personalize, and verify deadlines for your state and institution before sending. The AI will not invent account numbers, diagnoses, or statutes.</div>
         </div>
       </div>
 
@@ -655,6 +1029,7 @@ def build_html(t: dict) -> str:
             <div class="lt-toolbar">
               <span id="usage-counter" style="font-size:0.72rem;color:var(--text-faint);"></span>
               <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+              <button type="button" id="download-btn" class="lt-icon-btn" disabled>Download</button>
               <button type="button" class="lt-icon-btn" onclick="printLetter()">Print / PDF</button>
             </div>
           </div>
@@ -662,8 +1037,9 @@ def build_html(t: dict) -> str:
             <div id="loading-indicator" class="lt-loading">
               <div class="lt-spin"></div>
               <p>Drafting with care…</p>
+              <small>Using structured facts — not generic filler</small>
             </div>
-            <div id="output-text" class="lt-out"><span class="placeholder">Your letter will appear here. Fill the left panel and generate.</span></div>
+            <div id="output-text" class="lt-out"><span class="placeholder">Your letter will appear here.<br><br>1. Pick a mode<br>2. Fill facts (or load an example)<br>3. Hit Generate</span></div>
             <div id="email-gate" class="email-gate hidden">
               <div class="email-gate-blur"></div>
               <div class="email-gate-card">
@@ -684,11 +1060,16 @@ def build_html(t: dict) -> str:
         <div class="lt-card">
           <div class="lt-card-h"><h2>{esc(t["checklist_title"])}</h2></div>
           <div class="lt-body">
-            <p class="lt-side-note">The letter is only half the job. Use this checklist so the request actually moves.</p>
+            <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
             <ul class="lt-check">{checks}</ul>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="lt-know">
+      <h2 style="font-size:1.15rem;margin:0 0 0.85rem;color:var(--text);">What actually works</h2>
+      <div class="lt-know-grid">{knowledge}</div>
     </div>
 
     <div class="lt-card" style="margin-top:1.25rem;">
@@ -696,15 +1077,20 @@ def build_html(t: dict) -> str:
       <div class="lt-body">{faq_html}</div>
     </div>
 
-    <div style="margin-top:1.25rem;">
+    <div style="margin-top:1.5rem;">
       <h3 style="text-align:center;margin-bottom:0.85rem;color:var(--text);">Related tools</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">{related}</div>
+      <div class="lt-related">{related}</div>
     </div>
+  </div>
+
+  <div class="lt-sticky-gen" aria-hidden="true">
+    <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter →</button>
   </div>
 </main>
 {FOOTER}
 <script src="/tools/shared/ai-tool.js"></script>
-<script src="/tools/{t["id"]}/{t["id"]}.js"></script>
+<script src="/tools/shared/life-tool.js?v={CSS_V}"></script>
+<script src="/tools/{t["id"]}/{t["id"]}.js?v={CSS_V}"></script>
 </body>
 </html>
 """
@@ -712,220 +1098,32 @@ def build_html(t: dict) -> str:
 
 def build_js(t: dict) -> str:
     field_ids = [f[0] for f in t["fields"]]
-    fields_json = json.dumps(field_ids)
-    modes_json = json.dumps({m[0]: m[1] for m in t["modes"]})
-    return f"""// {t["id"]} — CSAITool + structured life-tool UX
-document.addEventListener('DOMContentLoaded', () => {{
-  const toolInput = document.getElementById('tool-input');
-  const modeValue = document.getElementById('mode-value');
-  const chips = document.querySelectorAll('#mode-chips .lt-chip');
-  const wordCountEl = document.getElementById('word-count');
-  const charCountEl = document.getElementById('char-count');
-  const charLive = document.getElementById('char-live');
-  const fieldIds = {fields_json};
-  const modeLabels = {modes_json};
-
-  function setMode(mode) {{
-    modeValue.value = mode;
-    chips.forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-mode') === mode));
+    return f"""// {t["id"]} — flagship life tool boot
+document.addEventListener('DOMContentLoaded', function () {{
+  if (!window.LifeTool) {{
+    console.error('LifeTool missing');
+    return;
   }}
-  chips.forEach((chip) => {{
-    chip.addEventListener('click', () => setMode(chip.getAttribute('data-mode')));
-  }});
-  if (chips[0]) setMode(chips[0].getAttribute('data-mode'));
-
-  document.querySelectorAll('.lt-ex').forEach((btn) => {{
-    btn.addEventListener('click', () => {{
-      toolInput.value = btn.getAttribute('data-ex') || '';
-      toolInput.dispatchEvent(new Event('input'));
-      toolInput.focus();
-    }});
-  }});
-
-  toolInput.addEventListener('input', function () {{
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 360) + 'px';
-    if (charLive) charLive.textContent = String(this.value.length);
-  }});
-
-  function assembleInput() {{
-    const parts = [];
-    const mode = modeValue.value;
-    parts.push('LETTER MODE: ' + (modeLabels[mode] || mode));
-    fieldIds.forEach((id) => {{
-      const el = document.getElementById(id);
-      if (el && el.value.trim()) {{
-        const label = el.previousElementSibling ? el.previousElementSibling.textContent : id;
-        parts.push(label.replace(/\\s+/g, ' ').trim() + ': ' + el.value.trim());
-      }}
-    }});
-    const story = toolInput.value.trim();
-    if (story) parts.push('SITUATION DETAILS:\\n' + story);
-    const addressed = (document.getElementById('addressed-to') || {{}}).value;
-    if (addressed && addressed.trim()) parts.push('ADDRESSED TO: ' + addressed.trim());
-    return parts.join('\\n');
-  }}
-
-  // Show loading via shared hook: observe generate button
-  const genBtn = document.getElementById('generate-btn');
-  const loading = document.getElementById('loading-indicator');
-  if (genBtn && loading) {{
-    const obs = new MutationObserver(() => {{
-      loading.classList.toggle('show', genBtn.disabled);
-    }});
-    obs.observe(genBtn, {{ attributes: true, attributeFilter: ['disabled'] }});
-  }}
-
-  window.CSAITool.init({{
-    toolId: '{t["id"]}',
+  LifeTool.mount({{
+    toolId: {json.dumps(t["id"])},
     emptyMessage: {json.dumps(t["empty"])},
-    collectInput: () => assembleInput(),
-    collectParams: () => ({{
-      mode: modeValue.value,
-      modeLabel: modeLabels[modeValue.value] || modeValue.value,
-      addressedTo: (document.getElementById('addressed-to') || {{}}).value || ''
-    }}),
-    onStats: (text) => {{
-      const words = text.trim().split(/\\s+/).filter(Boolean).length;
-      if (wordCountEl) wordCountEl.textContent = words + ' words';
-      if (charCountEl) charCountEl.textContent = text.length + ' characters';
-    }}
+    fieldIds: {json.dumps(field_ids)},
+    modeLabels: {json.dumps({m[0]: m[1] for m in t["modes"]})},
+    modeTips: {json.dumps(t["mode_tips"])},
+    criticalFields: {json.dumps(t["critical"])}
   }});
 }});
 """
-
-
-# Backend prompt templates
-PROMPTS = {
-    "utility-shutoff-letter": '''You are an expert consumer advocate who helps people facing utility disconnection. Write a professional {mode} letter based on the structured facts below.
-
-Facts:
-"""
-{input}
-"""
-Addressed to (if given): {addressedTo}
-
-Requirements:
-- One page, business tone, specific dates and dollar amounts only from the facts (do not invent)
-- Open with account number and disconnect/due date if provided
-- State hardship briefly, then the concrete payment offer or protection request
-- Request written confirmation of any arrangement
-- If mode involves medical protection, request the utility's medical certificate process without fabricating a diagnosis
-- Close with contact info placeholders if missing
-- End with a short "NEXT STEPS FOR YOU" bullet list (call utility, apply for energy aid if eligible, keep records)
-- Final line: "DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state."
-
-Return ONLY the letter text plus the next-steps section.''',
-    "insurance-denial-appeal": '''You are an experienced patient advocate drafting a health insurance INTERNAL APPEAL (member letter) for a {mode} denial.
-
-Facts:
-"""
-{input}
-"""
-Addressed to (if given): {addressedTo}
-
-Requirements:
-- Formal member appeal: identify member ID, claim/auth number, denial date, service/drug if provided
-- Quote or paraphrase the denial reason only if present in facts — do not invent policy language
-- Structure: what is appealed → clinical summary from member view → prior treatments tried (only if stated) → request approval + peer-to-peer if clinician contact given
-- Include "ATTACHMENTS I WILL PROVIDE" checklist (denial letter, order, clinician medical necessity letter, notes of failed alternatives)
-- Calm, factual tone — no threats, no invented diagnoses or outcomes
-- End with: "DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and ask your clinician for a medical necessity letter."
-
-Return ONLY the appeal letter.''',
-    "sap-appeal-letter": '''You are a financial aid advisor helping a student write a Satisfactory Academic Progress (SAP) appeal ({mode}).
-
-Facts:
-"""
-{input}
-"""
-Addressed to (if given): {addressedTo}
-
-Requirements:
-- Formal letter to Office of Financial Aid / SAP Committee
-- Sections: Extenuating circumstance (with dates from facts only) → What changed → Academic plan (next term credits/goals if provided) → Request for reinstatement/probation
-- Do not invent grades, diagnoses, or school policies
-- Encourage documentation without claiming you verified it
-- Tone: accountable, specific, hopeful but realistic
-- End with: "DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy and deadlines."
-
-Return ONLY the appeal letter.''',
-    "landlord-tenant-letter": '''You are a housing advocate drafting a calm, specific landlord-tenant letter ({mode}).
-
-Facts:
-"""
-{input}
-"""
-Addressed to (if given): {addressedTo}
-
-Requirements:
-- Include property/unit and key dates from facts only
-- Clear ask with a reasonable deadline when facts support one
-- Professional tone; firm when mode is deposit demand or habitability, collaborative for repair/rent plan
-- Suggest documenting photos/prior notices in a short attachments note
-- Do not advise illegal rent withholding or invent local statutes; if relevant, say "check local habitability rules" once
-- End with: "DISCLAIMER: Not legal advice. Housing law varies by location."
-
-Return ONLY the letter.''',
-    "payment-demand-letter": '''You are a collections-communication specialist writing a {mode} payment demand / overdue invoice letter that stays professional.
-
-Facts:
-"""
-{input}
-"""
-Addressed to (if given): {addressedTo}
-
-Requirements:
-- State amount, invoice/reference, original due date, and new pay-by date only if provided
-- Match tone to mode: friendly reminder vs firm follow-up vs final notice (final may mention pausing work or further action ONLY if the facts already imply it — never invent legal threats)
-- One clear payment method ask (e.g. "pay invoice via previous method" if unknown)
-- Short, scannable paragraphs
-- End with: "DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice."
-
-Return ONLY the letter.''',
-}
 
 
 def main() -> None:
     for t in TOOLS:
         d = TOOLS_DIR / t["id"]
         d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(build_html(t), encoding="utf-8", newline="\n")
-        (d / f"{t['id']}.js").write_text(build_js(t), encoding="utf-8", newline="\n")
+        (d / "index.html").write_text(build_html(t), encoding="utf-8")
+        (d / f"{t['id']}.js").write_text(build_js(t), encoding="utf-8")
         print("wrote", t["id"])
-
-    # Patch AI_PROMPTS into functions/index.js
-    idx = ROOT / "functions" / "index.js"
-    text = idx.read_text(encoding="utf-8")
-    marker = "    'behavioral-log': {"
-    if "utility-shutoff-letter" in text:
-        print("functions already has new tools — skip prompt insert")
-    else:
-        block_lines = []
-        for tid, tmpl in PROMPTS.items():
-            # Escape for JS template literal carefully — use function form like existing
-            # We'll use build: (input, params) => `...` with ${input} etc.
-            js_tmpl = tmpl.replace("\\", "\\\\").replace("`", "\\`")
-            # Convert {input} style to ${input} for JS - already using {input} in PROMPTS
-            js_tmpl = (
-                js_tmpl.replace("{input}", "${input}")
-                .replace("{mode}", "${params.modeLabel || params.mode || 'general'}")
-                .replace("{addressedTo}", "${params.addressedTo || 'Not specified'}")
-            )
-            block_lines.append(
-                f"""    '{tid}': {{
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `{js_tmpl}`
-    }},"""
-            )
-        insert = "\n".join(block_lines) + "\n"
-        if marker not in text:
-            raise SystemExit("marker not found in functions/index.js")
-        text = text.replace(marker, insert + marker, 1)
-        idx.write_text(text, encoding="utf-8", newline="\n")
-        print("patched functions/index.js AI_PROMPTS")
-
-    print("done")
+    print("done", len(TOOLS), "tools")
 
 
 if __name__ == "__main__":

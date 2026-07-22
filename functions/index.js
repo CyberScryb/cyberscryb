@@ -1306,105 +1306,253 @@ End with: "DISCLAIMER: This report is generated based on caregiver logs. It does
     },
     'utility-shutoff-letter': {
         model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an expert consumer advocate who helps people facing utility disconnection. Write a professional ${params.modeLabel || params.mode || 'general'} letter based on the structured facts below.
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'payment arrangement';
+            let modeExtra = '';
+            if (mode.includes('medical')) {
+                modeExtra = `
+MEDICAL PROTECTION MODE:
+- Request the utility's medical certificate / medical baseline process by name if known; do NOT invent a diagnosis or claim the form is already approved.
+- Ask for temporary hold while the certificate is completed by a licensed clinician.
+- Mention household medical context only if stated in facts.`;
+            } else if (mode.includes('restore')) {
+                modeExtra = `
+RESTORE SERVICE MODE:
+- Acknowledge service is already off if facts say so.
+- State what can be paid today toward reconnection and any deposit willingness only if stated.
+- Request written reconnection terms and a same-day or next-business-day restore window when possible.`;
+            } else if (mode.includes('hardship')) {
+                modeExtra = `
+HARDSHIP HOLD MODE:
+- Request temporary hardship hold / delayed disconnect while payment plan and aid applications proceed.
+- Suggest LIHEAP / local energy assistance only as a next step for the customer (do not claim they already qualify).`;
+            } else {
+                modeExtra = `
+PAYMENT PLAN MODE:
+- Lead with a concrete first payment + ongoing monthly offer using only amounts from facts.
+- Ask for written confirmation of arrangement terms and the date any hold expires.`;
+            }
+            return `You are a senior consumer advocate specializing in utility disconnection, payment arrangements, and energy assistance (LIHEAP / crisis programs). Draft a professional ${modeLabel} letter.
 
-Facts:
+STRUCTURED FACTS (use only these — never invent account numbers, amounts, diagnoses, or statutes):
 """
 ${input}
 """
-Addressed to (if given): ${params.addressedTo || 'Not specified'}
+Sender name if given: ${params.senderName || 'Use placeholder [Your Name]'}
+Addressed to if given: ${params.addressedTo || 'Customer Care / Payment Arrangements'}
 
-Requirements:
-- One page, business tone, specific dates and dollar amounts only from the facts (do not invent)
-- Open with account number and disconnect/due date if provided
-- State hardship briefly, then the concrete payment offer or protection request
-- Request written confirmation of any arrangement
-- If mode involves medical protection, request the utility's medical certificate process without fabricating a diagnosis
-- Close with contact info placeholders if missing
-- End with a short "NEXT STEPS FOR YOU" bullet list (call utility, apply for energy aid if eligible, keep records)
-- Final line: "DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state."
+DOMAIN KNOWLEDGE (apply carefully; do not invent state-specific laws):
+- Utilities prioritize letters that open with account # + disconnect/due date + concrete dollar offer.
+- Medical protection usually requires the utility's own clinician form — request the process; do not fabricate medical certifications.
+- LIHEAP and state crisis funds can pay vendors; recommend applying as a NEXT STEP, not as a claim of eligibility.
+- Always request written confirmation of holds and arrangements.
+${modeExtra}
 
-Return ONLY the letter text plus the next-steps section.`
+LETTER REQUIREMENTS:
+1. Business letter format: date line, recipient, RE: line with account # if provided, body, closing signature.
+2. One page if possible. Calm, specific, non-hostile.
+3. Open with account number and disconnect/due date when provided.
+4. Brief hardship (dates only from facts) → concrete payment offer or protection request → ask for written confirmation.
+5. If contact phone/email missing, use [phone] / [email] placeholders once.
+6. After the letter, add:
+
+---
+NEXT STEPS FOR YOU
+- Call the utility before the disconnect date; ask for hardship/payment desk; get a reference number
+- Apply to LIHEAP or local energy aid same day if income may qualify (energyhelp.us or state HHS)
+- Request medical certificate form if anyone is seriously ill / on life-supporting equipment
+- Keep disconnect notice, payment receipts, and all written confirmations
+
+CALL SCRIPT (30 seconds)
+"Hi, account [number]. I have a disconnect notice for [date]. I can pay [amount] by [day] and [plan]. Please place a hardship/payment arrangement and email confirmation to [email]."
+
+DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state.
+
+Return ONLY the letter + next steps + call script + disclaimer. No preamble.`;
+        }
     },
     'insurance-denial-appeal': {
         model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an experienced patient advocate drafting a health insurance INTERNAL APPEAL (member letter) for a ${params.modeLabel || params.mode || 'general'} denial.
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'internal appeal';
+            let modeExtra = '';
+            if (mode.includes('prior') || mode.includes('auth')) {
+                modeExtra = 'Focus on prior authorization reconsideration, medical necessity from member view, and peer-to-peer with treating clinician.';
+            } else if (mode.includes('network') || mode.includes('oon')) {
+                modeExtra = 'Focus on network inadequacy or continuity of care only if facts support; request single-case agreement / in-network exception. Do not invent network search details.';
+            } else if (mode.includes('quantity') || mode.includes('refill') || mode.includes('limit')) {
+                modeExtra = 'Focus on quantity-limit exception using the prescriber rationale from facts only.';
+            } else {
+                modeExtra = 'Address "not medically necessary" by mapping facts to failed alternatives and clinician order; quote denial reason only if present.';
+            }
+            return `You are an experienced patient advocate drafting a health plan MEMBER INTERNAL APPEAL letter (${modeLabel}).
 
-Facts:
+STRUCTURED FACTS (never invent member IDs, claim numbers, diagnoses, CPT/NDC codes, or policy language):
 """
 ${input}
 """
-Addressed to (if given): ${params.addressedTo || 'Not specified'}
+Sender: ${params.senderName || '[Member Name]'}
+Addressed to: ${params.addressedTo || 'Appeals & Grievances / Prior Authorization Appeals'}
 
-Requirements:
-- Formal member appeal: identify member ID, claim/auth number, denial date, service/drug if provided
-- Quote or paraphrase the denial reason only if present in facts — do not invent policy language
-- Structure: what is appealed → clinical summary from member view → prior treatments tried (only if stated) → request approval + peer-to-peer if clinician contact given
-- Include "ATTACHMENTS I WILL PROVIDE" checklist (denial letter, order, clinician medical necessity letter, notes of failed alternatives)
-- Calm, factual tone — no threats, no invented diagnoses or outcomes
-- End with: "DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and ask your clinician for a medical necessity letter."
+DOMAIN KNOWLEDGE:
+- Strong appeals: identify member + claim/auth # + denial date + service, quote the plan's denial reason, then answer it with documented clinical history from facts only.
+- A clinician letter of medical necessity is the strongest attachment — list it; do not pretend you wrote it.
+- Many commercial plans allow internal appeal then external review; mention checking the notice for deadlines without inventing a number of days unless facts provide one.
+- Peer-to-peer between plan medical director and treating clinician often helps — request it if clinician contact is given.
+${modeExtra}
 
-Return ONLY the appeal letter.`
+LETTER REQUIREMENTS:
+1. Formal business letter with RE: line (member ID, claim/auth #, service).
+2. Sections: What I am appealing → Why the denial is incomplete/incorrect based on facts → Clinical summary from member perspective (only stated facts) → Request (approve coverage / reverse denial + peer-to-peer) → Attachments list.
+3. Include:
+
+ATTACHMENTS I WILL PROVIDE
+- Denial letter / EOB (all pages)
+- Prescription or order
+- Clinician letter of medical necessity
+- Notes showing failed alternatives / step therapy (if applicable)
+- Other: [list only if facts mention]
+
+4. Calm, factual tone. No threats. No invented outcomes or guidelines.
+5. Close with member contact placeholders if missing.
+6. Final line: DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and obtain a clinician medical-necessity letter.
+
+Return ONLY the appeal letter.`;
+        }
     },
     'sap-appeal-letter': {
         model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a financial aid advisor helping a student write a Satisfactory Academic Progress (SAP) appeal (${params.modeLabel || params.mode || 'general'}).
+        build: (input, params) => {
+            const modeLabel = params.modeLabel || params.mode || 'SAP appeal';
+            return `You are a financial aid advisor coaching a student through a Satisfactory Academic Progress (SAP) appeal for federal/state/institutional aid (${modeLabel}).
 
-Facts:
+STRUCTURED FACTS (never invent GPA, pace %, grades, diagnoses, or school policy thresholds):
 """
 ${input}
 """
-Addressed to (if given): ${params.addressedTo || 'Not specified'}
+Sender: ${params.senderName || '[Student Name]'}
+Addressed to: ${params.addressedTo || 'Office of Financial Aid — SAP Committee'}
 
-Requirements:
-- Formal letter to Office of Financial Aid / SAP Committee
-- Sections: Extenuating circumstance (with dates from facts only) → What changed → Academic plan (next term credits/goals if provided) → Request for reinstatement/probation
-- Do not invent grades, diagnoses, or school policies
-- Encourage documentation without claiming you verified it
-- Tone: accountable, specific, hopeful but realistic
-- End with: "DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy and deadlines."
+DOMAIN KNOWLEDGE (federal SAP framework; school sets exact thresholds):
+- SAP typically measures: qualitative (GPA), quantitative (pace = completed/attempted credits), and maximum timeframe (~150% of program length).
+- Winning appeals usually have three legs: (1) documented extenuating circumstance with dates, (2) what is different now, (3) specific academic plan (credits, supports, target term GPA).
+- Emotion without documentation and plan rarely succeeds. Do not claim documents are attached unless facts say so — list what the student should attach.
+- Tone: accountable, specific, respectful, hopeful but realistic.
 
-Return ONLY the appeal letter.`
+LETTER REQUIREMENTS:
+1. Formal letter format with student ID and program if provided.
+2. Sections with clear headings:
+   - Extenuating circumstance (dates from facts only)
+   - Impact on SAP metrics (only numbers given)
+   - What has changed
+   - Academic plan for next term (credits, courses/supports, targets from facts)
+   - Request (reinstatement / probation / continued eligibility per school process)
+3. Closing: willingness to meet advisor / provide documentation.
+4. After letter, add:
+
+DOCUMENTS TO INCLUDE (school-dependent)
+- Official SAP form if required
+- Third-party documentation of circumstance
+- Advisor schedule / degree audit if max-timeframe
+- Disability services letter if relevant
+
+DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy PDF and deadlines.
+
+Return ONLY the letter + documents list + disclaimer.`;
+        }
     },
     'landlord-tenant-letter': {
         model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a housing advocate drafting a calm, specific landlord-tenant letter (${params.modeLabel || params.mode || 'general'}).
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'landlord-tenant';
+            let tone = 'professional and firm but civil';
+            let modeExtra = '';
+            if (mode.includes('deposit')) {
+                tone = 'firm, precise, businesslike';
+                modeExtra = 'Demand itemized deductions and return of remaining deposit. Do NOT invent the statutory number of days — say "within the time required by [state] law" or use a deadline only if facts provide one.';
+            } else if (mode.includes('habit')) {
+                tone = 'urgent, factual, non-threatening';
+                modeExtra = 'Document condition timeline. Request repair by a clear deadline from facts or a reasonable short window. Do not advise rent withholding. One optional line: tenant may contact local housing code enforcement if unresolved.';
+            } else if (mode.includes('rent')) {
+                tone = 'collaborative and specific';
+                modeExtra = 'Propose a dated catch-up schedule with amounts from facts only. Request written acceptance.';
+            } else if (mode.includes('move')) {
+                tone = 'clear and courteous';
+                modeExtra = 'State intended move-out date, unit, key return, and request for inspection / deposit process.';
+            } else {
+                modeExtra = 'State defect, start date, prior notices, access availability, and requested repair deadline.';
+            }
+            return `You are a housing advocate drafting a ${modeLabel} letter. Tone: ${tone}.
 
-Facts:
+STRUCTURED FACTS (never invent lease clauses, statute numbers, dollar penalties, or dates):
 """
 ${input}
 """
-Addressed to (if given): ${params.addressedTo || 'Not specified'}
+Sender: ${params.senderName || '[Tenant Name]'}
+Addressed to: ${params.addressedTo || 'Landlord / Property Manager'}
 
-Requirements:
-- Include property/unit and key dates from facts only
-- Clear ask with a reasonable deadline when facts support one
-- Professional tone; firm when mode is deposit demand or habitability, collaborative for repair/rent plan
-- Suggest documenting photos/prior notices in a short attachments note
-- Do not advise illegal rent withholding or invent local statutes; if relevant, say "check local habitability rules" once
-- End with: "DISCLAIMER: Not legal advice. Housing law varies by location."
+DOMAIN KNOWLEDGE:
+- Housing disputes turn on dated paper trails (prior texts/emails, photos). Reference prior contact only if stated.
+- Rent withholding / repair-and-deduct rules vary by jurisdiction — NEVER advise illegal rent withholding or invent local statutes.
+- Deposit return windows vary by state — do not invent day counts.
+${modeExtra}
 
-Return ONLY the letter.`
+LETTER REQUIREMENTS:
+1. Business letter with property/unit in RE: line.
+2. Timeline of issue and prior notices from facts.
+3. Clear ask + deadline when facts support one.
+4. Short note: "Enclosures/attachments: photos, prior messages, lease excerpt if relevant."
+5. Closing with contact info placeholders if missing.
+6. Final line: DISCLAIMER: Not legal advice. Housing law varies by location.
+
+Return ONLY the letter.`;
+        }
     },
     'payment-demand-letter': {
         model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a collections-communication specialist writing a ${params.modeLabel || params.mode || 'general'} payment demand / overdue invoice letter that stays professional.
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'payment demand';
+            let toneGuide = 'professional and clear';
+            if (mode.includes('friendly') || mode.includes('1st')) {
+                toneGuide = 'warm, assume good intent, short';
+            } else if (mode.includes('firm') || mode.includes('2nd')) {
+                toneGuide = 'polite but firm; reference prior reminders with dates from facts';
+            } else if (mode.includes('final')) {
+                toneGuide = 'final written notice — professional, not aggressive; escalate only using next steps stated in facts';
+            } else if (mode.includes('personal') || mode.includes('roommate')) {
+                toneGuide = 'personal but clear; preserve relationship while documenting the debt';
+            }
+            return `You are a collections-communication specialist writing a ${modeLabel} letter. Tone: ${toneGuide}.
 
-Facts:
+STRUCTURED FACTS (never invent amounts, invoice numbers, contract penalties, or legal threats):
 """
 ${input}
 """
-Addressed to (if given): ${params.addressedTo || 'Not specified'}
+Sender: ${params.senderName || '[Your Name / Business]'}
+Addressed to: ${params.addressedTo || 'Accounts Payable / Debtor'}
 
-Requirements:
-- State amount, invoice/reference, original due date, and new pay-by date only if provided
-- Match tone to mode: friendly reminder vs firm follow-up vs final notice (final may mention pausing work or further action ONLY if the facts already imply it — never invent legal threats)
-- One clear payment method ask (e.g. "pay invoice via previous method" if unknown)
-- Short, scannable paragraphs
-- End with: "DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice."
+DOMAIN KNOWLEDGE:
+- Effective demand letters always state: amount, invoice/reference, original due date, new pay-by date, how to pay.
+- Tone ladder: friendly → firm → final. Do not jump to legal threats on a first reminder.
+- Mention pause of work, late fees, collections, or small claims ONLY if the facts already include that next step (or contract basis). Never invent lawsuits or criminal claims.
+- Keep paragraphs short and scannable.
 
-Return ONLY the letter.`
+LETTER REQUIREMENTS:
+1. Business (or clear personal) letter format.
+2. Opening: purpose in one sentence.
+3. Body: amount owed, reference, original due date, prior contact summary (if given), new deadline, payment method.
+4. One clear call to action.
+5. Closing signature.
+6. Final line: DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice.
+
+Return ONLY the letter.`;
+        }
     },
+
     'behavioral-log': {
         model: 'gemini-3.1-pro-preview',
         build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:

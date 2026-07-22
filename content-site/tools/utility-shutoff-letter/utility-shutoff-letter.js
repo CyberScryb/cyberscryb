@@ -1,78 +1,15 @@
-// utility-shutoff-letter — CSAITool + structured life-tool UX
-document.addEventListener('DOMContentLoaded', () => {
-  const toolInput = document.getElementById('tool-input');
-  const modeValue = document.getElementById('mode-value');
-  const chips = document.querySelectorAll('#mode-chips .lt-chip');
-  const wordCountEl = document.getElementById('word-count');
-  const charCountEl = document.getElementById('char-count');
-  const charLive = document.getElementById('char-live');
-  const fieldIds = ["utility_name", "account", "disconnect_date", "balance", "can_pay", "plan"];
-  const modeLabels = {"payment-plan": "Payment plan", "hardship-hold": "Hardship hold", "medical-cert": "Medical protection", "restore-service": "Restore after shutoff"};
-
-  function setMode(mode) {
-    modeValue.value = mode;
-    chips.forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-mode') === mode));
+// utility-shutoff-letter — flagship life tool boot
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.LifeTool) {
+    console.error('LifeTool missing');
+    return;
   }
-  chips.forEach((chip) => {
-    chip.addEventListener('click', () => setMode(chip.getAttribute('data-mode')));
-  });
-  if (chips[0]) setMode(chips[0].getAttribute('data-mode'));
-
-  document.querySelectorAll('.lt-ex').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      toolInput.value = btn.getAttribute('data-ex') || '';
-      toolInput.dispatchEvent(new Event('input'));
-      toolInput.focus();
-    });
-  });
-
-  toolInput.addEventListener('input', function () {
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 360) + 'px';
-    if (charLive) charLive.textContent = String(this.value.length);
-  });
-
-  function assembleInput() {
-    const parts = [];
-    const mode = modeValue.value;
-    parts.push('LETTER MODE: ' + (modeLabels[mode] || mode));
-    fieldIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el && el.value.trim()) {
-        const label = el.previousElementSibling ? el.previousElementSibling.textContent : id;
-        parts.push(label.replace(/\s+/g, ' ').trim() + ': ' + el.value.trim());
-      }
-    });
-    const story = toolInput.value.trim();
-    if (story) parts.push('SITUATION DETAILS:\n' + story);
-    const addressed = (document.getElementById('addressed-to') || {}).value;
-    if (addressed && addressed.trim()) parts.push('ADDRESSED TO: ' + addressed.trim());
-    return parts.join('\n');
-  }
-
-  // Show loading via shared hook: observe generate button
-  const genBtn = document.getElementById('generate-btn');
-  const loading = document.getElementById('loading-indicator');
-  if (genBtn && loading) {
-    const obs = new MutationObserver(() => {
-      loading.classList.toggle('show', genBtn.disabled);
-    });
-    obs.observe(genBtn, { attributes: true, attributeFilter: ['disabled'] });
-  }
-
-  window.CSAITool.init({
-    toolId: 'utility-shutoff-letter',
+  LifeTool.mount({
+    toolId: "utility-shutoff-letter",
     emptyMessage: "Add your utility name, disconnect date, and what you can pay so we can draft a useful letter.",
-    collectInput: () => assembleInput(),
-    collectParams: () => ({
-      mode: modeValue.value,
-      modeLabel: modeLabels[modeValue.value] || modeValue.value,
-      addressedTo: (document.getElementById('addressed-to') || {}).value || ''
-    }),
-    onStats: (text) => {
-      const words = text.trim().split(/\s+/).filter(Boolean).length;
-      if (wordCountEl) wordCountEl.textContent = words + ' words';
-      if (charCountEl) charCountEl.textContent = text.length + ' characters';
-    }
+    fieldIds: ["utility_name", "account", "disconnect_date", "balance", "can_pay", "plan", "household", "state"],
+    modeLabels: {"payment-plan": "Payment plan", "hardship-hold": "Hardship hold", "medical-cert": "Medical protection", "restore-service": "Restore after shutoff"},
+    modeTips: {"payment-plan": {"title": "Payment plan mode", "body": "Utilities almost always want a concrete first payment + a realistic monthly amount. Vague \u201cI\u2019ll pay when I can\u201d gets denied. State the disconnect date and account number in the first lines."}, "hardship-hold": {"title": "Hardship hold mode", "body": "Many states allow temporary holds for documented hardship (job loss, medical crisis). Pair this letter with LIHEAP / local energy-aid applications the same day \u2014 the letter alone rarely freezes the account."}, "medical-cert": {"title": "Medical protection mode", "body": "Most IOUs require a physician/PA/NP form certifying that loss of service would be life-threatening or seriously harmful. Ask the utility for their exact form; do not invent a diagnosis in the letter."}, "restore-service": {"title": "Restore service mode", "body": "After shutoff, re-connect often needs a deposit + partial payment of arrears. State what you can pay today and request written reconnection terms and a same-day or next-business-day restore window."}},
+    criticalFields: ["utility_name", "disconnect_date", "balance", "can_pay"]
   });
 });

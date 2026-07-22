@@ -4,20 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insurance Denial Appeal Letter Generator — Prior Auth | CyberScryb</title>
-<meta name="description" content="Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft + document checklist. Not medical or legal advice.">
+<meta name="description" content="Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft, external review notes, document checklist. Not medical or legal advice.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://cyberscryb.com/tools/insurance-denial-appeal/">
 <meta property="og:title" content="Insurance Denial Appeal Letter Generator — Prior Auth | CyberScryb">
-<meta property="og:description" content="Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft + document checklist. Not medical or legal advice.">
+<meta property="og:description" content="Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft, external review notes, document checklist. Not medical or legal advice.">
 <meta property="og:url" content="https://cyberscryb.com/tools/insurance-denial-appeal/">
 <meta property="og:image" content="https://cyberscryb.com/og-image.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insurance Denial Appeal Letter Generator — Prior Auth | CyberScryb">
+<meta name="twitter:description" content="Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft, external review notes, document checklist. Not medical or legal advice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20260721life-tools-v1">
+<link rel="stylesheet" href="/css/style.css?v=20260721life-tools-v2">
 <link rel="stylesheet" href="/tools/humanizer/style.css">
 <link rel="stylesheet" href="/tools/shared/ai-tool.css">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20260721life-tools-v2">
 
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -48,15 +53,22 @@
     })();
     </script>
     <style media="print">
-        * { visibility: hidden; }
-        #output-text, #output-text * { visibility: visible; }
-        #output-text { position: fixed; top: 0; left: 0; width: 100%; font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff; padding: 1in; box-sizing: border-box; white-space: pre-wrap; }
+        * { visibility: hidden !important; }
+        #output-text, #output-text * { visibility: visible !important; }
+        #output-text {
+            position: fixed; top: 0; left: 0; width: 100%;
+            font-family: Georgia, serif; font-size: 12pt; color: #000; background: #fff;
+            padding: 0.85in; box-sizing: border-box; white-space: pre-wrap;
+            border: none !important; min-height: auto !important;
+        }
+        .lt-sticky-gen, nav, header, footer, .lt-toolbar, .email-gate { display: none !important; }
     </style>
     <script>
     function printLetter() {
         var out = document.getElementById('output-text');
         if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
-            alert('Generate a letter first, then print.');
+            if (window.LifeTool) LifeTool.toast('Generate a letter first, then print');
+            else alert('Generate a letter first, then print.');
             return;
         }
         window.print();
@@ -64,153 +76,9 @@
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
-
-    <style>
-    .lt-wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem 3rem; }
-    .lt-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.25rem; align-items: start; }
-    @media (max-width: 900px) { .lt-grid { grid-template-columns: 1fr; } }
-    .lt-card {
-        background: linear-gradient(180deg, #FFFFFF 0%, var(--card) 100%);
-        border: 1px solid var(--border-strong);
-        border-radius: 16px;
-        box-shadow: 0 12px 36px rgba(44,24,16,0.07);
-        overflow: hidden;
-    }
-    .lt-card-h {
-        display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
-        padding: 1rem 1.2rem; border-bottom: 1px solid var(--border);
-        background: var(--bg-elevated);
-    }
-    .lt-card-h h2 { margin: 0; font-size: 1.1rem; color: var(--text); }
-    .lt-body { padding: 1.15rem 1.2rem 1.35rem; }
-    .lt-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin: 0 0 0.4rem; }
-    .lt-field { margin-bottom: 1rem; }
-    .lt-input, .lt-select, .lt-area {
-        width: 100%; box-sizing: border-box;
-        padding: 0.75rem 0.9rem;
-        border: 1px solid var(--border-strong);
-        border-radius: 11px;
-        background: #fff;
-        color: var(--text);
-        font-family: var(--font);
-        font-size: 0.95rem;
-        transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    .lt-area { min-height: 120px; resize: vertical; line-height: 1.5; }
-    .lt-input:focus, .lt-select:focus, .lt-area:focus {
-        outline: none; border-color: var(--primary);
-        box-shadow: 0 0 0 3px var(--primary-glow);
-    }
-    .lt-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1rem; }
-    .lt-chip {
-        border: 1px solid var(--border-strong);
-        background: #fff;
-        color: var(--text-muted);
-        border-radius: 999px;
-        padding: 0.45rem 0.85rem;
-        font-size: 0.82rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.15s;
-    }
-    .lt-chip:hover { border-color: rgba(194,65,12,0.45); color: var(--text); }
-    .lt-chip.is-on {
-        background: rgba(194,65,12,0.12);
-        border-color: rgba(194,65,12,0.5);
-        color: var(--primary);
-    }
-    .lt-examples { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.35rem 0 1rem; }
-    .lt-ex {
-        border: 1px dashed var(--border-strong);
-        background: var(--bg-elevated);
-        color: var(--text-muted);
-        border-radius: 8px;
-        padding: 0.35rem 0.65rem;
-        font-size: 0.78rem;
-        cursor: pointer;
-    }
-    .lt-ex:hover { border-color: var(--primary-soft); color: var(--text); }
-    .lt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    @media (max-width: 560px) { .lt-row { grid-template-columns: 1fr; } }
-    .lt-hint { font-size: 0.78rem; color: var(--text-faint); margin: 0.25rem 0 0; }
-    .lt-gen {
-        width: 100%;
-        margin-top: 0.35rem;
-        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-        padding: 0.95rem 1.25rem;
-        border: none; border-radius: 12px;
-        background: var(--attention);
-        color: #fff;
-        font-family: var(--font);
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        box-shadow: 0 10px 28px rgba(27,58,75,0.28);
-        transition: transform 0.15s, background 0.15s;
-    }
-    .lt-gen:hover { background: var(--attention-hover); transform: translateY(-1px); }
-    .lt-gen:disabled { opacity: 0.65; cursor: wait; transform: none; }
-    .lt-out {
-        min-height: 320px;
-        padding: 1rem 1.1rem;
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        color: var(--text);
-        white-space: pre-wrap;
-        line-height: 1.65;
-        font-size: 0.95rem;
-    }
-    .lt-out .placeholder { color: var(--text-faint); }
-    .lt-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
-    .lt-icon-btn {
-        background: #fff; border: 1px solid var(--border-strong); color: var(--primary);
-        border-radius: 8px; padding: 0.4rem 0.7rem; font-size: 0.8rem; font-weight: 600; cursor: pointer;
-    }
-    .lt-icon-btn:hover { border-color: var(--primary); }
-    .lt-stats { display: flex; gap: 1rem; padding: 0.65rem 0 0; font-size: 0.8rem; color: var(--text-faint); }
-    .lt-check {
-        list-style: none; padding: 0; margin: 0.5rem 0 0;
-    }
-    .lt-check li {
-        position: relative;
-        padding: 0.5rem 0.55rem 0.5rem 1.85rem;
-        margin-bottom: 0.35rem;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: var(--bg-elevated);
-        font-size: 0.86rem;
-        color: var(--text);
-    }
-    .lt-check li::before { content: "☐"; position: absolute; left: 0.55rem; color: var(--primary); }
-    .lt-side-note {
-        font-size: 0.82rem; color: var(--text-muted); margin: 0 0 0.75rem; line-height: 1.5;
-    }
-    .lt-disc {
-        margin: 1rem 0 0; padding: 0.75rem 0.9rem;
-        background: rgba(185,28,28,0.06); border: 1px solid rgba(185,28,28,0.15);
-        border-radius: 10px; font-size: 0.8rem; color: var(--text-muted);
-    }
-    .lt-steps { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0 0 1rem; }
-    .lt-step {
-        font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-        color: var(--text-faint); padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--border);
-    }
-    .lt-step.on { color: var(--primary); border-color: rgba(194,65,12,0.35); background: rgba(194,65,12,0.08); }
-    .lt-loading { display: none; text-align: center; padding: 2rem 1rem; color: var(--primary); }
-    .lt-loading.show { display: block; }
-    .lt-spin {
-        width: 28px; height: 28px; margin: 0 auto 0.75rem;
-        border: 3px solid rgba(194,65,12,0.2); border-top-color: var(--primary);
-        border-radius: 50%; animation: ltspin 0.7s linear infinite;
-    }
-    @keyframes ltspin { to { transform: rotate(360deg); } }
-    /* reuse email-gate from humanizer if present; fallback */
-    .email-gate.hidden { display: none !important; }
-    </style>
-
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Insurance Denial Appeal Letter Generator", "applicationCategory": "LifestyleApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cyberscryb.com/tools/insurance-denial-appeal/"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Should my doctor write this?", "acceptedAnswer": {"@type": "Answer", "text": "Strongest packets include a clinician letter of medical necessity. This tool drafts your member appeal and reminds you what to request from the clinic."}}, {"@type": "Question", "name": "What if internal appeal fails?", "acceptedAnswer": {"@type": "Answer", "text": "Many plans allow external review. Your denial letter should explain rights and deadlines."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Insurance Denial Appeal Letter Generator", "applicationCategory": "LifestyleApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cyberscryb.com/tools/insurance-denial-appeal/", "description": "Free AI insurance appeal letter for prior authorization denials and not medically necessary decisions. Internal appeal draft, external review notes, document checklist. Not medical or legal advice."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Should my doctor write this?", "acceptedAnswer": {"@type": "Answer", "text": "Strongest packets include a clinician letter of medical necessity. This tool drafts your member appeal and reminds you what to request from the clinic."}}, {"@type": "Question", "name": "What if the internal appeal fails?", "acceptedAnswer": {"@type": "Answer", "text": "Many plans allow external review. Your denial letter should explain rights and deadlines. Ask the plan or your state insurance department."}}, {"@type": "Question", "name": "How long do I have?", "acceptedAnswer": {"@type": "Answer", "text": "Often 180 days for internal appeals on commercial plans \u2014 but always use the deadline printed on your notice. Some plans are shorter."}}, {"@type": "Question", "name": "Is this medical or legal advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is an educational draft. Follow your plan documents and your clinician\u2019s recommendations."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to use the Insurance Denial Appeal", "step": [{"@type": "HowToStep", "position": 1, "name": "Mode + IDs", "text": "Prior auth, medical necessity, OON, or quantity limit."}, {"@type": "HowToStep", "position": 2, "name": "Paste denial facts", "text": "Auth #, reason phrase, clinician, deadline."}, {"@type": "HowToStep", "position": 3, "name": "Send packet", "text": "Letter + denial + clinician note before the deadline."}]}</script>
 </head>
 <body>
 
@@ -245,53 +113,87 @@
     </header>
 
 <main>
-  <section class="hero" style="min-height:auto;padding:2.5rem 1.25rem 1.25rem;">
+  <section class="hero" style="min-height:auto;padding:2.25rem 1.25rem 0.75rem;">
     <div class="hero-container">
-      <div class="hero-eyebrow">AI life tool · free to try</div>
-      <h1 class="hero-title" style="font-size:clamp(1.75rem,4vw,2.4rem);">Insurance denial / prior auth <span style="color:var(--primary-soft);">appeal letter</span></h1>
-      <p class="hero-subtitle" style="max-width:36rem;">Denied as not medically necessary? Draft a member internal appeal with claim numbers, facts, and a packet list.</p>
+      <div class="hero-eyebrow">AI life tool · free to try · Pro unlimited</div>
+      <h1 class="hero-title" style="font-size:clamp(1.75rem,4vw,2.45rem);">Insurance denial / prior auth <span style="color:var(--primary-soft);">appeal letter</span></h1>
+      <p class="hero-subtitle" style="max-width:38rem;">Denied as not medically necessary? Draft a member internal appeal with claim numbers, facts, and a packet checklist plans actually review.</p>
     </div>
   </section>
 
   <div class="lt-wrap">
-    <div class="lt-steps" aria-hidden="true">
-      <span class="lt-step on">1 · Situation</span>
-      <span class="lt-step on">2 · Details</span>
-      <span class="lt-step">3 · Letter</span>
+    <div class="lt-trust" aria-label="Product promises">
+      <span><i></i> Research-informed structure</span>
+      <span><i></i> Draft autosaved on this device</span>
+      <span><i></i> Copy · print · download</span>
+      <span><i></i> Not legal advice</span>
     </div>
+
+    <div class="lt-how"><div class="lt-how-item"><span class="lt-how-n">1</span><strong>Mode + IDs</strong><span>Prior auth, medical necessity, OON, or quantity limit.</span></div>
+<div class="lt-how-item"><span class="lt-how-n">2</span><strong>Paste denial facts</strong><span>Auth #, reason phrase, clinician, deadline.</span></div>
+<div class="lt-how-item"><span class="lt-how-n">3</span><strong>Send packet</strong><span>Letter + denial + clinician note before the deadline.</span></div></div>
+
+    <div class="lt-steps" aria-label="Progress">
+      <span class="lt-step on" id="lt-step-1">1 · Mode</span>
+      <span class="lt-step" id="lt-step-2">2 · Facts</span>
+      <span class="lt-step" id="lt-step-3">3 · Letter</span>
+    </div>
+
     <div class="lt-grid">
       <div class="lt-card">
-        <div class="lt-card-h"><h2>Build your letter</h2><span class="badge-pill" style="margin:0;">Step by step</span></div>
+        <div class="lt-card-h">
+          <h2>Build your letter</h2>
+          <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+        </div>
         <div class="lt-body">
-          <label class="lt-label">Letter mode</label>
-          <div class="lt-chips" id="mode-chips" role="group" aria-label="Letter mode"><button type="button" class="lt-chip" data-mode="prior-auth">Prior authorization</button>
-<button type="button" class="lt-chip" data-mode="not-medically-necessary">Not medically necessary</button>
-<button type="button" class="lt-chip" data-mode="out-of-network">Out of network</button>
-<button type="button" class="lt-chip" data-mode="quantity-limit">Quantity / refill limit</button></div>
+          <label class="lt-label" id="mode-label">Letter mode</label>
+          <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label"><button type="button" class="lt-chip" data-mode="prior-auth" aria-pressed="false">Prior authorization</button>
+<button type="button" class="lt-chip" data-mode="not-medically-necessary" aria-pressed="false">Not medically necessary</button>
+<button type="button" class="lt-chip" data-mode="out-of-network" aria-pressed="false">Out of network</button>
+<button type="button" class="lt-chip" data-mode="quantity-limit" aria-pressed="false">Quantity / refill limit</button></div>
           <input type="hidden" id="mode-value" value="prior-auth">
 
-          <div class="lt-row"><div class="lt-field"><label class="lt-label" for="plan_name">Insurance plan</label><input class="lt-input" id="plan_name" type="text" placeholder="e.g. Blue Cross PPO"></div><div class="lt-field"><label class="lt-label" for="member_id">Member ID</label><input class="lt-input" id="member_id" type="text" placeholder="From your card"></div></div>
-<div class="lt-row"><div class="lt-field"><label class="lt-label" for="claim_id">Claim / auth number</label><input class="lt-input" id="claim_id" type="text" placeholder="From denial letter"></div><div class="lt-field"><label class="lt-label" for="denial_date">Denial date</label><input class="lt-input" id="denial_date" type="text" placeholder="e.g. March 20, 2026"></div></div>
-<div class="lt-row"><div class="lt-field"><label class="lt-label" for="service">Drug or procedure</label><input class="lt-input" id="service" type="text" placeholder="e.g. Humira / MRI lumbar"></div><div class="lt-field"><label class="lt-label" for="clinician">Prescribing clinician</label><input class="lt-input" id="clinician" type="text" placeholder="Name / clinic phone"></div></div>
+          <div class="lt-mode-tip" id="lt-mode-tip"><strong>Prior auth denial</strong>Open with member ID + auth number + service. Ask for reconsideration and a peer-to-peer between the plan medical director and your clinician. Attach the denial letter and clinic medical-necessity note.</div>
 
-          <div class="lt-field">
-            <label class="lt-label" for="tool-input">Your story (facts, dates, amounts)</label>
-            <div class="lt-examples"><button type="button" class="lt-ex" data-ex="Denied Enbrel as not medically necessary. Failed two oral DMARDs with side effects documented. Rheum clinic letter ready. Auth #…">Med denial after failed step therapy</button>
-<button type="button" class="lt-ex" data-ex="Denied lumbar MRI. Six weeks PT completed, red-flag symptoms listed by orthopedist. Claim #…">Imaging denial</button></div>
-            <textarea id="tool-input" class="lt-area" placeholder="Example: Blue Cross denied prior auth for Humira on March 20, 2026 (Auth #PA-99102). Reason: not medically necessary. Rheumatologist ordered after failed methotrexate and sulfasalazine. Diagnosis RA. Request peer-to-peer."></textarea>
-            <p class="lt-hint"><span id="char-live">0</span> characters · Be specific. Do not invent facts.</p>
+          <div class="lt-ready" id="lt-ready" aria-live="polite">
+            <div class="lt-ready-top"><span>Brief strength</span><span id="lt-ready-pct">0%</span></div>
+            <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+            <p class="lt-ready-msg" id="lt-ready-msg">Add a few key facts to unlock a strong draft.</p>
           </div>
 
+          <div class="lt-row">
+            <div class="lt-field">
+              <label class="lt-label" for="sender-name">Your name / business <span class="opt">(optional)</span></label>
+              <input class="lt-input" id="sender-name" type="text" placeholder="Appears as the sender" data-label="Sender" autocomplete="name">
+            </div>
+            <div class="lt-field">
+              <label class="lt-label" for="addressed-to">Addressed to <span class="opt">(optional)</span></label>
+              <input class="lt-input" id="addressed-to" type="text" placeholder="Department, company, or person" data-label="Addressed to" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="lt-row"><div class="lt-field"><label class="lt-label" for="plan_name">Insurance plan</label><input class="lt-input" id="plan_name" type="text" placeholder="e.g. Blue Cross PPO, UHC, Aetna" data-label="Insurance plan" autocomplete="off"></div><div class="lt-field"><label class="lt-label" for="member_id">Member ID</label><input class="lt-input" id="member_id" type="text" placeholder="From insurance card" data-label="Member ID" autocomplete="off"></div></div>
+<div class="lt-row"><div class="lt-field"><label class="lt-label" for="claim_id">Claim / auth number</label><input class="lt-input" id="claim_id" type="text" placeholder="From denial letter" data-label="Claim / auth number" autocomplete="off"></div><div class="lt-field"><label class="lt-label" for="denial_date">Denial date</label><input class="lt-input" id="denial_date" type="text" placeholder="e.g. March 20, 2026" data-label="Denial date" autocomplete="off"></div></div>
+<div class="lt-row"><div class="lt-field"><label class="lt-label" for="service">Drug or procedure</label><input class="lt-input" id="service" type="text" placeholder="e.g. Humira / MRI lumbar" data-label="Drug or procedure" autocomplete="off"></div><div class="lt-field"><label class="lt-label" for="denial_reason">Denial reason (as written)</label><input class="lt-input" id="denial_reason" type="text" placeholder="Copy key phrase from letter" data-label="Denial reason (as written)" autocomplete="off"></div></div>
+<div class="lt-row"><div class="lt-field"><label class="lt-label" for="clinician">Prescribing clinician</label><input class="lt-input" id="clinician" type="text" placeholder="Name / clinic phone" data-label="Prescribing clinician" autocomplete="off"></div><div class="lt-field"><label class="lt-label" for="deadline">Appeal deadline (if listed)</label><input class="lt-input" id="deadline" type="text" placeholder="e.g. 180 days from notice" data-label="Appeal deadline (if listed)" autocomplete="off"></div></div>
+
           <div class="lt-field">
-            <label class="lt-label" for="addressed-to">Addressed to <span style="font-weight:500;color:var(--text-faint);">(optional)</span></label>
-            <input class="lt-input" id="addressed-to" type="text" placeholder="Department, company, or person">
+            <label class="lt-label" for="tool-input">Situation details (facts, dates, amounts)</label>
+            <div class="lt-examples" aria-label="Example scenarios"><button type="button" class="lt-ex" data-payload='{&quot;mode&quot;: &quot;not-medically-necessary&quot;, &quot;fields&quot;: {&quot;plan_name&quot;: &quot;Blue Cross PPO&quot;, &quot;member_id&quot;: &quot;XYZ123456&quot;, &quot;claim_id&quot;: &quot;PA-99102&quot;, &quot;denial_date&quot;: &quot;March 20, 2026&quot;, &quot;service&quot;: &quot;Humira (adalimumab)&quot;, &quot;denial_reason&quot;: &quot;Not medically necessary; step therapy incomplete&quot;, &quot;clinician&quot;: &quot;Dr. Patel, Rheumatology, 555-0100&quot;, &quot;deadline&quot;: &quot;180 days from March 20, 2026&quot;}, &quot;story&quot;: &quot;Rheumatologist ordered Humira after documented failure of methotrexate and sulfasalazine with side effects. Diagnosis rheumatoid arthritis. Request internal appeal approval and peer-to-peer with treating rheumatologist.&quot;, &quot;addressedTo&quot;: &quot;Appeals &amp; Grievances Department&quot;, &quot;sender&quot;: &quot;Member on file&quot;}'>Med denial after step therapy</button>
+<button type="button" class="lt-ex" data-payload='{&quot;mode&quot;: &quot;prior-auth&quot;, &quot;fields&quot;: {&quot;plan_name&quot;: &quot;UnitedHealthcare&quot;, &quot;member_id&quot;: &quot;UHC998877&quot;, &quot;claim_id&quot;: &quot;AUTH-44102&quot;, &quot;denial_date&quot;: &quot;Feb 8, 2026&quot;, &quot;service&quot;: &quot;MRI lumbar spine without contrast&quot;, &quot;denial_reason&quot;: &quot;Does not meet clinical criteria; conservative care incomplete&quot;, &quot;clinician&quot;: &quot;Dr. Ng, Orthopedics&quot;, &quot;deadline&quot;: &quot;60 days from notice&quot;}, &quot;story&quot;: &quot;Six weeks of physical therapy completed. Orthopedist notes red-flag symptoms and requests MRI. Denial claims conservative care incomplete. Request reversal with PT records attached.&quot;, &quot;addressedTo&quot;: &quot;Prior Authorization Appeals&quot;, &quot;sender&quot;: &quot;C. Morgan&quot;}'>Imaging denial</button></div>
+            <textarea id="tool-input" class="lt-area" placeholder="Example: Blue Cross denied prior auth for Humira on March 20, 2026 (Auth #PA-99102). Reason: not medically necessary. Rheumatologist ordered after failed methotrexate and sulfasalazine. Diagnosis RA. Request peer-to-peer."></textarea>
+            <p class="lt-hint"><span id="char-live">0</span> characters · <strong>Be specific. Never invent facts the AI should invent.</strong></p>
           </div>
 
           <button type="button" id="generate-btn" class="lt-gen">
             <span class="btn-text">Generate letter</span>
             <span aria-hidden="true">→</span>
           </button>
-          <div class="lt-disc"><strong style="color:var(--danger);">Not legal, medical, or financial advice.</strong> Review, personalize, and verify deadlines for your state and institution before sending.</div>
+          <p class="lt-gen-sub">Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> · <span id="lt-save-hint">Autosaves as you type</span></p>
+          <div class="lt-actions">
+            <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+          </div>
+          <div class="lt-disc"><strong style="color:var(--danger);">Not legal, medical, or financial advice.</strong> Review, personalize, and verify deadlines for your state and institution before sending. The AI will not invent account numbers, diagnoses, or statutes.</div>
         </div>
       </div>
 
@@ -302,6 +204,7 @@
             <div class="lt-toolbar">
               <span id="usage-counter" style="font-size:0.72rem;color:var(--text-faint);"></span>
               <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+              <button type="button" id="download-btn" class="lt-icon-btn" disabled>Download</button>
               <button type="button" class="lt-icon-btn" onclick="printLetter()">Print / PDF</button>
             </div>
           </div>
@@ -309,8 +212,9 @@
             <div id="loading-indicator" class="lt-loading">
               <div class="lt-spin"></div>
               <p>Drafting with care…</p>
+              <small>Using structured facts — not generic filler</small>
             </div>
-            <div id="output-text" class="lt-out"><span class="placeholder">Your letter will appear here. Fill the left panel and generate.</span></div>
+            <div id="output-text" class="lt-out"><span class="placeholder">Your letter will appear here.<br><br>1. Pick a mode<br>2. Fill facts (or load an example)<br>3. Hit Generate</span></div>
             <div id="email-gate" class="email-gate hidden">
               <div class="email-gate-blur"></div>
               <div class="email-gate-card">
@@ -329,32 +233,47 @@
         </div>
 
         <div class="lt-card">
-          <div class="lt-card-h"><h2>Attach with the appeal</h2></div>
+          <div class="lt-card-h"><h2>Appeal packet checklist</h2></div>
           <div class="lt-body">
-            <p class="lt-side-note">The letter is only half the job. Use this checklist so the request actually moves.</p>
-            <ul class="lt-check"><li>Denial letter / EOB (all pages)</li>
-<li>Prescription or order</li>
-<li>Clinician letter of medical necessity</li>
-<li>Notes showing failed alternatives</li>
-<li>Ask clinic for peer-to-peer if available</li>
-<li>Calendar the internal appeal deadline on the notice</li></ul>
+            <p class="lt-side-note">The letter is half the job. Tap items as you finish them — progress saves on this device.</p>
+            <ul class="lt-check"><li>Denial letter / EOB — all pages (deadline is usually on it)</li>
+<li>Prescription, order, or pre-auth request copy</li>
+<li>Clinician letter of medical necessity (strongest piece)</li>
+<li>Chart notes showing failed alternatives / step therapy</li>
+<li>Relevant imaging, labs, or specialist notes</li>
+<li>Request peer-to-peer if the plan allows it</li>
+<li>Calendar the internal appeal deadline; ask about external review rights if denied again</li></ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="lt-card" style="margin-top:1.25rem;">
-      <div class="lt-card-h"><h2>FAQ</h2></div>
-      <div class="lt-body"><div style="margin-bottom:1rem;"><h4 style="margin:0 0 0.35rem;color:var(--text);">Should my doctor write this?</h4><p style="margin:0;color:var(--text-muted);font-size:0.92rem;">Strongest packets include a clinician letter of medical necessity. This tool drafts your member appeal and reminds you what to request from the clinic.</p></div>
-<div style="margin-bottom:1rem;"><h4 style="margin:0 0 0.35rem;color:var(--text);">What if internal appeal fails?</h4><p style="margin:0;color:var(--text-muted);font-size:0.92rem;">Many plans allow external review. Your denial letter should explain rights and deadlines.</p></div></div>
+    <div class="lt-know">
+      <h2 style="font-size:1.15rem;margin:0 0 0.85rem;color:var(--text);">What actually works</h2>
+      <div class="lt-know-grid"><div class="lt-know-card"><h3>Internal then external</h3><p>Most plans require an internal appeal first. If that fails, many commercial plans allow independent external review under state or federal rules. Deadlines are short — put them on a calendar the day the denial arrives.</p></div>
+<div class="lt-know-card"><h3>Clinician letter wins</h3><p>Member letters set the frame; a medical-necessity letter from the treating clinician citing failed alternatives and clinical criteria is what medical directors weigh most heavily.</p></div>
+<div class="lt-know-card"><h3>Quote the denial</h3><p>Copy the plan’s exact denial reason. Then answer that reason point-by-point. Invented policy language hurts credibility.</p></div>
+<div class="lt-know-card"><h3>Peer-to-peer</h3><p>Ask for a peer-to-peer between the plan’s medical director and your specialist. Put the clinic phone number in the letter so scheduling is easy.</p></div></div>
     </div>
 
-    <div style="margin-top:1.25rem;">
-      <h3 style="text-align:center;margin-bottom:0.85rem;color:var(--text);">Related tools</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;"><a href="/tools/appeal-letter/" style="display:block;padding:0.9rem 1rem;background:var(--card);border:1px solid var(--border-strong);border-radius:10px;text-decoration:none;color:var(--text-muted);"><strong style="color:var(--primary);display:block;margin-bottom:0.2rem;">General Appeal Letter</strong></a>
-<a href="/tools/hardship-letter/" style="display:block;padding:0.9rem 1rem;background:var(--card);border:1px solid var(--border-strong);border-radius:10px;text-decoration:none;color:var(--text-muted);"><strong style="color:var(--primary);display:block;margin-bottom:0.2rem;">Hardship Letter</strong></a>
-<a href="/tools/email-writer/" style="display:block;padding:0.9rem 1rem;background:var(--card);border:1px solid var(--border-strong);border-radius:10px;text-decoration:none;color:var(--text-muted);"><strong style="color:var(--primary);display:block;margin-bottom:0.2rem;">Email Writer</strong></a></div>
+    <div class="lt-card" style="margin-top:1.25rem;">
+      <div class="lt-card-h"><h2>FAQ</h2></div>
+      <div class="lt-body"><details class="lt-faq-item"><summary>Should my doctor write this?</summary><p>Strongest packets include a clinician letter of medical necessity. This tool drafts your member appeal and reminds you what to request from the clinic.</p></details>
+<details class="lt-faq-item"><summary>What if the internal appeal fails?</summary><p>Many plans allow external review. Your denial letter should explain rights and deadlines. Ask the plan or your state insurance department.</p></details>
+<details class="lt-faq-item"><summary>How long do I have?</summary><p>Often 180 days for internal appeals on commercial plans — but always use the deadline printed on your notice. Some plans are shorter.</p></details>
+<details class="lt-faq-item"><summary>Is this medical or legal advice?</summary><p>No. It is an educational draft. Follow your plan documents and your clinician’s recommendations.</p></details></div>
     </div>
+
+    <div style="margin-top:1.5rem;">
+      <h3 style="text-align:center;margin-bottom:0.85rem;color:var(--text);">Related tools</h3>
+      <div class="lt-related"><a href="/guides/how-to-appeal-an-insurance-claim-denial/"><strong>Insurance Appeal Guide</strong><small>Full process walkthrough</small></a>
+<a href="/tools/appeal-letter/"><strong>General Appeal Letter</strong><small>Other appeal types</small></a>
+<a href="/tools/hardship-letter/"><strong>Hardship Letter</strong><small>Billing hardship requests</small></a></div>
+    </div>
+  </div>
+
+  <div class="lt-sticky-gen" aria-hidden="true">
+    <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter →</button>
   </div>
 </main>
 
@@ -378,6 +297,7 @@
     </footer>
 
 <script src="/tools/shared/ai-tool.js"></script>
-<script src="/tools/insurance-denial-appeal/insurance-denial-appeal.js"></script>
+<script src="/tools/shared/life-tool.js?v=20260721life-tools-v2"></script>
+<script src="/tools/insurance-denial-appeal/insurance-denial-appeal.js?v=20260721life-tools-v2"></script>
 </body>
 </html>
