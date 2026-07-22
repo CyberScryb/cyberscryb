@@ -1304,6 +1304,107 @@ Tone: objective, professional, supportive, and clinical. Avoid definitive medica
 
 End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`
     },
+    'utility-shutoff-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are an expert consumer advocate who helps people facing utility disconnection. Write a professional ${params.modeLabel || params.mode || 'general'} letter based on the structured facts below.
+
+Facts:
+"""
+${input}
+"""
+Addressed to (if given): ${params.addressedTo || 'Not specified'}
+
+Requirements:
+- One page, business tone, specific dates and dollar amounts only from the facts (do not invent)
+- Open with account number and disconnect/due date if provided
+- State hardship briefly, then the concrete payment offer or protection request
+- Request written confirmation of any arrangement
+- If mode involves medical protection, request the utility's medical certificate process without fabricating a diagnosis
+- Close with contact info placeholders if missing
+- End with a short "NEXT STEPS FOR YOU" bullet list (call utility, apply for energy aid if eligible, keep records)
+- Final line: "DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state."
+
+Return ONLY the letter text plus the next-steps section.`
+    },
+    'insurance-denial-appeal': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are an experienced patient advocate drafting a health insurance INTERNAL APPEAL (member letter) for a ${params.modeLabel || params.mode || 'general'} denial.
+
+Facts:
+"""
+${input}
+"""
+Addressed to (if given): ${params.addressedTo || 'Not specified'}
+
+Requirements:
+- Formal member appeal: identify member ID, claim/auth number, denial date, service/drug if provided
+- Quote or paraphrase the denial reason only if present in facts — do not invent policy language
+- Structure: what is appealed → clinical summary from member view → prior treatments tried (only if stated) → request approval + peer-to-peer if clinician contact given
+- Include "ATTACHMENTS I WILL PROVIDE" checklist (denial letter, order, clinician medical necessity letter, notes of failed alternatives)
+- Calm, factual tone — no threats, no invented diagnoses or outcomes
+- End with: "DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and ask your clinician for a medical necessity letter."
+
+Return ONLY the appeal letter.`
+    },
+    'sap-appeal-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a financial aid advisor helping a student write a Satisfactory Academic Progress (SAP) appeal (${params.modeLabel || params.mode || 'general'}).
+
+Facts:
+"""
+${input}
+"""
+Addressed to (if given): ${params.addressedTo || 'Not specified'}
+
+Requirements:
+- Formal letter to Office of Financial Aid / SAP Committee
+- Sections: Extenuating circumstance (with dates from facts only) → What changed → Academic plan (next term credits/goals if provided) → Request for reinstatement/probation
+- Do not invent grades, diagnoses, or school policies
+- Encourage documentation without claiming you verified it
+- Tone: accountable, specific, hopeful but realistic
+- End with: "DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy and deadlines."
+
+Return ONLY the appeal letter.`
+    },
+    'landlord-tenant-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a housing advocate drafting a calm, specific landlord-tenant letter (${params.modeLabel || params.mode || 'general'}).
+
+Facts:
+"""
+${input}
+"""
+Addressed to (if given): ${params.addressedTo || 'Not specified'}
+
+Requirements:
+- Include property/unit and key dates from facts only
+- Clear ask with a reasonable deadline when facts support one
+- Professional tone; firm when mode is deposit demand or habitability, collaborative for repair/rent plan
+- Suggest documenting photos/prior notices in a short attachments note
+- Do not advise illegal rent withholding or invent local statutes; if relevant, say "check local habitability rules" once
+- End with: "DISCLAIMER: Not legal advice. Housing law varies by location."
+
+Return ONLY the letter.`
+    },
+    'payment-demand-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => `You are a collections-communication specialist writing a ${params.modeLabel || params.mode || 'general'} payment demand / overdue invoice letter that stays professional.
+
+Facts:
+"""
+${input}
+"""
+Addressed to (if given): ${params.addressedTo || 'Not specified'}
+
+Requirements:
+- State amount, invoice/reference, original due date, and new pay-by date only if provided
+- Match tone to mode: friendly reminder vs firm follow-up vs final notice (final may mention pausing work or further action ONLY if the facts already imply it — never invent legal threats)
+- One clear payment method ask (e.g. "pay invoice via previous method" if unknown)
+- Short, scannable paragraphs
+- End with: "DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice."
+
+Return ONLY the letter.`
+    },
     'behavioral-log': {
         model: 'gemini-3.1-pro-preview',
         build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
