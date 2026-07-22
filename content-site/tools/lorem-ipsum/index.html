@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260721toolcards">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <!-- Google Analytics 4 -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -66,11 +66,11 @@
         .controls-row{display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;align-items:flex-end}
         .ctrl-group{display:flex;flex-direction:column;gap:0.4rem}
         .ctrl-label{font-family: var(--font-brand), Georgia, serif;font-size:0.65rem;color:#555;text-transform:uppercase;letter-spacing:0.1em}
-        .ctrl-group select,.ctrl-group input[type="number"]{background:#141414;border: 1px solid rgba(255,255,255,0.12);color:#ededed;font-family:'JetBrains Mono',monospace;padding:0.5rem 0.75rem;border-radius:8px;outline:none;font-size:0.9rem}
+        .ctrl-group select,.ctrl-group input[type="number"]{background:#141414;border: 1px solid rgba(255,255,255,0.12);color: var(--text-muted);font-family:'JetBrains Mono',monospace;padding:0.5rem 0.75rem;border-radius:8px;outline:none;font-size:0.9rem}
         .ctrl-group input[type="number"]{width:70px}
         .ctrl-group input[type="checkbox"]{accent-color: var(--primary-soft)}
         .check-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.3rem}
-        .check-row label{font-size:0.85rem;color:#878787}
+        .check-row label{font-size:0.85rem;color: var(--text-muted)}
         .gen-btn{background:linear-gradient(135deg,#7b2cff,#0088ff);border:none;color:#000;font-family:'Inter',sans-serif;font-weight:700;font-size:0.95rem;padding:0.7rem 2rem;border-radius:8px;cursor:pointer;transition:all 0.3s;align-self:flex-end}
         .gen-btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(194, 65, 12,0.3)}
         .output-wrap{background:#141414;border:1px solid #222;border-radius:12px;overflow:hidden;margin-top:1rem}
@@ -83,12 +83,12 @@
         .word-count-bar{padding:0.5rem 1rem;border-top:1px solid #222;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#555}
         .faq-section{margin-top:3rem}.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
         .faq-section details{background:#141414;border:1px solid #222;border-radius:10px;margin-bottom:0.5rem}
-        .faq-section summary{padding:1rem;cursor:pointer;color:#ccc;font-weight:500;list-style:none;display:flex;justify-content:space-between}
+        .faq-section summary{padding:1rem;cursor:pointer;color: var(--text-muted);font-weight:500;list-style:none;display:flex;justify-content:space-between}
         .faq-section summary::after{content:'+';color: var(--primary-soft);font-weight:700}
         .faq-section details[open] summary::after{content:'−'}
-        .faq-section details p{padding:0 1rem 1rem;color:#878787;line-height:1.6;margin:0}
+        .faq-section details p{padding:0 1rem 1rem;color: var(--text-muted);line-height:1.6;margin:0}
         .breadcrumb{padding:1rem 0 0;font-size:0.8rem;color:#555;max-width:900px;margin:0 auto;padding-left:2rem}
-        .breadcrumb a{color: var(--primary-soft);text-decoration:none}.breadcrumb a:hover{color:#fff}.breadcrumb span{margin:0 0.4rem}
+        .breadcrumb a{color: var(--primary-soft);text-decoration:none}.breadcrumb a:hover{color: var(--text)}.breadcrumb span{margin:0 0.4rem}
     </style>
     <script type="application/ld+json">
     {
@@ -131,7 +131,7 @@
     </script>
 </head>
 <body>
-    <header><nav class="navbar"><div class="nav-container"><div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none"><img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo"><span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color:#fff;margin-left:10px">CyberScryb</span></a></div>                                <ul class="nav-menu">
+    <header><nav class="navbar"><div class="nav-container"><div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none"><img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo"><span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color: var(--text);margin-left:10px">CyberScryb</span></a></div>                                <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
                     <li><a href="/guides/">Guides</a></li>
@@ -206,24 +206,24 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Measure the exact length of your placeholder copy.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Measure the exact length of your placeholder copy.</span>
             </a>
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
-                <span style="font-size:0.85rem; color:#878787;">Wrap your Lorem Ipsum into styled HTML mockups.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Wrap your Lorem Ipsum into styled HTML mockups.</span>
             </a>
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
-                <span style="font-size:0.85rem; color:#878787;">Fill your draft mockups with realistic meta tags.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Fill your draft mockups with realistic meta tags.</span>
             </a>
         </div>
     </section>
 
-    <footer><div class="footer-container"><div class="footer-content"><div class="footer-brand"><span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1rem;color:#fff">CyberScryb</span><p>Free, privacy-first developer tools. Your data never leaves your browser.</p></div><div class="footer-links"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a><a href="/disclosure/">Affiliate Disclosure</a><a href="/guides/">Guides</a><a href="/contact/">Contact</a></div></div><div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div></div></footer>
+    <footer><div class="footer-container"><div class="footer-content"><div class="footer-brand"><span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1rem;color: var(--text)">CyberScryb</span><p>Free, privacy-first developer tools. Your data never leaves your browser.</p></div><div class="footer-links"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a><a href="/disclosure/">Affiliate Disclosure</a><a href="/guides/">Guides</a><a href="/contact/">Contact</a></div></div><div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div></div></footer>
 
     <!-- AdSense: After Footer -->
     <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">

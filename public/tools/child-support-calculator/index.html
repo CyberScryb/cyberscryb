@@ -20,7 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260721toolcards">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -113,9 +113,9 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
         <span style="color: var(--primary-soft);">Child Support Calculator</span>
     </nav>
@@ -125,7 +125,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -172,8 +172,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="calc-state" style="color: #ededed;">Select State Guidelines</label>
-                            <select id="calc-state" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <label for="calc-state" style="color: var(--text-muted);">Select State Guidelines</label>
+                            <select id="calc-state" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="California">California (Net Disposable Income Model)</option>
                                 <option value="Texas">Texas (Percentage of Income Model)</option>
                                 <option value="New York">New York (Income Shares Model)</option>
@@ -186,18 +186,18 @@
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="input-group">
-                                <label for="income-a" style="color: #ededed;">Parent A Gross Income ($/mo)</label>
-                                <input type="number" id="income-a" value="5000" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="income-a" style="color: var(--text-muted);">Parent A Gross Income ($/mo)</label>
+                                <input type="number" id="income-a" value="5000" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                             <div class="input-group">
-                                <label for="income-b" style="color: #ededed;">Parent B Gross Income ($/mo)</label>
-                                <input type="number" id="income-b" value="3000" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="income-b" style="color: var(--text-muted);">Parent B Gross Income ($/mo)</label>
+                                <input type="number" id="income-b" value="3000" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                         </div>
 
                         <div class="input-group">
-                            <label for="children-count" style="color: #ededed;">Number of Children</label>
-                            <select id="children-count" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <label for="children-count" style="color: var(--text-muted);">Number of Children</label>
+                            <select id="children-count" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="1">1 Child</option>
                                 <option value="2" selected>2 Children</option>
                                 <option value="3">3 Children</option>
@@ -207,8 +207,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="custody-arrangement" style="color: #ededed;">Physical Custody Arrangement</label>
-                            <select id="custody-arrangement" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <label for="custody-arrangement" style="color: var(--text-muted);">Physical Custody Arrangement</label>
+                            <select id="custody-arrangement" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="shared" selected>Shared / Joint Custody</option>
                                 <option value="primary-a">Parent A has Primary Physical Custody</option>
                                 <option value="primary-b">Parent B has Primary Physical Custody</option>
@@ -216,7 +216,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="nights-b" style="color: #ededed; display: flex; justify-content: space-between;">
+                            <label for="nights-b" style="color: var(--text-muted); display: flex; justify-content: space-between;">
                                 <span>Annual Nights with Parent B</span>
                                 <span id="nights-val" style="color: var(--primary-soft); font-weight: 600;">180 nights (49%)</span>
                             </label>
@@ -225,24 +225,24 @@
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="input-group">
-                                <label for="childcare-costs" style="color: #ededed;">Child Care Costs ($/mo)</label>
-                                <input type="number" id="childcare-costs" value="600" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="childcare-costs" style="color: var(--text-muted);">Child Care Costs ($/mo)</label>
+                                <input type="number" id="childcare-costs" value="600" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                             <div class="input-group">
-                                <label for="insurance-costs" style="color: #ededed;">Health Insurance Premium ($/mo)</label>
-                                <input type="number" id="insurance-costs" value="200" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="insurance-costs" style="color: var(--text-muted);">Health Insurance Premium ($/mo)</label>
+                                <input type="number" id="insurance-costs" value="200" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                         </div>
 
                         <!-- Local calculation outcome card -->
                         <div style="background: rgba(194, 65, 12,0.05); border: 1px solid rgba(194, 65, 12,0.15); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
                             <h3 style="font-size: 1rem; color: var(--primary-soft); margin-top: 0; margin-bottom: 0.75rem; font-family: var(--font-brand), Georgia, serif;">Baseline Estimate</h3>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem; color: #ccc;">
-                                <div>Income Share A: <strong id="local-result-a" style="color: #fff;">63%</strong></div>
-                                <div>Income Share B: <strong id="local-result-b" style="color: #fff;">37%</strong></div>
-                                <div>Basic Obligation: <strong id="local-result-obligation" style="color: #fff;">$1,920</strong></div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
+                                <div>Income Share A: <strong id="local-result-a" style="color: var(--text);">63%</strong></div>
+                                <div>Income Share B: <strong id="local-result-b" style="color: var(--text);">37%</strong></div>
+                                <div>Basic Obligation: <strong id="local-result-obligation" style="color: var(--text);">$1,920</strong></div>
                                 <div style="border-left: 2px solid #7b2cff; padding-left: 8px;">
-                                    <span id="local-result-payor" style="display:block; font-size: 0.75rem; color:#878787;">Parent A Pays:</span>
+                                    <span id="local-result-payor" style="display:block; font-size: 0.75rem; color: var(--text-muted);">Parent A Pays:</span>
                                     <strong id="local-result-final" style="font-size: 1.1rem; color: var(--primary-soft);">$450/mo</strong>
                                 </div>
                             </div>
@@ -262,13 +262,13 @@
                                 AI Analysis &amp; Worksheet
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
                                 <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your state-specific child support analysis, statutory breakdown, and deviation factors draft will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -292,7 +292,7 @@
                                 <p style="color: var(--primary-soft);">Building your child support analysis...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                         </div>
                     </div>
@@ -330,7 +330,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
                     <p>No social media. No distractions. Just tools that work.</p>
                 </div>
                 <div class="footer-links">

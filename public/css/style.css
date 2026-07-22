@@ -439,6 +439,44 @@ header {
     color: var(--text-muted);
 }
 
+/*
+  Hard override for leftover dark-theme inline styles (#fff / #ccc on white cards).
+  Inline color: #fff on light cards made titles vanish — do not remove until pages are clean.
+*/
+.blog-card h3,
+.blog-card h3 a,
+.tool-card h3,
+.tool-card h3 a,
+.glass-card h3,
+.glass-card h3 a {
+    color: var(--text) !important;
+}
+.blog-card p,
+.tool-card p,
+.glass-card p,
+.blog-card .tool-desc,
+.tool-card .tool-desc {
+    color: var(--text-muted) !important;
+}
+.blog-card .read-more,
+.tool-card .read-more {
+    color: var(--primary-soft) !important;
+}
+.blog-card .read-more:hover,
+.tool-card .read-more:hover {
+    color: var(--text) !important;
+}
+/* Section headings on linen (not inside dark hero) */
+.section > .container > h2,
+.section .container > h2 {
+    color: var(--text);
+}
+.nav-logo a span,
+.nav-logo span,
+.footer-brand span {
+    color: var(--text) !important;
+}
+
 .posts-grid,
 .tools-grid {
     display: grid;

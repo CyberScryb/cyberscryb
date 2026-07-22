@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260721toolcards">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LS46B9J1XK');</script>
     <script type="application/ld+json">
@@ -37,7 +37,7 @@
         .ctrl-group{background:linear-gradient(145deg,#1a1a1a,#0f0f0f);border:1px solid #333;border-radius:10px;padding:1rem}
         .ctrl-group h3{font-family: var(--font-brand), Georgia, serif;font-size:0.75rem;color: var(--primary-soft);margin:0 0 0.75rem;text-transform:uppercase;letter-spacing:1px}
         .ctrl-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
-        .ctrl-row label{font-size:0.8rem;color:#b0b0b0}
+        .ctrl-row label{font-size:0.8rem;color: var(--text-muted)}
         .ctrl-row span{font-size:0.75rem;color: var(--primary-soft);font-family:monospace}
         input[type="range"]{width:100%;accent-color: var(--primary-soft);margin-bottom:0.5rem}
         .palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
@@ -109,7 +109,7 @@
         <nav class="navbar"><div class="nav-container">
             <div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none;">
                 <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color:#fff;margin-left:10px;">CyberScryb</span>
+                <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color: var(--text);margin-left:10px;">CyberScryb</span>
             </a></div>
                                             <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
@@ -127,7 +127,7 @@
     <main class="fluid-app">
         <div style="max-width:1200px;margin:0 auto;padding:0 2rem 1rem;">
             <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color: var(--primary-soft);">Simulator</span></h1>
-            <p style="color:#b0b0b0;max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side &mdash; no data leaves your browser.</p>
+            <p style="color: var(--text-muted);max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side &mdash; no data leaves your browser.</p>
         </div>
         <div class="fluid-layout">
             <div class="fluid-canvas-wrap">
@@ -171,41 +171,41 @@
 
         <!-- SEO Content -->
         <section style="max-width:900px;margin:3rem auto 0;padding:0 2rem;">
-            <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">What Are the Navier-Stokes Equations?</h2>
-            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color:#fff;">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary-soft);">seven Millennium Prize Problems</a> in mathematics.</p>
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">What Are the Navier-Stokes Equations?</h2>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color: var(--text);">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary-soft);">seven Millennium Prize Problems</a> in mathematics.</p>
 
-            <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">How This Simulator Works</h2>
-            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color:#fff;">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
-            <ol style="color:#b0b0b0;line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">How This Simulator Works</h2>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color: var(--text);">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
+            <ol style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
                 <li><strong style="color: var(--primary-soft);">Add Forces</strong> &mdash; Your mouse input is added to the velocity field</li>
                 <li><strong style="color: var(--primary-soft);">Diffuse</strong> &mdash; Viscosity equalizes neighboring velocities</li>
                 <li><strong style="color: var(--primary-soft);">Advect</strong> &mdash; The velocity field moves itself and dye through back-tracing</li>
                 <li><strong style="color: var(--primary-soft);">Project</strong> &mdash; Pressure solve ensures divergence-free (mass-conserving) flow</li>
             </ol>
-            <p style="color:#b0b0b0;line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color:#fff;">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color: var(--text);">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
 
-            <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">Real-World Applications</h2>
-            <ul style="color:#b0b0b0;line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color:#fff;">Aerospace</strong> &mdash; Airflow optimization reducing fuel consumption by up to 15%</li>
-                <li><strong style="color:#fff;">Weather</strong> &mdash; Atmospheric fluid models predict storms days in advance</li>
-                <li><strong style="color:#fff;">Medical</strong> &mdash; Blood flow simulation for heart valve design</li>
-                <li><strong style="color:#fff;">Film & VFX</strong> &mdash; Realistic water, fire, and smoke effects</li>
-                <li><strong style="color:#fff;">Games</strong> &mdash; Real-time fluid effects in modern titles</li>
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Real-World Applications</h2>
+            <ul style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
+                <li><strong style="color: var(--text);">Aerospace</strong> &mdash; Airflow optimization reducing fuel consumption by up to 15%</li>
+                <li><strong style="color: var(--text);">Weather</strong> &mdash; Atmospheric fluid models predict storms days in advance</li>
+                <li><strong style="color: var(--text);">Medical</strong> &mdash; Blood flow simulation for heart valve design</li>
+                <li><strong style="color: var(--text);">Film & VFX</strong> &mdash; Realistic water, fire, and smoke effects</li>
+                <li><strong style="color: var(--text);">Games</strong> &mdash; Real-time fluid effects in modern titles</li>
             </ul>
 
-            <h2 style="font-size:1.5rem;margin-bottom:1rem;color:#fff;">Frequently Asked Questions</h2>
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Frequently Asked Questions</h2>
             <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
                 <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
-                    <summary style="cursor:pointer;color:#fff;font-weight:600;font-size:0.95rem;">Is this a real physics simulation?</summary>
-                    <p style="color:#b0b0b0;line-height:1.7;margin:0.75rem 0 0;">Yes &mdash; it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is this a real physics simulation?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes &mdash; it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
                 </details>
                 <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
-                    <summary style="cursor:pointer;color:#fff;font-weight:600;font-size:0.95rem;">Is my data sent anywhere?</summary>
-                    <p style="color:#b0b0b0;line-height:1.7;margin:0.75rem 0 0;">No. Everything runs 100% in your browser. Screenshots are generated locally via the Canvas API.</p>
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is my data sent anywhere?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">No. Everything runs 100% in your browser. Screenshots are generated locally via the Canvas API.</p>
                 </details>
                 <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
-                    <summary style="cursor:pointer;color:#fff;font-weight:600;font-size:0.95rem;">Can I use screenshots commercially?</summary>
-                    <p style="color:#b0b0b0;line-height:1.7;margin:0.75rem 0 0;">Yes. Any images you export are yours to use however you wish.</p>
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Can I use screenshots commercially?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes. Any images you export are yours to use however you wish.</p>
                 </details>
             </div>
         </section>
@@ -215,7 +215,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1rem;color:#fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1rem;color: var(--text);">CyberScryb</span>
                     <p>Free, privacy-first developer tools.</p>
                 </div>
                 <div class="footer-links">

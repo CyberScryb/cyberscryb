@@ -20,7 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260721toolcards">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -90,9 +90,9 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color: var(--primary-soft);">AI Bio Generator</span>
     </nav>
@@ -102,7 +102,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -144,13 +144,13 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #ededed;">Describe Yourself</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:150px;" placeholder="e.g. Product designer at a fintech startup. Love indie bookstores, espresso, and building weekend side projects. Based in Austin."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Describe Yourself</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); height:150px;" placeholder="e.g. Product designer at a fintech startup. Love indie bookstores, espresso, and building weekend side projects. Based in Austin."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="platform" style="color: #ededed;">Platform</label>
-                            <select id="platform" style="width:100%; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); color:#ededed; padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            <label for="platform" style="color: var(--text-muted);">Platform</label>
+                            <select id="platform" style="width:100%; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="LinkedIn" data-limit="160">LinkedIn (160 chars)</option>
                                 <option value="Twitter" data-limit="160">Twitter (160 chars)</option>
                                 <option value="Instagram" data-limit="150">Instagram (150 chars)</option>
@@ -159,7 +159,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label style="color: #ededed;">How Many Options?</label>
+                            <label style="color: var(--text-muted);">How Many Options?</label>
                             <div style="display:flex; gap:8px;">
                                 <label style="display:inline-flex; align-items:center; gap:6px; background:#0a0a0a; padding:8px 16px; border: 1px solid rgba(255,255,255,0.12); border-radius:6px; cursor:pointer; font-size:0.85rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="count" value="3" checked style="accent-color: var(--primary-soft);"> 3 bios
@@ -183,12 +183,12 @@
                                 Bio Options
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your bio options will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -212,7 +212,7 @@
                                 <p style="color: var(--primary-soft);">Crafting bios with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                             <span id="platform-label">Platform: LinkedIn</span>
                         </div>
@@ -221,13 +221,13 @@
 
                 <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Bios?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color: var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--text-muted); margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; 3 sets / day</li>
                                 <li>&#10003; 500 character limit</li>
                                 <li>&#10003; All 4 platforms</li>
@@ -237,9 +237,9 @@
                         <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
                             <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
                             <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--primary-soft); margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color: var(--text-muted);">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Unlimited bios</li>
                                 <li>&#10003; 5,000 character limit</li>
                                 <li>&#10003; Priority speed</li>
@@ -249,9 +249,9 @@
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
                             <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Lifetime</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$29</div>
                             <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">one-time, forever</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
                                 <li>&#10003; One payment</li>
                                 <li>&#10003; No renewals</li>
@@ -264,13 +264,13 @@
 
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Why Your Bio Matters More Than You Think</h2>
-                    <p style="color:#878787; line-height:1.8; margin-bottom:1rem;">Your social media bio is the single most-read piece of copy you will ever write. On LinkedIn alone, profiles with completed bios receive 40% more connection requests than those with generic descriptions. On Instagram and TikTok, your bio is the only text a visitor reads before deciding whether to follow &mdash; it has roughly two seconds to make an impression.</p>
-                    <p style="color:#878787; line-height:1.8; margin-bottom:1rem;">The challenge is that each platform has different character limits, audience expectations, and formatting rules. A LinkedIn bio that works at 160 characters needs a completely different tone than an 80-character TikTok bio. Writing one good bio is hard. Writing four platform-optimized versions is a full afternoon of work &mdash; unless you use the right tool.</p>
-                    <p style="color:#878787; line-height:1.8; margin-bottom:1rem;">Our AI Bio Generator uses Google's Gemini model to analyze your self-description and produce multiple bio options tailored to your chosen platform. It respects character limits, matches platform tone (professional for LinkedIn, casual for TikTok), and gives you variety so you can pick the version that sounds most like you.</p>
-                    <h3 style="color:#fff; font-size:1.1rem; margin:1.5rem 0 0.75rem;">What Makes a Bio Stand Out</h3>
-                    <p style="color:#878787; line-height:1.8; margin-bottom:1rem;">The best bios share three qualities: they are specific, they are human, and they create curiosity. Instead of "Marketing professional," a strong bio says "I help B2B SaaS companies turn demos into revenue." Instead of listing job titles, it mentions one unexpected detail &mdash; the weekend ceramics hobby, the obsession with cold brew, the side project that became a real product.</p>
-                    <p style="color:#878787; line-height:1.8; margin-bottom:1rem;">Formatting matters too. Line breaks, strategic emoji use, and a clear call-to-action (like a link or "DM me for collabs") turn a wall of text into a scannable, memorable introduction. Our generator handles all of this automatically, producing bios that follow the same patterns used by profiles with high engagement rates.</p>
-                    <p style="color:#878787; line-height:1.8;">Whether you are building a personal brand, launching a freelance career, or just want your profile to look polished, a well-crafted bio is the foundation. Generate yours in seconds, iterate until it feels right, and move on to the work that actually matters.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Your social media bio is the single most-read piece of copy you will ever write. On LinkedIn alone, profiles with completed bios receive 40% more connection requests than those with generic descriptions. On Instagram and TikTok, your bio is the only text a visitor reads before deciding whether to follow &mdash; it has roughly two seconds to make an impression.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">The challenge is that each platform has different character limits, audience expectations, and formatting rules. A LinkedIn bio that works at 160 characters needs a completely different tone than an 80-character TikTok bio. Writing one good bio is hard. Writing four platform-optimized versions is a full afternoon of work &mdash; unless you use the right tool.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Our AI Bio Generator uses Google's Gemini model to analyze your self-description and produce multiple bio options tailored to your chosen platform. It respects character limits, matches platform tone (professional for LinkedIn, casual for TikTok), and gives you variety so you can pick the version that sounds most like you.</p>
+                    <h3 style="color: var(--text); font-size:1.1rem; margin:1.5rem 0 0.75rem;">What Makes a Bio Stand Out</h3>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">The best bios share three qualities: they are specific, they are human, and they create curiosity. Instead of "Marketing professional," a strong bio says "I help B2B SaaS companies turn demos into revenue." Instead of listing job titles, it mentions one unexpected detail &mdash; the weekend ceramics hobby, the obsession with cold brew, the side project that became a real product.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Formatting matters too. Line breaks, strategic emoji use, and a clear call-to-action (like a link or "DM me for collabs") turn a wall of text into a scannable, memorable introduction. Our generator handles all of this automatically, producing bios that follow the same patterns used by profiles with high engagement rates.</p>
+                    <p style="color: var(--text-muted); line-height:1.8;">Whether you are building a personal brand, launching a freelance career, or just want your profile to look polished, a well-crafted bio is the foundation. Generate yours in seconds, iterate until it feels right, and move on to the work that actually matters.</p>
                 </div>
 
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
@@ -294,19 +294,19 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Write polished emails in seconds.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Write polished emails in seconds.</span>
             </a>
-            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Make AI text sound like you.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Make AI text sound like you.</span>
             </a>
-            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Summarize articles in seconds.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Summarize articles in seconds.</span>
             </a>
         </div>
     </section>
@@ -315,7 +315,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
                     <p>No social media. No distractions. Just tools that work.</p>
                 </div>
                 <div class="footer-links">

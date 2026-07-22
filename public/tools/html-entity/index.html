@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260721toolcards">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -107,20 +107,20 @@
             display: inline-flex; background: #141414; border: 1px solid #222; border-radius: 10px; padding: 4px; margin: 1.5rem 0 1rem;
         }
         .he-mode button {
-            background: transparent; border: none; color: #878787; font-family: 'Inter', sans-serif;
+            background: transparent; border: none; color: var(--text-muted); font-family: 'Inter', sans-serif;
             font-size: 0.9rem; font-weight: 500; padding: 0.55rem 1.2rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }
         .he-mode button.active { background: var(--primary); color: #fff; }
 
         .he-options { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
-        .he-options label { display: flex; align-items: center; gap: 0.4rem; color: #ccc; font-size: 0.85rem; cursor: pointer; }
+        .he-options label { display: flex; align-items: center; gap: 0.4rem; color: var(--text-muted); font-size: 0.85rem; cursor: pointer; }
         .he-options input[type="radio"] { accent-color: var(--primary-soft); }
 
         .he-pane { margin-bottom: 1rem; }
-        .he-pane label { display: block; font-size: 0.75rem; color: #878787; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+        .he-pane label { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
         .he-pane textarea {
             width: 100%; min-height: 160px; background: #141414; border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px; color: #ededed; font-family: 'JetBrains Mono', monospace;
+            border-radius: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem; line-height: 1.6; padding: 1rem; resize: vertical; outline: none;
             transition: border-color 0.3s;
         }
@@ -128,7 +128,7 @@
 
         .action-bar { display: flex; gap: 0.75rem; margin-top: 0.75rem; flex-wrap: wrap; }
         .action-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #ccc;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.55rem 1.1rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
@@ -139,14 +139,14 @@
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
-        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: var(--text-muted); font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
         .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
-        .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
+        .faq-section details p { padding: 0 1rem 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
         .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
-        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb a:hover { color: var(--text); }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
     <!-- Ahrefs Web Analytics -->
@@ -186,7 +186,7 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
@@ -260,19 +260,19 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
-                <span style="font-size:0.85rem; color:#878787;">Encode or decode strings and files to Base64 offline.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Encode or decode strings and files to Base64 offline.</span>
             </a>
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
-                <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML and back, with GFM support.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Convert Markdown to HTML and back, with GFM support.</span>
             </a>
-            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Beautify, minify & validate JSON with error detection.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Beautify, minify & validate JSON with error detection.</span>
             </a>
         </div>
     </section>
@@ -281,7 +281,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
                     <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
                 </div>
                 <div class="footer-links">

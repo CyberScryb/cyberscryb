@@ -1,10 +1,27 @@
 /* =============================
-   Guide Pages — DARTH VADER
+   Guide Pages — Linen & Terracotta
    ============================= */
+
+/* Map legacy dark-theme tokens → site brand (light linen) */
+.guide,
+.guide-content {
+    --bg-panel: var(--bg-elevated, #FFFCF7);
+    --bg-card: var(--card, #FFFFFF);
+    --steel: var(--border-strong, rgba(44, 24, 16, 0.18));
+    --text-primary: var(--text, #2C1810);
+    --text-secondary: var(--text-muted, #3D2B1F);
+    --text-muted: var(--text-faint, #5C4A3D);
+    --accent: var(--primary, #C2410C);
+    --accent-light: var(--primary-soft, #E05A2B);
+    --radius: 16px;
+    --radius-sm: 11px;
+    --font-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+}
 
 .guide {
     max-width: 740px;
     margin: 0 auto;
+    color: var(--text-primary);
 }
 
 .guide-header {
@@ -321,10 +338,10 @@
     align-items: center;
     gap: 6px;
     padding: 10px 20px;
-    background: rgba(0, 170, 255, 0.1);
-    border: 1px solid rgba(0, 170, 255, 0.3);
+    background: rgba(194, 65, 12, 0.08);
+    border: 1px solid rgba(194, 65, 12, 0.25);
     border-radius: var(--radius-sm);
-    color: #4dc9ff;
+    color: var(--accent-light);
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: 700;
