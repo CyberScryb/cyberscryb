@@ -517,6 +517,59 @@ header {
     border: 1px solid rgba(194, 65, 12, 0.4);
 }
 
+/* Compact price labels — prefer these over long free/Pro essays */
+.tag-free,
+.tag-sample,
+.tag-pro {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    margin: 0 0.3rem 0.55rem 0;
+    line-height: 1.3;
+    vertical-align: middle;
+}
+.tag-free {
+    background: rgba(22, 163, 74, 0.1);
+    color: #15803d;
+    border: 1px solid rgba(22, 163, 74, 0.28);
+}
+.tag-sample {
+    background: rgba(27, 58, 75, 0.08);
+    color: var(--attention);
+    border: 1px solid rgba(27, 58, 75, 0.22);
+}
+.tag-pro {
+    background: rgba(194, 65, 12, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(194, 65, 12, 0.28);
+}
+.price-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.65rem 1.15rem;
+    margin: 0 auto 1.25rem;
+    padding: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    list-style: none;
+}
+.price-legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.price-legend .tag-free,
+.price-legend .tag-sample,
+.price-legend .tag-pro {
+    margin: 0;
+}
+
 /* ─── Hero ─── */
 .hero {
     min-height: auto;
@@ -705,53 +758,7 @@ header {
 }
 .proof-item strong { color: var(--text-muted); font-weight: 600; }
 
-/* ─── How free works (homepage) ─── */
-.how-free {
-    padding: 0 0 2rem;
-}
-.how-free-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
-.how-free-step {
-    background: var(--card);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    padding: 1.15rem 1.2rem;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 10px 28px rgba(44,24,16,0.06);
-}
-.how-free-step .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 999px;
-    background: rgba(194, 65, 12, 0.12);
-    color: var(--primary);
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-bottom: 0.55rem;
-}
-.how-free-step h3 {
-    font-size: 0.98rem;
-    margin: 0 0 0.35rem;
-    color: var(--text);
-}
-.how-free-step p {
-    margin: 0;
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-}
-@media (max-width: 720px) {
-    .how-free-grid { grid-template-columns: 1fr; }
-}
-
-/* ─── Free vs Pro comparison ─── */
+/* ─── Free vs Pro comparison (kept for /pro; homepage uses tags) ─── */
 .compare-wrap {
     max-width: 720px;
     margin: 0 auto;
@@ -805,36 +812,36 @@ header {
 
 /* ─── Start here strip (tools page) ─── */
 .start-here {
-    margin: 0 0 1.75rem;
-    padding: 1.25rem 1.35rem 1.4rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(194, 65, 12, 0.22);
-    background:
-        linear-gradient(135deg, rgba(194, 65, 12, 0.07) 0%, transparent 55%),
-        var(--card);
-    box-shadow: 0 14px 36px rgba(44, 24, 16, 0.06);
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
 }
 .start-here-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 0.5rem 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 .start-here-head h2 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     text-align: left;
 }
 .start-here-head p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
-    max-width: 28rem;
 }
 .start-here .posts-grid {
     margin: 0;
+}
+.start-here .price-legend {
+    justify-content: flex-start;
+    margin: 0 0 1rem;
 }
 
 /* Curator product card accent */
