@@ -104,6 +104,71 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Base64 encoding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Base64 is a binary-to-text encoding scheme that converts binary data into ASCII characters. It's commonly used in email attachments, data URIs, API authentication tokens, and embedding binary data in text formats like JSON or XML."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Base64 encryption?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Base64 is encoding, not encryption. It doesn't provide any security — anyone can decode a Base64 string. It's used for data transport, not data protection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is URL-safe Base64?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard Base64 uses + and / characters which have special meaning in URLs. URL-safe Base64 replaces + with - and / with _ to make the encoded string safe for use in URLs and filenames."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Base64 increase size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Base64 encodes 3 bytes into 4 characters, resulting in approximately 33% size increase. This is the tradeoff for being able to represent binary data as text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Base64 increase file size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Base64 works by grouping binary data into 6-bit chunks, representing each chunk as a single ASCII character. Since 8 bits make up a standard byte, this conversion results in a size overhead of approximately 33%. For instance, a 75KB binary image will compile into a 100KB Base64 text string."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does browser-side decoding work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This utility executes entirely client-side using standard Web APIs like btoa() and atob() . Since all computations are processed locally inside your web browser, no raw text or binary data is sent over the internet to CyberScryb servers. Your data remains fully private."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the trailing '=' padding character mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Base64 requires the input bits to align perfectly in 24-bit blocks (which maps to 4 characters of output). If your input ends and leaves remaining bytes, padding characters (=) are appended to complete the block. One \"=\" indicates there was one remaining byte; \"==\" indicates two remaining bytes."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -320,7 +385,7 @@
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/base64-encode-decode-guide/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Base64 Encoding & Decoding Guide</strong>
@@ -338,7 +403,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

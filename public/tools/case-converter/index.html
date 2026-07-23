@@ -218,7 +218,8 @@
 
             <div style="margin-top: 1.5rem;">
                 <label style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Input Text</label>
-                <textarea id="cc-input" class="cc-box" placeholder="Type or paste your text here..."></textarea>
+                <label for="cc-input" class="cs-visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Input text to convert</label>
+                <textarea id="cc-input" class="cc-box" placeholder="Type or paste your text here..." aria-label="Input text to convert"></textarea>
                 <div class="stats-row">
                     <span>Characters: <strong id="cc-chars">0</strong></span>
                     <span>Words: <strong id="cc-words">0</strong></span>
@@ -241,7 +242,8 @@
 
             <div>
                 <label style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">Output</label>
-                <textarea id="cc-output" class="cc-box" readonly placeholder="Click a case button above to convert..."></textarea>
+                <label for="cc-output" class="cs-visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Converted output</label>
+                <textarea id="cc-output" class="cc-box" readonly placeholder="Click a case button above to convert..." aria-label="Converted output"></textarea>
                 <button class="copy-btn" id="cc-copy">📋 Copy Output</button>
             </div>
 
@@ -285,7 +287,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
-                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

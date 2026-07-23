@@ -169,10 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrap = document.createElement('div');
         wrap.className = 'cs-pro-gate-btns';
         wrap.innerHTML =
-            '<p class="cs-gate-trust">Full text · no daily cap · cancel anytime</p>'
+            '<p class="cs-gate-trust">Full rewrite · no daily cap · works on Gig + letters too</p>'
             + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Get Pro · $5/mo</a>'
             + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, 'gate_lifetime') + '" target="_blank" rel="noopener">Lifetime · $29</a>'
-            + '<p class="cs-gate-fine">Stripe · 14-day refund · <a href="/pro-restore/">Already paid?</a></p>';
+            + '<p class="cs-gate-fine">Stripe · 14-day refund · <a href="/pro/">Compare plans</a> · <a href="/pro-restore/">Already paid?</a></p>';
         card.appendChild(wrap);
         wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
             a.addEventListener('click', function () {
@@ -189,14 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mode === 'pro_only') {
             if (title) title.textContent = 'Free unlock used for today';
             if (blurb) {
-                blurb.innerHTML = 'You can still read the start above. <strong>Pro</strong> unlocks the rest with no daily cap.';
+                blurb.innerHTML = 'You can still read the start above. <strong>Pro ($5/mo)</strong> unlocks the full rewrite with no daily cap — same access on Gig Auto-Pilot and life letters.';
             }
             if (form) form.style.display = 'none';
             if (gateStatus) gateStatus.textContent = '';
         } else {
             if (title) title.textContent = 'Rest of your rewrite is locked';
             if (blurb) {
-                blurb.innerHTML = 'You can read the start above. Unlock the full text free once today with email, or go Pro if you need this every day.';
+                blurb.innerHTML = 'You can read the start above. Unlock the full text <strong>free once today with email</strong>, or go Pro ($5/mo) if you rewrite every day.';
             }
             if (form) form.style.display = '';
         }

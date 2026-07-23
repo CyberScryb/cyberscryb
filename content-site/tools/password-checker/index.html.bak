@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker &mdash; Free, No Signup | CyberScryb</title>
+    <meta name="description" content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
+    <meta name="keywords"
+        content="password strength checker, password tester, password security, how strong is my password, password entropy">
+    <meta property="og:title" content="Password Strength Checker &mdash; Free, No Signup | CyberScryb">
+    <meta property="og:description"
+        content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta property="og:url" content="https://cyberscryb.com/tools/password-checker/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Password Strength Checker &mdash; Free, No Signup | CyberScryb">
+    <meta name="twitter:description" content="Analyze password entropy and crack time locally using this password strength checker. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <link rel="canonical" href="https://cyberscryb.com/tools/password-checker/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- JSON-LD: Feed the Robot -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb Password Strength Checker",
+        "url": "https://cyberscryb.com/tools/password-checker",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free password strength checker with real-time entropy analysis, percentile ranking, crack time estimates at 10 billion guesses/sec, and pattern detection. 100% client-side &mdash; your password never leaves your browser.",
+        "featureList": ["Entropy calculation in bits", "Percentile ranking against common password patterns", "Crack time estimation at 10B guesses/sec", "Keyboard pattern detection", "Common password database check", "CyberScryb Verification ID"],
+        "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
+    }
+    </script>
+    <link rel="stylesheet" href="../shared/email-capture.css">
+    <!-- Google Analytics 4 -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <!-- Ahrefs Web Analytics -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+    <link rel="icon" type="image/png" href="/mascot-icon.png">
+</head>
+
+<body>
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="color:#7b2cff;">Password Strength Checker</span>
+    </nav>
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header>
+        <div class="logo">
+            <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+            <span>CyberScryb</span>
+        </div>
+        <nav>
+            <a href="/tools/">All Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+            <a href="/blog/">Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">🔐 100% Private &mdash; Nothing Leaves Your Browser</div>
+            <h1>Password <span class="accent">Strength</span> Checker</h1>
+            <p class="subtitle">Test your password with real-time entropy analysis, crack time estimates, and actionable
+                improvement tips.</p>
+        </section>
+
+        <section class="checker-card" id="checker">
+            <div class="input-group">
+                <div class="password-field">
+                    <input type="password" id="passwordInput" placeholder="Enter your password..." autocomplete="off"
+                        spellcheck="false">
+                    <button class="toggle-vis" id="toggleVis" title="Toggle visibility">👁</button>
+                </div>
+                <button class="generate-btn" id="generateBtn" title="Generate strong password">⚡ Generate</button>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="meter-bar">
+                    <div class="meter-fill" id="meterFill"></div>
+                </div>
+                <div class="meter-label" id="meterLabel">Enter a password to check</div>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="results hidden">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Entropy</div>
+                        <div class="stat-value" id="entropy">&mdash;</div>
+                        <div class="stat-unit">bits</div>
+                    </div>
+                    <div class="stat-card stat-card-accent">
+                        <div class="stat-label">Percentile</div>
+                        <div class="stat-value" id="percentile">&mdash;</div>
+                        <div class="stat-unit" id="percentileContext">vs. all passwords checked</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Crack Time</div>
+                        <div class="stat-value" id="crackTime">&mdash;</div>
+                        <div class="stat-unit" id="crackContext"></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Length</div>
+                        <div class="stat-value" id="length">&mdash;</div>
+                        <div class="stat-unit">characters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Charset</div>
+                        <div class="stat-value" id="charset">&mdash;</div>
+                        <div class="stat-unit" id="charsetSize">pool size</div>
+                    </div>
+                </div>
+
+                <!-- Composition -->
+                <div class="composition">
+                    <h3>Composition</h3>
+                    <div class="comp-grid">
+                        <div class="comp-item" id="hasLower"><span class="comp-icon">✗</span> Lowercase</div>
+                        <div class="comp-item" id="hasUpper"><span class="comp-icon">✗</span> Uppercase</div>
+                        <div class="comp-item" id="hasDigits"><span class="comp-icon">✗</span> Numbers</div>
+                        <div class="comp-item" id="hasSymbols"><span class="comp-icon">✗</span> Symbols</div>
+                    </div>
+                </div>
+
+                <!-- Warnings -->
+                <div id="warnings" class="warnings hidden">
+                    <h3>⚠️ Warnings</h3>
+                    <ul id="warningList"></ul>
+                </div>
+
+                <!-- Tips -->
+                <div id="tips" class="tips">
+                    <h3>Suggestions</h3>
+                    <ul id="tipsList"></ul>
+                </div>
+            </div>
+
+            <!-- Verification ID -->
+            <div class="verification-badge" id="verificationBadge" style="display:none">
+                <div class="verify-header">
+                    <span class="verify-icon">🛡️</span>
+                    <span class="verify-title">CYBERSCRYB VERIFICATION</span>
+                </div>
+                <div class="verify-id" id="verifyId">&mdash;</div>
+                <div class="verify-summary" id="verifySummary">&mdash;</div>
+            </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Entropy Analysis</h3>
+                    <p>Calculates the information entropy of your password based on character pool size and length.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱</div>
+                    <h3>Crack Time Estimate</h3>
+                    <p>Estimates how long a brute-force attack would take at 10 billion guesses per second.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡</div>
+                    <h3>Pattern Detection</h3>
+                    <p>Identifies common patterns like dictionary words, keyboard walks, repeated characters, and
+                        sequences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Client-Side</h3>
+                    <p>Your password never leaves your browser. No network requests, no logging, no tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Is my password uploaded to a server?</summary>
+                    <p>No. Everything runs in your browser using JavaScript. Your password is never transmitted
+                        anywhere. You can verify by checking the network tab in your browser's developer tools.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is password entropy?</summary>
+                    <p>Entropy measures the unpredictability of a password in bits. A password with 80+ bits of entropy
+                        is considered very strong. The formula is: <code>entropy = log2(pool_size^length)</code>.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How is crack time calculated?</summary>
+                    <p>We estimate based on 10 billion guesses per second (GPU-accelerated brute force). Real-world
+                        attacks may be faster or slower depending on the hashing algorithm used.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is a long password always better?</summary>
+                    <p>Length is the strongest factor, yes. A 16-character password from a large character set is
+                        exponentially harder to crack than an 8-character one. But avoid using common phrases or
+                        patterns even in long passwords.</p>
+                </details>
+            </div>
+        </section>
+    
+    <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How Passwords Get Cracked in 2026</h2>
+        <p>Password cracking has evolved far beyond simple guessing. Modern attackers use GPU-accelerated brute force that can test 10 billion password combinations per second using hardware that costs under $5,000. At that speed, an 8-character password using only lowercase letters falls in under 3 seconds. Add uppercase, numbers, and symbols and you buy more time &mdash; but not as much as you'd think.</p>
+<p><strong>Dictionary attacks</strong> are the first thing any cracker tries. They run through lists of the most common passwords &mdash; "password123," "qwerty," "letmein" &mdash; and variations with common substitutions like @ for a, 3 for e, and 0 for o. These substitutions feel clever but every cracking tool has them built in. If your password is "P@ssw0rd!" you're not fooling anyone.</p>
+<p><strong>Rainbow tables</strong> are precomputed lookup tables that map hashed passwords back to their plaintext. If a website stores passwords as unsalted MD5 or SHA-1 hashes and gets breached, attackers can look up millions of passwords instantly without any computation. Modern password storage uses salted bcrypt or Argon2 specifically to defeat rainbow tables, but many older systems still use weak hashing.</p>
+<p><strong>Credential stuffing</strong> is the most common attack in practice. Attackers take username/password pairs leaked from one breach and try them on other services. If you reuse the same password across Gmail, Netflix, and your bank, a single breach exposes all three. This is why unique passwords per service matter more than password complexity.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Makes a Password Actually Strong</h2>
+        <p>Password strength comes down to one concept: entropy &mdash; the mathematical unpredictability of your password measured in bits. Every bit of entropy doubles the number of guesses an attacker needs. A password with 40 bits of entropy requires about 1 trillion guesses. A password with 80 bits requires over a sextillion guesses &mdash; more than any current hardware can process in a human lifetime.</p>
+<p>Entropy depends on two factors: the size of the character pool you draw from, and the length of the password. Using lowercase letters only gives you a pool of 26 characters. Add uppercase (52), numbers (62), and symbols (95). But length matters exponentially more than pool size. A 20-character lowercase password has more entropy than a 10-character password using all character types.</p>
+<p>The best practical approach in 2026 is passphrases: four or five random words strung together, like "correct horse battery staple" (but actually random &mdash; don't use that one, it's famous). A four-word passphrase from a 7,776-word dictionary has about 51 bits of entropy. Five words gives you 64 bits. Six words gives you 77 bits. They're easier to remember and harder to crack than short complex passwords.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Password Managers: The Real Solution</h2>
+        <p>No human can remember unique, high-entropy passwords for 50+ accounts. Password managers solve this by generating and storing random passwords for every service, locked behind one strong master password. The major options &mdash; 1Password, Bitwarden, and KeePass &mdash; all use AES-256 encryption on your vault. Bitwarden is open-source and free. 1Password has better UX and costs $3/month.</p>
+<p>The most important thing you can do for your security in 2026 is use a password manager with unique passwords per site, enable two-factor authentication on your email and financial accounts, and never reuse passwords across services. This tool helps you understand how strong your passwords are &mdash; but the real defense is never relying on a single password to protect anything important.</p>
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Reading</h2>
+        <ul style="padding-left:1.2rem;">
+            <li><a href="/guides/" style="color:#7b2cff;">Browse All CyberScryb Guides</a></li>
+            <li><a href="/blog/" style="color:#7b2cff;">Read the CyberScryb Blog</a></li>
+            <li><a href="/tools/" style="color:#7b2cff;">Explore All Free Tools</a></li>
+        </ul>
+    </section>
+    </main>
+
+    <!-- AdSense: Below Tool -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="../uuid-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
+                <span style="font-size:0.85rem; color:#878787;">Generate secure random UUIDs for keys and identifiers.</span>
+            </a>
+            <a href="../base64-tool/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
+                <span style="font-size:0.85rem; color:#878787;">Encode and decode strings with Base64 safely in the browser.</span>
+            </a>
+            <a href="../regex-tester/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
+                <span style="font-size:0.85rem; color:#878787;">Test patterns for password validation rules live.</span>
+            </a>
+        </div>
+    </section>
+
+    
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/guides/how-strong-is-my-password/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? How Strong Is My Password?</strong>
+                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            </a>
+            <a href="/guides/password-entropy-explained/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Password Entropy Explained</strong>
+                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            </a>
+            <a href="/guides/how-to-check-if-password-has-been-leaked/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? How to Check If Password Has Been Leaked</strong>
+                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; Your password never leaves this page.</p>
+        <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="../shared/email-capture.js"></script>
+    <script src="../shared/affiliate-panel.js"></script>
+<script src="/js/cs-pro-widget.js?v=2" defer></script>
+</body>
+
+</html>

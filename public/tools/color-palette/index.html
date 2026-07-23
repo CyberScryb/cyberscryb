@@ -105,6 +105,71 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is color harmony?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Color harmony refers to aesthetically pleasing arrangements of colors based on their positions on the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent colors), and triadic (evenly spaced)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use these palettes commercially?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Colors cannot be copyrighted. Any palette generated here is free to use in any personal or commercial project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between RGB, HSL, and Hex?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They're all ways to represent colors. Hex (#FF0000) is compact and widely used in CSS. RGB (255, 0, 0) breaks color into red, green, blue channels. HSL (0°, 100%, 50%) uses hue, saturation, lightness — which is more intuitive for generating harmonies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pick a good base color?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with your brand's primary color, or use our random generator to explore. A good base color has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes two colors \"work together\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Colors work together when they maintain sufficient contrast for readability (WCAG AA requires a contrast ratio of at least 4.5:1 for normal text), while sharing a coherent relationship on the color wheel. Colors that are too similar in both hue and value blend into each other. Colors that are too different without a structural relationship (complementary, triadic, split-complementary) look chaotic. The goal is controlled tension — enough difference to create visual hierarchy, enough relationship to feel intentional."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many colors should a UI color palette have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most practical UI design systems use 5-9 colors: one primary brand color in 5-9 tints and shades, one accent color, one semantic set (success green, warning yellow, error red, info blue), and 2-3 neutral grays. Fewer colors mean tighter consistency — systems with 30+ colors usually end up with inconsistent usage and visual clutter. Start minimal and add colors only when you have a specific design need they solve."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I test if my palette meets WCAG accessibility requirements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After generating your palette, check text-on-background combinations with the CyberScryb WCAG Color Contrast Checker guide . WCAG AA compliance requires 4.5:1 for normal text, 3:1 for large text. WCAG AAA requires 7:1 for normal text. Always test your actual text color against your actual background color — not just your palette colors against each other."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -310,7 +375,7 @@
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/color-palette-generator-for-websites/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Color Palette Generator Guide</strong>
@@ -332,7 +397,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

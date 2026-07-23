@@ -108,6 +108,47 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my password uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs in your browser using JavaScript. Your password is never transmitted anywhere. You can verify by checking the network tab in your browser's developer tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is password entropy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entropy measures the unpredictability of a password in bits. A password with 80+ bits of entropy is considered very strong. The formula is: entropy = log2(pool_size^length) ."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is crack time calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We estimate based on 10 billion guesses per second (GPU-accelerated brute force). Real-world attacks may be faster or slower depending on the hashing algorithm used."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a long password always better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Length is the strongest factor, yes. A 16-character password from a large character set is exponentially harder to crack than an 8-character one. But avoid using common phrases or patterns even in long passwords."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -344,7 +385,7 @@
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/how-strong-is-my-password/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? How Strong Is My Password?</strong>
@@ -366,7 +407,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

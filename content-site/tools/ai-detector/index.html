@@ -197,6 +197,55 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is the AI detection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our detector uses Gemini 3.1 Pro to analyze writing patterns, not statistical classifiers. It identifies specific markers like formulaic transitions, repetitive sentence openers, and AI-favorite vocabulary. Accuracy depends on text length — 200+ words gives the best results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the score mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 0-100 score represents AI likelihood: 0-20 is almost certainly human, 21-40 is mostly human with some AI-like patterns, 41-60 is mixed signals, 61-80 is likely AI-generated, and 81-100 is almost certainly AI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What AI patterns does it look for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It checks for repetitive sentence openers, formulaic transitions (\"Furthermore,\" \"Moreover\"), lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words like \"leverage,\" \"delve,\" \"comprehensive,\" and \"utilize.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text stored or used for training?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your text is processed and immediately discarded. We never store, log, or train on your content. Privacy-first, always."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I fix a high AI score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use our AI Humanizer to rewrite flagged text. It rewrites AI content to match natural human writing patterns while preserving your meaning."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -320,7 +369,7 @@
                                     <h3>Unlock Full Detection Report</h3>
                                     <p>Enter your email to get the full result + <strong>3 free scans/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -426,7 +475,7 @@
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
             <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Best Free Developer Tools Online</strong>
@@ -440,7 +489,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

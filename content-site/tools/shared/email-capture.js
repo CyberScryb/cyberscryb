@@ -32,15 +32,19 @@
 
     const bar = document.createElement('div');
     bar.className = 'cs-email-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Email signup for CyberScryb tools and tips');
     bar.innerHTML = `
-        <h3>Get tools &amp; tips by email</h3>
-        <p class="cs-email-sub">Free. Powered by Substack · The Lazy Hustler.</p>
-        <form class="cs-email-form" id="csEmailForm">
-            <input type="email" class="cs-email-input" id="csEmailInput" placeholder="you@example.com" required>
+        <h3 id="cs-email-heading">Get tools &amp; tips by email</h3>
+        <p class="cs-email-sub">One useful note when we ship tools freelancers and caregivers actually use. Free via Substack · The Lazy Hustler.</p>
+        <form class="cs-email-form" id="csEmailForm" aria-labelledby="cs-email-heading">
+            <label class="cs-visually-hidden" for="csEmailInput">Email address</label>
+            <input type="email" class="cs-email-input" id="csEmailInput" name="email" placeholder="you@example.com" required autocomplete="email" inputmode="email">
             <button type="submit" class="cs-email-btn">Subscribe</button>
         </form>
-        <div class="cs-email-success" id="csEmailSuccess" style="display:none">
-            ✓ Saved. <a id="csSubstackLink" href="${SUBSTACK_URL}/subscribe" target="_blank" rel="noopener">Confirm on Substack →</a>
+        <div class="cs-email-success" id="csEmailSuccess" style="display:none" role="status" aria-live="polite">
+            ✓ Saved on this device. <a id="csSubstackLink" href="${SUBSTACK_URL}/subscribe?utm_source=cyberscryb" target="_blank" rel="noopener">Confirm free Substack →</a>
+            <p class="cs-email-next" style="margin:.75rem 0 0;font-size:.85rem;font-weight:500;color:#a3a3a3;">Next: open Humanizer or Gig Auto-Pilot while you’re here.</p>
         </div>
         <p class="cs-email-note">No spam. Unsubscribe anytime on Substack.</p>
     `;
