@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Restore Pro Access &mdash; CyberScryb</title>
+  <meta name="description" content="Restore CyberScryb Pro on this browser after checkout or if cookies were cleared.">
+  <link rel="icon" type="image/png" href="/mascot-icon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: #020205;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #e6e9f0;
+      padding: 20px;
+      background-image: radial-gradient(circle at 20% 20%, rgba(194, 65, 12,0.08), transparent 50%);
+    }
+    .card {
+      max-width: 480px; width: 100%;
+      background: #0a0e1a;
+      border: 1px solid rgba(194, 65, 12,0.25);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    h1 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+    p { color: #8892a8; line-height: 1.6; margin-bottom: 14px; font-size: 15px; }
+    .status {
+      padding: 12px 14px; border-radius: 10px; margin: 16px 0;
+      font-size: 14px; font-weight: 600;
+    }
+    .status.ok { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.35); }
+    .status.warn { background: rgba(194, 65, 12,0.1); color: #c4a0ff; border: 1px solid rgba(194, 65, 12,0.3); }
+    .btn {
+      display: block; width: 100%; text-align: center;
+      padding: 14px 20px; border-radius: 12px; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer; font-size: 15px;
+      margin-top: 10px;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: transparent; color: #c4a0ff; border: 1px solid rgba(194, 65, 12,0.5); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    ol { color: #8892a8; padding-left: 1.2rem; margin: 12px 0 16px; line-height: 1.7; font-size: 14px; }
+    a.inline { color: var(--primary-soft); }
+    .foot { margin-top: 24px; font-size: 13px; color: #6b7280; text-align: center; }
+  </style>
+  <script src="/js/cs-pro-status.js" defer></script>
+</head>
+<body>
+  <div class="card">
+    <h1>Restore Pro</h1>
+    <p>Paid already but tools still show limits? Restore Pro on <strong>this browser</strong>. Pro is stored on the device that completed checkout.</p>
+
+    <div id="status" class="status warn">Checking this device…</div>
+
+    <button type="button" class="btn btn-primary" id="btn-restore">Restore Pro on this device</button>
+    <a class="btn btn-secondary" href="/pro/">Buy or manage Pro</a>
+    <a class="btn btn-secondary" href="/tools/humanizer/">Back to Humanizer</a>
+
+    <p style="margin-top:20px;font-size:14px;"><strong style="color: var(--text-muted);">If restore doesn’t work</strong></p>
+    <ol>
+      <li>Use the <strong>same browser</strong> you used at checkout (or open the link from your Stripe receipt).</li>
+      <li>Finish payment until you see the green “Pro Activated” page.</li>
+      <li>Don’t clear site data / cookies for cyberscryb.com if you want Pro to stick.</li>
+      <li>Email <a class="inline" href="mailto:support@cyberscryb.com">support@cyberscryb.com</a> with your Stripe receipt — we’ll activate you.</li>
+    </ol>
+
+    <p class="foot">Secure checkout via Stripe · 14-day refund · CyberScryb LLC</p>
+  </div>
+
+  <script>
+  (function () {
+    function ready(fn) {
+      if (window.CSProStatus) return fn();
+      var n = 0;
+      var t = setInterval(function () {
+        n++;
+        if (window.CSProStatus || n > 40) {
+          clearInterval(t);
+          fn();
+        }
+      }, 50);
+    }
+
+    ready(function () {
+      var status = document.getElementById('status');
+      var btn = document.getElementById('btn-restore');
+      var CS = window.CSProStatus;
+
+      function paint() {
+        if (CS && CS.isPro()) {
+          status.className = 'status ok';
+          status.textContent = 'Pro is active on this device. Full results unlocked.';
+          btn.textContent = 'Pro already active';
+          btn.disabled = true;
+          if (CS.updateNav) CS.updateNav();
+        } else {
+          status.className = 'status warn';
+          status.textContent = 'Pro not detected on this device yet.';
+          btn.disabled = false;
+        }
+      }
+
+      btn.addEventListener('click', function () {
+        if (!CS) return;
+        // Restore from localStorage if present; otherwise user may have paid in another browser
+        var restored = CS.tryRestoreFromStorage && CS.tryRestoreFromStorage();
+        if (restored || CS.isPro()) {
+          status.className = 'status ok';
+          status.textContent = 'Pro restored. Reload any open tool tabs.';
+          btn.disabled = true;
+          btn.textContent = 'Pro active';
+          if (CS.updateNav) CS.updateNav();
+          return;
+        }
+        // No prior local flag — cannot invent Pro without payment
+        status.className = 'status warn';
+        status.innerHTML = 'No Pro purchase found in this browser. Complete checkout on the <a class="inline" href="/pro/">Pro page</a>, or email support@cyberscryb.com with your receipt.';
+      });
+
+      paint();
+    });
+  })();
+  </script>
+</body>
+</html>

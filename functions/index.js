@@ -1304,6 +1304,255 @@ Tone: objective, professional, supportive, and clinical. Avoid definitive medica
 
 End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`
     },
+    'utility-shutoff-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'payment arrangement';
+            let modeExtra = '';
+            if (mode.includes('medical')) {
+                modeExtra = `
+MEDICAL PROTECTION MODE:
+- Request the utility's medical certificate / medical baseline process by name if known; do NOT invent a diagnosis or claim the form is already approved.
+- Ask for temporary hold while the certificate is completed by a licensed clinician.
+- Mention household medical context only if stated in facts.`;
+            } else if (mode.includes('restore')) {
+                modeExtra = `
+RESTORE SERVICE MODE:
+- Acknowledge service is already off if facts say so.
+- State what can be paid today toward reconnection and any deposit willingness only if stated.
+- Request written reconnection terms and a same-day or next-business-day restore window when possible.`;
+            } else if (mode.includes('hardship')) {
+                modeExtra = `
+HARDSHIP HOLD MODE:
+- Request temporary hardship hold / delayed disconnect while payment plan and aid applications proceed.
+- Suggest LIHEAP / local energy assistance only as a next step for the customer (do not claim they already qualify).`;
+            } else {
+                modeExtra = `
+PAYMENT PLAN MODE:
+- Lead with a concrete first payment + ongoing monthly offer using only amounts from facts.
+- Ask for written confirmation of arrangement terms and the date any hold expires.`;
+            }
+            return `You are a senior consumer advocate specializing in utility disconnection, payment arrangements, and energy assistance (LIHEAP / crisis programs). Draft a professional ${modeLabel} letter.
+
+STRUCTURED FACTS (use only these — never invent account numbers, amounts, diagnoses, or statutes):
+"""
+${input}
+"""
+Sender name if given: ${params.senderName || 'Use placeholder [Your Name]'}
+Addressed to if given: ${params.addressedTo || 'Customer Care / Payment Arrangements'}
+
+DOMAIN KNOWLEDGE (apply carefully; do not invent state-specific laws):
+- Utilities prioritize letters that open with account # + disconnect/due date + concrete dollar offer.
+- Medical protection usually requires the utility's own clinician form — request the process; do not fabricate medical certifications.
+- LIHEAP and state crisis funds can pay vendors; recommend applying as a NEXT STEP, not as a claim of eligibility.
+- Always request written confirmation of holds and arrangements.
+${modeExtra}
+
+LETTER REQUIREMENTS:
+1. Business letter format: date line, recipient, RE: line with account # if provided, body, closing signature.
+2. One page if possible. Calm, specific, non-hostile.
+3. Open with account number and disconnect/due date when provided.
+4. Brief hardship (dates only from facts) → concrete payment offer or protection request → ask for written confirmation.
+5. If contact phone/email missing, use [phone] / [email] placeholders once.
+6. After the letter, add:
+
+---
+NEXT STEPS FOR YOU
+- Call the utility before the disconnect date; ask for hardship/payment desk; get a reference number
+- Apply to LIHEAP or local energy aid same day if income may qualify (energyhelp.us or state HHS)
+- Request medical certificate form if anyone is seriously ill / on life-supporting equipment
+- Keep disconnect notice, payment receipts, and all written confirmations
+
+CALL SCRIPT (30 seconds)
+"Hi, account [number]. I have a disconnect notice for [date]. I can pay [amount] by [day] and [plan]. Please place a hardship/payment arrangement and email confirmation to [email]."
+
+DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state.
+
+Return ONLY the letter + next steps + call script + disclaimer. No preamble.`;
+        }
+    },
+    'insurance-denial-appeal': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'internal appeal';
+            let modeExtra = '';
+            if (mode.includes('prior') || mode.includes('auth')) {
+                modeExtra = 'Focus on prior authorization reconsideration, medical necessity from member view, and peer-to-peer with treating clinician.';
+            } else if (mode.includes('network') || mode.includes('oon')) {
+                modeExtra = 'Focus on network inadequacy or continuity of care only if facts support; request single-case agreement / in-network exception. Do not invent network search details.';
+            } else if (mode.includes('quantity') || mode.includes('refill') || mode.includes('limit')) {
+                modeExtra = 'Focus on quantity-limit exception using the prescriber rationale from facts only.';
+            } else {
+                modeExtra = 'Address "not medically necessary" by mapping facts to failed alternatives and clinician order; quote denial reason only if present.';
+            }
+            return `You are an experienced patient advocate drafting a health plan MEMBER INTERNAL APPEAL letter (${modeLabel}).
+
+STRUCTURED FACTS (never invent member IDs, claim numbers, diagnoses, CPT/NDC codes, or policy language):
+"""
+${input}
+"""
+Sender: ${params.senderName || '[Member Name]'}
+Addressed to: ${params.addressedTo || 'Appeals & Grievances / Prior Authorization Appeals'}
+
+DOMAIN KNOWLEDGE:
+- Strong appeals: identify member + claim/auth # + denial date + service, quote the plan's denial reason, then answer it with documented clinical history from facts only.
+- A clinician letter of medical necessity is the strongest attachment — list it; do not pretend you wrote it.
+- Many commercial plans allow internal appeal then external review; mention checking the notice for deadlines without inventing a number of days unless facts provide one.
+- Peer-to-peer between plan medical director and treating clinician often helps — request it if clinician contact is given.
+${modeExtra}
+
+LETTER REQUIREMENTS:
+1. Formal business letter with RE: line (member ID, claim/auth #, service).
+2. Sections: What I am appealing → Why the denial is incomplete/incorrect based on facts → Clinical summary from member perspective (only stated facts) → Request (approve coverage / reverse denial + peer-to-peer) → Attachments list.
+3. Include:
+
+ATTACHMENTS I WILL PROVIDE
+- Denial letter / EOB (all pages)
+- Prescription or order
+- Clinician letter of medical necessity
+- Notes showing failed alternatives / step therapy (if applicable)
+- Other: [list only if facts mention]
+
+4. Calm, factual tone. No threats. No invented outcomes or guidelines.
+5. Close with member contact placeholders if missing.
+6. Final line: DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and obtain a clinician medical-necessity letter.
+
+Return ONLY the appeal letter.`;
+        }
+    },
+    'sap-appeal-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const modeLabel = params.modeLabel || params.mode || 'SAP appeal';
+            return `You are a financial aid advisor coaching a student through a Satisfactory Academic Progress (SAP) appeal for federal/state/institutional aid (${modeLabel}).
+
+STRUCTURED FACTS (never invent GPA, pace %, grades, diagnoses, or school policy thresholds):
+"""
+${input}
+"""
+Sender: ${params.senderName || '[Student Name]'}
+Addressed to: ${params.addressedTo || 'Office of Financial Aid — SAP Committee'}
+
+DOMAIN KNOWLEDGE (federal SAP framework; school sets exact thresholds):
+- SAP typically measures: qualitative (GPA), quantitative (pace = completed/attempted credits), and maximum timeframe (~150% of program length).
+- Winning appeals usually have three legs: (1) documented extenuating circumstance with dates, (2) what is different now, (3) specific academic plan (credits, supports, target term GPA).
+- Emotion without documentation and plan rarely succeeds. Do not claim documents are attached unless facts say so — list what the student should attach.
+- Tone: accountable, specific, respectful, hopeful but realistic.
+
+LETTER REQUIREMENTS:
+1. Formal letter format with student ID and program if provided.
+2. Sections with clear headings:
+   - Extenuating circumstance (dates from facts only)
+   - Impact on SAP metrics (only numbers given)
+   - What has changed
+   - Academic plan for next term (credits, courses/supports, targets from facts)
+   - Request (reinstatement / probation / continued eligibility per school process)
+3. Closing: willingness to meet advisor / provide documentation.
+4. After letter, add:
+
+DOCUMENTS TO INCLUDE (school-dependent)
+- Official SAP form if required
+- Third-party documentation of circumstance
+- Advisor schedule / degree audit if max-timeframe
+- Disability services letter if relevant
+
+DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy PDF and deadlines.
+
+Return ONLY the letter + documents list + disclaimer.`;
+        }
+    },
+    'landlord-tenant-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'landlord-tenant';
+            let tone = 'professional and firm but civil';
+            let modeExtra = '';
+            if (mode.includes('deposit')) {
+                tone = 'firm, precise, businesslike';
+                modeExtra = 'Demand itemized deductions and return of remaining deposit. Do NOT invent the statutory number of days — say "within the time required by [state] law" or use a deadline only if facts provide one.';
+            } else if (mode.includes('habit')) {
+                tone = 'urgent, factual, non-threatening';
+                modeExtra = 'Document condition timeline. Request repair by a clear deadline from facts or a reasonable short window. Do not advise rent withholding. One optional line: tenant may contact local housing code enforcement if unresolved.';
+            } else if (mode.includes('rent')) {
+                tone = 'collaborative and specific';
+                modeExtra = 'Propose a dated catch-up schedule with amounts from facts only. Request written acceptance.';
+            } else if (mode.includes('move')) {
+                tone = 'clear and courteous';
+                modeExtra = 'State intended move-out date, unit, key return, and request for inspection / deposit process.';
+            } else {
+                modeExtra = 'State defect, start date, prior notices, access availability, and requested repair deadline.';
+            }
+            return `You are a housing advocate drafting a ${modeLabel} letter. Tone: ${tone}.
+
+STRUCTURED FACTS (never invent lease clauses, statute numbers, dollar penalties, or dates):
+"""
+${input}
+"""
+Sender: ${params.senderName || '[Tenant Name]'}
+Addressed to: ${params.addressedTo || 'Landlord / Property Manager'}
+
+DOMAIN KNOWLEDGE:
+- Housing disputes turn on dated paper trails (prior texts/emails, photos). Reference prior contact only if stated.
+- Rent withholding / repair-and-deduct rules vary by jurisdiction — NEVER advise illegal rent withholding or invent local statutes.
+- Deposit return windows vary by state — do not invent day counts.
+${modeExtra}
+
+LETTER REQUIREMENTS:
+1. Business letter with property/unit in RE: line.
+2. Timeline of issue and prior notices from facts.
+3. Clear ask + deadline when facts support one.
+4. Short note: "Enclosures/attachments: photos, prior messages, lease excerpt if relevant."
+5. Closing with contact info placeholders if missing.
+6. Final line: DISCLAIMER: Not legal advice. Housing law varies by location.
+
+Return ONLY the letter.`;
+        }
+    },
+    'payment-demand-letter': {
+        model: 'gemini-3.1-pro-preview',
+        build: (input, params) => {
+            const mode = (params.mode || '').toLowerCase();
+            const modeLabel = params.modeLabel || params.mode || 'payment demand';
+            let toneGuide = 'professional and clear';
+            if (mode.includes('friendly') || mode.includes('1st')) {
+                toneGuide = 'warm, assume good intent, short';
+            } else if (mode.includes('firm') || mode.includes('2nd')) {
+                toneGuide = 'polite but firm; reference prior reminders with dates from facts';
+            } else if (mode.includes('final')) {
+                toneGuide = 'final written notice — professional, not aggressive; escalate only using next steps stated in facts';
+            } else if (mode.includes('personal') || mode.includes('roommate')) {
+                toneGuide = 'personal but clear; preserve relationship while documenting the debt';
+            }
+            return `You are a collections-communication specialist writing a ${modeLabel} letter. Tone: ${toneGuide}.
+
+STRUCTURED FACTS (never invent amounts, invoice numbers, contract penalties, or legal threats):
+"""
+${input}
+"""
+Sender: ${params.senderName || '[Your Name / Business]'}
+Addressed to: ${params.addressedTo || 'Accounts Payable / Debtor'}
+
+DOMAIN KNOWLEDGE:
+- Effective demand letters always state: amount, invoice/reference, original due date, new pay-by date, how to pay.
+- Tone ladder: friendly → firm → final. Do not jump to legal threats on a first reminder.
+- Mention pause of work, late fees, collections, or small claims ONLY if the facts already include that next step (or contract basis). Never invent lawsuits or criminal claims.
+- Keep paragraphs short and scannable.
+
+LETTER REQUIREMENTS:
+1. Business (or clear personal) letter format.
+2. Opening: purpose in one sentence.
+3. Body: amount owed, reference, original due date, prior contact summary (if given), new deadline, payment method.
+4. One clear call to action.
+5. Closing signature.
+6. Final line: DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice.
+
+Return ONLY the letter.`;
+        }
+    },
+
     'behavioral-log': {
         model: 'gemini-3.1-pro-preview',
         build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
@@ -1559,7 +1808,8 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
         // TODO: Add admin authentication here
         // For now, check for a secret query param
         const secret = req.query.secret;
-        if (secret !== (functions.config().analytics?.secret || process.env.ANALYTICS_SECRET)) {
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
             return res.status(403).json({ error: 'Unauthorized' });
         }
 
@@ -1668,7 +1918,257 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
     });
 });
 
+// ─── Public Metrics (dashboard-facing) ─────────────────
+// Same aggregate/anonymized data as analyticsReport, exposed under a
+// dedicated /api/metrics route for external dashboards. `cors({origin:true})`
+// reflects the request Origin back in Access-Control-Allow-Origin and
+// auto-handles the OPTIONS preflight, so any origin can GET this route.
+exports.getMetrics = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const secret = req.query.secret;
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        try {
+            const days = parseInt(req.query.days) || 7;
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - days);
+            const startDateStr = startDate.toISOString().slice(0, 10);
+
+            const snapshot = await db.collection('analytics')
+                .where('date', '>=', startDateStr)
+                .orderBy('date', 'desc')
+                .limit(5000)
+                .get();
+
+            const summary = {
+                totalRequests: 0,
+                successfulRequests: 0,
+                rateLimitHits: 0,
+                toolUsage: {},
+                tierDistribution: {},
+                hourlyDistribution: Array(24).fill(0)
+            };
+
+            snapshot.forEach(doc => {
+                const event = doc.data();
+                const count = event.count || 0;
+
+                if (event.type === 'ai_request') {
+                    summary.totalRequests += count;
+
+                    if (event.metadata?.tool) {
+                        Object.entries(event.metadata.tool).forEach(([tool, toolCount]) => {
+                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + toolCount;
+                        });
+                    }
+
+                    if (event.metadata?.tier) {
+                        Object.entries(event.metadata.tier).forEach(([tier, tierCount]) => {
+                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + tierCount;
+                        });
+                    }
+                } else if (event.type === 'ai_success') {
+                    summary.successfulRequests += count;
+                } else if (event.type === 'rate_limit_hit') {
+                    summary.rateLimitHits += count;
+                }
+
+                if (event.hourly) {
+                    event.hourly.forEach((hourlyCount, hour) => {
+                        summary.hourlyDistribution[hour] += hourlyCount;
+                    });
+                }
+            });
+
+            summary.successRate = summary.totalRequests > 0
+                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+                : '0%';
+
+            return res.status(200).json({
+                period: `Last ${days} days`,
+                startDate: startDateStr,
+                endDate: new Date().toISOString().slice(0, 10),
+                summary
+            });
+
+        } catch (error) {
+            console.error('[METRICS] Report error:', error);
+            return res.status(500).json({ error: 'Failed to generate metrics' });
+        }
+    });
+});
+
+// ─── Substack newsletter sync ─────────────────────────
+// Substack has no official public subscribe API. We use the same
+// free-subscribe endpoint their own forms call:
+//   POST https://{publication}.substack.com/api/v1/free
+// Configure with SUBSTACK_PUBLICATION (subdomain only), e.g. "lazyhustler".
+// Set SUBSTACK_PUBLICATION="" or "off" to disable without code changes.
+
+function getSubstackPublication() {
+    const raw = (process.env.SUBSTACK_PUBLICATION || process.env.SUBSTACK_SUBDOMAIN || 'lazyhustler')
+        .trim()
+        .toLowerCase();
+    if (!raw || raw === 'off' || raw === 'false' || raw === '0') return null;
+    return raw
+        .replace(/^https?:\/\//, '')
+        .replace(/\.substack\.com.*$/, '')
+        .replace(/\/$/, '');
+}
+
+/**
+ * Push email to Substack free list. Never throws — returns a result object.
+ * Substack typically replies requires_confirmation:true and emails a confirm link.
+ *
+ * Substack blocks Node.js TLS fingerprints (403). curl works. Prefer curl binary
+ * (present on GCF Node images as `curl`, Windows as `curl.exe`), fall back to https.
+ */
+function pushToSubstack(email) {
+    const publication = getSubstackPublication();
+    if (!publication) {
+        return Promise.resolve({ ok: false, skipped: true, reason: 'not_configured' });
+    }
+
+    const fs = require('fs');
+    const os = require('os');
+    const path = require('path');
+    const { execFile } = require('child_process');
+    const https = require('https');
+
+    const baseHost = `${publication}.substack.com`;
+    const baseUrl = `https://${baseHost}`;
+    const payloadObj = {
+        email,
+        first_url: 'https://cyberscryb.com/',
+        first_referrer: '',
+        current_url: 'https://cyberscryb.com/',
+        current_referrer: 'https://cyberscryb.com/',
+    };
+    const payload = JSON.stringify(payloadObj);
+    const ua =
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+    function parseResult(statusCode, raw) {
+        let data = null;
+        try { data = JSON.parse(raw); } catch (_) { data = null; }
+        if (statusCode < 200 || statusCode >= 300) {
+            console.warn('[substack] subscribe failed', statusCode, String(raw || '').slice(0, 200));
+            return {
+                ok: false,
+                skipped: false,
+                status: statusCode,
+                reason: (data && (data.error || data.message)) || `http_${statusCode}`,
+                publication,
+            };
+        }
+        return {
+            ok: true,
+            skipped: false,
+            status: statusCode,
+            publication,
+            requiresConfirmation: !!(data && data.requires_confirmation),
+            subscriptionId: data && data.subscription_id ? data.subscription_id : null,
+        };
+    }
+
+    function viaHttps() {
+        return new Promise((resolve) => {
+            const req = https.request(
+                {
+                    hostname: baseHost,
+                    path: '/api/v1/free',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Content-Length': Buffer.byteLength(payload),
+                        'User-Agent': ua,
+                        Origin: baseUrl,
+                        Referer: `${baseUrl}/`,
+                    },
+                    timeout: 15000,
+                },
+                (res) => {
+                    let raw = '';
+                    res.on('data', (chunk) => { raw += chunk; });
+                    res.on('end', () => resolve(parseResult(res.statusCode, raw)));
+                }
+            );
+            req.on('error', (err) => {
+                console.error('[substack] https error', err && err.message);
+                resolve({ ok: false, skipped: false, reason: 'network_error', publication });
+            });
+            req.on('timeout', () => {
+                req.destroy();
+                resolve({ ok: false, skipped: false, reason: 'timeout', publication });
+            });
+            req.write(payload);
+            req.end();
+        });
+    }
+
+    function viaCurl(bin) {
+        return new Promise((resolve) => {
+            const tmp = path.join(os.tmpdir(), `ss-${Date.now()}-${Math.random().toString(36).slice(2)}.json`);
+            try {
+                fs.writeFileSync(tmp, payload, 'utf8');
+            } catch (e) {
+                resolve({ ok: false, skipped: false, reason: 'tmp_write_failed', publication });
+                return;
+            }
+            const args = [
+                '-sS', '-X', 'POST', `${baseUrl}/api/v1/free`,
+                '-H', 'Content-Type: application/json',
+                '-H', 'Accept: application/json',
+                '-H', `User-Agent: ${ua}`,
+                '-H', `Origin: ${baseUrl}`,
+                '-H', `Referer: ${baseUrl}/`,
+                '--data-binary', `@${tmp}`,
+                '-w', '\n__HTTP__%{http_code}',
+                '--max-time', '15',
+            ];
+            execFile(bin, args, { timeout: 20000, maxBuffer: 256 * 1024 }, (err, stdout) => {
+                try { fs.unlinkSync(tmp); } catch (_) { /* ignore */ }
+                if (err && !stdout) {
+                    resolve({ ok: false, skipped: false, reason: `curl_error:${err.message}`, publication });
+                    return;
+                }
+                const text = String(stdout || '');
+                const m = text.match(/\n__HTTP__(\d+)\s*$/);
+                const status = m ? parseInt(m[1], 10) : (err ? 0 : 200);
+                const body = m ? text.replace(/\n__HTTP__\d+\s*$/, '') : text;
+                resolve(parseResult(status, body));
+            });
+        });
+    }
+
+    // Prefer curl (works against Substack bot filter). Try unix then Windows name.
+    return viaCurl('curl').then((r) => {
+        if (r.ok) return r;
+        if (r.reason && String(r.reason).includes('curl_error')) {
+            return viaCurl('curl.exe').then((r2) => {
+                if (r2.ok) return r2;
+                if (r2.reason && String(r2.reason).includes('curl_error')) {
+                    return viaHttps();
+                }
+                return r2;
+            });
+        }
+        // curl ran but Substack rejected — still try https as last resort
+        return viaHttps().then((h) => (h.ok ? h : r));
+    });
+}
+
 // ─── Email Capture ───────────────────────────────────
+// 1) Always store in Firestore `subscribers`
+// 2) Also add to Substack free list (Lazy Hustler by default)
 exports.subscribeEmail = functions.https.onRequest((req, res) => {
     cors(req, res, async () => {
         if (req.method !== 'POST') {
@@ -1685,31 +2185,156 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
         const normalizedEmail = email.toLowerCase().trim();
 
         try {
-            // Check for duplicate
+            // Check for duplicate in our DB
             const existing = await db.collection('subscribers')
                 .where('email', '==', normalizedEmail)
                 .limit(1)
                 .get();
 
             if (!existing.empty) {
-                return res.status(200).json({ message: 'already_subscribed' });
+                const doc = existing.docs[0];
+                const data = doc.data() || {};
+                let substack = { ok: true, skipped: true, reason: 'already_synced' };
+
+                // Re-try Substack if we never synced this row (or last attempt failed)
+                if (!data.substackSynced) {
+                    substack = await pushToSubstack(normalizedEmail);
+                    await doc.ref.update({
+                        substackSynced: !!substack.ok,
+                        substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                        substackStatus: substack.ok ? 'ok' : (substack.reason || 'error'),
+                        substackPublication: substack.publication || getSubstackPublication() || null,
+                    });
+                }
+
+                return res.status(200).json({
+                    message: 'already_subscribed',
+                    substack: {
+                        ok: !!substack.ok,
+                        requiresConfirmation: !!substack.requiresConfirmation,
+                        publication: substack.publication || getSubstackPublication(),
+                    },
+                });
             }
+
+            // Push to Substack first so a confirm email can go out
+            const substack = await pushToSubstack(normalizedEmail);
 
             // Store the subscriber (no IP tracking - privacy-first)
             await db.collection('subscribers').add({
                 email: normalizedEmail,
                 source: source || 'homepage',
-                subscribedAt: admin.firestore.FieldValue.serverTimestamp()
+                subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
+                substackSynced: !!substack.ok,
+                substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                substackStatus: substack.ok
+                    ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
+                    : (substack.skipped ? 'skipped' : (substack.reason || 'error')),
+                substackPublication: substack.publication || getSubstackPublication() || null,
+                substackSubscriptionId: substack.subscriptionId
+                    ? String(substack.subscriptionId)
+                    : null,
             });
 
             // Log conversion (anonymous)
-            logConversion('email_capture', 'subscribed', { source: source || 'homepage' });
+            logConversion('email_capture', 'subscribed', {
+                source: source || 'homepage',
+                substack: substack.ok ? 'ok' : 'fail',
+            });
 
-            return res.status(200).json({ message: 'subscribed' });
+            return res.status(200).json({
+                message: 'subscribed',
+                // Front-end can show: check email for Substack confirm
+                substack: {
+                    ok: !!substack.ok,
+                    requiresConfirmation: !!substack.requiresConfirmation,
+                    publication: substack.publication || getSubstackPublication(),
+                },
+            });
 
         } catch (error) {
             console.error('Subscribe Error:', error);
             return res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
+
+// One-shot / on-demand: push unsynced Firestore subscribers to Substack.
+// GET /api/substack-backfill?secret=ANALYTICS_SECRET&limit=50
+exports.substackBackfill = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        if (req.method !== 'GET' && req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method Not Allowed' });
+        }
+
+        const secret = req.query.secret || (req.body && req.body.secret);
+        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+        if (!expectedSecret || secret !== expectedSecret) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        if (!getSubstackPublication()) {
+            return res.status(400).json({ error: 'SUBSTACK_PUBLICATION not configured' });
+        }
+
+        const limit = Math.min(parseInt(req.query.limit || '50', 10) || 50, 200);
+        const dryRun = req.query.dry === '1' || req.query.dry === 'true';
+
+        try {
+            const snap = await db.collection('subscribers').limit(500).get();
+            const pending = [];
+            snap.forEach((doc) => {
+                const d = doc.data() || {};
+                if (d.email && !d.substackSynced) {
+                    pending.push({ id: doc.id, email: d.email, ref: doc.ref });
+                }
+            });
+
+            const batch = pending.slice(0, limit);
+            const results = { attempted: 0, ok: 0, failed: 0, skipped: dryRun ? batch.length : 0, details: [] };
+
+            if (dryRun) {
+                return res.status(200).json({
+                    dryRun: true,
+                    pendingTotal: pending.length,
+                    wouldProcess: batch.map((b) => b.email),
+                });
+            }
+
+            for (const row of batch) {
+                results.attempted++;
+                const substack = await pushToSubstack(row.email);
+                // small delay so Substack rate limits are less likely
+                await new Promise((r) => setTimeout(r, 400));
+
+                await row.ref.update({
+                    substackSynced: !!substack.ok,
+                    substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                    substackStatus: substack.ok
+                        ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
+                        : (substack.reason || 'error'),
+                    substackPublication: substack.publication || getSubstackPublication() || null,
+                    substackSubscriptionId: substack.subscriptionId
+                        ? String(substack.subscriptionId)
+                        : null,
+                });
+
+                if (substack.ok) results.ok++;
+                else results.failed++;
+                results.details.push({
+                    email: row.email,
+                    ok: !!substack.ok,
+                    reason: substack.reason || null,
+                });
+            }
+
+            return res.status(200).json({
+                pendingTotal: pending.length,
+                ...results,
+            });
+        } catch (error) {
+            console.error('[substack] backfill error', error);
+            return res.status(500).json({ error: 'Backfill failed' });
         }
     });
 });

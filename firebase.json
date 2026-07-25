@@ -69,8 +69,28 @@
     ],
     "redirects": [
       {
+        "source": "/v2",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/v2/**",
+        "destination": "/",
+        "type": 301
+      },
+      {
         "source": "/blog.html",
         "destination": "/guides/",
+        "type": 301
+      },
+      {
+        "source": "/products",
+        "destination": "/tools/",
+        "type": 301
+      },
+      {
+        "source": "/products/**",
+        "destination": "/tools/",
         "type": 301
       }
     ],
@@ -86,6 +106,10 @@
       {
         "source": "/api/subscribe",
         "function": "subscribeEmail"
+      },
+      {
+        "source": "/api/substack-backfill",
+        "function": "substackBackfill"
       },
       {
         "source": "/api/gig-work",
@@ -110,6 +134,10 @@
       {
         "source": "/api/validate-pro",
         "function": "validateStripeSession"
+      },
+      {
+        "source": "/api/metrics",
+        "function": "getMetrics"
       }
     ]
   },

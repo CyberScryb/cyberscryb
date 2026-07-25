@@ -27,9 +27,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/subnet-calculator/style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -121,9 +121,9 @@
 <body>
     <!-- Navigation Breadcrumbs -->
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color:#a855f7;">Subnet Calculator</span>
     </nav>
@@ -135,18 +135,17 @@
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
             </div>
         </nav>
@@ -227,15 +226,15 @@
 
         <!-- Educational content (SEO / AdSense Wedge) -->
         <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:#cbd5e1; font-family:'Inter',sans-serif; line-height:1.75;">
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding IPv4 Subnetting &amp; CIDR Notation</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding IPv4 Subnetting &amp; CIDR Notation</h2>
             <p>Subnetting is the practice of dividing a physical network into multiple logical sub-networks (subnets). In modern networking, this partitioning is essential for conserving IP address ranges, optimizing routing efficiency, and enforcing security policies. Without subnetting, all devices connected to an organization's network would inhabit the same broadcast domain, leading to excessive network congestion and security vulnerabilities.</p>
             <p>An IPv4 address consists of 32 bits, divided into four octets of 8 bits each, usually written in dotted-decimal format (e.g., 192.168.1.1). Subnetting works by taking bits from the host portion of an IP address and utilizing them to identify the specific subnet. This division is defined by a subnet mask, which dictates which portion of the address belongs to the network routing path and which belongs to the individual device (host).</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Shift from Classful Routing to CIDR</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Shift from Classful Routing to CIDR</h2>
             <p>In the early days of the internet, IP addresses were allocated in strict classes (Class A, B, and C). Class A networks used a default 8-bit mask (/8), allowing for over 16 million host addresses. Class B used a 16-bit mask (/16) with 65,534 hosts, and Class C used a 24-bit mask (/24) supporting 254 hosts. This system was highly inefficient. An organization needing 500 IP addresses would be forced to request a Class B network block, wasting over 65,000 potential IP addresses.</p>
             <p>To solve this scaling crisis, Classless Inter-Domain Routing (CIDR) was introduced in 1993. CIDR allows subnet masks to be partitioned at any bit boundary, rather than just 8-bit octet increments. A network prefix is denoted with a slash followed by the number of network bits (e.g., 192.168.1.0/25). This slash number represents the network mask. For example, a /25 network borrows one bit from the fourth octet, splitting a standard /24 network block into two distinct subnets, each offering 126 usable host addresses.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How to Calculate a Subnet Manually</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How to Calculate a Subnet Manually</h2>
             <p>Manual subnetting calculations require converting dotted-decimal IP addresses into binary form, performing bitwise operations, and converting back to decimal. Here are the core metrics calculated by this tool:</p>
             <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
                 <li style="margin-bottom:0.5rem;"><strong>Network Address:</strong> Calculated by performing a bitwise AND operation between the IP address and the subnet mask. This represents the starting boundary of the subnet range and cannot be assigned to an active host.</li>
@@ -245,11 +244,11 @@
             </ul>
             <p>By understanding binary alignment, network engineers can easily calculate block sizes and design robust network architectures suited for secure, modern enterprise operations.</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
-                <li><a href="/tools/regex-tester/" style="color:#06b6d4;">Regex Tester</a> &mdash; Test network validation filters.</li>
-                <li><a href="/tools/password-checker/" style="color:#06b6d4;">Password Strength Checker</a> &mdash; Evaluate system credentials securely.</li>
-                <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb Network Architecture Guides</a></li>
+                <li><a href="/tools/regex-tester/" style="color:#C2410C;">Regex Tester</a> &mdash; Test network validation filters.</li>
+                <li><a href="/tools/password-checker/" style="color:#C2410C;">Password Strength Checker</a> &mdash; Evaluate system credentials securely.</li>
+                <li><a href="/guides/" style="color:#C2410C;">Read CyberScryb Network Architecture Guides</a></li>
             </ul>
         </section>
     </main>
@@ -262,19 +261,19 @@
 
     <!-- Related Tools Grid -->
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:#0f1016; border: 1px solid rgba(255,255,255,0.08); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Network Tools</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Network Tools</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">UUID Generator</strong>
-                <span style="font-size:0.85rem; color:#878787;">Generate secure random UUIDs for network tokens.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Generate secure random UUIDs for network tokens.</span>
             </a>
-            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
-                <span style="font-size:0.85rem; color:#878787;">Encode or decode network requests using Base64.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Encode or decode network requests using Base64.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
-                <span style="font-size:0.85rem; color:#878787;">Validate network IP matches with regex parameters.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Validate network IP matches with regex parameters.</span>
             </a>
         </div>
     </section>

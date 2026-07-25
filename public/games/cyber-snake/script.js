@@ -396,13 +396,13 @@ function draw() {
     snake.forEach((segment, idx) => {
         // Head has brighter color
         if (idx === 0) {
-            ctx.fillStyle = '#06b6d4'; // bright cyan
-            ctx.shadowColor = '#06b6d4';
+            ctx.fillStyle = '#C2410C'; // bright cyan
+            ctx.shadowColor = '#C2410C';
             ctx.shadowBlur = 15;
         } else {
             // body segments fade slightly
-            ctx.fillStyle = `rgba(6, 182, 212, ${Math.max(0.4, 1.0 - idx / (snake.length + 2))})`;
-            ctx.shadowColor = '#06b6d4';
+            ctx.fillStyle = `rgba(194, 65, 12, ${Math.max(0.4, 1.0 - idx / (snake.length + 2))})`;
+            ctx.shadowColor = '#C2410C';
             ctx.shadowBlur = 5;
         }
         

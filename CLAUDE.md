@@ -3,6 +3,31 @@
 
 ---
 
+## 🏗️ ACTIVE INITIATIVE — Site Rebuild (started 2026-07-21)
+
+Nathan handed down `Rebuild.CLAUDE.md` (repo root) as a full rebuild/redesign master brief — read it before any design/content work. **Phase 0 audit is done** (`PHASE0-AUDIT-2026-07-21.md`). Branch: `rebuild/phase1-foundation`.
+
+### P0 status (as of 2026-07-21 handoff, continued after Claude rate-limit)
+
+| Item | Status |
+|---|---|
+| `/pro/` pricing + Stripe | Clean (stale brief finding) |
+| `tool_use` → `tool_used` analytics | **Fixed** on all 14 standalone dev tools (public + content-site) |
+| One tool count | **Fixed → 50** (exact dir count under `public/tools/` excl. `shared`) |
+| About privacy claim | **Fixed** — AI vs client-side tools scoped correctly |
+| Humanizer privacy copy | **Fixed** on humanizer + rewrite/remove landing pages |
+| Canonical nav | Partial (homepage nav aligned toward interior; full component still Phase 1) |
+| `privacy-check.html` | Gone from tree (resolved by absence) |
+| AI crawler block (ClaudeBot/GPTBot) | **Still needs Nathan decision** (Cloudflare dashboard) |
+| PSI / CWV baseline | Still blocked without PSI key or local Lighthouse |
+| Ahrefs/Semrush/GSC export | Still blocked — need Nathan export for SEO floor |
+| Tool shell spec | Written: `public/tools/shared/tool-shell-spec.md` (spec only, not applied) |
+| Design tokens / Phase 1 visual rebuild | **Not started** — needs go-ahead + Digital Obsidian decision |
+
+**Deploy rule for this initiative:** never push to `main` / ship without explicit "ship it" from Nathan, checkpoint by checkpoint (`Rebuild.CLAUDE.md` hard constraint).
+
+---
+
 ## ⚡ OPERATING DIRECTIVE — READ THIS FIRST, EVERY SESSION
 
 ### How Claude Works on This Project
@@ -260,8 +285,8 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 - Brands: **CyberScryb LLC** (tools/SaaS) + **Lazy Hustler** (content/newsletter)
 - Stats: 68+ AI systems, 229 Suno music tracks
 
-## CyberScryb Products
-**Site:** cyberscryb.com — 29 AI tools total
+## CyberScryb Products (on-site tools only)
+**Site:** cyberscryb.com — tools hub + Pro. The `/products/` Gumroad/pre-order page was removed (301 → `/tools/`). No external product storefront on-site.
 
 ### Hero Tools (highest commercial value)
 | Tool | Notes |
@@ -277,15 +302,16 @@ The goal is: Nathan describes what he wants, it gets done, he finds the result w
 ### Dev Tools (bundle filler)
 JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, password checker, privacy policy gen, SEO meta tag gen, and others.
 
-## Pricing (as of session)
+## Pricing (canonical — keep site-wide)
 | Tier | Price | Link |
 |------|-------|------|
 | Monthly | $5/mo | cyberscryb.com/pro |
-| Annual | $29/yr | cyberscryb.com/pro |
+| Lifetime | $29 one-time (first 50 buyers, then $49) | cyberscryb.com/pro |
 | CNA Resume Kit | $39 one-time | https://buy.stripe.com/00w3cx56m3mueKF3oV0sU01 |
-| CyberScryb Pro (lifetime promo) | listed on site | https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08 |
 
-**Note:** A $29 lifetime and $19 CNA pack were created and then **deactivated** in April 2026 because they conflicted with existing $29/yr tier.
+**Stripe Payment Links:** Monthly `https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b` · Lifetime `https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08`
+
+**Do not advertise annual/$29/yr or $9/mo.** Historical notes: old $9 monthly copy was fixed to $5; stale tool pages once said "Pro Annual $29/yr" while `/pro/` sold lifetime — fixed to Lifetime $29 site-wide.
 
 ## Automated Systems (Scheduled Tasks)
 | Task | Schedule | Status |
@@ -312,7 +338,7 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 - **ChatGPT/Claude cite Reddit** at 7% conversion vs Google's 5%
 
 ## Active Revenue Channels
-- CyberScryb Pro subscriptions ($5/mo, $29/yr)
+- CyberScryb Pro ($5/mo or $29 lifetime)
 - CNA Resume Kit ($39)
 - AdSense on tool pages (revenue = traffic indicator; amount unknown)
 - Stripe product ID prefix: `fce2083b` (when Stripe MCP reconnected)
@@ -334,3 +360,11 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 
 ## Context for New Sessions
 Start any new session by reading this file. Key constraint: **Stripe MCP must be reconnected** before revenue monitoring works. The Reddit monitor is the core compounding automation — check its daily email output to know if it's driving engagement. The story post is the single highest-leverage human action still pending.
+
+## Recent (2026-07-22 full site audit + fix)
+- Fixed AI Tools filter: life/AI letter tools were categorized legal-only so AI filter hid them (~12 tools). Full category map + longest-slug match.
+- Added 7 missing tools to /tools/ listing (contrast, glassmorphism, subnet, child/spousal support, behavioral log, med log).
+- Sitemap: +14 missing tool URLs. Broken links fixed (meta-tag-generator, daily-schedule, medical-history, favicon).
+- Privacy copy: about/contact/privacy/disclosure/tools footers + best-free-dev-tools FAQ + llms.txt no longer claim all tools are client-side only.
+- GA consent gate on tools.html, ai-writing-suite, fluid-sim. Homepage logo alt text. Filter dock mobile wrap. Email capture Substack copy polish.
+

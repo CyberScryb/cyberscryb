@@ -22,8 +22,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
 
     <!-- Google Analytics 4 -->
     <script>
@@ -105,10 +105,10 @@
 
         .sg-input {
             width: 100%; background: #141414; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
-            color: #ededed; font-family: 'Inter', sans-serif; font-size: 1.1rem;
+            color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1.1rem;
             padding: 1.25rem 1.5rem; outline: none; transition: border-color 0.3s;
         }
-        .sg-input:focus { border-color: #7b2cff; }
+        .sg-input:focus { border-color: var(--primary-soft); }
         .sg-input::placeholder { color: #333; }
 
         .sg-output-box {
@@ -118,7 +118,7 @@
             flex-wrap: wrap;
         }
         .sg-output {
-            font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: #7b2cff;
+            font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: var(--primary-soft);
             word-break: break-all; flex: 1 1 300px;
         }
         .sg-output.empty { color: #444; font-size: 1rem; }
@@ -130,22 +130,22 @@
         .sg-option {
             background: #141414; border: 1px solid #222; border-radius: 10px; padding: 1rem;
         }
-        .sg-option label { display: block; font-size: 0.75rem; color: #878787; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+        .sg-option label { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
         .sg-option select, .sg-option input[type="number"] {
             width: 100%; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
-            color: #ededed; font-family: 'Inter', sans-serif; padding: 0.5rem 0.75rem; outline: none;
+            color: var(--text-muted); font-family: 'Inter', sans-serif; padding: 0.5rem 0.75rem; outline: none;
         }
-        .sg-option select:focus, .sg-option input[type="number"]:focus { border-color: #7b2cff; }
-        .sg-toggle { display: flex; align-items: center; gap: 0.5rem; color: #ccc; font-size: 0.9rem; cursor: pointer; }
-        .sg-toggle input { width: 18px; height: 18px; accent-color: #7b2cff; }
+        .sg-option select:focus, .sg-option input[type="number"]:focus { border-color: var(--primary-soft); }
+        .sg-toggle { display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; }
+        .sg-toggle input { width: 18px; height: 18px; accent-color: var(--primary-soft); }
 
         .action-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #ccc;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
-        .action-btn:hover { border-color: #7b2cff; color: #7b2cff; }
-        .action-btn.primary { background: #7b2cff; border-color: #7b2cff; color: #fff; }
+        .action-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .action-btn.primary { background: var(--primary); border-color: var(--primary-soft); color: #fff; }
         .action-btn.primary:hover { background: #a01818; }
 
         .sg-meta { font-size: 0.8rem; color: #555555; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; }
@@ -153,14 +153,14 @@
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
         .faq-section details { background: #141414; border: 1px solid #222; border-radius: 10px; margin-bottom: 0.5rem; }
-        .faq-section summary { padding: 1rem; cursor: pointer; color: #ccc; font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
-        .faq-section summary::after { content: '+'; color: #7b2cff; font-weight: 700; }
+        .faq-section summary { padding: 1rem; cursor: pointer; color: var(--text-muted); font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
+        .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
-        .faq-section details p { padding: 0 1rem 1rem; color: #878787; line-height: 1.6; margin: 0; }
+        .faq-section details p { padding: 0 1rem 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
         .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
-        .breadcrumb a { color: #7b2cff; text-decoration: none; }
-        .breadcrumb a:hover { color: #fff; }
+        .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--text); }
         .breadcrumb span { margin: 0 0.4rem; }
     </style>
     <!-- Ahrefs Web Analytics -->
@@ -200,18 +200,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -231,7 +230,7 @@
             </div>
 
             <div style="margin-top: 1.5rem;">
-                <input type="text" class="sg-input" id="sg-input" placeholder="Type or paste your title here &mdash; e.g. My Awesome Blog Post!">
+                <input type="text" class="sg-input" id="sg-input" placeholder="Type or paste your title here &mdash; e.g. My Awesome Blog Post!" aria-label="Type or paste your title here &amp;mdash; e.g. My Awesome Blog Post!">
             </div>
 
             <div class="sg-output-box">
@@ -283,19 +282,19 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
-                <span style="font-size:0.85rem; color:#878787;">Build meta title, description, and Open Graph tags for your new URL.</span>
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Build meta title, description, and Open Graph tags for your new URL.</span>
             </a>
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
-                <span style="font-size:0.85rem; color:#878787;">Convert Markdown drafts into publish-ready HTML.</span>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Convert Markdown drafts into publish-ready HTML.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Count words & characters before you trim a title.</span>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Count words & characters before you trim a title.</span>
             </a>
         </div>
     </section>
@@ -304,8 +303,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>
@@ -404,7 +403,7 @@
                 const old = btn.textContent;
                 btn.textContent = 'Copied!';
                 setTimeout(() => { btn.textContent = old; }, 1200);
-                if (typeof gtag === 'function') gtag('event', 'tool_use', { tool_name: 'slug_generator' });
+                if (typeof gtag === 'function') gtag('event', 'tool_used', { tool_name: 'slug_generator' });
             }
         });
         document.getElementById('sg-sample').addEventListener('click', () => {

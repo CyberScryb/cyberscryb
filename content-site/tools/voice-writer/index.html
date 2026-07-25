@@ -21,8 +21,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -152,9 +152,9 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color:#a78bfa;">AI Voice Writer</span>
     </nav>
@@ -164,18 +164,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -213,27 +212,27 @@
 
                         <!-- Voice Mode -->
                         <div class="input-group">
-                            <label style="color: #ededed;">Voice Mode</label>
+                            <label style="color: var(--text-muted);">Voice Mode</label>
                             <div style="display:flex; gap:8px; flex-direction:column;">
                                 <label id="voice-conversational-label" style="display:flex; align-items:flex-start; gap:10px; background:#0d0d0d; padding:12px 14px; border: 2px solid #a78bfa; border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="conversational" checked style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
-                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Conversational</div>
-                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Short sentences. Direct. Like texting a smart friend. No fluff.</div>
+                                        <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Conversational</div>
+                                        <div style="font-size:0.75rem; color: var(--text-muted); margin-top:2px;">Short sentences. Direct. Like texting a smart friend. No fluff.</div>
                                     </div>
                                 </label>
                                 <label id="voice-educational-label" style="display:flex; align-items:flex-start; gap:10px; background:#0a0a0a; padding:12px 14px; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="educational" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
-                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Educational</div>
-                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Clear, structured, confident. Sharp instructor who respects your time.</div>
+                                        <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Educational</div>
+                                        <div style="font-size:0.75rem; color: var(--text-muted); margin-top:2px;">Clear, structured, confident. Sharp instructor who respects your time.</div>
                                     </div>
                                 </label>
                                 <label id="voice-strategic-label" style="display:flex; align-items:flex-start; gap:10px; background:#0a0a0a; padding:12px 14px; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="strategic" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
-                                        <div style="font-size:0.9rem; font-weight:600; color:#ededed;">Strategic</div>
-                                        <div style="font-size:0.75rem; color:#878787; margin-top:2px;">Framework-driven, systematic. Like someone who's done the reps.</div>
+                                        <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Strategic</div>
+                                        <div style="font-size:0.75rem; color: var(--text-muted); margin-top:2px;">Framework-driven, systematic. Like someone who's done the reps.</div>
                                     </div>
                                 </label>
                             </div>
@@ -241,18 +240,18 @@
 
                         <!-- Topic Input -->
                         <div class="input-group" style="margin-top:1.25rem;">
-                            <label for="tool-input" style="color: #ededed;">Topic or Brief</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:120px;" placeholder="e.g. Why most people never finish what they start&#10;&#10;or: The biggest mistake freelancers make with their rates&#10;&#10;or: How to write a caregiver shift report"></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Topic or Brief</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); height:120px;" placeholder="e.g. Why most people never finish what they start&#10;&#10;or: The biggest mistake freelancers make with their rates&#10;&#10;or: How to write a caregiver shift report"></textarea>
                             <div style="font-size:0.75rem; color:#555; margin-top:4px;" id="char-count">0 / 500 characters</div>
                         </div>
 
                         <!-- Refinement -->
                         <div class="input-group" style="margin-top:1rem;">
-                            <label for="refinement-input" style="color: #878787; font-size:0.85rem;">Refine the output <span style="color:#555;">(optional &mdash; after first generation)</span></label>
-                            <input type="text" id="refinement-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
+                            <label for="refinement-input" style="color: var(--text-muted); font-size:0.85rem;">Refine the output <span style="color:#555;">(optional &mdash; after first generation)</span></label>
+                            <input type="text" id="refinement-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: #fff; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Generate</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -266,12 +265,12 @@
                                 Output
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #a78bfa;">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; white-space: pre-wrap;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); white-space: pre-wrap;">
                                 <span class="placeholder" style="color: #555555;">Your content will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -283,7 +282,7 @@
                                     <h3>Unlock the Full Output</h3>
                                     <p>Enter your email to get the full result + <strong>3 free generations/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn" style="background: linear-gradient(135deg, #a78bfa, #7c3aed);">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -295,7 +294,7 @@
                                 <p style="color: #a78bfa;">Writing with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                             <span id="char-out-count">0 chars</span>
                         </div>
@@ -305,13 +304,13 @@
                 <!-- Upgrade Tiers -->
                 <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Generations?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and no ads</p>
+                    <p style="text-align:center; color: var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and no ads</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--text-muted); margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; 3 generations / day</li>
                                 <li>&#10003; All 3 voice modes</li>
                                 <li>&#10003; Refinement loop</li>
@@ -319,29 +318,29 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #a78bfa; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#a78bfa; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#a78bfa,#7c3aed); color: var(--text); font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#a78bfa; margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color: var(--text-muted);">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Unlimited generations</li>
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                                 <li>&#10003; All tools included</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#a78bfa,#7c3aed); color:#fff; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#a78bfa,#7c3aed); color: var(--text); padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
-                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Lifetime</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$29</div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">one-time, forever</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
-                                <li>&#10003; Batch processing</li>
-                                <li>&#10003; API access</li>
-                                <li>&#10003; Priority support</li>
+                                <li>&#10003; One payment</li>
+                                <li>&#10003; No renewals</li>
+                                <li>&#10003; 14-day refund</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Lifetime</a>
                         </div>
                     </div>
                 </div>
@@ -373,8 +372,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>Free, privacy-first developer tools.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

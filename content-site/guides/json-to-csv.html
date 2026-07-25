@@ -19,9 +19,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/guides/guide.css">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
     <!-- Google AdSense &mdash; delayed load to protect LCP -->
@@ -51,6 +51,47 @@
         });
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a file size limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The tool runs in your browser, so the only limit is your device's memory. We've tested with datasets of 50,000+ rows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my data get uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything happens client-side in JavaScript. Your data never leaves your machine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert CSV back to JSON?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use the mode toggle to switch to \"CSV &rarr; JSON\" mode. The tool automatically infers data types (numbers, booleans, nulls)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it handle nested JSON objects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Nested keys are flattened with dot notation. For example, {\"address\": {\"city\": \"Seattle\"}} becomes the column address.city ."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -201,7 +242,24 @@ Charlie,35,Boise</code></pre>
                     <li><a href="/guides/">Browse all guides</a></li>
                 </ul>
             </div>
-        </article>
+        
+<section class="cs-ilink-panel" aria-label="Related tools">
+  <style>
+    .cs-ilink-panel{max-width:760px;margin:2.5rem auto;padding:1.5rem 1.25rem;border:1px solid rgba(194,65,12,.25);border-radius:14px;background:linear-gradient(145deg,rgba(194,65,12,.06),rgba(255,255,255,.6))}
+    .cs-ilink-panel h2{margin:0 0 1rem;font-size:1.15rem;text-align:center;color:var(--text,#2C1810)}
+    .cs-ilink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}
+    .cs-ilink-card{display:flex;flex-direction:column;gap:.35rem;padding:1rem;border-radius:10px;border:1px solid rgba(22,20,17,.1);background:#fff;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+    .cs-ilink-card:hover{border-color:var(--primary,#C2410C);transform:translateY(-2px)}
+    .cs-ilink-card strong{color:var(--primary-soft,#E05A2B);font-size:.95rem}
+    .cs-ilink-card span{font-size:.8rem;color:var(--text-muted,#6B5344)}
+  </style>
+  <h2>Use the free tool</h2>
+  <div class="cs-ilink-grid">
+<a class="cs-ilink-card" href="/tools/json-csv-converter/"><strong>Convert JSON ↔ CSV free</strong><span>Open →</span></a>
+<a class="cs-ilink-card" href="/tools/json-formatter/"><strong>JSON Formatter</strong><span>Open →</span></a>
+  </div>
+</section>
+</article>
     </main>
 
     <footer>

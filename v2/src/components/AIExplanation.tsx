@@ -41,7 +41,7 @@ export function AIInlineExplanation({ prompt, context, label = "AI Explanation" 
           ) : ai.error ? (
             <span className="text-red-400">Failed to load explanation.</span>
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: String(ai.result || '').replace(/\n/g, '<br/>') }} />
+            <div className="whitespace-pre-wrap">{String(ai.result || '')}</div>
           )}
         </div>
       )}

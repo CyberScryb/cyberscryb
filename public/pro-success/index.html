@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Pro Activated &mdash; CyberScryb</title>
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/mascot-icon.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -28,7 +29,7 @@
     .icon { font-size: 56px; margin-bottom: 20px; line-height: 1; }
     h1 {
       font-size: 28px; font-weight: 800;
-      background: #7b2cff;
+      background: var(--primary);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
     }
@@ -36,7 +37,7 @@
     .spinner {
       width: 40px; height: 40px;
       border: 3px solid rgba(30, 64, 175,.15);
-      border-top-color: #7b2cff;
+      border-top-color: var(--primary-soft);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 20px;
@@ -45,7 +46,7 @@
     .btn {
       display: inline-block; margin-top: 28px;
       padding: 14px 32px;
-      background: #7b2cff;
+      background: var(--primary);
       color: #0a0e1a; font-weight: 700; font-size: 15px;
       border-radius: 999px; text-decoration: none;
       transition: transform .2s, box-shadow .2s;
@@ -54,6 +55,7 @@
     .error { color: #ff6b6b; }
     #status-msg { margin-bottom: 4px; }
   </style>
+    <script src="/js/cs-pro-status.js" defer></script>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <meta name="description" content="Your CyberScryb Pro subscription is now active. Enjoy unlimited access to all AI tools.">
@@ -92,18 +94,19 @@
     <p id="status-msg">Verifying your payment…</p>
   </div>
   <div id="success-state" style="display:none">
-    <div class="icon">🚀</div>
-    <h1>Pro Activated!</h1>
-    <p>Your Pro access is now live on this device.</p>
-    <p style="margin-top:8px;font-size:13px;color:#6b7280">All tools are now unlocked. No limits.</p>
-    <a href="/tools/" class="btn">Start Using Pro &rarr;</a>
+    <div class="icon">✓</div>
+    <h1>Pro is on</h1>
+    <p>Unlimited full results on this device. No daily cap on Humanizer and the other Pro AI tools.</p>
+    <p style="margin-top:8px;font-size:13px;color:#9A958C">You&rsquo;re good to go — open a tool and keep working.</p>
+    <a href="/tools/humanizer/" class="btn">Open Humanizer</a>
+    <p style="margin-top:16px;font-size:13px;color:#9A958C;">Different computer? <a href="/pro-restore/" style="color:#E05A2B;">Restore Pro</a> on that browser, or email your Stripe receipt.</p>
   </div>
   <div id="error-state" style="display:none">
     <div class="icon">⚠️</div>
     <h1 class="error">Something Went Wrong</h1>
     <p id="error-msg">We couldn't verify your payment.</p>
     <p style="margin-top:12px;font-size:13px">
-      Email <a href="mailto:support@cyberscryb.com" style="color:#7b2cff">support@cyberscryb.com</a>
+      Email <a href="mailto:support@cyberscryb.com" style="color: var(--primary-soft)">support@cyberscryb.com</a>
       and we'll sort it out fast.
     </p>
     <a href="/pro/" class="btn" style="background:rgba(255,255,255,.08);color:#e6e9f0;margin-top:20px">Back to Pro Page</a>
@@ -127,16 +130,24 @@
   }
 
   function activatePro() {
+    // cs_pro is the real unlimited flag. cs_subscribed alone is free email tier.
+    setCookie('cs_pro', '1', 365);
     setCookie('cs_subscribed', '1', 365);
     setCookie('cs_pro_source', 'stripe', 365);
+    try { localStorage.setItem('cs_pro', '1'); } catch (e) {}
     show('success-state');
     // Clean URL without leaking session_id
     history.replaceState(null, '', '/pro-success/');
+    if (window.CSProStatus && window.CSProStatus.updateNav) {
+      try { window.CSProStatus.updateNav(); } catch (e) {}
+    }
   }
 
   if (!sessionId) {
-    // No session_id &mdash; maybe they bookmarked the page or refreshed after activation
-    var alreadyPro = document.cookie.indexOf('cs_subscribed=1') > -1;
+    // No session_id — bookmark/refresh after activation
+    var alreadyPro = document.cookie.indexOf('cs_pro=1') > -1
+      || document.cookie.indexOf('cs_pro_source=stripe') > -1
+      || (function(){ try { return localStorage.getItem('cs_pro') === '1'; } catch(e){ return false; } })();
     if (alreadyPro) {
       activatePro();
     } else {

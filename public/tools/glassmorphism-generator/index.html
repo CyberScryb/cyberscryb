@@ -25,9 +25,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/glassmorphism-generator/style.css">
     
     <!-- JSON-LD: WebApplication -->
@@ -119,9 +119,9 @@
 <body>
     <!-- Navigation Breadcrumbs -->
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <span style="color:#a855f7;">CSS Glassmorphism Generator</span>
     </nav>
@@ -133,18 +133,17 @@
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
             </div>
         </nav>
@@ -184,7 +183,7 @@
                         <label for="glassColor">Glass Color</label>
                         <div class="picker-row">
                             <input type="color" id="glassColor" value="#ffffff">
-                            <input type="text" id="glassColorHex" value="#ffffff" placeholder="#ffffff" maxlength="7">
+                            <input type="text" id="glassColorHex" value="#ffffff" placeholder="#ffffff" maxlength="7" aria-label="#ffffff">
                         </div>
                     </div>
 
@@ -210,7 +209,7 @@
                         <label for="borderColor">Border Color</label>
                         <div class="picker-row">
                             <input type="color" id="borderColor" value="#ffffff">
-                            <input type="text" id="borderColorHex" value="#ffffff" placeholder="#ffffff" maxlength="7">
+                            <input type="text" id="borderColorHex" value="#ffffff" placeholder="#ffffff" maxlength="7" aria-label="#ffffff">
                         </div>
                     </div>
 
@@ -289,11 +288,11 @@
 
         <!-- Educational content (SEO / AdSense Wedge) -->
         <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:#cbd5e1; font-family:'Inter',sans-serif; line-height:1.75;">
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding CSS Glassmorphism in Modern UI Design</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding CSS Glassmorphism in Modern UI Design</h2>
             <p>Glassmorphism has emerged as one of the most popular styling trends in contemporary user interface design, finding heavy usage in operating systems like macOS, Windows 11 (Fluent Design's Acrylic), and popular premium websites. The aesthetic is defined by a semi-transparent, frosted glass look that allows backgrounds, gradients, and images to show through with a soft blur. This establishes vertical depth, visual hierarchy, and an upscale, premium digital atmosphere.</p>
             <p>The key to achieving a realistic glassmorphic card lies in combining four core CSS layers: a semi-transparent background color, a backing blur filter, a light border to emulate glass refraction, and a subtle drop shadow to ground the element above its backdrop. Without these elements in balance, the UI component will look like a simple, low-contrast transparent container rather than true frosted glass.</p>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Backdrop-Filter Mechanism</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Backdrop-Filter Mechanism</h2>
             <p>Before the introduction of the CSS <code>backdrop-filter</code> property, developers had to resort to duplicate, blurred background images or heavy JavaScript hacks to create a frosted glass effect. Today, the <code>backdrop-filter</code> property applies graphical effects (like blur or color shifting) to the area directly behind an element. Unlike standard <code>filter</code> (which blurs the element itself and all its text/child content), <code>backdrop-filter</code> only impacts the layer beneath the element, keeping your foreground text completely sharp and legible.</p>
             <p>Here is the syntax used to create a baseline glass card:</p>
             <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
@@ -303,7 +302,7 @@
     -webkit-backdrop-filter: blur(10px); /* Safari support */
 }</pre>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Browser Compatibility &amp; Vendor Prefixes</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Browser Compatibility &amp; Vendor Prefixes</h2>
             <p>While <code>backdrop-filter</code> is widely supported by modern browsers, Safari requires the vendor-prefixed version: <code>-webkit-backdrop-filter</code>. If this prefix is omitted, users on iOS Devices or macOS Safari will see plain transparent boxes without any blur effect, which destroys the aesthetic and can lead to severe legibility issues. CyberScryb's CSS Glassmorphism Generator automatically writes both standard and vendor-prefixed rules so your design remains compatible across all devices.</p>
             <p>For browsers that do not support backdrop filters at all (like older legacy mobile browsers or custom embedded WebViews), you should implement a fallback pattern using a feature query. This ensures that the card background receives a higher solid opacity if the backdrop filter fails to execute:</p>
             <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
@@ -321,21 +320,21 @@
     }
 }</pre>
 
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Accessibility and Contrast Optimization</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Accessibility and Contrast Optimization</h2>
             <p>Designers must pay special attention to readability when using glassmorphic UI components. Because the background behind the card changes as the user scrolls or navigates, text contrast can shift dramatically. If a card sits above a bright, busy gradient, white text can become completely illegible, failing WCAG accessibility requirements.</p>
             <p>To optimize readability and maintain high contrast:</p>
             <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
                 <li style="margin-bottom:0.5rem;"><strong>Increase Glass Opacity:</strong> If the background is complex or highly contrasted, raise the card background's alpha opacity (e.g. from <code>0.1</code> to <code>0.35</code>).</li>
                 <li style="margin-bottom:0.5rem;"><strong>Utilize Border Refraction:</strong> A crisp, thin border of 1px or 2px in white or high contrast acts as a physical barrier separating the card boundaries from the surrounding page context.</li>
                 <li style="margin-bottom:0.5rem;"><strong>Add Drop Shadows:</strong> Shadows help anchor the card, especially against lighter backdrops, giving depth and improving bounds detection.</li>
-                <li style="margin-bottom:0.5rem;"><strong>Test with the WCAG Contrast Checker:</strong> Verify the text contrast of your card using CyberScryb's <a href="/tools/contrast-checker/" style="color:#06b6d4;">Accessibility Color Contrast Checker</a> to guarantee AA/AAA compliance.</li>
+                <li style="margin-bottom:0.5rem;"><strong>Test with the WCAG Contrast Checker:</strong> Verify the text contrast of your card using CyberScryb's <a href="/tools/contrast-checker/" style="color:#C2410C;">Accessibility Color Contrast Checker</a> to guarantee AA/AAA compliance.</li>
             </ul>
             
-            <h2 style="font-family:'Orbitron',sans-serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
-                <li><a href="/tools/contrast-checker/" style="color:#06b6d4;">WCAG Color Contrast Checker</a> &mdash; Ensure your glassmorphic text matches accessibility ratios.</li>
-                <li><a href="/tools/color-palette/" style="color:#06b6d4;">Color Palette Generator</a> &mdash; Design harmonious color schemes for web backdrops.</li>
-                <li><a href="/guides/" style="color:#06b6d4;">Read CyberScryb CSS &amp; UI Design Guides</a></li>
+                <li><a href="/tools/contrast-checker/" style="color:#C2410C;">WCAG Color Contrast Checker</a> &mdash; Ensure your glassmorphic text matches accessibility ratios.</li>
+                <li><a href="/tools/color-palette/" style="color:#C2410C;">Color Palette Generator</a> &mdash; Design harmonious color schemes for web backdrops.</li>
+                <li><a href="/guides/" style="color:#C2410C;">Read CyberScryb CSS &amp; UI Design Guides</a></li>
             </ul>
         </section>
     </main>
@@ -348,19 +347,19 @@
 
     <!-- Related Tools Grid -->
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:#0f1016; border: 1px solid rgba(255,255,255,0.08); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related UI Tools</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related UI Tools</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/contrast-checker/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/contrast-checker/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">WCAG Contrast Checker</strong>
-                <span style="font-size:0.85rem; color:#878787;">Audit color compliance ratios for accessibility.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Audit color compliance ratios for accessibility.</span>
             </a>
-            <a href="/tools/color-palette/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/color-palette/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Color Palette Generator</strong>
-                <span style="font-size:0.85rem; color:#878787;">Generate beautiful color schemes with matching tones.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Generate beautiful color schemes with matching tones.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#07070a; border: 1px solid rgba(255,255,255,0.08); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
                 <strong style="color:#a855f7; display:block; margin-bottom:0.25rem;">Regex Tester</strong>
-                <span style="font-size:0.85rem; color:#878787;">Verify syntax layouts with active highlights.</span>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Verify syntax layouts with active highlights.</span>
             </a>
         </div>
     </section>

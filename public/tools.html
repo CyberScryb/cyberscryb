@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Online Developer Tools &mdash; No Signup | CyberScryb</title>
-    <meta name="description" content="Access over 40 free online developer tools for JSON, SEO, AI, and encoding. Free, instant, runs in your browser. No signup.">
+    <meta name="description" content="50 free online tools: AI writers, hardship letters, JSON, SEO, and encoding. Free samples, no signup. Pro unlocks unlimited AI.">
     <link rel="canonical" href="https://cyberscryb.com/tools/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Free Online Developer Tools &mdash; No Signup | CyberScryb">
     <meta property="og:description"
-        content="Access over 40 free online developer tools for JSON, SEO, AI, and encoding. Free, instant, runs in your browser. No signup.">
+        content="50 free online tools: AI writers, hardship letters, JSON, SEO, and encoding. Free samples, no signup. Pro unlocks unlimited AI.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/">
     <meta property="og:site_name" content="CyberScryb">
@@ -21,24 +21,27 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free Online Developer Tools &mdash; No Signup | CyberScryb">
     <meta name="twitter:description"
-        content="Access over 40 free online developer tools for JSON, SEO, AI, and encoding. Free, instant, runs in your browser. No signup.">
+        content="50 free online tools: AI writers, hardship letters, JSON, SEO, and encoding. Free samples, no signup. Pro unlocks unlimited AI.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260723ui-system">
 
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
+        if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+            window['ga-disable-G-LS46B9J1XK'] = true;
+        }
         gtag('js', new Date());
         gtag('config', 'G-LS46B9J1XK');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
 
     <!-- JSON-LD ItemList -->
     <script type="application/ld+json">
@@ -46,8 +49,8 @@
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": "CyberScryb Developer Tools",
-        "description": "Free, privacy-first developer tools that run in your browser",
-        "numberOfItems": 42,
+        "description": "Free browser tools and AI writers for freelancers, caregivers, and builders",
+        "numberOfItems": 50,
         "itemListElement": [
             {
                 "@type": "ListItem",
@@ -344,8 +347,36 @@
          crossorigin="anonymous"></script>
 
 <style id="cs-pro-badge-style">
-.cs-pro-badge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#0a0e1a;font:700 9px/1 'Orbitron','Inter',sans-serif;padding:5px 9px;border-radius:999px;letter-spacing:1px;z-index:5;box-shadow:0 2px 8px rgba(0,212,255,0.4);pointer-events:none}
-.blog-card{position:relative}
+.cs-pro-badge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#C2410C,#7c3aed);color:#0a0e1a;font:700 9px/1 'Orbitron','Inter',sans-serif;padding:5px 9px;border-radius:999px;letter-spacing:1px;z-index:5;box-shadow:0 2px 8px rgba(194, 65, 12,0.4);pointer-events:none}
+.blog-card{position:relative;overflow:visible}
+/* Tools page: force clear card edge + hover ring (beats any stale cache / overrides) */
+.posts-grid .blog-card,
+.section .blog-card{
+  border:1px solid rgba(44,24,16,0.16)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 0 0 1px rgba(44,24,16,0.04),0 12px 40px rgba(44,24,16,0.08)!important;
+}
+/* Force readable ink on white cards (kill leftover dark-theme #fff/#ccc inlines) */
+.posts-grid .blog-card h3 a,
+.section .blog-card h3 a{
+  color:var(--text,#2C1810)!important;
+}
+.posts-grid .blog-card p,
+.section .blog-card p{
+  color:var(--text-muted,#3D2B1F)!important;
+}
+.posts-grid .blog-card .read-more,
+.section .blog-card .read-more{
+  color:var(--primary,#C2410C)!important;
+}
+.posts-grid .blog-card:hover,
+.section .blog-card:hover,
+.posts-grid .blog-card:focus-within,
+.section .blog-card:focus-within{
+  border-color:rgba(194,65,12,0.9)!important;
+  outline:2px solid rgba(194,65,12,0.45);
+  outline-offset:3px;
+  box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 0 0 1px rgba(194,65,12,0.45),0 0 0 5px rgba(194,65,12,0.14),0 0 28px rgba(194,65,12,0.28),0 22px 48px rgba(44,24,16,0.12)!important;
+}
 </style>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
@@ -385,18 +416,17 @@
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
-                    <li><a href="/blog/">Blog</a></li>
+<li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -408,100 +438,175 @@
     </header>
 
     <main>
-        <section class="hero" style="min-height: 35vh; padding-top: 80px; padding-bottom: 2rem;">
+        <section class="hero" style="min-height: auto; padding-top: 80px; padding-bottom: 1rem;">
             <div class="hero-container">
-                <h1 class="hero-title">CyberScryb <span style="color: var(--accent-cyan);">Tools</span></h1>
-                <p class="hero-subtitle">40+ tools to solve real problems. Most run in your browser: no account, no data collection. A few use AI on the backend. The labels indicate AI processing.</p>
+                <h1 class="hero-title">Tools</h1>
+                <ul class="price-legend" aria-label="Pricing labels">
+                    <li><span class="tag-free">Free</span> no account</li>
+                    <li><span class="tag-sample">Free sample</span> AI (then limits)</li>
+                    <li><span class="tag-pro">Pro</span> unlimited AI · $5/mo</li>
+                </ul>
             </div>
         </section>
 
-        <div class="container" style="margin-top: -1rem; margin-bottom: 2rem;">
+        <div class="container" style="margin-bottom: 1.25rem;">
             <div class="search-wrapper">
-                <input type="text" id="tool-search" placeholder="Search 50+ tools (e.g., child support, humanizer, JSON)..." />
+                <input type="text" id="tool-search" placeholder="Search tools…" />
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
             
             <div class="filter-dock-wrapper">
                 <div class="filter-dock">
-                    <button class="filter-btn active" data-category="all">All Tools</button>
-                    <button class="filter-btn" data-category="ai">AI Utilities</button>
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="ai">AI Tools</button>
                     <button class="filter-btn" data-category="developer">Developer</button>
-                    <button class="filter-btn" data-category="legal">Legal & Family</button>
-                    <button class="filter-btn" data-category="writing">Writing & SEO</button>
+                    <button class="filter-btn" data-category="legal">Legal &amp; Family</button>
+                    <button class="filter-btn" data-category="writing">Writing &amp; SEO</button>
                     <button class="filter-btn" data-category="finance">Finance</button>
                 </div>
             </div>
         </div>
 
-        <section class="tools-grid" style="padding: 1rem 0 4rem;">
+        <section class="section" id="money-tools" style="padding:0 0 1.25rem;">
             <div class="container">
-                <div class="posts-grid reveal-stagger">
+                <div class="start-here" id="start-here">
+                    <div class="start-here-head">
+                        <h2>Popular</h2>
+                        <a href="/pro/" class="cta-secondary" style="font-size:0.8rem;padding:0.45rem 0.85rem;">Pro →</a>
+                    </div>
+                    <div class="posts-grid" data-filter-scope="pinned">
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="/tools/humanizer/">AI Humanizer</a></h3>
+                                <p>Stiff AI paste → sounds human.</p>
+                                <a href="/tools/humanizer/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="/tools/gig-auto-pilot/">Gig Auto-Pilot</a></h3>
+                                <p>Job post → proposal + draft.</p>
+                                <a href="/tools/gig-auto-pilot/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="/tools/ai-writing-suite/">AI Writing Suite</a></h3>
+                                <p>Detect patterns, clean lines.</p>
+                                <a href="/tools/ai-writing-suite/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card card-curator">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Curator Prime</a></h3>
+                                <p>Photo → ID, value, care notes.</p>
+                                <a href="https://curator.cyberscryb.com" class="read-more" target="_blank" rel="noopener">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="/tools/utility-shutoff-letter/">Utility Shutoff Letter</a></h3>
+                                <p>Disconnect notice → payment letter.</p>
+                                <a href="/tools/utility-shutoff-letter/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-sample">Free sample</span>
+                                <h3><a href="/tools/insurance-denial-appeal/">Insurance Appeal</a></h3>
+                                <p>Prior auth / medical necessity.</p>
+                                <a href="/tools/insurance-denial-appeal/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-card-content">
+                                <span class="tag-free">Free</span>
+                                <h3><a href="/tools/password-checker/">Password Strength</a></h3>
+                                <p>Local only — never leaves device.</p>
+                                <a href="/tools/password-checker/" class="read-more">Open →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="section-head" style="margin:1.5rem 0 1rem;">
+                    <h2 id="all-tools-heading">All tools</h2>
+                    <p style="color:var(--text-muted);font-size:0.95rem;margin:0.35rem 0 0;">Filter by category below. Popular shortcuts stay pinned at the top.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding: 1rem 0 4rem;" id="all-tools" aria-labelledby="all-tools-heading">
+            <div class="container">
+                <div class="posts-grid reveal-stagger" data-filter-scope="catalog">
 
                     <!-- AI Summarizer -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/summarizer/" style="color: #fff;">AI Text Summarizer</a></h3>
-                            <p style="color: #ccc;">Drop in any article or doc and get a tight summary back in seconds. Runs on Gemini 3.1 Pro.</p>
-                            <a href="/tools/summarizer/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/summarizer/" style="color: var(--text);">AI Text Summarizer</a></h3>
+                            <p style="color: var(--text-muted);">Drop in any article or doc and get a tight summary back in seconds. Runs on Gemini 3.1 Pro.</p>
+                            <a href="/tools/summarizer/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Email Writer -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/email-writer/" style="color: #fff;">AI Email Writer</a></h3>
-                            <p style="color: #ccc;">Need a professional email fast? Pick a tone, add the context, and you've got a polished draft in seconds.</p>
-                            <a href="/tools/email-writer/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/email-writer/" style="color: var(--text);">AI Email Writer</a></h3>
+                            <p style="color: var(--text-muted);">Need a professional email fast? Pick a tone, add the context, and you've got a polished draft in seconds.</p>
+                            <a href="/tools/email-writer/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Bio Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                                                        <h3><a href="/tools/bio-generator/" style="color: #fff;">AI Bio Generator</a></h3>
-                            <p style="color: #ccc;">Gives you three to five bios for LinkedIn, Twitter, Instagram, or TikTok. Each option fits the platform's character limit.</p>
-                            <a href="/tools/bio-generator/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                                                        <h3><a href="/tools/bio-generator/" style="color: var(--text);">AI Bio Generator</a></h3>
+                            <p style="color: var(--text-muted);">Gives you three to five bios for LinkedIn, Twitter, Instagram, or TikTok. Each option fits the platform's character limit.</p>
+                            <a href="/tools/bio-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Code Explainer -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/code-explainer/" style="color: #fff;">AI Code Explainer</a></h3>
-                            <p style="color: #ccc;">Paste a snippet in JavaScript, Python, Go, Rust, SQL, or other languages. Receive a plain-English breakdown of the code's function.</p>
-                            <a href="/tools/code-explainer/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/code-explainer/" style="color: var(--text);">AI Code Explainer</a></h3>
+                            <p style="color: var(--text-muted);">Paste a snippet in JavaScript, Python, Go, Rust, SQL, or other languages. Receive a plain-English breakdown of the code's function.</p>
+                            <a href="/tools/code-explainer/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Product Description -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/product-description/" style="color: #fff;">AI Product Description Generator</a></h3>
-                            <p style="color: #ccc;">Provide a product name and select features. The tool generates copy matching professional e-commerce listings on Shopify, Etsy, or Amazon.</p>
-                            <a href="/tools/product-description/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/product-description/" style="color: var(--text);">AI Product Description Generator</a></h3>
+                            <p style="color: var(--text-muted);">Provide a product name and select features. The tool generates copy matching professional e-commerce listings on Shopify, Etsy, or Amazon.</p>
+                            <a href="/tools/product-description/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Gig Auto-Pilot -->
                     <div class="blog-card blog-card--hero">
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(0, 255, 136, 0.08); border-color: rgba(0, 255, 136, 0.15); color: #00ff88;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
-                            <div
-                                style="background: #00ff88; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">
-                                NEW</div>
-                            <h3><a href="/tools/gig-auto-pilot/" style="color: #fff;">Gig Auto-Pilot</a></h3>
-                            <p style="color: #ccc;">Writes freelance proposals and drafts the requested work. Review the draft, then click submit.</p>
-                            <a href="/tools/gig-auto-pilot/" class="read-more" style="color: #00ff88;">Launch
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.15); color: #C2410C;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/gig-auto-pilot/" style="color: var(--text);">Gig Auto-Pilot</a></h3>
+                            <p style="color: var(--text-muted);">Writes freelance proposals and drafts the requested work. Review the draft, then click submit.</p>
+                            <a href="/tools/gig-auto-pilot/" class="read-more">Launch
                                 Tool &rarr;</a>
                         </div>
                     </div>
@@ -510,12 +615,10 @@
                     <div class="blog-card blog-card--hero">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg></div>
-                            <div
-                                style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">
-                                POPULAR</div>
-                            <h3><a href="/tools/humanizer/" style="color: #fff;">Anti-AI Humanizer</a></h3>
-                            <p style="color: #ccc;">Paste AI-generated text to receive content matching your natural writing style.</p>
-                            <a href="/tools/humanizer/" class="read-more" style="color: #7b2cff;">Launch Tool
+                            <span class="tool-status-badge">POPULAR</span>
+                            <h3><a href="/tools/humanizer/" style="color: var(--text);">Anti-AI Humanizer</a></h3>
+                            <p style="color: var(--text-muted);">Paste AI-generated text to receive content matching your natural writing style.</p>
+                            <a href="/tools/humanizer/" class="read-more">Launch Tool
                                 &rarr;</a>
                         </div>
                     </div>
@@ -524,8 +627,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div>
-                            <h3><a href="/tools/json-csv-converter/" style="color: #fff;">JSON &harr; CSV Converter</a></h3>
-                            <p style="color: #ccc;">Goes both ways. Handles nested objects and big files without choking.</p>
+                            <h3><a href="/tools/json-csv-converter/" style="color: var(--text);">JSON &harr; CSV Converter</a></h3>
+                            <p style="color: var(--text-muted);">Goes both ways. Handles nested objects and big files without choking.</p>
                             <a href="/tools/json-csv-converter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -534,8 +637,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></div>
-                            <h3><a href="/tools/seo-tag-generator/" style="color: #fff;">SEO Meta Generator</a></h3>
-                            <p style="color: #ccc;">Fills in your title tag, meta description, OG tags, and Twitter cards. No more Googling the format.</p>
+                            <h3><a href="/tools/seo-tag-generator/" style="color: var(--text);">SEO Meta Generator</a></h3>
+                            <p style="color: var(--text-muted);">Fills in your title tag, meta description, OG tags, and Twitter cards. No more Googling the format.</p>
                             <a href="/tools/seo-tag-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -544,8 +647,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
-                                                        <h3><a href="/tools/password-checker/" style="color: #fff;">Password Strength Checker</a></h3>
-                            <p style="color: #ccc;">Estimates password crack times and flags common security vulnerabilities. The calculator runs inside the browser to keep passwords private.</p>
+                                                        <h3><a href="/tools/password-checker/" style="color: var(--text);">Password Strength Checker</a></h3>
+                            <p style="color: var(--text-muted);">Estimates password crack times and flags common security vulnerabilities. The calculator runs inside the browser to keep passwords private.</p>
                             <a href="/tools/password-checker/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -554,8 +657,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 9-3 3 3 3"/><path d="m14 15 3-3-3-3"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
-                            <h3><a href="/tools/base64-tool/" style="color: #fff;">Base64 Encoder/Decoder</a></h3>
-                            <p style="color: #ccc;">Text in, Base64 out. Or the reverse. Supports both standard and URL-safe formats.</p>
+                            <h3><a href="/tools/base64-tool/" style="color: var(--text);">Base64 Encoder/Decoder</a></h3>
+                            <p style="color: var(--text-muted);">Text in, Base64 out. Or the reverse. Supports both standard and URL-safe formats.</p>
                             <a href="/tools/base64-tool/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -564,8 +667,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg></div>
-                            <h3><a href="/tools/color-palette/" style="color: #fff;">Color Palette Generator</a></h3>
-                            <p style="color: #ccc;">Select a base color to generate a matching palette. The utility validates WCAG contrast requirements and exports custom CSS.</p>
+                            <h3><a href="/tools/color-palette/" style="color: var(--text);">Color Palette Generator</a></h3>
+                            <p style="color: var(--text-muted);">Select a base color to generate a matching palette. The utility validates WCAG contrast requirements and exports custom CSS.</p>
                             <a href="/tools/color-palette/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -574,8 +677,8 @@
                     <div class="blog-card">
                         <div class="blog-card-content">
                             <div class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
-                            <h3><a href="/tools/markdown-html/" style="color: #fff;">Markdown &rarr; HTML Converter</a></h3>
-                            <p style="color: #ccc;">Type markdown on the left, see the rendered HTML on the right. GitHub-flavored syntax works.</p>
+                            <h3><a href="/tools/markdown-html/" style="color: var(--text);">Markdown &rarr; HTML Converter</a></h3>
+                            <p style="color: var(--text-muted);">Type markdown on the left, see the rendered HTML on the right. GitHub-flavored syntax works.</p>
                             <a href="/tools/markdown-html/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
@@ -584,10 +687,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(255, 107, 53, 0.08); border-color: rgba(255, 107, 53, 0.15); color: #ff6b35;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3v10"/><path d="m12.67 5.5 8.66 5"/><path d="m12.67 10.5 8.66-5"/><path d="M9 17a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2z"/></svg></div>
-                            <div style="background: #ff6b35; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/regex-tester/" style="color: #fff;">Regex Tester</a></h3>
-                            <p style="color: #ccc;">Write a regex to test matching text with real-time highlighting. The tool includes capture groups and a syntax cheat sheet.</p>
-                            <a href="/tools/regex-tester/" class="read-more" style="color: #ff6b35;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/regex-tester/" style="color: var(--text);">Regex Tester</a></h3>
+                            <p style="color: var(--text-muted);">Write a regex to test matching text with real-time highlighting. The tool includes capture groups and a syntax cheat sheet.</p>
+                            <a href="/tools/regex-tester/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -595,10 +698,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.15); color: #a855f7;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M12 21v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 12v.01"/></svg></div>
-                            <div style="background: #a855f7; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/qr-generator/" style="color: #fff;">QR Code Generator</a></h3>
-                            <p style="color: #ccc;">Paste a URL or WiFi password to generate a QR code. Customize the colors and download the image in PNG or SVG format.</p>
-                            <a href="/tools/qr-generator/" class="read-more" style="color: #a855f7;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/qr-generator/" style="color: var(--text);">QR Code Generator</a></h3>
+                            <p style="color: var(--text-muted);">Paste a URL or WiFi password to generate a QR code. Customize the colors and download the image in PNG or SVG format.</p>
+                            <a href="/tools/qr-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -606,21 +709,21 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.15); color: #f59e0b;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H3"/><path d="M10 12H3"/><path d="M10 19H3"/><circle cx="17" cy="15" r="3"/><path d="m21 19-1.9-1.9"/></svg></div>
-                            <div style="background: #f59e0b; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/word-counter/" style="color: #fff;">Word & Character Counter</a></h3>
-                            <p style="color: #ccc;">Paste text to calculate word counts, character counts, reading times, and keyword density.</p>
-                            <a href="/tools/word-counter/" class="read-more" style="color: #f59e0b;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/word-counter/" style="color: var(--text);">Word & Character Counter</a></h3>
+                            <p style="color: var(--text-muted);">Paste text to calculate word counts, character counts, reading times, and keyword density.</p>
+                            <a href="/tools/word-counter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- UUID Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(6, 182, 212, 0.08); border-color: rgba(6, 182, 212, 0.15); color: #06b6d4;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></div>
-                            <div style="background: #06b6d4; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/uuid-generator/" style="color: #fff;">UUID / GUID Generator</a></h3>
-                            <p style="color: #ccc;">Need unique IDs? Generate up to 100 v4 UUIDs instantly using the secure Web Crypto API.</p>
-                            <a href="/tools/uuid-generator/" class="read-more" style="color: #06b6d4;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.15); color: #C2410C;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/uuid-generator/" style="color: var(--text);">UUID / GUID Generator</a></h3>
+                            <p style="color: var(--text-muted);">Need unique IDs? Generate up to 100 v4 UUIDs instantly using the secure Web Crypto API.</p>
+                            <a href="/tools/uuid-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -628,10 +731,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(236, 72, 153, 0.08); border-color: rgba(236, 72, 153, 0.15); color: #ec4899;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4v16"/><path d="M17 4v16"/><path d="M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/></svg></div>
-                            <div style="background: #ec4899; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/lorem-ipsum/" style="color: #fff;">Lorem Ipsum Generator</a></h3>
-                            <p style="color: #ccc;">Fill your design mockups with text. Choose length by paragraph, word, or sentence, then copy with one click.</p>
-                            <a href="/tools/lorem-ipsum/" class="read-more" style="color: #ec4899;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/lorem-ipsum/" style="color: var(--text);">Lorem Ipsum Generator</a></h3>
+                            <p style="color: var(--text-muted);">Fill your design mockups with text. Choose length by paragraph, word, or sentence, then copy with one click.</p>
+                            <a href="/tools/lorem-ipsum/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -639,21 +742,21 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); color: #10b981;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></div>
-                            <div style="background: #10b981; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/epoch-converter/" style="color: #fff;">Epoch / Timestamp Converter</a></h3>
-                            <p style="color: #ccc;">Paste a Unix timestamp, get a human date. Or type a date and get the epoch. Auto-detects seconds vs. milliseconds.</p>
-                            <a href="/tools/epoch-converter/" class="read-more" style="color: #10b981;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/epoch-converter/" style="color: var(--text);">Epoch / Timestamp Converter</a></h3>
+                            <p style="color: var(--text-muted);">Paste a Unix timestamp, get a human date. Or type a date and get the epoch. Auto-detects seconds vs. milliseconds.</p>
+                            <a href="/tools/epoch-converter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Cron Expression Builder -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/cron-builder/" style="color: #fff;">Cron Expression Builder</a></h3>
-                            <p style="color: #ccc;">Build cron expressions visually to avoid syntax errors. The utility displays upcoming run times to verify schedules.</p>
-                            <a href="/tools/cron-builder/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/cron-builder/" style="color: var(--text);">Cron Expression Builder</a></h3>
+                            <p style="color: var(--text-muted);">Build cron expressions visually to avoid syntax errors. The utility displays upcoming run times to verify schedules.</p>
+                            <a href="/tools/cron-builder/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -661,21 +764,21 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.15); color: #8b5cf6;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
-                            <div style="background: #8b5cf6; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/privacy-generator/" style="color: #fff;">Privacy Policy Generator</a></h3>
-                            <p style="color: #ccc;">Answer questions about your website to draft a compliant privacy policy. The document downloads in HTML or Markdown format.</p>
-                            <a href="/tools/privacy-generator/" class="read-more" style="color: #8b5cf6;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/privacy-generator/" style="color: var(--text);">Privacy Policy Generator</a></h3>
+                            <p style="color: var(--text-muted);">Answer questions about your website to draft a compliant privacy policy. The document downloads in HTML or Markdown format.</p>
+                            <a href="/tools/privacy-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- JSON Formatter & Validator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(0, 212, 255, 0.08); border-color: rgba(0, 212, 255, 0.15); color: #00d4ff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/json-formatter/" style="color: #fff;">JSON Formatter & Validator</a></h3>
-                            <p style="color: #ccc;">Format messy JSON or minify the payload. The validator highlights syntax errors by line and column.</p>
-                            <a href="/tools/json-formatter/" class="read-more" style="color: #00d4ff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.15); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/json-formatter/" style="color: var(--text);">JSON Formatter & Validator</a></h3>
+                            <p style="color: var(--text-muted);">Format messy JSON or minify the payload. The validator highlights syntax errors by line and column.</p>
+                            <a href="/tools/json-formatter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -683,10 +786,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(34, 197, 94, 0.08); border-color: rgba(34, 197, 94, 0.15); color: #22c55e;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/></svg></div>
-                            <div style="background: #22c55e; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/text-diff/" style="color: #fff;">Text Diff Checker</a></h3>
-                            <p style="color: #ccc;">Put two versions of something side by side and see exactly what changed. Color-coded adds and removes.</p>
-                            <a href="/tools/text-diff/" class="read-more" style="color: #22c55e;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/text-diff/" style="color: var(--text);">Text Diff Checker</a></h3>
+                            <p style="color: var(--text-muted);">Put two versions of something side by side and see exactly what changed. Color-coded adds and removes.</p>
+                            <a href="/tools/text-diff/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -694,10 +797,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.15); color: #f59e0b;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg></div>
-                            <div style="background: #f59e0b; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/slug-generator/" style="color: #fff;">Slug Generator</a></h3>
-                            <p style="color: #ccc;">Turns any title or heading into a clean URL slug. Strips accents, special characters, and common stop words.</p>
-                            <a href="/tools/slug-generator/" class="read-more" style="color: #f59e0b;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/slug-generator/" style="color: var(--text);">Slug Generator</a></h3>
+                            <p style="color: var(--text-muted);">Turns any title or heading into a clean URL slug. Strips accents, special characters, and common stop words.</p>
+                            <a href="/tools/slug-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -705,21 +808,21 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(236, 72, 153, 0.08); border-color: rgba(236, 72, 153, 0.15); color: #ec4899;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg></div>
-                            <div style="background: #ec4899; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/html-entity/" style="color: #fff;">HTML Entity Encoder/Decoder</a></h3>
-                            <p style="color: #ccc;">Swaps special characters for their HTML entity equivalents and back. Covers both named entities and numeric codes.</p>
-                            <a href="/tools/html-entity/" class="read-more" style="color: #ec4899;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/html-entity/" style="color: var(--text);">HTML Entity Encoder/Decoder</a></h3>
+                            <p style="color: var(--text-muted);">Swaps special characters for their HTML entity equivalents and back. Covers both named entities and numeric codes.</p>
+                            <a href="/tools/html-entity/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Case Converter -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(6, 182, 212, 0.08); border-color: rgba(6, 182, 212, 0.15); color: #06b6d4;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16"/><path d="M22 9v7"/><path d="M3.304 13h6.392"/><circle cx="18.5" cy="12.5" r="3.5"/></svg></div>
-                            <div style="background: #06b6d4; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/case-converter/" style="color: #fff;">Case Converter</a></h3>
-                            <p style="color: #ccc;">Convert variables to camelCase, snake_case, kebab-case, PascalCase, or SCREAMING_SNAKE.</p>
-                            <a href="/tools/case-converter/" class="read-more" style="color: #06b6d4;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.15); color: #C2410C;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16"/><path d="M22 9v7"/><path d="M3.304 13h6.392"/><circle cx="18.5" cy="12.5" r="3.5"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/case-converter/" style="color: var(--text);">Case Converter</a></h3>
+                            <p style="color: var(--text-muted);">Convert variables to camelCase, snake_case, kebab-case, PascalCase, or SCREAMING_SNAKE.</p>
+                            <a href="/tools/case-converter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -727,10 +830,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); color: #10b981;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-                            <div style="background: #10b981; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/url-encoder/" style="color: #fff;">URL Encoder / Decoder</a></h3>
-                            <p style="color: #ccc;">Percent-encodes URLs (or decodes them). Handles both <code>encodeURIComponent</code> and <code>encodeURI</code> modes.</p>
-                            <a href="/tools/url-encoder/" class="read-more" style="color: #10b981;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/url-encoder/" style="color: var(--text);">URL Encoder / Decoder</a></h3>
+                            <p style="color: var(--text-muted);">Percent-encodes URLs (or decodes them). Handles both <code>encodeURIComponent</code> and <code>encodeURI</code> modes.</p>
+                            <a href="/tools/url-encoder/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -738,10 +841,10 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.15); color: #a855f7;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></div>
-                            <div style="background: #a855f7; color: #fff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/jwt-decoder/" style="color: #fff;">JWT Decoder</a></h3>
-                            <p style="color: #ccc;">Paste a JWT and see the header, payload, and signature laid out. Nothing leaves your browser.</p>
-                            <a href="/tools/jwt-decoder/" class="read-more" style="color: #a855f7;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/jwt-decoder/" style="color: var(--text);">JWT Decoder</a></h3>
+                            <p style="color: var(--text-muted);">Paste a JWT and see the header, payload, and signature laid out. Nothing leaves your browser.</p>
+                            <a href="/tools/jwt-decoder/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -749,65 +852,98 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(255, 107, 53, 0.08); border-color: rgba(255, 107, 53, 0.15); color: #ff6b35;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></div>
-                            <div style="background: #ff6b35; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/hash-generator/" style="color: #fff;">Hash Generator</a></h3>
-                            <p style="color: #ccc;">Type something, get the MD5, SHA-1, SHA-256, and SHA-512 hashes. All computed locally.</p>
-                            <a href="/tools/hash-generator/" class="read-more" style="color: #ff6b35;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/hash-generator/" style="color: var(--text);">Hash Generator</a></h3>
+                            <p style="color: var(--text-muted);">Type something, get the MD5, SHA-1, SHA-256, and SHA-512 hashes. All computed locally.</p>
+                            <a href="/tools/hash-generator/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- WCAG Contrast Checker -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.15); color: #3b82f6;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/contrast-checker/" style="color: var(--text);">WCAG Contrast Checker</a></h3>
+                            <p style="color: var(--text-muted);">Check foreground/background contrast against WCAG AA and AAA. Pick colors, get a pass/fail instantly.</p>
+                            <a href="/tools/contrast-checker/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Glassmorphism Generator -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(167, 139, 250, 0.08); border-color: rgba(167, 139, 250, 0.2); color: #a78bfa;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/glassmorphism-generator/" style="color: var(--text);">CSS Glassmorphism Generator</a></h3>
+                            <p style="color: var(--text-muted);">Dial blur, opacity, and border for frosted-glass CSS. Copy-ready backdrop-filter snippets.</p>
+                            <a href="/tools/glassmorphism-generator/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Subnet Calculator -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); color: #10b981;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+                            <span class="tool-status-badge">NEW</span>
+                            <h3><a href="/tools/subnet-calculator/" style="color: var(--text);">Subnet Calculator</a></h3>
+                            <p style="color: var(--text-muted);">CIDR to mask, network, broadcast, and host range. Local-only IPv4 subnet math for lab and ops work.</p>
+                            <a href="/tools/subnet-calculator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Tweet Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/tweet-generator/" style="color: #fff;">AI Tweet Generator</a></h3>
-                            <p style="color: #ccc;">Specify a topic to write posts for Twitter or LinkedIn. The tool generates multiple angles to choose from.</p>
-                            <a href="/tools/tweet-generator/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/tweet-generator/" style="color: var(--text);">AI Tweet Generator</a></h3>
+                            <p style="color: var(--text-muted);">Specify a topic to write posts for Twitter or LinkedIn. The tool generates multiple angles to choose from.</p>
+                            <a href="/tools/tweet-generator/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Resume Bullet Points -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/resume-bullets/" style="color: #fff;">AI Resume Bullet Writer</a></h3>
-                            <p style="color: #ccc;">Describe what you did at a job and get back polished bullet points with metrics and action verbs. Uses the STAR framework.</p>
-                            <a href="/tools/resume-bullets/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/resume-bullets/" style="color: var(--text);">AI Resume Bullet Writer</a></h3>
+                            <p style="color: var(--text-muted);">Describe what you did at a job and get back polished bullet points with metrics and action verbs. Uses the STAR framework.</p>
+                            <a href="/tools/resume-bullets/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Meta Description Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/meta-description/" style="color: #fff;">AI Meta Description Generator</a></h3>
-                            <p style="color: #ccc;">Paste your page URL or topic, get 3&ndash;5 meta descriptions at the right character length. Ready to copy into your CMS.</p>
-                            <a href="/tools/meta-description/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/meta-description/" style="color: var(--text);">AI Meta Description Generator</a></h3>
+                            <p style="color: var(--text-muted);">Paste your page URL or topic, get 3&ndash;5 meta descriptions at the right character length. Ready to copy into your CMS.</p>
+                            <a href="/tools/meta-description/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Detection Score -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/ai-detector/" style="color: #fff;">AI Detection Score</a></h3>
-                            <p style="color: #ccc;">Paste text to calculate a probability score for AI generation. The report highlights flagged sentences.</p>
-                            <a href="/tools/ai-detector/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/ai-detector/" style="color: var(--text);">AI Detection Score</a></h3>
+                            <p style="color: var(--text-muted);">Paste text to calculate a probability score for AI generation. The report highlights flagged sentences.</p>
+                            <a href="/tools/ai-detector/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Writing Suite -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(0, 212, 255, 0.08); border-color: rgba(0, 212, 255, 0.15); color: #00d4ff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6"/><path d="M12 6l6 6-9.5 9.5a1.5 1.5 0 0 1-2.1 0L4 19a1.5 1.5 0 0 1 0-2.1L12 6z"/><path d="M3 3l3 3"/><path d="M18 3l3 3"/><path d="M3 18l3 3"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; ADVANCED</div>
-                            <h3><a href="/tools/ai-writing-suite/" style="color: #fff;">AI Writing Suite</a></h3>
-                            <p style="color: #ccc;">9-heuristic AI detector that tells you WHY text is flagged. Then fixes the flagged sentences inline. Detect + humanize in one tool.</p>
-                            <a href="/tools/ai-writing-suite/" class="read-more" style="color: #00d4ff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.15); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6"/><path d="M12 6l6 6-9.5 9.5a1.5 1.5 0 0 1-2.1 0L4 19a1.5 1.5 0 0 1 0-2.1L12 6z"/><path d="M3 3l3 3"/><path d="M18 3l3 3"/><path d="M3 18l3 3"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; ADVANCED</span>
+                            <h3><a href="/tools/ai-writing-suite/" style="color: var(--text);">AI Writing Suite</a></h3>
+                            <p style="color: var(--text-muted);">9-heuristic AI detector that tells you WHY text is flagged. Then fixes the flagged sentences inline. Detect + humanize in one tool.</p>
+                            <a href="/tools/ai-writing-suite/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -816,75 +952,125 @@
         </section>
 
         <!-- Life Tools Section -->
-        <section class="tools-grid" style="padding: 2rem 0 4rem;">
+        <section class="section" style="padding: 2rem 0 4rem;">
             <div class="container">
-                <h2 style="margin-bottom: 0.5rem; text-align: center;">Life <span style="color: #7b2cff;">Tools</span></h2>
-                <p style="text-align:center; color:#878787; margin-bottom: 1.5rem; font-size: 0.95rem;">Real tools for real situations. No judgment, just help.</p>
-                <div class="posts-grid reveal-stagger">
+                <h2 style="margin-bottom: 0.5rem; text-align: center;">Life <span style="color: var(--primary-soft);">Tools</span></h2>
+                <p style="text-align:center; color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Real tools for real situations. No judgment, just help.</p>
+                <div class="posts-grid reveal-stagger" data-filter-scope="catalog">
 
                     <!-- AI Hardship Letter Writer -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/hardship-letter/" style="color: #fff;">AI Hardship Letter Writer</a></h3>
-                            <p style="color: #ccc;">Generate a professional hardship letter for mortgage, medical bills, immigration, student loans, or utility shutoff.</p>
-                            <a href="/tools/hardship-letter/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; LIFE</span>
+                            <h3><a href="/tools/hardship-letter/" style="color: var(--text);">AI Hardship Letter Writer</a></h3>
+                            <p style="color: var(--text-muted);">Generate a professional hardship letter for mortgage, medical bills, immigration, student loans, or utility shutoff.</p>
+                            <a href="/tools/hardship-letter/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/utility-shutoff-letter/" style="color: var(--text);">Utility Shutoff Letter</a></h3>
+                            <p style="color: var(--text-muted);">Electric disconnect notice? Payment-arrangement letter, medical protection request, and document checklist.</p>
+                            <a href="/tools/utility-shutoff-letter/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/insurance-denial-appeal/" style="color: var(--text);">Insurance Denial Appeal</a></h3>
+                            <p style="color: var(--text-muted);">Prior auth refused or “not medically necessary”? Draft a member internal appeal with packet list.</p>
+                            <a href="/tools/insurance-denial-appeal/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/sap-appeal-letter/" style="color: var(--text);">SAP Financial Aid Appeal</a></h3>
+                            <p style="color: var(--text-muted);">Aid suspended for SAP? Letter + academic plan structure schools look for.</p>
+                            <a href="/tools/sap-appeal-letter/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/landlord-tenant-letter/" style="color: var(--text);">Landlord &amp; Tenant Letters</a></h3>
+                            <p style="color: var(--text-muted);">Repair requests, deposit demands, late-rent plans, habitability notices.</p>
+                            <a href="/tools/landlord-tenant-letter/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/payment-demand-letter/" style="color: var(--text);">Payment Demand Letter</a></h3>
+                            <p style="color: var(--text-muted);">Unpaid invoice or overdue bill — friendly, firm, or final notice with clear dates.</p>
+                            <a href="/tools/payment-demand-letter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Budget Planner -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; LIFE TOOLS</div>
-                            <h3><a href="/tools/budget-planner/" style="color: #fff;">Budget Planner</a></h3>
-                            <p style="color: #ccc;">Build a survival budget around your financial situation. The tool creates plans for job loss, medical bills, or reduced income.</p>
-                            <a href="/tools/budget-planner/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; LIFE TOOLS</span>
+                            <h3><a href="/tools/budget-planner/" style="color: var(--text);">Budget Planner</a></h3>
+                            <p style="color: var(--text-muted);">Build a survival budget around your financial situation. The tool creates plans for job loss, medical bills, or reduced income.</p>
+                            <a href="/tools/budget-planner/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Appeal Letter Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9 12l2 2 4-4"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/appeal-letter/" style="color: #fff;">AI Appeal Letter Generator</a></h3>
-                            <p style="color: #ccc;">Fight back against unfair decisions. Write a professional appeal for unemployment, insurance, housing, or school disputes.</p>
-                            <a href="/tools/appeal-letter/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/appeal-letter/" style="color: var(--text);">AI Appeal Letter Generator</a></h3>
+                            <p style="color: var(--text-muted);">Fight back against unfair decisions. Write a professional appeal for unemployment, insurance, housing, or school disputes.</p>
+                            <a href="/tools/appeal-letter/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Caregiver Shift Report Generator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M12 10v8"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; LIFE TOOLS</div>
-                            <h3><a href="/tools/caregiver-report/" style="color: #fff;">Caregiver Shift Report Generator</a></h3>
-                            <p style="color: #ccc;">Turn messy shift notes into a professional, structured care report. Built for CNAs, home health aides, and family caregivers.</p>
-                            <a href="/tools/caregiver-report/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M12 10v8"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; LIFE TOOLS</span>
+                            <h3><a href="/tools/caregiver-report/" style="color: var(--text);">Caregiver Shift Report Generator</a></h3>
+                            <p style="color: var(--text-muted);">Turn messy shift notes into a professional, structured care report. Built for CNAs, home health aides, and family caregivers.</p>
+                            <a href="/tools/caregiver-report/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Custody Document Drafter -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; LIFE TOOLS</div>
-                            <h3><a href="/tools/custody-document/" style="color: #fff;">Custody &amp; Parenting Plan Drafter</a></h3>
-                            <p style="color: #ccc;">Draft parenting plans, custody declarations, and modification requests. Organize your thoughts for your family's future.</p>
-                            <a href="/tools/custody-document/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; LIFE TOOLS</span>
+                            <h3><a href="/tools/custody-document/" style="color: var(--text);">Custody &amp; Parenting Plan Drafter</a></h3>
+                            <p style="color: var(--text-muted);">Draft parenting plans, custody declarations, and modification requests. Organize your thoughts for your family's future.</p>
+                            <a href="/tools/custody-document/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- AI Paraphraser -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/paraphraser/" style="color: #fff;">AI Paraphraser</a></h3>
-                            <p style="color: #ccc;">Rewrite and paraphrase any text while preserving meaning. Multiple tone options for any context.</p>
-                            <a href="/tools/paraphraser/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/paraphraser/" style="color: var(--text);">AI Paraphraser</a></h3>
+                            <p style="color: var(--text-muted);">Rewrite and paraphrase any text while preserving meaning. Multiple tone options for any context.</p>
+                            <a href="/tools/paraphraser/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -892,21 +1078,65 @@
                     <div class="blog-card" >
                         <div class="blog-card-content">
                             <div class="tool-icon" style="background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.2); color: #a78bfa;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-                            <div style="background: #a78bfa; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">AI &middot; NEW</div>
-                            <h3><a href="/tools/voice-writer/" style="color: #fff;">AI Voice Writer</a></h3>
-                            <p style="color: #ccc;">Generate content matching your brand voice. Select a conversational, educational, or strategic tone to start.</p>
-                            <a href="/tools/voice-writer/" class="read-more" style="color: #a78bfa;">Launch Tool &rarr;</a>
+                            <span class="tool-status-badge">AI &middot; NEW</span>
+                            <h3><a href="/tools/voice-writer/" style="color: var(--text);">AI Voice Writer</a></h3>
+                            <p style="color: var(--text-muted);">Generate content matching your brand voice. Select a conversational, educational, or strategic tone to start.</p>
+                            <a href="/tools/voice-writer/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Child Support Calculator -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25); color: #10b981;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <span class="tool-status-badge">LEGAL &middot; FREE</span>
+                            <h3><a href="/tools/child-support-calculator/" style="color: var(--text);">Child Support Calculator</a></h3>
+                            <p style="color: var(--text-muted);">Estimate child support with income, custody share, and childcare costs. Planning only — not legal advice.</p>
+                            <a href="/tools/child-support-calculator/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Spousal Support Calculator -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25); color: #10b981;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                            <span class="tool-status-badge">LEGAL &middot; FREE</span>
+                            <h3><a href="/tools/spousal-support-calculator/" style="color: var(--text);">Spousal Support Calculator</a></h3>
+                            <p style="color: var(--text-muted);">Rough alimony / spousal support estimate from incomes and marriage length. For planning conversations only.</p>
+                            <a href="/tools/spousal-support-calculator/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Behavioral Log -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                            <span class="tool-status-badge">LIFE &middot; FREE</span>
+                            <h3><a href="/tools/behavioral-log/" style="color: var(--text);">ABC Behavioral Log</a></h3>
+                            <p style="color: var(--text-muted);">Document dementia or care behaviors with Antecedent–Behavior–Consequence notes for handoffs and care plans.</p>
+                            <a href="/tools/behavioral-log/" class="read-more">Launch Tool &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Med Administration Log -->
+                    <div class="blog-card">
+                        <div class="blog-card-content">
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5 3 13l1.5-1.5L12 19l8.5-8.5L22 12"/><path d="M12 2v6"/><path d="M8 6h8"/></svg></div>
+                            <span class="tool-status-badge">LIFE &middot; FREE</span>
+                            <h3><a href="/tools/med-administration-log/" style="color: var(--text);">Medication Administration Log</a></h3>
+                            <p style="color: var(--text-muted);">Track meds given, refused, or held. Printable MAR-style log for CNAs and family caregivers.</p>
+                            <a href="/tools/med-administration-log/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
                     <!-- Fluid Dynamics Simulator -->
                     <div class="blog-card" >
                         <div class="blog-card-content">
-                            <div class="tool-icon" style="background: rgba(123, 44, 255, 0.08); border-color: rgba(123, 44, 255, 0.25); color: #7b2cff;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-                            <div style="background: linear-gradient(135deg, #7b2cff, #00d4ff); color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">INTERACTIVE &middot; NEW</div>
-                            <h3><a href="/tools/fluid-sim/" style="color: #fff;">Fluid Dynamics Simulator</a></h3>
-                            <p style="color: #ccc;">Real-time Navier-Stokes fluid simulation. Click &amp; drag to inject dye. 5 color palettes, physics controls, screenshot export.</p>
-                            <a href="/tools/fluid-sim/" class="read-more" style="color: #7b2cff;">Launch Tool &rarr;</a>
+                            <div class="tool-icon" style="background: rgba(194, 65, 12, 0.08); border-color: rgba(194, 65, 12, 0.25); color: var(--primary-soft);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+                            <span class="tool-status-badge">INTERACTIVE &middot; NEW</span>
+                            <h3><a href="/tools/fluid-sim/" style="color: var(--text);">Fluid Dynamics Simulator</a></h3>
+                            <p style="color: var(--text-muted);">Real-time Navier-Stokes fluid simulation. Click &amp; drag to inject dye. 5 color palettes, physics controls, screenshot export.</p>
+                            <a href="/tools/fluid-sim/" class="read-more">Launch Tool &rarr;</a>
                         </div>
                     </div>
 
@@ -931,8 +1161,8 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span
-                        style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>Free, privacy-first developer tools.</p>
+                        style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>
@@ -951,17 +1181,48 @@
     <script src="/js/script.js?v=20260623"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.posts-grid .blog-card');
+        // Catalog + life sections filter; Popular (pinned) always stays visible
+        const cards = document.querySelectorAll('.posts-grid[data-filter-scope="catalog"] .blog-card, .posts-grid.reveal-stagger .blog-card, section.section .posts-grid .blog-card');
+        const filterableCards = Array.from(document.querySelectorAll('.posts-grid .blog-card')).filter(card => {
+            const grid = card.closest('.posts-grid');
+            return !grid || grid.getAttribute('data-filter-scope') !== 'pinned';
+        });
         
-        // Dictionary mapping paths to categories
+        // Path slug → categories. Multi-category tools appear in every matching filter.
+        // AI = any tool that calls an AI backend (or is labeled AI on the card).
         const categoryMapping = {
+            // AI writing / freelance
             'summarizer': ['ai', 'writing'],
             'email-writer': ['ai', 'writing'],
             'bio-generator': ['ai', 'writing'],
             'code-explainer': ['ai', 'developer'],
             'product-description': ['ai', 'writing'],
-            'gig-auto-pilot': ['ai', 'finance'],
+            'gig-auto-pilot': ['ai', 'writing', 'finance'],
             'humanizer': ['ai', 'writing'],
+            'tweet-generator': ['ai', 'writing'],
+            'resume-bullets': ['ai', 'writing'],
+            'meta-description': ['ai', 'writing'],
+            'ai-detector': ['ai', 'writing'],
+            'ai-writing-suite': ['ai', 'writing'],
+            'paraphraser': ['ai', 'writing'],
+            'voice-writer': ['ai', 'writing'],
+            // AI life / legal letter tools (were missing 'ai' — AI filter hid them)
+            'hardship-letter': ['ai', 'legal', 'writing'],
+            'appeal-letter': ['ai', 'legal', 'writing'],
+            'utility-shutoff-letter': ['ai', 'legal', 'writing', 'finance'],
+            'insurance-denial-appeal': ['ai', 'legal', 'writing'],
+            'sap-appeal-letter': ['ai', 'legal', 'writing'],
+            'landlord-tenant-letter': ['ai', 'legal', 'writing'],
+            'payment-demand-letter': ['ai', 'legal', 'writing', 'finance'],
+            'budget-planner': ['ai', 'finance'],
+            'caregiver-report': ['ai', 'legal'],
+            'custody-document': ['ai', 'legal'],
+            // Client-side life / legal (not AI)
+            'child-support-calculator': ['legal', 'finance'],
+            'spousal-support-calculator': ['legal', 'finance'],
+            'med-administration-log': ['legal'],
+            'behavioral-log': ['legal'],
+            // Developer utilities
             'json-csv-converter': ['developer'],
             'seo-tag-generator': ['developer', 'writing'],
             'password-checker': ['developer'],
@@ -974,20 +1235,6 @@
             'uuid-generator': ['developer'],
             'lorem-ipsum': ['developer', 'writing'],
             'epoch-converter': ['developer'],
-            'child-support-calculator': ['legal', 'finance'],
-            'spousal-support-calculator': ['legal', 'finance'],
-            'custody-document': ['legal'],
-            'caregiver-report': ['legal'],
-            'hardship-letter': ['legal', 'writing'],
-            'appeal-letter': ['legal', 'writing'],
-            'med-administration-log': ['legal'],
-            'behavioral-log': ['legal'],
-            'budget-planner': ['finance'],
-            'voice-writer': ['ai', 'writing'],
-            'fluid-sim': ['developer'],
-            'text-diff': ['developer'],
-            'tweet-generator': ['ai', 'writing'],
-            'resume-bullets': ['ai', 'writing'],
             'cron-builder': ['developer'],
             'subnet-calculator': ['developer'],
             'json-formatter': ['developer'],
@@ -995,80 +1242,134 @@
             'hash-generator': ['developer'],
             'case-converter': ['developer'],
             'slug-generator': ['developer', 'writing'],
-            'url-encoder': ['developer']
+            'url-encoder': ['developer'],
+            'text-diff': ['developer'],
+            'html-entity': ['developer'],
+            'privacy-generator': ['developer', 'writing'],
+            'fluid-sim': ['developer'],
+            'contrast-checker': ['developer'],
+            'glassmorphism-generator': ['developer']
         };
 
-        // Assign categories based on href
-        cards.forEach(card => {
+        // Longest slug first so e.g. insurance-denial-appeal wins over appeal-letter
+        const mappingKeys = Object.keys(categoryMapping).sort((a, b) => b.length - a.length);
+
+        function assignCategories(card) {
             const link = card.querySelector('h3 a');
             if (!link) return;
             const href = link.getAttribute('href') || '';
-            
-            // Find which mapping key matches the href
-            let assigned = false;
-            for (const [key, cats] of Object.entries(categoryMapping)) {
-                if (href.includes(`/${key}/`)) {
-                    card.setAttribute('data-categories', cats.join(' '));
-                    assigned = true;
+            const title = (link.textContent || '').toLowerCase();
+            const cardText = (card.textContent || '').toLowerCase();
+            const categories = new Set();
+
+            let matched = false;
+            for (const key of mappingKeys) {
+                if (href.includes('/' + key + '/') || href.endsWith('/' + key)) {
+                    categoryMapping[key].forEach(c => categories.add(c));
+                    matched = true;
                     break;
                 }
             }
-            
-            // Default category if none matched
-            if (!assigned) {
-                const title = link.textContent.toLowerCase();
-                const categories = [];
-                if (title.includes('ai')) categories.push('ai');
-                if (title.includes('writer') || title.includes('generator') || title.includes('converter')) categories.push('developer');
-                card.setAttribute('data-categories', categories.join(' ') || 'developer');
-            }
-        });
 
-        // Implement Live Search and Category Filter
+            if (/\bai\b/.test(title) || /ai\s*[·•]/.test(cardText) || cardText.includes('ai ·')) {
+                categories.add('ai');
+            }
+            if (href.includes('curator.cyberscryb.com')) {
+                categories.add('ai');
+            }
+
+            if (!matched && categories.size === 0) {
+                categories.add('developer');
+            }
+
+            card.setAttribute('data-categories', Array.from(categories).join(' '));
+            card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        }
+        filterableCards.forEach(assignCategories);
+        // Still tag pinned cards for deep-links but do not hide them when filtering
+        document.querySelectorAll('.posts-grid[data-filter-scope="pinned"] .blog-card').forEach(assignCategories);
+
         const searchInput = document.getElementById('tool-search');
         const filterButtons = document.querySelectorAll('.filter-btn');
-        
+
         let currentCategory = 'all';
         let searchQuery = '';
 
         function filterTools() {
-            cards.forEach(card => {
-                const title = (card.querySelector('h3').textContent || '').toLowerCase();
-                const desc = (card.querySelector('p').textContent || '').toLowerCase();
-                const categories = (card.getAttribute('data-categories') || '').split(' ');
-                
-                const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery);
+            let visibleCount = 0;
+            filterableCards.forEach(card => {
+                const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+                const desc = (card.querySelector('p')?.textContent || '').toLowerCase();
+                const categories = (card.getAttribute('data-categories') || '').split(/\s+/).filter(Boolean);
+
+                const matchesSearch = !searchQuery || title.includes(searchQuery) || desc.includes(searchQuery);
                 const matchesCategory = currentCategory === 'all' || categories.includes(currentCategory);
-                
+
                 if (matchesSearch && matchesCategory) {
                     card.style.display = '';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 10);
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                    visibleCount++;
                 } else {
                     card.style.opacity = '0';
                     card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 200);
+                    card.style.display = 'none';
                 }
             });
+
+            // Hide empty Life Tools section only (Popular stays pinned)
+            document.querySelectorAll('main .section').forEach(section => {
+                const head = section.querySelector('h2');
+                if (!head || !head.textContent.toLowerCase().includes('life')) return;
+                const grid = section.querySelector('.posts-grid');
+                if (!grid) return;
+                const anyVisible = Array.from(grid.querySelectorAll('.blog-card')).some(c => c.style.display !== 'none');
+                section.style.display = anyVisible || (currentCategory === 'all' && !searchQuery) ? '' : (anyVisible ? '' : 'none');
+                if (!anyVisible && (currentCategory !== 'all' || searchQuery)) section.style.display = 'none';
+                else if (anyVisible) section.style.display = '';
+            });
+
+            let countEl = document.getElementById('tool-filter-count');
+            if (!countEl && searchInput) {
+                countEl = document.createElement('p');
+                countEl.id = 'tool-filter-count';
+                countEl.setAttribute('aria-live', 'polite');
+                countEl.style.cssText = 'margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted);';
+                searchInput.parentElement?.parentElement?.appendChild(countEl);
+            }
+            if (countEl) {
+                if (currentCategory !== 'all' || searchQuery) {
+                    countEl.textContent = visibleCount + ' tool' + (visibleCount === 1 ? '' : 's') + ' shown';
+                    countEl.hidden = false;
+                } else {
+                    countEl.hidden = true;
+                }
+            }
         }
 
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase().trim();
-            filterTools();
-        });
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                filterTools();
+            });
+        }
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                currentCategory = btn.getAttribute('data-category');
+                currentCategory = btn.getAttribute('data-category') || 'all';
                 filterTools();
             });
         });
+
+        // Deep-link: /tools/?cat=ai or #ai
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('cat') || (location.hash || '').replace('#', '');
+        if (catParam) {
+            const matchBtn = Array.from(filterButtons).find(b => b.getAttribute('data-category') === catParam);
+            if (matchBtn) matchBtn.click();
+        }
     });
     </script>
 </body>

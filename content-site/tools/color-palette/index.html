@@ -20,8 +20,8 @@
     <link rel="canonical" href="https://cyberscryb.com/tools/color-palette/">
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/color-palette/style.css">
     <script type="application/ld+json">
     {
@@ -105,15 +105,80 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is color harmony?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Color harmony refers to aesthetically pleasing arrangements of colors based on their positions on the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent colors), and triadic (evenly spaced)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use these palettes commercially?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Colors cannot be copyrighted. Any palette generated here is free to use in any personal or commercial project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between RGB, HSL, and Hex?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They're all ways to represent colors. Hex (#FF0000) is compact and widely used in CSS. RGB (255, 0, 0) breaks color into red, green, blue channels. HSL (0°, 100%, 50%) uses hue, saturation, lightness — which is more intuitive for generating harmonies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pick a good base color?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with your brand's primary color, or use our random generator to explore. A good base color has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes two colors \"work together\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Colors work together when they maintain sufficient contrast for readability (WCAG AA requires a contrast ratio of at least 4.5:1 for normal text), while sharing a coherent relationship on the color wheel. Colors that are too similar in both hue and value blend into each other. Colors that are too different without a structural relationship (complementary, triadic, split-complementary) look chaotic. The goal is controlled tension — enough difference to create visual hierarchy, enough relationship to feel intentional."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many colors should a UI color palette have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most practical UI design systems use 5-9 colors: one primary brand color in 5-9 tints and shades, one accent color, one semantic set (success green, warning yellow, error red, info blue), and 2-3 neutral grays. Fewer colors mean tighter consistency — systems with 30+ colors usually end up with inconsistent usage and visual clutter. Start minimal and add colors only when you have a specific design need they solve."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I test if my palette meets WCAG accessibility requirements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After generating your palette, check text-on-background combinations with the CyberScryb WCAG Color Contrast Checker guide . WCAG AA compliance requires 4.5:1 for normal text, 3:1 for large text. WCAG AAA requires 7:1 for normal text. Always test your actual text color against your actual background color — not just your palette colors against each other."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">Color Palette Generator</span>
+        <span style="color: var(--primary-soft);">Color Palette Generator</span>
     </nav>
     <div class="bg-grid"></div>
     <div class="glow glow-1"></div>
@@ -125,18 +190,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -260,7 +324,7 @@
                     <p>Start with your brand's primary color, or use our random generator to explore. A good base color
                         has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes.</p>
                 </details>
-         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.7;">
+         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Outfit',sans-serif;line-height:1.7;">
         <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">How Color Palettes Work in Web Design</h2>
         <p>A color palette is a curated set of colors that work together visually, derived from principles of color theory. The three most useful palette types for web projects are complementary (colors opposite each other on the color wheel, which create high contrast and visual tension &mdash; good for calls-to-action), analogous (colors adjacent on the wheel, which feel harmonious and calm &mdash; good for backgrounds and content areas), and triadic (three colors equally spaced on the wheel, which create vibrant, balanced schemes).</p>
         <p>When building a UI, most designers work with a base color (your primary brand color), a complementary or triadic accent (for buttons, links, and highlights), and a set of neutral tones (for backgrounds, text, and borders). The exact hues matter less than their relationship to each other &mdash; a well-structured palette keeps your interface coherent even as elements change across different pages and states.</p>
@@ -292,38 +356,38 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
-                <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML for styled blog posts and docs.</span>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Convert Markdown to HTML for styled blog posts and docs.</span>
             </a>
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
-                <span style="font-size:0.85rem; color:#878787;">Build rich meta tags for your next landing page.</span>
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Build rich meta tags for your next landing page.</span>
             </a>
-            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Make AI-generated copy read naturally for human readers.</span>
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Make AI-generated copy read naturally for human readers.</span>
             </a>
         </div>
     </section>
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/color-palette-generator-for-websites/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Color Palette Generator Guide</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/color-palette-generator-for-websites/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Color Palette Generator Guide</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
-            <a href="/guides/hex-vs-rgb-vs-hsl-color-formats/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Hex vs RGB vs HSL Color Formats</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/hex-vs-rgb-vs-hsl-color-formats/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Hex vs RGB vs HSL Color Formats</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
-            <a href="/guides/color-contrast-checker-wcag/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? WCAG Color Contrast Guide</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/color-contrast-checker-wcag/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? WCAG Color Contrast Guide</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
         </div>
     </section>
@@ -332,8 +396,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

@@ -18,9 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -109,15 +109,48 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a Medication Administration Record (MAR)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A MAR is a professional grid sheet used by nurses and caregivers to document every medication dose given to a patient. Accurate recording prevents double-dosing and ensures medication compliance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the drug interaction audit work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The AI model reviews the active medications, dosages, and routes listed on your MAR grid, references standard clinical safety criteria, and alerts you to possible drug-drug interactions or side-effect risks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I print my completed MAR and report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Clicking the \"Print / PDF\" button will format the MAR grid and completed handoff notes into a clean, printer-friendly layout suitable for physical care files or medical binder inserts."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <span style="color:#7b2cff;">Medication Administration Log</span>
+        <span style="color: var(--primary-soft);">Medication Administration Log</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -125,18 +158,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -150,11 +182,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
+                <div class="badge" style="background: rgba(194, 65, 12, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(194, 65, 12, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     Caregiver Tools
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">Medication Administration <span style="color: #7b2cff;">Log</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">Medication Administration <span style="color: var(--primary-soft);">Log</span></h1>
                 <p class="hero-subtitle">Interactive MAR grid, drug-safety check, &amp; caregiver handoff generator.</p>
             </div>
         </section>
@@ -170,27 +202,27 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M4.82 4.82A10 10 0 1 1 20 12h-8V4.82z"/></svg>
                                 Medication Administration Record (MAR)
                             </h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
                         </div>
 
                         <!-- Add Medication Form -->
                         <form id="med-form" style="border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.01);">
-                            <h3 style="font-size: 0.95rem; color:#fff; margin-top:0; margin-bottom:0.75rem;">Add New Medication</h3>
+                            <h3 style="font-size: 0.95rem; color: var(--text); margin-top:0; margin-bottom:0.75rem;">Add New Medication</h3>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                                 <div class="input-group">
-                                    <label for="med-name" style="font-size:0.8rem; color:#878787;">Medication Name</label>
-                                    <input type="text" id="med-name" placeholder="e.g. Donepezil" required style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
+                                    <label for="med-name" style="font-size:0.8rem; color: var(--text-muted);">Medication Name</label>
+                                    <input type="text" id="med-name" placeholder="e.g. Donepezil" required style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-dosage" style="font-size:0.8rem; color:#878787;">Dosage</label>
-                                    <input type="text" id="med-dosage" placeholder="e.g. 5mg" required style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
+                                    <label for="med-dosage" style="font-size:0.8rem; color: var(--text-muted);">Dosage</label>
+                                    <input type="text" id="med-dosage" placeholder="e.g. 5mg" required style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
                                 <div class="input-group">
-                                    <label for="med-route" style="font-size:0.8rem; color:#878787;">Route</label>
-                                    <select id="med-route" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
+                                    <label for="med-route" style="font-size:0.8rem; color: var(--text-muted);">Route</label>
+                                    <select id="med-route" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
                                         <option value="Oral">Oral (PO)</option>
                                         <option value="Sublingual">Sublingual (SL)</option>
                                         <option value="Transdermal">Transdermal (Patch)</option>
@@ -200,8 +232,8 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-frequency" style="font-size:0.8rem; color:#878787;">Frequency</label>
-                                    <select id="med-frequency" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
+                                    <label for="med-frequency" style="font-size:0.8rem; color: var(--text-muted);">Frequency</label>
+                                    <select id="med-frequency" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
                                         <option value="Daily">Once Daily</option>
                                         <option value="Twice Daily">Twice Daily (BID)</option>
                                         <option value="Three Times Daily">3x Daily (TID)</option>
@@ -210,18 +242,18 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-time" style="font-size:0.8rem; color:#878787;">Scheduled Time</label>
-                                    <input type="text" id="med-time" placeholder="e.g. 08:00" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
+                                    <label for="med-time" style="font-size:0.8rem; color: var(--text-muted);">Scheduled Time</label>
+                                    <input type="text" id="med-time" placeholder="e.g. 08:00" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                             </div>
-                            <button type="submit" style="background: rgba(123, 44, 255, 0.15); border: 1px solid #7b2cff; color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.75rem; width:100%;">Add to MAR Grid</button>
+                            <button type="submit" style="background: rgba(194, 65, 12, 0.15); border: 1px solid #7b2cff; color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.75rem; width:100%;">Add to MAR Grid</button>
                         </form>
 
                         <!-- MAR Grid Table -->
                         <div style="overflow-x: auto; margin-bottom: 1.5rem;">
                             <table style="width: 100%; border-collapse: collapse; min-width: 480px; font-size: 0.85rem; text-align: left;">
                                 <thead>
-                                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #878787;">
+                                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: var(--text-muted);">
                                         <th style="padding: 8px 12px;">Medication</th>
                                         <th style="padding: 8px 6px;">Dose</th>
                                         <th style="padding: 8px 6px;">Route</th>
@@ -238,8 +270,8 @@
 
                         <!-- Report/Audit Type -->
                         <div class="input-group" style="margin-bottom: 1.25rem;">
-                            <label for="audit-type" style="color: #ededed;">Audit Report Type</label>
-                            <select id="audit-type" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                            <label for="audit-type" style="color: var(--text-muted);">Audit Report Type</label>
+                            <select id="audit-type" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                                 <option value="safety-audit">Drug Safety Audit (Interactions, side-effects, risk check)</option>
                                 <option value="handoff-summary">Handoff & shift summary report (Next-shift briefing)</option>
                             </select>
@@ -247,11 +279,11 @@
 
                         <!-- Handoff shift context -->
                         <div class="input-group">
-                            <label for="caregiver-notes" style="color: #ededed;">Caregiver Shift Handoff Context (PRN Reasons, Refusals, Vitals, etc.)</label>
-                            <textarea id="caregiver-notes" placeholder="e.g. Patient refused morning Donepezil until breakfast was served. Blood pressure checked at 08:00 was 118/74. Complained of mild dizziness after Metoprolol." style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; height: 100px; resize: vertical;"></textarea>
+                            <label for="caregiver-notes" style="color: var(--text-muted);">Caregiver Shift Handoff Context (PRN Reasons, Refusals, Vitals, etc.)</label>
+                            <textarea id="caregiver-notes" placeholder="e.g. Patient refused morning Donepezil until breakfast was served. Blood pressure checked at 08:00 was 118/74. Complained of mild dizziness after Metoprolol." style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; height: 100px; resize: vertical;"></textarea>
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: #7b2cff; border: none; color: #000; font-family: 'Orbitron'; font-weight: 600; margin-top: 1.5rem;">
+                        <button id="generate-btn" class="primary-btn" style="background: var(--primary); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600; margin-top: 1.5rem;">
                             <span class="btn-text">Audit Interactions &amp; Build Handoff</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -265,13 +297,13 @@
                                 Handoff Report &amp; Safety Audit
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
-                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Print / PDF</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your safety audit, potential drug-drug interaction warning profile, compliance analytics, and a professional shift handoff report will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -283,7 +315,7 @@
                                     <h3>Unlock Your Safety Audit</h3>
                                     <p>Enter your email to get the full result + <strong>3 free reports/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -291,11 +323,11 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Running safety check &amp; drafting handoff...</p>
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary-soft);">Running safety check &amp; drafting handoff...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                         </div>
                     </div>
@@ -303,26 +335,26 @@
 
                 <!-- FAQ -->
                 <div class="geo-card" style="background: #18181b; border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is a Medication Administration Record (MAR)?</h4><p>A MAR is a professional grid sheet used by nurses and caregivers to document every medication dose given to a patient. Accurate recording prevents double-dosing and ensures medication compliance.</p></div>
                     <div class="faq-item"><h4>How does the drug interaction audit work?</h4><p>The AI model reviews the active medications, dosages, and routes listed on your MAR grid, references standard clinical safety criteria, and alerts you to possible drug-drug interactions or side-effect risks.</p></div>
                     <div class="faq-item"><h4>Can I print my completed MAR and report?</h4><p>Yes. Clicking the "Print / PDF" button will format the MAR grid and completed handoff notes into a clean, printer-friendly layout suitable for physical care files or medical binder inserts.</p></div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
-                    <p>Related: <a href="/tools/caregiver-report/">Caregiver Shift Report</a> | <a href="/tools/behavioral-log/">Behavioral Log</a> | <a href="/tools/medical-history/">Medical History Organizer</a></p>
+                    <p>Related: <a href="/tools/caregiver-report/">Caregiver Shift Report</a> | <a href="/tools/behavioral-log/">Behavioral Log</a> | <a href="/blog/what-goes-in-a-caregiver-shift-report-2026/">Shift Report Guide</a></p>
                 </div>
             </div>
         </section>
 
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Importance of MAR and Handoff Sheets</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Importance of MAR and Handoff Sheets</h2>
             <p>In senior care, memory care, and group home environments, medication administration errors are among the most common and preventable safety hazards. A Medication Administration Record (MAR) is the primary line of defense. By checking off administrations in real time, caregivers prevent double-dosing, missed medications, or scheduling anomalies. In addition to a structured log, a descriptive caregiver shift handoff note ensures that oncoming staff members are aware of vital signs (like blood pressure or blood sugar), refusals, and any behavioral symptoms that occurred after a medication was given.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Common Drug-Drug Interactions to Monitor</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Common Drug-Drug Interactions to Monitor</h2>
             <p>Caregivers must remain alert to dangerous drug interactions. For example, administering multiple medications that lower blood pressure (like beta-blockers and ACE inhibitors) can lead to severe orthostatic hypotension and increased fall risks, especially in elderly patients. Anticholinergic drugs taken alongside cognitive enhancers (such as acetylcholinesterase inhibitors like Donepezil) can cancel out the effects of both medications, leading to worsened confusion or memory loss. The AI audit highlights these safety profiles to ensure they are reported to the prescribing physician.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#7b2cff;margin-top:2rem;">Best Practices for Caregiver Communications</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Best Practices for Caregiver Communications</h2>
             <p>When writing handoff notes for the next shift, focus on objective, clear, and actionable data. Avoid subjective comments like "patient was difficult." Instead, write: "Patient refused morning dose of Metoprolol at 08:00, stating they felt too dizzy. BP checked: 102/60. Notification sent to family representative and doctor's office at 08:30." Ensure all vitals are recorded alongside any PRN (as-needed) medications given, including the reason for administration and the patient's subsequent response.</p>
         </section>
     </main>
@@ -331,8 +363,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

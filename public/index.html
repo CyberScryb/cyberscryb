@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberScryb: Free AI and Developer Tools | Privacy-First</title>
-    <meta name="description" content="Free, privacy-first AI &amp; developer tools: Humanizer, JSON&harr;CSV, Password Checker, Base64, Markdown&rarr;HTML. No signup. Runs in your browser.">
+    <title>CyberScryb — Humanizer, freelance proposals &amp; free browser tools</title>
+    <meta name="description" content="Rewrite stiff ChatGPT drafts. Build freelance proposals. 50 free browser tools, no account. Pro for unlimited full AI results — $5/mo.">
     <link rel="canonical" href="https://cyberscryb.com/">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="CyberScryb: Free AI and Developer Tools">
-    <meta property="og:description"
-        content="Free, privacy-first developer tools running entirely in the browser. No signup required.">
+    <meta property="og:title" content="CyberScryb — Humanizer, freelance proposals, free tools">
+    <meta property="og:description" content="Clean up stiff drafts. Draft freelance proposals. Free browser tools. Pro for unlimited AI results.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CyberScryb: Free AI and Developer Tools">
-    <meta name="twitter:description"
-        content="Free, privacy-first developer tools running entirely in the browser. No signup required.">
-
+    <meta name="twitter:title" content="CyberScryb — AI Humanizer &amp; Freelance Tools">
+    <meta name="twitter:description" content="Free samples. Pro for unlimited full AI results. $5/mo.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Google Search Console Verification -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260723ui-system">
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
-
-    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -41,20 +27,13 @@
         gtag('js', new Date());
         gtag('config', 'G-LS46B9J1XK');
     </script>
-
-    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "CyberScryb",
         "url": "https://cyberscryb.com",
-        "description": "Free, privacy-first developer tools running entirely in the browser.",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://cyberscryb.com/tools.html",
-            "query-input": "required name=search_term_string"
-        }
+        "description": "AI humanizer, freelance proposal tools, and free browser developer utilities."
     }
     </script>
     <script type="application/ld+json">
@@ -63,8 +42,6 @@
         "@type": "Organization",
         "name": "CyberScryb",
         "url": "https://cyberscryb.com",
-        "description": "Free, privacy-first developer tools and guides. All tools run entirely client-side.",
-        "foundingDate": "2026",
         "contactPoint": {
             "@type": "ContactPoint",
             "email": "support@cyberscryb.com",
@@ -73,16 +50,12 @@
     }
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
     (function() {
         function loadAdsense() {
             if (window._adsenseLoaded) return;
             var robots = document.querySelector('meta[name="robots"]');
-            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
-                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
-                return;
-            }
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) return;
             window._adsenseLoaded = true;
             var s = document.createElement('script');
             s.async = true;
@@ -90,70 +63,36 @@
             s.crossOrigin = 'anonymous';
             document.head.appendChild(s);
         }
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
+        if (document.readyState === 'complete') setTimeout(loadAdsense, 2500);
+        else window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
         ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
             window.addEventListener(ev, loadAdsense, { once: true, passive: true });
         });
     })();
     </script>
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
 </head>
-
 <body>
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                    <a href="/">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32">
+                        <span class="brand-mark">CyberScryb</span>
                     </a>
                 </div>
-                                                <ul class="nav-menu">
+                <ul class="nav-menu" id="nav-menu">
                     <li><a href="/" class="active">Home</a></li>
                     <li><a href="/tools/">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
-                    <li><a href="/blog/">Blog</a></li>
+<li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" class="nav-curator" target="_blank" rel="noopener">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <button type="button" class="hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </nav>
     </header>
@@ -161,104 +100,304 @@
     <main>
         <section class="hero">
             <div class="hero-container">
-                <h1 class="hero-title">Free AI and Developer Tools Running in the Browser</h1>
-                <p class="hero-subtitle">Browse 40+ client-side utilities including a text humanizer, JSON converter, password checker, and SEO tag generator. All tools run entirely in the browser. No signup required. Data never leaves your computer.</p>
+                <div class="hero-eyebrow">Freelancers &amp; builders</div>
+                <h1 class="hero-title">Write better. Bid faster. ID stuff from a photo.</h1>
+                <p class="hero-subtitle" style="max-width:32rem;">
+                    Humanizer, freelance proposals, free browser tools, and Curator Prime photo ID.
+                </p>
                 <div class="hero-cta">
-                    <a href="/tools/" class="cta-button">Browse the Tools</a>
-                    <a href="#tools-overview" class="cta-secondary">What's here?</a>
+                    <a href="/tools/humanizer/" class="cta-attention">Try Humanizer</a>
+                    <a href="/tools/" class="cta-secondary">All tools</a>
+                </div>
+                <ul class="price-legend" aria-label="Pricing labels">
+                    <li><span class="tag-free">Free</span> browser tools</li>
+                    <li><span class="tag-sample">Free sample</span> AI writers</li>
+                    <li><span class="tag-pro">Pro</span> $5/mo unlimited AI</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section featured-posts" id="flagship" aria-labelledby="flagship-heading" style="padding-top:0.5rem;">
+            <div class="container">
+                <div class="section-head">
+                    <h2 id="flagship-heading">Popular</h2>
+                </div>
+                <div class="posts-grid">
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/humanizer/">AI Humanizer</a></h3>
+                            <p>Make stiff ChatGPT paste sound like you wrote it.</p>
+                            <a href="/tools/humanizer/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/gig-auto-pilot/">Gig Auto-Pilot</a></h3>
+                            <p>Job post → proposal, draft, and interview prep.</p>
+                            <a href="/tools/gig-auto-pilot/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/hardship-letter/">Hardship Letter</a></h3>
+                            <p>Mortgage, medical, student loan — draft that reviewers finish.</p>
+                            <a href="/tools/hardship-letter/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card card-curator">
+                        <div class="blog-card-content">
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="https://curator.cyberscryb.com" class="nav-curator" target="_blank" rel="noopener">Curator Prime</a></h3>
+                            <p>Photo → name, brand, value range, care notes. Sister app by CyberScryb.</p>
+                            <a href="https://curator.cyberscryb.com" class="nav-curator" class="read-more" target="_blank" rel="noopener">Open Curator →</a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="tools-overview" class="featured-posts">
+        <section class="section featured-posts" id="life-tools" aria-labelledby="life-tools-heading">
             <div class="container">
-                <h2>What People Use Most</h2>
-                <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-
-                    <!-- Humanizer -->
-                    <div class="blog-card" style="border: 1px solid #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);">
+                <div class="section-head">
+                    <h2 id="life-tools-heading">Life tools</h2>
+                    <p>Real situations — letters, care notes, and plans. Free sample on each.</p>
+                </div>
+                <div class="posts-grid">
+                    <article class="blog-card">
                         <div class="blog-card-content">
-                            <div style="background: #00d4ff; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">POPULAR</div>
-                            <h3><a href="/tools/humanizer/" style="color: #fff;">Anti-AI Humanizer</a></h3>
-                            <p>Paste ChatGPT or Claude output to generate text matching your brand voice.</p>
-                            <a href="/tools/humanizer/" class="read-more">Launch Tool &rarr;</a>
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/utility-shutoff-letter/">Utility Shutoff Letter</a></h3>
+                            <p>Disconnect notice → payment arrangement letter.</p>
+                            <a href="/tools/utility-shutoff-letter/" class="read-more">Open →</a>
                         </div>
-                    </div>
-
-                    <!-- Gig Auto-Pilot -->
-                    <div class="blog-card" style="border: 1px solid #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);">
+                    </article>
+                    <article class="blog-card">
                         <div class="blog-card-content">
-                            <div style="background: #00ff88; color: #000; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 700;">NEW</div>
-                            <h3><a href="/tools/gig-auto-pilot/" style="color: #fff;">Gig Auto-Pilot</a></h3>
-                            <p>Finds gig postings, writes your proposal, and drafts the final deliverable. You get a finished job ready for submission.</p>
-                            <a href="/tools/gig-auto-pilot/" class="read-more" style="color: #00ff88;">Launch Tool &rarr;</a>
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/appeal-letter/">Appeal Letter</a></h3>
+                            <p>Unemployment, housing, insurance — fight the denial in writing.</p>
+                            <a href="/tools/appeal-letter/" class="read-more">Open →</a>
                         </div>
-                    </div>
-
-                    <!-- JSON Converter -->
-                    <div class="blog-card">
+                    </article>
+                    <article class="blog-card">
                         <div class="blog-card-content">
-                            <h3><a href="/tools/json-csv-converter/" style="color: #fff;">JSON &harr; CSV Converter</a></h3>
-                            <p>Drop in JSON, get CSV. Drop in CSV, get JSON. Handles nested objects and won't choke on big files.</p>
-                            <a href="/tools/json-csv-converter/" class="read-more">Launch Tool &rarr;</a>
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/caregiver-report/">Caregiver Shift Report</a></h3>
+                            <p>Messy shift notes → structured handoff report.</p>
+                            <a href="/tools/caregiver-report/" class="read-more">Open →</a>
                         </div>
-                    </div>
-
-                    <!-- SEO Meta Generator -->
-                    <div class="blog-card">
+                    </article>
+                    <article class="blog-card">
                         <div class="blog-card-content">
-                            <h3><a href="/tools/seo-tag-generator/" style="color: #fff;">SEO Meta Generator</a></h3>
-                            <p>Generate page titles, meta descriptions, open graph tags, and Twitter cards to improve search visibility.</p>
-                            <a href="/tools/seo-tag-generator/" class="read-more">Launch Tool &rarr;</a>
+                            <span class="tag-sample">Free sample</span>
+                            <h3><a href="/tools/custody-document/">Parenting Plan Drafter</a></h3>
+                            <p>Custody plans and modification requests, organized.</p>
+                            <a href="/tools/custody-document/" class="read-more">Open →</a>
                         </div>
-                    </div>
+                    </article>
+                </div>
+                <p class="text-center" style="margin-top:1.5rem;">
+                    <a href="/tools/?cat=ai" class="cta-secondary">All AI &amp; life tools →</a>
+                </p>
+            </div>
+        </section>
 
-                    <!-- Password Checker -->
-                    <div class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/password-checker/" style="color: #fff;">Password Strength Checker</a></h3>
-                            <p>Estimate password crack times and check for security vulnerabilities. The calculator runs inside the browser to keep credentials private.</p>
-                            <a href="/tools/password-checker/" class="read-more">Launch Tool &rarr;</a>
-                        </div>
+        <section class="pro-band" id="pro" aria-labelledby="pro-heading">
+            <div class="container">
+                <div class="pro-band-inner">
+                    <div>
+                        <h2 id="pro-heading">Pro · unlimited AI</h2>
+                        <p style="margin:0;color:var(--text-muted);">
+                            Full Humanizer, Gig, and writing tools without daily caps.
+                        </p>
+                        <ul class="pro-band-list">
+                            <li>Unlimited full AI results</li>
+                            <li>Longer inputs</li>
+                            <li>14-day refund</li>
+                        </ul>
                     </div>
-
-                    <!-- Base64 Tool -->
-                    <div class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/base64-tool/" style="color: #fff;">Base64 Encoder/Decoder</a></h3>
-                            <p>Paste text, get Base64. Paste Base64, get text. Handles both standard and URL-safe alphabets.</p>
-                            <a href="/tools/base64-tool/" class="read-more">Launch Tool &rarr;</a>
-                        </div>
+                    <div class="pro-band-card">
+                        <div class="pro-band-price">$5<span>/mo</span></div>
+                        <p class="pro-band-note">or $29 lifetime</p>
+                        <a href="/pro/" class="cta-attention" style="width:100%;">Get Pro</a>
+                        <p style="margin:0.85rem 0 0;font-size:0.8rem;color:var(--text-faint);">
+                            <a href="/pro-restore/">Already paid?</a>
+                        </p>
                     </div>
-
-                    <!-- Color Palette -->
-                    <div class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/color-palette/" style="color: #fff;">Color Palette Generator</a></h3>
-                            <p>Pick a color to get a full palette. Checks WCAG contrast and exports CSS.</p>
-                            <a href="/tools/color-palette/" class="read-more">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Markdown to HTML -->
-                    <div class="blog-card">
-                        <div class="blog-card-content">
-                            <h3><a href="/tools/markdown-html/" style="color: #fff;">Markdown &rarr; HTML</a></h3>
-                            <p>Write markdown on the left, see rendered HTML on the right. Supports GitHub-flavored syntax.</p>
-                            <a href="/tools/markdown-html/" class="read-more">Launch Tool &rarr;</a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <section id="newsletter" class="newsletter">
+        <section class="section featured-posts" id="tools-overview" aria-labelledby="free-tools-heading">
             <div class="container">
-                <h2>New Tools, No Spam</h2>
-                <p>Subscribe to receive notifications when new developer tools launch.</p>
+                <div class="section-head">
+                    <h2 id="free-tools-heading">Free tools</h2>
+                
+                    <ul class="price-legend" id="free-tools-legend" aria-label="Pricing labels" style="justify-content:flex-start;margin:0.5rem 0 1rem;">
+                        <li><span class="tag-free">Free</span> no account</li>
+                        <li><span class="tag-sample">Free sample</span> AI (then limits)</li>
+                        <li><span class="tag-pro">Pro</span> unlimited · $5/mo</li>
+                    </ul>
+</div>
+                <div class="posts-grid">
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/json-csv-converter/">JSON ↔ CSV</a></h3>
+                            <p>Nested JSON and large files, in-browser.</p>
+                            <a href="/tools/json-csv-converter/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/password-checker/">Password Strength</a></h3>
+                            <p>Stays on your device. Never uploaded.</p>
+                            <a href="/tools/password-checker/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/seo-tag-generator/">SEO Meta Generator</a></h3>
+                            <p>Titles, meta, Open Graph — copy-ready.</p>
+                            <a href="/tools/seo-tag-generator/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/base64-tool/">Base64</a></h3>
+                            <p>Encode / decode, URL-safe option.</p>
+                            <a href="/tools/base64-tool/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/cron-builder/">Cron Builder</a></h3>
+                            <p>Schedules with plain-English preview.</p>
+                            <a href="/tools/cron-builder/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-card-content">
+                            <span class="tag-free">Free</span>
+                            <h3><a href="/tools/regex-tester/">Regex Tester</a></h3>
+                            <p>Live match highlight + cheat sheet.</p>
+                            <a href="/tools/regex-tester/" class="read-more">Open →</a>
+                        </div>
+                    </article>
+                </div>
+                <p class="text-center" style="margin-top:1.75rem;">
+                    <a href="/tools/" class="cta-secondary">All tools</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Blog — same card section pattern as tools above -->
+        <section class="section featured-posts" id="from-the-blog" aria-labelledby="blog-heading">
+            <div class="container">
+                <div class="section-head">
+                    <h2 id="blog-heading">From the blog</h2>
+                    <p>Practical how-tos that pair with the tools — freelancing, life docs, AI writing, and builder notes.</p>
+                </div>
+                <div class="posts-grid">
+                    <article class="blog-card" data-category="ai">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="ai">AI Tools</span>
+                            <h3><a href="/blog/how-to-make-ai-text-sound-human-2026/">How to Make AI Text Sound Human in 2026</a></h3>
+                            <p>Seven concrete passes so ChatGPT drafts read like a person wrote them — before detectors and clients see the raw paste.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-11">May 11, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="/blog/how-to-make-ai-text-sound-human-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card" data-category="freelance">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="freelance">Freelancing</span>
+                            <h3><a href="/blog/free-upwork-proposal-generator-2026/">Free Upwork Proposal Generator</a></h3>
+                            <p>Stop burning Connects on weak pitches. Draft faster with a free AI pass built for freelancers.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-10">May 10, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>6 min read</span>
+                            </div>
+                            <a href="/blog/free-upwork-proposal-generator-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card" data-category="life">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="/blog/how-to-write-a-hardship-letter-2026/">How to Write a Hardship Letter</a></h3>
+                            <p>Structure reviewers actually finish — mortgage forbearance, medical debt, student loans.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-17">May 17, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>7 min read</span>
+                            </div>
+                            <a href="/blog/how-to-write-a-hardship-letter-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card" data-category="life">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="/blog/how-to-appeal-unemployment-denial-2026/">Denied Unemployment? Write a Successful Appeal</a></h3>
+                            <p>A denial is not the end. What to write, what to avoid, and how to structure the appeal letter.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-17">May 17, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="/blog/how-to-appeal-unemployment-denial-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card" data-category="seo">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="seo">SEO Tools</span>
+                            <h3><a href="/blog/seo-tag-generators-gate-meta-2026/">Why SEO Generators Gate Meta Tags</a></h3>
+                            <p>Behind the email walls and paywalls — and why our SEO tag generator stays free.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>6 min read</span>
+                            </div>
+                            <a href="/blog/seo-tag-generators-gate-meta-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                    <article class="blog-card" data-category="developer">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="developer">Developer</span>
+                            <h3><a href="/blog/free-password-strength-checker-2026/">Free Password Strength Checker (Local)</a></h3>
+                            <p>Test passwords in your browser — entropy, crack times, patterns. Nothing leaves your device.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-25">May 25, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="/blog/free-password-strength-checker-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+                </div>
+                <p class="text-center" style="margin-top:1.75rem;">
+                    <a href="/blog/" class="cta-secondary">Browse all posts</a>
+                </p>
+            </div>
+        </section>
+
+        <section class="newsletter" id="newsletter" aria-labelledby="news-heading">
+            <div class="container">
+                <h2 id="news-heading">New tools. No spam.</h2>
+                <p>Get notified when we ship tools freelancers and builders actually use.</p>
                 <form class="newsletter-form" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <input type="hidden" name="access_key" value="">
+                    <input type="email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Email">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
@@ -269,28 +408,37 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span
-                        style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>Free, privacy-first developer tools. Your data never leaves your browser.</p>
+                    <span class="brand-mark" style="font-size:1.1rem;">CyberScryb</span>
+                    <p>AI tools and free browser utilities for freelancers and builders. Try free. Pro when you need unlimited.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/privacy/">Privacy Policy</a>
-                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/pro/">Pro</a>
+                    <a href="/privacy/">Privacy</a>
+                    <a href="/disclosure/">Disclosure</a>
                     <a href="/contact/">Contact</a>
+                    <a href="/pro-restore/">Restore Pro</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+                <p>&copy; 2026 CyberScryb LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="/js/script.js" defer></script>
-    <!-- AdSense auto ad unit -->
-    <div style="text-align:center;margin:20px auto;max-width:970px;">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+    <script src="/js/cs-pro-status.js" defer></script>
+    <script src="/js/script.js?v=20260719m" defer></script>
+    <script>
+    (function () {
+        var btn = document.getElementById('nav-toggle');
+        var menu = document.getElementById('nav-menu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function () {
+            var open = menu.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    })();
+    </script>
 </body>
-
 </html>

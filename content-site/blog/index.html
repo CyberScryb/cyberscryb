@@ -27,12 +27,13 @@
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-    <link rel="preload" href="/css/style.css?v=20260623" as="style">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap"></noscript>
+    <link rel="preload" href="/css/style.css?v=20260723ui-system" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260723ui-system">
 
     <!-- Google AdSense &mdash; delayed load to protect LCP -->
     <script>
@@ -88,6 +89,8 @@
             "url": "https://cyberscryb.com"
         },
         "blogPost": [
+            {"@type": "BlogPosting", "headline": "Free Password Strength Checker: Test Passwords Locally in Your Browser (2026 Guide)", "url": "https://cyberscryb.com/blog/free-password-strength-checker-2026/", "datePublished": "2026-05-25"},
+            {"@type": "BlogPosting", "headline": "Cron Expression Builder Online: Build, Test, and Debug Cron Schedules in Seconds", "url": "https://cyberscryb.com/blog/cron-expression-builder-online-2026/", "datePublished": "2026-05-11"},
             {"@type": "BlogPosting", "headline": "Collecting Custody Evidence for a Co-parent with Dementia", "url": "https://cyberscryb.com/blog/dementia-custody-evidence-guide-2026/", "datePublished": "2026-06-02"},
             {"@type": "BlogPosting", "headline": "Why CyberScryb Uses Vanilla JS (No Frameworks)", "url": "https://cyberscryb.com/blog/why-vanilla-js-no-frameworks-2026/", "datePublished": "2026-06-02"},
             {"@type": "BlogPosting", "headline": "Unemployment Board of Review Hearing Checklist", "url": "https://cyberscryb.com/blog/unemployment-hearing-checklist-2026/", "datePublished": "2026-06-02"},
@@ -148,18 +151,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
-                    <li><a href="/blog/" class="active">Blog</a></li>
+<li><a href="/blog/" class="active">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" class="nav-curator" target="_blank" rel="noopener">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -171,22 +173,39 @@
     </header>
 
     <main>
-        <!-- Breadcrumb -->
-        <nav aria-label="Breadcrumb" style="max-width: 1100px; margin: 1.25rem auto 0; padding: 0 1.25rem; font-size: 0.85rem; color: #878787;">
-            <a href="/" style="color:#878787;">Home</a>
+        <nav aria-label="Breadcrumb" class="container" style="margin: 1.25rem auto 0; font-size: 0.85rem; color: var(--text-faint);">
+            <a href="/" style="color: var(--text-faint);">Home</a>
             <span style="margin: 0 0.4rem;">&rsaquo;</span>
-            <span style="color:#00d4ff;">Blog</span>
+            <span style="color: var(--primary-soft);">Blog</span>
         </nav>
 
-        <section class="hero" style="padding-top: 2.5rem; padding-bottom: 1.5rem; min-height: 30vh;">
+        <section class="hero blog-hero">
             <div class="hero-container">
-                <h1 class="hero-title" style="margin-bottom: 0.75rem;">CyberScryb <span style="color:#00d4ff;">Blog</span></h1>
-                <p class="hero-subtitle">Practical guides on AI tools, Life Tools, and developer utilities. No fluff. Just what works.</p>
+                <span class="hero-eyebrow">Guides &amp; field notes</span>
+                <h1 class="hero-title">CyberScryb Blog</h1>
+                <p class="hero-subtitle">Practical how-tos for freelancers, caregivers, and builders. No fluff — just what works with the tools on this site.</p>
             </div>
         </section>
 
+        <div class="blog-toolbar">
+            <div class="search-wrapper">
+                <input type="search" id="blog-search" placeholder="Search posts (e.g. hardship, Upwork, AI humanizer)…" aria-label="Search blog posts" autocomplete="off">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="filter-dock-wrapper">
+                <div class="filter-dock" role="tablist" aria-label="Filter posts by category">
+                    <button type="button" class="filter-btn active" data-category="all">All</button>
+                    <button type="button" class="filter-btn" data-category="life">Life Tools</button>
+                    <button type="button" class="filter-btn" data-category="ai">AI</button>
+                    <button type="button" class="filter-btn" data-category="freelance">Freelance</button>
+                    <button type="button" class="filter-btn" data-category="developer">Developer</button>
+                    <button type="button" class="filter-btn" data-category="seo">SEO</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Top AdSense Unit -->
-        <section style="max-width: 900px; margin: 1.5rem auto 0; padding: 0 1rem; text-align: center;">
+        <section class="blog-ad-slot" style="max-width: 900px; margin: 0 auto 0.75rem; padding: 0 1rem; text-align: center; min-height: 0;">
             <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-5721233331247292"
@@ -196,118 +215,248 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </section>
 
-        <section style="padding-top: 2rem; padding-bottom: 3rem;">
+        <section class="blog-index-section">
             <div class="container">
-                <h2 style="margin-bottom: 0.5rem;">Latest Posts</h2>
-                <p style="text-align:center; color:#878787; margin-bottom: 1.5rem; font-size: 0.95rem;">Practical how-tos and honest guides.</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;" class="reveal-stagger">
-
-                    <div class="blog-card">
+                <div class="blog-featured" id="blog-featured">
+                    <article class="blog-card blog-featured-main" data-category="ai" data-search="how to make ai text sound human humanizer chatgpt claude detectors">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="dementia-custody-evidence-guide-2026/" style="color:#fff;">Collecting Custody Evidence for a Co-parent with Dementia</a></h3>
-                            <p style="color:#ccc;">A practical guide on how to ethically and legally document custody concerns and collect evidence when co-parenting with a former spouse experiencing early-onset dementia.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">June 2, 2026 &middot; 8 min read</div>
-                            <a href="dementia-custody-evidence-guide-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="ai">AI Tools · Featured</span>
+                            <h2><a href="how-to-make-ai-text-sound-human-2026/">How to Make AI Text Sound Human in 2026</a></h2>
+                            <p>Detectors got sharp. This playbook walks through seven concrete passes — and free tools — so drafts read like a person wrote them, not a model.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-11">May 11, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="how-to-make-ai-text-sound-human-2026/" class="read-more">Read the playbook →</a>
                         </div>
+                    </article>
+                    <div class="blog-featured-side">
+                        <article class="blog-card" data-category="freelance" data-search="free upwork proposal generator connects freelance gigs">
+                            <div class="blog-card-content">
+                                <span class="blog-tag" data-cat="freelance">Freelancing</span>
+                                <h3><a href="free-upwork-proposal-generator-2026/">Free Upwork Proposal Generator</a></h3>
+                                <p>Stop burning Connects on weak proposals. Draft faster with a free AI pass built for freelancers.</p>
+                                <div class="blog-meta">
+                                    <time datetime="2026-05-10">May 10, 2026</time>
+                                    <span aria-hidden="true">·</span>
+                                    <span>6 min</span>
+                                </div>
+                                <a href="free-upwork-proposal-generator-2026/" class="read-more">Read post →</a>
+                            </div>
+                        </article>
+                        <article class="blog-card" data-category="life" data-search="hardship letter mortgage medical student loans forbearance">
+                            <div class="blog-card-content">
+                                <span class="blog-tag" data-cat="life">Life Tools</span>
+                                <h3><a href="how-to-write-a-hardship-letter-2026/">How to Write a Hardship Letter</a></h3>
+                                <p>Structure that reviewers actually finish — mortgage, medical debt, student loans.</p>
+                                <div class="blog-meta">
+                                    <time datetime="2026-05-17">May 17, 2026</time>
+                                    <span aria-hidden="true">·</span>
+                                    <span>7 min</span>
+                                </div>
+                                <a href="how-to-write-a-hardship-letter-2026/" class="read-more">Read post →</a>
+                            </div>
+                        </article>
                     </div>
+                </div>
 
-                    <div class="blog-card">
+                <div class="section-head">
+                    <h2>All posts</h2>
+                    <p>Life tools, AI writing, freelance ops, and builder notes.</p>
+                </div>
+
+                <div class="posts-grid reveal-stagger" id="blog-posts">
+
+                    <article class="blog-card" data-category="developer" data-search="password strength checker free zxcvbn entropy crack time client-side browser privacy">
                         <div class="blog-card-content">
-                            <div class="blog-tag">DEVELOPER</div>
-                            <h3><a href="why-vanilla-js-no-frameworks-2026/" style="color:#fff;">Why CyberScryb Uses Vanilla JS (No Frameworks)</a></h3>
-                            <p style="color:#ccc;">Learn why CyberScryb uses Vanilla JavaScript, HTML, and CSS. Explore web performance, simplicity, and the advantages of framework-free development.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">June 2, 2026 &middot; 7 min read</div>
-                            <a href="why-vanilla-js-no-frameworks-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="developer">Developer</span>
+                            <h3><a href="free-password-strength-checker-2026/">Free Password Strength Checker (Local, 2026)</a></h3>
+                            <p>Test passwords in your browser — entropy, crack times, patterns. No server, no logging, no signup.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-25">May 25, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="free-password-strength-checker-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="developer" data-search="cron expression builder online quartz unix schedule next run times">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="unemployment-hearing-checklist-2026/" style="color:#fff;">Unemployment Board of Review Hearing Checklist</a></h3>
-                            <p style="color:#ccc;">Prepare for your unemployment appeal hearing. A complete checklist covering evidence gathering, witness prep, cross-examination strategies, and Board of Review procedures.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">June 2, 2026 &middot; 8 min read</div>
-                            <a href="unemployment-hearing-checklist-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="developer">Developer</span>
+                            <h3><a href="cron-expression-builder-online-2026/">Cron Expression Builder Online</a></h3>
+                            <p>Build, decode, and debug cron schedules with plain English and next fire times — free, client-side.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-11">May 11, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>7 min read</span>
+                            </div>
+                            <a href="cron-expression-builder-online-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="life" data-search="custody evidence dementia co-parent parenting">
                         <div class="blog-card-content">
-                            <div class="blog-tag">SEO TOOLS</div>
-                            <h3><a href="seo-tag-generators-gate-meta-2026/" style="color:#fff;">Why Online SEO Generators Gate Meta Tags (Behind the Scenes)</a></h3>
-                            <p style="color:#ccc;">An insider look at why SEO generators hide basic meta tags behind email gates and paywalls, and why we keep our SEO tags generator free at CyberScryb.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">June 2, 2026 &middot; 6 min read</div>
-                            <a href="seo-tag-generators-gate-meta-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="dementia-custody-evidence-guide-2026/">Collecting Custody Evidence for a Co-parent with Dementia</a></h3>
+                            <p>How to document concerns ethically and legally when co-parenting with a former spouse in early-onset dementia.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="dementia-custody-evidence-guide-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="developer" data-search="vanilla js javascript frameworks performance html css">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="behavioral-spike-tracking-memory-care-2026/" style="color:#fff;">Tracking Behavioral Spikes in Memory Care</a></h3>
-                            <p style="color:#ccc;">A clinical guide on tracking sundowning, agitation, and behavioral spikes in dementia care. Learn how to log events and identify triggers.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">June 2, 2026 &middot; 9 min read</div>
-                            <a href="behavioral-spike-tracking-memory-care-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="developer">Developer</span>
+                            <h3><a href="why-vanilla-js-no-frameworks-2026/">Why CyberScryb Uses Vanilla JS</a></h3>
+                            <p>Why we ship HTML, CSS, and plain JS — performance, simplicity, and fewer moving parts.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>7 min read</span>
+                            </div>
+                            <a href="why-vanilla-js-no-frameworks-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="life" data-search="unemployment board of review hearing checklist appeal">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="what-goes-in-a-caregiver-shift-report-2026/" style="color:#fff;">What Goes in a Caregiver Shift Report and Why the Report Matters</a></h3>
-                            <p style="color:#ccc;">Document every caregiver shift change correctly. Learn what to include, what to skip, and how to complete the log in under five minutes.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">May 17, 2026 &middot; 7 min read</div>
-                            <a href="what-goes-in-a-caregiver-shift-report-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="unemployment-hearing-checklist-2026/">Unemployment Board of Review Hearing Checklist</a></h3>
+                            <p>Evidence, witnesses, cross-exam prep, and Board of Review procedure — in one checklist.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="unemployment-hearing-checklist-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="seo" data-search="seo generators gate meta tags paywall free">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="how-to-appeal-unemployment-denial-2026/" style="color:#fff;">Denied Unemployment? Here is How to Write a Successful Appeal</a></h3>
-                            <p style="color:#ccc;">An unemployment denial is not the final decision. Learn what to write and what mistakes to avoid in the appeal letter.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">May 17, 2026 &middot; 8 min read</div>
-                            <a href="how-to-appeal-unemployment-denial-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="seo">SEO Tools</span>
+                            <h3><a href="seo-tag-generators-gate-meta-2026/">Why Online SEO Generators Gate Meta Tags</a></h3>
+                            <p>Behind the email walls and paywalls — and why our SEO tag generator stays free.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>6 min read</span>
+                            </div>
+                            <a href="seo-tag-generators-gate-meta-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="life" data-search="behavioral spikes memory care sundowning dementia caregiver">
                         <div class="blog-card-content">
-                            <div class="blog-tag">LIFE TOOLS</div>
-                            <h3><a href="how-to-write-a-hardship-letter-2026/" style="color:#fff;">How to Write a Hardship Letter (2026 Guide)</a></h3>
-                            <p style="color:#ccc;">Draft requests for mortgage forbearance, medical debt, or student loans. The template structures letters for immediate review.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">May 17, 2026 &middot; 7 min read</div>
-                            <a href="how-to-write-a-hardship-letter-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="behavioral-spike-tracking-memory-care-2026/">Tracking Behavioral Spikes in Memory Care</a></h3>
+                            <p>Log sundowning, agitation, and triggers so the care team can act on patterns, not guesswork.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-06-02">June 2, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>9 min read</span>
+                            </div>
+                            <a href="behavioral-spike-tracking-memory-care-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="life" data-search="caregiver shift report handoff documentation">
                         <div class="blog-card-content">
-                            <div class="blog-tag">AI TOOLS</div>
-                            <h3><a href="how-to-make-ai-text-sound-human-2026/" style="color:#fff;">How to Make AI Text Sound Human in 2026 (Free Tools)</a></h3>
-                            <p style="color:#ccc;">Modern AI detectors flag AI-generated text with high accuracy. The playbook outlines seven steps to humanize output.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">May 11, 2026 &middot; 8 min read</div>
-                            <a href="how-to-make-ai-text-sound-human-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="what-goes-in-a-caregiver-shift-report-2026/">What Goes in a Caregiver Shift Report</a></h3>
+                            <p>What to include, what to skip, and how to finish the handoff log in under five minutes.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-17">May 17, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>7 min read</span>
+                            </div>
+                            <a href="what-goes-in-a-caregiver-shift-report-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="blog-card">
+                    <article class="blog-card" data-category="life" data-search="unemployment denial appeal letter how to write">
                         <div class="blog-card-content">
-                            <div class="blog-tag">FREELANCING</div>
-                            <h3><a href="free-upwork-proposal-generator-2026/" style="color:#fff;">Free Upwork Proposal Generator (2026): Win Gigs Without Paying for Connects</a></h3>
-                            <p style="color:#ccc;">Avoid wasting Connects on proposals. The free AI tool drafts proposals to increase response rates.</p>
-                            <div style="color:#777;font-size:0.8rem;margin:0.5rem 0;">May 10, 2026 &middot; 6 min read</div>
-                            <a href="free-upwork-proposal-generator-2026/" class="read-more">Read Post &rarr;</a>
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="how-to-appeal-unemployment-denial-2026/">Denied Unemployment? Write a Successful Appeal</a></h3>
+                            <p>A denial is not the end. What to write, what to avoid, and how to structure the appeal.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-17">May 17, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="how-to-appeal-unemployment-denial-2026/" class="read-more">Read post →</a>
                         </div>
-                    </div>
+                    </article>
 
+                    <article class="blog-card" data-category="life" data-search="hardship letter mortgage medical student loans">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="life">Life Tools</span>
+                            <h3><a href="how-to-write-a-hardship-letter-2026/">How to Write a Hardship Letter (2026 Guide)</a></h3>
+                            <p>Templates and structure for forbearance, medical debt, and student loan requests.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-17">May 17, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>7 min read</span>
+                            </div>
+                            <a href="how-to-write-a-hardship-letter-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="ai" data-search="ai text sound human humanizer free tools detectors">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="ai">AI Tools</span>
+                            <h3><a href="how-to-make-ai-text-sound-human-2026/">How to Make AI Text Sound Human in 2026</a></h3>
+                            <p>Seven steps to humanize AI drafts before detectors and clients see the raw paste.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-11">May 11, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>8 min read</span>
+                            </div>
+                            <a href="how-to-make-ai-text-sound-human-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="freelance" data-search="upwork proposal generator free connects freelance">
+                        <div class="blog-card-content">
+                            <span class="blog-tag" data-cat="freelance">Freelancing</span>
+                            <h3><a href="free-upwork-proposal-generator-2026/">Free Upwork Proposal Generator (2026)</a></h3>
+                            <p>Win more replies without paying for every Connect on a throwaway pitch.</p>
+                            <div class="blog-meta">
+                                <time datetime="2026-05-10">May 10, 2026</time>
+                                <span aria-hidden="true">·</span>
+                                <span>6 min read</span>
+                            </div>
+                            <a href="free-upwork-proposal-generator-2026/" class="read-more">Read post →</a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="blog-empty" id="blog-empty" role="status">No posts match that filter. Try All, or clear the search.</div>
+            </div>
+        </section>
+
+        <section class="blog-tools-band" aria-labelledby="blog-tools-heading">
+            <div class="blog-tools-band-inner">
+                <div>
+                    <h2 id="blog-tools-heading">Prefer to skip the essay?</h2>
+                    <p>Open the free tools these posts point to — humanizer, hardship letters, gig proposals — right in the browser.</p>
+                </div>
+                <div class="cta-row">
+                    <a href="/tools/humanizer/" class="cta-button">AI Humanizer</a>
+                    <a href="/tools/" class="cta-secondary">All tools</a>
                 </div>
             </div>
         </section>
 
         <!-- Bottom AdSense Unit -->
-        <section style="max-width: 900px; margin: 0 auto 1rem; padding: 0 1rem; text-align: center;">
+        <section style="max-width: 900px; margin: 0 auto 1.5rem; padding: 0 1rem; text-align: center;">
             <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-5721233331247292"
@@ -322,7 +471,7 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
                     <p>Free, privacy-first tools for real life and real work.</p>
                 </div>
                 <div class="footer-links">
@@ -340,7 +489,50 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260623"></script>
+    <script src="/js/script.js?v=20260719p" defer></script>
+    <script>
+    (function () {
+        var activeCat = 'all';
+        var searchEl = document.getElementById('blog-search');
+        var emptyEl = document.getElementById('blog-empty');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('#blog-featured .blog-card, #blog-posts .blog-card'));
+        var buttons = Array.prototype.slice.call(document.querySelectorAll('.blog-toolbar .filter-btn'));
+
+        function applyFilters() {
+            var q = (searchEl && searchEl.value || '').trim().toLowerCase();
+            var visible = 0;
+            cards.forEach(function (card) {
+                var cat = card.getAttribute('data-category') || '';
+                var hay = ((card.getAttribute('data-search') || '') + ' ' + card.textContent).toLowerCase();
+                var catOk = activeCat === 'all' || cat === activeCat;
+                var qOk = !q || hay.indexOf(q) !== -1;
+                var show = catOk && qOk;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            if (emptyEl) emptyEl.classList.toggle('is-visible', visible === 0);
+            var featured = document.getElementById('blog-featured');
+            if (featured) {
+                var anyFeatured = false;
+                featured.querySelectorAll('.blog-card').forEach(function (c) {
+                    if (c.style.display !== 'none') anyFeatured = true;
+                });
+                featured.style.display = anyFeatured ? '' : 'none';
+            }
+        }
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                activeCat = btn.getAttribute('data-category') || 'all';
+                buttons.forEach(function (b) { b.classList.toggle('active', b === btn); });
+                applyFilters();
+            });
+        });
+        if (searchEl) {
+            searchEl.addEventListener('input', applyFilters);
+        }
+    })();
+    </script>
 </body>
 
 </html>

@@ -18,11 +18,9 @@
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
-    <link rel="stylesheet" href="/tools/humanizer/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20260719q">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
@@ -98,11 +96,11 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">AI Humanizer</span>
+        <span style="color: var(--primary-soft);">AI Humanizer</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -111,18 +109,17 @@
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
                         <span
-                            style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -133,218 +130,217 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero" style="min-height: 40vh; padding-top: 80px;">
-            <div class="hero-container">
-                <div class="badge"
-                    style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
-                    ✨ New Tool</div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">Anti-AI <span style="color: #7b2cff;">Humanizer</span>
-                </h1>
-                <p class="hero-subtitle">Stop sounding like a robot. Rewrite AI text with your unique voice.</p>
+    <main class="hz-app">
+        <!--
+          Conversion layout (see DECISIONS.md):
+          single column + light editor + real mode chips + one purple CTA
+        -->
+        <section class="hz-shell" aria-label="AI Humanizer editor">
+            <div class="hz-topbar hz-sticky-chrome" id="hz-tool-chrome">
+                <div class="hz-brand">
+                    <h1>AI Humanizer</h1>
+                    <p id="hz-empty-hint">Paste text from ChatGPT or Claude. We rewrite the stiff parts so it reads like a person wrote it. One full free run to start.</p>
+                </div>
+                <div class="hz-topbar-actions">
+                    <span id="usage-counter" class="hz-pill">1 free full result</span>
+                    <kbd class="hz-kbd" title="Keyboard">⌘/Ctrl+Enter</kbd>
+                    <a href="/pro/" class="hz-link-pro">Get Pro</a>
+                </div>
+            </div>
+
+            <!-- Idea 9: honest static compare (not fake social proof) -->
+            <div class="hz-compare-strip" aria-label="Example before and after">
+                <div class="hz-compare-col">
+                    <span class="hz-compare-label">Typical AI paste</span>
+                    <p>“In today’s rapidly evolving landscape, it is important to leverage synergies in order to drive meaningful outcomes.”</p>
+                </div>
+                <div class="hz-compare-col hz-compare-after">
+                    <span class="hz-compare-label">After a pass here</span>
+                    <p>“Most of this is noise. Pick the two things that move the number and ignore the rest.”</p>
+                </div>
+            </div>
+
+            <div class="hz-workspace" id="hz-workspace">
+                <!-- 1) INPUT (full width) -->
+                <div class="hz-pane hz-pane-input">
+                    <div class="hz-pane-head">
+                        <span class="hz-pane-title">Original text</span>
+                        <span id="char-counter" class="hz-meta">0 / 500 free</span>
+                    </div>
+                    <textarea id="robotic-text" class="hz-editor"
+                        placeholder="Paste the draft you want fixed…"
+                        rows="10"
+                        spellcheck="true"
+                        autofocus aria-label="Paste the draft you want fixed…"></textarea>
+                    <div class="hz-pane-foot">
+                        <div class="hz-foot-left">
+                            <button type="button" id="try-sample-btn" class="hz-ghost-btn hz-sample">Try sample</button>
+                            <button type="button" id="style-samples-toggle" class="hz-ghost-btn" aria-expanded="false" aria-controls="style-samples-body">
+                                <span class="toggle-label">+ Match my writing style</span>
+                                <span class="chevron" aria-hidden="true">▾</span>
+                            </button>
+                        </div>
+                        <span class="hz-hint">Free: 500 characters · Ctrl/⌘+Enter to run</span>
+                    </div>
+                    <div id="style-samples-body" class="hz-style-drawer">
+                        <p class="hz-hint" style="margin-bottom:10px;">Optional. A few lines you wrote helps the rewrite sound like you — not generic AI.</p>
+                        <div class="style-samples-container">
+                            <textarea class="style-sample" placeholder="Sample 1"></textarea>
+                            <textarea class="style-sample" placeholder="Sample 2 (optional)"></textarea>
+                            <textarea class="style-sample" placeholder="Sample 3 (optional)"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2) ACTION BAR: real modes + primary CTA -->
+                <div class="hz-actionbar" role="toolbar" aria-label="Rewrite options">
+                    <div class="hz-modes" role="group" aria-label="Rewrite mode">
+                        <button type="button" class="hz-mode is-active" data-mode="natural" data-style="Casual, conversational, natural human writing with varied sentence length and contractions">Natural</button>
+                        <button type="button" class="hz-mode" data-mode="professional" data-style="Professional but clearly human — like a skilled colleague writing email or docs. Clear, confident, no corporate AI fluff">Professional</button>
+                        <button type="button" class="hz-mode" data-mode="shorter" data-style="Natural and concise: about 25% shorter, keep meaning, cut filler and AI padding">Shorter</button>
+                    </div>
+                    <button type="button" id="humanize-btn" class="hz-primary-btn">
+                        <span class="btn-text">Humanize</span>
+                        <span class="btn-icon" aria-hidden="true">→</span>
+                    </button>
+                </div>
+
+                <!-- 3) OUTPUT (full width) — paywall lives here after value -->
+                <div class="hz-pane hz-pane-output output-panel">
+                    <div class="hz-pane-head">
+                        <span class="hz-pane-title">Result</span>
+                        <div class="hz-pane-tools">
+                            <span id="word-count" class="hz-meta">0 words</span>
+                            <span id="cliche-count" class="hz-meta hz-meta-hide-sm">—</span>
+                        </div>
+                    </div>
+                    <div class="hz-output-wrap output-wrapper">
+                        <div id="output-text" class="hz-editor hz-output output-content" contenteditable="true" role="textbox" aria-label="Humanized result">
+                            <span class="placeholder">Nothing here yet. Paste a draft above — or hit Try sample — then Humanize.</span>
+                        </div>
+                        <div id="email-gate" class="email-gate hidden">
+                            <div class="email-gate-blur"></div>
+                            <div class="email-gate-card">
+                                <div class="email-gate-icon">✦</div>
+                                <h3>Rest of your rewrite is locked</h3>
+                                <p>You can read the start above. Unlock the full text free once today with email, or go Pro if you need this every day.</p>
+                                <form id="gate-email-form" class="gate-form">
+                                    <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
+                                    <button type="submit" id="gate-submit-btn">Unlock free</button>
+                                </form>
+                                <div id="gate-status" class="gate-status"></div>
+                                <p class="gate-fine">No spam · 14-day refund on Pro · Stripe</p>
+                            </div>
+                        </div>
+                        <div id="loading-indicator" class="hz-loading hidden">
+                            <div class="spinner"></div>
+                            <p>Working…</p>
+                        </div>
+                    </div>
+                    <!-- Idea 3: result actions -->
+                    <div class="hz-result-actions" id="hz-result-actions" hidden>
+                        <button type="button" id="copy-btn" class="hz-action-btn">Copy</button>
+                        <button type="button" id="download-btn" class="hz-action-btn">Download .txt</button>
+                        <button type="button" id="again-btn" class="hz-action-btn">Run again</button>
+                        <a href="/pro/" class="hz-action-btn hz-action-pro">Open Pro</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea 10: mobile thumb bar -->
+            <div class="hz-mobile-bar" id="hz-mobile-bar" aria-label="Quick actions">
+                <button type="button" id="humanize-btn-mobile" class="hz-primary-btn">Humanize</button>
+                <a href="/pro/" class="hz-link-pro hz-mobile-pro">Pro</a>
             </div>
         </section>
 
-        <section class="tool-content" style="padding: 2rem 0;">
-            <div class="container">
-                <div class="humanizer-container" style="background: transparent; box-shadow: none;">
-                    <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel"
-                        style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
-                        <div class="panel-header">
-                            <h2 style="font-size: 1.5rem; margin: 0;">📥 Input</h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="robotic-text" style="color: #ededed;">Paste Robotic / AI Text</label>
-                            <textarea id="robotic-text"
-                                style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;"
-                                placeholder="Paste the text generated by ChatGPT, Claude, etc. here..."></textarea>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="style-samples" style="color: #ededed;">Your Style Samples
-                                (Tweets/Emails)</label>
-                            <div class="style-samples-container">
-                                <textarea class="style-sample"
-                                    style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;"
-                                    placeholder="Sample 1 (e.g. a tweet you wrote)"></textarea>
-                                <textarea class="style-sample"
-                                    style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;"
-                                    placeholder="Sample 2 (e.g. an email intro)"></textarea>
-                                <textarea class="style-sample"
-                                    style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;"
-                                    placeholder="Sample 3 (e.g. a blog excerpt)"></textarea>
-                            </div>
-                            <p class="help-text" style="color: #878787;">We'll analyze these to mimic your tone, sentence
-                                length, and vocabulary.</p>
-                        </div>
-
-                        <button id="humanize-btn" class="primary-btn"
-                            style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
-                            <span class="btn-text">Humanize Text</span>
-                            <span class="btn-icon">✨</span>
-                        </button>
+        <section class="hz-below">
+            <div id="upgrade-tiers" class="hz-pricing">
+                <div class="hz-pricing-head">
+                    <h2>Unlimited when you need it</h2>
+                    <p>Full rewrites every time. Cancel anytime.</p>
+                </div>
+                <div class="hz-price-grid">
+                    <div class="hz-price-card">
+                        <div class="hz-price-name">Free</div>
+                        <div class="hz-price-amt">$0</div>
+                        <ul>
+                            <li>1 free full sample</li>
+                            <li>1 email unlock / day</li>
+                            <li>500 character limit</li>
+                        </ul>
                     </div>
-
-                    <!-- Right Panel: Output -->
-                    <div class="panel output-panel"
-                        style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12);">
-                        <div class="panel-header">
-                            <h2 style="font-size: 1.5rem; margin: 0;">✨ Humanized Result</h2>
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" aria-label="Copy result to clipboard"
-                                    style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">📋</button>
-                            </div>
-                        </div>
-                        <div class="output-wrapper">
-                            <div id="output-text" class="output-content" contenteditable="true"
-                                style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
-                                <span class="placeholder" style="color: #555555;">Your human-sounding text will appear
-                                    here...</span>
-                            </div>
-                            <!-- Blurred overlay + email gate -->
-                            <div id="email-gate" class="email-gate hidden">
-                                <div class="email-gate-blur"></div>
-                                <div class="email-gate-card">
-                                    <div class="email-gate-icon">🔓</div>
-                                    <h3>Unlock Your Full Result</h3>
-                                    <p>Enter your email to get the complete humanized text + <strong>3 free rewrites/day</strong></p>
-                                    <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
-                                        <button type="submit" id="gate-submit-btn">Unlock Result</button>
-                                    </form>
-                                    <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
-                                    <p style="font-size:0.7rem; color:#555; margin-top:0.75rem;">No spam. Unsubscribe anytime.</p>
-                                </div>
-                            </div>
-                            <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Analyzing style & rewriting...</p>
-                            </div>
-                        </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
-                            <span id="word-count">0 words</span>
-                            <span id="cliche-count">0 clichés removed</span>
-                        </div>
+                    <div class="hz-price-card hz-price-featured">
+                        <div class="hz-price-badge">Popular</div>
+                        <div class="hz-price-name">Pro</div>
+                        <div class="hz-price-amt">$5<span>/mo</span></div>
+                        <ul>
+                            <li>Unlimited full rewrites</li>
+                            <li>Longer inputs</li>
+                            <li>Gig Auto-Pilot included</li>
+                            <li>14-day refund</li>
+                        </ul>
+                        <a class="hz-price-cta" href="https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b?utm_source=humanizer&utm_medium=pricing&utm_campaign=pro_conversion" target="_blank" rel="noopener">Go Pro</a>
+                    </div>
+                    <div class="hz-price-card">
+                        <div class="hz-price-name">Lifetime</div>
+                        <div class="hz-price-amt">$29</div>
+                        <ul>
+                            <li>Everything in Pro</li>
+                            <li>One payment</li>
+                            <li>No renewals</li>
+                        </ul>
+                        <a class="hz-price-cta hz-price-cta-outline" href="https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08?utm_source=humanizer&utm_medium=pricing&utm_campaign=pro_conversion" target="_blank" rel="noopener">Buy lifetime</a>
                     </div>
                 </div>
+                <p class="hz-restore">Already paid? <a href="/pro-restore/">Restore Pro on this device</a></p>
+            </div>
 
-                <div class="geo-card comparison-table"
-                    style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 3rem; padding: 2rem; border-radius: 12px;">
-                    <h3>CyberScryb vs. The Rest</h3>
-                    <table style="width: 100%; text-align: left; border-collapse: collapse; margin-top: 1rem;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                                <th style="padding: 1rem; color: #fff;">Feature</th>
-                                <th class="highlight" style="padding: 1rem; color: #7b2cff;">CyberScryb Humanizer</th>
-                                <th style="padding: 1rem; color: #878787;">ChatGPT / Claude</th>
-                                <th style="padding: 1rem; color: #878787;">Other "Humanizers"</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                                <td style="padding: 1rem;"><strong>Style Matching</strong></td>
-                                <td class="check" style="color: #7b2cff;">✅ Custom (Few-Shot)</td>
-                                <td style="color: #555555;">❌ Generic</td>
-                                <td style="color: #555555;">❌ Random</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                                <td style="padding: 1rem;"><strong>Privacy</strong></td>
-                                <td class="check" style="color: #7b2cff;">✅ Secure Backend</td>
-                                <td style="color: #555555;">❌ Cloud (Logged)</td>
-                                <td style="color: #555555;">❌ Cloud (Logged)</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                                <td style="padding: 1rem;"><strong>Cost</strong></td>
-                                <td class="check" style="color: #7b2cff;">✅ Free tier + $5/mo Pro</td>
-                                <td style="color: #555555;">❌ $20+ /mo</td>
-                                <td style="color: #555555;">❌ $15+ /mo</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- ═══ Upgrade Tiers ═══ -->
-                <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Rewrites?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
-                        <!-- Free Tier -->
-                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
-                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
-                                <li>&#10003; 3 rewrites / day</li>
-                                <li>&#10003; 500 character limit</li>
-                                <li>&#10003; Style matching</li>
-                                <li style="color:#555;">&#10007; Ads shown</li>
-                            </ul>
-                        </div>
-                        <!-- Pro Monthly -->
-                        <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
-                            <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
-                                <li>&#10003; Unlimited rewrites</li>
-                                <li>&#10003; 5,000 character limit</li>
-                                <li>&#10003; Priority speed</li>
-                                <li>&#10003; No ads</li>
-                            </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Upgrade to Pro</a>
-                        </div>
-                        <!-- Annual -->
-                        <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
-                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
-                                <li>&#10003; Everything in Pro</li>
-                                <li>&#10003; Batch processing</li>
-                                <li>&#10003; API access</li>
-                                <li>&#10003; Priority support</li>
-                            </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none; transition:all 0.2s;">Get Annual</a>
-                        </div>
+            <div class="hz-compare">
+                <h2>Why people use this</h2>
+                <div class="hz-compare-grid">
+                    <div>
+                        <h3>Style matching</h3>
+                        <p>Optional samples of your writing so output isn’t generic “AI casual.”</p>
                     </div>
-                </div>
-
-                <div class="related-tools" style="text-align: center; margin-top: 2rem;">
-                    <p>Related: <a href="/tools/humanizer/rewrite-chatgpt-text/">Rewrite ChatGPT Text</a> | <a
-                            href="/tools/humanizer/remove-ai-detection/">Remove AI Detection</a></p>
+                    <div>
+                        <h3>Fast path</h3>
+                        <p>Paste → Humanize → copy. Built like a writing app, not a form in a blog post.</p>
+                    </div>
+                    <div>
+                        <h3>Fair free tier</h3>
+                        <p>Try a real result first. Pro is only when you need unlimited full rewrites.</p>
+                    </div>
                 </div>
             </div>
+
+            <p class="hz-related">Related: <a href="/tools/humanizer/rewrite-chatgpt-text/">Rewrite ChatGPT text</a> · <a href="/tools/humanizer/remove-ai-detection/">Remove AI detection</a></p>
         </section>
 
-        <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why this AI Humanizer Exists</h2>
+        <section class="content-section hz-seo" style="max-width:760px;margin:2rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:var(--font-sans),system-ui,sans-serif;line-height:1.7;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why this AI Humanizer Exists</h2>
             <p>AI detection got serious in 2025. Turnitin rolled out their second-generation detector across most major universities, GPTZero hit version 5, and Originality.ai 4 became the standard in freelance content marketplaces. The result: writers who lean on GPT-5, Claude, or Gemini for first drafts started getting their work flagged at rates close to 95 percent when they submitted the raw output. Students were called into academic integrity hearings. Freelancers were dropped from agencies. Marketers watched their blog posts get demoted in search.</p>
             <p>The CyberScryb Anti-AI Humanizer was built specifically against the patterns those detectors flag. It rewrites your text to break the statistical fingerprint that gives away machine-generated writing: low perplexity, predictable sentence lengths, over-reliance on transition words like "moreover" and "furthermore," compulsive contraction expansion, and surgically clean punctuation. The output reads natural because real human writing isn't statistically clean &mdash; it bounces around, contradicts itself, uses fragments, and skips perfect grammar in places.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How the Tool Works</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How the Tool Works</h2>
             <p>Paste any AI-generated paragraph into the input box and hit the humanize button. The tool sends your text to a tuned Gemini endpoint that runs seven specific transformations: it varies sentence length aggressively, swaps out the most-flagged transition words for natural alternatives, adds contractions, injects deliberate small imperfections, replaces vague phrases with specific examples, rewrites the first and last sentences (which detectors weight most heavily), and applies inconsistent punctuation patterns that match how real people type. The whole process runs in under three seconds. Your text is never logged, stored, or used to train future models. Your first generation runs free without an email so you can verify the output is actually useful. After the first one, the tool asks for an email because every AI call has a real backend cost.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Common Mistakes People Make</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Common Mistakes People Make</h2>
             <p>The biggest one is running the same text through the humanizer multiple times and expecting a better score each pass. The first pass moves the score by 40 to 70 points typically. The second pass only adds another 5 to 15 points because the easy patterns are already gone. After three passes you start losing readability faster than you gain detection bypass.</p>
             <p>The second mistake is humanizing text that's still factually wrong or poorly argued. The humanizer changes how your writing reads, not what it says. If your AI draft has the wrong facts, made-up citations, or confused logic, the humanizer makes it harder to detect as AI but doesn't fix the actual content problems. Always edit for substance before humanizing for style.</p>
             <p>The third mistake is pasting massive blocks of text at once. The free tier limits you to 500 characters per pass for a reason &mdash; short focused passes produce cleaner output than dumping a 2,000-word essay in one shot. Break your text into paragraphs, humanize each one, and reassemble. The result reads better and scores lower across detectors.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Who Uses This</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses This</h2>
             <p>The biggest user group is freelance writers and content marketers whose clients run output through Originality.ai before paying. The second is graduate students who use AI for first drafts but need the final submission to pass Turnitin. The third is small business owners writing their own marketing copy who don't want Google to demote their pages for looking machine-generated. Job seekers also use it for cover letters, since major ATS systems now flag obviously AI-generated text.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What This Tool Is Not</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What This Tool Is Not</h2>
             <p>It's not a magic button that turns AI text into a Pulitzer-winning essay. The output is genuinely indistinguishable from human writing on current detectors, but the underlying ideas, structure, and reasoning are still whatever the source AI gave you. If you want writing that wins arguments, makes new points, or moves readers emotionally, you still need to do the actual thinking yourself. The humanizer handles surface features. Substance is on you.</p>
             <p>It's also not a guarantee against every detector forever. AI detection improves monthly, and the patterns that bypass detection today may fail in six months. We retrain the humanization logic on a rolling basis to stay ahead of the major detectors, but if you absolutely need text that no detector will ever flag, the only safe approach is writing it yourself from scratch.</p>
         </section>
     </main>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will AI detectors flag text humanized by this tool?","acceptedAnswer":{"@type":"Answer","text":"On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. That said, detection technology improves monthly. No tool can guarantee permanent invisibility — if you need text no detector will ever flag, write it yourself."}},{"@type":"Question","name":"Does this work on text from ChatGPT, Claude, and Gemini?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works on AI-generated text from any source — ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites surface patterns (sentence structure, word choice, rhythm) that detectors look for, regardless of which AI wrote the original."}},{"@type":"Question","name":"Is the humanized text original or will it trigger plagiarism checks?","acceptedAnswer":{"@type":"Answer","text":"Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources in a plagiarism database. However, the underlying ideas still came from the original AI output — if you're submitting academic work, check your institution's policy on AI-assisted writing."}},{"@type":"Question","name":"How many times can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"Free users get 3 rewrites per day, with a 500-character input limit. Enter your email to unlock the full output when you hit the gate. Pro users get unlimited rewrites with no character cap."}},{"@type":"Question","name":"Does submitting my email sign me up for a newsletter?","acceptedAnswer":{"@type":"Answer","text":"Yes — you'll get occasional updates about new tools and improvements. You can unsubscribe any time. We don't sell email addresses or spam."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
@@ -361,7 +357,7 @@
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">How many times can I use it for free?</summary>
-                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Free users get 3 rewrites per day with a 500-character input limit. Enter your email to unlock the full output. Pro users get unlimited rewrites with no character cap.</p>
+                <p style="margin:0.75rem 0 0; color:#8892a8; font-size:0.95rem;">Free users get 1 full sample, then 1 full unlock per day with email (500-character input limit). Pro users get unlimited full rewrites with no character cap.</p>
             </details>
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#e6e9f0; cursor:pointer;">Does submitting my email sign me up for a newsletter?</summary>
@@ -377,30 +373,30 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/gig-auto-pilot/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Gig Auto-Pilot</strong>
-                <span style="font-size:0.85rem; color:#878787;">Automate freelance gig workflows and proposals.</span>
+            <a href="/tools/gig-auto-pilot/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Gig Auto-Pilot</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Automate freelance gig workflows and proposals.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Count words, characters, and reading time instantly.</span>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Count words, characters, and reading time instantly.</span>
             </a>
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
-                <span style="font-size:0.85rem; color:#878787;">Convert Markdown to HTML and back in seconds.</span>
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Convert Markdown to HTML and back in seconds.</span>
             </a>
         </div>
     </section>
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Best Free Developer Tools Online</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Best Free Developer Tools Online</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
         </div>
     </section>
@@ -410,8 +406,8 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span
-                        style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                        style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>
@@ -451,13 +447,13 @@
         "Matches your personal writing style",
         "Bypasses GPTZero and Turnitin AI detection",
         "No signup required",
-        "Privacy-first — nothing is stored"
+        "Nothing is saved — your text is sent to generate the result, then discarded"
       ]
     }
     </script>
 
     <script src="/js/script.js?v=20260623"></script>
-    <script src="/tools/humanizer/humanizer.js"></script>
+    <script src="/tools/humanizer/humanizer.js?v=20260719n"></script>
     <script src="/tools/shared/affiliate-panel.js"></script>
 
 <section style="max-width:720px; margin:3rem auto; padding:0 1.5rem; font-family:inherit; line-height:1.7; color:inherit;">
@@ -499,7 +495,8 @@
     <a href="/tools/ai-detector/">AI Detector</a>
   </p>
 </nav>
-<script src="/js/cs-pro-widget.js?v=2" defer></script>
+<script src="/js/cs-pro-status.js" defer></script>
+<script src="/js/cs-pro-widget.js?v=3" defer></script>
 </body>
 
 </html>

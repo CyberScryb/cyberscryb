@@ -18,9 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -109,11 +109,11 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">&#8250;</span>
-        <span style="color:#7b2cff;">Caregiver Report Generator</span>
+        <span style="color: var(--primary-soft);">Caregiver Report Generator</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -121,18 +121,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -146,11 +145,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
+                <div class="badge" style="background: rgba(194, 65, 12, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(194, 65, 12, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     Life Tools
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">Caregiver <span style="color: #7b2cff;">Shift Report</span> Generator</h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">Caregiver <span style="color: var(--primary-soft);">Shift Report</span> Generator</h1>
                 <p class="hero-subtitle">You did the hard part. Let us handle the paperwork.</p>
             </div>
         </section>
@@ -165,22 +164,22 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 Your Notes
                             </h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #ededed;">Type or paste your shift notes (informal is fine &mdash; we'll structure it for you)</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Type or paste your shift notes (informal is fine &mdash; we'll structure it for you)</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="patient-name" style="color: #ededed;">Patient/Client Name (optional)</label>
-                            <input type="text" id="patient-name" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;" placeholder="Leave blank to use [Patient Name]">
+                            <label for="patient-name" style="color: var(--text-muted);">Patient/Client Name (optional)</label>
+                            <input type="text" id="patient-name" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;" placeholder="Leave blank to use [Patient Name]">
                         </div>
 
                         <div class="input-group">
-                            <label for="shift-type" style="color: #ededed;">Shift Type</label>
-                            <select id="shift-type" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <label for="shift-type" style="color: var(--text-muted);">Shift Type</label>
+                            <select id="shift-type" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="Day Shift">Day Shift</option>
                                 <option value="Evening Shift">Evening Shift</option>
                                 <option value="Night Shift">Night Shift</option>
@@ -189,7 +188,7 @@
                             </select>
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Generate Report</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -203,13 +202,13 @@
                                 Shift Report
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
-                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Print / PDF</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your structured shift report will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -221,7 +220,7 @@
                                     <h3>Unlock Your Full Report</h3>
                                     <p>Enter your email to get the full result + <strong>3 free reports/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -229,11 +228,11 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Building your shift report...</p>
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary-soft);">Building your shift report...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                             <span id="section-count">0 sections</span>
                         </div>
@@ -243,13 +242,13 @@
                 <!-- Upgrade Tiers -->
                 <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Reports?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color: var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--text-muted); margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; 3 reports / day</li>
                                 <li>&#10003; 500 character limit</li>
                                 <li>&#10003; All shift types</li>
@@ -257,36 +256,36 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--primary-soft); margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color: var(--text-muted);">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Unlimited reports</li>
                                 <li>&#10003; 20,000 character limit</li>
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
-                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Lifetime</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$29</div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">one-time, forever</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
-                                <li>&#10003; Batch processing</li>
-                                <li>&#10003; API access</li>
-                                <li>&#10003; Priority support</li>
+                                <li>&#10003; One payment</li>
+                                <li>&#10003; No renewals</li>
+                                <li>&#10003; 14-day refund</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Lifetime</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ -->
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Who is this for?</h4><p>CNAs, home health aides, family caregivers, hospice workers &mdash; anyone who needs to document care. We built this because a former CNA wanted something that actually helped after a long shift.</p></div>
                     <div class="faq-item"><h4>Is patient information stored?</h4><p>No. Your notes are processed and immediately discarded. We never store patient data. This is a HIPAA-conscious design &mdash; nothing is saved, logged, or used for training.</p></div>
                     <div class="faq-item"><h4>Can I use this for official reports?</h4><p>It generates a structured draft. Always review the output for accuracy before submitting to your agency or facility. Think of it as a first pass that saves you time, not a replacement for your clinical judgment.</p></div>
@@ -301,22 +300,22 @@
         </section>
 
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Who This Tool Is For</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who This Tool Is For</h2>
             <p>This is built for the people who actually do the work of caregiving and then still have to document it. Certified Nursing Assistants finishing a twelve-hour shift. Home health aides driving between five clients a day. Hospice workers who just held a hand through a hard hour. Family caregivers managing a parent with dementia who need a paper trail for the next sibling or the next doctor's visit. If your job description includes "and write a shift report at the end," this tool is for you.</p>
             <p>I built it because I was a CNA before I got into tech, and the paperwork at the end of a shift always took the energy I did not have left. Charting software is great when it works, but most agencies still expect a written summary, and most caregivers are writing those by hand or in a notes app between tasks. This tool turns a few quick notes about your shift into a structured, complete report you can paste into your EMR, hand off to the next shift, or attach to a family update.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What Belongs in a Shift Report</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Belongs in a Shift Report</h2>
             <p>A complete shift report covers six things at minimum: identification (date, shift hours, your name, patient or client name), vitals if you take them (blood pressure, pulse, respiration, temperature, oxygen saturation, pain score), intake and output (meals eaten or refused, fluids, bathroom activity if relevant), medications administered with exact times and any refusals, activities of daily living covered (bathing, dressing, mobility, exercises, transfers), and observations (behavior, mood, cognition, skin condition, any incidents or near-misses, anything that changed from baseline). End with a handoff line for the next shift: what is unfinished, what to watch for, and any concerns to flag.</p>
             <p>The detail level should be enough that the next caregiver or nurse can pick up exactly where you left off without having to guess. "Patient refused lunch" is incomplete. "Patient refused lunch at 12:15, said the chicken smelled off, accepted a yogurt and crackers at 12:40, ate about half" is a real handoff. Vague reports create the gaps that later become incident reports.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Why Documentation Matters Beyond the Next Shift</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Documentation Matters Beyond the Next Shift</h2>
             <p>Shift reports are not just for the next caregiver. They are a legal record. If an incident happens, if a family questions care, if Medicare or an insurance reviewer audits the file, your shift report is the primary evidence of what was done and what was observed. A report that says "patient seemed fine, no issues" is worth nothing in a chart review. A report with specific observations, times, and actions is what protects you, your agency, and the patient.</p>
             <p>If you also have to write a hardship letter, appeal an insurance denial for a client, or document something for a custody or guardianship case related to a patient's care, the <a href="/tools/hardship-letter/">Hardship Letter Writer</a> and <a href="/tools/appeal-letter/">Appeal Letter Writer</a> on this site cover those workflows too. They were built for the same audience and the same reason &mdash; care work generates a paper trail nobody trained you to write, and the AI tools that exist either cost money or do not understand the domain.</p>
         </section>
     </main>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h2 style="font-family:'Orbitron',sans-serif; font-size:1.3rem; color:#00d4ff; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so — and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format — use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background:#0a0a0a; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
@@ -349,34 +348,34 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Draft polished emails in seconds.</span>
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Count words, characters, and reading time.</span>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Count words, characters, and reading time.</span>
             </a>
-            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Condense long text into key points.</span>
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Condense long text into key points.</span>
             </a>
         </div>
     </section>
 
     
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">?? Related Guides</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/caregiver-shift-handoff-standards/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Caregiver Shift Handoff Standards</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/caregiver-shift-handoff-standards/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Caregiver Shift Handoff Standards</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
-            <a href="/guides/documenting-cognitive-decline-for-doctors-and-courts/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed; transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">?? Documenting Cognitive Decline</strong>
-                <span style="font-size:0.85rem; color:#878787;">Read the full guide ?</span>
+            <a href="/guides/documenting-cognitive-decline-for-doctors-and-courts/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">?? Documenting Cognitive Decline</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide ?</span>
             </a>
         </div>
     </section>
@@ -385,8 +384,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

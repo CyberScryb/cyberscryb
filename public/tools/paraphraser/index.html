@@ -18,9 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -90,15 +90,64 @@
       document.head.appendChild(script);
     })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the AI paraphraser free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You get 3 free paraphrases per day after providing your email. No credit card required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is paraphrasing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paraphrasing is rewriting text in different words while keeping the original meaning. It helps avoid plagiarism and improves clarity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I choose different tones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Pick from casual, formal, academic, or creative tones to match your audience and purpose."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text stored or shared?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your inputs are processed and immediately discarded. We never store or train on your content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the paraphrased text pass plagiarism checks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our AI rewrites text thoroughly, but we recommend reviewing the output and citing sources where appropriate."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">AI Paraphraser</span>
+        <span style="color: var(--primary-soft);">AI Paraphraser</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -106,18 +155,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -131,11 +179,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
+                <div class="badge" style="background: rgba(194, 65, 12, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(194, 65, 12, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     AI-Powered
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: #7b2cff;">Paraphraser</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: var(--primary-soft);">Paraphraser</span></h1>
                 <p class="hero-subtitle">Paste any text and get a freshly rewritten version in seconds. Adjust tone and length to fit your needs.</p>
             </div>
         </section>
@@ -150,17 +198,17 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 Input
                             </h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #ededed;">Text to Paraphrase</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:180px;" placeholder="Paste the text you want to paraphrase here..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Text to Paraphrase</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); height:180px;" placeholder="Paste the text you want to paraphrase here..."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="tone-select" style="color: #ededed;">Tone</label>
-                            <select id="tone-select" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.85rem; width: 100%; cursor: pointer;">
+                            <label for="tone-select" style="color: var(--text-muted);">Tone</label>
+                            <select id="tone-select" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.85rem; width: 100%; cursor: pointer;">
                                 <option value="casual">Casual</option>
                                 <option value="formal" selected>Formal</option>
                                 <option value="academic">Academic</option>
@@ -169,21 +217,21 @@
                         </div>
 
                         <div class="input-group">
-                            <label style="color: #ededed;">Output Length</label>
+                            <label style="color: var(--text-muted);">Output Length</label>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
                                 <label style="display:inline-flex; align-items:center; gap:6px; background:#0a0a0a; padding:8px 12px; border: 1px solid rgba(255,255,255,0.12); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
-                                    <input type="radio" name="length" value="shorter" style="accent-color:#7b2cff;"> Shorter
+                                    <input type="radio" name="length" value="shorter" style="accent-color: var(--primary-soft);"> Shorter
                                 </label>
                                 <label style="display:inline-flex; align-items:center; gap:6px; background:#0a0a0a; padding:8px 12px; border: 1px solid rgba(255,255,255,0.12); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
-                                    <input type="radio" name="length" value="same" checked style="accent-color:#7b2cff;"> Same Length
+                                    <input type="radio" name="length" value="same" checked style="accent-color: var(--primary-soft);"> Same Length
                                 </label>
                                 <label style="display:inline-flex; align-items:center; gap:6px; background:#0a0a0a; padding:8px 12px; border: 1px solid rgba(255,255,255,0.12); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
-                                    <input type="radio" name="length" value="longer" style="accent-color:#7b2cff;"> Longer
+                                    <input type="radio" name="length" value="longer" style="accent-color: var(--primary-soft);"> Longer
                                 </label>
                             </div>
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Paraphrase Now</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -197,12 +245,12 @@
                                 Paraphrased Text
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your paraphrased text will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -214,7 +262,7 @@
                                     <h3>Unlock Your Full Result</h3>
                                     <p>Enter your email to get the full result + <strong>3 free paraphrases/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -222,11 +270,11 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Paraphrasing with Gemini 3.1 Pro...</p>
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary-soft);">Paraphrasing with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                             <span id="char-count">0 characters</span>
                         </div>
@@ -236,13 +284,13 @@
                 <!-- Upgrade Tiers -->
                 <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Paraphrases?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color: var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--text-muted); margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; 3 paraphrases / day</li>
                                 <li>&#10003; 500 character limit</li>
                                 <li>&#10003; All tones &amp; lengths</li>
@@ -250,36 +298,36 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--primary-soft); margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color: var(--text-muted);">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Unlimited paraphrases</li>
                                 <li>&#10003; 20,000 character limit</li>
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
-                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Lifetime</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$29</div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">one-time, forever</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
-                                <li>&#10003; Batch processing</li>
-                                <li>&#10003; API access</li>
-                                <li>&#10003; Priority support</li>
+                                <li>&#10003; One payment</li>
+                                <li>&#10003; No renewals</li>
+                                <li>&#10003; 14-day refund</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Lifetime</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ -->
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Is the AI paraphraser free?</h4><p>Yes. You get 3 free paraphrases per day after providing your email. No credit card required.</p></div>
                     <div class="faq-item"><h4>What is paraphrasing?</h4><p>Paraphrasing is rewriting text in different words while keeping the original meaning. It helps avoid plagiarism and improves clarity.</p></div>
                     <div class="faq-item"><h4>Can I choose different tones?</h4><p>Absolutely. Pick from casual, formal, academic, or creative tones to match your audience and purpose.</p></div>
@@ -294,23 +342,23 @@
         </section>
     
     <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Paraphrasing vs. Plagiarism: Where the Line Is</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Paraphrasing vs. Plagiarism: Where the Line Is</h2>
         <p>Paraphrasing is restating someone else's idea in your own words while citing the original source. Plagiarism is presenting someone else's ideas or words as your own. The tool you use to rephrase text doesn't change the ethical obligation to cite your sources. If you paraphrase a paragraph from a research paper, you still need to cite that paper &mdash; even if none of the original words remain.</p>
 <p>Academic institutions have specific standards for what counts as acceptable paraphrasing. Simply swapping synonyms word-by-word (what some call "patchwriting") is usually considered a form of plagiarism because the sentence structure and ideas are still the source author's work. Genuine paraphrasing requires understanding the original idea and expressing it in a fundamentally different way &mdash; different structure, different emphasis, different examples.</p>
 <p>This tool helps with the mechanics of rewording, but the intellectual responsibility is yours. Use it to generate alternative phrasings, then revise the output to ensure it genuinely reflects your understanding of the source material. Always add your own analysis, context, or perspective when incorporating paraphrased content into academic work.</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">How AI Paraphrasing Works</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How AI Paraphrasing Works</h2>
         <p>Modern AI paraphrasers use transformer-based language models that understand the meaning of text, not just the individual words. When you submit a sentence, the model encodes its semantic content &mdash; the core idea, relationships between concepts, and contextual nuance &mdash; then generates a new sentence that preserves that meaning while using different vocabulary and structure.</p>
 <p>This is fundamentally different from older synonym-replacement tools that would swap "big" for "large" and "house" for "dwelling" without understanding context. AI paraphrasers can restructure sentences from passive to active voice, combine two short sentences into one complex sentence, or split one long sentence into two clearer ones &mdash; all while keeping the meaning intact.</p>
 <p>The quality of AI paraphrasing depends heavily on the complexity of the input. Simple factual statements paraphrase cleanly. Technical writing with precise terminology is harder &mdash; the model may substitute terms that change the meaning in subtle but important ways. Always review paraphrased technical content carefully.</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Best Practices for Using a Paraphraser</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Best Practices for Using a Paraphraser</h2>
         <p><strong>Work in small chunks.</strong> Paraphrasing paragraph by paragraph produces better results than pasting entire pages. The model can focus on each idea individually and produce more natural rewording.</p>
 <p><strong>Review for accuracy.</strong> AI can occasionally drift from the original meaning, especially with negations ("the study did not find" becoming "the study found") or quantifiers ("most students" becoming "all students"). Always compare the paraphrased output against the original.</p>
 <p><strong>Use it for first drafts, not final copy.</strong> The best workflow is: paraphrase to get a starting point, then edit the output in your own voice. The final text should read like something you'd naturally write, not like an AI rewrote someone else's work.</p>
-        <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Related Reading</h2>
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Related Reading</h2>
         <ul style="padding-left:1.2rem;">
-            <li><a href="/guides/" style="color:#7b2cff;">Browse All CyberScryb Guides</a></li>
-            <li><a href="/blog/" style="color:#7b2cff;">Read the CyberScryb Blog</a></li>
-            <li><a href="/tools/" style="color:#7b2cff;">Explore All Free Tools</a></li>
+            <li><a href="/guides/" style="color: var(--primary-soft);">Browse All CyberScryb Guides</a></li>
+            <li><a href="/blog/" style="color: var(--primary-soft);">Read the CyberScryb Blog</a></li>
+            <li><a href="/tools/" style="color: var(--primary-soft);">Explore All Free Tools</a></li>
         </ul>
     </section>
     </main>
@@ -322,19 +370,19 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Like</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Rewrite AI text to sound like you wrote it.</span>
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Rewrite AI text to sound like you wrote it.</span>
             </a>
-            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Summarize long articles and documents instantly.</span>
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Summarize long articles and documents instantly.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                <span style="font-size:0.85rem; color:#878787;">Count words, characters, and reading time.</span>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Count words, characters, and reading time.</span>
             </a>
         </div>
     </section>
@@ -343,8 +391,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

@@ -23,9 +23,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260623">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
     <link rel="stylesheet" href="/tools/humanizer/style.css">
 
     <!-- Google Analytics 4 -->
@@ -98,11 +98,11 @@
 
 <body>
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
-        <a href="/" style="color:#878787; text-decoration:none;">Home</a>
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <a href="/tools/" style="color:#878787; text-decoration:none;">Tools</a>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="margin:0 8px; color:#444;">›</span>
-        <span style="color:#7b2cff;">Budget Planner</span>
+        <span style="color: var(--primary-soft);">Budget Planner</span>
     </nav>
     <header>
         <nav class="navbar">
@@ -110,18 +110,17 @@
                 <div class="nav-logo">
                     <a href="/" style="display: flex; align-items: center; text-decoration: none;">
                         <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
-                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #fff; margin-left: 10px;">CyberScryb</span>
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
                     </a>
                 </div>
                                                 <ul class="nav-menu">
                     <li><a href="/">Home</a></li>
                     <li><a href="/tools/" class="active">Tools</a></li>
-                    <li><a href="/products/">Products</a></li>
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:#d4a855;font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -135,11 +134,11 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(123, 44, 255, 0.1); color: #7b2cff; padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(123, 44, 255, 0.3);">
+                <div class="badge" style="background: rgba(194, 65, 12, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(194, 65, 12, 0.3);">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     Life Tool &middot; AI-Powered
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">Budget <span style="color: #7b2cff;">Planner</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">Budget <span style="color: var(--primary-soft);">Planner</span></h1>
                 <p class="hero-subtitle">Money is tight. This tool helps you figure out where it goes.</p>
             </div>
         </section>
@@ -154,17 +153,17 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7b2cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                                 Your Situation
                             </h2>
-                            <span class="step-badge" style="background: #7b2cff; color: #000;">Step 1</span>
+                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: #ededed;">Describe your financial situation (income, bills, what you owe, what's due soon)</label>
-                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; height:180px;" placeholder="e.g. Lost my job 3 weeks ago, $400 in checking, $1200 rent due in 10 days, $280 car payment, $150 utilities, 2 kids..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Describe your financial situation (income, bills, what you owe, what's due soon)</label>
+                            <textarea id="tool-input" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); height:180px;" placeholder="e.g. Lost my job 3 weeks ago, $400 in checking, $1200 rent due in 10 days, $280 car payment, $150 utilities, 2 kids..."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="situation-select" style="color: #ededed;">Situation Type</label>
-                            <select id="situation-select" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
+                            <label for="situation-select" style="color: var(--text-muted);">Situation Type</label>
+                            <select id="situation-select" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
                                 <option value="">Just describe my situation</option>
                                 <option value="job loss">Lost my job</option>
                                 <option value="medical">Medical bills</option>
@@ -173,7 +172,7 @@
                             </select>
                         </div>
 
-                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: 'Orbitron'; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #7b2cff, #e03030); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Build My Budget Plan</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -187,12 +186,12 @@
                                 Your Budget Plan
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span id="usage-counter" style="font-size:0.7rem; color:#878787; font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #7b2cff;">Copy</button>
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--primary-soft);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: #ededed;">
+                            <div id="output-text" class="output-content" style="background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);">
                                 <span class="placeholder" style="color: #555555;">Your budget plan will appear here...</span>
                             </div>
                             <div id="email-gate" class="email-gate hidden">
@@ -204,7 +203,7 @@
                                     <h3>Unlock Your Full Budget Plan</h3>
                                     <p>Enter your email to get the full result + <strong>3 free plans/day</strong></p>
                                     <form id="gate-email-form" class="gate-form">
-                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email">
+                                        <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
                                         <button type="submit" id="gate-submit-btn">Unlock Result</button>
                                     </form>
                                     <div id="gate-status" style="margin-top:0.5rem; font-size:0.85rem; min-height:1.2em;"></div>
@@ -212,11 +211,11 @@
                                 </div>
                             </div>
                             <div id="loading-indicator" class="hidden">
-                                <div class="spinner" style="border-top-color: #7b2cff;"></div>
-                                <p style="color: #7b2cff;">Building your budget plan with Gemini 3.1 Pro...</p>
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary-soft);">Building your budget plan with Gemini 3.1 Pro...</p>
                             </div>
                         </div>
-                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: #878787;">
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
                             <span id="word-count">0 words</span>
                             <span id="char-count">0 characters</span>
                         </div>
@@ -226,13 +225,13 @@
                 <!-- Upgrade Tiers -->
                 <div id="upgrade-tiers" class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="text-align:center; margin-bottom:0.5rem;">Need More Budget Plans?</h3>
-                    <p style="text-align:center; color:#878787; font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
+                    <p style="text-align:center; color: var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Unlock higher limits and premium features</p>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; max-width:750px; margin:0 auto;">
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#878787; margin-bottom:0.5rem;">Free</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$0</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--text-muted); margin-bottom:0.5rem;">Free</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$0</div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">with email</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; 3 plans / day</li>
                                 <li>&#10003; 500 character input limit</li>
                                 <li>&#10003; All situation types</li>
@@ -240,36 +239,36 @@
                             </ul>
                         </div>
                         <div style="background:#0a0a0a; border:2px solid #7b2cff; border-radius:12px; padding:1.5rem; text-align:center; position:relative;">
-                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#7b2cff; margin-bottom:0.5rem;">Pro</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color:#878787;">/mo</span></div>
+                            <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; font-family: var(--font-brand), Georgia, serif; font-size:0.6rem; font-weight:700; padding:3px 12px; border-radius:20px; text-transform:uppercase;">Popular</div>
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color: var(--primary-soft); margin-bottom:0.5rem;">Pro</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$5<span style="font-size:0.9rem; color: var(--text-muted);">/mo</span></div>
                             <div style="color:#555555; font-size:0.8rem; margin-bottom:1rem;">cancel anytime</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Unlimited plans</li>
                                 <li>&#10003; 20,000 character input</li>
                                 <li>&#10003; Priority speed</li>
                                 <li>&#10003; No ads</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:linear-gradient(135deg,#7b2cff,#e03030); color:#000; padding:0.7rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Upgrade to Pro</a>
                         </div>
                         <div style="background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:12px; padding:1.5rem; text-align:center;">
-                            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Pro Annual</div>
-                            <div style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.25rem;">$29<span style="font-size:0.9rem; color:#878787;">/yr</span></div>
-                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">Save 52%</div>
-                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color:#878787; line-height:2;">
+                            <div style="font-family: var(--font-brand), Georgia, serif; font-size:0.75rem; text-transform:uppercase; color:#22c55e; margin-bottom:0.5rem;">Lifetime</div>
+                            <div style="font-size:2rem; font-weight:800; color: var(--text); margin-bottom:0.25rem;">$29</div>
+                            <div style="color:#22c55e; font-size:0.8rem; margin-bottom:1rem;">one-time, forever</div>
+                            <ul style="list-style:none; padding:0; text-align:left; font-size:0.8rem; color: var(--text-muted); line-height:2;">
                                 <li>&#10003; Everything in Pro</li>
-                                <li>&#10003; Batch processing</li>
-                                <li>&#10003; API access</li>
-                                <li>&#10003; Priority support</li>
+                                <li>&#10003; One payment</li>
+                                <li>&#10003; No renewals</li>
+                                <li>&#10003; 14-day refund</li>
                             </ul>
-                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family:'Orbitron',monospace; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Annual</a>
+                            <a href="/pro/" class="pro-upgrade-btn" style="display:block; margin-top:1rem; background:transparent; color:#22c55e; padding:0.7rem; border-radius:8px; border:1px solid #22c55e; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">Get Lifetime</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ -->
                 <div class="geo-card" style="background: linear-gradient(145deg, #111111, #0a0a0a); border: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
-                    <h3 style="color:#7b2cff; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is a survival budget?</h4><p>A survival budget is a stripped-down spending plan focused on keeping you housed, fed, and operational during a financial crisis. It ranks your expenses by necessity, identifies what can be cut or deferred, and tells you exactly how long your current cash will last at current burn rate. It's not a long-term financial plan &mdash; it's a triage document for when things go wrong.</p></div>
                     <div class="faq-item"><h4>How specific should I be in my description?</h4><p>The more specific, the better. Give actual dollar amounts where you can &mdash; current checking balance, each bill and its due date, your monthly income or unemployment benefit, any debt minimums you have to hit. Vague inputs like "I'm struggling" produce generic output. Specific inputs like "$612 checking, $1,100 rent due May 1, $230 car note, $0 income since April 15" produce a plan you can actually use.</p></div>
                     <div class="faq-item"><h4>Does the AI store my financial information?</h4><p>No. Your input is sent to the AI model for processing only and is immediately discarded. We don't store, log, or retain any financial details you share. Nothing you enter touches a database.</p></div>
@@ -284,18 +283,18 @@
         </section>
 
         <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">When You Actually Need a Budget Plan</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When You Actually Need a Budget Plan</h2>
             <p>Most budget advice is written for people who have money and want to save more. This tool is for a different situation &mdash; when a job ended, hours got cut, a medical bill arrived that wasn't planned for, or one income disappeared and the bills didn't. The goal isn't to get rich. The goal is to stay housed, keep the lights on, and buy time until things stabilize.</p>
             <p>The specific moments when a survival budget matters most: the first week after a job loss when you're calculating how long you can last before you're in trouble, the day a hospital bill shows up that's bigger than your checking account, the month one partner's income disappears and the other has to cover everything, and any moment when you look at your bank balance and feel the math not working. That's when this tool helps.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What a Survival Budget Actually Does</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What a Survival Budget Actually Does</h2>
             <p>A good survival budget does three things: it tells you your actual burn rate &mdash; how much you're spending per month at minimum to stay operational. It ranks your expenses by what happens if you don't pay &mdash; eviction and repossession rank above credit card interest, which ranks above subscription services. And it identifies which expenses can be paused, reduced, or negotiated without immediate consequence.</p>
             <p>Most people in a financial crisis already know they're in trouble. What they need is a clear picture of the specific numbers &mdash; which bill to pay first with the $400 they have, which creditor to call this week, what they can survive deferring for 30 days. That's what this tool outputs.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">Before You Generate &mdash; What to Have Ready</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Before You Generate &mdash; What to Have Ready</h2>
             <p>Before you paste your situation into the generator, gather these: your current checking/savings balance, a list of every monthly bill and its amount, any payments that are past due and by how many days, your current monthly income (or weekly unemployment benefit), and any one-time expenses coming up in the next 30 days like a car registration or insurance payment. You don't need to be precise &mdash; close estimates work. What matters is that you include everything, not that the numbers are exact to the dollar.</p>
 
-            <h2 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;color:#00d4ff;margin-top:2rem;">What to Do After You Have the Plan</h2>
+            <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What to Do After You Have the Plan</h2>
             <p>The plan tells you what to pay and what to defer. The next step is actually making the calls. If you need to defer rent, call your landlord before the due date &mdash; most landlords would rather work with you than start the eviction process. If you have medical debt, most hospital billing departments have a charity care or hardship program that can reduce or eliminate the balance for low-income patients &mdash; but you have to ask for it. If you're behind on a utility, most providers have a shutoff grace period and often a hardship program.</p>
             <p>If you're in a situation where you need to formally request hardship consideration from a lender or institution, the <a href="/tools/hardship-letter/">CyberScryb Hardship Letter Writer</a> handles the next step. The budget plan gives you the numbers; the hardship letter gives you the formal document to send.</p>
         </section>
@@ -308,19 +307,19 @@
     </section>
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#111111,#0a0a0a); border: 1px solid rgba(255,255,255,0.12); border-radius:12px;">
-        <h3 style="text-align:center; margin-bottom:1.5rem; color:#fff;">Related Tools You Might Need</h3>
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Need</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/hardship-letter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Hardship Letter Writer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Write a formal hardship letter for your lender or landlord.</span>
+            <a href="/tools/hardship-letter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Hardship Letter Writer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Write a formal hardship letter for your lender or landlord.</span>
             </a>
-            <a href="/tools/appeal-letter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">Appeal Letter Writer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Draft insurance or financial appeal letters.</span>
+            <a href="/tools/appeal-letter/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Appeal Letter Writer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Draft insurance or financial appeal letters.</span>
             </a>
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color:#ededed;" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
-                <strong style="color:#7b2cff; display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
-                <span style="font-size:0.85rem; color:#878787;">Draft polished emails in seconds.</span>
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#0a0a0a; border: 1px solid rgba(255,255,255,0.12); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#7b2cff'" onmouseout="this.style.borderColor='#333'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
         </div>
     </section>
@@ -329,8 +328,8 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff;">CyberScryb</span>
-                    <p>No social media. No distractions. Just tools that work.</p>
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/privacy/">Privacy Policy</a>

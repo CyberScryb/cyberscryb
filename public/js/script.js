@@ -77,10 +77,10 @@ function showCookieConsentBanner() {
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(194, 65, 12, 0.2);
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(194, 65, 12, 0.1);
             z-index: 99999;
             font-family: 'Inter', sans-serif;
             color: #cbd5e1;
@@ -130,14 +130,14 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: linear-gradient(135deg, #00d4ff, #7b2cff);
+            background: linear-gradient(135deg, #C2410C, #7b2cff);
             color: #000;
             border: none;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 10px rgba(194, 65, 12, 0.2);
         }
         .cs-cookie-btn-accept:hover {
             transform: translateY(-1px);
-            box-shadow: 0 0 18px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 18px rgba(194, 65, 12, 0.5);
         }
         .cs-cookie-btn-decline {
             background: transparent;
@@ -367,3 +367,89 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
         });
     });
 });
+
+// ─── Live page interactions (hover / pointer feel) ─────────────────
+// "Hover" = pointer is over something, before click. These effects
+// react to movement so the UI feels alive without requiring a click.
+(function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Skip coarse pointers (most phones) — hover isn't the model there
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+    function ready(fn) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fn);
+        } else {
+            fn();
+        }
+    }
+
+    ready(function () {
+        // Soft ambient glow that follows the cursor (very low opacity)
+        var glow = document.createElement('div');
+        glow.className = 'cs-cursor-glow';
+        glow.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(glow);
+
+        var gx = 0, gy = 0, tx = 0, ty = 0, raf = 0;
+        function tick() {
+            gx += (tx - gx) * 0.12;
+            gy += (ty - gy) * 0.12;
+            glow.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+            raf = requestAnimationFrame(tick);
+        }
+        window.addEventListener('pointermove', function (e) {
+            tx = e.clientX;
+            ty = e.clientY;
+            if (!raf) raf = requestAnimationFrame(tick);
+            glow.classList.add('is-on');
+        }, { passive: true });
+        window.addEventListener('pointerleave', function () {
+            glow.classList.remove('is-on');
+        });
+
+        // Cards: spotlight follows pointer inside the card
+        var cards = document.querySelectorAll(
+            '.blog-card, .glass-card, .tool-card, .hz-price-card, .pro-band-inner, .hz-workspace'
+        );
+        cards.forEach(function (card) {
+            card.classList.add('cs-interactive');
+            card.addEventListener('pointermove', function (e) {
+                var r = card.getBoundingClientRect();
+                var x = ((e.clientX - r.left) / r.width) * 100;
+                var y = ((e.clientY - r.top) / r.height) * 100;
+                card.style.setProperty('--spot-x', x + '%');
+                card.style.setProperty('--spot-y', y + '%');
+            }, { passive: true });
+            card.addEventListener('pointerenter', function () {
+                card.classList.add('is-hot');
+            });
+            card.addEventListener('pointerleave', function () {
+                card.classList.remove('is-hot');
+            });
+        });
+
+        // Buttons / CTAs: slight magnetic pull toward cursor
+        var magnets = document.querySelectorAll(
+            '.cta-button, .cta-attention, .cta-secondary, .btn-primary, .btn-attention, .hz-primary-btn, .nav-menu a.nav-pro, .nav-menu a[href="/pro/"]'
+        );
+        magnets.forEach(function (el) {
+            el.classList.add('cs-magnetic');
+            el.addEventListener('pointermove', function (e) {
+                var r = el.getBoundingClientRect();
+                var dx = e.clientX - (r.left + r.width / 2);
+                var dy = e.clientY - (r.top + r.height / 2);
+                el.style.transform =
+                    'translate(' + (dx * 0.12) + 'px,' + (dy * 0.18) + 'px) translateY(-1px)';
+            }, { passive: true });
+            el.addEventListener('pointerleave', function () {
+                el.style.transform = '';
+            });
+        });
+
+        // Nav links: mark for CSS underline grow
+        document.querySelectorAll('.nav-menu a:not([href="/pro/"]):not(.nav-pro)').forEach(function (a) {
+            a.classList.add('cs-nav-link');
+        });
+    });
+})();
