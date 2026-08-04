@@ -205,7 +205,7 @@ function pageHtml(p) {
   const faqJson = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: p.faqs.map((f) => ({
+    mainEntity: p.faqs.map(f => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -221,17 +221,9 @@ function pageHtml(p) {
     author: { '@type': 'Organization', name: 'CyberScryb' },
     mainEntityOfPage: `https://cyberscryb.com/guides/${p.slug}/`,
   };
-  const sections = p.sections
-    .map(
-      (s) =>
-        `<h2>${s.h}</h2>\n<p>${s.p}</p>`
-    )
-    .join('\n');
+  const sections = p.sections.map(s => `<h2>${s.h}</h2>\n<p>${s.p}</p>`).join('\n');
   const faqHtml = p.faqs
-    .map(
-      (f) =>
-        `<details><summary>${f.q}</summary><p>${f.a}</p></details>`
-    )
+    .map(f => `<details><summary>${f.q}</summary><p>${f.a}</p></details>`)
     .join('\n');
 
   return `<!DOCTYPE html>
@@ -333,7 +325,7 @@ function main() {
     let html = fs.readFileSync(idx, 'utf8');
     if (!html.includes(PAGES[0].slug)) {
       const cards = PAGES.map(
-        (p) => `
+        p => `
                     <article class="blog-card">
                         <div class="blog-card-content">
                             <span class="blog-tag" data-cat="life">Life Tools</span>
@@ -344,10 +336,7 @@ function main() {
                     </article>`
       ).join('\n');
       if (html.includes('posts-grid')) {
-        html = html.replace(
-          /(class="posts-grid[^"]*"[^>]*>)/,
-          `$1\n${cards}\n`
-        );
+        html = html.replace(/(class="posts-grid[^"]*"[^>]*>)/, `$1\n${cards}\n`);
         fs.writeFileSync(idx, html, 'utf8');
         console.log('patched guides/index.html');
       }

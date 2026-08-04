@@ -28,5 +28,5 @@ export const storage = {
     Object.keys(localStorage).forEach(k => {
       if (k.startsWith(PREFIX)) localStorage.removeItem(k);
     });
-  }
+  },
 };

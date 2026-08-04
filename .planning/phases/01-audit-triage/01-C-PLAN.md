@@ -1,7 +1,7 @@
 ---
 plan_id: 01-C
 phase: 1
-title: "Jest+jsdom tests for client-side dev tools: base64, hash, regex, url-encoder, slug, case-converter, uuid, epoch, json-formatter"
+title: 'Jest+jsdom tests for client-side dev tools: base64, hash, regex, url-encoder, slug, case-converter, uuid, epoch, json-formatter'
 wave: 1
 depends_on: []
 files_modified:
@@ -24,10 +24,10 @@ files_modified:
 autonomous: true
 requirements: [AUDIT-02]
 must_haves:
-  - "Every client-side dev tool in the in-scope list has a Jest test file that calls its pure transform function with at least 3 input/output pairs covering: happy path, edge case (empty input, unicode, very long input as relevant), and a documented failure mode"
+  - 'Every client-side dev tool in the in-scope list has a Jest test file that calls its pure transform function with at least 3 input/output pairs covering: happy path, edge case (empty input, unicode, very long input as relevant), and a documented failure mode'
   - "Each tool's script.js exports its pure transform functions via the CommonJS guard pattern already used by password-checker.js and json-csv-converter.js so the tests can require them"
-  - "npm test exits 0 with all new test suites green"
-  - "The transform functions remain identical to current behavior — this plan adds tests around existing code, it does NOT change tool behavior (a regression would be a bug, not a feature)"
+  - 'npm test exits 0 with all new test suites green'
+  - 'The transform functions remain identical to current behavior — this plan adds tests around existing code, it does NOT change tool behavior (a regression would be a bug, not a feature)'
 ---
 
 <objective>
@@ -49,8 +49,9 @@ Output: Eight new Jest test files + minimal CommonJS guard exports added to eigh
 @CLAUDE.md
 
 # Existing patterns to copy
-@__tests__/password-checker.test.js
-@__tests__/json-csv-converter.test.js
+
+@**tests**/password-checker.test.js
+@**tests**/json-csv-converter.test.js
 @public/tools/password-checker/script.js
 @public/tools/json-csv-converter/script.js
 
@@ -58,7 +59,7 @@ Output: Eight new Jest test files + minimal CommonJS guard exports added to eigh
 <!-- CommonJS export pattern from CONVENTIONS.md (already in use by password-checker.js line 291 and json-csv-converter.js line 355) -->
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { functionName, anotherFunction };
+module.exports = { functionName, anotherFunction };
 }
 
 This guard is invisible to the browser (no `module` global) and exposes the
@@ -67,18 +68,19 @@ pure functions to Jest. Browser execution of the file is unaffected.
 Tools in scope for this plan (8 tools, all client-side, all have non-trivial
 pure transform logic that benefits from tests):
 
-1. base64-tool       — encode/decode string ↔ base64, including UTF-8 multi-byte
-2. hash-generator    — MD5/SHA-1/SHA-256/SHA-512 of input (uses Web Crypto SubtleCrypto)
-3. url-encoder       — encodeURIComponent / decodeURIComponent, handle reserved chars
-4. slug-generator    — string → URL-safe slug (lowercase, dashes, strip diacritics)
-5. case-converter    — camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE
-6. json-formatter    — pretty-print / minify / validate JSON
-7. uuid-generator    — v4 UUID via crypto.getRandomValues (per CLAUDE.md — must NOT use Math.random)
-8. epoch-converter   — epoch seconds ↔ ISO 8601 ↔ human-readable
+1. base64-tool — encode/decode string ↔ base64, including UTF-8 multi-byte
+2. hash-generator — MD5/SHA-1/SHA-256/SHA-512 of input (uses Web Crypto SubtleCrypto)
+3. url-encoder — encodeURIComponent / decodeURIComponent, handle reserved chars
+4. slug-generator — string → URL-safe slug (lowercase, dashes, strip diacritics)
+5. case-converter — camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE
+6. json-formatter — pretty-print / minify / validate JSON
+7. uuid-generator — v4 UUID via crypto.getRandomValues (per CLAUDE.md — must NOT use Math.random)
+8. epoch-converter — epoch seconds ↔ ISO 8601 ↔ human-readable
 
 Tools NOT in scope this plan (handled differently or already tested):
-- password-checker (already tested in __tests__/password-checker.test.js)
-- json-csv-converter (already tested in __tests__/json-csv-converter.test.js)
+
+- password-checker (already tested in **tests**/password-checker.test.js)
+- json-csv-converter (already tested in **tests**/json-csv-converter.test.js)
 - markdown-html (uses third-party marked.js, smoke-test only via Plan E)
 - color-palette (visual tool, no pure transform)
 - qr-generator (uses third-party qrcode.js, tested via Plan E)
@@ -87,6 +89,7 @@ Tools NOT in scope this plan (handled differently or already tested):
 - text-diff, lorem-ipsum, word-counter, html-entity (covered in Plan E manual smoke pass — they have less behavior surface)
 - jwt-decoder, privacy-generator, seo-tag-generator (more complex; defer to Phase 2 UX work)
 </interfaces>
+
 </context>
 
 <tasks>
@@ -156,10 +159,11 @@ Tools NOT in scope this plan (handled differently or already tested):
 </verification>
 
 <success_criteria>
+
 - Every in-scope dev tool's pure transform logic is locked in by tests
 - Refactoring the UI in Phase 2 can't silently break the underlying transforms
 - Test coverage extends the existing pattern (password-checker, json-csv-converter) rather than introducing a new test framework
-</success_criteria>
+  </success_criteria>
 
 <output>
 Create `.planning/phases/01-audit-triage/01-C-SUMMARY.md` when done, summarizing: tools tested, function names that were extracted/renamed during the refactor, any tool where the existing implementation surprised the tests (e.g., behavior different from expected), and test counts.

@@ -1,7 +1,7 @@
 ---
 plan_id: 01-B
 phase: 1
-title: "AI tool functional tests: every toolId reaches Gemini, every prompt builds, every error path returns JSON"
+title: 'AI tool functional tests: every toolId reaches Gemini, every prompt builds, every error path returns JSON'
 wave: 1
 depends_on: []
 files_modified:
@@ -12,11 +12,11 @@ files_modified:
 autonomous: true
 requirements: [AUDIT-01, AUDIT-05]
 must_haves:
-  - "Every key in AI_PROMPTS has a Jest test that calls its .build(input, params) function with representative input and asserts the returned prompt string is non-empty and contains the input verbatim"
-  - "A Jest test asserts that the /api/ai-generate handler returns JSON (never plain text) on every error branch — 400 missing tool, 400 unknown tool, 429 rate limited, 500 Gemini error"
-  - "A Jest test asserts that the rewriteText handler (humanizer) returns JSON on every error branch — fixing CONCERNS.md WARNING that lines 83, 93, 108, 147, 155, 163, 174, 208, 219, 589 use res.send() instead of res.json()"
+  - 'Every key in AI_PROMPTS has a Jest test that calls its .build(input, params) function with representative input and asserts the returned prompt string is non-empty and contains the input verbatim'
+  - 'A Jest test asserts that the /api/ai-generate handler returns JSON (never plain text) on every error branch — 400 missing tool, 400 unknown tool, 429 rate limited, 500 Gemini error'
+  - 'A Jest test asserts that the rewriteText handler (humanizer) returns JSON on every error branch — fixing CONCERNS.md WARNING that lines 83, 93, 108, 147, 155, 163, 174, 208, 219, 589 use res.send() instead of res.json()'
   - "All error responses in functions/index.js use res.status(N).json({ error: '...' }) — verified by a grep gate that finds zero res.status(.*).send( patterns outside of success paths"
-  - "npm test exits 0"
+  - 'npm test exits 0'
 ---
 
 <objective>
@@ -40,46 +40,47 @@ Output: Three new Jest test files + a hardened `functions/index.js` where every 
 @CLAUDE.md
 
 # Source files under test
+
 @functions/index.js
 @public/tools/shared/ai-tool.js
-@__tests__/firebase-functions.test.js
+@**tests**/firebase-functions.test.js
 
 <interfaces>
 <!-- Frontend → backend contract from public/tools/shared/ai-tool.js lines 246-260 -->
 
 Request shape (POST /api/ai-generate):
-  body: { tool: string, input: string|object, params?: object }
+body: { tool: string, input: string|object, params?: object }
 
 Frontend error parser (ai-tool.js lines 252-258):
-  if (!response.ok) {
-      let errMsg = '';
-      try {
-          const errData = await response.json();   // <-- ALWAYS calls .json()
-          errMsg = errData.error || '';
-      } catch (e) {}
-      throw new Error(friendlyError(response.status, errMsg));
-  }
+if (!response.ok) {
+let errMsg = '';
+try {
+const errData = await response.json(); // <-- ALWAYS calls .json()
+errMsg = errData.error || '';
+} catch (e) {}
+throw new Error(friendlyError(response.status, errMsg));
+}
 
 Implication: ANY response with res.send(plainText) crashes the try/await
 silently and falls back to friendlyError(status, '') with no useful message.
 
 Success response shape (generateAI):
-  res.status(200).json({ result: string, tool: string })
+res.status(200).json({ result: string, tool: string })
 
 Error response shape (REQUIRED, contract):
-  res.status(N).json({ error: string })
+res.status(N).json({ error: string })
 
 AI_PROMPTS structure (functions/index.js):
-  {
-    [toolId]: {
-      model: 'gemini-3.1-pro-preview',
-      build: (input, params) => promptString
-    }
-  }
+{
+[toolId]: {
+model: 'gemini-3.1-pro-preview',
+build: (input, params) => promptString
+}
+}
 
 Pattern from CONVENTIONS.md (CRITICAL):
-  ALL errors must use res.status(N).json({ error: '...' })
-  Never use res.send() for errors — the frontend always calls .json() on the response.
+ALL errors must use res.status(N).json({ error: '...' })
+Never use res.send() for errors — the frontend always calls .json() on the response.
 </interfaces>
 </context>
 
@@ -141,11 +142,12 @@ Pattern from CONVENTIONS.md (CRITICAL):
 </verification>
 
 <success_criteria>
+
 - Every AI tool's prompt builds without throwing for representative input
 - The error-response contract between frontend and backend is enforced by tests
 - The humanizer's plain-text error responses (CONCERNS.md WARNING) are eliminated
 - Future regressions in error shape are caught by `npm test`, not by users seeing "Request failed" with no detail
-</success_criteria>
+  </success_criteria>
 
 <output>
 Create `.planning/phases/01-audit-triage/01-B-SUMMARY.md` when done, summarizing: tests added, prompt keys covered, error-response sites fixed (with line numbers from CONCERNS.md before/after), and any quirks discovered when mocking `firebase-admin` / `firebase-functions`.

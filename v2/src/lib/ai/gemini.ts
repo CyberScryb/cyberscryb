@@ -30,7 +30,7 @@ async function sha256(message: string): Promise<string> {
   const msgBuffer = new TextEncoder().encode(message);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 function parseMaybeJSON(text: string, hasSchema: boolean) {
@@ -47,10 +47,7 @@ export const ai = {
    * Streaming generation — calls Cloud Function with stream:true. Falls back
    * to single-response mode if the backend returns a non-streamed payload.
    */
-  async generateStream(
-    opts: GenerateOptions<any>,
-    onChunk: (text: string) => void,
-  ): Promise<void> {
+  async generateStream(opts: GenerateOptions<any>, onChunk: (text: string) => void): Promise<void> {
     if (opts.abortSignal?.aborted) throw new Error('Aborted');
 
     const response = await fetch(API_ENDPOINT, {
@@ -69,14 +66,14 @@ export const ai = {
       let errBody = '';
       let retryable = false;
       let retryAfter = null;
-      
+
       try {
         const err = await response.json();
         errBody = err.error || '';
         retryable = err.retryable || false;
         retryAfter = err.retryAfter || null;
       } catch {}
-      
+
       // User-friendly error messages
       let userMessage = errBody;
       if (response.status === 429) {
@@ -92,7 +89,7 @@ export const ai = {
       } else if (!userMessage) {
         userMessage = `❌ Request failed (Error ${response.status}). Please try again.`;
       }
-      
+
       const error = new Error(userMessage) as any;
       error.retryable = retryable;
       error.retryAfter = retryAfter;
@@ -119,7 +116,9 @@ export const ai = {
 
     while (true) {
       if (opts.abortSignal?.aborted) {
-        try { reader.cancel(); } catch {}
+        try {
+          reader.cancel();
+        } catch {}
         throw new Error('Aborted');
       }
       const { value, done } = await reader.read();
@@ -132,8 +131,8 @@ export const ai = {
       for (const evt of events) {
         const dataLines = evt
           .split('\n')
-          .filter((l) => l.startsWith('data:'))
-          .map((l) => l.replace(/^data:\s?/, ''));
+          .filter(l => l.startsWith('data:'))
+          .map(l => l.replace(/^data:\s?/, ''));
         if (dataLines.length) {
           const joined = dataLines.join('');
           if (joined && joined !== '[DONE]') {
@@ -168,7 +167,7 @@ export const ai = {
     if (opts.abortSignal?.aborted) throw new Error('Aborted');
 
     const cacheKey = await sha256(
-      opts.model + opts.prompt + (opts.schema ? JSON.stringify(opts.schema) : ''),
+      opts.model + opts.prompt + (opts.schema ? JSON.stringify(opts.schema) : '')
     );
     const cached = sessionStorage.getItem('ai:' + cacheKey);
     if (cached !== null) {
@@ -191,14 +190,14 @@ export const ai = {
       let errBody = '';
       let retryable = false;
       let retryAfter = null;
-      
+
       try {
         const err = await response.json();
         errBody = err.error || '';
         retryable = err.retryable || false;
         retryAfter = err.retryAfter || null;
       } catch {}
-      
+
       const errorMessage = errBody || `AI request failed: HTTP ${response.status}`;
       const error = new Error(errorMessage) as any;
       error.retryable = retryable;

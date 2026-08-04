@@ -36,7 +36,7 @@ for (const f of files) {
       path.join('public', rel.slice(1), 'index.html'),
       path.join('public', rel.slice(1)),
     ];
-    if (!cands.some((c) => fs.existsSync(c))) {
+    if (!cands.some(c => fs.existsSync(c))) {
       if (!missing.has(href)) missing.set(href, []);
       if (missing.get(href).length < 2) missing.get(href).push(f);
     }

@@ -1,7 +1,7 @@
 ---
 plan_id: 01-E
 phase: 1
-title: "Lighthouse audit on top 10 pages + cross-browser AI tool verification + ship critical fixes"
+title: 'Lighthouse audit on top 10 pages + cross-browser AI tool verification + ship critical fixes'
 wave: 2
 depends_on: [01-A, 01-D]
 files_modified:
@@ -15,13 +15,13 @@ files_modified:
 autonomous: false
 requirements: [AUDIT-04, AUDIT-05]
 must_haves:
-  - "LIGHTHOUSE-REPORT.md exists and lists Lighthouse scores (Performance, Accessibility, Best Practices, SEO) for the top 10 pages: homepage, tools.html, summarizer, hardship-letter, humanizer, email-writer, json-csv-converter, password-checker, about.html, /guides/ index"
-  - "Every score below 90 in Performance, Accessibility, or SEO is either fixed in this plan OR explicitly deferred to a named later phase with reason"
-  - "scripts/lighthouse-audit.sh re-runs the audit against the deployed site and writes the report"
-  - "tools.html GA4 loader is deferred matching the index.html pattern (closes CONCERNS.md INFO)"
-  - "Lighthouse-flagged accessibility issues are fixed in this plan if the fix is non-disruptive (alt text, button labels, contrast tweaks via CSS variables already in place)"
-  - "Phase 1 success criterion #3 (top 10 pages score >=90 on Lighthouse perf/a11y/SEO) is satisfied OR every gap has a tracked disposition"
-  - "CROSSBROWSER-REPORT.md exists and documents end-to-end functional verification of the top 5 AI tools (summarizer, hardship-letter, humanizer, email-writer, paraphraser) in Chrome, Safari, Firefox, and mobile (375px viewport) — covers AUDIT-05"
+  - 'LIGHTHOUSE-REPORT.md exists and lists Lighthouse scores (Performance, Accessibility, Best Practices, SEO) for the top 10 pages: homepage, tools.html, summarizer, hardship-letter, humanizer, email-writer, json-csv-converter, password-checker, about.html, /guides/ index'
+  - 'Every score below 90 in Performance, Accessibility, or SEO is either fixed in this plan OR explicitly deferred to a named later phase with reason'
+  - 'scripts/lighthouse-audit.sh re-runs the audit against the deployed site and writes the report'
+  - 'tools.html GA4 loader is deferred matching the index.html pattern (closes CONCERNS.md INFO)'
+  - 'Lighthouse-flagged accessibility issues are fixed in this plan if the fix is non-disruptive (alt text, button labels, contrast tweaks via CSS variables already in place)'
+  - 'Phase 1 success criterion #3 (top 10 pages score >=90 on Lighthouse perf/a11y/SEO) is satisfied OR every gap has a tracked disposition'
+  - 'CROSSBROWSER-REPORT.md exists and documents end-to-end functional verification of the top 5 AI tools (summarizer, hardship-letter, humanizer, email-writer, paraphraser) in Chrome, Safari, Firefox, and mobile (375px viewport) — covers AUDIT-05'
 ---
 
 <objective>
@@ -46,6 +46,7 @@ Output: A LIGHTHOUSE-REPORT.md with per-page scores and per-issue dispositions, 
 @CLAUDE.md
 
 # Files frequently flagged by Lighthouse on this site (per CONCERNS.md)
+
 @public/tools.html
 @public/index.html
 @public/css/style.css
@@ -64,15 +65,16 @@ Top 10 pages to audit (chosen by traffic + strategic importance):
   10. https://cyberscryb.com/guides/                    (guides index)
 
 Lighthouse runner: npx -y @lhci/cli@latest collect, or
-  npx -y lighthouse <url> --output=json --output=html --chrome-flags="--headless"
+npx -y lighthouse <url> --output=json --output=html --chrome-flags="--headless"
 (if Chrome is available in the runner environment)
 
 If headless Chrome is not available in this environment, the script
 must fall back to using PageSpeed Insights API:
-  https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=<URL>&category=performance&category=accessibility&category=seo
+https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=<URL>&category=performance&category=accessibility&category=seo
 This returns lighthouseResult.categories.{performance,accessibility,seo,best-practices}.score (0-1).
 
 Known issues this audit will likely flag (from CONCERNS.md):
+
 - tools.html GA4 not deferred (loads sync at lines 36-42 — perf hit)
 - og:image is SVG (Best Practices warning on most platforms)
 - Same AdSense slot ID across all pages (no Lighthouse impact but recorded)
@@ -179,18 +181,13 @@ that Nate runs after pushing main (GitHub Actions auto-deploys).
 ```
 
 Nate runs the verification, fills in the table, and types "approved" to resume. If any cell fails AND the fix is cheap, add it to LIGHTHOUSE-REPORT.md disposition as fix-in-task-5.2 and re-loop. If the fix is expensive, defer to a named later phase (e.g., Phase 2 UX polish for mobile layout issues, Phase 3 AI quality for cross-browser streaming behavior).</action>
-  <verify>
-    <automated>test -f /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md && grep -c "| summarizer" /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md</automated>
-  </verify>
-  <acceptance_criteria>
-    - source assertion: file .planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md exists
-    - source assertion: CROSSBROWSER-REPORT.md has a table row for each of: summarizer, hardship-letter, humanizer, email-writer, paraphraser
-    - source assertion: CROSSBROWSER-REPORT.md has 4 verification columns: Chrome, Safari, Firefox, Mobile 375px
-    - behavior assertion: after Nate fills in the table, every cell is PASS or has a documented FAIL with a follow-up disposition
-    - source assertion: CROSSBROWSER-REPORT.md includes an "Approved" block with Nate's name and date once verification is complete
-  </acceptance_criteria>
-  <verification>Read the file. Confirm the table exists and every cell either says PASS or has a documented FAIL with a disposition (fix-now or defer-to-phase-N).</verification>
-  <resume-signal>Type "approved" when Nate has filled in the table and recorded outcomes for all 20 cells.</resume-signal>
+<verify>
+<automated>test -f /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md && grep -c "| summarizer" /home/user/cyberscryb/.planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md</automated>
+</verify>
+<acceptance_criteria> - source assertion: file .planning/phases/01-audit-triage/CROSSBROWSER-REPORT.md exists - source assertion: CROSSBROWSER-REPORT.md has a table row for each of: summarizer, hardship-letter, humanizer, email-writer, paraphraser - source assertion: CROSSBROWSER-REPORT.md has 4 verification columns: Chrome, Safari, Firefox, Mobile 375px - behavior assertion: after Nate fills in the table, every cell is PASS or has a documented FAIL with a follow-up disposition - source assertion: CROSSBROWSER-REPORT.md includes an "Approved" block with Nate's name and date once verification is complete
+</acceptance_criteria>
+<verification>Read the file. Confirm the table exists and every cell either says PASS or has a documented FAIL with a disposition (fix-now or defer-to-phase-N).</verification>
+<resume-signal>Type "approved" when Nate has filled in the table and recorded outcomes for all 20 cells.</resume-signal>
 </task>
 
 </tasks>
@@ -204,11 +201,12 @@ Nate runs the verification, fills in the table, and types "approved" to resume. 
 </verification>
 
 <success_criteria>
+
 - The site has measurable baseline Lighthouse scores for the first time (no more guessing)
 - Cheap fixes are shipped immediately
 - Expensive fixes (SVG og:image PNG conversion, blocking script audits, image optimization) are explicitly deferred with phase assignments
 - scripts/lighthouse-audit.sh is reusable as a smoke test before any future release
-</success_criteria>
+  </success_criteria>
 
 <output>
 Create .planning/phases/01-audit-triage/01-E-SUMMARY.md when done, summarizing: baseline scores per page (before fixes), fixes applied, expected impact, deferred issues with phase assignments, and any surprises Lighthouse flagged that weren't in CONCERNS.md.

@@ -1,7 +1,7 @@
 ---
 plan_id: 01-D
 phase: 1
-title: "Apply inventory fixes: build budget-planner frontend, remove humanizer/index_v1.html, wire/remove ai-writing-suite, standardize tool counts, add distill to sitemap, fix tools.html canonical"
+title: 'Apply inventory fixes: build budget-planner frontend, remove humanizer/index_v1.html, wire/remove ai-writing-suite, standardize tool counts, add distill to sitemap, fix tools.html canonical'
 wave: 2
 depends_on: [01-A]
 files_modified:
@@ -16,14 +16,14 @@ autonomous: false
 requirements: [AUDIT-03, AUDIT-06]
 must_haves:
   - "public/tools/budget-planner/index.html and public/tools/budget-planner/budget-planner.js exist, follow the summarizer template, and CSAITool.init({ toolId: 'budget-planner', ... }) is wired"
-  - "budget-planner is listed in tools.html (Life Tools section), in public/sitemap.xml, and as an option in the public/index.html homepage dropdown"
+  - 'budget-planner is listed in tools.html (Life Tools section), in public/sitemap.xml, and as an option in the public/index.html homepage dropdown'
   - "public/tools/humanizer/index_v1.html is deleted from the repo OR its triage disposition in AUDIT-INVENTORY.md is explicitly 'keep-as-documented-exception' with a comment in the file explaining why"
-  - "ai-writing-suite is resolved per AUDIT-INVENTORY.md triage decision (either fully wired into tools.html + sitemap.xml + dropdown, OR removed from public/tools/)"
-  - "/distill/ is in public/sitemap.xml"
-  - "public/tools.html canonical link points to https://cyberscryb.com/tools (no .html suffix)"
-  - "Tool count claims in public/index.html and public/tools.html match the actual count derived from the inventory; index.html hero/trust-bar/stat-counter and tools.html meta/og/JSON-LD numberOfItems all show the same number"
-  - "Running scripts/audit-inventory.js exits 0 (no orphans remain except documented exceptions)"
-  - "Existing tool pages flagged by AUDIT-INVENTORY.md as missing nav/JSON-LD/breadcrumbs are swept and fixed (or documented as structural exceptions / deferred to Phase 2). AUDIT-INVENTORY.md gets a ## Existing-Page Sweep section listing every page touched. Closes Phase 1 success criterion #4 for ALL tool pages, not just budget-planner."
+  - 'ai-writing-suite is resolved per AUDIT-INVENTORY.md triage decision (either fully wired into tools.html + sitemap.xml + dropdown, OR removed from public/tools/)'
+  - '/distill/ is in public/sitemap.xml'
+  - 'public/tools.html canonical link points to https://cyberscryb.com/tools (no .html suffix)'
+  - 'Tool count claims in public/index.html and public/tools.html match the actual count derived from the inventory; index.html hero/trust-bar/stat-counter and tools.html meta/og/JSON-LD numberOfItems all show the same number'
+  - 'Running scripts/audit-inventory.js exits 0 (no orphans remain except documented exceptions)'
+  - 'Existing tool pages flagged by AUDIT-INVENTORY.md as missing nav/JSON-LD/breadcrumbs are swept and fixed (or documented as structural exceptions / deferred to Phase 2). AUDIT-INVENTORY.md gets a ## Existing-Page Sweep section listing every page touched. Closes Phase 1 success criterion #4 for ALL tool pages, not just budget-planner.'
 ---
 
 <objective>
@@ -49,6 +49,7 @@ Output: A working budget-planner tool page, an updated tools.html / index.html /
 @CLAUDE.md
 
 # Template + reference files
+
 @public/tools/summarizer/index.html
 @public/tools/summarizer/summarizer.js
 @public/tools/hardship-letter/index.html
@@ -64,27 +65,27 @@ It expects body { tool: 'budget-planner', input: <user financial situation>, par
 params.situation is free-text; sanitizeParams will slice(0, 300).
 
 CSAITool.init contract (from public/tools/shared/ai-tool.js):
-  window.CSAITool.init({
-    toolId: 'budget-planner',
-    emptyMessage: 'Please describe your situation.',
-    collectInput: () => document.getElementById('tool-input').value.trim(),
-    collectParams: () => ({
-      situation: document.getElementById('situation-select')?.value || ''
-    }),
-    onStats: (text) => { /* optional word counter etc */ }
-  });
+window.CSAITool.init({
+toolId: 'budget-planner',
+emptyMessage: 'Please describe your situation.',
+collectInput: () => document.getElementById('tool-input').value.trim(),
+collectParams: () => ({
+situation: document.getElementById('situation-select')?.value || ''
+}),
+onStats: (text) => { /* optional word counter etc */ }
+});
 
 Required DOM IDs (from CONVENTIONS.md "The CSAITool.init Pattern"):
-  generate-btn, output-text, loading-indicator, copy-btn,
-  email-gate, gate-email-form, gate-email-input, gate-status,
-  gate-submit-btn, upgrade-tiers, usage-counter
+generate-btn, output-text, loading-indicator, copy-btn,
+email-gate, gate-email-form, gate-email-input, gate-status,
+gate-submit-btn, upgrade-tiers, usage-counter
 
 Nav menu links (CONVENTIONS.md exact order — Blog uses absolute /blog/):
-  Home -> Tools -> Guides -> About -> Blog (/blog/)
+Home -> Tools -> Guides -> About -> Blog (/blog/)
 
 Script load order at end of body:
-  ../../js/script.js, ../shared/ai-tool.js, ./budget-planner.js,
-  ../shared/affiliate-panel.js, /js/cs-pro-widget.js?v=2 (defer)
+../../js/script.js, ../shared/ai-tool.js, ./budget-planner.js,
+../shared/affiliate-panel.js, /js/cs-pro-widget.js?v=2 (defer)
 
 Schema.org JSON-LD: SoftwareApplication, price "0", priceCurrency "USD",
 applicationCategory "FinanceApplication".
@@ -197,13 +198,14 @@ applicationCategory "FinanceApplication".
 </verification>
 
 <success_criteria>
+
 - Phase 1 success criterion #5 ("no orphan tools or orphan prompts") is verifiable by running scripts/audit-inventory.js
 - Phase 1 success criterion #4 ("every tool page has working nav, footer, JSON-LD, breadcrumbs") is closed for the new budget-planner page AND for every existing tool page the inventory flagged as missing those elements (sweep applied in task 4.4)
 - One new Life Tool ships and hits cyberscryb.com after the next push to main
 - Tool count inconsistency (CONCERNS.md INFO) is resolved
 - Distill is now indexable by Google (CONCERNS.md INFO resolved)
 - tools.html canonical SEO issue (CONCERNS.md INFO resolved)
-</success_criteria>
+  </success_criteria>
 
 <output>
 Create .planning/phases/01-audit-triage/01-D-SUMMARY.md when done, summarizing: final tool count N chosen, files deleted vs kept, ai-writing-suite resolution path taken, any "41" replacements that were ambiguous and skipped (surfaced for human review), and a confirmation that scripts/audit-inventory.js now exits 0.

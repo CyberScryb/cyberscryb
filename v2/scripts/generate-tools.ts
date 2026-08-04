@@ -8,7 +8,9 @@ function write(filename: string, content: string) {
   fs.writeFileSync(path.join(toolsDir, filename), content);
 }
 
-write('CryptoTools.tsx', `
+write(
+  'CryptoTools.tsx',
+  `
 import React, { useState } from 'react';
 import { WorkspaceShell, SplitPane, CodeEditor, ActionButton } from '../components/WorkspaceShell';
 import { ShieldCheck, Hash, Key, Lock, Fingerprint } from 'lucide-react';
@@ -69,7 +71,8 @@ export const CryptoTools = [
     }
   }
 ];
-`);
+`
+);
 // Generate similar files for WebTools, MediaTools, TextTools, DataTools...
 // Just adding them quickly so the script runs.
 // ... (I will expand this in subsequent commands to ensure accuracy and size)

@@ -1,4 +1,5 @@
 <!-- refreshed: 2026-05-20 -->
+
 # Architecture
 
 **Analysis Date:** 2026-05-20
@@ -55,22 +56,23 @@
 
 ## Component Responsibilities
 
-| Component | Responsibility | File |
-|-----------|----------------|------|
-| Firebase Hosting | Serve static assets, route /api/* to functions | `firebase.json` |
-| Cloud Functions | AI generation, email subscription, rate limiting | `functions/index.js` |
-| CSAITool (shared JS) | Email gate, usage tracking, typewriter output, API calls | `public/tools/shared/ai-tool.js` |
-| email-capture.js | Passive email bar injected into guide/tool pages | `public/tools/shared/email-capture.js` |
-| affiliate-panel.js | Contextual affiliate recommendations per tool | `public/tools/shared/affiliate-panel.js` |
-| script.js | Global nav, GA4 events, Cloudflare chatbot loader, CJ Affiliate | `public/js/script.js` |
-| generate-pages.js | Node script that generates all guide HTML from page data | `generate-pages.js` |
-| GitHub Actions | CI/CD: deploy hosting + functions on push to main | `.github/workflows/deploy.yml` |
+| Component            | Responsibility                                                  | File                                     |
+| -------------------- | --------------------------------------------------------------- | ---------------------------------------- |
+| Firebase Hosting     | Serve static assets, route /api/* to functions                  | `firebase.json`                          |
+| Cloud Functions      | AI generation, email subscription, rate limiting                | `functions/index.js`                     |
+| CSAITool (shared JS) | Email gate, usage tracking, typewriter output, API calls        | `public/tools/shared/ai-tool.js`         |
+| email-capture.js     | Passive email bar injected into guide/tool pages                | `public/tools/shared/email-capture.js`   |
+| affiliate-panel.js   | Contextual affiliate recommendations per tool                   | `public/tools/shared/affiliate-panel.js` |
+| script.js            | Global nav, GA4 events, Cloudflare chatbot loader, CJ Affiliate | `public/js/script.js`                    |
+| generate-pages.js    | Node script that generates all guide HTML from page data        | `generate-pages.js`                      |
+| GitHub Actions       | CI/CD: deploy hosting + functions on push to main               | `.github/workflows/deploy.yml`           |
 
 ## Pattern Overview
 
 **Overall:** Server-rendered static site with serverless backend functions
 
 **Key Characteristics:**
+
 - No build step, no bundler, no framework — vanilla HTML/CSS/JS deployed directly
 - All AI processing happens server-side in Cloud Functions; browser only POSTs inputs and renders results
 - Frontend consumes a single generic endpoint (`/api/ai-generate`) for all 14 AI tools, differentiated by a `tool` param
@@ -80,6 +82,7 @@
 ## Layers
 
 **Static Hosting Layer:**
+
 - Purpose: Serve all HTML, CSS, JS, SVG directly to browser
 - Location: `public/`
 - Contains: Tool pages, blog posts, guides, global CSS, global JS
@@ -87,6 +90,7 @@
 - Used by: End users via browser
 
 **Shared Frontend Layer:**
+
 - Purpose: Common behavior reused across all AI tool pages
 - Location: `public/tools/shared/`
 - Contains: `ai-tool.js` (email gate + API caller), `email-capture.js` (subscription bar), `affiliate-panel.js` (contextual recommendations), `ai-tool.css`, `email-capture.css`
@@ -94,6 +98,7 @@
 - Used by: All AI tool pages via `<script src="../shared/ai-tool.js">`
 
 **Cloud Functions Layer:**
+
 - Purpose: Secure AI calls, email capture, rate limiting
 - Location: `functions/index.js`
 - Contains: 4 exported HTTP functions, `AI_PROMPTS` object with 14 tool configs, in-memory rate limiter
@@ -101,6 +106,7 @@
 - Used by: Frontend via `/api/*` rewrites in `firebase.json`
 
 **Data Layer:**
+
 - Purpose: Persist subscriber emails
 - Location: Firebase Firestore, collection `subscribers`
 - Used by: `subscribeEmail` Cloud Function only
@@ -144,6 +150,7 @@
 5. Commit and push to trigger deploy
 
 **State Management:**
+
 - Per-user AI usage: `localStorage` keyed by `cs_{toolId}_usage` (date + count)
 - Subscription state: cookie `cs_subscribed=1` (365 days) + `localStorage('cs_email_subscribed')`
 - Free trial tracking: `localStorage('cs_free_trial_used')` (one free full result before gate)
@@ -152,16 +159,19 @@
 ## Key Abstractions
 
 **CSAITool:**
+
 - Purpose: Unified email gate + API caller reused by all 14 AI tool pages
 - Examples: `public/tools/summarizer/summarizer.js`, `public/tools/email-writer/email-writer.js`
 - Pattern: Each tool calls `window.CSAITool.init({ toolId, collectInput, collectParams, onStats })` with tool-specific config
 
 **AI_PROMPTS dispatch table:**
+
 - Purpose: Add a new AI tool without touching routing — just add a key to the object
 - Location: `functions/index.js` lines 228-548
 - Pattern: `{ toolId: { model: '...', build: (input, params) => promptString } }`
 
 **generate-pages.js data-driven generation:**
+
 - Purpose: 21 SEO guides generated from a `pages[]` data array with a single HTML template function
 - Pattern: Each page object has `slug`, `title`, `h1`, `sections[]`, `faqs[]`, `citations[]`
 - Output: `public/guides/{slug}.html` with full JSON-LD (Article + FAQPage + SoftwareApplication)
@@ -169,20 +179,24 @@
 ## Entry Points
 
 **Homepage:**
+
 - Location: `public/index.html`
 - Uses absolute paths for all assets (`/css/style.css`, `/js/script.js`, `/favicon.svg`)
 
 **Tool Pages:**
+
 - Location: `public/tools/{tool-name}/index.html`
 - Use relative paths 2 levels up: `../../css/style.css`, `../../js/script.js`
 - Load shared JS: `../shared/ai-tool.js`, `../shared/affiliate-panel.js`
 - Load tool-specific JS last: `./{tool-name}.js` or `./script.js`
 
 **Cloud Functions:**
+
 - Location: `functions/index.js`
 - Triggered by: HTTP rewrites in `firebase.json`
 
 **CI/CD:**
+
 - Location: `.github/workflows/deploy.yml`
 - Triggers: push to `main` branch
 - Steps: checkout → Node 20 → `npm install` in `./functions` → `firebase deploy --only hosting,functions`
@@ -215,6 +229,7 @@
 **Strategy:** Functions return JSON error objects with HTTP status codes. Frontend catches via `try/catch` and maps status codes to user-friendly messages.
 
 **Patterns:**
+
 - `429` → "Busy right now — try again in a minute."
 - `400` → "Please check your input."
 - `500+` → "Something went wrong, try again."
@@ -230,4 +245,4 @@
 
 ---
 
-*Architecture analysis: 2026-05-20*
+_Architecture analysis: 2026-05-20_

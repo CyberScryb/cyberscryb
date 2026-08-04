@@ -1,16 +1,17 @@
 # CyberScryb.com — Rebuild Phase 0 Baseline Audit
-*Run 2026-07-21, against `main` @ 17ee583, live cyberscryb.com. Per `Rebuild.CLAUDE.md`: this is the mandatory pre-Phase-1 gate. No design/code changes made — findings only.*
+
+_Run 2026-07-21, against `main` @ 17ee583, live cyberscryb.com. Per `Rebuild.CLAUDE.md`: this is the mandatory pre-Phase-1 gate. No design/code changes made — findings only._
 
 ## P0 items from the brief — status
 
-| # | Brief's ask | Status |
-|---|---|---|
-| 1 | Verify/fix `/pro/` pricing + Stripe discrepancy | **Already fixed, verified clean.** See §1. |
-| 2 | Fix `tool_use`/`tool_used` analytics split | **Confirmed real, root-caused.** Not yet fixed. See §2. |
-| 3 | One tool count, one price, templated | **Price: clean. Tool count: still 3-way split.** See §3. |
-| 4 | One canonical nav component | **Largely clean** (Products link fully removed, Curator Prime present broadly) — not exhaustively verified page-by-page. See §4. |
-| 5 | Scope/remove "data never leaves browser" claim per tool | **One confirmed violation** (about.html), one to verify (voice-writer). See §5. |
-| 6 | Full technical + search baseline | **Technical: done. Search (Ahrefs/Semrush): blocked this session.** See §6, §7. |
+| #   | Brief's ask                                             | Status                                                                                                                           |
+| --- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Verify/fix `/pro/` pricing + Stripe discrepancy         | **Already fixed, verified clean.** See §1.                                                                                       |
+| 2   | Fix `tool_use`/`tool_used` analytics split              | **Confirmed real, root-caused.** Not yet fixed. See §2.                                                                          |
+| 3   | One tool count, one price, templated                    | **Price: clean. Tool count: still 3-way split.** See §3.                                                                         |
+| 4   | One canonical nav component                             | **Largely clean** (Products link fully removed, Curator Prime present broadly) — not exhaustively verified page-by-page. See §4. |
+| 5   | Scope/remove "data never leaves browser" claim per tool | **One confirmed violation** (about.html), one to verify (voice-writer). See §5.                                                  |
+| 6   | Full technical + search baseline                        | **Technical: done. Search (Ahrefs/Semrush): blocked this session.** See §6, §7.                                                  |
 
 ---
 
@@ -50,8 +51,8 @@ Recommend: pick "51" (or round to "50+" if you don't want to re-template every t
 
 ## 5. "Never leaves your browser" / privacy-first claims
 
-- **Confirmed violation:** `about.html:157` — *"Everything runs client-side in your browser. I do not see your inputs."* This is a blanket, page-wide claim on the About/trust page. It's false for every AI tool (Humanizer, Gig Auto-Pilot, AI Detector, hardship/appeal/custody generators, etc.) — those route through the Cloudflare Worker (`cloudflare-worker/worker.js`) to either Cloudflare Workers AI or Firebase Functions → Gemini, which is inherently server-side. This is the highest-visibility instance since About is a trust page, not a tool page.
-- **To verify, not confirmed:** `voice-writer/index.html:450` says *"Privacy-first — nothing is stored"* — narrower claim than "never leaves your browser" (not-stored ≠ not-transmitted), so it may be technically accurate depending on whether voice-writer's backend persists anything. Didn't read voice-writer's JS to confirm; flag for Phase 1.
+- **Confirmed violation:** `about.html:157` — _"Everything runs client-side in your browser. I do not see your inputs."_ This is a blanket, page-wide claim on the About/trust page. It's false for every AI tool (Humanizer, Gig Auto-Pilot, AI Detector, hardship/appeal/custody generators, etc.) — those route through the Cloudflare Worker (`cloudflare-worker/worker.js`) to either Cloudflare Workers AI or Firebase Functions → Gemini, which is inherently server-side. This is the highest-visibility instance since About is a trust page, not a tool page.
+- **To verify, not confirmed:** `voice-writer/index.html:450` says _"Privacy-first — nothing is stored"_ — narrower claim than "never leaves your browser" (not-stored ≠ not-transmitted), so it may be technically accurate depending on whether voice-writer's backend persists anything. Didn't read voice-writer's JS to confirm; flag for Phase 1.
 - The dev-tool pages that legitimately run 100% client-side (password-checker, word-counter, url-encoder, uuid-generator, etc. — confirmed no server call in their JS) are fine keeping the claim.
 - `js/script.js`'s shared footer ("Free, privacy-first developer tools.") templates onto 51 pages including AI-tool-adjacent static pages — worth a one-word gut check on whether "developer tools" framing undersells the Life Tools / AI writing side, but that's a positioning call for Phase 1, not a factual-accuracy issue like the above.
 
@@ -62,14 +63,16 @@ Recommend: pick "51" (or round to "50+" if you don't want to re-template every t
 **Canonical tags:** checked every HTML file in `public/` for a canonical tag pointing at `https://cyberscryb.com`. 100% clean — the only file with no canonical is `google0a31a4bf6dd0cebf.html` (Google Search Console site-verification file, correctly has none).
 
 **robots.txt — the finding that matters most for your stated 2026 strategy:**
+
 ```
 Content-Signal: search=yes,ai-train=no,use=reference
 Disallow: / for Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot,
           CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot, meta-externalagent
 ```
+
 This is Cloudflare's managed "AI Crawl Control," not something in this repo — it's set at the Cloudflare dashboard level. **It blocks ClaudeBot and GPTBot from crawling the site at all.** Your own `CLAUDE.md` cites "ChatGPT/Claude cite Reddit at 7% conversion vs Google's 5%" as part of the growth strategy, and the site already ships an `llms.txt` clearly intending to be AI-discoverable — but the crawlers that would need to fetch pages to cite them in ChatGPT/Claude answers are currently blocked at the edge. This also explains a 403 I hit earlier this session using an automated fetch tool against `/pro/` (plain curl with a browser UA got 200 fine — it's fingerprint/ASN-based bot detection, not a UA string check). **This needs your explicit call, not mine** — it's a legitimate deliberate choice for a lot of site owners (stops your content training competitors' models), but it directly conflicts with citing-engine visibility if that's a channel you want. Search indexing itself (`search=yes`) is unaffected either way.
 
-**Core Web Vitals / Lighthouse accessibility:** PageSpeed Insights keyless API is rate-limited in this environment (429 on every request) — same wall a prior session hit. Last known number: **mobile Performance = 45**, captured *before* the `defer` fix that shipped 2026-06-27 (script.js was render-blocking on 27 pages; now deferred). No fresh score exists to confirm the lift. A rough in-browser proxy on the homepage only: TTFB 390ms, DOMContentLoaded 574ms, load 745ms, 8KB transfer — fast, but this is a single data-center fetch, not 75th-percentile real-user Chrome data, so treat it as a sanity check, not a CWV number. **Need either a PSI API key or you running Lighthouse locally to get real per-template numbers before Phase 1 commits to a performance floor.**
+**Core Web Vitals / Lighthouse accessibility:** PageSpeed Insights keyless API is rate-limited in this environment (429 on every request) — same wall a prior session hit. Last known number: **mobile Performance = 45**, captured _before_ the `defer` fix that shipped 2026-06-27 (script.js was render-blocking on 27 pages; now deferred). No fresh score exists to confirm the lift. A rough in-browser proxy on the homepage only: TTFB 390ms, DOMContentLoaded 574ms, load 745ms, 8KB transfer — fast, but this is a single data-center fetch, not 75th-percentile real-user Chrome data, so treat it as a sanity check, not a CWV number. **Need either a PSI API key or you running Lighthouse locally to get real per-template numbers before Phase 1 commits to a performance floor.**
 
 **Accessibility labeling:** the 16 pages using the shared AI-tool template (hardship-letter, appeal-letter, custody-document, caregiver-report, bio-generator, email-writer, product-description, paraphraser, meta-description, resume-bullets, summarizer, tweet-generator, ai-detector, voice-writer, budget-planner, code-explainer) all have proper `<label>`/`aria-labelledby` wiring on their main input — that part's clean. The 2026-06-27 session hand-fixed 3 of the ~20 standalone dev-tool pages (password-checker, json-csv-converter, base64-tool) and explicitly noted the rest as a follow-up ("grep `placeholder=` without a paired `<label>` across all 51 tools") that never happened. No shared input-ID convention across those dev tools, so each needs individual review — budget for it in Phase 1's accessibility pass. Also: homepage's one `<img>` (`mascot-icon.webp`) has no `alt` text.
 
@@ -78,6 +81,7 @@ This is Cloudflare's managed "AI Crawl Control," not something in this repo — 
 ## 7. Search baseline — blocked this session, need your action
 
 Both connected data sources refused to serve data:
+
 - **Semrush:** "active subscription, but does not have enough API units." → semrush.com/mcp-access
 - **Ahrefs:** every endpoint (domain rating, site metrics, top pages, even the GSC bridge) returned `"Insufficient plan"` — the connected plan tier doesn't cover Site Explorer API access.
 
@@ -85,18 +89,20 @@ Per the brief's own fallback: **please export directly from GSC** (or top up/upg
 
 ## 8. Brand voice guide — doesn't actually exist yet
 
-Searched Notion per the brief's instruction. Found a page literally titled "Tone & Voice" under Design System → Startup in a Box — it's an **unfilled Notion template**: *"This is sample content that you can replace with your own... At Acme Corp, we always speak in a way that reflects our brand..."* Nobody has written CyberScryb's actual voice guide. Phase 1 will need to either reverse-engineer the voice that's already working in the shipped copy (plain-English, confident, no-fluff — e.g. pro.html's FAQ answers, about.html's founder story) or you write one from scratch. Don't let Phase 1 stall waiting for a document that isn't coming.
+Searched Notion per the brief's instruction. Found a page literally titled "Tone & Voice" under Design System → Startup in a Box — it's an **unfilled Notion template**: _"This is sample content that you can replace with your own... At Acme Corp, we always speak in a way that reflects our brand..."_ Nobody has written CyberScryb's actual voice guide. Phase 1 will need to either reverse-engineer the voice that's already working in the shipped copy (plain-English, confident, no-fluff — e.g. pro.html's FAQ answers, about.html's founder story) or you write one from scratch. Don't let Phase 1 stall waiting for a document that isn't coming.
 
 ## 9. One thing outside the brief's checklist, flagged because your own CLAUDE.md calls this pattern a failure
 
-`privacy-check.html` — orphan page, legacy styling, not in sitemap, unlinked — has been "OPEN DECISION: promote vs. noindex/delete" across at least three prior sessions (2026-06-01, referenced again 2026-06-27) without resolution. Your CLAUDE.md: *"If the same issue appears in two consecutive sessions without being resolved, that's a failure."* This is now three. **Pick one now:** noindex+leave it, or delete it, or tell me to promote it into the real IA. I didn't touch it — genuinely your call, not a technical question — but it shouldn't ride into Phase 1 unresolved a fourth time.
+`privacy-check.html` — orphan page, legacy styling, not in sitemap, unlinked — has been "OPEN DECISION: promote vs. noindex/delete" across at least three prior sessions (2026-06-01, referenced again 2026-06-27) without resolution. Your CLAUDE.md: _"If the same issue appears in two consecutive sessions without being resolved, that's a failure."_ This is now three. **Pick one now:** noindex+leave it, or delete it, or tell me to promote it into the real IA. I didn't touch it — genuinely your call, not a technical question — but it shouldn't ride into Phase 1 unresolved a fourth time.
 
 ---
 
 ## What I did NOT do (by design)
+
 No design tokens, no code changes, no deploys, no branch created — this is the audit only, per the brief's explicit gate. `Rebuild.CLAUDE.md` stays as its own file; I didn't overwrite `CLAUDE.md` since it holds operational memory (IDs, deploy protocol, asset map) this brief doesn't cover — added a pointer instead so future sessions find both.
 
 ## Recommended immediate action items (cheap, don't need Phase 1 design work)
+
 1. Fix the `tool_use`/`tool_used` split (§2) — mechanical, ~14 line changes, unblocks trustworthy usage data before any "most popular" homepage decision.
 2. Decide the AI-crawler-blocking question (§6) — one Cloudflare dashboard toggle, but it's a strategy call only you can make.
 3. Fix `about.html`'s privacy claim (§5) — one sentence, real liability as written.

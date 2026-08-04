@@ -22,17 +22,14 @@ for (const file of walk(toolsDir)) {
   const orig = html;
 
   // textarea with id + placeholder, no aria-label
-  html = html.replace(
-    /<textarea([^>]*\bid=["']([^"']+)["'][^>]*)>/gi,
-    (full, attrs, id) => {
-      if (/aria-label\s*=/i.test(attrs) || /aria-labelledby\s*=/i.test(attrs)) return full;
-      if (new RegExp(`<label[^>]+for=["']${id}["']`, 'i').test(html)) return full;
-      const ph = (attrs.match(/placeholder=["']([^"']*)["']/i) || [])[1] || 'Text input';
-      const label = ph.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-      if (/aria-label/i.test(full)) return full;
-      return `<textarea${attrs} aria-label="${label}">`;
-    }
-  );
+  html = html.replace(/<textarea([^>]*\bid=["']([^"']+)["'][^>]*)>/gi, (full, attrs, id) => {
+    if (/aria-label\s*=/i.test(attrs) || /aria-labelledby\s*=/i.test(attrs)) return full;
+    if (new RegExp(`<label[^>]+for=["']${id}["']`, 'i').test(html)) return full;
+    const ph = (attrs.match(/placeholder=["']([^"']*)["']/i) || [])[1] || 'Text input';
+    const label = ph.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    if (/aria-label/i.test(full)) return full;
+    return `<textarea${attrs} aria-label="${label}">`;
+  });
 
   // input text/search with placeholder, no aria-label, no label
   html = html.replace(

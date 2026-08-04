@@ -90,13 +90,10 @@ if (!guides.includes('price-legend') && guides.includes('hero-title')) {
                 <li><span class="tag-sample">Free sample</span> AI tools (then limits)</li>
                 <li><span class="tag-pro">Pro</span> unlimited AI · $5/mo</li>
             </ul>`;
-  guides = guides.replace(
-    /(<\/div>\s*<\/section>)/,
-    (m, g1, offset) => {
-      // first hero close only — crude: replace first occurrence after Guides h1
-      return legend + '\n        ' + g1;
-    }
-  );
+  guides = guides.replace(/(<\/div>\s*<\/section>)/, (m, g1, offset) => {
+    // first hero close only — crude: replace first occurrence after Guides h1
+    return legend + '\n        ' + g1;
+  });
   // only first — redo carefully
 }
 

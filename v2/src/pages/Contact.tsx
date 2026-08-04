@@ -9,7 +9,7 @@ export default function Contact() {
     name: '',
     email: '',
     message: '',
-    type: 'support'
+    type: 'support',
   });
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,7 +31,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    
+
     setIsSubmitting(true);
     // Simulate API Submission
     setTimeout(() => {
@@ -41,11 +41,13 @@ export default function Contact() {
     }, 1200);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name as keyof typeof errors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
 
@@ -53,7 +55,10 @@ export default function Contact() {
     <>
       <Helmet>
         <title>Contact & Feedback Support | CyberScryb</title>
-        <meta name="description" content="Reach out to the CyberScryb developer for bug reports, tool suggestions, or enterprise privacy support queries." />
+        <meta
+          name="description"
+          content="Reach out to the CyberScryb developer for bug reports, tool suggestions, or enterprise privacy support queries."
+        />
       </Helmet>
 
       <section className="relative py-24 px-6 max-w-4xl mx-auto flex flex-col items-center">
@@ -68,7 +73,8 @@ export default function Contact() {
             Need help? Let's chat.
           </h1>
           <p className="text-lg text-muted max-w-xl mx-auto">
-            Drop a message for bug reports, feature suggestions, or general support queries. I review emails personally.
+            Drop a message for bug reports, feature suggestions, or general support queries. I
+            review emails personally.
           </p>
         </div>
 
@@ -79,7 +85,8 @@ export default function Contact() {
                 <CheckCircle className="w-12 h-12 text-[#00D17A] mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-2">Message Dispatched!</h3>
                 <p className="text-sm text-muted leading-relaxed max-w-sm mb-6">
-                  Thank you for reaching out. I'll read your feedback and get back to you within 24-48 hours.
+                  Thank you for reaching out. I'll read your feedback and get back to you within
+                  24-48 hours.
                 </p>
                 <Button variant="secondary" onClick={() => setIsSubmitted(false)}>
                   Send Another Message
@@ -92,7 +99,10 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Name */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+                    <label
+                      htmlFor="name"
+                      className="text-xs font-mono uppercase tracking-wider text-white font-bold"
+                    >
                       Your Name
                     </label>
                     <input
@@ -115,7 +125,10 @@ export default function Contact() {
 
                   {/* Type */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="type" className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+                    <label
+                      htmlFor="type"
+                      className="text-xs font-mono uppercase tracking-wider text-white font-bold"
+                    >
                       Topic
                     </label>
                     <select
@@ -135,7 +148,10 @@ export default function Contact() {
 
                 {/* Email */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+                  <label
+                    htmlFor="email"
+                    className="text-xs font-mono uppercase tracking-wider text-white font-bold"
+                  >
                     Email Address
                   </label>
                   <input
@@ -158,7 +174,10 @@ export default function Contact() {
 
                 {/* Message */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="message" className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+                  <label
+                    htmlFor="message"
+                    className="text-xs font-mono uppercase tracking-wider text-white font-bold"
+                  >
                     Your Message
                   </label>
                   <textarea

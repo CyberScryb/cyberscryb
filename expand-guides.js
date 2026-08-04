@@ -789,34 +789,34 @@ for (const [filename, newContent] of Object.entries(expansions)) {
     console.log(`SKIP (not found): ${filename}`);
     continue;
   }
-  
+
   let html = fs.readFileSync(filepath, 'utf-8');
-  
+
   // Find the articleBody div and replace its contents
   const startMarker = '<div class="guide-content" itemprop="articleBody">';
   const endMarker = '</div>\r\n\r\n            <div class="cta-box bottom">';
   const altEndMarker = '</div>\n\n            <div class="cta-box bottom">';
-  
+
   const startIdx = html.indexOf(startMarker);
   let endIdx = html.indexOf(endMarker, startIdx);
   let endLen = endMarker.length;
-  
+
   if (endIdx === -1) {
     endIdx = html.indexOf(altEndMarker, startIdx);
     endLen = altEndMarker.length;
   }
-  
+
   if (startIdx === -1 || endIdx === -1) {
     console.log(`SKIP (markers not found): ${filename}`);
     continue;
   }
-  
+
   // Replace the content between markers
   const before = html.substring(0, startIdx + startMarker.length);
   const after = html.substring(endIdx);
-  
+
   html = before + newContent + '\n            ' + after;
-  
+
   fs.writeFileSync(filepath, html, 'utf-8');
   count++;
   console.log(`EXPANDED: ${filename}`);

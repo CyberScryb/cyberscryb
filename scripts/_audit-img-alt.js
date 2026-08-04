@@ -28,4 +28,4 @@ for (const f of walk('public')) {
   }
 }
 console.log({ noAlt, emptyAlt });
-samples.forEach((s) => console.log(s));
+samples.forEach(s => console.log(s));

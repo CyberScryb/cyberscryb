@@ -3,7 +3,7 @@
  * Generates AI-citable pages optimized for Generative Engine Optimization (GEO).
  * Each page includes: TL;DR summary, JSON-LD (Article + FAQ + HowTo + SoftwareApplication),
  * E-E-A-T author signals, entity-rich content, and affiliate CTAs.
- * 
+ *
  * Usage: node generate-pages.js
  */
 
@@ -13,514 +13,1143 @@ const path = require('path');
 // Strip HTML tags and decode entities for plain-text JSON-LD fields — script content
 // isn't HTML-parsed, so a raw "&lt;"/"&mdash;" would show up literally instead of the intended character.
 const HTML_ENTITIES = {
-    '&lt;': '<', '&gt;': '>', '&amp;': '&', '&quot;': '"', '&#39;': "'", '&apos;': "'",
-    '&mdash;': '—', '&ndash;': '–', '&rarr;': '→', '&harr;': '↔'
+  '&lt;': '<',
+  '&gt;': '>',
+  '&amp;': '&',
+  '&quot;': '"',
+  '&#39;': "'",
+  '&apos;': "'",
+  '&mdash;': '—',
+  '&ndash;': '–',
+  '&rarr;': '→',
+  '&harr;': '↔',
 };
 function toPlainText(html) {
-    if (typeof html !== 'string') return '';
-    return html
-        .replace(/<[^>]*>/g, '')
-        .replace(/&lt;|&gt;|&amp;|&quot;|&#39;|&apos;|&mdash;|&ndash;|&rarr;|&harr;/g, m => HTML_ENTITIES[m]);
+  if (typeof html !== 'string') return '';
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(
+      /&lt;|&gt;|&amp;|&quot;|&#39;|&apos;|&mdash;|&ndash;|&rarr;|&harr;/g,
+      m => HTML_ENTITIES[m]
+    );
 }
 
 // ─── Page Data: Each entry generates one complete SEO page ───
 const pages = [
-    // ═══ JSON & CSV ═══
-    {
-        slug: 'how-to-convert-json-to-csv-in-excel',
-        title: 'How to Convert JSON to CSV for Excel Import',
-        h1: 'Convert <span class="accent">JSON to CSV</span> for Excel',
-        subtitle: 'Import JSON API data into Excel using our free browser-based converter — no plugins required.',
-        tldr: 'To convert JSON to CSV for Excel: paste your JSON into CyberScryb\'s free converter, click Convert, and download the .csv file. The tool runs client-side (no upload), handles nested objects via dot notation, and supports datasets of 50,000+ rows.',
-        tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
-        keywords: 'json to csv excel, import json excel, json to spreadsheet, convert json to csv for excel',
-        sections: [
-            { h2: 'Why Convert JSON to CSV for Excel?', p: 'Excel can\'t natively open JSON files. By converting JSON to CSV first, you can open your API data, database exports, or config files directly in Excel. Our <a href="/tools/json-csv-converter/">free converter</a> handles this in seconds.' },
-            { h2: 'Step-by-Step: JSON to Excel via CSV', list: ['Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>', 'Select "JSON → CSV" mode', 'Paste your JSON data into the input panel', 'Click Convert (or press Ctrl+Enter)', 'Download the CSV file', 'Open the .csv file in Excel — data auto-populates into columns'] },
-            { h2: 'Handling Nested JSON for Excel', p: 'If your JSON contains nested objects (like <code>address.city</code>), our tool flattens them using dot notation. Each nested key becomes its own Excel column. Arrays are comma-separated within cells.' },
-            { h2: 'Large Dataset Support', p: 'No file size limits. The converter runs entirely in your browser, so a 50,000-row JSON file converts instantly without uploading anything to a server.' }
+  // ═══ JSON & CSV ═══
+  {
+    slug: 'how-to-convert-json-to-csv-in-excel',
+    title: 'How to Convert JSON to CSV for Excel Import',
+    h1: 'Convert <span class="accent">JSON to CSV</span> for Excel',
+    subtitle:
+      'Import JSON API data into Excel using our free browser-based converter — no plugins required.',
+    tldr: "To convert JSON to CSV for Excel: paste your JSON into CyberScryb's free converter, click Convert, and download the .csv file. The tool runs client-side (no upload), handles nested objects via dot notation, and supports datasets of 50,000+ rows.",
+    tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
+    keywords:
+      'json to csv excel, import json excel, json to spreadsheet, convert json to csv for excel',
+    sections: [
+      {
+        h2: 'Why Convert JSON to CSV for Excel?',
+        p: 'Excel can\'t natively open JSON files. By converting JSON to CSV first, you can open your API data, database exports, or config files directly in Excel. Our <a href="/tools/json-csv-converter/">free converter</a> handles this in seconds.',
+      },
+      {
+        h2: 'Step-by-Step: JSON to Excel via CSV',
+        list: [
+          'Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>',
+          'Select "JSON → CSV" mode',
+          'Paste your JSON data into the input panel',
+          'Click Convert (or press Ctrl+Enter)',
+          'Download the CSV file',
+          'Open the .csv file in Excel — data auto-populates into columns',
         ],
-        faqs: [
-            { q: 'Can I convert CSV back to JSON in Excel?', a: 'Not natively, but you can use our tool in reverse. Switch to "CSV → JSON" mode, paste your CSV, and get clean JSON output.' },
-            { q: 'Does this work with Google Sheets?', a: 'Yes. Download the CSV from our tool and open it in Google Sheets via File → Import → Upload.' },
-            { q: 'Is my data secure?', a: 'Absolutely. All conversion happens in your browser. No data is uploaded to any server.' }
+      },
+      {
+        h2: 'Handling Nested JSON for Excel',
+        p: 'If your JSON contains nested objects (like <code>address.city</code>), our tool flattens them using dot notation. Each nested key becomes its own Excel column. Arrays are comma-separated within cells.',
+      },
+      {
+        h2: 'Large Dataset Support',
+        p: 'No file size limits. The converter runs entirely in your browser, so a 50,000-row JSON file converts instantly without uploading anything to a server.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Can I convert CSV back to JSON in Excel?',
+        a: 'Not natively, but you can use our tool in reverse. Switch to "CSV → JSON" mode, paste your CSV, and get clean JSON output.',
+      },
+      {
+        q: 'Does this work with Google Sheets?',
+        a: 'Yes. Download the CSV from our tool and open it in Google Sheets via File → Import → Upload.',
+      },
+      {
+        q: 'Is my data secure?',
+        a: 'Absolutely. All conversion happens in your browser. No data is uploaded to any server.',
+      },
+    ],
+    citations: [
+      {
+        '@type': 'CreativeWork',
+        name: 'RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format',
+        url: 'https://datatracker.ietf.org/doc/html/rfc8259',
+      },
+      {
+        '@type': 'CreativeWork',
+        name: 'RFC 4180: Common Format and MIME Type for CSV Files',
+        url: 'https://datatracker.ietf.org/doc/html/rfc4180',
+      },
+    ],
+  },
+  {
+    slug: 'csv-to-json-converter-online',
+    title: 'CSV to JSON Converter — Free Online Tool',
+    h1: 'Convert <span class="accent">CSV to JSON</span> Online',
+    subtitle:
+      'Turn spreadsheet data into clean JSON for APIs, databases, and web applications — free and instant.',
+    tldr: "Convert CSV to JSON instantly: paste your spreadsheet data into CyberScryb's free converter, and get clean JSON output with automatic type detection (numbers, booleans, nulls). No signup, no upload — runs entirely in your browser.",
+    tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
+    keywords: 'csv to json, csv to json converter, convert csv to json online, spreadsheet to json',
+    sections: [
+      {
+        h2: 'When Do You Need CSV to JSON?',
+        p: 'Many APIs and modern databases expect JSON format, but your data lives in spreadsheets. Converting CSV to JSON is essential when importing data into MongoDB, posting to REST APIs, or building web applications.',
+      },
+      {
+        h2: 'How to Convert CSV to JSON',
+        list: [
+          'Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>',
+          'Click "CSV → JSON" mode',
+          'Paste your CSV data (or copy from Excel/Google Sheets)',
+          'Click Convert — JSON appears instantly',
+          'Copy to clipboard or download as .json file',
         ],
-        citations: [
-            { "@type": "CreativeWork", "name": "RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format", "url": "https://datatracker.ietf.org/doc/html/rfc8259" },
-            { "@type": "CreativeWork", "name": "RFC 4180: Common Format and MIME Type for CSV Files", "url": "https://datatracker.ietf.org/doc/html/rfc4180" }
-        ]
-    },
-    {
-        slug: 'csv-to-json-converter-online',
-        title: 'CSV to JSON Converter — Free Online Tool',
-        h1: 'Convert <span class="accent">CSV to JSON</span> Online',
-        subtitle: 'Turn spreadsheet data into clean JSON for APIs, databases, and web applications — free and instant.',
-        tldr: 'Convert CSV to JSON instantly: paste your spreadsheet data into CyberScryb\'s free converter, and get clean JSON output with automatic type detection (numbers, booleans, nulls). No signup, no upload — runs entirely in your browser.',
-        tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
-        keywords: 'csv to json, csv to json converter, convert csv to json online, spreadsheet to json',
-        sections: [
-            { h2: 'When Do You Need CSV to JSON?', p: 'Many APIs and modern databases expect JSON format, but your data lives in spreadsheets. Converting CSV to JSON is essential when importing data into MongoDB, posting to REST APIs, or building web applications.' },
-            { h2: 'How to Convert CSV to JSON', list: ['Open the <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a>', 'Click "CSV → JSON" mode', 'Paste your CSV data (or copy from Excel/Google Sheets)', 'Click Convert — JSON appears instantly', 'Copy to clipboard or download as .json file'] },
-            { h2: 'Automatic Type Detection', p: 'Our converter automatically detects data types. Numbers become JSON numbers (not strings), "true"/"false" become booleans, and empty cells become null.' }
+      },
+      {
+        h2: 'Automatic Type Detection',
+        p: 'Our converter automatically detects data types. Numbers become JSON numbers (not strings), "true"/"false" become booleans, and empty cells become null.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Does the header row become JSON keys?',
+        a: 'Yes. The first row is treated as column headers, which become the keys in each JSON object.',
+      },
+      {
+        q: 'Can I convert CSVs with special characters?',
+        a: 'Yes. The converter handles quoted fields, commas within values, and Unicode characters correctly per RFC 4180.',
+      },
+      {
+        q: 'What if my CSV uses semicolons instead of commas?',
+        a: 'The current version expects comma delimiters. Tip: do a find-and-replace of semicolons to commas before pasting.',
+      },
+    ],
+  },
+  {
+    slug: 'json-to-csv-with-nested-objects',
+    title: 'How to Convert Nested JSON to Flat CSV',
+    h1: 'Convert <span class="accent">Nested JSON</span> to Flat CSV',
+    subtitle:
+      'Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.',
+    tldr: 'Nested JSON objects are flattened to CSV using dot notation (e.g., user.address.city becomes a column header). Arrays become comma-separated cell values. No depth limit — works with any JSON structure.',
+    tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
+    keywords: 'nested json to csv, flatten json, json nested objects csv, deep json to spreadsheet',
+    sections: [
+      {
+        h2: 'The Nested JSON Problem',
+        p: 'Real-world JSON from APIs is rarely flat. You get nested objects like <code>{"user": {"address": {"city": "Seattle"}}}</code>. Spreadsheets need flat rows and columns. Our tool automatically flattens nested structures using dot notation.',
+      },
+      {
+        h2: 'How Flattening Works',
+        p: 'Nested keys are joined with dots: <code>user.address.city</code> becomes a CSV column header. Arrays are converted to comma-separated strings within cells. This preserves all data while making it spreadsheet-compatible.',
+      },
+      {
+        h2: 'Example: API Response to CSV',
+        p: 'A typical REST API response with nested user profiles, addresses, and order histories converts to a flat CSV where each column represents a specific data point. No data is lost in the process.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'How deep can nesting go?',
+        a: "There's no depth limit. Objects nested 10+ levels deep will all be flattened correctly.",
+      },
+      {
+        q: 'What happens to arrays inside objects?',
+        a: 'Array elements are joined with commas within a single cell. For example, ["tag1","tag2"] becomes "tag1,tag2" in the CSV.',
+      },
+    ],
+  },
+  // ═══ Password Security ═══
+  {
+    slug: 'how-strong-is-my-password',
+    title: 'How Strong Is My Password? — Free Strength Test',
+    h1: 'How Strong Is <span class="accent">Your Password</span>?',
+    subtitle:
+      'Test your password strength with entropy analysis, crack time estimates, and pattern detection.',
+    tldr: "A strong password has 60+ bits of entropy, uses 16+ characters mixing all character types, and avoids dictionary words and keyboard patterns. Use CyberScryb's free checker for instant entropy analysis, crack time estimates, and breach database comparison — all client-side, nothing uploaded.",
+    tool: { name: 'Password Strength Checker', path: 'password-checker' },
+    keywords:
+      'how strong is my password, password strength test, check password strength, password security',
+    sections: [
+      {
+        h2: 'What Makes a Password Strong?',
+        p: 'Password strength is measured in bits of entropy — the mathematical randomness of your password. A good password has 60+ bits of entropy, uses a mix of character types, and avoids common patterns and dictionary words.',
+      },
+      {
+        h2: 'What Our Tool Measures',
+        list: [
+          'Entropy (bits of randomness)',
+          'Estimated crack time (from milliseconds to centuries)',
+          'Character set analysis (uppercase, lowercase, numbers, symbols)',
+          'Pattern detection (keyboard walks, repeated characters, sequences)',
+          'Common password database comparison (top 10,000 leaked passwords)',
+          'Percentile ranking against global password strength',
         ],
-        faqs: [
-            { q: 'Does the header row become JSON keys?', a: 'Yes. The first row is treated as column headers, which become the keys in each JSON object.' },
-            { q: 'Can I convert CSVs with special characters?', a: 'Yes. The converter handles quoted fields, commas within values, and Unicode characters correctly per RFC 4180.' },
-            { q: 'What if my CSV uses semicolons instead of commas?', a: 'The current version expects comma delimiters. Tip: do a find-and-replace of semicolons to commas before pasting.' }
-        ]
-    },
-    {
-        slug: 'json-to-csv-with-nested-objects',
-        title: 'How to Convert Nested JSON to Flat CSV',
-        h1: 'Convert <span class="accent">Nested JSON</span> to Flat CSV',
-        subtitle: 'Flatten complex, deeply nested JSON objects into clean CSV rows — automatically handled.',
-        tldr: 'Nested JSON objects are flattened to CSV using dot notation (e.g., user.address.city becomes a column header). Arrays become comma-separated cell values. No depth limit — works with any JSON structure.',
-        tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
-        keywords: 'nested json to csv, flatten json, json nested objects csv, deep json to spreadsheet',
-        sections: [
-            { h2: 'The Nested JSON Problem', p: 'Real-world JSON from APIs is rarely flat. You get nested objects like <code>{"user": {"address": {"city": "Seattle"}}}</code>. Spreadsheets need flat rows and columns. Our tool automatically flattens nested structures using dot notation.' },
-            { h2: 'How Flattening Works', p: 'Nested keys are joined with dots: <code>user.address.city</code> becomes a CSV column header. Arrays are converted to comma-separated strings within cells. This preserves all data while making it spreadsheet-compatible.' },
-            { h2: 'Example: API Response to CSV', p: 'A typical REST API response with nested user profiles, addresses, and order histories converts to a flat CSV where each column represents a specific data point. No data is lost in the process.' }
+      },
+      {
+        h2: 'How Crack Time Is Calculated',
+        p: 'We estimate how long a modern GPU cluster would take to brute-force your password. This accounts for your password length, character set, and any detected patterns that reduce effective entropy.',
+      },
+      {
+        h2: 'Tips for Better Passwords',
+        list: [
+          'Use 16+ characters — length beats complexity',
+          'Mix uppercase, lowercase, numbers, and symbols',
+          'Avoid dictionary words, names, or dates',
+          "Don't use keyboard patterns (qwerty, asdf, 123456)",
+          'Use a unique password for every account',
+          'Consider a passphrase: "correct horse battery staple" is stronger than "P@ssw0rd!"',
         ],
-        faqs: [
-            { q: 'How deep can nesting go?', a: 'There\'s no depth limit. Objects nested 10+ levels deep will all be flattened correctly.' },
-            { q: 'What happens to arrays inside objects?', a: 'Array elements are joined with commas within a single cell. For example, ["tag1","tag2"] becomes "tag1,tag2" in the CSV.' }
-        ]
-    },
-    // ═══ Password Security ═══
-    {
-        slug: 'how-strong-is-my-password',
-        title: 'How Strong Is My Password? — Free Strength Test',
-        h1: 'How Strong Is <span class="accent">Your Password</span>?',
-        subtitle: 'Test your password strength with entropy analysis, crack time estimates, and pattern detection.',
-        tldr: 'A strong password has 60+ bits of entropy, uses 16+ characters mixing all character types, and avoids dictionary words and keyboard patterns. Use CyberScryb\'s free checker for instant entropy analysis, crack time estimates, and breach database comparison — all client-side, nothing uploaded.',
-        tool: { name: 'Password Strength Checker', path: 'password-checker' },
-        keywords: 'how strong is my password, password strength test, check password strength, password security',
-        sections: [
-            { h2: 'What Makes a Password Strong?', p: 'Password strength is measured in bits of entropy — the mathematical randomness of your password. A good password has 60+ bits of entropy, uses a mix of character types, and avoids common patterns and dictionary words.' },
-            { h2: 'What Our Tool Measures', list: ['Entropy (bits of randomness)', 'Estimated crack time (from milliseconds to centuries)', 'Character set analysis (uppercase, lowercase, numbers, symbols)', 'Pattern detection (keyboard walks, repeated characters, sequences)', 'Common password database comparison (top 10,000 leaked passwords)', 'Percentile ranking against global password strength'] },
-            { h2: 'How Crack Time Is Calculated', p: 'We estimate how long a modern GPU cluster would take to brute-force your password. This accounts for your password length, character set, and any detected patterns that reduce effective entropy.' },
-            { h2: 'Tips for Better Passwords', list: ['Use 16+ characters — length beats complexity', 'Mix uppercase, lowercase, numbers, and symbols', 'Avoid dictionary words, names, or dates', 'Don\'t use keyboard patterns (qwerty, asdf, 123456)', 'Use a unique password for every account', 'Consider a passphrase: "correct horse battery staple" is stronger than "P@ssw0rd!"'] }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Does this tool store my password?',
+        a: 'No. The analysis runs entirely in your browser. Nothing is sent to any server.',
+      },
+      {
+        q: "What's a good entropy score?",
+        a: '40-59 bits is moderate. 60-79 is strong. 80+ bits is excellent (centuries to crack).',
+      },
+      {
+        q: 'Is "P@ssw0rd!" a strong password?',
+        a: "No. Despite using special characters, it's a common substitution pattern that password crackers detect instantly.",
+      },
+    ],
+    citations: [
+      {
+        '@type': 'CreativeWork',
+        name: 'NIST SP 800-63B: Digital Identity Guidelines',
+        url: 'https://pages.nist.gov/800-63-3/sp800-63b.html',
+      },
+      {
+        '@type': 'CreativeWork',
+        name: 'A Mathematical Theory of Communication (Shannon, 1948)',
+        url: 'https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf',
+      },
+    ],
+  },
+  {
+    slug: 'password-entropy-explained',
+    title: 'Password Entropy Explained — What It Is & Why It Matters',
+    h1: 'Password <span class="accent">Entropy</span> Explained',
+    subtitle:
+      'Understand the math behind password security and why entropy matters more than complexity rules.',
+    tldr: 'Password entropy = Length × log₂(Character Pool Size), measured in bits. Below 28 bits is cracked in seconds; 60-79 bits takes years; 80+ bits is effectively uncrackable. Length matters more than complexity — "correcthorsebatterystaple" (100+ bits) beats "P@55w0rD" (52 bits).',
+    tool: { name: 'Password Strength Checker', path: 'password-checker' },
+    keywords:
+      'password entropy, what is password entropy, password entropy calculator, bits of entropy password',
+    sections: [
+      {
+        h2: 'What Is Password Entropy?',
+        p: 'Entropy measures the randomness (unpredictability) of a password, expressed in bits. Each bit doubles the number of possible combinations. A password with 40 bits of entropy has 2⁴⁰ (about 1 trillion) possible combinations.',
+      },
+      {
+        h2: 'How Entropy Is Calculated',
+        p: 'The formula is: Entropy = Length × log₂(Character Pool Size). A 10-character password using lowercase only (26 chars) has 10 × log₂(26) ≈ 47 bits. Using all character types (95 chars) jumps to 10 × log₂(95) ≈ 65.7 bits.',
+      },
+      {
+        h2: 'Entropy Benchmarks',
+        list: [
+          'Below 28 bits: Very weak — cracked in seconds',
+          '28-35 bits: Weak — cracked in minutes to hours',
+          '36-59 bits: Moderate — cracked in days to months',
+          '60-79 bits: Strong — cracked in years to decades',
+          '80+ bits: Excellent — effectively uncrackable with current tech',
         ],
-        faqs: [
-            { q: 'Does this tool store my password?', a: 'No. The analysis runs entirely in your browser. Nothing is sent to any server.' },
-            { q: 'What\'s a good entropy score?', a: '40-59 bits is moderate. 60-79 is strong. 80+ bits is excellent (centuries to crack).' },
-            { q: 'Is "P@ssw0rd!" a strong password?', a: 'No. Despite using special characters, it\'s a common substitution pattern that password crackers detect instantly.' }
+      },
+      {
+        h2: 'Why Length Beats Complexity',
+        p: 'Adding 4 characters to a password increases entropy more than switching from lowercase-only to all character types. "correcthorsebatterystaple" (100+ bits) crushes "P@55w0rD" (52 bits) because length dominates the entropy equation.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Does adding a symbol really help?',
+        a: 'Slightly. It expands the character pool from 62 to 95 characters. But adding 2 extra lowercase letters achieves the same entropy increase.',
+      },
+      {
+        q: 'What entropy do password managers generate?',
+        a: 'Most generate 128+ bit passwords (20+ random characters), which are effectively uncrackable.',
+      },
+    ],
+    citations: [
+      {
+        '@type': 'CreativeWork',
+        name: 'NIST SP 800-63B: Digital Identity Guidelines',
+        url: 'https://pages.nist.gov/800-63-3/sp800-63b.html',
+      },
+    ],
+  },
+  // ═══ SEO & Meta Tags ═══
+  {
+    slug: 'meta-tag-generator-for-seo',
+    title: 'Meta Tag Generator for SEO — Free Tool',
+    h1: 'Free <span class="accent">Meta Tag Generator</span> for SEO',
+    subtitle:
+      'Generate perfect title tags, meta descriptions, Open Graph tags, and Twitter cards in seconds.',
+    tldr: "Title tags (under 60 chars, keyword-first) increase CTR by 20-30%. Meta descriptions should be 150-160 chars with a CTA. Open Graph and Twitter Card tags control social previews. CyberScryb's free generator creates all essential tags in one click.",
+    tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
+    keywords:
+      'meta tag generator, seo meta tags, open graph generator, twitter card generator, meta description tool',
+    sections: [
+      {
+        h2: 'Why Meta Tags Matter for SEO',
+        p: 'Meta tags are the first thing Google and social platforms read about your page. A well-crafted title tag can increase click-through rates by 20-30%. Our <a href="/tools/seo-tag-generator/">free generator</a> creates all essential tags in one click.',
+      },
+      {
+        h2: 'What Tags Does This Tool Generate?',
+        list: [
+          'Title tag — the clickable headline in search results',
+          'Meta description — the snippet below your title',
+          'Open Graph tags — controls how your page looks on Facebook/LinkedIn',
+          'Twitter Card tags — optimizes your page preview on Twitter/X',
+          'Canonical URL — prevents duplicate content issues',
+          'Robots meta — controls search engine indexing behavior',
         ],
-        citations: [
-            { "@type": "CreativeWork", "name": "NIST SP 800-63B: Digital Identity Guidelines", "url": "https://pages.nist.gov/800-63-3/sp800-63b.html" },
-            { "@type": "CreativeWork", "name": "A Mathematical Theory of Communication (Shannon, 1948)", "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" }
-        ]
-    },
-    {
-        slug: 'password-entropy-explained',
-        title: 'Password Entropy Explained — What It Is & Why It Matters',
-        h1: 'Password <span class="accent">Entropy</span> Explained',
-        subtitle: 'Understand the math behind password security and why entropy matters more than complexity rules.',
-        tldr: 'Password entropy = Length × log₂(Character Pool Size), measured in bits. Below 28 bits is cracked in seconds; 60-79 bits takes years; 80+ bits is effectively uncrackable. Length matters more than complexity — "correcthorsebatterystaple" (100+ bits) beats "P@55w0rD" (52 bits).',
-        tool: { name: 'Password Strength Checker', path: 'password-checker' },
-        keywords: 'password entropy, what is password entropy, password entropy calculator, bits of entropy password',
-        sections: [
-            { h2: 'What Is Password Entropy?', p: 'Entropy measures the randomness (unpredictability) of a password, expressed in bits. Each bit doubles the number of possible combinations. A password with 40 bits of entropy has 2⁴⁰ (about 1 trillion) possible combinations.' },
-            { h2: 'How Entropy Is Calculated', p: 'The formula is: Entropy = Length × log₂(Character Pool Size). A 10-character password using lowercase only (26 chars) has 10 × log₂(26) ≈ 47 bits. Using all character types (95 chars) jumps to 10 × log₂(95) ≈ 65.7 bits.' },
-            { h2: 'Entropy Benchmarks', list: ['Below 28 bits: Very weak — cracked in seconds', '28-35 bits: Weak — cracked in minutes to hours', '36-59 bits: Moderate — cracked in days to months', '60-79 bits: Strong — cracked in years to decades', '80+ bits: Excellent — effectively uncrackable with current tech'] },
-            { h2: 'Why Length Beats Complexity', p: 'Adding 4 characters to a password increases entropy more than switching from lowercase-only to all character types. "correcthorsebatterystaple" (100+ bits) crushes "P@55w0rD" (52 bits) because length dominates the entropy equation.' }
+      },
+      {
+        h2: 'Best Practices for Title Tags',
+        list: [
+          'Keep titles under 60 characters (Google truncates longer ones)',
+          'Put your primary keyword near the beginning',
+          'Include your brand name at the end (separated by | or —)',
+          "Make it compelling — you're competing for clicks",
+          'Each page should have a unique title',
         ],
-        faqs: [
-            { q: 'Does adding a symbol really help?', a: 'Slightly. It expands the character pool from 62 to 95 characters. But adding 2 extra lowercase letters achieves the same entropy increase.' },
-            { q: 'What entropy do password managers generate?', a: 'Most generate 128+ bit passwords (20+ random characters), which are effectively uncrackable.' }
+      },
+      {
+        h2: 'Meta Description Tips',
+        p: 'Write 150-160 characters. Include a call-to-action. Use the primary keyword naturally. Google sometimes rewrites descriptions, but a good one increases click-through rates by up to 30%.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Do meta tags directly affect rankings?',
+        a: "Title tags are a confirmed ranking factor. Meta descriptions don't directly affect rankings but significantly impact click-through rates, which indirectly affect rankings.",
+      },
+      {
+        q: 'What are Open Graph tags?',
+        a: 'Open Graph tags (og:title, og:description, og:image) control how your page appears when shared on Facebook, LinkedIn, and other social platforms.',
+      },
+      {
+        q: 'How do I add these tags to my site?',
+        a: "Copy the generated HTML from our tool and paste it inside the <head> section of your web page's HTML.",
+      },
+    ],
+  },
+  {
+    slug: 'open-graph-tags-guide',
+    title: 'Open Graph Tags: Complete Guide for Social Sharing',
+    h1: 'Complete Guide to <span class="accent">Open Graph Tags</span>',
+    subtitle:
+      'Make your links look professional on Facebook, LinkedIn, and Twitter with proper OG tags.',
+    tldr: "Open Graph tags (og:title, og:description, og:image, og:url, og:type) control how your page appears when shared on Facebook, LinkedIn, and other platforms. Recommended og:image size is 1200×630px. Twitter falls back to OG tags if twitter:card tags aren't set.",
+    tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
+    keywords:
+      'open graph tags, og tags, facebook open graph, linkedin sharing, social media meta tags',
+    sections: [
+      {
+        h2: 'What Are Open Graph Tags?',
+        p: 'Open Graph is a protocol created by Facebook that controls how your web page appears when shared on social media. Without OG tags, platforms guess your title and image — often getting it wrong.',
+      },
+      {
+        h2: 'Essential Open Graph Tags',
+        list: [
+          'og:title — The title displayed in the social share card',
+          'og:description — A brief summary (2-4 sentences)',
+          'og:image — The preview image (1200×630px recommended)',
+          'og:url — The canonical URL of the page',
+          'og:type — Usually "website" or "article"',
+          "og:site_name — Your website's name",
         ],
-        citations: [
-            { "@type": "CreativeWork", "name": "NIST SP 800-63B: Digital Identity Guidelines", "url": "https://pages.nist.gov/800-63-3/sp800-63b.html" }
-        ]
-    },
-    // ═══ SEO & Meta Tags ═══
-    {
-        slug: 'meta-tag-generator-for-seo',
-        title: 'Meta Tag Generator for SEO — Free Tool',
-        h1: 'Free <span class="accent">Meta Tag Generator</span> for SEO',
-        subtitle: 'Generate perfect title tags, meta descriptions, Open Graph tags, and Twitter cards in seconds.',
-        tldr: 'Title tags (under 60 chars, keyword-first) increase CTR by 20-30%. Meta descriptions should be 150-160 chars with a CTA. Open Graph and Twitter Card tags control social previews. CyberScryb\'s free generator creates all essential tags in one click.',
-        tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
-        keywords: 'meta tag generator, seo meta tags, open graph generator, twitter card generator, meta description tool',
-        sections: [
-            { h2: 'Why Meta Tags Matter for SEO', p: 'Meta tags are the first thing Google and social platforms read about your page. A well-crafted title tag can increase click-through rates by 20-30%. Our <a href="/tools/seo-tag-generator/">free generator</a> creates all essential tags in one click.' },
-            { h2: 'What Tags Does This Tool Generate?', list: ['Title tag — the clickable headline in search results', 'Meta description — the snippet below your title', 'Open Graph tags — controls how your page looks on Facebook/LinkedIn', 'Twitter Card tags — optimizes your page preview on Twitter/X', 'Canonical URL — prevents duplicate content issues', 'Robots meta — controls search engine indexing behavior'] },
-            { h2: 'Best Practices for Title Tags', list: ['Keep titles under 60 characters (Google truncates longer ones)', 'Put your primary keyword near the beginning', 'Include your brand name at the end (separated by | or —)', 'Make it compelling — you\'re competing for clicks', 'Each page should have a unique title'] },
-            { h2: 'Meta Description Tips', p: 'Write 150-160 characters. Include a call-to-action. Use the primary keyword naturally. Google sometimes rewrites descriptions, but a good one increases click-through rates by up to 30%.' }
+      },
+      {
+        h2: 'Testing Your OG Tags',
+        p: 'Use Facebook\'s Sharing Debugger or Twitter\'s Card Validator to preview how your page will appear. Our <a href="/tools/seo-tag-generator/">SEO tag generator</a> creates all these tags for you automatically.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'What image size should I use for og:image?',
+        a: '1200×630 pixels is the recommended size. Facebook, LinkedIn, and Twitter all display it well at this resolution.',
+      },
+      {
+        q: 'Do I need separate tags for Twitter?',
+        a: "Twitter has its own card system (twitter:card, twitter:title, etc.) but falls back to OG tags if Twitter-specific ones aren't found.",
+      },
+    ],
+  },
+  // ═══ Base64 ═══
+  {
+    slug: 'base64-encode-decode-guide',
+    title: 'Base64 Encoding & Decoding — Complete Guide & Tool',
+    h1: 'Base64 <span class="accent">Encoding & Decoding</span> Guide',
+    subtitle:
+      'Understand Base64 encoding, when to use it, and convert data instantly with our free tool.',
+    tldr: 'Base64 converts binary data to ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). It increases size by 33% but enables binary data in text channels (email, JSON, HTML). Base64 is encoding, NOT encryption — anyone can decode it. Common uses: data URIs, MIME attachments, Basic Auth headers.',
+    tool: { name: 'Base64 Encoder/Decoder', path: 'base64-tool' },
+    keywords: 'base64 encode, base64 decode, base64 converter, what is base64, base64 online tool',
+    sections: [
+      {
+        h2: 'What Is Base64 Encoding?',
+        p: "Base64 converts binary data into a text-safe ASCII string using 64 characters (A-Z, a-z, 0-9, +, /). It's used when you need to transmit binary data through text-only channels like email, JSON, or HTML.",
+      },
+      {
+        h2: 'Common Use Cases',
+        list: [
+          'Embedding images in HTML/CSS using data URIs',
+          'Encoding file attachments in email (MIME)',
+          'Storing binary data in JSON APIs',
+          'Encoding authentication credentials (Basic Auth headers)',
+          'Data URL schemes in web applications',
+          'Encoding cryptographic keys and certificates',
         ],
-        faqs: [
-            { q: 'Do meta tags directly affect rankings?', a: 'Title tags are a confirmed ranking factor. Meta descriptions don\'t directly affect rankings but significantly impact click-through rates, which indirectly affect rankings.' },
-            { q: 'What are Open Graph tags?', a: 'Open Graph tags (og:title, og:description, og:image) control how your page appears when shared on Facebook, LinkedIn, and other social platforms.' },
-            { q: 'How do I add these tags to my site?', a: 'Copy the generated HTML from our tool and paste it inside the <head> section of your web page\'s HTML.' }
-        ]
-    },
-    {
-        slug: 'open-graph-tags-guide',
-        title: 'Open Graph Tags: Complete Guide for Social Sharing',
-        h1: 'Complete Guide to <span class="accent">Open Graph Tags</span>',
-        subtitle: 'Make your links look professional on Facebook, LinkedIn, and Twitter with proper OG tags.',
-        tldr: 'Open Graph tags (og:title, og:description, og:image, og:url, og:type) control how your page appears when shared on Facebook, LinkedIn, and other platforms. Recommended og:image size is 1200×630px. Twitter falls back to OG tags if twitter:card tags aren\'t set.',
-        tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
-        keywords: 'open graph tags, og tags, facebook open graph, linkedin sharing, social media meta tags',
-        sections: [
-            { h2: 'What Are Open Graph Tags?', p: 'Open Graph is a protocol created by Facebook that controls how your web page appears when shared on social media. Without OG tags, platforms guess your title and image — often getting it wrong.' },
-            { h2: 'Essential Open Graph Tags', list: ['og:title — The title displayed in the social share card', 'og:description — A brief summary (2-4 sentences)', 'og:image — The preview image (1200×630px recommended)', 'og:url — The canonical URL of the page', 'og:type — Usually "website" or "article"', 'og:site_name — Your website\'s name'] },
-            { h2: 'Testing Your OG Tags', p: 'Use Facebook\'s Sharing Debugger or Twitter\'s Card Validator to preview how your page will appear. Our <a href="/tools/seo-tag-generator/">SEO tag generator</a> creates all these tags for you automatically.' }
+      },
+      {
+        h2: 'How to Use Our Tool',
+        list: [
+          'Open the <a href="/tools/base64-tool/">Base64 Encoder/Decoder</a>',
+          'Select Encode or Decode mode',
+          'Paste your text or Base64 string',
+          'Click the action button — result appears instantly',
+          'Copy the output with one click',
         ],
-        faqs: [
-            { q: 'What image size should I use for og:image?', a: '1200×630 pixels is the recommended size. Facebook, LinkedIn, and Twitter all display it well at this resolution.' },
-            { q: 'Do I need separate tags for Twitter?', a: 'Twitter has its own card system (twitter:card, twitter:title, etc.) but falls back to OG tags if Twitter-specific ones aren\'t found.' }
-        ]
-    },
-    // ═══ Base64 ═══
-    {
-        slug: 'base64-encode-decode-guide',
-        title: 'Base64 Encoding & Decoding — Complete Guide & Tool',
-        h1: 'Base64 <span class="accent">Encoding & Decoding</span> Guide',
-        subtitle: 'Understand Base64 encoding, when to use it, and convert data instantly with our free tool.',
-        tldr: 'Base64 converts binary data to ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). It increases size by 33% but enables binary data in text channels (email, JSON, HTML). Base64 is encoding, NOT encryption — anyone can decode it. Common uses: data URIs, MIME attachments, Basic Auth headers.',
-        tool: { name: 'Base64 Encoder/Decoder', path: 'base64-tool' },
-        keywords: 'base64 encode, base64 decode, base64 converter, what is base64, base64 online tool',
-        sections: [
-            { h2: 'What Is Base64 Encoding?', p: 'Base64 converts binary data into a text-safe ASCII string using 64 characters (A-Z, a-z, 0-9, +, /). It\'s used when you need to transmit binary data through text-only channels like email, JSON, or HTML.' },
-            { h2: 'Common Use Cases', list: ['Embedding images in HTML/CSS using data URIs', 'Encoding file attachments in email (MIME)', 'Storing binary data in JSON APIs', 'Encoding authentication credentials (Basic Auth headers)', 'Data URL schemes in web applications', 'Encoding cryptographic keys and certificates'] },
-            { h2: 'How to Use Our Tool', list: ['Open the <a href="/tools/base64-tool/">Base64 Encoder/Decoder</a>', 'Select Encode or Decode mode', 'Paste your text or Base64 string', 'Click the action button — result appears instantly', 'Copy the output with one click'] },
-            { h2: 'Base64 vs Other Encodings', p: 'Base64 increases data size by ~33% but ensures safe transport across any text channel. URL-safe Base64 replaces + and / with - and _ for use in URLs. Our tool handles both variants.' }
+      },
+      {
+        h2: 'Base64 vs Other Encodings',
+        p: 'Base64 increases data size by ~33% but ensures safe transport across any text channel. URL-safe Base64 replaces + and / with - and _ for use in URLs. Our tool handles both variants.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is Base64 encryption?',
+        a: 'No. Base64 is encoding, not encryption. Anyone can decode it. Never use Base64 to protect sensitive data.',
+      },
+      {
+        q: 'Why does Base64 make files larger?',
+        a: 'Every 3 bytes of binary data become 4 Base64 characters, resulting in a 33% size increase. Plus padding characters may be added.',
+      },
+      {
+        q: 'Can I Base64 encode images?',
+        a: 'Yes. The result can be used as a data URI in HTML: <code>&lt;img src="data:image/png;base64,..."&gt;</code>. Useful for small icons to avoid HTTP requests.',
+      },
+    ],
+    citations: [
+      {
+        '@type': 'CreativeWork',
+        name: 'RFC 4648: The Base16, Base32, and Base64 Data Encodings',
+        url: 'https://datatracker.ietf.org/doc/html/rfc4648',
+      },
+    ],
+  },
+  {
+    slug: 'base64-image-encoder',
+    title: 'How to Convert Images to Base64 Data URIs',
+    h1: 'Convert Images to <span class="accent">Base64 Data URIs</span>',
+    subtitle:
+      'Embed images directly in HTML and CSS without external files — using Base64 data URIs.',
+    tldr: "Data URIs embed images directly in HTML/CSS using the format data:[mediatype];base64,[data]. Use for images under 10KB (icons, bullets) to eliminate HTTP requests. Don't use for large images — the 33% size increase and lack of caching makes them slower.",
+    tool: { name: 'Base64 Encoder/Decoder', path: 'base64-tool' },
+    keywords:
+      'image to base64, base64 image, data uri image, embed image html, image base64 converter',
+    sections: [
+      {
+        h2: 'What Are Data URIs?',
+        p: 'A data URI embeds file content directly in HTML or CSS, eliminating an HTTP request. Format: <code>data:[mediatype];base64,[data]</code>. Ideal for small images like icons, logos, and UI elements.',
+      },
+      {
+        h2: 'When to Use Base64 Images',
+        list: [
+          'Small images under 10KB (icons, bullets, simple graphics)',
+          "Email HTML templates (images often get blocked — inline ones don't)",
+          'Single-page applications reducing HTTP requests',
+          'CSS background images that need to load instantly',
+          'Offline-capable web apps',
         ],
-        faqs: [
-            { q: 'Is Base64 encryption?', a: 'No. Base64 is encoding, not encryption. Anyone can decode it. Never use Base64 to protect sensitive data.' },
-            { q: 'Why does Base64 make files larger?', a: 'Every 3 bytes of binary data become 4 Base64 characters, resulting in a 33% size increase. Plus padding characters may be added.' },
-            { q: 'Can I Base64 encode images?', a: 'Yes. The result can be used as a data URI in HTML: <code>&lt;img src="data:image/png;base64,..."&gt;</code>. Useful for small icons to avoid HTTP requests.' }
+      },
+      {
+        h2: 'When NOT to Use Base64 Images',
+        p: 'Large images (photos, banners) should not be Base64 encoded. The 33% size increase plus lack of caching makes them slower than regular image files. Use Base64 only for images under 10KB.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Does Base64 affect page load speed?',
+        a: 'For small images it speeds things up (fewer HTTP requests). For large images it slows things down (increased HTML size, no caching).',
+      },
+      {
+        q: 'How do I use a Base64 image in HTML?',
+        a: 'Use: <code>&lt;img src="data:image/png;base64,iVBOR..."&gt;</code>. Replace the Base64 string with your encoded image data.',
+      },
+    ],
+  },
+  // ═══ Color & Design ═══
+  {
+    slug: 'color-palette-generator-for-websites',
+    title: 'Color Palette Generator for Websites — Free Tool',
+    h1: 'Generate <span class="accent">Color Palettes</span> for Your Website',
+    subtitle:
+      'Create professional, harmonious color schemes instantly. Export as CSS, HEX, RGB, or HSL.',
+    tldr: 'A website needs 3-5 colors: primary, secondary accent, and neutrals. Use color harmony modes (complementary, analogous, triadic, monochromatic) to generate balanced palettes. Export as CSS custom properties for consistent theming. Dark mode is now expected by users.',
+    tool: { name: 'Color Palette Generator', path: 'color-palette' },
+    keywords:
+      'color palette generator, website color scheme, color scheme generator, css colors, web design colors',
+    sections: [
+      {
+        h2: 'Why Color Palettes Matter',
+        p: 'Color is the first thing users notice about your website. A harmonious palette builds trust, guides attention, and creates emotional resonance. Poorly chosen colors look amateurish and increase bounce rates.',
+      },
+      {
+        h2: 'Color Harmony Modes',
+        list: [
+          'Complementary — Two opposite colors for high contrast',
+          'Analogous — Adjacent colors for serene, comfortable designs',
+          'Triadic — Three evenly spaced colors for vibrant variety',
+          'Split-Complementary — A softer alternative to complementary',
+          'Monochromatic — Variations of a single hue for elegant simplicity',
         ],
-        citations: [
-            { "@type": "CreativeWork", "name": "RFC 4648: The Base16, Base32, and Base64 Data Encodings", "url": "https://datatracker.ietf.org/doc/html/rfc4648" }
-        ]
-    },
-    {
-        slug: 'base64-image-encoder',
-        title: 'How to Convert Images to Base64 Data URIs',
-        h1: 'Convert Images to <span class="accent">Base64 Data URIs</span>',
-        subtitle: 'Embed images directly in HTML and CSS without external files — using Base64 data URIs.',
-        tldr: 'Data URIs embed images directly in HTML/CSS using the format data:[mediatype];base64,[data]. Use for images under 10KB (icons, bullets) to eliminate HTTP requests. Don\'t use for large images — the 33% size increase and lack of caching makes them slower.',
-        tool: { name: 'Base64 Encoder/Decoder', path: 'base64-tool' },
-        keywords: 'image to base64, base64 image, data uri image, embed image html, image base64 converter',
-        sections: [
-            { h2: 'What Are Data URIs?', p: 'A data URI embeds file content directly in HTML or CSS, eliminating an HTTP request. Format: <code>data:[mediatype];base64,[data]</code>. Ideal for small images like icons, logos, and UI elements.' },
-            { h2: 'When to Use Base64 Images', list: ['Small images under 10KB (icons, bullets, simple graphics)', 'Email HTML templates (images often get blocked — inline ones don\'t)', 'Single-page applications reducing HTTP requests', 'CSS background images that need to load instantly', 'Offline-capable web apps'] },
-            { h2: 'When NOT to Use Base64 Images', p: 'Large images (photos, banners) should not be Base64 encoded. The 33% size increase plus lack of caching makes them slower than regular image files. Use Base64 only for images under 10KB.' }
+      },
+      {
+        h2: 'Using Colors in CSS',
+        p: 'Export your palette directly as CSS custom properties. Use <code>var(--primary)</code>, <code>var(--secondary)</code>, etc. throughout your stylesheets for consistent theming and easy updates.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'How many colors should a website palette have?',
+        a: '3-5 colors is ideal. A primary color, a secondary accent, a neutral (gray/white/dark), and optionally an alert/success color.',
+      },
+      {
+        q: 'Should I use dark mode?',
+        a: 'Yes. Dark mode reduces eye strain, saves battery on OLED screens, and is increasingly expected by users. Design both light and dark palettes.',
+      },
+      {
+        q: "What's the best primary color for SaaS?",
+        a: 'Blue is the most common (trust, reliability), but purple (modern/premium) and green (growth/health) are strong alternatives depending on your audience.',
+      },
+    ],
+  },
+  {
+    slug: 'color-contrast-checker-wcag',
+    title: 'Color Contrast Checker — WCAG Accessibility Guide',
+    h1: '<span class="accent">Color Contrast</span> & WCAG Accessibility',
+    subtitle:
+      'Ensure your text is readable for all users with proper contrast ratios and WCAG compliance.',
+    tldr: 'WCAG AA requires 4.5:1 contrast ratio for normal text, 3:1 for large text (18px+ bold). WCAG AAA requires 7:1 for normal text. Common mistakes: light gray on white, colored text on colored backgrounds. WCAG compliance is legally required under ADA (US) and EAA (EU 2025).',
+    tool: { name: 'Color Palette Generator', path: 'color-palette' },
+    keywords:
+      'color contrast checker, wcag contrast, accessibility color contrast, ada color compliance',
+    sections: [
+      {
+        h2: 'What Is Color Contrast?',
+        p: 'Color contrast is the difference in luminance between foreground text and background. Low contrast makes text hard to read, especially for users with visual impairments. WCAG (Web Content Accessibility Guidelines) sets minimum contrast ratios.',
+      },
+      {
+        h2: 'WCAG Contrast Requirements',
+        list: [
+          'Level AA: 4.5:1 ratio for normal text, 3:1 for large text (18px+ bold or 24px+)',
+          'Level AAA: 7:1 ratio for normal text, 4.5:1 for large text',
+          'UI components and graphics: 3:1 minimum against adjacent colors',
+          'Links must be distinguishable from surrounding text',
         ],
-        faqs: [
-            { q: 'Does Base64 affect page load speed?', a: 'For small images it speeds things up (fewer HTTP requests). For large images it slows things down (increased HTML size, no caching).' },
-            { q: 'How do I use a Base64 image in HTML?', a: 'Use: <code>&lt;img src="data:image/png;base64,iVBOR..."&gt;</code>. Replace the Base64 string with your encoded image data.' }
-        ]
-    },
-    // ═══ Color & Design ═══
-    {
-        slug: 'color-palette-generator-for-websites',
-        title: 'Color Palette Generator for Websites — Free Tool',
-        h1: 'Generate <span class="accent">Color Palettes</span> for Your Website',
-        subtitle: 'Create professional, harmonious color schemes instantly. Export as CSS, HEX, RGB, or HSL.',
-        tldr: 'A website needs 3-5 colors: primary, secondary accent, and neutrals. Use color harmony modes (complementary, analogous, triadic, monochromatic) to generate balanced palettes. Export as CSS custom properties for consistent theming. Dark mode is now expected by users.',
-        tool: { name: 'Color Palette Generator', path: 'color-palette' },
-        keywords: 'color palette generator, website color scheme, color scheme generator, css colors, web design colors',
-        sections: [
-            { h2: 'Why Color Palettes Matter', p: 'Color is the first thing users notice about your website. A harmonious palette builds trust, guides attention, and creates emotional resonance. Poorly chosen colors look amateurish and increase bounce rates.' },
-            { h2: 'Color Harmony Modes', list: ['Complementary — Two opposite colors for high contrast', 'Analogous — Adjacent colors for serene, comfortable designs', 'Triadic — Three evenly spaced colors for vibrant variety', 'Split-Complementary — A softer alternative to complementary', 'Monochromatic — Variations of a single hue for elegant simplicity'] },
-            { h2: 'Using Colors in CSS', p: 'Export your palette directly as CSS custom properties. Use <code>var(--primary)</code>, <code>var(--secondary)</code>, etc. throughout your stylesheets for consistent theming and easy updates.' }
+      },
+      {
+        h2: 'Common Contrast Mistakes',
+        list: [
+          'Light gray text on white backgrounds',
+          'Colored text on colored backgrounds (blue on purple)',
+          'Placeholder text too faint to read',
+          'Buttons with insufficient text-to-background contrast',
+          'Ignoring dark mode contrast requirements',
         ],
-        faqs: [
-            { q: 'How many colors should a website palette have?', a: '3-5 colors is ideal. A primary color, a secondary accent, a neutral (gray/white/dark), and optionally an alert/success color.' },
-            { q: 'Should I use dark mode?', a: 'Yes. Dark mode reduces eye strain, saves battery on OLED screens, and is increasingly expected by users. Design both light and dark palettes.' },
-            { q: 'What\'s the best primary color for SaaS?', a: 'Blue is the most common (trust, reliability), but purple (modern/premium) and green (growth/health) are strong alternatives depending on your audience.' }
-        ]
-    },
-    {
-        slug: 'color-contrast-checker-wcag',
-        title: 'Color Contrast Checker — WCAG Accessibility Guide',
-        h1: '<span class="accent">Color Contrast</span> & WCAG Accessibility',
-        subtitle: 'Ensure your text is readable for all users with proper contrast ratios and WCAG compliance.',
-        tldr: 'WCAG AA requires 4.5:1 contrast ratio for normal text, 3:1 for large text (18px+ bold). WCAG AAA requires 7:1 for normal text. Common mistakes: light gray on white, colored text on colored backgrounds. WCAG compliance is legally required under ADA (US) and EAA (EU 2025).',
-        tool: { name: 'Color Palette Generator', path: 'color-palette' },
-        keywords: 'color contrast checker, wcag contrast, accessibility color contrast, ada color compliance',
-        sections: [
-            { h2: 'What Is Color Contrast?', p: 'Color contrast is the difference in luminance between foreground text and background. Low contrast makes text hard to read, especially for users with visual impairments. WCAG (Web Content Accessibility Guidelines) sets minimum contrast ratios.' },
-            { h2: 'WCAG Contrast Requirements', list: ['Level AA: 4.5:1 ratio for normal text, 3:1 for large text (18px+ bold or 24px+)', 'Level AAA: 7:1 ratio for normal text, 4.5:1 for large text', 'UI components and graphics: 3:1 minimum against adjacent colors', 'Links must be distinguishable from surrounding text'] },
-            { h2: 'Common Contrast Mistakes', list: ['Light gray text on white backgrounds', 'Colored text on colored backgrounds (blue on purple)', 'Placeholder text too faint to read', 'Buttons with insufficient text-to-background contrast', 'Ignoring dark mode contrast requirements'] }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is WCAG compliance legally required?',
+        a: 'In many jurisdictions, yes. The ADA (US), EAA (EU 2025), and similar laws increasingly require WCAG 2.1 AA compliance for websites.',
+      },
+      {
+        q: 'What contrast ratio does white text on black achieve?',
+        a: '21:1 — the maximum possible contrast ratio. This exceeds all WCAG requirements.',
+      },
+    ],
+  },
+  // ═══ Markdown ═══
+  {
+    slug: 'markdown-to-html-converter-guide',
+    title: 'Markdown to HTML Converter — Free Online Tool & Guide',
+    h1: 'Convert <span class="accent">Markdown to HTML</span> Online',
+    subtitle:
+      'Transform your Markdown files to clean, semantic HTML. Live preview, copy, and download.',
+    tldr: 'Paste Markdown in the left panel, get clean HTML in the right panel instantly. Supports GitHub Flavored Markdown (tables, strikethrough, task lists, fenced code blocks). No character limit — runs client-side. Copy or download as .html file.',
+    tool: { name: 'Markdown to HTML Converter', path: 'markdown-html' },
+    keywords:
+      'markdown to html, convert markdown, markdown converter, markdown preview, md to html',
+    sections: [
+      {
+        h2: 'What Is Markdown?',
+        p: "Markdown is a lightweight markup language that uses plain text formatting. Created by John Gruber in 2004, it's used by GitHub, Reddit, Stack Overflow, and millions of developers for documentation, READMEs, and content writing.",
+      },
+      {
+        h2: 'How to Convert Markdown to HTML',
+        list: [
+          'Open the <a href="/tools/markdown-html/">Markdown to HTML Converter</a>',
+          'Type or paste your Markdown in the left panel',
+          'See the HTML output instantly in the right panel',
+          'Switch between rendered preview and raw HTML',
+          'Copy the HTML or download as a .html file',
         ],
-        faqs: [
-            { q: 'Is WCAG compliance legally required?', a: 'In many jurisdictions, yes. The ADA (US), EAA (EU 2025), and similar laws increasingly require WCAG 2.1 AA compliance for websites.' },
-            { q: 'What contrast ratio does white text on black achieve?', a: '21:1 — the maximum possible contrast ratio. This exceeds all WCAG requirements.' }
-        ]
-    },
-    // ═══ Markdown ═══
-    {
-        slug: 'markdown-to-html-converter-guide',
-        title: 'Markdown to HTML Converter — Free Online Tool & Guide',
-        h1: 'Convert <span class="accent">Markdown to HTML</span> Online',
-        subtitle: 'Transform your Markdown files to clean, semantic HTML. Live preview, copy, and download.',
-        tldr: 'Paste Markdown in the left panel, get clean HTML in the right panel instantly. Supports GitHub Flavored Markdown (tables, strikethrough, task lists, fenced code blocks). No character limit — runs client-side. Copy or download as .html file.',
-        tool: { name: 'Markdown to HTML Converter', path: 'markdown-html' },
-        keywords: 'markdown to html, convert markdown, markdown converter, markdown preview, md to html',
-        sections: [
-            { h2: 'What Is Markdown?', p: 'Markdown is a lightweight markup language that uses plain text formatting. Created by John Gruber in 2004, it\'s used by GitHub, Reddit, Stack Overflow, and millions of developers for documentation, READMEs, and content writing.' },
-            { h2: 'How to Convert Markdown to HTML', list: ['Open the <a href="/tools/markdown-html/">Markdown to HTML Converter</a>', 'Type or paste your Markdown in the left panel', 'See the HTML output instantly in the right panel', 'Switch between rendered preview and raw HTML', 'Copy the HTML or download as a .html file'] },
-            { h2: 'Supported Markdown Features', list: ['Headings (# through ######)', 'Bold, italic, and strikethrough text', 'Ordered and unordered lists', 'Code blocks with syntax highlighting', 'Links and images', 'Tables (GitHub Flavored Markdown)', 'Blockquotes and horizontal rules'] }
+      },
+      {
+        h2: 'Supported Markdown Features',
+        list: [
+          'Headings (# through ######)',
+          'Bold, italic, and strikethrough text',
+          'Ordered and unordered lists',
+          'Code blocks with syntax highlighting',
+          'Links and images',
+          'Tables (GitHub Flavored Markdown)',
+          'Blockquotes and horizontal rules',
         ],
-        faqs: [
-            { q: 'Does this support GitHub Flavored Markdown?', a: 'Yes. Tables, strikethrough, task lists, and fenced code blocks are all supported.' },
-            { q: 'Can I use this for blog posts?', a: 'Absolutely. Write in Markdown, convert to HTML, and paste into your CMS. The generated HTML is clean and semantic.' },
-            { q: 'Is there a character limit?', a: 'No. The converter runs in your browser, so it handles files of any size.' }
-        ]
-    },
-    {
-        slug: 'markdown-cheat-sheet',
-        title: 'Markdown Cheat Sheet — Complete Syntax Reference',
-        h1: '<span class="accent">Markdown</span> Cheat Sheet',
-        subtitle: 'Quick reference for all Markdown syntax: headings, lists, links, images, code, tables, and more.',
-        tldr: 'Markdown quick reference: **bold**, *italic*, # Heading, - list item, [link](url), ![image](url), `inline code`, ``` code block ```. Use GitHub Flavored Markdown (GFM) for tables, task lists, and strikethrough. It\'s the standard used by GitHub, Reddit, and Stack Overflow.',
-        tool: { name: 'Markdown to HTML Converter', path: 'markdown-html' },
-        keywords: 'markdown cheat sheet, markdown syntax, markdown reference, markdown guide, how to write markdown',
-        sections: [
-            { h2: 'Text Formatting', p: '<code>**bold**</code> for <strong>bold</strong>, <code>*italic*</code> for <em>italic</em>, <code>~~strikethrough~~</code> for <s>strikethrough</s>. Combine them: <code>***bold italic***</code>.' },
-            { h2: 'Headings', p: 'Use # for h1, ## for h2, ### for h3, and so on up to ######. Always include a space after the hash marks.' },
-            { h2: 'Lists', p: 'Unordered lists use <code>-</code>, <code>*</code>, or <code>+</code>. Ordered lists use numbers: <code>1.</code>, <code>2.</code>. Indent 2-4 spaces for nested lists.' },
-            { h2: 'Links and Images', p: 'Links: <code>[link text](url)</code>. Images: <code>![alt text](image-url)</code>. Add titles with <code>[text](url "title")</code>.' },
-            { h2: 'Code', p: 'Inline code: <code>`code`</code>. Code blocks: wrap with <code>```</code> on separate lines. Add a language after the opening backticks for syntax highlighting.' },
-            { h2: 'Tables', p: 'Use pipes <code>|</code> to separate columns and hyphens <code>---</code> for the header row separator. Alignment with <code>:---</code> (left), <code>:---:</code> (center), <code>---:</code> (right).' }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Does this support GitHub Flavored Markdown?',
+        a: 'Yes. Tables, strikethrough, task lists, and fenced code blocks are all supported.',
+      },
+      {
+        q: 'Can I use this for blog posts?',
+        a: 'Absolutely. Write in Markdown, convert to HTML, and paste into your CMS. The generated HTML is clean and semantic.',
+      },
+      {
+        q: 'Is there a character limit?',
+        a: 'No. The converter runs in your browser, so it handles files of any size.',
+      },
+    ],
+  },
+  {
+    slug: 'markdown-cheat-sheet',
+    title: 'Markdown Cheat Sheet — Complete Syntax Reference',
+    h1: '<span class="accent">Markdown</span> Cheat Sheet',
+    subtitle:
+      'Quick reference for all Markdown syntax: headings, lists, links, images, code, tables, and more.',
+    tldr: "Markdown quick reference: **bold**, *italic*, # Heading, - list item, [link](url), ![image](url), `inline code`, ``` code block ```. Use GitHub Flavored Markdown (GFM) for tables, task lists, and strikethrough. It's the standard used by GitHub, Reddit, and Stack Overflow.",
+    tool: { name: 'Markdown to HTML Converter', path: 'markdown-html' },
+    keywords:
+      'markdown cheat sheet, markdown syntax, markdown reference, markdown guide, how to write markdown',
+    sections: [
+      {
+        h2: 'Text Formatting',
+        p: '<code>**bold**</code> for <strong>bold</strong>, <code>*italic*</code> for <em>italic</em>, <code>~~strikethrough~~</code> for <s>strikethrough</s>. Combine them: <code>***bold italic***</code>.',
+      },
+      {
+        h2: 'Headings',
+        p: 'Use # for h1, ## for h2, ### for h3, and so on up to ######. Always include a space after the hash marks.',
+      },
+      {
+        h2: 'Lists',
+        p: 'Unordered lists use <code>-</code>, <code>*</code>, or <code>+</code>. Ordered lists use numbers: <code>1.</code>, <code>2.</code>. Indent 2-4 spaces for nested lists.',
+      },
+      {
+        h2: 'Links and Images',
+        p: 'Links: <code>[link text](url)</code>. Images: <code>![alt text](image-url)</code>. Add titles with <code>[text](url "title")</code>.',
+      },
+      {
+        h2: 'Code',
+        p: 'Inline code: <code>`code`</code>. Code blocks: wrap with <code>```</code> on separate lines. Add a language after the opening backticks for syntax highlighting.',
+      },
+      {
+        h2: 'Tables',
+        p: 'Use pipes <code>|</code> to separate columns and hyphens <code>---</code> for the header row separator. Alignment with <code>:---</code> (left), <code>:---:</code> (center), <code>---:</code> (right).',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Which Markdown flavor should I use?',
+        a: 'CommonMark is the standard. GitHub Flavored Markdown (GFM) adds tables, task lists, and strikethrough — and is the most widely supported.',
+      },
+      {
+        q: 'Can I use HTML inside Markdown?',
+        a: 'Yes. Most Markdown processors pass through raw HTML. This is useful for elements not supported by Markdown syntax.',
+      },
+    ],
+  },
+  // ═══ Developer Tools ═══
+  {
+    slug: 'best-free-developer-tools-online',
+    title: '10 Best Free Developer Tools Online (2026)',
+    h1: 'Best Free <span class="accent">Developer Tools</span> Online',
+    subtitle:
+      'Curated list of the most useful free online developer tools — JSON converters, encoders, formatters, and more.',
+    tldr: 'Best free developer tools in 2026: JSON↔CSV converter (handles nested objects, 50K+ rows), Base64 encoder/decoder, password strength checker (entropy + crack time), SEO meta tag generator (OG + Twitter cards), color palette generator (CSS export), and Markdown→HTML converter. All client-side, no signup.',
+    tool: { name: 'All Tools', path: '' },
+    keywords:
+      'free developer tools, online dev tools, free programming tools, web developer tools 2026',
+    sections: [
+      {
+        h2: 'Why Use Online Developer Tools?',
+        p: "Online tools eliminate setup, work on any device, and handle quick tasks without installing software. They're perfect for format conversions, data transformations, encoding, and quick calculations.",
+      },
+      {
+        h2: 'Data Conversion Tools',
+        p: 'Convert between JSON, CSV, XML, YAML, and other formats instantly. CyberScryb\'s <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a> handles nested objects, large datasets, and bidirectional conversion — all client-side.',
+      },
+      {
+        h2: 'Encoding & Decoding',
+        p: 'Base64 encode/decode, URL encode, HTML entity encoding. Our <a href="/tools/base64-tool/">Base64 tool</a> supports text encoding/decoding with instant results.',
+      },
+      {
+        h2: 'Security Tools',
+        p: 'Password strength checkers, hash generators, encryption tools. CyberScryb\'s <a href="/tools/password-checker/">Password Checker</a> provides entropy analysis, crack time estimates, and pattern detection.',
+      },
+      {
+        h2: 'SEO & Web Tools',
+        p: 'Meta tag generators, sitemap builders, robots.txt validators. Our <a href="/tools/seo-tag-generator/">SEO Meta Tag Generator</a> creates title tags, descriptions, Open Graph, and Twitter Card tags.',
+      },
+      {
+        h2: 'Design Tools',
+        p: 'Color palette generators, gradient builders, typography testers. CyberScryb\'s <a href="/tools/color-palette/">Color Palette Generator</a> creates harmonious schemes with CSS export.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Are these tools really free?',
+        a: 'Yes. CyberScryb tools are 100% free with no signup required. All processing happens in your browser.',
+      },
+      {
+        q: 'Is my data safe?',
+        a: 'Yes. Everything runs client-side. No data is uploaded to any server.',
+      },
+    ],
+  },
+  // ═══ Comparison & "Versus" Pages ═══
+  {
+    slug: 'json-vs-csv-when-to-use-each',
+    title: 'JSON vs CSV: When to Use Each Format (Comparison)',
+    h1: '<span class="accent">JSON vs CSV</span>: Which Format to Use',
+    subtitle:
+      'Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.',
+    tldr: 'JSON is hierarchical (nested objects, arrays, mixed types) — best for APIs, config files, and NoSQL databases. CSV is flat (rows and columns) — best for spreadsheets, data analysis, and bulk imports. CSV parses 3-5x faster for tabular data. For very large datasets, consider Parquet or Avro.',
+    tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
+    keywords: 'json vs csv, json or csv, csv vs json, data format comparison, when to use json',
+    sections: [
+      {
+        h2: 'At a Glance',
+        p: 'JSON is hierarchical and flexible. CSV is flat and universal. JSON is better for APIs and complex data. CSV is better for spreadsheets and simple tabular data. Need to switch between them? Use our <a href="/tools/json-csv-converter/">free converter</a>.',
+      },
+      {
+        h2: 'Structure Comparison',
+        p: 'JSON supports nested objects, arrays, and mixed types. CSV is strictly rows and columns. JSON files are larger but more expressive. CSV files are smaller and faster to parse for tabular data.',
+      },
+      {
+        h2: 'Performance',
+        p: 'CSV parsing is ~3-5x faster than JSON parsing for flat data. JSON is more efficient for hierarchical data because CSV requires column duplication for repeated structures.',
+      },
+      {
+        h2: 'Best Use Cases for JSON',
+        list: [
+          'API responses and requests',
+          'Configuration files',
+          'Complex or nested data structures',
+          'Real-time data streaming',
+          'NoSQL database storage (MongoDB, CouchDB)',
         ],
-        faqs: [
-            { q: 'Which Markdown flavor should I use?', a: 'CommonMark is the standard. GitHub Flavored Markdown (GFM) adds tables, task lists, and strikethrough — and is the most widely supported.' },
-            { q: 'Can I use HTML inside Markdown?', a: 'Yes. Most Markdown processors pass through raw HTML. This is useful for elements not supported by Markdown syntax.' }
-        ]
-    },
-    // ═══ Developer Tools ═══
-    {
-        slug: 'best-free-developer-tools-online',
-        title: '10 Best Free Developer Tools Online (2026)',
-        h1: 'Best Free <span class="accent">Developer Tools</span> Online',
-        subtitle: 'Curated list of the most useful free online developer tools — JSON converters, encoders, formatters, and more.',
-        tldr: 'Best free developer tools in 2026: JSON↔CSV converter (handles nested objects, 50K+ rows), Base64 encoder/decoder, password strength checker (entropy + crack time), SEO meta tag generator (OG + Twitter cards), color palette generator (CSS export), and Markdown→HTML converter. All client-side, no signup.',
-        tool: { name: 'All Tools', path: '' },
-        keywords: 'free developer tools, online dev tools, free programming tools, web developer tools 2026',
-        sections: [
-            { h2: 'Why Use Online Developer Tools?', p: 'Online tools eliminate setup, work on any device, and handle quick tasks without installing software. They\'re perfect for format conversions, data transformations, encoding, and quick calculations.' },
-            { h2: 'Data Conversion Tools', p: 'Convert between JSON, CSV, XML, YAML, and other formats instantly. CyberScryb\'s <a href="/tools/json-csv-converter/">JSON ↔ CSV Converter</a> handles nested objects, large datasets, and bidirectional conversion — all client-side.' },
-            { h2: 'Encoding & Decoding', p: 'Base64 encode/decode, URL encode, HTML entity encoding. Our <a href="/tools/base64-tool/">Base64 tool</a> supports text encoding/decoding with instant results.' },
-            { h2: 'Security Tools', p: 'Password strength checkers, hash generators, encryption tools. CyberScryb\'s <a href="/tools/password-checker/">Password Checker</a> provides entropy analysis, crack time estimates, and pattern detection.' },
-            { h2: 'SEO & Web Tools', p: 'Meta tag generators, sitemap builders, robots.txt validators. Our <a href="/tools/seo-tag-generator/">SEO Meta Tag Generator</a> creates title tags, descriptions, Open Graph, and Twitter Card tags.' },
-            { h2: 'Design Tools', p: 'Color palette generators, gradient builders, typography testers. CyberScryb\'s <a href="/tools/color-palette/">Color Palette Generator</a> creates harmonious schemes with CSS export.' }
+      },
+      {
+        h2: 'Best Use Cases for CSV',
+        list: [
+          'Spreadsheet imports/exports',
+          'Data analysis with pandas, R, or SPSS',
+          'Database bulk imports',
+          'Report generation',
+          'Legacy system integrations',
         ],
-        faqs: [
-            { q: 'Are these tools really free?', a: 'Yes. CyberScryb tools are 100% free with no signup required. All processing happens in your browser.' },
-            { q: 'Is my data safe?', a: 'Yes. Everything runs client-side. No data is uploaded to any server.' }
-        ]
-    },
-    // ═══ Comparison & "Versus" Pages ═══
-    {
-        slug: 'json-vs-csv-when-to-use-each',
-        title: 'JSON vs CSV: When to Use Each Format (Comparison)',
-        h1: '<span class="accent">JSON vs CSV</span>: Which Format to Use',
-        subtitle: 'Side-by-side comparison of JSON and CSV — structure, performance, use cases, and when to convert.',
-        tldr: 'JSON is hierarchical (nested objects, arrays, mixed types) — best for APIs, config files, and NoSQL databases. CSV is flat (rows and columns) — best for spreadsheets, data analysis, and bulk imports. CSV parses 3-5x faster for tabular data. For very large datasets, consider Parquet or Avro.',
-        tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
-        keywords: 'json vs csv, json or csv, csv vs json, data format comparison, when to use json',
-        sections: [
-            { h2: 'At a Glance', p: 'JSON is hierarchical and flexible. CSV is flat and universal. JSON is better for APIs and complex data. CSV is better for spreadsheets and simple tabular data. Need to switch between them? Use our <a href="/tools/json-csv-converter/">free converter</a>.' },
-            { h2: 'Structure Comparison', p: 'JSON supports nested objects, arrays, and mixed types. CSV is strictly rows and columns. JSON files are larger but more expressive. CSV files are smaller and faster to parse for tabular data.' },
-            { h2: 'Performance', p: 'CSV parsing is ~3-5x faster than JSON parsing for flat data. JSON is more efficient for hierarchical data because CSV requires column duplication for repeated structures.' },
-            { h2: 'Best Use Cases for JSON', list: ['API responses and requests', 'Configuration files', 'Complex or nested data structures', 'Real-time data streaming', 'NoSQL database storage (MongoDB, CouchDB)'] },
-            { h2: 'Best Use Cases for CSV', list: ['Spreadsheet imports/exports', 'Data analysis with pandas, R, or SPSS', 'Database bulk imports', 'Report generation', 'Legacy system integrations'] }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Which format is better for large datasets?',
+        a: 'For flat tabular data, CSV is more efficient. For complex hierarchical data, JSON preserves structure better. For very large datasets, consider Parquet or Avro.',
+      },
+      {
+        q: 'Can JSON replace CSV?',
+        a: "Technically yes, but CSV's simplicity and universal spreadsheet support make it irreplaceable for many workflows.",
+      },
+    ],
+  },
+  {
+    slug: 'hex-vs-rgb-vs-hsl-color-formats',
+    title: 'HEX vs RGB vs HSL — Color Format Guide',
+    h1: '<span class="accent">HEX vs RGB vs HSL</span> Color Formats',
+    subtitle: 'Understand the differences between color formats and when to use each in your CSS.',
+    tldr: 'HEX (#RRGGBB) is compact, best for static colors. RGB (0-255 per channel) is best for JavaScript/canvas. HSL (hue 0-360°, saturation %, lightness %) is the most intuitive — easiest to create shade variations. Use HSLA/RGBA when you need transparency. HSL is recommended for CSS design systems.',
+    tool: { name: 'Color Palette Generator', path: 'color-palette' },
+    keywords: 'hex vs rgb, hex vs hsl, color format comparison, css color formats, rgb vs hsl',
+    sections: [
+      {
+        h2: 'HEX Colors',
+        p: 'Format: #RRGGBB (e.g., #c41e1e). The most common CSS format. Compact but hard to modify mentally. Shorthand available: #RGB expands to #RRGGBB.',
+      },
+      {
+        h2: 'RGB Colors',
+        p: 'Format: rgb(196, 30, 30). Defines red, green, blue channels (0-255). More readable than HEX. RGBA adds alpha transparency: rgba(196, 30, 30, 0.8).',
+      },
+      {
+        h2: 'HSL Colors',
+        p: 'Format: hsl(0, 73%, 44%). Defines hue (0-360°), saturation (0-100%), lightness (0-100%). The most intuitive format — easy to create variations by adjusting one value.',
+      },
+      {
+        h2: 'Which Should You Use?',
+        list: [
+          'HEX for static colors and design hand-offs',
+          'RGB for JavaScript manipulation and canvas',
+          'HSL for CSS design systems and dynamic theming',
+          'HSLA/RGBA when you need transparency',
         ],
-        faqs: [
-            { q: 'Which format is better for large datasets?', a: 'For flat tabular data, CSV is more efficient. For complex hierarchical data, JSON preserves structure better. For very large datasets, consider Parquet or Avro.' },
-            { q: 'Can JSON replace CSV?', a: 'Technically yes, but CSV\'s simplicity and universal spreadsheet support make it irreplaceable for many workflows.' }
-        ]
-    },
-    {
-        slug: 'hex-vs-rgb-vs-hsl-color-formats',
-        title: 'HEX vs RGB vs HSL — Color Format Guide',
-        h1: '<span class="accent">HEX vs RGB vs HSL</span> Color Formats',
-        subtitle: 'Understand the differences between color formats and when to use each in your CSS.',
-        tldr: 'HEX (#RRGGBB) is compact, best for static colors. RGB (0-255 per channel) is best for JavaScript/canvas. HSL (hue 0-360°, saturation %, lightness %) is the most intuitive — easiest to create shade variations. Use HSLA/RGBA when you need transparency. HSL is recommended for CSS design systems.',
-        tool: { name: 'Color Palette Generator', path: 'color-palette' },
-        keywords: 'hex vs rgb, hex vs hsl, color format comparison, css color formats, rgb vs hsl',
-        sections: [
-            { h2: 'HEX Colors', p: 'Format: #RRGGBB (e.g., #c41e1e). The most common CSS format. Compact but hard to modify mentally. Shorthand available: #RGB expands to #RRGGBB.' },
-            { h2: 'RGB Colors', p: 'Format: rgb(196, 30, 30). Defines red, green, blue channels (0-255). More readable than HEX. RGBA adds alpha transparency: rgba(196, 30, 30, 0.8).' },
-            { h2: 'HSL Colors', p: 'Format: hsl(0, 73%, 44%). Defines hue (0-360°), saturation (0-100%), lightness (0-100%). The most intuitive format — easy to create variations by adjusting one value.' },
-            { h2: 'Which Should You Use?', list: ['HEX for static colors and design hand-offs', 'RGB for JavaScript manipulation and canvas', 'HSL for CSS design systems and dynamic theming', 'HSLA/RGBA when you need transparency'] }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Can I mix color formats in CSS?',
+        a: 'Yes. Browsers handle all formats. But pick one for consistency. HSL is best for design systems because you can easily create shades.',
+      },
+      {
+        q: 'Which format do design tools use?',
+        a: 'Figma and Sketch default to HEX. Photoshop uses RGB. CSS-focused designers increasingly prefer HSL.',
+      },
+    ],
+  },
+  // ═══ How-To Guides ═══
+  {
+    slug: 'how-to-check-if-password-has-been-leaked',
+    title: 'How to Check If Your Password Has Been Leaked',
+    h1: 'Has Your Password Been <span class="accent">Leaked</span>?',
+    subtitle:
+      'Check if your passwords appear in data breaches. Learn how to protect your accounts after a leak.',
+    tldr: "Check HaveIBeenPwned.com with your email, use CyberScryb's Password Checker against breach databases, or check Chrome's built-in password checkup. If leaked: change all passwords using that credential immediately, enable 2FA everywhere, and use a password manager for unique passwords per account.",
+    tool: { name: 'Password Strength Checker', path: 'password-checker' },
+    keywords:
+      'password leak check, has my password been leaked, password breach checker, compromised password',
+    sections: [
+      {
+        h2: 'How Passwords Get Leaked',
+        p: 'Data breaches expose millions of passwords each year. Major breaches (LinkedIn, Adobe, Yahoo, Equifax) have leaked over 3 billion credentials. Attackers use these leaked passwords to break into other accounts — because most people reuse passwords.',
+      },
+      {
+        h2: 'How to Check for Leaks',
+        list: [
+          'Visit HaveIBeenPwned.com and enter your email',
+          'Use our <a href="/tools/password-checker/">Password Strength Checker</a> to test if your password appears in common breach databases',
+          "Check Google Chrome's built-in password checkup in Settings → Passwords",
+          'Enable Firefox Monitor for automatic breach alerts',
         ],
-        faqs: [
-            { q: 'Can I mix color formats in CSS?', a: 'Yes. Browsers handle all formats. But pick one for consistency. HSL is best for design systems because you can easily create shades.' },
-            { q: 'Which format do design tools use?', a: 'Figma and Sketch default to HEX. Photoshop uses RGB. CSS-focused designers increasingly prefer HSL.' }
-        ]
-    },
-    // ═══ How-To Guides ═══
-    {
-        slug: 'how-to-check-if-password-has-been-leaked',
-        title: 'How to Check If Your Password Has Been Leaked',
-        h1: 'Has Your Password Been <span class="accent">Leaked</span>?',
-        subtitle: 'Check if your passwords appear in data breaches. Learn how to protect your accounts after a leak.',
-        tldr: 'Check HaveIBeenPwned.com with your email, use CyberScryb\'s Password Checker against breach databases, or check Chrome\'s built-in password checkup. If leaked: change all passwords using that credential immediately, enable 2FA everywhere, and use a password manager for unique passwords per account.',
-        tool: { name: 'Password Strength Checker', path: 'password-checker' },
-        keywords: 'password leak check, has my password been leaked, password breach checker, compromised password',
-        sections: [
-            { h2: 'How Passwords Get Leaked', p: 'Data breaches expose millions of passwords each year. Major breaches (LinkedIn, Adobe, Yahoo, Equifax) have leaked over 3 billion credentials. Attackers use these leaked passwords to break into other accounts — because most people reuse passwords.' },
-            { h2: 'How to Check for Leaks', list: ['Visit HaveIBeenPwned.com and enter your email', 'Use our <a href="/tools/password-checker/">Password Strength Checker</a> to test if your password appears in common breach databases', 'Check Google Chrome\'s built-in password checkup in Settings → Passwords', 'Enable Firefox Monitor for automatic breach alerts'] },
-            { h2: 'What to Do If Your Password Was Leaked', list: ['Change the password immediately — on ALL sites where you used it', 'Enable two-factor authentication (2FA) on every important account', 'Use a password manager to generate unique passwords', 'Monitor your accounts for suspicious activity', 'Consider credit monitoring if financial data was exposed'] }
+      },
+      {
+        h2: 'What to Do If Your Password Was Leaked',
+        list: [
+          'Change the password immediately — on ALL sites where you used it',
+          'Enable two-factor authentication (2FA) on every important account',
+          'Use a password manager to generate unique passwords',
+          'Monitor your accounts for suspicious activity',
+          'Consider credit monitoring if financial data was exposed',
         ],
-        faqs: [
-            { q: 'Should I be worried if my password was in a breach?', a: 'Yes. Change it immediately and check all accounts that used the same password. Enable 2FA everywhere possible.' },
-            { q: 'Is it safe to check my password on breach-checking websites?', a: 'Reputable services like HaveIBeenPwned use k-anonymity — they only send a partial hash of your password, never the full thing.' }
-        ]
-    },
-    {
-        slug: 'seo-checklist-for-new-websites',
-        title: 'SEO Checklist for New Websites — 2026 Guide',
-        h1: '<span class="accent">SEO Checklist</span> for New Websites',
-        subtitle: 'Everything you need to do to get your new website indexed and ranking on Google.',
-        tldr: 'New website SEO essentials: submit sitemap to Search Console, add unique title tags (<60 chars) and meta descriptions (150-160 chars), enable HTTPS, add JSON-LD structured data, use one H1 per page, optimize images (WebP + alt text), and target long-tail keywords with lower competition first.',
-        tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
-        keywords: 'seo checklist, new website seo, seo for beginners, how to rank on google, website seo guide',
-        sections: [
-            { h2: 'Technical SEO Foundation', list: ['Submit sitemap to Google Search Console', 'Ensure all pages have unique title tags and meta descriptions', 'Set up canonical URLs to prevent duplicate content', 'Enable HTTPS (free with Let\'s Encrypt or Firebase Hosting)', 'Achieve Core Web Vitals scores in the green zone', 'Create a clean URL structure (no query parameters for content pages)', 'Add structured data (JSON-LD) for rich snippets'] },
-            { h2: 'On-Page SEO', list: ['Use one H1 per page with your primary keyword', 'Write compelling meta descriptions (150-160 chars) — use our <a href="/tools/seo-tag-generator/">free generator</a>', 'Include internal links between related pages', 'Optimize images: compress, add alt text, use modern formats (WebP)', 'Ensure content is longer and more comprehensive than competitors', 'Use semantic HTML (header, main, article, footer, nav)'] },
-            { h2: 'Content Strategy', list: ['Target long-tail keywords with lower competition first', 'Answer specific questions your audience is searching for', 'Create "pillar" pages that link to detailed subtopic pages', 'Update content regularly — Google favors freshness', 'Write for humans first, search engines second'] }
+      },
+    ],
+    faqs: [
+      {
+        q: 'Should I be worried if my password was in a breach?',
+        a: 'Yes. Change it immediately and check all accounts that used the same password. Enable 2FA everywhere possible.',
+      },
+      {
+        q: 'Is it safe to check my password on breach-checking websites?',
+        a: 'Reputable services like HaveIBeenPwned use k-anonymity — they only send a partial hash of your password, never the full thing.',
+      },
+    ],
+  },
+  {
+    slug: 'seo-checklist-for-new-websites',
+    title: 'SEO Checklist for New Websites — 2026 Guide',
+    h1: '<span class="accent">SEO Checklist</span> for New Websites',
+    subtitle: 'Everything you need to do to get your new website indexed and ranking on Google.',
+    tldr: 'New website SEO essentials: submit sitemap to Search Console, add unique title tags (<60 chars) and meta descriptions (150-160 chars), enable HTTPS, add JSON-LD structured data, use one H1 per page, optimize images (WebP + alt text), and target long-tail keywords with lower competition first.',
+    tool: { name: 'SEO Meta Tag Generator', path: 'seo-tag-generator' },
+    keywords:
+      'seo checklist, new website seo, seo for beginners, how to rank on google, website seo guide',
+    sections: [
+      {
+        h2: 'Technical SEO Foundation',
+        list: [
+          'Submit sitemap to Google Search Console',
+          'Ensure all pages have unique title tags and meta descriptions',
+          'Set up canonical URLs to prevent duplicate content',
+          "Enable HTTPS (free with Let's Encrypt or Firebase Hosting)",
+          'Achieve Core Web Vitals scores in the green zone',
+          'Create a clean URL structure (no query parameters for content pages)',
+          'Add structured data (JSON-LD) for rich snippets',
         ],
-        faqs: [
-            { q: 'How long until Google indexes my new site?', a: 'Usually 4-14 days after submitting to Search Console. Individual pages can take 1-7 days after crawling.' },
-            { q: 'Do I need to pay for SEO tools?', a: 'Not initially. Google Search Console, Google Analytics, and free tools like CyberScryb\'s SEO Tag Generator cover the basics. Paid tools help as you scale.' }
-        ]
-    },
-    {
-        slug: 'how-to-format-json-data',
-        title: 'How to Format & Pretty-Print JSON Data',
-        h1: 'Format & <span class="accent">Pretty-Print JSON</span> Data',
-        subtitle: 'Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.',
-        tldr: 'Pretty-print JSON with JSON.stringify(JSON.parse(data), null, 2) in your browser console, or paste into CyberScryb\'s converter for auto-formatting. Common JSON errors: trailing commas, single quotes (must be double), unquoted keys, and unescaped special characters.',
-        tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
-        keywords: 'format json, pretty print json, json formatter, json beautifier, json validator online',
-        sections: [
-            { h2: 'Why Format JSON?', p: 'Minified JSON is unreadable. API responses, config files, and database exports often come as single-line blobs. Formatting with proper indentation makes the structure visible and errors findable.' },
-            { h2: 'How to Pretty-Print JSON', list: ['Open your browser\'s developer console (F12)', 'Type: JSON.stringify(JSON.parse(yourJson), null, 2)', 'Or use our <a href="/tools/json-csv-converter/">JSON tool</a> — paste your JSON and it auto-formats', 'In VS Code: Ctrl+Shift+P → "Format Document"', 'In the terminal: python -m json.tool < input.json'] },
-            { h2: 'Common JSON Syntax Errors', list: ['Missing or extra commas after the last element', 'Using single quotes instead of double quotes', 'Unquoted keys (valid in JS but not in JSON)', 'Trailing commas in arrays or objects', 'Unescaped special characters in strings'] }
+      },
+      {
+        h2: 'On-Page SEO',
+        list: [
+          'Use one H1 per page with your primary keyword',
+          'Write compelling meta descriptions (150-160 chars) — use our <a href="/tools/seo-tag-generator/">free generator</a>',
+          'Include internal links between related pages',
+          'Optimize images: compress, add alt text, use modern formats (WebP)',
+          'Ensure content is longer and more comprehensive than competitors',
+          'Use semantic HTML (header, main, article, footer, nav)',
         ],
-        faqs: [
-            { q: 'What\'s the difference between JSON and JavaScript objects?', a: 'JSON requires double quotes for keys and strings, doesn\'t allow trailing commas, and doesn\'t support functions. JavaScript objects are more flexible.' },
-            { q: 'How do I validate JSON?', a: 'Our converter validates JSON on paste. If parsing fails, it highlights the error. You can also use jsonlint.com for detailed error messages.' }
-        ]
-    },
-    {
-        slug: 'json-web-token-decoder-hash-generator',
-        title: 'How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side',
-        h1: 'Safely Inspect <span class="accent">JWTs</span> & Generate Hashes',
-        subtitle: 'Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.',
-        tldr: 'To inspect JWTs safely: decode the base64url payload locally in the browser using atob(). For hashes: use the native Web Crypto API. This ensures sensitive API keys and tokens never cross the network.',
-        tool: { name: 'JWT Decoder', path: 'jwt-decoder' },
-        keywords: 'jwt decoder, decode jwt in browser, client-side hash generator, sha-256 web crypto',
-        sections: [
-            { h2: 'The Security Risk of Third-Party Token Decoders', p: 'Many online developer tools require you to paste JSON Web Tokens (JWT) or private data keys to inspect their parameters. If these utilities transmit your strings back to their servers, your tokens can be intercepted or logged. If your JWT contains access claims, session IDs, or private scopes, anyone who captures it can hijack your users\' sessions. This guide details how to leverage client-side cryptography to decode tokens and generate standard cryptographic hashes (like SHA-256) safely in your own browser.' },
-            { h2: 'How to Decode a JWT in the Browser (No Server Requests)', p: 'A JWT consists of three parts separated by periods: Header (defines token type and algorithm), Payload (contains authorization claims), and Signature (verifies token integrity). These blocks are simply Base64URL-encoded strings. You can inspect the payload client-side in seconds using the native atob() method:<br><br><pre><code class="language-javascript">function decodeJWTPayload(token) {\n  const parts = token.split(\'.\');\n  if (parts.length !== 3) {\n    throw new Error("Invalid JWT layout");\n  }\n  \n  const base64Url = parts[1];\n  const base64 = base64Url.replace(/-/g, \'+\').replace(/_/g, \'/\');\n  \n  const jsonPayload = decodeURIComponent(\n    atob(base64)\n      .split(\'\')\n      .map(c => \'%\' + (\'00\' + c.charCodeAt(0).toString(16)).slice(-2))\n      .join(\'\')\n  );\n\n  return JSON.parse(jsonPayload);\n}</code></pre>' },
-            { h2: 'Browser-Side Cryptographic Hashing with Web Crypto API', p: 'Instead of sending strings to a server to generate an MD5 or SHA-256 signature, utilize your browser\'s native, high-performance Web Crypto API:<br><br><pre><code class="language-javascript">async function generateSHA256(message) {\n  const msgBuffer = new TextEncoder().encode(message);\n  const hashBuffer = await crypto.subtle.digest(\'SHA-256\', msgBuffer);\n  const hashArray = Array.from(new Uint8Array(hashBuffer));\n  const hashHex = hashArray.map(b => b.toString(16).padStart(2, \'0\')).join(\'\');\n  return hashHex;\n}</code></pre><br>By performing operations 100% client-side, your development payloads never cross the wire.' },
-            { h2: 'Direct Utilities on CyberScryb', p: 'If you need to analyze tokens or generate cryptographic checksums immediately, launch our zero-server tools:', list: ['<a href="/tools/jwt-decoder/">Client-Side JWT Decoder</a>', '<a href="/tools/hash-generator/">In-Browser Cryptographic Hash Generator</a>'] }
+      },
+      {
+        h2: 'Content Strategy',
+        list: [
+          'Target long-tail keywords with lower competition first',
+          'Answer specific questions your audience is searching for',
+          'Create "pillar" pages that link to detailed subtopic pages',
+          'Update content regularly — Google favors freshness',
+          'Write for humans first, search engines second',
         ],
-        faqs: [
-            { q: 'Why is browser-side decoding safer?', a: 'Online services that process tokens server-side can read and log your secrets. Browser-side tools run the decoding script locally inside your browser sandbox, ensuring no token data is transmitted over the internet.' },
-            { q: 'What algorithms does the Web Crypto API support?', a: 'It natively supports SHA-1, SHA-256, SHA-384, and SHA-512 for cryptographic hashing, as well as modern encryption standards like AES-GCM and RSA-PSS.' }
-        ]
-    }
+      },
+    ],
+    faqs: [
+      {
+        q: 'How long until Google indexes my new site?',
+        a: 'Usually 4-14 days after submitting to Search Console. Individual pages can take 1-7 days after crawling.',
+      },
+      {
+        q: 'Do I need to pay for SEO tools?',
+        a: "Not initially. Google Search Console, Google Analytics, and free tools like CyberScryb's SEO Tag Generator cover the basics. Paid tools help as you scale.",
+      },
+    ],
+  },
+  {
+    slug: 'how-to-format-json-data',
+    title: 'How to Format & Pretty-Print JSON Data',
+    h1: 'Format & <span class="accent">Pretty-Print JSON</span> Data',
+    subtitle:
+      'Clean up messy JSON data — make it readable, validate syntax, and spot errors instantly.',
+    tldr: "Pretty-print JSON with JSON.stringify(JSON.parse(data), null, 2) in your browser console, or paste into CyberScryb's converter for auto-formatting. Common JSON errors: trailing commas, single quotes (must be double), unquoted keys, and unescaped special characters.",
+    tool: { name: 'JSON ↔ CSV Converter', path: 'json-csv-converter' },
+    keywords:
+      'format json, pretty print json, json formatter, json beautifier, json validator online',
+    sections: [
+      {
+        h2: 'Why Format JSON?',
+        p: 'Minified JSON is unreadable. API responses, config files, and database exports often come as single-line blobs. Formatting with proper indentation makes the structure visible and errors findable.',
+      },
+      {
+        h2: 'How to Pretty-Print JSON',
+        list: [
+          "Open your browser's developer console (F12)",
+          'Type: JSON.stringify(JSON.parse(yourJson), null, 2)',
+          'Or use our <a href="/tools/json-csv-converter/">JSON tool</a> — paste your JSON and it auto-formats',
+          'In VS Code: Ctrl+Shift+P → "Format Document"',
+          'In the terminal: python -m json.tool < input.json',
+        ],
+      },
+      {
+        h2: 'Common JSON Syntax Errors',
+        list: [
+          'Missing or extra commas after the last element',
+          'Using single quotes instead of double quotes',
+          'Unquoted keys (valid in JS but not in JSON)',
+          'Trailing commas in arrays or objects',
+          'Unescaped special characters in strings',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "What's the difference between JSON and JavaScript objects?",
+        a: "JSON requires double quotes for keys and strings, doesn't allow trailing commas, and doesn't support functions. JavaScript objects are more flexible.",
+      },
+      {
+        q: 'How do I validate JSON?',
+        a: 'Our converter validates JSON on paste. If parsing fails, it highlights the error. You can also use jsonlint.com for detailed error messages.',
+      },
+    ],
+  },
+  {
+    slug: 'json-web-token-decoder-hash-generator',
+    title:
+      'How to Safely Inspect JSON Web Tokens (JWT) and Generate Cryptographic Hashes Client-Side',
+    h1: 'Safely Inspect <span class="accent">JWTs</span> & Generate Hashes',
+    subtitle:
+      'Learn why sending sensitive tokens to online servers is a risk, and how to safely inspect payload claims and create cryptographic hashes 100% in-browser.',
+    tldr: 'To inspect JWTs safely: decode the base64url payload locally in the browser using atob(). For hashes: use the native Web Crypto API. This ensures sensitive API keys and tokens never cross the network.',
+    tool: { name: 'JWT Decoder', path: 'jwt-decoder' },
+    keywords: 'jwt decoder, decode jwt in browser, client-side hash generator, sha-256 web crypto',
+    sections: [
+      {
+        h2: 'The Security Risk of Third-Party Token Decoders',
+        p: "Many online developer tools require you to paste JSON Web Tokens (JWT) or private data keys to inspect their parameters. If these utilities transmit your strings back to their servers, your tokens can be intercepted or logged. If your JWT contains access claims, session IDs, or private scopes, anyone who captures it can hijack your users' sessions. This guide details how to leverage client-side cryptography to decode tokens and generate standard cryptographic hashes (like SHA-256) safely in your own browser.",
+      },
+      {
+        h2: 'How to Decode a JWT in the Browser (No Server Requests)',
+        p: "A JWT consists of three parts separated by periods: Header (defines token type and algorithm), Payload (contains authorization claims), and Signature (verifies token integrity). These blocks are simply Base64URL-encoded strings. You can inspect the payload client-side in seconds using the native atob() method:<br><br><pre><code class=\"language-javascript\">function decodeJWTPayload(token) {\n  const parts = token.split('.');\n  if (parts.length !== 3) {\n    throw new Error(\"Invalid JWT layout\");\n  }\n  \n  const base64Url = parts[1];\n  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');\n  \n  const jsonPayload = decodeURIComponent(\n    atob(base64)\n      .split('')\n      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))\n      .join('')\n  );\n\n  return JSON.parse(jsonPayload);\n}</code></pre>",
+      },
+      {
+        h2: 'Browser-Side Cryptographic Hashing with Web Crypto API',
+        p: "Instead of sending strings to a server to generate an MD5 or SHA-256 signature, utilize your browser's native, high-performance Web Crypto API:<br><br><pre><code class=\"language-javascript\">async function generateSHA256(message) {\n  const msgBuffer = new TextEncoder().encode(message);\n  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);\n  const hashArray = Array.from(new Uint8Array(hashBuffer));\n  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');\n  return hashHex;\n}</code></pre><br>By performing operations 100% client-side, your development payloads never cross the wire.",
+      },
+      {
+        h2: 'Direct Utilities on CyberScryb',
+        p: 'If you need to analyze tokens or generate cryptographic checksums immediately, launch our zero-server tools:',
+        list: [
+          '<a href="/tools/jwt-decoder/">Client-Side JWT Decoder</a>',
+          '<a href="/tools/hash-generator/">In-Browser Cryptographic Hash Generator</a>',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Why is browser-side decoding safer?',
+        a: 'Online services that process tokens server-side can read and log your secrets. Browser-side tools run the decoding script locally inside your browser sandbox, ensuring no token data is transmitted over the internet.',
+      },
+      {
+        q: 'What algorithms does the Web Crypto API support?',
+        a: 'It natively supports SHA-1, SHA-256, SHA-384, and SHA-512 for cryptographic hashing, as well as modern encryption standards like AES-GCM and RSA-PSS.',
+      },
+    ],
+  },
 ];
 
 // ─── HTML Template Generator ───
 
 function generatePage(page) {
-    const toolLink = page.tool.path ? `/tools/${page.tool.path}/` : '/';
+  const toolLink = page.tool.path ? `/tools/${page.tool.path}/` : '/';
 
-    const sectionsHtml = page.sections.map(s => {
-        let content = '';
-        if (s.p) content += `                <p>${s.p}</p>\n`;
-        if (s.list) {
-            content += `                <${s.list[0] && s.list[0].match(/^\d/) ? 'ol' : 'ul'}>\n`;
-            content += s.list.map(item => `                    <li>${item}</li>`).join('\n') + '\n';
-            content += `                </${s.list[0] && s.list[0].match(/^\d/) ? 'ol' : 'ul'}>\n`;
-        }
-        return `                <h2>${s.h2}</h2>\n${content}`;
-    }).join('\n');
+  const sectionsHtml = page.sections
+    .map(s => {
+      let content = '';
+      if (s.p) content += `                <p>${s.p}</p>\n`;
+      if (s.list) {
+        content += `                <${s.list[0] && s.list[0].match(/^\d/) ? 'ol' : 'ul'}>\n`;
+        content += s.list.map(item => `                    <li>${item}</li>`).join('\n') + '\n';
+        content += `                </${s.list[0] && s.list[0].match(/^\d/) ? 'ol' : 'ul'}>\n`;
+      }
+      return `                <h2>${s.h2}</h2>\n${content}`;
+    })
+    .join('\n');
 
-    const faqsHtml = page.faqs.map(f =>
+  const faqsHtml = page.faqs
+    .map(
+      f =>
         `                <details>\n                    <summary>${f.q}</summary>\n                    <p>${f.a}</p>\n                </details>`
-    ).join('\n');
+    )
+    .join('\n');
 
-    const faqSchemaItems = page.faqs.map(f => ({
-        "@type": "Question",
-        "name": f.q,
-        "acceptedAnswer": { "@type": "Answer", "text": toPlainText(f.a) }
-    }));
+  const faqSchemaItems = page.faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: toPlainText(f.a) },
+  }));
 
-    // Enhanced JSON-LD with E-E-A-T signals, speakable schema, and citations
-    const jsonLd = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": page.title,
-        "description": page.subtitle,
-        "author": {
-            "@type": "Organization",
-            "name": "CyberScryb",
-            "url": "https://cyberscryb.com/about/",
-            "sameAs": ["https://github.com/cyberscryb"]
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "CyberScryb",
-            "url": "https://cyberscryb.com"
-        },
-        "datePublished": "2026-02-01",
-        "dateModified": "2026-02-12",
-        "mainEntityOfPage": `https://cyberscryb.com/guides/${page.slug}/`,
-        "about": page.keywords.split(', ').slice(0, 3).map(kw => ({
-            "@type": "Thing",
-            "name": kw
+  // Enhanced JSON-LD with E-E-A-T signals, speakable schema, and citations
+  const jsonLd = JSON.stringify(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: page.title,
+      description: page.subtitle,
+      author: {
+        '@type': 'Organization',
+        name: 'CyberScryb',
+        url: 'https://cyberscryb.com/about/',
+        sameAs: ['https://github.com/cyberscryb'],
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'CyberScryb',
+        url: 'https://cyberscryb.com',
+      },
+      datePublished: '2026-02-01',
+      dateModified: '2026-02-12',
+      mainEntityOfPage: `https://cyberscryb.com/guides/${page.slug}/`,
+      about: page.keywords
+        .split(', ')
+        .slice(0, 3)
+        .map(kw => ({
+          '@type': 'Thing',
+          name: kw,
         })),
-        "mentions": page.keywords.split(', ').slice(3).map(kw => ({
-            "@type": "Thing",
-            "name": kw
+      mentions: page.keywords
+        .split(', ')
+        .slice(3)
+        .map(kw => ({
+          '@type': 'Thing',
+          name: kw,
         })),
-        "speakable": {
-            "@type": "SpeakableSpecification",
-            "cssSelector": [".tldr-box", ".guide-subtitle", "h1"]
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.tldr-box', '.guide-subtitle', 'h1'],
+      },
+      citation: page.citations || [],
+    },
+    null,
+    8
+  );
+
+  const faqJsonLd = JSON.stringify(
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqSchemaItems,
+    },
+    null,
+    8
+  );
+
+  // SoftwareApplication schema for the tool
+  const softwareJsonLd = page.tool.path
+    ? JSON.stringify(
+        {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: page.tool.name,
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Web Browser',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          url: `https://cyberscryb.com/tools/${page.tool.path}/`,
         },
-        "citation": page.citations || []
-    }, null, 8);
+        null,
+        8
+      )
+    : null;
 
-    const faqJsonLd = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqSchemaItems
-    }, null, 8);
-
-    // SoftwareApplication schema for the tool
-    const softwareJsonLd = page.tool.path ? JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": page.tool.name,
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Web Browser",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "url": `https://cyberscryb.com/tools/${page.tool.path}/`
-    }, null, 8) : null;
-
-    // TL;DR summary box for AI citation
-    const tldrHtml = page.tldr ? `
+  // TL;DR summary box for AI citation
+  const tldrHtml = page.tldr
+    ? `
             <div class="tldr-box" role="region" aria-label="Key Takeaways">
                 <div class="tldr-header">
                     <span class="tldr-icon">⚡</span>
                     <strong>Key Takeaways (TL;DR)</strong>
                 </div>
                 <p>${page.tldr}</p>
-            </div>` : '';
+            </div>`
+    : '';
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -574,10 +1203,14 @@ function generatePage(page) {
     </script>
     <script type="application/ld+json">
     ${faqJsonLd}
-    </script>${softwareJsonLd ? `
+    </script>${
+      softwareJsonLd
+        ? `
     <script type="application/ld+json">
     ${softwareJsonLd}
-    </script>` : ''}
+    </script>`
+        : ''
+    }
     <!-- iubenda cookie consent banner -->
     <script>
     (function() {
@@ -719,178 +1352,244 @@ ${faqsHtml}
 // ─── Sitemap Generator ───
 
 function generateSitemap(generatedPages) {
-    const baseUrl = 'https://cyberscryb.com';
-    const today = new Date().toISOString().slice(0, 10);
-    const mainPages = [
-        { path: '/', priority: '1.0', freq: 'weekly' },
-        { path: '/tools/', priority: '0.9', freq: 'weekly' },
-        { path: '/guides/', priority: '0.9', freq: 'weekly' },
-        { path: '/blog/', priority: '0.9', freq: 'weekly' },
-        { path: '/about/', priority: '0.7', freq: 'monthly' },
-        { path: '/pro/', priority: '0.8', freq: 'monthly' },
-        { path: '/distill/', priority: '0.8', freq: 'monthly' },
-        { path: '/distill-privacy/', priority: '0.3', freq: 'yearly' },
-        { path: '/contact/', priority: '0.4', freq: 'yearly' },
-        { path: '/privacy/', priority: '0.3', freq: 'yearly' },
-        { path: '/terms/', priority: '0.3', freq: 'yearly' },
-        { path: '/disclosure/', priority: '0.3', freq: 'yearly' }
-    ];
-    const indexableTools = [
-        'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
-        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter',
-        'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
-        'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
-        'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
-        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator', 'jwt-decoder', 'hash-generator'
-    ];
+  const baseUrl = 'https://cyberscryb.com';
+  const today = new Date().toISOString().slice(0, 10);
+  const mainPages = [
+    { path: '/', priority: '1.0', freq: 'weekly' },
+    { path: '/tools/', priority: '0.9', freq: 'weekly' },
+    { path: '/guides/', priority: '0.9', freq: 'weekly' },
+    { path: '/blog/', priority: '0.9', freq: 'weekly' },
+    { path: '/about/', priority: '0.7', freq: 'monthly' },
+    { path: '/pro/', priority: '0.8', freq: 'monthly' },
+    { path: '/distill/', priority: '0.8', freq: 'monthly' },
+    { path: '/distill-privacy/', priority: '0.3', freq: 'yearly' },
+    { path: '/contact/', priority: '0.4', freq: 'yearly' },
+    { path: '/privacy/', priority: '0.3', freq: 'yearly' },
+    { path: '/terms/', priority: '0.3', freq: 'yearly' },
+    { path: '/disclosure/', priority: '0.3', freq: 'yearly' },
+  ];
+  const indexableTools = [
+    'ai-detector',
+    'ai-writing-suite',
+    'base64-tool',
+    'color-palette',
+    'contrast-checker',
+    'glassmorphism-generator',
+    'humanizer',
+    'json-csv-converter',
+    'markdown-html',
+    'password-checker',
+    'seo-tag-generator',
+    'summarizer',
+    'word-counter',
+    'hardship-letter',
+    'caregiver-report',
+    'budget-planner',
+    'paraphraser',
+    'child-support-calculator',
+    'email-writer',
+    'appeal-letter',
+    'custody-document',
+    'lorem-ipsum',
+    'bio-generator',
+    'gig-auto-pilot',
+    'epoch-converter',
+    'subnet-calculator',
+    'spousal-support-calculator',
+    'regex-tester',
+    'product-description',
+    'med-administration-log',
+    'code-explainer',
+    'behavioral-log',
+    'json-formatter',
+    'uuid-generator',
+    'jwt-decoder',
+    'hash-generator',
+  ];
 
-    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-    xml += '  <!-- Main Pages -->\n';
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  xml += '  <!-- Main Pages -->\n';
 
-    mainPages.forEach(p => {
-        xml += `  <url><loc>${baseUrl}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.freq}</changefreq><priority>${p.priority}</priority></url>\n`;
-    });
+  mainPages.forEach(p => {
+    xml += `  <url><loc>${baseUrl}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.freq}</changefreq><priority>${p.priority}</priority></url>\n`;
+  });
 
-    xml += '\n  <!-- Tools -->\n';
-    indexableTools.forEach(t => {
-        xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
-    });
+  xml += '\n  <!-- Tools -->\n';
+  indexableTools.forEach(t => {
+    xml += `  <url><loc>${baseUrl}/tools/${t}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n`;
+  });
 
-    // Add sub-pages of humanizer tool
-    xml += `  <url><loc>${baseUrl}/tools/humanizer/rewrite-chatgpt-text/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
-    xml += `  <url><loc>${baseUrl}/tools/humanizer/remove-ai-detection/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
+  // Add sub-pages of humanizer tool
+  xml += `  <url><loc>${baseUrl}/tools/humanizer/rewrite-chatgpt-text/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
+  xml += `  <url><loc>${baseUrl}/tools/humanizer/remove-ai-detection/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`;
 
-    // Guide pages
-    xml += '\n  <!-- Guides -->\n';
+  // Guide pages
+  xml += '\n  <!-- Guides -->\n';
 
-    // Static guides
-    const staticGuides = [
-        'caregiver-shift-handoff-standards',
-        'css-glassmorphism-generator-guide',
-        'documenting-cognitive-decline-for-doctors-and-courts',
-        'how-to-appeal-a-housing-denial',
-        'how-to-appeal-an-insurance-claim-denial',
-        'how-to-appeal-an-unemployment-denial',
-        'how-to-write-a-medical-hardship-letter',
-        'how-to-write-a-mortgage-hardship-letter',
-        'how-to-write-a-parenting-plan',
-        'how-to-write-a-student-loan-hardship-letter',
-        'when-to-request-a-custody-modification',
-        'json-to-csv'
-    ];
-    staticGuides.forEach(slug => {
-        xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
-    });
+  // Static guides
+  const staticGuides = [
+    'caregiver-shift-handoff-standards',
+    'css-glassmorphism-generator-guide',
+    'documenting-cognitive-decline-for-doctors-and-courts',
+    'how-to-appeal-a-housing-denial',
+    'how-to-appeal-an-insurance-claim-denial',
+    'how-to-appeal-an-unemployment-denial',
+    'how-to-write-a-medical-hardship-letter',
+    'how-to-write-a-mortgage-hardship-letter',
+    'how-to-write-a-parenting-plan',
+    'how-to-write-a-student-loan-hardship-letter',
+    'when-to-request-a-custody-modification',
+    'json-to-csv',
+  ];
+  staticGuides.forEach(slug => {
+    xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+  });
 
-    // Generated guides
-    generatedPages.forEach(p => {
-        xml += `  <url><loc>${baseUrl}/guides/${p.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
-    });
+  // Generated guides
+  generatedPages.forEach(p => {
+    xml += `  <url><loc>${baseUrl}/guides/${p.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
+  });
 
-    // Blog posts
-    xml += '\n  <!-- Blog Posts -->\n';
-    const blogPosts = [
-        'behavioral-spike-tracking-memory-care-2026',
-        'cron-expression-builder-online-2026',
-        'dementia-custody-evidence-guide-2026',
-        'free-password-strength-checker-2026',
-        'free-upwork-proposal-generator-2026',
-        'how-to-appeal-unemployment-denial-2026',
-        'how-to-make-ai-text-sound-human-2026',
-        'how-to-write-a-hardship-letter-2026',
-        'seo-tag-generators-gate-meta-2026',
-        'unemployment-hearing-checklist-2026',
-        'what-goes-in-a-caregiver-shift-report-2026',
-        'why-vanilla-js-no-frameworks-2026',
-        'court-admissible-parenting-plan-guide'
-    ];
-    blogPosts.forEach(post => {
-        xml += `  <url><loc>${baseUrl}/blog/${post}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
-    });
+  // Blog posts
+  xml += '\n  <!-- Blog Posts -->\n';
+  const blogPosts = [
+    'behavioral-spike-tracking-memory-care-2026',
+    'cron-expression-builder-online-2026',
+    'dementia-custody-evidence-guide-2026',
+    'free-password-strength-checker-2026',
+    'free-upwork-proposal-generator-2026',
+    'how-to-appeal-unemployment-denial-2026',
+    'how-to-make-ai-text-sound-human-2026',
+    'how-to-write-a-hardship-letter-2026',
+    'seo-tag-generators-gate-meta-2026',
+    'unemployment-hearing-checklist-2026',
+    'what-goes-in-a-caregiver-shift-report-2026',
+    'why-vanilla-js-no-frameworks-2026',
+    'court-admissible-parenting-plan-guide',
+  ];
+  blogPosts.forEach(post => {
+    xml += `  <url><loc>${baseUrl}/blog/${post}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
+  });
 
-    xml += '</urlset>\n';
-    return xml;
+  xml += '</urlset>\n';
+  return xml;
 }
 
 // ─── Robots Meta Manager (Indexation Pruning) ───
 
 function manageRobotsMeta() {
-    const indexableTools = new Set([
-        'ai-detector', 'ai-writing-suite', 'base64-tool', 'color-palette', 'contrast-checker', 'glassmorphism-generator',
-        'humanizer', 'json-csv-converter', 'markdown-html', 'password-checker', 'seo-tag-generator', 'summarizer', 'word-counter',
-        'hardship-letter', 'caregiver-report', 'budget-planner', 'paraphraser', 'child-support-calculator', 'email-writer',
-        'appeal-letter', 'custody-document', 'lorem-ipsum', 'bio-generator', 'gig-auto-pilot', 'epoch-converter',
-        'subnet-calculator', 'spousal-support-calculator', 'regex-tester', 'product-description', 'med-administration-log',
-        'code-explainer', 'behavioral-log', 'json-formatter', 'uuid-generator', 'jwt-decoder', 'hash-generator'
-    ]);
+  const indexableTools = new Set([
+    'ai-detector',
+    'ai-writing-suite',
+    'base64-tool',
+    'color-palette',
+    'contrast-checker',
+    'glassmorphism-generator',
+    'humanizer',
+    'json-csv-converter',
+    'markdown-html',
+    'password-checker',
+    'seo-tag-generator',
+    'summarizer',
+    'word-counter',
+    'hardship-letter',
+    'caregiver-report',
+    'budget-planner',
+    'paraphraser',
+    'child-support-calculator',
+    'email-writer',
+    'appeal-letter',
+    'custody-document',
+    'lorem-ipsum',
+    'bio-generator',
+    'gig-auto-pilot',
+    'epoch-converter',
+    'subnet-calculator',
+    'spousal-support-calculator',
+    'regex-tester',
+    'product-description',
+    'med-administration-log',
+    'code-explainer',
+    'behavioral-log',
+    'json-formatter',
+    'uuid-generator',
+    'jwt-decoder',
+    'hash-generator',
+  ]);
 
-    const dirsToProcess = [
-        path.join(__dirname, 'content-site', 'tools'),
-        path.join(__dirname, 'public', 'tools')
-    ];
+  const dirsToProcess = [
+    path.join(__dirname, 'content-site', 'tools'),
+    path.join(__dirname, 'public', 'tools'),
+  ];
 
-    function processDirectory(dirPath, baseDir) {
-        if (!fs.existsSync(dirPath)) return;
-        const items = fs.readdirSync(dirPath);
-        items.forEach(item => {
-            const fullPath = path.join(dirPath, item);
-            const stat = fs.statSync(fullPath);
+  function processDirectory(dirPath, baseDir) {
+    if (!fs.existsSync(dirPath)) return;
+    const items = fs.readdirSync(dirPath);
+    items.forEach(item => {
+      const fullPath = path.join(dirPath, item);
+      const stat = fs.statSync(fullPath);
 
-            if (stat.isDirectory()) {
-                if (item === 'shared') return;
-                processDirectory(fullPath, baseDir);
-            } else if (stat.isFile() && item.endsWith('.html')) {
-                const relativeToTools = path.relative(baseDir, fullPath);
-                const firstPart = relativeToTools.split(path.sep)[0];
+      if (stat.isDirectory()) {
+        if (item === 'shared') return;
+        processDirectory(fullPath, baseDir);
+      } else if (stat.isFile() && item.endsWith('.html')) {
+        const relativeToTools = path.relative(baseDir, fullPath);
+        const firstPart = relativeToTools.split(path.sep)[0];
 
-                const isIndexable = indexableTools.has(firstPart);
-                let content = fs.readFileSync(fullPath, 'utf8');
+        const isIndexable = indexableTools.has(firstPart);
+        let content = fs.readFileSync(fullPath, 'utf8');
 
-                const robotsRegex = /<meta\s+name=["']robots["']\s+content=["']([^"']*)["']\s*\/?>/i;
+        const robotsRegex = /<meta\s+name=["']robots["']\s+content=["']([^"']*)["']\s*\/?>/i;
 
-                if (isIndexable) {
-                    // Remove any robots tag if it has noindex
-                    if (robotsRegex.test(content)) {
-                        const match = content.match(robotsRegex);
-                        if (match && match[1].toLowerCase().includes('noindex')) {
-                            content = content.replace(robotsRegex, '');
-                            fs.writeFileSync(fullPath, content, 'utf8');
-                            console.log(`  🟢 Restored indexability for page: ${relativeToTools}`);
-                        }
-                    }
-                } else {
-                    // Add <meta name="robots" content="noindex, follow"> if not already set to noindex
-                    if (robotsRegex.test(content)) {
-                        const match = content.match(robotsRegex);
-                        if (match && !match[1].toLowerCase().includes('noindex')) {
-                            content = content.replace(robotsRegex, '<meta name="robots" content="noindex, follow">');
-                            fs.writeFileSync(fullPath, content, 'utf8');
-                            console.log(`  🔴 Set noindex on existing robots tag for page: ${relativeToTools}`);
-                        }
-                    } else {
-                        // Find <head> to insert it early in the head
-                        const headRegex = /<head>/i;
-                        if (headRegex.test(content)) {
-                            content = content.replace(/<head>/i, '<head>\n    <meta name="robots" content="noindex, follow">');
-                            fs.writeFileSync(fullPath, content, 'utf8');
-                            console.log(`  🔴 Injected noindex robots tag for page: ${relativeToTools}`);
-                        } else {
-                            console.warn(`  ⚠️ Could not find <head> tag in ${relativeToTools}`);
-                        }
-                    }
-                }
+        if (isIndexable) {
+          // Remove any robots tag if it has noindex
+          if (robotsRegex.test(content)) {
+            const match = content.match(robotsRegex);
+            if (match && match[1].toLowerCase().includes('noindex')) {
+              content = content.replace(robotsRegex, '');
+              fs.writeFileSync(fullPath, content, 'utf8');
+              console.log(`  🟢 Restored indexability for page: ${relativeToTools}`);
             }
-        });
-    }
-
-    console.log(`\n🤖 Running Robots Meta Manager...`);
-    dirsToProcess.forEach(baseDir => {
-        if (fs.existsSync(baseDir)) {
-            console.log(`  Scanning directory: ${baseDir}`);
-            processDirectory(baseDir, baseDir);
+          }
+        } else {
+          // Add <meta name="robots" content="noindex, follow"> if not already set to noindex
+          if (robotsRegex.test(content)) {
+            const match = content.match(robotsRegex);
+            if (match && !match[1].toLowerCase().includes('noindex')) {
+              content = content.replace(
+                robotsRegex,
+                '<meta name="robots" content="noindex, follow">'
+              );
+              fs.writeFileSync(fullPath, content, 'utf8');
+              console.log(`  🔴 Set noindex on existing robots tag for page: ${relativeToTools}`);
+            }
+          } else {
+            // Find <head> to insert it early in the head
+            const headRegex = /<head>/i;
+            if (headRegex.test(content)) {
+              content = content.replace(
+                /<head>/i,
+                '<head>\n    <meta name="robots" content="noindex, follow">'
+              );
+              fs.writeFileSync(fullPath, content, 'utf8');
+              console.log(`  🔴 Injected noindex robots tag for page: ${relativeToTools}`);
+            } else {
+              console.warn(`  ⚠️ Could not find <head> tag in ${relativeToTools}`);
+            }
+          }
         }
+      }
     });
+  }
+
+  console.log(`\n🤖 Running Robots Meta Manager...`);
+  dirsToProcess.forEach(baseDir => {
+    if (fs.existsSync(baseDir)) {
+      console.log(`  Scanning directory: ${baseDir}`);
+      processDirectory(baseDir, baseDir);
+    }
+  });
 }
 
 // ─── Execute ───
@@ -906,14 +1605,14 @@ console.log(`\n🔥 CyberScryb SEO Page Generator`);
 console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
 
 pages.forEach(page => {
-    const html = generatePage(page);
-    const filePath = path.join(guidesDir, `${page.slug}.html`);
-    const publicFilePath = path.join(publicGuidesDir, `${page.slug}.html`);
+  const html = generatePage(page);
+  const filePath = path.join(guidesDir, `${page.slug}.html`);
+  const publicFilePath = path.join(publicGuidesDir, `${page.slug}.html`);
 
-    fs.writeFileSync(filePath, html, 'utf-8');
-    fs.writeFileSync(publicFilePath, html, 'utf-8');
+  fs.writeFileSync(filePath, html, 'utf-8');
+  fs.writeFileSync(publicFilePath, html, 'utf-8');
 
-    console.log(`  ✅ ${page.slug}.html (${page.title})`);
+  console.log(`  ✅ ${page.slug}.html (${page.title})`);
 });
 
 // Generate sitemap

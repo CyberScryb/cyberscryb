@@ -14,8 +14,8 @@ async function testConnection() {
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
   } catch (error) {
-    if(error instanceof Error && error.message.includes('the client is offline')) {
-      console.error("Please check your Firebase configuration.");
+    if (error instanceof Error && error.message.includes('the client is offline')) {
+      console.error('Please check your Firebase configuration.');
     }
   }
 }
@@ -30,11 +30,15 @@ interface FirestoreErrorInfo {
     email: string;
     emailVerified: boolean;
     isAnonymous: boolean;
-    providerInfo: { providerId: string; displayName: string; email: string; }[];
-  }
+    providerInfo: { providerId: string; displayName: string; email: string }[];
+  };
 }
 
-export function handleFirestoreError(error: any, operationType: FirestoreErrorInfo['operationType'], path: string | null = null) {
+export function handleFirestoreError(
+  error: any,
+  operationType: FirestoreErrorInfo['operationType'],
+  path: string | null = null
+) {
   if (error.code === 'permission-denied') {
     const user = auth.currentUser;
     const errorInfo: FirestoreErrorInfo = {
@@ -46,12 +50,13 @@ export function handleFirestoreError(error: any, operationType: FirestoreErrorIn
         email: user?.email || 'N/A',
         emailVerified: user?.emailVerified || false,
         isAnonymous: user?.isAnonymous ?? false,
-        providerInfo: user?.providerData.map(p => ({
+        providerInfo:
+          user?.providerData.map(p => ({
             providerId: p.providerId,
             displayName: p.displayName || '',
-            email: p.email || ''
-        })) || []
-      }
+            email: p.email || '',
+          })) || [],
+      },
     };
     throw new Error(JSON.stringify(errorInfo));
   }

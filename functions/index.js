@@ -1,6 +1,6 @@
-const functions = require("firebase-functions/v1");
-const cors = require("cors")({ origin: true });
-const admin = require("firebase-admin");
+const functions = require('firebase-functions/v1');
+const cors = require('cors')({ origin: true });
+const admin = require('firebase-admin');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -10,84 +10,89 @@ const db = admin.firestore();
 // Compliant with GDPR, CCPA, and privacy-first principles.
 
 const analyticsStore = {
-    events: [], // In-memory buffer for batch writes
-    lastFlush: Date.now()
+  events: [], // In-memory buffer for batch writes
+  lastFlush: Date.now(),
 };
 
 // Log an anonymous event (aggregate only)
 function logEvent(eventType, metadata = {}) {
-    const event = {
-        type: eventType,
-        timestamp: Date.now(),
-        date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
-        hour: new Date().getHours(),
-        ...metadata
-    };
-    
-    analyticsStore.events.push(event);
-    
-    // Flush to Firestore every 100 events or every 5 minutes
-    if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
-        flushAnalytics();
-    }
+  const event = {
+    type: eventType,
+    timestamp: Date.now(),
+    date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
+    hour: new Date().getHours(),
+    ...metadata,
+  };
+
+  analyticsStore.events.push(event);
+
+  // Flush to Firestore every 100 events or every 5 minutes
+  if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
+    flushAnalytics();
+  }
 }
 
 // Batch write events to Firestore (aggregate only)
 async function flushAnalytics() {
-    if (analyticsStore.events.length === 0) return;
-    
-    const eventsToFlush = [...analyticsStore.events];
-    analyticsStore.events = [];
-    analyticsStore.lastFlush = Date.now();
-    
-    try {
-        // Group events by type and date for aggregation
-        const aggregated = {};
-        
-        eventsToFlush.forEach(event => {
-            const key = `${event.date}_${event.type}`;
-            if (!aggregated[key]) {
-                aggregated[key] = {
-                    date: event.date,
-                    type: event.type,
-                    count: 0,
-                    hourly: Array(24).fill(0),
-                    metadata: {}
-                };
-            }
-            
-            aggregated[key].count++;
-            aggregated[key].hourly[event.hour]++;
-            
-            // Aggregate metadata (counts only, no user data)
-            Object.keys(event).forEach(k => {
-                if (['type', 'timestamp', 'date', 'hour'].includes(k)) return;
-                if (!aggregated[key].metadata[k]) {
-                    aggregated[key].metadata[k] = {};
-                }
-                const val = String(event[k]);
-                aggregated[key].metadata[k][val] = (aggregated[key].metadata[k][val] || 0) + 1;
-            });
-        });
-        
-        // Write aggregated data to Firestore
-        const batch = db.batch();
-        Object.values(aggregated).forEach(agg => {
-            const docRef = db.collection('analytics').doc(`${agg.date}_${agg.type}_${Date.now()}`);
-            batch.set(docRef, {
-                ...agg,
-                updatedAt: admin.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-        });
-        
-        await batch.commit();
-        console.log(`[ANALYTICS] Flushed ${eventsToFlush.length} events (${Object.keys(aggregated).length} aggregated)`);
-        
-    } catch (error) {
-        console.error('[ANALYTICS] Flush error:', error);
-        // Re-add events to buffer on failure
-        analyticsStore.events.unshift(...eventsToFlush);
-    }
+  if (analyticsStore.events.length === 0) return;
+
+  const eventsToFlush = [...analyticsStore.events];
+  analyticsStore.events = [];
+  analyticsStore.lastFlush = Date.now();
+
+  try {
+    // Group events by type and date for aggregation
+    const aggregated = {};
+
+    eventsToFlush.forEach(event => {
+      const key = `${event.date}_${event.type}`;
+      if (!aggregated[key]) {
+        aggregated[key] = {
+          date: event.date,
+          type: event.type,
+          count: 0,
+          hourly: Array(24).fill(0),
+          metadata: {},
+        };
+      }
+
+      aggregated[key].count++;
+      aggregated[key].hourly[event.hour]++;
+
+      // Aggregate metadata (counts only, no user data)
+      Object.keys(event).forEach(k => {
+        if (['type', 'timestamp', 'date', 'hour'].includes(k)) return;
+        if (!aggregated[key].metadata[k]) {
+          aggregated[key].metadata[k] = {};
+        }
+        const val = String(event[k]);
+        aggregated[key].metadata[k][val] = (aggregated[key].metadata[k][val] || 0) + 1;
+      });
+    });
+
+    // Write aggregated data to Firestore
+    const batch = db.batch();
+    Object.values(aggregated).forEach(agg => {
+      const docRef = db.collection('analytics').doc(`${agg.date}_${agg.type}_${Date.now()}`);
+      batch.set(
+        docRef,
+        {
+          ...agg,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+    });
+
+    await batch.commit();
+    console.log(
+      `[ANALYTICS] Flushed ${eventsToFlush.length} events (${Object.keys(aggregated).length} aggregated)`
+    );
+  } catch (error) {
+    console.error('[ANALYTICS] Flush error:', error);
+    // Re-add events to buffer on failure
+    analyticsStore.events.unshift(...eventsToFlush);
+  }
 }
 
 // Flush analytics every 5 minutes
@@ -95,154 +100,171 @@ setInterval(flushAnalytics, 300000);
 
 // Conversion funnel tracking (anonymous)
 function logConversion(funnel, step, metadata = {}) {
-    logEvent('conversion', {
-        funnel,
-        step,
-        ...metadata
-    });
+  logEvent('conversion', {
+    funnel,
+    step,
+    ...metadata,
+  });
 }
 
 // A/B test variant assignment (deterministic, no tracking)
 function getABVariant(testName, identifier) {
-    // Use hash of identifier to deterministically assign variant
-    const crypto = require('crypto');
-    const hash = crypto.createHash('md5').update(testName + identifier).digest('hex');
-    const hashInt = parseInt(hash.slice(0, 8), 16);
-    return hashInt % 2 === 0 ? 'A' : 'B';
+  // Use hash of identifier to deterministically assign variant
+  const crypto = require('crypto');
+  const hash = crypto
+    .createHash('md5')
+    .update(testName + identifier)
+    .digest('hex');
+  const hashInt = parseInt(hash.slice(0, 8), 16);
+  return hashInt % 2 === 0 ? 'A' : 'B';
 }
 
 // ─── Rate Limiter ────────────────────────────────────────
 // Enhanced rate limiting with sliding window, per-user tracking, and tiered limits.
 // In-memory implementation (production should use Redis for multi-instance deployments).
 
-const rateLimitStore = new Map();  // Map<string, { requests: number[], tier: string }>
+const rateLimitStore = new Map(); // Map<string, { requests: number[], tier: string }>
 let globalDailyCount = 0;
 let globalDayReset = Date.now() + 86400000; // 24h from now
 
 // Tiered rate limits (requests per minute)
 const RATE_LIMIT_TIERS = {
-    anonymous: { perMinute: 5, perHour: 20, perDay: 50 },
-    free: { perMinute: 10, perHour: 60, perDay: 200 },
-    subscribed: { perMinute: 20, perHour: 200, perDay: 1000 },
-    premium: { perMinute: 100, perHour: 2000, perDay: 10000 },
+  anonymous: { perMinute: 5, perHour: 20, perDay: 50 },
+  free: { perMinute: 10, perHour: 60, perDay: 200 },
+  subscribed: { perMinute: 20, perHour: 200, perDay: 1000 },
+  premium: { perMinute: 100, perHour: 2000, perDay: 10000 },
 };
 
 const GLOBAL_LIMITS = {
-    perDay: 5000,  // Increased from 500 to support growth
-    perHour: 500,  // New: prevent sudden spikes
+  perDay: 5000, // Increased from 500 to support growth
+  perHour: 500, // New: prevent sudden spikes
 };
 
 // Extract anonymous client identifier (hashed IP only - privacy-first)
 function getClientIdentifier(req) {
-    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-               req.connection?.remoteAddress || 'unknown';
-    
-    // Hash the IP to prevent storing raw IPs (privacy-first approach)
-    const crypto = require('crypto');
-    const hash = crypto.createHash('sha256').update(ip + 'salt_v1').digest('hex').slice(0, 16);
-    
-    return `anon:${hash}`;
+  const ip =
+    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+    req.connection?.remoteAddress ||
+    'unknown';
+
+  // Hash the IP to prevent storing raw IPs (privacy-first approach)
+  const crypto = require('crypto');
+  const hash = crypto
+    .createHash('sha256')
+    .update(ip + 'salt_v1')
+    .digest('hex')
+    .slice(0, 16);
+
+  return `anon:${hash}`;
 }
 
 // Determine user tier based on cookies/headers (no user ID tracking)
 function getUserTier(req) {
-    const subscribed = req.cookies?.cs_subscribed === '1';
-    const premium = req.cookies?.cs_premium === '1' || req.headers['x-premium'] === '1';
-    
-    if (premium) return 'premium';
-    if (subscribed) return 'subscribed';
-    
-    return 'anonymous';
+  const subscribed = req.cookies?.cs_subscribed === '1';
+  const premium = req.cookies?.cs_premium === '1' || req.headers['x-premium'] === '1';
+
+  if (premium) return 'premium';
+  if (subscribed) return 'subscribed';
+
+  return 'anonymous';
 }
 
 // Sliding window rate limit check
 function checkRateLimit(req) {
-    const now = Date.now();
-    const identifier = getClientIdentifier(req);
-    const tier = getUserTier(req);
-    const limits = RATE_LIMIT_TIERS[tier];
+  const now = Date.now();
+  const identifier = getClientIdentifier(req);
+  const tier = getUserTier(req);
+  const limits = RATE_LIMIT_TIERS[tier];
 
-    // Reset global daily counter
-    if (now > globalDayReset) {
-        globalDailyCount = 0;
-        globalDayReset = now + 86400000;
-    }
+  // Reset global daily counter
+  if (now > globalDayReset) {
+    globalDailyCount = 0;
+    globalDayReset = now + 86400000;
+  }
 
-    // Check global daily cap (applies to all users)
-    if (globalDailyCount >= GLOBAL_LIMITS.perDay) {
-        console.warn(`[RATE_LIMIT] Global daily limit reached: ${globalDailyCount}/${GLOBAL_LIMITS.perDay}`);
-        return { 
-            allowed: false, 
-            reason: 'Service capacity reached. Try again in a few hours.',
-            retryAfter: Math.ceil((globalDayReset - now) / 1000)
-        };
-    }
-
-    // Get or create user's request history
-    if (!rateLimitStore.has(identifier)) {
-        rateLimitStore.set(identifier, { requests: [], tier });
-    }
-
-    const userData = rateLimitStore.get(identifier);
-    
-    // Update tier if changed (user upgraded)
-    userData.tier = tier;
-
-    // Remove requests older than 24 hours (sliding window)
-    const dayAgo = now - 86400000;
-    const hourAgo = now - 3600000;
-    const minuteAgo = now - 60000;
-    
-    userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
-
-    // Count requests in each window
-    const requestsLastMinute = userData.requests.filter(t => t > minuteAgo).length;
-    const requestsLastHour = userData.requests.filter(t => t > hourAgo).length;
-    const requestsLastDay = userData.requests.length;
-
-    // Check per-minute limit (no identifier logging - privacy-first)
-    if (requestsLastMinute >= limits.perMinute) {
-        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`);
-        return { 
-            allowed: false, 
-            reason: `Rate limit: ${limits.perMinute} requests per minute. Slow down.`,
-            retryAfter: 60
-        };
-    }
-
-    // Check per-hour limit
-    if (requestsLastHour >= limits.perHour) {
-        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`);
-        return { 
-            allowed: false, 
-            reason: `Hourly limit reached (${limits.perHour} requests). Try again soon.`,
-            retryAfter: 3600
-        };
-    }
-
-    // Check per-day limit
-    if (requestsLastDay >= limits.perDay) {
-        console.warn(`[RATE_LIMIT] Tier ${tier} exceeded daily limit: ${requestsLastDay}/${limits.perDay}`);
-        return { 
-            allowed: false, 
-            reason: `Daily limit reached (${limits.perDay} requests). Upgrade or try tomorrow.`,
-            retryAfter: Math.ceil((dayAgo + 86400000 - now) / 1000)
-        };
-    }
-
-    // Allow request and record timestamp
-    userData.requests.push(now);
-    globalDailyCount++;
-
-    return { 
-        allowed: true,
-        remaining: {
-            minute: limits.perMinute - requestsLastMinute - 1,
-            hour: limits.perHour - requestsLastHour - 1,
-            day: limits.perDay - requestsLastDay - 1
-        },
-        tier
+  // Check global daily cap (applies to all users)
+  if (globalDailyCount >= GLOBAL_LIMITS.perDay) {
+    console.warn(
+      `[RATE_LIMIT] Global daily limit reached: ${globalDailyCount}/${GLOBAL_LIMITS.perDay}`
+    );
+    return {
+      allowed: false,
+      reason: 'Service capacity reached. Try again in a few hours.',
+      retryAfter: Math.ceil((globalDayReset - now) / 1000),
     };
+  }
+
+  // Get or create user's request history
+  if (!rateLimitStore.has(identifier)) {
+    rateLimitStore.set(identifier, { requests: [], tier });
+  }
+
+  const userData = rateLimitStore.get(identifier);
+
+  // Update tier if changed (user upgraded)
+  userData.tier = tier;
+
+  // Remove requests older than 24 hours (sliding window)
+  const dayAgo = now - 86400000;
+  const hourAgo = now - 3600000;
+  const minuteAgo = now - 60000;
+
+  userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
+
+  // Count requests in each window
+  const requestsLastMinute = userData.requests.filter(t => t > minuteAgo).length;
+  const requestsLastHour = userData.requests.filter(t => t > hourAgo).length;
+  const requestsLastDay = userData.requests.length;
+
+  // Check per-minute limit (no identifier logging - privacy-first)
+  if (requestsLastMinute >= limits.perMinute) {
+    console.warn(
+      `[RATE_LIMIT] Tier ${tier} exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`
+    );
+    return {
+      allowed: false,
+      reason: `Rate limit: ${limits.perMinute} requests per minute. Slow down.`,
+      retryAfter: 60,
+    };
+  }
+
+  // Check per-hour limit
+  if (requestsLastHour >= limits.perHour) {
+    console.warn(
+      `[RATE_LIMIT] Tier ${tier} exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`
+    );
+    return {
+      allowed: false,
+      reason: `Hourly limit reached (${limits.perHour} requests). Try again soon.`,
+      retryAfter: 3600,
+    };
+  }
+
+  // Check per-day limit
+  if (requestsLastDay >= limits.perDay) {
+    console.warn(
+      `[RATE_LIMIT] Tier ${tier} exceeded daily limit: ${requestsLastDay}/${limits.perDay}`
+    );
+    return {
+      allowed: false,
+      reason: `Daily limit reached (${limits.perDay} requests). Upgrade or try tomorrow.`,
+      retryAfter: Math.ceil((dayAgo + 86400000 - now) / 1000),
+    };
+  }
+
+  // Allow request and record timestamp
+  userData.requests.push(now);
+  globalDailyCount++;
+
+  return {
+    allowed: true,
+    remaining: {
+      minute: limits.perMinute - requestsLastMinute - 1,
+      hour: limits.perHour - requestsLastHour - 1,
+      day: limits.perDay - requestsLastDay - 1,
+    },
+    tier,
+  };
 }
 
 // ─── Firestore-backed Cross-Instance Rate Limiting ──────
@@ -251,247 +273,276 @@ function checkRateLimit(req) {
 const GLOBAL_DAILY_CAP = 500;
 
 const FIRESTORE_TIER_CAPS = {
-    anonymous: 50,
-    free: 200,
-    subscribed: 1000,
-    premium: 10000,
+  anonymous: 50,
+  free: 200,
+  subscribed: 1000,
+  premium: 10000,
 };
 
 function getDateString(date = new Date()) {
-    return date.toISOString().slice(0, 10); // YYYY-MM-DD
+  return date.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
 function getIpHash(req) {
-    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-               req.connection?.remoteAddress || 'unknown';
-    const crypto = require('crypto');
-    return crypto.createHash('sha256').update(ip + 'salt_v1').digest('hex');
+  const ip =
+    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+    req.connection?.remoteAddress ||
+    'unknown';
+  const crypto = require('crypto');
+  return crypto
+    .createHash('sha256')
+    .update(ip + 'salt_v1')
+    .digest('hex');
 }
 
 // Checks and increments Firestore-backed global + per-IP daily counters.
 // Returns { allowed: true } or { allowed: false, reason, retryAfter }.
 // Global cap fails CLOSED (Firestore error => block). Per-IP cap fails OPEN.
 async function checkFirestoreRateLimit(req) {
-    const dateStr = getDateString();
-    const tier = getUserTier(req);
-    const ipHash = getIpHash(req);
+  const dateStr = getDateString();
+  const tier = getUserTier(req);
+  const ipHash = getIpHash(req);
 
-    // Global daily cap — fail CLOSED
-    try {
-        const globalRef = db.collection('usage').doc(`daily-${dateStr}`);
-        const result = await db.runTransaction(async (tx) => {
-            const snap = await tx.get(globalRef);
-            const current = snap.exists ? (snap.data().count || 0) : 0;
-            if (current >= GLOBAL_DAILY_CAP) {
-                return { exceeded: true, count: current };
-            }
-            tx.set(globalRef, {
-                count: admin.firestore.FieldValue.increment(1),
-                updatedAt: admin.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-            return { exceeded: false, count: current + 1 };
-        });
+  // Global daily cap — fail CLOSED
+  try {
+    const globalRef = db.collection('usage').doc(`daily-${dateStr}`);
+    const result = await db.runTransaction(async tx => {
+      const snap = await tx.get(globalRef);
+      const current = snap.exists ? snap.data().count || 0 : 0;
+      if (current >= GLOBAL_DAILY_CAP) {
+        return { exceeded: true, count: current };
+      }
+      tx.set(
+        globalRef,
+        {
+          count: admin.firestore.FieldValue.increment(1),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+      return { exceeded: false, count: current + 1 };
+    });
 
-        if (result.exceeded) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Global daily cap reached: ${result.count}/${GLOBAL_DAILY_CAP}`);
-            return {
-                allowed: false,
-                reason: 'Service capacity reached. Try again in a few hours.',
-                retryAfter: 3600
-            };
-        }
-    } catch (err) {
-        console.error('[FIRESTORE_RATE_LIMIT] Global cap check failed, failing closed:', err.message);
-        return {
-            allowed: false,
-            reason: 'Service temporarily unavailable. Try again shortly.',
-            retryAfter: 60
-        };
+    if (result.exceeded) {
+      console.warn(
+        `[FIRESTORE_RATE_LIMIT] Global daily cap reached: ${result.count}/${GLOBAL_DAILY_CAP}`
+      );
+      return {
+        allowed: false,
+        reason: 'Service capacity reached. Try again in a few hours.',
+        retryAfter: 3600,
+      };
     }
+  } catch (err) {
+    console.error('[FIRESTORE_RATE_LIMIT] Global cap check failed, failing closed:', err.message);
+    return {
+      allowed: false,
+      reason: 'Service temporarily unavailable. Try again shortly.',
+      retryAfter: 60,
+    };
+  }
 
-    // Per-IP daily cap — fail OPEN
-    try {
-        const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.anonymous;
-        const ipRef = db.collection('rateLimits').doc(`${ipHash}-${dateStr}`);
-        const result = await db.runTransaction(async (tx) => {
-            const snap = await tx.get(ipRef);
-            const current = snap.exists ? (snap.data().count || 0) : 0;
-            if (current >= ipCap) {
-                return { exceeded: true, count: current };
-            }
-            tx.set(ipRef, {
-                count: admin.firestore.FieldValue.increment(1),
-                tier,
-                updatedAt: admin.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-            return { exceeded: false, count: current + 1 };
-        });
+  // Per-IP daily cap — fail OPEN
+  try {
+    const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.anonymous;
+    const ipRef = db.collection('rateLimits').doc(`${ipHash}-${dateStr}`);
+    const result = await db.runTransaction(async tx => {
+      const snap = await tx.get(ipRef);
+      const current = snap.exists ? snap.data().count || 0 : 0;
+      if (current >= ipCap) {
+        return { exceeded: true, count: current };
+      }
+      tx.set(
+        ipRef,
+        {
+          count: admin.firestore.FieldValue.increment(1),
+          tier,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+      return { exceeded: false, count: current + 1 };
+    });
 
-        if (result.exceeded) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Per-IP daily cap reached for tier ${tier}: ${result.count}/${ipCap}`);
-            return {
-                allowed: false,
-                reason: `Daily limit reached (${ipCap} requests). Upgrade or try tomorrow.`,
-                retryAfter: 3600
-            };
-        }
-    } catch (err) {
-        console.error('[FIRESTORE_RATE_LIMIT] Per-IP cap check failed, failing open:', err.message);
-        // fail open - don't block on transient per-IP errors
+    if (result.exceeded) {
+      console.warn(
+        `[FIRESTORE_RATE_LIMIT] Per-IP daily cap reached for tier ${tier}: ${result.count}/${ipCap}`
+      );
+      return {
+        allowed: false,
+        reason: `Daily limit reached (${ipCap} requests). Upgrade or try tomorrow.`,
+        retryAfter: 3600,
+      };
     }
+  } catch (err) {
+    console.error('[FIRESTORE_RATE_LIMIT] Per-IP cap check failed, failing open:', err.message);
+    // fail open - don't block on transient per-IP errors
+  }
 
-    return { allowed: true };
+  return { allowed: true };
 }
 
 // Clean up old entries every 10 minutes to prevent memory bloat
 setInterval(() => {
-    const now = Date.now();
-    const dayAgo = now - 86400000;
-    let cleaned = 0;
+  const now = Date.now();
+  const dayAgo = now - 86400000;
+  let cleaned = 0;
 
-    for (const [identifier, userData] of rateLimitStore.entries()) {
-        // Remove requests older than 24 hours
-        const before = userData.requests.length;
-        userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
-        
-        // If no recent requests, remove the entry entirely
-        if (userData.requests.length === 0) {
-            rateLimitStore.delete(identifier);
-            cleaned++;
-        }
-    }
+  for (const [identifier, userData] of rateLimitStore.entries()) {
+    // Remove requests older than 24 hours
+    const before = userData.requests.length;
+    userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
 
-    if (cleaned > 0) {
-        console.log(`[RATE_LIMIT] Cleaned ${cleaned} inactive entries. Active users: ${rateLimitStore.size}`);
+    // If no recent requests, remove the entry entirely
+    if (userData.requests.length === 0) {
+      rateLimitStore.delete(identifier);
+      cleaned++;
     }
+  }
+
+  if (cleaned > 0) {
+    console.log(
+      `[RATE_LIMIT] Cleaned ${cleaned} inactive entries. Active users: ${rateLimitStore.size}`
+    );
+  }
 }, 600000); // Every 10 minutes
 
 // ─── Referer Validation ─────────────────────────────────
-const ALLOWED_HOSTS = ['cyberscryb.com', 'www.cyberscryb.com', 'localhost', 'gen-lang-client-0384486156.web.app'];
+const ALLOWED_HOSTS = [
+  'cyberscryb.com',
+  'www.cyberscryb.com',
+  'localhost',
+  'gen-lang-client-0384486156.web.app',
+];
 
 function isAllowedReferer(referer) {
-    if (!referer) return true;
-    try {
-        const url = new URL(referer);
-        const hostname = url.hostname.toLowerCase();
-        
-        // Exact match or valid subdomain match
-        return ALLOWED_HOSTS.some(allowedHost => {
-            const lowerHost = allowedHost.toLowerCase();
-            // Exact match
-            if (hostname === lowerHost) return true;
-            // Subdomain match: must end with .allowedHost (not just contain it)
-            if (hostname.endsWith('.' + lowerHost)) return true;
-            return false;
-        });
-    } catch (e) {
-        // Invalid URL format - reject
-        console.warn('Invalid referer URL format:', referer);
-        return false;
-    }
+  if (!referer) return true;
+  try {
+    const url = new URL(referer);
+    const hostname = url.hostname.toLowerCase();
+
+    // Exact match or valid subdomain match
+    return ALLOWED_HOSTS.some(allowedHost => {
+      const lowerHost = allowedHost.toLowerCase();
+      // Exact match
+      if (hostname === lowerHost) return true;
+      // Subdomain match: must end with .allowedHost (not just contain it)
+      if (hostname.endsWith('.' + lowerHost)) return true;
+      return false;
+    });
+  } catch (e) {
+    // Invalid URL format - reject
+    console.warn('Invalid referer URL format:', referer);
+    return false;
+  }
 }
 
 // ─── Param Sanitization ─────────────────────────────────
 const MAX_PARAM_LENGTH = 300;
 const PARAM_ALLOWLISTS = {
-    voice: ['conversational', 'educational', 'strategic'],
-    platform: ['LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'TikTok', 'YouTube'],
-    docType: ['parenting plan', 'custody declaration', 'modification request'],
+  voice: ['conversational', 'educational', 'strategic'],
+  platform: ['LinkedIn', 'Twitter', 'Instagram', 'Facebook', 'TikTok', 'YouTube'],
+  docType: ['parenting plan', 'custody declaration', 'modification request'],
 };
 
 function sanitizeParams(params) {
-    if (!params || typeof params !== 'object' || Array.isArray(params)) return {};
-    const clean = {};
-    for (const [key, val] of Object.entries(params)) {
-        if (typeof val === 'boolean') { clean[key] = val; }
-        else if (typeof val === 'number') {
-            if (Number.isFinite(val)) {
-                const clampKeys = ['paragraphs', 'sentences', 'count', 'length', 'limit', 'offset', 'page'];
-                if (clampKeys.includes(key)) {
-                    clean[key] = Math.max(1, Math.min(20, Math.floor(val)));
-                } else {
-                    clean[key] = Math.max(-100000000, Math.min(100000000, val));
-                }
-            }
+  if (!params || typeof params !== 'object' || Array.isArray(params)) return {};
+  const clean = {};
+  for (const [key, val] of Object.entries(params)) {
+    if (typeof val === 'boolean') {
+      clean[key] = val;
+    } else if (typeof val === 'number') {
+      if (Number.isFinite(val)) {
+        const clampKeys = ['paragraphs', 'sentences', 'count', 'length', 'limit', 'offset', 'page'];
+        if (clampKeys.includes(key)) {
+          clean[key] = Math.max(1, Math.min(20, Math.floor(val)));
+        } else {
+          clean[key] = Math.max(-100000000, Math.min(100000000, val));
         }
-        else if (typeof val === 'string') {
-            if (PARAM_ALLOWLISTS[key]) { if (PARAM_ALLOWLISTS[key].includes(val)) clean[key] = val; }
-            else { clean[key] = val.slice(0, MAX_PARAM_LENGTH); }
-        }
+      }
+    } else if (typeof val === 'string') {
+      if (PARAM_ALLOWLISTS[key]) {
+        if (PARAM_ALLOWLISTS[key].includes(val)) clean[key] = val;
+      } else {
+        clean[key] = val.slice(0, MAX_PARAM_LENGTH);
+      }
     }
-    return clean;
+  }
+  return clean;
 }
 
 // Ensure you set this config variable:
 // firebase functions:config:set google.api_key="YOUR_API_KEY"
 
 exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
-        }
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-        const { text, style } = req.body;
-        const referer = req.get('Referer');
+    const { text, style } = req.body;
+    const referer = req.get('Referer');
 
-        // Basic security: Check if request comes from our domain
-        // Allow localhost for testing
-        if (!isAllowedReferer(referer)) {
-            console.warn(`Blocked request from unauthorized referer: ${referer}`);
-            return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
-        }
+    // Basic security: Check if request comes from our domain
+    // Allow localhost for testing
+    if (!isAllowedReferer(referer)) {
+      console.warn(`Blocked request from unauthorized referer: ${referer}`);
+      return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
+    }
 
-        // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
-        const fsRateCheck = await checkFirestoreRateLimit(req);
-        if (!fsRateCheck.allowed) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-            logEvent('rate_limit_hit', { reason: 'firestore_cap' });
-            return res.status(429)
-                .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: fsRateCheck.reason,
-                    retryAfter: fsRateCheck.retryAfter
-                });
-        }
-
-        // Rate limit check (no identifier logging)
-        const rateCheck = checkRateLimit(req);
-        if (!rateCheck.allowed) {
-            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', reason: 'blocked' });
-            return res.status(429)
-                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: rateCheck.reason,
-                    retryAfter: rateCheck.retryAfter
-                });
-        }
-
-        // Add rate limit info to response headers (for client-side display)
-        if (rateCheck.remaining) {
-            res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
-            res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
-            res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
-            res.set('X-RateLimit-Tier', rateCheck.tier);
-        }
-
-        // Log analytics event (aggregate only)
-        logEvent('ai_request', { 
-            tool: 'humanizer',
-            tier: rateCheck.tier,
-            inputLength: text.length > 500 ? '500+' : text.length > 200 ? '200-500' : '0-200'
+    // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
+    const fsRateCheck = await checkFirestoreRateLimit(req);
+    if (!fsRateCheck.allowed) {
+      console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
+      logEvent('rate_limit_hit', { reason: 'firestore_cap' });
+      return res
+        .status(429)
+        .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: fsRateCheck.reason,
+          retryAfter: fsRateCheck.retryAfter,
         });
+    }
 
-        // Get API Key from Environment Config
-        const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    // Rate limit check (no identifier logging)
+    const rateCheck = checkRateLimit(req);
+    if (!rateCheck.allowed) {
+      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', reason: 'blocked' });
+      return res
+        .status(429)
+        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: rateCheck.reason,
+          retryAfter: rateCheck.retryAfter,
+        });
+    }
 
-        if (!apiKey) {
-            console.error("API Key not found in functions config.");
-            return res.status(500).json({ error: "Server Configuration Error: Missing API Key" });
-        }
+    // Add rate limit info to response headers (for client-side display)
+    if (rateCheck.remaining) {
+      res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
+      res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
+      res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
+      res.set('X-RateLimit-Tier', rateCheck.tier);
+    }
 
-        try {
-            const prompt = `
+    // Log analytics event (aggregate only)
+    logEvent('ai_request', {
+      tool: 'humanizer',
+      tier: rateCheck.tier,
+      inputLength: text.length > 500 ? '500+' : text.length > 200 ? '200-500' : '0-200',
+    });
+
+    // Get API Key from Environment Config
+    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+
+    if (!apiKey) {
+      console.error('API Key not found in functions config.');
+      return res.status(500).json({ error: 'Server Configuration Error: Missing API Key' });
+    }
+
+    try {
+      const prompt = `
       You are a professional editor. Rewrite the following text to sound more human and less robotic.
       Avoid AI jargon, repetitive sentence structures, and overly formal tone.
       
@@ -503,243 +554,250 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
       Return ONLY the rewritten text. Do not include quotes or explanations.
       `;
 
-            // Call Gemini 3.1 Pro API (highest quality for humanizer output)
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { maxOutputTokens: 8192 }
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("Gemini API Error:", errorData);
-                
-                // Provide actionable error messages
-                let userMessage = 'AI service temporarily unavailable. Please try again.';
-                if (response.status === 429) {
-                    userMessage = '⏳ Our AI is overloaded right now. Please wait 30 seconds and try again. (Tip: Shorter text processes faster!)';
-                } else if (response.status === 400) {
-                    userMessage = '❌ Invalid input detected. Please check your text for special characters or try shortening it.';
-                } else if (errorData.error?.message) {
-                    userMessage = '⚠️ ' + errorData.error.message;
-                }
-                
-                return res.status(response.status).json({ 
-                    error: userMessage,
-                    retryable: response.status === 429 || response.status >= 500,
-                    retryAfter: response.status === 429 ? 30 : null
-                });
-            }
-
-            const data = await response.json();
-            const rewrittenText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing text.";
-
-            // Log success
-            logEvent('ai_success', { 
-                tool: 'humanizer',
-                tier: rateCheck.tier,
-                outputLength: rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500'
-            });
-
-            res.status(200).json({ result: rewrittenText });
-
-        } catch (error) {
-            console.error("Function Error:", error);
-            
-            // Graceful error handling with retry guidance
-            if (error.name === 'AbortError') {
-                return res.status(408).json({ 
-                    error: '⏱️ Request timeout. Your text might be too long—try shortening it or try again.',
-                    retryable: true,
-                    retryAfter: 5
-                });
-            }
-            
-            return res.status(500).json({ 
-                error: '🔧 Our AI service hit a snag. Please try again in a moment. If this persists, contact support.',
-                retryable: true,
-                retryAfter: 10
-            });
+      // Call Gemini 3.1 Pro API (highest quality for humanizer output)
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { maxOutputTokens: 8192 },
+          }),
         }
-    });
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Gemini API Error:', errorData);
+
+        // Provide actionable error messages
+        let userMessage = 'AI service temporarily unavailable. Please try again.';
+        if (response.status === 429) {
+          userMessage =
+            '⏳ Our AI is overloaded right now. Please wait 30 seconds and try again. (Tip: Shorter text processes faster!)';
+        } else if (response.status === 400) {
+          userMessage =
+            '❌ Invalid input detected. Please check your text for special characters or try shortening it.';
+        } else if (errorData.error?.message) {
+          userMessage = '⚠️ ' + errorData.error.message;
+        }
+
+        return res.status(response.status).json({
+          error: userMessage,
+          retryable: response.status === 429 || response.status >= 500,
+          retryAfter: response.status === 429 ? 30 : null,
+        });
+      }
+
+      const data = await response.json();
+      const rewrittenText =
+        data.candidates?.[0]?.content?.parts?.[0]?.text || 'Error processing text.';
+
+      // Log success
+      logEvent('ai_success', {
+        tool: 'humanizer',
+        tier: rateCheck.tier,
+        outputLength:
+          rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
+      });
+
+      res.status(200).json({ result: rewrittenText });
+    } catch (error) {
+      console.error('Function Error:', error);
+
+      // Graceful error handling with retry guidance
+      if (error.name === 'AbortError') {
+        return res.status(408).json({
+          error: '⏱️ Request timeout. Your text might be too long—try shortening it or try again.',
+          retryable: true,
+          retryAfter: 5,
+        });
+      }
+
+      return res.status(500).json({
+        error:
+          '🔧 Our AI service hit a snag. Please try again in a moment. If this persists, contact support.',
+        retryable: true,
+        retryAfter: 10,
+      });
+    }
+  });
 });
 
 // ─── Client-Side Analytics Event Endpoint ───────────────
 // Allows client to log anonymous events (conversion tracking, A/B tests)
 exports.analyticsEvent = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
-        }
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-        const { event, funnel, step, metadata } = req.body;
+    const { event, funnel, step, metadata } = req.body;
 
-        if (!event) {
-            return res.status(400).json({ error: 'Event type required' });
-        }
+    if (!event) {
+      return res.status(400).json({ error: 'Event type required' });
+    }
 
-        // Log the event (aggregate only)
-        if (event === 'conversion' && funnel && step) {
-            logConversion(funnel, step, metadata || {});
-        } else {
-            logEvent(event, metadata || {});
-        }
+    // Log the event (aggregate only)
+    if (event === 'conversion' && funnel && step) {
+      logConversion(funnel, step, metadata || {});
+    } else {
+      logEvent(event, metadata || {});
+    }
 
-        return res.status(200).json({ ok: true });
-    });
+    return res.status(200).json({ ok: true });
+  });
 });
 
 // ─── Scheduled Analytics Reports ────────────────────────
 // Runs daily at 9 AM UTC, sends email summary
 exports.dailyAnalyticsReport = functions.pubsub
-    .schedule('0 9 * * *')
-    .timeZone('UTC')
-    .onRun(async (context) => {
-        try {
-            // Fetch yesterday's analytics
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const dateStr = yesterday.toISOString().slice(0, 10);
+  .schedule('0 9 * * *')
+  .timeZone('UTC')
+  .onRun(async context => {
+    try {
+      // Fetch yesterday's analytics
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const dateStr = yesterday.toISOString().slice(0, 10);
 
-            const snapshot = await db.collection('analytics')
-                .where('date', '==', dateStr)
-                .get();
+      const snapshot = await db.collection('analytics').where('date', '==', dateStr).get();
 
-            const summary = {
-                date: dateStr,
-                totalRequests: 0,
-                successfulRequests: 0,
-                rateLimitHits: 0,
-                newSubscribers: 0,
-                toolUsage: {},
-                tierDistribution: {},
-                topHours: []
-            };
+      const summary = {
+        date: dateStr,
+        totalRequests: 0,
+        successfulRequests: 0,
+        rateLimitHits: 0,
+        newSubscribers: 0,
+        toolUsage: {},
+        tierDistribution: {},
+        topHours: [],
+      };
 
-            const hourlyData = Array(24).fill(0);
+      const hourlyData = Array(24).fill(0);
 
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                
-                if (data.type === 'ai_request') {
-                    summary.totalRequests += data.count || 0;
-                    
-                    if (data.metadata?.tool) {
-                        Object.entries(data.metadata.tool).forEach(([tool, count]) => {
-                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
-                        });
-                    }
-                    
-                    if (data.metadata?.tier) {
-                        Object.entries(data.metadata.tier).forEach(([tier, count]) => {
-                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
-                        });
-                    }
-                }
-                
-                if (data.type === 'ai_success') {
-                    summary.successfulRequests += data.count || 0;
-                }
-                
-                if (data.type === 'rate_limit_hit') {
-                    summary.rateLimitHits += data.count || 0;
-                }
-                
-                if (data.type === 'conversion' && data.metadata?.funnel?.email_capture) {
-                    summary.newSubscribers += data.count || 0;
-                }
-                
-                if (data.hourly) {
-                    data.hourly.forEach((count, hour) => {
-                        hourlyData[hour] += count;
-                    });
-                }
+      snapshot.forEach(doc => {
+        const data = doc.data();
+
+        if (data.type === 'ai_request') {
+          summary.totalRequests += data.count || 0;
+
+          if (data.metadata?.tool) {
+            Object.entries(data.metadata.tool).forEach(([tool, count]) => {
+              summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
             });
+          }
 
-            // Find top 3 hours
-            const hourlyWithIndex = hourlyData.map((count, hour) => ({ hour, count }));
-            hourlyWithIndex.sort((a, b) => b.count - a.count);
-            summary.topHours = hourlyWithIndex.slice(0, 3).map(h => `${h.hour}:00 (${h.count} requests)`);
-
-            // Calculate success rate
-            summary.successRate = summary.totalRequests > 0 
-                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(1) + '%'
-                : '0%';
-
-            // Log summary
-            console.log('[ANALYTICS] Daily Report:', JSON.stringify(summary, null, 2));
-
-            // TODO: Send email report (integrate with SendGrid/Mailgun)
-            // For now, just store the report
-            await db.collection('analytics_reports').add({
-                type: 'daily',
-                ...summary,
-                generatedAt: admin.firestore.FieldValue.serverTimestamp()
+          if (data.metadata?.tier) {
+            Object.entries(data.metadata.tier).forEach(([tier, count]) => {
+              summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
             });
-
-            return null;
-
-        } catch (error) {
-            console.error('[ANALYTICS] Daily report error:', error);
-            return null;
+          }
         }
-    });
+
+        if (data.type === 'ai_success') {
+          summary.successfulRequests += data.count || 0;
+        }
+
+        if (data.type === 'rate_limit_hit') {
+          summary.rateLimitHits += data.count || 0;
+        }
+
+        if (data.type === 'conversion' && data.metadata?.funnel?.email_capture) {
+          summary.newSubscribers += data.count || 0;
+        }
+
+        if (data.hourly) {
+          data.hourly.forEach((count, hour) => {
+            hourlyData[hour] += count;
+          });
+        }
+      });
+
+      // Find top 3 hours
+      const hourlyWithIndex = hourlyData.map((count, hour) => ({ hour, count }));
+      hourlyWithIndex.sort((a, b) => b.count - a.count);
+      summary.topHours = hourlyWithIndex.slice(0, 3).map(h => `${h.hour}:00 (${h.count} requests)`);
+
+      // Calculate success rate
+      summary.successRate =
+        summary.totalRequests > 0
+          ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(1) + '%'
+          : '0%';
+
+      // Log summary
+      console.log('[ANALYTICS] Daily Report:', JSON.stringify(summary, null, 2));
+
+      // TODO: Send email report (integrate with SendGrid/Mailgun)
+      // For now, just store the report
+      await db.collection('analytics_reports').add({
+        type: 'daily',
+        ...summary,
+        generatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      return null;
+    } catch (error) {
+      console.error('[ANALYTICS] Daily report error:', error);
+      return null;
+    }
+  });
 
 exports.generateGigWork = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
-        }
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-        const { jobDescription, freelancerProfile } = req.body;
+    const { jobDescription, freelancerProfile } = req.body;
 
-        // Security: Check Referer
-        const referer = req.get('Referer');
-        if (!isAllowedReferer(referer)) {
-            return res.status(403).json({ error: 'Unauthorized Source' });
-        }
+    // Security: Check Referer
+    const referer = req.get('Referer');
+    if (!isAllowedReferer(referer)) {
+      return res.status(403).json({ error: 'Unauthorized Source' });
+    }
 
-        // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
-        const fsRateCheck = await checkFirestoreRateLimit(req);
-        if (!fsRateCheck.allowed) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-            logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
-            return res.status(429)
-                .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: fsRateCheck.reason,
-                    retryAfter: fsRateCheck.retryAfter
-                });
-        }
-
-        // Rate limit check (no identifier logging)
-        const rateCheck = checkRateLimit(req);
-        if (!rateCheck.allowed) {
-            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool: 'gig-work' });
-            return res.status(429)
-                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: rateCheck.reason,
-                    retryAfter: rateCheck.retryAfter
-                });
-        }
-
-        // Log analytics
-        logEvent('ai_request', { 
-            tool: 'gig-work',
-            tier: rateCheck.tier,
-            hasProfile: !!freelancerProfile
+    // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
+    const fsRateCheck = await checkFirestoreRateLimit(req);
+    if (!fsRateCheck.allowed) {
+      console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
+      logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
+      return res
+        .status(429)
+        .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: fsRateCheck.reason,
+          retryAfter: fsRateCheck.retryAfter,
         });
+    }
 
-        const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
-        if (!apiKey) return res.status(500).json({ error: "Missing API Key" });
+    // Rate limit check (no identifier logging)
+    const rateCheck = checkRateLimit(req);
+    if (!rateCheck.allowed) {
+      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool: 'gig-work' });
+      return res
+        .status(429)
+        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: rateCheck.reason,
+          retryAfter: rateCheck.retryAfter,
+        });
+    }
 
-        try {
-            const prompt = `
+    // Log analytics
+    logEvent('ai_request', {
+      tool: 'gig-work',
+      tier: rateCheck.tier,
+      hasProfile: !!freelancerProfile,
+    });
+
+    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    if (!apiKey) return res.status(500).json({ error: 'Missing API Key' });
+
+    try {
+      const prompt = `
             You are an Expert Freelance Coach and Top 1% Upwork/Fiverr Seller.
             
             Task: Analyze the following JOB DESCRIPTION and create a winning proposal package for the freelancer.
@@ -758,58 +816,60 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
             Return ONLY valid JSON.
             `;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { responseMimeType: "application/json", maxOutputTokens: 8192 }
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("Gemini API Error:", errorData);
-                
-                let userMessage = 'AI generation failed. Please try again.';
-                if (response.status === 429) {
-                    userMessage = 'AI service is busy. Please wait 30 seconds and try again.';
-                } else if (errorData.error?.message) {
-                    userMessage = errorData.error.message;
-                }
-                
-                return res.status(response.status).json({ 
-                    error: userMessage,
-                    retryable: true,
-                    retryAfter: response.status === 429 ? 30 : 5
-                });
-            }
-
-            const data = await response.json();
-            const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            const resultJson = JSON.parse(rawText); // Parse the internal JSON
-
-            logEvent('ai_success', { tool: 'gig-work', tier: rateCheck.tier });
-
-            res.status(200).json(resultJson);
-
-        } catch (error) {
-            console.error("Function Error:", error);
-            
-            if (error.name === 'AbortError') {
-                return res.status(408).json({ 
-                    error: 'Request timeout. Please try again.',
-                    retryable: true
-                });
-            }
-            
-            return res.status(500).json({ 
-                error: 'Service temporarily unavailable. Please try again.',
-                retryable: true,
-                retryAfter: 5
-            });
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 8192 },
+          }),
         }
-    });
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Gemini API Error:', errorData);
+
+        let userMessage = 'AI generation failed. Please try again.';
+        if (response.status === 429) {
+          userMessage = 'AI service is busy. Please wait 30 seconds and try again.';
+        } else if (errorData.error?.message) {
+          userMessage = errorData.error.message;
+        }
+
+        return res.status(response.status).json({
+          error: userMessage,
+          retryable: true,
+          retryAfter: response.status === 429 ? 30 : 5,
+        });
+      }
+
+      const data = await response.json();
+      const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      const resultJson = JSON.parse(rawText); // Parse the internal JSON
+
+      logEvent('ai_success', { tool: 'gig-work', tier: rateCheck.tier });
+
+      res.status(200).json(resultJson);
+    } catch (error) {
+      console.error('Function Error:', error);
+
+      if (error.name === 'AbortError') {
+        return res.status(408).json({
+          error: 'Request timeout. Please try again.',
+          retryable: true,
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Service temporarily unavailable. Please try again.',
+        retryable: true,
+        retryAfter: 5,
+      });
+    }
+  });
 });
 
 // ─── Generic AI Generator ─────────────────────────────
@@ -817,9 +877,12 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
 // Adding a new AI tool = adding a new entry to AI_PROMPTS.
 
 const AI_PROMPTS = {
-    'summarizer': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an expert summarizer. Summarize the following text into ${params.length || '3-5 sentences'}.
+  summarizer: {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an expert summarizer. Summarize the following text into ${params.length || '3-5 sentences'}.
 Keep the key points, facts, and conclusions. Remove fluff. Use clear, simple language.
 ${params.bullet ? 'Return the summary as a bulleted list.' : ''}
 
@@ -828,11 +891,14 @@ Text to summarize:
 ${input}
 """
 
-Return ONLY the summary. No preamble, no "Here is the summary:", just the summary text.`
-    },
-    'email-writer': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a professional email writer. Write a ${params.tone || 'professional'} email based on this brief:
+Return ONLY the summary. No preamble, no "Here is the summary:", just the summary text.`,
+  },
+  'email-writer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a professional email writer. Write a ${params.tone || 'professional'} email based on this brief:
 
 Brief: "${input}"
 ${params.recipient ? `Recipient: ${params.recipient}` : ''}
@@ -846,11 +912,14 @@ Requirements:
 - Professional sign-off
 - Natural, human tone (not AI-sounding)
 
-Return ONLY the email text with the subject line at the top.`
-    },
-    'bio-generator': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an expert at writing compelling social media bios. Write ${params.count || '3'} ${params.platform || 'LinkedIn'} bios for this person.
+Return ONLY the email text with the subject line at the top.`,
+  },
+  'bio-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an expert at writing compelling social media bios. Write ${params.count || '3'} ${params.platform || 'LinkedIn'} bios for this person.
 
 Person's background:
 "${input}"
@@ -862,11 +931,14 @@ Requirements:
 - Focus on value to the reader, not just titles
 - Mix of professional + personality
 
-Return each bio on its own line, numbered 1/2/3 etc. No extra commentary.`
-    },
-    'product-description': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an expert e-commerce copywriter. Write a compelling product description for this product:
+Return each bio on its own line, numbered 1/2/3 etc. No extra commentary.`,
+  },
+  'product-description': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an expert e-commerce copywriter. Write a compelling product description for this product:
 
 Product: "${input}"
 ${params.audience ? `Target audience: ${params.audience}` : ''}
@@ -880,11 +952,14 @@ Requirements:
 - No clichés like "premium quality" or "the best"
 - Use sensory language where relevant
 
-Return ONLY the product description, formatted with the hook, bullet points, and CTA.`
-    },
-    'code-explainer': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a patient senior developer explaining code to a beginner. Explain the following code clearly:
+Return ONLY the product description, formatted with the hook, bullet points, and CTA.`,
+  },
+  'code-explainer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a patient senior developer explaining code to a beginner. Explain the following code clearly:
 
 \`\`\`${params.language || ''}
 ${input}
@@ -898,11 +973,14 @@ Requirements:
 - Mention what inputs it expects and what outputs it produces
 - Keep it under 400 words
 
-Return ONLY the explanation in markdown format with clear sections.`
-    },
-    'meta-description': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an SEO expert. Write ${params.count || '3'} meta descriptions for this page:
+Return ONLY the explanation in markdown format with clear sections.`,
+  },
+  'meta-description': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an SEO expert. Write ${params.count || '3'} meta descriptions for this page:
 
 Page topic / content: "${input}"
 ${params.keyword ? `Primary keyword to include: ${params.keyword}` : ''}
@@ -914,11 +992,14 @@ Requirements for each:
 - Be specific, not generic
 - Each one takes a DIFFERENT angle (benefit-focused, curiosity, urgency, etc.)
 
-Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`
-    },
-    'ai-detector': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an AI text detection expert. Analyze the following text and determine how likely it was written by an AI language model.
+Return each on its own line, numbered 1/2/3 etc. Then on a new line show the character count in parentheses, e.g. "(152 chars)".`,
+  },
+  'ai-detector': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an AI text detection expert. Analyze the following text and determine how likely it was written by an AI language model.
 
 Score the text from 0 to 100:
 - 0-20: Almost certainly human-written
@@ -943,12 +1024,15 @@ MARKERS FOUND:
 ANALYSIS:
 [2-3 sentences explaining your assessment]
 
-Be specific about which phrases, patterns, or structural elements triggered your score. Look for: repetitive sentence openers, formulaic transitions, lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words (leverage, delve, furthermore, etc.).`
-    },
-    // ─── Life Tools ───
-    'hardship-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an empathetic but professional letter writer who has helped hundreds of people write hardship letters. Write a ${params.type || 'general'} hardship letter based on this person's situation.
+Be specific about which phrases, patterns, or structural elements triggered your score. Look for: repetitive sentence openers, formulaic transitions, lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words (leverage, delve, furthermore, etc.).`,
+  },
+  // ─── Life Tools ───
+  'hardship-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an empathetic but professional letter writer who has helped hundreds of people write hardship letters. Write a ${params.type || 'general'} hardship letter based on this person's situation.
 
 Their situation:
 "${input}"
@@ -966,11 +1050,14 @@ Requirements:
 - Length: 300-500 words (one page)
 - Do NOT exaggerate or fabricate details — only use what the person provided
 
-Return ONLY the letter text, ready to copy. Include [YOUR NAME] and [DATE] placeholders.`
-    },
-    'appeal-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an experienced advocate who helps people write appeal letters. Write a ${params.type || 'general'} appeal letter based on this situation.
+Return ONLY the letter text, ready to copy. Include [YOUR NAME] and [DATE] placeholders.`,
+  },
+  'appeal-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an experienced advocate who helps people write appeal letters. Write a ${params.type || 'general'} appeal letter based on this situation.
 
 Their situation and what they're appealing:
 "${input}"
@@ -988,11 +1075,14 @@ Requirements:
 - Length: 400-600 words
 - Include placeholders for [YOUR NAME], [DATE], [CASE NUMBER]
 
-Return ONLY the letter text, ready to copy.`
-    },
-    'custody-document': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a family law paralegal assistant helping a parent draft custody-related documents. Generate a ${params.docType || 'parenting plan'} based on the following details.
+Return ONLY the letter text, ready to copy.`,
+  },
+  'custody-document': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a family law paralegal assistant helping a parent draft custody-related documents. Generate a ${params.docType || 'parenting plan'} based on the following details.
 
 Parent's situation and details:
 "${input}"
@@ -1009,11 +1099,14 @@ Requirements:
 - Note: This is a DRAFT to help organize thoughts — not legal advice. Include a disclaimer.
 - Tone: factual, organized, professional
 
-Return the document with clear section headers. End with: "DISCLAIMER: This is a draft created to help organize your thoughts. It is not legal advice. Consult a family law attorney before filing any documents with the court."`
-    },
-    'caregiver-report': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an experienced caregiver helping write a professional shift report. Convert these informal notes into a structured caregiver report.
+Return the document with clear section headers. End with: "DISCLAIMER: This is a draft created to help organize your thoughts. It is not legal advice. Consult a family law attorney before filing any documents with the court."`,
+  },
+  'caregiver-report': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an experienced caregiver helping write a professional shift report. Convert these informal notes into a structured caregiver report.
 
 Caregiver's notes:
 "${input}"
@@ -1037,11 +1130,14 @@ Requirements:
 - If something wasn't mentioned, note "Not reported this shift"
 - Tone: professional, factual, concise
 
-Return the formatted report ready to print or email.`
-    },
-    'budget-planner': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a compassionate financial counselor helping someone create a survival budget during a difficult time. Based on their situation, create a personalized budget plan.
+Return the formatted report ready to print or email.`,
+  },
+  'budget-planner': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a compassionate financial counselor helping someone create a survival budget during a difficult time. Based on their situation, create a personalized budget plan.
 
 Their financial situation:
 "${input}"
@@ -1058,11 +1154,14 @@ Requirements:
 - Tone: honest and direct but not judgmental. Practical, not preachy.
 - Do NOT give generic advice like "make a budget" — give SPECIFIC action items based on what they told you
 
-Format with clear headers and bullet points. End with: "Remember: this is a starting point, not a final plan. Call 211 for local assistance programs you may qualify for."`
-    },
-    'resume-bullets': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
+Format with clear headers and bullet points. End with: "Remember: this is a starting point, not a final plan. Call 211 for local assistance programs you may qualify for."`,
+  },
+  'resume-bullets': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a career coach and resume expert. Rewrite these accomplishments as strong resume bullet points:
 
 Raw accomplishments:
 "${input}"
@@ -1076,11 +1175,14 @@ Requirements:
 - Remove passive voice
 - Return 4-6 bullet points
 
-Return ONLY the bullet points, each starting with "• ". No preamble.`
-    },
-    'tweet-generator': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
+Return ONLY the bullet points, each starting with "• ". No preamble.`,
+  },
+  'tweet-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
 
 Topic: "${input}"
 ${params.angle ? `Angle: ${params.angle}` : ''}
@@ -1092,11 +1194,14 @@ Requirements:
 - No hashtag spam — max 1-2 relevant hashtags per tweet
 - Sound human, not corporate
 
-Return each tweet on its own line, separated by "---". No numbering, no commentary.`
-    },
-    'paraphraser': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a skilled editor. Paraphrase the following text in ${params.tone || 'a clear, natural'} tone.
+Return each tweet on its own line, separated by "---". No numbering, no commentary.`,
+  },
+  paraphraser: {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a skilled editor. Paraphrase the following text in ${params.tone || 'a clear, natural'} tone.
 Keep the meaning 100% intact but rephrase the words and sentence structure.
 ${params.length === 'shorter' ? 'Make it shorter than the original.' : ''}
 ${params.length === 'longer' ? 'Expand it slightly with more detail.' : ''}
@@ -1106,11 +1211,14 @@ Text:
 ${input}
 """
 
-Return ONLY the paraphrased text. No quotes, no preamble.`
-    },
-    'linkedin-post': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a LinkedIn ghostwriter who's helped executives get millions of impressions. Write a ${params.style || 'thought leadership'} LinkedIn post about this topic:
+Return ONLY the paraphrased text. No quotes, no preamble.`,
+  },
+  'linkedin-post': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a LinkedIn ghostwriter who's helped executives get millions of impressions. Write a ${params.style || 'thought leadership'} LinkedIn post about this topic:
 
 Topic: "${input}"
 ${params.hook ? `Hook style: ${params.hook}` : 'Hook style: Contrarian or surprising'}
@@ -1126,11 +1234,14 @@ Requirements:
 - Tone: Authentic, not corporate. Personal, not preachy.
 - NO hashtag spam — max 3 relevant hashtags at the very end
 
-Return ONLY the post text, ready to copy and paste into LinkedIn.`
-    },
-    'cold-email': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a sales copywriter who writes cold emails that get 40%+ response rates. Write a personalized cold email based on this brief:
+Return ONLY the post text, ready to copy and paste into LinkedIn.`,
+  },
+  'cold-email': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a sales copywriter who writes cold emails that get 40%+ response rates. Write a personalized cold email based on this brief:
 
 Brief: "${input}"
 ${params.recipient ? `Recipient: ${params.recipient}` : ''}
@@ -1146,11 +1257,14 @@ Requirements:
 - Tone: Conversational, not salesy. Helpful, not pushy.
 - NO: "I hope this email finds you well", "reaching out", "I'd love to pick your brain"
 
-Return ONLY the email with subject line at the top.`
-    },
-    'job-description': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a talent acquisition expert who writes job descriptions that attract A-players. Write a compelling job description for this role:
+Return ONLY the email with subject line at the top.`,
+  },
+  'job-description': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a talent acquisition expert who writes job descriptions that attract A-players. Write a compelling job description for this role:
 
 Role details: "${input}"
 ${params.company ? `Company: ${params.company}` : ''}
@@ -1168,11 +1282,14 @@ Requirements:
 - Tone: Exciting but honest. Ambitious but realistic.
 - NO: "Fast-paced environment", "wear many hats", "competitive salary"
 
-Return the full job description with clear section headers.`
-    },
-    'press-release': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a PR professional who writes press releases for major publications. Write a professional press release for this announcement:
+Return the full job description with clear section headers.`,
+  },
+  'press-release': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a PR professional who writes press releases for major publications. Write a professional press release for this announcement:
 
 Announcement: "${input}"
 ${params.company ? `Company: ${params.company}` : ''}
@@ -1190,11 +1307,14 @@ Requirements:
 - Length: 400-600 words
 - Tone: Professional, factual, newsworthy (not promotional)
 
-Return the complete press release ready to distribute.`
-    },
-    'seo-title': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are an SEO expert who writes titles that rank #1 and get clicked. Generate ${params.count || '5'} SEO-optimized page titles for this topic:
+Return the complete press release ready to distribute.`,
+  },
+  'seo-title': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an SEO expert who writes titles that rank #1 and get clicked. Generate ${params.count || '5'} SEO-optimized page titles for this topic:
 
 Topic/page content: "${input}"
 ${params.keyword ? `Primary keyword: ${params.keyword}` : ''}
@@ -1209,23 +1329,25 @@ Requirements for each title:
 - Each title takes a DIFFERENT angle (how-to, list, comparison, guide, etc.)
 - Be specific, not generic
 
-Return each title on its own line, numbered 1-5. Then show character count in parentheses, e.g. "(57 chars)".`
-    },
-    'voice-writer': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const voice = params.voice || 'conversational';
-            const refinement = params.refinement ? `\n\nUser refinement request: "${params.refinement}"` : '';
+Return each title on its own line, numbered 1-5. Then show character count in parentheses, e.g. "(57 chars)".`,
+  },
+  'voice-writer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const voice = params.voice || 'conversational';
+      const refinement = params.refinement
+        ? `\n\nUser refinement request: "${params.refinement}"`
+        : '';
 
-            const voiceInstructions = {
-                conversational: `Write in a warm, direct, conversational tone — like you're texting a smart friend who's going through something real. Short sentences. Contractions everywhere. No corporate speak. No fluff. Use "you" and "your". Be specific, not generic. Sound like a real person, not a brand. Slightly confrontational when it serves the point.`,
-                educational: `Write in a clear teaching voice — structured, confident, and practical. Use numbered steps or clear sections when it helps. Define terms without being condescending. Give concrete examples. Sound like a sharp instructor who respects the reader's time. No filler phrases, no padding.`,
-                strategic: `Write in a strategic, framework-driven tone — like a business operator who's figured something out and is sharing the system. Use frameworks, sequences, and clear logic. Be direct about what works and what doesn't. Sound like someone who's done the reps, not someone theorizing. Bullet points and numbered lists where they add clarity.`
-            };
+      const voiceInstructions = {
+        conversational: `Write in a warm, direct, conversational tone — like you're texting a smart friend who's going through something real. Short sentences. Contractions everywhere. No corporate speak. No fluff. Use "you" and "your". Be specific, not generic. Sound like a real person, not a brand. Slightly confrontational when it serves the point.`,
+        educational: `Write in a clear teaching voice — structured, confident, and practical. Use numbered steps or clear sections when it helps. Define terms without being condescending. Give concrete examples. Sound like a sharp instructor who respects the reader's time. No filler phrases, no padding.`,
+        strategic: `Write in a strategic, framework-driven tone — like a business operator who's figured something out and is sharing the system. Use frameworks, sequences, and clear logic. Be direct about what works and what doesn't. Sound like someone who's done the reps, not someone theorizing. Bullet points and numbered lists where they add clarity.`,
+      };
 
-            const instructions = voiceInstructions[voice] || voiceInstructions.conversational;
+      const instructions = voiceInstructions[voice] || voiceInstructions.conversational;
 
-            return `You are a professional content writer who can match specific tones and registers precisely.
+      return `You are a professional content writer who can match specific tones and registers precisely.
 
 Voice instructions:
 ${instructions}
@@ -1237,11 +1359,14 @@ ${refinement}
 Write a focused piece on this topic in the voice described above. Aim for 150-250 words unless the topic naturally calls for more or less.
 
 Return ONLY the written content. No title, no meta commentary, no "here's the piece:".`;
-        }
     },
-    'child-support-calculator': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a family law expert specializing in state child support guidelines. Based on the provided financial inputs, analyze the child support details:
+  },
+  'child-support-calculator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a family law expert specializing in state child support guidelines. Based on the provided financial inputs, analyze the child support details:
 
 State: ${params.state || 'General Income Shares model'}
 Parent A Monthly Gross Income: $${params.incomeA || '0'}
@@ -1257,11 +1382,14 @@ Requirements:
 4. Detail the next steps required to file or request child support, including forms or worksheets commonly used in ${params.state || 'this state'}.
 5. Tone: professional, informative, objective, and clear. Avoid legalese without explanation.
 
-End with: "DISCLAIMER: This analysis is based on provided figures and standard guidelines. It does not constitute legal advice. Please consult a qualified family law attorney or your state's Department of Child Support Services for official calculations."`
-    },
-    'spousal-support-calculator': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a family law expert. Analyze spousal support (alimony) considerations for the following scenario:
+End with: "DISCLAIMER: This analysis is based on provided figures and standard guidelines. It does not constitute legal advice. Please consult a qualified family law attorney or your state's Department of Child Support Services for official calculations."`,
+  },
+  'spousal-support-calculator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a family law expert. Analyze spousal support (alimony) considerations for the following scenario:
 
 State: ${params.state || 'General statutory model'}
 Parent A (Payor) Monthly Income: $${params.incomeA || '0'}
@@ -1277,11 +1405,14 @@ Requirements:
 5. Outline modification and termination factors (e.g., remarriage, cohabitation, retirement, significant income changes).
 6. Tone: objective, authoritative, easy to understand.
 
-End with: "DISCLAIMER: This calculation and analysis are for educational purposes. Alimony is highly discretionary and varies by court. Consult a family law attorney or tax professional for advice."`
-    },
-    'med-administration-log': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a professional nurse or clinical coordinator. Analyze the following medication administration log or notes:
+End with: "DISCLAIMER: This calculation and analysis are for educational purposes. Alimony is highly discretionary and varies by court. Consult a family law attorney or tax professional for advice."`,
+  },
+  'med-administration-log': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a professional nurse or clinical coordinator. Analyze the following medication administration log or notes:
 
 Log/Notes:
 """
@@ -1302,38 +1433,38 @@ Requirements:
 
 Tone: objective, professional, supportive, and clinical. Avoid definitive medical diagnoses.
 
-End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`
-    },
-    'utility-shutoff-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const mode = (params.mode || '').toLowerCase();
-            const modeLabel = params.modeLabel || params.mode || 'payment arrangement';
-            let modeExtra = '';
-            if (mode.includes('medical')) {
-                modeExtra = `
+End with: "DISCLAIMER: This report is generated based on caregiver logs. It does not replace professional clinical judgment or medical advice. Verify all medication changes with the prescribing physician or pharmacist."`,
+  },
+  'utility-shutoff-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'payment arrangement';
+      let modeExtra = '';
+      if (mode.includes('medical')) {
+        modeExtra = `
 MEDICAL PROTECTION MODE:
 - Request the utility's medical certificate / medical baseline process by name if known; do NOT invent a diagnosis or claim the form is already approved.
 - Ask for temporary hold while the certificate is completed by a licensed clinician.
 - Mention household medical context only if stated in facts.`;
-            } else if (mode.includes('restore')) {
-                modeExtra = `
+      } else if (mode.includes('restore')) {
+        modeExtra = `
 RESTORE SERVICE MODE:
 - Acknowledge service is already off if facts say so.
 - State what can be paid today toward reconnection and any deposit willingness only if stated.
 - Request written reconnection terms and a same-day or next-business-day restore window when possible.`;
-            } else if (mode.includes('hardship')) {
-                modeExtra = `
+      } else if (mode.includes('hardship')) {
+        modeExtra = `
 HARDSHIP HOLD MODE:
 - Request temporary hardship hold / delayed disconnect while payment plan and aid applications proceed.
 - Suggest LIHEAP / local energy assistance only as a next step for the customer (do not claim they already qualify).`;
-            } else {
-                modeExtra = `
+      } else {
+        modeExtra = `
 PAYMENT PLAN MODE:
 - Lead with a concrete first payment + ongoing monthly offer using only amounts from facts.
 - Ask for written confirmation of arrangement terms and the date any hold expires.`;
-            }
-            return `You are a senior consumer advocate specializing in utility disconnection, payment arrangements, and energy assistance (LIHEAP / crisis programs). Draft a professional ${modeLabel} letter.
+      }
+      return `You are a senior consumer advocate specializing in utility disconnection, payment arrangements, and energy assistance (LIHEAP / crisis programs). Draft a professional ${modeLabel} letter.
 
 STRUCTURED FACTS (use only these — never invent account numbers, amounts, diagnoses, or statutes):
 """
@@ -1370,24 +1501,28 @@ CALL SCRIPT (30 seconds)
 DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility and state.
 
 Return ONLY the letter + next steps + call script + disclaimer. No preamble.`;
-        }
     },
-    'insurance-denial-appeal': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const mode = (params.mode || '').toLowerCase();
-            const modeLabel = params.modeLabel || params.mode || 'internal appeal';
-            let modeExtra = '';
-            if (mode.includes('prior') || mode.includes('auth')) {
-                modeExtra = 'Focus on prior authorization reconsideration, medical necessity from member view, and peer-to-peer with treating clinician.';
-            } else if (mode.includes('network') || mode.includes('oon')) {
-                modeExtra = 'Focus on network inadequacy or continuity of care only if facts support; request single-case agreement / in-network exception. Do not invent network search details.';
-            } else if (mode.includes('quantity') || mode.includes('refill') || mode.includes('limit')) {
-                modeExtra = 'Focus on quantity-limit exception using the prescriber rationale from facts only.';
-            } else {
-                modeExtra = 'Address "not medically necessary" by mapping facts to failed alternatives and clinician order; quote denial reason only if present.';
-            }
-            return `You are an experienced patient advocate drafting a health plan MEMBER INTERNAL APPEAL letter (${modeLabel}).
+  },
+  'insurance-denial-appeal': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'internal appeal';
+      let modeExtra = '';
+      if (mode.includes('prior') || mode.includes('auth')) {
+        modeExtra =
+          'Focus on prior authorization reconsideration, medical necessity from member view, and peer-to-peer with treating clinician.';
+      } else if (mode.includes('network') || mode.includes('oon')) {
+        modeExtra =
+          'Focus on network inadequacy or continuity of care only if facts support; request single-case agreement / in-network exception. Do not invent network search details.';
+      } else if (mode.includes('quantity') || mode.includes('refill') || mode.includes('limit')) {
+        modeExtra =
+          'Focus on quantity-limit exception using the prescriber rationale from facts only.';
+      } else {
+        modeExtra =
+          'Address "not medically necessary" by mapping facts to failed alternatives and clinician order; quote denial reason only if present.';
+      }
+      return `You are an experienced patient advocate drafting a health plan MEMBER INTERNAL APPEAL letter (${modeLabel}).
 
 STRUCTURED FACTS (never invent member IDs, claim numbers, diagnoses, CPT/NDC codes, or policy language):
 """
@@ -1420,13 +1555,13 @@ ATTACHMENTS I WILL PROVIDE
 6. Final line: DISCLAIMER: Not medical or legal advice. Follow your plan's deadlines and obtain a clinician medical-necessity letter.
 
 Return ONLY the appeal letter.`;
-        }
     },
-    'sap-appeal-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const modeLabel = params.modeLabel || params.mode || 'SAP appeal';
-            return `You are a financial aid advisor coaching a student through a Satisfactory Academic Progress (SAP) appeal for federal/state/institutional aid (${modeLabel}).
+  },
+  'sap-appeal-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const modeLabel = params.modeLabel || params.mode || 'SAP appeal';
+      return `You are a financial aid advisor coaching a student through a Satisfactory Academic Progress (SAP) appeal for federal/state/institutional aid (${modeLabel}).
 
 STRUCTURED FACTS (never invent GPA, pace %, grades, diagnoses, or school policy thresholds):
 """
@@ -1461,31 +1596,36 @@ DOCUMENTS TO INCLUDE (school-dependent)
 DISCLAIMER: Not legal or financial-aid advice. Follow your school's SAP policy PDF and deadlines.
 
 Return ONLY the letter + documents list + disclaimer.`;
-        }
     },
-    'landlord-tenant-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const mode = (params.mode || '').toLowerCase();
-            const modeLabel = params.modeLabel || params.mode || 'landlord-tenant';
-            let tone = 'professional and firm but civil';
-            let modeExtra = '';
-            if (mode.includes('deposit')) {
-                tone = 'firm, precise, businesslike';
-                modeExtra = 'Demand itemized deductions and return of remaining deposit. Do NOT invent the statutory number of days — say "within the time required by [state] law" or use a deadline only if facts provide one.';
-            } else if (mode.includes('habit')) {
-                tone = 'urgent, factual, non-threatening';
-                modeExtra = 'Document condition timeline. Request repair by a clear deadline from facts or a reasonable short window. Do not advise rent withholding. One optional line: tenant may contact local housing code enforcement if unresolved.';
-            } else if (mode.includes('rent')) {
-                tone = 'collaborative and specific';
-                modeExtra = 'Propose a dated catch-up schedule with amounts from facts only. Request written acceptance.';
-            } else if (mode.includes('move')) {
-                tone = 'clear and courteous';
-                modeExtra = 'State intended move-out date, unit, key return, and request for inspection / deposit process.';
-            } else {
-                modeExtra = 'State defect, start date, prior notices, access availability, and requested repair deadline.';
-            }
-            return `You are a housing advocate drafting a ${modeLabel} letter. Tone: ${tone}.
+  },
+  'landlord-tenant-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'landlord-tenant';
+      let tone = 'professional and firm but civil';
+      let modeExtra = '';
+      if (mode.includes('deposit')) {
+        tone = 'firm, precise, businesslike';
+        modeExtra =
+          'Demand itemized deductions and return of remaining deposit. Do NOT invent the statutory number of days — say "within the time required by [state] law" or use a deadline only if facts provide one.';
+      } else if (mode.includes('habit')) {
+        tone = 'urgent, factual, non-threatening';
+        modeExtra =
+          'Document condition timeline. Request repair by a clear deadline from facts or a reasonable short window. Do not advise rent withholding. One optional line: tenant may contact local housing code enforcement if unresolved.';
+      } else if (mode.includes('rent')) {
+        tone = 'collaborative and specific';
+        modeExtra =
+          'Propose a dated catch-up schedule with amounts from facts only. Request written acceptance.';
+      } else if (mode.includes('move')) {
+        tone = 'clear and courteous';
+        modeExtra =
+          'State intended move-out date, unit, key return, and request for inspection / deposit process.';
+      } else {
+        modeExtra =
+          'State defect, start date, prior notices, access availability, and requested repair deadline.';
+      }
+      return `You are a housing advocate drafting a ${modeLabel} letter. Tone: ${tone}.
 
 STRUCTURED FACTS (never invent lease clauses, statute numbers, dollar penalties, or dates):
 """
@@ -1509,24 +1649,25 @@ LETTER REQUIREMENTS:
 6. Final line: DISCLAIMER: Not legal advice. Housing law varies by location.
 
 Return ONLY the letter.`;
-        }
     },
-    'payment-demand-letter': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => {
-            const mode = (params.mode || '').toLowerCase();
-            const modeLabel = params.modeLabel || params.mode || 'payment demand';
-            let toneGuide = 'professional and clear';
-            if (mode.includes('friendly') || mode.includes('1st')) {
-                toneGuide = 'warm, assume good intent, short';
-            } else if (mode.includes('firm') || mode.includes('2nd')) {
-                toneGuide = 'polite but firm; reference prior reminders with dates from facts';
-            } else if (mode.includes('final')) {
-                toneGuide = 'final written notice — professional, not aggressive; escalate only using next steps stated in facts';
-            } else if (mode.includes('personal') || mode.includes('roommate')) {
-                toneGuide = 'personal but clear; preserve relationship while documenting the debt';
-            }
-            return `You are a collections-communication specialist writing a ${modeLabel} letter. Tone: ${toneGuide}.
+  },
+  'payment-demand-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'payment demand';
+      let toneGuide = 'professional and clear';
+      if (mode.includes('friendly') || mode.includes('1st')) {
+        toneGuide = 'warm, assume good intent, short';
+      } else if (mode.includes('firm') || mode.includes('2nd')) {
+        toneGuide = 'polite but firm; reference prior reminders with dates from facts';
+      } else if (mode.includes('final')) {
+        toneGuide =
+          'final written notice — professional, not aggressive; escalate only using next steps stated in facts';
+      } else if (mode.includes('personal') || mode.includes('roommate')) {
+        toneGuide = 'personal but clear; preserve relationship while documenting the debt';
+      }
+      return `You are a collections-communication specialist writing a ${modeLabel} letter. Tone: ${toneGuide}.
 
 STRUCTURED FACTS (never invent amounts, invoice numbers, contract penalties, or legal threats):
 """
@@ -1550,12 +1691,15 @@ LETTER REQUIREMENTS:
 6. Final line: DISCLAIMER: Not legal advice. For disputes or large sums, consider professional advice.
 
 Return ONLY the letter.`;
-        }
     },
+  },
 
-    'behavioral-log': {
-        model: 'gemini-3.1-pro-preview',
-        build: (input, params) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
+  'behavioral-log': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a memory care specialist and behavioral analyst. Analyze this Antecedent-Behavior-Consequence (ABC) log:
 
 Log Entries:
 """
@@ -1569,353 +1713,364 @@ Requirements:
 4. Outline safety precautions and monitoring advice for the care team.
 5. Tone: compassionate, clinical, actionable, and structured.
 
-End with: "DISCLAIMER: This analysis is based on behavioral observations. It is not a clinical diagnosis or treatment plan. Consult a neurologist, psychiatrist, or geriatric specialist for formal medical evaluation."`
-    }
+End with: "DISCLAIMER: This analysis is based on behavioral observations. It is not a clinical diagnosis or treatment plan. Consult a neurologist, psychiatrist, or geriatric specialist for formal medical evaluation."`,
+  },
 };
 
 exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
-        }
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-        const { tool, input, params } = req.body;
+    const { tool, input, params } = req.body;
 
-        // Security: Referer check
-        const referer = req.get('Referer');
-        if (!isAllowedReferer(referer)) {
-            return res.status(403).json({ error: 'Unauthorized Source' });
-        }
+    // Security: Referer check
+    const referer = req.get('Referer');
+    if (!isAllowedReferer(referer)) {
+      return res.status(403).json({ error: 'Unauthorized Source' });
+    }
 
-        // Validate tool
-        if (!tool || !AI_PROMPTS[tool]) {
-            return res.status(400).json({ error: 'Invalid tool. Valid: ' + Object.keys(AI_PROMPTS).join(', ') });
-        }
+    // Validate tool
+    if (!tool || !AI_PROMPTS[tool]) {
+      return res
+        .status(400)
+        .json({ error: 'Invalid tool. Valid: ' + Object.keys(AI_PROMPTS).join(', ') });
+    }
 
-        // Validate input
-        if (!input || typeof input !== 'string' || input.length < 1) {
-            return res.status(400).json({ error: 'Input text is required' });
-        }
+    // Validate input
+    if (!input || typeof input !== 'string' || input.length < 1) {
+      return res.status(400).json({ error: 'Input text is required' });
+    }
 
-        if (input.length > 5000) {
-            return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
-        }
+    if (input.length > 5000) {
+      return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
+    }
 
-        // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
-        const fsRateCheck = await checkFirestoreRateLimit(req);
-        if (!fsRateCheck.allowed) {
-            console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-            logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
-            return res.status(429)
-                .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: fsRateCheck.reason,
-                    retryAfter: fsRateCheck.retryAfter
-                });
-        }
-
-        // Rate limit check (no identifier logging)
-        const rateCheck = checkRateLimit(req);
-        if (!rateCheck.allowed) {
-            console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-            logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool });
-            return res.status(429)
-                .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-                .json({
-                    error: rateCheck.reason,
-                    retryAfter: rateCheck.retryAfter
-                });
-        }
-
-        // Add rate limit info to response headers
-        if (rateCheck.remaining) {
-            res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
-            res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
-            res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
-            res.set('X-RateLimit-Tier', rateCheck.tier);
-        }
-
-        // Log analytics
-        logEvent('ai_request', { 
-            tool,
-            tier: rateCheck.tier,
-            inputLength: input.length > 1000 ? '1000+' : input.length > 500 ? '500-1000' : '0-500'
+    // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
+    const fsRateCheck = await checkFirestoreRateLimit(req);
+    if (!fsRateCheck.allowed) {
+      console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
+      logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
+      return res
+        .status(429)
+        .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: fsRateCheck.reason,
+          retryAfter: fsRateCheck.retryAfter,
         });
+    }
 
-        // Get API Key
-        const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
-        if (!apiKey) {
-            console.error("API Key not found in functions config.");
-            return res.status(500).json({ error: "Server Configuration Error" });
-        }
+    // Rate limit check (no identifier logging)
+    const rateCheck = checkRateLimit(req);
+    if (!rateCheck.allowed) {
+      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
+      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool });
+      return res
+        .status(429)
+        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
+        .json({
+          error: rateCheck.reason,
+          retryAfter: rateCheck.retryAfter,
+        });
+    }
 
-        try {
-            const toolConfig = AI_PROMPTS[tool];
-            const prompt = toolConfig.build(input, sanitizeParams(params));
-            const model = toolConfig.model || 'gemini-3.1-pro-preview';
+    // Add rate limit info to response headers
+    if (rateCheck.remaining) {
+      res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
+      res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
+      res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
+      res.set('X-RateLimit-Tier', rateCheck.tier);
+    }
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 8192
-                    }
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error(`Gemini API Error (${tool}):`, errorData);
-                
-                let userMessage = 'AI service temporarily unavailable. Please try again.';
-                if (response.status === 429) {
-                    userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
-                } else if (response.status === 400) {
-                    userMessage = 'Invalid input. Please check your text and try again.';
-                } else if (errorData.error?.message) {
-                    userMessage = errorData.error.message;
-                }
-                
-                return res.status(response.status).json({ 
-                    error: userMessage,
-                    retryable: response.status === 429 || response.status >= 500,
-                    retryAfter: response.status === 429 ? 30 : null
-                });
-            }
-
-            const data = await response.json();
-            const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing input.";
-
-            logEvent('ai_success', { 
-                tool,
-                tier: rateCheck.tier,
-                outputLength: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500'
-            });
-
-            res.status(200).json({ result, tool });
-
-        } catch (error) {
-            console.error(`Function Error (${tool}):`, error);
-            
-            if (error.name === 'AbortError') {
-                return res.status(408).json({ 
-                    error: 'Request timeout. Please try again.',
-                    retryable: true
-                });
-            }
-            
-            if (error.message && error.message.includes('JSON')) {
-                return res.status(500).json({ 
-                    error: 'AI returned invalid response. Please try again.',
-                    retryable: true,
-                    retryAfter: 5
-                });
-            }
-            
-            return res.status(500).json({ 
-                error: 'Service temporarily unavailable. Please try again in a moment.',
-                retryable: true,
-                retryAfter: 5
-            });
-        }
+    // Log analytics
+    logEvent('ai_request', {
+      tool,
+      tier: rateCheck.tier,
+      inputLength: input.length > 1000 ? '1000+' : input.length > 500 ? '500-1000' : '0-500',
     });
+
+    // Get API Key
+    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    if (!apiKey) {
+      console.error('API Key not found in functions config.');
+      return res.status(500).json({ error: 'Server Configuration Error' });
+    }
+
+    try {
+      const toolConfig = AI_PROMPTS[tool];
+      const prompt = toolConfig.build(input, sanitizeParams(params));
+      const model = toolConfig.model || 'gemini-3.1-pro-preview';
+
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 8192,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error(`Gemini API Error (${tool}):`, errorData);
+
+        let userMessage = 'AI service temporarily unavailable. Please try again.';
+        if (response.status === 429) {
+          userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
+        } else if (response.status === 400) {
+          userMessage = 'Invalid input. Please check your text and try again.';
+        } else if (errorData.error?.message) {
+          userMessage = errorData.error.message;
+        }
+
+        return res.status(response.status).json({
+          error: userMessage,
+          retryable: response.status === 429 || response.status >= 500,
+          retryAfter: response.status === 429 ? 30 : null,
+        });
+      }
+
+      const data = await response.json();
+      const result = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Error processing input.';
+
+      logEvent('ai_success', {
+        tool,
+        tier: rateCheck.tier,
+        outputLength: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
+      });
+
+      res.status(200).json({ result, tool });
+    } catch (error) {
+      console.error(`Function Error (${tool}):`, error);
+
+      if (error.name === 'AbortError') {
+        return res.status(408).json({
+          error: 'Request timeout. Please try again.',
+          retryable: true,
+        });
+      }
+
+      if (error.message && error.message.includes('JSON')) {
+        return res.status(500).json({
+          error: 'AI returned invalid response. Please try again.',
+          retryable: true,
+          retryAfter: 5,
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Service temporarily unavailable. Please try again in a moment.',
+        retryable: true,
+        retryAfter: 5,
+      });
+    }
+  });
 });
 
 // ─── Privacy Status Endpoint ───────────────────────────
 // Allows users to verify what data exists about them (privacy-first transparency)
 exports.privacyStatus = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'GET') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
+  cors(req, res, async () => {
+    if (req.method !== 'GET') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    const identifier = getClientIdentifier(req);
+    const tier = getUserTier(req);
+
+    // Get current rate limit status
+    const userData = rateLimitStore.get(identifier);
+    const now = Date.now();
+
+    let rateLimitInfo = {
+      tier,
+      hashedIdentifier: identifier.slice(0, 12) + '...', // Show partial hash for verification
+      requestsStored: userData ? userData.requests.length : 0,
+      oldestRequest:
+        userData && userData.requests.length > 0
+          ? new Date(Math.min(...userData.requests)).toISOString()
+          : null,
+      newestRequest:
+        userData && userData.requests.length > 0
+          ? new Date(Math.max(...userData.requests)).toISOString()
+          : null,
+      dataExpiresAt:
+        userData && userData.requests.length > 0
+          ? new Date(Math.max(...userData.requests) + 86400000).toISOString()
+          : null,
+    };
+
+    // Check if email is subscribed (only if they provide it)
+    const email = req.query.email;
+    let emailStatus = null;
+
+    if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      try {
+        const normalizedEmail = email.toLowerCase().trim();
+        const existing = await db
+          .collection('subscribers')
+          .where('email', '==', normalizedEmail)
+          .limit(1)
+          .get();
+
+        if (!existing.empty) {
+          const doc = existing.docs[0].data();
+          emailStatus = {
+            subscribed: true,
+            subscribedAt: doc.subscribedAt?.toDate().toISOString() || null,
+            source: doc.source || 'unknown',
+          };
+        } else {
+          emailStatus = { subscribed: false };
         }
+      } catch (e) {
+        console.error('Privacy check error:', e);
+      }
+    }
 
-        const identifier = getClientIdentifier(req);
-        const tier = getUserTier(req);
-        
-        // Get current rate limit status
-        const userData = rateLimitStore.get(identifier);
-        const now = Date.now();
-        
-        let rateLimitInfo = {
-            tier,
-            hashedIdentifier: identifier.slice(0, 12) + '...', // Show partial hash for verification
-            requestsStored: userData ? userData.requests.length : 0,
-            oldestRequest: userData && userData.requests.length > 0 
-                ? new Date(Math.min(...userData.requests)).toISOString()
-                : null,
-            newestRequest: userData && userData.requests.length > 0
-                ? new Date(Math.max(...userData.requests)).toISOString()
-                : null,
-            dataExpiresAt: userData && userData.requests.length > 0
-                ? new Date(Math.max(...userData.requests) + 86400000).toISOString()
-                : null
-        };
-
-        // Check if email is subscribed (only if they provide it)
-        const email = req.query.email;
-        let emailStatus = null;
-        
-        if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            try {
-                const normalizedEmail = email.toLowerCase().trim();
-                const existing = await db.collection('subscribers')
-                    .where('email', '==', normalizedEmail)
-                    .limit(1)
-                    .get();
-                
-                if (!existing.empty) {
-                    const doc = existing.docs[0].data();
-                    emailStatus = {
-                        subscribed: true,
-                        subscribedAt: doc.subscribedAt?.toDate().toISOString() || null,
-                        source: doc.source || 'unknown'
-                    };
-                } else {
-                    emailStatus = { subscribed: false };
-                }
-            } catch (e) {
-                console.error('Privacy check error:', e);
-            }
-        }
-
-        return res.status(200).json({
-            privacy: {
-                tracking: 'none',
-                dataRetention: '24 hours maximum',
-                ipStorage: 'hashed only, never stored raw',
-                userIdTracking: 'disabled',
-                cookies: tier === 'subscribed' || tier === 'premium' ? ['cs_subscribed'] : [],
-                thirdPartySharing: 'never'
-            },
-            rateLimit: rateLimitInfo,
-            email: emailStatus,
-            message: 'All data is ephemeral and expires within 24 hours. No persistent user profiles.'
-        });
+    return res.status(200).json({
+      privacy: {
+        tracking: 'none',
+        dataRetention: '24 hours maximum',
+        ipStorage: 'hashed only, never stored raw',
+        userIdTracking: 'disabled',
+        cookies: tier === 'subscribed' || tier === 'premium' ? ['cs_subscribed'] : [],
+        thirdPartySharing: 'never',
+      },
+      rateLimit: rateLimitInfo,
+      email: emailStatus,
+      message: 'All data is ephemeral and expires within 24 hours. No persistent user profiles.',
     });
+  });
 });
 
 // ─── Analytics Dashboard ────────────────────────────────
 // View aggregate analytics (admin only - add auth in production)
 exports.analyticsReport = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'GET') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
+  cors(req, res, async () => {
+    if (req.method !== 'GET') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    // TODO: Add admin authentication here
+    // For now, check for a secret query param
+    const secret = req.query.secret;
+    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    if (!expectedSecret || secret !== expectedSecret) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    try {
+      const days = parseInt(req.query.days) || 7;
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - days);
+      const startDateStr = startDate.toISOString().slice(0, 10);
+
+      // Fetch analytics data
+      const snapshot = await db
+        .collection('analytics')
+        .where('date', '>=', startDateStr)
+        .orderBy('date', 'desc')
+        .limit(1000)
+        .get();
+
+      const events = {};
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const key = `${data.date}_${data.type}`;
+        if (!events[key]) {
+          events[key] = { ...data, count: 0 };
+        }
+        events[key].count += data.count || 0;
+      });
+
+      // Calculate summary stats
+      const summary = {
+        totalRequests: 0,
+        successfulRequests: 0,
+        rateLimitHits: 0,
+        conversionsByFunnel: {},
+        toolUsage: {},
+        tierDistribution: {},
+        hourlyDistribution: Array(24).fill(0),
+      };
+
+      Object.values(events).forEach(event => {
+        if (event.type === 'ai_request') {
+          summary.totalRequests += event.count;
+
+          // Tool usage
+          if (event.metadata?.tool) {
+            Object.entries(event.metadata.tool).forEach(([tool, count]) => {
+              summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
+            });
+          }
+
+          // Tier distribution
+          if (event.metadata?.tier) {
+            Object.entries(event.metadata.tier).forEach(([tier, count]) => {
+              summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
+            });
+          }
         }
 
-        // TODO: Add admin authentication here
-        // For now, check for a secret query param
-        const secret = req.query.secret;
-        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
-        if (!expectedSecret || secret !== expectedSecret) {
-            return res.status(403).json({ error: 'Unauthorized' });
+        if (event.type === 'ai_success') {
+          summary.successfulRequests += event.count;
         }
 
-        try {
-            const days = parseInt(req.query.days) || 7;
-            const startDate = new Date();
-            startDate.setDate(startDate.getDate() - days);
-            const startDateStr = startDate.toISOString().slice(0, 10);
-
-            // Fetch analytics data
-            const snapshot = await db.collection('analytics')
-                .where('date', '>=', startDateStr)
-                .orderBy('date', 'desc')
-                .limit(1000)
-                .get();
-
-            const events = {};
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const key = `${data.date}_${data.type}`;
-                if (!events[key]) {
-                    events[key] = { ...data, count: 0 };
-                }
-                events[key].count += data.count || 0;
-            });
-
-            // Calculate summary stats
-            const summary = {
-                totalRequests: 0,
-                successfulRequests: 0,
-                rateLimitHits: 0,
-                conversionsByFunnel: {},
-                toolUsage: {},
-                tierDistribution: {},
-                hourlyDistribution: Array(24).fill(0)
-            };
-
-            Object.values(events).forEach(event => {
-                if (event.type === 'ai_request') {
-                    summary.totalRequests += event.count;
-                    
-                    // Tool usage
-                    if (event.metadata?.tool) {
-                        Object.entries(event.metadata.tool).forEach(([tool, count]) => {
-                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + count;
-                        });
-                    }
-                    
-                    // Tier distribution
-                    if (event.metadata?.tier) {
-                        Object.entries(event.metadata.tier).forEach(([tier, count]) => {
-                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + count;
-                        });
-                    }
-                }
-                
-                if (event.type === 'ai_success') {
-                    summary.successfulRequests += event.count;
-                }
-                
-                if (event.type === 'rate_limit_hit') {
-                    summary.rateLimitHits += event.count;
-                }
-                
-                if (event.type === 'conversion') {
-                    if (event.metadata?.funnel) {
-                        Object.entries(event.metadata.funnel).forEach(([funnel, count]) => {
-                            if (!summary.conversionsByFunnel[funnel]) {
-                                summary.conversionsByFunnel[funnel] = {};
-                            }
-                            if (event.metadata?.step) {
-                                Object.entries(event.metadata.step).forEach(([step, stepCount]) => {
-                                    summary.conversionsByFunnel[funnel][step] = 
-                                        (summary.conversionsByFunnel[funnel][step] || 0) + stepCount;
-                                });
-                            }
-                        });
-                    }
-                }
-                
-                // Hourly distribution
-                if (event.hourly) {
-                    event.hourly.forEach((count, hour) => {
-                        summary.hourlyDistribution[hour] += count;
-                    });
-                }
-            });
-
-            // Calculate success rate
-            summary.successRate = summary.totalRequests > 0 
-                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
-                : '0%';
-
-            return res.status(200).json({
-                period: `Last ${days} days`,
-                startDate: startDateStr,
-                endDate: new Date().toISOString().slice(0, 10),
-                summary,
-                rawEvents: Object.values(events).slice(0, 50) // Latest 50 events
-            });
-
-        } catch (error) {
-            console.error('[ANALYTICS] Report error:', error);
-            return res.status(500).json({ error: 'Failed to generate report' });
+        if (event.type === 'rate_limit_hit') {
+          summary.rateLimitHits += event.count;
         }
-    });
+
+        if (event.type === 'conversion') {
+          if (event.metadata?.funnel) {
+            Object.entries(event.metadata.funnel).forEach(([funnel, count]) => {
+              if (!summary.conversionsByFunnel[funnel]) {
+                summary.conversionsByFunnel[funnel] = {};
+              }
+              if (event.metadata?.step) {
+                Object.entries(event.metadata.step).forEach(([step, stepCount]) => {
+                  summary.conversionsByFunnel[funnel][step] =
+                    (summary.conversionsByFunnel[funnel][step] || 0) + stepCount;
+                });
+              }
+            });
+          }
+        }
+
+        // Hourly distribution
+        if (event.hourly) {
+          event.hourly.forEach((count, hour) => {
+            summary.hourlyDistribution[hour] += count;
+          });
+        }
+      });
+
+      // Calculate success rate
+      summary.successRate =
+        summary.totalRequests > 0
+          ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+          : '0%';
+
+      return res.status(200).json({
+        period: `Last ${days} days`,
+        startDate: startDateStr,
+        endDate: new Date().toISOString().slice(0, 10),
+        summary,
+        rawEvents: Object.values(events).slice(0, 50), // Latest 50 events
+      });
+    } catch (error) {
+      console.error('[ANALYTICS] Report error:', error);
+      return res.status(500).json({ error: 'Failed to generate report' });
+    }
+  });
 });
 
 // ─── Public Metrics (dashboard-facing) ─────────────────
@@ -1924,85 +2079,86 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
 // reflects the request Origin back in Access-Control-Allow-Origin and
 // auto-handles the OPTIONS preflight, so any origin can GET this route.
 exports.getMetrics = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'GET') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
-        }
+  cors(req, res, async () => {
+    if (req.method !== 'GET') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-        const secret = req.query.secret;
-        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
-        if (!expectedSecret || secret !== expectedSecret) {
-            return res.status(403).json({ error: 'Unauthorized' });
-        }
+    const secret = req.query.secret;
+    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    if (!expectedSecret || secret !== expectedSecret) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
 
-        try {
-            const days = parseInt(req.query.days) || 7;
-            const startDate = new Date();
-            startDate.setDate(startDate.getDate() - days);
-            const startDateStr = startDate.toISOString().slice(0, 10);
+    try {
+      const days = parseInt(req.query.days) || 7;
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - days);
+      const startDateStr = startDate.toISOString().slice(0, 10);
 
-            const snapshot = await db.collection('analytics')
-                .where('date', '>=', startDateStr)
-                .orderBy('date', 'desc')
-                .limit(5000)
-                .get();
+      const snapshot = await db
+        .collection('analytics')
+        .where('date', '>=', startDateStr)
+        .orderBy('date', 'desc')
+        .limit(5000)
+        .get();
 
-            const summary = {
-                totalRequests: 0,
-                successfulRequests: 0,
-                rateLimitHits: 0,
-                toolUsage: {},
-                tierDistribution: {},
-                hourlyDistribution: Array(24).fill(0)
-            };
+      const summary = {
+        totalRequests: 0,
+        successfulRequests: 0,
+        rateLimitHits: 0,
+        toolUsage: {},
+        tierDistribution: {},
+        hourlyDistribution: Array(24).fill(0),
+      };
 
-            snapshot.forEach(doc => {
-                const event = doc.data();
-                const count = event.count || 0;
+      snapshot.forEach(doc => {
+        const event = doc.data();
+        const count = event.count || 0;
 
-                if (event.type === 'ai_request') {
-                    summary.totalRequests += count;
+        if (event.type === 'ai_request') {
+          summary.totalRequests += count;
 
-                    if (event.metadata?.tool) {
-                        Object.entries(event.metadata.tool).forEach(([tool, toolCount]) => {
-                            summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + toolCount;
-                        });
-                    }
-
-                    if (event.metadata?.tier) {
-                        Object.entries(event.metadata.tier).forEach(([tier, tierCount]) => {
-                            summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + tierCount;
-                        });
-                    }
-                } else if (event.type === 'ai_success') {
-                    summary.successfulRequests += count;
-                } else if (event.type === 'rate_limit_hit') {
-                    summary.rateLimitHits += count;
-                }
-
-                if (event.hourly) {
-                    event.hourly.forEach((hourlyCount, hour) => {
-                        summary.hourlyDistribution[hour] += hourlyCount;
-                    });
-                }
+          if (event.metadata?.tool) {
+            Object.entries(event.metadata.tool).forEach(([tool, toolCount]) => {
+              summary.toolUsage[tool] = (summary.toolUsage[tool] || 0) + toolCount;
             });
+          }
 
-            summary.successRate = summary.totalRequests > 0
-                ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
-                : '0%';
-
-            return res.status(200).json({
-                period: `Last ${days} days`,
-                startDate: startDateStr,
-                endDate: new Date().toISOString().slice(0, 10),
-                summary
+          if (event.metadata?.tier) {
+            Object.entries(event.metadata.tier).forEach(([tier, tierCount]) => {
+              summary.tierDistribution[tier] = (summary.tierDistribution[tier] || 0) + tierCount;
             });
-
-        } catch (error) {
-            console.error('[METRICS] Report error:', error);
-            return res.status(500).json({ error: 'Failed to generate metrics' });
+          }
+        } else if (event.type === 'ai_success') {
+          summary.successfulRequests += count;
+        } else if (event.type === 'rate_limit_hit') {
+          summary.rateLimitHits += count;
         }
-    });
+
+        if (event.hourly) {
+          event.hourly.forEach((hourlyCount, hour) => {
+            summary.hourlyDistribution[hour] += hourlyCount;
+          });
+        }
+      });
+
+      summary.successRate =
+        summary.totalRequests > 0
+          ? ((summary.successfulRequests / summary.totalRequests) * 100).toFixed(2) + '%'
+          : '0%';
+
+      return res.status(200).json({
+        period: `Last ${days} days`,
+        startDate: startDateStr,
+        endDate: new Date().toISOString().slice(0, 10),
+        summary,
+      });
+    } catch (error) {
+      console.error('[METRICS] Report error:', error);
+      return res.status(500).json({ error: 'Failed to generate metrics' });
+    }
+  });
 });
 
 // ─── Substack newsletter sync ─────────────────────────
@@ -2013,14 +2169,14 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
 // Set SUBSTACK_PUBLICATION="" or "off" to disable without code changes.
 
 function getSubstackPublication() {
-    const raw = (process.env.SUBSTACK_PUBLICATION || process.env.SUBSTACK_SUBDOMAIN || 'lazyhustler')
-        .trim()
-        .toLowerCase();
-    if (!raw || raw === 'off' || raw === 'false' || raw === '0') return null;
-    return raw
-        .replace(/^https?:\/\//, '')
-        .replace(/\.substack\.com.*$/, '')
-        .replace(/\/$/, '');
+  const raw = (process.env.SUBSTACK_PUBLICATION || process.env.SUBSTACK_SUBDOMAIN || 'lazyhustler')
+    .trim()
+    .toLowerCase();
+  if (!raw || raw === 'off' || raw === 'false' || raw === '0') return null;
+  return raw
+    .replace(/^https?:\/\//, '')
+    .replace(/\.substack\.com.*$/, '')
+    .replace(/\/$/, '');
 }
 
 /**
@@ -2031,415 +2187,471 @@ function getSubstackPublication() {
  * (present on GCF Node images as `curl`, Windows as `curl.exe`), fall back to https.
  */
 function pushToSubstack(email) {
-    const publication = getSubstackPublication();
-    if (!publication) {
-        return Promise.resolve({ ok: false, skipped: true, reason: 'not_configured' });
+  const publication = getSubstackPublication();
+  if (!publication) {
+    return Promise.resolve({ ok: false, skipped: true, reason: 'not_configured' });
+  }
+
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const { execFile } = require('child_process');
+  const https = require('https');
+
+  const baseHost = `${publication}.substack.com`;
+  const baseUrl = `https://${baseHost}`;
+  const payloadObj = {
+    email,
+    first_url: 'https://cyberscryb.com/',
+    first_referrer: '',
+    current_url: 'https://cyberscryb.com/',
+    current_referrer: 'https://cyberscryb.com/',
+  };
+  const payload = JSON.stringify(payloadObj);
+  const ua =
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+  function parseResult(statusCode, raw) {
+    let data = null;
+    try {
+      data = JSON.parse(raw);
+    } catch (_) {
+      data = null;
     }
-
-    const fs = require('fs');
-    const os = require('os');
-    const path = require('path');
-    const { execFile } = require('child_process');
-    const https = require('https');
-
-    const baseHost = `${publication}.substack.com`;
-    const baseUrl = `https://${baseHost}`;
-    const payloadObj = {
-        email,
-        first_url: 'https://cyberscryb.com/',
-        first_referrer: '',
-        current_url: 'https://cyberscryb.com/',
-        current_referrer: 'https://cyberscryb.com/',
+    if (statusCode < 200 || statusCode >= 300) {
+      console.warn('[substack] subscribe failed', statusCode, String(raw || '').slice(0, 200));
+      return {
+        ok: false,
+        skipped: false,
+        status: statusCode,
+        reason: (data && (data.error || data.message)) || `http_${statusCode}`,
+        publication,
+      };
+    }
+    return {
+      ok: true,
+      skipped: false,
+      status: statusCode,
+      publication,
+      requiresConfirmation: !!(data && data.requires_confirmation),
+      subscriptionId: data && data.subscription_id ? data.subscription_id : null,
     };
-    const payload = JSON.stringify(payloadObj);
-    const ua =
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+  }
 
-    function parseResult(statusCode, raw) {
-        let data = null;
-        try { data = JSON.parse(raw); } catch (_) { data = null; }
-        if (statusCode < 200 || statusCode >= 300) {
-            console.warn('[substack] subscribe failed', statusCode, String(raw || '').slice(0, 200));
-            return {
-                ok: false,
-                skipped: false,
-                status: statusCode,
-                reason: (data && (data.error || data.message)) || `http_${statusCode}`,
-                publication,
-            };
+  function viaHttps() {
+    return new Promise(resolve => {
+      const req = https.request(
+        {
+          hostname: baseHost,
+          path: '/api/v1/free',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Content-Length': Buffer.byteLength(payload),
+            'User-Agent': ua,
+            Origin: baseUrl,
+            Referer: `${baseUrl}/`,
+          },
+          timeout: 15000,
+        },
+        res => {
+          let raw = '';
+          res.on('data', chunk => {
+            raw += chunk;
+          });
+          res.on('end', () => resolve(parseResult(res.statusCode, raw)));
         }
-        return {
-            ok: true,
-            skipped: false,
-            status: statusCode,
-            publication,
-            requiresConfirmation: !!(data && data.requires_confirmation),
-            subscriptionId: data && data.subscription_id ? data.subscription_id : null,
-        };
-    }
-
-    function viaHttps() {
-        return new Promise((resolve) => {
-            const req = https.request(
-                {
-                    hostname: baseHost,
-                    path: '/api/v1/free',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json',
-                        'Content-Length': Buffer.byteLength(payload),
-                        'User-Agent': ua,
-                        Origin: baseUrl,
-                        Referer: `${baseUrl}/`,
-                    },
-                    timeout: 15000,
-                },
-                (res) => {
-                    let raw = '';
-                    res.on('data', (chunk) => { raw += chunk; });
-                    res.on('end', () => resolve(parseResult(res.statusCode, raw)));
-                }
-            );
-            req.on('error', (err) => {
-                console.error('[substack] https error', err && err.message);
-                resolve({ ok: false, skipped: false, reason: 'network_error', publication });
-            });
-            req.on('timeout', () => {
-                req.destroy();
-                resolve({ ok: false, skipped: false, reason: 'timeout', publication });
-            });
-            req.write(payload);
-            req.end();
-        });
-    }
-
-    function viaCurl(bin) {
-        return new Promise((resolve) => {
-            const tmp = path.join(os.tmpdir(), `ss-${Date.now()}-${Math.random().toString(36).slice(2)}.json`);
-            try {
-                fs.writeFileSync(tmp, payload, 'utf8');
-            } catch (e) {
-                resolve({ ok: false, skipped: false, reason: 'tmp_write_failed', publication });
-                return;
-            }
-            const args = [
-                '-sS', '-X', 'POST', `${baseUrl}/api/v1/free`,
-                '-H', 'Content-Type: application/json',
-                '-H', 'Accept: application/json',
-                '-H', `User-Agent: ${ua}`,
-                '-H', `Origin: ${baseUrl}`,
-                '-H', `Referer: ${baseUrl}/`,
-                '--data-binary', `@${tmp}`,
-                '-w', '\n__HTTP__%{http_code}',
-                '--max-time', '15',
-            ];
-            execFile(bin, args, { timeout: 20000, maxBuffer: 256 * 1024 }, (err, stdout) => {
-                try { fs.unlinkSync(tmp); } catch (_) { /* ignore */ }
-                if (err && !stdout) {
-                    resolve({ ok: false, skipped: false, reason: `curl_error:${err.message}`, publication });
-                    return;
-                }
-                const text = String(stdout || '');
-                const m = text.match(/\n__HTTP__(\d+)\s*$/);
-                const status = m ? parseInt(m[1], 10) : (err ? 0 : 200);
-                const body = m ? text.replace(/\n__HTTP__\d+\s*$/, '') : text;
-                resolve(parseResult(status, body));
-            });
-        });
-    }
-
-    // Prefer curl (works against Substack bot filter). Try unix then Windows name.
-    return viaCurl('curl').then((r) => {
-        if (r.ok) return r;
-        if (r.reason && String(r.reason).includes('curl_error')) {
-            return viaCurl('curl.exe').then((r2) => {
-                if (r2.ok) return r2;
-                if (r2.reason && String(r2.reason).includes('curl_error')) {
-                    return viaHttps();
-                }
-                return r2;
-            });
-        }
-        // curl ran but Substack rejected — still try https as last resort
-        return viaHttps().then((h) => (h.ok ? h : r));
+      );
+      req.on('error', err => {
+        console.error('[substack] https error', err && err.message);
+        resolve({ ok: false, skipped: false, reason: 'network_error', publication });
+      });
+      req.on('timeout', () => {
+        req.destroy();
+        resolve({ ok: false, skipped: false, reason: 'timeout', publication });
+      });
+      req.write(payload);
+      req.end();
     });
+  }
+
+  function viaCurl(bin) {
+    return new Promise(resolve => {
+      const tmp = path.join(
+        os.tmpdir(),
+        `ss-${Date.now()}-${Math.random().toString(36).slice(2)}.json`
+      );
+      try {
+        fs.writeFileSync(tmp, payload, 'utf8');
+      } catch (e) {
+        resolve({ ok: false, skipped: false, reason: 'tmp_write_failed', publication });
+        return;
+      }
+      const args = [
+        '-sS',
+        '-X',
+        'POST',
+        `${baseUrl}/api/v1/free`,
+        '-H',
+        'Content-Type: application/json',
+        '-H',
+        'Accept: application/json',
+        '-H',
+        `User-Agent: ${ua}`,
+        '-H',
+        `Origin: ${baseUrl}`,
+        '-H',
+        `Referer: ${baseUrl}/`,
+        '--data-binary',
+        `@${tmp}`,
+        '-w',
+        '\n__HTTP__%{http_code}',
+        '--max-time',
+        '15',
+      ];
+      execFile(bin, args, { timeout: 20000, maxBuffer: 256 * 1024 }, (err, stdout) => {
+        try {
+          fs.unlinkSync(tmp);
+        } catch (_) {
+          /* ignore */
+        }
+        if (err && !stdout) {
+          resolve({ ok: false, skipped: false, reason: `curl_error:${err.message}`, publication });
+          return;
+        }
+        const text = String(stdout || '');
+        const m = text.match(/\n__HTTP__(\d+)\s*$/);
+        const status = m ? parseInt(m[1], 10) : err ? 0 : 200;
+        const body = m ? text.replace(/\n__HTTP__\d+\s*$/, '') : text;
+        resolve(parseResult(status, body));
+      });
+    });
+  }
+
+  // Prefer curl (works against Substack bot filter). Try unix then Windows name.
+  return viaCurl('curl').then(r => {
+    if (r.ok) return r;
+    if (r.reason && String(r.reason).includes('curl_error')) {
+      return viaCurl('curl.exe').then(r2 => {
+        if (r2.ok) return r2;
+        if (r2.reason && String(r2.reason).includes('curl_error')) {
+          return viaHttps();
+        }
+        return r2;
+      });
+    }
+    // curl ran but Substack rejected — still try https as last resort
+    return viaHttps().then(h => (h.ok ? h : r));
+  });
 }
 
 // ─── Email Capture ───────────────────────────────────
 // 1) Always store in Firestore `subscribers`
 // 2) Also add to Substack free list (Lazy Hustler by default)
 exports.subscribeEmail = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    const { email, source } = req.body;
+
+    // Validate email
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'Valid email is required' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    try {
+      // Check for duplicate in our DB
+      const existing = await db
+        .collection('subscribers')
+        .where('email', '==', normalizedEmail)
+        .limit(1)
+        .get();
+
+      if (!existing.empty) {
+        const doc = existing.docs[0];
+        const data = doc.data() || {};
+        let substack = { ok: true, skipped: true, reason: 'already_synced' };
+
+        // Re-try Substack if we never synced this row (or last attempt failed)
+        if (!data.substackSynced) {
+          substack = await pushToSubstack(normalizedEmail);
+          await doc.ref.update({
+            substackSynced: !!substack.ok,
+            substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+            substackStatus: substack.ok ? 'ok' : substack.reason || 'error',
+            substackPublication: substack.publication || getSubstackPublication() || null,
+          });
         }
 
-        const { email, source } = req.body;
+        return res.status(200).json({
+          message: 'already_subscribed',
+          substack: {
+            ok: !!substack.ok,
+            requiresConfirmation: !!substack.requiresConfirmation,
+            publication: substack.publication || getSubstackPublication(),
+          },
+        });
+      }
 
-        // Validate email
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return res.status(400).json({ error: 'Valid email is required' });
-        }
+      // Push to Substack first so a confirm email can go out
+      const substack = await pushToSubstack(normalizedEmail);
 
-        const normalizedEmail = email.toLowerCase().trim();
+      // Store the subscriber (no IP tracking - privacy-first)
+      await db.collection('subscribers').add({
+        email: normalizedEmail,
+        source: source || 'homepage',
+        subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
+        substackSynced: !!substack.ok,
+        substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+        substackStatus: substack.ok
+          ? substack.requiresConfirmation
+            ? 'pending_confirmation'
+            : 'ok'
+          : substack.skipped
+            ? 'skipped'
+            : substack.reason || 'error',
+        substackPublication: substack.publication || getSubstackPublication() || null,
+        substackSubscriptionId: substack.subscriptionId ? String(substack.subscriptionId) : null,
+      });
 
-        try {
-            // Check for duplicate in our DB
-            const existing = await db.collection('subscribers')
-                .where('email', '==', normalizedEmail)
-                .limit(1)
-                .get();
+      // Log conversion (anonymous)
+      logConversion('email_capture', 'subscribed', {
+        source: source || 'homepage',
+        substack: substack.ok ? 'ok' : 'fail',
+      });
 
-            if (!existing.empty) {
-                const doc = existing.docs[0];
-                const data = doc.data() || {};
-                let substack = { ok: true, skipped: true, reason: 'already_synced' };
-
-                // Re-try Substack if we never synced this row (or last attempt failed)
-                if (!data.substackSynced) {
-                    substack = await pushToSubstack(normalizedEmail);
-                    await doc.ref.update({
-                        substackSynced: !!substack.ok,
-                        substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
-                        substackStatus: substack.ok ? 'ok' : (substack.reason || 'error'),
-                        substackPublication: substack.publication || getSubstackPublication() || null,
-                    });
-                }
-
-                return res.status(200).json({
-                    message: 'already_subscribed',
-                    substack: {
-                        ok: !!substack.ok,
-                        requiresConfirmation: !!substack.requiresConfirmation,
-                        publication: substack.publication || getSubstackPublication(),
-                    },
-                });
-            }
-
-            // Push to Substack first so a confirm email can go out
-            const substack = await pushToSubstack(normalizedEmail);
-
-            // Store the subscriber (no IP tracking - privacy-first)
-            await db.collection('subscribers').add({
-                email: normalizedEmail,
-                source: source || 'homepage',
-                subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
-                substackSynced: !!substack.ok,
-                substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
-                substackStatus: substack.ok
-                    ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
-                    : (substack.skipped ? 'skipped' : (substack.reason || 'error')),
-                substackPublication: substack.publication || getSubstackPublication() || null,
-                substackSubscriptionId: substack.subscriptionId
-                    ? String(substack.subscriptionId)
-                    : null,
-            });
-
-            // Log conversion (anonymous)
-            logConversion('email_capture', 'subscribed', {
-                source: source || 'homepage',
-                substack: substack.ok ? 'ok' : 'fail',
-            });
-
-            return res.status(200).json({
-                message: 'subscribed',
-                // Front-end can show: check email for Substack confirm
-                substack: {
-                    ok: !!substack.ok,
-                    requiresConfirmation: !!substack.requiresConfirmation,
-                    publication: substack.publication || getSubstackPublication(),
-                },
-            });
-
-        } catch (error) {
-            console.error('Subscribe Error:', error);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
-    });
+      return res.status(200).json({
+        message: 'subscribed',
+        // Front-end can show: check email for Substack confirm
+        substack: {
+          ok: !!substack.ok,
+          requiresConfirmation: !!substack.requiresConfirmation,
+          publication: substack.publication || getSubstackPublication(),
+        },
+      });
+    } catch (error) {
+      console.error('Subscribe Error:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 });
 
 // One-shot / on-demand: push unsynced Firestore subscribers to Substack.
 // GET /api/substack-backfill?secret=ANALYTICS_SECRET&limit=50
 exports.substackBackfill = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-        if (req.method !== 'GET' && req.method !== 'POST') {
-            return res.status(405).json({ error: 'Method Not Allowed' });
+  cors(req, res, async () => {
+    if (req.method !== 'GET' && req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    const secret = req.query.secret || (req.body && req.body.secret);
+    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    if (!expectedSecret || secret !== expectedSecret) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    if (!getSubstackPublication()) {
+      return res.status(400).json({ error: 'SUBSTACK_PUBLICATION not configured' });
+    }
+
+    const limit = Math.min(parseInt(req.query.limit || '50', 10) || 50, 200);
+    const dryRun = req.query.dry === '1' || req.query.dry === 'true';
+
+    try {
+      const snap = await db.collection('subscribers').limit(500).get();
+      const pending = [];
+      snap.forEach(doc => {
+        const d = doc.data() || {};
+        if (d.email && !d.substackSynced) {
+          pending.push({ id: doc.id, email: d.email, ref: doc.ref });
         }
+      });
 
-        const secret = req.query.secret || (req.body && req.body.secret);
-        const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
-        if (!expectedSecret || secret !== expectedSecret) {
-            return res.status(403).json({ error: 'Unauthorized' });
-        }
+      const batch = pending.slice(0, limit);
+      const results = {
+        attempted: 0,
+        ok: 0,
+        failed: 0,
+        skipped: dryRun ? batch.length : 0,
+        details: [],
+      };
 
-        if (!getSubstackPublication()) {
-            return res.status(400).json({ error: 'SUBSTACK_PUBLICATION not configured' });
-        }
+      if (dryRun) {
+        return res.status(200).json({
+          dryRun: true,
+          pendingTotal: pending.length,
+          wouldProcess: batch.map(b => b.email),
+        });
+      }
 
-        const limit = Math.min(parseInt(req.query.limit || '50', 10) || 50, 200);
-        const dryRun = req.query.dry === '1' || req.query.dry === 'true';
+      for (const row of batch) {
+        results.attempted++;
+        const substack = await pushToSubstack(row.email);
+        // small delay so Substack rate limits are less likely
+        await new Promise(r => setTimeout(r, 400));
 
-        try {
-            const snap = await db.collection('subscribers').limit(500).get();
-            const pending = [];
-            snap.forEach((doc) => {
-                const d = doc.data() || {};
-                if (d.email && !d.substackSynced) {
-                    pending.push({ id: doc.id, email: d.email, ref: doc.ref });
-                }
-            });
+        await row.ref.update({
+          substackSynced: !!substack.ok,
+          substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+          substackStatus: substack.ok
+            ? substack.requiresConfirmation
+              ? 'pending_confirmation'
+              : 'ok'
+            : substack.reason || 'error',
+          substackPublication: substack.publication || getSubstackPublication() || null,
+          substackSubscriptionId: substack.subscriptionId ? String(substack.subscriptionId) : null,
+        });
 
-            const batch = pending.slice(0, limit);
-            const results = { attempted: 0, ok: 0, failed: 0, skipped: dryRun ? batch.length : 0, details: [] };
+        if (substack.ok) results.ok++;
+        else results.failed++;
+        results.details.push({
+          email: row.email,
+          ok: !!substack.ok,
+          reason: substack.reason || null,
+        });
+      }
 
-            if (dryRun) {
-                return res.status(200).json({
-                    dryRun: true,
-                    pendingTotal: pending.length,
-                    wouldProcess: batch.map((b) => b.email),
-                });
-            }
-
-            for (const row of batch) {
-                results.attempted++;
-                const substack = await pushToSubstack(row.email);
-                // small delay so Substack rate limits are less likely
-                await new Promise((r) => setTimeout(r, 400));
-
-                await row.ref.update({
-                    substackSynced: !!substack.ok,
-                    substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
-                    substackStatus: substack.ok
-                        ? (substack.requiresConfirmation ? 'pending_confirmation' : 'ok')
-                        : (substack.reason || 'error'),
-                    substackPublication: substack.publication || getSubstackPublication() || null,
-                    substackSubscriptionId: substack.subscriptionId
-                        ? String(substack.subscriptionId)
-                        : null,
-                });
-
-                if (substack.ok) results.ok++;
-                else results.failed++;
-                results.details.push({
-                    email: row.email,
-                    ok: !!substack.ok,
-                    reason: substack.reason || null,
-                });
-            }
-
-            return res.status(200).json({
-                pendingTotal: pending.length,
-                ...results,
-            });
-        } catch (error) {
-            console.error('[substack] backfill error', error);
-            return res.status(500).json({ error: 'Backfill failed' });
-        }
-    });
+      return res.status(200).json({
+        pendingTotal: pending.length,
+        ...results,
+      });
+    } catch (error) {
+      console.error('[substack] backfill error', error);
+      return res.status(500).json({ error: 'Backfill failed' });
+    }
+  });
 });
-
 
 // ─── Pro Unlock — Stripe Session Validator ───────────────────────────────
 // Called by /pro-success page after Stripe redirects with ?session_id=...
 // Validates payment, stores session to prevent reuse, returns ok signal.
 exports.validateStripeSession = functions.https.onRequest((req, res) => {
-    cors(req, res, async () => {
-      try {
-        const sessionId = req.query.session_id || (req.body && req.body.session_id);
+  cors(req, res, async () => {
+    try {
+      const sessionId = req.query.session_id || (req.body && req.body.session_id);
 
-        if (!sessionId || !sessionId.startsWith('cs_')) {
-            return res.status(400).json({ error: 'Invalid session_id' });
-        }
-
-        // Check Firestore — reject replayed sessions
-        const sessionRef = db.collection('pro_sessions').doc(sessionId);
-        const existing = await sessionRef.get();
-        if (existing.exists) {
-            const data = existing.data();
-            // Already validated — still return success so page can set cookie on refresh
-            return res.status(200).json({ ok: true, status: data.status, replayed: true });
-        }
-
-        // Get Stripe secret — env var first (functions.config() was removed in firebase-functions v6)
-        const stripeSecret = process.env.STRIPE_SECRET || (functions.config().stripe && functions.config().stripe.secret);
-        if (!stripeSecret) {
-            // No Stripe secret configured → fall back to trusting the post-checkout redirect.
-            // Pro is gated by a client-side cookie anyway, so this is a pragmatic unlock, not a
-            // security regression. Setting STRIPE_SECRET automatically restores strict verification.
-            console.warn('[PRO] No STRIPE_SECRET — unlocking on redirect trust. Set STRIPE_SECRET for strict Stripe verification.');
-            await sessionRef.set({
-                status: 'redirect_trust',
-                verified: false,
-                validatedAt: admin.firestore.FieldValue.serverTimestamp(),
-                paid: null
-            });
-            logConversion('pro_unlock', 'redirect_trust', {});
-            return res.status(200).json({ ok: true, status: 'redirect_trust', verified: false });
-        }
-
-        // Call Stripe REST API — no package needed, just https
-        const https = require('https');
-        const stripeRes = await new Promise((resolve, reject) => {
-            const options = {
-                hostname: 'api.stripe.com',
-                path: `/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${stripeSecret}`,
-                    'Stripe-Version': '2023-10-16'
-                }
-            };
-            const req2 = https.request(options, (r) => {
-                let body = '';
-                r.on('data', d => body += d);
-                r.on('end', () => {
-                    try { resolve({ status: r.statusCode, body: JSON.parse(body) }); }
-                    catch (e) { reject(new Error('Invalid JSON from Stripe')); }
-                });
-            });
-            req2.on('error', reject);
-            req2.setTimeout(15000, () => req2.destroy(new Error('Stripe API request timed out')));
-            req2.end();
-        });
-
-        if (stripeRes.status !== 200) {
-            console.error('[PRO] Stripe API error:', stripeRes.body);
-            return res.status(400).json({ error: 'Could not verify payment' });
-        }
-
-        const session = stripeRes.body;
-        const paid = session.payment_status === 'paid';
-
-        // Store result in Firestore regardless (audit trail)
-        await sessionRef.set({
-            status: session.payment_status,
-            customerEmail: session.customer_details && session.customer_details.email,
-            amountTotal: session.amount_total,
-            currency: session.currency,
-            validatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            paid
-        });
-
-        if (!paid) {
-            return res.status(402).json({ error: 'Payment not completed', status: session.payment_status });
-        }
-
-        // Log it (anonymous aggregate)
-        logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
-
-        return res.status(200).json({ ok: true, status: 'paid' });
-      } catch (err) {
-        // Never leave the request hanging — always send a response so the client never spins forever
-        console.error('[PRO] validateStripeSession failed:', err);
-        if (!res.headersSent) {
-            return res.status(500).json({ error: 'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.' });
-        }
+      if (!sessionId || !sessionId.startsWith('cs_')) {
+        return res.status(400).json({ error: 'Invalid session_id' });
       }
-    });
+
+      // Check Firestore — reject replayed sessions
+      const sessionRef = db.collection('pro_sessions').doc(sessionId);
+      const existing = await sessionRef.get();
+      if (existing.exists) {
+        const data = existing.data();
+        // Already validated — still return success so page can set cookie on refresh
+        return res.status(200).json({ ok: true, status: data.status, replayed: true });
+      }
+
+      // Get Stripe secret — env var first (functions.config() was removed in firebase-functions v6)
+      const stripeSecret =
+        process.env.STRIPE_SECRET ||
+        (functions.config().stripe && functions.config().stripe.secret);
+      if (!stripeSecret) {
+        // No Stripe secret configured → fall back to trusting the post-checkout redirect.
+        // Pro is gated by a client-side cookie anyway, so this is a pragmatic unlock, not a
+        // security regression. Setting STRIPE_SECRET automatically restores strict verification.
+        console.warn(
+          '[PRO] No STRIPE_SECRET — unlocking on redirect trust. Set STRIPE_SECRET for strict Stripe verification.'
+        );
+        await sessionRef.set({
+          status: 'redirect_trust',
+          verified: false,
+          validatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          paid: null,
+        });
+        logConversion('pro_unlock', 'redirect_trust', {});
+        return res.status(200).json({ ok: true, status: 'redirect_trust', verified: false });
+      }
+
+      // Call Stripe REST API — no package needed, just https
+      const https = require('https');
+      const stripeRes = await new Promise((resolve, reject) => {
+        const options = {
+          hostname: 'api.stripe.com',
+          path: `/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${stripeSecret}`,
+            'Stripe-Version': '2023-10-16',
+          },
+        };
+        const req2 = https.request(options, r => {
+          let body = '';
+          r.on('data', d => (body += d));
+          r.on('end', () => {
+            try {
+              resolve({ status: r.statusCode, body: JSON.parse(body) });
+            } catch (e) {
+              reject(new Error('Invalid JSON from Stripe'));
+            }
+          });
+        });
+        req2.on('error', reject);
+        req2.setTimeout(15000, () => req2.destroy(new Error('Stripe API request timed out')));
+        req2.end();
+      });
+
+      if (stripeRes.status !== 200) {
+        console.error('[PRO] Stripe API error:', stripeRes.body);
+        return res.status(400).json({ error: 'Could not verify payment' });
+      }
+
+      const session = stripeRes.body;
+      const paid = session.payment_status === 'paid';
+
+      // Store result in Firestore regardless (audit trail)
+      await sessionRef.set({
+        status: session.payment_status,
+        customerEmail: session.customer_details && session.customer_details.email,
+        amountTotal: session.amount_total,
+        currency: session.currency,
+        validatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        paid,
+      });
+
+      if (!paid) {
+        return res
+          .status(402)
+          .json({ error: 'Payment not completed', status: session.payment_status });
+      }
+
+      // Log it (anonymous aggregate)
+      logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
+
+      return res.status(200).json({ ok: true, status: 'paid' });
+    } catch (err) {
+      // Never leave the request hanging — always send a response so the client never spins forever
+      console.error('[PRO] validateStripeSession failed:', err);
+      if (!res.headersSent) {
+        return res
+          .status(500)
+          .json({
+            error:
+              'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.',
+          });
+      }
+    }
+  });
 });
 
 // ─── Test Export (NODE_ENV=test only) ──────────────────
 if (process.env.NODE_ENV === 'test') {
-    module.exports.__testing = { AI_PROMPTS, sanitizeParams, isAllowedReferer, ALLOWED_HOSTS, checkFirestoreRateLimit, getIpHash, getDateString, GLOBAL_DAILY_CAP, FIRESTORE_TIER_CAPS, getUserTier };
+  module.exports.__testing = {
+    AI_PROMPTS,
+    sanitizeParams,
+    isAllowedReferer,
+    ALLOWED_HOSTS,
+    checkFirestoreRateLimit,
+    getIpHash,
+    getDateString,
+    GLOBAL_DAILY_CAP,
+    FIRESTORE_TIER_CAPS,
+    getUserTier,
+  };
 }

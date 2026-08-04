@@ -20,7 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   children,
   footer,
-  className
+  className,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -65,9 +65,9 @@ export const Modal: React.FC<ModalProps> = ({
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            aria-describedby={description ? "modal-desc" : undefined}
+            aria-describedby={description ? 'modal-desc' : undefined}
             className={cn(
-              "relative w-full max-w-lg bg-surface border border-strong rounded-xl p-6 shadow-2xl overflow-hidden z-10",
+              'relative w-full max-w-lg bg-surface border border-strong rounded-xl p-6 shadow-2xl overflow-hidden z-10',
               className
             )}
           >
@@ -96,15 +96,11 @@ export const Modal: React.FC<ModalProps> = ({
             </div>
 
             {/* Content */}
-            <div className="text-sm text-primary mb-6">
-              {children}
-            </div>
+            <div className="text-sm text-primary mb-6">{children}</div>
 
             {/* Footer */}
             {footer && (
-              <div className="flex justify-end gap-3 border-t border-subtle pt-4">
-                {footer}
-              </div>
+              <div className="flex justify-end gap-3 border-t border-subtle pt-4">{footer}</div>
             )}
           </motion.div>
         </div>

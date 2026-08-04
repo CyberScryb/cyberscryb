@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
   --color-base: #030303;
   --color-surface: #0a0a0f;
   --color-elevated: #12121f;
   --color-subtle: rgba(255, 255, 255, 0.06);
   --color-strong: rgba(255, 255, 255, 0.12);
-  
+
   --color-primary: #ededed;
   --color-muted: #878787;
   --color-faint: #555555;
-  
+
   --color-accent: #a855f7;
   --color-accent-glow: rgba(168, 85, 247, 0.15);
   --color-hover: #06b6d4;
   --color-hover-glow: rgba(6, 182, 212, 0.15);
-  
+
   --color-danger: #ef4444;
   --color-warning: #fbbf24;
 }
@@ -37,8 +37,8 @@
     --accent: #a855f7;
     --accent-glow: rgba(168, 85, 247, 0.5);
     --hover: #06b6d4;
-    --danger: #EF4444;
-    --warning: #FBBF24;
+    --danger: #ef4444;
+    --warning: #fbbf24;
   }
 
   body {
@@ -48,33 +48,63 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  a, button, input, select, textarea {
+  a,
+  button,
+  input,
+  select,
+  textarea {
     outline: none;
   }
 }
 
 @layer utilities {
-  .bg-base { background-color: var(--bg-base); }
-  .bg-surface { background-color: var(--bg-surface); }
-  .bg-elevated { background-color: var(--bg-elevated); }
-  
-  .border-subtle { border-color: var(--border-subtle); }
-  .border-strong { border-color: var(--border-strong); }
+  .bg-base {
+    background-color: var(--bg-base);
+  }
+  .bg-surface {
+    background-color: var(--bg-surface);
+  }
+  .bg-elevated {
+    background-color: var(--bg-elevated);
+  }
 
-  .text-primary { color: var(--text-primary); }
-  .text-muted { color: var(--text-muted); }
-  .text-faint { color: var(--text-faint); }
-  
-  .text-accent { color: var(--accent); }
-  .bg-accent { background-color: var(--accent); }
-  .border-accent { border-color: var(--accent); }
+  .border-subtle {
+    border-color: var(--border-subtle);
+  }
+  .border-strong {
+    border-color: var(--border-strong);
+  }
+
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-muted {
+    color: var(--text-muted);
+  }
+  .text-faint {
+    color: var(--text-faint);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+  .bg-accent {
+    background-color: var(--accent);
+  }
+  .border-accent {
+    border-color: var(--accent);
+  }
 
   .text-glow {
-    text-shadow: 0 0 10px var(--accent-glow), 0 0 20px rgba(52, 245, 197, 0.3);
+    text-shadow:
+      0 0 10px var(--accent-glow),
+      0 0 20px rgba(52, 245, 197, 0.3);
   }
 
   .box-glow {
-    box-shadow: 0 0 15px rgba(52, 245, 197, 0.15), inset 0 0 10px rgba(52, 245, 197, 0.05);
+    box-shadow:
+      0 0 15px rgba(52, 245, 197, 0.15),
+      inset 0 0 10px rgba(52, 245, 197, 0.05);
   }
 
   .noise-bg {
@@ -99,11 +129,13 @@
   .interactive-card:hover {
     transform: translateY(-2px);
     border-color: rgba(52, 245, 197, 0.3); /* subtle border color shift */
-    box-shadow: inset 0 0 20px rgba(52, 245, 197, 0.02), 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      inset 0 0 20px rgba(52, 245, 197, 0.02),
+      0 4px 12px rgba(0, 0, 0, 0.5);
   }
 
   .mesh-bg {
-    background: 
+    background:
       radial-gradient(circle at 15% 50%, rgba(52, 245, 197, 0.08), transparent 30%),
       radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08), transparent 30%);
     background-size: 200% 200%;
@@ -116,11 +148,20 @@
 }
 
 @keyframes meshFlow {
-  0% { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.1) translate(-2%, 2%); }
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(-2%, 2%);
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

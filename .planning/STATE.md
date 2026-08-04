@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-05-26T07:12:28.948Z"
+last_updated: '2026-05-26T07:12:28.948Z'
 progress:
   total_phases: 7
   completed_phases: 0
@@ -26,37 +26,37 @@ progress:
 
 ## Current Position
 
-| Field | Value |
-|-------|-------|
-| Phase | 1 (Audit & Triage) |
-| Plan | None yet |
-| Status | Roadmap created; awaiting plan |
-| Mode | standard (horizontal layers) |
-| Granularity | standard |
-| Parallelization | enabled |
+| Field           | Value                          |
+| --------------- | ------------------------------ |
+| Phase           | 1 (Audit & Triage)             |
+| Plan            | None yet                       |
+| Status          | Roadmap created; awaiting plan |
+| Mode            | standard (horizontal layers)   |
+| Granularity     | standard                       |
+| Parallelization | enabled                        |
 
 **Progress:** [████████░░] 80%
 
 ## Phase Map
 
-| Phase | Goal | Status |
-|-------|------|--------|
-| 1. Audit & Triage | Every existing tool works; top pages hit Lighthouse 90+ | Current |
-| 2. UX Polish Foundation | Micro-improvements + design tokens compound across all tools | Pending |
-| 3. AI Tool Quality Upgrades | Streaming, examples, regeneration; AI feels alive | Pending |
-| 4. Novel UX Features | Command palette, comparison, share-as-image | Pending |
-| 5. SEO Content Push | 8 blog posts, 10 guides, 5 Life Tools long-tail, rich snippets | Pending |
-| 6. Brand Identity Polish | Hero animation, category favicons, 404 page | Pending |
-| 7. Retention Layer | Newsletter, magic-link auth, PWA, extension | Pending |
+| Phase                       | Goal                                                           | Status  |
+| --------------------------- | -------------------------------------------------------------- | ------- |
+| 1. Audit & Triage           | Every existing tool works; top pages hit Lighthouse 90+        | Current |
+| 2. UX Polish Foundation     | Micro-improvements + design tokens compound across all tools   | Pending |
+| 3. AI Tool Quality Upgrades | Streaming, examples, regeneration; AI feels alive              | Pending |
+| 4. Novel UX Features        | Command palette, comparison, share-as-image                    | Pending |
+| 5. SEO Content Push         | 8 blog posts, 10 guides, 5 Life Tools long-tail, rich snippets | Pending |
+| 6. Brand Identity Polish    | Hero animation, category favicons, 404 page                    | Pending |
+| 7. Retention Layer          | Newsletter, magic-link auth, PWA, extension                    | Pending |
 
 ## Performance Metrics
 
-| Metric | Target | Current |
-|--------|--------|---------|
-| AI tools working end-to-end | 17/17 | TBD (Phase 1) |
-| Lighthouse score (top 10 pages) | ≥90 perf/a11y/SEO | TBD (Phase 1) |
-| Monthly visitors | Growth (baseline 3k+) | 3,000+ (May 2026) |
-| AdSense status | Approved | Re-review pending (submitted ~May 14) |
+| Metric                          | Target                | Current                               |
+| ------------------------------- | --------------------- | ------------------------------------- |
+| AI tools working end-to-end     | 17/17                 | TBD (Phase 1)                         |
+| Lighthouse score (top 10 pages) | ≥90 perf/a11y/SEO     | TBD (Phase 1)                         |
+| Monthly visitors                | Growth (baseline 3k+) | 3,000+ (May 2026)                     |
+| AdSense status                  | Approved              | Re-review pending (submitted ~May 14) |
 
 ## Accumulated Context
 
@@ -117,4 +117,5 @@ progress:
 - `/home/user/cyberscryb/CLAUDE.md`
 
 ---
-*State initialized: 2026-05-20*
+
+_State initialized: 2026-05-20_

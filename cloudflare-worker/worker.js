@@ -164,7 +164,10 @@ async function hashString(str) {
   const data = encoder.encode(str);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
+  return hashArray
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('')
+    .slice(0, 16);
 }
 
 function jsonResponse(data, status = 200, extraHeaders = {}) {
@@ -185,7 +188,7 @@ async function proxyToFirebase(body, realIP) {
     headers: {
       'Content-Type': 'application/json',
       // Satisfy the referer check in functions/index.js
-      'Referer': 'https://cyberscryb.com/',
+      Referer: 'https://cyberscryb.com/',
       // Pass real IP so Firebase rate limiter works per-user
       'X-Forwarded-For': realIP || '',
     },

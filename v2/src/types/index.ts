@@ -1,6 +1,4 @@
-export type Result<T, E = Error> = 
-  | { success: true; data: T }
-  | { success: false; error: E };
+export type Result<T, E = Error> = { success: true; data: T } | { success: false; error: E };
 
 export interface ToolMetadata {
   description: string;
@@ -23,4 +21,5 @@ export interface Tool {
   component: React.LazyExoticComponent<React.FC<any>>;
 }
 
-export type ToolCategory = 'Crypto' | 'Encoding' | 'Security' | 'Dev' | 'Web' | 'Media' | 'Data' | 'Productivity' | 'Legal';
+export type ToolCategory =
+  'Crypto' | 'Encoding' | 'Security' | 'Dev' | 'Web' | 'Media' | 'Data' | 'Productivity' | 'Legal';

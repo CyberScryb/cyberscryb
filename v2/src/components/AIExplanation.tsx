@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import { Sparkles, X, ChevronRight } from 'lucide-react';
 import { useAI } from '../lib/useAI';
 
-export function AIInlineExplanation({ prompt, context, label = "AI Explanation" }: { prompt: string, context: string, label?: string }) {
+export function AIInlineExplanation({
+  prompt,
+  context,
+  label = 'AI Explanation',
+}: {
+  prompt: string;
+  context: string;
+  label?: string;
+}) {
   const ai = useAI();
   const [open, setOpen] = useState(false);
 
@@ -25,15 +33,15 @@ export function AIInlineExplanation({ prompt, context, label = "AI Explanation" 
 
   return (
     <div className="mt-2 text-sm w-full max-w-xl mx-auto">
-      <button 
-        onClick={fetchExplanation} 
+      <button
+        onClick={fetchExplanation}
         disabled={ai.isLoading && !open}
         className="flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none"
       >
         <Sparkles size={12} />
         {ai.isLoading ? 'Thinking...' : open ? 'Close Explanation' : label}
       </button>
-      
+
       {open && (
         <div className="mt-2 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-md text-indigo-200 text-xs leading-relaxed animate-in fade-in slide-in-from-top-2">
           {ai.isLoading ? (
@@ -49,7 +57,15 @@ export function AIInlineExplanation({ prompt, context, label = "AI Explanation" 
   );
 }
 
-export function AITooltipInfo({ prompt, value, children }: { prompt: string, value: string, children: React.ReactNode }) {
+export function AITooltipInfo({
+  prompt,
+  value,
+  children,
+}: {
+  prompt: string;
+  value: string;
+  children: React.ReactNode;
+}) {
   const ai = useAI();
   const [open, setOpen] = useState(false);
 
@@ -67,7 +83,7 @@ export function AITooltipInfo({ prompt, value, children }: { prompt: string, val
 
   return (
     <div className="relative inline-block">
-      <div 
+      <div
         onMouseEnter={handleFetch}
         onMouseLeave={() => setOpen(false)}
         className="inline-flex cursor-help"

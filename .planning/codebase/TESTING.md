@@ -5,6 +5,7 @@
 ## Test Framework
 
 **Runner:** Jest 30.3.0
+
 - Config: none (uses `package.json` `"scripts": { "test": "jest --verbose" }`)
 - Environment: `jest-environment-jsdom` 30.3.0 (required for browser DOM simulation)
 - Location: `package.json` at repo root
@@ -12,6 +13,7 @@
 **Assertion Library:** Jest built-in (`expect`, matchers)
 
 **Run Commands:**
+
 ```bash
 npm test              # Run all tests (jest --verbose)
 ```
@@ -25,6 +27,7 @@ No watch mode or coverage commands are configured in `package.json`.
 **Naming:** `{tool-name}.test.js` pattern.
 
 **Current test files:**
+
 - `/__tests__/password-checker.test.js` — tests `public/tools/password-checker/script.js`
 - `/__tests__/firebase-functions.test.js` — tests logic from `functions/index.js`
 - `/__tests__/json-csv-converter.test.js` — tests `public/tools/json-csv-converter/script.js`
@@ -32,6 +35,7 @@ No watch mode or coverage commands are configured in `package.json`.
 ## Test Structure
 
 **Suite Organization:**
+
 ```javascript
 /**
  * Tool Name Tests
@@ -47,9 +51,9 @@ const { functionA, functionB } = require('../public/tools/tool-name/script');
 
 // ── functionA ──────────────────────────────────────────
 describe('functionA', () => {
-    test('describes expected behavior', () => {
-        expect(functionA(input)).toBe(expected);
-    });
+  test('describes expected behavior', () => {
+    expect(functionA(input)).toBe(expected);
+  });
 });
 ```
 
@@ -58,7 +62,9 @@ describe('functionA', () => {
 ## What Tests Cover
 
 ### `password-checker.test.js`
+
 Pure functions exported from `public/tools/password-checker/script.js`:
+
 - `formatTime(seconds)` — 12 tests covering all time range branches (instant → billions of years → ∞)
 - `getPercentile(entropy)` — 9 tests including common password detection and table integrity
 - `generateVerificationId(password, entropy, percentile)` — format regex tests
@@ -67,14 +73,18 @@ Pure functions exported from `public/tools/password-checker/script.js`:
 - Security audit: documents known `Math.random()` issue (placeholder test, not a fix)
 
 ### `firebase-functions.test.js`
+
 Logic re-implemented inline (functions module can't be imported due to `admin.initializeApp` side effects):
+
 - `getClientIP(req)` — 5 tests: forwarded-for extraction, whitespace trimming, fallback to remoteAddress
 - `checkRateLimit(ip)` — 6 tests: per-IP limits, global daily limit, reset timing
 - Email validation regex — 8 tests: valid/invalid formats, spaces
 - Referer security check — documents VULNERABILITY in current `string.includes()` implementation and tests the correct `new URL(referer).hostname` fix
 
 ### `json-csv-converter.test.js`
+
 Pure functions exported from `public/tools/json-csv-converter/script.js`:
+
 - `escapeCsvField(str)` — 7 tests: commas, quotes, newlines, empty string
 - `parseCsvLines(str)` — 8 tests: RFC 4180 compliance, CRLF, quoted fields with embedded newlines
 - `jsonToCsv(jsonStr)` — 10 tests: array/object/nested, null handling, escaping, error cases
@@ -88,7 +98,7 @@ Source files use a CommonJS guard so they work in both browser and Node/Jest:
 ```javascript
 // At the bottom of the source file:
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { functionName, anotherName };
+  module.exports = { functionName, anotherName };
 }
 ```
 
@@ -110,6 +120,7 @@ No `jest.mock()` calls exist in the test suite.
 **GitHub Actions workflow:** `.github/workflows/deploy.yml`
 
 Steps:
+
 1. `actions/checkout@v4`
 2. `actions/setup-node@v4` (Node 20)
 3. `npm install -g firebase-tools`
@@ -117,6 +128,7 @@ Steps:
 5. `firebase deploy --only hosting,functions`
 
 **What is NOT in the CI pipeline:**
+
 - `npm test` is never run before deployment
 - No lint step
 - No type checking
@@ -138,6 +150,7 @@ Code style is inconsistent across files — some use 4-space indent, some use 2-
 No formal manual QA checklist exists in the codebase. CLAUDE.md specifies a post-change audit:
 
 **Agent 1 — Broken Things Audit (manual/AI-assisted):**
+
 - Missing CSS/JS link paths on modified pages
 - Nav has Blog link on all tool pages
 - Deferred AdSense + GA4 loaders present
@@ -156,6 +169,7 @@ This audit is launched manually after changes — it is not automated.
 ## What's Missing
 
 **No tests exist for:**
+
 - All AI tool JS files (`summarizer.js`, `humanizer.js`, `email-writer.js`, `hardship-letter.js`, etc.)
 - `public/tools/shared/ai-tool.js` (CSAITool core — email gate logic, typewriter, usage tracking)
 - `public/tools/shared/email-capture.js`
@@ -174,4 +188,4 @@ This audit is launched manually after changes — it is not automated.
 
 ---
 
-*Testing analysis: 2026-05-20*
+_Testing analysis: 2026-05-20_

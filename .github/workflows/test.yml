@@ -17,11 +17,48 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
-      # Jest resolves firebase-admin/firebase-functions via modulePaths → functions/node_modules,
-      # so the functions deps must be installed too (or the ai-* suites fail to resolve the mocks).
       - run: npm ci
         working-directory: ./functions
+      - run: npm ci
+        working-directory: ./v2
       - run: npx jest --verbose --coverage
+
+  lint:
+    name: Lint (ESLint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+
+  format:
+    name: Format Check (Prettier)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run format -- --check
+
+  typecheck:
+    name: TypeCheck (TypeScript)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+        working-directory: ./v2
+      - run: npm run typecheck
 
   python-tests:
     name: Python Tests (pytest)
@@ -31,5 +68,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install pytest feedparser requests beautifulsoup4
+      - run: pip install pytest feedparser requests beautifulsoup4 google-generativeai schedule
       - run: python -m pytest freelance-pipeline/tests/ -v
+
+  build-site:
+    name: Build Static Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - run: npm run build:site

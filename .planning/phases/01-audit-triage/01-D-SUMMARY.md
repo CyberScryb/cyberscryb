@@ -1,15 +1,24 @@
 ---
-phase: "01"
-plan: "D"
-subsystem: "tools/seo"
-tags: ["life-tools", "budget-planner", "seo", "json-ld", "breadcrumbs", "cleanup"]
+phase: '01'
+plan: 'D'
+subsystem: 'tools/seo'
+tags: ['life-tools', 'budget-planner', 'seo', 'json-ld', 'breadcrumbs', 'cleanup']
 dependency_graph:
-  requires: ["01-A"]
-  provides: ["budget-planner frontend", "tool registry consistency", "schema sweep"]
-  affects: ["tools.html", "index.html", "sitemap.xml", "ai-writing-suite", "humanizer", "privacy-generator"]
+  requires: ['01-A']
+  provides: ['budget-planner frontend', 'tool registry consistency', 'schema sweep']
+  affects:
+    [
+      'tools.html',
+      'index.html',
+      'sitemap.xml',
+      'ai-writing-suite',
+      'humanizer',
+      'privacy-generator',
+    ]
 tech_stack:
   added: []
-  patterns: ["CSAITool.init pattern", "SoftwareApplication + FAQPage + BreadcrumbList JSON-LD triple"]
+  patterns:
+    ['CSAITool.init pattern', 'SoftwareApplication + FAQPage + BreadcrumbList JSON-LD triple']
 key_files:
   created:
     - public/tools/budget-planner/index.html
@@ -26,12 +35,12 @@ key_files:
   deleted:
     - public/tools/humanizer/index_v1.html
 decisions:
-  - "budget-planner uses FinanceApplication category (not LifestyleApplication) per JSON-LD spec for financial tools"
-  - "FUTURE_TOOL_PROMPTS allowlist added to audit script for 5 orphan prompts not being built in this phase"
-  - "/distill/ added as separate sitemap entry from /tools/distill/ (root-level landing vs tool dir)"
+  - 'budget-planner uses FinanceApplication category (not LifestyleApplication) per JSON-LD spec for financial tools'
+  - 'FUTURE_TOOL_PROMPTS allowlist added to audit script for 5 orphan prompts not being built in this phase'
+  - '/distill/ added as separate sitemap entry from /tools/distill/ (root-level landing vs tool dir)'
 metrics:
-  duration: "~15 minutes"
-  completed_date: "2026-05-26"
+  duration: '~15 minutes'
+  completed_date: '2026-05-26'
   tasks_completed: 3
   files_changed: 11
 ---
@@ -72,11 +81,11 @@ New Life Tool at `/tools/budget-planner/`:
 
 Pages touched:
 
-| Page | Fix |
-|------|-----|
-| humanizer/index.html | JSON-LD `@type`: WebApplication → SoftwareApplication |
-| privacy-generator/index.html | Added breadcrumb nav (HTML) + BreadcrumbList JSON-LD |
-| ai-writing-suite/index.html | SoftwareApplication JSON-LD + Blog/Guides nav + absolute paths |
+| Page                         | Fix                                                            |
+| ---------------------------- | -------------------------------------------------------------- |
+| humanizer/index.html         | JSON-LD `@type`: WebApplication → SoftwareApplication          |
+| privacy-generator/index.html | Added breadcrumb nav (HTML) + BreadcrumbList JSON-LD           |
+| ai-writing-suite/index.html  | SoftwareApplication JSON-LD + Blog/Guides nav + absolute paths |
 
 Only 3 pages needed fixes. All other tools were already compliant per the audit. `fluid-sim` accepted by triage (no schema needed for visual tool).
 
@@ -85,6 +94,7 @@ Only 3 pages needed fixes. All other tools were already compliant per the audit.
 `node scripts/audit-inventory.js --check` now exits 0.
 
 Changes to reach that state:
+
 - Budget-planner frontend built (resolves orphan AI_PROMPT)
 - Legacy file removed (0 legacy files)
 - Tool counts accurate (actual=42, homepage claims 42)
@@ -104,22 +114,22 @@ None. The budget-planner frontend is fully wired to the `budget-planner` AI_PROM
 
 Per plan instructions, these 5 orphan prompts in `functions/index.js` have no frontends and are NOT being built in this phase. They are documented here for the next planning cycle:
 
-| Prompt Key | Notes |
-|------------|-------|
-| `linkedin-post` | LinkedIn post generator — prompt written, no UI |
-| `cold-email` | Cold email writer — prompt written, no UI |
+| Prompt Key        | Notes                                             |
+| ----------------- | ------------------------------------------------- |
+| `linkedin-post`   | LinkedIn post generator — prompt written, no UI   |
+| `cold-email`      | Cold email writer — prompt written, no UI         |
 | `job-description` | Job description generator — prompt written, no UI |
-| `press-release` | Press release writer — prompt written, no UI |
-| `seo-title` | SEO title generator — prompt written, no UI |
+| `press-release`   | Press release writer — prompt written, no UI      |
+| `seo-title`       | SEO title generator — prompt written, no UI       |
 
 Each has a complete prompt in `functions/index.js`. They can be turned into tools by following the same CSAITool.init pattern used in budget-planner.
 
 ## Self-Check: PASSED
 
-| Check | Result |
-|-------|--------|
-| `public/tools/budget-planner/index.html` exists | FOUND |
-| `public/tools/budget-planner/budget-planner.js` exists | FOUND |
-| `public/tools/humanizer/index_v1.html` deleted | CONFIRMED |
-| Commit cf459d1 exists | FOUND |
-| `audit-inventory.js --check` exits 0 | PASSED |
+| Check                                                  | Result    |
+| ------------------------------------------------------ | --------- |
+| `public/tools/budget-planner/index.html` exists        | FOUND     |
+| `public/tools/budget-planner/budget-planner.js` exists | FOUND     |
+| `public/tools/humanizer/index_v1.html` deleted         | CONFIRMED |
+| Commit cf459d1 exists                                  | FOUND     |
+| `audit-inventory.js --check` exits 0                   | PASSED    |

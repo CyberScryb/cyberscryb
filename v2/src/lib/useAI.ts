@@ -17,13 +17,13 @@ export function useAI() {
     setError(null);
     setResult(null);
     setStreamData('');
-    
+
     abortControllerRef.current = new AbortController();
 
     try {
       const generated = await ai.generate({
         ...opts,
-        abortSignal: abortControllerRef.current.signal
+        abortSignal: abortControllerRef.current.signal,
       });
       setResult(generated);
       setIsLoading(false);
@@ -45,19 +45,22 @@ export function useAI() {
     setError(null);
     setResult(null);
     setStreamData('');
-    
+
     abortControllerRef.current = new AbortController();
-    
+
     let completeText = '';
 
     try {
-      await ai.generateStream({
-        ...opts,
-        abortSignal: abortControllerRef.current.signal
-      }, (chunk) => {
-        completeText += chunk;
-        setStreamData(completeText);
-      });
+      await ai.generateStream(
+        {
+          ...opts,
+          abortSignal: abortControllerRef.current.signal,
+        },
+        chunk => {
+          completeText += chunk;
+          setStreamData(completeText);
+        }
+      );
       setResult(completeText);
       setIsLoading(false);
       return completeText;

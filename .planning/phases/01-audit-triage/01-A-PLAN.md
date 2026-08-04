@@ -1,7 +1,7 @@
 ---
 plan_id: 01-A
 phase: 1
-title: "Static inventory: cross-reference every tool against AI_PROMPTS, tools.html, sitemap.xml, homepage dropdown"
+title: 'Static inventory: cross-reference every tool against AI_PROMPTS, tools.html, sitemap.xml, homepage dropdown'
 wave: 1
 depends_on: []
 files_modified:
@@ -10,9 +10,9 @@ files_modified:
 autonomous: true
 requirements: [AUDIT-03, AUDIT-06]
 must_haves:
-  - "AUDIT-INVENTORY.md exists and lists every tool directory under public/tools/ with cross-reference columns: in AI_PROMPTS?, in tools.html?, in sitemap.xml?, in homepage dropdown?, has JSON-LD?, has Blog nav link?, has breadcrumbs?"
-  - "Every orphan (toolId in AI_PROMPTS with no frontend, or frontend with no AI_PROMPTS entry, or tool with no tools.html card) is flagged with severity and remediation owner (Plan D vs out-of-phase)"
-  - "Inventory script scripts/audit-inventory.js is runnable via node and exits 0 when no new orphans are introduced after Plan D fixes ship"
+  - 'AUDIT-INVENTORY.md exists and lists every tool directory under public/tools/ with cross-reference columns: in AI_PROMPTS?, in tools.html?, in sitemap.xml?, in homepage dropdown?, has JSON-LD?, has Blog nav link?, has breadcrumbs?'
+  - 'Every orphan (toolId in AI_PROMPTS with no frontend, or frontend with no AI_PROMPTS entry, or tool with no tools.html card) is flagged with severity and remediation owner (Plan D vs out-of-phase)'
+  - 'Inventory script scripts/audit-inventory.js is runnable via node and exits 0 when no new orphans are introduced after Plan D fixes ship'
   - "Phase 1 success criterion #5 (every AI tool's toolId maps to a key in AI_PROMPTS; no orphan tools or orphan prompts) has a single source of truth document"
 ---
 
@@ -38,6 +38,7 @@ Output: `.planning/phases/01-audit-triage/AUDIT-INVENTORY.md` (the report) and `
 @CLAUDE.md
 
 # Source-of-truth files the inventory must read
+
 @functions/index.js
 @public/tools.html
 @public/sitemap.xml
@@ -48,6 +49,7 @@ Output: `.planning/phases/01-audit-triage/AUDIT-INVENTORY.md` (the report) and `
 <!-- Confirmed via grep: 16 keys present -->
 
 AI_PROMPTS keys (as of 2026-05-20):
+
 - summarizer
 - email-writer
 - bio-generator
@@ -59,7 +61,7 @@ AI_PROMPTS keys (as of 2026-05-20):
 - appeal-letter
 - custody-document
 - caregiver-report
-- budget-planner       <-- prompt exists, NO frontend (confirmed orphan, CONCERNS.md)
+- budget-planner <-- prompt exists, NO frontend (confirmed orphan, CONCERNS.md)
 - resume-bullets
 - tweet-generator
 - paraphraser
@@ -77,6 +79,7 @@ seo-tag-generator, shared, slug-generator, summarizer, text-diff,
 tweet-generator, url-encoder, uuid-generator, voice-writer, word-counter
 
 Special cases (NOT in AI_PROMPTS, handled separately):
+
 - humanizer: uses /api/rewrite → exports.rewriteText (legacy, not AI_PROMPTS)
 - gig-auto-pilot: uses /api/gig → exports.generateGigWork (separate function)
 - shared: not a tool, contains ai-tool.js
@@ -85,6 +88,7 @@ Special cases (NOT in AI_PROMPTS, handled separately):
 - fluid-sim: visual/fun tool, client-side only
 
 Known issues from CONCERNS.md to flag in inventory:
+
 1. budget-planner — prompt in functions/index.js lines 479-498, NO public/tools/budget-planner/ directory
 2. humanizer/index_v1.html — legacy file alongside index.html, only one should be canonical
 3. ai-writing-suite — directory exists, NOT in tools.html, NOT in sitemap.xml
@@ -92,6 +96,7 @@ Known issues from CONCERNS.md to flag in inventory:
 5. Tool count claims inconsistent: index.html says "41", tools.html meta says "39+", og says "38+", JSON-LD says 38
 6. tools.html canonical URL still uses ".html" suffix (cleanUrls strips it in production)
 </interfaces>
+
 </context>
 
 <tasks>
@@ -155,11 +160,12 @@ Known issues from CONCERNS.md to flag in inventory:
 </verification>
 
 <success_criteria>
+
 - AUDIT-INVENTORY.md is the single source of truth for "what tools exist and where they should be registered"
 - Plan D has a concrete, prioritized list to work from (no exploration needed)
 - The `--check` mode gives Phase 2+ a CI-style regression guard against new orphans
 - Phase 1 success criterion #5 is measurable and verifiable
-</success_criteria>
+  </success_criteria>
 
 <output>
 Create `.planning/phases/01-audit-triage/01-A-SUMMARY.md` when done, summarizing: total tools inventoried, count of orphans found by category, triage decisions assigned to Plan D vs deferred, and any surprises that emerged from the inspection of `ai-writing-suite/index.html`.

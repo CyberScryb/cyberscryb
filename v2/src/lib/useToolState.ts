@@ -8,13 +8,16 @@ import LZString from 'lz-string';
  * - Compression only happens on-demand when "Share" is clicked.
  * - Added debounced localStorage sync to reduce I/O during rapid typing.
  */
-export function useToolState<T>(toolId: string, initialState: T): [T, (state: T | ((val: T) => T)) => void, string, () => void] {
+export function useToolState<T>(
+  toolId: string,
+  initialState: T
+): [T, (state: T | ((val: T) => T)) => void, string, () => void] {
   const [state, setState] = useState<T>(() => {
     // 0. Check for injected example state
     if ((window as any).__CYBER_EXAMPLE_STATE) {
-       const override = (window as any).__CYBER_EXAMPLE_STATE;
-       delete (window as any).__CYBER_EXAMPLE_STATE;
-       return override as T;
+      const override = (window as any).__CYBER_EXAMPLE_STATE;
+      delete (window as any).__CYBER_EXAMPLE_STATE;
+      return override as T;
     }
     // 1. Check URL hash
     const hash = window.location.hash.slice(1);
@@ -62,7 +65,7 @@ export function useToolState<T>(toolId: string, initialState: T): [T, (state: T 
     const url = new URL(window.location.href);
     url.hash = compressed;
     const finalUrl = url.toString();
-    
+
     await navigator.clipboard.writeText(finalUrl);
   }, []);
 

@@ -299,10 +299,7 @@ const CONTENT_TOOL_MAP = {
 };
 
 function relatedPanel(map) {
-  const links = [
-    [map.tool, map.label],
-    ...(map.related || []),
-  ];
+  const links = [[map.tool, map.label], ...(map.related || [])];
   const cards = links
     .map(
       ([href, text]) =>
@@ -339,7 +336,11 @@ function ensureContentInternalLinks() {
   for (const [file, map] of Object.entries(CONTENT_TOOL_MAP)) {
     const blogPath = path.join(ROOT, 'blog', file);
     const guidePath = path.join(ROOT, 'guides', file);
-    const filePath = fs.existsSync(blogPath) ? blogPath : fs.existsSync(guidePath) ? guidePath : null;
+    const filePath = fs.existsSync(blogPath)
+      ? blogPath
+      : fs.existsSync(guidePath)
+        ? guidePath
+        : null;
     if (!filePath) {
       console.warn('missing content file', file);
       continue;
@@ -368,13 +369,15 @@ function ensureContentInternalLinks() {
 function extractFaqsFromHtml(html) {
   const faqs = [];
   // details/summary pattern
-  const detailsRe = /<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/details>/gi;
+  const detailsRe =
+    /<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/details>/gi;
   let m;
   while ((m = detailsRe.exec(html))) {
     faqs.push({ q: stripTags(m[1]), a: stripTags(m[2]) });
   }
   // faq-item h4 + p
-  const itemRe = /<div class="faq-item"[^>]*>\s*<h4[^>]*>([\s\S]*?)<\/h4>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/div>/gi;
+  const itemRe =
+    /<div class="faq-item"[^>]*>\s*<h4[^>]*>([\s\S]*?)<\/h4>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/div>/gi;
   while ((m = itemRe.exec(html))) {
     faqs.push({ q: stripTags(m[1]), a: stripTags(m[2]) });
   }
@@ -393,7 +396,7 @@ function extractFaqsFromHtml(html) {
   }
   // dedupe by question
   const seen = new Set();
-  return faqs.filter((f) => {
+  return faqs.filter(f => {
     const k = f.q.toLowerCase();
     if (seen.has(k) || f.q.length < 8 || f.a.length < 20) return false;
     seen.add(k);
@@ -414,7 +417,7 @@ function stripTags(s) {
 }
 
 function faqSchemaBlock(faqs) {
-  const entities = faqs.map((f) => ({
+  const entities = faqs.map(f => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },

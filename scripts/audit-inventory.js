@@ -16,11 +16,11 @@ const CHECK_MODE = process.argv.includes('--check');
 
 // ─── Known exceptions allowlist (exit 0 for these in --check mode) ───────────
 const KNOWN_EXCEPTIONS = new Set([
-  'humanizer',        // uses /api/rewrite endpoint, not /api/ai-generate
-  'gig-auto-pilot',   // uses /api/gig endpoint
-  'distill',          // landing page only (no index.html in dir yet)
-  'fluid-sim',        // visual/interactive tool, no AI prompt needed
-  'shared',           // helper directory, not a tool
+  'humanizer', // uses /api/rewrite endpoint, not /api/ai-generate
+  'gig-auto-pilot', // uses /api/gig endpoint
+  'distill', // landing page only (no index.html in dir yet)
+  'fluid-sim', // visual/interactive tool, no AI prompt needed
+  'shared', // helper directory, not a tool
   'ai-writing-suite', // complete tool, needs wiring — not an orphan
 ]);
 
@@ -31,11 +31,11 @@ const NON_STANDARD_API_PROMPTS = new Set([
 
 // ─── Future tools: prompts written, frontends planned for later phases ────────
 const FUTURE_TOOL_PROMPTS = new Set([
-  'linkedin-post',    // prompt written — frontend planned for future phase
-  'cold-email',       // prompt written — frontend planned for future phase
-  'job-description',  // prompt written — frontend planned for future phase
-  'press-release',    // prompt written — frontend planned for future phase
-  'seo-title',        // prompt written — frontend planned for future phase
+  'linkedin-post', // prompt written — frontend planned for future phase
+  'cold-email', // prompt written — frontend planned for future phase
+  'job-description', // prompt written — frontend planned for future phase
+  'press-release', // prompt written — frontend planned for future phase
+  'seo-title', // prompt written — frontend planned for future phase
 ]);
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -113,26 +113,61 @@ function getToolDirs() {
 
 function guessCategory(toolName, aiPromptKeys) {
   const lifeTools = new Set([
-    'hardship-letter', 'appeal-letter', 'custody-document',
-    'caregiver-report', 'budget-planner',
+    'hardship-letter',
+    'appeal-letter',
+    'custody-document',
+    'caregiver-report',
+    'budget-planner',
   ]);
   const aiWritingTools = new Set([
-    'summarizer', 'email-writer', 'bio-generator', 'product-description',
-    'code-explainer', 'meta-description', 'ai-detector', 'paraphraser',
-    'tweet-generator', 'resume-bullets', 'voice-writer', 'humanizer',
-    'linkedin-post', 'cold-email', 'job-description', 'press-release',
+    'summarizer',
+    'email-writer',
+    'bio-generator',
+    'product-description',
+    'code-explainer',
+    'meta-description',
+    'ai-detector',
+    'paraphraser',
+    'tweet-generator',
+    'resume-bullets',
+    'voice-writer',
+    'humanizer',
+    'linkedin-post',
+    'cold-email',
+    'job-description',
+    'press-release',
     'seo-title',
   ]);
   const devTools = new Set([
-    'base64-tool', 'json-formatter', 'json-csv-converter', 'password-checker',
-    'hash-generator', 'uuid-generator', 'url-encoder', 'jwt-decoder',
-    'regex-tester', 'epoch-converter', 'case-converter', 'lorem-ipsum',
-    'markdown-html', 'html-entity', 'text-diff', 'slug-generator',
-    'seo-tag-generator', 'color-palette', 'qr-generator', 'cron-builder',
-    'word-counter', 'privacy-generator',
+    'base64-tool',
+    'json-formatter',
+    'json-csv-converter',
+    'password-checker',
+    'hash-generator',
+    'uuid-generator',
+    'url-encoder',
+    'jwt-decoder',
+    'regex-tester',
+    'epoch-converter',
+    'case-converter',
+    'lorem-ipsum',
+    'markdown-html',
+    'html-entity',
+    'text-diff',
+    'slug-generator',
+    'seo-tag-generator',
+    'color-palette',
+    'qr-generator',
+    'cron-builder',
+    'word-counter',
+    'privacy-generator',
   ]);
   const specialTools = new Set([
-    'ai-writing-suite', 'distill', 'fluid-sim', 'gig-auto-pilot', 'shared',
+    'ai-writing-suite',
+    'distill',
+    'fluid-sim',
+    'gig-auto-pilot',
+    'shared',
   ]);
 
   if (lifeTools.has(toolName)) return 'life-tool';
@@ -158,10 +193,10 @@ function checkToolAttributes(toolName) {
 
   if (hasIndexHtml) {
     const content = readFile(indexPath);
-    hasJsonLd = content.includes('"@type": "SoftwareApplication"') ||
-                content.includes('"@type":"SoftwareApplication"');
-    hasBlogNavLink = /href="[^"]*\/blog\//i.test(content) ||
-                     /href="[^"]*\/blog"/i.test(content);
+    hasJsonLd =
+      content.includes('"@type": "SoftwareApplication"') ||
+      content.includes('"@type":"SoftwareApplication"');
+    hasBlogNavLink = /href="[^"]*\/blog\//i.test(content) || /href="[^"]*\/blog"/i.test(content);
     hasBreadcrumbs = /breadcrumb/i.test(content);
     hasCanonical = content.includes('rel="canonical"');
   }
@@ -250,10 +285,12 @@ function main() {
     if (KNOWN_EXCEPTIONS.has(t)) return false;
     const row = rows.find(r => r.tool === t);
     if (!row) return false;
-    return row.in_AI_PROMPTS === 'no' &&
-           row.in_tools_html === 'no' &&
-           row.in_sitemap === 'no' &&
-           row.in_homepage_dropdown === 'no';
+    return (
+      row.in_AI_PROMPTS === 'no' &&
+      row.in_tools_html === 'no' &&
+      row.in_sitemap === 'no' &&
+      row.in_homepage_dropdown === 'no'
+    );
   });
 
   // Tool count drift
@@ -273,7 +310,9 @@ function main() {
   const legacyFileRows = rows.filter(r => r.legacy_files !== '');
 
   // ─── Orphan check for --check mode ────────────────────────────────────────
-  const newOrphanAIPrompts = orphanAIPrompts.filter(k => !KNOWN_EXCEPTIONS.has(k) && !FUTURE_TOOL_PROMPTS.has(k));
+  const newOrphanAIPrompts = orphanAIPrompts.filter(
+    k => !KNOWN_EXCEPTIONS.has(k) && !FUTURE_TOOL_PROMPTS.has(k)
+  );
   const newOrphanFrontends = orphanFrontends.filter(t => !KNOWN_EXCEPTIONS.has(t));
 
   if (CHECK_MODE) {
@@ -310,9 +349,12 @@ function main() {
 |------|----------|---------------|---------------|---------------|------------|----------------------|----------------|-------------|-------------------|-----------------|---------------|--------------|
 `;
 
-  const tableRows = rows.map(r =>
-    `| ${r.tool} | ${r.category} | ${r.has_directory} | ${r.in_AI_PROMPTS} | ${r.in_tools_html} | ${r.in_sitemap} | ${r.in_homepage_dropdown} | ${r.has_index_html} | ${r.has_json_ld} | ${r.has_blog_nav_link} | ${r.has_breadcrumbs} | ${r.has_canonical} | ${r.legacy_files} |`
-  ).join('\n');
+  const tableRows = rows
+    .map(
+      r =>
+        `| ${r.tool} | ${r.category} | ${r.has_directory} | ${r.in_AI_PROMPTS} | ${r.in_tools_html} | ${r.in_sitemap} | ${r.in_homepage_dropdown} | ${r.has_index_html} | ${r.has_json_ld} | ${r.has_blog_nav_link} | ${r.has_breadcrumbs} | ${r.has_canonical} | ${r.legacy_files} |`
+    )
+    .join('\n');
 
   // ─── Section: Orphan AI_PROMPTS ────────────────────────────────────────────
   const orphanAISection = `
@@ -323,10 +365,14 @@ These prompts are defined in \`functions/index.js\` but have no frontend UI.
 
 | key | in_tools_html | in_sitemap | in_homepage_dropdown | exception? |
 |-----|---------------|------------|----------------------|------------|
-${orphanAIPrompts.map(k => {
-  const row = rows.find(r => r.tool === k);
-  return `| ${k} | ${row ? row.in_tools_html : 'no'} | ${row ? row.in_sitemap : 'no'} | ${row ? row.in_homepage_dropdown : 'no'} | ${KNOWN_EXCEPTIONS.has(k) ? 'yes' : 'no'} |`;
-}).join('\n') || '| — | — | — | — | — |'}
+${
+  orphanAIPrompts
+    .map(k => {
+      const row = rows.find(r => r.tool === k);
+      return `| ${k} | ${row ? row.in_tools_html : 'no'} | ${row ? row.in_sitemap : 'no'} | ${row ? row.in_homepage_dropdown : 'no'} | ${KNOWN_EXCEPTIONS.has(k) ? 'yes' : 'no'} |`;
+    })
+    .join('\n') || '| — | — | — | — | — |'
+}
 
 **New orphans (not in allowlist):** ${newOrphanAIPrompts.length > 0 ? newOrphanAIPrompts.join(', ') : 'none'}
 `;
@@ -335,10 +381,12 @@ ${orphanAIPrompts.map(k => {
   const allOrphanFrontends = toolDirs.filter(t => {
     const row = rows.find(r => r.tool === t);
     if (!row) return false;
-    return row.in_AI_PROMPTS === 'no' &&
-           row.in_tools_html === 'no' &&
-           row.in_sitemap === 'no' &&
-           row.in_homepage_dropdown === 'no';
+    return (
+      row.in_AI_PROMPTS === 'no' &&
+      row.in_tools_html === 'no' &&
+      row.in_sitemap === 'no' &&
+      row.in_homepage_dropdown === 'no'
+    );
   });
 
   const orphanFrontendsSection = `
@@ -349,10 +397,14 @@ Tool directories that exist on disk but are missing from ALL registries
 
 | tool | has_index_html | has_json_ld | exception? |
 |------|----------------|-------------|------------|
-${allOrphanFrontends.map(t => {
-  const row = rows.find(r => r.tool === t);
-  return `| ${t} | ${row ? row.has_index_html : 'no'} | ${row ? row.has_json_ld : 'no'} | ${KNOWN_EXCEPTIONS.has(t) ? 'yes' : 'no'} |`;
-}).join('\n') || '| — | — | — | — |'}
+${
+  allOrphanFrontends
+    .map(t => {
+      const row = rows.find(r => r.tool === t);
+      return `| ${t} | ${row ? row.has_index_html : 'no'} | ${row ? row.has_json_ld : 'no'} | ${KNOWN_EXCEPTIONS.has(t) ? 'yes' : 'no'} |`;
+    })
+    .join('\n') || '| — | — | — | — |'
+}
 
 **New orphans (not in allowlist):** ${newOrphanFrontends.length > 0 ? newOrphanFrontends.join(', ') : 'none'}
 `;
@@ -385,11 +437,24 @@ These should be removed to avoid confusion.
 ${legacyFileRows.map(r => `| ${r.tool} | ${r.legacy_files} |`).join('\n') || '| — | — |'}
 `;
 
-  const fullReport = HEADER + tableRows + '\n' + orphanAISection + orphanFrontendsSection + driftSection + legacySection;
+  const fullReport =
+    HEADER +
+    tableRows +
+    '\n' +
+    orphanAISection +
+    orphanFrontendsSection +
+    driftSection +
+    legacySection;
 
   // Write to output file
   // Preserve the ## Triage Decisions section if it already exists in the current file
-  const outputPath = path.join(ROOT, '.planning', 'phases', '01-audit-triage', 'AUDIT-INVENTORY.md');
+  const outputPath = path.join(
+    ROOT,
+    '.planning',
+    'phases',
+    '01-audit-triage',
+    'AUDIT-INVENTORY.md'
+  );
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
   let triageSection = '';
@@ -408,7 +473,9 @@ ${legacyFileRows.map(r => `| ${r.tool} | ${r.legacy_files} |`).join('\n') || '| 
   console.log(`Orphan AI_PROMPTS: ${orphanAIPrompts.length} (${newOrphanAIPrompts.length} new)`);
   console.log(`Orphan Frontends: ${allOrphanFrontends.length} (${newOrphanFrontends.length} new)`);
   console.log(`Legacy files: ${legacyFileRows.length} tools with legacy files`);
-  console.log(`Tool count drift: actual=${countDrift.actual}, homepage claims ${countDrift.homepage_meta}`);
+  console.log(
+    `Tool count drift: actual=${countDrift.actual}, homepage claims ${countDrift.homepage_meta}`
+  );
 }
 
 main();

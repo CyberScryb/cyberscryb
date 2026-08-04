@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distill</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      background: #0d0d14;
+      color: #e8e8ed;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+      border-bottom: 1px solid #2a2a3a;
+    }
+    .logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: white;
+    }
+    .title { font-weight: 600; font-size: 14px; }
+    .subtitle { font-size: 11px; color: #6b6b7a; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      margin: 12px 16px 8px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.4); }
+    .btn-secondary {
+      background: #1a1a26;
+      color: #e8e8ed;
+      border: 1px solid #2a2a3a;
+    }
+    .btn-secondary:hover { background: #222230; border-color: #3a3a4a; }
+    .tools-promo {
+      margin: 8px 16px 16px;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 8px;
+    }
+    .tools-promo h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #818cf8; margin-bottom: 8px; }
+    .tool-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; }
+    .tool-links a { color: #a5a5b8; text-decoration: none; padding: 6px 8px; border-radius: 4px; transition: all 0.15s; }
+    .tool-links a:hover { background: rgba(99,102,241,0.2); color: #c7c7e8; }
+    .divider { height: 1px; background: #2a2a3a; margin: 8px 16px; }
+    .footer {
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #6b6b7a;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">D</div>
+    <div>
+      <div class="title">Distill</div>
+      <div class="subtitle">Clean reader mode</div>
+    </div>
+  </div>
+  <button class="btn btn-primary" id="openReader">Open Reader View</button>
+  <button class="btn btn-secondary" id="openLibrary">Reading Library</button>
+  
+  <div class="tools-promo">
+    <h4>More free tools from CyberScryb</h4>
+    <div class="tool-links">
+      <a href="https://cyberscryb.com/tools/humanizer/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">AI Humanizer</a>
+      <a href="https://cyberscryb.com/tools/base64-tool/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">Base64 Encoder</a>
+      <a href="https://cyberscryb.com/tools/json-csv-converter/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">JSON ? CSV</a>
+      <a href="https://cyberscryb.com/tools/password-checker/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">Password Strength</a>
+      <a href="https://cyberscryb.com/tools/ai-detector/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">AI Detector</a>
+      <a href="https://cyberscryb.com/tools/?utm_source=distill_ext&utm_medium=popup&utm_campaign=cross_promo" target="_blank">All 50+ Tools</a>
+    </div>
+  </div>
+  
+  <div class="divider"></div>
+  
+  <div class="footer">
+    <a href="https://cyberscryb.com/distill/?utm_source=distill_ext&utm_medium=popup" target="_blank" style="color:#6b6b7a;text-decoration:none;">Settings & Help</a> ·
+    <a href="https://cyberscryb.com/distill-privacy/?utm_source=distill_ext&utm_medium=popup" target="_blank" style="color:#6b6b7a;text-decoration:none;">Privacy</a>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

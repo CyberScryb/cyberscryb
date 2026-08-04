@@ -13,9 +13,11 @@ python job_monitor.py                 # Run once
 ```
 
 ## Schedule (Windows Task Scheduler)
+
 Set `job_monitor.py` to run every 6 hours via Task Scheduler.
 
 ## Files
+
 - `job_monitor.py` — Main scraper + orchestrator
 - `proposal_generator.py` — AI proposal generation
 - `email_digest.py` — HTML email sender

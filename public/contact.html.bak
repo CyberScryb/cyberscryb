@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | CyberScryb</title>
+    <meta name="description" content="Get in touch with CyberScryb. Questions, feedback, or partnership inquiries &mdash; reach us at support@cyberscryb.com.">
+    <link rel="canonical" href="https://cyberscryb.com/contact/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact Us | CyberScryb">
+    <meta property="og:description" content="Questions, feedback, or partnership inquiries &mdash; reach us at support@cyberscryb.com.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/contact/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <!-- Google AdSense &mdash; delayed load to protect LCP -->
+    <script>
+    (function() {
+        function loadAdsense() {
+            if (window._adsenseLoaded) return;
+            var robots = document.querySelector('meta[name="robots"]');
+            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
+                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
+                return;
+            }
+            window._adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 2500);
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
+        }
+        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
+            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
+        });
+    })();
+    </script>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span
+                            style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                                                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                    <li><a href="/pro/" class="nav-pro">&#9733; Pro</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <h1>Contact Us</h1>
+                    <p>Have questions, feedback, or partnership inquiries? We'd love to hear from you.</p>
+
+                    <div style="background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid #333; border-radius: 12px; padding: 2.5rem; margin-top: 2rem; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">✉️</div>
+                        <h2 style="margin-top: 0;">Email Us</h2>
+                        <p>The best way to reach us:</p>
+                        <a href="mailto:support@cyberscryb.com"
+                            style="display: inline-block; font-family: var(--font-brand), Georgia, serif; font-size: 1.2rem; color: var(--primary-soft); padding: 0.75rem 1.5rem; border: 1px solid #C2410C; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='rgba(194, 65, 12,0.1)'; this.style.boxShadow='0 0 20px rgba(194, 65, 12,0.3)'"
+                            onmouseout="this.style.background='transparent'; this.style.boxShadow='none'">
+                            support@cyberscryb.com
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; border-left: 3px solid #C2410C; background: rgba(194, 65, 12, 0.05); border-radius: 0 8px 8px 0;">
+                        <p style="margin: 0; color: var(--text-muted);"><strong style="color: var(--text);">Response time:</strong> We typically respond within 24&ndash;48 hours on business days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js" defer></script>
+    <!-- AdSense auto ad unit -->
+    <div style="text-align:center;margin:20px auto;max-width:970px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+</body>
+
+</html>

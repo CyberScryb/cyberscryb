@@ -25,7 +25,7 @@ while ((m = re.exec(html))) {
   let matched = false;
   for (const key of keys) {
     if (href.includes('/' + key + '/') || href.endsWith('/' + key)) {
-      categoryMapping[key].forEach((c) => cats.add(c));
+      categoryMapping[key].forEach(c => cats.add(c));
       matched = true;
       break;
     }
@@ -42,7 +42,7 @@ while ((m = re.exec(html))) {
 
 // unique by href for AI
 const seen = new Set();
-const uniqueAi = ai.filter((x) => {
+const uniqueAi = ai.filter(x => {
   if (seen.has(x.href)) return false;
   seen.add(x.href);
   return true;
@@ -51,18 +51,20 @@ const uniqueAi = ai.filter((x) => {
 console.log('Total tool cards (incl Popular dupes):', total);
 console.log('Category card counts (with multi-tag):', byCat);
 console.log('Unique AI tools:', uniqueAi.length);
-uniqueAi.sort((a, b) => a.title.localeCompare(b.title)).forEach((x) => {
-  console.log('  -', x.title, '→', x.cats);
-});
+uniqueAi
+  .sort((a, b) => a.title.localeCompare(b.title))
+  .forEach(x => {
+    console.log('  -', x.title, '→', x.cats);
+  });
 
 // tools on disk not linked
 const dirs = fs
   .readdirSync('public/tools', { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name !== 'shared' && d.name !== 'distill')
-  .map((d) => d.name);
+  .filter(d => d.isDirectory() && d.name !== 'shared' && d.name !== 'distill')
+  .map(d => d.name);
 const onPage = new Set();
 const hrefRe = /href="\/tools\/([^"/]+)\/"/g;
 let h;
 while ((h = hrefRe.exec(html))) onPage.add(h[1]);
-const missing = dirs.filter((d) => !onPage.has(d));
+const missing = dirs.filter(d => !onPage.has(d));
 console.log('Dirs not on tools page:', missing.length ? missing.join(', ') : '(none)');

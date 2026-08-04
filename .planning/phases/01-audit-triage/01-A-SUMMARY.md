@@ -1,27 +1,27 @@
 ---
-phase: "01"
-plan: "A"
-subsystem: "audit-tooling"
-tags: ["audit", "inventory", "tooling"]
+phase: '01'
+plan: 'A'
+subsystem: 'audit-tooling'
+tags: ['audit', 'inventory', 'tooling']
 dependency_graph:
   requires: []
-  provides: ["tool-inventory", "orphan-report", "triage-decisions"]
-  affects: ["01-D-PLAN.md"]
+  provides: ['tool-inventory', 'orphan-report', 'triage-decisions']
+  affects: ['01-D-PLAN.md']
 tech_stack:
   added: []
-  patterns: ["Node.js script with no external deps", "Markdown report generation"]
+  patterns: ['Node.js script with no external deps', 'Markdown report generation']
 key_files:
   created:
     - scripts/audit-inventory.js
     - .planning/phases/01-audit-triage/AUDIT-INVENTORY.md
   modified: []
 decisions:
-  - "budget-planner assigned fix-in-plan-D — Life Tool with high hardship audience fit"
-  - "5 undocumented AI_PROMPTS (linkedin-post, cold-email, job-description, press-release, seo-title) found and triaged as future tools"
-  - "humanizer/index_v1.html assigned remove disposition"
+  - 'budget-planner assigned fix-in-plan-D — Life Tool with high hardship audience fit'
+  - '5 undocumented AI_PROMPTS (linkedin-post, cold-email, job-description, press-release, seo-title) found and triaged as future tools'
+  - 'humanizer/index_v1.html assigned remove disposition'
 metrics:
-  duration: "~10 minutes"
-  completed: "2026-05-26"
+  duration: '~10 minutes'
+  completed: '2026-05-26'
   tasks_completed: 1
   files_created: 2
 ---
@@ -33,6 +33,7 @@ Automated inventory script cross-referencing 49 tools against 4 registries (AI_P
 ## What Was Built
 
 `scripts/audit-inventory.js` — zero-dependency Node.js script that:
+
 - Reads `functions/index.js`, `public/tools.html`, `public/sitemap.xml`, `public/index.html`
 - Walks all `public/tools/*/` directories
 - Produces a 49-row Markdown table with 12 attribute columns per tool
@@ -47,6 +48,7 @@ Automated inventory script cross-referencing 49 tools against 4 registries (AI_P
 49 unique tool names across all registries (43 directories + 6 AI_PROMPTS-only keys).
 
 Breakdown:
+
 - **AI writing tools:** 17 (11 fully wired, 5 future/orphan prompts, 1 pending wiring)
 - **Dev tools:** 22 (all fully wired)
 - **Life tools:** 5 (4 fully wired, 1 missing frontend — budget-planner)
@@ -55,6 +57,7 @@ Breakdown:
 ## Orphans Found
 
 **6 Orphan AI_PROMPTS** (prompt defined, no frontend directory):
+
 - `budget-planner` — priority Life Tool, frontend needs to be built
 - `linkedin-post`, `cold-email`, `job-description`, `press-release`, `seo-title` — future tools with prompts already written but no UI
 
@@ -62,11 +65,11 @@ Breakdown:
 
 ## Triage Decisions Summary
 
-| disposition | count | items |
-|-------------|-------|-------|
-| `fix-in-plan-D` | 13 | budget-planner, ai-writing-suite wiring, distill sitemap, count drift, 5 future tools, ai-writing-suite JSON-LD + nav, humanizer JSON-LD, privacy-generator breadcrumbs |
-| `remove` | 1 | humanizer/index_v1.html |
-| `accepted` | 1 | fluid-sim missing JSON-LD/breadcrumbs |
+| disposition     | count | items                                                                                                                                                                   |
+| --------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fix-in-plan-D` | 13    | budget-planner, ai-writing-suite wiring, distill sitemap, count drift, 5 future tools, ai-writing-suite JSON-LD + nav, humanizer JSON-LD, privacy-generator breadcrumbs |
+| `remove`        | 1     | humanizer/index_v1.html                                                                                                                                                 |
+| `accepted`      | 1     | fluid-sim missing JSON-LD/breadcrumbs                                                                                                                                   |
 
 ## Surprises
 

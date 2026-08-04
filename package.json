@@ -8,7 +8,10 @@
     "test": "jest --verbose --forceExit",
     "test:js": "jest --verbose --forceExit",
     "test:python": "python -m pytest freelance-pipeline/tests/ -v",
-    "build:site": "python sync_and_build.py"
+    "build:site": "python sync_and_build.py",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern node_modules --ignore-pattern .claude",
+    "format": "prettier --write **/*.{js,jsx,ts,tsx,json,css,md,yml,yaml} --ignore-path .prettierignore",
+    "typecheck": "tsc --noEmit -p v2/tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -27,8 +30,12 @@
   },
   "homepage": "https://github.com/CyberScryb/cyberscryb#readme",
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^15.15.0",
     "jest": "^30.3.0",
-    "jest-environment-jsdom": "^30.3.0"
+    "jest-environment-jsdom": "^30.3.0",
+    "prettier": "^3.9.6"
   },
   "dependencies": {
     "@datadog/browser-rum": "^7.1.0"
@@ -37,6 +44,10 @@
     "modulePaths": [
       "<rootDir>/functions/node_modules"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/\\.claude/"
+    ]
   }
 }
