@@ -271,16 +271,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function copyOutput() {
         const text = getPlainOutput();
-        if (!text || text.indexOf('Nothing here yet') !== -1 || text.indexOf('will show here') !== -1) return;
+        if (!text || text.indexOf('Nothing here yet') !== -1 || text.indexOf('will show here') !== -1 || !navigator.clipboard) return;
         navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: TOOL_ID });
             if (copyBtn) {
-                const originalText = copyBtn.innerText;
+                if (copyBtn._copyResetTimeout) {
+                    clearTimeout(copyBtn._copyResetTimeout);
+                } else {
+                    copyBtn._originalText = copyBtn.innerText;
+                    copyBtn._originalLabel = copyBtn.getAttribute('aria-label');
+                }
                 copyBtn.innerText = 'Copied';
+                copyBtn.setAttribute('aria-label', 'Copied to clipboard');
                 copyBtn.classList.add('copied');
-                setTimeout(function () {
-                    copyBtn.innerText = originalText;
+                copyBtn._copyResetTimeout = setTimeout(function () {
+                    copyBtn.innerText = copyBtn._originalText;
+                    copyBtn.setAttribute('aria-label', copyBtn._originalLabel || 'Copy result to clipboard');
                     copyBtn.classList.remove('copied');
+                    copyBtn._copyResetTimeout = null;
                 }, 1600);
             }
         });
