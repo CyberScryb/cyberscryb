@@ -47,13 +47,18 @@ describe('AI_PROMPTS dispatch table', () => {
         'spousal-support-calculator',
         'med-administration-log',
         'behavioral-log',
+        'insurance-denial-appeal',
+        'landlord-tenant-letter',
+        'payment-demand-letter',
+        'sap-appeal-letter',
+        'utility-shutoff-letter',
     ];
 
     // Calculator tools are param-driven (they build from structured params, not a
     // free-text input), so they don't echo the raw input string like the others.
     const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-    test('has exactly 25 keys', () => {
+    test('has exactly 30 keys', () => {
         expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
     });
 
