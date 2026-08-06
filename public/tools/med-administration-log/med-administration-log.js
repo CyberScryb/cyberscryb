@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td style="font-weight: 600; color: #fff;">${escapeHtml(med.name)}</td>
-                <td><span style="color:#7b2cff;">${escapeHtml(med.dosage)}</span></td>
+                <td><span style="color:#C2410C;">${escapeHtml(med.dosage)}</span></td>
                 <td><span style="font-size:0.8rem; color:#878787;">${escapeHtml(med.route)}</span></td>
                 <td><span style="font-size:0.8rem; color:#878787;">${escapeHtml(med.frequency)} (${escapeHtml(med.time)})</span></td>
                 <td style="white-space: nowrap;">
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <label style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; color: #878787; cursor: pointer; user-select: none;">
                                     <input type="checkbox" class="shift-checkbox" data-id="${med.id}" data-shift="${shift}" ${checked ? 'checked' : ''} style="margin: 0; cursor: pointer;">
                                     <span>${shift[0]}</span>
-                                    <span class="time-stamp" style="font-size: 0.6rem; color: #7b2cff; height: 10px; display: inline-block;">${val}</span>
+                                    <span class="time-stamp" style="font-size: 0.6rem; color: #C2410C; height: 10px; display: inline-block;">${val}</span>
                                 </label>
                             `;
                         }).join('')}

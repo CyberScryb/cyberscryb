@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260721contrast-site">
+    <link rel="stylesheet" href="/css/style.css?v=20260806linen3">
     <script>
     window.dataLayer=window.dataLayer||[];
     function gtag(){dataLayer.push(arguments)}
@@ -134,7 +134,7 @@
 
     <main class="fluid-app">
         <div style="max-width:1200px;margin:0 auto;padding:0 2rem 1rem;">
-            <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color: var(--primary-soft);">Simulator</span></h1>
+            <h1 style="font-size:2rem;margin-bottom:0.5rem;">Fluid Dynamics <span style="color: var(--primary);">Simulator</span></h1>
             <p style="color: var(--text-muted);max-width:640px;">Click and drag to inject dye and force into a real-time Navier-Stokes fluid simulation. 100% client-side &mdash; no data leaves your browser.</p>
         </div>
         <div class="fluid-layout">
@@ -146,7 +146,7 @@
                 <div class="ctrl-group">
                     <h3>Color Palette</h3>
                     <div class="palette-grid">
-                        <button class="palette-btn active" data-palette="cyber" style="background:linear-gradient(135deg,#C2410C,#7b2cff)" title="Cyber"></button>
+                        <button class="palette-btn active" data-palette="cyber" style="background:linear-gradient(135deg,#C2410C,#C2410C)" title="Cyber"></button>
                         <button class="palette-btn" data-palette="fire" style="background:linear-gradient(135deg,#ff4400,#ffaa00)" title="Fire"></button>
                         <button class="palette-btn" data-palette="plasma" style="background:linear-gradient(135deg,#ff00ff,#00ffff)" title="Plasma"></button>
                         <button class="palette-btn" data-palette="ocean" style="background:linear-gradient(135deg,#0044ff,#00ddaa)" title="Ocean"></button>
@@ -180,15 +180,15 @@
         <!-- SEO Content -->
         <section style="max-width:900px;margin:3rem auto 0;padding:0 2rem;">
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">What Are the Navier-Stokes Equations?</h2>
-            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color: var(--text);">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary-soft);">seven Millennium Prize Problems</a> in mathematics.</p>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color: var(--text);">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary);">seven Millennium Prize Problems</a> in mathematics.</p>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">How This Simulator Works</h2>
             <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color: var(--text);">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
             <ol style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color: var(--primary-soft);">Add Forces</strong> &mdash; Your mouse input is added to the velocity field</li>
-                <li><strong style="color: var(--primary-soft);">Diffuse</strong> &mdash; Viscosity equalizes neighboring velocities</li>
-                <li><strong style="color: var(--primary-soft);">Advect</strong> &mdash; The velocity field moves itself and dye through back-tracing</li>
-                <li><strong style="color: var(--primary-soft);">Project</strong> &mdash; Pressure solve ensures divergence-free (mass-conserving) flow</li>
+                <li><strong style="color: var(--primary);">Add Forces</strong> &mdash; Your mouse input is added to the velocity field</li>
+                <li><strong style="color: var(--primary);">Diffuse</strong> &mdash; Viscosity equalizes neighboring velocities</li>
+                <li><strong style="color: var(--primary);">Advect</strong> &mdash; The velocity field moves itself and dye through back-tracing</li>
+                <li><strong style="color: var(--primary);">Project</strong> &mdash; Pressure solve ensures divergence-free (mass-conserving) flow</li>
             </ol>
             <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color: var(--text);">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
 
@@ -239,7 +239,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260623"></script>
+    <script src="/js/script.js?v=20260806linen3"></script>
     <script src="/tools/fluid-sim/fluid.js"></script>
     <script>
     (function(){

@@ -1,6 +1,25 @@
 # CyberScryb / Lazy Hustler — Working Memory
 
-_Last updated: 2026-06-05_
+_Last updated: 2026-08-06_
+
+---
+
+## Recent Changes (Session 2026-08-06)
+
+**Dark-theme remnant purge + WCAG contrast fix (Nathan: "tools page contrast colors are horrible").** Root cause of "broken visuals": the linen rebuild (Jul 21–23) never migrated the tool-layer styles, so live tool pages mixed dark-era UI onto the linen shell. Fixed and verified to ZERO WCAG AA failures (automated audit) on the life-tool page (incl. forced-open Pro gate) and /tools/:
+
+- `public/tools/shared/ai-tool.css` — full linen retheme (was #18181b panels, #0a0a0a inputs/outputs — the black boxes in Nathan's screenshot).
+- `public/tools/humanizer/style.css` — killed #111 pane bands, black scrims/shadows, dark mobile bars; **added fallbacks to every `var(--hz-*)`** — `.cs-pro-*` classes are used OUTSIDE `.hz-app` scope (life tools) where the vars don't resolve. `.cs-pro-cta-primary/:hover` flattened to literal `#1B3A4B`/`#122A38`.
+- **Legacy purple `#7b2cff` purge (170 files)** — ai-tool.js injected the Pro gate CTA with inline `linear-gradient(135deg,#7b2cff,#5b1fd1)` (old cyberpunk palette) → now slate `#1B3A4B` + cream. All other purple → terracotta. Only `.bak` files still carry it.
+- JS-injected slate-gray `#8892a8` → `#5C4A3D` (8 js files); `.filter-btn.active` + `.hero-eyebrow` + `.lt-chip.is-on` (solid terracotta/cream) + `.lt-step` darkened; cookie banner in `js/script.js` rethemed from dark glass (black-on-charcoal Accept was 1.53:1) to linen card.
+- Reverted bot-added `noindex` on the 5 flagship life tools (utility-shutoff / insurance-denial / landlord-tenant / payment-demand / sap-appeal) — b189f7b noindexed flagship pages.
+- Cache-busted ALL refs to css/style.css, root style.css, tool CSS + shared JS → `?v=20260806linen3` (1-year max-age would have pinned old dark CSS). All fixes mirrored to `content-site/` (build source of truth).
+
+**RULES LEARNED:** (1) `--hz-*` vars are scoped to `.hz-app`; any `.cs-pro-*`/shared class used on non-humanizer pages MUST carry literal fallbacks. (2) JS files inject styled markup (ai-tool.js gate, cs-pro-widget.js, script.js cookie banner) — theme sweeps MUST grep `*.js`, not just HTML/CSS. (3) Any CSS/JS change requires bumping the `?v=` on every referencing page — assets ship with 1-year max-age.
+
+**⚠️ DEPLOY BLOCKER (Nathan action):** GitHub Actions on the CyberScryb org has been failing since Aug 3 with "The job was not started because your account is locked due to a billing issue" — every deploy job dies in ~2s with no steps (last good deploy Jul 23 = why live was stale; GitHub *Pages* deploys still green, but the site ships via the **Firebase** workflow). This is **github.com billing** (repo-owner account), NOT Google Cloud (GCP verified healthy, $0 due, $10 credit). Check github.com → CyberScryb org → Settings → Billing and plans. GCP side note: "My Billing Account 3" shows −$7.18 balance w/ Aug 1 invoice — covered by credit, but keep an eye on it.
+
+**OPEN DECISIONS (Nathan yes/no):** (1) ~110 pages carry an **iubenda** cookie script (siteId 3672849) added by b189f7b that is a dead stub — iubenda returns "Autoblocking not enabled" (98 bytes). Configure the iubenda account, or strip the script? (Custom cs-cookie banner already handles consent.) (2) 12 guides + 10 blog posts are `noindex` from BEFORE b189f7b — includes the 10 flagship life guides built Jul 21 for organic reach. Deliberate AdSense pruning or a mistake to revert?
 
 ---
 

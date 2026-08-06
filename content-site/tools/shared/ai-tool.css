@@ -1,6 +1,7 @@
 /* Shared AI Tool Styles — used by summarizer, email-writer, bio-generator, code-explainer, product-description */
+/* Linen & Terracotta (2026-08-06): panels/inputs/outputs match the site brand — no dark surfaces. */
 :root {
-    --bg-panel: rgba(12, 12, 12, 0.6);
+    --bg-panel: rgba(255, 252, 247, 0.94);
     --border-highlight: rgba(194, 65, 12, 0.4);
 }
 
@@ -19,12 +20,13 @@
 }
 
 .panel {
-    background: #18181b;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg-elevated, #FFFCF7);
+    border: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     border-radius: 12px;
     padding: 24px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 14px 40px rgba(44, 24, 16, 0.07);
 }
 
 .panel-header {
@@ -32,7 +34,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     padding-bottom: 12px;
 }
 
@@ -41,7 +43,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #fff;
+    color: var(--text, #2C1810);
     margin: 0;
     display: flex;
     align-items: center;
@@ -57,10 +59,10 @@
 .step-badge {
     font-size: 0.7rem;
     background: #C2410C;
-    color: #000;
+    color: #FFFCF7;
     padding: 4px 10px;
     border-radius: 4px;
-    font-family: 'Orbitron', monospace;
+    font-family: inherit;
     font-weight: 700;
 }
 
@@ -72,7 +74,7 @@ label {
     display: block;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #878787;
+    color: var(--text-faint, #5C4A3D);
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -80,12 +82,12 @@ label {
 
 textarea, input[type="text"], select {
     width: 100%;
-    background: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #FFFFFF;
+    border: 1px solid var(--border-strong, rgba(44, 24, 16, 0.18));
     border-radius: 8px;
     padding: 12px;
-    color: #ededed;
-    font-family: 'Inter', sans-serif;
+    color: var(--text, #2C1810);
+    font-family: inherit;
     font-size: 0.9rem;
     transition: border-color 0.2s;
     box-sizing: border-box;
@@ -94,13 +96,18 @@ textarea, input[type="text"], select {
 textarea {
     resize: vertical;
     min-height: 140px;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
+}
+
+textarea::placeholder, input[type="text"]::placeholder {
+    color: var(--text-faint, #5C4A3D);
+    opacity: 0.75;
 }
 
 textarea:focus, input[type="text"]:focus, select:focus {
     outline: none;
     border-color: #C2410C;
-    box-shadow: none;
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.18);
 }
 
 .radio-group, .toggle-group {
@@ -114,12 +121,12 @@ textarea:focus, input[type="text"]:focus, select:focus {
     min-width: 90px;
     text-align: center;
     padding: 10px 12px;
-    background: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #FFFFFF;
+    border: 1px solid var(--border-strong, rgba(44, 24, 16, 0.18));
     border-radius: 8px;
     cursor: pointer;
     font-size: 0.8rem;
-    color: #878787;
+    color: var(--text-muted, #3D2B1F);
     text-transform: none;
     letter-spacing: 0;
     margin-bottom: 0;
@@ -131,38 +138,38 @@ textarea:focus, input[type="text"]:focus, select:focus {
 }
 
 .radio-group label:hover, .toggle-group label:hover {
-    border-color: #555;
-    color: #fff;
+    border-color: rgba(44, 24, 16, 0.35);
+    color: var(--text, #2C1810);
 }
 
 .radio-group input:checked + span,
 .toggle-group input:checked + span {
-    color: #C2410C;
+    color: #FFFCF7;
     font-weight: 700;
 }
 
 .radio-group label:has(input:checked),
 .toggle-group label:has(input:checked) {
     border-color: #C2410C;
-    background: rgba(194, 65, 12, 0.08);
-    color: #fff;
+    background: #C2410C;
+    color: #FFFCF7;
 }
 
 .help-text {
     font-size: 0.72rem;
-    color: #555555;
+    color: var(--text-faint, #5C4A3D);
     margin-top: 6px;
 }
 
 .primary-btn {
     width: 100%;
     background: #C2410C;
-    color: #000;
+    color: #FFFCF7;
     border: none;
     padding: 16px;
     border-radius: 8px;
     font-weight: 700;
-    font-family: 'Orbitron', monospace;
+    font-family: inherit;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s;
@@ -176,8 +183,9 @@ textarea:focus, input[type="text"]:focus, select:focus {
 }
 
 .primary-btn:hover:not(:disabled) {
+    background: #9A3412;
     transform: translateY(-2px);
-    box-shadow: none;
+    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.25);
 }
 
 .primary-btn:disabled {
@@ -188,30 +196,30 @@ textarea:focus, input[type="text"]:focus, select:focus {
 .output-wrapper {
     flex-grow: 1;
     position: relative;
-    background: #0a0a0a;
+    background: #FFFFFF;
     border-radius: 8px;
     padding: 20px;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     overflow-y: auto;
     min-height: 260px;
 }
 
 .output-content {
     white-space: pre-wrap;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
     line-height: 1.7;
-    color: #ededed;
+    color: var(--text, #2C1810);
     min-height: 100%;
 }
 
 .output-content .placeholder {
-    color: #555;
+    color: var(--text-faint, #5C4A3D);
     font-style: italic;
 }
 
 .icon-btn {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid var(--border-strong, rgba(44, 24, 16, 0.18));
     color: #C2410C;
     padding: 6px 10px;
     border-radius: 6px;
@@ -230,17 +238,17 @@ textarea:focus, input[type="text"]:focus, select:focus {
     justify-content: space-between;
     margin-top: 16px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     font-size: 0.72rem;
-    color: #555555;
-    font-family: 'Inter', sans-serif;
+    color: var(--text-faint, #5C4A3D);
+    font-family: inherit;
 }
 
 /* Loading Spinner */
 #loading-indicator {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(255, 252, 247, 0.92);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -282,7 +290,7 @@ textarea:focus, input[type="text"]:focus, select:focus {
 .email-gate-blur {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.96);
+    background: rgba(255, 252, 247, 0.96);
     pointer-events: none;
 }
 .email-gate-card {
@@ -296,15 +304,15 @@ textarea:focus, input[type="text"]:focus, select:focus {
     margin-bottom: 0.5rem;
 }
 .email-gate-card h3 {
-    font-family: 'Orbitron', monospace;
+    font-family: inherit;
     font-size: 1rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text, #2C1810);
     margin: 0 0 0.5rem;
     text-transform: uppercase;
 }
 .email-gate-card p {
-    color: #999;
+    color: var(--text-muted, #3D2B1F);
     font-size: 0.82rem;
     line-height: 1.5;
     margin: 0 0 1rem;
@@ -321,27 +329,27 @@ textarea:focus, input[type="text"]:focus, select:focus {
 .gate-form input {
     flex: 1;
     padding: 0.7rem 1rem;
-    background: #0a0a0a;
-    border: 1px solid #444;
+    background: #FFFFFF;
+    border: 1px solid var(--border-strong, rgba(44, 24, 16, 0.18));
     border-radius: 8px;
-    color: #ededed;
+    color: var(--text, #2C1810);
     font-size: 0.88rem;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
     transition: border-color 0.3s;
 }
 .gate-form input:focus {
     outline: none;
     border-color: #C2410C;
-    box-shadow: none;
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.18);
 }
-.gate-form input::placeholder { color: #555; }
+.gate-form input::placeholder { color: var(--text-faint, #5C4A3D); opacity: 0.75; }
 .gate-form button {
     background: #C2410C;
-    color: #000;
+    color: #FFFCF7;
     padding: 0.7rem 1.25rem;
     border: none;
     border-radius: 8px;
-    font-family: 'Orbitron', monospace;
+    font-family: inherit;
     font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -350,8 +358,9 @@ textarea:focus, input[type="text"]:focus, select:focus {
     white-space: nowrap;
 }
 .gate-form button:hover {
+    background: #9A3412;
     transform: translateY(-2px);
-    box-shadow: none;
+    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.25);
 }
 @media (max-width: 500px) {
     .gate-form { flex-direction: column; }
@@ -363,21 +372,21 @@ textarea:focus, input[type="text"]:focus, select:focus {
     max-width: 900px;
     margin: 3rem auto;
     padding: 2rem;
-    background: #18181b;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg-elevated, #FFFCF7);
+    border: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     border-radius: 12px;
 }
 .faq-section h3 {
     text-align: center;
-    color: #fff;
+    color: var(--text, #2C1810);
     margin-bottom: 1.5rem;
-    font-family: 'Orbitron', monospace;
+    font-family: inherit;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 .faq-item {
     margin-bottom: 1.25rem;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     padding-bottom: 1.25rem;
 }
 .faq-item:last-child {
@@ -391,7 +400,7 @@ textarea:focus, input[type="text"]:focus, select:focus {
     font-size: 0.95rem;
 }
 .faq-item p {
-    color: #878787;
+    color: var(--text-muted, #3D2B1F);
     font-size: 0.88rem;
     line-height: 1.6;
     margin: 0;
@@ -399,8 +408,8 @@ textarea:focus, input[type="text"]:focus, select:focus {
 
 /* Upgrade Tiers */
 #upgrade-tiers {
-    background: #18181b;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg-elevated, #FFFCF7);
+    border: 1px solid var(--border, rgba(44, 24, 16, 0.11));
     margin-top: 2rem;
     padding: 2rem;
     border-radius: 12px;
@@ -409,7 +418,7 @@ textarea:focus, input[type="text"]:focus, select:focus {
 #upgrade-tiers h3 {
     text-align: center;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: var(--text, #2C1810);
 }
 
 .hero-svg {

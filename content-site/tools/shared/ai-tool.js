@@ -167,17 +167,17 @@
             wrap.className = 'cs-pro-gate-btns';
             wrap.style.cssText = 'margin-top:14px;display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);';
             wrap.innerHTML =
-                '<p style="margin:0 0 4px;font-size:12px;color:#8892a8;text-align:center;line-height:1.4;">'
+                '<p style="margin:0 0 4px;font-size:12px;color:#5C4A3D;text-align:center;line-height:1.4;">'
                 + 'Full result · unlimited AI tools · cancel anytime</p>'
                 + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, toolId, 'gate_monthly') + '" target="_blank" rel="noopener" '
-                + 'style="display:block;text-align:center;background:linear-gradient(135deg,#7b2cff,#5b1fd1);color:#fff;padding:14px 14px;border-radius:10px;font-weight:700;text-decoration:none;font-size:15px;">'
+                + 'style="display:block;text-align:center;background:#1B3A4B;color:#FFFCF7;padding:14px 14px;border-radius:10px;font-weight:700;text-decoration:none;font-size:15px;">'
                 + 'Go Pro · $5/mo</a>'
                 + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, toolId, 'gate_lifetime') + '" target="_blank" rel="noopener" '
                 + 'style="display:block;text-align:center;background:transparent;color:#22c55e;padding:11px 14px;border-radius:10px;border:1px solid #22c55e;font-weight:600;text-decoration:none;font-size:13px;">'
                 + 'Lifetime · $29 (best if you hate subscriptions)</a>'
                 + '<p style="margin:4px 0 0;font-size:11px;color:#6b7280;text-align:center;line-height:1.4;">'
-                + 'Stripe secure · 14-day refund · <a href="/pro-restore/" style="color:#8892a8;">Already paid?</a></p>'
-                + '<a href="/pro/" style="text-align:center;color:#8892a8;font-size:12px;text-decoration:underline;">See what Pro includes</a>';
+                + 'Stripe secure · 14-day refund · <a href="/pro-restore/" style="color:#5C4A3D;">Already paid?</a></p>'
+                + '<a href="/pro/" style="text-align:center;color:#5C4A3D;font-size:12px;text-decoration:underline;">See what Pro includes</a>';
             container.appendChild(wrap);
             wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
                 a.addEventListener('click', function () {
@@ -268,7 +268,7 @@
         function showHardLimitMessage() {
             outputContent.innerHTML =
                 '<span style="color:#ef4444;">Free full unlock used for today.</span> ' +
-                '<span style="color:#8892a8;">Upgrade to Pro for unlimited rewrites.</span>';
+                '<span style="color:#5C4A3D;">Upgrade to Pro for unlimited rewrites.</span>';
             if (emailGate) {
                 emailGate.classList.remove('hidden');
                 setGateMode('pro_only');
@@ -276,7 +276,7 @@
             }
             const tiers = document.getElementById('upgrade-tiers');
             if (tiers) {
-                tiers.style.border = '2px solid #7b2cff';
+                tiers.style.border = '2px solid #C2410C';
                 tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 setTimeout(function () { tiers.style.border = ''; }, 3000);
             }
@@ -506,14 +506,14 @@
             btn.className = 'cs-example-btn';
             btn.textContent = '✨ Run example';
             btn.title = 'Load a sample input and run it — uses your one free full result if still available';
-            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #7b2cff;color:#7b2cff;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
+            btn.style.cssText = 'margin-left:10px;padding:10px 16px;background:transparent;border:1px solid #C2410C;color:#C2410C;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500;transition:all 150ms;';
             btn.addEventListener('mouseover', function () {
-                btn.style.background = '#7b2cff';
+                btn.style.background = '#C2410C';
                 btn.style.color = '#000';
             });
             btn.addEventListener('mouseout', function () {
                 btn.style.background = 'transparent';
-                btn.style.color = '#7b2cff';
+                btn.style.color = '#C2410C';
             });
             btn.addEventListener('click', function () { applyExample(true); });
 

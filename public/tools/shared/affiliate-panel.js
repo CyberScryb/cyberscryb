@@ -247,7 +247,7 @@
                     background: rgba(255,255,255,0.03);
                 }
                 .affiliate-link.primary {
-                    background: #7b2cff;
+                    background: #C2410C;
                     color: #000;
                     border-color: transparent;
                 }

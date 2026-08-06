@@ -69,8 +69,8 @@
     var el = document.createElement('div');
     el.id = 'cs-pro-restore-hint';
     el.style.cssText = 'position:fixed;bottom:16px;left:16px;z-index:9997;max-width:280px;background:#0f1423;border:1px solid rgba(123,44,255,0.35);border-radius:12px;padding:12px 14px;font:13px/1.4 Inter,system-ui,sans-serif;color:#c8cdd8;box-shadow:0 8px 24px rgba(0,0,0,0.4);';
-    el.innerHTML = 'Already paid? <a href="/pro-restore/" style="color:#7b2cff;font-weight:600;">Restore Pro on this device</a>'
-      + ' <button type="button" aria-label="Dismiss" style="float:right;background:none;border:none;color:#8892a8;cursor:pointer;font-size:16px;line-height:1;padding:0 0 0 8px;">&times;</button>';
+    el.innerHTML = 'Already paid? <a href="/pro-restore/" style="color:#C2410C;font-weight:600;">Restore Pro on this device</a>'
+      + ' <button type="button" aria-label="Dismiss" style="float:right;background:none;border:none;color:#5C4A3D;cursor:pointer;font-size:16px;line-height:1;padding:0 0 0 8px;">&times;</button>';
     el.querySelector('button').onclick = function () {
       el.remove();
       try { sessionStorage.setItem('cs_restore_hint_dismissed', '1'); } catch (e) { /* ignore */ }

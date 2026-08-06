@@ -74,16 +74,16 @@ function showCookieConsentBanner() {
             transform: translateX(-50%) translateY(100px);
             width: calc(100% - 48px);
             max-width: 540px;
-            background: rgba(10, 10, 10, 0.85);
+            background: rgba(255, 252, 247, 0.97);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(194, 65, 12, 0.2);
+            border: 1px solid rgba(44, 24, 16, 0.14);
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(194, 65, 12, 0.1);
+            box-shadow: 0 10px 40px rgba(44, 24, 16, 0.16);
             z-index: 99999;
-            font-family: 'Inter', sans-serif;
-            color: #cbd5e1;
+            font-family: 'Outfit', system-ui, sans-serif;
+            color: #3D2B1F;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -100,16 +100,16 @@ function showCookieConsentBanner() {
             gap: 8px;
         }
         .cs-cookie-title {
-            font-family: 'Orbitron', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #2C1810;
             letter-spacing: 0.5px;
         }
         .cs-cookie-text {
             font-size: 0.8rem;
             line-height: 1.5;
-            color: #94a3b8;
+            color: #3D2B1F;
             margin: 0;
         }
         .cs-cookie-actions {
@@ -119,8 +119,8 @@ function showCookieConsentBanner() {
             gap: 12px;
         }
         .cs-cookie-btn {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+            font-family: inherit;
+            font-size: 0.75rem;
             font-weight: 700;
             padding: 8px 16px;
             border-radius: 6px;
@@ -130,24 +130,25 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: linear-gradient(135deg, #C2410C, #7b2cff);
-            color: #000;
+            background: #C2410C;
+            color: #FFFCF7;
             border: none;
-            box-shadow: 0 0 10px rgba(194, 65, 12, 0.2);
+            box-shadow: 0 4px 14px rgba(194, 65, 12, 0.25);
         }
         .cs-cookie-btn-accept:hover {
             transform: translateY(-1px);
-            box-shadow: 0 0 18px rgba(194, 65, 12, 0.5);
+            background: #9A3412;
+            box-shadow: 0 6px 18px rgba(194, 65, 12, 0.35);
         }
         .cs-cookie-btn-decline {
             background: transparent;
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #3D2B1F;
+            border: 1px solid rgba(44, 24, 16, 0.25);
         }
         .cs-cookie-btn-decline:hover {
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.03);
+            color: #2C1810;
+            border-color: rgba(44, 24, 16, 0.45);
+            background: rgba(44, 24, 16, 0.04);
         }
         @media(max-width: 480px) {
             .cs-cookie-banner {

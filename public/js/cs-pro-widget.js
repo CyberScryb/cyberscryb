@@ -36,8 +36,8 @@
 .cs-pro-modal-bg.cs-active{display:flex}
 .cs-pro-modal{background:rgba(22,22,22,.92);max-width:540px;width:100%;border-radius:20px;padding:36px 32px 28px;font:14px/1.5 Inter,system-ui,sans-serif;color:#E8E2D6;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(237,233,225,.15);backdrop-filter:blur(12px)}
 .cs-pro-modal h2{margin:0 0 8px;font-size:22px;font-weight:800;font-family:Inter,system-ui,sans-serif;color:#E8E2D6}
-.cs-pro-modal .cs-sub{color:#8892a8;margin:0 0 24px;font-size:14px}
-.cs-pro-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#8892a8;padding:4px 10px;border-radius:6px}
+.cs-pro-modal .cs-sub{color:#5C4A3D;margin:0 0 24px;font-size:14px}
+.cs-pro-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#5C4A3D;padding:4px 10px;border-radius:6px}
 .cs-pro-close:hover{background:rgba(255,255,255,.05);color:#e6e9f0}
 .cs-plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
 .cs-plans.cs-single{grid-template-columns:1fr}
@@ -47,13 +47,13 @@
 .cs-plan.cs-best{border-color:#D97706;background:rgba(217, 119, 6,.08)}
 .cs-plan.cs-best::before{content:"BEST VALUE";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#D97706;color:#0A0A0A;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.5px;font-family:DM Sans,system-ui,sans-serif}
 .cs-plan .cs-price{font-size:32px;font-weight:900;color:#D97706;margin:8px 0;font-family:DM Sans,system-ui,sans-serif}
-.cs-plan .cs-price small{font-size:14px;font-weight:500;color:#8892a8}
+.cs-plan .cs-price small{font-size:14px;font-weight:500;color:#5C4A3D}
 .cs-plan .cs-name{font-weight:600;font-size:15px;font-family:DM Sans,system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase}
-.cs-plan .cs-tag{font-size:11px;color:#8892a8;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.cs-plan .cs-tag{font-size:11px;color:#5C4A3D;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
 .cs-features{list-style:none;padding:0;margin:16px 0 0;font-size:13px}
 .cs-features li{padding:6px 0;color:#cbd5e1}
 .cs-features li::before{content:"✓ ";color:#10b981;font-weight:700;margin-right:4px}
-.cs-foot{font-size:11px;color:#8892a8;text-align:center;margin-top:16px}
+.cs-foot{font-size:11px;color:#5C4A3D;text-align:center;margin-top:16px}
 .cs-foot a{color:#D97706;text-decoration:none}`;
   var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
