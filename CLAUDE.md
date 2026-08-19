@@ -1,6 +1,23 @@
 # CyberScryb / Lazy Hustler — Working Memory
 
-_Last updated: 2026-08-06_
+_Last updated: 2026-08-19_
+
+---
+
+## Recent Changes (Session 2026-08-19)
+
+**Principal-architect audit + P0 fixes shipped.** Full write-up published as a chat artifact ("CyberScryb Teardown") — direct source review of `functions/index.js`, CI/CD, and architecture, plus two parallel sub-agent sweeps (tools directory: ~20 sampled files + all of `tools/shared/`; dependencies: live `npm audit`/`npm outdated` across root, `functions/`, `v2/`). Fixed and pushed the safe, isolated P0 items:
+
+- `functions/index.js` — `isAllowedReferer()` now fails closed on a missing Referer header. Was `if (!referer) return true` — any non-browser client (curl, a script), or a browser `fetch()` with `referrerPolicy:'no-referrer'`, walked straight through the "security" gate on every AI endpoint (`rewriteText`, `generateGigWork`, `generateAI`). Real exposure was always bounded by the Firestore global daily cap (500/day, fails closed), but the check itself was a no-op for the easiest bypass.
+- `tools/shared/ai-tool.js` (public + content-site) — the shared AI-tool error renderer built its error message via string-concatenated `innerHTML`; if the Gemini API ever echoed user input back inside an error message, this was stored/reflected XSS. Now uses `textContent`.
+- `tools/shared/affiliate-panel.js` (public + content-site) — this JS-injected widget loads live on 31 pages incl. **humanizer, password-checker, base64-tool** and still had the pre-rebuild dark panel (`#18181b` bg, white/gray text, `#333` borders) plus the literal legacy `#7b2cff` purple hover glow — the Aug 6 purge swept HTML/CSS + most JS but missed this file. Rethemed to the real linen tokens confirmed in `public/css/style.css` (`--bg-elevated #FFFCF7`, `--text #2C1810`, `--text-faint #5C4A3D`, `--primary #C2410C`, `--primary-ink #FFFCF7`).
+- Deleted `eslint.config.json` (dead — ESLint 9's flat config only loads `.js/.mjs/.cjs`; this file was never read, and its contents were the pre-v9 legacy schema anyway) and `sync_all_to_content_site.py` (hardcoded paths to `C:\claude\cyberscryb\...`, a machine that no longer exists; also ran the wrong sync direction — `content-site/` is the documented source of truth, and `sync_and_build.py` already covers content-site → public correctly).
+
+**⚠️ Aug 6 "zero WCAG AA failures" claim needs a follow-up pass — not fully closed.** That sweep covered shared CSS but missed per-page inline `<style>` blocks. 57 live tool pages (confirmed via sub-agent sampling: `code-explainer`, `word-counter`, others) still hardcode `#0a0a0a`/`#111111`/`#141414` panels against the now-darkened `--text-muted`, computing to ~1.47:1 contrast. Not fixed this session — it's a larger sweep, tracked as P1 in the teardown report.
+
+**DEPLOY BLOCKER — Nathan reports the github.com billing lock cleared 2026-08-19.** This session's push is the live test of that; see chat/CLAUDE.md follow-up for the confirmed result.
+
+**OPEN, not actioned this session:** 5 open PRs incl. several Dependabot version-bump PRs (`js-yaml`, `postcss`, `protobufjs`, `react-router`, `uuid`, `ws`, `brace-expansion` — overlapping this session's dependency-audit findings) and a bot-opened "Install Vercel Speed Insights" PR (#41) — needs Nathan's own review before merging, not a mechanical one. Broader P1/P2 backlog (in-memory rate-limiter removal, analytics race condition, `firebase-admin`/`firebase-functions` major bumps, `generate-pages.js` modularization, tool-directory duplicate-logic consolidation into a shared `tool-kit.js`) is scoped in the teardown report, not started.
 
 ---
 

@@ -416,7 +416,7 @@ const ALLOWED_HOSTS = [
 ];
 
 function isAllowedReferer(referer) {
-  if (!referer) return true;
+  if (!referer) return false; // fail closed — legitimate same-origin fetch() calls always send one
   try {
     const url = new URL(referer);
     const hostname = url.hostname.toLowerCase();

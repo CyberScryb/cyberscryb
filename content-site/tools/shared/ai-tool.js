@@ -454,7 +454,11 @@
                     }
                 } catch (error) {
                     console.error('[ai-tool]', error);
-                    outputContent.innerHTML = '<span style="color:#ef4444;">' + (error.message || 'Request failed.') + '</span>';
+                    outputContent.innerHTML = '';
+                    const errEl = document.createElement('span');
+                    errEl.style.color = '#ef4444';
+                    errEl.textContent = error.message || 'Request failed.';
+                    outputContent.appendChild(errEl);
                 } finally {
                     loadingIndicator.classList.add('hidden');
                     generateBtn.disabled = false;

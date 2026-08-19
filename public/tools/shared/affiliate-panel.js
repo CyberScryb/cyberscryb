@@ -195,7 +195,7 @@
             <div class="affiliate-links">
                 ${linksHtml}
             </div>
-            <p style="font-size:0.7rem; color:var(--text-muted,#666); margin-top:12px; margin-bottom:0;">
+            <p style="font-size:0.7rem; color:var(--text-muted,#5C4A3D); margin-top:12px; margin-bottom:0;">
                 ${config.disclosure}
             </p>
         `;
@@ -209,19 +209,19 @@
                     max-width: 900px;
                     margin: 2rem auto;
                     padding: 2rem;
-                    background: #18181b;
-                    border: 1px solid #333;
+                    background: #FFFCF7;
+                    border: 1px solid #E4D9C8;
                     border-radius: 12px;
                     text-align: center;
                 }
                 .affiliate-header {
                     font-size: 1.2rem;
                     font-weight: 700;
-                    color: #fff;
+                    color: #2C1810;
                     margin-bottom: 0.75rem;
                 }
                 .affiliate-panel p {
-                    color: #999;
+                    color: #5C4A3D;
                     font-size: 0.9rem;
                     line-height: 1.6;
                     margin-bottom: 1rem;
@@ -242,18 +242,18 @@
                     font-weight: 700;
                     font-size: 0.85rem;
                     transition: all 0.2s;
-                    border: 1px solid #333;
-                    color: #ccc;
-                    background: rgba(255,255,255,0.03);
+                    border: 1px solid #E4D9C8;
+                    color: #3D2B1F;
+                    background: #FFFFFF;
                 }
                 .affiliate-link.primary {
                     background: #C2410C;
-                    color: #000;
+                    color: #FFFCF7;
                     border-color: transparent;
                 }
                 .affiliate-link:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 16px rgba(123, 44, 255, 0.2);
+                    box-shadow: 0 4px 16px rgba(194, 65, 12, 0.25);
                 }
                 .affiliate-subtitle {
                     font-size: 0.7rem;
@@ -262,7 +262,7 @@
                     margin-top: 4px;
                 }
                 .affiliate-link.primary .affiliate-subtitle {
-                    color: rgba(0,0,0,0.6);
+                    color: rgba(255, 252, 247, 0.75);
                 }
             `;
             document.head.appendChild(style);
