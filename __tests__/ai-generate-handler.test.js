@@ -24,10 +24,10 @@ const { isAllowedReferer, sanitizeParams, AI_PROMPTS, ALLOWED_HOSTS } =
 // ─── isAllowedReferer ────────────────────────────────────
 
 describe('isAllowedReferer', () => {
-  test('allows null/undefined referer (direct access)', () => {
-    expect(isAllowedReferer(null)).toBe(true);
-    expect(isAllowedReferer(undefined)).toBe(true);
-    expect(isAllowedReferer('')).toBe(true);
+  test('rejects null/undefined/empty referer (fail closed against non-browser clients)', () => {
+    expect(isAllowedReferer(null)).toBe(false);
+    expect(isAllowedReferer(undefined)).toBe(false);
+    expect(isAllowedReferer('')).toBe(false);
   });
 
   test('allows requests from cyberscryb.com', () => {

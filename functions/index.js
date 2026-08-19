@@ -5,6 +5,12 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore();
 
+// functions.config() was removed in this firebase-functions version — secrets
+// are read from environment variables only (see functions/.env in production).
+function getSecret(envVar) {
+  return process.env[envVar];
+}
+
 // ─── Privacy-Compliant Analytics ────────────────────────
 // Aggregate-only event logging. No user identification, no tracking.
 // Compliant with GDPR, CCPA, and privacy-first principles.
@@ -15,7 +21,7 @@ const analyticsStore = {
 };
 
 // Log an anonymous event (aggregate only)
-function logEvent(eventType, metadata = {}) {
+async function logEvent(eventType, metadata = {}) {
   const event = {
     type: eventType,
     timestamp: Date.now(),
@@ -26,9 +32,11 @@ function logEvent(eventType, metadata = {}) {
 
   analyticsStore.events.push(event);
 
-  // Flush to Firestore every 100 events or every 5 minutes
-  if (analyticsStore.events.length >= 100 || Date.now() - analyticsStore.lastFlush > 300000) {
-    flushAnalytics();
+  // Flush to Firestore every 20 events or every 5 minutes. Awaited (not fire-and-forget)
+  // so a Cloud Functions instance that freezes right after the HTTP response is sent
+  // doesn't silently drop the write.
+  if (analyticsStore.events.length >= 20 || Date.now() - analyticsStore.lastFlush > 300000) {
+    await flushAnalytics();
   }
 }
 
@@ -99,8 +107,8 @@ async function flushAnalytics() {
 setInterval(flushAnalytics, 300000);
 
 // Conversion funnel tracking (anonymous)
-function logConversion(funnel, step, metadata = {}) {
-  logEvent('conversion', {
+async function logConversion(funnel, step, metadata = {}) {
+  await logEvent('conversion', {
     funnel,
     step,
     ...metadata,
@@ -119,26 +127,15 @@ function getABVariant(testName, identifier) {
   return hashInt % 2 === 0 ? 'A' : 'B';
 }
 
-// ─── Rate Limiter ────────────────────────────────────────
-// Enhanced rate limiting with sliding window, per-user tracking, and tiered limits.
-// In-memory implementation (production should use Redis for multi-instance deployments).
+// ─── Client Identifier & Tier Helpers ───────────────────
+// The sliding-window, tiered in-memory rate limiter that used to live here
+// (checkRateLimit, RATE_LIMIT_TIERS, GLOBAL_LIMITS) was removed as dead code:
+// checkFirestoreRateLimit (below) is strictly more restrictive and runs first
+// in every handler, so the in-memory limiter could never actually bind.
+// rateLimitStore/getClientIdentifier remain in use by the privacyStatus
+// endpoint (user-facing transparency reporting of what's stored about them).
 
 const rateLimitStore = new Map(); // Map<string, { requests: number[], tier: string }>
-let globalDailyCount = 0;
-let globalDayReset = Date.now() + 86400000; // 24h from now
-
-// Tiered rate limits (requests per minute)
-const RATE_LIMIT_TIERS = {
-  anonymous: { perMinute: 5, perHour: 20, perDay: 50 },
-  free: { perMinute: 10, perHour: 60, perDay: 200 },
-  subscribed: { perMinute: 20, perHour: 200, perDay: 1000 },
-  premium: { perMinute: 100, perHour: 2000, perDay: 10000 },
-};
-
-const GLOBAL_LIMITS = {
-  perDay: 5000, // Increased from 500 to support growth
-  perHour: 500, // New: prevent sudden spikes
-};
 
 // Extract anonymous client identifier (hashed IP only - privacy-first)
 function getClientIdentifier(req) {
@@ -167,104 +164,6 @@ function getUserTier(req) {
   if (subscribed) return 'subscribed';
 
   return 'anonymous';
-}
-
-// Sliding window rate limit check
-function checkRateLimit(req) {
-  const now = Date.now();
-  const identifier = getClientIdentifier(req);
-  const tier = getUserTier(req);
-  const limits = RATE_LIMIT_TIERS[tier];
-
-  // Reset global daily counter
-  if (now > globalDayReset) {
-    globalDailyCount = 0;
-    globalDayReset = now + 86400000;
-  }
-
-  // Check global daily cap (applies to all users)
-  if (globalDailyCount >= GLOBAL_LIMITS.perDay) {
-    console.warn(
-      `[RATE_LIMIT] Global daily limit reached: ${globalDailyCount}/${GLOBAL_LIMITS.perDay}`
-    );
-    return {
-      allowed: false,
-      reason: 'Service capacity reached. Try again in a few hours.',
-      retryAfter: Math.ceil((globalDayReset - now) / 1000),
-    };
-  }
-
-  // Get or create user's request history
-  if (!rateLimitStore.has(identifier)) {
-    rateLimitStore.set(identifier, { requests: [], tier });
-  }
-
-  const userData = rateLimitStore.get(identifier);
-
-  // Update tier if changed (user upgraded)
-  userData.tier = tier;
-
-  // Remove requests older than 24 hours (sliding window)
-  const dayAgo = now - 86400000;
-  const hourAgo = now - 3600000;
-  const minuteAgo = now - 60000;
-
-  userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
-
-  // Count requests in each window
-  const requestsLastMinute = userData.requests.filter(t => t > minuteAgo).length;
-  const requestsLastHour = userData.requests.filter(t => t > hourAgo).length;
-  const requestsLastDay = userData.requests.length;
-
-  // Check per-minute limit (no identifier logging - privacy-first)
-  if (requestsLastMinute >= limits.perMinute) {
-    console.warn(
-      `[RATE_LIMIT] Tier ${tier} exceeded per-minute limit: ${requestsLastMinute}/${limits.perMinute}`
-    );
-    return {
-      allowed: false,
-      reason: `Rate limit: ${limits.perMinute} requests per minute. Slow down.`,
-      retryAfter: 60,
-    };
-  }
-
-  // Check per-hour limit
-  if (requestsLastHour >= limits.perHour) {
-    console.warn(
-      `[RATE_LIMIT] Tier ${tier} exceeded hourly limit: ${requestsLastHour}/${limits.perHour}`
-    );
-    return {
-      allowed: false,
-      reason: `Hourly limit reached (${limits.perHour} requests). Try again soon.`,
-      retryAfter: 3600,
-    };
-  }
-
-  // Check per-day limit
-  if (requestsLastDay >= limits.perDay) {
-    console.warn(
-      `[RATE_LIMIT] Tier ${tier} exceeded daily limit: ${requestsLastDay}/${limits.perDay}`
-    );
-    return {
-      allowed: false,
-      reason: `Daily limit reached (${limits.perDay} requests). Upgrade or try tomorrow.`,
-      retryAfter: Math.ceil((dayAgo + 86400000 - now) / 1000),
-    };
-  }
-
-  // Allow request and record timestamp
-  userData.requests.push(now);
-  globalDailyCount++;
-
-  return {
-    allowed: true,
-    remaining: {
-      minute: limits.perMinute - requestsLastMinute - 1,
-      hour: limits.perHour - requestsLastHour - 1,
-      day: limits.perDay - requestsLastDay - 1,
-    },
-    tier,
-  };
 }
 
 // ─── Firestore-backed Cross-Instance Rate Limiting ──────
@@ -382,31 +281,6 @@ async function checkFirestoreRateLimit(req) {
   return { allowed: true };
 }
 
-// Clean up old entries every 10 minutes to prevent memory bloat
-setInterval(() => {
-  const now = Date.now();
-  const dayAgo = now - 86400000;
-  let cleaned = 0;
-
-  for (const [identifier, userData] of rateLimitStore.entries()) {
-    // Remove requests older than 24 hours
-    const before = userData.requests.length;
-    userData.requests = userData.requests.filter(timestamp => timestamp > dayAgo);
-
-    // If no recent requests, remove the entry entirely
-    if (userData.requests.length === 0) {
-      rateLimitStore.delete(identifier);
-      cleaned++;
-    }
-  }
-
-  if (cleaned > 0) {
-    console.log(
-      `[RATE_LIMIT] Cleaned ${cleaned} inactive entries. Active users: ${rateLimitStore.size}`
-    );
-  }
-}, 600000); // Every 10 minutes
-
 // ─── Referer Validation ─────────────────────────────────
 const ALLOWED_HOSTS = [
   'cyberscryb.com',
@@ -494,7 +368,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     const fsRateCheck = await checkFirestoreRateLimit(req);
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-      logEvent('rate_limit_hit', { reason: 'firestore_cap' });
+      await logEvent('rate_limit_hit', { reason: 'firestore_cap' });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -504,37 +378,17 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         });
     }
 
-    // Rate limit check (no identifier logging)
-    const rateCheck = checkRateLimit(req);
-    if (!rateCheck.allowed) {
-      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', reason: 'blocked' });
-      return res
-        .status(429)
-        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-        .json({
-          error: rateCheck.reason,
-          retryAfter: rateCheck.retryAfter,
-        });
-    }
-
-    // Add rate limit info to response headers (for client-side display)
-    if (rateCheck.remaining) {
-      res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
-      res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
-      res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
-      res.set('X-RateLimit-Tier', rateCheck.tier);
-    }
+    const tier = getUserTier(req);
 
     // Log analytics event (aggregate only)
-    logEvent('ai_request', {
+    await logEvent('ai_request', {
       tool: 'humanizer',
-      tier: rateCheck.tier,
+      tier,
       inputLength: text.length > 500 ? '500+' : text.length > 200 ? '200-500' : '0-200',
     });
 
     // Get API Key from Environment Config
-    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    const apiKey = getSecret('GOOGLE_API_KEY');
 
     if (!apiKey) {
       console.error('API Key not found in functions config.');
@@ -595,9 +449,9 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         data.candidates?.[0]?.content?.parts?.[0]?.text || 'Error processing text.';
 
       // Log success
-      logEvent('ai_success', {
+      await logEvent('ai_success', {
         tool: 'humanizer',
-        tier: rateCheck.tier,
+        tier,
         outputLength:
           rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
       });
@@ -641,9 +495,9 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
 
     // Log the event (aggregate only)
     if (event === 'conversion' && funnel && step) {
-      logConversion(funnel, step, metadata || {});
+      await logConversion(funnel, step, metadata || {});
     } else {
-      logEvent(event, metadata || {});
+      await logEvent(event, metadata || {});
     }
 
     return res.status(200).json({ ok: true });
@@ -762,7 +616,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
     const fsRateCheck = await checkFirestoreRateLimit(req);
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-      logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
+      await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -772,28 +626,16 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         });
     }
 
-    // Rate limit check (no identifier logging)
-    const rateCheck = checkRateLimit(req);
-    if (!rateCheck.allowed) {
-      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool: 'gig-work' });
-      return res
-        .status(429)
-        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-        .json({
-          error: rateCheck.reason,
-          retryAfter: rateCheck.retryAfter,
-        });
-    }
+    const tier = getUserTier(req);
 
     // Log analytics
-    logEvent('ai_request', {
+    await logEvent('ai_request', {
       tool: 'gig-work',
-      tier: rateCheck.tier,
+      tier,
       hasProfile: !!freelancerProfile,
     });
 
-    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    const apiKey = getSecret('GOOGLE_API_KEY');
     if (!apiKey) return res.status(500).json({ error: 'Missing API Key' });
 
     try {
@@ -850,7 +692,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
       const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
       const resultJson = JSON.parse(rawText); // Parse the internal JSON
 
-      logEvent('ai_success', { tool: 'gig-work', tier: rateCheck.tier });
+      await logEvent('ai_success', { tool: 'gig-work', tier });
 
       res.status(200).json(resultJson);
     } catch (error) {
@@ -1731,8 +1573,9 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       return res.status(403).json({ error: 'Unauthorized Source' });
     }
 
-    // Validate tool
-    if (!tool || !AI_PROMPTS[tool]) {
+    // Validate tool (Object.hasOwn guards against prototype-pollution lookups like
+    // tool === '__proto__', which would otherwise resolve truthy via AI_PROMPTS[tool])
+    if (!tool || !Object.hasOwn(AI_PROMPTS, tool)) {
       return res
         .status(400)
         .json({ error: 'Invalid tool. Valid: ' + Object.keys(AI_PROMPTS).join(', ') });
@@ -1751,7 +1594,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
     const fsRateCheck = await checkFirestoreRateLimit(req);
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
-      logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
+      await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -1761,37 +1604,17 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         });
     }
 
-    // Rate limit check (no identifier logging)
-    const rateCheck = checkRateLimit(req);
-    if (!rateCheck.allowed) {
-      console.warn(`[RATE_LIMIT] Request blocked - ${rateCheck.reason}`);
-      logEvent('rate_limit_hit', { tier: rateCheck.tier || 'unknown', tool });
-      return res
-        .status(429)
-        .set('Retry-After', rateCheck.retryAfter?.toString() || '60')
-        .json({
-          error: rateCheck.reason,
-          retryAfter: rateCheck.retryAfter,
-        });
-    }
-
-    // Add rate limit info to response headers
-    if (rateCheck.remaining) {
-      res.set('X-RateLimit-Remaining-Minute', rateCheck.remaining.minute.toString());
-      res.set('X-RateLimit-Remaining-Hour', rateCheck.remaining.hour.toString());
-      res.set('X-RateLimit-Remaining-Day', rateCheck.remaining.day.toString());
-      res.set('X-RateLimit-Tier', rateCheck.tier);
-    }
+    const tier = getUserTier(req);
 
     // Log analytics
-    logEvent('ai_request', {
+    await logEvent('ai_request', {
       tool,
-      tier: rateCheck.tier,
+      tier,
       inputLength: input.length > 1000 ? '1000+' : input.length > 500 ? '500-1000' : '0-500',
     });
 
     // Get API Key
-    const apiKey = functions.config().google?.api_key || process.env.GOOGLE_API_KEY;
+    const apiKey = getSecret('GOOGLE_API_KEY');
     if (!apiKey) {
       console.error('API Key not found in functions config.');
       return res.status(500).json({ error: 'Server Configuration Error' });
@@ -1840,9 +1663,9 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       const data = await response.json();
       const result = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Error processing input.';
 
-      logEvent('ai_success', {
+      await logEvent('ai_success', {
         tool,
-        tier: rateCheck.tier,
+        tier,
         outputLength: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
       });
 
@@ -1962,7 +1785,7 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
     // TODO: Add admin authentication here
     // For now, check for a secret query param
     const secret = req.query.secret;
-    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
@@ -2085,7 +1908,7 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
     }
 
     const secret = req.query.secret;
-    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
@@ -2420,7 +2243,7 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
       });
 
       // Log conversion (anonymous)
-      logConversion('email_capture', 'subscribed', {
+      await logConversion('email_capture', 'subscribed', {
         source: source || 'homepage',
         substack: substack.ok ? 'ok' : 'fail',
       });
@@ -2450,7 +2273,7 @@ exports.substackBackfill = functions.https.onRequest((req, res) => {
     }
 
     const secret = req.query.secret || (req.body && req.body.secret);
-    const expectedSecret = functions.config().analytics?.secret || process.env.ANALYTICS_SECRET;
+    const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
@@ -2548,10 +2371,8 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         return res.status(200).json({ ok: true, status: data.status, replayed: true });
       }
 
-      // Get Stripe secret — env var first (functions.config() was removed in firebase-functions v6)
-      const stripeSecret =
-        process.env.STRIPE_SECRET ||
-        (functions.config().stripe && functions.config().stripe.secret);
+      // Get Stripe secret (functions.config() was removed in firebase-functions v6 — env var only)
+      const stripeSecret = getSecret('STRIPE_SECRET');
       if (!stripeSecret) {
         // No Stripe secret configured → fall back to trusting the post-checkout redirect.
         // Pro is gated by a client-side cookie anyway, so this is a pragmatic unlock, not a
@@ -2565,7 +2386,7 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
           validatedAt: admin.firestore.FieldValue.serverTimestamp(),
           paid: null,
         });
-        logConversion('pro_unlock', 'redirect_trust', {});
+        await logConversion('pro_unlock', 'redirect_trust', {});
         return res.status(200).json({ ok: true, status: 'redirect_trust', verified: false });
       }
 
@@ -2622,7 +2443,7 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
       }
 
       // Log it (anonymous aggregate)
-      logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
+      await logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
 
       return res.status(200).json({ ok: true, status: 'paid' });
     } catch (err) {
