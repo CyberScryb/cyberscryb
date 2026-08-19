@@ -36,13 +36,13 @@
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a real physics simulation or just an animation?","acceptedAnswer":{"@type":"Answer","text":"This is a genuine numerical simulation solving the Navier-Stokes equations for incompressible flow. The velocity field, pressure projection, diffusion, and advection are all computed each frame using established CFD methods."}},{"@type":"Question","name":"What do the viscosity and diffusion controls actually change?","acceptedAnswer":{"@type":"Answer","text":"Viscosity controls the fluid's internal friction. At zero viscosity, swirls persist indefinitely. At high viscosity, the fluid behaves like honey. Diffusion controls how quickly the dye spreads through the fluid."}},{"@type":"Question","name":"Is my data sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The entire simulation runs 100% in your browser using JavaScript and Canvas 2D. No data is transmitted to any server."}}]}
     </script>
     <style>
-        .fluid-app{padding:5rem 0 2rem;background:#0a0a0a;min-height:100vh}
+        .fluid-app{padding:5rem 0 2rem;background:#F8F1E9;min-height:100vh}
         .fluid-layout{display:grid;grid-template-columns:1fr 280px;gap:1.5rem;max-width:1200px;margin:0 auto;padding:0 2rem}
-        .fluid-canvas-wrap{position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid #333;aspect-ratio:1}
+        .fluid-canvas-wrap{position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid #E4D9C8;aspect-ratio:1}
         #fluidCanvas{width:100%;height:100%;display:block;cursor:crosshair}
         #fpsCounter{position:absolute;top:8px;left:8px;font:600 12px 'JetBrains Mono','Fira Code',monospace;color: var(--primary-soft);background:rgba(0,0,0,0.6);padding:3px 8px;border-radius:4px}
         .fluid-controls{display:flex;flex-direction:column;gap:1rem}
-        .ctrl-group{background:linear-gradient(145deg,#1a1a1a,#0f0f0f);border:1px solid #333;border-radius:10px;padding:1rem}
+        .ctrl-group{background:linear-gradient(145deg,#1a1a1a,#0f0f0f);border:1px solid #E4D9C8;border-radius:10px;padding:1rem}
         .ctrl-group h3{font-family: var(--font-brand), Georgia, serif;font-size:0.75rem;color: var(--primary-soft);margin:0 0 0.75rem;text-transform:uppercase;letter-spacing:1px}
         .ctrl-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
         .ctrl-row label{font-size:0.8rem;color: var(--text-muted)}
@@ -52,7 +52,7 @@
         .palette-btn{width:100%;aspect-ratio:1;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:all 0.2s}
         .palette-btn.active{border-color: var(--primary-soft);box-shadow:0 0 8px rgba(194, 65, 12,0.3)}
         .btn-row{display:flex;gap:0.5rem}
-        .fluid-btn{flex:1;padding:0.5rem;border:1px solid #333;border-radius:6px;background:#1a1a1a;color:#e0e0e0;font-family:'Inter',sans-serif;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
+        .fluid-btn{flex:1;padding:0.5rem;border:1px solid #E4D9C8;border-radius:6px;background:#1a1a1a;color:#e0e0e0;font-family:'Inter',sans-serif;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
         .fluid-btn:hover{border-color: var(--primary-soft);color: var(--primary-soft)}
         @media(max-width:768px){.fluid-layout{grid-template-columns:1fr}.fluid-canvas-wrap{max-height:60vh}}
     </style>
@@ -203,15 +203,15 @@
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Frequently Asked Questions</h2>
             <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
-                <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
+                <details style="background:#FFFFFF;border:1px solid #E4D9C8;border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is this a real physics simulation?</summary>
                     <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes &mdash; it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
                 </details>
-                <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
+                <details style="background:#FFFFFF;border:1px solid #E4D9C8;border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is my data sent anywhere?</summary>
                     <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">No. Everything runs 100% in your browser. Screenshots are generated locally via the Canvas API.</p>
                 </details>
-                <details style="background:#141414;border:1px solid #333;border-radius:10px;padding:1rem;">
+                <details style="background:#FFFFFF;border:1px solid #E4D9C8;border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Can I use screenshots commercially?</summary>
                     <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes. Any images you export are yours to use however you wish.</p>
                 </details>

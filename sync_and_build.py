@@ -25,11 +25,9 @@ def sync_directories(src_dir, dst_dir):
                 continue
             sync_directories(s, d)
         else:
-            # Overwrite or copy if size/mtime differs
-            if not os.path.exists(d) or os.path.getsize(s) != os.path.getsize(d) or os.path.getmtime(s) > os.path.getmtime(d):
-                os.makedirs(os.path.dirname(d), exist_ok=True)
-                shutil.copy2(s, d)
-                print(f"Copied: {os.path.relpath(d, dst_dir)}")
+            os.makedirs(os.path.dirname(d), exist_ok=True)
+            shutil.copy2(s, d)
+            print(f"Copied: {os.path.relpath(d, dst_dir)}")
 
 def run_build():
     root = os.path.dirname(os.path.abspath(__file__))

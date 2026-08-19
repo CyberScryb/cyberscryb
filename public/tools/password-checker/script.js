@@ -122,7 +122,7 @@ function analyze() {
     const warnings = [];
     if (pw.length < 8) warnings.push('Password is too short (minimum 8 characters recommended)');
     if (COMMON_PASSWORDS.has(pw.toLowerCase())) warnings.push('This is a commonly used password — easily guessed');
-    if (/(.)\\1{2,}/.test(pw)) warnings.push('Contains repeated characters (e.g., "aaa")');
+    if (/(.)\1{2,}/.test(pw)) warnings.push('Contains repeated characters (e.g., "aaa")');
     if (/^[a-zA-Z]+$/.test(pw)) warnings.push('Contains only letters — add numbers and symbols');
     if (/^[0-9]+$/.test(pw)) warnings.push('Contains only numbers — very weak');
     if (/^(.+)\1+$/.test(pw)) warnings.push('Password is a repeated pattern');

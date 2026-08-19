@@ -120,7 +120,9 @@ MARKERS FOUND:
 - [marker 3]
 
 ANALYSIS:
-[2-3 sentences explaining your assessment]`;
+[2-3 sentences explaining your assessment]
+
+Be specific about which phrases, patterns, or structural elements triggered your score. Look for: repetitive sentence openers, formulaic transitions, lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words (leverage, delve, furthermore, etc.).`;
 
     case 'tweet-generator':
       return `You are a viral social media writer. Write ${params.count || '5'} tweets about this topic:
