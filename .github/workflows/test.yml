@@ -85,3 +85,42 @@ jobs:
           python-version: '3.11'
       - run: npm ci
       - run: npm run build:site
+
+  accessibility:
+    name: Accessibility (axe-core)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - run: npm run build:site
+      - run: npx @axe-core/cli public/index.html public/tools/humanizer/index.html public/tools/code-explainer/index.html --exit
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - run: npm run build:site
+      - uses: treosh/lighthouse-ci-action@v11
+        with:
+          staticDistDir: public
+          urls: |
+            /
+            /tools/humanizer/
+          uploadArtifacts: true
+          temporaryPublicStorage: true

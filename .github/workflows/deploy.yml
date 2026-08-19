@@ -27,3 +27,15 @@ jobs:
         run: firebase deploy --only hosting,functions --project gen-lang-client-0384486156 --non-interactive --force
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Post-deploy smoke test
+        run: |
+          sleep 15
+          for url in "https://cyberscryb.com/" "https://cyberscryb.com/pro/" "https://cyberscryb.com/tools/humanizer/"; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            echo "$url -> $code"
+            if [ "$code" != "200" ]; then
+              echo "FAIL: $url returned $code"
+              exit 1
+            fi
+          done
