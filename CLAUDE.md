@@ -4,6 +4,23 @@ _Last updated: 2026-08-19_
 
 ---
 
+## Recent Changes (Session 2026-08-19, continued — P1 sweep)
+
+Nathan cleared the GitHub billing lock this session (confirmed: deploys now succeed, ~1-2min each, matching pre-Aug-3 durations). Followed up the P0 pass with the P1 tier from the teardown audit, executed via 4 parallel sub-agents + direct work, all verified (340/340 tests, `--forceExit` needed — the project's own `npm test` already knew this, my manual `npx jest` calls didn't). 5 commits:
+
+- **`fix(functions)`** — removed the dead in-memory rate limiter (Firestore-backed one already handles it and is stricter); fixed the analytics-write race condition (`logEvent`/`logConversion` now async+awaited, flush threshold 100→20); collapsed 6 dead `functions.config()` reads into one `getSecret()` helper; hardened `generateAI`'s tool lookup with `Object.hasOwn`. **Note:** kept `rateLimitStore`/`getClientIdentifier` alive (now inert) — `exports.privacyStatus` depends on them and would have thrown otherwise; caught by the sub-agent mid-task, not by me up front.
+- **`fix(tools)`** — retouched 47 tool pages (94 files across both trees) that still had inline dark-panel `<style>` blocks the Aug 6 retheme missed (real contrast, ~1.47:1, on live pages incl. `code-explainer` and `word-counter`). Also fixed 3 unrelated bugs: password-checker's regex backreference (`\\1`→`\1`), markdown-html's swallowed `aria-label`, and the Cloudflare Worker's `ai-detector` prompt drift vs. the Gemini version.
+- **`chore(deps)`** — `firebase-admin` 13.10.0→14.2.0, `firebase-functions` 6.6.0→7.3.2 (bumped together — 14.x needs `firebase-functions` ^11-13 as a peer). `functions/` moderate vulns 8→7 (remainder is upstream in `@google-cloud/storage`'s own dependency chain — `npm audit fix --force` wants to *downgrade* firebase-admin to fix it, which isn't a fix, so left alone). Root + v2: `npm audit fix`, both now 0 vulnerabilities.
+- **`feat(content)`** — published Week 1 of the existing content calendar (AUDIT-2026-06-27.md): "How to Tell If Text Was Written by AI (5 Free Checks)," 1,570 words, links the AI Text Detector.
+- **`ci`** — added `accessibility` (axe-core) and `lighthouse` (against local build, not live prod) jobs to `test.yml`; added a post-deploy smoke test (curls homepage/`/pro/`/humanizer, fails the job on non-200) to `deploy.yml`.
+
+**Not done / left for Nathan:**
+- PR **#40** (Dependabot, js-yaml in `/v2`) is very likely superseded by this session's `npm audit fix` — should auto-close on Dependabot's next scan. PR **#41** (Vercel Speed Insights, Draft, only touches the non-deployed `v2/App.tsx`) — 2 clicks in your own browser if you want it (mark ready, then merge); browser automation couldn't reach the merge controls cleanly and it isn't worth forcing for a non-production app. PRs #39/#37/#32 are your own in-progress/draft work — untouched.
+- `privacy-generator`'s `h2 { color: #111111 }` — left alone on purpose, it's inside the JS template that generates the *downloadable* privacy-policy document (white background there already), not the live dark-theme bug.
+- `voice-writer`'s `#a78bfa` — left alone on purpose, it's the page's deliberate brand accent, not a leftover.
+- Two things spawned as separate background tasks rather than fixed inline (out of scope for what was running): `voice-writer` has one more contrast spot the `#0a0a0a`/`#111111`/`#141414` search didn't catch (`background:#0d0d0d`, same invisible-text pattern); `court-admissible-parenting-plan-guide.html` (published, in the sitemap) is missing from `blog/index.html`'s post grid — orphaned from `/blog/`.
+- Everything else in the teardown audit's P2 tier (triple tool-tree architecture, `generate-pages.js` split, shared `tool-kit.js` module for the duplicated clipboard/escapeHtml/debounce logic, more content-calendar posts) — not started.
+
 ## Recent Changes (Session 2026-08-19)
 
 **Principal-architect audit + P0 fixes shipped.** Full write-up published as a chat artifact ("CyberScryb Teardown") — direct source review of `functions/index.js`, CI/CD, and architecture, plus two parallel sub-agent sweeps (tools directory: ~20 sampled files + all of `tools/shared/`; dependencies: live `npm audit`/`npm outdated` across root, `functions/`, `v2/`). Fixed and pushed the safe, isolated P0 items:
