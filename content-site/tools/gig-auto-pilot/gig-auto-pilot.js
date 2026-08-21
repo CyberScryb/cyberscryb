@@ -184,12 +184,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } else {
                 const paywall =
-                    '<div style="margin-top:12px;padding:14px;border:1px solid #C2410C;border-radius:10px;background:rgba(123,44,255,0.08);">' +
-                    '<strong style="color:#fff;">Free full kit used for today</strong>' +
+                    '<div style="margin-top:12px;padding:14px;border:1px solid #C2410C;border-radius:10px;background:rgba(194,65,12,0.06);">' +
+                    '<strong style="color:#9A3412;">Free full kit used for today</strong>' +
                     '<p style="color:#5C4A3D;margin:8px 0 12px;font-size:14px;">Preview below. Pro unlocks the full proposal, draft, and interview questions with no daily cap.</p>' +
                     '<a href="https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b?utm_source=gig_auto_pilot&utm_medium=paywall&utm_campaign=pro_conversion" target="_blank" rel="noopener" ' +
                     'style="display:inline-block;background:#C2410C;color:#fff;padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;margin-right:8px;">Unlock · $5/mo</a>' +
-                    '<a href="/pro/" style="color:#c4a0ff;font-size:13px;">See plans</a></div>';
+                    '<a href="/pro/" style="color:#C7522A;font-size:13px;">See plans</a></div>';
                 outputProposal.innerHTML = formatText(preview(data.proposal)) + paywall;
                 outputDraft.innerHTML = formatText(preview(data.draftWork)) + paywall;
                 outputInterview.innerHTML = formatText(preview(data.interviewQuestions)) + paywall;
