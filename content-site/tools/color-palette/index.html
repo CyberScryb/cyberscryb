@@ -299,32 +299,7 @@
             </div>
         </section>
 
-        <section class="faq" id="faq">
-            <h2>FAQ</h2>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>What is color harmony?</summary>
-                    <p>Color harmony refers to aesthetically pleasing arrangements of colors based on their positions on
-                        the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent
-                        colors), and triadic (evenly spaced).</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I use these palettes commercially?</summary>
-                    <p>Yes. Colors cannot be copyrighted. Any palette generated here is free to use in any personal or
-                        commercial project.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What's the difference between RGB, HSL, and Hex?</summary>
-                    <p>They're all ways to represent colors. Hex (#FF0000) is compact and widely used in CSS. RGB (255,
-                        0, 0) breaks color into red, green, blue channels. HSL (0°, 100%, 50%) uses hue, saturation,
-                        lightness &mdash; which is more intuitive for generating harmonies.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How do I pick a good base color?</summary>
-                    <p>Start with your brand's primary color, or use our random generator to explore. A good base color
-                        has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes.</p>
-                </details>
-         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Outfit',sans-serif;line-height:1.7;">
+         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:var(--text-secondary);font-family:'Outfit',sans-serif;line-height:1.7;">
         <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">How Color Palettes Work in Web Design</h2>
         <p>A color palette is a curated set of colors that work together visually, derived from principles of color theory. The three most useful palette types for web projects are complementary (colors opposite each other on the color wheel, which create high contrast and visual tension &mdash; good for calls-to-action), analogous (colors adjacent on the wheel, which feel harmonious and calm &mdash; good for backgrounds and content areas), and triadic (three colors equally spaced on the wheel, which create vibrant, balanced schemes).</p>
         <p>When building a UI, most designers work with a base color (your primary brand color), a complementary or triadic accent (for buttons, links, and highlights), and a set of neutral tones (for backgrounds, text, and borders). The exact hues matter less than their relationship to each other &mdash; a well-structured palette keeps your interface coherent even as elements change across different pages and states.</p>
@@ -334,17 +309,33 @@
         <p>The recommended workflow: generate a palette, pick your base and accent colors, then create a CSS custom properties (variables) file at the root of your project. Define colors as --color-primary, --color-accent, --color-surface, and so on. Reference those variables throughout your stylesheets rather than hardcoding hex values. When your brand colors change, you update one file instead of searching and replacing across dozens of CSS files.</p>
 
         <h2 style="font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--accent-light);margin-top:2.5rem;margin-bottom:1rem;font-weight:700;">Frequently Asked Questions</h2>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
             <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">What makes two colors "work together"?</summary>
             <p style="margin-top:0.75rem;color:var(--text-secondary);">Colors work together when they maintain sufficient contrast for readability (WCAG AA requires a contrast ratio of at least 4.5:1 for normal text), while sharing a coherent relationship on the color wheel. Colors that are too similar in both hue and value blend into each other. Colors that are too different without a structural relationship (complementary, triadic, split-complementary) look chaotic. The goal is controlled tension &mdash; enough difference to create visual hierarchy, enough relationship to feel intentional.</p>
         </details>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
             <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">How many colors should a UI color palette have?</summary>
             <p style="margin-top:0.75rem;color:var(--text-secondary);">Most practical UI design systems use 5-9 colors: one primary brand color in 5-9 tints and shades, one accent color, one semantic set (success green, warning yellow, error red, info blue), and 2-3 neutral grays. Fewer colors mean tighter consistency &mdash; systems with 30+ colors usually end up with inconsistent usage and visual clutter. Start minimal and add colors only when you have a specific design need they solve.</p>
         </details>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1.2rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
             <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">How do I test if my palette meets WCAG accessibility requirements?</summary>
             <p style="margin-top:0.75rem;color:var(--text-secondary);">After generating your palette, check text-on-background combinations with the CyberScryb <a href="/guides/color-contrast-checker-wcag/" style="color:var(--accent-light);">WCAG Color Contrast Checker guide</a>. WCAG AA compliance requires 4.5:1 for normal text, 3:1 for large text. WCAG AAA requires 7:1 for normal text. Always test your actual text color against your actual background color &mdash; not just your palette colors against each other.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">What is color harmony?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">Aesthetically pleasing arrangements of colors based on their positions on the color wheel. Common harmonies include complementary (opposite colors), analogous (adjacent colors), and triadic (evenly spaced).</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">Can I use these palettes commercially?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">Yes. Colors cannot be copyrighted. Any palette generated here is free to use in any personal or commercial project.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">What's the difference between RGB, HSL, and Hex?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">All ways to represent colors. Hex (#FF0000) is compact and widely used in CSS. RGB (255, 0, 0) breaks color into red, green, blue channels. HSL (0&deg;, 100%, 50%) uses hue, saturation, lightness &mdash; more intuitive for generating harmonies.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1.2rem;">
+            <summary style="cursor:pointer;font-weight:700;color:var(--text-primary);font-family:'Outfit',sans-serif;">How do I pick a good base color?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary);">Start with your brand's primary color, or use the random generator to explore. A good base color has moderate saturation (40-80%) and lightness (30-60%) for the most versatile palettes.</p>
         </details>
     </section>
 </main>

@@ -180,14 +180,8 @@
                 </div>
             </div>
 
-            <div class="faq-section">
-                <h2>Frequently Asked Questions</h2>
-                <details><summary>What is a Unix timestamp?</summary><p>A Unix timestamp (Epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's used in virtually all programming languages to represent time as a number.</p></details>
-                <details><summary>What is the Year 2038 problem?</summary><p>Systems using 32-bit signed integers for timestamps will overflow on Jan 19, 2038. Modern 64-bit systems won't have this issue.</p></details>
-                <details><summary>Does this tool support milliseconds?</summary><p>Yes! If the timestamp is 13+ digits, it's auto-detected as milliseconds and converted accordingly.</p></details>
-            </div>
         </div>
-        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:#cbd5e1;font-family:'Inter',sans-serif;line-height:1.7;">
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:var(--text-secondary, #5C4A3D);font-family:'Inter',sans-serif;line-height:1.7;">
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Is a Unix Timestamp?</h2>
         <p>A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970, 00:00:00 UTC &mdash; a date referred to as the Unix epoch. This convention was established in the early days of Unix operating systems as a simple, unambiguous way to represent any point in time using a single integer, with no dependence on locale, calendar format, or timezone.</p>
         <p>Every major programming language has built-in support for Unix timestamps. In JavaScript, <code>Date.now()</code> returns the current timestamp in milliseconds. In Python, <code>time.time()</code> returns it in seconds. In databases, Unix timestamps are often preferred for storing dates because integer comparisons are faster than string comparisons, and there is no ambiguity about date format (no DD/MM/YYYY vs MM/DD/YYYY confusion).</p>
@@ -197,17 +191,25 @@
         <p>When in doubt, check the magnitude: 10 digits = seconds, 13 digits = milliseconds. Convert accordingly before passing timestamps between systems that may use different conventions.</p>
 
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Frequently Asked Questions</h2>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Does Unix time account for timezones?</summary>
-            <p style="margin-top:0.75rem;">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
+            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
         </details>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What is the Year 2038 problem?</summary>
-            <p style="margin-top:0.75rem;">32-bit signed integers can represent values up to 2,147,483,647. When used to store Unix timestamps (seconds since 1970), this maximum corresponds to January 19, 2038 at 03:14:07 UTC. After that point, 32-bit systems will overflow and roll back to 1901. Most modern systems use 64-bit integers for timestamps, which extends the range to approximately 292 billion years in the future. If you're working with legacy embedded systems or old 32-bit databases, this is a real migration concern.</p>
+            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">32-bit signed integers can represent values up to 2,147,483,647. When used to store Unix timestamps (seconds since 1970), this maximum corresponds to January 19, 2038 at 03:14:07 UTC. After that point, 32-bit systems will overflow and roll back to 1901. Most modern systems use 64-bit integers for timestamps, which extends the range to approximately 292 billion years in the future. If you're working with legacy embedded systems or old 32-bit databases, this is a real migration concern.</p>
         </details>
-        <details style="margin-bottom:1rem;background:rgba(255,255,255,0.03);border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color:#2C1810;">How do I get the current Unix timestamp in different languages?</summary>
-            <p style="margin-top:0.75rem;">JavaScript: <code>Math.floor(Date.now() / 1000)</code> (seconds) or <code>Date.now()</code> (milliseconds). Python: <code>import time; int(time.time())</code>. PHP: <code>time()</code>. Ruby: <code>Time.now.to_i</code>. Go: <code>time.Now().Unix()</code>. SQL (PostgreSQL): <code>EXTRACT(EPOCH FROM NOW())</code>. SQL (MySQL): <code>UNIX_TIMESTAMP()</code>.</p>
+            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">JavaScript: <code>Math.floor(Date.now() / 1000)</code> (seconds) or <code>Date.now()</code> (milliseconds). Python: <code>import time; int(time.time())</code>. PHP: <code>time()</code>. Ruby: <code>Time.now.to_i</code>. Go: <code>time.Now().Unix()</code>. SQL (PostgreSQL): <code>EXTRACT(EPOCH FROM NOW())</code>. SQL (MySQL): <code>UNIX_TIMESTAMP()</code>.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What is a Unix timestamp?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">A Unix timestamp (Epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's used in virtually all programming languages to represent time as a number.</p>
+        </details>
+        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Does this tool support milliseconds?</summary>
+            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Yes. If the timestamp is 13+ digits, it's auto-detected as milliseconds and converted accordingly.</p>
         </details>
     </section>
 </main>
