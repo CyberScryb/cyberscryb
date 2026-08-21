@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         radio.addEventListener('change', () => {
             Object.entries(voiceLabels).forEach(([key, el]) => {
                 const isActive = key === radio.value;
-                el.style.border = isActive ? '2px solid #60a5fa' : '1px solid rgba(255,255,255,0.12)';
-                el.style.background = isActive ? '#0d0d0d' : '#0a0a0a';
+                el.style.border = isActive ? '2px solid #a78bfa' : '1px solid #E4D9C8';
+                el.style.background = '#FFFFFF';
             });
         });
     });
