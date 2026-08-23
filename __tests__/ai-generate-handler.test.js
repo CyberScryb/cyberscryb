@@ -3,7 +3,10 @@ process.env.NODE_ENV = 'test';
 // Mock firebase deps to prevent initializeApp side effects
 jest.mock('firebase-admin', () => ({
   initializeApp: jest.fn(),
-  firestore: jest.fn(() => ({ collection: jest.fn() })),
+}));
+jest.mock('firebase-admin/firestore', () => ({
+  getFirestore: jest.fn(() => ({ collection: jest.fn() })),
+  FieldValue: { increment: jest.fn(), serverTimestamp: jest.fn() },
 }));
 jest.mock('firebase-functions/v1', () => ({
   https: { onRequest: jest.fn() },

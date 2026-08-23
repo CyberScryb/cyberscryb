@@ -1,9 +1,10 @@
 const functions = require('firebase-functions/v1');
 const cors = require('cors')({ origin: true });
 const admin = require('firebase-admin');
+const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 
 admin.initializeApp();
-const db = admin.firestore();
+const db = getFirestore();
 
 // functions.config() was removed in this firebase-functions version — secrets
 // are read from environment variables only (see functions/.env in production).
@@ -86,7 +87,7 @@ async function flushAnalytics() {
         docRef,
         {
           ...agg,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       );
@@ -214,8 +215,8 @@ async function checkFirestoreRateLimit(req) {
       tx.set(
         globalRef,
         {
-          count: admin.firestore.FieldValue.increment(1),
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          count: FieldValue.increment(1),
+          updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       );
@@ -254,9 +255,9 @@ async function checkFirestoreRateLimit(req) {
       tx.set(
         ipRef,
         {
-          count: admin.firestore.FieldValue.increment(1),
+          count: FieldValue.increment(1),
           tier,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          updatedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       );
@@ -588,7 +589,7 @@ exports.dailyAnalyticsReport = functions.pubsub
       await db.collection('analytics_reports').add({
         type: 'daily',
         ...summary,
-        generatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        generatedAt: FieldValue.serverTimestamp(),
       });
 
       return null;
@@ -2205,7 +2206,7 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
           substack = await pushToSubstack(normalizedEmail);
           await doc.ref.update({
             substackSynced: !!substack.ok,
-            substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+            substackSyncedAt: FieldValue.serverTimestamp(),
             substackStatus: substack.ok ? 'ok' : substack.reason || 'error',
             substackPublication: substack.publication || getSubstackPublication() || null,
           });
@@ -2228,9 +2229,9 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
       await db.collection('subscribers').add({
         email: normalizedEmail,
         source: source || 'homepage',
-        subscribedAt: admin.firestore.FieldValue.serverTimestamp(),
+        subscribedAt: FieldValue.serverTimestamp(),
         substackSynced: !!substack.ok,
-        substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+        substackSyncedAt: FieldValue.serverTimestamp(),
         substackStatus: substack.ok
           ? substack.requiresConfirmation
             ? 'pending_confirmation'
@@ -2320,7 +2321,7 @@ exports.substackBackfill = functions.https.onRequest((req, res) => {
 
         await row.ref.update({
           substackSynced: !!substack.ok,
-          substackSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+          substackSyncedAt: FieldValue.serverTimestamp(),
           substackStatus: substack.ok
             ? substack.requiresConfirmation
               ? 'pending_confirmation'
@@ -2383,7 +2384,7 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         await sessionRef.set({
           status: 'redirect_trust',
           verified: false,
-          validatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          validatedAt: FieldValue.serverTimestamp(),
           paid: null,
         });
         await logConversion('pro_unlock', 'redirect_trust', {});
@@ -2432,7 +2433,7 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
         customerEmail: session.customer_details && session.customer_details.email,
         amountTotal: session.amount_total,
         currency: session.currency,
-        validatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        validatedAt: FieldValue.serverTimestamp(),
         paid,
       });
 

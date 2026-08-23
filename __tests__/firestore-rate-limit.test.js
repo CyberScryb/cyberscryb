@@ -42,17 +42,17 @@ function createFakeDb() {
 
 let mockFakeDb;
 
-jest.mock('firebase-admin', () => {
+jest.mock('firebase-admin', () => ({
+  initializeApp: jest.fn(),
+}));
+jest.mock('firebase-admin/firestore', () => {
   const FieldValue = {
     increment: n => ({ __increment: n }),
     serverTimestamp: () => 'SERVER_TIMESTAMP',
   };
   return {
-    initializeApp: jest.fn(),
-    firestore: Object.assign(
-      jest.fn(() => mockFakeDb),
-      { FieldValue }
-    ),
+    getFirestore: jest.fn(() => mockFakeDb),
+    FieldValue,
   };
 });
 
