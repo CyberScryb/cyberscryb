@@ -1405,6 +1405,7 @@ function generateSitemap(generatedPages) {
     'uuid-generator',
     'jwt-decoder',
     'hash-generator',
+    'cna-resume-kit',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1516,6 +1517,7 @@ function manageRobotsMeta() {
     'uuid-generator',
     'jwt-decoder',
     'hash-generator',
+    'cna-resume-kit',
   ]);
 
   const dirsToProcess = [
