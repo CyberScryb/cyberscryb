@@ -17,12 +17,6 @@ module.exports = [
       // any build script, not deployed (public/ is the deploy root), stale
       // since 2026-08-04 and drifted from the real content-site/public copies.
       'tools/',
-      // No package.json/tsconfig.json of its own, not referenced by deploy.yml
-      // or firebase.json, stale since 2026-08-04 — can't build standalone from
-      // here. The real curator.cyberscryb.com app likely lives elsewhere;
-      // this looks like an abandoned copy, not something to guess a TS-parser
-      // config for.
-      'curator-prime/',
     ],
   },
   {
