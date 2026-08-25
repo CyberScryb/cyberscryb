@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wordCountEl) wordCountEl.textContent = words + ' words';
             if (bulletCountEl) {
                 // Count bullet points by looking for lines starting with bullet markers
-                const lines = text.trim().split(/\n/).filter(l => /^[\u2022\-\*\u25CF]\s|^\d+[\.\)]\s/.test(l.trim()));
+                const lines = text.trim().split(/\n/).filter(l => /^[\u2022\-*\u25CF]\s|^\d+[.)]\s/.test(l.trim()));
                 const count = lines.length || 1;
                 bulletCountEl.textContent = count + ' bullet' + (count !== 1 ? 's' : '');
             }

@@ -13,6 +13,16 @@ module.exports = [
       'dist/',
       '*.lock',
       'coverage/',
+      // Orphaned pre-content-site/public-split source tree — not referenced by
+      // any build script, not deployed (public/ is the deploy root), stale
+      // since 2026-08-04 and drifted from the real content-site/public copies.
+      'tools/',
+      // No package.json/tsconfig.json of its own, not referenced by deploy.yml
+      // or firebase.json, stale since 2026-08-04 — can't build standalone from
+      // here. The real curator.cyberscryb.com app likely lives elsewhere;
+      // this looks like an abandoned copy, not something to guess a TS-parser
+      // config for.
+      'curator-prime/',
     ],
   },
   {
@@ -28,6 +38,10 @@ module.exports = [
     rules: {
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
+      // Every current no-empty violation is a deliberate `catch {}` swallowing
+      // localStorage exceptions (private browsing, quota, disabled storage) —
+      // a consistent, intentional pattern across the shared tool code.
+      'no-empty': ['error', { allowEmptyCatch: true }],
     },
   },
   {
@@ -37,6 +51,21 @@ module.exports = [
       sourceType: 'script',
       globals: {
         ...globals.browser,
+        // Loaded via separate <script> tags in the HTML these files ship with
+        gtag: 'readonly',
+        mixpanel: 'readonly',
+        MIXPANEL_CUSTOM_LIB_URL: 'readonly',
+        LifeTool: 'readonly',
+      },
+    },
+  },
+  {
+    // detector.js *defines* AIDetector — declaring it a global here too would
+    // collide with that definition (no-redeclare). app.js only consumes it.
+    files: ['content-site/tools/ai-writing-suite/app.js'],
+    languageOptions: {
+      globals: {
+        AIDetector: 'readonly',
       },
     },
   },
@@ -48,6 +77,35 @@ module.exports = [
       globals: {
         ...globals.node,
         ...globals.jest,
+        // Several tests load browser tool scripts under jsdom
+        ...globals.browser,
+      },
+    },
+  },
+  {
+    // Playwright screenshot capture — Node module scope plus browser-context
+    // callbacks passed to context.addInitScript()/page.evaluate().
+    files: ['scripts/capture-product-shots.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
+    },
+    rules: {
+      'no-empty': ['error', { allowEmptyCatch: true }],
+    },
+  },
+  {
+    files: ['distill-extension/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'script',
+      globals: {
+        ...globals.browser,
+        ...globals.webextensions,
       },
     },
   },

@@ -72,13 +72,14 @@ function generateHarmony(baseHex, harmony, count) {
             }
             break;
 
-        case 'analogous':
+        case 'analogous': {
             const analogStep = 30;
             for (let i = 0; i < count; i++) {
                 const angle = h + (i - Math.floor(count / 2)) * analogStep;
                 colors.push([angle, s, l + (i % 2 === 0 ? 0 : (i * 4 - 8))]);
             }
             break;
+        }
 
         case 'triadic':
             colors.push([h, s, l]);

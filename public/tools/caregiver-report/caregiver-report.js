@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wordCountEl) wordCountEl.textContent = words + ' words';
             if (sectionCountEl) {
                 // Count structured sections (lines that look like headers)
-                const sections = text.split('\n').filter(line => /^[A-Z\s\/&]+:/.test(line.trim()) || /^\d+\./.test(line.trim())).length;
+                const sections = text.split('\n').filter(line => /^[A-Z\s/&]+:/.test(line.trim()) || /^\d+\./.test(line.trim())).length;
                 sectionCountEl.textContent = sections + ' section' + (sections !== 1 ? 's' : '');
             }
         }

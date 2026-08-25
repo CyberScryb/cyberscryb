@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wordCountEl) wordCountEl.textContent = words + ' words';
             if (tweetCountEl) {
                 // Count tweets by looking for numbered lines or separator patterns
-                const lines = text.trim().split(/\n/).filter(l => /^\d+[\.\)]\s/.test(l.trim()));
+                const lines = text.trim().split(/\n/).filter(l => /^\d+[.)]\s/.test(l.trim()));
                 const count = lines.length || 1;
                 tweetCountEl.textContent = count + ' tweet' + (count !== 1 ? 's' : '');
             }
