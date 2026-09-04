@@ -99,7 +99,7 @@ export const MediaTools = [
                           label="Why should I strip this? (AI)"
                         />
                       </div>
-                      <Button primary onClick={stripMetadata} className="w-full">
+                      <Button variant="primary" onClick={stripMetadata} className="w-full">
                         Strip Metadata
                       </Button>
                     </div>

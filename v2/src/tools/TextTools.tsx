@@ -4,6 +4,7 @@ import { FileText, Type, Sparkles } from 'lucide-react';
 import { useAI } from '../lib/useAI';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useToolState } from '../lib/useToolState';
+import { Button } from '../components/ui/Button';
 
 export const TextTools = [
   {

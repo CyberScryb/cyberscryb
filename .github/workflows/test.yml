@@ -101,7 +101,8 @@ jobs:
           python-version: '3.11'
       - run: npm ci
       - run: npm run build:site
-      - run: npx @axe-core/cli public/index.html public/tools/humanizer/index.html public/tools/code-explainer/index.html --exit
+      - run: npx --yes browser-driver-manager install chrome
+      - run: npx @axe-core/cli public/index.html public/tools/humanizer/index.html public/tools/code-explainer/index.html --chrome-options="--no-sandbox,--disable-gpu,--disable-dev-shm-usage" --exit
 
   lighthouse:
     name: Lighthouse CI
@@ -119,9 +120,7 @@ jobs:
       - run: npm run build:site
       - uses: treosh/lighthouse-ci-action@v11
         with:
-          staticDistDir: public
-          urls: |
-            /
-            /tools/humanizer/
+          configPath: './lighthouserc.json'
           uploadArtifacts: true
           temporaryPublicStorage: true
+

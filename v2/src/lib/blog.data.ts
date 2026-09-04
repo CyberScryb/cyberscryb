@@ -1,4 +1,14 @@
-export const POSTS = [
+export interface BlogPostItem {
+  slug: string;
+  title: string;
+  snippet: string;
+  date: string;
+  image: string;
+  isCustomComponent?: boolean;
+  content?: string;
+}
+
+export const POSTS: BlogPostItem[] = [
   {
     slug: 'security-theater',
     title: 'Security Theater: Why Base64 Encoding is Not Encryption',
@@ -20,3 +30,4 @@ export const POSTS = [
     isCustomComponent: true,
   },
 ];
+

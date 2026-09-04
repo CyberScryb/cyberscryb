@@ -27,7 +27,7 @@ export const DevTools = [
       let nextRun = [];
       try {
         human = cronstrue.toString(cron);
-        const interval = parser.parseExpression(cron);
+        const interval = (parser.parse ? parser.parse(cron) : (parser as any).parseExpression(cron));
         for (let i = 0; i < 5; i++) {
           nextRun.push(interval.next().toString());
         }

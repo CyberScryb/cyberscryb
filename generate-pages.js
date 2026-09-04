@@ -1471,9 +1471,12 @@ function generateSitemap(generatedPages) {
     'what-goes-in-a-caregiver-shift-report-2026',
     'why-vanilla-js-no-frameworks-2026',
     'court-admissible-parenting-plan-guide',
+    'how-to-dispute-medical-bill-coding-errors-charity-care-2026.html',
+    'how-to-get-security-deposit-back-state-deadlines-2026.html',
   ];
   blogPosts.forEach(post => {
-    xml += `  <url><loc>${baseUrl}/blog/${post}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
+    const postPath = post.endsWith('.html') ? post : `${post}/`;
+    xml += `  <url><loc>${baseUrl}/blog/${postPath}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
   });
 
   xml += '</urlset>\n';

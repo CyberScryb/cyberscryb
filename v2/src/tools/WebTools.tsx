@@ -5,6 +5,7 @@ import { useAI } from '../lib/useAI';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useToolState } from '../lib/useToolState';
 import { AIInlineExplanation, AITooltipInfo } from '../components/AIExplanation';
+import { Button } from '../components/ui/Button';
 
 export const WebTools = [
   {
@@ -476,7 +477,7 @@ export const WebTools = [
                 {codes[code] || 'Unknown Code'}
               </div>
               <Button
-                variant="default"
+                variant="primary"
                 onClick={analyze}
                 disabled={ai.isLoading}
                 className="w-full"

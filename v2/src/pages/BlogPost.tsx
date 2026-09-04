@@ -69,7 +69,7 @@ export default function BlogPost() {
 
       <div className="prose prose-invert prose-lg max-w-3xl mx-auto markdown-body bg-transparent">
         <MarkdownPreview
-          source={post.content}
+          source={post.content || ''}
           style={{ backgroundColor: 'transparent', color: 'inherit' }}
         />
       </div>
