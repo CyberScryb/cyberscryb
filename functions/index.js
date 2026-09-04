@@ -198,16 +198,52 @@ function getUserTier(req) {
   return 'anonymous';
 }
 
-// ─── Firestore-backed Cross-Instance Rate Limiting ──────
-// In-memory limiter above is per-instance only; Cloud Functions scale to many
-// instances, so we layer a Firestore-backed check before it as the real cap.
+// ─── Rate Limiting & API Quota Protection ──────
+// 1. Sliding window in-memory burst limiter (max 5 requests per 60s per IP)
+const burstLimitStore = new Map();
+
+function checkBurstRateLimit(req) {
+  const ip =
+    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+    req.connection?.remoteAddress ||
+    'unknown';
+  const now = Date.now();
+  const windowMs = 60000;
+  const maxBurst = 5;
+
+  let timestamps = burstLimitStore.get(ip) || [];
+  timestamps = timestamps.filter(t => now - t < windowMs);
+
+  if (timestamps.length >= maxBurst) {
+    return {
+      allowed: false,
+      reason: 'Too many requests in a short time. Please wait 30 seconds.',
+      retryAfter: 30,
+    };
+  }
+
+  timestamps.push(now);
+  burstLimitStore.set(ip, timestamps);
+
+  if (burstLimitStore.size > 2000) {
+    for (const [key, list] of burstLimitStore.entries()) {
+      if (list.length === 0 || now - list[list.length - 1] > windowMs) {
+        burstLimitStore.delete(key);
+      }
+    }
+  }
+
+  return { allowed: true };
+}
+
+// 2. Global & Per-IP Daily Hard Caps (Firestore-backed)
 const GLOBAL_DAILY_CAP = 500;
 
 const FIRESTORE_TIER_CAPS = {
-  anonymous: 50,
-  free: 200,
-  subscribed: 1000,
-  premium: 10000,
+  anonymous: 10,
+  free: 10,
+  subscribed: 25,
+  premium: 50,
 };
 
 function getDateString(date = new Date()) {
@@ -230,6 +266,10 @@ function getIpHash(req) {
 // Returns { allowed: true } or { allowed: false, reason, retryAfter }.
 // Global cap fails CLOSED (Firestore error => block). Per-IP cap fails OPEN.
 async function checkFirestoreRateLimit(req) {
+  // Fast burst check
+  const burst = checkBurstRateLimit(req);
+  if (!burst.allowed) return burst;
+
   const dateStr = getDateString();
   const tier = getUserTier(req);
   const ipHash = getIpHash(req);
@@ -394,6 +434,14 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     if (!isAllowedReferer(referer)) {
       console.warn(`Blocked request from unauthorized referer: ${referer}`);
       return res.status(403).json({ error: 'Unauthorized Source' }); // Enforced security
+    }
+
+    // Input validation: text must be non-empty string <= 4000 characters
+    if (!text || typeof text !== 'string' || text.trim().length === 0) {
+      return res.status(400).json({ error: 'Text input is required' });
+    }
+    if (text.length > 4000) {
+      return res.status(400).json({ error: 'Input text exceeds 4,000 character limit' });
     }
 
     // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
@@ -650,6 +698,15 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
       return res.status(403).json({ error: 'Unauthorized Source' });
     }
 
+    // Input validation: jobDescription must be non-empty string <= 4000 characters
+    if (!jobDescription || typeof jobDescription !== 'string' || jobDescription.trim().length === 0) {
+      return res.status(400).json({ error: 'Job description is required' });
+    }
+    if (jobDescription.length > 4000) {
+      return res.status(400).json({ error: 'Job description exceeds 4,000 character limit' });
+    }
+    const cleanProfile = typeof freelancerProfile === 'string' ? freelancerProfile.slice(0, 4000) : '';
+
     // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
     const fsRateCheck = await checkFirestoreRateLimit(req);
     if (!fsRateCheck.allowed) {
@@ -687,7 +744,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
             "${jobDescription}"
             
             Freelancer Profile/Skills:
-            "${freelancerProfile}"
+            "${cleanProfile}"
             
             Output Requirement: Return a JSON object with 3 fields:
             1. "proposal": A persuasive, short, punchy cover letter. Focus on the client's pain point. No generic fluff.
@@ -1626,8 +1683,8 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       return res.status(400).json({ error: 'Input text is required' });
     }
 
-    if (input.length > 5000) {
-      return res.status(400).json({ error: 'Input too long. Max 5000 characters.' });
+    if (input.length > 4000) {
+      return res.status(400).json({ error: 'Input too long. Max 4000 characters.' });
     }
 
     // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)

@@ -53,16 +53,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Signed In
             userDisplay.textContent = user.displayName || user.email;
             authBtn.textContent = 'Sign Out';
-            authGate.style.display = 'none';
-            toolInputs.style.display = 'block';
         } else {
             // Signed Out
-            userDisplay.textContent = 'Not signed in';
-            authBtn.textContent = 'Sign In';
-            authGate.style.display = 'block';
-            toolInputs.style.display = 'none';
+            userDisplay.textContent = 'Free Mode';
+            authBtn.textContent = 'Sign In (Optional)';
         }
+        if (authGate) authGate.style.display = 'none';
+        if (toolInputs) toolInputs.style.display = 'block';
     }
+    updateUI(null);
 
     // Auth Button Logic
     if (authBtn) {
@@ -116,8 +115,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (!currentUser) {
-            alert("Please sign in first.");
+        if (jobText.length > 4000) {
+            alert('Job description is too long (max 4,000 characters).');
             return;
         }
 
@@ -128,15 +127,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         generateBtn.innerHTML = '<span class="btn-text">Generating... (Takes ~10s)</span>';
 
         try {
-            // Get ID Token
-            const token = await currentUser.getIdToken();
+            const headers = { 'Content-Type': 'application/json' };
+            if (currentUser) {
+                try {
+                    const token = await currentUser.getIdToken();
+                    headers['Authorization'] = `Bearer ${token}`;
+                } catch (e) {}
+            }
 
-            const response = await fetch('https://us-central1-feisty-wall-456202-s3.cloudfunctions.net/generateGigWork', {
+            const response = await fetch('/api/gig-work', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Send Token!
-                },
+                headers: headers,
                 body: JSON.stringify({
                     jobDescription: jobText,
                     freelancerProfile: profile
@@ -144,60 +145,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             if (response.status === 429) {
-                throw new Error('Rate Limit Exceeded. Please wait a while.');
+                throw new Error('Daily limit reached or too many requests. Please wait a moment or try again tomorrow!');
             }
             if (!response.ok) {
-                throw new Error('API Error: ' + response.statusText);
+                let errText = response.statusText;
+                try {
+                    const errObj = await response.json();
+                    if (errObj.error) errText = errObj.error;
+                } catch (e) {}
+                throw new Error(errText);
             }
 
             const data = await response.json();
 
-            const isPro = (function () {
-                if (document.cookie.indexOf('cs_pro=1') > -1) return true;
-                if (document.cookie.indexOf('cs_pro_source=stripe') > -1) return true;
-                try { return localStorage.getItem('cs_pro') === '1'; } catch (e) { return false; }
-            })();
+            // Render full outputs directly without paywalls
+            outputProposal.innerHTML = formatText(data.proposal);
+            outputDraft.innerHTML = formatText(data.draftWork);
+            outputInterview.innerHTML = formatText(data.interviewQuestions);
 
-            const usageKey = 'cs_gig_full_usage';
-            const today = new Date().toISOString().slice(0, 10);
-            let usage = { date: today, count: 0 };
-            try {
-                usage = JSON.parse(localStorage.getItem(usageKey) || '{}');
-                if (usage.date !== today) usage = { date: today, count: 0 };
-            } catch (e) { usage = { date: today, count: 0 }; }
-
-            // Free: 1 full kit per day. After that, preview + Pro CTA.
-            const allowFull = isPro || usage.count < 1;
-
-            function preview(text) {
-                if (!text) return '';
-                const words = text.split(/\s+/);
-                const n = Math.max(8, Math.floor(words.length * 0.28));
-                return words.slice(0, n).join(' ') + '...';
-            }
-
-            if (allowFull) {
-                outputProposal.innerHTML = formatText(data.proposal);
-                outputDraft.innerHTML = formatText(data.draftWork);
-                outputInterview.innerHTML = formatText(data.interviewQuestions);
-                if (!isPro) {
-                    usage.count += 1;
-                    try { localStorage.setItem(usageKey, JSON.stringify(usage)); } catch (e) {}
-                }
-            } else {
-                const paywall =
-                    '<div style="margin-top:12px;padding:14px;border:1px solid #C2410C;border-radius:10px;background:rgba(194,65,12,0.06);">' +
-                    '<strong style="color:#9A3412;">Free full kit used for today</strong>' +
-                    '<p style="color:#5C4A3D;margin:8px 0 12px;font-size:14px;">Preview below. Pro unlocks the full proposal, draft, and interview questions with no daily cap.</p>' +
-                    '<a href="https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b?utm_source=gig_auto_pilot&utm_medium=paywall&utm_campaign=pro_conversion" target="_blank" rel="noopener" ' +
-                    'style="display:inline-block;background:#C2410C;color:#fff;padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;margin-right:8px;">Unlock · $5/mo</a>' +
-                    '<a href="/pro/" style="color:#C7522A;font-size:13px;">See plans</a></div>';
-                outputProposal.innerHTML = formatText(preview(data.proposal)) + paywall;
-                outputDraft.innerHTML = formatText(preview(data.draftWork)) + paywall;
-                outputInterview.innerHTML = formatText(preview(data.interviewQuestions)) + paywall;
-                if (typeof gtag === 'function') {
-                    gtag('event', 'paywall_shown', { tool_id: 'gig-auto-pilot', mode: 'daily_limit' });
-                }
+            if (typeof gtag === 'function') {
+                gtag('event', 'tool_used', { tool_id: 'gig-auto-pilot' });
             }
 
             // UX: Switch to first tab result
@@ -206,14 +173,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error(error);
             outputProposal.innerHTML = `<span style="color: #ff4444;">Error: ${error.message}</span>`;
-            if (error.message.includes('Rate Limit')) {
-                alert("You've hit the hourly limit (5 requests/hr). Prevents bot abuse!");
-            }
         } finally {
             loadingIndicator.classList.add('hidden');
 
-            // COOLDOWN: Enforce 60s wait
-            let cooldown = 60;
+            // COOLDOWN: 5s wait to prevent accidental spam
+            let cooldown = 5;
             const interval = setInterval(() => {
                 generateBtn.innerHTML = `<span class="btn-text">Wait ${cooldown}s</span>`;
                 cooldown--;

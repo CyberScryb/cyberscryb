@@ -15,78 +15,27 @@
   }
 
   function isPro() {
-    if (getCookie('cs_pro') === '1') return true;
-    if (getCookie('cs_pro_source') === 'stripe' && getCookie('cs_subscribed') === '1') return true;
-    try {
-      if (localStorage.getItem('cs_pro') === '1') return true;
-    } catch (e) { /* private mode */ }
-    return false;
+    return true;
   }
 
   function activatePro(days) {
-    var d = typeof days === 'number' ? days : 365;
-    setCookie('cs_pro', '1', d);
-    setCookie('cs_subscribed', '1', d);
-    setCookie('cs_pro_source', 'stripe', d);
-    try { localStorage.setItem('cs_pro', '1'); } catch (e) { /* ignore */ }
+    // no-op
   }
 
-  /** If localStorage says Pro but cookies were cleared, restore cookies. */
   function tryRestoreFromStorage() {
-    try {
-      if (localStorage.getItem('cs_pro') === '1' && getCookie('cs_pro') !== '1') {
-        activatePro(365);
-        return true;
-      }
-    } catch (e) { /* ignore */ }
-    return false;
+    return true;
   }
 
   function updateNav() {
-    var links = document.querySelectorAll('a[href="/pro/"], a[href="/pro"], a[href="https://cyberscryb.com/pro/"]');
-    var pro = isPro();
-    links.forEach(function (a) {
-      if (pro) {
-        a.innerHTML = '&#9733; Pro active';
-        a.style.color = '#22c55e';
-        a.title = 'Pro is active on this device';
-        a.setAttribute('data-cs-pro', '1');
-      } else if (!a.getAttribute('data-cs-pro-default')) {
-        a.setAttribute('data-cs-pro-default', a.innerHTML);
-      }
-    });
+    // no-op
   }
 
   function injectRestoreHint() {
-    if (isPro()) return;
-    if (document.getElementById('cs-pro-restore-hint')) return;
-    // Only on pro page or tools that show paywalls
-    var path = location.pathname || '';
-    // Skip /pro/ itself — that page already has its own "Restore Pro" CTAs.
-    var show = (path.indexOf('/pro') === 0 && path !== '/pro' && path !== '/pro/')
-      || path.indexOf('/tools/humanizer') === 0
-      || path.indexOf('/tools/gig-auto-pilot') === 0;
-    if (!show) return;
-
-    var el = document.createElement('div');
-    el.id = 'cs-pro-restore-hint';
-    el.style.cssText = 'position:fixed;bottom:16px;left:16px;z-index:9997;max-width:280px;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:12px;padding:12px 14px;font:13px/1.4 Inter,system-ui,sans-serif;color:#2C1810;box-shadow:0 14px 32px rgba(44,24,16,0.12);';
-    el.innerHTML = 'Already paid? <a href="/pro-restore/" style="color:#C2410C;font-weight:600;">Restore Pro on this device</a>'
-      + ' <button type="button" aria-label="Dismiss" style="float:right;background:none;border:none;color:#5C4A3D;cursor:pointer;font-size:16px;line-height:1;padding:0 0 0 8px;">&times;</button>';
-    el.querySelector('button').onclick = function () {
-      el.remove();
-      try { sessionStorage.setItem('cs_restore_hint_dismissed', '1'); } catch (e) { /* ignore */ }
-    };
-    try {
-      if (sessionStorage.getItem('cs_restore_hint_dismissed') === '1') return;
-    } catch (e) { /* ignore */ }
-    document.body.appendChild(el);
+    // no-op
   }
 
   function boot() {
-    tryRestoreFromStorage();
-    updateNav();
-    injectRestoreHint();
+    // no-op
   }
 
   if (document.readyState === 'loading') {

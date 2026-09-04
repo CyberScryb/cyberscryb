@@ -10,9 +10,9 @@
 // GA4: tool_used, email_captured, result_copied, pro_checkout_click, paywall_shown
 
 (function () {
-    const FREE_CHAR_LIMIT = 500;
-    const FREE_DAILY_LIMIT = 1;
-    const PREVIEW_RATIO = 0.28;
+    const FREE_CHAR_LIMIT = 4000;
+    const FREE_DAILY_LIMIT = 10;
+    const PREVIEW_RATIO = 1.0;
     const STRIPE_MONTHLY = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
     const STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
 
@@ -90,22 +90,8 @@
 
         function updateUsageDisplay() {
             if (!usageCounter) return;
-            if (isPro()) {
-                usageCounter.textContent = 'Pro · unlimited';
-                usageCounter.style.color = '#22c55e';
-                return;
-            }
-            if (!isSubscribed()) {
-                usageCounter.textContent = localStorage.getItem('cs_free_trial_used')
-                    ? 'Free trial used · unlock below'
-                    : '1 free full result';
-                usageCounter.style.color = '#888';
-                return;
-            }
-            const usage = getUsageToday();
-            const remaining = Math.max(0, FREE_DAILY_LIMIT - usage.count);
-            usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free full unlock today';
-            usageCounter.style.color = remaining === 0 ? '#ef4444' : '#888';
+            usageCounter.textContent = 'Free · up to 4,000 chars';
+            usageCounter.style.color = '#22c55e';
         }
 
         async function submitGateEmail(email) {
@@ -162,66 +148,16 @@
         }
 
         function ensureProButtons(container) {
-            if (!container || container.querySelector('.cs-pro-gate-btns')) return;
-            const wrap = document.createElement('div');
-            wrap.className = 'cs-pro-gate-btns';
-            wrap.style.cssText = 'margin-top:14px;display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);';
-            wrap.innerHTML =
-                '<p style="margin:0 0 4px;font-size:12px;color:#5C4A3D;text-align:center;line-height:1.4;">'
-                + 'Full result · unlimited AI tools · cancel anytime</p>'
-                + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, toolId, 'gate_monthly') + '" target="_blank" rel="noopener" '
-                + 'style="display:block;text-align:center;background:#1B3A4B;color:#FFFCF7;padding:14px 14px;border-radius:10px;font-weight:700;text-decoration:none;font-size:15px;">'
-                + 'Go Pro · $5/mo</a>'
-                + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, toolId, 'gate_lifetime') + '" target="_blank" rel="noopener" '
-                + 'style="display:block;text-align:center;background:transparent;color:#22c55e;padding:11px 14px;border-radius:10px;border:1px solid #22c55e;font-weight:600;text-decoration:none;font-size:13px;">'
-                + 'Lifetime · $29 (best if you hate subscriptions)</a>'
-                + '<p style="margin:4px 0 0;font-size:11px;color:#6b7280;text-align:center;line-height:1.4;">'
-                + 'Stripe secure · 14-day refund · <a href="/pro-restore/" style="color:#5C4A3D;">Already paid?</a></p>'
-                + '<a href="/pro/" style="text-align:center;color:#5C4A3D;font-size:12px;text-decoration:underline;">See what Pro includes</a>';
-            container.appendChild(wrap);
-            wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
-                a.addEventListener('click', function () {
-                    trackEvent('pro_checkout_click', { tool_id: toolId, placement: 'result_gate' });
-                });
-            });
+            // Paywalls removed - all tools are 100% unlocked
+            return;
         }
 
         function setGateMode(mode) {
-            // mode: 'email' | 'pro_only'
-            if (!emailGate) return;
-            const card = emailGate.querySelector('.email-gate-card') || emailGate;
-            const form = gateForm || emailGate.querySelector('#gate-email-form');
-            const title = card.querySelector('h3');
-            const blurb = card.querySelector('p');
-
-            if (mode === 'pro_only') {
-                if (title) title.textContent = 'Free unlock used for today';
-                if (blurb) {
-                    blurb.innerHTML = 'You\'ve seen a preview. <strong>Pro unlocks the full result</strong> and removes daily limits on Humanizer, Gig Auto-Pilot, and AI writing tools.';
-                }
-                if (form) form.style.display = 'none';
-                if (gateStatus) gateStatus.textContent = '';
-            } else {
-                if (title) title.textContent = 'Unlock Your Full Result';
-                if (blurb) {
-                    blurb.innerHTML = 'Get the complete output free once today with email, or go <strong>Pro</strong> for unlimited.';
-                }
-                if (form) form.style.display = '';
-            }
-            ensureProButtons(card);
+            if (emailGate) emailGate.classList.add('hidden');
         }
 
         function showPreviewWithGate(fullText, mode) {
-            pendingFullText = fullText;
-            const cutText = cutPreview(fullText);
-            typeText(cutText, 10, function () {
-                if (emailGate) {
-                    emailGate.classList.remove('hidden');
-                    setGateMode(mode || 'email');
-                    trackEvent('paywall_shown', { tool_id: toolId, mode: mode || 'email' });
-                }
-                updateStats(cutText);
-            });
+            showFullResult(fullText);
         }
 
         function showFullResult(fullText) {
@@ -259,9 +195,9 @@
         }
 
         function friendlyError(status, fallback) {
-            if (status === 429) return 'Busy right now — try again in a minute.';
-            if (status === 400) return 'Please check your input.';
-            if (status >= 500) return 'Something went wrong, try again.';
+            if (status === 429) return fallback || 'Daily limit reached or too many requests. Please wait a moment or try again tomorrow!';
+            if (status === 400) return fallback || 'Please check your input.';
+            if (status >= 500) return 'Service temporarily unavailable. Please try again shortly.';
             return fallback || 'Request failed.';
         }
 
@@ -355,25 +291,9 @@
                 }
 
                 const inputString = typeof input === 'string' ? input : JSON.stringify(input);
-                // Per-tool override (life tools need structured facts >> 500 chars)
-                const freeCharLimit = (typeof config.freeCharLimit === 'number' && config.freeCharLimit > 0)
-                    ? config.freeCharLimit
-                    : FREE_CHAR_LIMIT;
-                if (!isPro() && inputString.length > freeCharLimit) {
-                    alert('Free tier supports up to ' + freeCharLimit + ' characters. Shorten your input, or upgrade to Pro for longer text.');
-                    const tiers = document.getElementById('upgrade-tiers');
-                    if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    trackEvent('paywall_shown', { tool_id: toolId, mode: 'char_limit' });
+                if (inputString.length > 4000) {
+                    alert('Maximum input length is 4,000 characters. Please shorten your text.');
                     return;
-                }
-
-                // Free email users who already used today's full unlock cannot generate again for free
-                if (!isPro() && isSubscribed()) {
-                    const usage = getUsageToday();
-                    if (usage.count >= FREE_DAILY_LIMIT) {
-                        showHardLimitMessage();
-                        return;
-                    }
                 }
 
                 cancelTypewriter();
@@ -424,34 +344,11 @@
                         }
                     }
 
-                    // ── Access decision ──────────────────────────────────
-                    if (isPro()) {
-                        trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'pro' });
-                        showFullResult(result);
-                        showChainIfReady(result);
-                        updateUsageDisplay();
-                    } else if (!localStorage.getItem('cs_free_trial_used')) {
-                        // One genuine full free result per browser
-                        localStorage.setItem('cs_free_trial_used', '1');
-                        trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'new_anon' });
-                        showFullResult(result);
-                        showChainIfReady(result);
-                    } else if (isSubscribed()) {
-                        const usage = getUsageToday();
-                        if (usage.count < FREE_DAILY_LIMIT) {
-                            trackEvent('tool_used', { tool_id: toolId, gate_shown: 'no', user_type: 'subscribed' });
-                            showFullResult(result);
-                            incrementUsage();
-                            showChainIfReady(result);
-                        } else {
-                            trackEvent('tool_used', { tool_id: toolId, gate_shown: 'yes', user_type: 'limit' });
-                            showPreviewWithGate(result, 'pro_only');
-                        }
-                    } else {
-                        // Trial used, no email yet → preview + email/Pro gate
-                        trackEvent('tool_used', { tool_id: toolId, gate_shown: 'yes', user_type: 'anon' });
-                        showPreviewWithGate(result, 'email');
-                    }
+                    // ── Direct Full Result (Unlocked) ─────────────────────
+                    trackEvent('tool_used', { tool_id: toolId, user_type: 'free' });
+                    showFullResult(result);
+                    showChainIfReady(result);
+                    incrementUsage();
                 } catch (error) {
                     console.error('[ai-tool]', error);
                     outputContent.innerHTML = '';
@@ -461,7 +358,10 @@
                     outputContent.appendChild(errEl);
                 } finally {
                     loadingIndicator.classList.add('hidden');
-                    generateBtn.disabled = false;
+                    // 3-second cooldown to prevent accidental rapid double clicking
+                    setTimeout(function () {
+                        generateBtn.disabled = false;
+                    }, 3000);
                 }
             });
         }

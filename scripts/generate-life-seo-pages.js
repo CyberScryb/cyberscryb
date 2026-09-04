@@ -262,7 +262,6 @@ function pageHtml(p) {
         <li><a href="/tools/">Tools</a></li>
         <li><a href="/guides/">Guides</a></li>
         <li><a href="/blog/">Blog</a></li>
-        <li><a href="/pro/" class="nav-pro">★ Pro</a></li>
       </ul>
     </div>
   </nav>

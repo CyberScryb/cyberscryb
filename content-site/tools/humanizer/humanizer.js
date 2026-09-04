@@ -1,10 +1,9 @@
 // Humanizer — rewrite + free/Pro gates + product UX (sample, actions, shortcuts)
 
 document.addEventListener('DOMContentLoaded', () => {
-    const FREE_CHAR_LIMIT = 500;
-    const FREE_DAILY_LIMIT = 1;
-    // Show enough of their real output that they care — not full blur, not full free
-    const PREVIEW_RATIO = 0.42;
+    const FREE_CHAR_LIMIT = 4000;
+    const FREE_DAILY_LIMIT = 10;
+    const PREVIEW_RATIO = 1.0;
     const STRIPE_MONTHLY = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
     const STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
     const TOOL_ID = 'humanizer';
@@ -99,28 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function updateUsageDisplay() {
         if (!usageCounter) return;
-        if (isPro()) {
-            usageCounter.textContent = 'Pro · unlimited';
-            usageCounter.style.color = '#3D9B6A';
-            return;
-        }
-        if (!isSubscribed()) {
-            usageCounter.textContent = localStorage.getItem('cs_free_trial_used')
-                ? 'Free run used'
-                : '1 free full result';
-            usageCounter.style.color = '#A39E94';
-            return;
-        }
-        const usage = getUsageToday();
-        const remaining = Math.max(0, FREE_DAILY_LIMIT - usage.count);
-        usageCounter.textContent = remaining + '/' + FREE_DAILY_LIMIT + ' free today';
-        usageCounter.style.color = remaining === 0 ? '#B91C1C' : '#A39E94';
+        usageCounter.textContent = 'Free · up to 4,000 chars';
+        usageCounter.style.color = '#3D9B6A';
     }
     function updateCharCounter() {
         if (!charCounter || !roboticText) return;
         const n = roboticText.value.length;
-        const over = !isPro() && n > FREE_CHAR_LIMIT;
-        charCounter.textContent = n + (isPro() ? ' chars' : ' / ' + FREE_CHAR_LIMIT + ' free');
+        const over = n > FREE_CHAR_LIMIT;
+        charCounter.textContent = n + ' / ' + FREE_CHAR_LIMIT + ' chars';
         charCounter.style.color = over ? '#B91C1C' : '#A39E94';
         if (rewriteBtn) rewriteBtn.classList.toggle('is-over-limit', over);
         if (rewriteBtnMobile) rewriteBtnMobile.classList.toggle('is-over-limit', over);
@@ -165,56 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return (outputContent && outputContent.innerText || '').trim();
     }
     function ensureProButtons(card) {
-        if (!card || card.querySelector('.cs-pro-gate-btns')) return;
-        const wrap = document.createElement('div');
-        wrap.className = 'cs-pro-gate-btns';
-        wrap.innerHTML =
-            '<p class="cs-gate-trust">Full rewrite · no daily cap · works on Gig + letters too</p>'
-            + '<a class="cs-pro-cta-primary" href="' + stripeUrl(STRIPE_MONTHLY, 'gate_monthly') + '" target="_blank" rel="noopener">Get Pro · $5/mo</a>'
-            + '<a class="cs-pro-cta-secondary" href="' + stripeUrl(STRIPE_LIFETIME, 'gate_lifetime') + '" target="_blank" rel="noopener">Lifetime · $29</a>'
-            + '<p class="cs-gate-fine">Stripe · 14-day refund · <a href="/pro/">Compare plans</a> · <a href="/pro-restore/">Already paid?</a></p>';
-        card.appendChild(wrap);
-        wrap.querySelectorAll('a[href*="stripe.com"]').forEach(function (a) {
-            a.addEventListener('click', function () {
-                trackEvent('pro_checkout_click', { tool_id: TOOL_ID, placement: 'result_gate' });
-            });
-        });
+        // Paywalls removed - tool is 100% free and unlocked
+        return;
     }
     function setGateMode(mode) {
-        if (!emailGate) return;
-        const card = emailGate.querySelector('.email-gate-card') || emailGate;
-        const form = gateForm || emailGate.querySelector('#gate-email-form');
-        const title = card.querySelector('h3');
-        const blurb = card.querySelector('p');
-        if (mode === 'pro_only') {
-            if (title) title.textContent = 'Free unlock used for today';
-            if (blurb) {
-                blurb.innerHTML = 'You can still read the start above. <strong>Pro ($5/mo)</strong> unlocks the full rewrite with no daily cap — same access on Gig Auto-Pilot and life letters.';
-            }
-            if (form) form.style.display = 'none';
-            if (gateStatus) gateStatus.textContent = '';
-        } else {
-            if (title) title.textContent = 'Rest of your rewrite is locked';
-            if (blurb) {
-                blurb.innerHTML = 'You can read the start above. Unlock the full text <strong>free once today with email</strong>, or go Pro ($5/mo) if you rewrite every day.';
-            }
-            if (form) form.style.display = '';
-        }
-        ensureProButtons(card);
+        if (emailGate) emailGate.classList.add('hidden');
     }
     function showPreviewWithGate(fullText, mode) {
-        pendingFullText = fullText;
-        lastFullText = fullText;
-        const preview = cutPreview(fullText);
-        typeInto(preview, 6, function () {
-            if (emailGate) {
-                emailGate.classList.remove('hidden');
-                setGateMode(mode || 'email');
-                trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: mode || 'email' });
-            }
-            updateStats(preview);
-            showResultActions(true);
-        });
+        showFullResult(fullText);
     }
     function showFullResult(fullText) {
         pendingFullText = '';
@@ -403,34 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!isPro() && text.length > FREE_CHAR_LIMIT) {
-            alert('Free tier is ' + FREE_CHAR_LIMIT + ' characters. Shorten the text, or open Pro for longer drafts.');
-            const tiers = document.getElementById('upgrade-tiers');
-            if (tiers) tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'char_limit' });
+        if (text.length > FREE_CHAR_LIMIT) {
+            alert('Maximum character limit is ' + FREE_CHAR_LIMIT + '. Please shorten your text.');
             return;
-        }
-
-        if (!isPro() && isSubscribed()) {
-            const usage = getUsageToday();
-            if (usage.count >= FREE_DAILY_LIMIT) {
-                if (emailGate) {
-                    emailGate.classList.remove('hidden');
-                    setGateMode('pro_only');
-                }
-                if (lastFullText) {
-                    outputContent.innerHTML = '';
-                    typeInto(cutPreview(lastFullText), 4, function () {
-                        updateStats(cutPreview(lastFullText));
-                    });
-                    pendingFullText = lastFullText;
-                } else {
-                    outputContent.innerHTML = '<span style="color:#B91C1C;">Free full unlock used for today.</span> '
-                        + '<span style="color:#A39E94;">Pro removes the daily cap.</span>';
-                }
-                trackEvent('paywall_shown', { tool_id: TOOL_ID, mode: 'daily_limit' });
-                return;
-            }
         }
 
         if (loadingIndicator) loadingIndicator.classList.remove('hidden');
@@ -465,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const errorData = await response.json();
                     errMsg = errorData.error || errMsg;
                 } catch (e) { /* ignore */ }
-                if (response.status === 429) errMsg = 'Busy right now — try again in a minute.';
+                if (response.status === 429) errMsg = 'Daily limit reached or too many requests. Please wait a moment or try again tomorrow!';
                 throw new Error(errMsg);
             }
 
@@ -473,27 +391,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const rewrittenText = data.result || '';
             if (!rewrittenText) throw new Error('Empty response. Please try again.');
 
-            if (isPro()) {
-                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'pro' });
-                showFullResult(rewrittenText);
-            } else if (!localStorage.getItem('cs_free_trial_used')) {
-                localStorage.setItem('cs_free_trial_used', '1');
-                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'new_anon' });
-                showFullResult(rewrittenText);
-            } else if (isSubscribed()) {
-                const usage = getUsageToday();
-                if (usage.count < FREE_DAILY_LIMIT) {
-                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'no', user_type: 'subscribed' });
-                    showFullResult(rewrittenText);
-                    incrementUsage();
-                } else {
-                    trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'limit' });
-                    showPreviewWithGate(rewrittenText, 'pro_only');
-                }
-            } else {
-                trackEvent('tool_used', { tool_id: TOOL_ID, gate_shown: 'yes', user_type: 'anon' });
-                showPreviewWithGate(rewrittenText, 'email');
-            }
+            trackEvent('tool_used', { tool_id: TOOL_ID, user_type: 'free' });
+            showFullResult(rewrittenText);
+            incrementUsage();
             updateUsageDisplay();
         } catch (error) {
             console.error('Error:', error);
@@ -502,14 +402,16 @@ document.addEventListener('DOMContentLoaded', () => {
             showResultActions(false);
         } finally {
             if (loadingIndicator) loadingIndicator.classList.add('hidden');
-            if (rewriteBtn) {
-                rewriteBtn.disabled = false;
-                rewriteBtn.classList.remove('is-loading');
-            }
-            if (rewriteBtnMobile) {
-                rewriteBtnMobile.disabled = false;
-                rewriteBtnMobile.classList.remove('is-loading');
-            }
+            setTimeout(function () {
+                if (rewriteBtn) {
+                    rewriteBtn.disabled = false;
+                    rewriteBtn.classList.remove('is-loading');
+                }
+                if (rewriteBtnMobile) {
+                    rewriteBtnMobile.disabled = false;
+                    rewriteBtnMobile.classList.remove('is-loading');
+                }
+            }, 3000);
         }
     }
 
