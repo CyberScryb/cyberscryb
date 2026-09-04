@@ -5,8 +5,10 @@ const root = path.resolve(__dirname, '..');
 const toolsDir = path.join(root, 'content-site', 'tools');
 let modified = 0;
 
-const regex = /(?:<!--[^\n]*AdSense[^\n]*-->\s*)?<script>\s*\(function\s*\(\)\s*\{\s*function\s+loadAdsense\(\)[\s\S]*?\}\)\(\);\s*<\/script>/gi;
-const replacement = '<!-- Google AdSense -->\n    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>';
+const regex =
+  /(?:<!--[^\n]*AdSense[^\n]*-->\s*)?<script>\s*\(function\s*\(\)\s*\{\s*function\s+loadAdsense\(\)[\s\S]*?\}\)\(\);\s*<\/script>/gi;
+const replacement =
+  '<!-- Google AdSense -->\n    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>';
 
 function walk(dir) {
   for (const item of fs.readdirSync(dir)) {

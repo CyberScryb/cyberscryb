@@ -23,11 +23,17 @@
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(el._t);
-    el._t = setTimeout(function () { el.classList.remove('show'); }, ms || 2400);
+    el._t = setTimeout(function () {
+      el.classList.remove('show');
+    }, ms || 2400);
   }
 
-  function qs(sel, root) { return (root || document).querySelector(sel); }
-  function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function qs(sel, root) {
+    return (root || document).querySelector(sel);
+  }
+  function qsa(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
 
   function mount(config) {
     var toolId = config.toolId;
@@ -70,7 +76,11 @@
       });
       if (tipEl && modeTips[mode]) {
         var t = modeTips[mode];
-        tipEl.innerHTML = '<strong>' + escapeText(t.title || modeLabels[mode] || 'Tip') + '</strong>' + escapeText(t.body || '');
+        tipEl.innerHTML =
+          '<strong>' +
+          escapeText(t.title || modeLabels[mode] || 'Tip') +
+          '</strong>' +
+          escapeText(t.body || '');
         tipEl.hidden = false;
       }
       if (!skipSave) scheduleSave();
@@ -79,7 +89,9 @@
     chips.forEach(function (chip) {
       chip.setAttribute('role', 'button');
       chip.setAttribute('tabindex', '0');
-      chip.addEventListener('click', function () { setMode(chip.getAttribute('data-mode')); });
+      chip.addEventListener('click', function () {
+        setMode(chip.getAttribute('data-mode'));
+      });
       chip.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -123,7 +135,9 @@
             scheduleSave();
             if (toolInput) toolInput.focus();
             return;
-          } catch (err) { /* fall through */ }
+          } catch (err) {
+            /* fall through */
+          }
         }
         // legacy data-ex story only
         if (toolInput) {
@@ -196,8 +210,10 @@
         readyEl.classList.toggle('is-good', pct >= 70);
       }
       if (readyMsg) {
-        if (pct >= 85) readyMsg.textContent = 'Strong brief — the AI has enough specifics to draft well.';
-        else if (pct >= 55) readyMsg.textContent = 'Decent start. Add: ' + missing.slice(0, 3).join(', ') + '.';
+        if (pct >= 85)
+          readyMsg.textContent = 'Strong brief — the AI has enough specifics to draft well.';
+        else if (pct >= 55)
+          readyMsg.textContent = 'Decent start. Add: ' + missing.slice(0, 3).join(', ') + '.';
         else readyMsg.textContent = 'Thin so far. Fill: ' + missing.slice(0, 4).join(', ') + '.';
       }
 
@@ -231,7 +247,7 @@
         mode: modeValue ? modeValue.value : '',
         story: toolInput ? toolInput.value : '',
         fields: fields,
-        ts: Date.now()
+        ts: Date.now(),
       };
     }
     function scheduleSave() {
@@ -241,7 +257,9 @@
           localStorage.setItem(draftKey, JSON.stringify(collectDraft()));
           if (draftBadge) draftBadge.classList.add('show');
           if (saveHint) saveHint.textContent = 'Draft saved locally';
-        } catch (e) { /* private mode */ }
+        } catch (e) {
+          /* private mode */
+        }
       }, 400);
     }
     function restoreDraft() {
@@ -272,7 +290,9 @@
         if (draftBadge) draftBadge.classList.add('show');
         toast('Restored your draft');
         return true;
-      } catch (e) { return false; }
+      } catch (e) {
+        return false;
+      }
     }
 
     if (clearBtn) {
@@ -280,14 +300,19 @@
         if (!confirm('Clear this form and saved draft?')) return;
         fieldIds.concat(['addressed-to', 'sender-name']).forEach(function (id) {
           var el = document.getElementById(id);
-          if (el) { el.value = ''; markFilled(el); }
+          if (el) {
+            el.value = '';
+            markFilled(el);
+          }
         });
         if (toolInput) {
           toolInput.value = '';
           toolInput.style.height = '';
           toolInput.dispatchEvent(new Event('input'));
         }
-        try { localStorage.removeItem(draftKey); } catch (e) {}
+        try {
+          localStorage.removeItem(draftKey);
+        } catch (e) {}
         if (draftBadge) draftBadge.classList.remove('show');
         if (chips[0]) setMode(chips[0].getAttribute('data-mode'));
         updateReady();
@@ -297,7 +322,9 @@
 
     // ── Interactive checklist ─────────────────────────────
     var checkState = {};
-    try { checkState = JSON.parse(localStorage.getItem(checkKey) || '{}'); } catch (e) {}
+    try {
+      checkState = JSON.parse(localStorage.getItem(checkKey) || '{}');
+    } catch (e) {}
     qsa('.lt-check li').forEach(function (li, idx) {
       var key = 'c' + idx;
       var cb = document.createElement('input');
@@ -312,9 +339,14 @@
       function toggle() {
         li.classList.toggle('is-done', cb.checked);
         checkState[key] = cb.checked;
-        try { localStorage.setItem(checkKey, JSON.stringify(checkState)); } catch (e) {}
+        try {
+          localStorage.setItem(checkKey, JSON.stringify(checkState));
+        } catch (e) {}
       }
-      cb.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+      cb.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggle();
+      });
       li.addEventListener('click', function (e) {
         if (e.target === cb) return;
         cb.checked = !cb.checked;
@@ -332,15 +364,24 @@
       fieldIds.forEach(function (id) {
         var el = document.getElementById(id);
         if (el && el.value.trim()) {
-          var label = el.getAttribute('data-label')
-            || (el.previousElementSibling ? el.previousElementSibling.textContent : id);
-          parts.push(label.replace(/\s+/g, ' ').trim().replace(/\s*\(optional\).*/i, '') + ': ' + el.value.trim());
+          var label =
+            el.getAttribute('data-label') ||
+            (el.previousElementSibling ? el.previousElementSibling.textContent : id);
+          parts.push(
+            label
+              .replace(/\s+/g, ' ')
+              .trim()
+              .replace(/\s*\(optional\).*/i, '') +
+              ': ' +
+              el.value.trim()
+          );
         }
       });
       var story = toolInput ? toolInput.value.trim() : '';
       if (story) parts.push('SITUATION DETAILS:\n' + story);
       var addressed = qs('#addressed-to');
-      if (addressed && addressed.value.trim()) parts.push('ADDRESSED TO: ' + addressed.value.trim());
+      if (addressed && addressed.value.trim())
+        parts.push('ADDRESSED TO: ' + addressed.value.trim());
       return parts.join('\n');
     }
 
@@ -356,7 +397,9 @@
     wireLoading(genBtn);
 
     if (stickyGen && genBtn) {
-      stickyGen.addEventListener('click', function () { genBtn.click(); });
+      stickyGen.addEventListener('click', function () {
+        genBtn.click();
+      });
     }
 
     // Ctrl/Cmd+Enter
@@ -379,7 +422,11 @@
         }
         var text = out.innerText || '';
         if (global.FormalExport && typeof global.FormalExport.exportWordDoc === 'function') {
-          global.FormalExport.exportWordDoc(text, toolId, (modeLabels && modeValue ? modeLabels[modeValue.value] : null) || 'Formal Document');
+          global.FormalExport.exportWordDoc(
+            text,
+            toolId,
+            (modeLabels && modeValue ? modeLabels[modeValue.value] : null) || 'Formal Document'
+          );
         } else {
           var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
           var a = document.createElement('a');
@@ -411,9 +458,10 @@
       collectParams: function () {
         return {
           mode: modeValue ? modeValue.value : '',
-          modeLabel: modeLabels[modeValue ? modeValue.value : ''] || (modeValue ? modeValue.value : ''),
+          modeLabel:
+            modeLabels[modeValue ? modeValue.value : ''] || (modeValue ? modeValue.value : ''),
           addressedTo: (qs('#addressed-to') || {}).value || '',
-          senderName: (qs('#sender-name') || {}).value || ''
+          senderName: (qs('#sender-name') || {}).value || '',
         };
       },
       onStats: function (text) {
@@ -425,7 +473,7 @@
           step3.classList.add('done');
         }
         if (downloadBtn) downloadBtn.disabled = false;
-      }
+      },
     });
 
     // Enhance copy feedback with toast

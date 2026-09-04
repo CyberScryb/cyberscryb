@@ -17,10 +17,12 @@
   function textToHtmlParagraphs(text) {
     if (!text) return '';
     var paragraphs = text.split(/\r?\n\r?\n/);
-    return paragraphs.map(function (p) {
-      var lines = p.split(/\r?\n/).map(escapeHtml).join('<br>\n');
-      return '<p style="margin:0 0 14pt 0; text-align:justify;">' + lines + '</p>';
-    }).join('\n');
+    return paragraphs
+      .map(function (p) {
+        var lines = p.split(/\r?\n/).map(escapeHtml).join('<br>\n');
+        return '<p style="margin:0 0 14pt 0; text-align:justify;">' + lines + '</p>';
+      })
+      .join('\n');
   }
 
   /**
@@ -34,14 +36,18 @@
     }
 
     var title = docTitle || 'Formal Communication';
-    var safeFilename = (filename || 'formal-document') + '-' + new Date().toISOString().slice(0, 10) + '.doc';
+    var safeFilename =
+      (filename || 'formal-document') + '-' + new Date().toISOString().slice(0, 10) + '.doc';
 
-    var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" ' +
+    var html =
+      '<html xmlns:o="urn:schemas-microsoft-com:office:office" ' +
       'xmlns:w="urn:schemas-microsoft-com:office:word" ' +
       'xmlns="http://www.w3.org/TR/REC-html40">\n' +
       '<head>\n' +
       '<meta charset="utf-8">\n' +
-      '<title>' + escapeHtml(title) + '</title>\n' +
+      '<title>' +
+      escapeHtml(title) +
+      '</title>\n' +
       '<!--[if gte mso 9]>\n' +
       '<xml>\n' +
       '<w:WordDocument>\n' +
@@ -120,7 +126,7 @@
 
   global.FormalExport = {
     exportWordDoc: exportWordDoc,
-    exportPDF: exportPDF
+    exportPDF: exportPDF,
   };
 
   // Wire into global printLetter if not already defined

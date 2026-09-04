@@ -20,10 +20,10 @@ claim below points at a real file.
 
 ### 1.1 Layout / markup
 
-| | Humanizer | Hardship Letter | JSON↔CSV | Password Checker |
-|---|---|---|---|---|
-| Structure | Single column: input pane → action bar (mode chips + CTA) → output pane. Deliberate choice, see `humanizer/DECISIONS.md` §1. | Two-column: `.humanizer-container` > `.input-panel` + `.output-panel` side by side. | Two-column: `.panels` > `.panel.input-panel` + `.convert-section` + `.panel.output-panel`. | Single card, no input/output split — it's live analysis of one field, not a transform. |
-| CSS source of layout | Real classes in `/tools/humanizer/style.css` (`.hz-shell`, `.hz-workspace`, `.hz-pane`, etc.) | **Almost entirely inline `style="..."` attributes.** The semantic classes it uses (`.panel`, `.input-panel`, `.output-panel`, `.humanizer-container`, `.step-badge`, `.icon-btn`, `.stats-bar`) are not styled by anything the page loads — see 1.1.1 below. | Dedicated `/tools/json-csv-converter/style.css`, self-consistent, not shared with any other tool. | Dedicated `/tools/password-checker/style.css`, self-consistent, not shared with any other tool. |
+|                      | Humanizer                                                                                                                    | Hardship Letter                                                                                                                                                                                                                                              | JSON↔CSV                                                                                          | Password Checker                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Structure            | Single column: input pane → action bar (mode chips + CTA) → output pane. Deliberate choice, see `humanizer/DECISIONS.md` §1. | Two-column: `.humanizer-container` > `.input-panel` + `.output-panel` side by side.                                                                                                                                                                          | Two-column: `.panels` > `.panel.input-panel` + `.convert-section` + `.panel.output-panel`.        | Single card, no input/output split — it's live analysis of one field, not a transform.          |
+| CSS source of layout | Real classes in `/tools/humanizer/style.css` (`.hz-shell`, `.hz-workspace`, `.hz-pane`, etc.)                                | **Almost entirely inline `style="..."` attributes.** The semantic classes it uses (`.panel`, `.input-panel`, `.output-panel`, `.humanizer-container`, `.step-badge`, `.icon-btn`, `.stats-bar`) are not styled by anything the page loads — see 1.1.1 below. | Dedicated `/tools/json-csv-converter/style.css`, self-consistent, not shared with any other tool. | Dedicated `/tools/password-checker/style.css`, self-consistent, not shared with any other tool. |
 
 **1.1.1 — Orphaned shared stylesheet (concrete bug, not just "inconsistency").**
 `public/tools/shared/ai-tool.css` exists, defines `.panel`, `.panel-header`, `.step-badge`,
@@ -73,7 +73,7 @@ the least informative one.
 - Both tools also fall back to a **native `alert()`** for two specific cases: empty input
   (`ai-tool.js` line ~347: `alert(config.emptyMessage || 'Please provide some input.')`) and
   over-the-free-character-limit (`ai-tool.js` and `humanizer.js` both call `alert(...)` directly).
-  Humanizer's own `runHumanize()` handles *empty* input better than the shared core does — it
+  Humanizer's own `runHumanize()` handles _empty_ input better than the shared core does — it
   shakes/highlights the textarea (`.input-error` class) instead of alerting — but still uses a
   blocking `alert()` for the char-limit case.
 - **JSON↔CSV** has the best-designed error of the four: a dedicated `.error-bar` component with
@@ -93,11 +93,11 @@ This is the one place the site has already done real design work, on humanizer s
 worth preserving, not reinventing:
 
 - Free trial = one full result, no email required.
-- On the *next* generation, output is cut to a real, substantive preview (not a one-line teaser
+- On the _next_ generation, output is cut to a real, substantive preview (not a one-line teaser
   — `PREVIEW_RATIO` is 0.42 on humanizer, 0.28 in the shared core), typed in, then the bottom of
   the pane blurs into a card: icon, headline, one-line value prop, an email-unlock form, and
   Pro/Lifetime CTAs injected below it.
-- The card's copy changes depending on *why* the user is gated (`setGateMode('email')` vs
+- The card's copy changes depending on _why_ the user is gated (`setGateMode('email')` vs
   `setGateMode('pro_only')`) — first-time-without-email vs already-used-today's-email-unlock.
 - On a hard daily-limit hit, `showHardLimitMessage()` additionally flashes a violet border
   around the `#upgrade-tiers` pricing block and smooth-scrolls to it.
@@ -115,7 +115,7 @@ This is good and the canonical shell keeps its shape. What's inconsistent/weak:
   `href`, while the JS-injected gate buttons build the same kind of URL through a `stripeUrl()`
   helper function. Two code paths generating the same class of link — if the Stripe link ever
   changes, one of them is easy to forget.
-- Hardship-letter's *static* pricing block (`#upgrade-tiers`, always visible below the tool, not
+- Hardship-letter's _static_ pricing block (`#upgrade-tiers`, always visible below the tool, not
   the in-context gate) is fully hand-inlined — three pricing cards worth of gradient/border/badge
   styling duplicated from scratch — rather than reusing humanizer's `.hz-pricing`/`.hz-price-card`
   classes, which already express the identical layout.
@@ -130,7 +130,7 @@ This is good and the canonical shell keeps its shape. What's inconsistent/weak:
   `--text-muted`, `--primary: #0F4D32` (dark green), `--primary-soft: #2A6B4A`,
   `--danger: #B91C1C`, `--border`, `--radius`, etc.
 - `humanizer/style.css` scopes a **second, parallel** token set on `.hz-app` (`--hz-bg`,
-  `--hz-surface`, `--hz-text`, `--hz-green`, `--hz-border`...) whose *values* are copy-pasted
+  `--hz-surface`, `--hz-text`, `--hz-green`, `--hz-border`...) whose _values_ are copy-pasted
   from the global tokens above (`--hz-green: #0F4D32` is exactly `--primary`, `--hz-border` is
   exactly `--border`'s rgba string) but under entirely different names. Same values, no shared
   source.
@@ -161,13 +161,13 @@ in §3–4 is written so both tool types (chip-driven and plain) can sit on one 
 top of `humanizer/index.html`) documents two choices that **do not match the CSS actually
 shipping today**:
 
-1. §2 of that doc: *"Humanizer workspace is light (near-white editors, dark text)... Dark cyber
-   UI signals 'dev toy,' not 'I trust this with client copy.'"* — but `humanizer/style.css`'s
+1. §2 of that doc: _"Humanizer workspace is light (near-white editors, dark text)... Dark cyber
+   UI signals 'dev toy,' not 'I trust this with client copy.'"_ — but `humanizer/style.css`'s
    `.hz-app` tokens are `--hz-bg: #0A0A0A`, `--hz-surface: #161616`, `--hz-text: #E8E2D6`: a dark
    near-black surface with light cream text. That's the opposite of what the decisions doc
    describes.
-2. §3 of that doc: *"Keep violet/purple as the only strong accent (don't invent a new brand
-   palette)... Competing neon cyan+red+purple splits attention."* — but the same stylesheet's
+2. §3 of that doc: _"Keep violet/purple as the only strong accent (don't invent a new brand
+   palette)... Competing neon cyan+red+purple splits attention."_ — but the same stylesheet's
    own header comment reads `/* Humanizer — near-black canvas, green actions, amber rare pay */`,
    and its primary interactive color token is `--hz-green: #0F4D32`, not violet.
 
@@ -190,8 +190,12 @@ One DOM shape, two supported profiles:
   surfaced by JS if an operation runs long enough to need it (see §4.3).
 
 ```html
-<section class="cs-tool-shell" aria-label="[Tool name] editor" data-tool-state="idle" data-tool-profile="gated">
-
+<section
+  class="cs-tool-shell"
+  aria-label="[Tool name] editor"
+  data-tool-state="idle"
+  data-tool-profile="gated"
+>
   <!-- Sticky top chrome: title + live free-usage status. Gated profile only. -->
   <div class="cs-tool-topbar">
     <div class="cs-tool-brand">
@@ -200,18 +204,21 @@ One DOM shape, two supported profiles:
     </div>
     <div class="cs-tool-topbar-actions">
       <!-- Always-visible free-usage status, not just shown after the cap is hit -->
-      <span class="cs-tool-usage-pill" id="cs-tool-usage" role="status" aria-live="polite">1 free full result</span>
+      <span class="cs-tool-usage-pill" id="cs-tool-usage" role="status" aria-live="polite"
+        >1 free full result</span
+      >
       <kbd class="cs-tool-kbd">⌘/Ctrl+Enter</kbd>
       <a href="/pro/" class="cs-tool-link-pro">Get Pro</a>
     </div>
   </div>
 
   <div class="cs-tool-workspace">
-
     <!-- ───────── INPUT AREA ───────── -->
     <div class="cs-tool-pane cs-tool-pane-input">
       <div class="cs-tool-pane-head">
-        <span class="cs-tool-pane-title">[e.g. "Original text" / "Your situation" / "Input JSON"]</span>
+        <span class="cs-tool-pane-title"
+          >[e.g. "Original text" / "Your situation" / "Input JSON"]</span
+        >
         <span class="cs-tool-meta" id="cs-tool-input-meta">0 / 500 free</span>
       </div>
 
@@ -228,10 +235,14 @@ One DOM shape, two supported profiles:
 
       <div class="cs-tool-pane-foot">
         <div class="cs-tool-foot-left">
-          <button type="button" class="cs-tool-ghost-btn" id="cs-tool-sample-btn">Try sample</button>
+          <button type="button" class="cs-tool-ghost-btn" id="cs-tool-sample-btn">
+            Try sample
+          </button>
           <!-- optional: style-match drawer, advanced-options toggle, etc. -->
         </div>
-        <span class="cs-tool-hint" id="cs-tool-input-hint">Free: 500 characters · Ctrl/⌘+Enter to run</span>
+        <span class="cs-tool-hint" id="cs-tool-input-hint"
+          >Free: 500 characters · Ctrl/⌘+Enter to run</span
+        >
       </div>
     </div>
 
@@ -258,8 +269,13 @@ One DOM shape, two supported profiles:
            bug-risk where loading/gate/error are three independently-toggled .hidden
            classes with no shared source of truth. -->
       <div class="cs-tool-output-wrap">
-
-        <div class="cs-tool-output-content" id="cs-tool-output" contenteditable="true" role="textbox" aria-label="Result">
+        <div
+          class="cs-tool-output-content"
+          id="cs-tool-output"
+          contenteditable="true"
+          role="textbox"
+          aria-label="Result"
+        >
           <span class="cs-tool-placeholder">Nothing here yet. …</span>
         </div>
 
@@ -270,7 +286,9 @@ One DOM shape, two supported profiles:
             <span class="cs-tool-skeleton-line"></span>
             <span class="cs-tool-skeleton-line cs-tool-skeleton-line--short"></span>
           </div>
-          <p class="cs-tool-loading-msg" id="cs-tool-loading-msg" role="status" aria-live="polite">Reading your input…</p>
+          <p class="cs-tool-loading-msg" id="cs-tool-loading-msg" role="status" aria-live="polite">
+            Reading your input…
+          </p>
         </div>
 
         <!-- ERROR (request-level) — see §4.2 -->
@@ -286,28 +304,61 @@ One DOM shape, two supported profiles:
           <div class="cs-tool-paywall-blur" aria-hidden="true"></div>
           <div class="cs-tool-paywall-card">
             <div class="cs-tool-paywall-icon" aria-hidden="true">✦</div>
-            <h3 class="cs-tool-paywall-title" id="cs-tool-paywall-title">Rest of your result is ready</h3>
-            <p class="cs-tool-paywall-body" id="cs-tool-paywall-body">You can read the start above. …</p>
+            <h3 class="cs-tool-paywall-title" id="cs-tool-paywall-title">
+              Rest of your result is ready
+            </h3>
+            <p class="cs-tool-paywall-body" id="cs-tool-paywall-body">
+              You can read the start above. …
+            </p>
 
             <form class="cs-tool-gate-form" id="cs-tool-gate-form">
               <label class="cs-tool-sr-only" for="cs-tool-gate-input">Email</label>
-              <input type="email" class="cs-tool-gate-input" id="cs-tool-gate-input" placeholder="you@example.com" required autocomplete="email">
-              <button type="submit" class="cs-tool-gate-submit" id="cs-tool-gate-submit">Unlock free</button>
+              <input
+                type="email"
+                class="cs-tool-gate-input"
+                id="cs-tool-gate-input"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+              />
+              <button type="submit" class="cs-tool-gate-submit" id="cs-tool-gate-submit">
+                Unlock free
+              </button>
             </form>
-            <p class="cs-tool-gate-status" id="cs-tool-gate-status" role="status" aria-live="polite"></p>
+            <p
+              class="cs-tool-gate-status"
+              id="cs-tool-gate-status"
+              role="status"
+              aria-live="polite"
+            ></p>
 
             <!-- Always part of the markup — not JS-injected. See 1.4. -->
             <div class="cs-tool-paywall-benefits">
               <p>Unlimited full results · no daily cap · cancel anytime</p>
             </div>
             <div class="cs-tool-paywall-actions">
-              <a class="cs-tool-cta-primary" id="cs-tool-cta-monthly" href="#" target="_blank" rel="noopener">Go Pro · $5/mo</a>
-              <a class="cs-tool-cta-secondary" id="cs-tool-cta-lifetime" href="#" target="_blank" rel="noopener">Lifetime · $29</a>
+              <a
+                class="cs-tool-cta-primary"
+                id="cs-tool-cta-monthly"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                >Go Pro · $5/mo</a
+              >
+              <a
+                class="cs-tool-cta-secondary"
+                id="cs-tool-cta-lifetime"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                >Lifetime · $29</a
+              >
             </div>
-            <p class="cs-tool-gate-fine">Stripe secure · 14-day refund · <a href="/pro-restore/">Already paid?</a></p>
+            <p class="cs-tool-gate-fine">
+              Stripe secure · 14-day refund · <a href="/pro-restore/">Already paid?</a>
+            </p>
           </div>
         </div>
-
       </div>
 
       <div class="cs-tool-result-actions" id="cs-tool-result-actions" hidden>
@@ -338,23 +389,52 @@ One DOM shape, two supported profiles:
     <div class="cs-tool-price-card">
       <div class="cs-tool-price-name">Free</div>
       <div class="cs-tool-price-amt">$0</div>
-      <ul><li>1 free full result</li><li>1 email unlock / day</li><li>500 character limit</li></ul>
+      <ul>
+        <li>1 free full result</li>
+        <li>1 email unlock / day</li>
+        <li>500 character limit</li>
+      </ul>
     </div>
     <div class="cs-tool-price-card cs-tool-price-featured">
       <div class="cs-tool-price-badge">Popular</div>
       <div class="cs-tool-price-name">Pro</div>
       <div class="cs-tool-price-amt">$5<span>/mo</span></div>
-      <ul><li>Unlimited full results</li><li>Longer inputs</li><li>All AI tools included</li><li>14-day refund</li></ul>
-      <a class="cs-tool-price-cta" id="cs-tool-price-cta-monthly" href="#" target="_blank" rel="noopener">Go Pro</a>
+      <ul>
+        <li>Unlimited full results</li>
+        <li>Longer inputs</li>
+        <li>All AI tools included</li>
+        <li>14-day refund</li>
+      </ul>
+      <a
+        class="cs-tool-price-cta"
+        id="cs-tool-price-cta-monthly"
+        href="#"
+        target="_blank"
+        rel="noopener"
+        >Go Pro</a
+      >
     </div>
     <div class="cs-tool-price-card">
       <div class="cs-tool-price-name">Lifetime</div>
       <div class="cs-tool-price-amt">$29</div>
-      <ul><li>Everything in Pro</li><li>One payment</li><li>No renewals</li></ul>
-      <a class="cs-tool-price-cta cs-tool-price-cta-outline" id="cs-tool-price-cta-lifetime" href="#" target="_blank" rel="noopener">Buy lifetime</a>
+      <ul>
+        <li>Everything in Pro</li>
+        <li>One payment</li>
+        <li>No renewals</li>
+      </ul>
+      <a
+        class="cs-tool-price-cta cs-tool-price-cta-outline"
+        id="cs-tool-price-cta-lifetime"
+        href="#"
+        target="_blank"
+        rel="noopener"
+        >Buy lifetime</a
+      >
     </div>
   </div>
-  <p class="cs-tool-restore">Already paid? <a href="/pro-restore/">Restore Pro on this device</a></p>
+  <p class="cs-tool-restore">
+    Already paid? <a href="/pro-restore/">Restore Pro on this device</a>
+  </p>
 </div>
 ```
 
@@ -378,12 +458,20 @@ error           → .cs-tool-error visible
 ```css
 .cs-tool-loading,
 .cs-tool-error,
-.cs-tool-paywall { display: none; }
+.cs-tool-paywall {
+  display: none;
+}
 
-.cs-tool-shell[data-tool-state="loading"] .cs-tool-loading { display: flex; }
-.cs-tool-shell[data-tool-state="error"] .cs-tool-error { display: flex; }
-.cs-tool-shell[data-tool-state="preview-gated"] .cs-tool-paywall,
-.cs-tool-shell[data-tool-state="hard-capped"] .cs-tool-paywall { display: flex; }
+.cs-tool-shell[data-tool-state='loading'] .cs-tool-loading {
+  display: flex;
+}
+.cs-tool-shell[data-tool-state='error'] .cs-tool-error {
+  display: flex;
+}
+.cs-tool-shell[data-tool-state='preview-gated'] .cs-tool-paywall,
+.cs-tool-shell[data-tool-state='hard-capped'] .cs-tool-paywall {
+  display: flex;
+}
 ```
 
 Changing state is a single `shell.dataset.toolState = 'loading'` from JS. This directly closes
@@ -418,7 +506,7 @@ duration of the call. Target state:
   .cs-tool-skeleton-line {
     display: block;
     height: 0.9em;
-    border-radius: var(--radius-token, /* tokens.css radius-sm */);
+    border-radius: var(--radius-token /* tokens.css radius-sm */);
     background: linear-gradient(
       90deg,
       var(--surface-token) 25%,
@@ -428,28 +516,34 @@ duration of the call. Target state:
     background-size: 200% 100%;
     animation: cs-tool-shimmer 1.4s ease-in-out infinite;
   }
-  .cs-tool-skeleton-line--short { width: 60%; }
+  .cs-tool-skeleton-line--short {
+    width: 60%;
+  }
   @keyframes cs-tool-shimmer {
-    from { background-position: 200% 0; }
-    to   { background-position: -200% 0; }
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
   }
   ```
 
 - **Rotating status messages, not one static line.** `#cs-tool-loading-msg` advances through a
   short array on an interval (~1.8–2.5s) instead of sitting on one sentence:
   `"Reading your input…"` → `"Drafting with [model]…"` → `"Polishing the wording…"` →
-  `"Almost done…"`. This is honest progress-*feel* without faking a literal percentage we can't
+  `"Almost done…"`. This is honest progress-_feel_ without faking a literal percentage we can't
   actually compute from a single non-streaming response — and it's the direct answer to a
   static caption looking identical for a 1s and an 8s call.
 - **Minimum-duration guard for instant tools.** JSON↔CSV and any other synchronous client-side
-  tool should only ever enter `data-tool-state="loading"` if the operation is *still running*
+  tool should only ever enter `data-tool-state="loading"` if the operation is _still running_
   after roughly 150ms (a short `setTimeout` before flipping state). Most conversions finish
   well under that and should go straight to `result` — this is what replaces JSON↔CSV's current
   one-off `.converting` button-flash with the same shared concept every other tool uses, instead
   of a bespoke substitute.
 - **Where streaming plugs in.** If `/api/rewrite` or `/api/ai-generate` ever moves to a streamed
   response (SSE or chunked fetch), the loading state's job shrinks to covering only the gap
-  before the *first* token — typically much shorter than full-completion wait. From the first
+  before the _first_ token — typically much shorter than full-completion wait. From the first
   chunk onward, state goes straight to `result` and tokens append directly into
   `#cs-tool-output`, with a blinking `.cs-tool-stream-cursor` at the tail end of the text to
   signal "still writing." No separate design is needed for that later — it's the same `result`
@@ -481,9 +575,9 @@ well) and formalized:
 
 - **Earned preview, never a hard wall.** The user always sees a real, substantive chunk of their
   actual result before any gate appears — never a one-line teaser, never a 100%-blocked box. The
-  gate sits *after* value was already delivered, not in front of it.
+  gate sits _after_ value was already delivered, not in front of it.
 - **Contextual copy, not one generic message.** `.cs-tool-paywall-title`/`-body` text depends on
-  *why* the user landed here — first free result already used (offer email unlock) vs. today's
+  _why_ the user landed here — first free result already used (offer email unlock) vs. today's
   email unlock already used too (offer Pro only, hide the email form). This is the one part of
   the current implementation that's already correct and just needs to stay that way.
 - **The CTA block is permanent markup, not a JS side-effect.** `.cs-tool-paywall-actions` (Pro +
@@ -496,7 +590,7 @@ well) and formalized:
   `humanizer.js` and `ai-tool.js`.
 - **One way to build a Stripe link, not two.** A single helper (something like
   `stripeUrl(base, toolId, placement)`, which already exists in both JS files independently)
-  should be the *only* thing that ever produces a Stripe href with UTM params — including the
+  should be the _only_ thing that ever produces a Stripe href with UTM params — including the
   static pricing block in §2, which today gets its UTM string hand-typed directly into HTML on
   humanizer and would otherwise silently drift from the JS-built version the same page also uses.
 - **Always-visible usage status.** `.cs-tool-usage-pill` in the topbar (§2) is not new — humanizer
@@ -529,22 +623,22 @@ tool-specific benefit in the Pro tier's `<ul>`) are data, not markup forks.
 
 ## 5. Before → after, by inconsistency
 
-| Found in audit (§1) | Resolved by |
-|---|---|
-| Hardship-letter's panel/button/pricing chrome is hand-duplicated inline; `ai-tool.css` is orphaned | One shell (§2) with real classes; nothing hand-inlined per tool |
-| Two-column vs one-column with no documented reasoning behind the difference | Single canonical structure follows humanizer's documented, conversion-tested choice (`DECISIONS.md` §1); still supports a dev-tool two-pane variant via CSS, not markup forking |
-| Loading = static spinner + one caption, identical for 1s and 8s calls | Skeleton + rotating status messages (§4.1) |
-| JSON↔CSV invented its own `.converting` flash instead of a shared concept | Same `data-tool-state="loading"`, gated by a 150ms minimum-duration guard so instant tools rarely show it |
-| No streaming story | Explicit note on where it plugs into the `result` state (§4.1) |
-| Error = plain red `<span>`, two different hardcoded reds (`#B91C1C` vs `#ef4444`) | One `.cs-tool-error` component, one token-driven color |
-| `alert()` used for empty input / char limit on both AI tools | `.cs-tool-field-error`, inline, never blocking |
-| No retry action after a failed request | `#cs-tool-retry-btn` in `.cs-tool-error` |
-| Paywall CTA markup is JS-injected, duplicated across two files | `.cs-tool-paywall-actions`/`-benefits` are permanent HTML (§2, §4.3) |
-| Stripe UTM links built two different ways on the same page | One `stripeUrl()` helper, used everywhere a Stripe link appears |
-| Hardship-letter's pricing cards hand-inlined from scratch | `.cs-tool-pricing` (§4.4), one component |
-| Three live accent systems (`--primary` green, `.hz-*` green, `#7b2cff` violet) | Shell uses placeholder token names only; no fourth value invented here (§1.5, §4 intro) |
-| `humanizer/DECISIONS.md` vs shipped CSS disagree on theme lightness and accent hue | Explicitly flagged (§1.7), not silently resolved |
-| Two parallel paywall/usage cores (`humanizer.js` vs `ai-tool.js`) | Shell + state contract (§3) designed so both tool shapes (chip-driven and plain) can run on one core |
+| Found in audit (§1)                                                                                | Resolved by                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hardship-letter's panel/button/pricing chrome is hand-duplicated inline; `ai-tool.css` is orphaned | One shell (§2) with real classes; nothing hand-inlined per tool                                                                                                                 |
+| Two-column vs one-column with no documented reasoning behind the difference                        | Single canonical structure follows humanizer's documented, conversion-tested choice (`DECISIONS.md` §1); still supports a dev-tool two-pane variant via CSS, not markup forking |
+| Loading = static spinner + one caption, identical for 1s and 8s calls                              | Skeleton + rotating status messages (§4.1)                                                                                                                                      |
+| JSON↔CSV invented its own `.converting` flash instead of a shared concept                          | Same `data-tool-state="loading"`, gated by a 150ms minimum-duration guard so instant tools rarely show it                                                                       |
+| No streaming story                                                                                 | Explicit note on where it plugs into the `result` state (§4.1)                                                                                                                  |
+| Error = plain red `<span>`, two different hardcoded reds (`#B91C1C` vs `#ef4444`)                  | One `.cs-tool-error` component, one token-driven color                                                                                                                          |
+| `alert()` used for empty input / char limit on both AI tools                                       | `.cs-tool-field-error`, inline, never blocking                                                                                                                                  |
+| No retry action after a failed request                                                             | `#cs-tool-retry-btn` in `.cs-tool-error`                                                                                                                                        |
+| Paywall CTA markup is JS-injected, duplicated across two files                                     | `.cs-tool-paywall-actions`/`-benefits` are permanent HTML (§2, §4.3)                                                                                                            |
+| Stripe UTM links built two different ways on the same page                                         | One `stripeUrl()` helper, used everywhere a Stripe link appears                                                                                                                 |
+| Hardship-letter's pricing cards hand-inlined from scratch                                          | `.cs-tool-pricing` (§4.4), one component                                                                                                                                        |
+| Three live accent systems (`--primary` green, `.hz-*` green, `#7b2cff` violet)                     | Shell uses placeholder token names only; no fourth value invented here (§1.5, §4 intro)                                                                                         |
+| `humanizer/DECISIONS.md` vs shipped CSS disagree on theme lightness and accent hue                 | Explicitly flagged (§1.7), not silently resolved                                                                                                                                |
+| Two parallel paywall/usage cores (`humanizer.js` vs `ai-tool.js`)                                  | Shell + state contract (§3) designed so both tool shapes (chip-driven and plain) can run on one core                                                                            |
 
 ---
 
@@ -556,7 +650,7 @@ tool-specific benefit in the Pro tier's `<ul>`) are data, not markup forks.
 - Does not resolve the `DECISIONS.md`-vs-shipped-CSS conflict in §1.7 — flagged for a decision,
   not guessed at.
 - Does not mandate collapsing every dev-utility tool into single-column; humanizer's single-column
-  choice was made for a *conversion* tool with a paywall funnel, and that reasoning doesn't
+  choice was made for a _conversion_ tool with a paywall funnel, and that reasoning doesn't
   automatically transfer to a bidirectional converter where seeing both formats at once is a real
   feature, not just legacy layout.
 - Does not merge `humanizer.js` and `ai-tool.js` into one file — that's implementation, this is

@@ -11,7 +11,8 @@
     "build:site": "python sync_and_build.py",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern node_modules --ignore-pattern .claude",
     "format": "prettier --write **/*.{js,jsx,ts,tsx,json,css,md,yml,yaml} --ignore-path .prettierignore",
-    "typecheck": "tsc --noEmit -p v2/tsconfig.json"
+    "typecheck": "tsc --noEmit -p v2/tsconfig.json",
+    "test:a11y": "node scripts/check-a11y.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   "homepage": "https://github.com/CyberScryb/cyberscryb#readme",
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "axe-core": "^4.13.0",
     "eslint": "^9.39.5",
     "globals": "^15.15.0",
     "jest": "^30.3.0",

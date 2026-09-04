@@ -17,7 +17,10 @@ let n = 0;
 for (const f of walk(root)) {
   let c = fs.readFileSync(f, 'utf8');
   const o = c;
-  c = c.replace(/font-family:\s*['"]Orbitron['"][^;"']*/gi, 'font-family: var(--font-brand), Georgia, serif');
+  c = c.replace(
+    /font-family:\s*['"]Orbitron['"][^;"']*/gi,
+    'font-family: var(--font-brand), Georgia, serif'
+  );
   c = c.replace(/style="color:#C2410C;font-weight:700;"/gi, 'class="nav-pro"');
   c = c.replace(/style="color:#C2410C;font-weight:700"/gi, 'class="nav-pro"');
   c = c.replace(/color:\s*#C2410C/gi, 'color: var(--primary-soft)');
@@ -39,10 +42,7 @@ console.log('updated', n, 'html files');
 // tools.html money lane + copy
 const toolsPath = path.join(root, 'tools.html');
 let tools = fs.readFileSync(toolsPath, 'utf8');
-tools = tools.replace(
-  /<h1 class="hero-title">[\s\S]*?<\/h1>/,
-  '<h1 class="hero-title">Tools</h1>'
-);
+tools = tools.replace(/<h1 class="hero-title">[\s\S]*?<\/h1>/, '<h1 class="hero-title">Tools</h1>');
 tools = tools.replace(
   /<p class="hero-subtitle">[\s\S]*?<\/p>/,
   '<p class="hero-subtitle">Writing and freelance tools first. Free browser utilities below. Search still covers everything.</p>'

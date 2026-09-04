@@ -449,7 +449,10 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap' });
-      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool: 'humanizer', reason: 'firestore_cap' });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', {
+        tool: 'humanizer',
+        reason: 'firestore_cap',
+      });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -539,7 +542,8 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
       await phCapture(getClientIdentifier(req), 'ai_tool_used', {
         tool: 'humanizer',
         tier,
-        output_length_bucket: rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
+        output_length_bucket:
+          rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
       });
 
       res.status(200).json({ result: rewrittenText });
@@ -699,20 +703,28 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
     }
 
     // Input validation: jobDescription must be non-empty string <= 4000 characters
-    if (!jobDescription || typeof jobDescription !== 'string' || jobDescription.trim().length === 0) {
+    if (
+      !jobDescription ||
+      typeof jobDescription !== 'string' ||
+      jobDescription.trim().length === 0
+    ) {
       return res.status(400).json({ error: 'Job description is required' });
     }
     if (jobDescription.length > 4000) {
       return res.status(400).json({ error: 'Job description exceeds 4,000 character limit' });
     }
-    const cleanProfile = typeof freelancerProfile === 'string' ? freelancerProfile.slice(0, 4000) : '';
+    const cleanProfile =
+      typeof freelancerProfile === 'string' ? freelancerProfile.slice(0, 4000) : '';
 
     // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
     const fsRateCheck = await checkFirestoreRateLimit(req);
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
-      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool: 'gig-work', reason: 'firestore_cap' });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', {
+        tool: 'gig-work',
+        reason: 'firestore_cap',
+      });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -1692,7 +1704,10 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
-      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool, reason: 'firestore_cap' });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', {
+        tool,
+        reason: 'firestore_cap',
+      });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -1741,7 +1756,11 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       if (!response.ok) {
         const errorData = await response.json();
         console.error(`Gemini API Error (${tool}):`, errorData);
-        await phCapture(getClientIdentifier(req), 'ai_generation_failed', { tool, tier, status: response.status });
+        await phCapture(getClientIdentifier(req), 'ai_generation_failed', {
+          tool,
+          tier,
+          status: response.status,
+        });
 
         let userMessage = 'AI service temporarily unavailable. Please try again.';
         if (response.status === 429) {
@@ -1770,13 +1789,18 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       await phCapture(getClientIdentifier(req), 'ai_tool_used', {
         tool,
         tier,
-        output_length_bucket: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
+        output_length_bucket:
+          result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
       });
 
       res.status(200).json({ result, tool });
     } catch (error) {
       console.error(`Function Error (${tool}):`, error);
-      await phCapture(getClientIdentifier(req), 'ai_generation_failed', { tool, tier, error_type: error.name || 'unknown' });
+      await phCapture(getClientIdentifier(req), 'ai_generation_failed', {
+        tool,
+        tier,
+        error_type: error.name || 'unknown',
+      });
       if (posthog) posthog.captureException(error, getClientIdentifier(req));
 
       if (error.name === 'AbortError') {
@@ -2554,19 +2578,20 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
 
       // Log it (anonymous aggregate)
       await logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
-      await phCapture(getClientIdentifier(req), 'pro_unlocked', { currency: session.currency, verification_method: 'stripe' });
+      await phCapture(getClientIdentifier(req), 'pro_unlocked', {
+        currency: session.currency,
+        verification_method: 'stripe',
+      });
 
       return res.status(200).json({ ok: true, status: 'paid' });
     } catch (err) {
       // Never leave the request hanging — always send a response so the client never spins forever
       console.error('[PRO] validateStripeSession failed:', err);
       if (!res.headersSent) {
-        return res
-          .status(500)
-          .json({
-            error:
-              'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.',
-          });
+        return res.status(500).json({
+          error:
+            'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.',
+        });
       }
     }
   });

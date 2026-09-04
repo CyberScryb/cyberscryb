@@ -1,7 +1,7 @@
 // Distill Extension Popup Script
 // Handles opening reader view and tracking
 
-(function() {
+(function () {
   'use strict';
 
   const openReaderBtn = document.getElementById('openReader');
@@ -11,12 +11,17 @@
     try {
       // Get the active tab
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      
+
       if (!tab || !tab.id) return;
 
       // Check if we can inject into this tab
       const url = tab.url || '';
-      if (url.startsWith('chrome://') || url.startsWith('chrome-extension://') || url.startsWith('edge://') || url.startsWith('about:')) {
+      if (
+        url.startsWith('chrome://') ||
+        url.startsWith('chrome-extension://') ||
+        url.startsWith('edge://') ||
+        url.startsWith('about:')
+      ) {
         // Can't inject into browser pages
         showNotification('Cannot use Distill on this page');
         return;
@@ -25,7 +30,7 @@
       // Inject the reader script
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ['content.js']
+        files: ['content.js'],
       });
 
       // Close popup

@@ -8,9 +8,9 @@
  * @throws {SyntaxError} If input is not valid JSON
  */
 function prettyPrint(text, indent) {
-    if (indent === undefined) indent = 2;
-    const obj = JSON.parse(text);
-    return JSON.stringify(obj, null, indent);
+  if (indent === undefined) indent = 2;
+  const obj = JSON.parse(text);
+  return JSON.stringify(obj, null, indent);
 }
 
 /**
@@ -20,8 +20,8 @@ function prettyPrint(text, indent) {
  * @throws {SyntaxError} If input is not valid JSON
  */
 function minify(text) {
-    const obj = JSON.parse(text);
-    return JSON.stringify(obj);
+  const obj = JSON.parse(text);
+  return JSON.stringify(obj);
 }
 
 /**
@@ -30,16 +30,16 @@ function minify(text) {
  * @returns {{ valid: boolean, type: string|null, error: string|null }}
  */
 function validate(text) {
-    try {
-        const obj = JSON.parse(text.trim());
-        const type = Array.isArray(obj) ? 'array' : typeof obj;
-        return { valid: true, type, error: null };
-    } catch (e) {
-        return { valid: false, type: null, error: e.message };
-    }
+  try {
+    const obj = JSON.parse(text.trim());
+    const type = Array.isArray(obj) ? 'array' : typeof obj;
+    return { valid: true, type, error: null };
+  } catch (e) {
+    return { valid: false, type: null, error: e.message };
+  }
 }
 
 // ── Module Exports (for testing) ─────────────────────────────────────────────
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { prettyPrint, minify, validate };
+  module.exports = { prettyPrint, minify, validate };
 }

@@ -9,149 +9,164 @@ let currentView = 'preview';
 mdInput.addEventListener('input', convert);
 
 function convert() {
-    const md = mdInput.value;
-    const html = markdownToHtml(md);
-    preview.innerHTML = html;
-    htmlOutput.value = html;
-    updateStats();
+  const md = mdInput.value;
+  const html = markdownToHtml(md);
+  preview.innerHTML = html;
+  htmlOutput.value = html;
+  updateStats();
 }
 
 function markdownToHtml(md) {
-    if (!md.trim()) return '';
+  if (!md.trim()) return '';
 
-    let html = md;
+  let html = md;
 
-    // Escape HTML entities in input (but preserve markdown)
-    html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Escape HTML entities in input (but preserve markdown)
+  html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    // Fenced code blocks (``` ... ```)
-    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
-        return `<pre><code class="language-${lang || 'text'}">${code.trimEnd()}</code></pre>`;
-    });
+  // Fenced code blocks (``` ... ```)
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+    return `<pre><code class="language-${lang || 'text'}">${code.trimEnd()}</code></pre>`;
+  });
 
-    // Tables
-    html = html.replace(/^(\|.+\|)\n(\|[\s:-]+\|)\n((?:\|.+\|\n?)+)/gm, (_, headerRow, alignRow, bodyRows) => {
-        const headers = headerRow.split('|').filter(c => c.trim());
-        const aligns = alignRow.split('|').filter(c => c.trim()).map(c => {
-            c = c.trim();
-            if (c.startsWith(':') && c.endsWith(':')) return 'center';
-            if (c.endsWith(':')) return 'right';
-            return 'left';
+  // Tables
+  html = html.replace(
+    /^(\|.+\|)\n(\|[\s:-]+\|)\n((?:\|.+\|\n?)+)/gm,
+    (_, headerRow, alignRow, bodyRows) => {
+      const headers = headerRow.split('|').filter(c => c.trim());
+      const aligns = alignRow
+        .split('|')
+        .filter(c => c.trim())
+        .map(c => {
+          c = c.trim();
+          if (c.startsWith(':') && c.endsWith(':')) return 'center';
+          if (c.endsWith(':')) return 'right';
+          return 'left';
         });
-        const rows = bodyRows.trim().split('\n');
+      const rows = bodyRows.trim().split('\n');
 
-        let table = '<table>\n<thead>\n<tr>\n';
-        headers.forEach((h, i) => {
-            table += `<th style="text-align:${aligns[i] || 'left'}">${h.trim()}</th>\n`;
+      let table = '<table>\n<thead>\n<tr>\n';
+      headers.forEach((h, i) => {
+        table += `<th style="text-align:${aligns[i] || 'left'}">${h.trim()}</th>\n`;
+      });
+      table += '</tr>\n</thead>\n<tbody>\n';
+      rows.forEach(row => {
+        const cells = row.split('|').filter(c => c.trim());
+        table += '<tr>\n';
+        cells.forEach((c, i) => {
+          table += `<td style="text-align:${aligns[i] || 'left'}">${c.trim()}</td>\n`;
         });
-        table += '</tr>\n</thead>\n<tbody>\n';
-        rows.forEach(row => {
-            const cells = row.split('|').filter(c => c.trim());
-            table += '<tr>\n';
-            cells.forEach((c, i) => {
-                table += `<td style="text-align:${aligns[i] || 'left'}">${c.trim()}</td>\n`;
-            });
-            table += '</tr>\n';
-        });
-        table += '</tbody>\n</table>';
-        return table;
-    });
+        table += '</tr>\n';
+      });
+      table += '</tbody>\n</table>';
+      return table;
+    }
+  );
 
-    // Blockquotes
-    html = html.replace(/^(?:&gt;|>) (.+)$/gm, '<blockquote><p>$1</p></blockquote>');
-    // Merge adjacent blockquotes
-    html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
+  // Blockquotes
+  html = html.replace(/^(?:&gt;|>) (.+)$/gm, '<blockquote><p>$1</p></blockquote>');
+  // Merge adjacent blockquotes
+  html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
 
-    // Headers
-    html = html.replace(/^###### (.+)$/gm, '<h6>$1</h6>');
-    html = html.replace(/^##### (.+)$/gm, '<h5>$1</h5>');
-    html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
-    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  // Headers
+  html = html.replace(/^###### (.+)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
-    // Horizontal rules
-    html = html.replace(/^(?:---|\*\*\*|___)$/gm, '<hr>');
+  // Horizontal rules
+  html = html.replace(/^(?:---|\*\*\*|___)$/gm, '<hr>');
 
-    // Task lists
-    html = html.replace(/^- \[x\] (.+)$/gm, '<li><input type="checkbox" checked disabled> $1</li>');
-    html = html.replace(/^- \[ \] (.+)$/gm, '<li><input type="checkbox" disabled> $1</li>');
+  // Task lists
+  html = html.replace(/^- \[x\] (.+)$/gm, '<li><input type="checkbox" checked disabled> $1</li>');
+  html = html.replace(/^- \[ \] (.+)$/gm, '<li><input type="checkbox" disabled> $1</li>');
 
-    // Unordered lists
-    html = html.replace(/^[*-] (.+)$/gm, '<li>$1</li>');
+  // Unordered lists
+  html = html.replace(/^[*-] (.+)$/gm, '<li>$1</li>');
 
-    // Ordered lists
-    html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  // Ordered lists
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
 
-    // Wrap consecutive <li> in <ul> or <ol>
-    html = html.replace(/((?:<li>(?:(?!<li>).)*<\/li>\n?)+)/g, (match) => {
-        if (match.includes('type="checkbox"')) {
-            return `<ul style="list-style:none;padding-left:0">\n${match}</ul>`;
-        }
-        return `<ul>\n${match}</ul>`;
-    });
+  // Wrap consecutive <li> in <ul> or <ol>
+  html = html.replace(/((?:<li>(?:(?!<li>).)*<\/li>\n?)+)/g, match => {
+    if (match.includes('type="checkbox"')) {
+      return `<ul style="list-style:none;padding-left:0">\n${match}</ul>`;
+    }
+    return `<ul>\n${match}</ul>`;
+  });
 
-    // Images
-    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  // Images
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
 
-    // Links
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Links
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener">$1</a>'
+  );
 
-    // Bold + Italic
-    html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
-    html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+  // Bold + Italic
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
 
-    // Bold
-    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
 
-    // Italic
-    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+  // Italic
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/_(.+?)_/g, '<em>$1</em>');
 
-    // Strikethrough
-    html = html.replace(/~~(.+?)~~/g, '<del>$1</del>');
+  // Strikethrough
+  html = html.replace(/~~(.+?)~~/g, '<del>$1</del>');
 
-    // Inline code (after code blocks to avoid conflicts)
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Inline code (after code blocks to avoid conflicts)
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    // Paragraphs — wrap standalone lines not already in HTML tags
-    html = html.split('\n\n').map(block => {
-        block = block.trim();
-        if (!block) return '';
-        if (/^<(?:h[1-6]|ul|ol|li|table|blockquote|pre|hr|img|div)/.test(block)) return block;
-        if (!/</.test(block) || /^(?:<strong>|<em>|<a |<code>|<del>)/.test(block)) {
-            return `<p>${block.replace(/\n/g, '<br>')}</p>`;
-        }
-        return block;
-    }).join('\n\n');
+  // Paragraphs — wrap standalone lines not already in HTML tags
+  html = html
+    .split('\n\n')
+    .map(block => {
+      block = block.trim();
+      if (!block) return '';
+      if (/^<(?:h[1-6]|ul|ol|li|table|blockquote|pre|hr|img|div)/.test(block)) return block;
+      if (!/</.test(block) || /^(?:<strong>|<em>|<a |<code>|<del>)/.test(block)) {
+        return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+      }
+      return block;
+    })
+    .join('\n\n');
 
-    return html.trim();
+  return html.trim();
 }
 
 function setView(view) {
-    currentView = view;
-    document.querySelectorAll('.view-tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
-    document.getElementById('outputLabel').textContent = view === 'preview' ? 'Preview' : 'HTML Source';
+  currentView = view;
+  document
+    .querySelectorAll('.view-tab')
+    .forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  document.getElementById('outputLabel').textContent =
+    view === 'preview' ? 'Preview' : 'HTML Source';
 
-    if (view === 'preview') {
-        preview.classList.remove('hidden');
-        htmlOutput.classList.add('hidden');
-    } else {
-        preview.classList.add('hidden');
-        htmlOutput.classList.remove('hidden');
-    }
+  if (view === 'preview') {
+    preview.classList.remove('hidden');
+    htmlOutput.classList.add('hidden');
+  } else {
+    preview.classList.add('hidden');
+    htmlOutput.classList.remove('hidden');
+  }
 }
 
 function clearAll() {
-    mdInput.value = '';
-    preview.innerHTML = '';
-    htmlOutput.value = '';
-    updateStats();
+  mdInput.value = '';
+  preview.innerHTML = '';
+  htmlOutput.value = '';
+  updateStats();
 }
 
 function loadSample() {
-    mdInput.value = `# CyberScryb Documentation
+  mdInput.value = `# CyberScryb Documentation
 
 ## Getting Started
 
@@ -195,28 +210,28 @@ console.log(csv);
 Visit [cyberscryb.com](https://cyberscryb.com) for more tools.
 
 *Built with ❤️ by Nate*`;
-    convert();
+  convert();
 }
 
 function copyHtml() {
-    const html = htmlOutput.value || preview.innerHTML;
-    if (!html) return;
-    navigator.clipboard.writeText(html);
-    const btns = document.querySelectorAll('.icon-btn');
-    const copyBtn = btns[2]; // "Copy HTML" button
-    copyBtn.textContent = 'Copied!';
-    copyBtn.classList.add('success');
-    setTimeout(() => {
-        copyBtn.textContent = 'Copy HTML';
-        copyBtn.classList.remove('success');
-    }, 2000);
+  const html = htmlOutput.value || preview.innerHTML;
+  if (!html) return;
+  navigator.clipboard.writeText(html);
+  const btns = document.querySelectorAll('.icon-btn');
+  const copyBtn = btns[2]; // "Copy HTML" button
+  copyBtn.textContent = 'Copied!';
+  copyBtn.classList.add('success');
+  setTimeout(() => {
+    copyBtn.textContent = 'Copy HTML';
+    copyBtn.classList.remove('success');
+  }, 2000);
 }
 
 function downloadHtml() {
-    const html = htmlOutput.value || preview.innerHTML;
-    if (!html) return;
+  const html = htmlOutput.value || preview.innerHTML;
+  if (!html) return;
 
-    const fullHtml = `<!DOCTYPE html>
+  const fullHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -240,18 +255,19 @@ ${html}
 </body>
 </html>`;
 
-    const blob = new Blob([fullHtml], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'converted.html';
-    a.click();
-    URL.revokeObjectURL(url);
+  const blob = new Blob([fullHtml], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'converted.html';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function updateStats() {
-    document.getElementById('mdStats').textContent = `${mdInput.value.length} chars`;
-    document.getElementById('htmlStats').textContent = `${(htmlOutput.value || preview.innerHTML).length} chars`;
+  document.getElementById('mdStats').textContent = `${mdInput.value.length} chars`;
+  document.getElementById('htmlStats').textContent =
+    `${(htmlOutput.value || preview.innerHTML).length} chars`;
 }
 
 // Auto-convert on load if there's existing content

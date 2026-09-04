@@ -1473,6 +1473,8 @@ function generateSitemap(generatedPages) {
     'court-admissible-parenting-plan-guide',
     'how-to-dispute-medical-bill-coding-errors-charity-care-2026.html',
     'how-to-get-security-deposit-back-state-deadlines-2026.html',
+    'how-to-cancel-gym-membership-ftc-click-to-cancel-2026.html',
+    'how-to-dispute-hoa-fines-selective-enforcement-2026.html',
   ];
   blogPosts.forEach(post => {
     const postPath = post.endsWith('.html') ? post : `${post}/`;

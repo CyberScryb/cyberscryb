@@ -30,4 +30,3 @@ export const POSTS: BlogPostItem[] = [
     isCustomComponent: true,
   },
 ];
-
