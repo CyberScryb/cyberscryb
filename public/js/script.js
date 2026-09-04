@@ -253,25 +253,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Newsletter form handling
 const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function (e) {
-        const email = this.querySelector('input[type="email"]').value;
+    newsletterForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const input = this.querySelector('input[type="email"]');
+        const email = input ? input.value.trim() : '';
         if (!email) {
-            e.preventDefault();
-            alert('Please enter a valid email address.');
             return;
         }
 
-        // Add loading state
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Subscribing...';
         submitBtn.disabled = true;
 
-        // Reset after a delay (form will actually submit)
-        setTimeout(() => {
+        let msgEl = this.parentNode.querySelector('.cs-newsletter-msg');
+        if (!msgEl) {
+            msgEl = document.createElement('div');
+            msgEl.className = 'cs-newsletter-msg';
+            msgEl.style.marginTop = '0.75rem';
+            msgEl.style.fontSize = '0.9rem';
+            msgEl.style.textAlign = 'center';
+            this.parentNode.appendChild(msgEl);
+        }
+
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'homepage' })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                input.value = '';
+                submitBtn.textContent = 'Subscribed!';
+                msgEl.style.color = '#15803d';
+                msgEl.textContent = 'You are on the list! Thank you for subscribing.';
+            } else {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                msgEl.style.color = '#b91c1c';
+                msgEl.textContent = data.error || 'Something went wrong. Please try again.';
+            }
+        } catch (err) {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        }, 2000);
+            msgEl.style.color = '#b91c1c';
+            msgEl.textContent = 'Network error. Please try again.';
+        }
     });
 }
 
@@ -454,3 +482,80 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
         });
     });
 })();
+
+// ─── Automatic Draft Persistence (User Retention) ───
+(function () {
+    if (typeof window === 'undefined' || !window.localStorage) return;
+
+    var path = window.location.pathname;
+    if (!path.includes('/tools/')) return;
+
+    var storageKey = 'cs_draft_' + path.replace(/\/+$/, '');
+
+    function findInput() {
+        return (
+            document.getElementById('robotic-text') ||
+            document.getElementById('tool-input') ||
+            document.getElementById('input-text') ||
+            document.getElementById('job-description') ||
+            document.querySelector('.hz-editor:not(.hz-output)') ||
+            document.querySelector('textarea.tool-input') ||
+            document.querySelector('textarea')
+        );
+    }
+
+    function initDraft() {
+        var input = findInput();
+        if (!input) return;
+
+        // Restore draft if present and input is empty
+        try {
+            var saved = localStorage.getItem(storageKey);
+            if (saved && !input.value.trim()) {
+                input.value = saved;
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+
+                var banner = document.createElement('div');
+                banner.className = 'cs-draft-notice';
+                banner.style.cssText =
+                    'font-size:0.8rem; color:#854d0e; background:#fef9c3; border:1px solid #fef08a; padding:6px 12px; border-radius:6px; margin:8px 0; display:flex; justify-content:space-between; align-items:center;';
+                banner.innerHTML =
+                    '<span>Draft restored from your last visit</span><button type="button" style="background:none;border:none;color:#a16207;cursor:pointer;font-size:0.8rem;text-decoration:underline;">Clear</button>';
+
+                banner.querySelector('button').addEventListener('click', function () {
+                    localStorage.removeItem(storageKey);
+                    input.value = '';
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    banner.remove();
+                });
+
+                if (input.parentNode) {
+                    input.parentNode.insertBefore(banner, input);
+                }
+            }
+        } catch (e) {}
+
+        // Debounced autosave
+        var saveTimeout = null;
+        input.addEventListener('input', function () {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(function () {
+                try {
+                    var val = input.value.trim();
+                    if (val) {
+                        localStorage.setItem(storageKey, val);
+                    } else {
+                        localStorage.removeItem(storageKey);
+                    }
+                } catch (e) {}
+            }, 500);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraft);
+    } else {
+        initDraft();
+    }
+})();
+

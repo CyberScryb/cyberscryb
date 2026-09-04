@@ -12,6 +12,37 @@ function getSecret(envVar) {
   return process.env[envVar];
 }
 
+// ─── PostHog Analytics ──────────────────────────────────
+const { PostHog } = require('posthog-node');
+
+let posthog = null;
+const _phKey = process.env.POSTHOG_API_KEY;
+const _phHost = process.env.POSTHOG_HOST;
+
+if (_phKey && _phHost) {
+  posthog = new PostHog(_phKey, {
+    host: _phHost,
+    flushAt: 1,
+    flushInterval: 0,
+    enableExceptionAutocapture: true,
+  });
+} else if (process.env.NODE_ENV === 'development') {
+  console.error(
+    'POSTHOG_API_KEY variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once POSTHOG_API_KEY is configured'
+  );
+}
+
+// Enqueue a PostHog event and immediately flush (required in serverless / Firebase Functions).
+async function phCapture(distinctId, event, properties) {
+  if (!posthog) return;
+  try {
+    posthog.capture({ distinctId, event, properties });
+    await posthog.flush();
+  } catch (err) {
+    console.error('[PostHog] capture error:', err && err.message);
+  }
+}
+
 // ─── Privacy-Compliant Analytics ────────────────────────
 // Aggregate-only event logging. No user identification, no tracking.
 // Compliant with GDPR, CCPA, and privacy-first principles.
@@ -370,6 +401,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap' });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool: 'humanizer', reason: 'firestore_cap' });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -455,6 +487,11 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         tier,
         outputLength:
           rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
+      });
+      await phCapture(getClientIdentifier(req), 'ai_tool_used', {
+        tool: 'humanizer',
+        tier,
+        output_length_bucket: rewrittenText.length > 1000 ? '1000+' : rewrittenText.length > 500 ? '500-1000' : '0-500',
       });
 
       res.status(200).json({ result: rewrittenText });
@@ -618,6 +655,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool: 'gig-work' });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool: 'gig-work', reason: 'firestore_cap' });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -694,6 +732,7 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
       const resultJson = JSON.parse(rawText); // Parse the internal JSON
 
       await logEvent('ai_success', { tool: 'gig-work', tier });
+      await phCapture(getClientIdentifier(req), 'ai_tool_used', { tool: 'gig-work', tier });
 
       res.status(200).json(resultJson);
     } catch (error) {
@@ -1596,6 +1635,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
     if (!fsRateCheck.allowed) {
       console.warn(`[FIRESTORE_RATE_LIMIT] Request blocked - ${fsRateCheck.reason}`);
       await logEvent('rate_limit_hit', { reason: 'firestore_cap', tool });
+      await phCapture(getClientIdentifier(req), 'rate_limit_exceeded', { tool, reason: 'firestore_cap' });
       return res
         .status(429)
         .set('Retry-After', fsRateCheck.retryAfter?.toString() || '60')
@@ -1644,6 +1684,7 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       if (!response.ok) {
         const errorData = await response.json();
         console.error(`Gemini API Error (${tool}):`, errorData);
+        await phCapture(getClientIdentifier(req), 'ai_generation_failed', { tool, tier, status: response.status });
 
         let userMessage = 'AI service temporarily unavailable. Please try again.';
         if (response.status === 429) {
@@ -1669,10 +1710,17 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
         tier,
         outputLength: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
       });
+      await phCapture(getClientIdentifier(req), 'ai_tool_used', {
+        tool,
+        tier,
+        output_length_bucket: result.length > 1000 ? '1000+' : result.length > 500 ? '500-1000' : '0-500',
+      });
 
       res.status(200).json({ result, tool });
     } catch (error) {
       console.error(`Function Error (${tool}):`, error);
+      await phCapture(getClientIdentifier(req), 'ai_generation_failed', { tool, tier, error_type: error.name || 'unknown' });
+      if (posthog) posthog.captureException(error, getClientIdentifier(req));
 
       if (error.name === 'AbortError') {
         return res.status(408).json({
@@ -2248,6 +2296,10 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
         source: source || 'homepage',
         substack: substack.ok ? 'ok' : 'fail',
       });
+      await phCapture(getClientIdentifier(req), 'email_captured', {
+        source: source || 'homepage',
+        substack_synced: !!substack.ok,
+      });
 
       return res.status(200).json({
         message: 'subscribed',
@@ -2445,6 +2497,7 @@ exports.validateStripeSession = functions.https.onRequest((req, res) => {
 
       // Log it (anonymous aggregate)
       await logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
+      await phCapture(getClientIdentifier(req), 'pro_unlocked', { currency: session.currency, verification_method: 'stripe' });
 
       return res.status(200).json({ ok: true, status: 'paid' });
     } catch (err) {

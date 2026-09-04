@@ -18,11 +18,11 @@
   }
   // Don't show upgrade pill if already Pro
   if (cookiePro()) return;
-
   if (document.getElementById('cs-pro-modal-bg')) return;
+
   var path = location.pathname || '';
   var utmSource = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '_').replace(/\.html$/i, '') || 'home';
-  var isCna = (window.CS_WIDGET === 'cna') || /caregiver|hardship|appeal|custody|resume-bullets/.test(path);
+  var isCna = (window.CS_WIDGET === 'cna');
 
   var STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
   var STRIPE_MONTHLY  = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
