@@ -159,6 +159,62 @@
             ],
             triggerSelector: '#qr-output, canvas',
             disclosure: 'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.'
+        },
+        'resume-bullets': {
+            heading: '💼 Maximize Your Interview Callbacks',
+            message: 'Strong action bullets are essential. Test your full resume against automated Applicant Tracking Systems (ATS).',
+            links: [
+                {
+                    text: 'Grammarly Career Polish →',
+                    url: 'https://grammarly.com/?utm_source=cyberscryb&utm_medium=affiliate',
+                    primary: true,
+                    subtitle: 'Grammar, tone & executive clarity'
+                }
+            ],
+            triggerSelector: '#output-text, .output-content, .lt-out',
+            disclosure: 'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.'
+        },
+        'landlord-tenant-letter': {
+            heading: '⚖️ Protect Your Legal Paper Trail',
+            message: 'Always deliver formal notices via Certified Mail with Return Receipt or hand delivery with signed acknowledgment for legal proof.',
+            links: [
+                {
+                    text: 'Find Local Tenant Legal Aid →',
+                    url: 'https://www.lawhelp.org/',
+                    primary: true,
+                    subtitle: 'LawHelp.org — Free legal aid directory by state'
+                }
+            ],
+            triggerSelector: '#output-text, .lt-out',
+            disclosure: 'Resource disclosure: Free public legal aid directories for tenant self-advocacy.'
+        },
+        'utility-shutoff-letter': {
+            heading: '💡 Emergency Utility Assistance',
+            message: 'If you face immediate shutoff, apply for LIHEAP crisis grants and call 2-1-1 for local utility relief programs.',
+            links: [
+                {
+                    text: 'Find LIHEAP Grants by State →',
+                    url: 'https://www.acf.hhs.gov/ocs/low-income-home-energy-assistance-program-liheap',
+                    primary: true,
+                    subtitle: 'Official HHS Low-Income Energy Assistance'
+                }
+            ],
+            triggerSelector: '#output-text, .lt-out',
+            disclosure: 'Public benefit resource: Official federal & state energy assistance programs.'
+        },
+        'insurance-denial-appeal': {
+            heading: '🏥 Patient Rights & External Review',
+            message: 'Under federal ACA rules, if your internal insurance appeal is denied, you have the right to an External Independent Medical Review by an outside doctor.',
+            links: [
+                {
+                    text: 'State Insurance Commissioner Directory →',
+                    url: 'https://content.naic.org/state-insurance-departments',
+                    primary: true,
+                    subtitle: 'NAIC — File a state regulatory complaint'
+                }
+            ],
+            triggerSelector: '#output-text, .lt-out',
+            disclosure: 'Regulatory guidance: National Association of Insurance Commissioners.'
         }
     };
 

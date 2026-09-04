@@ -367,8 +367,10 @@
       }
     });
 
-    // ── Download ──────────────────────────────────────────
+    // ── Download (Word Doc .doc) ──────────────────────────
     if (downloadBtn) {
+      downloadBtn.textContent = 'Word (.doc)';
+      downloadBtn.title = 'Download formatted Word Document (.doc)';
       downloadBtn.addEventListener('click', function () {
         var out = qs('#output-text');
         if (!out || out.querySelector('.placeholder')) {
@@ -376,17 +378,21 @@
           return;
         }
         var text = out.innerText || '';
-        var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = toolId + '-' + new Date().toISOString().slice(0, 10) + '.txt';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function () {
-          URL.revokeObjectURL(a.href);
-          a.remove();
-        }, 500);
-        toast('Downloaded .txt');
+        if (global.FormalExport && typeof global.FormalExport.exportWordDoc === 'function') {
+          global.FormalExport.exportWordDoc(text, toolId, (modeLabels && modeValue ? modeLabels[modeValue.value] : null) || 'Formal Document');
+        } else {
+          var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+          var a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = toolId + '-' + new Date().toISOString().slice(0, 10) + '.txt';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function () {
+            URL.revokeObjectURL(a.href);
+            a.remove();
+          }, 500);
+          toast('Downloaded .txt');
+        }
       });
     }
 

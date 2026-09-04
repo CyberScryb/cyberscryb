@@ -34,33 +34,8 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense &mdash; delayed load to protect LCP -->
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            var robots = document.querySelector('meta[name="robots"]');
-            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
-                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
-                return;
-            }
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
-        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <style media="print">
         * { visibility: hidden; }
         #output-text, #output-text * { visibility: visible; }
@@ -206,6 +181,7 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button onclick="FormalExport.exportWordDoc(document.getElementById('output-text').innerText, 'appeal-letter', 'Formal Appeal Letter')" class="icon-btn" title="Download formatted Word Document (.doc)" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Word (.doc)</button>
                                 <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Print / PDF</button>
                             </div>
                         </div>
@@ -423,6 +399,7 @@
 
     <script src="/js/script.js?v=20260806linen3"></script>
     <script src="/tools/shared/ai-tool.js?v=20260819p0fix"></script>
+    <script src="/tools/shared/formal-export.js?v=20260904"></script>
     <script src="/tools/appeal-letter/appeal-letter.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20260819p0fix"></script>
 <script src="/js/cs-pro-widget.js?v=20260806linen3" defer></script>

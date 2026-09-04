@@ -39,34 +39,6 @@
     <link rel="icon" type="image/png" href="/mascot-icon.png">
     <link rel="stylesheet" href="/css/style.css?v=20260806linen3">
 
-    <!-- Google AdSense &mdash; delayed load to protect LCP -->
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            var robots = document.querySelector('meta[name="robots"]');
-            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
-                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
-                return;
-            }
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        // Load after page is interactive OR on first user interaction (whichever comes first)
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
-        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
 
     <!-- Google Analytics 4 -->
     <script>

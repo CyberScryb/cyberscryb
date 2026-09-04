@@ -30,33 +30,8 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <!-- Google AdSense &mdash; delayed load to protect LCP -->
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            var robots = document.querySelector('meta[name="robots"]');
-            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
-                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
-                return;
-            }
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
-        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CyberScryb Epoch Converter","url":"https://cyberscryb.com/tools/epoch-converter/","description":"Convert Unix/Epoch timestamps to human-readable dates and vice versa.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"CyberScryb","url":"https://cyberscryb.com"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cyberscryb.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://cyberscryb.com/tools/"},{"@type":"ListItem","position":3,"name":"Epoch Converter","item":"https://cyberscryb.com/tools/epoch-converter/"}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (also called Epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's widely used in programming to represent dates and times as a single number."}},{"@type":"Question","name":"What is the Year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Systems using 32-bit signed integers to store Unix timestamps will overflow on January 19, 2038 at 03:14:07 UTC. Modern systems use 64-bit integers which won't overflow for billions of years."}},{"@type":"Question","name":"Does this tool support milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool auto-detects whether your input is in seconds or milliseconds. It displays both formats in the output."}}]}</script>

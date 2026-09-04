@@ -1176,28 +1176,8 @@ function generatePage(page) {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/guides/guide.css">
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
-    <!-- Google AdSense — delayed load to protect LCP -->
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 2500);
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        }
-        ['scroll', 'mousemove', 'touchstart', 'click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <script type="application/ld+json">
     ${jsonLd}
     </script>
@@ -1391,8 +1371,10 @@ function generateSitemap(generatedPages) {
     'fluid-sim',
     'gig-auto-pilot',
     'glassmorphism-generator',
+    'gym-cancellation-letter',
     'hardship-letter',
     'hash-generator',
+    'hoa-dispute-letter',
     'html-entity',
     'humanizer',
     'insurance-denial-appeal',
@@ -1522,8 +1504,10 @@ function manageRobotsMeta() {
     'fluid-sim',
     'gig-auto-pilot',
     'glassmorphism-generator',
+    'gym-cancellation-letter',
     'hardship-letter',
     'hash-generator',
+    'hoa-dispute-letter',
     'html-entity',
     'humanizer',
     'insurance-denial-appeal',

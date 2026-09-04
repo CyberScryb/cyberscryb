@@ -527,3 +527,67 @@
   border-radius: 999px;
 }
 .lt-draft-badge.show { display: inline-flex; }
+
+/* ── Formal Print & PDF Stylesheet ───────────────────────── */
+@media print {
+  /* Hide all website navigation, sidebars, form inputs, ads, buttons */
+  header, nav, footer, .navbar, .lt-trust, .lt-card-h, .lt-stats,
+  .lt-card:first-child, .lt-sticky-gen, .lt-checklist-band, .lt-faq,
+  .lt-related, .lt-toolbar, .email-gate, #lt-toast, #cs-pro-open,
+  #cs-pro-modal-bg, .cookie-banner, #iubenda-cs-banner, .lt-actions,
+  .lt-gen-sub, .lt-hint, .lt-disc, [aria-hidden="true"],
+  .cs-pro-pill, .cs-affiliate-card, script, noscript {
+    display: none !important;
+  }
+
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    font-family: "Times New Roman", Times, Georgia, serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .lt-wrap {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .lt-grid {
+    display: block !important;
+  }
+
+  .lt-grid > .lt-rail {
+    width: 100% !important;
+  }
+
+  .lt-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .lt-body {
+    padding: 0 !important;
+  }
+
+  .lt-out {
+    border: none !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    font-family: "Times New Roman", Times, Georgia, serif !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: #000000 !important;
+    white-space: pre-wrap !important;
+  }
+
+  @page {
+    margin: 1in;
+    size: letter portrait;
+  }
+}

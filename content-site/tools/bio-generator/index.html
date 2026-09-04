@@ -34,29 +34,8 @@
     gtag('config', 'G-LS46B9J1XK');
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    <script>
-    (function() {
-        function loadAdsense() {
-            if (window._adsenseLoaded) return;
-            var robots = document.querySelector('meta[name="robots"]');
-            if (robots && robots.getAttribute('content') && robots.getAttribute('content').toLowerCase().includes('noindex')) {
-                console.log('AdSense: Indexation pruning active (noindex). Skipping ad loading.');
-                return;
-            }
-            window._adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292';
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-        }
-        if (document.readyState === 'complete') setTimeout(loadAdsense, 2500);
-        else window.addEventListener('load', function() { setTimeout(loadAdsense, 2500); });
-        ['scroll','mousemove','touchstart','click'].forEach(function(ev) {
-            window.addEventListener(ev, loadAdsense, { once: true, passive: true });
-        });
-    })();
-    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
