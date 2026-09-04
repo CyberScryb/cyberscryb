@@ -93,7 +93,7 @@
 
 <body>
     <!-- Navigation Breadcrumbs -->
-    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:var(--text-faint);">
         <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
@@ -261,7 +261,7 @@
         </section>
 
         <!-- Educational content (SEO / AdSense Wedge) -->
-        <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:#cbd5e1; font-family:'Inter',sans-serif; line-height:1.75;">
+        <section class="content-section" style="max-width:760px; margin:4rem auto; padding:0 1.5rem; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.75;">
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding CSS Glassmorphism in Modern UI Design</h2>
             <p>Glassmorphism has emerged as one of the most popular styling trends in contemporary user interface design, finding heavy usage in operating systems like macOS, Windows 11 (Fluent Design's Acrylic), and popular premium websites. The aesthetic is defined by a semi-transparent, frosted glass look that allows backgrounds, gradients, and images to show through with a soft blur. This establishes vertical depth, visual hierarchy, and an upscale, premium digital atmosphere.</p>
             <p>The key to achieving a realistic glassmorphic card lies in combining four core CSS layers: a semi-transparent background color, a backing blur filter, a light border to emulate glass refraction, and a subtle drop shadow to ground the element above its backdrop. Without these elements in balance, the UI component will look like a simple, low-contrast transparent container rather than true frosted glass.</p>
@@ -269,7 +269,7 @@
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Backdrop-Filter Mechanism</h2>
             <p>Before the introduction of the CSS <code>backdrop-filter</code> property, developers had to resort to duplicate, blurred background images or heavy JavaScript hacks to create a frosted glass effect. Today, the <code>backdrop-filter</code> property applies graphical effects (like blur or color shifting) to the area directly behind an element. Unlike standard <code>filter</code> (which blurs the element itself and all its text/child content), <code>backdrop-filter</code> only impacts the layer beneath the element, keeping your foreground text completely sharp and legible.</p>
             <p>Here is the syntax used to create a baseline glass card:</p>
-            <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
+            <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:var(--text-muted); border: 1px solid rgba(255,255,255,0.05);">
 .glass-card {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
@@ -279,7 +279,7 @@
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Browser Compatibility &amp; Vendor Prefixes</h2>
             <p>While <code>backdrop-filter</code> is widely supported by modern browsers, Safari requires the vendor-prefixed version: <code>-webkit-backdrop-filter</code>. If this prefix is omitted, users on iOS Devices or macOS Safari will see plain transparent boxes without any blur effect, which destroys the aesthetic and can lead to severe legibility issues. CyberScryb's CSS Glassmorphism Generator automatically writes both standard and vendor-prefixed rules so your design remains compatible across all devices.</p>
             <p>For browsers that do not support backdrop filters at all (like older legacy mobile browsers or custom embedded WebViews), you should implement a fallback pattern using a feature query. This ensures that the card background receives a higher solid opacity if the backdrop filter fails to execute:</p>
-            <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
+            <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:var(--text-muted); border: 1px solid rgba(255,255,255,0.05);">
 /* Fallback style for older browsers */
 .glass-card {
     background: rgba(20, 20, 25, 0.85); /* Solid dark fallback */
@@ -352,7 +352,7 @@
     <script src="/tools/glassmorphism-generator/script.js"></script>
     <script src="/tools/shared/email-capture.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20260819p0fix"></script>
-    <script src="/js/cs-pro-widget.js?v=20260806linen3" defer></script>
+    
 </body>
 
 </html>

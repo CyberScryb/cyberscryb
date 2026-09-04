@@ -107,7 +107,7 @@
             font-family: 'JetBrains Mono', monospace;
         }
         .jwt-meta div { margin: 0.2rem 0; }
-        .jwt-meta .label { color: #555555; }
+        .jwt-meta .label { color:var(--text-faint); }
         .jwt-meta .value { color: var(--text-muted); }
         .jwt-meta .expired { color: #ff6b6b; }
         .jwt-meta .valid { color: #10b981; }
@@ -118,7 +118,7 @@
         }
         .section-box h3 {
             font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
-            color: #555555; margin: 0 0 0.8rem 0;
+            color:var(--text-faint); margin: 0 0 0.8rem 0;
         }
         .section-box h3.header { color: var(--primary-soft); }
         .section-box h3.payload { color: #a855f7; }
@@ -135,7 +135,7 @@
         .code-box .js { color: #10b981; }
         .code-box .jn { color: #a855f7; }
         .code-box .jb { color: #f59e0b; }
-        .code-box .jp { color: #555555; }
+        .code-box .jp { color:var(--text-faint); }
 
         .action-bar { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
         .action-btn {
@@ -217,14 +217,14 @@
         <div class="jwt-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">JWT Decoder</h1>
-                <p style="color: #555555; margin-bottom: 0;">Decode JSON Web Tokens to inspect the header, payload, and signature. Tokens are decoded entirely in your browser.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Decode JSON Web Tokens to inspect the header, payload, and signature. Tokens are decoded entirely in your browser.</p>
             </div>
 
             <div class="warning-banner">
                 <strong>⚠ Security notice:</strong> This tool only <em>decodes</em> JWTs &mdash; it does <strong>not</strong> verify signatures. Signature verification requires the signing key and should only be done on a trusted backend. Your token never leaves this browser tab.
             </div>
 
-            <label style="display:block; font-size:0.75rem; color:#555555; text-transform:uppercase; letter-spacing:0.08em; margin:1rem 0 0.5rem;" for="jwt-input">JWT Token</label>
+            <label style="display:block; font-size:0.75rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin:1rem 0 0.5rem;" for="jwt-input">JWT Token</label>
             <textarea id="jwt-input" spellcheck="false" autocomplete="off" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"></textarea>
 
             <div class="action-bar">
@@ -484,7 +484,7 @@
         decode();
     })();
     </script>
-<script src="/js/cs-pro-widget.js?v=20260806linen3" defer></script>
+
 </body>
 
 </html>

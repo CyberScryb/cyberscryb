@@ -70,7 +70,7 @@
 </head>
 
 <body>
-    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:#555555;">
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:70px auto 0; padding:1rem 2rem 0; font-size:0.85rem; color:var(--text-faint);">
         <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
         <span style="margin:0 8px; color:#444;">›</span>
         <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
@@ -113,12 +113,11 @@
             <div class="hz-topbar hz-sticky-chrome" id="hz-tool-chrome">
                 <div class="hz-brand">
                     <h1>AI Humanizer</h1>
-                    <p id="hz-empty-hint">Paste text from ChatGPT or Claude. We rewrite the stiff parts so it reads like a person wrote it. One full free run to start.</p>
+                    <p id="hz-empty-hint">Paste text from ChatGPT or Claude. We rewrite the stiff parts so it reads like a person wrote it. 100% free.</p>
                 </div>
                 <div class="hz-topbar-actions">
-                    <span id="usage-counter" class="hz-pill">1 free full result</span>
+                    <span id="usage-counter" class="hz-pill">100% Free · 4,000 char cap</span>
                     <kbd class="hz-kbd" title="Keyboard">⌘/Ctrl+Enter</kbd>
-                    <a href="/pro/" class="hz-link-pro">Get Pro</a>
                 </div>
             </div>
 
@@ -139,7 +138,7 @@
                 <div class="hz-pane hz-pane-input">
                     <div class="hz-pane-head">
                         <span class="hz-pane-title">Original text</span>
-                        <span id="char-counter" class="hz-meta">0 / 500 free</span>
+                        <span id="char-counter" class="hz-meta">0 / 4,000 chars</span>
                     </div>
                     <textarea id="robotic-text" class="hz-editor"
                         placeholder="Paste the draft you want fixed…"
@@ -154,7 +153,7 @@
                                 <span class="chevron" aria-hidden="true">▾</span>
                             </button>
                         </div>
-                        <span class="hz-hint">Free: 500 characters · Ctrl/⌘+Enter to run</span>
+                        <span class="hz-hint">Up to 4,000 characters · Ctrl/⌘+Enter to run</span>
                     </div>
                     <div id="style-samples-body" class="hz-style-drawer">
                         <p class="hz-hint" style="margin-bottom:10px;">Optional. A few lines you wrote helps the rewrite sound like you — not generic AI.</p>
@@ -192,20 +191,6 @@
                         <div id="output-text" class="hz-editor hz-output output-content" contenteditable="true" role="textbox" aria-label="Humanized result">
                             <span class="placeholder">Nothing here yet. Paste a draft above — or hit Try sample — then Humanize.</span>
                         </div>
-                        <div id="email-gate" class="email-gate hidden">
-                            <div class="email-gate-blur"></div>
-                            <div class="email-gate-card">
-                                <div class="email-gate-icon">✦</div>
-                                <h3>Rest of your rewrite is locked</h3>
-                                <p>You can read the start above. Unlock the full text free once today with email, or go Pro if you need this every day.</p>
-                                <form id="gate-email-form" class="gate-form">
-                                    <input type="email" id="gate-email-input" placeholder="you@example.com" required autocomplete="email" aria-label="you@example.com">
-                                    <button type="submit" id="gate-submit-btn">Unlock free</button>
-                                </form>
-                                <div id="gate-status" class="gate-status"></div>
-                                <p class="gate-fine">No spam · 14-day refund on Pro · Stripe</p>
-                            </div>
-                        </div>
                         <div id="loading-indicator" class="hz-loading hidden">
                             <div class="spinner"></div>
                             <p>Working…</p>
@@ -216,7 +201,6 @@
                         <button type="button" id="copy-btn" class="hz-action-btn">Copy</button>
                         <button type="button" id="download-btn" class="hz-action-btn">Download .txt</button>
                         <button type="button" id="again-btn" class="hz-action-btn">Run again</button>
-                        <a href="/pro/" class="hz-action-btn hz-action-pro">Open Pro</a>
                     </div>
                 </div>
             </div>
@@ -224,51 +208,10 @@
             <!-- Idea 10: mobile thumb bar -->
             <div class="hz-mobile-bar" id="hz-mobile-bar" aria-label="Quick actions">
                 <button type="button" id="humanize-btn-mobile" class="hz-primary-btn">Humanize</button>
-                <a href="/pro/" class="hz-link-pro hz-mobile-pro">Pro</a>
             </div>
         </section>
 
         <section class="hz-below">
-            <div id="upgrade-tiers" class="hz-pricing">
-                <div class="hz-pricing-head">
-                    <h2>Unlimited when you need it</h2>
-                    <p>Full rewrites every time. Cancel anytime.</p>
-                </div>
-                <div class="hz-price-grid">
-                    <div class="hz-price-card">
-                        <div class="hz-price-name">Free</div>
-                        <div class="hz-price-amt">$0</div>
-                        <ul>
-                            <li>1 free full sample</li>
-                            <li>1 email unlock / day</li>
-                            <li>500 character limit</li>
-                        </ul>
-                    </div>
-                    <div class="hz-price-card hz-price-featured">
-                        <div class="hz-price-badge">Popular</div>
-                        <div class="hz-price-name">Pro</div>
-                        <div class="hz-price-amt">$5<span>/mo</span></div>
-                        <ul>
-                            <li>Unlimited full rewrites</li>
-                            <li>Longer inputs</li>
-                            <li>Gig Auto-Pilot included</li>
-                            <li>14-day refund</li>
-                        </ul>
-                        <a class="hz-price-cta" href="https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b?utm_source=humanizer&utm_medium=pricing&utm_campaign=pro_conversion" target="_blank" rel="noopener">Go Pro</a>
-                    </div>
-                    <div class="hz-price-card">
-                        <div class="hz-price-name">Lifetime</div>
-                        <div class="hz-price-amt">$29</div>
-                        <ul>
-                            <li>Everything in Pro</li>
-                            <li>One payment</li>
-                            <li>No renewals</li>
-                        </ul>
-                        <a class="hz-price-cta hz-price-cta-outline" href="https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08?utm_source=humanizer&utm_medium=pricing&utm_campaign=pro_conversion" target="_blank" rel="noopener">Buy lifetime</a>
-                    </div>
-                </div>
-                <p class="hz-restore">Already paid? <a href="/pro-restore/">Restore Pro on this device</a></p>
-            </div>
 
             <div class="hz-compare">
                 <h2>Why people use this</h2>
@@ -291,7 +234,7 @@
             <p class="hz-related">Related: <a href="/tools/humanizer/rewrite-chatgpt-text/">Rewrite ChatGPT text</a> · <a href="/tools/humanizer/remove-ai-detection/">Remove AI detection</a></p>
         </section>
 
-        <section class="content-section hz-seo" style="max-width:760px;margin:2rem auto 1rem;padding:0 1.5rem;color:#cbd5e1;font-family:var(--font-sans),system-ui,sans-serif;line-height:1.7;">
+        <section class="content-section hz-seo" style="max-width:760px;margin:2rem auto 1rem;padding:0 1.5rem;color:var(--text-muted);font-family:var(--font-sans),system-ui,sans-serif;line-height:1.7;">
             <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why this AI Humanizer Exists</h2>
             <p>AI detection got serious in 2025. Turnitin rolled out their second-generation detector across most major universities, GPTZero hit version 5, and Originality.ai 4 became the standard in freelance content marketplaces. The result: writers who lean on GPT-5, Claude, or Gemini for first drafts started getting their work flagged at rates close to 95 percent when they submitted the raw output. Students were called into academic integrity hearings. Freelancers were dropped from agencies. Marketers watched their blog posts get demoted in search.</p>
             <p>The CyberScryb Anti-AI Humanizer was built specifically against the patterns those detectors flag. It rewrites your text to break the statistical fingerprint that gives away machine-generated writing: low perplexity, predictable sentence lengths, over-reliance on transition words like "moreover" and "furthermore," compulsive contraction expansion, and surgically clean punctuation. The output reads natural because real human writing isn't statistically clean &mdash; it bounces around, contradicts itself, uses fragments, and skips perfect grammar in places.</p>
@@ -315,7 +258,7 @@
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
         <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will AI detectors flag text humanized by this tool?","acceptedAnswer":{"@type":"Answer","text":"On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. That said, detection technology improves monthly. No tool can guarantee permanent invisibility — if you need text no detector will ever flag, write it yourself."}},{"@type":"Question","name":"Does this work on text from ChatGPT, Claude, and Gemini?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works on AI-generated text from any source — ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites surface patterns (sentence structure, word choice, rhythm) that detectors look for, regardless of which AI wrote the original."}},{"@type":"Question","name":"Is the humanized text original or will it trigger plagiarism checks?","acceptedAnswer":{"@type":"Answer","text":"Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources in a plagiarism database. However, the underlying ideas still came from the original AI output — if you're submitting academic work, check your institution's policy on AI-assisted writing."}},{"@type":"Question","name":"How many times can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"Free users get 1 full sample, then 1 full unlock per day with email, with a 500-character input limit. Pro users get unlimited full rewrites with no character cap."}},{"@type":"Question","name":"Does submitting my email sign me up for a newsletter?","acceptedAnswer":{"@type":"Answer","text":"Yes — you'll get occasional updates about new tools and improvements. You can unsubscribe any time. We don't sell email addresses or spam."}},{"@type":"Question","name":"Does this bypass Turnitin's AI detection?","acceptedAnswer":{"@type":"Answer","text":"In most cases, yes — but no tool can guarantee 100% accuracy against every detector or every version of a detector. This humanizer is effective because it rewrites at the sentence structure level, not just word substitution. Always review the output before submitting anything important."}},{"@type":"Question","name":"How is this different from asking ChatGPT to rewrite this more naturally?","acceptedAnswer":{"@type":"Answer","text":"When you ask ChatGPT to rewrite its own output, the result is still generated by the same model, with the same statistical patterns detectors flag. This tool uses your style samples as a constraint, forcing the output toward your actual writing voice instead."}},{"@type":"Question","name":"Will the meaning of my text change?","acceptedAnswer":{"@type":"Answer","text":"The tool is instructed to preserve meaning while changing phrasing and structure. In rare cases with very technical text, a word or phrase may shift slightly. Always read the output carefully before using it."}}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will AI detectors flag text humanized by this tool?","acceptedAnswer":{"@type":"Answer","text":"On current major detectors (GPTZero, Turnitin, Originality.ai), humanized output typically scores below the detection threshold. That said, detection technology improves monthly. No tool can guarantee permanent invisibility — if you need text no detector will ever flag, write it yourself."}},{"@type":"Question","name":"Does this work on text from ChatGPT, Claude, and Gemini?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works on AI-generated text from any source — ChatGPT, Claude, Gemini, Copilot, or any other model. The humanizer rewrites surface patterns (sentence structure, word choice, rhythm) that detectors look for, regardless of which AI wrote the original."}},{"@type":"Question","name":"Is the humanized text original or will it trigger plagiarism checks?","acceptedAnswer":{"@type":"Answer","text":"Plagiarism checkers look for copied text, not AI patterns. Humanized output is rewritten, not copied, so it won't match existing sources in a plagiarism database. However, the underlying ideas still came from the original AI output — if you're submitting academic work, check your institution's policy on AI-assisted writing."}},{"@type":"Question","name":"How many times can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"Free users get 1 full sample, then 1 full unlock per day 100% free, with a 500-character input limit. Pro users get unlimited full rewrites with no character cap."}},{"@type":"Question","name":"Does submitting my email sign me up for a newsletter?","acceptedAnswer":{"@type":"Answer","text":"Yes — you'll get occasional updates about new tools and improvements. You can unsubscribe any time. We don't sell email addresses or spam."}},{"@type":"Question","name":"Does this bypass Turnitin's AI detection?","acceptedAnswer":{"@type":"Answer","text":"In most cases, yes — but no tool can guarantee 100% accuracy against every detector or every version of a detector. This humanizer is effective because it rewrites at the sentence structure level, not just word substitution. Always review the output before submitting anything important."}},{"@type":"Question","name":"How is this different from asking ChatGPT to rewrite this more naturally?","acceptedAnswer":{"@type":"Answer","text":"When you ask ChatGPT to rewrite its own output, the result is still generated by the same model, with the same statistical patterns detectors flag. This tool uses your style samples as a constraint, forcing the output toward your actual writing voice instead."}},{"@type":"Question","name":"Will the meaning of my text change?","acceptedAnswer":{"@type":"Answer","text":"The tool is instructed to preserve meaning while changing phrasing and structure. In rare cases with very technical text, a word or phrase may shift slightly. Always read the output carefully before using it."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Will AI detectors flag text humanized by this tool?</summary>
@@ -331,7 +274,7 @@
             </details>
             <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#2C1810; cursor:pointer;">How many times can I use it for free?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Free users get 1 full sample, then 1 full unlock per day with email (500-character input limit). Pro users get unlimited full rewrites with no character cap.</p>
+                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Free users get 1 full sample, then 1 full unlock per day 100% free (500-character input limit). Pro users get unlimited full rewrites with no character cap.</p>
             </details>
             <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
                 <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Does submitting my email sign me up for a newsletter?</summary>
@@ -469,7 +412,7 @@
   </p>
 </nav>
 <script src="/js/cs-pro-status.js?v=20260821a" defer></script>
-<script src="/js/cs-pro-widget.js?v=20260806linen3" defer></script>
+
 </body>
 
 </html>

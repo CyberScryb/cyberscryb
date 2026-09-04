@@ -460,7 +460,7 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
 
         // Buttons / CTAs: slight magnetic pull toward cursor
         var magnets = document.querySelectorAll(
-            '.cta-button, .cta-attention, .cta-secondary, .btn-primary, .btn-attention, .hz-primary-btn, .nav-menu a.nav-pro, .nav-menu a[href="/pro/"]'
+            '.cta-button, .cta-attention, .cta-secondary, .btn-primary, .btn-attention, .hz-primary-btn, .lt-gen'
         );
         magnets.forEach(function (el) {
             el.classList.add('cs-magnetic');
@@ -477,7 +477,7 @@ document.querySelectorAll('a[href*="affiliate"], a[href*="ref="], a[href*="?utm_
         });
 
         // Nav links: mark for CSS underline grow
-        document.querySelectorAll('.nav-menu a:not([href="/pro/"]):not(.nav-pro)').forEach(function (a) {
+        document.querySelectorAll('.nav-menu a').forEach(function (a) {
             a.classList.add('cs-nav-link');
         });
     });

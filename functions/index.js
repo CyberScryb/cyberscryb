@@ -341,7 +341,7 @@ async function checkFirestoreRateLimit(req) {
       );
       return {
         allowed: false,
-        reason: `Daily limit reached (${ipCap} requests). Upgrade or try tomorrow.`,
+        reason: `Daily limit reached (${ipCap} requests). Please try again tomorrow.`,
         retryAfter: 3600,
       };
     }

@@ -227,7 +227,7 @@
 
                 <h2>Implementation Blueprint &amp; Code Example</h2>
                 <p>Here is a production-ready CSS snippet demonstrating a standard glassmorphic class, incorporating vendor prefixes and a responsive layout system:</p>
-                <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
+                <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:var(--text-muted); border: 1px solid rgba(255,255,255,0.05);">
 .glass-container {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -248,7 +248,7 @@
                 <h2>Writing Cross-Browser Fallbacks</h2>
                 <p>Because backdrop filtering is a hardware-accelerated process, older web browsers or low-power mobile devices may not support it or could experience layout stuttering. To handle this gracefully, developers should write CSS feature queries using <code>@supports</code>. This serves a solid opaque background color to legacy devices and activates the glassmorphic styling block only if the browser explicitly supports it:</p>
                 
-                <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:#cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
+                <pre style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:15px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem; overflow-x:auto; color:var(--text-muted); border: 1px solid rgba(255,255,255,0.05);">
 /* Baseline design for unsupported browsers */
 .glass-card {
     background: #14151a; /* Solid dark theme color */
