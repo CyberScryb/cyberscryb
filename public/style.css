@@ -8,42 +8,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Surfaces — sun-warmed linen (peach undertone, not gray paper) */
-  --bg: #f8f1e9;
-  --bg-elevated: #fffcf7;
-  --card: #ffffff;
-  --card-glass: rgba(255, 252, 247, 0.94);
+  /* Surfaces — deep obsidian & elevated graphite (Raycast / Linear style) */
+  --bg: #09090b;
+  --bg-elevated: #121215;
+  --card: #18181b;
+  --card-glass: rgba(24, 24, 27, 0.85);
 
-  /* Type — espresso brown ink (dark enough for WCAG AA on white/linen) */
-  --text: #2c1810;
-  --text-muted: #3d2b1f; /* was #6B5344 — too light on white cards */
-  --text-faint: #5c4a3d; /* was #9A8578 — failed AA for body-sized text */
+  /* Type — crisp high-contrast text on obsidian */
+  --text: #fafafa;
+  --text-muted: #d4d4d8;
+  --text-faint: #a1a1aa;
 
-  /* Brand — terracotta clay (the actual brand color) */
-  --primary: #c2410c;
-  --primary-hover: #9a3412;
-  --primary-soft: #c7522a; /* CTA/link ink: WCAG AA on white (~5:1+); was #E05A2B (too light) */
-  --primary-ink: #fffcf7;
-  --primary-glow: rgba(194, 65, 12, 0.18);
-  --primary-rgb: 194, 65, 12;
-  /* Status / money click surfaces */
-  --cta-link: #9a3412; /* body-size link on white — AA */
-  --badge-new-bg: #c2410c;
-  --badge-new-fg: #fffcf7;
+  /* Brand — glowing radiant flame */
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --primary-soft: #fb923c;
+  --primary-ink: #09090b;
+  --primary-glow: rgba(249, 115, 22, 0.25);
+  --primary-rgb: 249, 115, 22;
 
-  /* Pro / money — deep slate-blue (deliberately NOT the brand clay) */
-  --attention: #1b3a4b;
-  --attention-hover: #122a38;
-  --attention-ink: #fffcf7;
-  --attention-glow: rgba(27, 58, 75, 0.18);
+  /* Status / CTA link */
+  --cta-link: #fb923c;
+  --badge-new-bg: #f97316;
+  --badge-new-fg: #09090b;
 
-  --success: #3f6b4a;
-  --danger: #b91c1c;
+  /* Accent — electric sky */
+  --attention: #38bdf8;
+  --attention-hover: #0284c7;
+  --attention-ink: #09090b;
+  --attention-glow: rgba(56, 189, 248, 0.2);
 
-  --border: rgba(44, 24, 16, 0.11);
-  --border-strong: rgba(44, 24, 16, 0.18);
-  --shadow: 0 14px 40px rgba(44, 24, 16, 0.07);
-  --shadow-lg: 0 28px 60px rgba(44, 24, 16, 0.11);
+  --success: #22c55e;
+  --danger: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
   --radius: 16px;
   --radius-sm: 11px;
   --radius-lg: 22px;
@@ -107,9 +108,9 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(ellipse 85% 50% at 50% -18%, rgba(194, 65, 12, 0.09), transparent 55%),
-    radial-gradient(ellipse 45% 40% at 100% 10%, rgba(27, 58, 75, 0.05), transparent 50%),
-    radial-gradient(ellipse 40% 35% at 0% 100%, rgba(194, 65, 12, 0.04), transparent 48%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.12), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 20%, rgba(56, 189, 248, 0.06), transparent 50%),
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(249, 115, 22, 0.05), transparent 50%);
 }
 body::after {
   content: '';
@@ -120,7 +121,7 @@ body::after {
   background: radial-gradient(
     ellipse 90% 80% at 50% 45%,
     transparent 42%,
-    rgba(44, 24, 16, 0.035) 100%
+    rgba(0, 0, 0, 0.4) 100%
   );
 }
 
@@ -186,7 +187,7 @@ textarea,
 select {
   font-family: inherit;
   color: var(--text);
-  background: #ffffff;
+  background: var(--bg-elevated);
   border: 1px solid var(--border-strong);
   border-radius: 9px;
   padding: 0.65rem 0.85rem;
@@ -206,7 +207,7 @@ select:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--primary-glow);
-  background: #ffffff;
+  background: var(--card);
 }
 
 button:focus-visible,
@@ -236,13 +237,13 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 252, 247, 0.86);
+  background: rgba(9, 9, 11, 0.85);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid var(--border);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 8px 28px rgba(22, 20, 17, 0.06);
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 8px 28px rgba(0, 0, 0, 0.5);
 }
 
 .navbar {
@@ -467,19 +468,17 @@ header {
 .blog-card,
 .tool-card,
 .hz-price-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, var(--card) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, var(--card) 100%);
   backdrop-filter: blur(14px) saturate(130%);
   -webkit-backdrop-filter: blur(14px) saturate(130%);
-  /* Visible resting outline (was too faint / clipped by overflow:hidden) */
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
-  /* Must stay visible so hover glow/outline rings are not clipped */
   overflow: visible;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.95) inset,
-    0 0 0 1px rgba(44, 24, 16, 0.08),
-    0 4px 6px rgba(44, 24, 16, 0.04),
-    0 14px 36px rgba(44, 24, 16, 0.12);
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 14px 36px rgba(0, 0, 0, 0.5);
   transition:
     border-color 0.22s ease,
     transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
@@ -497,18 +496,16 @@ header {
 .blog-card:focus-within,
 .tool-card:focus-within,
 .glass-card:focus-within {
-  border-color: rgba(224, 90, 43, 0.9);
-  outline: 2px solid rgba(224, 90, 43, 0.55);
+  border-color: rgba(249, 115, 22, 0.6);
+  outline: 2px solid rgba(249, 115, 22, 0.4);
   outline-offset: 3px;
   transform: translateY(-4px);
-  background: linear-gradient(180deg, #ffffff 0%, var(--card) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, var(--card) 100%);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.22) inset,
-    0 0 0 1px rgba(224, 90, 43, 0.5),
-    0 0 0 5px rgba(194, 65, 12, 0.16),
-    0 0 32px rgba(194, 65, 12, 0.35),
-    0 0 64px rgba(194, 65, 12, 0.16),
-    0 22px 48px rgba(22, 20, 17, 0.12);
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 0 0 1px rgba(249, 115, 22, 0.4),
+    0 0 24px rgba(249, 115, 22, 0.25),
+    0 22px 48px rgba(0, 0, 0, 0.6);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -662,10 +659,10 @@ header {
   vertical-align: middle;
 }
 .tag-free {
-  background: rgba(22, 163, 74, 0.14);
-  color: #166534;
-  border: 1px solid rgba(22, 163, 74, 0.35);
-  font-weight: 800;
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  font-weight: 700;
 }
 /* Value prop on AI cards — second thing eyes hit after title */
 .tag-sample {
@@ -747,9 +744,9 @@ header {
   gap: 0.4rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--primary-hover, #9a3412);
-  background: rgba(194, 65, 12, 0.22);
-  border: 1px solid rgba(194, 65, 12, 0.45);
+  color: var(--primary-soft);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.25);
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   margin-bottom: 1.25rem;
@@ -792,8 +789,8 @@ header {
   height: 52px;
   margin-bottom: 0.85rem;
   border-radius: 12px;
-  background: rgba(194, 65, 12, 0.14);
-  border: 1px solid rgba(194, 65, 12, 0.35);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.25);
   color: var(--primary-soft);
   flex-shrink: 0;
 }
@@ -1393,7 +1390,7 @@ select:focus-visible,
     right: 0;
     flex-direction: column;
     align-items: stretch;
-    background: #fffcf7;
+    background: var(--bg-elevated);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border-strong);
     box-shadow: 0 16px 36px rgba(44, 24, 16, 0.12);

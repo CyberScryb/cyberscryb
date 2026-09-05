@@ -133,16 +133,16 @@ function showCookieConsentBanner() {
             transform: translateX(-50%) translateY(100px);
             width: calc(100% - 48px);
             max-width: 540px;
-            background: rgba(255, 252, 247, 0.97);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(44, 24, 16, 0.14);
+            background: rgba(18, 18, 21, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 10px 40px rgba(44, 24, 16, 0.16);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
             z-index: 99999;
             font-family: 'Outfit', system-ui, sans-serif;
-            color: #3D2B1F;
+            color: #d4d4d8;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -162,13 +162,13 @@ function showCookieConsentBanner() {
             font-family: inherit;
             font-size: 1rem;
             font-weight: 700;
-            color: #2C1810;
+            color: #fafafa;
             letter-spacing: 0.5px;
         }
         .cs-cookie-text {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             line-height: 1.5;
-            color: #3D2B1F;
+            color: #d4d4d8;
             margin: 0;
         }
         .cs-cookie-actions {
@@ -189,25 +189,26 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: #C2410C;
-            color: #FFFCF7;
+            background: #f97316;
+            color: #09090b;
+            font-weight: 800;
             border: none;
-            box-shadow: 0 4px 14px rgba(194, 65, 12, 0.25);
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
         }
         .cs-cookie-btn-accept:hover {
             transform: translateY(-1px);
-            background: #9A3412;
-            box-shadow: 0 6px 18px rgba(194, 65, 12, 0.35);
+            background: #ea580c;
+            box-shadow: 0 6px 18px rgba(249, 115, 22, 0.4);
         }
         .cs-cookie-btn-decline {
             background: transparent;
-            color: #3D2B1F;
-            border: 1px solid rgba(44, 24, 16, 0.25);
+            color: #d4d4d8;
+            border: 1px solid rgba(255, 255, 255, 0.16);
         }
         .cs-cookie-btn-decline:hover {
-            color: #2C1810;
-            border-color: rgba(44, 24, 16, 0.45);
-            background: rgba(44, 24, 16, 0.04);
+            color: #fafafa;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
         }
         @media(max-width: 480px) {
             .cs-cookie-banner {

@@ -1,26 +1,26 @@
 /* Humanizer — inherits Linen & Terracotta site tokens */
 
 .hz-app {
-  --hz-bg: var(--bg, #f8f1e9);
-  --hz-surface: var(--card, #ffffff);
-  --hz-solid: var(--card, #ffffff);
-  --hz-border: var(--border, rgba(44, 24, 16, 0.11));
-  --hz-text: var(--text, #2c1810);
-  --hz-muted: var(--text-muted, #3d2b1f);
-  --hz-faint: var(--text-faint, #5c4a3d);
-  --hz-green: var(--primary, #c2410c);
-  --hz-green-hover: var(--primary-hover, #9a3412);
-  --hz-green-soft: var(--primary-soft, #e05a2b);
-  --hz-amber: var(--attention, #1b3a4b);
-  --hz-amber-hover: var(--attention-hover, #122a38);
-  --hz-glow: var(--primary-glow, rgba(194, 65, 12, 0.18));
+  --hz-bg: var(--bg, #09090b);
+  --hz-surface: var(--card, #18181b);
+  --hz-solid: var(--card, #18181b);
+  --hz-border: var(--border, rgba(255, 255, 255, 0.08));
+  --hz-text: var(--text, #fafafa);
+  --hz-muted: var(--text-muted, #d4d4d8);
+  --hz-faint: var(--text-faint, #a1a1aa);
+  --hz-green: var(--primary, #f97316);
+  --hz-green-hover: var(--primary-hover, #ea580c);
+  --hz-green-soft: var(--primary-soft, #fb923c);
+  --hz-amber: var(--attention, #38bdf8);
+  --hz-amber-hover: var(--attention-hover, #0284c7);
+  --hz-glow: var(--primary-glow, rgba(249, 115, 22, 0.25));
   --hz-font: var(--font, 'Outfit', system-ui, sans-serif);
 
   min-height: calc(100vh - 64px);
-  padding-top: 64px;
+  padding-top: 16px;
   padding-bottom: 48px;
   background: transparent;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, #fafafa);
   font-family: var(--hz-font, 'Outfit', system-ui, sans-serif);
 }
 
@@ -73,7 +73,7 @@
 .hz-link-pro {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--bg, #f8f1e9);
+  color: var(--bg, #09090b);
   text-decoration: none;
   padding: 7px 14px;
   border-radius: 999px;
@@ -82,19 +82,18 @@
 }
 .hz-link-pro:hover {
   background: var(--hz-amber-hover, #122a38);
-  color: var(--bg, #f8f1e9);
+  color: var(--bg, #09090b);
 }
 
 .hz-workspace {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 28%), var(--card, #ffffff);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 28%), var(--card, #18181b);
+  border: 1px solid var(--hz-border, rgba(255, 255, 255, 0.08));
   border-radius: 16px;
   overflow: hidden;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 16px 48px rgba(44, 24, 16, 0.1),
-    0 0 0 1px rgba(44, 24, 16, 0.05);
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 16px 48px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
 .hz-pane {
@@ -237,7 +236,8 @@ textarea.hz-editor.input-error {
 .hz-mode.is-active {
   border-color: var(--hz-green, #c2410c);
   background: var(--hz-green, #c2410c);
-  color: #fffcf7;
+  color: #09090b;
+  font-weight: 700;
 }
 
 .hz-primary-btn {
@@ -253,8 +253,8 @@ textarea.hz-editor.input-error {
   font-family: inherit;
   font-weight: 700;
   font-size: 0.95rem;
-  color: #f2efe8;
-  background: var(--hz-green, #c2410c);
+  color: #09090b;
+  background: var(--hz-green, #f97316);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.12) inset,
     0 8px 24px rgba(194, 65, 12, 0.22);
@@ -323,7 +323,7 @@ textarea.hz-editor.input-error {
 .style-sample {
   width: 100%;
   min-height: 48px;
-  background: var(--bg, #f8f1e9) !important;
+  background: var(--bg, #09090b) !important;
   border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11)) !important;
   border-radius: 8px !important;
   color: var(--hz-text, #2c1810) !important;
@@ -435,7 +435,7 @@ textarea.hz-editor.input-error {
 .gate-form input {
   flex: 1;
   padding: 0.7rem 0.9rem;
-  background: var(--bg, #f8f1e9);
+  background: var(--bg, #09090b);
   border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
   border-radius: 10px;
   color: var(--hz-text, #2c1810);
@@ -487,7 +487,7 @@ textarea.hz-editor.input-error {
   display: block;
   text-align: center;
   background: #1b3a4b;
-  color: var(--bg, #f8f1e9) !important;
+  color: var(--bg, #09090b) !important;
   padding: 13px;
   border-radius: 10px;
   font-weight: 700;
@@ -588,7 +588,7 @@ textarea.hz-editor.input-error {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   background: var(--hz-amber, #1b3a4b);
-  color: var(--bg, #f8f1e9);
+  color: var(--bg, #09090b);
   padding: 3px 10px;
   border-radius: 999px;
 }
@@ -632,7 +632,7 @@ textarea.hz-editor.input-error {
   padding: 11px;
   border-radius: 10px;
   background: var(--hz-amber, #1b3a4b);
-  color: var(--bg, #f8f1e9) !important;
+  color: var(--bg, #09090b) !important;
   font-weight: 700;
   text-decoration: none !important;
 }
@@ -848,12 +848,12 @@ textarea.hz-editor.input-error {
 }
 .hz-action-pro {
   background: var(--hz-amber, #1b3a4b);
-  color: var(--bg, #f8f1e9) !important;
+  color: var(--bg, #09090b) !important;
   border-color: transparent;
 }
 .hz-action-pro:hover {
   background: var(--hz-amber-hover, #122a38);
-  color: var(--bg, #f8f1e9) !important;
+  color: var(--bg, #09090b) !important;
 }
 
 .hz-pro-banner {
@@ -877,7 +877,7 @@ textarea.hz-editor.input-error {
   z-index: 40;
   gap: 10px;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(255, 252, 247, 0.94);
+  background: rgba(18, 18, 21, 0.94);
   backdrop-filter: blur(14px);
   border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
   box-shadow: 0 -8px 28px rgba(44, 24, 16, 0.12);
@@ -909,7 +909,7 @@ textarea.hz-editor.input-error {
     position: sticky;
     top: 56px;
     z-index: 15;
-    background: rgba(248, 241, 233, 0.94);
+    background: rgba(9, 9, 11, 0.94);
     backdrop-filter: blur(12px);
     margin: 0 -4px 12px;
     padding: 10px 8px;
@@ -923,6 +923,6 @@ textarea.hz-editor.input-error {
     top: 64px;
     z-index: 15;
     padding-bottom: 8px;
-    background: linear-gradient(to bottom, var(--bg, #f8f1e9) 70%, transparent);
+    background: linear-gradient(to bottom, var(--bg, #09090b) 70%, transparent);
   }
 }
