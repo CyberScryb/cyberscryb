@@ -314,6 +314,60 @@
       disclosure:
         'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
     },
+    'blood-sugar-log-generator': {
+      heading: '🩸 Diabetes & Glucose Support',
+      message:
+        'Logging is the first step — these tools help you (or your loved one) stay on track between appointments.',
+      links: [
+        {
+          text: 'Glucose Monitors & Test Strips →',
+          url: 'https://www.amazon.com/s?k=glucose+monitor+test+strips&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — meters, strips, and lancing supplies',
+        },
+        {
+          text: 'Diabetes Meal & Carb Guides →',
+          url: 'https://www.amazon.com/s?k=diabetes+meal+planning+book&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Amazon — books & planners for meal planning',
+        },
+      ],
+      triggerSelector: '#bs-output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'caregiver-timesheet': {
+      heading: '🕑 Payroll & Scheduling Tools',
+      message:
+        'Clean hours make clean paychecks. These tools help caregivers and families track time and shifts.',
+      links: [
+        {
+          text: 'Caregiver Scheduling Apps →',
+          url: 'https://www.amazon.com/s?k=caregiver+schedule+planner+book&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — printed planners & log books',
+        },
+      ],
+      triggerSelector: '#ts-output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'nurse-brain-sheet': {
+      heading: '🩺 Nursing Gear & Study Tools',
+      message:
+        'Great nurses prep well. Stock your kit and organize your shift with tools built for the floor.',
+      links: [
+        {
+          text: 'Nursing Badge Cards & Supplies →',
+          url: 'https://www.amazon.com/s?k=nursing+badge+cards+shift+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — badge reels, cards, and clinical tools',
+        },
+      ],
+      triggerSelector: '#ns-output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
     'caregiver-printable-pack': {
       heading: '🛡️ Peace of Mind for the Whole Family',
       message:
