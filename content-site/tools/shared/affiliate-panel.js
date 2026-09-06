@@ -232,6 +232,110 @@
       triggerSelector: '#output-text, .lt-out',
       disclosure: 'Regulatory guidance: National Association of Insurance Commissioners.',
     },
+    'caregiver-report': {
+      heading: '🩺 Caregiver Essentials',
+      message:
+        'You keep the care team safe every shift. These tools make the job a little easier — and keep the people you care for safer at home.',
+      links: [
+        {
+          text: 'Compare Medical Alert Systems →',
+          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb&utm_medium=affiliate&AID=YOUR_AFFILIATE_ID',
+          primary: true,
+          subtitle: '24/7 emergency monitoring for aging parents',
+        },
+        {
+          text: 'Caregiver Supplies on Amazon →',
+          url: 'https://www.amazon.com/s?k=caregiver+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Lift pads, gloves, organizers & more',
+        },
+      ],
+      triggerSelector: '.result-card, .output-card, #output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'med-administration-log': {
+      heading: '💊 Pill Management Made Safer',
+      message:
+        'Missed and double doses are the most common medication errors at home. A simple organizer system prevents both.',
+      links: [
+        {
+          text: 'Pill Organizers & Med Reminders →',
+          url: 'https://www.amazon.com/s?k=pill+organizer+daily+medication+reminder&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — organizers, apps & reminders',
+        },
+      ],
+      triggerSelector: '.result-card, .output-card, #output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'soap-note-generator': {
+      heading: '🩻 Clinical Tools for Care Teams',
+      message:
+        'Great documentation is the backbone of care. These tools help you chart faster and keep your kit stocked.',
+      links: [
+        {
+          text: 'Nursing & Clinical Supplies →',
+          url: 'https://www.amazon.com/s?k=nursing+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — supplies, note books & accessories',
+        },
+        {
+          text: 'Try a Free Charting / EMR Tool →',
+          url: 'https://www.heidihealth.com/en-us/blog/soap-note-template-with-examples?utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Reference — SOAP examples & charting workflows',
+        },
+      ],
+      triggerSelector: '#sn-output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'hipaa-release-generator': {
+      heading: '📄 Get Help With Records & Rights',
+      message:
+        'Your medical records belong to you. If a provider refuses to release them, you have options.',
+      links: [
+        {
+          text: 'Legal Help For Records Disputes →',
+          url: 'https://www.rocketlawyer.com/?utm_source=cyberscryb&utm_medium=affiliate&rid=YOUR_ROCKETLAWYER_ID',
+          primary: true,
+          subtitle: 'Rocket Lawyer — affordable legal documents & advice',
+        },
+        {
+          text: 'File an HHS OCR Complaint →',
+          url: 'https://www.hhs.gov/hipaa/filing-a-complaint/index.html',
+          primary: false,
+          subtitle: 'Official — report a HIPAA violation for free',
+        },
+      ],
+      triggerSelector: '#hr-output',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
+    'caregiver-printable-pack': {
+      heading: '🛡️ Peace of Mind for the Whole Family',
+      message:
+        'You downloaded the pack — now make the home safer with gear caregivers and families actually trust.',
+      links: [
+        {
+          text: 'Compare Medical Alert Systems →',
+          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb&utm_medium=affiliate&AID=YOUR_AFFILIATE_ID',
+          primary: true,
+          subtitle: '24/7 monitoring — fall detection & GPS',
+        },
+        {
+          text: 'Home Safety & Mobility Aids →',
+          url: 'https://www.amazon.com/s?k=bed+rails+elderly+safety+home+care&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Amazon — rails, grab bars, commodes & more',
+        },
+      ],
+      triggerSelector: '#pack-download',
+      disclosure:
+        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
+    },
   };
 
   // ─── Detect which tool we're on ───
