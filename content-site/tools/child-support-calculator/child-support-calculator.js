@@ -123,7 +123,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize baseline calculation on load
   calculateBaseline();
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      if (stateEl) stateEl.value = 'Texas';
+      if (incomeAEl) incomeAEl.value = '6200';
+      if (incomeBEl) incomeBEl.value = '3100';
+      if (childrenEl) childrenEl.value = '2';
+      if (nightsEl) {
+        nightsEl.value = '110';
+        if (nightsValEl) nightsValEl.textContent = '110 nights (30%)';
+      }
+      if (childcareEl) childcareEl.value = '650';
+      if (insuranceEl) insuranceEl.value = '280';
+      calculateBaseline();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'child-support-calculator',
     emptyMessage: 'Please adjust the income or expense inputs to calculate first.',
     collectInput: () => {

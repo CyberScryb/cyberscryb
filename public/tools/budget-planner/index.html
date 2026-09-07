@@ -123,23 +123,26 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                                 Your Situation
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Describe your financial situation (income, bills, what you owe, what's due soon)</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:180px;" placeholder="e.g. Lost my job 3 weeks ago, $400 in checking, $1200 rent due in 10 days, $280 car payment, $150 utilities, 2 kids..."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="e.g. Lost my job 3 weeks ago, $400 in checking, $1200 rent due in 10 days, $280 car payment, $150 utilities, 2 kids..."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label for="situation-select" style="color: var(--text-muted);">Situation Type</label>
-                            <select id="situation-select" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
+                            <select id="situation-select" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; font-family: 'Inter', sans-serif;">
                                 <option value="">Just describe my situation</option>
                                 <option value="job loss">Lost my job</option>
                                 <option value="medical">Medical bills</option>
@@ -155,7 +158,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -163,16 +166,19 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your budget plan will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is a survival budget?</h4><p>A survival budget is a stripped-down spending plan focused on keeping you housed, fed, and operational during a financial crisis. It ranks your expenses by necessity, identifies what can be cut or deferred, and tells you exactly how long your current cash will last at current burn rate. It's not a long-term financial plan &mdash; it's a triage document for when things go wrong.</p></div>
                     <div class="faq-item"><h4>How specific should I be in my description?</h4><p>The more specific, the better. Give actual dollar amounts where you can &mdash; current checking balance, each bill and its due date, your monthly income or unemployment benefit, any debt minimums you have to hit. Vague inputs like "I'm struggling" produce generic output. Specific inputs like "$612 checking, $1,100 rent due May 1, $230 car note, $0 income since April 15" produce a plan you can actually use.</p></div>
@@ -211,18 +217,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Need</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/hardship-letter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/hardship-letter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Hardship Letter Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Write a formal hardship letter for your lender or landlord.</span>
             </a>
-            <a href="/tools/appeal-letter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/appeal-letter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Appeal Letter Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft insurance or financial appeal letters.</span>
             </a>
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>

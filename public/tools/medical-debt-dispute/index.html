@@ -196,7 +196,10 @@
       <div class="lt-card">
         <div class="lt-card-h">
           <h2>Account &amp; Debt Details</h2>
-          <span class="lt-draft-badge show">Instant Generation</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample dispute scenario" style="background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);padding:4px 10px;font-size:0.8rem;border-radius:6px;cursor:pointer;font-weight:500;">Try Sample</button>
+            <span class="lt-draft-badge show">Instant Generation</span>
+          </div>
         </div>
         <div class="lt-body">
           <div class="lt-row">
@@ -289,18 +292,18 @@
     </div>
 
     <!-- Consumer Rights Section -->
-    <div class="geo-card" style="background:linear-gradient(145deg, #FFFCF7, #F8F1E9); border:1px solid #E4D9C8; border-radius:12px; padding:2rem; margin:2.5rem 0 1.5rem;">
+    <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); border-radius:12px; padding:2rem; margin:2.5rem 0 1.5rem;">
       <h3 style="color:var(--primary-soft); margin-top:0; font-family:var(--font-brand),Georgia,serif; font-size:1.4rem;">Key Legal Protections Against Medical Debt</h3>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem; margin-top:1rem;">
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">1. FDCPA &sect; 809 Cease &amp; Validate</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">When sent to collections, submitting a written dispute within 30 days legally prohibits the agency from calling you, adding collection fees, or reporting to credit bureaus until they substantiate the debt from the original hospital.</p>
         </div>
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">2. The No Surprises Act</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">Federal law bans surprise balance billing for emergency services and non-emergency services provided by out-of-network clinicians at in-network facilities. Patients cannot be billed more than in-network cost-sharing amounts.</p>
         </div>
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">3. Credit Bureau Protections</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">Equifax, Experian, and TransUnion have permanently removed all paid medical debts and unpaid medical debts under $500 from credit reports. Unpaid debts over $500 cannot be reported until at least 365 days after the bill was generated.</p>
         </div>
@@ -308,15 +311,15 @@
     </div>
 
     <!-- FAQ Section -->
-    <div class="geo-card" style="background:linear-gradient(145deg, #FFFCF7, #F8F1E9); border:1px solid #E4D9C8; border-radius:12px; padding:2rem; margin:1.5rem 0;">
+    <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); border-radius:12px; padding:2rem; margin:1.5rem 0;">
       <h3 style="color:var(--primary-soft); margin-top:0; font-family:var(--font-brand),Georgia,serif; font-size:1.4rem;">Frequently Asked Questions</h3>
       
-      <div class="faq-item" style="border-bottom:1px solid #E4D9C8; padding:1rem 0;">
+      <div class="faq-item" style="border-bottom:1px solid var(--border); padding:1rem 0;">
         <h4 style="margin:0 0 0.4rem; color:var(--text); font-size:1.05rem;">What happens when I request an itemized medical bill?</h4>
         <p style="margin:0; color:var(--text-muted); font-size:0.92rem; line-height:1.6;">Hospital summary bills only show lump-sum categories like "Pharmacy" or "Lab Services" with massive markups. Requesting a line-by-line itemized bill with standard CPT/HCPCS procedure codes forces auditors to verify each charge. It frequently cuts bills by 30% to 70% by uncovering phantom charges, billing duplicates, or coding errors.</p>
       </div>
 
-      <div class="faq-item" style="border-bottom:1px solid #E4D9C8; padding:1rem 0;">
+      <div class="faq-item" style="border-bottom:1px solid var(--border); padding:1rem 0;">
         <h4 style="margin:0 0 0.4rem; color:var(--text); font-size:1.05rem;">Can medical collectors share my medical records?</h4>
         <p style="margin:0; color:var(--text-muted); font-size:0.92rem; line-height:1.6;">Under the Health Insurance Portability and Accountability Act (HIPAA), third-party debt collection agencies are strictly limited in the Protected Health Information (PHI) they may handle. Collectors may not receive detailed clinical notes, diagnoses, or treatment records without an express patient authorization, preventing predatory disclosure.</p>
       </div>
@@ -470,6 +473,25 @@
     }
   });
 
+  // Try Sample Button
+  var sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', function() {
+      document.getElementById('provider-name').value = 'St. Jude Regional Medical Center';
+      document.getElementById('collector-name').value = 'Apex Receivables & Collections LLC';
+      document.getElementById('recipient-address').value = 'Dispute Resolutions, PO Box 8812, Dallas, TX 75201';
+      document.getElementById('patient-name').value = 'Jordan Miller';
+      document.getElementById('patient-address').value = '512 Elmwood Terrace, Austin, TX 78704';
+      document.getElementById('account-no').value = 'MED-89104-APX';
+      document.getElementById('disputed-amount').value = '$3,450.00';
+      document.getElementById('service-date').value = 'November 14, 2025';
+      document.getElementById('dispute-ground').value = 'itemized';
+      var details = document.getElementById('specific-details');
+      if (details) details.value = 'I received a summary billing statement indicating an outstanding balance of $3,450 without any itemization of CPT procedure codes, diagnostic ICD-10 codes, or pharmacy line items. Under federal billing guidelines and the Fair Debt Collection Practices Act, I am disputing this unverified charge and demanding an itemized master fee ledger before any payment can be evaluated.';
+      generateLetter();
+    });
+  }
+
   // Action Buttons
   var copyBtn = document.getElementById('copy-btn');
   if (copyBtn) {
@@ -480,8 +502,8 @@
         return;
       }
       navigator.clipboard.writeText(text).then(function() {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function() { copyBtn.textContent = 'Copy'; }, 2000);
+        copyBtn.textContent = 'Copied! ✓';
+        setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1600);
       });
     });
   }

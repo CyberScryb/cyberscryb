@@ -171,18 +171,21 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: #18181b; border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: #18181b; border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z"/></svg>
                                 Guidelines Input
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="calc-state" style="color: var(--text-muted);">Select State Guidelines</label>
-                            <select id="calc-state" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <select id="calc-state" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="California">California (Net Disposable Income Model)</option>
                                 <option value="Texas">Texas (Percentage of Income Model)</option>
                                 <option value="New York">New York (Income Shares Model)</option>
@@ -196,17 +199,17 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="input-group">
                                 <label for="income-a" style="color: var(--text-muted);">Parent A Gross Income ($/mo)</label>
-                                <input type="number" id="income-a" value="5000" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <input type="number" id="income-a" value="5000" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                             <div class="input-group">
                                 <label for="income-b" style="color: var(--text-muted);">Parent B Gross Income ($/mo)</label>
-                                <input type="number" id="income-b" value="3000" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <input type="number" id="income-b" value="3000" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                         </div>
 
                         <div class="input-group">
                             <label for="children-count" style="color: var(--text-muted);">Number of Children</label>
-                            <select id="children-count" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <select id="children-count" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="1">1 Child</option>
                                 <option value="2" selected>2 Children</option>
                                 <option value="3">3 Children</option>
@@ -217,7 +220,7 @@
 
                         <div class="input-group">
                             <label for="custody-arrangement" style="color: var(--text-muted);">Physical Custody Arrangement</label>
-                            <select id="custody-arrangement" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <select id="custody-arrangement" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="shared" selected>Shared / Joint Custody</option>
                                 <option value="primary-a">Parent A has Primary Physical Custody</option>
                                 <option value="primary-b">Parent B has Primary Physical Custody</option>
@@ -235,11 +238,11 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="input-group">
                                 <label for="childcare-costs" style="color: var(--text-muted);">Child Care Costs ($/mo)</label>
-                                <input type="number" id="childcare-costs" value="600" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <input type="number" id="childcare-costs" value="600" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                             <div class="input-group">
                                 <label for="insurance-costs" style="color: var(--text-muted);">Health Insurance Premium ($/mo)</label>
-                                <input type="number" id="insurance-costs" value="200" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <input type="number" id="insurance-costs" value="200" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                         </div>
 
@@ -264,7 +267,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: #18181b; border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: #18181b; border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -272,17 +275,20 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
-                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Print / PDF</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your state-specific child support analysis, statutory breakdown, and deviation factors draft will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: #18181b; border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: #18181b; border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is the Income Shares Model?</h4><p>The Income Shares Model is based on the concept that the child should receive the same proportion of parental income that they would have received if the parents lived together. Most US states use this model for calculations.</p></div>
                     <div class="faq-item"><h4>What counts as gross income for child support?</h4><p>Gross income usually includes salary, wages, bonuses, commissions, self-employment earnings, alimony received, pension payments, and social security benefits. Deductions vary by state but typically include income taxes, mandatory retirement contributions, and other child support orders.</p></div>

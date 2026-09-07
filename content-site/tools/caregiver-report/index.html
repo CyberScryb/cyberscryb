@@ -134,28 +134,31 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 Your Notes
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample shift notes" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Type or paste your shift notes (informal is fine &mdash; we'll structure it for you)</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label for="patient-name" style="color: var(--text-muted);">Patient/Client Name (optional)</label>
-                            <input type="text" id="patient-name" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;" placeholder="Leave blank to use [Patient Name]">
+                            <input type="text" id="patient-name" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;" placeholder="Leave blank to use [Patient Name]">
                         </div>
 
                         <div class="input-group">
                             <label for="shift-type" style="color: var(--text-muted);">Shift Type</label>
-                            <select id="shift-type" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
+                            <select id="shift-type" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
                                 <option value="Day Shift">Day Shift</option>
                                 <option value="Evening Shift">Evening Shift</option>
                                 <option value="Night Shift">Night Shift</option>
@@ -171,7 +174,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -179,14 +182,17 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
-                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Print / PDF</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
+                                <button onclick="printLetter()" class="icon-btn" title="Download as PDF / Print" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Print / PDF</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your structured shift report will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
                     <p>Related: <a href="/tools/hardship-letter/">Hardship Letter Writer</a> | <a href="/tools/appeal-letter/">Appeal Letter Writer</a> | <a href="/tools/custody-document/">Custody Document Drafter</a></p>
@@ -209,49 +215,49 @@
         </section>
     </main>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so — and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format — use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}},{"@type":"Question","name":"Who is this for?","acceptedAnswer":{"@type":"Answer","text":"CNAs, home health aides, family caregivers, hospice workers — anyone who needs to document care. Built by a former CNA who wanted something that actually helped after a long shift."}},{"@type":"Question","name":"Is patient information stored?","acceptedAnswer":{"@type":"Answer","text":"No. Your notes are processed and immediately discarded. We never store patient data. Nothing is saved, logged, or used for training."}},{"@type":"Question","name":"Can I use this for official reports?","acceptedAnswer":{"@type":"Answer","text":"It generates a structured draft. Always review the output for accuracy before submitting to your agency or facility — a first pass that saves you time, not a replacement for your clinical judgment."}},{"@type":"Question","name":"What if I forgot to note something?","acceptedAnswer":{"@type":"Answer","text":"Just add it to your notes and regenerate, or edit the output directly. The report is yours to adjust however you need."}},{"@type":"Question","name":"Does this replace charting software?","acceptedAnswer":{"@type":"Answer","text":"No — it helps you write better reports faster, especially when you're tired after a long shift. Paste the output into your EMR, agency form, or care log."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">What should a caregiver shift report include?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Date and shift time, patient name, vital signs if applicable, meals eaten, medications administered (with times), activities, behavioral observations, any incidents or falls, pain levels, and what was left unfinished for the next shift.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">What should a caregiver shift report include?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">Date and shift time, patient name, vital signs if applicable, meals eaten, medications administered (with times), activities, behavioral observations, any incidents or falls, pain levels, and what was left unfinished for the next shift.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Who reads these reports?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">The incoming caregiver, the patient's family, supervising nurses, and in some cases insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Who reads these reports?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">The incoming caregiver, the patient's family, supervising nurses, and in some cases insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">How detailed should the report be?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say what you offered instead. If there was a behavioral change, describe what triggered it. Vague reports create gaps that lead to mistakes.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">How detailed should the report be?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say what you offered instead. If there was a behavioral change, describe what triggered it. Vague reports create gaps that lead to mistakes.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Is this format accepted by care agencies?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">The output follows standard caregiver documentation conventions. Your specific agency may have a required form &mdash; use this as a draft and transfer the information to their template if needed.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Is this format accepted by care agencies?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">The output follows standard caregiver documentation conventions. Your specific agency may have a required form &mdash; use this as a draft and transfer the information to their template if needed.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Does this work for home care, memory care, and skilled nursing?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Yes. The tool adapts to the level of care you describe. For memory care, include behavioral observations. For skilled nursing, include vitals and wound notes. The output reflects what you put in.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Does this work for home care, memory care, and skilled nursing?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">Yes. The tool adapts to the level of care you describe. For memory care, include behavioral observations. For skilled nursing, include vitals and wound notes. The output reflects what you put in.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Who is this for?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">CNAs, home health aides, family caregivers, hospice workers &mdash; anyone who needs to document care. Built by a former CNA who wanted something that actually helped after a long shift.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Who is this for?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">CNAs, home health aides, family caregivers, hospice workers &mdash; anyone who needs to document care. Built by a former CNA who wanted something that actually helped after a long shift.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Is patient information stored?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">No. Your notes are processed and immediately discarded. We never store patient data. Nothing is saved, logged, or used for training.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Is patient information stored?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">No. Your notes are processed and immediately discarded. We never store patient data. Nothing is saved, logged, or used for training.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Can I use this for official reports?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">It generates a structured draft. Always review the output for accuracy before submitting to your agency or facility &mdash; a first pass that saves you time, not a replacement for your clinical judgment.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Can I use this for official reports?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">It generates a structured draft. Always review the output for accuracy before submitting to your agency or facility &mdash; a first pass that saves you time, not a replacement for your clinical judgment.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">What if I forgot to note something?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">Just add it to your notes and regenerate, or edit the output directly. The report is yours to adjust however you need.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">What if I forgot to note something?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">Just add it to your notes and regenerate, or edit the output directly. The report is yours to adjust however you need.</p>
             </details>
-            <details style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1rem;">
-                <summary style="font-weight:600; color:#2C1810; cursor:pointer;">Does this replace charting software?</summary>
-                <p style="margin:0.75rem 0 0; color:#5C4A3D; font-size:0.95rem;">No &mdash; it helps you write better reports faster, especially when you're tired after a long shift. Paste the output into your EMR, agency form, or care log.</p>
+            <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
+                <summary style="font-weight:600; color: var(--text); cursor:pointer;">Does this replace charting software?</summary>
+                <p style="margin:0.75rem 0 0; color: var(--text-muted); font-size:0.95rem;">No &mdash; it helps you write better reports faster, especially when you're tired after a long shift. Paste the output into your EMR, agency form, or care log.</p>
             </details>
         </div>
     </section>
@@ -262,18 +268,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Count words, characters, and reading time.</span>
             </a>
-            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Condense long text into key points.</span>
             </a>
@@ -281,14 +287,14 @@
     </section>
 
     
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/caregiver-shift-handoff-standards/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/caregiver-shift-handoff-standards/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Caregiver Shift Handoff Standards</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>
-            <a href="/guides/documenting-cognitive-decline-for-doctors-and-courts/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/documenting-cognitive-decline-for-doctors-and-courts/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Documenting Cognitive Decline</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>

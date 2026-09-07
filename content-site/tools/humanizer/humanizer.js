@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const FREE_CHAR_LIMIT = 4000;
   const FREE_DAILY_LIMIT = 10;
   const PREVIEW_RATIO = 1.0;
-  const STRIPE_MONTHLY = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
-  const STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
   const TOOL_ID = 'humanizer';
   const usageKey = 'cs_humanizer_usage';
 
@@ -67,33 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.cookie =
       name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
   }
-  function isPro() {
-    if (window.CSProStatus && typeof window.CSProStatus.isPro === 'function') {
-      return window.CSProStatus.isPro();
-    }
-    if (getCookie('cs_pro') === '1') return true;
-    if (getCookie('cs_pro_source') === 'stripe' && getCookie('cs_subscribed') === '1') return true;
-    try {
-      return localStorage.getItem('cs_pro') === '1';
-    } catch (e) {
-      return false;
-    }
-  }
-  function isSubscribed() {
-    return getCookie('cs_subscribed') === '1';
-  }
   function trackEvent(name, params) {
     if (typeof gtag === 'function') gtag('event', name, params);
-  }
-  function stripeUrl(base, placement) {
-    const sep = base.indexOf('?') > -1 ? '&' : '?';
-    return (
-      base +
-      sep +
-      'utm_source=humanizer&utm_medium=' +
-      encodeURIComponent(placement || 'gate') +
-      '&utm_campaign=pro_conversion'
-    );
   }
   function getUsageToday() {
     try {
@@ -113,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function updateUsageDisplay() {
     if (!usageCounter) return;
-    usageCounter.textContent = 'Free · up to 4,000 chars';
-    usageCounter.style.color = '#3D9B6A';
+    usageCounter.textContent = '100% Free · up to 4,000 chars';
+    usageCounter.style.color = 'var(--success, #22c55e)';
   }
   function updateCharCounter() {
     if (!charCounter || !roboticText) return;
@@ -284,19 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (gateForm) {
     gateForm.addEventListener('submit', async function (e) {
       e.preventDefault();
-      if (isPro()) {
-        unlockFullResult();
-        return;
-      }
-      const usage = getUsageToday();
-      if (isSubscribed() && usage.count >= FREE_DAILY_LIMIT) {
-        setGateMode('pro_only');
-        if (gateStatus) {
-          gateStatus.style.color = '#B91C1C';
-          gateStatus.textContent = 'Free unlock already used today. Pro removes the cap.';
-        }
-        return;
-      }
       const email = ((gateInput && gateInput.value) || '').trim();
       if (!email) return;
       if (gateSubmitBtn) {
@@ -476,15 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Pro active banner (idea 7) if cookie present
-  if (isPro()) {
-    const bar = document.createElement('div');
-    bar.className = 'hz-pro-banner';
-    bar.textContent = 'Pro is on this device — unlimited full results. No daily cap.';
-    const shell = document.querySelector('.hz-shell');
-    if (shell) shell.insertBefore(bar, shell.firstChild);
-  }
-
   updateUsageDisplay();
   updateCharCounter();
 });
+

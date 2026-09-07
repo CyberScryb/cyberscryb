@@ -112,6 +112,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  // Try Sample Button
+  const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      jobInput.value = "Looking for an experienced technical copywriter to rewrite our B2B SaaS product landing page. Current visitor-to-demo conversion is stagnant at 1.4%. Need benefit-driven H1/H2 hooks, feature-to-outcome translation, and structured comparison tables for enterprise compliance buyers. Must understand technical developer tools and security messaging.";
+      if (profileInput) profileInput.value = "Senior B2B SaaS conversion copywriter with 7+ years positioning developer and cybersecurity tools.";
+      jobInput.dispatchEvent(new Event('input'));
+    });
+  }
+
+  // Keyboard shortcut: Cmd/Ctrl + Enter
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      const active = document.activeElement;
+      if (active && (active.tagName === 'TEXTAREA' || active.tagName === 'INPUT')) {
+        e.preventDefault();
+        if (generateBtn && !generateBtn.disabled) generateBtn.click();
+      }
+    }
+  });
+
   // Generate Button Logic
   generateBtn.addEventListener('click', async () => {
     const jobText = jobInput.value.trim();

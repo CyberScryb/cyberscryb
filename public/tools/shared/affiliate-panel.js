@@ -16,6 +16,164 @@
 
   // ─── Configuration ───
   const AFFILIATE_CONFIG = {
+    'caregiver-report': {
+      heading: '🩺 Caregiver Essentials',
+      message:
+        'You keep the care team safe every shift. These tools make the job a little easier — and keep the people you care for safer at home.',
+      links: [
+        {
+          text: 'Compare Medical Alert Systems →',
+          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb',
+          primary: true,
+          subtitle: '24/7 emergency monitoring for aging parents',
+        },
+        {
+          text: 'Caregiver Supplies on Amazon →',
+          url: 'https://www.amazon.com/s?k=caregiver+supplies&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Lift pads, gloves, organizers & more',
+        },
+      ],
+      triggerSelector: '.result-card, .output-card, #output',
+      disclosure:
+        'Helpful tools: Verified resources for family caregivers and care teams.',
+    },
+    'med-administration-log': {
+      heading: '💊 Pill Management Made Safer',
+      message:
+        'Missed and double doses are the most common medication errors at home. A simple organizer system prevents both.',
+      links: [
+        {
+          text: 'Pill Organizers & Med Reminders →',
+          url: 'https://www.amazon.com/s?k=pill+organizer+daily+medication+reminder&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — organizers, apps & reminders',
+        },
+      ],
+      triggerSelector: '.result-card, .output-card, #output',
+      disclosure:
+        'Helpful tools: Verified resources for family caregivers and care teams.',
+    },
+    'soap-note-generator': {
+      heading: '🩻 Clinical Tools for Care Teams',
+      message:
+        'Great documentation is the backbone of care. These tools help you chart faster and keep your kit stocked.',
+      links: [
+        {
+          text: 'Nursing & Clinical Supplies →',
+          url: 'https://www.amazon.com/s?k=nursing+supplies&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — supplies, note books & accessories',
+        },
+        {
+          text: 'Try a Free Charting / EMR Tool →',
+          url: 'https://www.heidihealth.com/en-us/blog/soap-note-template-with-examples?utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Reference — SOAP examples & charting workflows',
+        },
+      ],
+      triggerSelector: '#sn-output',
+      disclosure:
+        'Clinical reference: Tools and documentation guides for healthcare staff.',
+    },
+    'hipaa-release-generator': {
+      heading: '📄 Get Help With Records & Rights',
+      message:
+        'Your medical records belong to you. If a provider refuses to release them, you have options.',
+      links: [
+        {
+          text: 'Legal Help For Records Disputes →',
+          url: 'https://www.rocketlawyer.com/?utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Rocket Lawyer — affordable legal documents & advice',
+        },
+        {
+          text: 'File an HHS OCR Complaint →',
+          url: 'https://www.hhs.gov/hipaa/filing-a-complaint/index.html',
+          primary: false,
+          subtitle: 'Official — report a HIPAA violation for free',
+        },
+      ],
+      triggerSelector: '#hr-output',
+      disclosure:
+        'Public legal aid: Resources for patient records and civil rights enforcement.',
+    },
+    'blood-sugar-log-generator': {
+      heading: '🩸 Diabetes & Glucose Support',
+      message:
+        'Logging is the first step — these tools help you (or your loved one) stay on track between appointments.',
+      links: [
+        {
+          text: 'Glucose Monitors & Test Strips →',
+          url: 'https://www.amazon.com/s?k=glucose+monitor+test+strips&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — meters, strips, and lancing supplies',
+        },
+        {
+          text: 'Diabetes Meal & Carb Guides →',
+          url: 'https://www.amazon.com/s?k=diabetes+meal+planning+book&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Amazon — books & planners for meal planning',
+        },
+      ],
+      triggerSelector: '#bs-output',
+      disclosure:
+        'Health resources: Evidence-based tools and guides for diabetic support.',
+    },
+    'caregiver-timesheet': {
+      heading: '🕑 Payroll & Scheduling Tools',
+      message:
+        'Clean hours make clean paychecks. These tools help caregivers and families track time and shifts.',
+      links: [
+        {
+          text: 'Caregiver Scheduling Apps →',
+          url: 'https://www.amazon.com/s?k=caregiver+schedule+planner+book&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — printed planners & log books',
+        },
+      ],
+      triggerSelector: '#ts-output',
+      disclosure:
+        'Caregiver resources: Time tracking and scheduling support.',
+    },
+    'nurse-brain-sheet': {
+      heading: '🩺 Nursing Gear & Study Tools',
+      message:
+        'Great nurses prep well. Stock your kit and organize your shift with tools built for the floor.',
+      links: [
+        {
+          text: 'Nursing Badge Cards & Supplies →',
+          url: 'https://www.amazon.com/s?k=nursing+badge+cards+shift+supplies&utm_source=cyberscryb',
+          primary: true,
+          subtitle: 'Amazon — badge reels, cards, and clinical tools',
+        },
+      ],
+      triggerSelector: '#ns-output',
+      disclosure:
+        'Clinical tools: Practical resources for nursing shifts and handoffs.',
+    },
+    'caregiver-printable-pack': {
+      heading: '🛡️ Peace of Mind for the Whole Family',
+      message:
+        'You downloaded the pack — now make the home safer with gear caregivers and families actually trust.',
+      links: [
+        {
+          text: 'Compare Medical Alert Systems →',
+          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb',
+          primary: true,
+          subtitle: '24/7 monitoring — fall detection & GPS',
+        },
+        {
+          text: 'Home Safety & Mobility Aids →',
+          url: 'https://www.amazon.com/s?k=bed+rails+elderly+safety+home+care&utm_source=cyberscryb',
+          primary: false,
+          subtitle: 'Amazon — rails, grab bars, commodes & more',
+        },
+      ],
+      triggerSelector: '#pack-download',
+      disclosure:
+        'Safety resources: Gear and monitoring systems for home safety.',
+    },
     'password-checker': {
       heading: '🛡️ Protect Your Accounts',
       message:
@@ -231,164 +389,6 @@
       ],
       triggerSelector: '#output-text, .lt-out',
       disclosure: 'Regulatory guidance: National Association of Insurance Commissioners.',
-    },
-    'caregiver-report': {
-      heading: '🩺 Caregiver Essentials',
-      message:
-        'You keep the care team safe every shift. These tools make the job a little easier — and keep the people you care for safer at home.',
-      links: [
-        {
-          text: 'Compare Medical Alert Systems →',
-          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb&utm_medium=affiliate&AID=YOUR_AFFILIATE_ID',
-          primary: true,
-          subtitle: '24/7 emergency monitoring for aging parents',
-        },
-        {
-          text: 'Caregiver Supplies on Amazon →',
-          url: 'https://www.amazon.com/s?k=caregiver+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: false,
-          subtitle: 'Lift pads, gloves, organizers & more',
-        },
-      ],
-      triggerSelector: '.result-card, .output-card, #output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'med-administration-log': {
-      heading: '💊 Pill Management Made Safer',
-      message:
-        'Missed and double doses are the most common medication errors at home. A simple organizer system prevents both.',
-      links: [
-        {
-          text: 'Pill Organizers & Med Reminders →',
-          url: 'https://www.amazon.com/s?k=pill+organizer+daily+medication+reminder&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: true,
-          subtitle: 'Amazon — organizers, apps & reminders',
-        },
-      ],
-      triggerSelector: '.result-card, .output-card, #output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'soap-note-generator': {
-      heading: '🩻 Clinical Tools for Care Teams',
-      message:
-        'Great documentation is the backbone of care. These tools help you chart faster and keep your kit stocked.',
-      links: [
-        {
-          text: 'Nursing & Clinical Supplies →',
-          url: 'https://www.amazon.com/s?k=nursing+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: true,
-          subtitle: 'Amazon — supplies, note books & accessories',
-        },
-        {
-          text: 'Try a Free Charting / EMR Tool →',
-          url: 'https://www.heidihealth.com/en-us/blog/soap-note-template-with-examples?utm_source=cyberscryb',
-          primary: false,
-          subtitle: 'Reference — SOAP examples & charting workflows',
-        },
-      ],
-      triggerSelector: '#sn-output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'hipaa-release-generator': {
-      heading: '📄 Get Help With Records & Rights',
-      message:
-        'Your medical records belong to you. If a provider refuses to release them, you have options.',
-      links: [
-        {
-          text: 'Legal Help For Records Disputes →',
-          url: 'https://www.rocketlawyer.com/?utm_source=cyberscryb&utm_medium=affiliate&rid=YOUR_ROCKETLAWYER_ID',
-          primary: true,
-          subtitle: 'Rocket Lawyer — affordable legal documents & advice',
-        },
-        {
-          text: 'File an HHS OCR Complaint →',
-          url: 'https://www.hhs.gov/hipaa/filing-a-complaint/index.html',
-          primary: false,
-          subtitle: 'Official — report a HIPAA violation for free',
-        },
-      ],
-      triggerSelector: '#hr-output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'blood-sugar-log-generator': {
-      heading: '🩸 Diabetes & Glucose Support',
-      message:
-        'Logging is the first step — these tools help you (or your loved one) stay on track between appointments.',
-      links: [
-        {
-          text: 'Glucose Monitors & Test Strips →',
-          url: 'https://www.amazon.com/s?k=glucose+monitor+test+strips&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: true,
-          subtitle: 'Amazon — meters, strips, and lancing supplies',
-        },
-        {
-          text: 'Diabetes Meal & Carb Guides →',
-          url: 'https://www.amazon.com/s?k=diabetes+meal+planning+book&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: false,
-          subtitle: 'Amazon — books & planners for meal planning',
-        },
-      ],
-      triggerSelector: '#bs-output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'caregiver-timesheet': {
-      heading: '🕑 Payroll & Scheduling Tools',
-      message:
-        'Clean hours make clean paychecks. These tools help caregivers and families track time and shifts.',
-      links: [
-        {
-          text: 'Caregiver Scheduling Apps →',
-          url: 'https://www.amazon.com/s?k=caregiver+schedule+planner+book&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: true,
-          subtitle: 'Amazon — printed planners & log books',
-        },
-      ],
-      triggerSelector: '#ts-output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'nurse-brain-sheet': {
-      heading: '🩺 Nursing Gear & Study Tools',
-      message:
-        'Great nurses prep well. Stock your kit and organize your shift with tools built for the floor.',
-      links: [
-        {
-          text: 'Nursing Badge Cards & Supplies →',
-          url: 'https://www.amazon.com/s?k=nursing+badge+cards+shift+supplies&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: true,
-          subtitle: 'Amazon — badge reels, cards, and clinical tools',
-        },
-      ],
-      triggerSelector: '#ns-output',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
-    },
-    'caregiver-printable-pack': {
-      heading: '🛡️ Peace of Mind for the Whole Family',
-      message:
-        'You downloaded the pack — now make the home safer with gear caregivers and families actually trust.',
-      links: [
-        {
-          text: 'Compare Medical Alert Systems →',
-          url: 'https://www.medicalguardian.com/?utm_source=cyberscryb&utm_medium=affiliate&AID=YOUR_AFFILIATE_ID',
-          primary: true,
-          subtitle: '24/7 monitoring — fall detection & GPS',
-        },
-        {
-          text: 'Home Safety & Mobility Aids →',
-          url: 'https://www.amazon.com/s?k=bed+rails+elderly+safety+home+care&tag=YOUR_AMAZON_TAG&utm_source=cyberscryb',
-          primary: false,
-          subtitle: 'Amazon — rails, grab bars, commodes & more',
-        },
-      ],
-      triggerSelector: '#pack-download',
-      disclosure:
-        'Affiliate disclosure: We may earn a commission if you purchase through these links, at no extra cost to you.',
     },
   };
 

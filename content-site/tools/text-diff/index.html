@@ -76,7 +76,7 @@
     </script>
 
     <style>
-        .td-app { padding: 6rem 0 4rem; background: #F8F1E9; min-height: 100vh; }
+        .td-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
         .td-container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
         .td-grid {
@@ -90,7 +90,7 @@
             letter-spacing: 0.08em; margin-bottom: 0.5rem;
         }
         .td-pane textarea {
-            width: 100%; min-height: 240px; background: #FFFFFF; border: 1px solid #E4D9C8;
+            width: 100%; min-height: 240px; background: var(--bg-elevated); border: 1px solid var(--border);
             border-radius: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem; line-height: 1.6; padding: 1rem; resize: vertical; outline: none;
             transition: border-color 0.3s;
@@ -101,7 +101,7 @@
             display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; align-items: center;
         }
         .action-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid #E4D9C8; color: var(--text-muted);
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted);
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
@@ -118,7 +118,7 @@
         .td-stats strong.same { color: var(--text-muted); }
 
         .td-output {
-            margin-top: 1rem; background: #FFFFFF; border: 1px solid #E4D9C8;
+            margin-top: 1rem; background: var(--bg-elevated); border: 1px solid var(--border);
             border-radius: 12px; overflow: hidden; font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem; line-height: 1.6;
         }
@@ -142,7 +142,7 @@
 
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-        .faq-section details { background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section details { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: var(--text-muted); font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
         .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
@@ -264,18 +264,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word & Character Counter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Count words, sentences, and reading time before/after edits.</span>
             </a>
-            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Beautify, minify and validate JSON with error locations.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Test regular expressions with live match highlighting.</span>
             </a>

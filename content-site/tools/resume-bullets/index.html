@@ -76,7 +76,7 @@
       "name": "Is the resume bullet generator free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. You get 3 free generations per day after providing your email. No credit card required."
+        "text": "Yes. 100% free with unlimited generations, no accounts, and no email or credit card required."
       }
     },
     {
@@ -168,23 +168,26 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                 Input
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load sample accomplishments" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Describe Your Accomplishments (raw, informal is fine)</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:180px;" placeholder="e.g. I led the migration from our old monolith to microservices, reduced page load time by 40%, managed a team of 5 developers, shipped 3 major features..."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="e.g. I led the migration from our old monolith to microservices, reduced page load time by 40%, managed a team of 5 developers, shipped 3 major features..."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label for="target-role" style="color: var(--text-muted);">Target Role <span style="color:var(--text-faint); font-weight:normal;">(optional)</span></label>
-                            <input type="text" id="target-role" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%;" placeholder="e.g. Senior Frontend Developer">
+                            <input type="text" id="target-role" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%;" placeholder="e.g. Senior Frontend Developer">
                         </div>
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #C2410C, #e03030); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
@@ -194,7 +197,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -202,28 +205,31 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your resume bullet points will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>Is the resume bullet generator free?</h4><p>Yes. You get 3 free generations per day after providing your email. No credit card required.</p></div>
+                    <div class="faq-item"><h4>Is the resume bullet generator free?</h4><p>Yes. 100% free with unlimited generations, no accounts, and no email or credit card required.</p></div>
                     <div class="faq-item"><h4>What makes a good resume bullet point?</h4><p>Strong bullets start with an action verb, include quantified results (metrics, percentages, dollar amounts), and follow the STAR framework: Situation, Task, Action, Result.</p></div>
                     <div class="faq-item"><h4>What are the best action verbs for resumes?</h4><p>Top-performing verbs include: spearheaded, optimized, engineered, orchestrated, accelerated, delivered, reduced, and increased. Our AI selects the strongest verbs for your context.</p></div>
                     <div class="faq-item"><h4>Should I include metrics in every bullet?</h4><p>Whenever possible, yes. Numbers make your impact concrete. If you don't have exact figures, reasonable estimates (e.g., "~30% improvement") are better than vague claims.</p></div>
                     <div class="faq-item"><h4>Does the target role affect the output?</h4><p>Yes. When you specify a target role, the AI tailors vocabulary, emphasis, and technical depth to match what hiring managers and ATS systems look for in that position.</p></div>
                 </div>
 
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 1.5rem 2rem; border-radius: 12px; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 1.5rem 2rem; border-radius: 12px; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;">
                     <div>
                         <strong style="color: var(--text); display:block; margin-bottom:0.25rem;">In caregiving or healthcare support?</strong>
-                        <span style="font-size:0.9rem; color: var(--text-muted);">The <a href="/tools/cna-resume-kit/">CNA Resume Kit</a> is the done-for-you version — built specifically for CNAs, aides, PCTs, HHAs, and LPN-bound nurses. $39 one-time.</span>
+                        <span style="font-size:0.9rem; color: var(--text-muted);">The <a href="/tools/cna-resume-kit/">CNA Resume Kit</a> is the done-for-you version — built specifically for CNAs, aides, PCTs, HHAs, and LPN-bound nurses. 100% free comprehensive template and guide.</span>
                     </div>
                     <a href="/tools/cna-resume-kit/" style="white-space:nowrap; background:var(--primary); color:#FFFFFF; padding:0.6rem 1.1rem; border-radius:8px; font-family: var(--font-brand), Georgia, serif; font-weight:700; font-size:0.8rem; text-transform:uppercase; text-decoration:none;">See the Kit</a>
                 </div>
@@ -241,18 +247,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
-            <a href="/tools/bio-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/bio-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Bio Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate compelling social media bios instantly.</span>
             </a>
-            <a href="/tools/gig-auto-pilot/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/gig-auto-pilot/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Gig Auto-Pilot</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Win freelance jobs with AI-generated proposals.</span>
             </a>

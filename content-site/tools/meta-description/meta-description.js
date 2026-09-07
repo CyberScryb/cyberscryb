@@ -9,7 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "CyberScryb is a 100% free collection of browser-based utilities and AI writers for developers, freelancers, and builders. Includes AI humanizer, formal appeal letters, regex tester, and JSON formatting with zero paywalls.";
+      const kw = document.getElementById('keyword-input');
+      if (kw) kw.value = "free online developer tools";
+      toolInput.focus();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'meta-description',
     emptyMessage: 'Please enter your page topic or content.',
     collectInput: () => {

@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "The James Webb Space Telescope (JWST) has observed the most distant galaxy merger ever discovered, occurring just 510 million years after the Big Bang. Astronomers using the telescope's Near-Infrared Camera detected spectroscopic signatures indicating two massive stellar clusters in the process of combining into a single protogalaxy. This finding challenges existing hierarchical models of cosmic structure formation, which predicted that massive galactic assemblies would require at least one billion years to coalesce. The research team noted that the merger features intense bursts of star formation occurring at rates nearly twenty times higher than modern spiral galaxies, producing heavy elements far earlier in cosmic history than previously thought possible.";
+      toolInput.focus();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'summarizer',
     emptyMessage: 'Please paste some text to summarize.',
     collectInput: () => {

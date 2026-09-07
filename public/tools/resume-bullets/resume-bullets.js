@@ -9,6 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
 
+  const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "Led modernization of patient checkout portal to Next.js and Tailwind CSS, reducing page load latency by 45%. Collaborated with 4 clinical specialists and 2 product designers to streamline appointment booking, which increased self-service appointment scheduling by 32% across 18,000 monthly active users. Mentored 3 junior developers through weekly code reviews and automated CI/CD unit testing pipelines.";
+      const targetRole = document.getElementById('target-role');
+      if (targetRole) targetRole.value = "Senior Frontend Software Engineer";
+      toolInput.dispatchEvent(new Event('input'));
+    });
+  }
+
   window.CSAITool.init({
     toolId: 'resume-bullets',
     emptyMessage: 'Please describe your accomplishments to generate resume bullets.',

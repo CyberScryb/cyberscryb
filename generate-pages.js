@@ -1341,7 +1341,6 @@ function generateSitemap(generatedPages) {
     { path: '/blog/', priority: '0.9', freq: 'weekly' },
     { path: '/about/', priority: '0.7', freq: 'monthly' },
     { path: '/pro/', priority: '0.8', freq: 'monthly' },
-    { path: '/distill/', priority: '0.8', freq: 'monthly' },
     { path: '/distill-privacy/', priority: '0.3', freq: 'yearly' },
     { path: '/contact/', priority: '0.4', freq: 'yearly' },
     { path: '/privacy/', priority: '0.3', freq: 'yearly' },
@@ -1365,7 +1364,6 @@ function generateSitemap(generatedPages) {
     'contrast-checker',
     'cron-builder',
     'custody-document',
-    'distill',
     'email-writer',
     'epoch-converter',
     'fluid-sim',
@@ -1409,6 +1407,12 @@ function generateSitemap(generatedPages) {
     'uuid-generator',
     'voice-writer',
     'word-counter',
+    'soap-note-generator',
+    'hipaa-release-generator',
+    'caregiver-printable-pack',
+    'blood-sugar-log-generator',
+    'caregiver-timesheet',
+    'nurse-brain-sheet',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1505,7 +1509,6 @@ function manageRobotsMeta() {
     'contrast-checker',
     'cron-builder',
     'custody-document',
-    'distill',
     'email-writer',
     'epoch-converter',
     'fluid-sim',
@@ -1549,6 +1552,12 @@ function manageRobotsMeta() {
     'uuid-generator',
     'voice-writer',
     'word-counter',
+    'soap-note-generator',
+    'hipaa-release-generator',
+    'caregiver-printable-pack',
+    'blood-sugar-log-generator',
+    'caregiver-timesheet',
+    'nurse-brain-sheet',
   ]);
 
   const dirsToProcess = [

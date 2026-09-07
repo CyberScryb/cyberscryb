@@ -14,7 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     toneLabel.textContent = 'Tone: ' + toneSelect.value;
   });
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "Ergonomic Bamboo Standing Desk with dual whisper-quiet electric motors, 4 programmable height memory presets, integrated cable management tray, and a solid 1-inch eco-friendly bamboo desktop. Supports up to 275 lbs.";
+      if (audience) audience.value = "Remote software engineers and home-office professionals";
+      toolInput.focus();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'product-description',
     emptyMessage: 'Please describe your product.',
     collectInput: () => toolInput.value.trim(),

@@ -360,8 +360,7 @@ But honestly? When I first tried training a model on my laptop, it sounded like 
             ${reasonsHtml ? `<div class="pop-section-title">Why this was flagged</div><ul class="pop-reasons">${reasonsHtml}</ul>` : ''}
             ${tips ? `<div class="pop-tip"><strong>💡 Tip:</strong> ${tips}</div>` : ''}
             <div class="pop-section-title">Sentence</div>
-            <div class="pop-text">"${escapeHtml(sentence.text)}"</div>
-            ${sentence.level !== 'human' ? `<button class="pop-humanize" title="AI rewriting coming in Pro">✨ Humanize This Sentence</button>` : ''}
+            ${sentence.level !== 'human' ? `<a href="/tools/humanizer/" class="pop-humanize" target="_blank" style="text-decoration:none;display:inline-block;text-align:center;">✨ Humanize in Free Tool →</a>` : ''}
         `;
 
     document.body.appendChild(pop);

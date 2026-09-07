@@ -9,7 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "5 counterintuitive lessons learned from bootstrapping a developer tool to $10k monthly recurring revenue without venture capital funding.";
+      toolInput.focus();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'tweet-generator',
     emptyMessage: 'Please enter a topic or idea to generate tweets.',
     collectInput: () => {

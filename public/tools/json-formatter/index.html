@@ -76,11 +76,11 @@
     </script>
 
     <style>
-        .jf-app { padding: 6rem 0 4rem; background: #F8F1E9; min-height: 100vh; }
+        .jf-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
         .jf-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
         .jf-label { display: block; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 1rem 0 0.5rem; }
         .jf-textarea {
-            width: 100%; min-height: 220px; background: #FFFFFF; border: 1px solid #E4D9C8;
+            width: 100%; min-height: 220px; background: var(--bg-elevated); border: 1px solid var(--border);
             border-radius: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
             font-size: 0.88rem; line-height: 1.55; padding: 1.2rem; resize: vertical; outline: none;
             transition: border-color 0.3s; white-space: pre;
@@ -89,7 +89,7 @@
         .jf-textarea::placeholder { color: #333; }
         .jf-btnrow { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
         .jf-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid #E4D9C8; color: var(--text-muted);
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted);
             font-family: 'Inter', sans-serif; font-size: 0.82rem; padding: 0.6rem 1rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
@@ -102,7 +102,7 @@
         .jf-stats span strong { color: var(--primary-soft); }
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-        .faq-section details { background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section details { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: var(--text-muted); font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
         .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
@@ -222,18 +222,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Convert JSON to CSV and back with nested object flattening.</span>
             </a>
-            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Encode or decode strings and files to Base64 offline.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Test regular expressions with live match highlighting.</span>
             </a>
@@ -241,14 +241,14 @@
     </section>
 
     
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/how-to-format-json-data/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/how-to-format-json-data/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">How to Format JSON Data</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>
-            <a href="/guides/json-vs-csv-when-to-use-each/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/json-vs-csv-when-to-use-each/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON vs CSV: When to Use Each</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>

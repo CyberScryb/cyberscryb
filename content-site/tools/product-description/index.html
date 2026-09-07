@@ -163,23 +163,26 @@
         <section class="tool-content" style="padding: 2rem 0;">
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                                 Product Details
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Product Name & Key Features</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:170px;" placeholder="e.g. Handmade soy candle, lavender & vanilla scent, 8oz, 40 hour burn time, poured in small batches in Portland..."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:170px;" placeholder="e.g. Handmade soy candle, lavender & vanilla scent, 8oz, 40 hour burn time, poured in small batches in Portland..."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label for="tone" style="color: var(--text-muted);">Tone</label>
-                            <select id="tone" style="width:100%; background:#FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            <select id="tone" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="persuasive">Persuasive</option>
                                 <option value="luxurious">Luxurious</option>
                                 <option value="playful">Playful</option>
@@ -190,19 +193,19 @@
 
                         <div class="input-group">
                             <label for="audience" style="color: var(--text-muted);">Target Audience (optional)</label>
-                            <input type="text" id="audience" placeholder="e.g. busy moms, gamers, first-time home buyers" style="width:100%; background:#FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            <input type="text" id="audience" placeholder="e.g. busy moms, gamers, first-time home buyers" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                         </div>
 
                         <div class="input-group">
                             <label style="color: var(--text-muted);">Length</label>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="short" style="accent-color: var(--primary-soft);"> Short (80-120 words)
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="medium" checked style="accent-color: var(--primary-soft);"> Medium (120-180)
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="long" style="accent-color: var(--primary-soft);"> Long (180-250)
                                 </label>
                             </div>
@@ -214,7 +217,7 @@
                         </button>
                     </div>
 
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -222,15 +225,18 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your product description will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Which platforms does this work for?</h4><p>Shopify, Etsy, Amazon, eBay, WooCommerce, BigCommerce, Squarespace &mdash; any store that accepts plain text or basic HTML.</p></div>
                     <div class="faq-item"><h4>Is the output SEO-friendly?</h4><p>Yes. Descriptions naturally include target keywords when you provide product details and audience.</p></div>
@@ -245,7 +251,7 @@
             </div>
         </section>
     </main>
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Why Product Descriptions Drive Revenue</h2>
                     <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Product descriptions are the unsung hero of e-commerce. Studies consistently show that 87% of online shoppers rate product descriptions as extremely important when making purchase decisions � more important than customer reviews or product images. A weak description loses sales. A strong one converts browsers into buyers.</p>
                     <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">The problem is scale. If you run a Shopify store with 200 products, writing unique, SEO-optimized descriptions for each one takes weeks. And generic, manufacturer-provided descriptions hurt your search rankings because Google flags duplicate content. You need unique copy for every product � and that is exactly what this tool provides.</p>
@@ -263,18 +269,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate meta tags for every product.</span>
             </a>
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft launch and follow-up emails.</span>
             </a>
-            <a href="/tools/summarizer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Turn reviews into highlights.</span>
             </a>

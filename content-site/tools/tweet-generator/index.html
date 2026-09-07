@@ -76,7 +76,7 @@
       "name": "Is the AI tweet generator free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. You get 3 free generations per day after providing your email. No credit card required."
+        "text": "Yes. 100% free with unlimited generations, no accounts, and no email or credit card required."
       }
     },
     {
@@ -168,30 +168,33 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                 Input
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Topic or idea</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:180px;" placeholder="e.g. Why most people fail at building habits, or: launching a new SaaS product this week..."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="e.g. Why most people fail at building habits, or: launching a new SaaS product this week..."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label style="color: var(--text-muted);">Count</label>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="count" value="3" style="accent-color: var(--primary-soft);"> 3
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="count" value="5" checked style="accent-color: var(--primary-soft);"> 5
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="count" value="10" style="accent-color: var(--primary-soft);"> 10
                                 </label>
                             </div>
@@ -199,7 +202,7 @@
 
                         <div class="input-group">
                             <label for="angle-select" style="color: var(--text-muted);">Angle</label>
-                            <select id="angle-select" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding: 10px 12px; border-radius: 6px; font-size: 0.85rem; width: 100%; font-family: 'Inter', sans-serif;">
+                            <select id="angle-select" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.85rem; width: 100%; font-family: 'Inter', sans-serif;">
                                 <option value="hot take" selected>Hot Take</option>
                                 <option value="educational">Educational</option>
                                 <option value="promotional">Promotional</option>
@@ -214,7 +217,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -222,18 +225,21 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your generated tweets will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>Is the AI tweet generator free?</h4><p>Yes. You get 3 free generations per day after providing your email. No credit card required.</p></div>
+                    <div class="faq-item"><h4>Is the AI tweet generator free?</h4><p>Yes. 100% free with unlimited generations, no accounts, and no email or credit card required.</p></div>
                     <div class="faq-item"><h4>What is the character limit for tweets?</h4><p>Twitter/X allows 280 characters per tweet. Our generator keeps each tweet within that limit by default so you can copy and post directly.</p></div>
                     <div class="faq-item"><h4>Can I use these tweets on LinkedIn or other platforms?</h4><p>Absolutely. The generated content works great on Twitter/X, LinkedIn, Threads, Mastodon, and Bluesky. Adjust the angle to match the platform's tone.</p></div>
                     <div class="faq-item"><h4>How do I write tweets that go viral?</h4><p>Viral tweets typically have a strong hook in the first line, offer a contrarian or surprising take, and end with a call to action. Our "hot take" angle is optimized for engagement.</p></div>
@@ -253,18 +259,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/bio-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/bio-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Bio Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate compelling social media bios instantly.</span>
             </a>
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
-            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Rewrite AI text to sound like you wrote it.</span>
             </a>

@@ -15,7 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
     toneLabel.textContent = 'Tone: ' + toneSelect.value;
   });
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      toolInput.value = "Ask my manager for Friday off because my sister is getting married out of state. I've already finished all quarterly deliverables and covered my on-call rotation with Alex.";
+      if (toneSelect) toneSelect.value = 'professional';
+      if (recipient) recipient.value = 'Sarah (Engineering Lead)';
+      if (purpose) purpose.value = 'Time-off request';
+      if (toneLabel) toneLabel.textContent = 'Tone: professional';
+      toolInput.focus();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'email-writer',
     emptyMessage: 'Please describe what you want to say.',
     collectInput: () => toolInput.value.trim(),

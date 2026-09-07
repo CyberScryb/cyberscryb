@@ -4,59 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>Pro Activated &mdash; CyberScryb</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" href="/mascot-icon.png">
+  <title>CyberScryb is 100% Free &mdash; All Tools Unlocked</title>
+  <link rel="stylesheet" href="/css/style.css?v=20260905dark">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
-      background: #F8F1E9;
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: #2C1810;
-      padding: 20px;
+      background: var(--bg, #09090b);
+      font-family: var(--font, 'Outfit', system-ui, sans-serif);
+      color: var(--text, #fafafa);
+      padding: 24px;
     }
     .card {
-      max-width: 480px; width: 100%;
-      background: #FFFFFF;
-      border: 1px solid #E4D9C8;
+      max-width: 520px; width: 100%;
+      background: var(--card, #18181b);
+      border: 1px solid var(--border, rgba(255,255,255,0.08));
       border-radius: 20px;
-      padding: 48px 40px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       text-align: center;
-      box-shadow: 0 20px 50px rgba(44,24,16,.12);
     }
-    .icon { font-size: 56px; margin-bottom: 20px; line-height: 1; }
-    h1 {
-      font-size: 28px; font-weight: 800;
-      color: #C2410C;
-      margin-bottom: 12px;
+    .badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--success, #22c55e);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 20px;
     }
-    p { color: #5C4A3D; line-height: 1.6; margin-bottom: 8px; }
-    .spinner {
-      width: 40px; height: 40px;
-      border: 3px solid rgba(194,65,12,.15);
-      border-top-color: #C2410C;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
+    h1 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--text, #fafafa); }
+    p { color: var(--text-muted, #d4d4d8); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
+    .btn-primary {
+      display: block; width: 100%; text-align: center;
+      padding: 14px 20px; border-radius: 12px; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer; font-size: 15px;
+      background: linear-gradient(135deg, var(--primary, #f97316), var(--primary-hover, #ea580c));
+      color: #09090b;
+      margin-top: 12px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .btn {
-      display: inline-block; margin-top: 28px;
-      padding: 14px 32px;
-      background: #C2410C;
-      color: #FFFCF7; font-weight: 700; font-size: 15px;
-      border-radius: 999px; text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
+    .btn-secondary {
+      display: block; width: 100%; text-align: center;
+      padding: 14px 20px; border-radius: 12px; font-weight: 600;
+      text-decoration: none; font-size: 15px;
+      background: var(--bg-elevated, #121215);
+      color: var(--text, #fafafa);
+      border: 1px solid var(--border, rgba(255,255,255,0.1));
+      margin-top: 10px;
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(194,65,12,.3); }
-    .error { color: #B91C1C; }
-    #status-msg { margin-bottom: 4px; }
   </style>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
-    <meta name="description" content="Your CyberScryb Pro subscription is now active. Enjoy unlimited access to all AI tools.">
     <!-- iubenda cookie consent banner -->
     <script>
     (function() {
@@ -85,102 +82,12 @@
     </script>
 </head>
 <body>
-<div class="card" id="card">
-  <div id="loading-state">
-    <div class="spinner"></div>
-    <h1>Activating Your Pro Access</h1>
-    <p id="status-msg">Verifying your payment…</p>
+  <div class="card">
+    <div class="badge">✓ 100% Free &amp; Unlocked</div>
+    <h1>Welcome to CyberScryb!</h1>
+    <p>We've eliminated all paywalls and subscriptions across CyberScryb. Every single tool, writer, and utility is now permanently unlocked and 100% free for everyone.</p>
+    <a class="btn-primary" href="/tools/humanizer/">Open AI Humanizer &rarr;</a>
+    <a class="btn-secondary" href="/tools/">Explore All 55+ Free Tools</a>
   </div>
-  <div id="success-state" style="display:none">
-    <div class="icon">✓</div>
-    <h1>Pro is on</h1>
-    <p>Unlimited full results on this device. No daily cap on Humanizer and the other Pro AI tools.</p>
-    <p style="margin-top:8px;font-size:13px;color:#5C4A3D">You&rsquo;re good to go — open a tool and keep working.</p>
-    <a href="/tools/humanizer/" class="btn">Open Humanizer</a>
-    <p style="margin-top:16px;font-size:13px;color:#5C4A3D;">Different computer? <a href="/pro-restore/" style="color:#C7522A;">Restore Pro</a> on that browser, or email your Stripe receipt.</p>
-  </div>
-  <div id="error-state" style="display:none">
-    <div class="icon">⚠️</div>
-    <h1 class="error">Something Went Wrong</h1>
-    <p id="error-msg">We couldn't verify your payment.</p>
-    <p style="margin-top:12px;font-size:13px">
-      Email <a href="mailto:support@cyberscryb.com" style="color: #C7522A">support@cyberscryb.com</a>
-      and we'll sort it out fast.
-    </p>
-    <a href="/pro/" class="btn" style="background:rgba(44,24,16,.06);color:#2C1810;margin-top:20px">Back to Pro Page</a>
-  </div>
-</div>
-
-<script>
-(function() {
-  var params = new URLSearchParams(location.search);
-  var sessionId = params.get('session_id');
-
-  function show(id) {
-    ['loading-state','success-state','error-state'].forEach(function(s) {
-      document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
-    });
-  }
-
-  function setCookie(name, value, days) {
-    var expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = name + '=' + value + '; expires=' + expires + '; path=/; SameSite=Lax';
-  }
-
-  function activatePro() {
-    // cs_pro is the real unlimited flag. cs_subscribed alone is free email tier.
-    setCookie('cs_pro', '1', 365);
-    setCookie('cs_subscribed', '1', 365);
-    setCookie('cs_pro_source', 'stripe', 365);
-    try { localStorage.setItem('cs_pro', '1'); } catch (e) {}
-    show('success-state');
-    // Clean URL without leaking session_id
-    history.replaceState(null, '', '/pro-success/');
-    if (window.CSProStatus && window.CSProStatus.updateNav) {
-      try { window.CSProStatus.updateNav(); } catch (e) {}
-    }
-  }
-
-  if (!sessionId) {
-    // No session_id — bookmark/refresh after activation
-    var alreadyPro = document.cookie.indexOf('cs_pro=1') > -1
-      || document.cookie.indexOf('cs_pro_source=stripe') > -1
-      || (function(){ try { return localStorage.getItem('cs_pro') === '1'; } catch(e){ return false; } })();
-    if (alreadyPro) {
-      activatePro();
-    } else {
-      document.getElementById('error-msg').textContent = 'No payment session found. If you just paid, check your email for a receipt and contact support.';
-      show('error-state');
-    }
-    return;
-  }
-
-  document.getElementById('status-msg').textContent = 'Confirming with Stripe…';
-
-  // Call Firebase function to validate &mdash; with a timeout so the spinner never hangs forever
-  var controller = new AbortController();
-  var timeoutId = setTimeout(function() { controller.abort(); }, 20000);
-
-  fetch('/api/validate-pro?session_id=' + encodeURIComponent(sessionId), { signal: controller.signal })
-    .then(function(r) { clearTimeout(timeoutId); return r.json(); })
-    .then(function(data) {
-      if (data.ok) {
-        activatePro();
-      } else {
-        document.getElementById('error-msg').textContent = data.error || 'Payment could not be confirmed.';
-        show('error-state');
-      }
-    })
-    .catch(function(err) {
-      clearTimeout(timeoutId);
-      console.error(err);
-      var aborted = err && err.name === 'AbortError';
-      document.getElementById('error-msg').textContent = aborted
-        ? 'This is taking longer than expected. Your payment may still be processing &mdash; check your email for a receipt, or email support@cyberscryb.com and we\'ll activate you manually.'
-        : 'Network error. Please try refreshing.';
-      show('error-state');
-    });
-})();
-</script>
 </body>
 </html>

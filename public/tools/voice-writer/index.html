@@ -177,7 +177,7 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -190,21 +190,21 @@
                         <div class="input-group">
                             <label style="color: var(--text-muted);">Voice Mode</label>
                             <div style="display:flex; gap:8px; flex-direction:column;">
-                                <label id="voice-conversational-label" style="display:flex; align-items:flex-start; gap:10px; background:#FFFFFF; padding:12px 14px; border: 2px solid #a78bfa; border-radius:8px; cursor:pointer;">
+                                <label id="voice-conversational-label" style="display:flex; align-items:flex-start; gap:10px; background: var(--bg-elevated); padding:12px 14px; border: 2px solid #a78bfa; border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="conversational" checked style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
                                         <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Conversational</div>
                                         <div style="font-size:0.75rem; color: var(--text-muted); margin-top:2px;">Short sentences. Direct. Natural tone.</div>
                                     </div>
                                 </label>
-                                <label id="voice-educational-label" style="display:flex; align-items:flex-start; gap:10px; background:#FFFFFF; padding:12px 14px; border: 1px solid #E4D9C8; border-radius:8px; cursor:pointer;">
+                                <label id="voice-educational-label" style="display:flex; align-items:flex-start; gap:10px; background: var(--bg-elevated); padding:12px 14px; border: 1px solid var(--border); border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="educational" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
                                         <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Educational</div>
                                         <div style="font-size:0.75rem; color: var(--text-muted); margin-top:2px;">Clear, structured, confident. Sharp instructor who respects your time.</div>
                                     </div>
                                 </label>
-                                <label id="voice-strategic-label" style="display:flex; align-items:flex-start; gap:10px; background:#FFFFFF; padding:12px 14px; border: 1px solid #E4D9C8; border-radius:8px; cursor:pointer;">
+                                <label id="voice-strategic-label" style="display:flex; align-items:flex-start; gap:10px; background: var(--bg-elevated); padding:12px 14px; border: 1px solid var(--border); border-radius:8px; cursor:pointer;">
                                     <input type="radio" name="voice" value="strategic" style="accent-color:#a78bfa; margin-top:3px; flex-shrink:0;">
                                     <div>
                                         <div style="font-size:0.9rem; font-weight:600; color: var(--text-muted);">Strategic</div>
@@ -217,14 +217,14 @@
                         <!-- Topic Input -->
                         <div class="input-group" style="margin-top:1.25rem;">
                             <label for="tool-input" style="color: var(--text-muted);">Topic or Brief</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:120px;" placeholder="e.g. Why most people never finish what they start&#10;&#10;or: The biggest mistake freelancers make with their rates&#10;&#10;or: How to write a caregiver shift report"></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:120px;" placeholder="e.g. Why most people never finish what they start&#10;&#10;or: The biggest mistake freelancers make with their rates&#10;&#10;or: How to write a caregiver shift report"></textarea>
                             <div style="font-size:0.75rem; color:#555; margin-top:4px;" id="char-count">0 / 4,000 characters</div>
                         </div>
 
                         <!-- Refinement -->
                         <div class="input-group" style="margin-top:1rem;">
                             <label for="refinement-input" style="color: var(--text-muted); font-size:0.85rem;">Refine the output <span style="color:#555;">(optional &mdash; after first generation)</span></label>
-                            <input type="text" id="refinement-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
+                            <input type="text" id="refinement-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:10px 12px; border-radius:6px; width:100%; font-size:0.85rem; box-sizing:border-box;" placeholder="e.g. Make it shorter. Add a specific example. Less formal.">
                         </div>
 
                         <button id="generate-btn" class="primary-btn" style="margin-top:1.25rem; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
@@ -234,7 +234,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -242,11 +242,11 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: #a78bfa;">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid var(--border); color: #a78bfa;">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); white-space: pre-wrap;">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); white-space: pre-wrap;">
                                 <span class="placeholder" style="color:var(--text-faint);">Your content will appear here...</span>
                             </div>
 
@@ -257,13 +257,16 @@
                 </section>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color:#a78bfa; margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is an AI voice writer?</h4><p>It generates content in a specific tone or register. Instead of generic AI output, you choose the voice &mdash; conversational, educational, or strategic &mdash; and it writes in that style consistently.</p></div>
                     <div class="faq-item"><h4>What are the three voice modes?</h4><p><strong>Conversational</strong> writes like you're talking to a smart friend &mdash; short sentences, direct, and engaging. <strong>Educational</strong> writes like a sharp instructor &mdash; structured, clear. <strong>Strategic</strong> writes like a business operator &mdash; framework-driven, systematic, result-focused.</p></div>
                     <div class="faq-item"><h4>What can I use this for?</h4><p>Social media posts, blog intros, newsletter sections, Reddit posts, email drafts, LinkedIn content &mdash; anything where tone matters and you want a starting point you can actually use without rewriting from scratch.</p></div>
                     <div class="faq-item"><h4>Is it free?</h4><p>Yes. 100% free to use. No account or credit card required.</p></div>
                     <div class="faq-item"><h4>Is my content stored?</h4><p>No. Your input is processed in real time and discarded. We never store or train on your content.</p></div>
+                </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">

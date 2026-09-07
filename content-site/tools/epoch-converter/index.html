@@ -36,31 +36,31 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cyberscryb.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://cyberscryb.com/tools/"},{"@type":"ListItem","position":3,"name":"Epoch Converter","item":"https://cyberscryb.com/tools/epoch-converter/"}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (also called Epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's widely used in programming to represent dates and times as a single number."}},{"@type":"Question","name":"What is the Year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Systems using 32-bit signed integers to store Unix timestamps will overflow on January 19, 2038 at 03:14:07 UTC. Modern systems use 64-bit integers which won't overflow for billions of years."}},{"@type":"Question","name":"Does this tool support milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool auto-detects whether your input is in seconds or milliseconds. It displays both formats in the output."}}]}</script>
     <style>
-        .epoch-app{padding:6rem 0 4rem;background:#F8F1E9;min-height:100vh}
+        .epoch-app{padding:6rem 0 4rem;background:var(--bg-elevated);min-height:100vh}
         .epoch-container{max-width:900px;margin:0 auto;padding:0 2rem}
-        .live-clock{background:linear-gradient(135deg,rgba(194, 65, 12,0.08),rgba(194,65,12,0.05));border:1px solid #E4D9C8;border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
+        .live-clock{background:linear-gradient(135deg,rgba(194, 65, 12,0.08),rgba(194,65,12,0.05));border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
         .clock-epoch{font-family: var(--font-brand), Georgia, serif;font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#C2410C,#C2410C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:0.05em}
         .clock-human{font-family:'JetBrains Mono',monospace;font-size:1rem;color: var(--text-muted);margin-top:0.5rem}
         .clock-label{font-size:0.75rem;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem}
         .converter-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
-        .conv-card{background:#FFFCF7;border:1px solid #E4D9C8;border-radius:12px;padding:1.5rem}
+        .conv-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
         .conv-card h2{font-size:1rem;margin-bottom:1rem;color: var(--text-muted)}
-        .conv-input{width:100%;background:#FFFFFF;border: 1px solid #E4D9C8;color: var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:1rem;padding:0.75rem;border-radius:8px;outline:none;transition:border-color 0.3s}
+        .conv-input{width:100%;background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);font-family:'JetBrains Mono',monospace;font-size:1rem;padding:0.75rem;border-radius:8px;outline:none;transition:border-color 0.3s}
         .conv-input:focus{border-color: var(--primary-soft);box-shadow:0 0 15px rgba(194, 65, 12,0.08)}
         .conv-btn{background:linear-gradient(135deg,#C2410C,#0088ff);border:none;color:#000;font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;transition:all 0.3s;margin-top:0.75rem;width:100%}
         .conv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(194, 65, 12,0.3)}
-        .conv-result{margin-top:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem}
+        .conv-result{margin-top:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem}
         .result-row{display:flex;justify-content:space-between;padding:0.3rem 0;border-bottom:1px solid #151515}
         .result-row:last-child{border-bottom:none}
         .result-label{font-size:0.8rem;color:#555}
         .result-value{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color: var(--primary-soft);cursor:pointer}
         .result-value:hover{color: var(--text)}
         .date-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
-        .date-inputs input,.time-inputs input{width:100%;background:#FFFFFF;border: 1px solid #E4D9C8;color: var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:0.9rem;padding:0.5rem;border-radius:6px;outline:none;text-align:center}
+        .date-inputs input,.time-inputs input{width:100%;background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);font-family:'JetBrains Mono',monospace;font-size:0.9rem;padding:0.5rem;border-radius:6px;outline:none;text-align:center}
         .time-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.75rem}
         .input-label{font-size:0.65rem;color:#444;text-align:center;margin-top:2px}
         .faq-section{margin-top:3rem}.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
-        .faq-section details{background:#FFFFFF;border:1px solid #E4D9C8;border-radius:10px;margin-bottom:0.5rem}
+        .faq-section details{background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;margin-bottom:0.5rem}
         .faq-section summary{padding:1rem;cursor:pointer;color: var(--text-muted);font-weight:500;list-style:none;display:flex;justify-content:space-between}
         .faq-section summary::after{content:'+';color: var(--primary-soft);font-weight:700}
         .faq-section details[open] summary::after{content:'−'}
@@ -155,7 +155,7 @@
             </div>
 
         </div>
-        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:var(--text-secondary, #5C4A3D);font-family:'Inter',sans-serif;line-height:1.7;">
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Is a Unix Timestamp?</h2>
         <p>A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970, 00:00:00 UTC &mdash; a date referred to as the Unix epoch. This convention was established in the early days of Unix operating systems as a simple, unambiguous way to represent any point in time using a single integer, with no dependence on locale, calendar format, or timezone.</p>
         <p>Every major programming language has built-in support for Unix timestamps. In JavaScript, <code>Date.now()</code> returns the current timestamp in milliseconds. In Python, <code>time.time()</code> returns it in seconds. In databases, Unix timestamps are often preferred for storing dates because integer comparisons are faster than string comparisons, and there is no ambiguity about date format (no DD/MM/YYYY vs MM/DD/YYYY confusion).</p>
@@ -165,25 +165,25 @@
         <p>When in doubt, check the magnitude: 10 digits = seconds, 13 digits = milliseconds. Convert accordingly before passing timestamps between systems that may use different conventions.</p>
 
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Frequently Asked Questions</h2>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Does Unix time account for timezones?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Does Unix time account for timezones?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What is the Year 2038 problem?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">32-bit signed integers can represent values up to 2,147,483,647. When used to store Unix timestamps (seconds since 1970), this maximum corresponds to January 19, 2038 at 03:14:07 UTC. After that point, 32-bit systems will overflow and roll back to 1901. Most modern systems use 64-bit integers for timestamps, which extends the range to approximately 292 billion years in the future. If you're working with legacy embedded systems or old 32-bit databases, this is a real migration concern.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">What is the Year 2038 problem?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">32-bit signed integers can represent values up to 2,147,483,647. When used to store Unix timestamps (seconds since 1970), this maximum corresponds to January 19, 2038 at 03:14:07 UTC. After that point, 32-bit systems will overflow and roll back to 1901. Most modern systems use 64-bit integers for timestamps, which extends the range to approximately 292 billion years in the future. If you're working with legacy embedded systems or old 32-bit databases, this is a real migration concern.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">How do I get the current Unix timestamp in different languages?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">JavaScript: <code>Math.floor(Date.now() / 1000)</code> (seconds) or <code>Date.now()</code> (milliseconds). Python: <code>import time; int(time.time())</code>. PHP: <code>time()</code>. Ruby: <code>Time.now.to_i</code>. Go: <code>time.Now().Unix()</code>. SQL (PostgreSQL): <code>EXTRACT(EPOCH FROM NOW())</code>. SQL (MySQL): <code>UNIX_TIMESTAMP()</code>.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">How do I get the current Unix timestamp in different languages?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">JavaScript: <code>Math.floor(Date.now() / 1000)</code> (seconds) or <code>Date.now()</code> (milliseconds). Python: <code>import time; int(time.time())</code>. PHP: <code>time()</code>. Ruby: <code>Time.now.to_i</code>. Go: <code>time.Now().Unix()</code>. SQL (PostgreSQL): <code>EXTRACT(EPOCH FROM NOW())</code>. SQL (MySQL): <code>UNIX_TIMESTAMP()</code>.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What is a Unix timestamp?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">A Unix timestamp (Epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's used in virtually all programming languages to represent time as a number.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">What is a Unix timestamp?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">A Unix timestamp (Epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's used in virtually all programming languages to represent time as a number.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Does this tool support milliseconds?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Yes. If the timestamp is 13+ digits, it's auto-detected as milliseconds and converted accordingly.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Does this tool support milliseconds?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Yes. If the timestamp is 13+ digits, it's auto-detected as milliseconds and converted accordingly.</p>
         </details>
     </section>
 </main>
@@ -194,18 +194,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">UUID Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate time-based UUIDs to pair with epoch timestamps.</span>
             </a>
-            <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/json-csv-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Convert timestamped datasets between JSON and CSV.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Test regex patterns for parsing timestamps from logs.</span>
             </a>

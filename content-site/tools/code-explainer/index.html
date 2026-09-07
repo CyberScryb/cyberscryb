@@ -154,23 +154,26 @@
         <section class="tool-content" style="padding: 2rem 0;">
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                                 Your Code
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Paste Code Snippet</label>
-                            <textarea id="tool-input" spellcheck="false" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:260px; font-family:'JetBrains Mono','Courier New',monospace;" placeholder="function fibonacci(n) {&#10;  if (n <= 1) return n;&#10;  return fibonacci(n - 1) + fibonacci(n - 2);&#10;}"></textarea>
+                            <textarea id="tool-input" spellcheck="false" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:260px; font-family:'JetBrains Mono','Courier New',monospace;" placeholder="function fibonacci(n) {&#10;  if (n <= 1) return n;&#10;  return fibonacci(n - 1) + fibonacci(n - 2);&#10;}"></textarea>
                         </div>
 
                         <div class="input-group">
                             <label for="language" style="color: var(--text-muted);">Language</label>
-                            <select id="language" style="width:100%; background:#FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            <select id="language" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="auto">Auto-detect</option>
                                 <option value="JavaScript">JavaScript</option>
                                 <option value="TypeScript">TypeScript</option>
@@ -197,7 +200,7 @@
                         </button>
                     </div>
 
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -205,15 +208,18 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">A plain-English explanation of your code will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>Which languages are supported?</h4><p>All major languages &mdash; JavaScript, TypeScript, Python, Java, C++, C#, Go, Rust, PHP, Ruby, Swift, Kotlin, SQL, Bash, HTML, CSS, and more. Auto-detect picks the right one automatically.</p></div>
                     <div class="faq-item"><h4>Who is this for?</h4><p>Beginners trying to understand a snippet, code reviewers, and senior devs onboarding to unfamiliar codebases.</p></div>
@@ -227,7 +233,7 @@
             </div>
         </section>
 
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Why Code Explanation Tools Matter</h2>
                     <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Reading code is harder than writing it. Most developers spend 60 to 70 percent of their time reading existing code � debugging, onboarding to a new codebase, reviewing pull requests, or trying to understand legacy systems that nobody documented. An AI code explainer transforms that process from hours of detective work into seconds of clear, structured explanation.</p>
                     <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Our tool uses Google's Gemini model to break down code in any language � Python, JavaScript, TypeScript, Go, Rust, SQL, Bash, and more. It identifies what each block does, explains control flow and data transformations, and highlights potential issues like unhandled edge cases or performance bottlenecks. The output is plain English, not more code.</p>
@@ -245,18 +251,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Test regular expressions live.</span>
             </a>
-            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/json-formatter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON Formatter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Pretty-print and validate JSON.</span>
             </a>
-            <a href="/tools/jwt-decoder/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/jwt-decoder/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Inspect JWT tokens instantly.</span>
             </a>

@@ -75,11 +75,11 @@
     </script>
 
     <style>
-        .sg-app { padding: 6rem 0 4rem; background: #F8F1E9; min-height: 100vh; }
+        .sg-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
         .sg-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
 
         .sg-input {
-            width: 100%; background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 12px;
+            width: 100%; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
             color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1.1rem;
             padding: 1.25rem 1.5rem; outline: none; transition: border-color 0.3s;
         }
@@ -87,7 +87,7 @@
         .sg-input::placeholder { color: #333; }
 
         .sg-output-box {
-            margin-top: 1.5rem; background: linear-gradient(145deg, #FFFCF7, #F8F1E9);
+            margin-top: 1.5rem; background: var(--card);
             border: 1px solid #C2410C; border-radius: 12px; padding: 1.5rem;
             display: flex; align-items: center; gap: 1rem; justify-content: space-between;
             flex-wrap: wrap;
@@ -103,11 +103,11 @@
             gap: 1rem;
         }
         .sg-option {
-            background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 10px; padding: 1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem;
         }
         .sg-option label { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
         .sg-option select, .sg-option input[type="number"] {
-            width: 100%; background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 6px;
+            width: 100%; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px;
             color: var(--text-muted); font-family: 'Inter', sans-serif; padding: 0.5rem 0.75rem; outline: none;
         }
         .sg-option select:focus, .sg-option input[type="number"]:focus { border-color: var(--primary-soft); }
@@ -115,7 +115,7 @@
         .sg-toggle input { width: 18px; height: 18px; accent-color: var(--primary-soft); }
 
         .action-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid #E4D9C8; color: var(--text-muted);
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted);
             font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.6rem 1.2rem;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
         }
@@ -127,7 +127,7 @@
 
         .faq-section { margin-top: 3rem; }
         .faq-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-        .faq-section details { background: #FFFFFF; border: 1px solid #E4D9C8; border-radius: 10px; margin-bottom: 0.5rem; }
+        .faq-section details { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.5rem; }
         .faq-section summary { padding: 1rem; cursor: pointer; color: var(--text-muted); font-weight: 500; list-style: none; display: flex; justify-content: space-between; }
         .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
@@ -255,18 +255,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Build meta title, description, and Open Graph tags for your new URL.</span>
             </a>
-            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/markdown-html/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown &harr; HTML</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Convert Markdown drafts into publish-ready HTML.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Count words & characters before you trim a title.</span>
             </a>

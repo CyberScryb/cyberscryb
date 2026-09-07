@@ -1,20 +1,13 @@
-// Shared AI Tool Core — free trial, email unlock, Pro unlimited
+// Shared AI Tool Core — 100% Free, Client-Side AI Writers
 // Usage: window.CSAITool.init({ toolId, collectInput, collectParams, onStats, ... })
 //
-// Access levels:
-//   Pro (cs_pro=1)           — unlimited full results, no char cap
-//   Free trial (once/browser) — one full result, no email
-//   Email free               — 1 full unlock per day after trial
-//   Beyond free              — preview + Pro paywall
+// All tools are 100% unlocked with zero paywalls, zero logins, and no subscriptions.
 //
-// GA4: tool_used, email_captured, result_copied, pro_checkout_click, paywall_shown
+// GA4: tool_used, email_captured, result_copied
 
 (function () {
   const FREE_CHAR_LIMIT = 4000;
-  const FREE_DAILY_LIMIT = 10;
   const PREVIEW_RATIO = 1.0;
-  const STRIPE_MONTHLY = 'https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b';
-  const STRIPE_LIFETIME = 'https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08';
 
   function setCookie(name, val, days) {
     const d = new Date();
@@ -25,43 +18,6 @@
   function getCookie(name) {
     const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return v ? v.pop() : '';
-  }
-  function isSubscribed() {
-    return getCookie('cs_subscribed') === '1';
-  }
-  function isPro() {
-    if (getCookie('cs_pro') === '1') return true;
-    try {
-      if (localStorage.getItem('cs_pro') === '1') return true;
-    } catch (e) {
-      /* private mode */
-    }
-    // Legacy: pro-success only set cs_subscribed — treat stripe-sourced sub as Pro
-    if (getCookie('cs_pro_source') === 'stripe' && getCookie('cs_subscribed') === '1') return true;
-    return false;
-  }
-  function activateProLocal(days) {
-    const d = typeof days === 'number' ? days : 365;
-    setCookie('cs_pro', '1', d);
-    setCookie('cs_subscribed', '1', d);
-    setCookie('cs_pro_source', 'stripe', d);
-    try {
-      localStorage.setItem('cs_pro', '1');
-    } catch (e) {
-      /* ignore */
-    }
-  }
-  function stripeUrl(base, toolId, placement) {
-    const sep = base.indexOf('?') > -1 ? '&' : '?';
-    return (
-      base +
-      sep +
-      'utm_source=' +
-      encodeURIComponent(toolId || 'tool') +
-      '&utm_medium=' +
-      encodeURIComponent(placement || 'paywall') +
-      '&utm_campaign=pro_conversion'
-    );
   }
 
   function init(config) {
@@ -228,22 +184,12 @@
 
     function showHardLimitMessage() {
       outputContent.innerHTML =
-        '<span style="color:#ef4444;">Free full unlock used for today.</span> ' +
-        '<span style="color:#5C4A3D;">Upgrade to Pro for unlimited rewrites.</span>';
+        '<span style="color:#ef4444;">Daily limit reached.</span> ' +
+        '<span style="color:var(--text-muted);">Please try again tomorrow.</span>';
       if (emailGate) {
-        emailGate.classList.remove('hidden');
-        setGateMode('pro_only');
+        emailGate.classList.add('hidden');
         pendingFullText = '';
       }
-      const tiers = document.getElementById('upgrade-tiers');
-      if (tiers) {
-        tiers.style.border = '2px solid #C2410C';
-        tiers.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(function () {
-          tiers.style.border = '';
-        }, 3000);
-      }
-      trackEvent('paywall_shown', { tool_id: toolId, mode: 'daily_limit' });
     }
 
     if (copyBtn) {
@@ -253,31 +199,31 @@
           navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: toolId });
             const orig = copyBtn.innerText;
-            copyBtn.innerText = 'Copied!';
+            copyBtn.innerText = 'Copied! ✓';
             setTimeout(function () {
               copyBtn.innerText = orig;
-            }, 1500);
+            }, 1600);
           });
         }
       });
     }
 
+    // Keyboard shortcut: Cmd/Ctrl + Enter to trigger generation
+    document.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        const active = document.activeElement;
+        if (active && (active.tagName === 'TEXTAREA' || active.tagName === 'INPUT')) {
+          e.preventDefault();
+          if (generateBtn && !generateBtn.disabled) {
+            generateBtn.click();
+          }
+        }
+      }
+    });
+
     if (gateForm) {
       gateForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        if (isPro()) {
-          unlockFullResult();
-          return;
-        }
-        const usage = getUsageToday();
-        if (isSubscribed() && usage.count >= FREE_DAILY_LIMIT) {
-          setGateMode('pro_only');
-          if (gateStatus) {
-            gateStatus.style.color = '#ef4444';
-            gateStatus.textContent = 'Free unlock already used today. Go Pro for unlimited.';
-          }
-          return;
-        }
         const email = gateInput.value.trim();
         if (!email) return;
         gateSubmitBtn.disabled = true;
@@ -494,9 +440,15 @@
 
   window.CSAITool = {
     init: init,
-    isSubscribed: isSubscribed,
-    isPro: isPro,
-    activateProLocal: activateProLocal,
+    isSubscribed: function () {
+      return true;
+    },
+    isPro: function () {
+      return true;
+    },
+    activateProLocal: function () {
+      return true;
+    },
     getCookie: getCookie,
     setCookie: setCookie,
   };

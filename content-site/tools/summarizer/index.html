@@ -74,7 +74,7 @@
       "name": "Is the AI summarizer free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. You get 3 free summaries per day after providing your email. No credit card required."
+        "text": "Yes. 100% free with unlimited summaries, no accounts, and zero email or credit card required."
       }
     },
     {
@@ -90,7 +90,7 @@
       "name": "Can I summarize PDFs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not directly yet — paste the extracted text. PDF upload is coming on Pro."
+        "text": "Not directly yet — paste the extracted text. Paste extracted text directly into the box for instant summarization."
       }
     },
     {
@@ -106,7 +106,7 @@
       "name": "How long can the input be?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Free tier supports up to 500 characters. Pro unlocks 20,000 characters per request."
+        "text": "You can summarize up to 4,000 characters per pass completely free with zero limits."
       }
     }
   ]
@@ -166,30 +166,33 @@
             <div class="container">
                 <div class="humanizer-container" style="background: transparent; box-shadow: none;">
                     <!-- Left Panel: Inputs -->
-                    <div class="panel input-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 Input
                             </h2>
-                            <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample scenario" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
                         </div>
 
                         <div class="input-group">
                             <label for="tool-input" style="color: var(--text-muted);">Paste Text to Summarize</label>
-                            <textarea id="tool-input" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted); height:180px;" placeholder="Paste your article, blog post, essay, or any long text here..."></textarea>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Paste your article, blog post, essay, or any long text here..."></textarea>
                         </div>
 
                         <div class="input-group">
                             <label style="color: var(--text-muted);">Summary Length</label>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="short" style="accent-color: var(--primary-soft);"> Short (1-2 sentences)
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="medium" checked style="accent-color: var(--primary-soft);"> Medium (3-5 sentences)
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="length" value="long" style="accent-color: var(--primary-soft);"> Long (paragraph)
                                 </label>
                             </div>
@@ -198,10 +201,10 @@
                         <div class="input-group">
                             <label style="color: var(--text-muted);">Format</label>
                             <div style="display:flex; gap:8px;">
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="format" value="paragraph" checked style="accent-color: var(--primary-soft);"> Paragraph
                                 </label>
-                                <label style="display:inline-flex; align-items:center; gap:6px; background:#FFFFFF; padding:8px 12px; border: 1px solid #E4D9C8; border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
+                                <label style="display:inline-flex; align-items:center; gap:6px; background: var(--bg-elevated); padding:8px 12px; border: 1px solid var(--border); border-radius:6px; cursor:pointer; font-size:0.8rem; text-transform:none; letter-spacing:0;">
                                     <input type="radio" name="format" value="bullets" style="accent-color: var(--primary-soft);"> Bullet Points
                                 </label>
                             </div>
@@ -214,7 +217,7 @@
                     </div>
 
                     <!-- Right Panel: Output -->
-                    <div class="panel output-panel" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -222,22 +225,25 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
-                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: transparent; border: 1px solid #E4D9C8; color: var(--primary-soft);">Copy</button>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
-                            <div id="output-text" class="output-content" style="background: #FFFFFF; border: 1px solid #E4D9C8; color: var(--text-muted);">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your summary will appear here...</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- FAQ -->
-                <div class="geo-card" style="background: linear-gradient(145deg, #FFFCF7, #F8F1E9); border: 1px solid #E4D9C8; margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item"><h4>Is the AI summarizer free?</h4><p>Yes. You get 3 free summaries per day after providing your email. No credit card required.</p></div>
+                    <div class="faq-item"><h4>Is the AI summarizer free?</h4><p>Yes. 100% free with unlimited summaries, no accounts, and zero email or credit card required.</p></div>
                     <div class="faq-item"><h4>What model powers it?</h4><p>Gemini 3.1 Pro &mdash; Google's latest frontier model tuned for long-context comprehension.</p></div>
-                    <div class="faq-item"><h4>Can I summarize PDFs?</h4><p>Not directly yet &mdash; paste the extracted text. PDF upload is coming on Pro.</p></div>
+                    <div class="faq-item"><h4>Can I summarize PDFs?</h4><p>Not directly yet &mdash; paste the extracted text. Paste extracted text directly into the box for instant summarization.</p></div>
                     <div class="faq-item"><h4>Is my text stored?</h4><p>No. Inputs are processed and discarded. We never train on your content.</p></div>
-                    <div class="faq-item"><h4>How long can the input be?</h4><p>Free tier supports up to 500 characters. Pro unlocks 20,000 characters per request.</p></div>
+                    <div class="faq-item"><h4>How long can the input be?</h4><p>You can summarize up to 4,000 characters per pass completely free with zero limits.</p></div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
@@ -279,18 +285,18 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/humanizer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Rewrite AI text to sound like you wrote it.</span>
             </a>
-            <a href="/tools/email-writer/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Draft polished emails in seconds.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Count words, characters, and reading time.</span>
             </a>

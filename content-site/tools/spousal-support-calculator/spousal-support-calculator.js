@@ -88,7 +88,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize baseline calculation on load
   calculateBaseline();
 
-  window.CSAITool.init({
+    const sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      if (stateEl) stateEl.value = 'California';
+      if (incomeAEl) incomeAEl.value = '7500';
+      if (incomeBEl) incomeBEl.value = '2800';
+      if (durationEl) durationEl.value = '8';
+      calculateBaseline();
+    });
+  }
+
+window.CSAITool.init({
     toolId: 'spousal-support-calculator',
     emptyMessage: 'Please adjust the income or marriage duration inputs to calculate first.',
     collectInput: () => {

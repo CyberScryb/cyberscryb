@@ -27,6 +27,7 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260905dark">
+    <meta name="google-adsense-account" content="ca-pub-5721233331247292">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
@@ -36,6 +37,8 @@
         gtag('js', new Date());
         gtag('config', 'G-LS46B9J1XK');
     </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
     <!-- Ahrefs Web Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
     <link rel="icon" type="image/png" href="/mascot-icon.png">
@@ -46,6 +49,8 @@
       const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
       
       if (blacklistedPaths.includes(currentPath)) return;
+      
+      if (navigator.userAgent && /Google|Mediapartners|bot/i.test(navigator.userAgent)) return;
       
       window._iub = window._iub || [];
       window._iub.csConfiguration = {

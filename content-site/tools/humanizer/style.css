@@ -45,13 +45,13 @@
   font-size: 1.45rem;
   font-weight: 750;
   letter-spacing: -0.03em;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 
 .hz-brand p {
   margin: 4px 0 0;
   font-size: 0.9rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-topbar-actions {
@@ -63,9 +63,9 @@
 .hz-pill {
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   background: var(--card, #ffffff);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   padding: 6px 11px;
   border-radius: 999px;
 }
@@ -107,8 +107,8 @@
   justify-content: space-between;
   gap: 12px;
   padding: 11px 16px;
-  border-bottom: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  background: var(--bg-elevated, #fffcf7);
+  border-bottom: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  background: var(--bg-elevated, var(--card, #18181b));
 }
 
 .hz-pane-title {
@@ -116,7 +116,7 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--hz-faint, #5c4a3d);
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
 }
 
 .hz-pane-tools {
@@ -128,7 +128,7 @@
 .hz-meta {
   font-size: 0.72rem;
   font-family: ui-monospace, monospace;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-editor {
@@ -138,7 +138,7 @@
   outline: none !important;
   resize: vertical;
   background: transparent !important;
-  color: var(--hz-text, #2c1810) !important;
+  color: var(--hz-text, var(--text, #fafafa)) !important;
   font-family: var(--hz-font, 'Outfit', system-ui, sans-serif) !important;
   font-size: 1.02rem !important;
   line-height: 1.7 !important;
@@ -153,7 +153,7 @@
 }
 
 .hz-editor::placeholder {
-  color: var(--hz-faint, #5c4a3d);
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
 }
 .hz-editor:focus {
   outline: none !important;
@@ -171,7 +171,7 @@ textarea.hz-editor.input-error {
 }
 
 .hz-output .placeholder {
-  color: var(--hz-faint, #5c4a3d);
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
   font-style: normal;
 }
 
@@ -188,14 +188,14 @@ textarea.hz-editor.input-error {
   justify-content: space-between;
   gap: 12px;
   padding: 10px 14px 12px;
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  background: var(--bg-elevated, #fffcf7);
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  background: var(--bg-elevated, var(--card, #18181b));
   flex-wrap: wrap;
 }
 
 .hz-hint {
   font-size: 0.75rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-actionbar {
@@ -205,9 +205,9 @@ textarea.hz-editor.input-error {
   gap: 12px;
   flex-wrap: wrap;
   padding: 12px 14px;
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  border-bottom: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  background: var(--bg-elevated, #fffcf7);
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  border-bottom: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  background: var(--bg-elevated, var(--card, #18181b));
 }
 
 .hz-modes {
@@ -218,9 +218,9 @@ textarea.hz-editor.input-error {
 
 .hz-mode {
   appearance: none;
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   background: var(--card, #ffffff);
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   font-family: inherit;
   font-size: 0.8rem;
   font-weight: 600;
@@ -231,7 +231,7 @@ textarea.hz-editor.input-error {
 }
 .hz-mode:hover {
   border-color: rgba(22, 20, 17, 0.22);
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 .hz-mode.is-active {
   border-color: var(--hz-green, #c2410c);
@@ -275,8 +275,8 @@ textarea.hz-editor.input-error {
 .hz-ghost-btn {
   appearance: none;
   background: transparent;
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  color: var(--hz-muted, #3d2b1f);
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   font-size: 0.78rem;
   font-weight: 600;
   font-family: inherit;
@@ -307,8 +307,8 @@ textarea.hz-editor.input-error {
 .hz-style-drawer {
   display: none;
   padding: 0 16px 14px;
-  background: var(--bg-elevated, #fffcf7);
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  background: var(--bg-elevated, var(--card, #18181b));
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
 }
 .hz-style-drawer.is-open {
   display: block;
@@ -324,9 +324,9 @@ textarea.hz-editor.input-error {
   width: 100%;
   min-height: 48px;
   background: var(--bg, #09090b) !important;
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11)) !important;
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08))) !important;
   border-radius: 8px !important;
-  color: var(--hz-text, #2c1810) !important;
+  color: var(--hz-text, var(--text, #fafafa)) !important;
   padding: 10px 12px !important;
   font-size: 0.875rem !important;
   font-family: inherit !important;
@@ -402,7 +402,7 @@ textarea.hz-editor.input-error {
   text-align: center;
   padding: 1.4rem 1.25rem 1.35rem;
   background: var(--card, #ffffff);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   border-radius: 16px;
   box-shadow: 0 16px 48px rgba(44, 24, 16, 0.18);
 }
@@ -416,12 +416,12 @@ textarea.hz-editor.input-error {
   margin: 0 0 0.4rem;
   font-size: 1.1rem;
   font-weight: 750;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 .email-gate-card > p {
   margin: 0 0 0.9rem;
   font-size: 0.875rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   line-height: 1.5;
 }
 .email-gate-card > p strong {
@@ -436,9 +436,9 @@ textarea.hz-editor.input-error {
   flex: 1;
   padding: 0.7rem 0.9rem;
   background: var(--bg, #09090b);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   border-radius: 10px;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
   font-size: 0.9rem;
 }
 .gate-form input:focus {
@@ -465,7 +465,7 @@ textarea.hz-editor.input-error {
 .gate-fine {
   margin: 0.65rem 0 0 !important;
   font-size: 0.7rem !important;
-  color: var(--hz-faint, #5c4a3d) !important;
+  color: var(--hz-faint, var(--text-faint, #a1a1aa)) !important;
 }
 
 .cs-pro-gate-btns {
@@ -474,12 +474,12 @@ textarea.hz-editor.input-error {
   flex-direction: column;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
 }
 .cs-gate-trust {
   margin: 0;
   font-size: 12px;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   text-align: center;
 }
 
@@ -521,11 +521,11 @@ textarea.hz-editor.input-error {
 .cs-gate-fine {
   margin: 4px 0 0;
   font-size: 11px;
-  color: var(--hz-faint, #5c4a3d);
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
   text-align: center;
 }
 .cs-gate-fine a {
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-below {
@@ -540,11 +540,11 @@ textarea.hz-editor.input-error {
 .hz-pricing-head h2 {
   margin: 0 0 6px;
   font-size: 1.25rem;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 .hz-pricing-head p {
   margin: 0;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-price-grid {
@@ -556,13 +556,13 @@ textarea.hz-editor.input-error {
   position: relative;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), var(--card, #ffffff);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   border-radius: 14px;
   padding: 20px 16px;
   text-align: center;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 12px 32px rgba(44, 24, 16, 0.08);
+    0 12px 32px rgba(0, 0, 0, 0.3);
   transition:
     border-color 0.2s,
     transform 0.2s,
@@ -573,7 +573,7 @@ textarea.hz-editor.input-error {
   border-color: rgba(22, 20, 17, 0.16);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 18px 40px rgba(44, 24, 16, 0.12);
+    0 18px 40px rgba(0, 0, 0, 0.4);
 }
 .hz-price-featured {
   border-color: rgba(217, 119, 6, 0.45);
@@ -597,19 +597,19 @@ textarea.hz-editor.input-error {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   margin-bottom: 4px;
 }
 .hz-price-amt {
   font-size: 1.85rem;
   font-weight: 800;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
   margin-bottom: 10px;
 }
 .hz-price-amt span {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 .hz-price-card ul {
   list-style: none;
@@ -617,7 +617,7 @@ textarea.hz-editor.input-error {
   margin: 0 0 14px;
   text-align: left;
   font-size: 0.84rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   line-height: 1.8;
 }
 .hz-price-card ul li::before {
@@ -645,7 +645,7 @@ textarea.hz-editor.input-error {
   text-align: center;
   margin-top: 16px;
   font-size: 0.85rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 .hz-restore a {
   color: var(--hz-green, #c2410c);
@@ -658,7 +658,7 @@ textarea.hz-editor.input-error {
 .hz-compare h2 {
   text-align: center;
   font-size: 1.1rem;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
   margin: 0 0 14px;
 }
 .hz-compare-grid {
@@ -670,34 +670,34 @@ textarea.hz-editor.input-error {
   padding: 16px;
   border-radius: 12px;
   background: var(--card, #ffffff);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
 }
 .hz-compare-grid h3 {
   margin: 0 0 6px;
   font-size: 0.92rem;
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 .hz-compare-grid p {
   margin: 0;
   font-size: 0.84rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   line-height: 1.5;
 }
 
 .hz-related {
   text-align: center;
   font-size: 0.85rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 .hz-related a {
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 
 .hz-seo {
-  color: var(--hz-muted, #3d2b1f) !important;
+  color: var(--hz-muted, var(--text-muted, #d4d4d8)) !important;
 }
 .hz-seo h2 {
-  color: var(--hz-text, #2c1810) !important;
+  color: var(--hz-text, var(--text, #fafafa)) !important;
   font-size: 1.2rem !important;
 }
 
@@ -711,7 +711,7 @@ textarea.hz-editor.input-error {
     position: sticky;
     bottom: 0;
     z-index: 20;
-    box-shadow: 0 -8px 24px rgba(44, 24, 16, 0.12);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
   }
   .hz-primary-btn {
     width: 100%;
@@ -767,8 +767,8 @@ textarea.hz-editor.input-error {
   margin-bottom: 14px;
 }
 .hz-compare-col {
-  background: var(--bg-elevated, #fffcf7);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  background: var(--bg-elevated, var(--card, #18181b));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   border-radius: 12px;
   padding: 12px 14px;
 }
@@ -781,17 +781,17 @@ textarea.hz-editor.input-error {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--hz-faint, #5c4a3d);
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
   margin-bottom: 6px;
 }
 .hz-compare-col p {
   margin: 0;
   font-size: 0.88rem;
-  color: var(--hz-muted, #3d2b1f);
+  color: var(--hz-muted, var(--text-muted, #d4d4d8));
   line-height: 1.5;
 }
 .hz-compare-after p {
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
 }
 
 .hz-foot-left {
@@ -803,8 +803,8 @@ textarea.hz-editor.input-error {
 .hz-kbd {
   font-size: 0.65rem;
   font-family: ui-monospace, monospace;
-  color: var(--hz-faint, #5c4a3d);
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  color: var(--hz-faint, var(--text-faint, #a1a1aa));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   padding: 3px 6px;
   border-radius: 6px;
   display: none;
@@ -820,17 +820,17 @@ textarea.hz-editor.input-error {
   flex-wrap: wrap;
   gap: 8px;
   padding: 12px 14px;
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  background: var(--bg-elevated, #fffcf7);
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  background: var(--bg-elevated, var(--card, #18181b));
 }
 .hz-result-actions[hidden] {
   display: none !important;
 }
 .hz-action-btn {
   appearance: none;
-  border: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+  border: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   background: var(--card, #ffffff);
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
   font-family: inherit;
   font-size: 0.82rem;
   font-weight: 600;
@@ -859,7 +859,7 @@ textarea.hz-editor.input-error {
 .hz-pro-banner {
   background: rgba(194, 65, 12, 0.25);
   border: 1px solid rgba(194, 65, 12, 0.45);
-  color: var(--hz-text, #2c1810);
+  color: var(--hz-text, var(--text, #fafafa));
   font-size: 0.88rem;
   font-weight: 600;
   padding: 10px 14px;
@@ -879,8 +879,8 @@ textarea.hz-editor.input-error {
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   background: rgba(18, 18, 21, 0.94);
   backdrop-filter: blur(14px);
-  border-top: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
-  box-shadow: 0 -8px 28px rgba(44, 24, 16, 0.12);
+  border-top: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.4);
 }
 .hz-mobile-bar .hz-primary-btn {
   flex: 1;
@@ -913,7 +913,7 @@ textarea.hz-editor.input-error {
     backdrop-filter: blur(12px);
     margin: 0 -4px 12px;
     padding: 10px 8px;
-    border-bottom: 1px solid var(--hz-border, rgba(44, 24, 16, 0.11));
+    border-bottom: 1px solid var(--hz-border, var(--border, rgba(255, 255, 255, 0.08)));
   }
 }
 

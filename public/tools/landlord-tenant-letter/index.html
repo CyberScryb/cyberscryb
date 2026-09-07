@@ -154,7 +154,10 @@
       <div class="lt-card">
         <div class="lt-card-h">
           <h2>Build your letter</h2>
-          <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button type="button" class="lt-ex icon-btn" title="Load realistic sample tenant letter" data-payload='{"mode":"repair","sender":"Alex Morgan","addressedTo":"Pine Street Property Management","fields":{"landlord":"Pine Street Property Management","property":"402 Pine St, Apt 3B, Chicago, IL 60614","dates":"Defect started on February 8, 2026. Verbal report on Feb 9, text message on Feb 14.","ask":"Immediate plumber dispatch to repair the leaking radiator valve before floor water damage occurs.","prior":"Text sent to manager Tom on Feb 14; ticket #4912 submitted on Feb 10.","lease_note":"Section 12 requires lessor to maintain heating and plumbing in working order."},"story":"The radiator in the master bedroom began leaking from the valve on February 8, 2026. Water is pooling under the baseboards despite multiple notifications."}' style="background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);padding:4px 10px;font-size:0.8rem;border-radius:6px;cursor:pointer;font-weight:500;">Try Sample</button>
+            <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+          </div>
         </div>
         <div class="lt-body">
           <label class="lt-label" id="mode-label">Letter mode</label>
@@ -227,6 +230,8 @@
               <small>Using structured facts — not generic filler</small>
             </div>
             <div id="output-text" class="lt-out"><span class="placeholder">Your letter will appear here.<br><br>1. Pick a mode<br>2. Fill facts (or load an example)<br>3. Hit Generate</span></div>
+      </div>
+    </div>
       </div>
     </div>
 

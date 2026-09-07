@@ -196,7 +196,10 @@
       <div class="lt-card">
         <div class="lt-card-h">
           <h2>Notice &amp; Property Details</h2>
-          <span class="lt-draft-badge show">Instant Generation</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample dispute scenario" style="background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);padding:4px 10px;font-size:0.8rem;border-radius:6px;cursor:pointer;font-weight:500;">Try Sample</button>
+            <span class="lt-draft-badge show">Instant Generation</span>
+          </div>
         </div>
         <div class="lt-body">
           <div class="lt-row">
@@ -297,18 +300,18 @@
     </div>
 
     <!-- Homeowner Due Process Rights -->
-    <div class="geo-card" style="background:linear-gradient(145deg, #FFFCF7, #F8F1E9); border:1px solid #E4D9C8; border-radius:12px; padding:2rem; margin:2.5rem 0 1.5rem;">
+    <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); border-radius:12px; padding:2rem; margin:2.5rem 0 1.5rem;">
       <h3 style="color:var(--primary-soft); margin-top:0; font-family:var(--font-brand),Georgia,serif; font-size:1.4rem;">Key Homeowner Due Process Protections</h3>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem; margin-top:1rem;">
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">1. Mandatory Notice &amp; Cure Period</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">State statutes prohibit boards from levying fines on a first notice. HOAs must grant a statutory opportunity to cure (usually 10 to 30 days) and specify the exact covenant alleged to be breached.</p>
         </div>
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">2. Right to an Impartial Hearing</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">Under California Davis-Stirling &sect; 5855, Florida FS &sect; 720.305, and Texas Prop Code &sect; 209.006, homeowners have a statutory right to present evidence and testimony before fines become enforceable.</p>
         </div>
-        <div style="background:#FFFFFF; border:1px solid #E4D9C8; border-radius:8px; padding:1.2rem;">
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1.2rem;">
           <strong style="color:var(--text); display:block; margin-bottom:0.4rem;">3. Tolling of Fines Pending Review</strong>
           <p style="font-size:0.9rem; color:var(--text-muted); margin:0; line-height:1.5;">Timely submission of this formal written dispute letter pauses (tolls) further fines, interest, or collection referrals until the Board reviews your submission and renders a formal ruling.</p>
         </div>
@@ -316,15 +319,15 @@
     </div>
 
     <!-- FAQ Section -->
-    <div class="geo-card" style="background:linear-gradient(145deg, #FFFCF7, #F8F1E9); border:1px solid #E4D9C8; border-radius:12px; padding:2rem; margin:1.5rem 0;">
+    <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); border-radius:12px; padding:2rem; margin:1.5rem 0;">
       <h3 style="color:var(--primary-soft); margin-top:0; font-family:var(--font-brand),Georgia,serif; font-size:1.4rem;">Frequently Asked Questions</h3>
       
-      <div class="faq-item" style="border-bottom:1px solid #E4D9C8; padding:1rem 0;">
+      <div class="faq-item" style="border-bottom:1px solid var(--border); padding:1rem 0;">
         <h4 style="margin:0 0 0.4rem; color:var(--text); font-size:1.05rem;">How does the selective enforcement defense work?</h4>
         <p style="margin:0; color:var(--text-muted); font-size:0.92rem; line-height:1.6;">If your HOA fines you for something that numerous other homeowners in the community are actively doing without penalty, the association is engaging in selective and arbitrary enforcement. Taking dated photographs of identical conditions throughout the community establishes an affirmative defense under common law and association fiduciary duties.</p>
       </div>
 
-      <div class="faq-item" style="border-bottom:1px solid #E4D9C8; padding:1rem 0;">
+      <div class="faq-item" style="border-bottom:1px solid var(--border); padding:1rem 0;">
         <h4 style="margin:0 0 0.4rem; color:var(--text); font-size:1.05rem;">What happens if the board ignores my dispute letter?</h4>
         <p style="margin:0; color:var(--text-muted); font-size:0.92rem; line-height:1.6;">By sending this letter via Certified Mail with Return Receipt Requested, you create an unassailable legal record. If the board attempts to assess fines or record an assessment lien without providing the requested hearing, the association violates statutory due process, which can render the fine void and expose the association to liability for homeowner legal fees.</p>
       </div>
@@ -477,6 +480,25 @@
     }
   });
 
+  // Try Sample Button
+  var sampleBtn = document.getElementById('sample-btn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', function() {
+      document.getElementById('hoa-name').value = 'Highland Park Homeowners Association';
+      document.getElementById('hoa-mgmt').value = 'Premier Community Management Group';
+      document.getElementById('hoa-address').value = '450 North Park Blvd, Suite 200, Denver, CO 80202';
+      document.getElementById('owner-name').value = 'Marcus & Elena Vance';
+      document.getElementById('property-address').value = '742 Whispering Pines Dr, Lot 84, Denver, CO 80237';
+      document.getElementById('account-no').value = 'HP-8402';
+      document.getElementById('notice-ref').value = 'Notice dated March 4, 2026 (Ref: VIO-991)';
+      document.getElementById('violation-category').value = 'lawn';
+      document.getElementById('dispute-ground').value = 'cured';
+      var expl = document.getElementById('specific-explanation');
+      if (expl) expl.value = 'The alleged lawn weed condition cited during the February inspection was caused by unseasonal freeze damage. On March 1, 2026, GreenThumb Landscaping aerated, dethatched, reseeded, and treated the front lawn with pre-emergent fertilizer (receipt attached). As shown in the time-stamped photographs taken yesterday, the turf is fully revitalized and meets the Community Standard.';
+      generateLetter();
+    });
+  }
+
   // Action Buttons
   var copyBtn = document.getElementById('copy-btn');
   if (copyBtn) {
@@ -487,8 +509,8 @@
         return;
       }
       navigator.clipboard.writeText(text).then(function() {
-        copyBtn.textContent = 'Copied!';
-        setTimeout(function() { copyBtn.textContent = 'Copy'; }, 2000);
+        copyBtn.textContent = 'Copied! ✓';
+        setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1600);
       });
     });
   }

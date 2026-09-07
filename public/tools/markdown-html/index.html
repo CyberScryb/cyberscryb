@@ -280,7 +280,7 @@ const x = 42;
             </div>
         </section>
 
-        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color:var(--text-secondary, #5C4A3D);font-family:'Inter',sans-serif;line-height:1.7;">
+        <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Convert Markdown to HTML?</h2>
         <p>Markdown is a lightweight markup language created by John Gruber in 2004 with the explicit goal of making it easy to write for the web. The core idea: plain text that looks like natural email formatting &mdash; asterisks for bold, hyphens for lists, pound signs for headings &mdash; that converts cleanly to HTML without requiring you to write HTML tags by hand.</p>
         <p>The conversion to HTML is necessary when you need to render Markdown in a browser or inject it into a web page. Most CMS platforms (WordPress, Ghost, Contentful) accept Markdown natively. But for custom applications, email templates, documentation sites, or any situation where you control the HTML directly, you need to convert Markdown to HTML yourself before rendering.</p>
@@ -291,37 +291,37 @@ const x = 42;
         <p>Developers also use Markdown-to-HTML conversion for generating README pages, building documentation sites without a full CMS, writing email templates in a readable format, and previewing documentation before committing to a repository.</p>
 
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Frequently Asked Questions</h2>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What Markdown flavors does this support?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">This tool supports GitHub Flavored Markdown (GFM), which includes CommonMark plus tables, strikethrough text, fenced code blocks with language highlighting, task list checkboxes, and autolinks. It does not support every custom Markdown extension &mdash; for example, Obsidian's callout syntax or Hugo shortcodes are not standard GFM.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">What Markdown flavors does this support?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">This tool supports GitHub Flavored Markdown (GFM), which includes CommonMark plus tables, strikethrough text, fenced code blocks with language highlighting, task list checkboxes, and autolinks. It does not support every custom Markdown extension &mdash; for example, Obsidian's callout syntax or Hugo shortcodes are not standard GFM.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Will the converted HTML include a full page structure?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">No. The output is an HTML fragment &mdash; the content tags only (headings, paragraphs, lists, code blocks), without wrapping html, head, or body tags. This is intentional: fragment output can be pasted directly into any existing HTML page without breaking your document structure.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Will the converted HTML include a full page structure?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">No. The output is an HTML fragment &mdash; the content tags only (headings, paragraphs, lists, code blocks), without wrapping html, head, or body tags. This is intentional: fragment output can be pasted directly into any existing HTML page without breaking your document structure.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Is the conversion done in my browser or on a server?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Entirely in your browser. No text is uploaded to any server. The conversion runs using JavaScript &mdash; your Markdown never leaves your machine. This also means the tool works offline once the page has loaded.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Is the conversion done in my browser or on a server?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Entirely in your browser. No text is uploaded to any server. The conversion runs using JavaScript &mdash; your Markdown never leaves your machine. This also means the tool works offline once the page has loaded.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Can I paste the HTML output directly into WordPress?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Yes, using WordPress's HTML/Code Editor mode (not the Visual Editor). Switch the block to HTML mode, paste the converted output, and it renders exactly as intended. The Visual Editor may try to reformat your HTML; the Code Editor preserves it exactly as pasted.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Can I paste the HTML output directly into WordPress?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Yes, using WordPress's HTML/Code Editor mode (not the Visual Editor). Switch the block to HTML mode, paste the converted output, and it renders exactly as intended. The Visual Editor may try to reformat your HTML; the Code Editor preserves it exactly as pasted.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Is my text stored or uploaded?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">No. All conversion happens in your browser using JavaScript. Nothing is sent to any server. Your content is completely private.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Is my text stored or uploaded?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">No. All conversion happens in your browser using JavaScript. Nothing is sent to any server. Your content is completely private.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">What Markdown syntax is supported?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">CommonMark plus GitHub Flavored Markdown (GFM) extensions: headers, emphasis, lists, links, images, code blocks, tables, task lists, blockquotes, and horizontal rules.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">What Markdown syntax is supported?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">CommonMark plus GitHub Flavored Markdown (GFM) extensions: headers, emphasis, lists, links, images, code blocks, tables, task lists, blockquotes, and horizontal rules.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Can I use this for blog posts?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">Yes. Write your content in Markdown, copy the HTML output, and paste it into your CMS or blog editor. The generated HTML is clean and semantic.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Can I use this for blog posts?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Yes. Write your content in Markdown, copy the HTML output, and paste it into your CMS or blog editor. The generated HTML is clean and semantic.</p>
         </details>
-        <details style="margin-bottom:1rem;background:#FFFFFF;border:1px solid #E4D9C8;border-radius:8px;padding:1rem;">
-            <summary style="cursor:pointer;font-weight:600;color:#2C1810;">Is there a file size limit?</summary>
-            <p style="margin-top:0.75rem;color:var(--text-secondary, #5C4A3D);">No hard limit. Since everything runs in your browser, performance depends on your device. Most documents up to 100,000 characters convert instantly.</p>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Is there a file size limit?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">No hard limit. Since everything runs in your browser, performance depends on your device. Most documents up to 100,000 characters convert instantly.</p>
         </details>
     </section>
 </main>
@@ -332,18 +332,18 @@ const x = 42;
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Encode HTML and binary payloads to Base64 safely.</span>
             </a>
-            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/seo-tag-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SEO Tag Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate meta tags for the HTML pages you publish.</span>
             </a>
-            <a href="/tools/word-counter/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Measure length and reading time for your content.</span>
             </a>
@@ -351,14 +351,14 @@ const x = 42;
     </section>
 
     
-    <section style="max-width:900px; margin:3rem auto; padding:2rem; background:linear-gradient(145deg,#FFFCF7,#F8F1E9); border: 1px solid #E4D9C8; border-radius:12px;">
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/markdown-cheat-sheet/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/markdown-cheat-sheet/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown Cheat Sheet</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>
-            <a href="/guides/markdown-to-html-converter-guide/" style="display:block; padding:1rem; background:#FFFFFF; border: 1px solid #E4D9C8; border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='#E4D9C8'">
+            <a href="/guides/markdown-to-html-converter-guide/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Markdown to HTML Converter Guide</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
             </a>

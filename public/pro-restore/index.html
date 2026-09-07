@@ -4,50 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>Restore Pro Access &mdash; CyberScryb</title>
-  <meta name="description" content="Restore CyberScryb Pro on this browser after checkout or if cookies were cleared.">
-  <link rel="icon" type="image/png" href="/mascot-icon.png">
+  <title>CyberScryb is 100% Free &mdash; All Tools Unlocked</title>
+  <link rel="stylesheet" href="/css/style.css?v=20260905dark">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
-      background: #F8F1E9;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #2C1810;
-      padding: 20px;
-      background-image: radial-gradient(circle at 20% 20%, rgba(194, 65, 12,0.08), transparent 50%);
+      background: var(--bg, #09090b);
+      font-family: var(--font, 'Outfit', system-ui, sans-serif);
+      color: var(--text, #fafafa);
+      padding: 24px;
     }
     .card {
-      max-width: 480px; width: 100%;
-      background: #FFFFFF;
-      border: 1px solid #E4D9C8;
+      max-width: 520px; width: 100%;
+      background: var(--card, #18181b);
+      border: 1px solid var(--border, rgba(255,255,255,0.08));
       border-radius: 20px;
       padding: 40px 32px;
-      box-shadow: 0 20px 50px rgba(44,24,16,0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      text-align: center;
     }
-    h1 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: #2C1810; }
-    p { color: #5C4A3D; line-height: 1.6; margin-bottom: 14px; font-size: 15px; }
-    .status {
-      padding: 12px 14px; border-radius: 10px; margin: 16px 0;
-      font-size: 14px; font-weight: 600;
+    .badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--success, #22c55e);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 20px;
     }
-    .status.ok { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.35); }
-    .status.warn { background: rgba(194, 65, 12,0.1); color: #9A3412; border: 1px solid rgba(194, 65, 12,0.3); }
-    .btn {
+    h1 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--text, #fafafa); }
+    p { color: var(--text-muted, #d4d4d8); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
+    .btn-primary {
       display: block; width: 100%; text-align: center;
       padding: 14px 20px; border-radius: 12px; font-weight: 700;
       text-decoration: none; border: none; cursor: pointer; font-size: 15px;
+      background: linear-gradient(135deg, var(--primary, #f97316), var(--primary-hover, #ea580c));
+      color: #09090b;
+      margin-top: 12px;
+    }
+    .btn-secondary {
+      display: block; width: 100%; text-align: center;
+      padding: 14px 20px; border-radius: 12px; font-weight: 600;
+      text-decoration: none; font-size: 15px;
+      background: var(--bg-elevated, #121215);
+      color: var(--text, #fafafa);
+      border: 1px solid var(--border, rgba(255,255,255,0.1));
       margin-top: 10px;
     }
-    .btn-primary { background: #C2410C; color: #fff; }
-    .btn-secondary { background: transparent; color: #C2410C; border: 1px solid rgba(194, 65, 12,0.5); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    ol { color: #5C4A3D; padding-left: 1.2rem; margin: 12px 0 16px; line-height: 1.7; font-size: 14px; }
-    a.inline { color: #C7522A; }
-    .foot { margin-top: 24px; font-size: 13px; color: #5C4A3D; text-align: center; }
   </style>
-  <!-- iubenda cookie consent banner -->
+    <!-- iubenda cookie consent banner -->
     <script>
     (function() {
       const currentPath = window.location.pathname;
@@ -76,79 +83,11 @@
 </head>
 <body>
   <div class="card">
-    <h1>Restore Pro</h1>
-    <p>Paid already but tools still show limits? Restore Pro on <strong>this browser</strong>. Pro is stored on the device that completed checkout.</p>
-
-    <div id="status" class="status warn">Checking this device…</div>
-
-    <button type="button" class="btn btn-primary" id="btn-restore">Restore Pro on this device</button>
-    <a class="btn btn-secondary" href="/pro/">Buy or manage Pro</a>
-    <a class="btn btn-secondary" href="/tools/humanizer/">Back to Humanizer</a>
-
-    <p style="margin-top:20px;font-size:14px;"><strong style="color: #3D2B1F;">If restore doesn’t work</strong></p>
-    <ol>
-      <li>Use the <strong>same browser</strong> you used at checkout (or open the link from your Stripe receipt).</li>
-      <li>Finish payment until you see the green “Pro Activated” page.</li>
-      <li>Don’t clear site data / cookies for cyberscryb.com if you want Pro to stick.</li>
-      <li>Email <a class="inline" href="mailto:support@cyberscryb.com">support@cyberscryb.com</a> with your Stripe receipt — we’ll activate you.</li>
-    </ol>
-
-    <p class="foot">Secure checkout via Stripe · 14-day refund · CyberScryb LLC</p>
+    <div class="badge">✓ 100% Free &amp; Unlocked</div>
+    <h1>No Restore Needed!</h1>
+    <p>We've eliminated all paywalls and subscriptions across CyberScryb. Every single tool, writer, and utility is now permanently unlocked and 100% free for everyone.</p>
+    <a class="btn-primary" href="/tools/humanizer/">Open AI Humanizer &rarr;</a>
+    <a class="btn-secondary" href="/tools/">Explore All 55+ Free Tools</a>
   </div>
-
-  <script>
-  (function () {
-    function ready(fn) {
-      if (window.CSProStatus) return fn();
-      var n = 0;
-      var t = setInterval(function () {
-        n++;
-        if (window.CSProStatus || n > 40) {
-          clearInterval(t);
-          fn();
-        }
-      }, 50);
-    }
-
-    ready(function () {
-      var status = document.getElementById('status');
-      var btn = document.getElementById('btn-restore');
-      var CS = window.CSProStatus;
-
-      function paint() {
-        if (CS && CS.isPro()) {
-          status.className = 'status ok';
-          status.textContent = 'Pro is active on this device. Full results unlocked.';
-          btn.textContent = 'Pro already active';
-          btn.disabled = true;
-          if (CS.updateNav) CS.updateNav();
-        } else {
-          status.className = 'status warn';
-          status.textContent = 'Pro not detected on this device yet.';
-          btn.disabled = false;
-        }
-      }
-
-      btn.addEventListener('click', function () {
-        if (!CS) return;
-        // Restore from localStorage if present; otherwise user may have paid in another browser
-        var restored = CS.tryRestoreFromStorage && CS.tryRestoreFromStorage();
-        if (restored || CS.isPro()) {
-          status.className = 'status ok';
-          status.textContent = 'Pro restored. Reload any open tool tabs.';
-          btn.disabled = true;
-          btn.textContent = 'Pro active';
-          if (CS.updateNav) CS.updateNav();
-          return;
-        }
-        // No prior local flag — cannot invent Pro without payment
-        status.className = 'status warn';
-        status.innerHTML = 'No Pro purchase found in this browser. Complete checkout on the <a class="inline" href="/pro/">Pro page</a>, or email support@cyberscryb.com with your receipt.';
-      });
-
-      paint();
-    });
-  })();
-  </script>
 </body>
 </html>
