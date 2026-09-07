@@ -45,6 +45,7 @@
     <!-- iubenda cookie consent banner -->
     <script>
     (function() {
+      if (navigator.userAgent && /Google|Mediapartners|bot/i.test(navigator.userAgent)) return;
       const currentPath = window.location.pathname;
       const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
       

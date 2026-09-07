@@ -429,6 +429,7 @@
       const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
       
       if (blacklistedPaths.includes(currentPath)) return;
+      if (navigator.userAgent && /Google|Mediapartners|bot/i.test(navigator.userAgent)) return;
       
       window._iub = window._iub || [];
       window._iub.csConfiguration = {

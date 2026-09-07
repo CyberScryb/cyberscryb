@@ -38,6 +38,12 @@
     />
     <link rel="stylesheet" href="/css/style.css?v=20260905dark" />
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292"
+      crossorigin="anonymous"
+    ></script>
     <meta name="google-adsense-account" content="ca-pub-5721233331247292">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
     <script>
@@ -71,12 +77,6 @@
       }
     </script>
     <link rel="icon" type="image/png" href="/mascot-icon.png" />
-    <!-- Google AdSense -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292"
-      crossorigin="anonymous"
-    ></script>
     <!-- iubenda cookie consent banner -->
     <script>
       (function () {
@@ -84,6 +84,8 @@
         const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
 
         if (blacklistedPaths.includes(currentPath)) return;
+
+        if (navigator.userAgent && /Google|Mediapartners|bot/i.test(navigator.userAgent)) return;
 
         window._iub = window._iub || [];
         window._iub.csConfiguration = {
