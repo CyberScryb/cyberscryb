@@ -84,7 +84,53 @@
     });
   }
 
+  // Every tool's "Try Sample" button has its own bespoke click handler that
+  // unconditionally overwrites its fields with a canned example — including
+  // fields we already know a real answer for (typed, or filled in from another
+  // tool). Rather than patching every tool's sample handler individually, guard
+  // generically here: snapshot known values before the click (capture phase,
+  // runs before the tool's own handler), then restore anything the sample
+  // handler clobbered (bubble phase, runs after). Works for every current and
+  // future tool with a #sample-btn or .cs-example-btn — no per-tool code needed.
+  function guardSampleButton() {
+    let preValues = null;
+
+    document.addEventListener(
+      'click',
+      function (e) {
+        const btn = e.target.closest && e.target.closest('#sample-btn, .cs-example-btn');
+        if (!btn) return;
+        preValues = {};
+        sharedFields().forEach(function (el) {
+          const v = (el.value || '').trim();
+          if (v) preValues[el.getAttribute('data-cs-share')] = v;
+        });
+      },
+      true
+    );
+
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest && e.target.closest('#sample-btn, .cs-example-btn');
+      if (!btn || !preValues) return;
+      const known = preValues;
+      preValues = null;
+      const profile = readProfile();
+      sharedFields().forEach(function (el) {
+        const key = el.getAttribute('data-cs-share');
+        const wasKnown = known[key];
+        if (!wasKnown || el.value.trim() === wasKnown) return;
+        el.value = wasKnown;
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+        const entry = profile[key];
+        if (entry) showHint(el, entry.tool);
+      });
+    });
+  }
+
   window.CSWorkspace = window.CSWorkspace || {};
   window.CSWorkspace.save = save;
   window.CSWorkspace.autofill = autofill;
+
+  guardSampleButton();
 })();
