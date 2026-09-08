@@ -95,7 +95,22 @@
   var out = el('sn-output');
   if (!out) return;
 
+  if (window.CSWorkspace && typeof window.CSWorkspace.autofill === 'function') {
+    try {
+      window.CSWorkspace.autofill('soap-note-generator');
+    } catch {
+      /* non-fatal */
+    }
+  }
+
   el('sn-generate').addEventListener('click', function () {
+    if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+      try {
+        window.CSWorkspace.save('soap-note-generator');
+      } catch {
+        /* non-fatal */
+      }
+    }
     out.textContent = buildNote();
     out.focus();
     try {

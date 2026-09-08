@@ -70,7 +70,22 @@
   var out = el('ts-output');
   if (!out) return;
 
+  if (window.CSWorkspace && typeof window.CSWorkspace.autofill === 'function') {
+    try {
+      window.CSWorkspace.autofill('caregiver-timesheet');
+    } catch {
+      /* non-fatal */
+    }
+  }
+
   el('ts-generate').addEventListener('click', function () {
+    if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+      try {
+        window.CSWorkspace.save('caregiver-timesheet');
+      } catch {
+        /* non-fatal */
+      }
+    }
     out.textContent = buildTimesheet();
     out.focus();
     try {

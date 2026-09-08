@@ -81,7 +81,22 @@
   var out = el('bs-output');
   if (!out) return;
 
+  if (window.CSWorkspace && typeof window.CSWorkspace.autofill === 'function') {
+    try {
+      window.CSWorkspace.autofill('blood-sugar-log-generator');
+    } catch {
+      /* non-fatal */
+    }
+  }
+
   el('bs-generate').addEventListener('click', function () {
+    if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+      try {
+        window.CSWorkspace.save('blood-sugar-log-generator');
+      } catch {
+        /* non-fatal */
+      }
+    }
     out.textContent = buildLog();
     out.focus();
     try {

@@ -119,7 +119,22 @@
   var out = el('hr-output');
   if (!out) return;
 
+  if (window.CSWorkspace && typeof window.CSWorkspace.autofill === 'function') {
+    try {
+      window.CSWorkspace.autofill('hipaa-release-generator');
+    } catch {
+      /* non-fatal */
+    }
+  }
+
   el('hr-generate').addEventListener('click', function () {
+    if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+      try {
+        window.CSWorkspace.save('hipaa-release-generator');
+      } catch {
+        /* non-fatal */
+      }
+    }
     out.textContent = buildForm();
     out.focus();
     try {
