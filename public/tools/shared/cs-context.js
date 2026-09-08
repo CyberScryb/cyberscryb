@@ -6,6 +6,66 @@
 (function () {
   const STORAGE_KEY = 'cs_profile_v1';
 
+  // US state name <-> abbreviation, so "state" can connect a free-text field
+  // (utility-shutoff-letter stores "CA") to a <select> of full names (the
+  // support calculators store "California") without either side breaking.
+  const STATE_ABBR = {
+    AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
+    CO: 'Colorado', CT: 'Connecticut', DE: 'Delaware', FL: 'Florida', GA: 'Georgia',
+    HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana', IA: 'Iowa',
+    KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland',
+    MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri',
+    MT: 'Montana', NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey',
+    NM: 'New Mexico', NY: 'New York', NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio',
+    OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina',
+    SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont',
+    VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+    DC: 'District of Columbia',
+  };
+  const STATE_NAME_TO_ABBR = {};
+  Object.keys(STATE_ABBR).forEach(function (abbr) {
+    STATE_NAME_TO_ABBR[STATE_ABBR[abbr].toLowerCase()] = abbr;
+  });
+
+  function canonicalizeStateValue(raw) {
+    const v = (raw || '').trim();
+    if (!v) return '';
+    if (v.length === 2 && STATE_ABBR[v.toUpperCase()]) return v.toUpperCase();
+    const abbr = STATE_NAME_TO_ABBR[v.toLowerCase()];
+    return abbr || v; // unrecognized ("Other", a typo) — store as-is, connects only to exact matches
+  }
+
+  // What to actually write into a given field for a stored value. Every key
+  // except "state" is a plain exact-string match; "state" expands the stored
+  // abbreviation back out to a full name when the target is the calculators'
+  // <select>, or keeps the abbreviation for a plain text field.
+  function valueForField(el, key, stored) {
+    if (key === 'state' && STATE_ABBR[stored]) {
+      return el.tagName === 'SELECT' ? STATE_ABBR[stored] : stored;
+    }
+    return stored;
+  }
+
+  // Never blank out a <select> by assigning a value it has no matching
+  // <option> for (e.g. two tools' tone dropdowns use different taxonomies) —
+  // that renders as nothing selected, which reads as broken, not "no-op".
+  function selectHasOption(el, value) {
+    if (el.tagName !== 'SELECT') return true;
+    return Array.prototype.some.call(el.options, function (o) {
+      return o.value === value;
+    });
+  }
+
+  // A <select> with no explicit default reports its first option as .value
+  // even though nothing was ever chosen — unlike a text input, where an empty
+  // string reliably means untouched. Treat a select sitting on its first,
+  // non-explicitly-selected option as empty too, so autofill and the sample
+  // guard don't mistake "browser default" for "the user already answered."
+  function fieldIsEmpty(el) {
+    if (el.tagName === 'SELECT') return el.selectedIndex <= 0;
+    return !el.value || !el.value.trim();
+  }
+
   function readProfile() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -38,8 +98,10 @@
     let changed = false;
     sharedFields().forEach(function (el) {
       const key = el.getAttribute('data-cs-share');
-      const val = (el.value || '').trim();
+      let val = (el.value || '').trim();
       if (!key || !val) return;
+      if (key === 'state') val = canonicalizeStateValue(val);
+      if (!val) return;
       profile[key] = { value: val, tool: toolId, updatedAt: Date.now() };
       changed = true;
     });
@@ -75,9 +137,11 @@
       const key = el.getAttribute('data-cs-share');
       const entry = profile[key];
       if (!entry || !entry.value) return;
-      if (el.value && el.value.trim()) return; // never overwrite what's already typed
+      if (!fieldIsEmpty(el)) return; // never overwrite what's already typed or chosen
       if (entry.tool === toolId) return; // nothing to borrow from itself
-      el.value = entry.value;
+      const val = valueForField(el, key, entry.value);
+      if (!selectHasOption(el, val)) return;
+      el.value = val;
       el.dispatchEvent(new Event('input', { bubbles: true }));
       el.dispatchEvent(new Event('change', { bubbles: true }));
       showHint(el, entry.tool);
@@ -102,8 +166,8 @@
         if (!btn) return;
         preValues = {};
         sharedFields().forEach(function (el) {
-          const v = (el.value || '').trim();
-          if (v) preValues[el.getAttribute('data-cs-share')] = v;
+          if (fieldIsEmpty(el)) return;
+          preValues[el.getAttribute('data-cs-share')] = (el.value || '').trim();
         });
       },
       true
