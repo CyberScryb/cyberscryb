@@ -432,6 +432,14 @@
       applyExample(false);
     }
 
+    if (window.CSWorkspace && typeof window.CSWorkspace.autofill === 'function') {
+      try {
+        window.CSWorkspace.autofill(toolId);
+      } catch (e) {
+        /* non-fatal */
+      }
+    }
+
     injectExampleButton();
     prefillIfEmpty();
 
