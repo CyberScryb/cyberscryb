@@ -55,6 +55,10 @@ For every task: **PLAN** (break into testable subtasks, identify verification me
 
 ---
 
+## Recent Changes (Session 2026-09-26 — Upwork proposal generator SEO)
+
+Search Console had `/tools/gig-auto-pilot/` at average position 28.9 for Upwork proposal-generator queries. Edited the hand-written source in `content-site/` (deploy copies that tree over `public/` via `sync_and_build.py`; `generate-pages.js` does not retemplate this page). Title trimmed from the requested 78-character string to 59 characters, keeping `Free AI Upwork Proposal Generator` first. Removed the false "runs in your browser" meta. Added a labeled example job post and proposal, and three FAQ items (length, free, no account) inside the existing FAQ block and FAQPage schema. Also fixed `updateUI()` throwing on the missing auth nodes, which aborted init and left Generate and Try Sample unbound. Did not touch `firebase.json` or the sitemap. Merged after #46: kept that PR's visually hidden homepage h2, `.html` redirects, and sitemap blog URLs.
+
 ## Recent Changes (Session 2026-09-26 — CTR titles + canonical URL forms)
 
 Password checker and SEO meta tag generator titles/descriptions rewritten in `content-site/tools/` (deploy source; `public/` is copied from it by `sync_and_build.py`). Password checker confirmed client-side, including a crack-time estimate. SEO generator emits Open Graph tags and a keywords meta tag. Removed a fabricated `aggregateRating` (4.9 / 127). `firebase.json` now 301s `.html` paths (including `index.html`) to the trailing-slash URL, after the existing `/blog.html` → `/guides/` rule, and leaves `/index.html` to `cleanUrls`. Sitemap generator no longer emits four blog posts with a `.html` suffix. Homepage intent cards had an h1→h3 skip that failed the axe job on main; a visually hidden h2 fixes that.
