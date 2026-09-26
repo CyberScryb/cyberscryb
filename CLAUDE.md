@@ -1,6 +1,6 @@
 # CyberScryb / Lazy Hustler — Working Memory
 
-_Last updated: 2026-09-10_
+_Last updated: 2026-09-26_
 
 ---
 
@@ -54,6 +54,10 @@ For every task: **PLAN** (break into testable subtasks, identify verification me
 **Reporting completion** — keep it concise, dense, action-oriented; don't explain obvious syntax. Include only: what changed; verification performed and results; issues found and fixed (including the "also touched, used by:" list); remaining blockers, if any; the exact next recommended command or implementation step.
 
 ---
+
+## Recent Changes (Session 2026-09-26 — CTR titles + canonical URL forms)
+
+Password checker and SEO meta tag generator titles/descriptions rewritten in `content-site/tools/` (deploy source; `public/` is copied from it by `sync_and_build.py`). Password checker confirmed client-side: `script.js` never sends the password. Removed a fabricated `aggregateRating` (4.9 / 127) from that page. Firebase `cleanUrls` + `trailingSlash` already 301 `.html` and non-slash URLs to the trailing-slash form live — no extra redirect rule added. Sitemap generator no longer emits four blog URLs with a `.html` suffix.
 
 ## Recent Changes (Session 2026-09-09/10 — AdSense "approved but no ads showing" root-cause fix)
 

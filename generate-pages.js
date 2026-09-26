@@ -1475,14 +1475,14 @@ function generateSitemap(generatedPages) {
     'what-goes-in-a-caregiver-shift-report-2026',
     'why-vanilla-js-no-frameworks-2026',
     'court-admissible-parenting-plan-guide',
-    'how-to-dispute-medical-bill-coding-errors-charity-care-2026.html',
-    'how-to-get-security-deposit-back-state-deadlines-2026.html',
-    'how-to-cancel-gym-membership-ftc-click-to-cancel-2026.html',
-    'how-to-dispute-hoa-fines-selective-enforcement-2026.html',
+    'how-to-dispute-medical-bill-coding-errors-charity-care-2026',
+    'how-to-get-security-deposit-back-state-deadlines-2026',
+    'how-to-cancel-gym-membership-ftc-click-to-cancel-2026',
+    'how-to-dispute-hoa-fines-selective-enforcement-2026',
   ];
   blogPosts.forEach(post => {
-    const postPath = post.endsWith('.html') ? post : `${post}/`;
-    xml += `  <url><loc>${baseUrl}/blog/${postPath}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
+    const slug = post.replace(/\.html$/, '');
+    xml += `  <url><loc>${baseUrl}/blog/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
   });
 
   xml += '</urlset>\n';
