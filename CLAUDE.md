@@ -55,6 +55,10 @@ For every task: **PLAN** (break into testable subtasks, identify verification me
 
 ---
 
+## Recent Changes (Session 2026-09-26 — Upwork proposal generator SEO)
+
+Search Console had `/tools/gig-auto-pilot/` at average position 28.9 for Upwork proposal-generator queries. Edited the hand-written source in `content-site/` (deploy copies that tree over `public/` via `sync_and_build.py`; `generate-pages.js` does not retemplate this page). Title trimmed from the requested 78-character string to 59 characters, keeping `Free AI Upwork Proposal Generator` first. Removed the false "runs in your browser" meta. Added a labeled example job post and proposal, and three FAQ items (length, free, no account) inside the existing FAQ block and FAQPage schema. Also fixed `updateUI()` throwing on the missing auth nodes, which aborted init and left Generate and Try Sample unbound. Did not touch `firebase.json` or the sitemap.
+
 ## Recent Changes (Session 2026-09-09/10 — AdSense "approved but no ads showing" root-cause fix)
 
 Nathan asked why ads weren't showing despite AdSense approval. Root causes found and fixed, verified live (deployed twice — see gotcha below):

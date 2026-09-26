@@ -56,14 +56,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function updateUI(user) {
-    if (user) {
-      // Signed In
-      userDisplay.textContent = user.displayName || user.email;
-      authBtn.textContent = 'Sign Out';
-    } else {
-      // Signed Out
-      userDisplay.textContent = 'Free Mode';
-      authBtn.textContent = 'Sign In (Optional)';
+    // Auth chrome is optional. The page has no login wall, and missing nodes must not
+    // abort init — that used to throw here and leave Generate and Try Sample unbound.
+    if (userDisplay && authBtn) {
+      if (user) {
+        userDisplay.textContent = user.displayName || user.email;
+        authBtn.textContent = 'Sign Out';
+      } else {
+        userDisplay.textContent = 'Free Mode';
+        authBtn.textContent = 'Sign In (Optional)';
+      }
     }
     if (authGate) authGate.style.display = 'none';
     if (toolInputs) toolInputs.style.display = 'block';
