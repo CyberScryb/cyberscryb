@@ -88,6 +88,11 @@
         "source": "/products/**",
         "destination": "/tools/",
         "type": 301
+      },
+      {
+        "regex": "^/(?!index\\.html$)(?P<path>.+?)(?:/index)?\\.html$",
+        "destination": "/:path/",
+        "type": 301
       }
     ],
     "rewrites": [
