@@ -4,6 +4,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-09-30 — Hosting site assertion after #48)
+
+PR #48 merged (`7d4ff12`) and deploy run 36766623955 still died in ~2s: `Assertion failed: resolving hosting target of a site with no site name or target name`. `firebase.json` hosting had no `site` or `target`, and there is no `.firebaserc`. `firebase deploy` looks up the default site and, in `lib/commands/deploy.js`, discards any lookup error that is not a 403 or "no default site". `resolveTargets()` then asserts because `options.site` was never set. Reproduced with firebase-tools 15.32.0 and 15.31.0 using `FIREBASE_TOKEN=invalid` (no deploy): the discarded error is HTTP 401 on `GET /v1beta1/projects/gen-lang-client-0384486156`. The same command with `"site": "gen-lang-client-0384486156"` skips the assertion and calls `.../sites/gen-lang-client-0384486156` (401 with the fake token; nothing uploaded). That site id is the project id — the Sep 26 run reached `sites/gen-lang-client-0384486156/versions/...` and failed only on the RE2 regex. 15.32.0 (what unpinned `npm install -g firebase-tools` installed on Sep 30) does not change that lookup versus 15.31.0. Fix: set the hosting `site`, and pin the CLI to `firebase-tools@15.31.0`. `FIREBASE_TOKEN` deprecation is a warning on both the Sep 26 and Sep 30 runs; it is not the failure.
+
 ## Recent Changes (Session 2026-09-30 — Firebase deploy blocked since PR #46)
 
 Every Hosting + Functions deploy since #46 failed while finalizing the hosting version: `Supplied redirect pattern invalid ... '(?!'`. Firebase Hosting compiles `redirects[].regex` with RE2, which has no lookahead. The rule was `"regex": "^/(?!index\\.html$)(?P<path>.+?)(?:/index)?\\.html$"` → `/:path/`.
