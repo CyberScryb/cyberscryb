@@ -90,7 +90,12 @@
         "type": 301
       },
       {
-        "regex": "^/(?!index\\.html$)(?P<path>.+?)(?:/index)?\\.html$",
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "regex": "^/(?P<path>.+?)(?:/index)?\\.html$",
         "destination": "/:path/",
         "type": 301
       }

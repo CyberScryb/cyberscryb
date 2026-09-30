@@ -1,6 +1,16 @@
 # CyberScryb / Lazy Hustler — Working Memory
 
-_Last updated: 2026-09-26_
+_Last updated: 2026-09-30_
+
+---
+
+## Recent Changes (Session 2026-09-30 — Firebase deploy blocked since PR #46)
+
+Every Hosting + Functions deploy since #46 failed while finalizing the hosting version: `Supplied redirect pattern invalid ... '(?!'`. Firebase Hosting compiles `redirects[].regex` with RE2, which has no lookahead. The rule was `"regex": "^/(?!index\\.html$)(?P<path>.+?)(?:/index)?\\.html$"` → `/:path/`.
+
+Replacement, still first-match: exact `/index.html` → `/`, then RE2-safe `"regex": "^/(?P<path>.+?)(?:/index)?\\.html$"` → `/:path/`. `/blog.html` → `/guides/` stays above that rule. Redirects run before `cleanUrls` / `trailingSlash`, so the explicit root rule is what keeps `/index.html` on `/` instead of `/index/`. Destinations already end in `/` (or are `/`), so they do not match again. `/api/*` rewrites are untouched.
+
+Jest (`__tests__/firebase-hosting-redirects.test.js`) compiles every `regex` in `firebase.json` with the `re2` package (pinned at 1.23.3 so the Node 20 Tests workflow can install it; 1.24+ requires Node ≥22) and checks sample URL mappings. `functions/package.json` `engines.node` and `deploy.yml` are Node 22. That is the same bump as open PR #44, which should be closed — it is still valid against the Node lines on main, but it does not fix the redirect, so merging it alone would not unblock deploy.
 
 ---
 
