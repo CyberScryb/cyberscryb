@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Terminal, Search, Github, Settings, SearchCode, Sparkles } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { TOOLS } from './src/lib/tools.registry';
 import { EXAMPLES, ToolExample } from './src/lib/examples.data';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -298,6 +299,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <SpeedInsights />
         <AIOptInModal />
         <Routes>
           <Route path="/" element={<Layout />}>
