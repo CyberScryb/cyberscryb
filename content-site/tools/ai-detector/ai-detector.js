@@ -1,4 +1,11 @@
 // AI Detector Tool — uses shared CSAITool core + custom score gauge UI
+
+// Sample input powers the shared core's "Run example" button and prefills
+// the empty textarea so first-time visitors see what the tool does.
+window.CSExamples = window.CSExamples || {};
+window.CSExamples['ai-detector'] = {
+  input: "In today's fast-paced digital landscape, it is more important than ever to leverage cutting-edge solutions that drive meaningful outcomes. Furthermore, organizations must embrace innovation in order to stay ahead of the curve. Moreover, by harnessing the power of synergy, teams can unlock unprecedented levels of growth and efficiency. It is worth noting that success requires dedication, perseverance, and a steadfast commitment to excellence. In conclusion, those who adapt to change will thrive, while those who resist it will inevitably fall behind."
+};
 document.addEventListener('DOMContentLoaded', () => {
   const toolInput = document.getElementById('tool-input');
   const wordCountEl = document.getElementById('word-count');
@@ -13,6 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const analysisText = document.getElementById('analysis-text');
   const humanizeCta = document.getElementById('humanize-cta');
   const outputText = document.getElementById('output-text');
+  const shareBtn = document.getElementById('share-btn');
+
+  // Share: native share sheet where available, otherwise copy the page URL
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: document.title,
+        text: 'Free AI detector — paste text, get a 0-100 AI likelihood score.',
+        url: window.location.href,
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          shareBtn.textContent = 'Copied!';
+          setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
+        }
+      } catch (err) {
+        /* user dismissed the share sheet — no-op */
+      }
+    });
+  }
 
   const CIRCUMFERENCE = 2 * Math.PI * 68; // ~427.26
 
