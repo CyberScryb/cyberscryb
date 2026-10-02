@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free AI Detector &mdash; Check AI Content | CyberScryb</title>
-    <meta name="description" content="Use our free AI detector to check AI content and identify writing patterns. Free, instant, runs in your browser. No signup.">
+    <meta name="description" content="Paste any text and get a 0-100 AI likelihood score with the exact markers flagged. Free AI detector, no signup, nothing stored or used for training.">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:title" content="Free AI Detector &mdash; Check AI Content | CyberScryb">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free AI Detector &mdash; Check AI Content | CyberScryb">
-    <meta name="twitter:description" content="Use our free AI detector to check AI content and identify writing patterns. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:description" content="Paste any text and get a 0-100 AI likelihood score with the exact markers flagged. Free AI detector, no signup, nothing stored or used for training.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
     <link rel="canonical" href="https://cyberscryb.com/tools/ai-detector/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -216,6 +216,30 @@
         "@type": "Answer",
         "text": "Yes! Use our AI Humanizer to rewrite flagged text. It rewrites AI content to match natural human writing patterns while preserving your meaning."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AI detectors be wrong?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Short samples under about 100 words, heavily edited AI text, and formal or non-native human writing can all misfire. Treat the score as a signal that deserves a human read, not as proof."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it detect text from ChatGPT, Claude, and Gemini?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The markers it looks for are properties of machine-generated prose in general, not of one specific model, so it works on text from ChatGPT, Claude, Gemini, Copilot, and other AI writers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from GPTZero or Turnitin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPTZero is a statistical classifier and Turnitin is an institutional system tied to your school. This tool uses an AI model to identify and explain the specific markers in your text, and it is free with no signup. It is a self-check, not an academic-integrity verdict."
+      }
     }
   ]
 }
@@ -255,7 +279,7 @@
         <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
         <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
         <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
-        <span style="color: var(--primary);">AI Detection Score</span>
+        <span style="color: var(--primary);">AI Detector</span>
     </nav>
 
     <main>
@@ -265,7 +289,7 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 21 12 17.77 7.82 21 9 14.14l-5-4.87 5.91-1.01z"/></svg>
                     AI-Powered
                 </div>
-                <h1 class="hero-title" style="font-size: 2.5rem;">AI Detection <span style="color: var(--primary);">Score</span></h1>
+                <h1 class="hero-title" style="font-size: 2.5rem;">Free <span style="color: var(--primary);">AI Detector</span></h1>
                 <p class="hero-subtitle">Paste any text and see how likely it was written by AI. Get a 0-100 score with specific markers identified.</p>
             </div>
         </section>
@@ -303,6 +327,7 @@
                             </h2>
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="share-btn" class="icon-btn" title="Share this tool" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Share</button>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
                             </div>
                         </div>
@@ -339,6 +364,29 @@
                     </div>
                 </div>
 
+                <!-- SEO content -->
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--text); margin-bottom:1rem;">How AI Detection Works</h2>
+                    <p style="color: var(--text-muted); line-height:1.7;">AI writing leaves a statistical fingerprint. Language models pick the most probable next word, so their output has unusually low perplexity (predictable word choices) and low burstiness (uniform sentence length). Human writing bounces around: fragments, varied rhythm, occasional contradictions, imperfect punctuation. Detectors look for the absence of that mess.</p>
+                    <p style="color: var(--text-muted); line-height:1.7;">This free AI detector takes a different approach from pure statistical classifiers. It sends your text to an AI model tuned to identify the specific markers detectors flag: formulaic transitions, repetitive sentence openers, AI-favorite vocabulary, hedged "on the other hand" balance, and generic examples. You get a 0-100 AI likelihood score plus the exact markers found, so the result is explainable instead of a black-box number.</p>
+
+                    <h2 style="color: var(--text); margin-bottom:1rem; margin-top:2rem;">How to Read Your Score</h2>
+                    <p style="color: var(--text-muted); line-height:1.7;">Scores of 0-20 mean the text reads as almost certainly human. Scores of 21-40 suggest a human writer with some AI-like habits, which is common in formal or academic prose. The 41-60 band is genuinely ambiguous and deserves a human read, not a verdict. Scores of 61-80 indicate likely AI generation, and 81-100 means the text is saturated with machine patterns.</p>
+                    <p style="color: var(--text-muted); line-height:1.7;">Length matters more than most people expect. Under about 100 words, every detector struggles, because there is not enough text for patterns to emerge. Past 200 words, accuracy climbs sharply. If you are checking a short paragraph, treat any score as a weak signal.</p>
+
+                    <h2 style="color: var(--text); margin-bottom:1rem; margin-top:2rem;">What This Detector Catches</h2>
+                    <p style="color: var(--text-muted); line-height:1.7;">The markers this tool reports map directly to what institutional detectors like Turnitin and GPTZero weight most heavily: sentences that all start the same way, transition words such as "furthermore" and "moreover" doing structural work a human would do with rhythm, compulsive contraction expansion ("do not" where a person would write "don't"), surgically clean punctuation with no fragments, and vocabulary tics like "leverage," "delve," "comprehensive," and "utilize."</p>
+                    <p style="color: var(--text-muted); line-height:1.7;">It also flags the subtler tells: writing with no personal voice, arguments that hedge every claim into neutrality, and examples so generic they could illustrate anything. These are the patterns that survive paraphrasing, which is why word-level rewrites often still get flagged.</p>
+
+                    <h2 style="color: var(--text); margin-bottom:1rem; margin-top:2rem;">Who Uses an AI Detector</h2>
+                    <p style="color: var(--text-muted); line-height:1.7;">Teachers and professors use AI detectors to screen student work before academic-integrity conversations. Editors run freelance submissions through them before paying for "original" writing. Hiring managers check cover letters that read suspiciously polished. And writers themselves use this tool as a self-check: paste a draft, see what gets flagged, and revise before submitting somewhere that runs Turnitin or Originality.ai.</p>
+                    <p style="color: var(--text-muted); line-height:1.7;">If your own text scores high, that does not mean you cheated. It means your writing shares patterns with machine output. The fix is usually concrete: vary your sentence lengths, cut the transition words, add contractions, and put one specific detail where a generic phrase sits. Or run it through our <a href="/tools/humanizer/" style="color: var(--primary);">AI Humanizer</a>, which rewrites those exact patterns while keeping your meaning.</p>
+
+                    <h2 style="color: var(--text); margin-bottom:1rem; margin-top:2rem;">The Limits of AI Detection</h2>
+                    <p style="color: var(--text-muted); line-height:1.7;">No AI detector is a lie detector, including this one. Short texts misfire. Heavily edited AI text can pass. Formal, non-native, or highly structured human writing can fail. Detection models also decay: as language models change, the patterns shift, and every detector needs retraining to keep up.</p>
+                    <p style="color: var(--text-muted); line-height:1.7;">Treat any score as a signal that deserves a human read, never as proof of anything. If you are making a consequential decision about someone else's work based on a detector score, you are misusing the tool.</p>
+                </div>
+
                 <!-- FAQ -->
                 <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
@@ -347,6 +395,9 @@
                     <div class="faq-item"><h4>What AI patterns does it look for?</h4><p>It checks for repetitive sentence openers, formulaic transitions ("Furthermore," "Moreover"), lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words like "leverage," "delve," "comprehensive," and "utilize."</p></div>
                     <div class="faq-item"><h4>Is my text stored or used for training?</h4><p>No. Your text is processed and immediately discarded. We never store, log, or train on your content. Privacy-first, always.</p></div>
                     <div class="faq-item"><h4>Can I fix a high AI score?</h4><p>Yes! Use our <a href="/tools/humanizer/" style="color: var(--primary);">AI Humanizer</a> to rewrite flagged text. It rewrites AI content to match natural human writing patterns while preserving your meaning.</p></div>
+                    <div class="faq-item"><h4>Can AI detectors be wrong?</h4><p>Yes. Short samples under about 100 words, heavily edited AI text, and formal or non-native human writing can all misfire. Treat the score as a signal that deserves a human read, not as proof.</p></div>
+                    <div class="faq-item"><h4>Does it detect text from ChatGPT, Claude, and Gemini?</h4><p>Yes. The markers it looks for are properties of machine-generated prose in general, not of one specific model, so it works on text from ChatGPT, Claude, Gemini, Copilot, and other AI writers.</p></div>
+                    <div class="faq-item"><h4>How is this different from GPTZero or Turnitin?</h4><p>GPTZero is a statistical classifier and Turnitin is an institutional system tied to your school. This tool uses an AI model to identify and explain the specific markers in your text, and it is free with no signup. It is a self-check, not an academic-integrity verdict.</p></div>
                 </div>
 
                 <div class="related-tools" style="text-align: center; margin-top: 2rem;">
@@ -384,9 +435,17 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/guides/best-free-developer-tools-online/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
-                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Best Free Developer Tools Online</strong>
-                <span style="font-size:0.85rem; color: var(--text-muted);">Read the full guide →</span>
+            <a href="/blog/how-to-make-ai-text-sound-human-2026/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">How to Make AI Text Sound Human in 2026</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Seven concrete passes before detectors see the raw paste →</span>
+            </a>
+            <a href="/tools/humanizer/remove-ai-detection/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Remove AI Detection</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Rewrite flagged text to bypass detectors →</span>
+            </a>
+            <a href="/tools/humanizer/rewrite-chatgpt-text/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Rewrite ChatGPT Text</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Make ChatGPT output read like you wrote it →</span>
             </a>
         </div>
     </section>
@@ -423,7 +482,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "CyberScryb AI Detection Score",
+      "name": "CyberScryb Free AI Detector",
       "applicationCategory": "ProductivityApplication",
       "operatingSystem": "Web",
       "offers": {
