@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tip Calculator — Split Bills &amp; Calculate Gratuity | CyberScryb</title>
 <meta name="description" content="Free tip calculator: figure the gratuity on any bill, split it with friends, and see the total per person instantly. No signup, no download, works on mobile.">
-<meta name="robots" content="index,follow">
+
 <link rel="canonical" href="https://cyberscryb.com/tools/tip-calculator/">
 <meta property="og:title" content="Tip Calculator — Split Bills &amp; Calculate Gratuity | CyberScryb">
 <meta property="og:description" content="Free tip calculator: figure the gratuity on any bill, split it with friends, and see the total per person instantly. No signup.">
@@ -136,6 +138,32 @@
         .tip-note.friendly { color: var(--text-muted); }
         .tip-note.warn { color: var(--primary-soft); }
     </style>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+      
+      if (blacklistedPaths.includes(currentPath)) return;
+      
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
 </head>
 
 <body>
@@ -281,6 +309,9 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
