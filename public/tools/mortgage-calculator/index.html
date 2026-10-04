@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator — Free Monthly Payment Estimator | CyberScryb</title>
+<meta name="description" content="Free mortgage calculator: estimate your monthly principal & interest payment, total interest, and full yearly amortization schedule. Instant, private, no signup.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://cyberscryb.com/tools/mortgage-calculator/">
+<meta property="og:title" content="Mortgage Calculator — Free Monthly Payment Estimator | CyberScryb">
+<meta property="og:description" content="Estimate your monthly mortgage payment, total interest, and year-by-year amortization. Free, instant, no signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/mortgage-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mortgage Calculator — Free Monthly Payment Estimator | CyberScryb">
+<meta name="twitter:description" content="Estimate your monthly mortgage payment, total interest, and year-by-year amortization. Free, instant, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20260905dark">
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Mortgage Calculator",
+        "url": "https://cyberscryb.com/tools/mortgage-calculator/",
+        "description": "Free mortgage calculator: estimate your monthly principal and interest payment, total interest paid, and a full yearly amortization schedule instantly in your browser.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Mortgage Calculator", "item": "https://cyberscryb.com/tools/mortgage-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How is my monthly mortgage payment calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Your payment is set by the standard amortization formula: M = P x r(1+r)^n / ((1+r)^n - 1), where P is your loan amount, r is your monthly interest rate (annual rate divided by 12), and n is the total number of payments. This calculator applies it instantly to your numbers." }},
+            { "@type": "Question", "name": "Does this include property taxes and insurance?", "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator covers principal and interest only. Your real monthly bill will also include property taxes, homeowner's insurance, and possibly PMI or HOA dues. Those vary by location and lender, so they are left out of this estimate." }},
+            { "@type": "Question", "name": "How much does my down payment change the payment?", "acceptedAnswer": { "@type": "Answer", "text": "Dollar for dollar on the loan amount. Every dollar of down payment is a dollar you do not borrow, so it reduces your loan amount, your monthly payment, and the total interest you pay. A 20% down payment also usually means no PMI." }},
+            { "@type": "Question", "name": "Is a 15-year or 30-year mortgage better?", "acceptedAnswer": { "@type": "Answer", "text": "A 15-year term saves a fortune in interest and builds equity fast, but the monthly payment is much higher. A 30-year term keeps payments low and flexible but costs far more in total interest. Try both terms above and compare the total interest column to see the trade-off." }},
+            { "@type": "Question", "name": "What credit score do I need for the rates shown?", "acceptedAnswer": { "@type": "Answer", "text": "This is an estimator, not a rate quote. Enter whatever rate you like. As general guidance only, the best rates typically go to borrowers with scores of 740 or higher, while many loan programs accept scores in the 620s at higher rates. This is not financial advice; a lender can give you a real quote." }},
+            { "@type": "Question", "name": "Is this mortgage calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser, and your numbers are never sent to any server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .mc-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .mc-container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+        .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        @media (max-width: 560px) { .mc-grid { grid-template-columns: 1fr; } }
+        .mc-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .mc-field input, .mc-field select {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .mc-field select { cursor: pointer; }
+        .mc-field input:focus, .mc-field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .mc-result {
+            margin-top: 1.25rem; padding: 1.75rem 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .mc-result .mc-label { font-size: 0.8rem; color: var(--text-faint); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+        .mc-result .mc-answer {
+            font-size: 2.8rem; font-weight: 800; color: var(--primary-soft); line-height: 1.15; margin-top: 0.4rem;
+            font-family: var(--font-brand), Georgia, serif;
+        }
+        .mc-result .mc-sub { font-size: 0.85rem; color: var(--text-faint); margin-top: 0.5rem; }
+        .mc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .mc-stats { grid-template-columns: 1fr; } }
+        .mc-stat {
+            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1rem; text-align: center;
+        }
+        .mc-stat .mc-stat-label { font-size: 0.72rem; color: var(--text-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+        .mc-stat .mc-stat-value { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-top: 0.3rem; }
+        .mc-table-wrap { margin-top: 1.5rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+        .mc-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 560px; }
+        .mc-table thead th {
+            background: var(--bg-elevated); color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.75rem 1rem; text-align: right; border-bottom: 1px solid var(--border-strong);
+        }
+        .mc-table thead th:first-child { text-align: left; }
+        .mc-table tbody td { padding: 0.65rem 1rem; text-align: right; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        .mc-table tbody td:first-child { text-align: left; color: var(--text); font-weight: 600; }
+        .mc-table tbody tr:last-child td { border-bottom: none; }
+        .mc-table tbody tr:hover td { background: var(--bg-elevated); }
+        .mc-error { color: var(--primary-soft); font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mc-app">
+        <div class="mc-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Mortgage Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Mortgage Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Estimate your monthly payment, total interest, and full amortization schedule. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top: 1.75rem;">
+                <div class="mc-grid">
+                    <div class="mc-field"><label for="mc-price">Home price ($)</label><input id="mc-price" type="number" inputmode="decimal" min="0" placeholder="e.g. 400000" value="400000"></div>
+                    <div class="mc-field"><label for="mc-down">Down payment ($)</label><input id="mc-down" type="number" inputmode="decimal" min="0" placeholder="e.g. 80000" value="80000"></div>
+                </div>
+                <div class="mc-grid">
+                    <div class="mc-field"><label for="mc-rate">Annual interest rate (%)</label><input id="mc-rate" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 6.5" value="6.5"></div>
+                    <div class="mc-field"><label for="mc-term">Loan term</label>
+                        <select id="mc-term">
+                            <option value="30" selected>30 years</option>
+                            <option value="20">20 years</option>
+                            <option value="15">15 years</option>
+                            <option value="10">10 years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mc-result">
+                    <div class="mc-label">Monthly principal &amp; interest</div>
+                    <div class="mc-answer" id="mc-payment">—</div>
+                    <div class="mc-sub" id="mc-note">Enter your numbers above.</div>
+                    <div class="mc-stats">
+                        <div class="mc-stat"><div class="mc-stat-label">Loan amount</div><div class="mc-stat-value" id="mc-loan">—</div></div>
+                        <div class="mc-stat"><div class="mc-stat-label">Total interest</div><div class="mc-stat-value" id="mc-interest">—</div></div>
+                        <div class="mc-stat"><div class="mc-stat-label">Total cost</div><div class="mc-stat-value" id="mc-total">—</div></div>
+                    </div>
+                </div>
+
+                <div class="mc-table-wrap" id="mc-schedule-wrap" style="display:none;">
+                    <table class="mc-table">
+                        <thead>
+                            <tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Remaining balance</th></tr>
+                        </thead>
+                        <tbody id="mc-schedule"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:860px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How Mortgage Payments Are Calculated</h2>
+                <p>Lenders use one standard formula to set your monthly payment, and it is designed so you pay the loan off exactly, on schedule, with the very last payment. It looks intimidating but the idea is simple:</p>
+                <p><strong style="color:var(--text);">M = P &times; r(1+r)^n / ((1+r)^n &minus; 1)</strong><br>P is your loan amount (home price minus down payment), r is your monthly interest rate (the annual rate divided by 12), and n is the total number of monthly payments (years &times; 12).</p>
+                <p><strong style="color:var(--text);">Worked example.</strong> A $400,000 home with an $80,000 down payment means you borrow $320,000. At 6.5% annual interest for 30 years: r = 0.065 / 12 = 0.005417, n = 360. Plug those in and the monthly payment comes out to about <strong style="color:var(--text);">$2,023</strong>. Over the full 30 years you pay roughly $408,000 in interest, for a total cost of about $728,000.</p>
+                <p><strong style="color:var(--text);">Why early payments are mostly interest.</strong> Each month the lender charges interest on the balance you still owe, then the rest of your payment chips away at the principal. Early on, the balance is huge, so the interest slice dominates. On the example above, year one payments total about $24,271, but only around $3,580 of that reduces the loan. The remaining $20,690 is interest. As the balance shrinks year by year, the ratio flips, and by the final years nearly all of each payment goes to principal. That flip is what the amortization table above shows, year by year.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Affects Your Monthly Payment</h2>
+                <p><strong style="color:var(--text);">Interest rate.</strong> This is the biggest lever. Even a single percentage point moves the payment hundreds of dollars a month on a typical loan and tens of thousands in total interest. Rate shopping is the highest-value hour you will spend in the whole home-buying process.</p>
+                <p><strong style="color:var(--text);">Loan term.</strong> A 30-year loan spreads payments thin, keeping them affordable but piling on interest. A 15-year loan roughly halves the total interest but demands a much bigger monthly check. Use the term dropdown above to compare both on your own numbers.</p>
+                <p><strong style="color:var(--text);">Down payment size.</strong> Every dollar of down payment is a dollar you never borrow, so it shrinks your loan amount, your monthly payment, and your total interest. Hitting 20% down has a bonus: lenders usually drop private mortgage insurance (PMI) at that point, which saves you a separate monthly fee.</p>
+                <p><strong style="color:var(--text);">What this calculator does not include.</strong> The number above is principal and interest only. A real mortgage bill also includes property taxes, homeowner's insurance, and possibly PMI or HOA dues. Those extras vary wildly by location and lender, so this version keeps the math clean and leaves escrow out. Treat the result as the core of your payment, not the full bill.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How is my monthly mortgage payment calculated?</summary><p>Your payment is set by the standard amortization formula: M = P &times; r(1+r)^n / ((1+r)^n &minus; 1), where P is your loan amount, r is your monthly interest rate (annual rate divided by 12), and n is the total number of payments. This calculator applies it instantly to your numbers.</p></details>
+                <details><summary>Does this include property taxes and insurance?</summary><p>No. This calculator covers principal and interest only. Your real monthly bill will also include property taxes, homeowner's insurance, and possibly PMI or HOA dues. Those vary by location and lender, so they are left out of this estimate.</p></details>
+                <details><summary>How much does my down payment change the payment?</summary><p>Dollar for dollar on the loan amount. Every dollar of down payment is a dollar you do not borrow, so it reduces your loan amount, your monthly payment, and the total interest you pay. A 20% down payment also usually means no PMI.</p></details>
+                <details><summary>Is a 15-year or 30-year mortgage better?</summary><p>A 15-year term saves a fortune in interest and builds equity fast, but the monthly payment is much higher. A 30-year term keeps payments low and flexible but costs far more in total interest. Try both terms above and compare the total interest column to see the trade-off.</p></details>
+                <details><summary>What credit score do I need for the rates shown?</summary><p>This is an estimator, not a rate quote. Enter whatever rate you like. As general guidance only, the best rates typically go to borrowers with scores of 740 or higher, while many loan programs accept scores in the 620s at higher rates. This is not financial advice; a lender can give you a real quote.</p></details>
+                <details><summary>Is this mortgage calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser, and your numbers are never sent to any server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Find a percent of a number or measure change.</span>
+                    </a>
+                    <a href="/tools/compound-interest-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Compound Interest Calculator</strong>
+                        <span style="font-size:0.85rem;">See how savings and investments grow over time.</span>
+                    </a>
+                    <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
+                        <span style="font-size:0.85rem;">Fit your mortgage payment into a monthly budget.</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20260905dark"></script>
+    <script>
+    (function () {
+        "use strict";
+        function money(n) {
+            return "$" + Math.round(n).toLocaleString("en-US");
+        }
+        function monthlyPayment(P, r, n) {
+            if (r === 0) return P / n;
+            var f = Math.pow(1 + r, n);
+            return P * r * f / (f - 1);
+        }
+        function el(id) { return document.getElementById(id); }
+        function showPlaceholder(msg) {
+            el("mc-payment").textContent = "—";
+            el("mc-note").textContent = msg;
+            el("mc-loan").textContent = "—";
+            el("mc-interest").textContent = "—";
+            el("mc-total").textContent = "—";
+            el("mc-schedule-wrap").style.display = "none";
+        }
+        function calc() {
+            var price = parseFloat(el("mc-price").value);
+            var down = parseFloat(el("mc-down").value);
+            var rate = parseFloat(el("mc-rate").value);
+            var years = parseInt(el("mc-term").value, 10);
+
+            if (isNaN(price) || isNaN(down) || isNaN(rate) || isNaN(years)) {
+                showPlaceholder("Enter your numbers above.");
+                return;
+            }
+            if (price < 0 || down < 0 || rate < 0) {
+                showPlaceholder("Please enter non-negative numbers.");
+                return;
+            }
+            if (price === 0) {
+                showPlaceholder("Enter a home price to get started.");
+                return;
+            }
+            if (down > price) {
+                showPlaceholder("Down payment can't exceed home price.");
+                return;
+            }
+
+            var P = price - down;
+            var r = rate / 12 / 100;
+            var n = years * 12;
+
+            if (P === 0) {
+                el("mc-payment").textContent = money(0);
+                el("mc-note").textContent = "No loan needed — the down payment covers the full price.";
+                el("mc-loan").textContent = money(0);
+                el("mc-interest").textContent = money(0);
+                el("mc-total").textContent = money(price);
+                el("mc-schedule-wrap").style.display = "none";
+                return;
+            }
+
+            var M = monthlyPayment(P, r, n);
+            if (!isFinite(M) || M < 0) {
+                showPlaceholder("Those numbers don't work — try different values.");
+                return;
+            }
+
+            el("mc-payment").textContent = money(M) + "/mo";
+            el("mc-note").textContent = "Principal & interest only — taxes, insurance, PMI, and HOA not included.";
+            el("mc-loan").textContent = money(P);
+
+            var balance = P, totalInterest = 0, rows = "";
+            for (var y = 1; y <= years; y++) {
+                var yrPrincipal = 0, yrInterest = 0;
+                for (var m = 1; m <= 12; m++) {
+                    var interest = balance * r;
+                    var principal = M - interest;
+                    if (principal > balance) principal = balance;
+                    balance -= principal;
+                    yrPrincipal += principal;
+                    yrInterest += interest;
+                }
+                totalInterest += yrInterest;
+                if (balance < 0.005) balance = 0;
+                rows += "<tr><td>Year " + y + "</td><td>" + money(yrPrincipal) + "</td><td>" + money(yrInterest) + "</td><td>" + money(balance) + "</td></tr>";
+            }
+
+            el("mc-interest").textContent = money(totalInterest);
+            el("mc-total").textContent = money(P + totalInterest);
+            el("mc-schedule").innerHTML = rows;
+            el("mc-schedule-wrap").style.display = "block";
+        }
+        ["mc-price", "mc-down", "mc-rate", "mc-term"].forEach(function (id) {
+            el(id).addEventListener("input", calc);
+        });
+        calc();
+    })();
+    </script>
+</body>
+</html>
