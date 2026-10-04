@@ -1155,6 +1155,8 @@ function generatePage(page) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#09090b">
     <title>${page.title} | CyberScryb</title>
     <meta name="description" content="${page.subtitle}">
     <meta name="keywords" content="${page.keywords}">
@@ -1238,7 +1240,6 @@ function generatePage(page) {
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
-                    <li><a href="/pro/" style="color:#00d4ff;font-weight:700;">&#9733; Pro</a></li>
                 </ul>
                 <div class="hamburger"><span></span><span></span><span></span></div>
             </div>
@@ -1408,6 +1409,12 @@ function generateSitemap(generatedPages) {
     'voice-writer',
     'word-counter',
     'soap-note-generator',
+    'percentage-calculator',
+    'mortgage-calculator',
+    'tip-calculator',
+    'compound-interest-calculator',
+    'cover-letter-generator',
+    'resignation-letter-generator',
     'hipaa-release-generator',
     'caregiver-printable-pack',
     'blood-sugar-log-generator',
@@ -1449,6 +1456,12 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-student-loan-hardship-letter',
     'when-to-request-a-custody-modification',
     'json-to-csv',
+    'how-to-calculate-percentage',
+    'how-to-calculate-mortgage-payments',
+    'how-to-calculate-tip',
+    'how-compound-interest-works',
+    'how-to-write-a-cover-letter',
+    'how-to-write-a-resignation-letter',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1553,6 +1566,12 @@ function manageRobotsMeta() {
     'voice-writer',
     'word-counter',
     'soap-note-generator',
+    'percentage-calculator',
+    'mortgage-calculator',
+    'tip-calculator',
+    'compound-interest-calculator',
+    'cover-letter-generator',
+    'resignation-letter-generator',
     'hipaa-release-generator',
     'caregiver-printable-pack',
     'blood-sugar-log-generator',
