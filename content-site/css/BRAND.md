@@ -1,35 +1,31 @@
-# CyberScryb brand — Linen & Terracotta
+# CyberScryb brand — Digital Obsidian
 
-Completely new system (not dark/green Humanizer, not teal, not charcoal paper).
+Dark-first design system. This is the live brand. (A previous "Linen & Terracotta"
+light-theme draft lived here; it was never shipped and contradicted the live site.)
 
 ## Surfaces
 
-- **Linen bg:** `#F8F1E9`
-- **Elevated:** `#FFFCF7`
-- **Cards:** `#FFFFFF`
+- **Obsidian bg:** `#09090b`
+- **Elevated:** `#18181b`-ish (`--bg-elevated`)
+- **Cards:** dark (`--card`)
 
 ## Type
 
-- **Espresso ink:** `#2C1810` (body default, headings)
-- **Muted clay:** `#3D2B1F` (paragraphs / secondary — AA on white & linen)
-- **Faint:** `#5C4A3D` (meta, trust lines — AA for body-sized text)
+- **Text:** `#fafafa` (`--text`)
+- **Muted:** `--text-muted`
+- **Faint:** `--text-faint`
 - **UI:** Outfit
-- **Wordmark:** Cormorant Garamond
+- **Wordmark/brand:** Cormorant Garamond
 
-## Brand
+## Brand accents
 
-- **Terracotta:** `#C2410C` — primary CTAs, links, focus (use for links, not soft)
-- Hover: `#9A3412`
-- Soft: `#E05A2B` (icons / large accents only — not small body links)
-
-## Pro / pay only
-
-- **Slate blue:** `#1B3A4B`
-- Hover: `#122A38`
-- Text on it: `#FFFCF7`
+- **Primary orange:** `#f97316` (`--primary`) — CTAs, links, focus. Hover: `--primary-hover`.
+- **Attention blue:** `#38bdf8` (`--attention`) — sparing secondary accent only, never the main CTA.
+- **Danger:** `#ef4444`
 
 ## Rules
 
-1. Terracotta is the brand — not green, not teal, not charcoal.
-2. Slate blue is scarce: Pro / checkout only.
-3. Linen canvas stays warm; no cool gray voids.
+1. Dark theme everywhere. No light-theme pages, no white cards on dark surfaces.
+2. One orange (`#f97316`). The legacy terracotta `#c2410c` is retired; do not introduce new uses.
+3. Main CTAs are orange. Blue is never the primary action.
+4. Free forever: no paywalls, no pricing tiers, no subscription language anywhere.
