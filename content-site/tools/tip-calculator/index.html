@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip Calculator — Split Bills &amp; Calculate Gratuity | CyberScryb</title>
+<meta name="description" content="Free tip calculator: figure the gratuity on any bill, split it with friends, and see the total per person instantly. No signup, no download, works on mobile.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://cyberscryb.com/tools/tip-calculator/">
+<meta property="og:title" content="Tip Calculator — Split Bills &amp; Calculate Gratuity | CyberScryb">
+<meta property="og:description" content="Free tip calculator: figure the gratuity on any bill, split it with friends, and see the total per person instantly. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/tip-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tip Calculator — Split Bills &amp; Calculate Gratuity | CyberScryb">
+<meta name="twitter:description" content="Free tip calculator: figure the gratuity on any bill, split it with friends, and see the total per person instantly. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20260905dark">
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Tip Calculator",
+        "url": "https://cyberscryb.com/tools/tip-calculator/",
+        "description": "Free online tip calculator: compute the gratuity on any bill, split the total evenly, and see exactly what each person owes, instantly in your browser.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Tip Calculator", "item": "https://cyberscryb.com/tools/tip-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is a good tip percentage?", "acceptedAnswer": { "@type": "Answer", "text": "In the US, 15-20% is standard for sit-down restaurants, with 20% as the common default for good service. Bars run about $1-2 per drink, and delivery is typically 10-20%. The preset buttons above cover the standard range." }},
+            { "@type": "Question", "name": "Should I tip on the pre-tax or post-tax amount?", "acceptedAnswer": { "@type": "Answer", "text": "Traditionally the tip is calculated on the pre-tax subtotal. In practice the difference is small on most bills: on an $85 bill with 8% tax, tipping 20% on the post-tax total adds only about $1.36. When in doubt, the pre-tax subtotal is the standard." }},
+            { "@type": "Question", "name": "How do I split a bill evenly?", "acceptedAnswer": { "@type": "Answer", "text": "Enter the bill and tip, then use the stepper to set the number of people. The calculator divides the tip and the total evenly and shows what each person owes. When splitting with an odd total, round each person's share up to the nearest dollar so the group covers the full amount." }},
+            { "@type": "Question", "name": "What is auto-gratuity?", "acceptedAnswer": { "@type": "Answer", "text": "Auto-gratuity is a service charge the restaurant adds automatically, usually 18-20%, most commonly on parties of 6 or 8+. It is not optional in the way a tip is. Always check the bill first so you don't tip twice on top of it." }},
+            { "@type": "Question", "name": "Do I tip on alcohol the same way?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, at a sit-down restaurant the full bill including alcohol gets the same percentage tip. At a bar, the norm shifts to about $1-2 per drink rather than a percentage. If bottles or expensive wine inflate the total, many people tip a lower percentage on the alcohol portion." }},
+            { "@type": "Question", "name": "Is this tip calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #f97316; --primary-soft: #fb923c;
+            --primary-glow: rgba(249,115,22,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .tip-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .tip-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .tip-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .tip-field input {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .tip-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .tip-input-wrap { position: relative; }
+        .tip-input-wrap .tip-symbol { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1.1rem; pointer-events: none; }
+        .tip-input-wrap input { padding-left: 2.1rem; }
+        .tip-presets { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0.9rem 0 0; }
+        .tip-preset {
+            background: var(--card); border: 1px solid var(--border-strong); color: var(--text-muted);
+            border-radius: 12px; padding: 0.85rem 1rem; font-size: 0.9rem; font-weight: 700;
+            cursor: pointer; font-family: var(--font); transition: all 0.15s; min-height: 48px;
+            display: flex; flex-direction: column; align-items: center; gap: 0.15rem; flex: 1 1 0; min-width: 120px;
+        }
+        .tip-preset:hover { border-color: var(--primary-soft); color: var(--text); }
+        .tip-preset.is-on { background: var(--primary); border-color: var(--primary); color: #ffedd5; }
+        .tip-preset .tip-preset-amt { font-size: 0.76rem; font-weight: 600; opacity: 0.85; }
+        .tip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .tip-row { grid-template-columns: 1fr; } }
+        .tip-stepper { display: flex; align-items: stretch; gap: 0.6rem; }
+        .tip-stepper button {
+            flex: 0 0 56px; min-height: 56px; font-size: 1.5rem; font-weight: 700; line-height: 1;
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); cursor: pointer; font-family: var(--font); transition: all 0.15s;
+            touch-action: manipulation;
+        }
+        .tip-stepper button:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .tip-stepper button:active { transform: scale(0.96); }
+        .tip-stepper .tip-split-count {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            font-size: 1.4rem; font-weight: 800; color: var(--text);
+        }
+        .tip-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .tip-result-top { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        @media (max-width: 560px) { .tip-result-top { grid-template-columns: 1fr 1fr; } }
+        .tip-big { text-align: center; padding: 1rem 0.5rem; background: var(--bg-elevated); border-radius: 10px; border: 1px solid var(--border); }
+        .tip-big .tip-label { font-size: 0.78rem; color: var(--text-faint); font-weight: 600; margin-bottom: 0.35rem; }
+        .tip-big .tip-amount { font-size: 2.2rem; font-weight: 800; color: var(--primary-soft); line-height: 1.1; font-family: var(--font-brand), Georgia, serif; }
+        .tip-per-person { border-top: 1px solid var(--border); padding-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .tip-person { text-align: center; }
+        .tip-person .tip-label { font-size: 0.78rem; color: var(--text-faint); font-weight: 600; margin-bottom: 0.25rem; }
+        .tip-person .tip-amount { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+        .tip-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; text-align: center; line-height: 1.6; }
+        .tip-note.friendly { color: var(--text-muted); }
+        .tip-note.warn { color: var(--primary-soft); }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="tip-app">
+        <div class="tip-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Tip Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Tip Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Calculate the gratuity, see the total, and split it fairly. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="tip-field">
+                    <label for="tip-bill">Bill amount</label>
+                    <div class="tip-input-wrap">
+                        <span class="tip-symbol">$</span>
+                        <input id="tip-bill" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 85.00" value="50">
+                    </div>
+                </div>
+
+                <div class="tip-row">
+                    <div class="tip-field">
+                        <label for="tip-custom">Tip percentage</label>
+                        <input id="tip-custom" type="number" inputmode="decimal" min="0" max="100" step="0.5" placeholder="Custom %" value="20">
+                    </div>
+                    <div class="tip-field">
+                        <label>Split between</label>
+                        <div class="tip-stepper">
+                            <button id="tip-minus" aria-label="Remove a person">&minus;</button>
+                            <div class="tip-split-count" id="tip-split-count">1</div>
+                            <button id="tip-plus" aria-label="Add a person">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-presets" role="group" aria-label="Tip presets">
+                    <button class="tip-preset" data-pct="15"><span>15%</span><span class="tip-preset-amt" id="tip-amt-15"></span></button>
+                    <button class="tip-preset" data-pct="18"><span>18%</span><span class="tip-preset-amt" id="tip-amt-18"></span></button>
+                    <button class="tip-preset is-on" data-pct="20"><span>20%</span><span class="tip-preset-amt" id="tip-amt-20"></span></button>
+                    <button class="tip-preset" data-pct="25"><span>25%</span><span class="tip-preset-amt" id="tip-amt-25"></span></button>
+                </div>
+
+                <div class="tip-result" id="tip-result">
+                    <div class="tip-result-top">
+                        <div class="tip-big">
+                            <div class="tip-label">Tip amount</div>
+                            <div class="tip-amount" id="tip-out-tip">$10.00</div>
+                        </div>
+                        <div class="tip-big">
+                            <div class="tip-label">Total bill</div>
+                            <div class="tip-amount" id="tip-out-total">$60.00</div>
+                        </div>
+                    </div>
+                    <div class="tip-per-person" id="tip-per-person">
+                        <div class="tip-person">
+                            <div class="tip-label">Tip per person</div>
+                            <div class="tip-amount" id="tip-out-tip-pp">$10.00</div>
+                        </div>
+                        <div class="tip-person">
+                            <div class="tip-label">Total per person</div>
+                            <div class="tip-amount" id="tip-out-total-pp">$60.00</div>
+                        </div>
+                    </div>
+                    <div class="tip-note" id="tip-note"></div>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Calculate a Tip</h2>
+                <p>A tip is just a percentage of the bill. Convert the percent to a decimal by dividing by 100, then multiply by the bill amount. Formula: <strong style="color:var(--text);">Tip = Bill &times; (Percent / 100)</strong>.</p>
+                <p>Worked example: an $85 bill at 20%. Convert 20% to 0.20, then multiply: 85 &times; 0.20 = $17.00 tip. Total: 85 + 17 = <strong style="color:var(--text);">$102.00</strong>. If two people split it evenly, each pays $102.00 / 2 = <strong style="color:var(--text);">$51.00</strong>.</p>
+                <p>For a quick mental tip, remember the 10% trick: move the decimal point one place left on the bill to get 10%. On an $85 bill, 10% is $8.50. Double it for 20% ($17), add half of it for 15% ($12.75), or double plus half for 25% ($21.25). No phone required.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Tipping Etiquette, Briefly</h2>
+                <p><strong style="color:var(--text);">Sit-down restaurants:</strong> 15-20% of the pre-tax bill is the US norm, with 20% the common default for good service. Exceptional service earns more; genuinely poor service still usually gets at least 10% since the problem may be the kitchen, not the server.</p>
+                <p><strong style="color:var(--text);">Bars:</strong> about $1-2 per drink, more if the drink is complicated or the bar is slammed.</p>
+                <p><strong style="color:var(--text);">Delivery:</strong> 10-20% of the order, with a minimum of $3-5 for small orders. Delivery drivers burn gas and time; a small order at a high percentage still deserves a real tip.</p>
+                <p><strong style="color:var(--text);">Coffee shops:</strong> optional. A dollar in the jar or 10% on a card tab is appreciated, never expected.</p>
+                <p><strong style="color:var(--text);">Large parties:</strong> restaurants often add an automatic gratuity, usually 18-20%, for groups of 6 or 8+. Check the bill before adding your own tip so you don't pay twice. Tipping customs differ by country; in much of Europe and Asia, service charges are built into prices and extra tipping is minimal or unnecessary.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is a good tip percentage?</summary><p>In the US, 15-20% is standard for sit-down restaurants, with 20% the common default for good service. Bars run about $1-2 per drink, and delivery is typically 10-20%. The preset buttons above cover the standard range.</p></details>
+                <details><summary>Should I tip on the pre-tax or post-tax amount?</summary><p>Traditionally the tip is calculated on the pre-tax subtotal. In practice the difference is small on most bills: on an $85 bill with 8% tax, tipping 20% on the post-tax total adds only about $1.36. When in doubt, the pre-tax subtotal is the standard.</p></details>
+                <details><summary>How do I split a bill evenly?</summary><p>Enter the bill and tip, then use the stepper to set the number of people. The calculator divides the tip and the total evenly and shows what each person owes. When splitting with an odd total, round each person's share up to the nearest dollar so the group covers the full amount.</p></details>
+                <details><summary>What is auto-gratuity?</summary><p>Auto-gratuity is a service charge the restaurant adds automatically, usually 18-20%, most commonly on parties of 6 or 8+. It is not optional in the way a tip is. Always check the bill first so you don't tip twice on top of it.</p></details>
+                <details><summary>Do I tip on alcohol the same way?</summary><p>Yes, at a sit-down restaurant the full bill including alcohol gets the same percentage tip. At a bar, the norm shifts to about $1-2 per drink rather than a percentage. If bottles or expensive wine inflate the total, many people tip a lower percentage on the alcohol portion.</p></details>
+                <details><summary>Is this tip calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Find a percent of a number, reverse it, or measure change.</span>
+                    </a>
+                    <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
+                        <span style="font-size:0.85rem;">Plan spending and keep dining costs in check.</span>
+                    </a>
+                    <a href="/tools/mortgage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Mortgage Calculator</strong>
+                        <span style="font-size:0.85rem;">Estimate monthly payments and interest.</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20260905dark"></script>
+    <script>
+    (function () {
+        "use strict";
+        var PRESETS = [15, 18, 20, 25];
+        var split = 1;
+
+        var billEl = document.getElementById("tip-bill");
+        var customEl = document.getElementById("tip-custom");
+        var countEl = document.getElementById("tip-split-count");
+        var outTip = document.getElementById("tip-out-tip");
+        var outTotal = document.getElementById("tip-out-total");
+        var outTipPp = document.getElementById("tip-out-tip-pp");
+        var outTotalPp = document.getElementById("tip-out-total-pp");
+        var perPersonEl = document.getElementById("tip-per-person");
+        var noteEl = document.getElementById("tip-note");
+
+        function money(n) {
+            var cents = Math.round(n * 100);
+            return "$" + (cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function markPresets(pct) {
+            document.querySelectorAll(".tip-preset").forEach(function (btn) {
+                var isOn = parseFloat(btn.dataset.pct) === pct;
+                btn.classList.toggle("is-on", isOn);
+            });
+        }
+
+        function updatePresetAmounts(bill) {
+            PRESETS.forEach(function (pct) {
+                var span = document.getElementById("tip-amt-" + pct);
+                if (!span) return;
+                if (bill > 0 && isFinite(bill)) {
+                    span.textContent = money(bill * pct / 100);
+                } else {
+                    span.textContent = "";
+                }
+            });
+        }
+
+        function showFriendly(cls, msg) {
+            outTip.textContent = "$0.00";
+            outTotal.textContent = "$0.00";
+            outTipPp.textContent = "$0.00";
+            outTotalPp.textContent = "$0.00";
+            noteEl.className = "tip-note friendly " + (cls || "");
+            noteEl.textContent = msg;
+        }
+
+        function calc() {
+            var rawBill = billEl.value.trim();
+            var bill = parseFloat(rawBill);
+            var pct = parseFloat(customEl.value);
+
+            // Negative bill: friendly message
+            if (!isNaN(bill) && bill < 0) {
+                showFriendly("warn", "Bills don't usually go below zero. Enter a positive amount.");
+                updatePresetAmounts(NaN);
+                return;
+            }
+            // Empty or zero bill: friendly placeholder
+            if (rawBill === "" || isNaN(bill) || bill <= 0) {
+                outTip.textContent = "—";
+                outTotal.textContent = "—";
+                outTipPp.textContent = "—";
+                outTotalPp.textContent = "—";
+                noteEl.className = "tip-note friendly";
+                noteEl.textContent = "Enter your bill amount to see the tip and total.";
+                updatePresetAmounts(NaN);
+                return;
+            }
+            // Sanity-check percent
+            if (isNaN(pct) || pct < 0) pct = 0;
+            if (pct > 100) pct = 100;
+
+            var tip = Math.round(bill * pct / 100 * 100) / 100;
+            var total = Math.round((bill + tip) * 100) / 100;
+            var tipPp = Math.round(tip / split * 100) / 100;
+            var totalPp = Math.round(total / split * 100) / 100;
+
+            outTip.textContent = money(tip);
+            outTotal.textContent = money(total);
+            outTipPp.textContent = money(tipPp);
+            outTotalPp.textContent = money(totalPp);
+
+            noteEl.className = "tip-note";
+            if (split === 1) {
+                noteEl.textContent = money(tip) + " tip (" + pct + "%) on a " + money(bill) + " bill.";
+            } else {
+                noteEl.textContent = "Split " + split + " ways: each person pays " + money(totalPp) + " (" + money(tipPp) + " tip).";
+            }
+            updatePresetAmounts(bill);
+        }
+
+        // Preset buttons: set custom input to match
+        document.querySelectorAll(".tip-preset").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                customEl.value = btn.dataset.pct;
+                markPresets(parseFloat(btn.dataset.pct));
+                calc();
+            });
+        });
+
+        // Typing custom percent clears preset selection
+        customEl.addEventListener("input", function () {
+            var pct = parseFloat(customEl.value);
+            var matches = PRESETS.some(function (p) { return p === pct; });
+            markPresets(matches ? pct : NaN);
+            calc();
+        });
+
+        // Stepper: 1 to 50
+        document.getElementById("tip-minus").addEventListener("click", function () {
+            if (split > 1) { split--; countEl.textContent = split; calc(); }
+        });
+        document.getElementById("tip-plus").addEventListener("click", function () {
+            if (split < 50) { split++; countEl.textContent = split; calc(); }
+        });
+
+        billEl.addEventListener("input", calc);
+
+        // Default: 20% preset selected
+        markPresets(20);
+        calc();
+    })();
+    </script>
+</body>
+</html>
