@@ -1454,6 +1454,57 @@ DISCLAIMER: Educational draft only — not legal advice. Rules vary by utility a
 Return ONLY the letter + next steps + call script + disclaimer. No preamble.`;
     },
   },
+  'cover-letter-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an expert hiring manager turned career coach who has read 10,000+ cover letters. Write a tailored cover letter (300-400 words).
+
+Job title: ${params.jobTitle || 'Not specified'}
+Company: ${params.company || 'Not specified'}
+Tone: ${params.tone || 'professional'}
+
+Candidate background:
+"${input}"
+
+Requirements:
+- Open with a hook specific to THIS role — never "I am writing to apply for..."
+- Connect 2-3 specific achievements from their background to the role's likely needs
+- Include one specific sentence showing knowledge of / enthusiasm for the company (never generic praise)
+- One short paragraph on why them, one on why this company
+- Confident close with a direct call to action (request the interview)
+- Tone: ${params.tone || 'professional'} — human, specific, zero cliches ("passionate team player", "detail-oriented", "fast-paced environment")
+- Length: 300-400 words
+- Do NOT invent employers, degrees, dates, or metrics not present in the background
+
+Return ONLY the letter text, ready to copy. Include [YOUR NAME] placeholder at the sign-off.`,
+  },
+  'resignation-letter-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a professional HR consultant. Write a gracious, professional resignation letter.
+
+Name: ${params.name || '[YOUR NAME]'}
+Company: ${params.company || '[COMPANY]'}
+Last day: ${params.lastDay || '[LAST DAY]'}
+Reason (keep to one brief, positive line): ${params.reason || 'Not specified'}
+
+Additional context from the person:
+"${input}"
+
+Requirements:
+- State the resignation clearly in the first two sentences, including the last day
+- Thank the employer genuinely in one specific sentence — no groveling
+- Offer a reasonable transition (handover period, documentation)
+- Keep the reason brief and positive — never burn bridges, never air grievances
+- Tone: professional and warm. Length: 150-250 words
+- Do NOT include complaints, counteroffer fishing, emotional language, or detailed personal matters
+
+Return ONLY the letter text, ready to copy.`,
+  },
   'insurance-denial-appeal': {
     model: 'gemini-3.1-pro-preview',
     build: (input, params) => {
