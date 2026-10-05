@@ -189,16 +189,16 @@ function showCookieConsentBanner() {
             letter-spacing: 0.5px;
         }
         .cs-cookie-btn-accept {
-            background: #f97316;
+            background: #ef4444;
             color: #09090b;
             font-weight: 800;
             border: none;
-            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+            box-shadow: 0 4px 14px rgba(239,68,68, 0.3);
         }
         .cs-cookie-btn-accept:hover {
             transform: translateY(-1px);
-            background: #ea580c;
-            box-shadow: 0 6px 18px rgba(249, 115, 22, 0.4);
+            background: #dc2626;
+            box-shadow: 0 6px 18px rgba(239,68,68, 0.4);
         }
         .cs-cookie-btn-decline {
             background: transparent;
