@@ -48,7 +48,65 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is CIDR notation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "CIDR (Classless Inter-Domain Routing) notation writes an IP address followed by a slash and a prefix length, like 192.168.1.0/24. The number counts how many of the 32 bits belong to the network portion. It replaced the old class A, B, and C system in 1993 because fixed classes wasted huge blocks of address space."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many usable hosts does a /24 subnet have?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A /24 has 256 total addresses. Two are reserved: the network address (first) and the broadcast address (last). That leaves 254 usable host addresses, which is why /24 is the most common size for a single office LAN or VLAN."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between a subnet mask and a CIDR prefix?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "They carry the same information in different formats. A subnet mask like 255.255.255.0 written in dotted decimal equals CIDR prefix /24, which counts the 24 leading 1-bits in that mask. CIDR is compact; dotted-decimal masks are still common in router configurations."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is a wildcard mask and when do I use it?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A wildcard mask is the bitwise inverse of a subnet mask: where the mask has 1s (network bits), the wildcard has 0s. For /24 (255.255.255.0) the wildcard is 0.0.0.255. Cisco access control lists and OSPF network statements use wildcard masks instead of subnet masks. A 0 bit means the address bit must match; a 1 bit means any value is allowed."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between the network and broadcast address?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The network address is the first address in a subnet (all host bits zero) and identifies the subnet itself. The broadcast address is the last address (all host bits one) and sends packets to every device on the subnet. Neither can be assigned to a device, so usable hosts run from one above the network address to one below the broadcast address."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I calculate the number of hosts in a subnet?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Take 2 to the power of the host bits, then subtract 2. Host bits are 32 minus the prefix, so a /26 has 6 host bits: 2^6 = 64, minus 2 = 62 usable hosts. The two you lose are the network address and the broadcast address. The calculator above does this instantly for any prefix."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics -->
     <script>
@@ -132,7 +190,7 @@
         <section class="hero">
             <div class="badge">🌐 100% Client-Side &mdash; Instant Subnet Parsing</div>
             <h1>Subnet <span class="accent">Calculator</span> &amp; CIDR Analyzer</h1>
-            <p class="subtitle">Quickly partition IPv4 networks, calculate ranges, total hosts, wildcard masks, and binary layouts.</p>
+            <p class="subtitle">Enter any IP address and CIDR prefix to get the subnet mask, network address, usable host range, broadcast address, wildcard mask, and a binary breakdown. Instant, private, free.</p>
         </section>
 
         <section class="calculator-card">
@@ -227,6 +285,31 @@
                 <li><a href="/tools/password-checker/" style="color:#C2410C;">Password Strength Checker</a> &mdash; Evaluate system credentials securely.</li>
                 <li><a href="/guides/" style="color:#C2410C;">Read CyberScryb Network Architecture Guides</a></li>
             </ul>
+        </section>
+
+        <!-- How to use -->
+        <section style="max-width:760px; margin:2rem auto; padding:0 1.5rem; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.75;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">How to Use This Subnet Calculator</h2>
+            <ol style="padding-left:1.5rem; margin-bottom:1.5rem;">
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Enter an IP address.</strong> Any IPv4 address works, for example 192.168.1.100. It does not need to be the network address; the tool masks it automatically.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Pick a CIDR prefix.</strong> Use the dropdown to select anything from /8 to /32. Common picks: /24 for a LAN, /30 for a point-to-point link, /32 for a single host.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Read the results.</strong> The subnet mask, network address, usable host range, broadcast address, usable host count, and wildcard mask appear instantly, with a binary visualization below.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Plan your subnets.</strong> Borrow bits from the host portion to split a block. A /24 splits into two /25s (126 hosts each), four /26s (62 each), or eight /27s (30 each).</li>
+            </ol>
+
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">Who Uses a Subnet Calculator</h2>
+            <p><strong style="color:var(--text);">Network engineers</strong> use it daily when carving up address space for VLANs, planning new sites, or writing firewall rules. <strong style="color:var(--text);">Students studying for CCNA or Network+</strong> use it to check their manual subnetting homework. <strong style="color:var(--text);">Homelab builders</strong> use it to segment IoT devices, guests, and servers on separate subnets. <strong style="color:var(--text);">Cloud engineers</strong> reach for it when sizing VPC subnets on AWS, Azure, or GCP, where picking the wrong prefix means rebuilding the network later.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section style="max-width:760px; margin:2rem auto 3rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:12px; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.7;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.4rem; color:var(--text); text-align:center; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is CIDR notation?</summary><p style="margin:0.6rem 0 0;">CIDR (Classless Inter-Domain Routing) notation writes an IP address followed by a slash and a prefix length, like 192.168.1.0/24. The number counts how many of the 32 bits belong to the network portion. It replaced the old class A, B, and C system in 1993 because fixed classes wasted huge blocks of address space.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">How many usable hosts does a /24 subnet have?</summary><p style="margin:0.6rem 0 0;">256 total addresses, minus the network address and the broadcast address, leaves 254 usable hosts. That is why /24 is the most common size for a single office LAN or VLAN.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is the difference between a subnet mask and a CIDR prefix?</summary><p style="margin:0.6rem 0 0;">They carry the same information in different formats. A subnet mask like 255.255.255.0 in dotted decimal equals CIDR prefix /24, which counts the 24 leading 1-bits in that mask. CIDR is compact; dotted-decimal masks are still common in router configurations.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is a wildcard mask and when do I use it?</summary><p style="margin:0.6rem 0 0;">A wildcard mask is the bitwise inverse of a subnet mask: where the mask has 1s (network bits), the wildcard has 0s. For /24 the wildcard is 0.0.0.255. Cisco access control lists and OSPF network statements use wildcard masks. A 0 bit means the address bit must match; a 1 bit means any value is allowed.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is the difference between the network and broadcast address?</summary><p style="margin:0.6rem 0 0;">The network address is the first address in a subnet (all host bits zero) and identifies the subnet itself. The broadcast address is the last address (all host bits one) and sends packets to every device on the subnet. Neither can be assigned to a device.</p></details>
+            <details style="padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">How do I calculate the number of hosts in a subnet?</summary><p style="margin:0.6rem 0 0;">Take 2 to the power of the host bits, then subtract 2. Host bits are 32 minus the prefix, so a /26 has 6 host bits: 2^6 = 64, minus 2 = 62 usable hosts. The calculator above does this instantly for any prefix.</p></details>
         </section>
     </main>
 

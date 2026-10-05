@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb</title>
-    <meta name="description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
+    <title>WCAG Contrast Checker &mdash; Color Contrast Ratio Test (AA/AAA) | CyberScryb</title>
+    <meta name="description" content="Free WCAG contrast checker: enter a text color and background color to get the exact contrast ratio and see if it passes AA and AAA. One-click auto-fix for failures. No signup.">
     <meta name="keywords"
         content="contrast checker, wcag contrast, color contrast checker, web accessibility, relative luminance, aa aaa standards">
     
@@ -46,7 +46,65 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is a good contrast ratio?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For normal text, aim for at least 4.5:1 to meet WCAG AA, and 7:1 for AAA. Large text and UI components need 3:1 for AA. The ratio runs from 1:1 (identical colors, no contrast) to 21:1 (black on white). Higher is always more readable, especially for low-vision users and in bright light."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between WCAG AA and AAA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AA is the widely required baseline: 4.5:1 for normal text and 3:1 for large text. AAA is the enhanced level: 7:1 for normal text and 4.5:1 for large text. AA is the realistic minimum for general web content and what most regulations reference; AAA is typically reserved for text-dense content aimed at people with low vision."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is the contrast ratio calculated?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The ratio compares the relative luminance of the two colors using the formula (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color and L2 is the darker. Luminance comes from the sRGB values with a gamma correction defined in the WCAG 2.1 spec. The checker above uses the exact same formula as Chrome DevTools, Lighthouse, and axe."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What counts as large text under WCAG?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Large text is at least 18pt (24px) regular, or at least 14pt (about 18.66px) bold. Large text gets the easier thresholds: 3:1 for AA and 4.5:1 for AAA, versus 4.5:1 and 7:1 for normal text."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does passing the contrast ratio guarantee accessibility?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Contrast is one criterion out of many. Color used as the only way to convey meaning (red versus green with no other cue), keyboard focus visibility, and text placed over images all need their own checks. A passing ratio is necessary, not sufficient."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do icons and logos need to pass WCAG contrast?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Icons that convey meaning, like status indicators or navigation chevrons, need 3:1 against their background under WCAG 2.1. Purely decorative icons and brand logos are exempt, but anything the user needs to perceive for the page to work still needs contrast."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics -->
     <script>
@@ -130,7 +188,7 @@
         <section class="hero">
             <div class="badge">🎨 100% Free WCAG Compliance Audit</div>
             <h1>WCAG Color <span class="accent">Contrast</span> Checker</h1>
-            <p class="subtitle">Evaluate and adjust design elements to comply with digital accessibility standards.</p>
+            <p class="subtitle">Enter a text color and a background color to get the exact contrast ratio and see whether it passes WCAG AA and AAA for normal text, large text, and UI components. One click auto-fixes failures.</p>
         </section>
 
         <section class="calculator-card">
@@ -243,6 +301,31 @@
                 <li><a href="/tools/color-palette/" style="color:#C2410C;">Color Palette Generator</a> &mdash; Create beautiful palettes.</li>
                 <li><a href="/guides/" style="color:#C2410C;">Read CyberScryb CSS &amp; Accessibility Design Guides</a></li>
             </ul>
+        </section>
+
+        <!-- How to use -->
+        <section style="max-width:760px; margin:2rem auto; padding:0 1.5rem; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.75;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">How to Check a Color Pair</h2>
+            <ol style="padding-left:1.5rem; margin-bottom:1.5rem;">
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Pick your colors.</strong> Use the color pickers or paste hex codes for the text (foreground) and the background. The ratio updates live as you type.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Read the badges.</strong> Each card shows pass or fail for normal text AA (4.5:1), normal text AAA (7:1), large text AA (3:1), and large text AAA (4.5:1).</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Preview real text.</strong> The sample paragraph and heading below the badges render your exact colors, so you can judge readability with your eyes, not just the numbers.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Auto-fix failures.</strong> Hit "Adjust for AA" or "Adjust for AAA" and the tool walks the foreground color's lightness until it passes, keeping your hue intact.</li>
+            </ol>
+
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">Who Uses a Contrast Checker</h2>
+            <p><strong style="color:var(--text);">Designers</strong> check palette pairs before they ship into a component library, so brand colors never fail an audit later. <strong style="color:var(--text);">Frontend developers</strong> verify text, buttons, and focus states during builds instead of remediating after launch. <strong style="color:var(--text);">QA teams</strong> run contrast as part of accessibility test passes across browsers and devices. <strong style="color:var(--text);">Anyone facing a compliance requirement</strong>, from the European Accessibility Act to a corporate accessibility policy, uses the AA badges as the documented proof a color pair passes.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section style="max-width:760px; margin:2rem auto 3rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:12px; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.7;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.4rem; color:var(--text); text-align:center; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is a good contrast ratio?</summary><p style="margin:0.6rem 0 0;">For normal text, aim for at least 4.5:1 to meet WCAG AA, and 7:1 for AAA. Large text and UI components need 3:1 for AA. The scale runs from 1:1 (identical colors) to 21:1 (black on white). Higher is always more readable, especially for low-vision users and in bright light.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is the difference between WCAG AA and AAA?</summary><p style="margin:0.6rem 0 0;">AA is the widely required baseline: 4.5:1 for normal text and 3:1 for large text. AAA is the enhanced level: 7:1 for normal text and 4.5:1 for large text. AA is the realistic minimum for general web content; AAA suits text-dense content aimed at people with low vision.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">How is the contrast ratio calculated?</summary><p style="margin:0.6rem 0 0;">The ratio compares the relative luminance of the two colors: (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color. Luminance comes from the sRGB values with the gamma correction in the WCAG 2.1 spec. This checker uses the same formula as Chrome DevTools, Lighthouse, and axe.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What counts as large text under WCAG?</summary><p style="margin:0.6rem 0 0;">At least 18pt (24px) regular, or at least 14pt (about 18.66px) bold. Large text gets the easier thresholds: 3:1 for AA and 4.5:1 for AAA, versus 4.5:1 and 7:1 for normal text.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Does passing the contrast ratio guarantee accessibility?</summary><p style="margin:0.6rem 0 0;">No. Contrast is one criterion out of many. Color used as the only way to convey meaning, keyboard focus visibility, and text placed over images all need their own checks. A passing ratio is necessary, not sufficient.</p></details>
+            <details style="padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Do icons and logos need to pass WCAG contrast?</summary><p style="margin:0.6rem 0 0;">Icons that convey meaning, like status indicators or navigation chevrons, need 3:1 against their background. Purely decorative icons and brand logos are exempt, but anything the user needs to perceive for the page to work still needs contrast.</p></details>
         </section>
     </main>
 
