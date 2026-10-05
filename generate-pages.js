@@ -1421,6 +1421,8 @@ function generateSitemap(generatedPages) {
     'caregiver-timesheet',
     'nurse-brain-sheet',
     'bmi-calculator',
+    'salary-converter',
+    'debt-payoff-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1464,6 +1466,8 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-cover-letter',
     'how-to-write-a-resignation-letter',
     'how-to-calculate-bmi',
+    'how-is-hourly-pay-calculated',
+    'debt-snowball-vs-avalanche',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1580,6 +1584,8 @@ function manageRobotsMeta() {
     'caregiver-timesheet',
     'nurse-brain-sheet',
     'bmi-calculator',
+    'salary-converter',
+    'debt-payoff-calculator',
   ]);
 
   const dirsToProcess = [
