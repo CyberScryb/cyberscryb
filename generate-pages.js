@@ -1420,6 +1420,7 @@ function generateSitemap(generatedPages) {
     'blood-sugar-log-generator',
     'caregiver-timesheet',
     'nurse-brain-sheet',
+    'bmi-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1462,6 +1463,7 @@ function generateSitemap(generatedPages) {
     'how-compound-interest-works',
     'how-to-write-a-cover-letter',
     'how-to-write-a-resignation-letter',
+    'how-to-calculate-bmi',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1577,6 +1579,7 @@ function manageRobotsMeta() {
     'blood-sugar-log-generator',
     'caregiver-timesheet',
     'nurse-brain-sheet',
+    'bmi-calculator',
   ]);
 
   const dirsToProcess = [
