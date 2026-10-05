@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator — Check Your Body Mass Index | CyberScryb</title>
+<meta name="description" content="Free BMI calculator: enter your height and weight to get your Body Mass Index, see your weight category, and find your healthy range. No signup, instant results in your browser.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/bmi-calculator/">
+<meta property="og:title" content="BMI Calculator — Check Your Body Mass Index | CyberScryb">
+<meta property="og:description" content="Free BMI calculator: enter height and weight, get your Body Mass Index and weight category instantly. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/bmi-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BMI Calculator — Check Your Body Mass Index | CyberScryb">
+<meta name="twitter:description" content="Free BMI calculator: enter height and weight, get your Body Mass Index and weight category instantly. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20260905dark">
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb BMI Calculator",
+        "url": "https://cyberscryb.com/tools/bmi-calculator/",
+        "description": "Free online BMI calculator: enter your height and weight to get your Body Mass Index, weight category, and healthy weight range, instantly in your browser.",
+        "applicationCategory": "HealthApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "BMI Calculator", "item": "https://cyberscryb.com/tools/bmi-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is a good BMI?", "acceptedAnswer": { "@type": "Answer", "text": "The World Health Organization defines a healthy BMI for adults as 18.5 to 24.9. Below 18.5 is underweight, 25 to 29.9 is overweight, and 30 or above is obese. These cutoffs are a screening starting point, not a diagnosis." }},
+            { "@type": "Question", "name": "How is BMI calculated?", "acceptedAnswer": { "@type": "Answer", "text": "BMI is your weight in kilograms divided by your height in meters squared. In imperial units, divide your weight in pounds by your height in inches squared, then multiply by 703. The calculator above does both automatically." }},
+            { "@type": "Question", "name": "Is BMI accurate?", "acceptedAnswer": { "@type": "Answer", "text": "BMI is a useful screening tool but a rough one. It cannot tell muscle from fat, so athletes can score as overweight while being very lean. It also does not account for age, sex, bone density, or where fat is carried. Doctors use it as a starting point alongside other measures, never as a diagnosis on its own." }},
+            { "@type": "Question", "name": "What BMI is considered obese?", "acceptedAnswer": { "@type": "Answer", "text": "A BMI of 30 or higher is classified as obese for adults, with 30-34.9 class I, 35-39.9 class II, and 40+ class III (severe obesity). These are population-level categories used for screening." }},
+            { "@type": "Question", "name": "Does BMI work the same for everyone?", "acceptedAnswer": { "@type": "Answer", "text": "Not exactly. The standard cutoffs were developed mainly from European populations. Some health authorities use lower thresholds for Asian populations, and BMI is interpreted differently for children and teens (percentiles, not fixed cutoffs), pregnant people, the elderly, and very muscular individuals." }},
+            { "@type": "Question", "name": "Is this BMI calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #f97316; --primary-soft: #fb923c;
+            --primary-glow: rgba(249,115,22,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .bmi-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .bmi-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .bmi-unit-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .bmi-unit-toggle button {
+            flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .bmi-unit-toggle button.is-on { background: var(--primary); border-color: var(--primary); color: #ffedd5; }
+        .bmi-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .bmi-field input {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .bmi-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .bmi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .bmi-row { grid-template-columns: 1fr; } }
+        .bmi-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .bmi-number { font-size: 3rem; font-weight: 800; color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; }
+        .bmi-cat { display: inline-block; margin-top: 0.5rem; padding: 0.35rem 1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; }
+        .bmi-cat.under { background: rgba(56,189,248,0.15); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.4); }
+        .bmi-cat.normal { background: rgba(74,222,128,0.15); color: #86efac; border: 1px solid rgba(74,222,128,0.4); }
+        .bmi-cat.over { background: rgba(251,191,36,0.15); color: #fcd34d; border: 1px solid rgba(251,191,36,0.4); }
+        .bmi-cat.obese { background: rgba(248,113,113,0.15); color: #fca5a5; border: 1px solid rgba(248,113,113,0.4); }
+        .bmi-scale { position: relative; height: 12px; border-radius: 999px; margin: 1.5rem 0 0.5rem;
+            background: linear-gradient(90deg, #38bdf8 0%, #38bdf8 16%, #4ade80 16%, #4ade80 42%, #fbbf24 42%, #fbbf24 58%, #f87171 58%, #f87171 100%); }
+        .bmi-marker { position: absolute; top: -6px; width: 4px; height: 24px; background: #fafafa; border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 6px rgba(0,0,0,0.6); }
+        .bmi-scale-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-faint); margin-bottom: 1rem; }
+        .bmi-range { font-size: 0.95rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6; }
+        .bmi-range strong { color: var(--text); }
+        .bmi-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+    </style>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+
+      if (blacklistedPaths.includes(currentPath)) return;
+
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="bmi-app">
+        <div class="bmi-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                BMI Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">BMI Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Enter your height and weight to get your Body Mass Index, weight category, and healthy range. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="bmi-unit-toggle" role="group" aria-label="Unit system">
+                    <button id="bmi-imperial" class="is-on" type="button">Imperial (ft / lb)</button>
+                    <button id="bmi-metric" type="button">Metric (cm / kg)</button>
+                </div>
+
+                <div id="bmi-imperial-fields">
+                    <div class="bmi-row" style="margin-top:0;">
+                        <div class="bmi-field">
+                            <label for="bmi-ft">Height (feet)</label>
+                            <input id="bmi-ft" type="number" inputmode="numeric" min="1" max="9" step="1" placeholder="e.g. 5" value="5">
+                        </div>
+                        <div class="bmi-field">
+                            <label for="bmi-in">Height (inches)</label>
+                            <input id="bmi-in" type="number" inputmode="decimal" min="0" max="11.99" step="0.5" placeholder="e.g. 9" value="9">
+                        </div>
+                    </div>
+                    <div class="bmi-field" style="margin-top:1rem;">
+                        <label for="bmi-lb">Weight (pounds)</label>
+                        <input id="bmi-lb" type="number" inputmode="decimal" min="1" step="0.5" placeholder="e.g. 160" value="160">
+                    </div>
+                </div>
+
+                <div id="bmi-metric-fields" style="display:none;">
+                    <div class="bmi-row" style="margin-top:0;">
+                        <div class="bmi-field">
+                            <label for="bmi-cm">Height (cm)</label>
+                            <input id="bmi-cm" type="number" inputmode="decimal" min="50" max="275" step="0.5" placeholder="e.g. 175" value="175">
+                        </div>
+                        <div class="bmi-field">
+                            <label for="bmi-kg">Weight (kg)</label>
+                            <input id="bmi-kg" type="number" inputmode="decimal" min="10" step="0.5" placeholder="e.g. 73" value="73">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bmi-result" id="bmi-result" aria-live="polite">
+                    <div class="bmi-number" id="bmi-out">—</div>
+                    <div><span class="bmi-cat normal" id="bmi-cat" style="display:none;"></span></div>
+                    <div class="bmi-scale" id="bmi-scale" style="display:none;">
+                        <div class="bmi-marker" id="bmi-marker"></div>
+                    </div>
+                    <div class="bmi-scale-labels" id="bmi-scale-labels" style="display:none;">
+                        <span>15</span><span>18.5</span><span>25</span><span>30</span><span>40</span>
+                    </div>
+                    <div class="bmi-range" id="bmi-range"></div>
+                    <div class="bmi-note" id="bmi-note">Enter your height and weight to see your BMI.</div>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Calculate BMI</h2>
+                <p>BMI is your weight divided by your height squared. In metric: <strong style="color:var(--text);">BMI = weight (kg) / height (m)<sup>2</sup></strong>. In imperial: <strong style="color:var(--text);">BMI = (weight (lb) / height (in)<sup>2</sup>) &times; 703</strong>.</p>
+                <p>Worked example: someone 5'9" (69 inches) weighing 160 lb. Square the height: 69 &times; 69 = 4,761. Divide weight by that: 160 / 4,761 = 0.0336. Multiply by 703: <strong style="color:var(--text);">23.6</strong>, squarely in the healthy range. The calculator above does this instantly and shows where you land on the scale.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Your BMI Means</h2>
+                <p>The World Health Organization categories for adults: <strong style="color:var(--text);">under 18.5 is underweight, 18.5 to 24.9 is the healthy range, 25 to 29.9 is overweight, and 30 or above is obese</strong> (30-34.9 class I, 35-39.9 class II, 40+ class III). These are screening cutoffs used across population health, not a diagnosis of any individual.</p>
+                <p>The calculator also shows your healthy weight range for your height: the weights that would put your BMI between 18.5 and 24.9. That range is often more useful than the single number, because it gives you a target zone instead of a pass/fail.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What BMI Gets Wrong</h2>
+                <p>BMI cannot tell muscle from fat. A lifter with low body fat can score as overweight; an older adult with little muscle can score as healthy while carrying risky visceral fat. It also ignores where fat sits (belly fat carries more risk than hip fat), and the standard cutoffs were built mainly from European populations. Some health authorities use lower thresholds for Asian populations.</p>
+                <p>Children and teens use BMI percentiles, not fixed cutoffs. Pregnancy, elite athletic training, and significant muscle loss with age all make the standard categories misleading. Doctors treat BMI as a starting screen alongside waist circumference, blood work, and an actual conversation, never as a verdict on its own. For the full picture, read our <a href="/guides/how-to-calculate-bmi/" style="color: var(--primary);">guide to calculating and interpreting BMI</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses a BMI Calculator</h2>
+                <p>People starting a fitness or weight-loss plan use it as a baseline to measure against later. Doctors and nurses record it at checkups as a quick screen. Life and health insurance applications often ask for it. Coaches use it with clients to set realistic targets, and curious searchers just want to know where they stand. Whatever brought you here, the number is a starting point for a conversation, ideally with a professional, not a final answer.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is a good BMI?</summary><p>The World Health Organization defines a healthy BMI for adults as 18.5 to 24.9. Below 18.5 is underweight, 25 to 29.9 is overweight, and 30 or above is obese. These cutoffs are a screening starting point, not a diagnosis.</p></details>
+                <details><summary>How is BMI calculated?</summary><p>BMI is your weight in kilograms divided by your height in meters squared. In imperial units, divide your weight in pounds by your height in inches squared, then multiply by 703. The calculator above does both automatically.</p></details>
+                <details><summary>Is BMI accurate?</summary><p>BMI is a useful screening tool but a rough one. It cannot tell muscle from fat, so athletes can score as overweight while being very lean. It also does not account for age, sex, bone density, or where fat is carried. Doctors use it as a starting point alongside other measures, never as a diagnosis on its own.</p></details>
+                <details><summary>What BMI is considered obese?</summary><p>A BMI of 30 or higher is classified as obese for adults, with 30-34.9 class I, 35-39.9 class II, and 40+ class III (severe obesity). These are population-level categories used for screening.</p></details>
+                <details><summary>Does BMI work the same for everyone?</summary><p>Not exactly. The standard cutoffs were developed mainly from European populations. Some health authorities use lower thresholds for Asian populations, and BMI is interpreted differently for children and teens (percentiles, not fixed cutoffs), pregnant people, the elderly, and very muscular individuals.</p></details>
+                <details><summary>Is this BMI calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Find a percent of a number or measure change.</span>
+                    </a>
+                    <a href="/tools/blood-sugar-log-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Blood Sugar Log Generator</strong>
+                        <span style="font-size:0.85rem;">Printable glucose tracking sheets.</span>
+                    </a>
+                    <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
+                        <span style="font-size:0.85rem;">Plan spending, including health costs.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Formulas, worked examples, category tables, and what BMI misses.</p>
+                <a href="/guides/how-to-calculate-bmi/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#ffedd5;font-weight:700;border-radius:10px;text-decoration:none;">Read the BMI Guide</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20260905dark"></script>
+    <script>
+    (function () {
+        "use strict";
+        var imperial = true;
+
+        var impBtn = document.getElementById("bmi-imperial");
+        var metBtn = document.getElementById("bmi-metric");
+        var impFields = document.getElementById("bmi-imperial-fields");
+        var metFields = document.getElementById("bmi-metric-fields");
+
+        var ftEl = document.getElementById("bmi-ft");
+        var inEl = document.getElementById("bmi-in");
+        var lbEl = document.getElementById("bmi-lb");
+        var cmEl = document.getElementById("bmi-cm");
+        var kgEl = document.getElementById("bmi-kg");
+
+        var outEl = document.getElementById("bmi-out");
+        var catEl = document.getElementById("bmi-cat");
+        var scaleEl = document.getElementById("bmi-scale");
+        var scaleLabels = document.getElementById("bmi-scale-labels");
+        var markerEl = document.getElementById("bmi-marker");
+        var rangeEl = document.getElementById("bmi-range");
+        var noteEl = document.getElementById("bmi-note");
+
+        function category(bmi) {
+            if (bmi < 18.5) return { label: "Underweight", cls: "under" };
+            if (bmi < 25) return { label: "Healthy weight", cls: "normal" };
+            if (bmi < 30) return { label: "Overweight", cls: "over" };
+            return { label: "Obese", cls: "obese" };
+        }
+
+        function showEmpty(msg) {
+            outEl.textContent = "—";
+            catEl.style.display = "none";
+            scaleEl.style.display = "none";
+            scaleLabels.style.display = "none";
+            rangeEl.textContent = "";
+            noteEl.textContent = msg;
+        }
+
+        function calc() {
+            var heightM, weightKg, healthyUnit;
+
+            if (imperial) {
+                var ft = parseFloat(ftEl.value), inch = parseFloat(inEl.value), lb = parseFloat(lbEl.value);
+                if (isNaN(ft) && isNaN(inch) && isNaN(lb)) { showEmpty("Enter your height and weight to see your BMI."); return; }
+                var totalIn = (isNaN(ft) ? 0 : ft) * 12 + (isNaN(inch) ? 0 : inch);
+                if (!(totalIn > 0) || isNaN(lb) || lb <= 0) { showEmpty("Enter a valid height and weight to see your BMI."); return; }
+                if (totalIn > 120 || lb > 1500) { showEmpty("Those numbers look off. Double-check your height and weight."); return; }
+                heightM = totalIn * 0.0254;
+                weightKg = lb * 0.453592;
+                healthyUnit = "lb";
+            } else {
+                var cm = parseFloat(cmEl.value), kg = parseFloat(kgEl.value);
+                if (isNaN(cm) && isNaN(kg)) { showEmpty("Enter your height and weight to see your BMI."); return; }
+                if (!(cm > 0) || isNaN(kg) || kg <= 0) { showEmpty("Enter a valid height and weight to see your BMI."); return; }
+                if (cm > 300 || kg > 700) { showEmpty("Those numbers look off. Double-check your height and weight."); return; }
+                heightM = cm / 100;
+                weightKg = kg;
+                healthyUnit = "kg";
+            }
+
+            var bmi = weightKg / (heightM * heightM);
+            if (!isFinite(bmi) || bmi <= 0 || bmi > 100) { showEmpty("Those numbers look off. Double-check your height and weight."); return; }
+
+            var cat = category(bmi);
+            outEl.textContent = bmi.toFixed(1);
+            catEl.textContent = cat.label;
+            catEl.className = "bmi-cat " + cat.cls;
+            catEl.style.display = "inline-block";
+
+            var lo = 18.5 * heightM * heightM, hi = 24.9 * heightM * heightM;
+            if (healthyUnit === "lb") { lo = lo / 0.453592; hi = hi / 0.453592; }
+            rangeEl.innerHTML = "Healthy weight for your height: <strong>" + lo.toFixed(0) + "–" + hi.toFixed(0) + " " + healthyUnit + "</strong> (BMI 18.5–24.9).";
+
+            var clamped = Math.min(Math.max(bmi, 15), 40);
+            var pct = ((clamped - 15) / (40 - 15)) * 100;
+            markerEl.style.left = pct + "%";
+            scaleEl.style.display = "block";
+            scaleLabels.style.display = "flex";
+
+            noteEl.textContent = "BMI is a screening tool, not a diagnosis. Muscle, age, and body composition all affect what it means for you.";
+        }
+
+        function setUnits(isImperial) {
+            imperial = isImperial;
+            impBtn.classList.toggle("is-on", isImperial);
+            metBtn.classList.toggle("is-on", !isImperial);
+            impFields.style.display = isImperial ? "block" : "none";
+            metFields.style.display = isImperial ? "none" : "block";
+            calc();
+        }
+
+        impBtn.addEventListener("click", function () { setUnits(true); });
+        metBtn.addEventListener("click", function () { setUnits(false); });
+        [ftEl, inEl, lbEl, cmEl, kgEl].forEach(function (el) { el.addEventListener("input", calc); });
+
+        calc();
+    })();
+    </script>
+</body>
+</html>
