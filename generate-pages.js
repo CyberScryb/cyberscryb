@@ -1423,6 +1423,7 @@ function generateSitemap(generatedPages) {
     'bmi-calculator',
     'salary-converter',
     'debt-payoff-calculator',
+    'age-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1468,6 +1469,8 @@ function generateSitemap(generatedPages) {
     'how-to-calculate-bmi',
     'how-is-hourly-pay-calculated',
     'debt-snowball-vs-avalanche',
+    'how-to-calculate-age',
+    'what-is-coast-fire',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1586,6 +1589,7 @@ function manageRobotsMeta() {
     'bmi-calculator',
     'salary-converter',
     'debt-payoff-calculator',
+    'age-calculator',
   ]);
 
   const dirsToProcess = [
