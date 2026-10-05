@@ -19,17 +19,17 @@
   --text-muted: #d4d4d8;
   --text-faint: #a1a1aa;
 
-  /* Brand — glowing radiant flame */
-  --primary: #f97316;
-  --primary-hover: #ea580c;
-  --primary-soft: #fb923c;
+  /* Brand — signal red on obsidian */
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --primary-soft: #f87171;
   --primary-ink: #09090b;
-  --primary-glow: rgba(249, 115, 22, 0.25);
-  --primary-rgb: 249, 115, 22;
+  --primary-glow: rgba(239, 68, 68, 0.25);
+  --primary-rgb: 239, 68, 68;
 
   /* Status / CTA link */
-  --cta-link: #fb923c;
-  --badge-new-bg: #f97316;
+  --cta-link: #f87171;
+  --badge-new-bg: #ef4444;
   --badge-new-fg: #09090b;
 
   /* Accent — electric sky */
@@ -108,9 +108,9 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.12), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(239, 68, 68, 0.12), transparent 60%),
     radial-gradient(ellipse 50% 40% at 100% 20%, rgba(56, 189, 248, 0.06), transparent 50%),
-    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(249, 115, 22, 0.05), transparent 50%);
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(239, 68, 68, 0.05), transparent 50%);
 }
 body::after {
   content: '';
@@ -118,11 +118,7 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(
-    ellipse 90% 80% at 50% 45%,
-    transparent 42%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
+  background: radial-gradient(ellipse 90% 80% at 50% 45%, transparent 42%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -171,7 +167,7 @@ p {
 }
 
 a {
-  color: var(--primary); /* primary-soft #E05A2B fails AA on white (~3.7:1) */
+  color: var(--primary); /* primary-soft #dc2626 fails AA on white (~3.7:1) */
   text-decoration: none;
   transition: color var(--transition);
 }
@@ -298,12 +294,12 @@ header {
 }
 .nav-menu a:hover {
   color: var(--primary-hover);
-  background: rgba(194, 65, 12, 0.1);
+  background: rgba(185, 28, 28, 0.1);
 }
 .nav-menu a.active {
   color: var(--text);
-  background: rgba(194, 65, 12, 0.14);
-  box-shadow: inset 0 0 0 1px rgba(194, 65, 12, 0.22);
+  background: rgba(185, 28, 28, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(185, 28, 28, 0.22);
 }
 
 /* Curator Prime — visible cross-sell (not demoted under Blog) */
@@ -361,7 +357,7 @@ header {
     background var(--transition),
     transform var(--transition),
     box-shadow var(--transition);
-  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.28);
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.28);
 }
 .cta-button:hover,
 .btn-primary:hover,
@@ -373,7 +369,7 @@ header {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
     0 12px 32px rgba(22, 20, 17, 0.14),
-    0 0 28px rgba(249, 115, 22, 0.3);
+    0 0 28px rgba(239, 68, 68, 0.3);
 }
 
 /* Amber attention — rare pay moments */
@@ -400,7 +396,7 @@ header {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.25) inset,
     0 8px 24px rgba(22, 20, 17, 0.12),
-    0 0 28px rgba(249, 115, 22, 0.18);
+    0 0 28px rgba(239, 68, 68, 0.18);
 }
 .cta-attention:hover,
 .btn-attention:hover {
@@ -410,7 +406,7 @@ header {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.2) inset,
     0 12px 32px rgba(22, 20, 17, 0.14),
-    0 0 36px rgba(194, 65, 12, 0.25);
+    0 0 36px rgba(185, 28, 28, 0.25);
 }
 
 .cta-secondary,
@@ -437,10 +433,10 @@ header {
 .cta-secondary:hover,
 .btn-secondary:hover {
   border-color: rgba(224, 90, 43, 0.65);
-  background: rgba(249, 115, 22, 0.18);
+  background: rgba(239, 68, 68, 0.18);
   color: var(--primary-soft);
   box-shadow:
-    0 0 0 1px rgba(194, 65, 12, 0.2),
+    0 0 0 1px rgba(185, 28, 28, 0.2),
     0 8px 20px rgba(22, 20, 17, 0.08);
 }
 
@@ -496,15 +492,15 @@ header {
 .blog-card:focus-within,
 .tool-card:focus-within,
 .glass-card:focus-within {
-  border-color: rgba(249, 115, 22, 0.6);
-  outline: 2px solid rgba(249, 115, 22, 0.4);
+  border-color: rgba(239, 68, 68, 0.6);
+  outline: 2px solid rgba(239, 68, 68, 0.4);
   outline-offset: 3px;
   transform: translateY(-4px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, var(--card) 100%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.1) inset,
-    0 0 0 1px rgba(249, 115, 22, 0.4),
-    0 0 24px rgba(249, 115, 22, 0.25),
+    0 0 0 1px rgba(239, 68, 68, 0.4),
+    0 0 24px rgba(239, 68, 68, 0.25),
     0 22px 48px rgba(0, 0, 0, 0.6);
 }
 
@@ -620,12 +616,12 @@ header {
   padding: 0.25rem 0.55rem;
   border-radius: 999px;
   margin-bottom: 0.65rem;
-  background: rgba(249, 115, 22, 0.28);
+  background: rgba(239, 68, 68, 0.28);
   color: var(--primary-soft);
-  border: 1px solid rgba(194, 65, 12, 0.5);
+  border: 1px solid rgba(185, 28, 28, 0.5);
 }
 .tool-badge.new {
-  background: rgba(194, 65, 12, 0.22);
+  background: rgba(185, 28, 28, 0.22);
   color: var(--primary-soft);
 }
 /* Rare: money / urgency chip — amber */
@@ -638,9 +634,9 @@ header {
   padding: 0.25rem 0.55rem;
   border-radius: 999px;
   margin-bottom: 0.65rem;
-  background: rgba(194, 65, 12, 0.15);
-  color: #ea580c;
-  border: 1px solid rgba(194, 65, 12, 0.4);
+  background: rgba(185, 28, 28, 0.15);
+  color: #dc2626;
+  border: 1px solid rgba(185, 28, 28, 0.4);
 }
 
 /* Compact price labels — prefer these over long free/Pro essays */
@@ -665,9 +661,9 @@ header {
   font-weight: 700;
 }
 .tag-pro {
-  background: rgba(194, 65, 12, 0.14);
+  background: rgba(185, 28, 28, 0.14);
   color: var(--primary-hover);
-  border: 1px solid rgba(194, 65, 12, 0.35);
+  border: 1px solid rgba(185, 28, 28, 0.35);
   font-weight: 800;
 }
 
@@ -736,8 +732,8 @@ header {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--primary-soft);
-  background: rgba(249, 115, 22, 0.12);
-  border: 1px solid rgba(249, 115, 22, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   margin-bottom: 1.25rem;
@@ -780,8 +776,8 @@ header {
   height: 52px;
   margin-bottom: 0.85rem;
   border-radius: 12px;
-  background: rgba(249, 115, 22, 0.12);
-  border: 1px solid rgba(249, 115, 22, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   color: var(--primary-soft);
   flex-shrink: 0;
 }
@@ -790,7 +786,7 @@ header {
 }
 .blog-card:hover .tool-icon,
 .blog-card:focus-within .tool-icon {
-  background: rgba(194, 65, 12, 0.22);
+  background: rgba(185, 28, 28, 0.22);
   border-color: rgba(224, 90, 43, 0.55);
   color: #fdba74;
 }
@@ -822,7 +818,7 @@ header {
   padding: 3rem 0;
 }
 .pro-band-inner {
-  background: linear-gradient(145deg, rgba(194, 65, 12, 0.06) 0%, transparent 45%), var(--card);
+  background: linear-gradient(145deg, rgba(185, 28, 28, 0.06) 0%, transparent 45%), var(--card);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border: 1px solid var(--border);
@@ -861,7 +857,7 @@ header {
 .pro-band-card {
   text-align: center;
   padding: 1.5rem;
-  background: linear-gradient(180deg, rgba(194, 65, 12, 0.04), transparent 50%), var(--card);
+  background: linear-gradient(180deg, rgba(185, 28, 28, 0.04), transparent 50%), var(--card);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   box-shadow:
@@ -1181,7 +1177,7 @@ select {
 }
 .filter-btn:hover {
   color: var(--text);
-  background: rgba(194, 65, 12, 0.08);
+  background: rgba(185, 28, 28, 0.08);
 }
 .filter-btn.active {
   background: var(--primary);
@@ -1230,8 +1226,8 @@ select {
   opacity: 0;
   background: radial-gradient(
     circle,
-    rgba(194, 65, 12, 0.08) 0%,
-    rgba(194, 65, 12, 0.05) 35%,
+    rgba(185, 28, 28, 0.08) 0%,
+    rgba(185, 28, 28, 0.05) 35%,
     transparent 70%
   );
   transition: opacity 0.35s ease;
@@ -1261,8 +1257,8 @@ select {
   clip-path: inset(0 round var(--radius));
   background: radial-gradient(
     480px circle at var(--spot-x) var(--spot-y),
-    rgba(194, 65, 12, 0.1) 0%,
-    rgba(194, 65, 12, 0.06) 28%,
+    rgba(185, 28, 28, 0.1) 0%,
+    rgba(185, 28, 28, 0.06) 28%,
     transparent 55%
   );
   z-index: 1;
@@ -1324,7 +1320,7 @@ input[type='email']:hover,
 input[type='text']:hover,
 textarea:hover,
 select:hover {
-  border-color: rgba(194, 65, 12, 0.35);
+  border-color: rgba(185, 28, 28, 0.35);
 }
 input[type='email']:focus-visible,
 input[type='text']:focus-visible,
@@ -1362,7 +1358,7 @@ select:focus-visible,
 .blog-card.card-accent:hover::before {
   opacity: 1;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary), rgba(194, 65, 12, 0.5), transparent 90%);
+  background: linear-gradient(90deg, var(--primary), rgba(185, 28, 28, 0.5), transparent 90%);
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -1401,7 +1397,7 @@ select:focus-visible,
   }
   .nav-menu a:hover,
   .nav-menu a.active {
-    background: rgba(194, 65, 12, 0.08);
+    background: rgba(185, 28, 28, 0.08);
     color: var(--primary) !important;
   }
 
@@ -1475,15 +1471,15 @@ select:focus-visible,
   margin-bottom: 0.65rem;
   width: fit-content;
   border: 1px solid transparent;
-  background: rgba(194, 65, 12, 0.14);
+  background: rgba(185, 28, 28, 0.14);
   color: var(--primary-hover);
 }
 /* Fixed category → hue map (guides + blog + tools copy) */
 .blog-tag[data-cat='life'],
 .blog-tag[data-cat='hardship'] {
-  background: rgba(194, 65, 12, 0.14);
-  color: #fb923c;
-  border-color: rgba(249, 115, 22, 0.28);
+  background: rgba(185, 28, 28, 0.14);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.28);
 }
 .blog-tag[data-cat='appeals'],
 .blog-tag[data-cat='appeal'] {
@@ -1498,14 +1494,14 @@ select:focus-visible,
   border-color: rgba(109, 40, 217, 0.28);
 }
 .blog-tag[data-cat='caregiver'] {
-  background: rgba(194, 65, 12, 0.12);
+  background: rgba(185, 28, 28, 0.12);
   color: #fdba74;
-  border-color: rgba(249, 115, 22, 0.3);
+  border-color: rgba(239, 68, 68, 0.3);
 }
 .blog-tag[data-cat='ai'] {
-  background: rgba(194, 65, 12, 0.16);
+  background: rgba(185, 28, 28, 0.16);
   color: #fdba74;
-  border-color: rgba(194, 65, 12, 0.32);
+  border-color: rgba(185, 28, 28, 0.32);
 }
 .blog-tag[data-cat='developer'],
 .blog-tag[data-cat='dev'] {
@@ -1565,7 +1561,7 @@ select:focus-visible,
   background: linear-gradient(
     90deg,
     var(--primary) 0%,
-    rgba(194, 65, 12, 0.45) 55%,
+    rgba(185, 28, 28, 0.45) 55%,
     transparent 100%
   );
   opacity: 1;
@@ -1681,7 +1677,7 @@ section.ads-slot,
   color: var(--text-muted);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  background: rgba(194, 65, 12, 0.03);
+  background: rgba(185, 28, 28, 0.03);
 }
 .blog-empty.is-visible {
   display: block;
@@ -1699,7 +1695,7 @@ section.ads-slot,
   gap: 1.25rem;
   padding: 1.5rem 1.65rem;
   background:
-    linear-gradient(145deg, rgba(249, 115, 22, 0.18) 0%, transparent 55%), var(--card-glass);
+    linear-gradient(145deg, rgba(239, 68, 68, 0.18) 0%, transparent 55%), var(--card-glass);
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow:
@@ -1779,4 +1775,325 @@ section.ads-slot,
 .tool-guide-content a:hover,
 .content-section a:hover {
   color: var(--primary-hover);
+}
+
+/* Homepage task discovery. */
+.intent-hero {
+  padding: 5.5rem 0 4rem;
+  text-align: center;
+}
+.intent-hero .hero-eyebrow {
+  margin-bottom: 1rem;
+}
+.intent-hero h1 {
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  font-size: clamp(2.6rem, 6vw, 4.7rem);
+  letter-spacing: -0.04em;
+}
+.intent-hero .lead {
+  max-width: 690px;
+  margin: 0 auto 2rem;
+  font-size: 1.15rem;
+}
+.intent-finder {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: left;
+}
+.intent-finder-box {
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.6rem;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+}
+.intent-finder input {
+  flex: 1;
+  min-width: 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 1.05rem;
+  padding: 1rem;
+}
+.intent-finder button {
+  border: 0;
+  cursor: pointer;
+}
+.intent-examples {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.intent-example {
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+}
+.intent-example:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+.finder-result {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--primary);
+  border-radius: 14px;
+  background: var(--card);
+  text-align: left;
+}
+.finder-result.show {
+  display: block;
+}
+.finder-result strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.finder-result a {
+  font-weight: 700;
+}
+.intent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.intent-card {
+  display: block;
+  padding: 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+.intent-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.intent-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.65rem;
+}
+.intent-card h3 {
+  margin-bottom: 0.35rem;
+}
+.intent-card p {
+  margin: 0;
+}
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.workflow-card {
+  padding: 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, var(--card), var(--bg-elevated));
+}
+.workflow-card ol {
+  margin: 0.8rem 0 0 1.2rem;
+  color: var(--text-muted);
+}
+.workflow-card li {
+  margin: 0.25rem 0;
+}
+.section-kicker {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  font-weight: 800;
+}
+.continue-box {
+  display: none;
+  margin: 0 auto 1.5rem;
+  max-width: 760px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--card);
+  text-align: left;
+}
+.continue-box.show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.continue-box p {
+  margin: 0;
+}
+.continue-box a {
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .intent-grid,
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+  .intent-finder-box {
+    flex-direction: column;
+  }
+  .intent-finder button {
+    width: 100%;
+  }
+  .continue-box.show {
+    display: block;
+  }
+  .continue-box a {
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Free-tool UX: readable results, clear focus, comfortable touch targets. */
+.cs-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100001;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--bg);
+  transform: translateY(-160%);
+}
+.cs-skip-link:focus {
+  transform: translateY(0);
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 4px;
+}
+.intent-hero {
+  padding: clamp(2.5rem, 6vw, 5rem) 0 3rem;
+}
+.intent-hero h1 {
+  text-wrap: balance;
+}
+.intent-hero .lead {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.intent-card {
+  min-width: 0;
+  border-color: var(--border-strong);
+}
+.intent-card p,
+.workflow-card li,
+.blog-card p {
+  line-height: 1.65;
+}
+.output-content,
+#output-text,
+#output-content,
+#output-proposal,
+#output-draft,
+#output-interview {
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.hz-output,
+.output-content {
+  user-select: text;
+}
+.filter-btn,
+.copy-btn,
+.hz-mode,
+.intent-example,
+.hamburger {
+  min-height: 44px;
+}
+.filter-btn.active {
+  border-color: var(--primary-soft);
+}
+.nav-menu a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.blog-card,
+.tool-card,
+.glass-card {
+  min-width: 0;
+}
+.search-wrapper input {
+  min-height: 52px;
+}
+@media (max-width: 760px) {
+  .intent-hero h1 {
+    font-size: clamp(2.1rem, 9vw, 3rem);
+    line-height: 1.12;
+  }
+  .intent-hero .lead {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .intent-finder input {
+    font-size: 16px;
+    padding: 14px;
+  }
+  .intent-card {
+    padding: 20px;
+  }
+  .section-head {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-links {
+    gap: 12px 20px;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keep reset buttons and empty sections hidden across layout styles. */
+[hidden] {
+  display: none !important;
+}
+#tool-filter-reset {
+  margin-top: 12px;
+}
+
+.cs-example-btn {
+  min-height: 44px;
+  margin-left: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--primary-soft);
+  cursor: pointer;
+}
+.cs-example-btn:hover {
+  background: var(--card);
+  border-color: var(--primary-soft);
 }

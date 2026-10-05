@@ -13,7 +13,20 @@
     if (!value) return '';
     var parts = value.split('-');
     if (parts.length !== 3) return value;
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     var monthIndex = parseInt(parts[1], 10) - 1;
     return (months[monthIndex] || parts[1]) + ' ' + parts[2] + ', ' + parts[0];
   }
@@ -34,7 +47,9 @@
     var recipient = el('hr-recipient').value.trim() || '[Name / Facility]';
     var purpose = el('hr-purpose').value.trim() || 'personal records / coordination of care';
     var other = el('hr-other').value.trim();
-    var expire = el('hr-expire').value ? formatDate(el('hr-expire').value) : addYears(new Date().toISOString().slice(0, 10), 1);
+    var expire = el('hr-expire').value
+      ? formatDate(el('hr-expire').value)
+      : addYears(new Date().toISOString().slice(0, 10), 1);
     var signer = el('hr-signer').value.trim() || '[Patient Name or Legal Representative]';
 
     var records = [];
@@ -69,10 +84,16 @@
     lines.push('4. PURPOSE:');
     lines.push('   ' + purpose);
     lines.push('');
-    lines.push('5. I understand this authorization is voluntary. I may revoke it in writing at any time, except to the extent that action has already been taken in reliance on it.');
-    lines.push('   This authorization expires on: ' + expire + ' (or earlier where required by state law).');
+    lines.push(
+      '5. I understand this authorization is voluntary. I may revoke it in writing at any time, except to the extent that action has already been taken in reliance on it.'
+    );
+    lines.push(
+      '   This authorization expires on: ' + expire + ' (or earlier where required by state law).'
+    );
     lines.push('');
-    lines.push('6. I understand that information disclosed pursuant to this authorization may be re-disclosed by the recipient and may no longer be protected by federal privacy regulations, except as otherwise required by law.');
+    lines.push(
+      '6. I understand that information disclosed pursuant to this authorization may be re-disclosed by the recipient and may no longer be protected by federal privacy regulations, except as otherwise required by law.'
+    );
     lines.push('');
     lines.push('7. A copy of this signed authorization is as valid as the original.');
     lines.push('');
@@ -85,7 +106,9 @@
 
   function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).then(function () { return true; });
+      return navigator.clipboard.writeText(text).then(function () {
+        return true;
+      });
     }
     return new Promise(function (resolve) {
       var ta = document.createElement('textarea');
@@ -113,7 +136,9 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
   }
 
   var out = el('hr-output');
@@ -139,13 +164,17 @@
     out.focus();
     try {
       gtag('event', 'tool_use', { event_category: 'tool', event_label: 'hipaa-release-generator' });
-    } catch { /* analytics optional */ }
+    } catch {
+      /* analytics optional */
+    }
   });
 
   el('hr-copy').addEventListener('click', function () {
     copyText(out.textContent).then(function (ok) {
       out.style.outline = ok ? '2px solid var(--primary)' : '';
-      setTimeout(function () { out.style.outline = ''; }, 900);
+      setTimeout(function () {
+        out.style.outline = '';
+      }, 900);
     });
   });
 

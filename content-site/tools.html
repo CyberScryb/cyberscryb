@@ -30,7 +30,7 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20260905dark">
+    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
     <meta name="google-adsense-account" content="ca-pub-5721233331247292">
 
     <!-- Google Analytics 4 -->
@@ -492,7 +492,7 @@
 
         <div class="container" style="margin-bottom: 1.25rem;">
             <div class="search-wrapper">
-                <input type="text" id="tool-search" placeholder="Search tools…" />
+                <input type="text" id="tool-search" aria-label="Search free tools" placeholder="Search by tool or task…" />
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
             
@@ -501,6 +501,7 @@
                     <button class="filter-btn active" data-category="all">All</button>
                     <button class="filter-btn" data-category="ai">AI Tools</button>
                     <button class="filter-btn" data-category="developer">Developer</button>
+                    <button class="filter-btn" data-category="life">Life Tools</button>
                     <button class="filter-btn" data-category="legal">Legal &amp; Family</button>
                     <button class="filter-btn" data-category="writing">Writing &amp; SEO</button>
                     <button class="filter-btn" data-category="finance">Finance</button>
@@ -1414,16 +1415,12 @@
         </div>
     </footer>
 
-    <script src="/js/script.js?v=20260905dark"></script>
+    <script src="/js/script.js?v=20261005ux1"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Catalog + life sections filter; Popular (pinned) always stays visible
-        const cards = document.querySelectorAll('.posts-grid[data-filter-scope="catalog"] .blog-card, .posts-grid.reveal-stagger .blog-card, section.section .posts-grid .blog-card');
-        const filterableCards = Array.from(document.querySelectorAll('.posts-grid .blog-card')).filter(card => {
-            const grid = card.closest('.posts-grid');
-            return !grid || grid.getAttribute('data-filter-scope') !== 'pinned';
-        });
-        
+        // Every section follows the same search and category selection.
+        const filterableCards = Array.from(document.querySelectorAll('.posts-grid .blog-card'));
+
         // Path slug → categories. Multi-category tools appear in every matching filter.
         // AI = any tool that calls an AI backend (or is labeled AI on the card).
         const categoryMapping = {
@@ -1539,21 +1536,23 @@
                 categories.add('developer');
             }
 
+            if (['legal', 'finance', 'health'].some(c => categories.has(c))) categories.add('life');
             card.setAttribute('data-categories', Array.from(categories).join(' '));
             card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
         }
         filterableCards.forEach(assignCategories);
-        // Still tag pinned cards for deep-links but do not hide them when filtering
-        document.querySelectorAll('.posts-grid[data-filter-scope="pinned"] .blog-card').forEach(assignCategories);
+
 
         const searchInput = document.getElementById('tool-search');
         const filterButtons = document.querySelectorAll('.filter-btn');
 
+        filterButtons.forEach(btn => btn.setAttribute('aria-pressed', String(btn.classList.contains('active'))));
         let currentCategory = 'all';
         let searchQuery = '';
 
         function filterTools() {
             let visibleCount = 0;
+            const visibleLinks = new Set();
             filterableCards.forEach(card => {
                 const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
                 const desc = (card.querySelector('p')?.textContent || '').toLowerCase();
@@ -1566,7 +1565,9 @@
                     card.style.display = '';
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1)';
-                    visibleCount++;
+                    const href = card.querySelector('h3 a')?.getAttribute('href');
+                    visibleLinks.add(href || card);
+                    visibleCount = visibleLinks.size;
                 } else {
                     card.style.opacity = '0';
                     card.style.transform = 'scale(0.95)';
@@ -1574,18 +1575,15 @@
                 }
             });
 
-            // Hide empty Life Tools section only (Popular stays pinned)
+            // Hide empty sections so their headings never imply missing results.
             document.querySelectorAll('main .section').forEach(section => {
-                const head = section.querySelector('h2');
-                if (!head || !head.textContent.toLowerCase().includes('life')) return;
                 const grid = section.querySelector('.posts-grid');
                 if (!grid) return;
-                const anyVisible = Array.from(grid.querySelectorAll('.blog-card')).some(c => c.style.display !== 'none');
-                section.style.display = anyVisible || (currentCategory === 'all' && !searchQuery) ? '' : (anyVisible ? '' : 'none');
-                if (!anyVisible && (currentCategory !== 'all' || searchQuery)) section.style.display = 'none';
-                else if (anyVisible) section.style.display = '';
+                section.hidden = !Array.from(grid.querySelectorAll('.blog-card')).some(c => c.style.display !== 'none');
             });
 
+            const resetButton = document.getElementById('tool-filter-reset');
+            if (resetButton) resetButton.hidden = currentCategory === 'all' && !searchQuery;
             let countEl = document.getElementById('tool-filter-count');
             if (!countEl && searchInput) {
                 countEl = document.createElement('p');
@@ -1596,7 +1594,7 @@
             }
             if (countEl) {
                 if (currentCategory !== 'all' || searchQuery) {
-                    countEl.textContent = visibleCount + ' tool' + (visibleCount === 1 ? '' : 's') + ' shown';
+                    countEl.textContent = visibleCount ? visibleCount + ' tool' + (visibleCount === 1 ? '' : 's') + ' shown' : 'No tools match. Try a shorter search or clear the filters.';
                     countEl.hidden = false;
                 } else {
                     countEl.hidden = true;
@@ -1611,10 +1609,25 @@
             });
         }
 
+        const reset = document.createElement('button');
+        reset.type = 'button';
+        reset.className = 'filter-btn';
+        reset.id = 'tool-filter-reset';
+        reset.textContent = 'Clear filters';
+        reset.hidden = true;
+        document.querySelector('.filter-dock-wrapper')?.appendChild(reset);
+        reset.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            document.querySelector('.filter-btn[data-category="all"]').click();
+            searchInput.focus();
+        });
+
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                filterButtons.forEach(b => b.classList.remove('active'));
+                filterButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 currentCategory = btn.getAttribute('data-category') || 'all';
                 filterTools();
             });
@@ -1622,7 +1635,8 @@
 
         // Deep-link: /tools/?cat=ai or #ai
         const params = new URLSearchParams(window.location.search);
-        const catParam = params.get('cat') || (location.hash || '').replace('#', '');
+        const requestedCategory = params.get('cat') || (location.hash || '').replace('#', '');
+        const catParam = requestedCategory;
         if (catParam) {
             const matchBtn = Array.from(filterButtons).find(b => b.getAttribute('data-category') === catParam);
             if (matchBtn) matchBtn.click();

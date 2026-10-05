@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('company').value = 'Northwind Traders';
       document.getElementById('last-day').value = 'October 18, 2026';
       document.getElementById('reason').value = 'new opportunity';
-      toolInput.value = "Happy to document my current projects and train whoever takes over the client accounts during my last two weeks. Grateful for the mentorship here — especially the chance to lead the warehouse rollout last year.";
+      toolInput.value =
+        'Happy to document my current projects and train whoever takes over the client accounts during my last two weeks. Grateful for the mentorship here — especially the chance to lead the warehouse rollout last year.';
       toolInput.dispatchEvent(new Event('input'));
     });
   }

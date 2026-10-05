@@ -1,8 +1,8 @@
 name: Tests
 
 on:
-  push:
-    branches: [main]
+  workflow_call:
+  workflow_dispatch:
   pull_request:
     branches: [main]
 
@@ -14,14 +14,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
       - run: npm ci
         working-directory: ./functions
-      - run: npm ci
-        working-directory: ./v2
-      - run: npx jest --verbose --coverage
+      - run: npx jest --verbose --coverage --runInBand
 
   lint:
     name: Lint (ESLint)
@@ -30,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
       - run: npm run lint
@@ -42,10 +40,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
-      - run: npm run format -- --check
+      - run: npm run format:check
 
   typecheck:
     name: TypeCheck (TypeScript)
@@ -54,7 +52,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - run: npm ci
         working-directory: ./v2
@@ -79,7 +77,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - uses: actions/setup-python@v5
         with:
@@ -94,7 +92,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - uses: actions/setup-python@v5
         with:
@@ -110,7 +108,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       - uses: actions/setup-python@v5
         with:

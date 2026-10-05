@@ -38,7 +38,9 @@
 
   function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).then(function () { return true; });
+      return navigator.clipboard.writeText(text).then(function () {
+        return true;
+      });
     }
     return new Promise(function (resolve) {
       var ta = document.createElement('textarea');
@@ -66,7 +68,9 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
   }
 
   var out = el('ns-output');
@@ -77,13 +81,17 @@
     out.focus();
     try {
       gtag('event', 'tool_use', { event_category: 'tool', event_label: 'nurse-brain-sheet' });
-    } catch { /* analytics optional */ }
+    } catch {
+      /* analytics optional */
+    }
   });
 
   el('ns-copy').addEventListener('click', function () {
     copyText(out.textContent).then(function (ok) {
       out.style.outline = ok ? '2px solid var(--primary)' : '';
-      setTimeout(function () { out.style.outline = ''; }, 900);
+      setTimeout(function () {
+        out.style.outline = '';
+      }, 900);
     });
   });
 

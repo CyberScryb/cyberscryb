@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sampleBtn = document.getElementById('sample-btn');
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
-      toolInput.value = "My health insurance claim (Claim #HC-98214) for an out-of-network MRI was denied on February 12, 2026. The insurer stated the scan was 'not medically necessary'. However, my attending physician Dr. Sarah Chen documented urgent progressive neurological symptoms requiring immediate diagnostic imaging. Prior conservative treatment had failed, and in-network imaging facilities had a 6-week scheduling backlog that posed a severe health risk. I am requesting a full reversal of this denial and coverage under my in-network benefit tier.";
+      toolInput.value =
+        "My health insurance claim (Claim #HC-98214) for an out-of-network MRI was denied on February 12, 2026. The insurer stated the scan was 'not medically necessary'. However, my attending physician Dr. Sarah Chen documented urgent progressive neurological symptoms requiring immediate diagnostic imaging. Prior conservative treatment had failed, and in-network imaging facilities had a 6-week scheduling backlog that posed a severe health risk. I am requesting a full reversal of this denial and coverage under my in-network benefit tier.";
       appealType.value = 'insurance';
       if (appealTypeLabel) appealTypeLabel.textContent = 'Type: Insurance Claim Denial';
       addressedTo.value = 'Aetna Health Claims Appeals Committee';

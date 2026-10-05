@@ -20,7 +20,20 @@
     if (!value) return '';
     var parts = value.split('-');
     if (parts.length !== 3) return value;
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     var monthIndex = parseInt(parts[1], 10) - 1;
     return (months[monthIndex] || parts[1]) + ' ' + parts[2] + ', ' + parts[0];
   }
@@ -61,7 +74,9 @@
 
   function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).then(function () { return true; });
+      return navigator.clipboard.writeText(text).then(function () {
+        return true;
+      });
     }
     return new Promise(function (resolve) {
       var ta = document.createElement('textarea');
@@ -89,7 +104,9 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
   }
 
   var out = el('sn-output');
@@ -115,13 +132,17 @@
     out.focus();
     try {
       gtag('event', 'tool_use', { event_category: 'tool', event_label: 'soap-note-generator' });
-    } catch { /* analytics optional */ }
+    } catch {
+      /* analytics optional */
+    }
   });
 
   el('sn-copy').addEventListener('click', function () {
     copyText(out.textContent).then(function (ok) {
       out.style.outline = ok ? '2px solid var(--primary)' : '';
-      setTimeout(function () { out.style.outline = ''; }, 900);
+      setTimeout(function () {
+        out.style.outline = '';
+      }, 900);
     });
   });
 

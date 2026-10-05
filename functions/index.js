@@ -136,7 +136,8 @@ async function flushAnalytics() {
 }
 
 // Flush analytics every 5 minutes
-setInterval(flushAnalytics, 300000);
+const analyticsFlushTimer = setInterval(flushAnalytics, 300000);
+analyticsFlushTimer.unref();
 
 // Conversion funnel tracking (anonymous)
 async function logConversion(funnel, step, metadata = {}) {
@@ -187,15 +188,9 @@ function getClientIdentifier(req) {
   return `anon:${hash}`;
 }
 
-// Determine user tier based on cookies/headers (no user ID tracking)
-function getUserTier(req) {
-  const subscribed = req.cookies?.cs_subscribed === '1';
-  const premium = req.cookies?.cs_premium === '1' || req.headers['x-premium'] === '1';
-
-  if (premium) return 'premium';
-  if (subscribed) return 'subscribed';
-
-  return 'anonymous';
+// All visitors get the same free access. Old cookies cannot buy a higher quota.
+function getUserTier() {
+  return 'free';
 }
 
 // ─── Rate Limiting & API Quota Protection ──────
@@ -239,12 +234,7 @@ function checkBurstRateLimit(req) {
 // 2. Global & Per-IP Daily Hard Caps (Firestore-backed)
 const GLOBAL_DAILY_CAP = 500;
 
-const FIRESTORE_TIER_CAPS = {
-  anonymous: 10,
-  free: 10,
-  subscribed: 25,
-  premium: 50,
-};
+const FIRESTORE_TIER_CAPS = { free: 10 };
 
 function getDateString(date = new Date()) {
   return date.toISOString().slice(0, 10); // YYYY-MM-DD
@@ -315,7 +305,7 @@ async function checkFirestoreRateLimit(req) {
 
   // Per-IP daily cap — fail OPEN
   try {
-    const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.anonymous;
+    const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.free;
     const ipRef = db.collection('rateLimits').doc(`${ipHash}-${dateStr}`);
     const result = await db.runTransaction(async tx => {
       const snap = await tx.get(ipRef);
@@ -1945,7 +1935,7 @@ exports.privacyStatus = functions.https.onRequest((req, res) => {
         dataRetention: '24 hours maximum',
         ipStorage: 'hashed only, never stored raw',
         userIdTracking: 'disabled',
-        cookies: tier === 'subscribed' || tier === 'premium' ? ['cs_subscribed'] : [],
+        cookies: [],
         thirdPartySharing: 'never',
       },
       rateLimit: rateLimitInfo,
@@ -2536,115 +2526,13 @@ exports.substackBackfill = functions.https.onRequest((req, res) => {
 });
 
 // ─── Pro Unlock — Stripe Session Validator ───────────────────────────────
-// Called by /pro-success page after Stripe redirects with ?session_id=...
-// Validates payment, stores session to prevent reuse, returns ok signal.
+// Retired paid-access endpoint retained so old URLs fail clearly without touching Stripe.
 exports.validateStripeSession = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => {
-    try {
-      const sessionId = req.query.session_id || (req.body && req.body.session_id);
-
-      if (!sessionId || !sessionId.startsWith('cs_')) {
-        return res.status(400).json({ error: 'Invalid session_id' });
-      }
-
-      // Check Firestore — reject replayed sessions
-      const sessionRef = db.collection('pro_sessions').doc(sessionId);
-      const existing = await sessionRef.get();
-      if (existing.exists) {
-        const data = existing.data();
-        // Already validated — still return success so page can set cookie on refresh
-        return res.status(200).json({ ok: true, status: data.status, replayed: true });
-      }
-
-      // Get Stripe secret (functions.config() was removed in firebase-functions v6 — env var only)
-      const stripeSecret = getSecret('STRIPE_SECRET');
-      if (!stripeSecret) {
-        // No Stripe secret configured → fall back to trusting the post-checkout redirect.
-        // Pro is gated by a client-side cookie anyway, so this is a pragmatic unlock, not a
-        // security regression. Setting STRIPE_SECRET automatically restores strict verification.
-        console.warn(
-          '[PRO] No STRIPE_SECRET — unlocking on redirect trust. Set STRIPE_SECRET for strict Stripe verification.'
-        );
-        await sessionRef.set({
-          status: 'redirect_trust',
-          verified: false,
-          validatedAt: FieldValue.serverTimestamp(),
-          paid: null,
-        });
-        await logConversion('pro_unlock', 'redirect_trust', {});
-        return res.status(200).json({ ok: true, status: 'redirect_trust', verified: false });
-      }
-
-      // Call Stripe REST API — no package needed, just https
-      const https = require('https');
-      const stripeRes = await new Promise((resolve, reject) => {
-        const options = {
-          hostname: 'api.stripe.com',
-          path: `/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${stripeSecret}`,
-            'Stripe-Version': '2023-10-16',
-          },
-        };
-        const req2 = https.request(options, r => {
-          let body = '';
-          r.on('data', d => (body += d));
-          r.on('end', () => {
-            try {
-              resolve({ status: r.statusCode, body: JSON.parse(body) });
-            } catch (e) {
-              reject(new Error('Invalid JSON from Stripe'));
-            }
-          });
-        });
-        req2.on('error', reject);
-        req2.setTimeout(15000, () => req2.destroy(new Error('Stripe API request timed out')));
-        req2.end();
-      });
-
-      if (stripeRes.status !== 200) {
-        console.error('[PRO] Stripe API error:', stripeRes.body);
-        return res.status(400).json({ error: 'Could not verify payment' });
-      }
-
-      const session = stripeRes.body;
-      const paid = session.payment_status === 'paid';
-
-      // Store result in Firestore regardless (audit trail)
-      await sessionRef.set({
-        status: session.payment_status,
-        customerEmail: session.customer_details && session.customer_details.email,
-        amountTotal: session.amount_total,
-        currency: session.currency,
-        validatedAt: FieldValue.serverTimestamp(),
-        paid,
-      });
-
-      if (!paid) {
-        return res
-          .status(402)
-          .json({ error: 'Payment not completed', status: session.payment_status });
-      }
-
-      // Log it (anonymous aggregate)
-      await logConversion('pro_unlock', 'stripe_validated', { currency: session.currency });
-      await phCapture(getClientIdentifier(req), 'pro_unlocked', {
-        currency: session.currency,
-        verification_method: 'stripe',
-      });
-
-      return res.status(200).json({ ok: true, status: 'paid' });
-    } catch (err) {
-      // Never leave the request hanging — always send a response so the client never spins forever
-      console.error('[PRO] validateStripeSession failed:', err);
-      if (!res.headersSent) {
-        return res.status(500).json({
-          error:
-            'Could not validate payment. Email support@cyberscryb.com and we will activate you manually.',
-        });
-      }
-    }
+  cors(req, res, () => {
+    res.status(410).json({
+      error: 'Paid access has been retired. All CyberScryb tools are free.',
+      toolsUrl: '/tools/',
+    });
   });
 });
 

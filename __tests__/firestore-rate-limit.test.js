@@ -123,24 +123,24 @@ describe('Firestore-backed rate limiting', () => {
     const req = makeReq({ ip: '10.10.10.10' });
     const dateStr = getDateString();
     const ipHash = getIpHash(req);
-    const cap = FIRESTORE_TIER_CAPS.anonymous;
+    const cap = FIRESTORE_TIER_CAPS.free;
 
-    mockFakeDb.__store.set(`rateLimits/${ipHash}-${dateStr}`, { count: cap, tier: 'anonymous' });
+    mockFakeDb.__store.set(`rateLimits/${ipHash}-${dateStr}`, { count: cap, tier: 'free' });
 
     const result = await checkFirestoreRateLimit(req);
     expect(result.allowed).toBe(false);
     expect(result.reason).toMatch(/daily limit/i);
   });
 
-  test('per-IP tier cap respects subscribed tier', async () => {
+  test('old signup cookies cannot increase the free daily cap', async () => {
     const req = makeReq({ ip: '11.11.11.11', cookies: { cs_subscribed: '1' } });
     const dateStr = getDateString();
     const ipHash = getIpHash(req);
 
-    // Set count just under the subscribed cap - should be allowed
+    // Set count just under the free cap - should be allowed
     mockFakeDb.__store.set(`rateLimits/${ipHash}-${dateStr}`, {
-      count: FIRESTORE_TIER_CAPS.subscribed - 1,
-      tier: 'subscribed',
+      count: FIRESTORE_TIER_CAPS.free - 1,
+      tier: 'free',
     });
 
     const result = await checkFirestoreRateLimit(req);
@@ -148,11 +148,22 @@ describe('Firestore-backed rate limiting', () => {
 
     // Now at cap - should block
     mockFakeDb.__store.set(`rateLimits/${ipHash}-${dateStr}`, {
-      count: FIRESTORE_TIER_CAPS.subscribed,
-      tier: 'subscribed',
+      count: FIRESTORE_TIER_CAPS.free,
+      tier: 'free',
     });
     const result2 = await checkFirestoreRateLimit(req);
     expect(result2.allowed).toBe(false);
+  });
+
+  test('forged premium cookies and headers cannot bypass the shared cap', async () => {
+    const req = makeReq({
+      cookies: { cs_premium: '1', cs_subscribed: '1' },
+      headers: { 'x-premium': '1' },
+    });
+    mockFakeDb.__store.set(`rateLimits/${getIpHash(req)}-${getDateString()}`, {
+      count: FIRESTORE_TIER_CAPS.free,
+    });
+    expect((await checkFirestoreRateLimit(req)).allowed).toBe(false);
   });
 
   test('IP hashing is deterministic and never contains the raw IP', () => {

@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     platformLabel.textContent = 'Platform: ' + platformSelect.value;
   });
 
-    const sampleBtn = document.getElementById('sample-btn');
+  const sampleBtn = document.getElementById('sample-btn');
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
-      toolInput.value = "Full-stack software engineer building open-source developer tooling and web performance utilities. Sourdough baker, long-distance cyclist, based in Brooklyn.";
+      toolInput.value =
+        'Full-stack software engineer building open-source developer tooling and web performance utilities. Sourdough baker, long-distance cyclist, based in Brooklyn.';
       if (platformSelect) {
         platformSelect.value = 'twitter';
         if (platformLabel) platformLabel.textContent = 'Platform: twitter';
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-window.CSAITool.init({
+  window.CSAITool.init({
     toolId: 'bio-generator',
     emptyMessage: 'Please describe yourself so we can write great bios.',
     collectInput: () => toolInput.value.trim(),

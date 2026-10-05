@@ -35,7 +35,7 @@ def run_build():
     dst_dir = os.path.join(root, "public")
     
     print("Step 0: Normalizing relative paths and compliance tags...")
-    subprocess.run(["node", "scripts/normalize-tool-paths.js"], cwd=root)
+    subprocess.run(["node", "scripts/normalize-tool-paths.js"], cwd=root, check=True)
     
     print("\nStep 1: Syncing content-site to public...")
     sync_directories(src_dir, dst_dir)
@@ -47,6 +47,8 @@ def run_build():
         print("Generator warnings/errors:")
         safe_print(res.stderr)
         
+    res.check_returncode()
+
     print("\nStep 3: Bumping version cache buster...")
     # Import bump_version inline or run it directly
     from bump_version import bump_version

@@ -5,8 +5,15 @@ on:
     branches:
       - main
 
+concurrency:
+  group: firebase-main
+  cancel-in-progress: false
+
 jobs:
+  checks:
+    uses: ./.github/workflows/test.yml
   deploy:
+    needs: checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +43,7 @@ jobs:
       - name: Post-deploy smoke test
         run: |
           sleep 15
-          for url in "https://cyberscryb.com/" "https://cyberscryb.com/pro/" "https://cyberscryb.com/tools/humanizer/"; do
+          for url in "https://cyberscryb.com/" "https://cyberscryb.com/tools/" "https://cyberscryb.com/tools/humanizer/"; do
             code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
             echo "$url -> $code"
             if [ "$code" != "200" ]; then

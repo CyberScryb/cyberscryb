@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     langLabel.textContent = 'Language: ' + languageSelect.value;
   });
 
-    const sampleBtn = document.getElementById('sample-btn');
+  const sampleBtn = document.getElementById('sample-btn');
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
-      toolInput.value = "function debounce(func, delay = 300) {\n  let timeoutId;\n  return function (...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => {\n      func.apply(this, args);\n    }, delay);\n  };\n}";
+      toolInput.value =
+        'function debounce(func, delay = 300) {\n  let timeoutId;\n  return function (...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => {\n      func.apply(this, args);\n    }, delay);\n  };\n}';
       if (languageSelect) {
         languageSelect.value = 'javascript';
         if (langLabel) langLabel.textContent = 'Language: javascript';
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-window.CSAITool.init({
+  window.CSAITool.init({
     toolId: 'code-explainer',
     emptyMessage: 'Please paste a code snippet to explain.',
     collectInput: () => toolInput.value.trim(),

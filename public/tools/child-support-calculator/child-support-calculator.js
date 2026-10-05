@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize baseline calculation on load
   calculateBaseline();
 
-    const sampleBtn = document.getElementById('sample-btn');
+  const sampleBtn = document.getElementById('sample-btn');
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
       if (stateEl) stateEl.value = 'Texas';
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-window.CSAITool.init({
+  window.CSAITool.init({
     toolId: 'child-support-calculator',
     emptyMessage: 'Please adjust the income or expense inputs to calculate first.',
     collectInput: () => {

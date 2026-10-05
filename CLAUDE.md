@@ -1,3 +1,10 @@
+# Current Product Direction — October 5, 2026
+
+CyberScryb tools are free, with no accounts, signup gates, or paywalls. Voluntary
+Ko-fi donations support hosting and AI costs and never unlock features. Keep
+capacity protection anonymous and equal for everyone (10 AI requests/IP/day,
+500 globally/day). Historical Pro/pricing notes below are superseded.
+
 # CyberScryb / Lazy Hustler — Working Memory
 
 _Last updated: 2026-09-30_

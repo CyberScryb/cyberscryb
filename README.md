@@ -2,6 +2,10 @@
 
 Source for [cyberscryb.com](https://cyberscryb.com).
 
+Free tools. No accounts, signup gates, or paywalls. Voluntary support through
+[Ko-fi](https://ko-fi.com/cyberscryb) never changes access. AI capacity limits
+apply equally to everyone: 10 requests per IP per UTC day, 500 sitewide.
+
 - `content-site/` - source HTML content
 - `public/` - deployed static output
 - `functions/` - Firebase Cloud Functions

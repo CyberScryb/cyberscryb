@@ -275,24 +275,51 @@ function showCookieConsentBanner() {
   };
 })();
 
-// Mobile Navigation Toggle
+// Keyboard and touch navigation use the same open state.
 document.addEventListener('DOMContentLoaded', function () {
-  const hamburger = document.querySelector('.hamburger');
-  const navMenu = document.querySelector('.nav-menu');
-
-  if (hamburger && navMenu) {
-    hamburger.addEventListener('click', function () {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('active');
+  const toggle = document.querySelector('.hamburger');
+  const menu = document.querySelector('.nav-menu');
+  if (toggle && menu) {
+    if (!menu.id) menu.id = 'cs-nav-menu';
+    toggle.setAttribute('aria-controls', menu.id);
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    function setOpen(open) {
+      menu.classList.toggle('open', open);
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    toggle.addEventListener('click', () =>
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true')
+    );
+    menu
+      .querySelectorAll('a')
+      .forEach(link => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
     });
-
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
+    document.addEventListener('click', event => {
+      if (!menu.contains(event.target) && !toggle.contains(event.target)) setOpen(false);
     });
+  }
+  const main = document.querySelector('main');
+  if (main && !document.querySelector('.cs-skip-link')) {
+    if (!main.id) main.id = 'cs-main';
+    const skip = document.createElement('a');
+    skip.className = 'cs-skip-link';
+    skip.href = '#' + main.id;
+    skip.textContent = 'Skip to content';
+    document.body.prepend(skip);
+    main.tabIndex = -1;
+  }
+  if (!window.CSSupport && !document.querySelector('script[src*="/tools/shared/support.js"]')) {
+    const script = document.createElement('script');
+    script.src = '/tools/shared/support.js?v=20261005';
+    document.body.appendChild(script);
   }
 });
 
@@ -300,7 +327,9 @@ document.addEventListener('DOMContentLoaded', function () {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.getElementById(href.slice(1));
     if (target) {
       target.scrollIntoView({
         behavior: 'smooth',
@@ -309,59 +338,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
-
-// Newsletter form handling
-const newsletterForm = document.querySelector('.newsletter-form');
-if (newsletterForm) {
-  newsletterForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const input = this.querySelector('input[type="email"]');
-    const email = input ? input.value.trim() : '';
-    if (!email) {
-      return;
-    }
-
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Subscribing...';
-    submitBtn.disabled = true;
-
-    let msgEl = this.parentNode.querySelector('.cs-newsletter-msg');
-    if (!msgEl) {
-      msgEl = document.createElement('div');
-      msgEl.className = 'cs-newsletter-msg';
-      msgEl.style.marginTop = '0.75rem';
-      msgEl.style.fontSize = '0.9rem';
-      msgEl.style.textAlign = 'center';
-      this.parentNode.appendChild(msgEl);
-    }
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'homepage' }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        input.value = '';
-        submitBtn.textContent = 'Subscribed!';
-        msgEl.style.color = '#15803d';
-        msgEl.textContent = 'You are on the list! Thank you for subscribing.';
-      } else {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        msgEl.style.color = '#b91c1c';
-        msgEl.textContent = data.error || 'Something went wrong. Please try again.';
-      }
-    } catch (err) {
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
-      msgEl.style.color = '#b91c1c';
-      msgEl.textContent = 'Network error. Please try again.';
-    }
-  });
-}
 
 // Contact form handling
 const contactForm = document.querySelector('.contact-form');

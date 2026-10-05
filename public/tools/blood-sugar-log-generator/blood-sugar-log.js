@@ -31,10 +31,26 @@
     lines.push('Target range: ' + low + ' - ' + high + ' mg/dL  (per your care team)');
     lines.push('');
     lines.push('Day | ' + cols.join(' | '));
-    lines.push('---- + ' + cols.map(function () { return '---------'; }).join(' + '));
+    lines.push(
+      '---- + ' +
+        cols
+          .map(function () {
+            return '---------';
+          })
+          .join(' + ')
+    );
 
     for (var d = 1; d <= days; d++) {
-      lines.push('Day ' + d + ' | ' + cols.map(function () { return '______'; }).join(' | '));
+      lines.push(
+        'Day ' +
+          d +
+          ' | ' +
+          cols
+            .map(function () {
+              return '______';
+            })
+            .join(' | ')
+      );
     }
 
     lines.push('');
@@ -47,7 +63,9 @@
 
   function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).then(function () { return true; });
+      return navigator.clipboard.writeText(text).then(function () {
+        return true;
+      });
     }
     return new Promise(function (resolve) {
       var ta = document.createElement('textarea');
@@ -75,7 +93,9 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
   }
 
   var out = el('bs-output');
@@ -100,14 +120,21 @@
     out.textContent = buildLog();
     out.focus();
     try {
-      gtag('event', 'tool_use', { event_category: 'tool', event_label: 'blood-sugar-log-generator' });
-    } catch { /* analytics optional */ }
+      gtag('event', 'tool_use', {
+        event_category: 'tool',
+        event_label: 'blood-sugar-log-generator',
+      });
+    } catch {
+      /* analytics optional */
+    }
   });
 
   el('bs-copy').addEventListener('click', function () {
     copyText(out.textContent).then(function (ok) {
       out.style.outline = ok ? '2px solid var(--primary)' : '';
-      setTimeout(function () { out.style.outline = ''; }, 900);
+      setTimeout(function () {
+        out.style.outline = '';
+      }, 900);
     });
   });
 

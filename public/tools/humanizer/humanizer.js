@@ -1,11 +1,8 @@
-// Humanizer — rewrite + free/Pro gates + product UX (sample, actions, shortcuts)
+// Humanizer — free full results, sample, actions, and shortcuts
 
 document.addEventListener('DOMContentLoaded', () => {
   const FREE_CHAR_LIMIT = 4000;
-  const FREE_DAILY_LIMIT = 10;
-  const PREVIEW_RATIO = 1.0;
   const TOOL_ID = 'humanizer';
-  const usageKey = 'cs_humanizer_usage';
 
   const SAMPLE_TEXT =
     "In today's rapidly evolving digital landscape, it is imperative that organizations leverage synergies across cross-functional teams in order to drive meaningful outcomes and unlock unprecedented value for stakeholders at scale.";
@@ -25,18 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const wordCount = document.getElementById('word-count');
   const clicheCount = document.getElementById('cliche-count');
   const styleSamples = document.querySelectorAll('.style-sample');
-  const emailGate = document.getElementById('email-gate');
-  const gateForm = document.getElementById('gate-email-form');
-  const gateInput = document.getElementById('gate-email-input');
-  const gateStatus = document.getElementById('gate-status');
-  const gateSubmitBtn = document.getElementById('gate-submit-btn');
   const usageCounter = document.getElementById('usage-counter');
   const charCounter = document.getElementById('char-counter');
   const modeButtons = document.querySelectorAll('.hz-mode');
 
-  let pendingFullText = '';
-  let lastFullText = '';
-  let typeTimer = null;
   let selectedStyle =
     'Casual, conversational, natural human writing with varied sentence length and contractions';
 
@@ -55,34 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedStyle = activeMode.getAttribute('data-style');
   }
 
-  function getCookie(name) {
-    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return v ? v.pop() : '';
-  }
-  function setCookie(name, val, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + days * 86400000);
-    document.cookie =
-      name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
-  }
   function trackEvent(name, params) {
     if (typeof gtag === 'function') gtag('event', name, params);
-  }
-  function getUsageToday() {
-    try {
-      const data = JSON.parse(localStorage.getItem(usageKey) || '{}');
-      const today = new Date().toISOString().slice(0, 10);
-      if (data.date !== today) return { date: today, count: 0 };
-      return data;
-    } catch (e) {
-      return { date: new Date().toISOString().slice(0, 10), count: 0 };
-    }
-  }
-  function incrementUsage() {
-    const usage = getUsageToday();
-    usage.count++;
-    localStorage.setItem(usageKey, JSON.stringify(usage));
-    updateUsageDisplay();
   }
   function updateUsageDisplay() {
     if (!usageCounter) return;
@@ -98,37 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (rewriteBtn) rewriteBtn.classList.toggle('is-over-limit', over);
     if (rewriteBtnMobile) rewriteBtnMobile.classList.toggle('is-over-limit', over);
   }
-  function cancelType() {
-    clearTimeout(typeTimer);
-    typeTimer = null;
-  }
-  function cutPreview(fullText) {
-    const words = fullText.split(/\s+/);
-    // Always show a meaningful chunk of THEIR output (idea 2)
-    const n = Math.max(12, Math.floor(words.length * PREVIEW_RATIO));
-    const preview = words.slice(0, n).join(' ');
-    const end = preview.lastIndexOf('.');
-    return end > preview.length * 0.4 ? preview.slice(0, end + 1) : preview + '…';
-  }
-  function typeInto(text, speed, done) {
-    cancelType();
-    outputContent.innerHTML = '';
-    let i = 0;
-    (function step() {
-      if (i < text.length) {
-        outputContent.innerHTML += escapeHtml(text.charAt(i));
-        i++;
-        typeTimer = setTimeout(step, speed);
-      } else if (done) done();
-    })();
-  }
-  function escapeHtml(ch) {
-    if (ch === '<') return '&lt;';
-    if (ch === '>') return '&gt;';
-    if (ch === '&') return '&amp;';
-    if (ch === '\n') return '<br>';
-    return ch;
-  }
   function showResultActions(show) {
     if (!resultActions) return;
     if (show) resultActions.removeAttribute('hidden');
@@ -137,36 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function getPlainOutput() {
     return ((outputContent && outputContent.innerText) || '').trim();
   }
-  function ensureProButtons(card) {
-    // Paywalls removed - tool is 100% free and unlocked
-    return;
-  }
-  function setGateMode(mode) {
-    if (emailGate) emailGate.classList.add('hidden');
-  }
-  function showPreviewWithGate(fullText, mode) {
-    showFullResult(fullText);
-  }
   function showFullResult(fullText) {
-    pendingFullText = '';
-    lastFullText = fullText;
-    if (emailGate) emailGate.classList.add('hidden');
-    typeInto(fullText, 6, function () {
-      updateStats(fullText);
-      showResultActions(true);
-    });
-  }
-  function unlockFullResult() {
-    if (!pendingFullText) return;
-    const full = pendingFullText;
-    pendingFullText = '';
-    lastFullText = full;
-    if (emailGate) emailGate.classList.add('hidden');
-    typeInto(full, 4, function () {
-      updateStats(full);
-      incrementUsage();
-      showResultActions(true);
-    });
+    outputContent.textContent = fullText;
+    outputContent.style.whiteSpace = 'pre-wrap';
+    updateStats(fullText);
+    showResultActions(true);
+    document.dispatchEvent(
+      new CustomEvent('cs:tool-result', {
+        detail: { toolId: TOOL_ID, outputId: outputContent.id },
+      })
+    );
   }
 
   // Style samples toggle
@@ -254,62 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (gateForm) {
-    gateForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const email = ((gateInput && gateInput.value) || '').trim();
-      if (!email) return;
-      if (gateSubmitBtn) {
-        gateSubmitBtn.disabled = true;
-        gateSubmitBtn.textContent = 'Unlocking…';
-      }
-      try {
-        const res = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source: TOOL_ID + '_gate' }),
-        });
-        const data = await res.json().catch(function () {
-          return {};
-        });
-        if (res.ok) {
-          setCookie('cs_subscribed', '1', 365);
-          if (gateStatus) {
-            gateStatus.style.color = '#3D9B6A';
-            gateStatus.textContent = 'Unlocked — full text below.';
-          }
-          trackEvent('email_captured', { tool_id: TOOL_ID, source: TOOL_ID + '_gate' });
-          setTimeout(unlockFullResult, 500);
-        } else {
-          if (gateStatus) {
-            gateStatus.style.color = '#B91C1C';
-            gateStatus.textContent = data.error || 'Something went wrong.';
-          }
-          if (gateSubmitBtn) {
-            gateSubmitBtn.disabled = false;
-            gateSubmitBtn.textContent = 'Unlock free';
-          }
-        }
-      } catch (err) {
-        if (gateStatus) {
-          gateStatus.style.color = '#B91C1C';
-          gateStatus.textContent = 'Network error. Try again.';
-        }
-        if (gateSubmitBtn) {
-          gateSubmitBtn.disabled = false;
-          gateSubmitBtn.textContent = 'Unlock free';
-        }
-      }
-    });
-  }
-
-  if (emailGate) {
-    const card = emailGate.querySelector('.email-gate-card');
-    if (card) ensureProButtons(card);
-  }
-
   async function runHumanize() {
-    if (!roboticText || !outputContent) return;
+    if (!roboticText || !outputContent || (rewriteBtn && rewriteBtn.disabled)) return;
     const text = roboticText.value.trim();
 
     let sampleBlock = '';
@@ -345,10 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
       rewriteBtnMobile.disabled = true;
       rewriteBtnMobile.classList.add('is-loading');
     }
-    if (emailGate) emailGate.classList.add('hidden');
     showResultActions(false);
     outputContent.innerHTML = '';
-    pendingFullText = '';
+    outputContent.setAttribute('aria-busy', 'true');
 
     if (window.matchMedia('(max-width: 900px)').matches) {
       const out = document.querySelector('.output-panel');
@@ -385,16 +242,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       trackEvent('tool_used', { tool_id: TOOL_ID, user_type: 'free' });
       showFullResult(rewrittenText);
-      incrementUsage();
       updateUsageDisplay();
     } catch (error) {
       console.error('Error:', error);
-      outputContent.innerHTML =
-        '<span style="color:#B91C1C;">Error: ' +
-        (error.message || 'Please try again later.') +
-        '</span>';
+      const errorEl = document.createElement('span');
+      errorEl.style.color = '#B91C1C';
+      errorEl.textContent = 'Error: ' + (error.message || 'Please try again later.');
+      outputContent.replaceChildren(errorEl);
       showResultActions(false);
     } finally {
+      outputContent.setAttribute('aria-busy', 'false');
       if (loadingIndicator) loadingIndicator.classList.add('hidden');
       setTimeout(function () {
         if (rewriteBtn) {
@@ -439,4 +296,3 @@ document.addEventListener('DOMContentLoaded', () => {
   updateUsageDisplay();
   updateCharCounter();
 });
-

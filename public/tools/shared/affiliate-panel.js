@@ -35,8 +35,7 @@
         },
       ],
       triggerSelector: '.result-card, .output-card, #output',
-      disclosure:
-        'Helpful tools: Verified resources for family caregivers and care teams.',
+      disclosure: 'Helpful tools: Verified resources for family caregivers and care teams.',
     },
     'med-administration-log': {
       heading: '💊 Pill Management Made Safer',
@@ -51,8 +50,7 @@
         },
       ],
       triggerSelector: '.result-card, .output-card, #output',
-      disclosure:
-        'Helpful tools: Verified resources for family caregivers and care teams.',
+      disclosure: 'Helpful tools: Verified resources for family caregivers and care teams.',
     },
     'soap-note-generator': {
       heading: '🩻 Clinical Tools for Care Teams',
@@ -73,8 +71,7 @@
         },
       ],
       triggerSelector: '#sn-output',
-      disclosure:
-        'Clinical reference: Tools and documentation guides for healthcare staff.',
+      disclosure: 'Clinical reference: Tools and documentation guides for healthcare staff.',
     },
     'hipaa-release-generator': {
       heading: '📄 Get Help With Records & Rights',
@@ -95,8 +92,7 @@
         },
       ],
       triggerSelector: '#hr-output',
-      disclosure:
-        'Public legal aid: Resources for patient records and civil rights enforcement.',
+      disclosure: 'Public legal aid: Resources for patient records and civil rights enforcement.',
     },
     'blood-sugar-log-generator': {
       heading: '🩸 Diabetes & Glucose Support',
@@ -117,8 +113,7 @@
         },
       ],
       triggerSelector: '#bs-output',
-      disclosure:
-        'Health resources: Evidence-based tools and guides for diabetic support.',
+      disclosure: 'Health resources: Evidence-based tools and guides for diabetic support.',
     },
     'caregiver-timesheet': {
       heading: '🕑 Payroll & Scheduling Tools',
@@ -133,8 +128,7 @@
         },
       ],
       triggerSelector: '#ts-output',
-      disclosure:
-        'Caregiver resources: Time tracking and scheduling support.',
+      disclosure: 'Caregiver resources: Time tracking and scheduling support.',
     },
     'nurse-brain-sheet': {
       heading: '🩺 Nursing Gear & Study Tools',
@@ -149,8 +143,7 @@
         },
       ],
       triggerSelector: '#ns-output',
-      disclosure:
-        'Clinical tools: Practical resources for nursing shifts and handoffs.',
+      disclosure: 'Clinical tools: Practical resources for nursing shifts and handoffs.',
     },
     'caregiver-printable-pack': {
       heading: '🛡️ Peace of Mind for the Whole Family',
@@ -171,8 +164,7 @@
         },
       ],
       triggerSelector: '#pack-download',
-      disclosure:
-        'Safety resources: Gear and monitoring systems for home safety.',
+      disclosure: 'Safety resources: Gear and monitoring systems for home safety.',
     },
     'password-checker': {
       heading: '🛡️ Protect Your Accounts',

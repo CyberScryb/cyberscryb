@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sampleBtn = document.getElementById('sample-btn');
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
-      toolInput.value = "Mrs. Evelyn Carter had a calm day shift. Ate 75% of breakfast (scrambled eggs, oatmeal, apple juice). Administered morning medications (metformin 500mg, lisinopril 10mg) with applesauce at 0830 with zero dysphagia noted. Assisted with morning hygiene and shower with 1-person assist and walker. Vitals at 1100: BP 128/82, HR 74, SpO2 97% on room air, temp 98.4F. Daughter Brenda visited from 1300 to 1430. Patient napped peacefully from 1440 to 1600. No fall risks or skin breakdowns observed.";
+      toolInput.value =
+        'Mrs. Evelyn Carter had a calm day shift. Ate 75% of breakfast (scrambled eggs, oatmeal, apple juice). Administered morning medications (metformin 500mg, lisinopril 10mg) with applesauce at 0830 with zero dysphagia noted. Assisted with morning hygiene and shower with 1-person assist and walker. Vitals at 1100: BP 128/82, HR 74, SpO2 97% on room air, temp 98.4F. Daughter Brenda visited from 1300 to 1430. Patient napped peacefully from 1440 to 1600. No fall risks or skin breakdowns observed.';
       const patientEl = document.getElementById('patient-name');
       if (patientEl) patientEl.value = 'Evelyn Carter';
       const shiftEl = document.getElementById('shift-type');
