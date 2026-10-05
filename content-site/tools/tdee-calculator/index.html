@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDEE Calculator — Find Your Daily Calorie Needs | CyberScryb</title>
+<meta name="description" content="Free TDEE calculator using the Mifflin-St Jeor formula. Enter sex, age, height, weight, and activity to get your BMR, TDEE, and cut/maintain/bulk calorie targets. Metric or imperial, no signup, private.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/tdee-calculator/">
+<meta property="og:title" content="TDEE Calculator — Find Your Daily Calorie Needs | CyberScryb">
+<meta property="og:description" content="Free TDEE calculator: get your BMR, total daily energy expenditure, and cut/maintain/bulk calorie targets instantly. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/tdee-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TDEE Calculator — Find Your Daily Calorie Needs | CyberScryb">
+<meta name="twitter:description" content="Free TDEE calculator: get your BMR, total daily energy expenditure, and cut/maintain/bulk calorie targets instantly. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20260905dark">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20260905dark">
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
+        window['ga-disable-G-LS46B9J1XK'] = true;
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LS46B9J1XK');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb TDEE Calculator",
+        "url": "https://cyberscryb.com/tools/tdee-calculator/",
+        "description": "Free online TDEE calculator using the Mifflin-St Jeor equation: enter sex, age, height, weight, and activity level to get your BMR, total daily energy expenditure, and cut, maintain, and bulk calorie targets, instantly in your browser.",
+        "applicationCategory": "HealthApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "TDEE Calculator", "item": "https://cyberscryb.com/tools/tdee-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is TDEE?", "acceptedAnswer": { "@type": "Answer", "text": "TDEE is Total Daily Energy Expenditure: the total calories your body burns in a day. It includes your BMR (the energy to keep you alive at rest), activity from exercise, NEAT (unplanned movement like walking and fidgeting), and the thermic effect of food (energy spent digesting what you eat). Your TDEE is the number that tells you how much you can eat to maintain your weight." }},
+            { "@type": "Question", "name": "How is TDEE calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Most calculators use the Mifflin-St Jeor equation to estimate BMR from sex, weight, height, and age, then multiply by an activity factor from 1.2 (sedentary) to 1.9 (extra active). This calculator uses: male BMR = 10 x weight(kg) + 6.25 x height(cm) - 5 x age + 5, and female BMR = the same formula minus 161 instead of plus 5. TDEE = BMR x activity factor." }},
+            { "@type": "Question", "name": "What is the difference between TDEE and BMR?", "acceptedAnswer": { "@type": "Answer", "text": "BMR is the calories your body burns at complete rest just keeping you alive: breathing, circulation, cell repair. TDEE adds everything else on top: planned exercise, daily movement, and digestion. BMR is usually 60 to 75% of TDEE. Never eat below your BMR for long; it is the floor your body needs to function." }},
+            { "@type": "Question", "name": "How accurate are TDEE calculators?", "acceptedAnswer": { "@type": "Answer", "text": "Expect them to be off by 10 to 20% in either direction. They estimate BMR from population averages and cannot see your muscle mass, genetics, health conditions, or NEAT, which varies hugely between people. Use the result as a starting point, track your weight for 2 to 3 weeks, and adjust up or down based on what the scale does." }},
+            { "@type": "Question", "name": "How many calories should I eat to lose weight?", "acceptedAnswer": { "@type": "Answer", "text": "Eat below your TDEE. A 20% deficit is the standard sustainable cut: TDEE x 0.8. A deficit of about 500 calories per day works out to roughly 1 pound of fat loss per week, since a pound of body fat holds about 3,500 calories. Do not drop below your BMR without medical supervision." }},
+            { "@type": "Question", "name": "Is this TDEE calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #f97316; --primary-soft: #fb923c;
+            --primary-glow: rgba(249,115,22,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .tdee-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .tdee-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .tdee-unit-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .tdee-unit-toggle button {
+            flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .tdee-unit-toggle button.is-on { background: var(--primary); border-color: var(--primary); color: #ffedd5; }
+        .tdee-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .tdee-field input, .tdee-field select {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .tdee-field select { font-size: 1rem; cursor: pointer; }
+        .tdee-field select option { background: var(--card); color: var(--text); }
+        .tdee-field input:focus, .tdee-field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .tdee-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .tdee-row { grid-template-columns: 1fr; } }
+        .tdee-sex { display: flex; gap: 0.5rem; }
+        .tdee-sex button {
+            flex: 1; padding: 0.8rem; font-size: 1rem; font-weight: 700; font-family: var(--font);
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .tdee-sex button.is-on { background: var(--primary); border-color: var(--primary); color: #ffedd5; }
+        .tdee-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .tdee-main { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+        @media (max-width: 560px) { .tdee-main { grid-template-columns: 1fr; } }
+        .tdee-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .tdee-stat .tdee-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .tdee-stat .tdee-value { font-size: 2.25rem; font-weight: 800; color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; }
+        .tdee-stat .tdee-unit { font-size: 0.8rem; color: var(--text-faint); }
+        .tdee-goals { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 0.5rem; }
+        @media (max-width: 560px) { .tdee-goals { grid-template-columns: 1fr; } }
+        .tdee-goal { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .tdee-goal.is-selected { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow); }
+        .tdee-goal .tdee-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .tdee-goal .tdee-value { font-size: 1.5rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; }
+        .tdee-goal .tdee-delta { font-size: 0.78rem; color: var(--text-faint); margin-top: 0.25rem; }
+        .tdee-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+        .tdee-error { font-size: 0.95rem; color: var(--primary-soft); padding: 1rem 0; }
+        .tdee-mult { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .tdee-mult th, .tdee-mult td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .tdee-mult th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .tdee-mult td { color: var(--text-muted); }
+        .tdee-mult td:last-child { color: var(--primary-soft); font-weight: 700; font-variant-numeric: tabular-nums; }
+        .tdee-mult tbody tr:last-child td { border-bottom: none; }
+    </style>
+    <!-- iubenda cookie consent banner -->
+    <script>
+    (function() {
+      const currentPath = window.location.pathname;
+      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
+
+      if (blacklistedPaths.includes(currentPath)) return;
+
+      window._iub = window._iub || [];
+      window._iub.csConfiguration = {
+        cookiePolicyId: '98273641',
+        siteId: '3672849',
+        lang: 'en',
+        banner: {
+          acceptButtonDisplay: true,
+          customizeButtonDisplay: true,
+          position: 'float-bottom-right'
+        }
+      };
+
+      const script = document.createElement('script');
+      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="tdee-app">
+        <div class="tdee-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                TDEE Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">TDEE Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Find your total daily energy expenditure with the Mifflin-St Jeor formula, plus cut, maintain, and bulk calorie targets. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="tdee-unit-toggle" role="group" aria-label="Unit system">
+                    <button id="tdee-imperial" class="is-on" type="button">Imperial (ft / lb)</button>
+                    <button id="tdee-metric" type="button">Metric (cm / kg)</button>
+                </div>
+
+                <div class="tdee-field" style="margin-bottom:1rem;">
+                    <label>Sex</label>
+                    <div class="tdee-sex" role="group" aria-label="Sex">
+                        <button id="tdee-male" class="is-on" type="button">Male</button>
+                        <button id="tdee-female" type="button">Female</button>
+                    </div>
+                </div>
+
+                <div class="tdee-field" style="margin-bottom:1rem;">
+                    <label for="tdee-age">Age</label>
+                    <input id="tdee-age" type="number" inputmode="numeric" min="1" max="120" step="1" placeholder="e.g. 35" value="35">
+                </div>
+
+                <div id="tdee-imperial-fields">
+                    <div class="tdee-row" style="margin-top:0;">
+                        <div class="tdee-field">
+                            <label for="tdee-ft">Height (feet)</label>
+                            <input id="tdee-ft" type="number" inputmode="numeric" min="1" max="9" step="1" placeholder="e.g. 5" value="5">
+                        </div>
+                        <div class="tdee-field">
+                            <label for="tdee-in">Height (inches)</label>
+                            <input id="tdee-in" type="number" inputmode="decimal" min="0" max="11.99" step="0.5" placeholder="e.g. 9" value="9">
+                        </div>
+                    </div>
+                    <div class="tdee-field" style="margin-top:1rem;">
+                        <label for="tdee-lb">Weight (pounds)</label>
+                        <input id="tdee-lb" type="number" inputmode="decimal" min="1" step="0.5" placeholder="e.g. 165" value="165">
+                    </div>
+                </div>
+
+                <div id="tdee-metric-fields" style="display:none;">
+                    <div class="tdee-row" style="margin-top:0;">
+                        <div class="tdee-field">
+                            <label for="tdee-cm">Height (cm)</label>
+                            <input id="tdee-cm" type="number" inputmode="decimal" min="50" max="275" step="0.5" placeholder="e.g. 175" value="175">
+                        </div>
+                        <div class="tdee-field">
+                            <label for="tdee-kg">Weight (kg)</label>
+                            <input id="tdee-kg" type="number" inputmode="decimal" min="10" step="0.5" placeholder="e.g. 75" value="75">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tdee-row">
+                    <div class="tdee-field">
+                        <label for="tdee-activity">Activity level</label>
+                        <select id="tdee-activity">
+                            <option value="1.2">Sedentary: little or no exercise</option>
+                            <option value="1.375">Lightly active: 1-3 days/week</option>
+                            <option value="1.55" selected>Moderately active: 3-5 days/week</option>
+                            <option value="1.725">Very active: 6-7 days/week</option>
+                            <option value="1.9">Extra active: physical job or 2x/day training</option>
+                        </select>
+                    </div>
+                    <div class="tdee-field">
+                        <label for="tdee-goal">Goal</label>
+                        <select id="tdee-goal">
+                            <option value="cut">Cut (lose weight, -20%)</option>
+                            <option value="maintain" selected>Maintain</option>
+                            <option value="bulk">Bulk (gain muscle, +10%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tdee-result" id="tdee-result" aria-live="polite">
+                    <div id="tdee-body">
+                        <div class="tdee-main">
+                            <div class="tdee-stat">
+                                <div class="tdee-label">BMR</div>
+                                <div class="tdee-value" id="tdee-bmr-out">—</div>
+                                <div class="tdee-unit">cal / day</div>
+                            </div>
+                            <div class="tdee-stat">
+                                <div class="tdee-label">TDEE</div>
+                                <div class="tdee-value" id="tdee-out">—</div>
+                                <div class="tdee-unit">cal / day</div>
+                            </div>
+                        </div>
+                        <div class="tdee-goals">
+                            <div class="tdee-goal" id="tdee-goal-cut">
+                                <div class="tdee-label">Cut (20% deficit)</div>
+                                <div class="tdee-value" id="tdee-cut-out">—</div>
+                                <div class="tdee-delta" id="tdee-cut-delta">cal / day</div>
+                            </div>
+                            <div class="tdee-goal" id="tdee-goal-maintain">
+                                <div class="tdee-label">Maintain</div>
+                                <div class="tdee-value" id="tdee-maintain-out">—</div>
+                                <div class="tdee-delta" id="tdee-maintain-delta">cal / day</div>
+                            </div>
+                            <div class="tdee-goal" id="tdee-goal-bulk">
+                                <div class="tdee-label">Bulk (10% surplus)</div>
+                                <div class="tdee-value" id="tdee-bulk-out">—</div>
+                                <div class="tdee-delta" id="tdee-bulk-delta">cal / day</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tdee-note" id="tdee-note">Enter your numbers to see your daily calorie targets.</div>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use the TDEE Calculator</h2>
+                <p>Pick your unit system, choose male or female, enter your age, height, and weight, then pick the activity level that honestly matches your week. The results update as you type. The goal dropdown highlights which of the three targets fits your plan: cut, maintain, or bulk.</p>
+                <p>Worked example: a 35-year-old man, 5'9" (175 cm), 165 lb (75 kg), moderately active. BMR = 10 &times; 75 + 6.25 &times; 175 - 5 &times; 35 + 5 = 750 + 1,093.75 - 175 + 5 = <strong style="color:var(--text);">1,674 cal/day</strong>. TDEE = 1,674 &times; 1.55 = <strong style="color:var(--text);">2,594 cal/day</strong>. His targets: cut at 2,075, maintain at 2,594, bulk at 2,854. His 20% cut deficit is about 519 cal/day, which works out to roughly 1 pound of fat loss per week.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What TDEE Actually Means</h2>
+                <p>TDEE is the sum of everything your body burns in a day. The biggest piece is your BMR: the energy to keep you alive at rest, breathing, circulation, brain function, cell repair. On top of that sit three smaller buckets: exercise activity (planned workouts), NEAT (all the unplanned movement: walking, standing, fidgeting, housework), and the thermic effect of food (the energy spent digesting what you eat). Read our guide: <a href="/guides/what-is-tdee/" style="color: var(--primary);">what is TDEE</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The Activity Multipliers</h2>
+                <p>The calculator multiplies your BMR by an activity factor. These are the standard multipliers, from the least to the most active:</p>
+                <table class="tdee-mult">
+                    <thead>
+                        <tr><th>Activity level</th><th>What it means</th><th>Multiplier</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sedentary</td><td>Little or no exercise, desk job</td><td>1.2</td></tr>
+                        <tr><td>Lightly active</td><td>Light exercise or sports 1-3 days/week</td><td>1.375</td></tr>
+                        <tr><td>Moderately active</td><td>Moderate exercise or sports 3-5 days/week</td><td>1.55</td></tr>
+                        <tr><td>Very active</td><td>Hard exercise 6-7 days/week</td><td>1.725</td></tr>
+                        <tr><td>Extra active</td><td>Physical job or training twice a day</td><td>1.9</td></tr>
+                    </tbody>
+                </table>
+                <p>Most people overestimate here. If you sit at a desk and train three times a week, moderately active is the honest pick. The extra active tier is for construction workers, farm labor, and two-a-day athletes, not just an enthusiastic gym schedule.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The Goal Targets, Explained</h2>
+                <p><strong style="color:var(--text);">Cut: TDEE &times; 0.8.</strong> A 20% deficit is the standard sustainable cut. It is aggressive enough to see weekly progress and mild enough to preserve muscle and sanity. A deficit near 500 cal/day loses about a pound of fat per week.</p>
+                <p><strong style="color:var(--text);">Maintain: TDEE.</strong> Eat at your TDEE and your weight holds steady. This is also the right target when you are recomposing: training hard while eating at maintenance slowly trades fat for muscle, especially for beginners.</p>
+                <p><strong style="color:var(--text);">Bulk: TDEE &times; 1.1.</strong> A 10% surplus gives muscle-building fuel without piling on fat. Faster than this and most of the extra gain is fat, which you will just have to cut later. A surplus near 250 to 300 cal/day gains roughly half a pound per week, and you want most of it to be muscle.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What TDEE Misses</h2>
+                <p>The formula estimates BMR from population averages, so expect the result to be off by 10 to 20% for any individual. It cannot see muscle mass (muscle burns more than fat at rest), genetics, thyroid and hormonal conditions, medications, or your NEAT, which varies wildly: two people with the same desk job can differ by 800 cal/day just from how much they move without thinking about it.</p>
+                <p>The fix is simple: use the number as a starting point, eat at the target for two to three weeks, and watch the scale. If weight moves the wrong way or too slowly, adjust by 100 to 200 calories and repeat. The calculator is a compass, not a GPS. Never eat below your BMR for long stretches without medical supervision; it is the floor your body needs to function.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses a TDEE Calculator</h2>
+                <p>People starting a cut use it to find a deficit that is actually sustainable instead of starving on a random number. Lifters use the bulk target to gain muscle without excess fat. Athletes and coaches use it to fuel training blocks. Anyone maintaining after weight loss uses it to find the intake that keeps the scale still. Whatever the goal, the TDEE number replaces guesswork with a measurable starting point.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is TDEE?</summary><p>TDEE is Total Daily Energy Expenditure: the total calories your body burns in a day. It includes your BMR (the energy to keep you alive at rest), activity from exercise, NEAT (unplanned movement like walking and fidgeting), and the thermic effect of food (energy spent digesting what you eat). Your TDEE is the number that tells you how much you can eat to maintain your weight.</p></details>
+                <details><summary>How is TDEE calculated?</summary><p>Most calculators use the Mifflin-St Jeor equation to estimate BMR from sex, weight, height, and age, then multiply by an activity factor from 1.2 (sedentary) to 1.9 (extra active). This calculator uses: male BMR = 10 x weight(kg) + 6.25 x height(cm) - 5 x age + 5, and female BMR = the same formula minus 161 instead of plus 5. TDEE = BMR x activity factor.</p></details>
+                <details><summary>What is the difference between TDEE and BMR?</summary><p>BMR is the calories your body burns at complete rest just keeping you alive: breathing, circulation, cell repair. TDEE adds everything else on top: planned exercise, daily movement, and digestion. BMR is usually 60 to 75% of TDEE. Never eat below your BMR for long; it is the floor your body needs to function.</p></details>
+                <details><summary>How accurate are TDEE calculators?</summary><p>Expect them to be off by 10 to 20% in either direction. They estimate BMR from population averages and cannot see your muscle mass, genetics, health conditions, or NEAT, which varies hugely between people. Use the result as a starting point, track your weight for 2 to 3 weeks, and adjust up or down based on what the scale does.</p></details>
+                <details><summary>How many calories should I eat to lose weight?</summary><p>Eat below your TDEE. A 20% deficit is the standard sustainable cut: TDEE x 0.8. A deficit of about 500 calories per day works out to roughly 1 pound of fat loss per week, since a pound of body fat holds about 3,500 calories. Do not drop below your BMR without medical supervision.</p></details>
+                <details><summary>Is this TDEE calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/bmi-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">BMI Calculator</strong>
+                        <span style="font-size:0.85rem;">Check your Body Mass Index and weight category.</span>
+                    </a>
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Find a percent of a number or measure change.</span>
+                    </a>
+                    <a href="/tools/blood-sugar-log-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#C2410C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Blood Sugar Log Generator</strong>
+                        <span style="font-size:0.85rem;">Printable glucose tracking sheets.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">The four components of TDEE, the Mifflin-St Jeor formula, activity multipliers, and how to cut, maintain, or bulk.</p>
+                <a href="/guides/what-is-tdee/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#ffedd5;font-weight:700;border-radius:10px;text-decoration:none;">Read the TDEE Guide</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20260905dark"></script>
+    <script>
+    (function () {
+        "use strict";
+        var imperial = true;
+        var isMale = true;
+
+        var impBtn = document.getElementById("tdee-imperial");
+        var metBtn = document.getElementById("tdee-metric");
+        var maleBtn = document.getElementById("tdee-male");
+        var femaleBtn = document.getElementById("tdee-female");
+        var impFields = document.getElementById("tdee-imperial-fields");
+        var metFields = document.getElementById("tdee-metric-fields");
+
+        var ageEl = document.getElementById("tdee-age");
+        var ftEl = document.getElementById("tdee-ft");
+        var inEl = document.getElementById("tdee-in");
+        var lbEl = document.getElementById("tdee-lb");
+        var cmEl = document.getElementById("tdee-cm");
+        var kgEl = document.getElementById("tdee-kg");
+        var activityEl = document.getElementById("tdee-activity");
+        var goalEl = document.getElementById("tdee-goal");
+
+        var bodyEl = document.getElementById("tdee-body");
+        var bmrOut = document.getElementById("tdee-bmr-out");
+        var tdeeOut = document.getElementById("tdee-out");
+        var cutOut = document.getElementById("tdee-cut-out");
+        var maintainOut = document.getElementById("tdee-maintain-out");
+        var bulkOut = document.getElementById("tdee-bulk-out");
+        var cutDelta = document.getElementById("tdee-cut-delta");
+        var maintainDelta = document.getElementById("tdee-maintain-delta");
+        var bulkDelta = document.getElementById("tdee-bulk-delta");
+        var goalCut = document.getElementById("tdee-goal-cut");
+        var goalMaintain = document.getElementById("tdee-goal-maintain");
+        var goalBulk = document.getElementById("tdee-goal-bulk");
+        var noteEl = document.getElementById("tdee-note");
+
+        function fmt(n) { return Math.round(n).toLocaleString("en-US"); }
+
+        function showError(msg) {
+            bodyEl.style.display = "none";
+            noteEl.textContent = msg;
+        }
+
+        function showBody() {
+            bodyEl.style.display = "block";
+        }
+
+        function calc() {
+            var heightCm, weightKg;
+            var age = parseFloat(ageEl.value);
+
+            if (imperial) {
+                var ft = parseFloat(ftEl.value), inch = parseFloat(inEl.value), lb = parseFloat(lbEl.value);
+                if (isNaN(ft) && isNaN(inch) && isNaN(lb)) { showError("Enter your height and weight to see your calorie targets."); return; }
+                var totalIn = (isNaN(ft) ? 0 : ft) * 12 + (isNaN(inch) ? 0 : inch);
+                if (!(totalIn > 0) || isNaN(lb) || lb <= 0) { showError("Enter a valid height and weight to see your calorie targets."); return; }
+                if (totalIn > 120 || lb > 1500) { showError("Those numbers look off. Double-check your height and weight."); return; }
+                heightCm = totalIn * 2.54;
+                weightKg = lb * 0.453592;
+            } else {
+                var cm = parseFloat(cmEl.value), kg = parseFloat(kgEl.value);
+                if (isNaN(cm) && isNaN(kg)) { showError("Enter your height and weight to see your calorie targets."); return; }
+                if (!(cm > 0) || isNaN(kg) || kg <= 0) { showError("Enter a valid height and weight to see your calorie targets."); return; }
+                if (cm > 300 || kg > 700) { showError("Those numbers look off. Double-check your height and weight."); return; }
+                heightCm = cm;
+                weightKg = kg;
+            }
+
+            if (isNaN(age) || !(age >= 1) || age > 120) { showError("Enter a valid age between 1 and 120."); return; }
+
+            var activity = parseFloat(activityEl.value);
+            var bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + (isMale ? 5 : -161);
+            var tdee = bmr * activity;
+            if (!isFinite(bmr) || !isFinite(tdee) || bmr <= 0 || tdee > 20000) { showError("Those numbers look off. Double-check your inputs."); return; }
+
+            var cut = tdee * 0.8;
+            var bulk = tdee * 1.1;
+            var cutDeficit = tdee - cut;
+            var bulkSurplus = bulk - tdee;
+            var cutLbsWeek = cutDeficit * 7 / 3500;
+            var bulkLbsWeek = bulkSurplus * 7 / 3500;
+
+            bmrOut.textContent = fmt(bmr);
+            tdeeOut.textContent = fmt(tdee);
+            cutOut.textContent = fmt(cut);
+            maintainOut.textContent = fmt(tdee);
+            bulkOut.textContent = fmt(bulk);
+
+            cutDelta.textContent = "-" + fmt(cutDeficit) + " cal/day, about " + cutLbsWeek.toFixed(1) + " lb/week loss";
+            maintainDelta.textContent = "weight stays steady";
+            bulkDelta.textContent = "+" + fmt(bulkSurplus) + " cal/day, about " + bulkLbsWeek.toFixed(1) + " lb/week gain";
+
+            var goal = goalEl.value;
+            goalCut.classList.toggle("is-selected", goal === "cut");
+            goalMaintain.classList.toggle("is-selected", goal === "maintain");
+            goalBulk.classList.toggle("is-selected", goal === "bulk");
+
+            showBody();
+            if (goal === "cut") {
+                noteEl.textContent = "Cut target selected: eat " + fmt(cut) + " cal/day, about " + cutLbsWeek.toFixed(1) + " lb/week loss. A 500 cal/day deficit loses roughly 1 lb per week. Never stay below your BMR (" + fmt(bmr) + " cal/day) for long without medical supervision.";
+            } else if (goal === "bulk") {
+                noteEl.textContent = "Bulk target selected: eat " + fmt(bulk) + " cal/day, about " + bulkLbsWeek.toFixed(1) + " lb/week gain. Pair the surplus with strength training so the gain is mostly muscle.";
+            } else {
+                noteEl.textContent = "Maintain target selected: eat " + fmt(tdee) + " cal/day to hold your weight steady. TDEE estimates run 10 to 20% off for individuals, so track for 2 to 3 weeks and adjust.";
+            }
+        }
+
+        function setUnits(isImperial) {
+            imperial = isImperial;
+            impBtn.classList.toggle("is-on", isImperial);
+            metBtn.classList.toggle("is-on", !isImperial);
+            impFields.style.display = isImperial ? "block" : "none";
+            metFields.style.display = isImperial ? "none" : "block";
+            calc();
+        }
+
+        function setSex(male) {
+            isMale = male;
+            maleBtn.classList.toggle("is-on", male);
+            femaleBtn.classList.toggle("is-on", !male);
+            calc();
+        }
+
+        impBtn.addEventListener("click", function () { setUnits(true); });
+        metBtn.addEventListener("click", function () { setUnits(false); });
+        maleBtn.addEventListener("click", function () { setSex(true); });
+        femaleBtn.addEventListener("click", function () { setSex(false); });
+        [ageEl, ftEl, inEl, lbEl, cmEl, kgEl].forEach(function (el) { el.addEventListener("input", calc); });
+        activityEl.addEventListener("change", calc);
+        goalEl.addEventListener("change", calc);
+
+        calc();
+    })();
+    </script>
+</body>
+</html>

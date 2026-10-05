@@ -1424,6 +1424,7 @@ function generateSitemap(generatedPages) {
     'salary-converter',
     'debt-payoff-calculator',
     'age-calculator',
+    'tdee-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1471,6 +1472,8 @@ function generateSitemap(generatedPages) {
     'debt-snowball-vs-avalanche',
     'how-to-calculate-age',
     'what-is-coast-fire',
+    'what-is-tdee',
+    'roth-ira-vs-traditional-ira',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1590,6 +1593,7 @@ function manageRobotsMeta() {
     'salary-converter',
     'debt-payoff-calculator',
     'age-calculator',
+    'tdee-calculator',
   ]);
 
   const dirsToProcess = [
