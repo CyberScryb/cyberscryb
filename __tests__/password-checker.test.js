@@ -206,6 +206,29 @@ describe('KEYBOARD_PATTERNS', () => {
   });
 });
 
+// ── Visibility Toggle Accessibility ─────────────────────
+
+describe('toggleVis accessibility', () => {
+  test('updates aria-label when clicked', () => {
+    const toggleBtn = document.getElementById('toggleVis');
+    const inputEl = document.getElementById('passwordInput');
+
+    // Initial state
+    toggleBtn.setAttribute('aria-label', 'Show password');
+    inputEl.type = 'password';
+
+    // Click to show password
+    toggleBtn.click();
+    expect(inputEl.type).toBe('text');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Hide password');
+
+    // Click to hide password
+    toggleBtn.click();
+    expect(inputEl.type).toBe('password');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Show password');
+  });
+});
+
 // ── Security: Math.random() usage ───────────────────────
 
 describe('security audit', () => {
