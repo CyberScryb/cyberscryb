@@ -46,7 +46,65 @@
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
-    
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is glassmorphism?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Glassmorphism is a UI design pattern where elements look like frosted glass panels floating above the background. Its three signatures are transparency, a light border edge, and a vivid background showing through a blur. Apple popularized the look in iOS 7 and macOS; the term itself was coined in 2020."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What CSS properties create the frosted glass effect?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Four properties do the work: a semi-transparent background (rgba), backdrop-filter: blur() for the frost, a thin light border for the glass edge, and a soft box-shadow for depth. Adding saturate(150-180%) to the backdrop filter keeps the colors behind the glass vivid instead of washed out. The generator above writes all of them for you."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does backdrop-filter work in Safari?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, but Safari requires the -webkit- vendor prefix: -webkit-backdrop-filter. Without it, Safari and iOS users see a plain transparent box with no blur, which can wreck readability. This generator writes both the standard and prefixed rules automatically."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which browsers support backdrop-filter?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Chrome 76+, Edge 79+, Safari 9+, and Firefox 103+ support it. Internet Explorer has no support at all. For older browsers, add a fallback with @supports: give the card a solid higher-opacity background when backdrop-filter is unavailable."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does glassmorphism hurt performance?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It can. Backdrop blur is GPU-expensive, and large blur values over animated backgrounds cause lag on older devices. Keep blur between 8px and 20px for most cards, avoid stacking many blurred layers, and test on real mid-range phones before shipping."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is glassmorphism bad for accessibility?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It can be, because text contrast shifts as the background behind the card changes. Fix it by raising the card's background opacity over busy backgrounds, keeping a crisp 1-2px border, and testing the final text pair with a WCAG contrast checker. Never rely on the blur alone to make text readable."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/tools/shared/email-capture.css">
     <!-- Google Analytics -->
     <script>
@@ -130,7 +188,7 @@
         <section class="hero">
             <div class="badge">💎 100% Client-Side &mdash; Visual CSS Designer</div>
             <h1>CSS Glassmorphism <span class="accent">Generator</span></h1>
-            <p class="subtitle">Visually create premium frosted-glass components, configure filters, and export clean, cross-browser CSS code.</p>
+            <p class="subtitle">Drag the sliders to design a frosted-glass card, preview it live on different backgrounds, then copy the cross-browser CSS and HTML. Free, no signup.</p>
         </section>
 
         <!-- Tool App Structure -->
@@ -313,6 +371,32 @@
                 <li><a href="/tools/color-palette/" style="color:#C2410C;">Color Palette Generator</a> &mdash; Design harmonious color schemes for web backdrops.</li>
                 <li><a href="/guides/" style="color:#C2410C;">Read CyberScryb CSS &amp; UI Design Guides</a></li>
             </ul>
+        </section>
+
+        <!-- How to use -->
+        <section style="max-width:760px; margin:2rem auto; padding:0 1.5rem; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.75;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">How to Build Your Glass Card</h2>
+            <ol style="padding-left:1.5rem; margin-bottom:1.5rem;">
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Dial in the blur and opacity.</strong> Start around 12px blur and 0.25 opacity. Under 4px the background stays distracting; over 30px it stops looking like glass.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Set the glass tint.</strong> Pick a glass color with the picker. White tints suit dark backgrounds; dark tints suit bright ones.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Add the edge.</strong> A 1px border at low opacity plus a soft shadow is what sells the refraction. Increase radius for friendlier cards, lower it for panels.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Test on real backgrounds.</strong> Switch the canvas background with the emoji buttons. A card that looks great on a gradient can fall apart on a photo, so check both.</li>
+                <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Copy and paste.</strong> Hit Copy CSS and Copy HTML. Both vendor-prefixed rules ship in the output, so Safari renders the blur correctly.</li>
+            </ol>
+
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:var(--primary-soft); margin-top:2.5rem;">Where Glassmorphism Works Best</h2>
+            <p><strong style="color:var(--text);">Login and signup cards</strong> floating over brand imagery are the classic use case. <strong style="color:var(--text);">Dashboard widgets</strong> use it to layer stats over charts without solid blocks. <strong style="color:var(--text);">Music and media players</strong> frost the controls over album art. <strong style="color:var(--text);">Marketing hero sections</strong> float glass CTAs over video backgrounds. Wherever you need depth without heaviness, glass beats a flat card.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section style="max-width:760px; margin:2rem auto 3rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:12px; color:var(--text-muted); font-family:'Inter',sans-serif; line-height:1.7;">
+            <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.4rem; color:var(--text); text-align:center; margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What is glassmorphism?</summary><p style="margin:0.6rem 0 0;">Glassmorphism is a UI design pattern where elements look like frosted glass panels floating above the background. Its three signatures are transparency, a light border edge, and a vivid background showing through a blur. Apple popularized the look in iOS 7 and macOS; the term itself was coined in 2020.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">What CSS properties create the frosted glass effect?</summary><p style="margin:0.6rem 0 0;">Four properties do the work: a semi-transparent background (rgba), backdrop-filter: blur() for the frost, a thin light border for the glass edge, and a soft box-shadow for depth. Adding saturate(150-180%) to the backdrop filter keeps colors vivid instead of washed out. The generator above writes all of them for you.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Does backdrop-filter work in Safari?</summary><p style="margin:0.6rem 0 0;">Yes, but Safari requires the -webkit- vendor prefix. Without it, Safari and iOS users see a plain transparent box with no blur, which can wreck readability. This generator writes both the standard and prefixed rules automatically.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Which browsers support backdrop-filter?</summary><p style="margin:0.6rem 0 0;">Chrome 76+, Edge 79+, Safari 9+, and Firefox 103+ support it. Internet Explorer has no support at all. For older browsers, add a fallback with @supports: give the card a solid higher-opacity background when backdrop-filter is unavailable.</p></details>
+            <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Does glassmorphism hurt performance?</summary><p style="margin:0.6rem 0 0;">It can. Backdrop blur is GPU-expensive, and large blur values over animated backgrounds cause lag on older devices. Keep blur between 8px and 20px for most cards, avoid stacking many blurred layers, and test on real mid-range phones before shipping.</p></details>
+            <details style="padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Is glassmorphism bad for accessibility?</summary><p style="margin:0.6rem 0 0;">It can be, because text contrast shifts as the background behind the card changes. Fix it by raising the card's background opacity over busy backgrounds, keeping a crisp 1-2px border, and testing the final text pair with a <a href="/tools/contrast-checker/" style="color:var(--primary);">WCAG contrast checker</a>. Never rely on the blur alone to make text readable.</p></details>
         </section>
     </main>
 
