@@ -1963,9 +1963,11 @@ exports.analyticsReport = functions.https.onRequest((req, res) => {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    // TODO: Add admin authentication here
-    // For now, check for a secret query param
-    const secret = req.query.secret;
+    // Check for admin authentication via Authorization header
+    const authHeader = req.headers.authorization;
+    const secret = authHeader && authHeader.startsWith('Bearer ')
+      ? authHeader.split('Bearer ')[1]
+      : null;
     const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
@@ -2088,7 +2090,10 @@ exports.getMetrics = functions.https.onRequest((req, res) => {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const secret = req.query.secret;
+    const authHeader = req.headers.authorization;
+    const secret = authHeader && authHeader.startsWith('Bearer ')
+      ? authHeader.split('Bearer ')[1]
+      : null;
     const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
@@ -2457,7 +2462,10 @@ exports.substackBackfill = functions.https.onRequest((req, res) => {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const secret = req.query.secret || (req.body && req.body.secret);
+    const authHeader = req.headers.authorization;
+    const secret = authHeader && authHeader.startsWith('Bearer ')
+      ? authHeader.split('Bearer ')[1]
+      : null;
     const expectedSecret = getSecret('ANALYTICS_SECRET');
     if (!expectedSecret || secret !== expectedSecret) {
       return res.status(403).json({ error: 'Unauthorized' });
