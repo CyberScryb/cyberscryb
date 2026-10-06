@@ -1405,6 +1405,9 @@ function generateSitemap(generatedPages) {
     'tdee-calculator',
     'macro-calculator',
     'overtime-pay-calculator',
+    'unit-converter',
+    'retirement-drawdown-calculator',
+    'sat-score-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1456,6 +1459,10 @@ function generateSitemap(generatedPages) {
     'how-to-calculate-macros',
     'how-overtime-pay-is-calculated',
     'roth-ira-vs-traditional-ira',
+    'unit-conversion-guide',
+    'safe-withdrawal-rate',
+    'how-digital-sat-scoring-works',
+    'appliance-energy-cost',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1580,6 +1587,9 @@ function manageRobotsMeta() {
     'tdee-calculator',
     'macro-calculator',
     'overtime-pay-calculator',
+    'unit-converter',
+    'retirement-drawdown-calculator',
+    'sat-score-calculator',
   ]);
 
   const dirsToProcess = [
