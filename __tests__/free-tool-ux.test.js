@@ -123,3 +123,39 @@ test('catalog search filters every section and clear filters restores the tools'
     'false'
   );
 });
+
+test('contrast checker has descriptive ARIA labels and swap colors functionality', () => {
+  const html = fs.readFileSync(
+    path.join(__dirname, '..', 'content-site/tools/contrast-checker/index.html'),
+    'utf8'
+  );
+  const dom = new DOMParser().parseFromString(html, 'text/html');
+  document.body.innerHTML = dom.body.innerHTML;
+
+  const fgPicker = document.querySelector('#fgPicker');
+  const fgHex = document.querySelector('#fgHex');
+  const bgPicker = document.querySelector('#bgPicker');
+  const bgHex = document.querySelector('#bgHex');
+  const btnSwap = document.querySelector('#btnSwap');
+
+  expect(fgPicker.getAttribute('aria-label')).toBe('Foreground color picker');
+  expect(fgHex.getAttribute('aria-label')).toBe('Foreground color hex code');
+  expect(bgPicker.getAttribute('aria-label')).toBe('Background color picker');
+  expect(bgHex.getAttribute('aria-label')).toBe('Background color hex code');
+  expect(btnSwap.getAttribute('aria-label')).toBe('Swap text and background colors');
+
+  load('tools/contrast-checker/script.js');
+  document.dispatchEvent(new Event('DOMContentLoaded'));
+
+  fgPicker.value = '#123456';
+  fgHex.value = '#123456';
+  bgPicker.value = '#ABCDEF';
+  bgHex.value = '#ABCDEF';
+
+  btnSwap.click();
+
+  expect(fgPicker.value).toBe('#abcdef');
+  expect(fgHex.value).toBe('#ABCDEF');
+  expect(bgPicker.value).toBe('#123456');
+  expect(bgHex.value).toBe('#123456');
+});

@@ -20,10 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const cardLargeAAA = document.getElementById('cardLargeAAA');
   const badgeLargeAAA = document.getElementById('badgeLargeAAA');
 
+  const btnSwap = document.getElementById('btnSwap');
   const btnAutoAA = document.getElementById('btnAutoAA');
   const btnAutoAAA = document.getElementById('btnAutoAAA');
 
   // Attach listeners
+  if (btnSwap) {
+    btnSwap.addEventListener('click', swapColors);
+  }
   fgPicker.addEventListener('input', () => {
     fgHex.value = fgPicker.value.toUpperCase();
     calculateContrast();
@@ -57,6 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial calculation
   calculateContrast();
+
+  function swapColors() {
+    const tempFg = fgPicker.value;
+    const tempBg = bgPicker.value;
+
+    fgPicker.value = tempBg;
+    fgHex.value = tempBg.toUpperCase();
+    bgPicker.value = tempFg;
+    bgHex.value = tempFg.toUpperCase();
+
+    calculateContrast();
+  }
 
   function calculateContrast() {
     const fg = fgPicker.value;
