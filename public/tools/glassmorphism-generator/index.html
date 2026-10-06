@@ -9,28 +9,28 @@
     <meta name="description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta name="keywords"
         content="glassmorphism generator, css glassmorphism, frosted glass css, glass card maker, css glass generator, backdrop filter blur, glassmorphism code">
-    
+
     <meta property="og:title" content="CSS Glassmorphism Generator &mdash; Free UI tool | CyberScryb">
     <meta property="og:description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/glassmorphism-generator/">
-    
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CSS Glassmorphism Generator &mdash; Free UI tool | CyberScryb">
     <meta name="twitter:description" content="Design frosted glass UI elements and copy clean code with this CSS glassmorphism generator. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
-    
+
     <link rel="canonical" href="https://cyberscryb.com/tools/glassmorphism-generator/">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
     <link rel="stylesheet" href="/tools/glassmorphism-generator/style.css">
-    
+
     <!-- JSON-LD: WebApplication -->
     <script type="application/ld+json">
     {
@@ -107,52 +107,21 @@
 
     <link rel="stylesheet" href="/tools/shared/support.css">
     <!-- Google Analytics -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    
+
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
     <meta property="og:site_name" content="CyberScryb">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
     <!-- Navigation Breadcrumbs -->
-    
+
 
     <header>
         <nav class="navbar">
@@ -197,7 +166,7 @@
                 <!-- Settings Panel -->
                 <div class="control-panel">
                     <h3>Effect Adjustments</h3>
-                    
+
                     <div class="control-group">
                         <div class="label-row">
                             <label for="blurSlider">Glass Blur</label>
@@ -299,14 +268,14 @@
                             <button class="tab-btn active" data-tab="css">CSS Code</button>
                             <button class="tab-btn" data-tab="html">HTML Markup</button>
                         </div>
-                        
+
                         <div class="code-wrapper">
                             <!-- CSS Tab Content -->
                             <div class="tab-content active" id="tabCss">
                                 <pre><code id="cssOutput" class="language-css">/* Styles will populate here */</code></pre>
                                 <button class="btn btn-copy" id="btnCopyCss">Copy CSS</button>
                             </div>
-                            
+
                             <!-- HTML Tab Content -->
                             <div class="tab-content" id="tabHtml">
                                 <pre><code id="htmlOutput" class="language-html">&lt;div class="glass-card"&gt;
@@ -326,7 +295,7 @@
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding CSS Glassmorphism in Modern UI Design</h2>
             <p>Glassmorphism has emerged as one of the most popular styling trends in contemporary user interface design, finding heavy usage in operating systems like macOS, Windows 11 (Fluent Design's Acrylic), and popular premium websites. The aesthetic is defined by a semi-transparent, frosted glass look that allows backgrounds, gradients, and images to show through with a soft blur. This establishes vertical depth, visual hierarchy, and an upscale, premium digital atmosphere.</p>
             <p>The key to achieving a realistic glassmorphic card lies in combining four core CSS layers: a semi-transparent background color, a backing blur filter, a light border to emulate glass refraction, and a subtle drop shadow to ground the element above its backdrop. Without these elements in balance, the UI component will look like a simple, low-contrast transparent container rather than true frosted glass.</p>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Backdrop-Filter Mechanism</h2>
             <p>Before the introduction of the CSS <code>backdrop-filter</code> property, developers had to resort to duplicate, blurred background images or heavy JavaScript hacks to create a frosted glass effect. Today, the <code>backdrop-filter</code> property applies graphical effects (like blur or color shifting) to the area directly behind an element. Unlike standard <code>filter</code> (which blurs the element itself and all its text/child content), <code>backdrop-filter</code> only impacts the layer beneath the element, keeping your foreground text completely sharp and legible.</p>
             <p>Here is the syntax used to create a baseline glass card:</p>
@@ -336,7 +305,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px); /* Safari support */
 }</pre>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Browser Compatibility &amp; Vendor Prefixes</h2>
             <p>While <code>backdrop-filter</code> is widely supported by modern browsers, Safari requires the vendor-prefixed version: <code>-webkit-backdrop-filter</code>. If this prefix is omitted, users on iOS Devices or macOS Safari will see plain transparent boxes without any blur effect, which destroys the aesthetic and can lead to severe legibility issues. CyberScryb's CSS Glassmorphism Generator automatically writes both standard and vendor-prefixed rules so your design remains compatible across all devices.</p>
             <p>For browsers that do not support backdrop filters at all (like older legacy mobile browsers or custom embedded WebViews), you should implement a fallback pattern using a feature query. This ensures that the card background receives a higher solid opacity if the backdrop filter fails to execute:</p>
@@ -364,7 +333,7 @@
                 <li style="margin-bottom:0.5rem;"><strong>Add Drop Shadows:</strong> Shadows help anchor the card, especially against lighter backdrops, giving depth and improving bounds detection.</li>
                 <li style="margin-bottom:0.5rem;"><strong>Test with the WCAG Contrast Checker:</strong> Verify the text contrast of your card using CyberScryb's <a href="/tools/contrast-checker/" style="color:#b91c1c;">Accessibility Color Contrast Checker</a> to guarantee AA/AAA compliance.</li>
             </ul>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
                 <li><a href="/tools/contrast-checker/" style="color:#b91c1c;">WCAG Color Contrast Checker</a> &mdash; Ensure your glassmorphic text matches accessibility ratios.</li>
@@ -398,7 +367,7 @@
             <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Does glassmorphism hurt performance?</summary><p style="margin:0.6rem 0 0;">It can. Backdrop blur is GPU-expensive, and large blur values over animated backgrounds cause lag on older devices. Keep blur between 8px and 20px for most cards, avoid stacking many blurred layers, and test on real mid-range phones before shipping.</p></details>
             <details style="padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Is glassmorphism bad for accessibility?</summary><p style="margin:0.6rem 0 0;">It can be, because text contrast shifts as the background behind the card changes. Fix it by raising the card's background opacity over busy backgrounds, keeping a crisp 1-2px border, and testing the final text pair with a <a href="/tools/contrast-checker/" style="color:var(--primary);">WCAG contrast checker</a>. Never rely on the blur alone to make text readable.</p></details>
         </section>
-    </main>
+
 
     <!-- AdSense Slot -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
@@ -425,7 +394,8 @@
         </div>
     </section>
 
-    <footer>
+    </main>
+<footer>
         <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; All UI calculations run locally in your browser.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
@@ -438,8 +408,8 @@
 
     <script src="/tools/glassmorphism-generator/script.js"></script>
     <script src="/tools/shared/support.js"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
-    
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+
 </body>
 
 </html>

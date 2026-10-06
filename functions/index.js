@@ -161,14 +161,6 @@ function getABVariant(testName, identifier) {
 }
 
 // ─── Client Identifier & Tier Helpers ───────────────────
-// The sliding-window, tiered in-memory rate limiter that used to live here
-// (checkRateLimit, RATE_LIMIT_TIERS, GLOBAL_LIMITS) was removed as dead code:
-// checkFirestoreRateLimit (below) is strictly more restrictive and runs first
-// in every handler, so the in-memory limiter could never actually bind.
-// rateLimitStore/getClientIdentifier remain in use by the privacyStatus
-// endpoint (user-facing transparency reporting of what's stored about them).
-
-const rateLimitStore = new Map(); // Map<string, { requests: number[], tier: string }>
 
 // Extract anonymous client identifier (hashed IP only - privacy-first)
 function getClientIdentifier(req) {
@@ -252,95 +244,48 @@ function getIpHash(req) {
     .digest('hex');
 }
 
-// Checks and increments Firestore-backed global + per-IP daily counters.
-// Returns { allowed: true } or { allowed: false, reason, retryAfter }.
-// Global cap fails CLOSED (Firestore error => block). Per-IP cap fails OPEN.
+// Both caps are checked and incremented atomically; unavailable storage fails closed.
 async function checkFirestoreRateLimit(req) {
-  // Fast burst check
   const burst = checkBurstRateLimit(req);
   if (!burst.allowed) return burst;
-
   const dateStr = getDateString();
   const tier = getUserTier(req);
-  const ipHash = getIpHash(req);
-
-  // Global daily cap — fail CLOSED
+  const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.free;
   try {
     const globalRef = db.collection('usage').doc(`daily-${dateStr}`);
-    const result = await db.runTransaction(async tx => {
-      const snap = await tx.get(globalRef);
-      const current = snap.exists ? snap.data().count || 0 : 0;
-      if (current >= GLOBAL_DAILY_CAP) {
-        return { exceeded: true, count: current };
+    const ipRef = db.collection('rateLimits').doc(`${getIpHash(req)}-${dateStr}`);
+    return await db.runTransaction(async tx => {
+      const globalSnap = await tx.get(globalRef);
+      const ipSnap = await tx.get(ipRef);
+      const globalCount = globalSnap.exists ? globalSnap.data().count || 0 : 0;
+      const ipCount = ipSnap.exists ? ipSnap.data().count || 0 : 0;
+      if (globalCount >= GLOBAL_DAILY_CAP) {
+        return {
+          allowed: false,
+          reason: 'Service capacity reached. Try again tomorrow.',
+          retryAfter: 3600,
+        };
       }
-      tx.set(
-        globalRef,
-        {
-          count: FieldValue.increment(1),
-          updatedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
-      return { exceeded: false, count: current + 1 };
+      if (ipCount >= ipCap) {
+        return {
+          allowed: false,
+          reason: `Daily limit reached (${ipCap} requests). Please try again tomorrow.`,
+          retryAfter: 3600,
+        };
+      }
+      const updatedAt = FieldValue.serverTimestamp();
+      tx.set(globalRef, { count: FieldValue.increment(1), updatedAt }, { merge: true });
+      tx.set(ipRef, { count: FieldValue.increment(1), tier, updatedAt }, { merge: true });
+      return { allowed: true };
     });
-
-    if (result.exceeded) {
-      console.warn(
-        `[FIRESTORE_RATE_LIMIT] Global daily cap reached: ${result.count}/${GLOBAL_DAILY_CAP}`
-      );
-      return {
-        allowed: false,
-        reason: 'Service capacity reached. Try again in a few hours.',
-        retryAfter: 3600,
-      };
-    }
   } catch (err) {
-    console.error('[FIRESTORE_RATE_LIMIT] Global cap check failed, failing closed:', err.message);
+    console.error('[FIRESTORE_RATE_LIMIT] Quota check failed:', err.message);
     return {
       allowed: false,
       reason: 'Service temporarily unavailable. Try again shortly.',
       retryAfter: 60,
     };
   }
-
-  // Per-IP daily cap — fail OPEN
-  try {
-    const ipCap = FIRESTORE_TIER_CAPS[tier] ?? FIRESTORE_TIER_CAPS.free;
-    const ipRef = db.collection('rateLimits').doc(`${ipHash}-${dateStr}`);
-    const result = await db.runTransaction(async tx => {
-      const snap = await tx.get(ipRef);
-      const current = snap.exists ? snap.data().count || 0 : 0;
-      if (current >= ipCap) {
-        return { exceeded: true, count: current };
-      }
-      tx.set(
-        ipRef,
-        {
-          count: FieldValue.increment(1),
-          tier,
-          updatedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
-      return { exceeded: false, count: current + 1 };
-    });
-
-    if (result.exceeded) {
-      console.warn(
-        `[FIRESTORE_RATE_LIMIT] Per-IP daily cap reached for tier ${tier}: ${result.count}/${ipCap}`
-      );
-      return {
-        allowed: false,
-        reason: `Daily limit reached (${ipCap} requests). Please try again tomorrow.`,
-        retryAfter: 3600,
-      };
-    }
-  } catch (err) {
-    console.error('[FIRESTORE_RATE_LIMIT] Per-IP cap check failed, failing open:', err.message);
-    // fail open - don't block on transient per-IP errors
-  }
-
-  return { allowed: true };
 }
 
 // ─── Referer Validation ─────────────────────────────────
@@ -1715,6 +1660,10 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
+    res.set('Cache-Control', 'no-store');
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+      return res.status(400).json({ error: 'Invalid JSON body' });
+    }
     const { tool, input, params } = req.body;
 
     // Security: Referer check
@@ -1869,78 +1818,31 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
 });
 
 // ─── Privacy Status Endpoint ───────────────────────────
-// Allows users to verify what data exists about them (privacy-first transparency)
+// Public documentation only: never disclose an arbitrary email's membership.
 exports.privacyStatus = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => {
+  cors(req, res, () => {
+    res.set('Cache-Control', 'no-store');
     if (req.method !== 'GET') {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
-
-    const identifier = getClientIdentifier(req);
-    const tier = getUserTier(req);
-
-    // Get current rate limit status
-    const userData = rateLimitStore.get(identifier);
-    const now = Date.now();
-
-    let rateLimitInfo = {
-      tier,
-      hashedIdentifier: identifier.slice(0, 12) + '...', // Show partial hash for verification
-      requestsStored: userData ? userData.requests.length : 0,
-      oldestRequest:
-        userData && userData.requests.length > 0
-          ? new Date(Math.min(...userData.requests)).toISOString()
-          : null,
-      newestRequest:
-        userData && userData.requests.length > 0
-          ? new Date(Math.max(...userData.requests)).toISOString()
-          : null,
-      dataExpiresAt:
-        userData && userData.requests.length > 0
-          ? new Date(Math.max(...userData.requests) + 86400000).toISOString()
-          : null,
-    };
-
-    // Check if email is subscribed (only if they provide it)
-    const email = req.query.email;
-    let emailStatus = null;
-
-    if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      try {
-        const normalizedEmail = email.toLowerCase().trim();
-        const existing = await db
-          .collection('subscribers')
-          .where('email', '==', normalizedEmail)
-          .limit(1)
-          .get();
-
-        if (!existing.empty) {
-          const doc = existing.docs[0].data();
-          emailStatus = {
-            subscribed: true,
-            subscribedAt: doc.subscribedAt?.toDate().toISOString() || null,
-            source: doc.source || 'unknown',
-          };
-        } else {
-          emailStatus = { subscribed: false };
-        }
-      } catch (e) {
-        console.error('Privacy check error:', e);
-      }
-    }
-
     return res.status(200).json({
       privacy: {
-        tracking: 'none',
-        dataRetention: '24 hours maximum',
-        ipStorage: 'hashed only, never stored raw',
-        userIdTracking: 'disabled',
-        cookies: [],
-        thirdPartySharing: 'never',
+        browserTools: 'Inputs are processed locally.',
+        aiTools: 'Inputs are sent to our backend and Google Gemini for generation.',
+        aiResponseCaching: 'disabled',
+        localDrafts: 'Some tools save drafts on your device for up to 14 days.',
+        analytics:
+          'Browser analytics and ads load only after acceptance; operational server analytics may also be collected.',
+        rateLimits:
+          'Daily usage counters use hashed IP identifiers; quota reset is not a promise of record deletion.',
+        subscriptions: 'Voluntary email subscriptions are retained until removal is requested.',
+        providerRetention:
+          'See provider policies and our privacy policy for processing and retention.',
+        policyUrl: '/privacy/',
       },
-      rateLimit: rateLimitInfo,
-      email: emailStatus,
-      message: 'All data is ephemeral and expires within 24 hours. No persistent user profiles.',
+      email: null,
+      message:
+        'Subscription membership is private. Contact us for data access or removal requests.',
     });
   });
 });

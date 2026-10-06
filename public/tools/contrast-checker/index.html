@@ -9,28 +9,28 @@
     <meta name="description" content="Free WCAG contrast checker: enter a text color and background color to get the exact contrast ratio and see if it passes AA and AAA. One-click auto-fix for failures. No signup.">
     <meta name="keywords"
         content="contrast checker, wcag contrast, color contrast checker, web accessibility, relative luminance, aa aaa standards">
-    
+
     <meta property="og:title" content="WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb">
     <meta property="og:description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta property="og:url" content="https://cyberscryb.com/tools/contrast-checker/">
-    
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="WCAG Contrast Checker &mdash; Free Accessibility | CyberScryb">
     <meta name="twitter:description" content="Verify web accessibility compliance with our WCAG contrast checker tool. Free, instant, runs in your browser. No signup.">
     <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
-    
+
     <link rel="canonical" href="https://cyberscryb.com/tools/contrast-checker/">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
     <link rel="stylesheet" href="/tools/contrast-checker/style.css">
-    
+
     <!-- JSON-LD: WebApplication -->
     <script type="application/ld+json">
     {
@@ -107,52 +107,21 @@
 
     <link rel="stylesheet" href="/tools/shared/support.css">
     <!-- Google Analytics -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
-    
+
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
     <meta property="og:site_name" content="CyberScryb">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
     <!-- Navigation Breadcrumbs -->
-    
+
 
     <header>
         <nav class="navbar">
@@ -201,7 +170,7 @@
                         <input type="text" id="fgHex" value="#a855f7" placeholder="#000000" maxlength="7" aria-label="#000000">
                     </div>
                 </div>
-                
+
                 <div class="input-panel">
                     <h3>Background Color</h3>
                     <div class="color-control">
@@ -217,7 +186,7 @@
                     <div class="ratio-lbl">CONTRAST RATIO</div>
                     <div class="ratio-val" id="ratioVal">10.5:1</div>
                 </div>
-                
+
                 <div class="adjust-box">
                     <div class="adjust-lbl">AUTO-OPTIMIZE CONTRAST</div>
                     <div class="adjust-actions">
@@ -268,14 +237,14 @@
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">The Crucial Role of Color Contrast in Modern Design</h2>
             <p>Web accessibility (often abbreviated as a11y) ensures that digital services can be navigated, read, and understood by everyone, including individuals with low vision, color blindness, or age-related vision degeneration. Color contrast represents one of the most common design failures on the internet, directly affecting readability and search index crawling optimization.</p>
             <p>When foreground text does not contrast sufficiently with the background, reading comprehension drops drastically. This affects users not only with clinical visual impairments but also users viewing screens under direct sunlight or using screens in power-saving low-brightness configurations. CyberScryb's WCAG Color Contrast Checker calculates the precise mathematical contrast between text components to guarantee universal readability.</p>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Understanding WCAG 2.1 &amp; 2.2 Standards</h2>
             <p>The Web Content Accessibility Guidelines (WCAG) categorize design compliance into three main levels: A (minimal), AA (mid-level / industry standard), and AAA (highest criteria). Here is how color contrast thresholds are defined:</p>
             <ul style="padding-left:1.5rem; margin-bottom:1.5rem;">
                 <li style="margin-bottom:0.5rem;"><strong>WCAG AA Compliance:</strong> Normal text elements require a minimum contrast ratio of 4.5:1. Large text (defined as 18pt/24px or larger, or 14pt/18.67px bold or larger) requires a 3.0:1 ratio. Graphical elements and UI controls also require a 3.0:1 ratio.</li>
                 <li style="margin-bottom:0.5rem;"><strong>WCAG AAA Compliance:</strong> Normal text elements require a minimum contrast ratio of 7.0:1. Large text elements require a minimum of 4.5:1. This level ensures maximum legibility for low-vision readers.</li>
             </ul>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How Relative Luminance &amp; Contrast Ratio Are Calculated</h2>
             <p>The relative luminance of any color is calculated based on its RGB values, representing the perceived brightness of a color relative to absolute white. The formula normalizes sRGB values and adjusts for gamma correction:</p>
             <p style="font-family:'JetBrains Mono',monospace; background:#07070a; padding:12px; border-radius:6px; font-size:0.9rem; margin-bottom:1.25rem;">
@@ -291,10 +260,10 @@
                 Contrast Ratio = (L1 + 0.05) / (L2 + 0.05)
             </p>
             <p>Where L1 is the lighter color (larger luminance value) and L2 is the darker color (smaller luminance value). Adding 0.05 acts as a light ambient bias to prevent division-by-zero errors when dealing with absolute black.</p>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">How the Auto-Optimize Tool Works</h2>
             <p>If your color combination fails compliance checks, you don't have to guess how to correct it. CyberScryb's contrast engine adjusts the lightness channel (L) of the foreground color in HSL space, step-by-step, until it hits the exact target ratio (4.5 or 7.0) relative to your background color. This preserves your color's hue and saturation, giving you the closest accessible match.</p>
-            
+
             <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.6rem; color:#a855f7; margin-top:2.5rem;">Related Developer Resources</h2>
             <ul style="padding-left:1.5rem;">
                 <li><a href="/tools/subnet-calculator/" style="color:#b91c1c;">Subnet Calculator</a> &mdash; Map server networks cleanly.</li>
@@ -327,7 +296,7 @@
             <details style="border-bottom:1px solid var(--border); padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Does passing the contrast ratio guarantee accessibility?</summary><p style="margin:0.6rem 0 0;">No. Contrast is one criterion out of many. Color used as the only way to convey meaning, keyboard focus visibility, and text placed over images all need their own checks. A passing ratio is necessary, not sufficient.</p></details>
             <details style="padding:0.9rem 0;"><summary style="color:var(--primary-soft); font-weight:600; cursor:pointer;">Do icons and logos need to pass WCAG contrast?</summary><p style="margin:0.6rem 0 0;">Icons that convey meaning, like status indicators or navigation chevrons, need 3:1 against their background. Purely decorative icons and brand logos are exempt, but anything the user needs to perceive for the page to work still needs contrast.</p></details>
         </section>
-    </main>
+
 
     <!-- AdSense Slot -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
@@ -354,7 +323,8 @@
         </div>
     </section>
 
-    <footer>
+    </main>
+<footer>
         <p><strong>CyberScryb LLC</strong> &copy; 2026 &mdash; Accessibility analysis runs client-side in the browser.</p>
         <p><a href="/privacy/">Privacy Policy</a> | <a href="/terms/">Terms of Service</a> | <a href="/disclosure/">Affiliate Disclosure</a> | <a href="/guides/">Guides</a> | <a href="/contact/">Contact</a></p>
     </footer>
@@ -367,8 +337,8 @@
 
     <script src="/tools/contrast-checker/script.js"></script>
     <script src="/tools/shared/support.js"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
-    
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+
 </body>
 
 </html>

@@ -1,33 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// Iubenda Banner script block to inject
-const iubendaScript = `    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>`;
+// The shared manager gates optional analytics and advertising until acceptance.
+const consentScript =
+  '<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">\n<script src="/js/consent.js?v=20261006audit1" defer></script>';
 
 function isRelative(url) {
   if (!url || url.trim() === '' || url.trim().startsWith('#')) return false;
@@ -75,14 +51,14 @@ function processHtmlFile(filepath) {
     }
   }
 
-  // 2. Iubenda Cookie Consent Banner Injection (if not already injected)
-  if (!html.includes('iubenda cookie consent banner') && !html.includes('_iub.csConfiguration')) {
+  // 2. Shared consent manager injection
+  if (!html.includes('/js/consent.js')) {
     const headEndTag = '</head>';
     const headEndIdx = html.indexOf(headEndTag);
     if (headEndIdx !== -1) {
-      html = html.substring(0, headEndIdx) + iubendaScript + '\n' + html.substring(headEndIdx);
+      html = html.substring(0, headEndIdx) + consentScript + '\n' + html.substring(headEndIdx);
       modified = true;
-      console.log(`  ➕ Injected iubenda script in: ${posixPath}`);
+      console.log(`  ➕ Injected consent manager in: ${posixPath}`);
     } else {
       console.warn(`  ⚠️ No </head> tag found in: ${posixPath}`);
     }

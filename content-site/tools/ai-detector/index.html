@@ -19,22 +19,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
-    <!-- Google Analytics 4 -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
 
     <style>
         .score-gauge {
@@ -143,35 +134,9 @@
             opacity: 0.8;
         }
     </style>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+
 
 <script type="application/ld+json">
 {
@@ -207,7 +172,7 @@
       "name": "Is my text stored or used for training?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Your text is processed and immediately discarded. We never store, log, or train on your content. Privacy-first, always."
+        "text": "Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device."
       }
     },
     {
@@ -245,10 +210,12 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
-    
+
     <header>
         <nav class="navbar">
             <div class="nav-container">
@@ -266,11 +233,11 @@
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
-                <div class="hamburger">
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -394,7 +361,7 @@
                     <div class="faq-item"><h4>How accurate is the AI detection?</h4><p>Our detector uses Gemini 3.1 Pro to analyze writing patterns, not statistical classifiers. It identifies specific markers like formulaic transitions, repetitive sentence openers, and AI-favorite vocabulary. Accuracy depends on text length &mdash; 200+ words gives the best results.</p></div>
                     <div class="faq-item"><h4>What does the score mean?</h4><p>The 0-100 score represents AI likelihood: 0-20 is almost certainly human, 21-40 is mostly human with some AI-like patterns, 41-60 is mixed signals, 61-80 is likely AI-generated, and 81-100 is almost certainly AI.</p></div>
                     <div class="faq-item"><h4>What AI patterns does it look for?</h4><p>It checks for repetitive sentence openers, formulaic transitions ("Furthermore," "Moreover"), lack of personal voice, overly balanced perspectives, generic examples, and AI-favorite words like "leverage," "delve," "comprehensive," and "utilize."</p></div>
-                    <div class="faq-item"><h4>Is my text stored or used for training?</h4><p>No. Your text is processed and immediately discarded. We never store, log, or train on your content. Privacy-first, always.</p></div>
+                    <div class="faq-item"><h4>Is my text stored or used for training?</h4><p>Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device.</p></div>
                     <div class="faq-item"><h4>Can I fix a high AI score?</h4><p>Yes! Use our <a href="/tools/humanizer/" style="color: var(--primary);">AI Humanizer</a> to rewrite flagged text. It rewrites AI content to match natural human writing patterns while preserving your meaning.</p></div>
                     <div class="faq-item"><h4>Can AI detectors be wrong?</h4><p>Yes. Short samples under about 100 words, heavily edited AI text, and formal or non-native human writing can all misfire. Treat the score as a signal that deserves a human read, not as proof.</p></div>
                     <div class="faq-item"><h4>Does it detect text from ChatGPT, Claude, and Gemini?</h4><p>Yes. The markers it looks for are properties of machine-generated prose in general, not of one specific model, so it works on text from ChatGPT, Claude, Gemini, Copilot, and other AI writers.</p></div>
@@ -406,7 +373,7 @@
                 </div>
             </div>
         </section>
-    </main>
+
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
@@ -432,7 +399,7 @@
         </div>
     </section>
 
-    
+
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
@@ -451,7 +418,8 @@
         </div>
     </section>
 
-    <footer>
+    </main>
+<footer>
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -498,10 +466,10 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20261005ux1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261005ux1"></script>
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
     <script src="/tools/ai-detector/ai-detector.js"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 </body>
 

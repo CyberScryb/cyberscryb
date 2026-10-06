@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,24 +24,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
 
-    <!-- Google Analytics 4 -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
     <style media="print">
         * { visibility: hidden; }
         #output-text, #output-text * { visibility: visible; }
@@ -57,8 +48,7 @@
         window.print();
     }
     </script>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
     <link rel="icon" type="image/png" href="/mascot-icon.png">
     <script type="application/ld+json">
     {
@@ -88,37 +78,14 @@
             { "@type": "Question", "name": "How long should a cover letter be?", "acceptedAnswer": { "@type": "Answer", "text": "One page, roughly 300-400 words. Hiring managers skim; every sentence must earn its place. This generator targets that length automatically." }},
             { "@type": "Question", "name": "Will recruiters know my cover letter was AI-written?", "acceptedAnswer": { "@type": "Answer", "text": "Not if you personalize it. The generator drafts from YOUR background and the specific role, avoiding the generic phrases that flag AI text. Always read it through and adjust details before sending." }},
             { "@type": "Question", "name": "Should I write a new cover letter for every job?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A tailored letter that connects your experience to the specific role dramatically outperforms a generic one. That's exactly what this tool is built for — a fresh, specific letter in seconds." }},
-            { "@type": "Question", "name": "Is my information stored?", "acceptedAnswer": { "@type": "Answer", "text": "No. Your input is sent to the AI model for processing and immediately discarded. Nothing is stored, logged, or used for training." }},
+            { "@type": "Question", "name": "Is my information stored?", "acceptedAnswer": { "@type": "Answer", "text": "Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device." }},
             { "@type": "Question", "name": "Is this cover letter generator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup and no paywall. Generate, copy, and send." }}
         ]
     }
     </script>
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
 
-      if (blacklistedPaths.includes(currentPath)) return;
-
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
@@ -140,11 +107,11 @@
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
-                <div class="hamburger">
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -252,7 +219,7 @@
                     <div class="faq-item"><h4>How long should a cover letter be?</h4><p>One page, roughly 300-400 words. Hiring managers skim; every sentence must earn its place. This generator targets that length automatically.</p></div>
                     <div class="faq-item"><h4>Will recruiters know my cover letter was AI-written?</h4><p>Not if you personalize it. The generator drafts from YOUR background and the specific role, avoiding the generic phrases that flag AI text. Always read it through and adjust details before sending.</p></div>
                     <div class="faq-item"><h4>Should I write a new cover letter for every job?</h4><p>Yes. A tailored letter that connects your experience to the specific role dramatically outperforms a generic one. That's exactly what this tool is built for &mdash; a fresh, specific letter in seconds.</p></div>
-                    <div class="faq-item"><h4>Is my information stored?</h4><p>No. Your input is sent to the AI model for processing and immediately discarded. Nothing is stored, logged, or used for training.</p></div>
+                    <div class="faq-item"><h4>Is my information stored?</h4><p>Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device.</p></div>
                     <div class="faq-item"><h4>Is this cover letter generator free?</h4><p>Yes, 100% free with no signup and no paywall. Generate, copy, and send.</p></div>
                 </div>
 
@@ -275,7 +242,7 @@
             <p>The quality of the output tracks the quality of your input. Don't write "5 years experience in marketing." Write what you actually did: "Grew email list from 8k to 41k in 18 months; highest-converting campaign drove $212k in attributed revenue." Specific inputs produce specific letters. Include the job title and company so the letter can speak to the role directly instead of floating in generic space.</p>
             <p>After generating, do three things. First, verify every fact &mdash; the model only knows what you told it, but check anyway. Second, add one sentence only you could write: something about why this company specifically. Third, match the tone to the industry. A startup and a bank do not want the same letter, which is why the tone selector exists. For more on structure, the <a href="/guides/how-to-write-a-cover-letter/">cover letter writing guide</a> walks through each paragraph in detail.</p>
         </section>
-    </main>
+
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
@@ -315,7 +282,8 @@
         </div>
     </section>
 
-    <footer>
+    </main>
+<footer>
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -344,11 +312,11 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20261005ux1"></script>
-    <script src="/tools/shared/cs-context.js?v=20261005ux1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261005ux1"></script>
-    <script src="/tools/shared/formal-export.js?v=20261005ux1"></script>
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/cover-letter-generator/cover-letter-generator.js"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 </body>
 </html>

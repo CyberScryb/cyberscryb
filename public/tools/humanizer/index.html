@@ -20,60 +20,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
     <meta name="google-adsense-account" content="ca-pub-5721233331247292">
 
-    <!-- Google Analytics 4 -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
+
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      if (navigator.userAgent && /Google|Mediapartners|bot/i.test(navigator.userAgent)) return;
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
-    
+
     <header>
         <nav class="navbar">
             <div class="nav-container">
@@ -92,11 +58,11 @@
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
-                <div class="hamburger">
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -323,7 +289,7 @@
         </div>
     </section>
 
-    
+
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background:var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
@@ -348,7 +314,7 @@
   <p>Most AI humanizer tools apply a generic "make it sound casual" transformation. This one is different. When you paste two or three examples of your own writing &mdash; even a few tweets or a short email &mdash; the tool performs a few-shot analysis of your style before rewriting. It extracts your average sentence length, your preferred punctuation style, whether you tend toward active or passive voice, how often you use contractions, and roughly how formal your vocabulary is. The rewrite then uses those parameters instead of defaults. The result reads like you wrote it on a good day, not like a robot doing an impression of a human.</p>
 
   <h2>Privacy</h2>
-  <p>Your input is sent to the AI model for processing and immediately discarded. Nothing you type is stored, logged, or used for training. Your text never touches a database. The style samples you provide are used in the same request and not retained.</p>
+  <p>Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device.</p>
 
 </section>
 
@@ -365,9 +331,10 @@
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
-    </main>
 
-    <footer>
+
+    </main>
+<footer>
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -413,14 +380,14 @@
         "Matches your personal writing style",
         "Bypasses GPTZero and Turnitin AI detection",
         "No signup required",
-        "Nothing is saved — your text is sent to generate the result, then discarded"
+        "Text is sent for AI generation; provider retention and local drafts are explained in our privacy policy"
       ]
     }
     </script>
 
-    <script src="/js/script.js?v=20261005ux1"></script>
-    <script src="/tools/humanizer/humanizer.js?v=20261005ux1"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/humanizer/humanizer.js?v=20261006audit1"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 
 </body>

@@ -191,25 +191,44 @@ describe('Firestore-backed rate limiting', () => {
     expect(typeof result.retryAfter).toBe('number');
   });
 
-  test('per-IP cap check fails OPEN on Firestore error after global succeeds', async () => {
-    const dateStr = getDateString();
-    let callCount = 0;
+  test('failure reading the per-IP quota fails closed without incrementing either counter', async () => {
     const realRunTransaction = mockFakeDb.runTransaction.bind(mockFakeDb);
-    mockFakeDb.runTransaction = async fn => {
-      callCount++;
-      if (callCount === 1) {
-        // global check succeeds
-        return realRunTransaction(fn);
-      }
-      // per-IP check fails
-      throw new Error('Firestore unavailable for per-IP doc');
-    };
-
+    mockFakeDb.runTransaction = fn =>
+      realRunTransaction(tx =>
+        fn({
+          ...tx,
+          get: ref => {
+            if (ref.path.startsWith('rateLimits/')) throw new Error('IP quota unavailable');
+            return tx.get(ref);
+          },
+        })
+      );
     const result = await checkFirestoreRateLimit(makeReq({ ip: '8.8.8.8' }));
-    expect(result.allowed).toBe(true);
+    expect(result.allowed).toBe(false);
+    expect(mockFakeDb.__store.size).toBe(0);
+  });
 
-    // global counter still incremented
-    const globalDoc = mockFakeDb.__store.get(`usage/daily-${dateStr}`);
-    expect(globalDoc.count).toBe(1);
+  test('an exhausted IP quota does not consume the global quota', async () => {
+    const req = makeReq({ ip: '8.8.4.4' });
+    mockFakeDb.__store.set(`rateLimits/${getIpHash(req)}-${getDateString()}`, { count: 10 });
+    expect((await checkFirestoreRateLimit(req)).allowed).toBe(false);
+    expect(mockFakeDb.__store.has(`usage/daily-${getDateString()}`)).toBe(false);
+  });
+
+  test('ten generations across burst windows exhaust the daily quota', async () => {
+    const now = jest.spyOn(Date, 'now');
+    const start = Date.now();
+    const req = makeReq({ ip: '192.0.2.100' });
+    try {
+      for (let i = 0; i < 10; i++) {
+        now.mockReturnValue(start + i * 61000);
+        expect((await checkFirestoreRateLimit(req)).allowed).toBe(true);
+      }
+      now.mockReturnValue(start + 10 * 61000);
+      expect((await checkFirestoreRateLimit(req)).allowed).toBe(false);
+      expect(mockFakeDb.__store.get(`usage/daily-${getDateString()}`).count).toBe(10);
+    } finally {
+      now.mockRestore();
+    }
   });
 });

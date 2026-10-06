@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    
-    
+
+
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,22 +21,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261005ux1">
-    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261005ux1">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
-    <!-- Google Analytics 4 -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (localStorage.getItem('cs_cookie_consent') === 'declined') {
-        window['ga-disable-G-LS46B9J1XK'] = true;
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-LS46B9J1XK');
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS46B9J1XK"></script>
+
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5721233331247292" crossorigin="anonymous"></script>
+
     <style media="print">
         * { visibility: hidden; }
         #output-text, #output-text * { visibility: visible; }
@@ -52,39 +43,15 @@
         window.print();
     }
     </script>
-    <!-- Ahrefs Web Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="8ErrwVsIH390rmP2ercYDQ" async></script>
+
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <!-- iubenda cookie consent banner -->
-    <script>
-    (function() {
-      const currentPath = window.location.pathname;
-      const blacklistedPaths = ['/tools/regex-tester', '/tools/base64-tool'];
-      
-      if (blacklistedPaths.includes(currentPath)) return;
-      
-      window._iub = window._iub || [];
-      window._iub.csConfiguration = {
-        cookiePolicyId: '98273641',
-        siteId: '3672849',
-        lang: 'en',
-        banner: {
-          acceptButtonDisplay: true,
-          customizeButtonDisplay: true,
-          position: 'float-bottom-right'
-        }
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://cs.iubenda.com/autoblocking/3672849.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
-    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
 <body>
-    
+
     <header>
         <nav class="navbar">
             <div class="nav-container">
@@ -102,11 +69,11 @@
                     <li><a href="/about/">About</a></li>
                     <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
-                <div class="hamburger">
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -191,7 +158,7 @@
                         </div>
                         <div class="output-wrapper">
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
-                                <span class="placeholder" style="color: #555555;">Your hardship letter will appear here...</span>
+                                <span class="placeholder" style="color: var(--text-muted);">Your hardship letter will appear here...</span>
                             </div>
                             <div id="loading-indicator" class="hidden">
                                 <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
@@ -210,7 +177,7 @@
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
                     <div class="faq-item"><h4>What is a hardship letter?</h4><p>A hardship letter is a formal document you send to a lender, creditor, or institution explaining why you cannot meet your financial obligations. It describes your circumstances &mdash; job loss, medical emergency, divorce, natural disaster &mdash; and requests relief such as a loan modification, payment plan, or debt reduction.</p></div>
                     <div class="faq-item"><h4>Will this letter work for my mortgage company?</h4><p>This tool generates a professional, well-structured letter following the format mortgage servicers expect. However, every lender has different requirements. Use the generated letter as a strong starting point, then customize it with your specific account details and any documentation your servicer requests.</p></div>
-                    <div class="faq-item"><h4>Is my information stored?</h4><p>No. Your input is sent to the AI model for processing and immediately discarded. We do not store, log, or train on any personal information you provide. Your hardship details never touch a database.</p></div>
+                    <div class="faq-item"><h4>Is my information stored?</h4><p>Your input is sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database. Provider processing and retention are described in our privacy policy. Some tools also save drafts on your device.</p></div>
                     <div class="faq-item"><h4>Can I edit the letter after it's generated?</h4><p>Yes. The output is fully editable text. Copy it, paste it into your word processor, and adjust names, dates, account numbers, or any details before sending it. We strongly recommend personalizing it with your specific information.</p></div>
                     <div class="faq-item"><h4>Should I attach supporting documentation?</h4><p>Yes, always. A hardship letter is much stronger when accompanied by supporting documents: medical records, termination letters, bank statements, tax returns, or any evidence that corroborates your situation. Most institutions expect documentation alongside your letter.</p></div>
                 </div>
@@ -241,7 +208,7 @@
             <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">A Note on Why This Tool Is Free</h2>
             <p>This tool is free because the people who actually need a hardship letter usually cannot afford to pay $50 for one. I worked as a Certified Nursing Assistant for years before getting into tech, and I had to write hardship letters more than once myself. The tools that existed at the time either wanted $40 upfront or buried the actual help behind ten pages of affiliate-link blog content. This is the version of the tool I wish had existed when I needed it: 100% free, runs directly in your browser, with instant full outputs and no hidden subscriptions or paywalls.</p>
         </section>
-    </main>
+
 
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
@@ -267,7 +234,7 @@
         </div>
     </section>
 
-    
+
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
@@ -286,7 +253,8 @@
         </div>
     </section>
 
-    <footer>
+    </main>
+<footer>
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -358,7 +326,7 @@
           "name": "Is my information stored?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Your input is sent to the AI model for processing and immediately discarded. We do not store, log, or train on any personal information you provide. Your hardship details never touch a database."
+            "text": "Your input is sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database. Provider processing and retention are described in our privacy policy. Some tools also save drafts on your device."
           }
         },
         {
@@ -381,12 +349,12 @@
     }
     </script>
 
-    <script src="/js/script.js?v=20261005ux1"></script>
-    <script src="/tools/shared/cs-context.js?v=20261005ux1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261005ux1"></script>
-    <script src="/tools/shared/formal-export.js?v=20261005ux1"></script>
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/hardship-letter/hardship-letter.js"></script>
-    <script src="/tools/shared/affiliate-panel.js?v=20261005ux1"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 </body>
 
