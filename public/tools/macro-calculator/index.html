@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macro Calculator — Protein, Carbs & Fat Grams | CyberScryb</title>
+<meta name="description" content="Free macro calculator: get your daily protein, carb, and fat grams for cutting, maintaining, or bulking. Choose balanced, high-protein, low-carb, or keto. Metric or imperial, no signup, private.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/macro-calculator/">
+<meta property="og:title" content="Macro Calculator — Protein, Carbs & Fat Grams | CyberScryb">
+<meta property="og:description" content="Free macro calculator: daily protein, carb, and fat targets in grams for your goal and diet style. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/macro-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Macro Calculator — Protein, Carbs & Fat Grams | CyberScryb">
+<meta name="twitter:description" content="Free macro calculator: daily protein, carb, and fat targets in grams for your goal and diet style. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Macro Calculator",
+        "url": "https://cyberscryb.com/tools/macro-calculator/",
+        "description": "Free online macro calculator: enter sex, age, height, weight, and activity level to get daily protein, carb, and fat targets in grams for cutting, maintaining, or bulking, in balanced, high-protein, low-carb, or keto styles.",
+        "applicationCategory": "HealthApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Macro Calculator", "item": "https://cyberscryb.com/tools/macro-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What are macros?", "acceptedAnswer": { "@type": "Answer", "text": "Macros (macronutrients) are the three nutrients that supply calories: protein and carbohydrates each provide 4 calories per gram, and fat provides 9 calories per gram. Hitting a calorie target controls whether you gain or lose weight; splitting those calories into a macro ratio controls body composition, energy, and how full you feel." } },
+            { "@type": "Question", "name": "How is a macro calculator different from a calorie calculator?", "acceptedAnswer": { "@type": "Answer", "text": "A calorie calculator (like a TDEE calculator) tells you how many total calories to eat. A macro calculator takes that same calorie number and splits it into grams of protein, carbs, and fat based on a diet style, so you know what to actually put on the plate, not just a single number." } },
+            { "@type": "Question", "name": "How much protein do I need per day?", "acceptedAnswer": { "@type": "Answer", "text": "Most of these presets land between 0.7 and 1.1 grams of protein per pound of bodyweight, which matches the range sports nutrition research supports for preserving or building muscle. The high-protein preset sits at the top of that range; balanced and low-carb sit in the middle." } },
+            { "@type": "Question", "name": "What is a good macro split for weight loss?", "acceptedAnswer": { "@type": "Answer", "text": "Any split works for weight loss as long as total calories are in a deficit; macros mainly affect hunger, energy, and muscle retention, not the scale directly. A higher-protein split (35 to 40% of calories) is the most evidence-backed choice for a cut since it preserves muscle and keeps you fuller on fewer calories." } },
+            { "@type": "Question", "name": "Is keto the same as low-carb?", "acceptedAnswer": { "@type": "Answer", "text": "No. Low-carb here means roughly 20% of calories from carbs, light but not restrictive. Keto is far stricter, around 5% of calories from carbs (commonly under 50g per day), which is low enough to shift the body into ketosis. Keto is harder to sustain and not required for fat loss." } },
+            { "@type": "Question", "name": "Is this macro calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. Every calculation happens instantly in your browser and your numbers are never sent to a server." } }
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #ef4444; --primary-soft: #f87171;
+            --primary-glow: rgba(239,68,68,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .macro-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .macro-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .macro-unit-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .macro-unit-toggle button {
+            flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .macro-unit-toggle button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .macro-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .macro-field input, .macro-field select {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .macro-field select { font-size: 1rem; cursor: pointer; }
+        .macro-field select option { background: var(--card); color: var(--text); }
+        .macro-field input:focus, .macro-field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .macro-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .macro-row { grid-template-columns: 1fr; } }
+        .macro-sex { display: flex; gap: 0.5rem; }
+        .macro-sex button {
+            flex: 1; padding: 0.8rem; font-size: 1rem; font-weight: 700; font-family: var(--font);
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .macro-sex button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .macro-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .macro-cal { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.25rem; }
+        .macro-cal-value { font-size: 2.5rem; font-weight: 800; color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; margin-bottom: 1.25rem; }
+        .macro-bars { display: flex; height: 14px; border-radius: 7px; overflow: hidden; margin-bottom: 1.25rem; background: var(--bg-elevated); }
+        .macro-bar-protein { background: #f87171; }
+        .macro-bar-carb { background: #38bdf8; }
+        .macro-bar-fat { background: #fbbf24; }
+        .macro-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 0.5rem; }
+        @media (max-width: 560px) { .macro-grid { grid-template-columns: 1fr; } }
+        .macro-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .macro-stat .macro-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; display:flex; align-items:center; justify-content:center; gap:0.35rem; }
+        .macro-stat .macro-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+        .macro-stat .macro-value { font-size: 1.7rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; }
+        .macro-stat .macro-unit { font-size: 0.78rem; color: var(--text-faint); }
+        .macro-stat .macro-pct { font-size: 0.75rem; color: var(--text-faint); margin-top: 0.15rem; }
+        .macro-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+        .macro-error { font-size: 0.95rem; color: var(--primary-soft); padding: 1rem 0; }
+        .macro-diet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+        @media (max-width: 560px) { .macro-diet-grid { grid-template-columns: 1fr 1fr; } }
+        .macro-diet-grid button {
+            padding: 0.7rem 0.4rem; font-size: 0.82rem; font-weight: 700; font-family: var(--font);
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 10px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 44px;
+        }
+        .macro-diet-grid button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .macro-split { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .macro-split th, .macro-split td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .macro-split th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .macro-split td { color: var(--text-muted); }
+        .macro-split tbody tr:last-child td { border-bottom: none; }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="macro-app">
+        <div class="macro-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Macro Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Macro Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Turn your calorie target into daily protein, carb, and fat grams. Pick a goal and a diet style. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="macro-unit-toggle" role="group" aria-label="Unit system">
+                    <button id="macro-imperial" class="is-on" type="button">Imperial (ft / lb)</button>
+                    <button id="macro-metric" type="button">Metric (cm / kg)</button>
+                </div>
+
+                <div class="macro-field" style="margin-bottom:1rem;">
+                    <label>Sex</label>
+                    <div class="macro-sex" role="group" aria-label="Sex">
+                        <button id="macro-male" class="is-on" type="button">Male</button>
+                        <button id="macro-female" type="button">Female</button>
+                    </div>
+                </div>
+
+                <div class="macro-field" style="margin-bottom:1rem;">
+                    <label for="macro-age">Age</label>
+                    <input id="macro-age" type="number" inputmode="numeric" min="1" max="120" step="1" placeholder="e.g. 35" value="35">
+                </div>
+
+                <div id="macro-imperial-fields">
+                    <div class="macro-row" style="margin-top:0;">
+                        <div class="macro-field">
+                            <label for="macro-ft">Height (feet)</label>
+                            <input id="macro-ft" type="number" inputmode="numeric" min="1" max="9" step="1" placeholder="e.g. 5" value="5">
+                        </div>
+                        <div class="macro-field">
+                            <label for="macro-in">Height (inches)</label>
+                            <input id="macro-in" type="number" inputmode="decimal" min="0" max="11.99" step="0.5" placeholder="e.g. 9" value="9">
+                        </div>
+                    </div>
+                    <div class="macro-field" style="margin-top:1rem;">
+                        <label for="macro-lb">Weight (pounds)</label>
+                        <input id="macro-lb" type="number" inputmode="decimal" min="1" step="0.5" placeholder="e.g. 165" value="165">
+                    </div>
+                </div>
+
+                <div id="macro-metric-fields" style="display:none;">
+                    <div class="macro-row" style="margin-top:0;">
+                        <div class="macro-field">
+                            <label for="macro-cm">Height (cm)</label>
+                            <input id="macro-cm" type="number" inputmode="decimal" min="50" max="275" step="0.5" placeholder="e.g. 175" value="175">
+                        </div>
+                        <div class="macro-field">
+                            <label for="macro-kg">Weight (kg)</label>
+                            <input id="macro-kg" type="number" inputmode="decimal" min="10" step="0.5" placeholder="e.g. 75" value="75">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-field">
+                        <label for="macro-activity">Activity level</label>
+                        <select id="macro-activity">
+                            <option value="1.2">Sedentary: little or no exercise</option>
+                            <option value="1.375">Lightly active: 1-3 days/week</option>
+                            <option value="1.55" selected>Moderately active: 3-5 days/week</option>
+                            <option value="1.725">Very active: 6-7 days/week</option>
+                            <option value="1.9">Extra active: physical job or 2x/day training</option>
+                        </select>
+                    </div>
+                    <div class="macro-field">
+                        <label for="macro-goal">Goal</label>
+                        <select id="macro-goal">
+                            <option value="cut">Cut (lose weight, -20%)</option>
+                            <option value="maintain" selected>Maintain</option>
+                            <option value="bulk">Bulk (gain muscle, +10%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="macro-field" style="margin-top:1rem;">
+                    <label>Diet style</label>
+                    <div class="macro-diet-grid" role="group" aria-label="Diet style">
+                        <button id="macro-diet-balanced" class="is-on" type="button">Balanced</button>
+                        <button id="macro-diet-highprotein" type="button">High Protein</button>
+                        <button id="macro-diet-lowcarb" type="button">Low Carb</button>
+                        <button id="macro-diet-keto" type="button">Keto</button>
+                    </div>
+                </div>
+
+                <div class="macro-result" id="macro-result" aria-live="polite">
+                    <div id="macro-body">
+                        <div class="macro-cal">Daily calories</div>
+                        <div class="macro-cal-value" id="macro-cal-out">—</div>
+                        <div class="macro-bars">
+                            <div class="macro-bar-protein" id="macro-bar-protein" style="width:33%"></div>
+                            <div class="macro-bar-carb" id="macro-bar-carb" style="width:34%"></div>
+                            <div class="macro-bar-fat" id="macro-bar-fat" style="width:33%"></div>
+                        </div>
+                        <div class="macro-grid">
+                            <div class="macro-stat">
+                                <div class="macro-label"><span class="macro-dot" style="background:#f87171;"></span>Protein</div>
+                                <div class="macro-value" id="macro-protein-out">—</div>
+                                <div class="macro-unit">grams/day</div>
+                                <div class="macro-pct" id="macro-protein-pct">—</div>
+                            </div>
+                            <div class="macro-stat">
+                                <div class="macro-label"><span class="macro-dot" style="background:#38bdf8;"></span>Carbs</div>
+                                <div class="macro-value" id="macro-carb-out">—</div>
+                                <div class="macro-unit">grams/day</div>
+                                <div class="macro-pct" id="macro-carb-pct">—</div>
+                            </div>
+                            <div class="macro-stat">
+                                <div class="macro-label"><span class="macro-dot" style="background:#fbbf24;"></span>Fat</div>
+                                <div class="macro-value" id="macro-fat-out">—</div>
+                                <div class="macro-unit">grams/day</div>
+                                <div class="macro-pct" id="macro-fat-pct">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="macro-note" id="macro-note">Enter your numbers to see your daily macro targets.</div>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use the Macro Calculator</h2>
+                <p>Enter your stats the same way you would for a TDEE calculator, pick cut, maintain, or bulk, then pick a diet style. The calculator first works out your calorie target with the Mifflin-St Jeor formula, then splits those calories into protein, carb, and fat grams based on the diet style you picked. Change any field and the grams update immediately.</p>
+                <p>Worked example: a 35-year-old man, 5'9" (175 cm), 165 lb (75 kg), moderately active, cutting, on a Balanced split. TDEE comes out to <strong style="color:var(--text);">2,594 cal/day</strong>; a 20% cut puts his target at <strong style="color:var(--text);">2,075 cal/day</strong>. Balanced splits 30% protein / 40% carbs / 30% fat, so his targets are <strong style="color:var(--text);">156g protein, 208g carbs, and 69g fat</strong> &mdash; 2,075 calories, give or take rounding. Read our guide: <a href="/guides/how-to-calculate-macros/" style="color: var(--primary);">how to calculate macros</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Macros Matter More Than Just Calories</h2>
+                <p>Calories decide whether you gain, lose, or hold weight. Macros decide what that weight is made of, how hungry you feel along the way, and how much energy you have to train. Two people eating the identical 2,000 calories a day can end up in very different places if one eats mostly protein and vegetables and the other eats mostly sugar: same calorie math, different hunger, different muscle retention, different results on the scale after a few months.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The Four Diet Styles, Explained</h2>
+                <table class="macro-split">
+                    <thead><tr><th>Style</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Best for</th></tr></thead>
+                    <tbody>
+                        <tr><td>Balanced</td><td>30%</td><td>40%</td><td>30%</td><td>General health, sustainable long-term</td></tr>
+                        <tr><td>High Protein</td><td>40%</td><td>30%</td><td>30%</td><td>Cutting, preserving muscle on a deficit</td></tr>
+                        <tr><td>Low Carb</td><td>35%</td><td>20%</td><td>45%</td><td>Steadier energy, less appetite swings</td></tr>
+                        <tr><td>Keto</td><td>20%</td><td>5%</td><td>75%</td><td>Strict carb restriction, ketosis</td></tr>
+                    </tbody>
+                </table>
+                <p>Protein and carbs both supply 4 calories per gram; fat supplies 9. That is why a high-fat split like keto looks small in percentage terms on paper but still accounts for most of your calories &mdash; fat is more than double the energy density of the other two. None of these four is objectively "best": they are different tools for different goals and different levels of tolerance for restriction. Balanced is the easiest to sustain for most people; high protein earns its keep specifically during a cut.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How Much Protein Do You Actually Need?</h2>
+                <p>Sports nutrition research generally supports 0.7 to 1 gram of protein per pound of bodyweight for people trying to build or preserve muscle, with some benefit up to about 1.2g/lb during an aggressive cut. These presets are percentages of calories, not fixed bodyweight ratios, so where they land in g/lb moves with both your calorie target and your weight &mdash; the note under your results shows your actual number. A bigger calorie target (bulking) or a lighter bodyweight will push the g/lb figure higher for the same percentage; a calorie deficit or a heavier bodyweight pulls it lower. If your number comes out well below 0.7g/lb, Low Carb or High Protein will close the gap. Landing above 1.2g/lb isn't harmful for most people with normal kidney function, it just isn't buying you extra muscle beyond that point.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What the Calculator Misses</h2>
+                <p>This tool inherits the same accuracy range as any TDEE-based calculator: calorie estimates run 10 to 20% off for a given individual, since they are built from population averages and cannot see your muscle mass, genetics, or day-to-day activity outside formal exercise. The macro split itself is a starting ratio, not a medical prescription &mdash; people with kidney disease, diabetes, or other metabolic conditions should get a macro target from a doctor or registered dietitian, not a generic calculator. Use the numbers here as a two-to-three-week starting point, then adjust based on your energy, hunger, and progress.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses a Macro Calculator</h2>
+                <p>Lifters use it to hit a protein target while cutting so the weight they lose is fat, not muscle. People newer to tracking use it to understand what "eat more protein" actually means in grams at breakfast, lunch, and dinner. Low-carb and keto dieters use it to find the carb ceiling that keeps them in their chosen range without guessing. Whatever the goal, grams on a plate are easier to act on than a single calorie number.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What are macros?</summary><p>Macros (macronutrients) are the three nutrients that supply calories: protein and carbohydrates each provide 4 calories per gram, and fat provides 9 calories per gram. Hitting a calorie target controls whether you gain or lose weight; splitting those calories into a macro ratio controls body composition, energy, and how full you feel.</p></details>
+                <details><summary>How is a macro calculator different from a calorie calculator?</summary><p>A calorie calculator (like a TDEE calculator) tells you how many total calories to eat. A macro calculator takes that same calorie number and splits it into grams of protein, carbs, and fat based on a diet style, so you know what to actually put on the plate, not just a single number.</p></details>
+                <details><summary>How much protein do I need per day?</summary><p>Most of these presets land between 0.7 and 1.1 grams of protein per pound of bodyweight, which matches the range sports nutrition research supports for preserving or building muscle. The high-protein preset sits at the top of that range; balanced and low-carb sit in the middle.</p></details>
+                <details><summary>What is a good macro split for weight loss?</summary><p>Any split works for weight loss as long as total calories are in a deficit; macros mainly affect hunger, energy, and muscle retention, not the scale directly. A higher-protein split (35 to 40% of calories) is the most evidence-backed choice for a cut since it preserves muscle and keeps you fuller on fewer calories.</p></details>
+                <details><summary>Is keto the same as low-carb?</summary><p>No. Low-carb here means roughly 20% of calories from carbs, light but not restrictive. Keto is far stricter, around 5% of calories from carbs (commonly under 50g per day), which is low enough to shift the body into ketosis. Keto is harder to sustain and not required for fat loss.</p></details>
+                <details><summary>Is this macro calculator free?</summary><p>Yes, 100% free with no signup. Every calculation happens instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/tdee-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">TDEE Calculator</strong>
+                        <span style="font-size:0.85rem;">Find your daily calorie burn and cut/maintain/bulk targets.</span>
+                    </a>
+                    <a href="/tools/bmi-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">BMI Calculator</strong>
+                        <span style="font-size:0.85rem;">Check your Body Mass Index and weight category.</span>
+                    </a>
+                    <a href="/tools/blood-sugar-log-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Blood Sugar Log Generator</strong>
+                        <span style="font-size:0.85rem;">Printable glucose tracking sheets.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Why macros matter beyond the calorie number, the four diet styles compared, and how much protein you actually need.</p>
+                <a href="/guides/how-to-calculate-macros/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#fee2e2;font-weight:700;border-radius:10px;text-decoration:none;">Read the Macro Guide</a>
+            </section>
+        </div>
+
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+        var imperial = true;
+        var isMale = true;
+        var diet = "balanced";
+        var DIETS = {
+            balanced:    { protein: 0.30, carb: 0.40, fat: 0.30 },
+            highprotein: { protein: 0.40, carb: 0.30, fat: 0.30 },
+            lowcarb:     { protein: 0.35, carb: 0.20, fat: 0.45 },
+            keto:        { protein: 0.20, carb: 0.05, fat: 0.75 }
+        };
+
+        var impBtn = document.getElementById("macro-imperial");
+        var metBtn = document.getElementById("macro-metric");
+        var maleBtn = document.getElementById("macro-male");
+        var femaleBtn = document.getElementById("macro-female");
+        var impFields = document.getElementById("macro-imperial-fields");
+        var metFields = document.getElementById("macro-metric-fields");
+
+        var dietBtns = {
+            balanced: document.getElementById("macro-diet-balanced"),
+            highprotein: document.getElementById("macro-diet-highprotein"),
+            lowcarb: document.getElementById("macro-diet-lowcarb"),
+            keto: document.getElementById("macro-diet-keto")
+        };
+
+        var ageEl = document.getElementById("macro-age");
+        var ftEl = document.getElementById("macro-ft");
+        var inEl = document.getElementById("macro-in");
+        var lbEl = document.getElementById("macro-lb");
+        var cmEl = document.getElementById("macro-cm");
+        var kgEl = document.getElementById("macro-kg");
+        var activityEl = document.getElementById("macro-activity");
+        var goalEl = document.getElementById("macro-goal");
+
+        var bodyEl = document.getElementById("macro-body");
+        var calOut = document.getElementById("macro-cal-out");
+        var proteinOut = document.getElementById("macro-protein-out");
+        var carbOut = document.getElementById("macro-carb-out");
+        var fatOut = document.getElementById("macro-fat-out");
+        var proteinPct = document.getElementById("macro-protein-pct");
+        var carbPct = document.getElementById("macro-carb-pct");
+        var fatPct = document.getElementById("macro-fat-pct");
+        var barProtein = document.getElementById("macro-bar-protein");
+        var barCarb = document.getElementById("macro-bar-carb");
+        var barFat = document.getElementById("macro-bar-fat");
+        var noteEl = document.getElementById("macro-note");
+
+        function fmt(n) { return Math.round(n).toLocaleString("en-US"); }
+
+        function showError(msg) {
+            bodyEl.style.display = "none";
+            noteEl.textContent = msg;
+        }
+
+        function showBody() {
+            bodyEl.style.display = "block";
+        }
+
+        function calc() {
+            var heightCm, weightKg;
+            var age = parseFloat(ageEl.value);
+
+            if (imperial) {
+                var ft = parseFloat(ftEl.value), inch = parseFloat(inEl.value), lb = parseFloat(lbEl.value);
+                if (isNaN(ft) && isNaN(inch) && isNaN(lb)) { showError("Enter your height and weight to see your macro targets."); return; }
+                var totalIn = (isNaN(ft) ? 0 : ft) * 12 + (isNaN(inch) ? 0 : inch);
+                if (!(totalIn > 0) || isNaN(lb) || lb <= 0) { showError("Enter a valid height and weight to see your macro targets."); return; }
+                if (totalIn > 120 || lb > 1500) { showError("Those numbers look off. Double-check your height and weight."); return; }
+                heightCm = totalIn * 2.54;
+                weightKg = lb * 0.453592;
+            } else {
+                var cm = parseFloat(cmEl.value), kg = parseFloat(kgEl.value);
+                if (isNaN(cm) && isNaN(kg)) { showError("Enter your height and weight to see your macro targets."); return; }
+                if (!(cm > 0) || isNaN(kg) || kg <= 0) { showError("Enter a valid height and weight to see your macro targets."); return; }
+                if (cm > 300 || kg > 700) { showError("Those numbers look off. Double-check your height and weight."); return; }
+                heightCm = cm;
+                weightKg = kg;
+            }
+
+            if (isNaN(age) || !(age >= 1) || age > 120) { showError("Enter a valid age between 1 and 120."); return; }
+
+            var activity = parseFloat(activityEl.value);
+            var bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + (isMale ? 5 : -161);
+            var tdee = bmr * activity;
+            if (!isFinite(bmr) || !isFinite(tdee) || bmr <= 0 || tdee > 20000) { showError("Those numbers look off. Double-check your inputs."); return; }
+
+            var goal = goalEl.value;
+            var calories = tdee;
+            if (goal === "cut") calories = tdee * 0.8;
+            if (goal === "bulk") calories = tdee * 1.1;
+
+            var split = DIETS[diet];
+            var proteinG = (calories * split.protein) / 4;
+            var carbG = (calories * split.carb) / 4;
+            var fatG = (calories * split.fat) / 9;
+
+            calOut.textContent = fmt(calories);
+            proteinOut.textContent = fmt(proteinG);
+            carbOut.textContent = fmt(carbG);
+            fatOut.textContent = fmt(fatG);
+            proteinPct.textContent = Math.round(split.protein * 100) + "% of calories";
+            carbPct.textContent = Math.round(split.carb * 100) + "% of calories";
+            fatPct.textContent = Math.round(split.fat * 100) + "% of calories";
+            barProtein.style.width = (split.protein * 100) + "%";
+            barCarb.style.width = (split.carb * 100) + "%";
+            barFat.style.width = (split.fat * 100) + "%";
+
+            showBody();
+            var perLb = proteinG / (weightKg / 0.453592);
+            noteEl.textContent = "That's about " + perLb.toFixed(2) + "g of protein per pound of bodyweight on the " + dietLabel(diet) + " split. TDEE estimates run 10 to 20% off for individuals, so track for 2 to 3 weeks and adjust.";
+        }
+
+        function dietLabel(d) {
+            return { balanced: "Balanced", highprotein: "High Protein", lowcarb: "Low Carb", keto: "Keto" }[d];
+        }
+
+        function setUnits(isImperial) {
+            imperial = isImperial;
+            impBtn.classList.toggle("is-on", isImperial);
+            metBtn.classList.toggle("is-on", !isImperial);
+            impFields.style.display = isImperial ? "block" : "none";
+            metFields.style.display = isImperial ? "none" : "block";
+            calc();
+        }
+
+        function setSex(male) {
+            isMale = male;
+            maleBtn.classList.toggle("is-on", male);
+            femaleBtn.classList.toggle("is-on", !male);
+            calc();
+        }
+
+        function setDiet(d) {
+            diet = d;
+            Object.keys(dietBtns).forEach(function (k) { dietBtns[k].classList.toggle("is-on", k === d); });
+            calc();
+        }
+
+        impBtn.addEventListener("click", function () { setUnits(true); });
+        metBtn.addEventListener("click", function () { setUnits(false); });
+        maleBtn.addEventListener("click", function () { setSex(true); });
+        femaleBtn.addEventListener("click", function () { setSex(false); });
+        Object.keys(dietBtns).forEach(function (k) { dietBtns[k].addEventListener("click", function () { setDiet(k); }); });
+        [ageEl, ftEl, inEl, lbEl, cmEl, kgEl].forEach(function (el) { el.addEventListener("input", calc); });
+        activityEl.addEventListener("change", calc);
+        goalEl.addEventListener("change", calc);
+
+        calc();
+    })();
+    </script>
+</body>
+</html>

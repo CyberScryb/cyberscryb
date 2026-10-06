@@ -1403,6 +1403,7 @@ function generateSitemap(generatedPages) {
     'debt-payoff-calculator',
     'age-calculator',
     'tdee-calculator',
+    'macro-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1451,6 +1452,7 @@ function generateSitemap(generatedPages) {
     'how-to-calculate-age',
     'what-is-coast-fire',
     'what-is-tdee',
+    'how-to-calculate-macros',
     'roth-ira-vs-traditional-ira',
   ];
   staticGuides.forEach(slug => {
@@ -1465,6 +1467,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'how-to-calculate-macros-2026',
     'behavioral-spike-tracking-memory-care-2026',
     'cron-expression-builder-online-2026',
     'dementia-custody-evidence-guide-2026',
@@ -1572,6 +1575,7 @@ function manageRobotsMeta() {
     'debt-payoff-calculator',
     'age-calculator',
     'tdee-calculator',
+    'macro-calculator',
   ]);
 
   const dirsToProcess = [
