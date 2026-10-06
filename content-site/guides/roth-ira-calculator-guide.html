@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Roth IRA Calculators Work: 2026 Limits, Inputs, and a Worked Example | CyberScryb</title>
+    <meta name="description" content="How Roth IRA calculators work: what each input means, the 2026 contribution limits ($7,500, or $8,600 at 50+), a worked example, and why Roth vs Traditional changes your projection. Includes a free calculator.">
+    <meta name="keywords" content="how roth ira calculator works, roth ira calculator, how much will my roth ira grow, what is the roth ira limit for 2026, roth ira growth calculator, roth ira vs traditional projection">
+    <meta property="og:title" content="How Roth IRA Calculators Work: 2026 Limits, Inputs, and a Worked Example">
+    <meta property="og:description" content="What each Roth IRA calculator input means, the 2026 contribution limits, a worked example showing contributions vs growth, and why the Roth vs Traditional choice changes the number.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cyberscryb.com/guides/roth-ira-calculator-guide/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Roth IRA Calculators Work: 2026 Limits, Inputs, and a Worked Example">
+    <meta name="twitter:description" content="The inputs, the 2026 limits, a worked example, and why Roth vs Traditional changes the projection.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://cyberscryb.com/guides/roth-ira-calculator-guide/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/guides/guide.css">
+    <link rel="stylesheet" href="/tools/shared/support.css">
+    <style>
+        .ira-table { width: 100%; max-width: 640px; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .ira-table th, .ira-table td { padding: 0.65rem 1rem; text-align: left; border-bottom: 1px solid var(--steel); }
+        .ira-table th { color: var(--text-primary); font-weight: 700; border-bottom: 2px solid var(--steel); }
+        .ira-table td { color: var(--text-secondary); }
+        .ira-table td:last-child { color: var(--accent-light); font-weight: 600; font-variant-numeric: tabular-nums; }
+        .ira-table tbody tr:last-child td { border-bottom: none; }
+        .formula-box { background: var(--bg-card); border: 1px solid var(--steel); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+        .formula-box strong { color: var(--text-primary); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How Roth IRA Calculators Work: 2026 Limits, Inputs, and a Worked Example",
+        "description": "How Roth IRA calculators work: what each input means, the 2026 contribution limits ($7,500, or $8,600 at 50+), a worked example showing contributions vs growth, and why the Roth vs Traditional choice changes your projection.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com/about/",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com"
+        },
+        "datePublished": "2026-10-06",
+        "dateModified": "2026-10-06",
+        "mainEntityOfPage": "https://cyberscryb.com/guides/roth-ira-calculator-guide/",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "roth ira calculator"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "roth ira contribution limit 2026"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "retirement savings"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "compound interest"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "traditional ira"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": [
+                {
+                        "@type": "CreativeWork",
+                        "name": "IRS Publication 590-A, Contributions to Individual Retirement Arrangements (IRAs)",
+                        "url": "https://www.irs.gov/publications/p590a"
+                }
+        ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "How much will my Roth IRA grow?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "It depends on your annual contribution, your expected return, and how many years the money compounds. As an example, maxing the 2026 limit of $7,500 per year from age 25 to 65 at a 7% average annual return grows to roughly $1.65 million, of which about $300,000 is your contributions and about $1.35 million is growth. Try the free calculator linked in this guide with your own numbers."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "What is the Roth IRA limit for 2026?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "The 2026 IRA contribution limit is $7,500 if you are under 50, or $8,600 at age 50 and older, including a $1,100 catch-up contribution. The limit applies to all your IRAs combined, not per account, and you need earned income at least equal to your contribution."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Is Roth IRA growth really tax-free?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes, qualified withdrawals are completely tax-free. Two conditions must hold: your Roth IRA must have been open at least 5 years, and you must be at least 59 and a half or meet an exception such as disability. Your original contributions are separate: you can withdraw what you put in at any time, at any age, with no tax and no penalty."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "What return should I assume in a Roth IRA calculator?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "7% per year is the standard planning figure for a stock-heavy portfolio, representing roughly the long-run US stock market average after inflation. Before inflation the average is closer to 10%. Use 7% for a realistic long-term projection and 5% if you want a conservative one."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Can I keep contributing to a Roth IRA after retirement age?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes. There is no age limit on Roth IRA contributions. You can contribute at any age as long as you have earned income at least equal to your contribution and your income is within the Roth eligibility phase-outs, which for 2026 are $153,000 to $168,000 for single filers and $242,000 to $252,000 for married couples filing jointly."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Does a Roth IRA calculator include taxes?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "A Roth IRA calculator does not need to subtract taxes, because qualified Roth withdrawals are tax-free. That is the key difference from a traditional IRA projection, where the pre-tax balance looks bigger but every withdrawal is taxed as ordinary income. If you are comparing the two, our Roth vs Traditional IRA guide works through the after-tax math."
+                        }
+                }
+        ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Roth IRA Calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://cyberscryb.com/tools/roth-ira-calculator/"
+}
+    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #eef1f6; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/guides/" class="active">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="/">Tools</a>
+                    <span>/</span>
+                    <a href="https://cyberscryb.com/tools/roth-ira-calculator/">Roth IRA Calculator</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1 itemprop="headline">How <span class="accent">Roth IRA Calculators</span> Work</h1>
+                <p class="guide-subtitle" itemprop="description">What each input means, the 2026 contribution limits, a worked example of contributions vs growth, and why the Roth vs Traditional choice changes the number at the end. With a free calculator that runs the math live.</p>
+                <div class="guide-meta">
+                    <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-10-06" itemprop="dateModified">October 6, 2026</time></span>
+                    <span>⏱ 6 min read</span>
+                </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>A Roth IRA calculator compounds your yearly contribution at your expected return for the years between your current age and retirement age. The 2026 limit is <strong>$7,500</strong> ($8,600 at 50+). Most of the final number is growth, not contributions, and because qualified Roth withdrawals are tax-free, the projected balance is what you actually keep. That is the whole reason the Roth vs Traditional choice matters for the projection.</p>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Skip to your number:</strong>
+                    <span>Enter your ages, contribution, and expected return to project your tax-free Roth balance at retirement.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/roth-ira-calculator/" class="cta-btn">Open Roth IRA Calculator &rarr;</a>
+            </div>
+
+            <div class="guide-content" itemprop="articleBody">
+                <h2>The Direct Answer</h2>
+                <p>A Roth IRA calculator answers one question: if you contribute a fixed amount every year and earn a steady average return, how big is your account when you retire? It does this by compounding. Each year's balance grows by the expected return, then the next year's contribution lands on top, and the cycle repeats. The math is simple; the result is not, because compounding over decades turns ordinary contributions into amounts that surprise almost everyone.</p>
+                <p>What makes a Roth IRA calculator different from a generic compound interest calculator is the guardrails. A real Roth projection has to respect the IRS contribution limits, the catch-up contribution at 50+, and the Roth's tax-free withdrawal treatment, because those are what turn the raw number into money you actually keep.</p>
+
+                <h2>What Each Input Means</h2>
+                <p><strong>Current age and retirement age.</strong> These set the number of compounding years, which is the single most powerful input. Ten extra years of compounding typically matters more than doubling your annual contribution. A 25-year-old and a 40-year-old contributing the same amount get wildly different balances, because the 25-year-old gets 15 more years of growth on every dollar.</p>
+                <p><strong>Current balance.</strong> What is already in the account today. Money already invested gets a head start over money you have not contributed yet, which is why starting early beats saving more later.</p>
+                <p><strong>Annual contribution.</strong> What you plan to add each year. The IRS caps this. For 2026 the limit is $7,500 if you are under 50, or $8,600 at 50 and older, which includes the $1,100 catch-up contribution. The limit covers all your IRAs combined, not per account, and you need earned income at least equal to your contribution.</p>
+                <p><strong>Expected annual return.</strong> Your average yearly investment growth. The standard planning figure is 7%, roughly the long-run US stock market average after inflation; before inflation it is closer to 10%. Use 7% for a realistic long-term projection, 5% for a conservative one. Nothing in the market grows in a smooth line, so treat this as an average over the whole period, not a promise.</p>
+
+                <h2>2026 Contribution Limits at a Glance</h2>
+                <p>These are the IRS figures for 2026, consistent with our <a href="/guides/roth-ira-vs-traditional-ira/">Roth vs Traditional IRA guide</a>. Verify them at irs.gov before filing, because the IRS adjusts them yearly.</p>
+                <table class="ira-table">
+                    <thead>
+                        <tr><th>Rule</th><th>2026 figure</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IRA contribution limit, under age 50</td><td>$7,500</td></tr>
+                        <tr><td>IRA contribution limit, age 50 and older</td><td>$8,600</td></tr>
+                        <tr><td>Catch-up contribution, age 50 and older</td><td>$1,100</td></tr>
+                        <tr><td>Roth eligibility phase-out, single / head of household (MAGI)</td><td>$153,000 - $168,000</td></tr>
+                        <tr><td>Roth eligibility phase-out, married filing jointly (MAGI)</td><td>$242,000 - $252,000</td></tr>
+                        <tr><td>Contribution deadline for tax year 2026</td><td>April 15, 2027</td></tr>
+                    </tbody>
+                </table>
+                <p>Three things worth knowing. First, above the phase-out ranges you cannot contribute directly to a Roth, though the backdoor Roth exists as a workaround. Second, the 2026 deadline is April 15, 2027: contributions made between January 1 and April 15, 2027 can still count for 2026 if you designate them as such. Third, your contribution cannot exceed your earned income for the year.</p>
+
+                <!-- AdSense: Mid-Content -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
+                <h2>Worked Example: $7,500 a Year from 25 to 65</h2>
+                <p>Say you are 25, starting from zero, maxing the 2026 limit of $7,500 every year until 65, earning a steady 7%. Here is how the projection builds.</p>
+                <div class="formula-box">
+                    <p><strong>Years contributing:</strong> 40</p>
+                    <p><strong>Total contributions:</strong> 40 x $7,500 = $300,000</p>
+                    <p><strong>Projected balance at 65:</strong> roughly $1.65 million</p>
+                    <p><strong>Growth:</strong> roughly $1.35 million, about 82% of the balance</p>
+                </div>
+                <p>That split is the thing to sit with. You put in $300,000. Compounding adds more than four times that. And because this is a Roth, the entire $1.65 million is tax-free in retirement as long as the account has been open 5+ years and you are 59 and a half. Run your own version with the <a href="https://cyberscryb.com/tools/roth-ira-calculator/">free Roth IRA calculator</a> to see how starting ten years later shrinks the growth side far faster than the contribution side.</p>
+
+                <h2>Why Roth vs Traditional Changes the Projection</h2>
+                <p>The calculator's projected balance for a Roth is the amount you keep. A traditional IRA with the same inputs would show a similar or slightly larger pre-tax balance, because contributions there are made with pre-tax dollars, but every withdrawal gets taxed as ordinary income in retirement. So comparing the two headline numbers is a trap.</p>
+                <p>The real comparison is after-tax spendable money, and it comes down to one bet: your tax rate now versus your tax rate in retirement. If your rate is lower now, Roth wins, because you pay tax cheap today and withdraw free later. If your rate is higher now, traditional wins, because the deduction at a high rate is worth more than tax-free withdrawals later. Our <a href="/guides/roth-ira-vs-traditional-ira/">Roth vs Traditional IRA guide</a> works through this decision rule with a full worked example.</p>
+                <p>One more Roth advantage the calculator cannot show: there are no required minimum distributions. A traditional IRA forces withdrawals starting in your 70s whether you need the money or not; a Roth lets the balance sit and compound indefinitely, which matters for estate planning.</p>
+
+                <h2>How to Use Your Projection</h2>
+                <p><strong>Test the contribution levels you can actually sustain.</strong> Compare $3,000, $5,000, and $7,500 a year. The gap between them over a career is measured in six figures, which makes the abstract habit concrete.</p>
+                <p><strong>Run the conservative case.</strong> Rerun the projection at 5% instead of 7%. If your plan still works at 5%, it is robust. If it only works at 8%, it is a hope.</p>
+                <p><strong>Check the income limits.</strong> If your income is near the Roth phase-outs ($153,000 to $168,000 single, $242,000 to $252,000 married filing jointly for 2026), confirm you are eligible before banking on the projection.</p>
+                <p><strong>Compare against the spend side.</strong> A big balance is only half the picture. Run the number through our <a href="https://cyberscryb.com/tools/retirement-drawdown-calculator/">retirement drawdown calculator</a> to see how long it lasts at your spending level, and our <a href="https://cyberscryb.com/tools/compound-interest-calculator/">compound interest calculator</a> to isolate what the growth engine is doing.</p>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>How much will my Roth IRA grow?</summary>
+                    <p>It depends on your annual contribution, your expected return, and how many years the money compounds. As an example, maxing the 2026 limit of $7,500 per year from age 25 to 65 at a 7% average annual return grows to roughly $1.65 million, of which about $300,000 is your contributions and about $1.35 million is growth. Try the calculator above with your own numbers.</p>
+                </details>
+                <details>
+                    <summary>What is the Roth IRA limit for 2026?</summary>
+                    <p>The 2026 IRA contribution limit is $7,500 if you are under 50, or $8,600 at age 50 and older, including a $1,100 catch-up contribution. The limit applies to all your IRAs combined, not per account, and you need earned income at least equal to your contribution.</p>
+                </details>
+                <details>
+                    <summary>Is Roth IRA growth really tax-free?</summary>
+                    <p>Yes, qualified withdrawals are completely tax-free. Two conditions must hold: your Roth IRA must have been open at least 5 years, and you must be at least 59 and a half or meet an exception such as disability. Your original contributions are separate: you can withdraw what you put in at any time, at any age, with no tax and no penalty.</p>
+                </details>
+                <details>
+                    <summary>What return should I assume in a Roth IRA calculator?</summary>
+                    <p>7% per year is the standard planning figure for a stock-heavy portfolio, representing roughly the long-run US stock market average after inflation. Before inflation the average is closer to 10%. Use 7% for a realistic long-term projection and 5% if you want a conservative one.</p>
+                </details>
+                <details>
+                    <summary>Can I keep contributing to a Roth IRA after retirement age?</summary>
+                    <p>Yes. There is no age limit on Roth IRA contributions. You can contribute at any age as long as you have earned income at least equal to your contribution and your income is within the Roth eligibility phase-outs, which for 2026 are $153,000 to $168,000 for single filers and $242,000 to $252,000 for married couples filing jointly.</p>
+                </details>
+                <details>
+                    <summary>Does a Roth IRA calculator include taxes?</summary>
+                    <p>A Roth IRA calculator does not need to subtract taxes, because qualified Roth withdrawals are tax-free. That is the key difference from a traditional IRA projection, where the pre-tax balance looks bigger but every withdrawal is taxed as ordinary income. If you are comparing the two, our <a href="/guides/roth-ira-vs-traditional-ira/">Roth vs Traditional IRA guide</a> works through the after-tax math.</p>
+                </details>
+
+                <h2>Keep Reading: Finance Guides and Tools</h2>
+                <p>Once you have your projection, figure out what the spending side looks like with our <a href="https://cyberscryb.com/tools/retirement-drawdown-calculator/">free retirement drawdown calculator</a>. To isolate the compounding engine behind the numbers, try the <a href="https://cyberscryb.com/tools/compound-interest-calculator/">compound interest calculator</a> and read <a href="/guides/how-compound-interest-works.html">how compound interest works</a>. If debt is competing with retirement for the same dollars, <a href="/guides/debt-snowball-vs-avalanche/">debt snowball vs avalanche</a> settles which balance to kill first, and the <a href="https://cyberscryb.com/tools/debt-payoff-calculator/">debt payoff calculator</a> prices each strategy on your real numbers. And if you have not picked an account type yet, <a href="/guides/roth-ira-vs-traditional-ira/">Roth IRA vs Traditional IRA</a> is the decision guide.</p>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Project your own tax-free balance:</strong>
+                    <span>Enter your ages and contribution to see contributions vs growth year by year.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/roth-ira-calculator/" class="cta-btn">Open Free Roth IRA Calculator &rarr;</a>
+            </div>
+
+            <p style="font-size:0.85rem; opacity:0.7; max-width:900px; margin:1rem auto;">Educational content only, not financial advice. Tax rules change; verify 2026 limits at irs.gov and talk to a licensed professional about your situation.</p>
+        </article>
+
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #eef1f6;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/support.js"></script>
+</body>
+
+</html>
