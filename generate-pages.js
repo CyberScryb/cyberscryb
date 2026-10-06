@@ -1408,6 +1408,9 @@ function generateSitemap(generatedPages) {
     'unit-converter',
     'retirement-drawdown-calculator',
     'sat-score-calculator',
+    'grammar-checker',
+    'sleep-cycle-calculator',
+    'roth-ira-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1463,6 +1466,9 @@ function generateSitemap(generatedPages) {
     'safe-withdrawal-rate',
     'how-digital-sat-scoring-works',
     'appliance-energy-cost',
+    'how-to-check-grammar-online',
+    'how-sleep-cycles-work',
+    'roth-ira-calculator-guide',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1590,6 +1596,9 @@ function manageRobotsMeta() {
     'unit-converter',
     'retirement-drawdown-calculator',
     'sat-score-calculator',
+    'grammar-checker',
+    'sleep-cycle-calculator',
+    'roth-ira-calculator',
   ]);
 
   const dirsToProcess = [

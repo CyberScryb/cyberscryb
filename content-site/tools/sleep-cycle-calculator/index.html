@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Cycle Calculator — Best Bedtimes &amp; Wake Times | CyberScryb</title>
+<meta name="description" content="Free sleep cycle calculator: pick your wake-up time and get the best bedtimes based on full 90-minute sleep cycles (with a 15-minute fall-asleep buffer), or enter your bedtime to find the ideal wake times. No signup.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/sleep-cycle-calculator/">
+<meta property="og:title" content="Sleep Cycle Calculator — Best Bedtimes &amp; Wake Times | CyberScryb">
+<meta property="og:description" content="Wake up at the end of a sleep cycle instead of the middle. Enter a wake time for best bedtimes, or a bedtime for best wake times, based on 90-minute cycles. Free, no signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/sleep-cycle-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sleep Cycle Calculator — Best Bedtimes &amp; Wake Times | CyberScryb">
+<meta name="twitter:description" content="Wake up at the end of a sleep cycle instead of the middle. Enter a wake time for best bedtimes, or a bedtime for best wake times, based on 90-minute cycles. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Sleep Cycle Calculator",
+        "url": "https://cyberscryb.com/tools/sleep-cycle-calculator/",
+        "description": "Free online sleep cycle calculator: enter a wake-up time to get the best bedtimes, or enter a bedtime to get the best wake-up times, based on complete 90-minute sleep cycles with a 15-minute fall-asleep buffer. Runs entirely in your browser.",
+        "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Sleep Cycle Calculator", "item": "https://cyberscryb.com/tools/sleep-cycle-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How long is a sleep cycle?", "acceptedAnswer": { "@type": "Answer", "text": "About 90 minutes for the average adult. Each cycle moves through light sleep, deep sleep, and REM sleep before the next cycle starts. Most adults need 5 to 6 complete cycles per night, which is why 7.5 to 9 hours is the standard recommendation." }},
+            { "@type": "Question", "name": "Why do I wake up tired even after 8 hours of sleep?", "acceptedAnswer": { "@type": "Answer", "text": "Usually because you woke in the middle of a deep or REM phase instead of at the end of a complete cycle. An alarm cutting into deep sleep causes sleep inertia, the heavy groggy feeling that can linger for an hour. Waking at a cycle boundary feels dramatically better even on fewer total hours." }},
+            { "@type": "Question", "name": "Is 5 sleep cycles enough?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, for many adults. Five full 90-minute cycles equals 7.5 hours of sleep, which sits inside the recommended 7 to 9 hour range. Six cycles (9 hours) is better if you are sleep-deprived, recovering, or training hard." }},
+            { "@type": "Question", "name": "Why does the calculator subtract 15 minutes for falling asleep?", "acceptedAnswer": { "@type": "Answer", "text": "Because a sleep cycle does not start when you climb into bed, it starts when you fall asleep. The average adult takes about 15 minutes to fall asleep (sleep onset latency), so the calculator counts backward from there. If you know you take longer, shift the bedtimes earlier by the difference." }},
+            { "@type": "Question", "name": "Should I wake up at the same time every day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, as much as possible. A consistent wake time anchors your circadian rhythm, which makes falling asleep faster and improves sleep quality. Even on weekends, try to stay within an hour of your weekday wake time rather than sleeping in for hours." }},
+            { "@type": "Question", "name": "Is this sleep cycle calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. Every calculation happens instantly in your browser and nothing you enter is ever sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .sleep-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .sleep-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .sleep-tabs { display: flex; gap: 0.5rem; margin-top: 1.5rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 0.35rem; }
+        .sleep-tab {
+            flex: 1; padding: 0.75rem 1rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: transparent; border: 1px solid transparent; border-radius: 9px;
+            color: var(--text-faint); cursor: pointer; transition: all 0.15s;
+        }
+        .sleep-tab:hover { color: var(--text); }
+        .sleep-tab.active { background: var(--primary); border-color: var(--primary-hover); color: var(--text); }
+        .sleep-panel { display: none; margin-top: 1.25rem; }
+        .sleep-panel.active { display: block; }
+        .sleep-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .sleep-field input {
+            width: 100%; box-sizing: border-box; padding: 0.9rem 1rem; font-size: 1.25rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); color-scheme: dark; font-family: var(--font); outline: none; transition: border-color 0.15s;
+            font-variant-numeric: tabular-nums;
+        }
+        .sleep-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .sleep-chips { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+        .sleep-chip {
+            padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 999px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+        }
+        .sleep-chip:hover { border-color: var(--primary); color: var(--text); }
+        .sleep-results { margin-top: 1.25rem; display: grid; gap: 0.75rem; }
+        .sleep-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .sleep-card .s-time { font-size: 1.75rem; font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
+        .sleep-card .s-time small { font-size: 0.95rem; font-weight: 600; color: var(--text-faint); }
+        .sleep-card .s-meta { text-align: right; font-size: 0.8rem; color: var(--text-faint); line-height: 1.5; }
+        .sleep-card .s-meta strong { color: var(--primary-soft); display: block; font-size: 0.9rem; }
+        .sleep-card.best { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary), 0 8px 28px -12px var(--primary-glow); }
+        .sleep-card.ok { opacity: 0.75; }
+        .sleep-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+        .sleep-share { margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .sleep-share button {
+            padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 10px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+        }
+        .sleep-share button:hover { border-color: var(--primary); color: var(--text); }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="sleep-app">
+        <div class="sleep-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Sleep Cycle Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Sleep Cycle Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">You do not wake up refreshed because of how <em>long</em> you slept. You wake up refreshed when you wake at the end of a full 90-minute sleep cycle instead of in the middle of one. Pick a mode below and plan your sleep around complete cycles. Instant, private, free forever.</p>
+            </div>
+
+            <div class="sleep-tabs" role="tablist" aria-label="Calculator mode">
+                <button type="button" class="sleep-tab active" id="tab-wake" role="tab" aria-selected="true" aria-controls="panel-wake">I want to wake up at...</button>
+                <button type="button" class="sleep-tab" id="tab-bed" role="tab" aria-selected="false" aria-controls="panel-bed">I am going to bed at...</button>
+            </div>
+
+            <div class="sleep-panel active" id="panel-wake" role="tabpanel" aria-labelledby="tab-wake">
+                <div class="sleep-field" style="margin-top:1.25rem;">
+                    <label for="sleep-wake">What time do you need to wake up?</label>
+                    <input id="sleep-wake" type="time" value="07:00">
+                </div>
+                <div class="sleep-chips" aria-label="Quick wake times">
+                    <button type="button" class="sleep-chip" data-wake="05:30">5:30 AM</button>
+                    <button type="button" class="sleep-chip" data-wake="06:00">6:00 AM</button>
+                    <button type="button" class="sleep-chip" data-wake="06:30">6:30 AM</button>
+                    <button type="button" class="sleep-chip" data-wake="07:00">7:00 AM</button>
+                    <button type="button" class="sleep-chip" data-wake="07:30">7:30 AM</button>
+                    <button type="button" class="sleep-chip" data-wake="08:00">8:00 AM</button>
+                </div>
+                <div class="sleep-results" id="sleep-bedtimes" aria-live="polite"></div>
+                <p class="sleep-note">These bedtimes assume about 15 minutes to fall asleep. If you know you take longer, move each bedtime earlier by the difference. Highlighted times give you 5 to 6 full cycles, which is the sweet spot for most adults.</p>
+            </div>
+
+            <div class="sleep-panel" id="panel-bed" role="tabpanel" aria-labelledby="tab-bed">
+                <div class="sleep-field" style="margin-top:1.25rem;">
+                    <label for="sleep-bed">What time are you going to bed?</label>
+                    <input id="sleep-bed" type="time" value="23:00">
+                </div>
+                <div class="sleep-chips" aria-label="Quick bedtimes">
+                    <button type="button" class="sleep-chip" data-now="now">Now</button>
+                    <button type="button" class="sleep-chip" data-now="30">In 30 min</button>
+                    <button type="button" class="sleep-chip" data-now="60">In 1 hour</button>
+                    <button type="button" class="sleep-chip" data-now="120">In 2 hours</button>
+                </div>
+                <div class="sleep-results" id="sleep-waketimes" aria-live="polite"></div>
+                <p class="sleep-note">Wake times count 15 minutes of drifting off, then full 90-minute cycles after that. Set your alarm for one of these times to wake at a cycle boundary instead of mid-cycle.</p>
+            </div>
+
+            <div class="sleep-share">
+                <button type="button" id="sleep-copy">Copy shareable link</button>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How the Math Works</h2>
+                <p>The average adult sleep cycle runs about <strong style="color:var(--text);">90 minutes</strong>, cycling through light sleep, deep sleep, and REM sleep before the next one starts. Most adults need <strong style="color:var(--text);">5 to 6 complete cycles</strong> a night, which is 7.5 to 9 hours of actual sleep. The calculator adds the average <strong style="color:var(--text);">15 minutes it takes to fall asleep</strong>, so the bedtimes and wake times it shows land on cycle boundaries, not in the middle of deep sleep.</p>
+                <p>Worked example: you need to be up at 7:00 AM. Six cycles is 9 hours of sleep, plus 15 minutes to drift off: count back 9 hours 15 minutes from 7:00 AM and you get <strong style="color:var(--text);">9:45 PM</strong>. Five cycles is 7 hours 30 minutes of sleep, plus 15 minutes: <strong style="color:var(--text);">11:15 PM</strong>. Four cycles is the bare minimum at 6 hours 15 minutes of sleep plus 15 minutes: <strong style="color:var(--text);">12:45 AM</strong>, which will get you through one rough day but should not be the plan. The full breakdown of what happens inside each 90-minute cycle is in our <a href="/guides/how-sleep-cycles-work/" style="color: var(--primary);">guide to how sleep cycles work</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Waking Mid-Cycle Ruins Your Morning</h2>
+                <p>Being dragged awake out of deep sleep triggers sleep inertia, that heavy, foggy grogginess that can take up to an hour to burn off. This is why you can sleep 8 full hours and still feel wrecked: your alarm fired during the deepest part of a cycle. Waking at a cycle boundary, when the brain is already near the surface in light sleep, skips most of that inertia. The total hours matter less than where your alarm lands inside the cycle.</p>
+                <p>The classic trap is the snooze button. Nine extra minutes of fragmented dozing gives you no real sleep and starts a new cycle you will never finish, so you wake groggier than if you had just gotten up. One of the most useful things this calculator does is remove the guesswork: set one alarm at a cycle boundary and get up the first time.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When People Reach for a Sleep Cycle Calculator</h2>
+                <p>Shift workers with odd start times use it to back out a bedtime that still gives them 5 full cycles when a normal schedule is impossible. Students before exam week use it to stop the all-nighter spiral: better to get 4.5 or 6 hours aligned to cycles than 7 hours cut mid-cycle. New parents, people dealing with insomnia, and anyone training for a race or a big physical day use it to protect the deep-sleep cycles that drive recovery.</p>
+                <p>It also settles the bedtime argument honestly. "I go to bed at 11 and get up at 6" sounds like 7 hours, but minus 15 minutes to fall asleep and a mid-cycle alarm it is really 6.75 hours with a rough landing. Seeing the actual cycle counts makes the tradeoffs concrete, and most people pick a bedtime 30 to 90 minutes earlier than they expected.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How long is a sleep cycle?</summary><p>About 90 minutes for the average adult. Each cycle moves through light sleep, deep sleep, and REM sleep before the next cycle starts. Most adults need 5 to 6 complete cycles per night, which is why 7.5 to 9 hours is the standard recommendation.</p></details>
+                <details><summary>Why do I wake up tired even after 8 hours of sleep?</summary><p>Usually because you woke in the middle of a deep or REM phase instead of at the end of a complete cycle. An alarm cutting into deep sleep causes sleep inertia, the heavy groggy feeling that can linger for an hour. Waking at a cycle boundary feels dramatically better even on fewer total hours.</p></details>
+                <details><summary>Is 5 sleep cycles enough?</summary><p>Yes, for many adults. Five full 90-minute cycles equals 7.5 hours of sleep, which sits inside the recommended 7 to 9 hour range. Six cycles (9 hours) is better if you are sleep-deprived, recovering, or training hard.</p></details>
+                <details><summary>Why does the calculator subtract 15 minutes for falling asleep?</summary><p>Because a sleep cycle does not start when you climb into bed, it starts when you fall asleep. The average adult takes about 15 minutes to fall asleep, so the calculator counts from there. If you know you take longer, shift the bedtimes earlier by the difference.</p></details>
+                <details><summary>Should I wake up at the same time every day?</summary><p>Yes, as much as possible. A consistent wake time anchors your circadian rhythm, which makes falling asleep faster and improves sleep quality. Even on weekends, try to stay within an hour of your weekday wake time rather than sleeping in for hours.</p></details>
+                <details><summary>Is this sleep cycle calculator free?</summary><p>Yes, 100% free with no signup. Every calculation happens instantly in your browser and nothing you enter is ever sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/tdee-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">TDEE Calculator</strong>
+                        <span style="font-size:0.85rem;">Daily calorie needs by activity level.</span>
+                    </a>
+                    <a href="/tools/bmi-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">BMI Calculator</strong>
+                        <span style="font-size:0.85rem;">Body mass index with healthy ranges.</span>
+                    </a>
+                    <a href="/tools/age-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Age Calculator</strong>
+                        <span style="font-size:0.85rem;">Exact age in years, months, and days.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full science?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">What happens inside a 90-minute cycle, sleep inertia, and how many cycles you really need.</p>
+                <a href="/guides/how-sleep-cycles-work/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:var(--text);font-weight:700;border-radius:10px;text-decoration:none;">Read the Sleep Cycles Guide</a>
+            </section>
+        </div>
+
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+
+        var CYCLE_MIN = 90;
+        var FALL_ASLEEP_MIN = 15;
+
+        var tabWake = document.getElementById("tab-wake");
+        var tabBed = document.getElementById("tab-bed");
+        var panelWake = document.getElementById("panel-wake");
+        var panelBed = document.getElementById("panel-bed");
+        var wakeEl = document.getElementById("sleep-wake");
+        var bedEl = document.getElementById("sleep-bed");
+        var bedtimesEl = document.getElementById("sleep-bedtimes");
+        var waketimesEl = document.getElementById("sleep-waketimes");
+        var copyBtn = document.getElementById("sleep-copy");
+
+        function setMode(mode) {
+            var wake = mode === "wake";
+            tabWake.classList.toggle("active", wake);
+            tabBed.classList.toggle("active", !wake);
+            tabWake.setAttribute("aria-selected", wake ? "true" : "false");
+            tabBed.setAttribute("aria-selected", wake ? "false" : "true");
+            panelWake.classList.toggle("active", wake);
+            panelBed.classList.toggle("active", !wake);
+            updateShareURL();
+        }
+
+        function parseTime(str) {
+            var m = /^(\d{1,2}):(\d{2})(?::\d{2})?$/.exec(str || "");
+            if (!m) return null;
+            var h = +m[1], min = +m[2];
+            if (h < 0 || h > 23 || min < 0 || min > 59) return null;
+            return h * 60 + min;
+        }
+
+        function fmtTime(totalMin) {
+            var m = ((totalMin % 1440) + 1440) % 1440;
+            var h = Math.floor(m / 60), min = m % 60;
+            var ampm = h < 12 ? "AM" : "PM";
+            var h12 = h % 12; if (h12 === 0) h12 = 12;
+            return { text: h12 + ":" + (min < 10 ? "0" : "") + min, ampm: ampm, min: m };
+        }
+
+        function plural(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
+
+        function cycleLabel(n) {
+            return plural(n, "cycle") + " (" + (n * 1.5).toFixed(1).replace(/\.0$/, "") + "h of sleep)";
+        }
+
+        // Mode 1: wake time -> best bedtimes (count back).
+        function renderBedtimes() {
+            var wake = parseTime(wakeEl.value);
+            if (wake === null) {
+                bedtimesEl.innerHTML = '<p class="sleep-note">Enter a wake-up time above.</p>';
+                return;
+            }
+            var rows = [];
+            [6, 5, 4].forEach(function (c) {
+                var bedMin = wake - FALL_ASLEEP_MIN - c * CYCLE_MIN;
+                var t = fmtTime(bedMin);
+                // If the bedtime lands before midnight it belongs to the
+                // evening before the wake-up day ("tonight"); otherwise
+                // it falls earlier the same day ("today").
+                var dayLabel = bedMin < 0 ? "tonight" : "today";
+                var best = c >= 5;
+                rows.push(
+                    '<div class="sleep-card' + (best ? " best" : " ok") + '">' +
+                    '<div class="s-time">' + t.text + ' <small>' + t.ampm + ' · ' + dayLabel + '</small></div>' +
+                    '<div class="s-meta"><strong>' + cycleLabel(c) + '</strong>' + (best ? "recommended" : "minimum, one rough day only") + '</div>' +
+                    '</div>'
+                );
+            });
+            bedtimesEl.innerHTML = rows.join("");
+            updateShareURL();
+        }
+
+        // Mode 2: bedtime -> best wake times (count forward).
+        function renderWaketimes() {
+            var bed = parseTime(bedEl.value);
+            if (bed === null) {
+                waketimesEl.innerHTML = '<p class="sleep-note">Enter a bedtime above.</p>';
+                return;
+            }
+            var rows = [];
+            [6, 5, 4].forEach(function (c) {
+                var wakeMin = bed + FALL_ASLEEP_MIN + c * CYCLE_MIN;
+                var t = fmtTime(wakeMin);
+                var tomorrow = wakeMin >= 1440;
+                var best = c >= 5;
+                rows.push(
+                    '<div class="sleep-card' + (best ? " best" : " ok") + '">' +
+                    '<div class="s-time">' + t.text + ' <small>' + t.ampm + ' · ' + (tomorrow ? "tomorrow" : "today") + '</small></div>' +
+                    '<div class="s-meta"><strong>' + cycleLabel(c) + '</strong>' + (best ? "recommended" : "minimum, one rough day only") + '</div>' +
+                    '</div>'
+                );
+            });
+            waketimesEl.innerHTML = rows.join("");
+            updateShareURL();
+        }
+
+        function nowMinutes() {
+            var d = new Date();
+            return d.getHours() * 60 + d.getMinutes();
+        }
+
+        function toTimeValue(min) {
+            var m = ((min % 1440) + 1440) % 1440;
+            var h = Math.floor(m / 60), mi = m % 60;
+            return (h < 10 ? "0" : "") + h + ":" + (mi < 10 ? "0" : "") + mi;
+        }
+
+        function updateShareURL() {
+            var url = new URL(window.location.href);
+            var wake = panelWake.classList.contains("active");
+            url.searchParams.set("mode", wake ? "wake" : "bed");
+            if (wakeEl.value) url.searchParams.set("wake", wakeEl.value); else url.searchParams.delete("wake");
+            if (bedEl.value) url.searchParams.set("bed", bedEl.value); else url.searchParams.delete("bed");
+            history.replaceState(null, "", url.toString());
+        }
+
+        tabWake.addEventListener("click", function () { setMode("wake"); });
+        tabBed.addEventListener("click", function () { setMode("bed"); });
+
+        wakeEl.addEventListener("input", renderBedtimes);
+        bedEl.addEventListener("input", renderWaketimes);
+
+        document.querySelectorAll(".sleep-chip[data-wake]").forEach(function (chip) {
+            chip.addEventListener("click", function () {
+                wakeEl.value = chip.getAttribute("data-wake");
+                renderBedtimes();
+            });
+        });
+
+        document.querySelectorAll(".sleep-chip[data-now]").forEach(function (chip) {
+            chip.addEventListener("click", function () {
+                var offset = chip.getAttribute("data-now");
+                var base = offset === "now" ? nowMinutes() : nowMinutes() + parseInt(offset, 10);
+                bedEl.value = toTimeValue(base);
+                renderWaketimes();
+            });
+        });
+
+        copyBtn.addEventListener("click", function () {
+            updateShareURL();
+            var done = function () { copyBtn.textContent = "Link copied"; setTimeout(function () { copyBtn.textContent = "Copy shareable link"; }, 2000); };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(window.location.href).then(done, done);
+            } else { done(); }
+        });
+
+        // Shareable URL: read ?mode=wake|bed&wake=HH:MM&bed=HH:MM on load.
+        (function init() {
+            var params = new URLSearchParams(window.location.search);
+            var mode = params.get("mode"), wake = params.get("wake"), bed = params.get("bed");
+            if (wake && parseTime(wake) !== null) wakeEl.value = wake;
+            if (bed && parseTime(bed) !== null) bedEl.value = bed;
+            if (mode === "bed") setMode("bed"); else setMode("wake");
+            renderBedtimes();
+            renderWaketimes();
+        })();
+    })();
+    </script>
+</body>
+</html>

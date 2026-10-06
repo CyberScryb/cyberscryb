@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Grammar Checker Online - No Signup, 100% Private | CyberScryb</title>
+    <meta name="description" content="Free grammar checker that runs 100% in your browser. No signup, no server, your text never leaves your device. Catches spelling, punctuation, and common grammar mistakes instantly.">
+    <meta name="keywords" content="grammar checker, free grammar checker, grammar check online, free grammar checker no signup, private grammar checker, check grammar online">
+    <meta property="og:title" content="Free Grammar Checker Online - No Signup, 100% Private | CyberScryb">
+    <meta property="og:description" content="Paste text and get instant grammar feedback. Everything runs in your browser. Your text never leaves your device.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/grammar-checker/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Grammar Checker Online - No Signup, 100% Private | CyberScryb">
+    <meta name="twitter:description" content="Paste text and get instant grammar feedback. Everything runs in your browser. Your text never leaves your device.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://cyberscryb.com/tools/grammar-checker/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+
+    <!-- Google AdSense -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb Free Grammar Checker",
+        "url": "https://cyberscryb.com/tools/grammar-checker/",
+        "description": "Free online grammar checker. Paste text and get instant feedback on spelling, punctuation, and common grammar mistakes. Runs 100% in your browser, no signup, nothing sent to any server.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Grammar Checker", "item": "https://cyberscryb.com/tools/grammar-checker/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Is this grammar checker really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is free, unlimited, and requires no signup or account. There are no usage caps and no premium tier." }},
+            { "@type": "Question", "name": "Is my text sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every check runs in your browser using JavaScript. This tool makes no network requests with your text, so your writing never leaves your device and cannot be stored or used for training." }},
+            { "@type": "Question", "name": "What does a rule-based grammar checker catch?", "acceptedAnswer": { "@type": "Answer", "text": "It catches common mechanical errors: misspelled words, doubled words, extra spaces, missing or misplaced punctuation, sentence capitalization, missing apostrophes in contractions, often-confused word pairs like their/they're/there and your/you're, and basic subject-verb mistakes like 'we was'." }},
+            { "@type": "Question", "name": "What will a rule-based checker miss?", "acceptedAnswer": { "@type": "Answer", "text": "It cannot understand meaning, so it will miss wrong words that are spelled correctly in context, subtle style problems, awkward phrasing, tense inconsistencies across paragraphs, and factual errors. It is a first pass, not a replacement for proofreading." }},
+            { "@type": "Question", "name": "How is this different from Grammarly?", "acceptedAnswer": { "@type": "Answer", "text": "Grammarly is an AI-powered service that sends your text to its servers and requires an account for full features. This checker is rule-based and runs entirely in your browser: no account, no server, no data collection. The trade-off is that it catches common mechanical errors but not the subtle issues an AI can spot." }},
+            { "@type": "Question", "name": "Does it work on long documents?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Because everything runs locally, there are no server timeouts or per-request limits. Essays, articles, cover letters, and chapters all check instantly in the page." }},
+            { "@type": "Question", "name": "Can I use it offline?", "acceptedAnswer": { "@type": "Answer", "text": "Once the page has loaded, the checking itself needs no internet connection. The rules run entirely in your browser." }},
+            { "@type": "Question", "name": "Does it check spelling too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It includes a list of the most commonly misspelled English words, such as receive, definitely, separate, and accommodate, and suggests the correct spelling for each." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .gc-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .gc-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        .gc-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(239, 68, 68, 0.1); color: var(--primary-soft);
+            padding: 5px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+            border: 1px solid rgba(239, 68, 68, 0.35); margin-bottom: 1rem;
+        }
+        .gc-h1 { font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--text); }
+        .gc-sub { color: var(--text-faint); margin-bottom: 0.25rem; line-height: 1.6; }
+        .gc-privacy-note {
+            display: flex; align-items: flex-start; gap: 10px;
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1rem 1.25rem; margin: 1.25rem 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;
+        }
+        .gc-privacy-note svg { flex-shrink: 0; margin-top: 2px; }
+        .stat-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem; margin: 1.5rem 0;
+        }
+        .stat-card {
+            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.2rem; text-align: center; transition: border-color 0.3s, transform 0.2s;
+        }
+        .stat-card:hover { border-color: var(--primary-soft); transform: translateY(-2px); }
+        .stat-value {
+            font-family: var(--font-brand), Georgia, serif; font-size: 2rem; font-weight: 700;
+            color: var(--primary-soft); line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-top: 0.5rem;
+        }
+        #gc-textarea {
+            width: 100%; min-height: 260px; background: var(--bg-elevated); border: 1px solid var(--border);
+            border-radius: 12px; color: var(--text); font-family: 'Inter', sans-serif;
+            font-size: 1rem; line-height: 1.7; padding: 1.25rem; resize: vertical; outline: none;
+            transition: border-color 0.3s; box-sizing: border-box;
+        }
+        #gc-textarea:focus { border-color: var(--primary-soft); box-shadow: 0 0 20px rgba(239,68,68,0.08); }
+        #gc-textarea::placeholder { color: var(--text-faint); }
+        .action-bar { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; align-items: center; }
+        .primary-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626); border: none; color: #000;
+            font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem;
+            padding: 0.8rem 1.75rem; border-radius: 10px; cursor: pointer; letter-spacing: 0.03em;
+            transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 0 20px rgba(239,68,68,0.25);
+        }
+        .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(239,68,68,0.45); }
+        .action-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted);
+            font-family: 'Inter', sans-serif; font-size: 0.85rem; padding: 0.7rem 1.1rem;
+            border-radius: 10px; cursor: pointer; transition: all 0.2s;
+        }
+        .action-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .gc-results { margin-top: 2rem; }
+        .gc-results h2 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text); }
+        .gc-summary { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6; }
+        .gc-legend { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 1rem; }
+        .gc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .gc-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+        #gc-marked {
+            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.25rem; font-size: 0.95rem; line-height: 1.8; color: var(--text-muted);
+            white-space: pre-wrap; word-wrap: break-word; margin-bottom: 1.25rem; max-height: 320px; overflow-y: auto;
+        }
+        .gc-mark-err {
+            background: rgba(239,68,68,0.16); border-bottom: 2px solid #ef4444;
+            border-radius: 3px; padding: 0 1px; cursor: pointer;
+        }
+        .gc-mark-verify {
+            background: rgba(56,189,248,0.12); border-bottom: 2px solid #38bdf8;
+            border-radius: 3px; padding: 0 1px; cursor: pointer;
+        }
+        .gc-issue {
+            background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+        }
+        .gc-issue-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .gc-tag {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+            padding: 3px 10px; border-radius: 999px; border: 1px solid;
+        }
+        .gc-tag.err { color: var(--danger); border-color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.08); }
+        .gc-tag.verify { color: var(--attention); border-color: rgba(56,189,248,0.5); background: rgba(56,189,248,0.08); }
+        .gc-snippet { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-faint); margin-bottom: 0.5rem; line-height: 1.6; }
+        .gc-snippet mark { background: rgba(239,68,68,0.25); color: var(--text); border-radius: 3px; padding: 0 2px; }
+        .gc-snippet mark.v { background: rgba(56,189,248,0.25); }
+        .gc-msg { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem; }
+        .gc-fix-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+        .gc-fix-label { font-size: 0.85rem; color: var(--text-faint); }
+        .gc-fix-label strong { color: var(--success); font-weight: 600; }
+        .gc-apply {
+            background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.4); color: var(--success);
+            font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        }
+        .gc-apply:hover { background: rgba(34,197,94,0.2); }
+        .gc-empty { color: var(--text-faint); font-size: 0.95rem; padding: 1rem 0; }
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: var(--text-faint); max-width: 900px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+        .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { margin: 0 0.4rem; }
+        .geo-card { background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px; }
+        .geo-card h2 { color: var(--text); margin-bottom: 1rem; font-size: 1.4rem; }
+        .geo-card p { color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+        .geo-card a { color: var(--primary); }
+        .gc-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+        .gc-table th, .gc-table td { padding: 0.65rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .gc-table th { color: var(--text); font-weight: 700; }
+        .gc-table td { color: var(--text-muted); }
+        .gc-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--primary-soft); white-space: nowrap; }
+        .gc-table tbody tr:last-child td { border-bottom: none; }
+        .faq-item { margin-bottom: 1rem; }
+        .faq-item h4 { color: var(--text); margin-bottom: 0.4rem; font-size: 1.02rem; }
+        .faq-item p { color: var(--text-muted); line-height: 1.7; margin: 0; }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="gc-app">
+        <div class="breadcrumb">
+            <a href="/">Home</a><span>›</span>
+            <a href="/tools/">Tools</a><span>›</span>
+            Grammar Checker
+        </div>
+        <div class="gc-container">
+            <div style="padding: 1.5rem 0 0;">
+                <span class="gc-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    100% Private - No Signup
+                </span>
+                <h1 class="gc-h1">Free Grammar Checker</h1>
+                <p class="gc-sub">Paste any text and get instant feedback on spelling, punctuation, and common grammar mistakes. No account, no limits, no waiting.</p>
+                <div class="gc-privacy-note">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    <span><strong style="color: var(--text);">Everything runs in your browser.</strong> This checker uses pattern rules in JavaScript and makes no network requests with your text. Your writing never leaves your device, so it cannot be stored, logged, or used for training. Paste drafts, emails, or manuscripts with confidence.</span>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-value" id="s-words">0</div><div class="stat-label">Words</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-chars">0</div><div class="stat-label">Characters</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-reading">&lt; 1m</div><div class="stat-label">Reading Time</div></div>
+                <div class="stat-card"><div class="stat-value" id="s-issues">0</div><div class="stat-label">Issues Found</div></div>
+            </div>
+
+            <textarea id="gc-textarea" placeholder="Paste or type your text here. Checking happens automatically as you type..." aria-label="Paste or type your text here to check grammar"></textarea>
+
+            <div class="action-bar">
+                <button class="primary-btn" id="btn-check">Check Grammar</button>
+                <button class="action-btn" id="btn-sample">Try Sample</button>
+                <button class="action-btn" id="btn-fixall" disabled>Apply All Fixes</button>
+                <button class="action-btn" id="btn-copy">Copy Text</button>
+                <button class="action-btn" id="btn-clear">Clear</button>
+            </div>
+
+            <div class="gc-results" id="gc-results">
+                <h2>Results</h2>
+                <div class="gc-legend">
+                    <span><span class="gc-dot" style="background:#ef4444;"></span> Likely error (safe to fix)</span>
+                    <span><span class="gc-dot" style="background:#38bdf8;"></span> Confusable word (check the context)</span>
+                </div>
+                <div id="gc-marked"><span style="color:var(--text-faint);">Your checked text will appear here with issues highlighted. Click a highlight to jump to its explanation.</span></div>
+                <div class="gc-summary" id="gc-summary"></div>
+                <div id="gc-list"></div>
+            </div>
+
+            <div class="geo-card">
+                <h2>An Honest, Rule-Based Grammar Checker</h2>
+                <p>Most grammar checkers are black boxes: you paste text, an AI somewhere on a server rewrites your sentences, and you never learn what changed or why. This tool takes the opposite approach. It runs a set of hand-written pattern rules directly in your browser, flags each match, and tells you exactly what rule fired and what the fix is. There is no AI involved, which means two things you should know up front.</p>
+                <p>First, it catches common mechanical errors reliably: misspellings, doubled words, extra spaces, punctuation spacing, sentence capitalization, missing apostrophes, often-confused word pairs, and basic subject-verb mistakes like "we was". Second, it will not catch everything. It cannot understand meaning, so a wrong word that happens to be spelled correctly will slip past unless it is on the confusables list. It will not fix your style, your structure, or your argument. Think of it as a careful first pass, not a replacement for proofreading. For the full picture, read our <a href="/guides/how-to-check-grammar-online/">guide to checking grammar online</a>.</p>
+
+                <h2 style="margin-top:2rem;">What This Checker Catches</h2>
+                <p>The engine scans your text with sixteen rule families, all running locally:</p>
+                <table class="gc-table">
+                    <thead><tr><th>Category</th><th>What it flags</th></tr></thead>
+                    <tbody>
+                        <tr><td>Spelling</td><td>Common misspellings such as recieve, definately, seperate, and accomodate, with the correct form suggested.</td></tr>
+                        <tr><td>Confusable words</td><td>Their / they're / there, your / you're, its / it's, then / than, affect / effect, too / two, lose / loose, and more, flagged for you to verify in context.</td></tr>
+                        <tr><td>Repeated words</td><td>Doubled words like "the the", with a note that some doubles (had had) are legitimate.</td></tr>
+                        <tr><td>Spacing</td><td>Double spaces, spaces before punctuation, and missing spaces after punctuation.</td></tr>
+                        <tr><td>Capitalization</td><td>Sentences and lines that start lowercase, and the pronoun "i" written lowercase.</td></tr>
+                        <tr><td>Apostrophes</td><td>Missing apostrophes in common contractions: dont, cant, wont, im, youre, and similar.</td></tr>
+                        <tr><td>Word choice</td><td>"Could of" corrected to "could have", "in regards to" to "in regard to", "alot" to "a lot", "irregardless" to "regardless".</td></tr>
+                        <tr><td>Agreement</td><td>Basic subject-verb mismatches such as "we was" or "he were".</td></tr>
+                        <tr><td>Punctuation</td><td>Doubled exclamation or question marks, and ellipses longer than three dots.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 style="margin-top:2rem;">What It Will Not Catch</h2>
+                <p>Honesty matters more than a long feature list. This checker will miss wrong-word errors outside its confusables list (for example, "bare" where you meant "bear"), tense inconsistencies across paragraphs, run-on sentences, sentence fragments used deliberately, awkward phrasing, tone problems, and anything factually wrong. If your writing needs meaning-level review, pair this tool with a careful human read or an AI editor, and paste only text you are comfortable sharing with that service.</p>
+
+                <h2 style="margin-top:2rem;">Why Most Free Grammar Checkers Are Not Private</h2>
+                <p>Nearly every browser-based grammar checker works the same way: your text is sent to a company server, analyzed there, and the results are sent back. That is how AI-powered suggestions work, and it means your drafts, emails, cover letters, and manuscripts pass through someone else's infrastructure. Some services keep copies for product improvement or model training, governed by privacy policies most people never read.</p>
+                <p>This checker exists because that trade is not always worth it. The rules run as JavaScript in this page. Open your browser's network tab while you type: you will see no requests carrying your text anywhere. There is no account to create, no document history stored, and nothing to delete later. It is the right tool when the text is sensitive, or when you simply prefer that your writing stays yours.</p>
+
+                <h2 style="margin-top:2rem;">Who Uses a Grammar Checker</h2>
+                <p>Students run essays and applications through a checker before submitting. Job seekers proofread resumes and cover letters where one typo can end a candidacy. Freelancers clean up client deliverables and pitches. Non-native English writers catch the mechanical errors that fluency usually hides. Bloggers and newsletter writers do a final pass before publishing. Anyone who writes under deadline uses it as a safety net, because tired eyes skip exactly the errors a rule engine never misses.</p>
+                <p>If a scan comes back clean and you want a second opinion on tone or flow, our <a href="/tools/ai-detector/">AI Detector</a> can tell you whether your draft reads as machine-written, and the <a href="/tools/humanizer/">AI Humanizer</a> can loosen up stiff phrasing. For longer writing projects, the <a href="/tools/ai-writing-suite/">AI Writing Suite</a> covers drafting and rewriting.</p>
+            </div>
+
+            <div class="geo-card">
+                <h2 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+                <div class="faq-item"><h4>Is this grammar checker really free?</h4><p>Yes. Free, unlimited, no signup, no account, no usage caps. Because the checking runs in your browser, there is no server cost per check to pass on to you.</p></div>
+                <div class="faq-item"><h4>Is my text sent to a server?</h4><p>No. Every check runs in your browser with JavaScript, and this tool makes no network requests carrying your text. Your writing never leaves your device, so it cannot be stored, logged, or used for training.</p></div>
+                <div class="faq-item"><h4>What does a rule-based checker catch?</h4><p>Common mechanical errors: misspelled words, doubled words, extra or missing spaces, punctuation mistakes, sentence capitalization, missing apostrophes, often-confused word pairs like their/they're/there, and basic subject-verb mistakes like "we was".</p></div>
+                <div class="faq-item"><h4>What will it miss?</h4><p>Anything requiring an understanding of meaning: wrong words that are spelled correctly, tense drift across paragraphs, awkward phrasing, tone, structure, and factual errors. It is a first pass, not a replacement for proofreading.</p></div>
+                <div class="faq-item"><h4>How is this different from Grammarly?</h4><p>Grammarly is AI-powered, sends your text to its servers, and reserves features for accounts and paid plans. This checker is rule-based and fully local: no account, no server, no data collection. The trade-off is narrower coverage of subtle issues.</p></div>
+                <div class="faq-item"><h4>Does it work on long documents?</h4><p>Yes. Local checking means no server timeouts or per-request limits. Essays, articles, cover letters, and chapters check instantly in the page.</p></div>
+                <div class="faq-item"><h4>Can I use it offline?</h4><p>Once the page has loaded, the checking itself needs no internet connection. The rules run entirely in your browser.</p></div>
+                <div class="faq-item"><h4>Does it check spelling too?</h4><p>Yes. It includes a list of the most commonly misspelled English words, such as receive, definitely, separate, and accommodate, and suggests the correct spelling for each one it finds.</p></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Related: <a href="/tools/humanizer/" style="color: var(--primary);">AI Humanizer</a> | <a href="/tools/ai-detector/" style="color: var(--primary);">AI Detector</a> | <a href="/tools/ai-writing-suite/" style="color: var(--primary);">AI Writing Suite</a> | <a href="/guides/how-to-check-grammar-online/" style="color: var(--primary);">How to Check Grammar Online (Guide)</a></p>
+            </div>
+        </div>
+
+        <!-- AdSense: Below Tool -->
+        <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </section>
+
+        <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+            <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+                <a href="/tools/humanizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Loosen up stiff phrasing after your grammar pass.</span>
+                </a>
+                <a href="/tools/ai-detector/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Detector</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Check whether your draft reads as machine-written.</span>
+                </a>
+                <a href="/tools/ai-writing-suite/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Writing Suite</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Drafting and rewriting tools for longer projects.</span>
+                </a>
+            </div>
+        </section>
+
+        <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+            <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Guides</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+                <a href="/guides/how-to-check-grammar-online/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">How to Check Grammar Online</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Rule-based vs AI checkers, privacy, and what they miss &rarr;</span>
+                </a>
+                <a href="/tools/humanizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Make corrected text sound natural &rarr;</span>
+                </a>
+                <a href="/tools/ai-detector/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='var(--border)'">
+                    <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Detector</strong>
+                    <span style="font-size:0.85rem; color: var(--text-muted);">Screen drafts before detectors see them &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+/* Grammar checker engine core (DOM-free). checkText(text) -> array of errors.
+   Each error: { start, end, cat, label, message, fix }
+   cat: 'error' (likely wrong) or 'verify' (check the context)
+*/
+'use strict';
+
+var MISSPELLINGS = {
+  'recieve': 'receive', 'beleive': 'believe', 'acheive': 'achieve',
+  'definately': 'definitely', 'seperate': 'separate',
+  'separete': 'separate', 'occassion': 'occasion', 'ocassion': 'occasion',
+  'accomodate': 'accommodate', 'acommodate': 'accommodate', 'arguement': 'argument',
+  'calender': 'calendar', 'cemetary': 'cemetery',
+  'changable': 'changeable', 'collegue': 'colleague', 'comming': 'coming',
+  'commited': 'committed', 'comitted': 'committed',
+  'embarass': 'embarrass', 'embarras': 'embarrass',
+  'existance': 'existence', 'experiance': 'experience',
+  'fourty': 'forty', 'goverment': 'government', 'grammer': 'grammar',
+  'harrass': 'harass', 'imediate': 'immediate', 'immediate': null,
+  'independant': 'independent', 'knowlege': 'knowledge',
+  'libary': 'library', 'maintanance': 'maintenance',
+  'managment': 'management', 'neccessary': 'necessary',
+  'noticable': 'noticeable', 'ocurrence': 'occurrence',
+  'occurance': 'occurrence', 'persue': 'pursue', 'posession': 'possession',
+  'prefered': 'preferred', 'publically': 'publicly',
+  'recomend': 'recommend', 'refering': 'referring',
+  'rember': 'remember', 'rythm': 'rhythm', 'rhythem': 'rhythm',
+  'sacrafice': 'sacrifice', 'sieze': 'seize',
+  'sucessful': 'successful', 'suprise': 'surprise',
+  'tendancy': 'tendency', 'tommorow': 'tomorrow', 'tomarrow': 'tomorrow',
+  'truely': 'truly', 'untill': 'until', 'wierd': 'weird',
+  'writting': 'writing', 'writen': 'written',
+  'freind': 'friend', 'thier': 'their', 'teh': 'the',
+  'happend': 'happened', 'useing': 'using', 'begining': 'beginning',
+  'dissapear': 'disappear', 'enviroment': 'environment',
+  'febuary': 'february', 'wensday': 'wednesday',
+  'dissapoint': 'disappoint', 'expecially': 'especially',
+  'expresso': 'espresso', 'irregardless': 'regardless',
+  'beautifull': 'beautiful', 'alot': 'a lot', 'usefull': 'useful',
+  'necesary': 'necessary', 'occured': 'occurred', 'wich': 'which',
+  'shoud': 'should', 'becuase': 'because'
+};
+var CONFUSABLES = [
+  { words: ['their', "they're", 'there'],
+    msg: "'Their' is possessive (their house). 'They're' means they are. 'There' is a place or a point (there it is). Make sure this is the one you mean." },
+  { words: ['your', "you're"],
+    msg: "'Your' is possessive (your turn). 'You're' means you are. These are the most commonly swapped words in English, so double-check." },
+  { words: ['its', "it's"],
+    msg: "'Its' is possessive (its color). 'It's' means it is or it has. If you can replace it with 'it is', use the apostrophe." },
+  { words: ['then', 'than'],
+    msg: "'Then' is about time or sequence (then we left). 'Than' is for comparisons (bigger than). Check that this is the right one." },
+  { words: ['affect', 'effect'],
+    msg: "'Affect' is usually a verb (it affects sales). 'Effect' is usually a noun (the effect was huge). Make sure this is the one you mean." },
+  { words: ['too', 'two'],
+    msg: "'Too' means also or excessively. 'Two' is the number 2. 'To' is the preposition. Check that this is the right one." },
+  { words: ['lose', 'loose'],
+    msg: "'Lose' is the verb (don't lose your keys). 'Loose' is an adjective meaning not tight. Check that this is the right one." },
+  { words: ['weather', 'whether'],
+    msg: "'Weather' is rain and sun. 'Whether' introduces a choice (whether to go). Check that this is the right one." },
+  { words: ['who\'s', 'whose'],
+    msg: "'Who's' means who is. 'Whose' is possessive (whose turn). Check that this is the right one." },
+  { words: ['passed', 'past'],
+    msg: "'Passed' is the verb (she passed the test). 'Past' is time gone by or beyond (in the past, walked past). Check that this is the right one." },
+  { words: ['breath', 'breathe'],
+    msg: "'Breath' is the noun (take a breath). 'Breathe' is the verb (breathe in). Check that this is the right one." },
+  { words: ['desert', 'dessert'],
+    msg: "'Desert' is the dry place (one s). 'Dessert' is the sweet course (two s's). Check that this is the right one." },
+  { words: ['principle', 'principal'],
+    msg: "'Principle' is a rule or belief. 'Principal' is the head of a school or the main amount. Check that this is the right one." },
+  { words: ['complement', 'compliment'],
+    msg: "'Complement' completes something. 'Compliment' is praise. Check that this is the right one." }
+];
+
+var ABBREV = { 'mr': 1, 'mrs': 1, 'ms': 1, 'dr': 1, 'sr': 1, 'jr': 1,
+  'st': 1, 'etc': 1, 'eg': 1, 'ie': 1, 'vs': 1, 'approx': 1, 'no': 1,
+  'inc': 1, 'ltd': 1, 'co': 1, 'prof': 1, 'gen': 1, 'rep': 1, 'sen': 1,
+  'gov': 1, 'dept': 1, 'univ': 1, 'ave': 1, 'blvd': 1, 'rd': 1 };
+
+var APOSTROPHE = {
+  'doesnt': "doesn't", 'dont': "don't", 'cant': "can't",
+  'couldnt': "couldn't", 'didnt': "didn't", 'wont': "won't",
+  'isnt': "isn't", 'arent': "aren't", 'wasnt': "wasn't",
+  'werent': "weren't", 'hasnt': "hasn't", 'havent': "haven't",
+  'hadnt': "hadn't", 'wouldnt': "wouldn't", 'shouldnt': "shouldn't",
+  'mustnt': "mustn't", 'neednt': "needn't",
+  'im': "I'm", 'ive': "I've", 'youre': "you're", 'theyre': "they're",
+  'theres': "there's", 'whats': "what's", 'thats': "that's",
+  'whos': "who's", 'couldve': "could've", 'wouldve': "would've",
+  'shouldve': "should've", 'mightve': "might've"
+};
+
+function preserveCase(orig, fix) {
+  if (orig === orig.toUpperCase() && orig.length > 1) return fix.toUpperCase();
+  if (orig[0] === orig[0].toUpperCase()) {
+    return fix.charAt(0).toUpperCase() + fix.slice(1);
+  }
+  return fix;
+}
+
+function pushError(errors, start, end, cat, label, message, fix) {
+  if (start < 0 || end <= start) return;
+  errors.push({ start: start, end: end, cat: cat, label: label, message: message, fix: fix || null });
+}
+
+function checkText(text) {
+  var errors = [];
+  if (!text) return errors;
+  var m, i, w, fix;
+
+  // 1. Misspellings
+  var missRe = new RegExp('\\b(' + Object.keys(MISSPELLINGS).join('|') + ')\\b', 'gi');
+  while ((m = missRe.exec(text)) !== null) {
+    w = m[1].toLowerCase();
+    fix = preserveCase(m[1], MISSPELLINGS[w]);
+    pushError(errors, m.index, m.index + m[1].length, 'error', 'Spelling',
+      '"' + m[1] + '" is a common misspelling of "' + fix + '".', fix);
+  }
+
+  // 2. Repeated words
+  var dblRe = /\b([A-Za-z]+)\s+(\1)\b/g;
+  var dm;
+  while ((dm = dblRe.exec(text)) !== null) {
+    pushError(errors, dm.index, dm.index + dm[0].length, 'error', 'Repeated word',
+      'The word "' + dm[1] + '" appears twice in a row. Sometimes this is intentional (like "had had"), but usually it is a typo.',
+      dm[1]);
+  }
+
+  // 3. Confusable words (verify, no auto-fix)
+  for (i = 0; i < CONFUSABLES.length; i++) {
+    var group = CONFUSABLES[i];
+    var esc = group.words.map(function(x) { return x.replace(/'/g, "\\'"); });
+    var cre = new RegExp('\\b(' + esc.join('|') + ')\\b', 'gi');
+    var cm;
+    while ((cm = cre.exec(text)) !== null) {
+      pushError(errors, cm.index, cm.index + cm[1].length, 'verify',
+        'Confusable word', group.msg, null);
+    }
+  }
+
+  // 4. Repeated spaces
+  var spRe = / {2,}/g;
+  var sm;
+  while ((sm = spRe.exec(text)) !== null) {
+    pushError(errors, sm.index, sm.index + sm[0].length, 'error', 'Extra spaces',
+      'More than one space here. One space is enough.', ' ');
+  }
+
+  // 5. Space before punctuation
+  var sbpRe = / +([,.;:!?])/g;
+  var bm;
+  while ((bm = sbpRe.exec(text)) !== null) {
+    pushError(errors, bm.index, bm.index + bm[0].length, 'error', 'Punctuation spacing',
+      'There should be no space before "' + bm[1] + '".', bm[1]);
+  }
+
+  // 6. Missing space after punctuation
+  var msaRe = /([,;:!?])([A-Za-z])/g;
+  var am;
+  while ((am = msaRe.exec(text)) !== null) {
+    var tokStart = text.lastIndexOf(' ', am.index) + 1;
+    var tokEnd = text.indexOf(' ', am.index);
+    if (tokEnd === -1) tokEnd = text.length;
+    var tok = text.slice(tokStart, tokEnd);
+    if (/@|https?:|\.com|\.net|\.org|\.io|\.ai/.test(tok)) continue;
+    pushError(errors, am.index, am.index + am[0].length, 'error', 'Punctuation spacing',
+      'Put a space after "' + am[1] + '".', am[1] + ' ' + am[2]);
+  }
+  // periods: only flag before uppercase letters, skip decimals and abbreviations
+  var mspRe = /(\.)([A-Z])/g;
+  var pm;
+  while ((pm = mspRe.exec(text)) !== null) {
+    var before = text.slice(0, pm.index);
+    if (/\d$/.test(before)) continue; // decimal like 3.5
+    var ts = text.lastIndexOf(' ', pm.index) + 1;
+    var te = text.indexOf(' ', pm.index);
+    if (te === -1) te = text.length;
+    var ttok = text.slice(ts, te);
+    if (/^(?:[A-Z]\.)+[A-Z]?\.?$/.test(ttok)) continue; // U.S.A. style abbreviations
+    var bw = before.match(/([A-Za-z]+)$/);
+    var bw2 = bw ? bw[1].toLowerCase() : '';
+    if (ABBREV[bw2]) continue;
+    if (/^(e\.g|i\.e)$/i.test(before.slice(-4))) continue;
+    pushError(errors, pm.index, pm.index + pm[0].length, 'error', 'Punctuation spacing',
+      'Put a space after the period.', '. ' + pm[2]);
+  }
+
+  // 7. Sentence capitalization
+  function wordBefore(idx) {
+    var b = text.slice(0, idx).match(/([A-Za-z]+)\.?$/);
+    return b ? b[1] : '';
+  }
+  var scRe = /([.!?])(\s+)([a-z])/g;
+  var scm;
+  while ((scm = scRe.exec(text)) !== null) {
+    var wb = wordBefore(scm.index).toLowerCase();
+    if (ABBREV[wb] || wb.length <= 1 || /\d$/.test(wordBefore(scm.index))) continue;
+    var lidx = scm.index + scm[1].length + scm[2].length;
+    if (/^(e\.g|i\.e)/i.test(text.slice(lidx, lidx + 4))) continue; // "e.g." is a lowercase continuation
+    pushError(errors, lidx, lidx + 1, 'error', 'Capitalization',
+      'Start a new sentence with a capital letter.', scm[3].toUpperCase());
+  }
+  var nlRe = /\n[ \t]*([a-z])/g;
+  var nlm;
+  while ((nlm = nlRe.exec(text)) !== null) {
+    var lidx2 = nlm.index + nlm[0].length - 1;
+    pushError(errors, lidx2, lidx2 + 1, 'error', 'Capitalization',
+      'Start a new line with a capital letter.', nlm[1].toUpperCase());
+  }
+  var startRe = /^\s*([a-z])/;
+  var stm = startRe.exec(text);
+  if (stm) {
+    pushError(errors, stm.index + stm[0].length - 1, stm.index + stm[0].length, 'error',
+      'Capitalization', 'Start your text with a capital letter.', stm[1].toUpperCase());
+  }
+
+  // 8. Lone lowercase i
+  var iRe = /\bi\b/g;
+  var im;
+  while ((im = iRe.exec(text)) !== null) {
+    if (/^i\.e/i.test(text.slice(im.index, im.index + 3))) continue; // "i.e." is not the pronoun
+    pushError(errors, im.index, im.index + 1, 'error', 'Capitalization',
+      'The pronoun "I" is always capitalized.', 'I');
+  }
+
+  // 9. Missing apostrophes in contractions
+  var apRe = new RegExp('\\b(' + Object.keys(APOSTROPHE).join('|') + ')\\b', 'gi');
+  var apm;
+  while ((apm = apRe.exec(text)) !== null) {
+    w = apm[1].toLowerCase();
+    fix = preserveCase(apm[1], APOSTROPHE[w]);
+    pushError(errors, apm.index, apm.index + apm[1].length, 'error', 'Missing apostrophe',
+      '"' + apm[1] + '" is probably meant to be "' + fix + '".', fix);
+  }
+
+  // 10. "of" instead of "have"
+  var ofRe = /\b(could|would|should|might|must)\s+of\b/gi;
+  var ofm;
+  while ((ofm = ofRe.exec(text)) !== null) {
+    var pron = preserveCase(ofm[1], ofm[1]);
+    pushError(errors, ofm.index, ofm.index + ofm[0].length, 'error', 'Word choice',
+      '"Could of" is a mishearing of "could\'ve" (could have). The correct form is "' + pron + ' have".',
+      pron + ' have');
+  }
+
+  // 11. Basic subject-verb agreement
+  var svRe = /\b(we|they|you|these|those)\s+was\b/gi;
+  var svm;
+  while ((svm = svRe.exec(text)) !== null) {
+    var subj = preserveCase(svm[1], svm[1]);
+    pushError(errors, svm.index, svm.index + svm[0].length, 'error', 'Agreement',
+      '"' + svm[1] + ' was" should be "' + subj + ' were". Plural subjects take "were".',
+      subj + ' were');
+  }
+  var svRe2 = /\b(he|she|it|this|that)\s+were\b/gi;
+  var svm2;
+  while ((svm2 = svRe2.exec(text)) !== null) {
+    var subj2 = preserveCase(svm2[1], svm2[1]);
+    pushError(errors, svm2.index, svm2.index + svm2[0].length, 'error', 'Agreement',
+      '"' + svm2[1] + ' were" should be "' + subj2 + ' was". Singular subjects take "was".',
+      subj2 + ' was');
+  }
+
+  // 12. "in regards to" and "irregardless" (irregardless is in misspellings already)
+  var irRe = /\bin regards to\b/gi;
+  var irm;
+  while ((irm = irRe.exec(text)) !== null) {
+    pushError(errors, irm.index, irm.index + irm[0].length, 'error', 'Word choice',
+      'The standard phrase is "in regard to", not "in regards to".', 'in regard to');
+  }
+
+  // 13. Doubled punctuation (!! or ??)
+  var dpRe = /([!?])\1+/g;
+  var dpm;
+  while ((dpm = dpRe.exec(text)) !== null) {
+    pushError(errors, dpm.index, dpm.index + dpm[0].length, 'error', 'Punctuation',
+      'One "' + dpm[1] + '" is enough. Doubling it reads as shouting or sloppy.',
+      dpm[1]);
+  }
+  var dotsRe = /\.{4,}/g;
+  var dtm;
+  while ((dtm = dotsRe.exec(text)) !== null) {
+    pushError(errors, dtm.index, dtm.index + dtm[0].length, 'error', 'Punctuation',
+      'An ellipsis is three dots, not ' + dtm[0].length + '.', '...');
+  }
+
+  // Sort by position, drop overlaps (keep first)
+  errors.sort(function(a, b) { return a.start - b.start || a.end - b.end; });
+  var out = [];
+  var lastEnd = -1;
+  for (i = 0; i < errors.length; i++) {
+    if (errors[i].start >= lastEnd) {
+      out.push(errors[i]);
+      lastEnd = errors[i].end;
+    }
+  }
+  return out;
+}
+
+
+    /* ---------- DOM wiring (no network calls: everything runs locally) ---------- */
+    (function() {
+        var ta = document.getElementById('gc-textarea');
+        var els = {
+            words: document.getElementById('s-words'),
+            chars: document.getElementById('s-chars'),
+            reading: document.getElementById('s-reading'),
+            issues: document.getElementById('s-issues')
+        };
+        var markedEl = document.getElementById('gc-marked');
+        var summaryEl = document.getElementById('gc-summary');
+        var listEl = document.getElementById('gc-list');
+        var fixAllBtn = document.getElementById('btn-fixall');
+        var timer = null;
+        var currentErrors = [];
+
+        var SAMPLE = "Grammar checkers are usefull, but there not perfect. Their are alot of common mistakes that they miss. For example, i often recieve emails that say 'your welcome' when they mean you're welcome. My freind definately needs to seperate then from than, and affect from effect.  Its important to proofread carefully, because a tool cant catch everything. We was told to double check our work, and you was too. If you could of fixed it earlier, you should of. Dont forget to breath and take you're time. The wierd thing is, teh checker flagged alot of issues, but it missed some to.";
+
+        function escapeHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function snippet(text, err) {
+            var s = Math.max(0, err.start - 40);
+            var e = Math.min(text.length, err.end + 40);
+            var pre = escapeHtml(text.slice(s, err.start));
+            var mid = escapeHtml(text.slice(err.start, err.end));
+            var post = escapeHtml(text.slice(err.end, e));
+            var cls = err.cat === 'verify' ? ' class="v"' : '';
+            return (s > 0 ? '...' : '') + pre + '<mark' + cls + '>' + mid + '</mark>' + post + (e < text.length ? '...' : '');
+        }
+
+        function renderMarked(text, errors) {
+            if (!text.trim()) {
+                markedEl.innerHTML = '<span style="color:var(--text-faint);">Your checked text will appear here with issues highlighted. Click a highlight to jump to its explanation.</span>';
+                return;
+            }
+            var parts = [];
+            var pos = 0;
+            errors.forEach(function(err, idx) {
+                parts.push(escapeHtml(text.slice(pos, err.start)));
+                var cls = err.cat === 'verify' ? 'gc-mark-verify' : 'gc-mark-err';
+                parts.push('<span class="' + cls + '" data-idx="' + idx + '" title="Click to see explanation">' + escapeHtml(text.slice(err.start, err.end)) + '</span>');
+                pos = err.end;
+            });
+            parts.push(escapeHtml(text.slice(pos)));
+            markedEl.innerHTML = parts.join('');
+        }
+
+        function renderList(text, errors) {
+            currentErrors = errors;
+            if (!errors.length) {
+                if (text.trim()) {
+                    listEl.innerHTML = '<p class="gc-empty">No issues found. Your text looks clean by every rule in the engine.</p>';
+                } else {
+                    listEl.innerHTML = '';
+                }
+                fixAllBtn.disabled = true;
+                return;
+            }
+            var fixable = errors.filter(function(e) { return e.fix; }).length;
+            fixAllBtn.disabled = fixable === 0;
+            fixAllBtn.textContent = 'Apply All Fixes' + (fixable ? ' (' + fixable + ')' : '');
+            listEl.innerHTML = errors.map(function(err, idx) {
+                var tag = err.cat === 'verify'
+                    ? '<span class="gc-tag verify">Check</span>'
+                    : '<span class="gc-tag err">' + escapeHtml(err.label) + '</span>';
+                var fixRow = err.fix
+                    ? '<div class="gc-fix-row"><span class="gc-fix-label">Suggested fix: <strong>' + escapeHtml(err.fix) + '</strong></span><button class="gc-apply" data-idx="' + idx + '">Apply Fix</button></div>'
+                    : '<div class="gc-fix-row"><span class="gc-fix-label">No automatic fix: this one needs your judgment.</span></div>';
+                return '<div class="gc-issue" id="issue-' + idx + '">' +
+                    '<div class="gc-issue-head">' + tag + '</div>' +
+                    '<div class="gc-snippet">' + snippet(text, err) + '</div>' +
+                    '<div class="gc-msg">' + escapeHtml(err.message) + '</div>' +
+                    fixRow + '</div>';
+            }).join('');
+        }
+
+        function runCheck() {
+            var text = ta.value;
+            var trimmed = text.trim();
+            var words = trimmed ? trimmed.split(/\s+/) : [];
+            var readMin = Math.ceil(words.length / 200);
+            els.words.textContent = words.length.toLocaleString();
+            els.chars.textContent = text.length.toLocaleString();
+            els.reading.innerHTML = words.length === 0 ? '&lt; 1m' : (readMin < 1 ? '&lt; 1m' : readMin + 'm');
+            var errors = checkText(text);
+            els.issues.textContent = errors.length.toLocaleString();
+            renderMarked(text, errors);
+            renderList(text, errors);
+            if (text.trim()) {
+                var errN = errors.filter(function(e) { return e.cat === 'error'; }).length;
+                var verN = errors.length - errN;
+                summaryEl.textContent = errors.length === 0
+                    ? 'Clean. No issues found in ' + words.length.toLocaleString() + ' words.'
+                    : 'Found ' + errors.length + ' item' + (errors.length === 1 ? '' : 's') + ': ' +
+                      errN + ' likely error' + (errN === 1 ? '' : 's') + ', ' + verN + ' to double-check in context.';
+            } else {
+                summaryEl.textContent = '';
+            }
+            if (typeof gtag === 'function' && words.length > 0) {
+                gtag('event', 'tool_used', { tool_name: 'grammar_checker', word_count: words.length });
+            }
+        }
+
+        function applyFix(idx) {
+            var err = currentErrors[idx];
+            if (!err || !err.fix) return;
+            var text = ta.value;
+            ta.value = text.slice(0, err.start) + err.fix + text.slice(err.end);
+            runCheck();
+            ta.focus();
+        }
+
+        function applyAllFixes() {
+            var text = ta.value;
+            var fixable = currentErrors.filter(function(e) { return e.fix; })
+                .sort(function(a, b) { return b.start - a.start; });
+            fixable.forEach(function(err) {
+                text = text.slice(0, err.start) + err.fix + text.slice(err.end);
+            });
+            ta.value = text;
+            runCheck();
+            ta.focus();
+        }
+
+        ta.addEventListener('input', function() {
+            clearTimeout(timer);
+            timer = setTimeout(runCheck, 400);
+        });
+        document.getElementById('btn-check').addEventListener('click', runCheck);
+        document.getElementById('btn-sample').addEventListener('click', function() { ta.value = SAMPLE; runCheck(); });
+        document.getElementById('btn-clear').addEventListener('click', function() { ta.value = ''; runCheck(); });
+        document.getElementById('btn-copy').addEventListener('click', function() {
+            if (navigator.clipboard) navigator.clipboard.writeText(ta.value);
+        });
+        fixAllBtn.addEventListener('click', applyAllFixes);
+        listEl.addEventListener('click', function(ev) {
+            var btn = ev.target.closest ? ev.target.closest('.gc-apply') : null;
+            if (btn && btn.getAttribute('data-idx') !== null) applyFix(parseInt(btn.getAttribute('data-idx'), 10));
+        });
+        markedEl.addEventListener('click', function(ev) {
+            var sp = ev.target.closest ? ev.target.closest('[data-idx]') : null;
+            if (sp) {
+                var card = document.getElementById('issue-' + sp.getAttribute('data-idx'));
+                if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        runCheck();
+    })();
+    </script>
+
+</body>
+
+</html>
