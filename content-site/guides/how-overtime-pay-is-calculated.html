@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Overtime Pay Is Calculated — Time and a Half, Double Time | CyberScryb</title>
+    <meta name="description" content="How overtime pay actually works: the FLSA 1.5x rule, state double-time rules, and why a shift differential changes the math. Includes a worked example and free calculator.">
+    <meta name="keywords" content="how overtime pay is calculated, time and a half calculator, overtime pay rules, double time pay, shift differential overtime, flsa overtime, california overtime rules">
+    <meta property="og:title" content="How Overtime Pay Is Calculated — Time and a Half, Double Time">
+    <meta property="og:description" content="The FLSA 1.5x rule, state double-time rules, and why a shift differential changes the math. Worked example and free calculator.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cyberscryb.com/guides/how-overtime-pay-is-calculated/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Overtime Pay Is Calculated — Time and a Half, Double Time">
+    <meta name="twitter:description" content="The FLSA 1.5x rule, state double-time rules, and why a shift differential changes the math. Worked example and free calculator.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://cyberscryb.com/guides/how-overtime-pay-is-calculated/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/guides/guide.css">
+    <link rel="stylesheet" href="/tools/shared/support.css">
+    <style>
+        .ot-guide-table { width: 100%; max-width: 640px; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .ot-guide-table th, .ot-guide-table td { padding: 0.65rem 1rem; text-align: left; border-bottom: 1px solid var(--steel); }
+        .ot-guide-table th { color: var(--text-primary); font-weight: 700; border-bottom: 2px solid var(--steel); }
+        .ot-guide-table td { color: var(--text-secondary); }
+        .ot-guide-table tbody tr:last-child td { border-bottom: none; }
+        .formula-box { background: var(--bg-card); border: 1px solid var(--steel); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+        .formula-box strong { color: var(--text-primary); }
+    </style>
+    <!-- Google AdSense -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How Overtime Pay Is Calculated — Time and a Half, Double Time",
+        "description": "How overtime pay actually works: the FLSA 1.5x rule, state double-time rules, and why a shift differential changes the math. Includes a worked example and free calculator.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com/about/",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com"
+        },
+        "datePublished": "2026-10-06",
+        "dateModified": "2026-10-06",
+        "mainEntityOfPage": "https://cyberscryb.com/guides/how-overtime-pay-is-calculated/",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "overtime pay"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "fair labor standards act"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "shift differential"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "double time"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "regular rate of pay"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "non-exempt employee"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "How is overtime pay calculated?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Overtime pay is your regular hourly rate multiplied by 1.5, multiplied by your overtime hours. Under the federal Fair Labor Standards Act (FLSA), non-exempt employees earn this time-and-a-half rate for hours worked beyond 40 in a workweek."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "What is double-time pay and who gets it?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Double-time pay is twice your regular hourly rate. Federal law does not require it, but several states do in specific situations, most notably California, which requires double-time after 12 hours worked in a single day or after 8 hours on the 7th consecutive day of a workweek."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Does a shift differential count toward overtime pay?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes. A non-discretionary shift differential must be folded into your regular rate of pay before the overtime multiplier is applied, under 29 CFR 778.110. The 1.5x or 2x premium then applies to your base rate plus the differential, not the base rate alone."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Who is exempt from overtime pay?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Exemption depends on actual job duties and salary level, not job title or pay format. Common exemptions cover certain executive, administrative, professional, and outside sales roles that meet specific duties tests and earn above the Department of Labor's minimum salary threshold."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Is overtime calculated daily or weekly?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Federal law calculates overtime weekly: anything over 40 hours in a 7-day workweek. A handful of states also require daily overtime regardless of the weekly total -- California and Alaska after 8 hours in a single day, Nevada the same but only for employees earning under about 1.5 times minimum wage, and Colorado after 12 consecutive hours in a single day."
+                        }
+                }
+        ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Overtime Pay Calculator",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+        },
+        "url": "https://cyberscryb.com/tools/overtime-pay-calculator/"
+}
+    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #eef1f6; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/guides/" class="active">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="/">Tools</a>
+                    <span>/</span>
+                    <a href="https://cyberscryb.com/tools/overtime-pay-calculator/">Overtime Pay Calculator</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1 itemprop="headline">How Overtime Pay Is <span class="accent">Calculated</span></h1>
+                <p class="guide-subtitle" itemprop="description">Time and a half sounds simple until a shift differential or a double-time day gets involved. The actual rules, the worked math, and where states diverge from federal law.</p>
+                <div class="guide-meta">
+                    <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-10-06" itemprop="dateModified">October 6, 2026</time></span>
+                    <span>⏱ 6 min read</span>
+                </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>Overtime is 1.5&times; your regular rate for hours past 40 in a week under federal law; some states add daily overtime and double-time. A shift differential has to be folded into your rate before the multiplier applies, not added on top afterward. Run your exact numbers with our <a href="https://cyberscryb.com/tools/overtime-pay-calculator/">free overtime pay calculator</a>, which handles the differential correctly and breaks out double-time too.</p>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Check your paycheck:</strong>
+                    <span>Enter your rate, differential, and hours for a full gross-pay breakdown.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/overtime-pay-calculator/" class="cta-btn">Open Overtime Pay Calculator &rarr;</a>
+            </div>
+
+            <div class="guide-content" itemprop="articleBody">
+                <h2>The Direct Answer</h2>
+                <p>Overtime pay is your regular hourly rate multiplied by 1.5 for every overtime hour you work. Under the federal Fair Labor Standards Act (FLSA), that applies to "non-exempt" employees for any hours worked beyond 40 in a single workweek. If your schedule puts you at 46 hours this week, the first 40 are paid at your normal rate and the remaining 6 are paid at 1.5&times; that rate. That's the baseline every state builds on, and some states build on it considerably.</p>
+
+                <h2>The Federal Formula</h2>
+                <div class="formula-box">
+                    <p><strong>Regular pay</strong> = regular hours &times; hourly rate</p>
+                    <p><strong>Overtime pay</strong> = overtime hours &times; hourly rate &times; 1.5</p>
+                    <p style="margin-bottom:0;"><strong>Gross pay</strong> = regular pay + overtime pay</p>
+                </div>
+                <p>Worked example. You earn $22/hr and work 46 hours in a week. Regular pay = 40 &times; $22 = <strong>$880</strong>. Overtime pay = 6 &times; $22 &times; 1.5 = <strong>$198</strong>. Gross pay for the week = <strong>$1,078</strong>. That's the simple case, no differential, no double-time. Our <a href="https://cyberscryb.com/tools/overtime-pay-calculator/">free overtime pay calculator</a> runs this instantly for any rate and hours.</p>
+
+                <h2>Where Shift Differentials Change the Math</h2>
+                <p>A shift differential is extra pay for less desirable hours: nights, weekends, holidays, or a hard-to-staff unit. It's common in healthcare, manufacturing, retail, and public safety. Here's the part most online calculators skip: under <a href="https://www.ecfr.gov/current/title-29/subtitle-B/chapter-V/subchapter-A/part-778/subpart-C/section-778.110" rel="nofollow noopener">29 CFR 778.110</a>, a non-discretionary differential (one your employer promised as part of the job, not a surprise bonus) has to be included in your "regular rate of pay" before the 1.5&times; multiplier is applied. You can't legally compute overtime on your base wage alone and tack the differential on as a flat add-on; the differential itself is supposed to get the overtime treatment too.</p>
+                <div class="formula-box">
+                    <p><strong>Effective rate</strong> = base hourly rate + differential</p>
+                    <p style="margin-bottom:0;"><strong>Overtime pay</strong> = overtime hours &times; effective rate &times; 1.5</p>
+                </div>
+                <p>Worked example with a differential. $22/hr base, a $2/hr night differential, 40 regular hours and 6 overtime hours. Effective rate = $22 + $2 = <strong>$24/hr</strong>. Regular pay = 40 &times; $24 = <strong>$960</strong>. Overtime pay = 6 &times; $24 &times; 1.5 = <strong>$216</strong>. Gross pay = <strong>$1,176</strong>, about $98 more than if the differential had been added on flat after a base-rate-only overtime calculation.</p>
+
+                <!-- AdSense: Mid-Content -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
+                <h2>Double-Time and State Rules</h2>
+                <p>Double-time, twice your regular rate, is not required anywhere by federal law. A small number of states require it in specific circumstances. California is the best-known example: double-time kicks in after 12 hours worked in a single day, and also after 8 hours worked on the 7th consecutive day of a workweek (the first 8 hours on that 7th day are paid at 1.5&times;, and anything past that at 2&times;).</p>
+                <table class="ot-guide-table">
+                    <thead>
+                        <tr><th>Rule</th><th>Federal (FLSA)</th><th>Example state variation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Overtime threshold</td><td>Over 40 hrs/week</td><td>CA, AK: also daily, over 8 hrs/day. NV: same, only below ~1.5&times; min wage (under $18/hr in 2026). CO: daily, over 12 consecutive hours</td></tr>
+                        <tr><td>Overtime rate</td><td>1.5&times; regular rate</td><td>Same rate, different trigger</td></tr>
+                        <tr><td>Double-time</td><td>Not required</td><td>CA: over 12 hrs/day, or 7th consecutive day over 8 hrs</td></tr>
+                    </tbody>
+                </table>
+                <p>This is exactly why a general-purpose overtime calculator shouldn't try to guess your state's trigger rule for you; the trigger varies by state, by industry in some cases, and occasionally by union contract. What doesn't vary is the premium math once you know which hours count as regular, overtime, or double-time &mdash; that's federal, universal, and what the calculator handles. Check your state labor department's site for your exact daily and double-time thresholds.</p>
+
+                <h2>Who Actually Gets Overtime</h2>
+                <p>Overtime rules apply to "non-exempt" employees, which in practice means most hourly workers. Salaried employees can be classified "exempt" from overtime, but only if they meet specific duties tests (executive, administrative, professional, or outside sales roles, broadly) <em>and</em> earn above a minimum salary threshold the Department of Labor updates periodically. A salaried title alone doesn't make someone exempt. Plenty of salaried workers in healthcare, retail management, and office roles are misclassified and are, in fact, owed overtime once their actual duties are checked against the test.</p>
+
+                <h2>What the Calculator Can't Do For You</h2>
+                <p>It can't tell you your state's daily-overtime or double-time trigger, because that depends on where you work, and in a few cases your industry or union contract. It can't tell you whether you're correctly classified as exempt or non-exempt, since that depends on your actual job duties. What it can do reliably is the dollar math once you know your hours: regular pay, overtime pay at 1.5&times;, and double-time pay at 2&times;, all computed off the correct regular rate of pay when a shift differential is involved, and &mdash; in biweekly mode &mdash; calculated separately for each workweek rather than averaged together, since federal law treats every workweek as its own unit (29 CFR 778.104). If something looks off against your actual pay stub, that mismatch is worth raising with payroll or HR directly, since wage and hour violations are common and often unintentional.</p>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>How is overtime pay calculated?</summary>
+                    <p>Overtime pay is your regular hourly rate multiplied by 1.5, multiplied by your overtime hours. Under the federal Fair Labor Standards Act (FLSA), non-exempt employees earn this time-and-a-half rate for hours worked beyond 40 in a workweek.</p>
+                </details>
+                <details>
+                    <summary>What is double-time pay and who gets it?</summary>
+                    <p>Double-time pay is twice your regular hourly rate. Federal law does not require it, but several states do in specific situations, most notably California, which requires double-time after 12 hours worked in a single day or after 8 hours on the 7th consecutive day of a workweek.</p>
+                </details>
+                <details>
+                    <summary>Does a shift differential count toward overtime pay?</summary>
+                    <p>Yes. A non-discretionary shift differential must be folded into your regular rate of pay before the overtime multiplier is applied, under 29 CFR 778.110. The 1.5x or 2x premium then applies to your base rate plus the differential, not the base rate alone.</p>
+                </details>
+                <details>
+                    <summary>Who is exempt from overtime pay?</summary>
+                    <p>Exemption depends on actual job duties and salary level, not job title or pay format. Common exemptions cover certain executive, administrative, professional, and outside sales roles that meet specific duties tests and earn above the Department of Labor's minimum salary threshold.</p>
+                </details>
+                <details>
+                    <summary>Is overtime calculated daily or weekly?</summary>
+                    <p>Federal law calculates overtime weekly: anything over 40 hours in a 7-day workweek. A handful of states also require daily overtime regardless of the weekly total -- California and Alaska after 8 hours in a single day, Nevada the same but only for employees earning under about 1.5 times minimum wage, and Colorado after 12 consecutive hours in a single day.</p>
+                </details>
+
+                <h2>Keep Reading: Pay &amp; Finance Guides</h2>
+                <p>If you want the fuller picture on turning hours into a yearly number, see <a href="/guides/how-is-hourly-pay-calculated/">how hourly pay is calculated</a> for the 2080-hour year and biweekly-vs-semimonthly math. And since raises and differentials are both percentage and rate changes, <a href="/guides/how-to-calculate-percentage/">how to calculate percentage</a> keeps that arithmetic sharp.</p>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Get your exact paycheck:</strong>
+                    <span>Regular, overtime, and double-time pay, with shift differential done right.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/overtime-pay-calculator/" class="cta-btn">Open Free Overtime Pay Calculator &rarr;</a>
+            </div>
+
+            <p style="font-size:0.85rem; opacity:0.7; max-width:900px; margin:1rem auto;">Educational content only, not legal or tax advice. Overtime and wage rules vary by state, industry, and employment classification; contact your state labor department or an employment attorney about your specific situation.</p>
+        </article>
+
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #eef1f6;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/support.js"></script>
+</body>
+
+</html>
