@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roth IRA Calculator — Project Your Tax-Free Balance | CyberScryb</title>
+<meta name="description" content="Free Roth IRA calculator: enter your age, retirement age, current balance, annual contribution (capped at the 2026 IRS limit), and expected return to project your tax-free balance at retirement. No signup.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/roth-ira-calculator/">
+<meta property="og:title" content="Roth IRA Calculator — Project Your Tax-Free Balance">
+<meta property="og:description" content="See what your Roth IRA could be worth at retirement: contributions vs growth, year by year. Free, instant, no signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/roth-ira-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roth IRA Calculator — Project Your Tax-Free Balance">
+<meta name="twitter:description" content="Project your tax-free Roth IRA balance at retirement, with a contributions vs growth breakdown. Free, instant, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "WebApplication",
+    "name": "CyberScryb Roth IRA Calculator",
+    "url": "https://cyberscryb.com/tools/roth-ira-calculator/",
+    "description": "Free online Roth IRA calculator: project your tax-free balance at retirement from your current age, retirement age, current balance, annual contribution up to the 2026 IRS limit, and expected annual return, with a contributions vs growth breakdown and year-by-year table.",
+    "applicationCategory": "FinanceApplication", "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Roth IRA Calculator", "item": "https://cyberscryb.com/tools/roth-ira-calculator/" }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": "How much will my Roth IRA grow?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on your annual contribution, your expected return, and how many years the money compounds. As an example, maxing the 2026 limit of $7,500 per year from age 25 to 65 at a 7% average annual return grows to roughly $1.65 million, of which about $300,000 is your contributions and about $1.35 million is growth. Use the calculator above with your own numbers." }},
+        { "@type": "Question", "name": "What is the Roth IRA limit for 2026?", "acceptedAnswer": { "@type": "Answer", "text": "The 2026 IRA contribution limit is $7,500 if you are under 50, or $8,600 at age 50 and older, which includes a $1,100 catch-up contribution. The limit applies to all your IRAs combined, not per account." }},
+        { "@type": "Question", "name": "Is Roth IRA growth tax-free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, qualified withdrawals are completely tax-free. That requires your Roth IRA to have been open at least 5 years and that you are at least 59 and a half or meet an exception such as disability. Your original contributions can always be withdrawn tax-free and penalty-free at any time because you already paid tax on them." }},
+        { "@type": "Question", "name": "Is this Roth IRA calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server." }}
+    ]
+}
+</script>
+
+<style>
+    .ri-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+    .ri-container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+    .ri-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 640px) { .ri-grid { grid-template-columns: 1fr; } }
+    .ri-field { margin-bottom: 0.9rem; }
+    .ri-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+    .ri-field input {
+        width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.05rem;
+        background: var(--bg); border: 1px solid var(--border-strong); border-radius: 11px;
+        color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+    }
+    .ri-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+    .ri-hint { font-size: 0.78rem; color: var(--text-faint); margin-top: 0.35rem; line-height: 1.5; }
+    .ri-input-wrap { position: relative; }
+    .ri-input-wrap .ri-symbol { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1.05rem; pointer-events: none; }
+    .ri-input-wrap input { padding-left: 2.1rem; }
+    .ri-input-wrap .ri-pct { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1.05rem; pointer-events: none; }
+    .ri-input-wrap.has-pct input { padding-right: 2.4rem; }
+    .ri-panel {
+        background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+        padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .ri-panel-title { font-size: 1.05rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; margin: 0 0 1.25rem; }
+    .ri-verdict {
+        margin-top: 1.5rem; padding: 1.5rem; border-radius: 14px; text-align: center;
+        background: var(--card); border: 1px solid var(--primary);
+    }
+    .ri-verdict .ri-big {
+        font-size: 2.4rem; font-weight: 800; color: var(--primary-soft);
+        font-family: var(--font-brand), Georgia, serif; margin: 0.25rem 0;
+    }
+    .ri-verdict .ri-big-sub { color: var(--text-faint); font-size: 0.85rem; margin: 0 0 1rem; }
+    .ri-break { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-top: 0.5rem; }
+    @media (max-width: 560px) { .ri-break { grid-template-columns: 1fr; } }
+    .ri-break-item { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+    .ri-break-item .ri-k { font-size: 0.78rem; color: var(--text-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ri-break-item .ri-v { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-top: 0.25rem; }
+    .ri-break-item .ri-note { font-size: 0.8rem; color: var(--text-faint); margin-top: 0.25rem; }
+    .ri-note-box {
+        margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 12px; font-size: 0.88rem; line-height: 1.6;
+        background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-muted);
+    }
+    .ri-note-box strong { color: var(--primary-soft); }
+    .ri-chart-wrap { margin-top: 1.5rem; }
+    .ri-chart-title { font-size: 1.05rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; margin: 0 0 0.5rem; }
+    .ri-legend { display: flex; gap: 1.25rem; font-size: 0.82rem; color: var(--text-faint); margin-bottom: 0.75rem; }
+    .ri-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 0.4rem; vertical-align: baseline; }
+    #ri-chart { width: 100%; height: auto; display: block; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; }
+    .ri-table-wrap { margin-top: 1.5rem; overflow-x: auto; }
+    .ri-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .ri-table th, .ri-table td { padding: 0.6rem 0.75rem; text-align: right; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+    .ri-table th { color: var(--text-faint); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ri-table th:first-child, .ri-table td:first-child { text-align: left; }
+    .ri-table td { color: var(--text-muted); }
+    .ri-table td.hl { color: var(--primary-soft); font-weight: 700; }
+    .ri-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .ri-error {
+        margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 12px; font-size: 0.92rem;
+        background: var(--card); border: 1px solid var(--primary); color: var(--text-muted);
+    }
+    .ri-error strong { color: var(--primary-soft); }
+    .ri-disclaimer {
+        margin-top: 2rem; padding: 1.25rem 1.5rem; border-radius: 12px; font-size: 0.85rem; line-height: 1.65;
+        background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-faint);
+    }
+    .ri-disclaimer strong { color: var(--text-muted); }
+    .faq-section { margin-top: 3rem; }
+    .faq-section h2 { font-family: var(--font-brand), Georgia, serif; font-size: 1.5rem; color: var(--primary-soft); margin-bottom: 1rem; }
+    .faq-section details { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; padding: 0.9rem 1.1rem; }
+    .faq-section summary { cursor: pointer; font-weight: 700; color: var(--text); font-size: 0.95rem; }
+    .faq-section details p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin: 0.6rem 0 0; }
+    .rel-card {
+        display: block; padding: 1rem; background: var(--bg-elevated); border: 1px solid var(--border);
+        border-radius: 8px; text-decoration: none; color: var(--text-muted); transition: border-color 0.15s;
+    }
+    .rel-card:hover { border-color: var(--primary); }
+    .rel-card strong { color: var(--primary-soft); display: block; margin-bottom: 0.25rem; }
+    .rel-card span { font-size: 0.85rem; }
+</style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="ri-app">
+        <div class="ri-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Roth IRA Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Roth IRA Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Project your tax-free balance at retirement. Enter your ages, current balance, yearly contribution, and expected return, and see contributions vs growth year by year. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="ri-panel">
+                    <h2 class="ri-panel-title">Your inputs</h2>
+                    <div class="ri-grid">
+                        <div class="ri-field">
+                            <label for="ri-age">Current age</label>
+                            <input id="ri-age" type="number" inputmode="numeric" min="18" max="100" step="1" value="30">
+                        </div>
+                        <div class="ri-field">
+                            <label for="ri-retire">Retirement age</label>
+                            <input id="ri-retire" type="number" inputmode="numeric" min="19" max="110" step="1" value="65">
+                        </div>
+                        <div class="ri-field">
+                            <label for="ri-balance">Current Roth IRA balance</label>
+                            <div class="ri-input-wrap">
+                                <span class="ri-symbol">$</span>
+                                <input id="ri-balance" type="number" inputmode="decimal" min="0" step="100" value="10000">
+                            </div>
+                        </div>
+                        <div class="ri-field">
+                            <label for="ri-contrib">Annual contribution</label>
+                            <div class="ri-input-wrap">
+                                <span class="ri-symbol">$</span>
+                                <input id="ri-contrib" type="number" inputmode="decimal" min="0" step="100" value="7500">
+                            </div>
+                            <p class="ri-hint" id="ri-limit-hint">2026 IRS limit: $7,500 under age 50, $8,600 at 50+. Contributions above your limit are capped in the projection.</p>
+                        </div>
+                        <div class="ri-field">
+                            <label for="ri-return">Expected annual return</label>
+                            <div class="ri-input-wrap has-pct">
+                                <input id="ri-return" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="7">
+                                <span class="ri-pct">%</span>
+                            </div>
+                            <p class="ri-hint">The long-run stock market average is around 7% after inflation, before inflation it is roughly 10%.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ri-results" aria-live="polite"></div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use This Calculator</h2>
+                <p>Fill in five numbers and the projection updates live. Your current age and retirement age set how many years your money compounds. The current balance is what is already in the account today. Annual contribution is what you plan to add each year, and the calculator caps it at the 2026 IRS limit ($7,500 under 50, $8,600 at 50+ with catch-up). Expected return is your average yearly investment growth; 7% is the common planning number for a stock-heavy portfolio.</p>
+                <p>The results show your projected tax-free balance at retirement, split into total contributions (money you actually put in) and growth (what compounding did). The chart shows both stacking up year by year, and the table gives exact figures so you can see the moment growth starts doing more work than your contributions. To understand what these inputs actually mean and where the limits come from, read our <a href="/guides/roth-ira-calculator-guide/" style="color: var(--primary);">Roth IRA calculator guide</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What the Numbers Mean</h2>
+                <p><strong style="color:var(--text);">Projected balance:</strong> your estimated tax-free account value at your retirement age, assuming contributions go in monthly and compound monthly at your expected return. Qualified withdrawals of this entire amount are tax-free if your account has been open at least 5 years and you are 59 and a half or older.</p>
+                <p><strong style="color:var(--text);">Contributions vs growth:</strong> this split is the whole story of a Roth IRA. Early on, nearly all of your balance is money you put in. Somewhere in the middle decades, growth takes over and finishes far ahead. The longer the timeline, the more lopsided the split gets in growth's favor.</p>
+                <p><strong style="color:var(--text);">Contribution cap:</strong> the IRS limits how much you can contribute to IRAs each year, across all your IRAs combined. For 2026 that is $7,500 if you are under 50 and $8,600 at 50+, thanks to the $1,100 catch-up contribution. If you type a number above your limit, the calculator caps it and tells you.</p>
+                <p><strong style="color:var(--text);">Why Roth vs Traditional matters here:</strong> this projection shows a Roth balance, which is after-tax money going in and tax-free money coming out. A traditional IRA with the same inputs would show a bigger pre-tax balance but you would owe income tax on every withdrawal. Our <a href="/guides/roth-ira-vs-traditional-ira/" style="color: var(--primary);">Roth vs Traditional guide</a> works through the math of which one leaves you with more spendable money.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How much will my Roth IRA grow?</summary><p>It depends on your annual contribution, your expected return, and how many years the money compounds. Maxing the 2026 limit of $7,500 per year from age 25 to 65 at a 7% average annual return grows to roughly $1.65 million, of which about $300,000 is your contributions and about $1.35 million is growth. Enter your own numbers above for an exact projection.</p></details>
+                <details><summary>What is the Roth IRA limit for 2026?</summary><p>The 2026 IRA contribution limit is $7,500 if you are under 50, or $8,600 at age 50 and older, including a $1,100 catch-up contribution. The limit applies to all your IRAs combined, not per account, and you need earned income at least equal to your contribution.</p></details>
+                <details><summary>Is Roth IRA growth really tax-free?</summary><p>Yes, qualified withdrawals are completely tax-free. Two conditions must hold: your Roth IRA must have been open at least 5 years, and you must be at least 59 and a half (or meet an exception such as disability). Your original contributions are separate: you can withdraw what you put in at any time, at any age, with no tax and no penalty.</p></details>
+                <details><summary>Should I use the max contribution every year?</summary><p>If you can afford it, yes. The math of compounding rewards every dollar invested early, so hitting the full $7,500 (or $8,600 at 50+) moves the needle far more than most people expect. Compare a $5,000-a-year habit against a $7,500-a-year habit above and watch the gap widen by six figures over a career.</p></details>
+                <details><summary>Can I keep contributing past my retirement age?</summary><p>Yes. There is no age limit on Roth IRA contributions; you can contribute at any age as long as you have earned income at least equal to the contribution and your income is within the Roth eligibility phase-outs. If you work past 65, you can keep feeding the account.</p></details>
+                <details><summary>Is this Roth IRA calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <div class="ri-disclaimer">
+                <strong>Disclaimer:</strong> This calculator is an estimate for educational purposes, not financial advice. It assumes a constant rate of return and monthly contributions; real markets fluctuate and actual results will differ. Tax rules change over time, verify current limits at irs.gov and talk to a licensed financial professional about your situation.
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a class="rel-card" href="/tools/compound-interest-calculator/">
+                        <strong>Compound Interest Calculator</strong>
+                        <span>See the growth engine behind your projection.</span>
+                    </a>
+                    <a class="rel-card" href="/tools/retirement-drawdown-calculator/">
+                        <strong>Retirement Drawdown Calculator</strong>
+                        <span>Plan how to spend your balance after retirement.</span>
+                    </a>
+                    <a class="rel-card" href="/tools/debt-payoff-calculator/">
+                        <strong>Debt Payoff Calculator</strong>
+                        <span>Kill high-interest debt before it eats your savings.</span>
+                    </a>
+                    <a class="rel-card" href="/guides/roth-ira-vs-traditional-ira/">
+                        <strong>Roth vs Traditional IRA Guide</strong>
+                        <span>Which account type leaves you with more.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">How Roth IRA calculators work</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">What each input means, the 2026 contribution limits, a worked example, and why Roth vs Traditional changes the projection.</p>
+                <a href="/guides/roth-ira-calculator-guide/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:var(--text);font-weight:700;border-radius:10px;text-decoration:none;">Read the Roth IRA Guide</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-ad-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+
+        var LIMIT_UNDER_50 = 7500;
+        var LIMIT_50_PLUS = 8600;
+        var CATCH_UP = 1100;
+
+        var ageEl = document.getElementById("ri-age");
+        var retireEl = document.getElementById("ri-retire");
+        var balanceEl = document.getElementById("ri-balance");
+        var contribEl = document.getElementById("ri-contrib");
+        var returnEl = document.getElementById("ri-return");
+        var resultsEl = document.getElementById("ri-results");
+
+        function money(n) {
+            var cents = Math.round(n * 100);
+            return "$" + (cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function moneyShort(n) {
+            if (n >= 1000000) return "$" + (n / 1000000).toFixed(2) + "M";
+            if (n >= 1000) return "$" + (n / 1000).toFixed(1) + "K";
+            return "$" + Math.round(n).toString();
+        }
+
+        function esc(s) {
+            return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function calc() {
+            var age = parseFloat(ageEl.value);
+            var retire = parseFloat(retireEl.value);
+            var startBalance = parseFloat(balanceEl.value);
+            var annualContrib = parseFloat(contribEl.value);
+            var annualReturn = parseFloat(returnEl.value);
+
+            if (isNaN(age) || isNaN(retire) || isNaN(startBalance) || isNaN(annualContrib) || isNaN(annualReturn)) {
+                resultsEl.innerHTML = "";
+                return;
+            }
+            if (age < 18) age = 18;
+            if (retire <= age) {
+                resultsEl.innerHTML =
+                    '<div class="ri-error"><strong>Check your ages.</strong> Your retirement age needs to be later than your current age for the projection to run.</div>';
+                return;
+            }
+            if (annualReturn < 0) annualReturn = 0;
+            if (annualReturn > 30) annualReturn = 30;
+            if (startBalance < 0) startBalance = 0;
+            if (annualContrib < 0) annualContrib = 0;
+
+            var limit = age >= 50 ? LIMIT_50_PLUS : LIMIT_UNDER_50;
+            var capped = false;
+            if (annualContrib > limit) { annualContrib = limit; capped = true; }
+
+            var years = Math.round(retire - age);
+            var months = years * 12;
+            var monthlyContrib = annualContrib / 12;
+            var mr = annualReturn / 100 / 12;
+
+            var balance = startBalance;
+            var totalContrib = 0;
+            var snapshots = [];
+
+            for (var y = 1; y <= years; y++) {
+                var contribThisYear = 0;
+                for (var m = 0; m < 12; m++) {
+                    balance += monthlyContrib;
+                    contribThisYear += monthlyContrib;
+                    totalContrib += monthlyContrib;
+                    balance *= (1 + mr);
+                }
+                var growth = balance - startBalance - totalContrib;
+                snapshots.push({
+                    year: y,
+                    age: Math.round(age) + y,
+                    balance: balance,
+                    contrib: totalContrib,
+                    growth: growth
+                });
+            }
+
+            var finalBalance = balance;
+            var finalGrowth = finalBalance - startBalance - totalContrib;
+
+            drawChart(snapshots, startBalance, years);
+            renderResults(finalBalance, totalContrib, finalGrowth, startBalance, capped, limit, years, snapshots);
+        }
+
+        function drawChart(snapshots, startBalance, years) {
+            var canvas = document.getElementById("ri-chart");
+            if (!canvas || !snapshots.length) return;
+            var dpr = window.devicePixelRatio || 1;
+            var cssW = canvas.clientWidth || 880;
+            var cssH = 320;
+            canvas.width = cssW * dpr;
+            canvas.height = cssH * dpr;
+            var ctx = canvas.getContext("2d");
+            ctx.scale(dpr, dpr);
+
+            var padL = 58, padR = 14, padT = 16, padB = 34;
+            var w = cssW - padL - padR;
+            var h = cssH - padT - padB;
+            var max = Math.max.apply(null, snapshots.map(function (s) { return s.balance; })) * 1.08;
+
+            ctx.clearRect(0, 0, cssW, cssH);
+
+            // gridlines + y labels
+            ctx.font = "11px Inter, sans-serif";
+            ctx.fillStyle = "#a1a1aa";
+            ctx.textAlign = "right";
+            var ticks = 4;
+            for (var t = 0; t <= ticks; t++) {
+                var val = max * t / ticks;
+                var yy = padT + h - (val / max) * h;
+                ctx.strokeStyle = "rgba(255,255,255,0.06)";
+                ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + w, yy); ctx.stroke();
+                ctx.fillText(moneyShort(val), padL - 8, yy + 4);
+            }
+
+            // stacked bars: contributions (red) + growth (soft red)
+            var n = snapshots.length;
+            var slot = w / n;
+            var barW = Math.max(1, slot * 0.72);
+            for (var i = 0; i < n; i++) {
+                var s = snapshots[i];
+                var totalH = (s.balance / max) * h;
+                var contribH = (Math.min(s.contrib, s.balance) / max) * h;
+                var growthH = Math.max(0, totalH - contribH);
+                var x = padL + i * slot + (slot - barW) / 2;
+                var yTotal = padT + h - totalH;
+                ctx.fillStyle = "#f87171";
+                ctx.fillRect(x, yTotal, barW, growthH);
+                ctx.fillStyle = "#ef4444";
+                ctx.fillRect(x, yTotal + growthH, barW, contribH);
+            }
+
+            // x labels
+            ctx.fillStyle = "#a1a1aa";
+            ctx.textAlign = "center";
+            var step = Math.ceil(n / 8);
+            for (var j = 0; j < n; j += step) {
+                var lx = padL + j * slot + slot / 2;
+                ctx.fillText("Age " + snapshots[j].age, lx, cssH - 12);
+            }
+        }
+
+        function renderResults(finalBalance, totalContrib, finalGrowth, startBalance, capped, limit, years, snapshots) {
+            var contribPortion = totalContrib + startBalance;
+            var html =
+                '<div class="ri-verdict">' +
+                    '<div class="ri-big-sub">Projected tax-free balance at retirement</div>' +
+                    '<div class="ri-big">' + money(finalBalance) + '</div>' +
+                    '<div class="ri-break">' +
+                        '<div class="ri-break-item">' +
+                            '<div class="ri-k">Total contributions</div>' +
+                            '<div class="ri-v">' + money(contribPortion) + '</div>' +
+                            '<div class="ri-note">Your money in, over ' + years + ' years</div>' +
+                        '</div>' +
+                        '<div class="ri-break-item">' +
+                            '<div class="ri-k">Growth</div>' +
+                            '<div class="ri-v">' + money(finalGrowth) + '</div>' +
+                            '<div class="ri-note">Compounding did the rest</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+
+            if (capped) {
+                html += '<div class="ri-note-box"><strong>Limit applied.</strong> Your annual contribution was capped at the 2026 IRS limit of ' +
+                    money(limit) + ' (includes the $' + CATCH_UP.toLocaleString("en-US") + ' catch-up contribution at age 50+). The limit covers all your IRAs combined.</div>';
+            }
+
+            html +=
+                '<div class="ri-chart-wrap">' +
+                    '<h2 class="ri-chart-title">Year-by-year growth</h2>' +
+                    '<div class="ri-legend">' +
+                        '<span><span class="ri-swatch" style="background:#ef4444;"></span>Contributions</span>' +
+                        '<span><span class="ri-swatch" style="background:#f87171;"></span>Growth</span>' +
+                    '</div>' +
+                    '<canvas id="ri-chart" height="320" aria-label="Stacked bar chart of Roth IRA balance growth over time"></canvas>' +
+                '</div>';
+
+            html +=
+                '<div class="ri-table-wrap"><table class="ri-table">' +
+                '<thead><tr><th>Age</th><th>Balance</th><th>Contributions to date</th><th>Growth to date</th></tr></thead><tbody>';
+
+            var rowStep = Math.max(1, Math.floor(years / 12));
+            for (var i = 0; i < snapshots.length; i++) {
+                var s = snapshots[i];
+                var isLast = i === snapshots.length - 1;
+                if (isLast || i % rowStep === 0) {
+                    html += '<tr><td>' + s.age + '</td><td class="hl">' + money(s.balance) +
+                        '</td><td>' + money(s.contrib) + '</td><td>' + money(s.growth) + '</td></tr>';
+                }
+            }
+            html += '</tbody></table></div>';
+
+            resultsEl.innerHTML = html;
+            drawChart(snapshots, startBalance, years);
+        }
+
+        [ageEl, retireEl, balanceEl, contribEl, returnEl].forEach(function (el) {
+            el.addEventListener("input", calc);
+        });
+        window.addEventListener("resize", function () { calc(); });
+        calc();
+    })();
+    </script>
+</body>
+
+</html>
