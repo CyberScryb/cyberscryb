@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Much Does It Cost to Run an Appliance? (kWh Cost Calculator Guide) | CyberScryb</title>
+    <meta name="description" content="Find out exactly what each appliance costs to run. The kWh cost formula (watts x hours / 1000 x your rate), a worked cost table at $0.17/kWh, real examples for AC, dryers, and fridges, phantom load explained, and 5 ways to cut your electric bill.">
+    <meta name="keywords" content="appliance energy cost, how much does it cost to run an appliance, kwh cost calculator, how to calculate kwh, what uses the most electricity in a home, cost to run air conditioner per hour, refrigerator electricity per month, why is my electric bill so high, phantom load">
+    <meta property="og:title" content="How Much Does It Cost to Run an Appliance? (kWh Cost Calculator Guide)">
+    <meta property="og:description" content="The kWh cost formula, a quick-lookup cost table, real examples for the biggest offenders, phantom load explained, and 5 ways to cut your electric bill.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cyberscryb.com/guides/appliance-energy-cost/">
+    <meta property="og:site_name" content="CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Much Does It Cost to Run an Appliance? (kWh Cost Calculator Guide)">
+    <meta name="twitter:description" content="The kWh cost formula, a quick-lookup cost table, real examples for the biggest offenders, phantom load explained, and 5 ways to cut your electric bill.">
+    <meta name="author" content="CyberScryb">
+    <link rel="canonical" href="https://cyberscryb.com/guides/appliance-energy-cost/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/guides/guide.css">
+    <link rel="stylesheet" href="/tools/shared/support.css">
+    <style>
+        .kwh-table { width: 100%; max-width: 680px; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+        .kwh-table th, .kwh-table td { padding: 0.6rem 0.9rem; text-align: left; border-bottom: 1px solid var(--steel); }
+        .kwh-table th { color: var(--text-primary); font-weight: 700; border-bottom: 2px solid var(--steel); }
+        .kwh-table td { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+        .kwh-table td.cost { color: var(--accent-light); font-weight: 600; }
+        .kwh-table tbody tr:last-child td { border-bottom: none; }
+        .formula-box { background: var(--bg-card); border: 1px solid var(--steel); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+        .formula-box strong { color: var(--text-primary); }
+        .calc-box { background: var(--bg-card); border: 1px solid var(--steel); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; max-width: 560px; }
+        .calc-box h3 { margin-top: 0; color: var(--text-primary); font-size: 1.1rem; }
+        .calc-box label { display: block; color: var(--text-secondary); font-size: 0.9rem; margin: 0.75rem 0 0.25rem; }
+        .calc-box input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--steel); border-radius: var(--radius-sm); background: transparent; color: var(--text-primary); font-size: 1rem; }
+        .calc-box input:focus { outline: none; border-color: var(--accent-light); }
+        .calc-result { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--steel); color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
+        .calc-result strong { color: var(--accent-light); font-size: 1.15rem; }
+        .bill-line { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px dashed var(--steel); font-size: 0.95rem; }
+        .bill-line dt { color: var(--text-primary); font-weight: 600; }
+        .bill-line dd { margin: 0; color: var(--text-secondary); text-align: right; }
+    </style>
+    <!-- Google AdSense -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How Much Does It Cost to Run an Appliance? (kWh Cost Calculator Guide)",
+        "description": "Find out exactly what each appliance costs to run. The kWh cost formula (watts x hours / 1000 x your rate), a worked cost table at $0.17/kWh, real examples for AC, dryers, and fridges, phantom load explained, and 5 ways to cut your electric bill.",
+        "author": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com/about/",
+                "sameAs": [
+                        "https://github.com/cyberscryb"
+                ]
+        },
+        "publisher": {
+                "@type": "Organization",
+                "name": "CyberScryb",
+                "url": "https://cyberscryb.com"
+        },
+        "datePublished": "2026-10-06",
+        "dateModified": "2026-10-06",
+        "mainEntityOfPage": "https://cyberscryb.com/guides/appliance-energy-cost/",
+        "about": [
+                {
+                        "@type": "Thing",
+                        "name": "appliance energy cost"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "kilowatt-hour"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "electricity rate"
+                }
+        ],
+        "mentions": [
+                {
+                        "@type": "Thing",
+                        "name": "phantom load"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "electric bill"
+                },
+                {
+                        "@type": "Thing",
+                        "name": "energy efficiency"
+                }
+        ],
+        "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                        ".tldr-box",
+                        ".guide-subtitle",
+                        "h1"
+                ]
+        },
+        "citation": []
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+                {
+                        "@type": "Question",
+                        "name": "How much does it cost to run an air conditioner per hour?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "A typical 3-ton central AC draws about 3,500 watts, so it costs roughly $0.60 per hour at $0.17 per kWh. Run it 8 hours a day and that is about $143 a month. A window unit (around 1,200 watts) costs about $0.20 per hour, or $49 a month at 8 hours a day."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "What uses the most electricity in a home?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Heating and cooling is the largest share of most electric bills, followed by the water heater and the electric dryer. A central AC or a space heater can each cost more per month than everything else in the house combined. Plug loads, lights, and electronics make up a smaller slice than most people expect."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "How much electricity does a refrigerator use per month?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "A modern full-size refrigerator uses roughly 40 to 60 kWh per month, which costs $6.80 to $10.20 at $0.17 per kWh. An old or inefficient model can use 100 kWh or more, doubling that cost. The fridge runs 24 hours a day but its compressor cycles on and off, so it draws power only about a third of the time."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Why is my electric bill so high?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "The usual causes are heating or cooling a space more than necessary, an electric water heater, extra electric dryer loads, old inefficient appliances, phantom load from devices on standby, and a rate that is higher than you think once delivery charges are included. Compare your total kWh this month to the same month last year to spot what changed."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "Is it cheaper to leave lights on or turn them off?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Turn them off. That rule was about old fluorescents and the energy cost of warming up; modern LEDs draw 5 to 15 watts and lose nothing from being switched. A 10-watt LED left on 8 hours a day costs about $0.41 a month, so lighting is cheap either way, but off is still cheaper than on."
+                        }
+                },
+                {
+                        "@type": "Question",
+                        "name": "How do I calculate the kWh of an appliance?",
+                        "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Multiply the appliance's wattage by the hours it runs, then divide by 1,000. A 1,500-watt space heater run for 4 hours uses 1,500 x 4 / 1,000 = 6 kWh. Multiply by your electricity rate (for example $0.17 per kWh) to get the cost: 6 x 0.17 = $1.02."
+                        }
+                }
+        ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://cyberscryb.com/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Guides",
+                        "item": "https://cyberscryb.com/guides/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Appliance Energy Cost",
+                        "item": "https://cyberscryb.com/guides/appliance-energy-cost/"
+                }
+        ]
+}
+    </script>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo">
+                        <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1.2rem; color: #eef1f6; margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/guides/" class="active">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="guide" itemscope itemtype="https://schema.org/Article">
+            <div class="guide-header">
+                <div class="breadcrumb">
+                    <a href="/">Home</a>
+                    <span>/</span>
+                    <a href="/guides/">Guides</a>
+                    <span>/</span>
+                    <span>Guide</span>
+                </div>
+                <h1 itemprop="headline">How Much Does It <span class="accent">Cost to Run</span> an Appliance?</h1>
+                <p class="guide-subtitle" itemprop="description">One formula answers every appliance on your bill. Here it is, a cost table so you can look things up fast, the big offenders worked out, and five ways to shrink the bill.</p>
+                <div class="guide-meta">
+                    <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
+                    <span>📅 Updated <time datetime="2026-10-06" itemprop="dateModified">October 6, 2026</time></span>
+                    <span>⏱ 8 min read</span>
+                </div>
+            </div>
+
+            <div class="tldr-box" role="region" aria-label="Key Takeaways">
+                <div class="tldr-header">
+                    <span class="tldr-icon">⚡</span>
+                    <strong>Key Takeaways (TL;DR)</strong>
+                </div>
+                <p>Cost = <strong>watts x hours / 1,000 x your rate</strong>. That is the whole trick. A 3,500-watt central AC at 8 hours a day costs about $143 a month at $0.17 per kWh. Heating and cooling, the water heater, and the dryer are where your money actually goes. Everything below runs on that one formula, plus a calculator you can use right on this page.</p>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">
+                    <strong>Find the waste, then budget it:</strong>
+                    <span>Work out your biggest offenders below, then plug the numbers into the budget planner and watch the savings.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/budget-planner/" class="cta-btn">Open Budget Planner &rarr;</a>
+            </div>
+
+            <div class="guide-content" itemprop="articleBody">
+                <h2>The Direct Answer: The kWh Cost Formula</h2>
+                <p>Your power company bills you in kilowatt-hours (kWh). One kWh is what a 1,000-watt appliance burns in one hour. Your rate is the price per kWh. So the cost of running anything is:</p>
+                <div class="formula-box">
+                    <p><strong>kWh</strong> = watts x hours / 1,000</p>
+                    <p style="margin-bottom:0;"><strong>Cost</strong> = kWh x your rate per kWh</p>
+                </div>
+                <p>Worked example. A 1,500-watt space heater, 4 hours a day. kWh = 1,500 x 4 / 1,000 = <strong>6 kWh</strong> a day. At $0.17 per kWh that is 6 x 0.17 = <strong>$1.02 a day</strong>, or about $30.60 a month. Two inputs you look up (wattage is on the appliance label), one you read off your bill (your rate), and you know exactly what the thing costs.</p>
+                <p>$0.17 per kWh is roughly the US residential average. Your rate may be half that or double. The formula does not care; it works for any rate.</p>
+
+                <h2>Run the Numbers Yourself</h2>
+                <p>Plug in any appliance below. No signup, nothing leaves your browser.</p>
+                <div class="calc-box" id="kwh-widget">
+                    <h3>Appliance Cost Calculator</h3>
+                    <label for="kwh-watts">Wattage (W)</label>
+                    <input type="number" id="kwh-watts" value="1500" min="1" max="20000" step="1">
+                    <label for="kwh-hours">Hours per day</label>
+                    <input type="number" id="kwh-hours" value="4" min="0" max="24" step="0.25">
+                    <label for="kwh-rate">Your rate ($ per kWh)</label>
+                    <input type="number" id="kwh-rate" value="0.17" min="0" max="2" step="0.01">
+                    <div class="calc-result" id="kwh-result" aria-live="polite"></div>
+                </div>
+                <script>
+                (function () {
+                    var w = document.getElementById('kwh-watts');
+                    var h = document.getElementById('kwh-hours');
+                    var r = document.getElementById('kwh-rate');
+                    var out = document.getElementById('kwh-result');
+                    function calc() {
+                        var watts = parseFloat(w.value) || 0;
+                        var hours = parseFloat(h.value) || 0;
+                        var rate = parseFloat(r.value) || 0;
+                        if (watts <= 0 || hours <= 0 || rate < 0) {
+                            out.innerHTML = 'Enter your numbers to see the cost.';
+                            return;
+                        }
+                        var kwhDay = watts * hours / 1000;
+                        var costDay = kwhDay * rate;
+                        var costMonth = costDay * 30;
+                        out.innerHTML = 'Daily use: <strong>' + kwhDay.toFixed(2) + ' kWh</strong> (' + '$' + costDay.toFixed(2) + '/day)<br>' +
+                            'Monthly cost: <strong>$' + costMonth.toFixed(2) + '</strong> (about $' + (costMonth * 12).toFixed(0) + '/year)';
+                    }
+                    w.addEventListener('input', calc);
+                    h.addEventListener('input', calc);
+                    r.addEventListener('input', calc);
+                    calc();
+                })();
+                </script>
+
+                <h2>Quick-Lookup Cost Table at $0.17/kWh</h2>
+                <p>Typical wattages and use, priced at the US average rate of $0.17 per kWh. If your rate is higher or lower, scale the numbers proportionally: at $0.34/kWh, double everything.</p>
+                <table class="kwh-table">
+                    <thead>
+                        <tr><th>Appliance</th><th>Watts</th><th>Typical use</th><th>Cost / month</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Central AC (3-ton)</td><td>3,500</td><td>8 hrs/day</td><td class="cost">$142.80</td></tr>
+                        <tr><td>Electric water heater</td><td>4,500</td><td>3 hrs/day</td><td class="cost">$68.85</td></tr>
+                        <tr><td>Space heater</td><td>1,500</td><td>6 hrs/day</td><td class="cost">$45.90</td></tr>
+                        <tr><td>Electric dryer</td><td>3,000</td><td>45 min/day</td><td class="cost">$11.48</td></tr>
+                        <tr><td>Refrigerator</td><td>~50 avg*</td><td>24 hrs/day</td><td class="cost">$6.12</td></tr>
+                        <tr><td>Gaming PC (under load)</td><td>400</td><td>4 hrs/day</td><td class="cost">$8.16</td></tr>
+                        <tr><td>Window AC</td><td>1,200</td><td>8 hrs/day</td><td class="cost">$48.96</td></tr>
+                        <tr><td>Big-screen LED TV</td><td>100</td><td>5 hrs/day</td><td class="cost">$2.55</td></tr>
+                        <tr><td>Microwave</td><td>1,100</td><td>15 min/day</td><td class="cost">$1.40</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.9rem;">*Refrigerators cycle on and off, so they draw power only about a third of the time. The ~50-watt figure is the 24-hour average (compressor draw is higher when running), landing a modern full-size fridge around 36 to 60 kWh a month.</p>
+
+                <!-- AdSense: Mid-Content -->
+                <section style="max-width:900px; margin:2rem auto; padding:0; text-align:center;">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </section>
+
+                <h2>The Big Offenders, Worked Out</h2>
+                <p><strong>Central AC.</strong> A 3-ton system pulls roughly 3,500 watts when the compressor is running. At $0.17 per kWh, that is $0.60 an hour. Eight hours of real runtime a day puts you near $143 a month. In hot states with rates above $0.25, the same unit clears $200. This is the single largest line on most summer bills.</p>
+                <p><strong>Space heater.</strong> The classic budget trap. 1,500 watts on full blast is $0.26 an hour, which feels like nothing until it runs all evening for a month: 6 hours a day is $45.90 a month for heating one room. Two heaters running through a cold snap can cost more than the rest of the house combined.</p>
+                <p><strong>Electric dryer.</strong> About 3,000 watts, roughly 45 minutes per load. That is 2.25 kWh per load, or $0.38 a load at $0.17. A family doing a load a day pays around $11 to $12 a month. Hang-drying half your laundry cuts that in half with no lifestyle cost.</p>
+                <p><strong>Water heater.</strong> Electric tank heaters draw about 4,500 watts, but only fire about 3 hours a day in a typical household. That is 13.5 kWh a day, $2.30 a day, roughly $69 a month. It is the quiet heavyweight: nobody thinks about it, and it never stops showing up on the bill.</p>
+                <p><strong>Refrigerator.</strong> Modern full-size fridges use 40 to 60 kWh a month, so $6.80 to $10.20 at average rates. An old second fridge in the garage can double or triple that. If you own one made before 2001, its nameplate math will often justify replacing it on electricity alone.</p>
+                <p><strong>Gaming PC.</strong> Under load, a gaming rig with a midrange GPU draws 300 to 500 watts, not the 750-plus on the power supply label (that is capacity, not draw). Four hours a day at 400 watts is $8.16 a month. Idle, it drops under 100 watts, so use sleep mode; you do not need to shut it down between sessions.</p>
+
+                <h2>Phantom Load: The 10% You Never See</h2>
+                <p>Phantom load is electricity drawn by devices that look off but are not: TVs in standby, cable boxes, game consoles, printers, chargers, coffee makers with clocks. The US Department of Energy estimates standby power is roughly 10% of residential electricity use. On a $130 monthly bill, that is about $13 for nothing.</p>
+                <p>The worst offenders are the ones with a hard drive or a tuner: old cable boxes can draw 15 to 20 watts around the clock, which is $2.20 to $2.45 a month for a box nobody is watching. Phone chargers are the opposite extreme, under a watt each; unplugging them saves pennies. The fix that actually pays: put the entertainment center on one power strip and kill it with a single switch. One strip, one click, no more 24-hour TV standby.</p>
+
+                <h2>How to Read Your Electric Bill</h2>
+                <p>The bill has four parts that matter:</p>
+                <dl>
+                    <div class="bill-line"><dt>Total kWh used</dt><dd>Your consumption this period. Compare to the same month last year, not to last month; seasons drive everything.</dd></div>
+                    <div class="bill-line"><dt>Rate per kWh</dt><dd>Often split into supply (the power) and delivery (the wires). Your real rate is the sum, plus sometimes tiered pricing where kWh above a threshold cost more.</dd></div>
+                    <div class="bill-line"><dt>Service charge</dt><dd>A flat fee, usually $5 to $15 a month. Unavoidable; ignore it when hunting for savings.</dd></div>
+                    <div class="bill-line"><dt>Taxes and fees</dt><dd>Small per-kWh add-ons. They make your effective rate slightly higher than the headline rate.</dd></div>
+                </dl>
+                <p>The number most people get wrong is the rate. A bill that says "$0.11 per kWh" can have an effective rate of $0.16 or more after delivery charges, tiers, and fees are added. Divide the total bill by total kWh to get your true all-in rate, and use that number in the formula above.</p>
+
+                <h2>5 Ways to Cut the Bill</h2>
+                <p><strong>1. Set the thermostat like it matters, because it does.</strong> Every degree you raise the AC (or lower the heat) saves about 3% on that portion of the bill. Two degrees down in summer and three up in winter is a real line item, not a rounding error.</p>
+                <p><strong>2. Swap remaining incandescents for LEDs.</strong> A 60-watt bulb becomes a 9-watt bulb. Five old bulbs running 6 hours a day cost $9.18 a month; the LED versions cost $1.38. The payback is a few months per bulb.</p>
+                <p><strong>3. Put entertainment gear on one power strip and switch it off.</strong> This kills the standby draw of the TV, console, soundbar, and streaming box in one move. Roughly $5 to $15 a month recovered, zero effort after setup.</p>
+                <p><strong>4. Drop the water heater to 120°F.</strong> Most ship set at 140°F. Lowering it cuts standby and cycling losses for a device that is already one of your top three costs, and 120°F is the recommended safe setting.</p>
+                <p><strong>5. Move heavy use off-peak if your plan has time-of-use rates.</strong> Some utilities charge half the rate late at night. If yours does, run the dryer and dishwasher after 9 or 10 PM and put the same kWh at a cheaper price.</p>
+
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>How much does it cost to run an air conditioner per hour?</summary>
+                    <p>A typical 3-ton central AC draws about 3,500 watts, so it costs roughly $0.60 per hour at $0.17 per kWh. Run it 8 hours a day and that is about $143 a month. A window unit (around 1,200 watts) costs about $0.20 per hour, or $49 a month at 8 hours a day.</p>
+                </details>
+                <details>
+                    <summary>What uses the most electricity in a home?</summary>
+                    <p>Heating and cooling is the largest share of most electric bills, followed by the water heater and the electric dryer. A central AC or a space heater can each cost more per month than everything else in the house combined. Plug loads, lights, and electronics make up a smaller slice than most people expect.</p>
+                </details>
+                <details>
+                    <summary>How much electricity does a refrigerator use per month?</summary>
+                    <p>A modern full-size refrigerator uses roughly 40 to 60 kWh per month, which costs $6.80 to $10.20 at $0.17 per kWh. An old or inefficient model can use 100 kWh or more, doubling that cost. The fridge runs 24 hours a day but its compressor cycles on and off, so it draws power only about a third of the time.</p>
+                </details>
+                <details>
+                    <summary>Why is my electric bill so high?</summary>
+                    <p>The usual causes are heating or cooling a space more than necessary, an electric water heater, extra electric dryer loads, old inefficient appliances, phantom load from devices on standby, and a rate that is higher than you think once delivery charges are included. Compare your total kWh this month to the same month last year to spot what changed.</p>
+                </details>
+                <details>
+                    <summary>Is it cheaper to leave lights on or turn them off?</summary>
+                    <p>Turn them off. That rule was about old fluorescents and the energy cost of warming up; modern LEDs draw 5 to 15 watts and lose nothing from being switched. A 10-watt LED left on 8 hours a day costs about $0.41 a month, so lighting is cheap either way, but off is still cheaper than on.</p>
+                </details>
+                <details>
+                    <summary>How do I calculate the kWh of an appliance?</summary>
+                    <p>Multiply the appliance's wattage by the hours it runs, then divide by 1,000. A 1,500-watt space heater run for 4 hours uses 1,500 x 4 / 1,000 = 6 kWh. Multiply by your electricity rate (for example $0.17 per kWh) to get the cost: 6 x 0.17 = $1.02.</p>
+                </details>
+
+                <h2>Keep Reading: Money Guides</h2>
+                <p>Once you know what your appliances cost, the next step is the math around the savings. <a href="/guides/debt-snowball-vs-avalanche.html">Debt snowball vs avalanche</a> shows where to put the money you freed up, and <a href="/guides/how-compound-interest-works.html">how compound interest works</a> shows what those savings become over time. Run the bill-cutting arithmetic with our <a href="https://cyberscryb.com/tools/percentage-calculator/">free percentage calculator</a>, or plan the whole budget with the <a href="https://cyberscryb.com/tools/budget-planner/">budget planner</a>.</p>
+            </div>
+
+            <div class="cta-box bottom">
+                <div class="cta-text">
+                    <strong>Turn the findings into a budget:</strong>
+                    <span>Add your appliance costs as line items and see what the bill should be before it arrives.</span>
+                </div>
+                <a href="https://cyberscryb.com/tools/budget-planner/" class="cta-btn">Open Free Budget Planner &rarr;</a>
+            </div>
+
+            <p style="font-size:0.85rem; opacity:0.7; max-width:900px; margin:1rem auto;">Estimates based on typical appliance wattages at $0.17/kWh (US residential average). Check your appliance nameplate and your bill's effective rate for exact numbers.</p>
+        </article>
+
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #eef1f6;">CyberScryb</span>
+                    <p>Free, privacy-first developer tools.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/support.js"></script>
+</body>
+
+</html>

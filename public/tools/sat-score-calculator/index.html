@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAT Score Calculator — Estimate Your Digital SAT Score | CyberScryb</title>
+<meta name="description" content="Free digital SAT score calculator: enter your raw correct answers per section and your Module 2 difficulty path to get an estimated scaled score (200-800 per section, 400-1600 total). Instant, no signup, private.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/sat-score-calculator/">
+<meta property="og:title" content="SAT Score Calculator — Estimate Your Digital SAT Score | CyberScryb">
+<meta property="og:description" content="Free digital SAT score estimator: enter your raw scores per section and Module 2 difficulty path for an estimated scaled score. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/sat-score-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SAT Score Calculator — Estimate Your Digital SAT Score | CyberScryb">
+<meta name="twitter:description" content="Free digital SAT score estimator: enter your raw scores per section and Module 2 difficulty path for an estimated scaled score. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+    <!-- Google AdSense -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb SAT Score Calculator",
+        "url": "https://cyberscryb.com/tools/sat-score-calculator/",
+        "description": "Free digital SAT score calculator: enter your raw correct answers for Reading & Writing and Math plus your Module 2 difficulty path to get an estimated scaled score (200-800 per section, 400-1600 total), instantly in your browser.",
+        "applicationCategory": "EducationalApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "SAT Score Calculator", "item": "https://cyberscryb.com/tools/sat-score-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How is the digital SAT scored?", "acceptedAnswer": { "@type": "Answer", "text": "The digital SAT is section-adaptive. Each section (Reading & Writing, Math) has two modules. Everyone gets the same first module; your performance on it routes you to a harder or easier second module. Your raw score is the number of questions answered correctly (there is no penalty for wrong answers). The College Board then converts that raw score to a scaled score of 200-800 per section using a process called equating, which adjusts for the difficulty of the questions you saw. A harder second module can reach a higher scaled score than an easier one with the same raw score." }},
+            { "@type": "Question", "name": "What is a good SAT score?", "acceptedAnswer": { "@type": "Answer", "text": "The national average SAT score is around 1050-1060 out of 1600. A score of 1200 is roughly the 80th percentile, 1350 is roughly the 90th, and 1450+ is roughly the 96th. What counts as 'good' depends on the school: many state schools admit students with scores in the 1000-1200 range, while highly selective colleges typically look for 1400-1500+. Check the score ranges of the specific colleges on your list rather than chasing a single magic number." }},
+            { "@type": "Question", "name": "How many questions can I miss and still get a 1400?", "acceptedAnswer": { "@type": "Answer", "text": "As a rough estimate on the harder Module 2 path, a 1400 total usually requires around 700 per section. As a rough estimate on the harder Module 2 path, 1400 usually needs around 700 per section: about 40 of 54 correct in Reading & Writing (missing about 14 questions) and about 29-31 of 44 correct in Math (missing about 13-15 questions). On the easier Module 2 path, 1400 is out of reach: the easier path caps out around 1200-1230. These are estimates, not official numbers." }},
+            { "@type": "Question", "name": "Is the SAT out of 1600 or 2400?", "acceptedAnswer": { "@type": "Answer", "text": "The SAT is out of 1600. It has two sections, Reading & Writing and Math, each scored 200-800, for a total of 400-1600. The 2400 scale (with a separate Writing section scored 200-800) was retired in 2016. If you see an old score out of 2400, it cannot be directly compared to a current score." }},
+            { "@type": "Question", "name": "What is superscoring?", "acceptedAnswer": { "@type": "Answer", "text": "Superscoring means a college takes your highest section scores across multiple test dates and combines them. If you scored 700 Reading & Writing and 600 Math in March, then 650 and 700 in May, your superscore is 1400 (700 + 700). Many colleges superscore the SAT, and the digital format is designed for it, so a strong single section is never wasted." }},
+            { "@type": "Question", "name": "How accurate is this SAT score calculator?", "acceptedAnswer": { "@type": "Answer", "text": "It is an estimate, not an official score. The real conversion uses equating based on the specific questions you saw, which no third party can reproduce exactly. The tables here are modeled on the College Board's published practice test conversions and are meant for practice-test scoring and study planning. Only the College Board issues official scores." }},
+            { "@type": "Question", "name": "Is this SAT score calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your scores are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #ef4444; --primary-soft: #f87171;
+            --primary-glow: rgba(239,68,68,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .sat-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .sat-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .sat-path-toggle { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+        .sat-path-toggle button {
+            flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .sat-path-toggle button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .sat-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .sat-field input {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .sat-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .sat-section-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+        .sat-section-card h3 { margin: 0 0 0.25rem; font-size: 1.05rem; color: var(--text); }
+        .sat-section-card .sat-sub { font-size: 0.85rem; color: var(--text-faint); margin: 0 0 0.75rem; }
+        .sat-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .sat-total { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .sat-total-value { font-size: 3.5rem; font-weight: 800; color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; }
+        .sat-total-note { font-size: 0.8rem; color: var(--text-faint); margin-top: 0.25rem; }
+        .sat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+        @media (max-width: 560px) { .sat-cols { grid-template-columns: 1fr; } }
+        .sat-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .sat-stat .sat-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .sat-stat .sat-value { font-size: 2rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; }
+        .sat-stat .sat-raw { font-size: 0.8rem; color: var(--text-faint); margin-top: 0.25rem; }
+        .sat-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+        .sat-error { font-size: 0.95rem; color: var(--primary-soft); padding: 1rem 0; }
+        .sat-mult { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .sat-mult th, .sat-mult td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .sat-mult th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .sat-mult td { color: var(--text-muted); }
+        .sat-mult td:last-child { color: var(--primary-soft); font-weight: 700; font-variant-numeric: tabular-nums; }
+        .sat-mult tbody tr:last-child td { border-bottom: none; }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="sat-app">
+        <div class="sat-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                SAT Score Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">SAT Score Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Estimate your digital SAT score: enter your correct answers per section and your Module 2 difficulty path. Built for the digital SAT (2024 and later), 400-1600 scale. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="sat-section-card">
+                    <h3>Reading &amp; Writing</h3>
+                    <p class="sat-sub">2 modules, 54 questions total. No penalty for wrong answers.</p>
+                    <div class="sat-field">
+                        <label for="sat-rw-raw">Questions answered correctly (0-54)</label>
+                        <input id="sat-rw-raw" type="number" inputmode="numeric" min="0" max="54" step="1" placeholder="e.g. 42">
+                    </div>
+                    <div class="sat-field" style="margin-top:0.9rem;">
+                        <label>Module 2 difficulty</label>
+                        <div class="sat-path-toggle" role="group" aria-label="Reading and Writing Module 2 difficulty">
+                            <button id="sat-rw-harder" class="is-on" type="button">Harder Module 2</button>
+                            <button id="sat-rw-easier" type="button">Easier Module 2</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sat-section-card">
+                    <h3>Math</h3>
+                    <p class="sat-sub">2 modules, 44 questions total. Calculator allowed on both modules.</p>
+                    <div class="sat-field">
+                        <label for="sat-m-raw">Questions answered correctly (0-44)</label>
+                        <input id="sat-m-raw" type="number" inputmode="numeric" min="0" max="44" step="1" placeholder="e.g. 36">
+                    </div>
+                    <div class="sat-field" style="margin-top:0.9rem;">
+                        <label>Module 2 difficulty</label>
+                        <div class="sat-path-toggle" role="group" aria-label="Math Module 2 difficulty">
+                            <button id="sat-m-harder" class="is-on" type="button">Harder Module 2</button>
+                            <button id="sat-m-easier" type="button">Easier Module 2</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sat-result" id="sat-result" aria-live="polite">
+                    <div id="sat-body">
+                        <div class="sat-total">Estimated total</div>
+                        <div class="sat-total-value" id="sat-total-out">—</div>
+                        <div class="sat-total-note">out of 1600</div>
+                        <div class="sat-cols">
+                            <div class="sat-stat">
+                                <div class="sat-label">Reading &amp; Writing</div>
+                                <div class="sat-value" id="sat-rw-out">—</div>
+                                <div class="sat-raw" id="sat-rw-rawline">200-800</div>
+                            </div>
+                            <div class="sat-stat">
+                                <div class="sat-label">Math</div>
+                                <div class="sat-value" id="sat-m-out">—</div>
+                                <div class="sat-raw" id="sat-m-rawline">200-800</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sat-note" id="sat-note">Enter your correct answers for both sections to see an estimated scaled score.</div>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use the SAT Score Calculator</h2>
+                <p>Enter the number of questions you got right in each section: 0 to 54 for Reading &amp; Writing, 0 to 44 for Math. Then pick which Module 2 you saw: the harder path if you did well on Module 1, the easier path if you struggled. The result updates as you type.</p>
+                <p>The difficulty path matters a lot. A harder Module 2 can reach a full 800 with a perfect raw score; an easier Module 2 caps out around 630 in Reading &amp; Writing and 590 in Math. That is why two students with the same number of correct answers can get different scaled scores. For the full explanation, read our guide: <a href="/guides/how-digital-sat-scoring-works/" style="color: var(--primary);">how digital SAT scoring works</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Worked Example</h2>
+                <p>A student finishes a practice test with 42 of 54 correct in Reading &amp; Writing and 36 of 44 correct in Math, on the harder Module 2 path for both. Her Reading &amp; Writing raw score converts to roughly <strong style="color:var(--text);">720</strong>, and her Math raw score converts to roughly <strong style="color:var(--text);">760</strong>, for an estimated total of <strong style="color:var(--text);">1480</strong> out of 1600. If she had seen the easier Module 2 path instead, the same raw scores would land her around 550 and 530, or about 1080 total. The path changes everything.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What the Estimate Is (and Isn't)</h2>
+                <p>This calculator gives an <strong style="color:var(--text);">estimate</strong>, not an official score. The real conversion is done by the College Board with a process called equating, which adjusts for the exact difficulty of the questions you saw. No third-party tool can reproduce that exactly. The tables here are modeled on the College Board's published practice-test score conversions, so they are accurate enough for practice-test scoring and study planning, but the only official score comes from the College Board.</p>
+                <p>There is no guessing penalty on the digital SAT, so your raw score is simply the number of questions answered correctly. Blank and wrong answers count the same: zero. If you used this calculator by counting your correct answers on a practice test, you are using it exactly the way it was built to be used.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The 200-800 Scale</h2>
+                <p>Each section is scored from 200 to 800, and the total is the sum: 400 to 1600. Scores move in 10-point increments. The old 2400 scale (with a separate Writing section) was retired in 2016, so the SAT today is out of 1600, period.</p>
+                <table class="sat-mult">
+                    <thead>
+                        <tr><th>Score range</th><th>Rough percentile</th><th>What it means</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1450-1600</td><td>96th+</td><td>Competitive at the most selective colleges</td></tr>
+                        <tr><td>1350-1440</td><td>90-95th</td><td>Strong for flagship state universities</td></tr>
+                        <tr><td>1200-1340</td><td>79-89th</td><td>Above average nationally, solid for many schools</td></tr>
+                        <tr><td>1050-1190</td><td>63-78th</td><td>Around and above the national average (~1050)</td></tr>
+                        <tr><td>400-1040</td><td>Below 63rd</td><td>Below average; many schools are test-optional</td></tr>
+                    </tbody>
+                </table>
+                <p>Percentiles are approximate and shift year to year. The only score that matters is the one relative to the colleges on your list: compare your score to each school's published 25th-75th percentile range, not to a national number.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Real Use Cases</h2>
+                <p><strong style="color:var(--text);">Practice-test scoring.</strong> After each College Board practice test, plug in your raw correct counts and get a scaled score in seconds instead of hunting through conversion tables.</p>
+                <p><strong style="color:var(--text);">Study target setting.</strong> Work backward: if your dream school's 75th percentile is 1450, see how many questions per section you can afford to miss and still clear it, then drill to that number.</p>
+                <p><strong style="color:var(--text);">College-list sanity check.</strong> Before you lock in application fees, estimate your score and compare it to each school's published range. A 1250 changes which list is realistic versus a 1400.</p>
+                <p><strong style="color:var(--text);">Superscore planning.</strong> Many colleges combine your best section scores across test dates. Score one section now, then see exactly how high the other section needs to be on a retake to hit your target superscore.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How is the digital SAT scored?</summary><p>The digital SAT is section-adaptive. Each section (Reading &amp; Writing, Math) has two modules. Everyone gets the same first module; your performance on it routes you to a harder or easier second module. Your raw score is the number of questions answered correctly (there is no penalty for wrong answers). The College Board then converts that raw score to a scaled score of 200-800 per section using a process called equating, which adjusts for the difficulty of the questions you saw.</p></details>
+                <details><summary>What is a good SAT score?</summary><p>The national average is around 1050-1060 out of 1600. A 1200 is roughly the 80th percentile, 1350 roughly the 90th, and 1450+ roughly the 96th. What counts as "good" depends on the school: many state schools admit students in the 1000-1200 range, while highly selective colleges typically look for 1400-1500+. Compare your score to the published ranges of your specific colleges.</p></details>
+                <details><summary>How many questions can I miss and still get a 1400?</summary><p>Roughly, on the harder Module 2 path: about 40 of 54 correct in Reading &amp; Writing (missing about 14 questions) and about 29-31 of 44 correct in Math (missing about 13-15 questions), for around 700 per section. On the easier Module 2 path, 1400 is out of reach: the easier path caps around 1200-1230. These are estimates, not official numbers.</p></details>
+                <details><summary>Is the SAT out of 1600 or 2400?</summary><p>The SAT is out of 1600: two sections, 200-800 each. The 2400 scale with a separate Writing section was retired in 2016. Old 2400-scale scores cannot be directly compared to current scores.</p></details>
+                <details><summary>What is superscoring?</summary><p>Superscoring means a college takes your highest section scores across multiple test dates and combines them. If you scored 700 Reading &amp; Writing and 600 Math in March, then 650 and 700 in May, your superscore is 1400 (700 + 700). Many colleges superscore the SAT, so a strong single section is never wasted.</p></details>
+                <details><summary>How accurate is this SAT score calculator?</summary><p>It is an estimate, not an official score. The real conversion uses equating based on the specific questions you saw, which no third party can reproduce exactly. The tables here are modeled on the College Board's published practice-test conversions and are meant for practice-test scoring and study planning. Only the College Board issues official scores.</p></details>
+                <details><summary>Is this SAT score calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your scores are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Turn raw scores into percentages or measure score improvement.</span>
+                    </a>
+                    <a href="/tools/age-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Age Calculator</strong>
+                        <span style="font-size:0.85rem;">Find your exact age on test day or any date.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">How adaptive modules work, what equating really does, score ranges colleges expect, and how to raise your score.</p>
+                <a href="/guides/how-digital-sat-scoring-works/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#fee2e2;font-weight:700;border-radius:10px;text-decoration:none;">Read the SAT Scoring Guide</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+        /* Conversion tables modeled on College Board published practice-test
+           score conversions. Anchor pairs: [raw correct, scaled score].
+           harder = harder Module 2 (higher ceiling), easier = easier Module 2 (lower ceiling).
+           Estimates only, never official scores. */
+        var TABLES = {
+            rw: {
+                harder: [[0,200],[10,470],[15,500],[20,540],[25,580],[30,620],[35,660],[40,700],[45,740],[48,770],[51,790],[54,800]],
+                easier: [[0,200],[10,370],[20,430],[30,480],[40,530],[45,570],[50,610],[54,630]]
+            },
+            math: {
+                harder: [[0,200],[2,400],[6,460],[10,510],[14,550],[18,590],[22,630],[26,670],[30,710],[34,740],[38,770],[41,790],[44,800]],
+                easier: [[0,200],[5,280],[10,320],[15,360],[20,400],[25,440],[30,480],[35,520],[40,560],[44,590]]
+            }
+        };
+
+        function convert(section, harder, raw) {
+            var anchors = TABLES[section][harder ? "harder" : "easier"];
+            if (raw <= anchors[0][0]) return anchors[0][1];
+            for (var i = 1; i < anchors.length; i++) {
+                if (raw <= anchors[i][0]) {
+                    var x0 = anchors[i - 1][0], y0 = anchors[i - 1][1];
+                    var x1 = anchors[i][0], y1 = anchors[i][1];
+                    var val = y0 + (y1 - y0) * (raw - x0) / (x1 - x0);
+                    return Math.round(val / 10) * 10;
+                }
+            }
+            return anchors[anchors.length - 1][1];
+        }
+
+        var rwRawEl = document.getElementById("sat-rw-raw");
+        var mRawEl = document.getElementById("sat-m-raw");
+        var rwHarderBtn = document.getElementById("sat-rw-harder");
+        var rwEasierBtn = document.getElementById("sat-rw-easier");
+        var mHarderBtn = document.getElementById("sat-m-harder");
+        var mEasierBtn = document.getElementById("sat-m-easier");
+        var bodyEl = document.getElementById("sat-body");
+        var totalOut = document.getElementById("sat-total-out");
+        var rwOut = document.getElementById("sat-rw-out");
+        var mOut = document.getElementById("sat-m-out");
+        var rwRawLine = document.getElementById("sat-rw-rawline");
+        var mRawLine = document.getElementById("sat-m-rawline");
+        var noteEl = document.getElementById("sat-note");
+
+        var rwHarder = true, mHarder = true;
+
+        function showError(msg) {
+            bodyEl.style.display = "none";
+            noteEl.textContent = msg;
+        }
+
+        function showBody() {
+            bodyEl.style.display = "block";
+        }
+
+        function setPath(section, harder) {
+            if (section === "rw") {
+                rwHarder = harder;
+                rwHarderBtn.classList.toggle("is-on", harder);
+                rwEasierBtn.classList.toggle("is-on", !harder);
+            } else {
+                mHarder = harder;
+                mHarderBtn.classList.toggle("is-on", harder);
+                mEasierBtn.classList.toggle("is-on", !harder);
+            }
+            calc();
+        }
+
+        function calc() {
+            var rwRaw = parseFloat(rwRawEl.value);
+            var mRaw = parseFloat(mRawEl.value);
+            var rwEmpty = isNaN(rwRaw), mEmpty = isNaN(mRaw);
+
+            if (rwEmpty && mEmpty) {
+                showError("Enter your correct answers for both sections to see an estimated scaled score.");
+                return;
+            }
+            if (!rwEmpty && (rwRaw < 0 || rwRaw > 54 || !isFinite(rwRaw))) {
+                showError("Reading & Writing correct answers must be a whole number between 0 and 54.");
+                return;
+            }
+            if (!mEmpty && (mRaw < 0 || mRaw > 44 || !isFinite(mRaw))) {
+                showError("Math correct answers must be a whole number between 0 and 44.");
+                return;
+            }
+
+            var rw = rwEmpty ? null : convert("rw", rwHarder, Math.round(rwRaw));
+            var m = mEmpty ? null : convert("math", mHarder, Math.round(mRaw));
+
+            showBody();
+            rwOut.textContent = rw === null ? "—" : rw;
+            mOut.textContent = m === null ? "—" : m;
+            rwRawLine.textContent = rwEmpty ? "200-800" : Math.round(rwRaw) + " of 54 correct (" + (rwHarder ? "harder" : "easier") + " Module 2)";
+            mRawLine.textContent = mEmpty ? "200-800" : Math.round(mRaw) + " of 44 correct (" + (mHarder ? "harder" : "easier") + " Module 2)";
+
+            if (rw === null || m === null) {
+                totalOut.textContent = "—";
+                noteEl.textContent = "One section to go: enter your score for the other section to get an estimated total.";
+            } else {
+                var total = rw + m;
+                totalOut.textContent = total;
+                var band;
+                if (total >= 1450) band = "a score competitive at the most selective colleges.";
+                else if (total >= 1350) band = "a strong score for flagship state universities.";
+                else if (total >= 1200) band = "above the national average (~1050).";
+                else band = "below the national average; many schools are test-optional.";
+                noteEl.textContent = "Estimated " + total + " out of 1600: " + band + " This is an estimate, not an official score. Only the College Board issues official scores.";
+            }
+        }
+
+        rwHarderBtn.addEventListener("click", function () { setPath("rw", true); });
+        rwEasierBtn.addEventListener("click", function () { setPath("rw", false); });
+        mHarderBtn.addEventListener("click", function () { setPath("math", true); });
+        mEasierBtn.addEventListener("click", function () { setPath("math", false); });
+        rwRawEl.addEventListener("input", calc);
+        mRawEl.addEventListener("input", calc);
+
+        calc();
+    })();
+    </script>
+</body>
+</html>

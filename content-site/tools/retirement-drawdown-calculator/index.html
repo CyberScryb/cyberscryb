@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Drawdown Calculator: How Long Will My Money Last? | CyberScryb</title>
+<meta name="description" content="Free retirement drawdown calculator. Enter your savings, annual spending, return, and inflation to see how many years your money lasts, year-by-year balances, and your withdrawal rate vs the 4% rule. No signup, runs in your browser.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/retirement-drawdown-calculator/">
+<meta property="og:title" content="Retirement Drawdown Calculator: How Long Will My Money Last? | CyberScryb">
+<meta property="og:description" content="See how many years your retirement savings last, with inflation-adjusted withdrawals year by year. Free, no signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/retirement-drawdown-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Retirement Drawdown Calculator: How Long Will My Money Last? | CyberScryb">
+<meta name="twitter:description" content="See how many years your retirement savings last, with inflation-adjusted withdrawals year by year. Free, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Retirement Drawdown Calculator",
+        "url": "https://cyberscryb.com/tools/retirement-drawdown-calculator/",
+        "description": "Free online retirement drawdown calculator: enter savings, annual spending, expected return, inflation, current age, and plan-to age to see how many years your money lasts, a year-by-year balance table with inflation-adjusted withdrawals, your safe withdrawal rate versus the 4% rule, and total interest earned versus principal drawn. Runs entirely in your browser.",
+        "applicationCategory": "FinanceApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Retirement Drawdown Calculator", "item": "https://cyberscryb.com/tools/retirement-drawdown-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is a safe withdrawal rate in retirement?", "acceptedAnswer": { "@type": "Answer", "text": "The classic answer is 4%: withdraw 4% of your starting balance in year one, then adjust that dollar amount for inflation each year. Bill Bengen's 1994 research found this rate survived every 30-year retirement window in US history with a 50/50 stock-and-bond portfolio. It is a planning starting point, not a guarantee, and it assumes you never take on extra spending beyond inflation." }},
+            { "@type": "Question", "name": "How much can I withdraw per year in retirement?", "acceptedAnswer": { "@type": "Answer", "text": "A common rule of thumb is 4% of your portfolio per year, adjusted for inflation. On $750,000 that is $30,000 in year one, growing with inflation after that. If your withdrawals plus inflation outpace your returns, your balance shrinks and can run out. Enter your own numbers in the calculator above to see exactly how many years your spending plan lasts." }},
+            { "@type": "Question", "name": "Will my 401k last until I die?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on four things: how much you saved, how much you spend each year, your portfolio's returns, and inflation. If you spend 4% of the starting balance per year (adjusted for inflation) with typical market returns, historical data says your money usually lasts a full 30-year retirement. If you spend 6 to 8% a year, it typically runs out in under 20 years. The calculator above simulates your exact scenario." }},
+            { "@type": "Question", "name": "Does the 4% rule still work?", "acceptedAnswer": { "@type": "Answer", "text": "Mostly, yes, as a planning guideline. Critics argue today's bond yields and longer retirements make 4% aggressive, while Bengen himself later revised it upward to 4.7% with small-cap value exposure. The bigger insight from the research is flexibility: retirees who trim spending after bad market years make their money last much longer than any fixed rule implies. Read our guide on the safe withdrawal rate for the full picture." }},
+            { "@type": "Question", "name": "How does inflation affect retirement withdrawals?", "acceptedAnswer": { "@type": "Answer", "text": "Inflation grows your withdrawals every year even though your portfolio does not grow on its own. At 3% inflation, $40,000 of spending this year needs to be about $97,000 in 30 years to buy the same things. The calculator above inflates your withdrawal each year automatically, so you see the true pressure inflation puts on your savings." }},
+            { "@type": "Question", "name": "What is sequence-of-returns risk?", "acceptedAnswer": { "@type": "Answer", "text": "It is the risk that bad market years hit early in retirement, when your portfolio is largest and withdrawals lock in losses. Two retirees with the same average return can have very different outcomes: one who retires into a crash can run out of money while one who retires into a boom does fine. This calculator uses a single average return, so it does not model sequence risk; our safe withdrawal rate guide explains it in detail." }},
+            { "@type": "Question", "name": "Is this retirement calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All math runs instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #ef4444; --primary-soft: #f87171;
+            --primary-glow: rgba(239,68,68,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .dd-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .dd-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .dd-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .dd-field input {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .dd-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .dd-field .dd-hint { font-size: 0.75rem; color: var(--text-faint); margin-top: 0.3rem; }
+        .dd-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .dd-row { grid-template-columns: 1fr; } }
+        .dd-result {
+            margin-top: 1.25rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .dd-verdict { font-size: 1.15rem; font-weight: 800; line-height: 1.5; padding: 1rem; border-radius: 10px; margin-bottom: 1.25rem; }
+        .dd-verdict.ok { color: var(--primary-soft); background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.35); }
+        .dd-verdict.warn { color: #fbbf24; background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.4); }
+        .dd-main { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+        @media (max-width: 560px) { .dd-main { grid-template-columns: 1fr; } }
+        .dd-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .dd-stat .dd-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .dd-stat .dd-value { font-size: 2rem; font-weight: 800; color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; line-height: 1.1; }
+        .dd-stat .dd-unit { font-size: 0.8rem; color: var(--text-faint); }
+        .dd-bench { width: 100%; border-collapse: collapse; margin: 1.25rem 0 0.5rem; font-size: 0.92rem; text-align: left; }
+        .dd-bench th, .dd-bench td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+        .dd-bench th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .dd-bench td { color: var(--text-muted); }
+        .dd-bench td:last-child { color: var(--primary-soft); font-weight: 700; font-variant-numeric: tabular-nums; }
+        .dd-bench tbody tr:last-child td { border-bottom: none; }
+        .dd-bench tr.you td { background: rgba(239,68,68,0.06); }
+        .dd-table-wrap { max-height: 480px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; margin: 1.25rem 0 0; }
+        .dd-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+        .dd-table th, .dd-table td { padding: 0.55rem 0.7rem; text-align: right; border-bottom: 1px solid var(--border); }
+        .dd-table th { position: sticky; top: 0; background: var(--card); color: var(--text); font-weight: 700; z-index: 1; }
+        .dd-table th:first-child, .dd-table td:first-child { text-align: left; }
+        .dd-table td { color: var(--text-muted); }
+        .dd-table tbody tr:last-child td { border-bottom: none; }
+        .dd-table tr.depleted td { color: #fbbf24; font-weight: 700; }
+        .dd-note { font-size: 0.85rem; color: var(--text-faint); margin-top: 1rem; line-height: 1.6; }
+        .dd-error { font-size: 0.95rem; color: var(--primary-soft); padding: 1rem 0; }
+        .dd-disclaimer { font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dd-app">
+        <div class="dd-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Retirement Drawdown Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Retirement Drawdown Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">The question every retiree actually asks: will my money last as long as I do? Enter your savings, what you spend each year, and your assumptions. The calculator simulates your retirement year by year, growing your withdrawals with inflation and compounding returns on what is left, and tells you the age your money runs out or the balance you still have at your plan-to age. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <div class="dd-row" style="margin-top:0;">
+                    <div class="dd-field">
+                        <label for="dd-savings">Current retirement savings ($)</label>
+                        <input id="dd-savings" type="number" inputmode="decimal" min="0" max="100000000" step="1000" value="750000">
+                    </div>
+                    <div class="dd-field">
+                        <label for="dd-spending">Annual spending need ($, pre-tax)</label>
+                        <input id="dd-spending" type="number" inputmode="decimal" min="1" max="5000000" step="500" value="30000">
+                        <div class="dd-hint">What you need to live on per year, before taxes, in today's dollars.</div>
+                    </div>
+                </div>
+
+                <div class="dd-row">
+                    <div class="dd-field">
+                        <label for="dd-return">Expected annual return (%)</label>
+                        <input id="dd-return" type="number" inputmode="decimal" min="0" max="25" step="0.1" value="6">
+                    </div>
+                    <div class="dd-field">
+                        <label for="dd-inflation">Expected inflation (%)</label>
+                        <input id="dd-inflation" type="number" inputmode="decimal" min="0" max="10" step="0.1" value="3">
+                        <div class="dd-hint">Your withdrawals grow by this much every year.</div>
+                    </div>
+                </div>
+
+                <div class="dd-row">
+                    <div class="dd-field">
+                        <label for="dd-age">Current age</label>
+                        <input id="dd-age" type="number" inputmode="numeric" min="30" max="100" step="1" value="62">
+                    </div>
+                    <div class="dd-field">
+                        <label for="dd-plantill">Plan to age</label>
+                        <input id="dd-plantill" type="number" inputmode="numeric" min="31" max="110" step="1" value="90">
+                        <div class="dd-hint">The age your savings must last to.</div>
+                    </div>
+                </div>
+
+                <div class="dd-result" id="dd-result" aria-live="polite">
+                    <div id="dd-body">
+                        <div class="dd-verdict ok" id="dd-verdict">—</div>
+                        <div class="dd-main">
+                            <div class="dd-stat">
+                                <div class="dd-label">Money lasts</div>
+                                <div class="dd-value" id="dd-years">—</div>
+                                <div class="dd-unit" id="dd-years-sub">years</div>
+                            </div>
+                            <div class="dd-stat">
+                                <div class="dd-label">Balance at plan age</div>
+                                <div class="dd-value" id="dd-final">—</div>
+                                <div class="dd-unit">remaining</div>
+                            </div>
+                            <div class="dd-stat">
+                                <div class="dd-label">Total withdrawn</div>
+                                <div class="dd-value" id="dd-totalw">—</div>
+                                <div class="dd-unit">over the period</div>
+                            </div>
+                            <div class="dd-stat">
+                                <div class="dd-label">Total interest earned</div>
+                                <div class="dd-value" id="dd-totali">—</div>
+                                <div class="dd-unit">over the period</div>
+                            </div>
+                        </div>
+
+                        <h2 style="font-size:1.1rem;color:var(--text);margin:1.25rem 0 0;text-align:left;">Your withdrawal rate vs the benchmarks</h2>
+                        <table class="dd-bench">
+                            <thead><tr><th>Rate</th><th>First-year withdrawal</th><th>What history says</th></tr></thead>
+                            <tbody id="dd-bench-body"></tbody>
+                        </table>
+                        <p class="dd-note" id="dd-bench-note" style="text-align:left;"></p>
+
+                        <h2 style="font-size:1.1rem;color:var(--text);margin:1.5rem 0 0;text-align:left;">Year-by-year balance</h2>
+                        <div class="dd-table-wrap">
+                            <table class="dd-table">
+                                <thead><tr><th>Age</th><th>Starting balance</th><th>Withdrawal</th><th>Growth</th><th>Ending balance</th></tr></thead>
+                                <tbody id="dd-rows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="dd-note" id="dd-note">Enter your numbers to simulate your retirement.</div>
+                </div>
+
+                <div class="dd-disclaimer">
+                    <strong style="color:var(--text-muted);">Not financial advice.</strong> This is an educational planning tool that applies one average return and one inflation rate every year. Real markets are bumpy: a crash early in retirement hurts far more than the same crash late (sequence-of-returns risk). Taxes, fees, Social Security, and required minimum distributions are not modeled. Talk to a fiduciary financial advisor about your actual situation.
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use the Drawdown Calculator</h2>
+                <p>Enter six numbers and the results update as you type:</p>
+                <p><strong style="color:var(--text);">1. Current retirement savings.</strong> Everything set aside for retirement across your 401(k), IRAs, and taxable accounts, as one total.</p>
+                <p><strong style="color:var(--text);">2. Annual spending need.</strong> What you must pull out per year to live on, in today's dollars, before taxes. Not your portfolio percentage, your actual budget.</p>
+                <p><strong style="color:var(--text);">3. Expected annual return.</strong> A blended long-run average. A 60/40 stock-and-bond portfolio has historically returned roughly 6 to 7% before inflation; an all-bond portfolio closer to 4%.</p>
+                <p><strong style="color:var(--text);">4. Expected inflation.</strong> Defaults to 3%, the long-run US average. This grows your withdrawals every year so the math stays honest.</p>
+                <p><strong style="color:var(--text);">5 and 6. Current age and plan-to age.</strong> Pick a plan-to age past your life expectancy, not at it. Half of 65-year-olds live past their life expectancy; planning to 90 or 95 is how you avoid outliving the money.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">A Worked Example</h2>
+                <p>Take a 62-year-old with $750,000 saved who needs $30,000 a year, expects 6% returns and 3% inflation, and plans to 90. That is 28 years. Year one withdraws $30,000, about 4% of the starting balance, while the untouched money compounds at 6%. Each year's withdrawal is 3% larger than the last, because everything costs more. Run it: the money lasts all 28 years, roughly $1,288,000 is withdrawn in total, the portfolio earns about $1,548,000 in growth along the way, and about $1,010,000 remains at age 90. Note that the total withdrawn is far larger than the starting balance. That is compounding doing its job while you spend.</p>
+                <p>Now change one number: need $60,000 a year instead of $30,000 on the same $750,000. That is an 8% first-year withdrawal rate. The math is brutal: the money runs dry around age 78, about 16 years in, having withdrawn roughly $1,306,000 total. Same saver, same market, double the spending, half the retirement. Spending is the lever.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What the Math Actually Does</h2>
+                <p>Each simulated year, in this order: the year's withdrawal is your spending need grown by inflation for every year since you started, your remaining balance grows by your expected return, then the withdrawal is subtracted. Nothing fancy, just the two forces that decide everything: withdrawals grow exponentially with inflation while returns compound on whatever is left. That ordering is why high spending early is so dangerous; every dollar withdrawn is a dollar that can never compound again.</p>
+                <p>What the math does not do: it assumes the same return every year. Real portfolios have good years and bad years, and a bad stretch at the start of retirement is far more damaging than the same stretch at the end, because withdrawals taken during a crash are never replaced. That is sequence-of-returns risk, and it is why this calculator is a starting point, not a verdict. Our <a href="/guides/safe-withdrawal-rate/" style="color: var(--primary);">safe withdrawal rate guide</a> explains the risk and how retirees guard against it.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses a Drawdown Calculator</h2>
+                <p><strong style="color:var(--text);">The early-retirement check.</strong> You are 45, you have $900,000, and you want to know if you can stop working. Forty years of withdrawals is a different animal than 25; the calculator tells you whether the plan survives the extra decade and a half.</p>
+                <p><strong style="color:var(--text);">The pre-retiree gut check.</strong> You are 60 and deciding whether to retire this year or grind two more. Run it both ways: two more years of compounding plus two fewer years of withdrawals is often the single biggest lever you have.</p>
+                <p><strong style="color:var(--text);">The post-retirement annual review.</strong> You are already retired and checking in once a year. Re-run with your actual balance and remaining plan age to see if you are ahead of or behind the plan, and whether spending needs adjusting.</p>
+                <p>Pair it with the growth side of the story: <a href="/tools/compound-interest-calculator/" style="color: var(--primary);">compound interest calculator</a> for the accumulation years, and our <a href="/guides/roth-ira-vs-traditional-ira/" style="color: var(--primary);">Roth vs Traditional IRA guide</a> for where to hold the money.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>What is a safe withdrawal rate in retirement?</summary><p>The classic answer is 4%: withdraw 4% of your starting balance in year one, then adjust that dollar amount for inflation each year. Bill Bengen's 1994 research found this rate survived every 30-year retirement window in US history with a 50/50 stock-and-bond portfolio. It is a planning starting point, not a guarantee.</p></details>
+                <details><summary>How much can I withdraw per year in retirement?</summary><p>A common rule of thumb is 4% of your portfolio per year, adjusted for inflation. On $750,000 that is $30,000 in year one, growing with inflation after that. Enter your own numbers in the calculator above to see exactly how many years your spending plan lasts.</p></details>
+                <details><summary>Will my 401k last until I die?</summary><p>It depends on how much you saved, how much you spend each year, your portfolio's returns, and inflation. Spend 4% of the starting balance per year (adjusted for inflation) with typical returns, and history says the money usually lasts a full 30-year retirement. Spend 6 to 8% a year and it typically runs out in under 20 years.</p></details>
+                <details><summary>Does the 4% rule still work?</summary><p>Mostly, yes, as a planning guideline. Bengen himself later revised it upward to 4.7% with small-cap value exposure, while critics say today's yields make 4% aggressive. The bigger insight is flexibility: retirees who trim spending after bad market years make their money last much longer than any fixed rule implies.</p></details>
+                <details><summary>How does inflation affect retirement withdrawals?</summary><p>Inflation grows your withdrawals every year even though your portfolio does not grow on its own. At 3% inflation, $40,000 of spending this year needs about $97,000 in 30 years to buy the same things. The calculator above inflates your withdrawal each year automatically.</p></details>
+                <details><summary>What is sequence-of-returns risk?</summary><p>The risk that bad market years hit early in retirement, when your portfolio is largest and withdrawals lock in losses. This calculator uses one average return per year, so it does not model sequence risk; our safe withdrawal rate guide explains it in detail.</p></details>
+                <details><summary>Is this retirement calculator free?</summary><p>Yes, 100% free with no signup. All math runs instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/compound-interest-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Compound Interest Calculator</strong>
+                        <span style="font-size:0.85rem;">Grow your savings before you start drawing it down.</span>
+                    </a>
+                    <a href="/tools/salary-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Salary Converter</strong>
+                        <span style="font-size:0.85rem;">Turn your salary into annual take-home for your spending plan.</span>
+                    </a>
+                    <a href="/tools/mortgage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Mortgage Calculator</strong>
+                        <span style="font-size:0.85rem;">See how housing payments fit your retirement budget.</span>
+                    </a>
+                    <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
+                        <span style="font-size:0.85rem;">Nail down the annual spending number to enter above.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">The 4% rule explained, Bengen's research, sequence-of-returns risk, and how to stretch a portfolio.</p>
+                <a href="/guides/safe-withdrawal-rate/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#fee2e2;font-weight:700;border-radius:10px;text-decoration:none;">Read the Safe Withdrawal Rate Guide</a>
+            </section>
+        </div>
+
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+
+        var savingsEl = document.getElementById("dd-savings");
+        var spendingEl = document.getElementById("dd-spending");
+        var returnEl = document.getElementById("dd-return");
+        var inflationEl = document.getElementById("dd-inflation");
+        var ageEl = document.getElementById("dd-age");
+        var plantillEl = document.getElementById("dd-plantill");
+
+        var bodyEl = document.getElementById("dd-body");
+        var verdictEl = document.getElementById("dd-verdict");
+        var yearsEl = document.getElementById("dd-years");
+        var yearsSubEl = document.getElementById("dd-years-sub");
+        var finalEl = document.getElementById("dd-final");
+        var totalwEl = document.getElementById("dd-totalw");
+        var totaliEl = document.getElementById("dd-totali");
+        var benchBodyEl = document.getElementById("dd-bench-body");
+        var benchNoteEl = document.getElementById("dd-bench-note");
+        var rowsEl = document.getElementById("dd-rows");
+        var noteEl = document.getElementById("dd-note");
+
+        function money(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+
+        function showError(msg) {
+            bodyEl.style.display = "none";
+            noteEl.textContent = msg;
+        }
+
+        function showBody() { bodyEl.style.display = "block"; }
+
+        function simulate(savings, spending, ret, infl, age, planTo) {
+            var years = planTo - age;
+            var balance = savings;
+            var totalW = 0, totalG = 0;
+            var rows = [];
+            var depletedAge = null;
+            var y;
+            for (y = 0; y < years; y++) {
+                var withdrawal = spending * Math.pow(1 + infl, y);
+                var growth = balance * ret;
+                var end = balance + growth - withdrawal;
+                totalW += withdrawal;
+                totalG += growth;
+                var done = end <= 0;
+                rows.push({ age: age + y, start: balance, withdrawal: withdrawal, growth: growth, end: done ? 0 : end });
+                if (done) { depletedAge = age + y; break; }
+                balance = end;
+            }
+            return { years: years, rows: rows, depletedAge: depletedAge, totalW: totalW, totalG: totalG, finalBalance: depletedAge === null ? balance : 0 };
+        }
+
+        function calc() {
+            var savings = parseFloat(savingsEl.value);
+            var spending = parseFloat(spendingEl.value);
+            var ret = parseFloat(returnEl.value) / 100;
+            var infl = parseFloat(inflationEl.value) / 100;
+            var age = parseInt(ageEl.value, 10);
+            var planTo = parseInt(plantillEl.value, 10);
+
+            if (isNaN(savings) || savings < 0 || savings > 100000000) { showError("Enter your current retirement savings, from $0 to $100,000,000."); return; }
+            if (isNaN(spending) || spending <= 0 || spending > 5000000) { showError("Enter a valid annual spending need above $0."); return; }
+            if (isNaN(ret) || ret < 0 || ret > 0.25) { showError("Enter an expected annual return between 0 and 25%."); return; }
+            if (isNaN(infl) || infl < 0 || infl > 0.10) { showError("Enter an expected inflation rate between 0 and 10%."); return; }
+            if (isNaN(age) || age < 30 || age > 100) { showError("Enter a current age between 30 and 100."); return; }
+            if (isNaN(planTo) || planTo < 31 || planTo > 110) { showError("Enter a plan-to age between 31 and 110."); return; }
+            if (planTo <= age) { showError("Your plan-to age must be after your current age."); return; }
+            if (savings === 0) { showError("With $0 in savings, any spending plan runs out immediately. Enter your current retirement savings."); return; }
+
+            var sim = simulate(savings, spending, ret, infl, age, planTo);
+            var userRate = spending / savings;
+
+            if (sim.depletedAge !== null) {
+                var lasted = sim.depletedAge - age;
+                verdictEl.className = "dd-verdict warn";
+                verdictEl.textContent = "Warning: your money runs out at age " + sim.depletedAge + ", after " + lasted + " of your planned " + sim.years + " years. Lower spending, a higher return assumption, or a shorter plan horizon closes the gap.";
+                yearsEl.textContent = lasted;
+                yearsSubEl.textContent = "years, to age " + sim.depletedAge;
+                finalEl.textContent = "$0";
+            } else {
+                verdictEl.className = "dd-verdict ok";
+                verdictEl.textContent = "Your savings survive to your plan age of " + planTo + ". You spend " + sim.years + " years in retirement with " + money(sim.finalBalance) + " still left.";
+                yearsEl.textContent = sim.years;
+                yearsSubEl.textContent = "years, to age " + planTo;
+                finalEl.textContent = money(sim.finalBalance);
+            }
+
+            totalwEl.textContent = money(sim.totalW);
+            totaliEl.textContent = money(sim.totalG);
+
+            var bench = [
+                { rate: 0.03, label: "3% (conservative)" },
+                { rate: 0.04, label: "4% (classic rule)" },
+                { rate: 0.05, label: "5% (aggressive)" }
+            ];
+            var html = "";
+            bench.forEach(function (b) {
+                html += "<tr><td>" + b.label + "</td><td>" + money(savings * b.rate) + " / yr</td><td>" + (b.rate <= 0.04 ? "Survived nearly all 30-year retirements in Bengen's data" : "Runs dry in many historical 30-year windows") + "</td></tr>";
+            });
+            html += "<tr class=\"you\"><td>Your rate: " + (userRate * 100).toFixed(2) + "%</td><td>" + money(spending) + " / yr</td><td>" + (userRate <= 0.04 ? "At or below the classic 4% line" : userRate <= 0.05 ? "Above the 4% rule; shorter safety margin" : "Well above 4%; depletion risk is high") + "</td></tr>";
+            benchBodyEl.innerHTML = html;
+            benchNoteEl.textContent = "Your first-year withdrawal rate is " + (userRate * 100).toFixed(2) + "% of your starting savings. The 4% rule held across historical US market data for a 50/50 stock-bond portfolio; your simulation above uses your own return assumption, not history.";
+
+            var rowsHtml = "";
+            sim.rows.forEach(function (r) {
+                var cls = r.end === 0 ? " class=\"depleted\"" : "";
+                rowsHtml += "<tr" + cls + "><td>" + r.age + "</td><td>" + money(r.start) + "</td><td>" + money(r.withdrawal) + "</td><td>" + money(r.growth) + "</td><td>" + money(r.end) + "</td></tr>";
+            });
+            rowsEl.innerHTML = rowsHtml;
+
+            showBody();
+            if (sim.depletedAge !== null) {
+                noteEl.textContent = "This is a simplified model: one fixed return per year, no taxes or fees. Real markets swing, and a crash early in retirement hurts more than the average suggests.";
+            } else {
+                noteEl.textContent = "Total withdrawn exceeds your starting savings because growth compounds on the untouched balance. Re-run this once a year with your actual balance to stay on track.";
+            }
+        }
+
+        [savingsEl, spendingEl, returnEl, inflationEl, ageEl, plantillEl].forEach(function (el) { el.addEventListener("input", calc); });
+
+        calc();
+    })();
+    </script>
+</body>
+</html>

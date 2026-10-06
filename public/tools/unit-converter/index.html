@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Unit Converter — Length, Weight, Temperature & More | CyberScryb</title>
+<meta name="description" content="Free online unit converter: convert length, weight, temperature, volume, area, speed, time, and data instantly. Metric and imperial, two-way conversion, no signup. All calculations happen in your browser.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/unit-converter/">
+<meta property="og:title" content="Free Unit Converter — Length, Weight, Temperature & More | CyberScryb">
+<meta property="og:description" content="Convert length, weight, temperature, volume, area, speed, time, and data instantly. Metric and imperial, two-way, no signup, fully private.">
+<meta property="og:url" content="https://cyberscryb.com/tools/unit-converter/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Unit Converter — Length, Weight, Temperature & More | CyberScryb">
+<meta name="twitter:description" content="Convert length, weight, temperature, volume, area, speed, time, and data instantly. Metric and imperial, two-way, no signup, fully private.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Unit Converter",
+        "url": "https://cyberscryb.com/tools/unit-converter/",
+        "description": "Free online unit converter for length, weight, temperature, volume, area, speed, time, and data. Pick a category, choose two units, and get instant two-way conversions in your browser. No signup, no data leaves your device.",
+        "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Unit Converter", "item": "https://cyberscryb.com/tools/unit-converter/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How do I convert kg to lbs?", "acceptedAnswer": { "@type": "Answer", "text": "Multiply the kilograms by 2.20462. So 70 kg x 2.20462 = 154.32 lb. To go the other way, divide pounds by 2.20462. The converter above does this instantly in either direction." }},
+            { "@type": "Question", "name": "How many kilometers are in a mile?", "acceptedAnswer": { "@type": "Answer", "text": "There are exactly 1.60934 kilometers in a mile. To convert miles to kilometers, multiply by 1.60934. To convert kilometers to miles, multiply by 0.621371 or divide by 1.60934." }},
+            { "@type": "Question", "name": "What is 32 degrees Fahrenheit in Celsius?", "acceptedAnswer": { "@type": "Answer", "text": "32 F is 0 C, the freezing point of water. The formula is (F - 32) x 5/9. So (32 - 32) x 5/9 = 0 C." }},
+            { "@type": "Question", "name": "How many ounces are in a cup?", "acceptedAnswer": { "@type": "Answer", "text": "There are 8 US fluid ounces in a US cup. Do not confuse fluid ounces (volume) with ounces by weight: a cup of water weighs about 8.3 ounces, but a cup of flour weighs only about 4.4 ounces." }},
+            { "@type": "Question", "name": "How do I convert Celsius to Fahrenheit?", "acceptedAnswer": { "@type": "Answer", "text": "Multiply the Celsius temperature by 9/5 (1.8) and add 32. So 20 C x 1.8 + 32 = 68 F. A quick trick: double the Celsius, subtract 10% of the result, then add 32." }},
+            { "@type": "Question", "name": "Is this unit converter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All conversions happen instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #09090b; --bg-elevated: #121215; --card: #18181b;
+            --text: #fafafa; --text-muted: #d4d4d8; --text-faint: #a1a1aa;
+            --primary: #ef4444; --primary-soft: #f87171;
+            --primary-glow: rgba(239,68,68,0.25);
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        }
+        .uc-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .uc-container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+        .uc-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 1.25rem; }
+        .uc-tabs button {
+            padding: 0.6rem 1rem; font-size: 0.88rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 999px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+        }
+        .uc-tabs button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .uc-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; }
+        .uc-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.75rem; align-items: end; }
+        @media (max-width: 560px) { .uc-row { grid-template-columns: 1fr; } }
+        .uc-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .uc-field input, .uc-field select {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .uc-field select { font-size: 0.95rem; cursor: pointer; }
+        .uc-field select option { background: var(--card); color: var(--text); }
+        .uc-field input:focus, .uc-field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .uc-swap {
+            width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border-strong);
+            background: var(--bg-elevated); color: var(--primary-soft); font-size: 1.35rem; font-weight: 800;
+            cursor: pointer; transition: all 0.15s; justify-self: center; align-self: end;
+        }
+        @media (max-width: 560px) { .uc-swap { transform: rotate(90deg); align-self: center; } }
+        .uc-swap:hover { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .uc-meta { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .uc-factor { font-size: 0.9rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+        .uc-copy {
+            padding: 0.6rem 1.2rem; font-size: 0.88rem; font-weight: 700; font-family: var(--font);
+            background: var(--primary); border: none; border-radius: 10px; color: #fee2e2; cursor: pointer; transition: opacity 0.15s;
+        }
+        .uc-copy:hover { opacity: 0.9; }
+        .uc-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .uc-table th, .uc-table td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .uc-table th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .uc-table td { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+        .uc-table td:last-child { color: var(--primary-soft); font-weight: 700; }
+        .uc-table tbody tr:last-child td { border-bottom: none; }
+        .uc-formula { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.95rem; color: var(--text-muted); }
+        .uc-formula strong { color: var(--text); }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="uc-app">
+        <div class="uc-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Unit Converter
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Free Unit Converter</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Convert length, weight, temperature, volume, area, speed, time, and data in seconds. Type in either box and the other updates instantly. Metric and imperial, no signup, private.</p>
+            </div>
+
+            <div class="uc-tabs" role="group" aria-label="Conversion category" id="uc-tabs"></div>
+
+            <div class="uc-panel" aria-live="polite">
+                <div class="uc-row">
+                    <div class="uc-field">
+                        <label for="uc-from">From</label>
+                        <input id="uc-from" type="number" inputmode="decimal" step="any" value="1" style="margin-bottom:0.5rem;">
+                        <select id="uc-from-unit" aria-label="From unit"></select>
+                    </div>
+                    <button type="button" class="uc-swap" id="uc-swap" aria-label="Swap units" title="Swap units">&#8646;</button>
+                    <div class="uc-field">
+                        <label for="uc-to">To</label>
+                        <input id="uc-to" type="number" inputmode="decimal" step="any" style="margin-bottom:0.5rem;">
+                        <select id="uc-to-unit" aria-label="To unit"></select>
+                    </div>
+                </div>
+                <div class="uc-meta">
+                    <div class="uc-factor" id="uc-factor"></div>
+                    <button type="button" class="uc-copy" id="uc-copy">Copy result</button>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use the Unit Converter</h2>
+                <p>Pick a category tab at the top: length, weight, temperature, volume, area, speed, time, or data. Choose your from and to units in the two dropdowns, then type a number in either box. The other box updates instantly, so conversions run both directions. Hit the swap button to flip the units without retyping. The copy button grabs the result for pasting into a recipe, invoice, or homework answer. For the full walkthrough of the math and quick reference charts, see our <a href="/guides/unit-conversion-guide/" style="color: var(--primary);">unit conversion guide</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The Conversions People Look Up Most</h2>
+                <p>These eight answers cover the vast majority of everyday conversion searches. Each one is exact:</p>
+                <table class="uc-table">
+                    <thead>
+                        <tr><th>From</th><th>To</th><th>Answer</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1 mile</td><td>kilometers</td><td>1.60934 km</td></tr>
+                        <tr><td>1 kilometer</td><td>miles</td><td>0.621371 mi</td></tr>
+                        <tr><td>1 kilogram</td><td>pounds</td><td>2.20462 lb</td></tr>
+                        <tr><td>1 pound</td><td>kilograms</td><td>0.453592 kg</td></tr>
+                        <tr><td>32 &deg;F</td><td>Celsius</td><td>0 &deg;C</td></tr>
+                        <tr><td>1 US gallon</td><td>liters</td><td>3.78541 L</td></tr>
+                        <tr><td>1 US cup</td><td>fluid ounces</td><td>8 fl oz</td></tr>
+                        <tr><td>1 inch</td><td>centimeters</td><td>2.54 cm</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When You Need a Unit Converter</h2>
+                <p><strong style="color:var(--text);">Travel.</strong> Rental cars abroad quote kilometers and speed limits change at the border. A quick mph to km/h check keeps you legal, and kilometers to miles keeps the road-trip math in your head. Temperature flips too: weather reports in Celsius read very differently from Fahrenheit.</p>
+                <p><strong style="color:var(--text);">Cooking.</strong> Recipes cross borders constantly. American cups and Fahrenheit meet grams and Celsius everywhere else. A wrong conversion ruins a bake; volume to weight needs the ingredient density, but cups to milliliters and Fahrenheit to Celsius are straight conversions this tool handles.</p>
+                <p><strong style="color:var(--text);">Shipping and selling.</strong> International carriers charge by kilogram and centimeter while US listings think in pounds and inches. One decimal-place error on a freight quote costs real money. Double-check dimensions before you print the label.</p>
+                <p><strong style="color:var(--text);">Homework and DIY.</strong> Science classes mix metric and imperial in the same problem set, and hardware store measurements flip between inches, feet, and millimeters. Two-way conversion means you can start from whichever unit the question gave you.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How the Conversions Work</h2>
+                <p>Almost every conversion here is a single multiplication. Each unit is defined by its exact factor relative to a base unit: meters for length, kilograms for weight, liters for volume, square meters for area, meters per second for speed, seconds for time, and bytes for data. Converting means going from your unit to the base unit, then out to the target unit. That two-step path is why the tool can convert between any pair in a category without storing a factor for every combination.</p>
+                <div class="uc-formula"><strong>Example:</strong> miles to kilometers. 1 mile = 1,609.344 meters. 1 kilometer = 1,000 meters. So 5 miles = 5 &times; 1,609.344 / 1,000 = <strong>8.04672 km</strong>.</div>
+                <p>Temperature is the exception: it is not linear because Fahrenheit and Celsius zero points do not line up. Celsius to Fahrenheit is (C &times; 9/5) + 32, and Fahrenheit to Celsius is (F - 32) &times; 5/9. Kelvin is just Celsius shifted by 273.15. The tool handles the offsets automatically; details and a full temperature table are in the <a href="/guides/unit-conversion-guide/" style="color: var(--primary);">guide</a>.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How do I convert kg to lbs?</summary><p>Multiply the kilograms by 2.20462. So 70 kg &times; 2.20462 = 154.32 lb. To go the other way, divide pounds by 2.20462. The converter above does this instantly in either direction.</p></details>
+                <details><summary>How many kilometers are in a mile?</summary><p>There are exactly 1.60934 kilometers in a mile. To convert miles to kilometers, multiply by 1.60934. To convert kilometers to miles, multiply by 0.621371 or divide by 1.60934.</p></details>
+                <details><summary>What is 32 degrees Fahrenheit in Celsius?</summary><p>32 F is 0 C, the freezing point of water. The formula is (F - 32) &times; 5/9. So (32 - 32) &times; 5/9 = 0 C.</p></details>
+                <details><summary>How many ounces are in a cup?</summary><p>There are 8 US fluid ounces in a US cup. Do not confuse fluid ounces (volume) with ounces by weight: a cup of water weighs about 8.3 ounces, but a cup of flour weighs only about 4.4 ounces.</p></details>
+                <details><summary>How do I convert Celsius to Fahrenheit?</summary><p>Multiply the Celsius temperature by 9/5 (1.8) and add 32. So 20 C &times; 1.8 + 32 = 68 F. A quick trick: double the Celsius, subtract 10% of the result, then add 32.</p></details>
+                <details><summary>Is this unit converter free?</summary><p>Yes, 100% free with no signup. All conversions happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/salary-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Salary Converter</strong>
+                        <span style="font-size:0.85rem;">Convert pay between hourly, weekly, monthly, and yearly.</span>
+                    </a>
+                    <a href="/tools/age-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Age Calculator</strong>
+                        <span style="font-size:0.85rem;">Get an exact age from any birth date.</span>
+                    </a>
+                    <a href="/tools/tdee-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">TDEE Calculator</strong>
+                        <span style="font-size:0.85rem;">Find your daily calorie needs with the Mifflin-St Jeor formula.</span>
+                    </a>
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Find a percent of a number or measure change.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full conversion charts?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Quick reference tables for length, weight, and temperature, the formulas behind each conversion, and the mistakes that catch people out.</p>
+                <a href="/guides/unit-conversion-guide/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#fee2e2;font-weight:700;border-radius:10px;text-decoration:none;">Read the Conversion Guide</a>
+            </section>
+        </div>
+
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+
+        var CATEGORIES = {
+            length: {
+                label: "Length",
+                fromDefault: "km", toDefault: "mi",
+                units: [
+                    { id: "km", label: "Kilometers", abbr: "km", factor: 1000 },
+                    { id: "m", label: "Meters", abbr: "m", factor: 1 },
+                    { id: "cm", label: "Centimeters", abbr: "cm", factor: 0.01 },
+                    { id: "mm", label: "Millimeters", abbr: "mm", factor: 0.001 },
+                    { id: "mi", label: "Miles", abbr: "mi", factor: 1609.344 },
+                    { id: "yd", label: "Yards", abbr: "yd", factor: 0.9144 },
+                    { id: "ft", label: "Feet", abbr: "ft", factor: 0.3048 },
+                    { id: "in", label: "Inches", abbr: "in", factor: 0.0254 },
+                    { id: "nmi", label: "Nautical miles", abbr: "nmi", factor: 1852 }
+                ]
+            },
+            weight: {
+                label: "Weight",
+                fromDefault: "kg", toDefault: "lb",
+                units: [
+                    { id: "kg", label: "Kilograms", abbr: "kg", factor: 1 },
+                    { id: "g", label: "Grams", abbr: "g", factor: 0.001 },
+                    { id: "mg", label: "Milligrams", abbr: "mg", factor: 0.000001 },
+                    { id: "lb", label: "Pounds", abbr: "lb", factor: 0.45359237 },
+                    { id: "oz", label: "Ounces", abbr: "oz", factor: 0.028349523125 },
+                    { id: "t", label: "Metric tons", abbr: "t", factor: 1000 },
+                    { id: "uston", label: "US tons", abbr: "ton", factor: 907.18474 },
+                    { id: "stone", label: "Stone", abbr: "st", factor: 6.35029318 }
+                ]
+            },
+            temperature: {
+                label: "Temperature",
+                fromDefault: "c", toDefault: "f",
+                units: [
+                    { id: "c", label: "Celsius", abbr: "\u00B0C" },
+                    { id: "f", label: "Fahrenheit", abbr: "\u00B0F" },
+                    { id: "k", label: "Kelvin", abbr: "K" }
+                ],
+                toBase: function (v, id) {
+                    if (id === "f") return (v - 32) * 5 / 9;
+                    if (id === "k") return v - 273.15;
+                    return v;
+                },
+                fromBase: function (v, id) {
+                    if (id === "f") return v * 9 / 5 + 32;
+                    if (id === "k") return v + 273.15;
+                    return v;
+                }
+            },
+            volume: {
+                label: "Volume",
+                fromDefault: "l", toDefault: "gal",
+                units: [
+                    { id: "l", label: "Liters", abbr: "L", factor: 1 },
+                    { id: "ml", label: "Milliliters", abbr: "mL", factor: 0.001 },
+                    { id: "gal", label: "Gallons (US)", abbr: "gal", factor: 3.785411784 },
+                    { id: "qt", label: "Quarts (US)", abbr: "qt", factor: 0.946352946 },
+                    { id: "pt", label: "Pints (US)", abbr: "pt", factor: 0.473176473 },
+                    { id: "cup", label: "Cups (US)", abbr: "cup", factor: 0.2365882365 },
+                    { id: "floz", label: "Fluid ounces (US)", abbr: "fl oz", factor: 0.0295735295625 },
+                    { id: "tbsp", label: "Tablespoons (US)", abbr: "tbsp", factor: 0.01478676478125 },
+                    { id: "tsp", label: "Teaspoons (US)", abbr: "tsp", factor: 0.00492892159375 },
+                    { id: "m3", label: "Cubic meters", abbr: "m\u00B3", factor: 1000 }
+                ]
+            },
+            area: {
+                label: "Area",
+                fromDefault: "m2", toDefault: "ft2",
+                units: [
+                    { id: "km2", label: "Square kilometers", abbr: "km\u00B2", factor: 1000000 },
+                    { id: "m2", label: "Square meters", abbr: "m\u00B2", factor: 1 },
+                    { id: "cm2", label: "Square centimeters", abbr: "cm\u00B2", factor: 0.0001 },
+                    { id: "mi2", label: "Square miles", abbr: "mi\u00B2", factor: 2589988.110336 },
+                    { id: "acre", label: "Acres", abbr: "ac", factor: 4046.8564224 },
+                    { id: "ha", label: "Hectares", abbr: "ha", factor: 10000 },
+                    { id: "yd2", label: "Square yards", abbr: "yd\u00B2", factor: 0.83612736 },
+                    { id: "ft2", label: "Square feet", abbr: "ft\u00B2", factor: 0.09290304 },
+                    { id: "in2", label: "Square inches", abbr: "in\u00B2", factor: 0.00064516 }
+                ]
+            },
+            speed: {
+                label: "Speed",
+                fromDefault: "kmh", toDefault: "mph",
+                units: [
+                    { id: "ms", label: "Meters per second", abbr: "m/s", factor: 1 },
+                    { id: "kmh", label: "Kilometers per hour", abbr: "km/h", factor: 0.2777777777777778 },
+                    { id: "mph", label: "Miles per hour", abbr: "mph", factor: 0.44704 },
+                    { id: "fts", label: "Feet per second", abbr: "ft/s", factor: 0.3048 },
+                    { id: "knot", label: "Knots", abbr: "kt", factor: 0.5144444444444445 }
+                ]
+            },
+            time: {
+                label: "Time",
+                fromDefault: "hr", toDefault: "min",
+                units: [
+                    { id: "ms2", label: "Milliseconds", abbr: "ms", factor: 0.001 },
+                    { id: "s", label: "Seconds", abbr: "s", factor: 1 },
+                    { id: "min", label: "Minutes", abbr: "min", factor: 60 },
+                    { id: "hr", label: "Hours", abbr: "hr", factor: 3600 },
+                    { id: "day", label: "Days", abbr: "day", factor: 86400 },
+                    { id: "week", label: "Weeks", abbr: "wk", factor: 604800 },
+                    { id: "year", label: "Years (365.25 days)", abbr: "yr", factor: 31557600 }
+                ]
+            },
+            data: {
+                label: "Data",
+                fromDefault: "gb", toDefault: "mb",
+                units: [
+                    { id: "bit", label: "Bits", abbr: "bit", factor: 0.125 },
+                    { id: "b", label: "Bytes", abbr: "B", factor: 1 },
+                    { id: "kb", label: "Kilobytes", abbr: "KB", factor: 1024 },
+                    { id: "mb", label: "Megabytes", abbr: "MB", factor: 1048576 },
+                    { id: "gb", label: "Gigabytes", abbr: "GB", factor: 1073741824 },
+                    { id: "tb", label: "Terabytes", abbr: "TB", factor: 1099511627776 },
+                    { id: "pb", label: "Petabytes", abbr: "PB", factor: 1125899906842624 }
+                ]
+            }
+        };
+
+        var currentCat = "length";
+
+        var tabsEl = document.getElementById("uc-tabs");
+        var fromEl = document.getElementById("uc-from");
+        var toEl = document.getElementById("uc-to");
+        var fromUnitEl = document.getElementById("uc-from-unit");
+        var toUnitEl = document.getElementById("uc-to-unit");
+        var factorEl = document.getElementById("uc-factor");
+        var swapBtn = document.getElementById("uc-swap");
+        var copyBtn = document.getElementById("uc-copy");
+
+        function getCat() { return CATEGORIES[currentCat]; }
+
+        function getUnit(id) {
+            var units = getCat().units;
+            for (var i = 0; i < units.length; i++) {
+                if (units[i].id === id) return units[i];
+            }
+            return units[0];
+        }
+
+        function convert(value, fromId, toId) {
+            var cat = getCat();
+            if (cat.toBase && cat.fromBase) {
+                return cat.fromBase(cat.toBase(value, fromId), toId);
+            }
+            var fromUnit = getUnit(fromId);
+            var toUnit = getUnit(toId);
+            return value * fromUnit.factor / toUnit.factor;
+        }
+
+        function fmtNum(n) {
+            if (!isFinite(n)) return "";
+            if (n === 0) return "0";
+            var abs = Math.abs(n);
+            if (abs >= 1e15 || abs < 1e-10) return n.toExponential(6);
+            return String(parseFloat(n.toPrecision(10)));
+        }
+
+        function convertFrom() {
+            var v = parseFloat(fromEl.value);
+            if (isNaN(v)) { toEl.value = ""; updateFactor(); return; }
+            toEl.value = fmtNum(convert(v, fromUnitEl.value, toUnitEl.value));
+            updateFactor();
+        }
+
+        function convertTo() {
+            var v = parseFloat(toEl.value);
+            if (isNaN(v)) { fromEl.value = ""; updateFactor(); return; }
+            fromEl.value = fmtNum(convert(v, toUnitEl.value, fromUnitEl.value));
+            updateFactor();
+        }
+
+        function updateFactor() {
+            var fromUnit = getUnit(fromUnitEl.value);
+            var toUnit = getUnit(toUnitEl.value);
+            var rate = convert(1, fromUnit.id, toUnit.id);
+            factorEl.textContent = "1 " + fromUnit.abbr + " = " + fmtNum(rate) + " " + toUnit.abbr;
+        }
+
+        function buildSelect(sel, selectedId) {
+            sel.innerHTML = "";
+            getCat().units.forEach(function (u) {
+                var opt = document.createElement("option");
+                opt.value = u.id;
+                opt.textContent = u.label + " (" + u.abbr + ")";
+                if (u.id === selectedId) opt.selected = true;
+                sel.appendChild(opt);
+            });
+        }
+
+        function setCategory(catId) {
+            currentCat = catId;
+            var buttons = tabsEl.querySelectorAll("button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.toggle("is-on", buttons[i].dataset.cat === catId);
+            }
+            var cat = getCat();
+            buildSelect(fromUnitEl, cat.fromDefault);
+            buildSelect(toUnitEl, cat.toDefault);
+            convertFrom();
+        }
+
+        Object.keys(CATEGORIES).forEach(function (catId) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.dataset.cat = catId;
+            btn.textContent = CATEGORIES[catId].label;
+            btn.addEventListener("click", function () { setCategory(catId); });
+            tabsEl.appendChild(btn);
+        });
+
+        fromEl.addEventListener("input", convertFrom);
+        toEl.addEventListener("input", convertTo);
+        fromUnitEl.addEventListener("change", convertFrom);
+        toUnitEl.addEventListener("change", convertFrom);
+
+        swapBtn.addEventListener("click", function () {
+            var tmp = fromUnitEl.value;
+            fromUnitEl.value = toUnitEl.value;
+            toUnitEl.value = tmp;
+            convertFrom();
+        });
+
+        copyBtn.addEventListener("click", function () {
+            var text = toEl.value;
+            if (!text) return;
+            function done() {
+                var old = copyBtn.textContent;
+                copyBtn.textContent = "Copied";
+                setTimeout(function () { copyBtn.textContent = old; }, 1500);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+            } else {
+                fallback();
+            }
+            function fallback() {
+                toEl.select();
+                try { document.execCommand("copy"); } catch (e) {}
+                done();
+            }
+        });
+
+        setCategory("length");
+    })();
+    </script>
+</body>
+</html>
