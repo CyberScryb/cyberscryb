@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Overtime Pay Is Calculated (2026): Time and a Half, Done Right | CyberScryb</title>
+<meta name="description" content="A free overtime pay calculator and the real math behind it: the FLSA 1.5x rule, state double-time rules, and why a shift differential changes what you're actually owed.">
+<link rel="canonical" href="https://cyberscryb.com/blog/how-overtime-pay-is-calculated-2026/">
+<meta property="og:title" content="How Overtime Pay Is Calculated (2026): Time and a Half, Done Right">
+<meta property="og:description" content="The FLSA 1.5x rule, state double-time rules, and why a shift differential changes what you're actually owed. Plus a free calculator.">
+<meta property="og:url" content="https://cyberscryb.com/blog/how-overtime-pay-is-calculated-2026/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-10-06">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Overtime Pay Is Calculated (2026): Time and a Half, Done Right",
+  "description": "A free overtime pay calculator and the real math behind it: the FLSA 1.5x rule, state double-time rules, and why a shift differential changes what you're actually owed.",
+  "datePublished": "2026-10-06",
+  "dateModified": "2026-10-06",
+  "author": {"@type": "Organization", "name": "CyberScryb"},
+  "publisher": {"@type": "Organization", "name": "CyberScryb", "url": "https://cyberscryb.com"},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://cyberscryb.com/blog/how-overtime-pay-is-calculated-2026/"},
+  "image": "https://cyberscryb.com/og-image.png"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the CyberScryb overtime calculator really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. No signup, no account, no paywall. It runs entirely in your browser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator know my state's overtime rules?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, and that's deliberate. State trigger rules for overtime and double-time vary too much to hardcode safely. You tell it how many hours are regular, overtime, and double-time; it handles the dollar math correctly from there, including shift differentials."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my shift differential matter for overtime?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Federal law requires non-discretionary differentials to be folded into your regular rate of pay before the overtime multiplier applies. Skipping this step understates what you're owed on every overtime hour."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+.article-wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7}
+.article-wrap h1{font-family: var(--font-brand), Georgia, serif;font-size:2.2rem;line-height:1.2;margin:0 0 8px;background: var(--primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.article-wrap .meta{color: var(--text-muted);font-size:0.9rem;margin-bottom:32px}
+.article-wrap h2{font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;margin-top:40px;color: var(--primary-soft)}
+.article-wrap h3{font-size:1.15rem;margin-top:24px;color: var(--text-muted)}
+.article-wrap p,.article-wrap li{color: var(--text-muted)}
+.article-wrap a{color: var(--primary-soft)}
+.article-wrap blockquote{border-left:3px solid #b91c1c;padding:0 0 0 16px;margin:24px 0;color: var(--text-muted);font-style:italic}
+.article-wrap code{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:0.9em}
+.article-wrap .cta-box{background:linear-gradient(135deg,rgba(185,28,28, 0.08),rgba(185,28,28, 0.06));border:1px solid rgba(185,28,28, 0.3);border-radius:14px;padding:24px;margin:32px 0}
+.article-wrap .cta-box .cta-btn{display:inline-block;background: var(--primary);color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-family: var(--font-brand), Georgia, serif;font-weight:700;margin-top:12px}
+.article-wrap table{width:100%;border-collapse:collapse;margin:20px 0;font-size:0.95rem}
+.article-wrap th,.article-wrap td{border:1px solid rgba(255,255,255,0.12);padding:10px 12px;text-align:left}
+.article-wrap th{background:rgba(255,255,255,0.04);color:var(--primary-soft);font-weight:600}
+.article-wrap ul.toc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 16px 16px 36px;margin:24px 0}
+</style>
+
+<link rel="icon" type="image/png" href="/mascot-icon.png">
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+<body>
+<header>
+  <nav class="navbar"><div class="nav-container">
+    <div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none;">
+      <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+      <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color: var(--text);margin-left:10px;">CyberScryb</span>
+    </a></div>
+    <ul class="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">Tools</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+    </ul>
+  </div></nav>
+</header>
+<main>
+<article class="article-wrap">
+<p><a href="/blog/">&larr; Back to blog</a></p>
+<h1>How Overtime Pay Is Calculated (2026): Time and a Half, Done Right</h1>
+<p class="meta">Published October 6, 2026 &middot; 7 min read &middot; By the CyberScryb team</p>
+
+<p>I spent a lot of night shifts doing this math in my head before a shift even started: base rate, the night differential, how many hours past 40 I&rsquo;d actually hit if I picked up the extra shift. Most online overtime calculators make you choose between simple and correct. They'll do 1.5&times; your base wage just fine, then either ignore your shift differential completely or bolt it on afterward as a flat bonus &mdash; which, it turns out, is not what you're legally owed.</p>
+
+<p>This post walks through the actual rules: the federal 1.5&times; formula, where states go further with daily overtime and double-time, and the shift-differential detail most calculators skip. Then there's a free tool that does all of it correctly.</p>
+
+<div class="cta-box">
+  <strong style="color: var(--primary-soft);font-family: var(--font-brand), Georgia, serif;letter-spacing:1px;font-size:0.85rem;">SKIP STRAIGHT TO THE TOOL</strong>
+  <p style="margin:8px 0 0;">Enter your rate, differential, and hours for a full gross-pay breakdown, plus an annualized estimate.</p>
+  <a class="cta-btn" href="/tools/overtime-pay-calculator/">Open Overtime Pay Calculator &rarr;</a>
+</div>
+
+<ul class="toc">
+  <li><a href="#federal-formula">The federal overtime formula</a></li>
+  <li><a href="#differential">Where shift differentials change the math</a></li>
+  <li><a href="#double-time">Double-time and state rules</a></li>
+  <li><a href="#exempt">Who actually gets overtime</a></li>
+  <li><a href="#related-tools">Tools that pair with this one</a></li>
+  <li><a href="#faq">FAQ</a></li>
+</ul>
+
+<h2 id="federal-formula">The Federal Overtime Formula</h2>
+<p>Under the Fair Labor Standards Act, non-exempt employees earn <strong style="color:var(--text);">1.5&times; their regular hourly rate</strong> for every hour worked beyond 40 in a single workweek. That's the federal floor, and it's where every state starts.</p>
+<p>Worked example: $22/hr, 46 hours worked in a week. Regular pay = 40 &times; $22 = <strong style="color:var(--text);">$880</strong>. Overtime pay = 6 &times; $22 &times; 1.5 = <strong style="color:var(--text);">$198</strong>. Gross pay for the week = <strong style="color:var(--text);">$1,078</strong>. Simple, as long as there's no differential or double-time involved.</p>
+
+<h2 id="differential">Where Shift Differentials Change the Math</h2>
+<p>A shift differential is extra pay for less desirable hours &mdash; nights, weekends, holidays. It's standard across healthcare, manufacturing, retail, and anywhere that has to staff around the clock. Here's the detail that trips up most calculators: under <a href="https://www.ecfr.gov/current/title-29/subtitle-B/chapter-V/subchapter-A/part-778/subpart-C/section-778.110" rel="nofollow noopener">29 CFR 778.110</a>, a non-discretionary differential has to be folded into your "regular rate of pay" <em>before</em> the 1.5&times; multiplier applies. It is not a flat bonus you add after the overtime math is done.</p>
+<p>Same example, with a $2/hr night differential added: effective rate = $22 + $2 = <strong style="color:var(--text);">$24/hr</strong>. Regular pay = 40 &times; $24 = <strong style="color:var(--text);">$960</strong>. Overtime pay = 6 &times; $24 &times; 1.5 = <strong style="color:var(--text);">$216</strong>. Gross pay = <strong style="color:var(--text);">$1,176</strong> &mdash; about $98 more than a base-rate-only calculation would show. On a paycheck you check every two weeks, that gap adds up fast.</p>
+
+<div class="cta-box">
+  <strong style="color: var(--primary-soft);font-family: var(--font-brand), Georgia, serif;letter-spacing:1px;font-size:0.85rem;">TRY IT NOW</strong>
+  <p style="margin:8px 0 0;">Plug in your differential and watch the effective rate update the overtime math live.</p>
+  <a class="cta-btn" href="/tools/overtime-pay-calculator/">Launch Overtime Pay Calculator &rarr;</a>
+</div>
+
+<h2 id="double-time">Double-Time and State Rules</h2>
+<p>Double-time, 2&times; your regular rate, isn't required anywhere by federal law. A handful of states require it in specific situations. California is the best-known: double-time after 12 hours in a single day, and after 8 hours on the 7th consecutive day of a workweek.</p>
+<table>
+  <thead><tr><th>Rule</th><th>Federal (FLSA)</th><th>Example state variation</th></tr></thead>
+  <tbody>
+    <tr><td>Overtime threshold</td><td>Over 40 hrs/week</td><td>CA, AK, NV, CO: also daily, over 8 hrs/day</td></tr>
+    <tr><td>Overtime rate</td><td>1.5&times; regular rate</td><td>Same rate, different trigger</td></tr>
+    <tr><td>Double-time</td><td>Not required</td><td>CA: over 12 hrs/day, or 7th consecutive day</td></tr>
+  </tbody>
+</table>
+<p>This is exactly why the CyberScryb calculator doesn't try to guess your state's trigger for you. You tell it how many hours are regular, overtime, and double-time &mdash; from your schedule, your pay stub, or your state's rule &mdash; and it gets the dollar math right from there. The trigger varies by state; the premium math doesn't.</p>
+
+<h2 id="exempt">Who Actually Gets Overtime</h2>
+<p>Overtime applies to "non-exempt" employees, generally hourly workers. Salaried employees can be exempt, but only if they meet specific duties tests <em>and</em> clear a minimum salary threshold the Department of Labor updates periodically &mdash; a salaried title alone doesn't make someone exempt. Misclassification is common, especially in healthcare, retail management, and office roles. If you're salaried and routinely working well past 40 hours, it's worth checking your actual duties against current DOL guidance rather than assuming your paycheck format settles the question.</p>
+
+<h2 id="related-tools">Tools That Pair With This One</h2>
+<p>Run these in sequence, all free, all client-side:</p>
+<ul>
+  <li><a href="/tools/overtime-pay-calculator/">Overtime pay calculator</a> &mdash; regular, 1.5&times;, and 2&times; pay for one paycheck, differential included correctly.</li>
+  <li><a href="/tools/salary-converter/">Salary converter</a> &mdash; turn hourly pay into an annual number, and back.</li>
+  <li><a href="/tools/budget-planner/">Budget planner</a> &mdash; plan spending around a paycheck that moves week to week.</li>
+</ul>
+
+<h2 id="faq">FAQ</h2>
+
+<h3>Is the CyberScryb overtime calculator really free?</h3>
+<p>Yes. No signup, no account, no paywall. It runs entirely in your browser.</p>
+
+<h3>Does this calculator know my state's overtime rules?</h3>
+<p>No, and that's deliberate. State trigger rules for overtime and double-time vary too much to hardcode safely. You tell it how many hours are regular, overtime, and double-time; it handles the dollar math correctly from there, including shift differentials.</p>
+
+<h3>Why does my shift differential matter for overtime?</h3>
+<p>Federal law requires non-discretionary differentials to be folded into your regular rate of pay before the overtime multiplier applies. Skipping this step understates what you're owed on every overtime hour.</p>
+
+<div class="cta-box">
+  <strong style="color: var(--primary-soft);font-family: var(--font-brand), Georgia, serif;letter-spacing:1px;font-size:0.85rem;">100% FREE BROWSER TOOLS</strong>
+  <p style="margin:8px 0 0;">Zero paywalls, zero registrations, zero subscriptions. Private, fast tools for work and everyday life, completely unlocked.</p>
+  <a class="cta-btn" href="/tools/">Browse Free Tools &rarr;</a>
+</div>
+
+<p style="margin-top:40px;color: var(--text-muted);font-size:0.95rem;">Related reading: <a href="/blog/">all posts</a> &middot; <a href="/tools/">all tools</a> &middot; <a href="/guides/how-overtime-pay-is-calculated/">how overtime pay is calculated (full guide)</a> &middot; <a href="/guides/how-is-hourly-pay-calculated/">how hourly pay is calculated</a></p>
+
+<section class="cs-ilink-panel" aria-label="Related tools">
+  <style>
+    .cs-ilink-panel{max-width:760px;margin:2.5rem auto;padding:1.5rem 1.25rem;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+    .cs-ilink-panel h2{margin:0 0 1rem;font-size:1.15rem;text-align:center;color:var(--text)}
+    .cs-ilink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}
+    .cs-ilink-card{display:flex;flex-direction:column;gap:.35rem;padding:1rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-elevated);text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+    .cs-ilink-card:hover{border-color:var(--primary);transform:translateY(-2px)}
+    .cs-ilink-card strong{color:var(--primary-soft);font-size:.95rem}
+    .cs-ilink-card span{font-size:.8rem;color:var(--text-muted)}
+  </style>
+  <h2>Use the free tool</h2>
+  <div class="cs-ilink-grid">
+<a class="cs-ilink-card" href="/tools/overtime-pay-calculator/"><strong>Overtime Pay Calculator</strong><span>Open →</span></a>
+<a class="cs-ilink-card" href="/tools/salary-converter/"><strong>Salary Converter</strong><span>Open →</span></a>
+  </div>
+</section>
+</article>
+
+<div style="max-width:760px;margin:40px auto 0;padding:0 24px;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-5721233331247292"
+     data-ad-slot="2899271242"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</main>
+<footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:32px 24px;text-align:center;color: var(--text-muted);font-size:0.9rem;margin-top:60px;">
+  <p>© 2026 CyberScryb LLC &middot; <a href="/privacy/" style="color: var(--text-muted);">Privacy</a> &middot; <a href="/terms/" style="color: var(--text-muted);">Terms</a> &middot; <a href="/disclosure/" style="color: var(--text-muted);">Disclosure</a></p>
+</footer>
+
+</body>
+</html>

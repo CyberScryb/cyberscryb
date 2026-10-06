@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overtime Pay Calculator — Time and a Half + Double Time | CyberScryb</title>
+<meta name="description" content="Free overtime pay calculator: regular, time-and-a-half, and double-time pay, with shift differential folded into the rate correctly. Weekly or biweekly, no signup, private.">
+
+<link rel="canonical" href="https://cyberscryb.com/tools/overtime-pay-calculator/">
+<meta property="og:title" content="Overtime Pay Calculator — Time and a Half + Double Time | CyberScryb">
+<meta property="og:description" content="Free overtime pay calculator: regular, 1.5x, and 2x pay for one paycheck, with shift differential included correctly. No signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/overtime-pay-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Overtime Pay Calculator — Time and a Half + Double Time | CyberScryb">
+<meta name="twitter:description" content="Free overtime pay calculator: regular, 1.5x, and 2x pay for one paycheck, with shift differential included correctly. No signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "WebApplication",
+        "name": "CyberScryb Overtime Pay Calculator",
+        "url": "https://cyberscryb.com/tools/overtime-pay-calculator/",
+        "description": "Free overtime pay calculator: enter your hourly rate, shift differential, regular hours, overtime hours, and double-time hours to get a full gross pay breakdown for one pay period, plus an annualized estimate.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+            { "@type": "ListItem", "position": 3, "name": "Overtime Pay Calculator", "item": "https://cyberscryb.com/tools/overtime-pay-calculator/" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "How is overtime pay calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Overtime pay is your regular hourly rate multiplied by 1.5, multiplied by your overtime hours. Under the federal Fair Labor Standards Act (FLSA), non-exempt employees earn this time-and-a-half rate for hours worked beyond 40 in a workweek. Some states require daily overtime or double-time in additional situations." }},
+            { "@type": "Question", "name": "What is double-time pay?", "acceptedAnswer": { "@type": "Answer", "text": "Double-time pay is twice your regular hourly rate. It is not required by federal law, but several states require it in specific cases, most notably California, which requires double-time after 12 hours worked in a single day or after 8 hours on the 7th consecutive day of work in a workweek." }},
+            { "@type": "Question", "name": "Does a shift differential count toward overtime pay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Under federal law, a non-discretionary shift differential must be included in your 'regular rate of pay' before the overtime premium is calculated. That means the 1.5x or 2x multiplier applies to your base rate plus the differential, not just the base rate alone. Many simple calculators get this wrong by adding the differential as a flat bonus instead." }},
+            { "@type": "Question", "name": "Is overtime pay the same in every state?", "acceptedAnswer": { "@type": "Answer", "text": "No. Federal law (FLSA) only requires time-and-a-half after 40 hours in a workweek. Some states go further: California and Alaska require daily overtime after 8 hours in a day, and California requires double-time after 12 hours in a day or after 8 hours on a 7th consecutive workday. Check your state labor department for your exact rules." }},
+            { "@type": "Question", "name": "Is this overtime calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server." }}
+        ]
+    }
+    </script>
+
+    <style>
+        .ot-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+        .ot-container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+        .ot-period-toggle { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .ot-period-toggle button {
+            flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 700; font-family: var(--font);
+            background: var(--card); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text-muted); cursor: pointer; transition: all 0.15s; min-height: 48px;
+        }
+        .ot-period-toggle button.is-on { background: var(--primary); border-color: var(--primary); color: #fee2e2; }
+        .ot-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+        .ot-field input {
+            width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.1rem;
+            background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 11px;
+            color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.15s;
+        }
+        .ot-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .ot-hint { font-size: 0.78rem; color: var(--text-faint); margin-top: 0.35rem; line-height: 1.5; }
+        .ot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        @media (max-width: 560px) { .ot-row { grid-template-columns: 1fr; } }
+        .ot-result {
+            margin-top: 1.25rem; padding: 1.75rem 1.5rem; background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; text-align: center;
+        }
+        .ot-result .ot-label { font-size: 0.8rem; color: var(--text-faint); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+        .ot-result .ot-answer {
+            font-size: 2.6rem; font-weight: 800; color: var(--primary-soft); line-height: 1.15; margin-top: 0.4rem;
+            font-family: var(--font-brand), Georgia, serif;
+        }
+        .ot-result .ot-sub { font-size: 0.85rem; color: var(--text-faint); margin-top: 0.5rem; }
+        .ot-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
+        @media (max-width: 560px) { .ot-grid { grid-template-columns: 1fr; } }
+        .ot-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 0.5rem; }
+        .ot-stat .ot-stat-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+        .ot-stat .ot-stat-value { font-size: 1.5rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; }
+        .ot-stat .ot-stat-sub { font-size: 0.75rem; color: var(--text-faint); margin-top: 0.15rem; }
+        .ot-annual { margin-top: 1rem; padding: 1rem 1.25rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px; }
+        .ot-annual p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        .ot-error { color: var(--primary-soft); font-size: 0.9rem; font-weight: 600; }
+        .ot-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .ot-table th, .ot-table td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .ot-table th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--border-strong); }
+        .ot-table td { color: var(--text-muted); }
+        .ot-table tbody tr:last-child td { border-bottom: none; }
+    </style>
+
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="ot-app">
+        <div class="ot-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Overtime Pay Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Overtime Pay Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Regular, time-and-a-half, and double-time pay for one paycheck &mdash; with shift differential folded into the rate correctly. Instant, private, free forever.</p>
+            </div>
+
+            <div style="margin-top: 1.75rem;">
+                <div class="ot-period-toggle" role="group" aria-label="Pay period">
+                    <button id="ot-weekly" class="is-on" type="button">Weekly</button>
+                    <button id="ot-biweekly" type="button">Biweekly (2 weeks)</button>
+                </div>
+
+                <div class="ot-row" style="margin-top:0;">
+                    <div class="ot-field">
+                        <label for="ot-rate">Base hourly rate ($)</label>
+                        <input id="ot-rate" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 22" value="22">
+                    </div>
+                    <div class="ot-field">
+                        <label for="ot-diff">Shift differential ($/hr, optional)</label>
+                        <input id="ot-diff" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 2" value="0">
+                        <div class="ot-hint">Night-shift or weekend premium added to your base rate before overtime math.</div>
+                    </div>
+                </div>
+
+                <div class="ot-row">
+                    <div class="ot-field">
+                        <label for="ot-regular">Regular hours this period</label>
+                        <input id="ot-regular" type="number" inputmode="decimal" min="0" step="0.25" placeholder="e.g. 40" value="40">
+                    </div>
+                    <div class="ot-field">
+                        <label for="ot-ot">Overtime hours (1.5&times;)</label>
+                        <input id="ot-ot" type="number" inputmode="decimal" min="0" step="0.25" placeholder="e.g. 5" value="0">
+                    </div>
+                </div>
+                <div class="ot-row">
+                    <div class="ot-field">
+                        <label for="ot-dt">Double-time hours (2&times;, optional)</label>
+                        <input id="ot-dt" type="number" inputmode="decimal" min="0" step="0.25" placeholder="e.g. 0" value="0">
+                        <div class="ot-hint">Only applies if your state or contract requires double-time. See the FAQ below.</div>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="ot-result" id="ot-result" aria-live="polite">
+                    <div id="ot-body">
+                        <div class="ot-label">Gross pay this period</div>
+                        <div class="ot-answer" id="ot-total">—</div>
+                        <div class="ot-sub" id="ot-note">Enter your numbers above.</div>
+
+                        <div class="ot-grid">
+                            <div class="ot-stat">
+                                <div class="ot-stat-label">Regular pay</div>
+                                <div class="ot-stat-value" id="ot-regular-out">—</div>
+                                <div class="ot-stat-sub" id="ot-regular-sub">&nbsp;</div>
+                            </div>
+                            <div class="ot-stat">
+                                <div class="ot-stat-label">Overtime pay</div>
+                                <div class="ot-stat-value" id="ot-ot-out">—</div>
+                                <div class="ot-stat-sub" id="ot-ot-sub">&nbsp;</div>
+                            </div>
+                            <div class="ot-stat">
+                                <div class="ot-stat-label">Double-time pay</div>
+                                <div class="ot-stat-value" id="ot-dt-out">—</div>
+                                <div class="ot-stat-sub" id="ot-dt-sub">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ot-annual" id="ot-annual" style="display:none;">
+                    <p id="ot-annual-text"></p>
+                </div>
+            </div>
+
+            <section class="content-section" style="max-width:820px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How This Calculator Works</h2>
+                <p>Enter your base rate, any shift differential, and how many hours fall into regular, overtime, and double-time for the period. The calculator first adds your differential to your base rate to get your true "regular rate of pay," the number federal law actually requires overtime to be based on, then applies the 1.5&times; and 2&times; multipliers to that full rate, not just your base wage.</p>
+                <p>Worked example: $22/hr base, a $2/hr night differential, 40 regular hours and 6 overtime hours in a week. Effective rate = $22 + $2 = <strong style="color:var(--text);">$24/hr</strong>. Regular pay = 40 &times; $24 = <strong style="color:var(--text);">$960</strong>. Overtime pay = 6 &times; $24 &times; 1.5 = <strong style="color:var(--text);">$216</strong>. Total gross pay = <strong style="color:var(--text);">$1,176</strong> for the week. Read our guide: <a href="/guides/how-overtime-pay-is-calculated/" style="color: var(--primary);">how overtime pay is calculated</a>.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The Mistake Most Overtime Calculators Make</h2>
+                <p>A shift differential is "non-discretionary" compensation, meaning your employer promised it as part of the job, not a surprise bonus. Under the Fair Labor Standards Act, any non-discretionary pay has to be folded into your regular rate <em>before</em> the overtime multiplier is applied. Plenty of simple calculators skip this: they compute 1.5&times; your base wage, then tack the differential on separately as a flat add-on. That understates what you're legally owed on every overtime hour, since the differential itself should also get the 1.5&times; (or 2&times;) treatment. This calculator folds it in correctly.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Federal Rules vs. State Rules</h2>
+                <table class="ot-table">
+                    <thead><tr><th>Rule</th><th>Federal (FLSA)</th><th>Example state variation</th></tr></thead>
+                    <tbody>
+                        <tr><td>Overtime threshold</td><td>Over 40 hrs/week</td><td>CA, AK, NV, CO: also daily, over 8 hrs/day</td></tr>
+                        <tr><td>Overtime rate</td><td>1.5&times; regular rate</td><td>Same rate, different trigger</td></tr>
+                        <tr><td>Double-time</td><td>Not required</td><td>CA: over 12 hrs/day, or 7th consecutive day over 8 hrs</td></tr>
+                        <tr><td>7th consecutive day</td><td>Not addressed</td><td>CA: 1.5&times; first 8 hrs, 2&times; after</td></tr>
+                    </tbody>
+                </table>
+                <p>This calculator doesn't guess your state's rule for you &mdash; you tell it how many hours are regular, overtime, and double-time (from your schedule, your pay stub, or your state's threshold), and it handles the dollar math correctly from there. That keeps it accurate everywhere, since the trigger rules genuinely differ by state and even by union contract, but the premium math (1.5&times; and 2&times; of the full regular rate) does not.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Is Owed Overtime?</h2>
+                <p>Federal overtime rules apply to "non-exempt" employees, generally hourly workers. Salaried employees can be "exempt" from overtime if they meet specific duties tests and earn above a minimum salary threshold set by the Department of Labor, which is updated periodically. Many salaried healthcare, retail, and office workers assume they're exempt when they aren't &mdash; exemption depends on actual job duties, not just the paycheck format or a job title. If you're salaried and regularly work well past 40 hours, it's worth checking your exemption status against current DOL guidance.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Why Shift Differentials Exist</h2>
+                <p>Differentials compensate for less desirable hours: nights, weekends, holidays, or hard-to-staff units. They're common in healthcare, manufacturing, retail, and public safety &mdash; anywhere someone has to keep the lights on around the clock. A $2 to $4/hr night differential is typical in healthcare; some facilities pay a flat percentage (often 10 to 15%) instead of a flat dollar amount. Either way, the same rule applies: it counts toward your regular rate for overtime purposes.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How is overtime pay calculated?</summary><p>Overtime pay is your regular hourly rate multiplied by 1.5, multiplied by your overtime hours. Under the federal Fair Labor Standards Act (FLSA), non-exempt employees earn this time-and-a-half rate for hours worked beyond 40 in a workweek. Some states require daily overtime or double-time in additional situations.</p></details>
+                <details><summary>What is double-time pay?</summary><p>Double-time pay is twice your regular hourly rate. It is not required by federal law, but several states require it in specific cases, most notably California, which requires double-time after 12 hours worked in a single day or after 8 hours on the 7th consecutive day of work in a workweek.</p></details>
+                <details><summary>Does a shift differential count toward overtime pay?</summary><p>Yes. Under federal law, a non-discretionary shift differential must be included in your "regular rate of pay" before the overtime premium is calculated. That means the 1.5x or 2x multiplier applies to your base rate plus the differential, not just the base rate alone. Many simple calculators get this wrong by adding the differential as a flat bonus instead.</p></details>
+                <details><summary>Is overtime pay the same in every state?</summary><p>No. Federal law (FLSA) only requires time-and-a-half after 40 hours in a workweek. Some states go further: California and Alaska require daily overtime after 8 hours in a day, and California requires double-time after 12 hours in a day or after 8 hours on a 7th consecutive workday. Check your state labor department for your exact rules.</p></details>
+                <details><summary>Is this overtime calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser and your numbers are never sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a href="/tools/salary-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Salary Converter</strong>
+                        <span style="font-size:0.85rem;">Turn hourly pay into annual salary, and back.</span>
+                    </a>
+                    <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
+                        <span style="font-size:0.85rem;">Plan spending around variable paychecks.</span>
+                    </a>
+                    <a href="/tools/percentage-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Percentage Calculator</strong>
+                        <span style="font-size:0.85rem;">Work out a raise or a pay change.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Want the full breakdown?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Federal vs. state overtime rules, double-time triggers, and why shift differentials change the math.</p>
+                <a href="/guides/how-overtime-pay-is-calculated/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:#fee2e2;font-weight:700;border-radius:10px;text-decoration:none;">Read the Overtime Pay Guide</a>
+            </section>
+        </div>
+
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- AdSense: After Footer -->
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script>
+    (function () {
+        "use strict";
+        var isWeekly = true;
+
+        function el(id) { return document.getElementById(id); }
+        function money(n, decimals) {
+            var d = (typeof decimals === "number") ? decimals : 2;
+            return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+        }
+
+        function showError(msg) {
+            el("ot-total").textContent = "—";
+            el("ot-note").textContent = msg;
+            el("ot-regular-out").textContent = "—";
+            el("ot-ot-out").textContent = "—";
+            el("ot-dt-out").textContent = "—";
+            el("ot-regular-sub").innerHTML = "&nbsp;";
+            el("ot-ot-sub").innerHTML = "&nbsp;";
+            el("ot-dt-sub").innerHTML = "&nbsp;";
+            el("ot-annual").style.display = "none";
+        }
+
+        function calc() {
+            var rate = parseFloat(el("ot-rate").value);
+            var diff = parseFloat(el("ot-diff").value);
+            var regHours = parseFloat(el("ot-regular").value);
+            var otHours = parseFloat(el("ot-ot").value);
+            var dtHours = parseFloat(el("ot-dt").value);
+
+            if (isNaN(rate) || isNaN(diff) || isNaN(regHours) || isNaN(otHours) || isNaN(dtHours)) {
+                showError("Enter your rate and hours to see your paycheck breakdown.");
+                return;
+            }
+            if (rate < 0 || diff < 0 || regHours < 0 || otHours < 0 || dtHours < 0) {
+                showError("Please enter non-negative numbers.");
+                return;
+            }
+            if (rate === 0) {
+                showError("Enter an hourly rate to get started.");
+                return;
+            }
+            var totalHours = regHours + otHours + dtHours;
+            if (totalHours > 168) {
+                showError("Total hours can't exceed 168 in a single week.");
+                return;
+            }
+
+            var effectiveRate = rate + diff;
+            var regularPay = regHours * effectiveRate;
+            var otPay = otHours * effectiveRate * 1.5;
+            var dtPay = dtHours * effectiveRate * 2;
+            var total = regularPay + otPay + dtPay;
+
+            if (!isFinite(total)) {
+                showError("Those numbers don't work — try different values.");
+                return;
+            }
+
+            el("ot-total").textContent = money(total, 2);
+            var periodLabel = isWeekly ? "this week" : "this 2-week period";
+            var note = "Gross pay for " + periodLabel + ", before taxes and deductions.";
+            if (diff > 0) note += " Effective rate (base + differential): " + money(effectiveRate, 2) + "/hr.";
+            el("ot-note").textContent = note;
+
+            el("ot-regular-out").textContent = money(regularPay, 2);
+            el("ot-regular-sub").textContent = regHours + " hrs @ " + money(effectiveRate, 2);
+            el("ot-ot-out").textContent = money(otPay, 2);
+            el("ot-ot-sub").textContent = otHours + " hrs @ " + money(effectiveRate * 1.5, 2);
+            el("ot-dt-out").textContent = money(dtPay, 2);
+            el("ot-dt-sub").textContent = dtHours + " hrs @ " + money(effectiveRate * 2, 2);
+
+            if (totalHours > 0) {
+                var multiplier = isWeekly ? 52 : 26;
+                var annual = total * multiplier;
+                el("ot-annual-text").innerHTML =
+                    "<strong style=\"color:var(--text);\">If this repeats every " + (isWeekly ? "week" : "2 weeks") + ":</strong> " +
+                    money(total, 2) + " &times; " + multiplier + " " + (isWeekly ? "weeks" : "periods") +
+                    " = about " + money(annual, 0) + " a year, gross.";
+                el("ot-annual").style.display = "block";
+            } else {
+                el("ot-annual").style.display = "none";
+            }
+        }
+
+        function setPeriod(weekly) {
+            isWeekly = weekly;
+            el("ot-weekly").classList.toggle("is-on", weekly);
+            el("ot-biweekly").classList.toggle("is-on", !weekly);
+            calc();
+        }
+
+        el("ot-weekly").addEventListener("click", function () { setPeriod(true); });
+        el("ot-biweekly").addEventListener("click", function () { setPeriod(false); });
+        ["ot-rate", "ot-diff", "ot-regular", "ot-ot", "ot-dt"].forEach(function (id) {
+            el(id).addEventListener("input", calc);
+        });
+
+        calc();
+    })();
+    </script>
+</body>
+</html>
