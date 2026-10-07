@@ -208,6 +208,30 @@ describe('KEYBOARD_PATTERNS', () => {
 
 // ── Security: Math.random() usage ───────────────────────
 
+describe('toggleVisibility button UX', () => {
+  test('toggles password visibility and updates aria-label and title', () => {
+    const inputEl = document.getElementById('passwordInput');
+    const toggleBtn = document.getElementById('toggleVis');
+
+    // Initial state
+    inputEl.type = 'password';
+
+    // Click to show password
+    toggleBtn.click();
+    expect(inputEl.type).toBe('text');
+    expect(toggleBtn.textContent).toBe('👁‍🗨');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Hide password');
+    expect(toggleBtn.getAttribute('title')).toBe('Hide password');
+
+    // Click again to hide password
+    toggleBtn.click();
+    expect(inputEl.type).toBe('password');
+    expect(toggleBtn.textContent).toBe('👁');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Show password');
+    expect(toggleBtn.getAttribute('title')).toBe('Show password');
+  });
+});
+
 describe('security audit', () => {
   test('FLAGGED: generatePassword uses Math.random() (not crypto-secure)', () => {
     // This test documents the known security issue.

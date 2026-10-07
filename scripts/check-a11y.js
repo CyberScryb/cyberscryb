@@ -1,5 +1,13 @@
 const axe = require('axe-core');
-const { JSDOM } = require('jsdom');
+let JSDOM;
+try {
+  JSDOM = require('jsdom').JSDOM;
+} catch {
+  const jsdomPath = require.resolve('jsdom', {
+    paths: [require.resolve('jest-environment-jsdom')],
+  });
+  JSDOM = require(jsdomPath).JSDOM;
+}
 const fs = require('fs');
 const path = require('path');
 
@@ -7,6 +15,7 @@ const TARGET_PAGES = [
   'public/index.html',
   'public/tools/humanizer/index.html',
   'public/tools/code-explainer/index.html',
+  'public/tools/password-checker/index.html',
   'public/blog/index.html',
   'public/guides/index.html',
   'public/tools.html',
