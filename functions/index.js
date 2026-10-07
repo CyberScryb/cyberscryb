@@ -1736,7 +1736,8 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
           body: JSON.stringify({
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
-              temperature: 0.7,
+              // Google deprecated temperature/top_p/top_k and thinking_budget (2026-10-06 notice):
+              // upcoming Gemini models 400-error on them, so we omit them and use model defaults.
               maxOutputTokens: 8192,
             },
           }),
