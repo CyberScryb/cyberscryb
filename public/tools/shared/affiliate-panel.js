@@ -473,13 +473,13 @@
                     background: #FFFFFF;
                 }
                 .affiliate-link.primary {
-                    background: #C2410C;
+                    background: #dc2626;
                     color: #FFFCF7;
                     border-color: transparent;
                 }
                 .affiliate-link:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 16px rgba(194, 65, 12, 0.25);
+                    box-shadow: 0 4px 16px rgba(220,38,38, 0.25);
                 }
                 .affiliate-subtitle {
                     font-size: 0.7rem;

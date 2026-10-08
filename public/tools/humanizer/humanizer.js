@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const n = roboticText.value.length;
     const over = n > FREE_CHAR_LIMIT;
     charCounter.textContent = n + ' / ' + FREE_CHAR_LIMIT + ' chars';
-    charCounter.style.color = over ? '#B91C1C' : '#A39E94';
+    charCounter.style.color = over ? '#dc2626' : '#A39E94';
     if (rewriteBtn) rewriteBtn.classList.toggle('is-over-limit', over);
     if (rewriteBtnMobile) rewriteBtnMobile.classList.toggle('is-over-limit', over);
   }
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Error:', error);
       const errorEl = document.createElement('span');
-      errorEl.style.color = '#B91C1C';
+      errorEl.style.color = '#dc2626';
       errorEl.textContent = 'Error: ' + (error.message || 'Please try again later.');
       outputContent.replaceChildren(errorEl);
       showResultActions(false);
