@@ -21,12 +21,12 @@ for (const f of walk(root)) {
     /font-family:\s*['"]Orbitron['"][^;"']*/gi,
     'font-family: var(--font-brand), Georgia, serif'
   );
-  c = c.replace(/style="color:#C2410C;font-weight:700;"/gi, 'class="nav-pro"');
-  c = c.replace(/style="color:#C2410C;font-weight:700"/gi, 'class="nav-pro"');
-  c = c.replace(/color:\s*#C2410C/gi, 'color: var(--primary-soft)');
-  c = c.replace(/color:\s*#C2410C/gi, 'color: var(--primary-soft)');
-  c = c.replace(/background:\s*#C2410C/gi, 'background: var(--primary)');
-  c = c.replace(/background:\s*#C2410C/gi, 'background: var(--primary)');
+  c = c.replace(/style="color:#dc2626;font-weight:700;"/gi, 'class="nav-pro"');
+  c = c.replace(/style="color:#dc2626;font-weight:700"/gi, 'class="nav-pro"');
+  c = c.replace(/color:\s*#dc2626/gi, 'color: var(--primary-soft)');
+  c = c.replace(/color:\s*#dc2626/gi, 'color: var(--primary-soft)');
+  c = c.replace(/background:\s*#dc2626/gi, 'background: var(--primary)');
+  c = c.replace(/background:\s*#dc2626/gi, 'background: var(--primary)');
   c = c.replace(/rgba\(0,\s*212,\s*255/gi, 'rgba(26, 24, 20');
   c = c.replace(/rgba\(123,\s*44,\s*255/gi, 'rgba(26, 24, 20');
   // Cache-bust shared style if old version pin

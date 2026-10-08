@@ -1411,6 +1411,11 @@ function generateSitemap(generatedPages) {
     'grammar-checker',
     'sleep-cycle-calculator',
     'roth-ira-calculator',
+    'thesis-statement-generator',
+    'business-name-generator',
+    'dating-profile-writer',
+    'wedding-vow-generator',
+    'interview-answer-coach',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1476,6 +1481,11 @@ function generateSitemap(generatedPages) {
     'upwork-proposal-template-that-wins',
     'utility-shutoff-payment-arrangement-letter',
     'dependent-care-fsa-vs-child-care-tax-credit',
+    'how-to-write-a-thesis-statement',
+    'how-to-pick-a-business-name',
+    'how-to-write-a-dating-profile',
+    'how-to-write-wedding-vows',
+    'how-to-answer-interview-questions',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1606,6 +1616,11 @@ function manageRobotsMeta() {
     'grammar-checker',
     'sleep-cycle-calculator',
     'roth-ira-calculator',
+    'thesis-statement-generator',
+    'business-name-generator',
+    'dating-profile-writer',
+    'wedding-vow-generator',
+    'interview-answer-coach',
   ]);
 
   const dirsToProcess = [

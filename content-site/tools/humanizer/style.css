@@ -8,12 +8,12 @@
   --hz-text: var(--text, #fafafa);
   --hz-muted: var(--text-muted, #d4d4d8);
   --hz-faint: var(--text-faint, #a1a1aa);
-  --hz-green: var(--primary, #f97316);
-  --hz-green-hover: var(--primary-hover, #ea580c);
-  --hz-green-soft: var(--primary-soft, #fb923c);
+  --hz-green: var(--primary, #ef4444);
+  --hz-green-hover: var(--primary-hover, #dc2626);
+  --hz-green-soft: var(--primary-soft, #f87171);
   --hz-amber: var(--attention, #38bdf8);
   --hz-amber-hover: var(--attention-hover, #0284c7);
-  --hz-glow: var(--primary-glow, rgba(249, 115, 22, 0.25));
+  --hz-glow: var(--primary-glow, rgba(239,68,68, 0.25));
   --hz-font: var(--font, 'Outfit', system-ui, sans-serif);
 
   min-height: calc(100vh - 64px);
@@ -161,7 +161,7 @@
 }
 
 textarea.hz-editor.input-error {
-  background: rgba(185, 28, 28, 0.08) !important;
+  background: rgba(220,38,38, 0.08) !important;
 }
 
 .hz-output {
@@ -235,8 +235,8 @@ textarea.hz-editor.input-error {
   color: var(--hz-text, var(--text, #fafafa));
 }
 .hz-mode.is-active {
-  border-color: var(--hz-green, #c2410c);
-  background: var(--hz-green, #c2410c);
+  border-color: var(--hz-green, #dc2626);
+  background: var(--hz-green, #dc2626);
   color: #09090b;
   font-weight: 700;
 }
@@ -255,17 +255,17 @@ textarea.hz-editor.input-error {
   font-weight: 700;
   font-size: 0.95rem;
   color: #09090b;
-  background: var(--hz-green, #f97316);
+  background: var(--hz-green, #ef4444);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.12) inset,
-    0 8px 24px rgba(194, 65, 12, 0.22);
+    0 8px 24px rgba(220,38,38, 0.22);
   transition: 0.2s ease;
 }
 .hz-primary-btn:hover:not(:disabled) {
   background: var(--hz-green-hover, #9a3412);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.1) inset,
-    0 12px 32px rgba(194, 65, 12, 0.3);
+    0 12px 32px rgba(220,38,38, 0.3);
 }
 .hz-primary-btn:disabled,
 .hz-primary-btn.is-loading {
@@ -290,12 +290,12 @@ textarea.hz-editor.input-error {
   transition: 0.2s ease;
 }
 .hz-ghost-btn:hover {
-  border-color: var(--hz-green, #c2410c);
-  color: var(--hz-green, #c2410c);
+  border-color: var(--hz-green, #dc2626);
+  color: var(--hz-green, #dc2626);
 }
 .hz-ghost-btn.copied {
-  border-color: var(--hz-green, #c2410c);
-  color: var(--hz-green, #c2410c);
+  border-color: var(--hz-green, #dc2626);
+  color: var(--hz-green, #dc2626);
 }
 .hz-ghost-btn .chevron {
   font-size: 0.65rem;
@@ -334,9 +334,9 @@ textarea.hz-editor.input-error {
   resize: vertical;
 }
 .style-sample:focus {
-  border-color: var(--hz-green, #c2410c) !important;
+  border-color: var(--hz-green, #dc2626) !important;
   outline: none !important;
-  box-shadow: 0 0 0 3px var(--hz-glow, rgba(194, 65, 12, 0.18)) !important;
+  box-shadow: 0 0 0 3px var(--hz-glow, rgba(220,38,38, 0.18)) !important;
 }
 
 .hz-loading {
@@ -353,7 +353,7 @@ textarea.hz-editor.input-error {
 .hz-loading p {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--hz-green, #c2410c);
+  color: var(--hz-green, #dc2626);
   font-weight: 600;
 }
 .hz-loading.hidden,
@@ -364,8 +364,8 @@ textarea.hz-editor.input-error {
 .spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid rgba(194, 65, 12, 0.28);
-  border-top-color: var(--hz-green, #c2410c);
+  border: 3px solid rgba(220,38,38, 0.28);
+  border-top-color: var(--hz-green, #dc2626);
   border-radius: 50%;
   animation: hz-spin 0.75s linear infinite;
 }
@@ -410,7 +410,7 @@ textarea.hz-editor.input-error {
 
 .email-gate-icon {
   font-size: 1.1rem;
-  color: var(--hz-green, #c2410c);
+  color: var(--hz-green, #dc2626);
   margin-bottom: 0.25rem;
 }
 .email-gate-card h3 {
@@ -426,7 +426,7 @@ textarea.hz-editor.input-error {
   line-height: 1.5;
 }
 .email-gate-card > p strong {
-  color: var(--hz-green, #c2410c);
+  color: var(--hz-green, #dc2626);
 }
 
 .gate-form {
@@ -444,12 +444,12 @@ textarea.hz-editor.input-error {
 }
 .gate-form input:focus {
   outline: none;
-  border-color: var(--hz-green, #c2410c);
-  box-shadow: 0 0 0 3px var(--hz-glow, rgba(194, 65, 12, 0.18));
+  border-color: var(--hz-green, #dc2626);
+  box-shadow: 0 0 0 3px var(--hz-glow, rgba(220,38,38, 0.18));
 }
 .gate-form button {
   padding: 0.7rem 0.95rem;
-  background: var(--hz-green, #c2410c);
+  background: var(--hz-green, #dc2626);
   color: #f2efe8;
   border: none;
   border-radius: 10px;
@@ -511,10 +511,10 @@ textarea.hz-editor.input-error {
   display: block;
   text-align: center;
   background: transparent;
-  color: var(--hz-green, #c2410c) !important;
+  color: var(--hz-green, #dc2626) !important;
   padding: 11px;
   border-radius: 10px;
-  border: 1px solid var(--hz-green, #c2410c);
+  border: 1px solid var(--hz-green, #dc2626);
   font-weight: 600;
   text-decoration: none !important;
   font-size: 13px;
@@ -623,7 +623,7 @@ textarea.hz-editor.input-error {
 }
 .hz-price-card ul li::before {
   content: '✓ ';
-  color: var(--hz-green, #c2410c);
+  color: var(--hz-green, #dc2626);
   font-weight: 700;
 }
 
@@ -639,8 +639,8 @@ textarea.hz-editor.input-error {
 }
 .hz-price-cta-outline {
   background: transparent;
-  border: 1px solid var(--hz-green, #c2410c);
-  color: var(--hz-green, #c2410c) !important;
+  border: 1px solid var(--hz-green, #dc2626);
+  color: var(--hz-green, #dc2626) !important;
 }
 .hz-restore {
   text-align: center;
@@ -649,7 +649,7 @@ textarea.hz-editor.input-error {
   color: var(--hz-muted, var(--text-muted, #d4d4d8));
 }
 .hz-restore a {
-  color: var(--hz-green, #c2410c);
+  color: var(--hz-green, #dc2626);
   font-weight: 600;
 }
 
@@ -774,7 +774,7 @@ textarea.hz-editor.input-error {
   padding: 12px 14px;
 }
 .hz-compare-after {
-  border-color: rgba(194, 65, 12, 0.4);
+  border-color: rgba(220,38,38, 0.4);
 }
 .hz-compare-label {
   display: block;
@@ -844,8 +844,8 @@ textarea.hz-editor.input-error {
     background 0.2s;
 }
 .hz-action-btn:hover {
-  border-color: var(--hz-green, #c2410c);
-  color: var(--hz-green, #c2410c);
+  border-color: var(--hz-green, #dc2626);
+  color: var(--hz-green, #dc2626);
 }
 .hz-action-pro {
   background: var(--hz-amber, #1b3a4b);
@@ -858,8 +858,8 @@ textarea.hz-editor.input-error {
 }
 
 .hz-pro-banner {
-  background: rgba(194, 65, 12, 0.25);
-  border: 1px solid rgba(194, 65, 12, 0.45);
+  background: rgba(220,38,38, 0.25);
+  border: 1px solid rgba(220,38,38, 0.45);
   color: var(--hz-text, var(--text, #fafafa));
   font-size: 0.88rem;
   font-weight: 600;

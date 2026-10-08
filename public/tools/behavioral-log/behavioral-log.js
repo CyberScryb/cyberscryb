@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
     logs.forEach(log => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-                <td style="white-space: nowrap; color: #C2410C; font-weight: 600;">${escapeHtml(log.time)}</td>
+                <td style="white-space: nowrap; color: #dc2626; font-weight: 600;">${escapeHtml(log.time)}</td>
                 <td><span style="color: var(--text-muted);">${escapeHtml(log.antecedent)}</span></td>
                 <td><span style="color: #ef4444; font-weight: 500;">${escapeHtml(log.behavior)}</span></td>
-                <td><span style="color: #C2410C;">${escapeHtml(log.consequence)}</span></td>
+                <td><span style="color: #dc2626;">${escapeHtml(log.consequence)}</span></td>
                 <td style="text-align: center;">
                     <button class="delete-log-btn" data-id="${log.id}" style="background: transparent; border: none; color: #ef4444; cursor: pointer; padding: 4px 8px; font-size: 0.8rem;" title="Delete Entry">Delete</button>
                 </td>
