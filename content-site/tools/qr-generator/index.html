@@ -6,22 +6,22 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator &mdash; Free Online QR Maker | CyberScryb</title>
-    <meta name="description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
+    <title>Free QR Code Generator &mdash; QR Maker for Links, WiFi & Text | CyberScryb</title>
+    <meta name="description" content="Free QR code generator: make QR codes for URLs, WiFi credentials, email, phone numbers, and text. Instant, private, no signup. Download as PNG or SVG.">
     <link rel="canonical" href="https://cyberscryb.com/tools/qr-generator/">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="QR Code Generator &mdash; Free Online QR Maker | CyberScryb">
-    <meta property="og:description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
+    <meta property="og:title" content="Free QR Code Generator &mdash; QR Maker for Links, WiFi & Text | CyberScryb">
+    <meta property="og:description" content="Free QR code generator: make QR codes for URLs, WiFi credentials, email, phone numbers, and text. Instant, private, no signup. Download as PNG or SVG.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/qr-generator/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="QR Code Generator &mdash; Free Online QR Maker | CyberScryb">
-    <meta name="twitter:description" content="Create custom codes for links, text, or wifi access using our QR code generator. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:title" content="Free QR Code Generator &mdash; QR Maker for Links, WiFi & Text | CyberScryb">
+    <meta name="twitter:description" content="Free QR code generator: make QR codes for URLs, WiFi credentials, email, phone numbers, and text. Instant, private, no signup. Download as PNG or SVG.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +41,7 @@
         "@type": "WebApplication",
         "name": "CyberScryb QR Code Generator",
         "url": "https://cyberscryb.com/tools/qr-generator/",
-        "description": "Generate QR codes instantly for URLs, text, WiFi, email, and more. Free and private.",
+        "description": "Free QR code generator. Create QR codes for URLs, WiFi credentials, email, phone numbers, and text in your browser. No signup, no watermarks, download as PNG or SVG.",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -80,6 +80,46 @@
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "100% free, no signup, no watermarks. The QR code is generated entirely in your browser — your data never leaves your device."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do QR codes expire?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. A static QR code is just your data drawn as a pattern — there is no server, account, or timer behind it, so it never expires and keeps working offline. The one thing that can break is the destination: if the URL inside the code stops working, the code still scans but the link goes nowhere."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I track how many people scan my QR code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Not with the code itself — a static QR code carries no analytics. If you need scan counts, encode a tracked link instead: add UTM parameters to the URL, or point the code at a short link from a service that counts clicks."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What size should I print a QR code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use the 10:1 rule: make the code at least one-tenth of the distance people will scan it from. For a business card or receipt (scanned at ~30 cm), 2–3 cm is plenty. For a window sign scanned from 3 meters, print it about 30 cm wide. SVG download scales without losing sharpness."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do QR codes need the internet to work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Reading the pattern is fully offline. Whether anything happens next depends on the content: plain text, WiFi credentials, and contact info work with no connection at all, while encoded URLs need the internet to load the page."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data sent to a server when I generate a code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. The code is generated entirely in your browser by a client-side library — your URLs, WiFi passwords, and text never leave your device. There is no account, no upload, and nothing to delete."
                 }
             }
         ]
@@ -303,6 +343,42 @@
                 </div>
             </div>
 
+
+            <!-- How To Section -->
+            <div class="faq-section" style="margin-top:2rem;">
+                <h2>How to Create a QR Code in 4 Steps</h2>
+                <ol style="color:var(--text-muted); line-height:1.9; padding-left:1.4rem; margin:0;">
+                    <li><strong style="color:var(--text);">Pick a content type.</strong> Use the tabs above to choose Text / URL, WiFi, Email, or Phone. For WiFi, the tool pre-fills the standard <code style="color:var(--primary-soft);">WIFI:T:WPA;S:Name;P:Password;;</code> format; for email it builds a <code style="color:var(--primary-soft);">mailto:</code> link.</li>
+                    <li><strong style="color:var(--text);">Enter your content.</strong> Paste a link, type your message, or fill in your network name and password. The code regenerates live as you type.</li>
+                    <li><strong style="color:var(--text);">Style it.</strong> Set foreground and background colors and drag the size slider (128px to 512px). Keep contrast high &mdash; dark on light scans best.</li>
+                    <li><strong style="color:var(--text);">Download.</strong> Grab a PNG for screens and small prints, or an SVG for anything large: posters, signage, packaging. No watermark, no account.</li>
+                </ol>
+            </div>
+
+            <!-- Use Cases Section -->
+            <div class="faq-section" style="margin-top:2rem;">
+                <h2>What You Can Encode in a QR Code</h2>
+                <p style="color:var(--text-muted); line-height:1.8;">A QR code is just a machine-readable wrapper around text. The most useful payloads in practice:</p>
+                <ul style="color:var(--text-muted); line-height:1.9; padding-left:1.4rem; margin:0.5rem 0 0;">
+                    <li><strong style="color:var(--text);">WiFi access.</strong> Put a code on a fridge magnet or guest-room card and visitors join the network without typing the password.</li>
+                    <li><strong style="color:var(--text);">Business cards and resumes.</strong> Link to your portfolio, LinkedIn, or a <a href="/tools/bio-generator/" style="color:var(--primary-soft);">link-in-bio page</a> so a scan beats a stack of cards.</li>
+                    <li><strong style="color:var(--text);">Menus, flyers, and event signage.</strong> One scan opens the menu, RSVP form, or schedule. SVG download keeps it crisp at poster size.</li>
+                    <li><strong style="color:var(--text);">Contact and payment links.</strong> Encode <code style="color:var(--primary-soft);">mailto:</code> or <code style="color:var(--primary-soft);">tel:</code> links for one-tap contact, or a payment URL for market stalls and fundraisers.</li>
+                    <li><strong style="color:var(--text);">Asset and inventory labels.</strong> Pair each code with a <a href="/tools/uuid-generator/" style="color:var(--primary-soft);">unique ID</a> to track equipment, tools, or storage bins.</li>
+                </ul>
+            </div>
+
+            <!-- Scan Tips Section -->
+            <div class="faq-section" style="margin-top:2rem;">
+                <h2>Tips for QR Codes That Actually Scan</h2>
+                <ul style="color:var(--text-muted); line-height:1.9; padding-left:1.4rem; margin:0;">
+                    <li><strong style="color:var(--text);">Contrast first.</strong> Scanners read dark modules on a light background. Fancy low-contrast color pairs look great and scan terribly; always test with your own phone camera before printing.</li>
+                    <li><strong style="color:var(--text);">Size for distance.</strong> A common rule: the code should be at least one-tenth of the expected scanning distance. A menu scanned at arm's length can be 2 cm wide; a poster scanned from 3 meters needs about 30 cm.</li>
+                    <li><strong style="color:var(--text);">Leave a quiet zone.</strong> Keep a blank margin around the code (at least 4 modules wide). Cropping tight against the pattern is the most common reason printed codes fail.</li>
+                    <li><strong style="color:var(--text);">Shorter data scans faster.</strong> Less data means a simpler pattern and faster reads. For long URLs, consider a short redirect or a link shortener before encoding.</li>
+                </ul>
+            </div>
+
             <!-- FAQ Section for SEO/GEO -->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
@@ -322,6 +398,27 @@
                     <summary>What formats can I download?</summary>
                     <p>You can download your QR code as a PNG image (raster) or SVG file (vector/scalable). SVG is ideal for print materials.</p>
                 </details>
+                <details>
+                    <summary>Do QR codes expire?</summary>
+                    <p>No. A static QR code is just your data drawn as a pattern &mdash; there is no server, account, or timer behind it, so it never expires and keeps working offline. The one thing that can break is the destination: if the URL inside the code stops working, the code still scans but the link goes nowhere.</p>
+                </details>
+                <details>
+                    <summary>Can I track how many people scan my QR code?</summary>
+                    <p>Not with the code itself &mdash; a static QR code carries no analytics. If you need scan counts, encode a tracked link instead: add UTM parameters to the URL, or point the code at a short link from a service that counts clicks.</p>
+                </details>
+                <details>
+                    <summary>What size should I print a QR code?</summary>
+                    <p>Use the 10:1 rule: make the code at least one-tenth of the distance people will scan it from. For a business card or receipt (scanned at ~30 cm), 2&ndash;3 cm is plenty. For a window sign scanned from 3 meters, print it about 30 cm wide. SVG download scales without losing sharpness.</p>
+                </details>
+                <details>
+                    <summary>Do QR codes need the internet to work?</summary>
+                    <p>Reading the pattern is fully offline. Whether anything happens next depends on the content: plain text, WiFi credentials, and contact info work with no connection at all, while encoded URLs need the internet to load the page.</p>
+                </details>
+                <details>
+                    <summary>Is my data sent to a server when I generate a code?</summary>
+                    <p>No. The code is generated entirely in your browser by a client-side library &mdash; your URLs, WiFi passwords, and text never leave your device. There is no account, no upload, and nothing to delete.</p>
+                </details>
+
             </div>
         </div>
 
@@ -335,15 +432,15 @@
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder/Decoder</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Encode URLs or payloads before embedding them in QR codes.</span>
             </a>
-            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+            <a href="/tools/uuid-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">UUID Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Generate unique IDs to pair with each QR code.</span>
             </a>
-            <a href="/tools/color-palette/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#b91c1c'" onmouseout="this.style.borderColor='var(--border)'">
+            <a href="/tools/color-palette/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Color Palette Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Pick on-brand colors for your custom QR codes.</span>
             </a>

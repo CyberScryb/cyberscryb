@@ -1469,6 +1469,13 @@ function generateSitemap(generatedPages) {
     'how-to-check-grammar-online',
     'how-sleep-cycles-work',
     'roth-ira-calculator-guide',
+    'insurance-prior-auth-appeal-letter',
+    'landlord-tenant-repair-request-letter',
+    'payment-demand-letter-for-unpaid-invoice',
+    'sap-financial-aid-appeal-letter-guide',
+    'upwork-proposal-template-that-wins',
+    'utility-shutoff-payment-arrangement-letter',
+    'dependent-care-fsa-vs-child-care-tax-credit',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
