@@ -160,7 +160,7 @@
     clearBtn.type = 'button';
     clearBtn.textContent = 'clear';
     clearBtn.style.cssText =
-      'background:none;border:none;color:#C2410C;cursor:pointer;font-size:0.78rem;text-decoration:underline;padding:0;';
+      'background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.78rem;text-decoration:underline;padding:0;';
     clearBtn.addEventListener('click', function () {
       el.value = '';
       el.dispatchEvent(new Event('input', { bubbles: true }));

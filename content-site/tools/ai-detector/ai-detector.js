@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (score <= 20) return '#22c55e'; // green — human
     if (score <= 40) return '#84cc16'; // lime
     if (score <= 60) return '#f59e0b'; // amber
-    if (score <= 80) return '#f97316'; // orange
+    if (score <= 80) return '#ef4444'; // orange
     return '#ef4444'; // red — AI
   }
 
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (parsed.markers.length > 0) {
       markersSection.classList.remove('hidden');
       markersList.innerHTML = '';
-      const color = parsed.score !== null ? getScoreColor(parsed.score) : '#C2410C';
+      const color = parsed.score !== null ? getScoreColor(parsed.score) : '#dc2626';
       parsed.markers.forEach(m => {
         const li = document.createElement('li');
         li.textContent = m;

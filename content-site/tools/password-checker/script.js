@@ -184,11 +184,11 @@ function analyze() {
   if (entropy < 28 || COMMON_PASSWORDS.has(pw.toLowerCase())) {
     strength = 'very-weak';
     strengthLabel = 'VERY WEAK';
-    strengthColor = '#C2410C';
+    strengthColor = '#dc2626';
   } else if (entropy < 36) {
     strength = 'weak';
     strengthLabel = 'WEAK';
-    strengthColor = '#f97316';
+    strengthColor = '#ef4444';
   } else if (entropy < 60) {
     strength = 'fair';
     strengthLabel = 'FAIR';
