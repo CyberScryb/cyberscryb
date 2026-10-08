@@ -1652,6 +1652,101 @@ Requirements:
 
 End with: "DISCLAIMER: This analysis is based on behavioral observations. It is not a clinical diagnosis or treatment plan. Consult a neurologist, psychiatrist, or geriatric specialist for formal medical evaluation."`,
   },
+  'thesis-statement-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a writing instructor who crafts strong academic thesis statements. Write ${params.count || '3'} thesis statements for this topic and essay type.
+
+Topic: "${input}"
+Essay type: ${params.essayType || 'Argumentative'}
+
+Requirements:
+- Each thesis must be arguable (takes a clear position someone could disagree with), specific, and one unified idea
+- 1-2 sentences each, no fluff or vague language
+- Vary the angle across options (different claims, not rewordings of each other)
+- Academic tone appropriate for college-level work
+
+Return each thesis on its own line, numbered 1/2/3 etc. No extra commentary.`,
+  },
+  'business-name-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a branding expert who names startups. Generate ${params.count || '5'} business name ideas for this business.
+
+Business: "${input}"
+Industry: ${params.industry || 'Any'}
+Vibe: ${params.vibe || 'Modern'}
+
+Requirements:
+- Short, memorable, easy to spell and pronounce
+- Distinct angles across options (compound words, evocative words, invented spellings - not variations of one idea)
+- Avoid cliches and overused suffixes (-ly, -ify) unless genuinely clever
+- Match the requested vibe and industry conventions
+- One line per name, numbered 1/2/3 etc. No extra commentary.`,
+  },
+  'dating-profile-writer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a dating coach who writes profiles that get quality matches. Write ${params.count || '3'} dating profile bios for this person, optimized for ${params.app || 'Tinder'} with a ${params.tone || 'Witty'} tone.
+
+About them: "${input}"
+
+Requirements:
+- Specific and vivid (hobbies, quirks, what they are looking for) - never generic
+- Each option a different angle; 40-80 words each
+- End with a light conversation hook or call to action
+- Confident and warm, never arrogant, needy, or cliche
+- No emoji overload (max 2 per bio)
+
+Return each bio on its own line block, numbered 1/2/3 etc. No extra commentary.`,
+  },
+  'wedding-vow-generator': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a wedding officiant and writer who crafts deeply personal vows. Write ${params.count || '2'} wedding vow drafts based on this story.
+
+Story: "${input}"
+${params.partnerName ? `Partner's name: ${params.partnerName}` : ''}
+Tone: ${params.tone || 'Heartfelt'}
+Length: ${params.length || 'Medium (~300 words)'}
+
+Requirements:
+- Structure: warm opening, 1-2 specific memories from their story, 3-4 concrete promises (not generic "I promise to love you"), heartfelt close
+- Sound spoken, not written - natural rhythm, no purple prose
+- Weave in their real details; never invent major facts not given
+- Each draft a genuinely different angle, not a rewording
+
+Separate drafts with a line of dashes. No extra commentary.`,
+  },
+  'interview-answer-coach': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are an executive interview coach. Build a strong sample answer to this interview question using the STAR method (Situation, Task, Action, Result).
+
+Question: "${input}"
+${params.role ? `Target role: ${params.role}` : ''}
+Experience level: ${params.level || 'Mid-level'}
+
+Requirements:
+- Structure the answer clearly with STAR headers
+- Write in first person, as the candidate speaking
+- Keep it to 90-120 seconds spoken (roughly 200-280 words)
+- Concrete and specific - no vague claims; include a quantifiable result where plausible
+- Calibrated to the experience level (entry-level: coursework/internships OK; executive: scope and leadership)
+- End with 2-3 bullet "delivery tips" (pacing, what to emphasize, trap to avoid)
+
+Return ONLY the coached answer with STAR structure plus delivery tips.`,
+  },
 };
 
 exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
