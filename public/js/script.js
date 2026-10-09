@@ -294,7 +294,7 @@ document
         banner.style.cssText =
           'font-size:0.8rem; color:#854d0e; background:#fef9c3; border:1px solid #fef08a; padding:6px 12px; border-radius:6px; margin:8px 0; display:flex; justify-content:space-between; align-items:center;';
         banner.innerHTML =
-          '<span>Draft restored from your last visit</span><button type="button" style="background:none;border:none;color:#a16207;cursor:pointer;font-size:0.8rem;text-decoration:underline;" aria-label="Clear restored draft">Clear</button>';
+          '<span>Draft restored from your last visit</span><button type="button" style="background:none;border:none;color:#a16207;cursor:pointer;font-size:0.8rem;text-decoration:underline;">Clear</button>';
 
         banner.querySelector('button').addEventListener('click', function () {
           localStorage.removeItem(storageKey);
