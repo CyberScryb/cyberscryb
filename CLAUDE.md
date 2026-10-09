@@ -11,6 +11,32 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-09 — Everyday paperwork tools and discovery)
+
+Added two local browser tools: `/tools/refund-request/` builds an editable refund,
+replacement, or repair request; `/tools/paper-trail/` organizes dated events,
+evidence references, and next steps. Both support copy, text download, print,
+fictional examples, and clearing. They do not call AI or persist input. Their
+`data-no-draft` body attribute opts out of the shared textarea draft persistence;
+other tools retain their existing behavior. The timeline summary is read-only:
+edit individual events or case fields to update it.
+
+Added two substantive guides and two companion blog articles, linked from the
+homepage and directories. Catalog filtering now handles task keywords, counts
+unique results, hides empty sections, supports clear filters, and synchronizes
+query/category state with the URL and browser history. Homepage intent cards
+open the relevant catalog category; recent-tool links are stored on actual clicks.
+Scoped responsive styles retain the current black/red/silver design.
+
+Integrated the unfinished work with all 25 newer main commits through `5c7e86e`.
+Verified all previous catalog/guide/blog directory links and generator slugs were
+preserved. No AI prompts, backend logic, deployment settings, or dependencies changed.
+Validation: 428 Jest tests; build; lint (zero errors, existing warnings); formatting;
+16 static accessibility pages; eight rendered accessibility pages; browser checks
+at 320, 390, and 1440px, including event editing, exports, draft privacy, filters,
+and history. Shared files also consumed by existing pages: `css/style.css` and
+`js/script.js`; new layout rules are scoped and draft opt-out is explicit.
+
 ## Recent Changes (Session 2026-09-30 — Hosting site assertion after #48)
 
 PR #48 merged (`7d4ff12`) and deploy run 36766623955 still died in ~2s: `Assertion failed: resolving hosting target of a site with no site name or target name`. `firebase.json` hosting had no `site` or `target`, and there is no `.firebaserc`. `firebase deploy` looks up the default site and, in `lib/commands/deploy.js`, discards any lookup error that is not a 403 or "no default site". `resolveTargets()` then asserts because `options.site` was never set. Reproduced with firebase-tools 15.32.0 and 15.31.0 using `FIREBASE_TOKEN=invalid` (no deploy): the discarded error is HTTP 401 on `GET /v1beta1/projects/gen-lang-client-0384486156`. The same command with `"site": "gen-lang-client-0384486156"` skips the assertion and calls `.../sites/gen-lang-client-0384486156` (401 with the fake token; nothing uploaded). That site id is the project id — the Sep 26 run reached `sites/gen-lang-client-0384486156/versions/...` and failed only on the RE2 regex. 15.32.0 (what unpinned `npm install -g firebase-tools` installed on Sep 30) does not change that lookup versus 15.31.0. Fix: set the hosting `site`, and pin the CLI to `firebase-tools@15.31.0`. `FIREBASE_TOKEN` deprecation is a warning on both the Sep 26 and Sep 30 runs; it is not the failure.

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090b" />
+    <title>Free Paper Trail Timeline Builder | CyberScryb</title>
+    <meta
+      name="description"
+      content="Organize customer service calls, emails, and records into a dated timeline. Free copy, download, and print. No account; your details stay in the page."
+    />
+    <link rel="canonical" href="https://cyberscryb.com/tools/paper-trail/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Free Paper Trail Timeline Builder | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Organize customer service calls, emails, and records into a dated timeline. Free copy, download, and print. No account; your details stay in the page."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/paper-trail/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/mascot-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261009paperwork" />
+    <link rel="stylesheet" href="/css/paperwork.css?v=20261009" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261006audit1" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+    <script src="/js/script.js?v=20261009paperwork" defer></script>
+    <script src="/tools/shared/paperwork-tools.js?v=20261009" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Paper Trail Timeline Builder",
+        "url": "https://cyberscryb.com/tools/paper-trail/",
+        "description": "Organize customer service calls, emails, and records into a dated timeline. Free copy, download, and print. No account; your details stay in the page.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body data-no-draft>
+    <a class="cs-skip-link" href="#main">Skip to content</a>
+    <header>
+      <nav class="navbar" aria-label="Primary">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" aria-label="CyberScryb home"
+              ><img src="/mascot-icon.webp" alt="" width="32" height="32" class="logo" /><span
+                >CyberScryb</span
+              ></a
+            >
+          </div>
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+            <li>
+              <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+                >Curator Prime</a
+              >
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main id="main" class="pw-shell" tabindex="-1" data-paperwork-tool="timeline">
+      <div class="pw-breadcrumb">
+        <a href="/tools/">Tools</a><span aria-hidden="true">/</span><span>Everyday paperwork</span>
+      </div>
+      <header class="pw-hero">
+        <p class="pw-eyebrow">Get the facts in order</p>
+        <h1>Paper Trail Timeline Builder</h1>
+        <p class="pw-lede">
+          Keep calls, emails, promises, and records in date order. Make the next conversation easier
+          to pick up where the last one ended.
+        </p>
+        <ul class="pw-promises">
+          <li>Free, no account</li>
+          <li>Runs in your browser</li>
+          <li>Copy, download, or print</li>
+        </ul>
+      </header>
+      <noscript
+        ><p class="pw-noscript">
+          This tool needs JavaScript. You can still use the
+          <a href="/guides/how-to-organize-a-paper-trail/">step-by-step guide</a> to prepare your
+          own document.
+        </p></noscript
+      >
+      <p class="pw-status" id="pw-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="pw-workspace">
+        <section class="pw-panel" aria-label="Your details">
+          <h2><span class="pw-step" aria-hidden="true">1</span>Name your record</h2>
+          <div class="pw-field">
+            <label for="pw-title"
+              >What is this about? <span class="pw-optional">(optional)</span></label
+            ><input
+              id="pw-title"
+              name="title"
+              aria-describedby="pw-title-hint pw-title-error"
+              type="text"
+              maxlength="300"
+            />
+            <p class="pw-hint" id="pw-title-hint">A short label, such as “Damaged desk lamp.”</p>
+            <p class="pw-error" id="pw-title-error" data-error-for="title"></p>
+          </div>
+          <div class="pw-field">
+            <label for="pw-reference"
+              >Case or order reference <span class="pw-optional">(optional)</span></label
+            ><input
+              id="pw-reference"
+              name="reference"
+              aria-describedby="pw-reference-hint pw-reference-error"
+              type="text"
+              maxlength="300"
+            />
+            <p class="pw-hint" id="pw-reference-hint"></p>
+            <p class="pw-error" id="pw-reference-error" data-error-for="reference"></p>
+          </div>
+          <form novalidate autocomplete="off">
+            <h2 class="pw-event-heading">
+              <span class="pw-step" aria-hidden="true">2</span>Add an event
+            </h2>
+            <div class="pw-row">
+              <div class="pw-field">
+                <label for="pw-date">Event date</label
+                ><input
+                  id="pw-date"
+                  name="date"
+                  aria-describedby="pw-date-hint pw-date-error"
+                  required
+                  type="date"
+                  min="0001-01-01"
+                  max="9999-12-31"
+                />
+                <p class="pw-hint" id="pw-date-hint"></p>
+                <p class="pw-error" id="pw-date-error" data-error-for="date"></p>
+              </div>
+              <div class="pw-field">
+                <label for="pw-type">Event type</label
+                ><select
+                  id="pw-type"
+                  name="type"
+                  aria-describedby="pw-type-hint pw-type-error"
+                  required
+                >
+                  <option value="contact" selected>Contact with customer service</option>
+                  <option value="purchase">Purchase or payment</option>
+                  <option value="response">Reply received</option>
+                  <option value="promise">Promise or agreed next step</option>
+                  <option value="evidence">Record saved</option>
+                  <option value="other">Other event</option>
+                </select>
+                <p class="pw-hint" id="pw-type-hint"></p>
+                <p class="pw-error" id="pw-type-error" data-error-for="type"></p>
+              </div>
+            </div>
+            <div class="pw-row">
+              <div class="pw-field">
+                <label for="pw-channel">Channel <span class="pw-optional">(optional)</span></label
+                ><input
+                  id="pw-channel"
+                  name="channel"
+                  aria-describedby="pw-channel-hint pw-channel-error"
+                  type="text"
+                  maxlength="300"
+                />
+                <p class="pw-hint" id="pw-channel-hint">
+                  Phone, email, chat, letter, or in person.
+                </p>
+                <p class="pw-error" id="pw-channel-error" data-error-for="channel"></p>
+              </div>
+              <div class="pw-field">
+                <label for="pw-contact"
+                  >Who you spoke to <span class="pw-optional">(optional)</span></label
+                ><input
+                  id="pw-contact"
+                  name="contact"
+                  aria-describedby="pw-contact-hint pw-contact-error"
+                  type="text"
+                  maxlength="300"
+                />
+                <p class="pw-hint" id="pw-contact-hint"></p>
+                <p class="pw-error" id="pw-contact-error" data-error-for="contact"></p>
+              </div>
+            </div>
+            <div class="pw-field">
+              <label for="pw-details">What happened?</label
+              ><textarea
+                id="pw-details"
+                name="details"
+                aria-describedby="pw-details-hint pw-details-error"
+                required
+                rows="3"
+                maxlength="6000"
+              ></textarea>
+              <p class="pw-hint" id="pw-details-hint">
+                Separate what was said from what you think it means. Include the time if useful.
+              </p>
+              <p class="pw-error" id="pw-details-error" data-error-for="details"></p>
+            </div>
+            <div class="pw-field">
+              <label for="pw-evidence"
+                >Where to find the record <span class="pw-optional">(optional)</span></label
+              ><input
+                id="pw-evidence"
+                name="evidence"
+                aria-describedby="pw-evidence-hint pw-evidence-error"
+                type="text"
+                maxlength="300"
+              />
+              <p class="pw-hint" id="pw-evidence-hint">
+                A filename, email subject, or folder name. Keep the original yourself.
+              </p>
+              <p class="pw-error" id="pw-evidence-error" data-error-for="evidence"></p>
+            </div>
+            <button id="pw-add-event" class="pw-primary pw-submit" type="submit">Add event</button
+            ><button id="pw-cancel-edit" class="pw-text-button" type="button" hidden>
+              Cancel edit
+            </button>
+          </form>
+          <h2 class="pw-event-heading">
+            <span class="pw-step" aria-hidden="true">3</span>Choose your next step
+          </h2>
+          <div class="pw-field">
+            <label for="pw-questions"
+              >Open questions <span class="pw-optional">(optional)</span></label
+            ><textarea
+              id="pw-questions"
+              name="questions"
+              aria-describedby="pw-questions-hint pw-questions-error"
+              rows="3"
+              maxlength="6000"
+            ></textarea>
+            <p class="pw-hint" id="pw-questions-hint"></p>
+            <p class="pw-error" id="pw-questions-error" data-error-for="questions"></p>
+          </div>
+          <div class="pw-field">
+            <label for="pw-nextAction"
+              >My next action <span class="pw-optional">(optional)</span></label
+            ><textarea
+              id="pw-nextAction"
+              name="nextAction"
+              aria-describedby="pw-nextAction-hint pw-nextAction-error"
+              rows="3"
+              maxlength="6000"
+            ></textarea>
+            <p class="pw-hint" id="pw-nextAction-hint"></p>
+            <p class="pw-error" id="pw-nextAction-error" data-error-for="nextAction"></p>
+          </div>
+          <div class="pw-field">
+            <label for="pw-followupDate"
+              >My follow-up date <span class="pw-optional">(optional)</span></label
+            ><input
+              id="pw-followupDate"
+              name="followupDate"
+              aria-describedby="pw-followupDate-hint pw-followupDate-error"
+              type="date"
+              min="0001-01-01"
+              max="9999-12-31"
+            />
+            <p class="pw-hint" id="pw-followupDate-hint">
+              A personal reminder in your summary. No notification is scheduled; this is not a legal
+              deadline.
+            </p>
+            <p class="pw-error" id="pw-followupDate-error" data-error-for="followupDate"></p>
+          </div>
+          <div class="pw-actions">
+            <button id="pw-example" type="button" class="pw-text-button">
+              Try a fictional example</button
+            ><button id="pw-clear" type="button" class="pw-text-button">Clear everything</button>
+          </div>
+          <h2 class="pw-event-heading">
+            Saved events <span id="pw-event-count" class="pw-count">0 events</span>
+          </h2>
+          <p id="pw-events-empty" class="pw-hint">Your events will appear here, oldest first.</p>
+          <ol id="pw-events" class="pw-events"></ol>
+        </section>
+        <section class="pw-panel pw-output-panel" aria-labelledby="pw-result-heading">
+          <h2 id="pw-result-heading">Your timeline summary</h2>
+          <p class="pw-hint" id="pw-output-hint">
+            The summary updates from your saved events and next steps. Use Edit beside an event to
+            change it.
+          </p>
+          <p id="pw-output-empty" class="pw-empty">
+            Add your first event to start the summary. Events are sorted by date, even if you enter
+            them out of order.
+          </p>
+          <label for="pw-output" class="pw-output-label">Summary text</label
+          ><textarea
+            id="pw-output"
+            class="pw-output"
+            aria-describedby="pw-output-hint"
+            spellcheck="true"
+            readonly
+          ></textarea>
+          <div class="pw-actions pw-export">
+            <button type="button" class="pw-secondary" data-export="copy" disabled>Copy text</button
+            ><button type="button" class="pw-secondary" data-export="download" disabled>
+              Download</button
+            ><button type="button" class="pw-secondary" data-export="print" disabled>Print</button>
+          </div>
+          <p class="pw-hint pw-privacy">
+            Your details stay in this page. They are not sent to AI or saved by this tool. Download
+            a copy before refreshing or leaving. The tool does not send messages, store evidence, or
+            contact anyone for you.
+          </p>
+        </section>
+      </div>
+      <section class="pw-reading pw-prose" aria-label="How to use this tool">
+        <h2>A record you can pick up next week</h2>
+        <p>
+          You should not have to reconstruct the whole story every time someone asks for it. Add one
+          event for each meaningful purchase, call, message, reply, or promise. The summary puts
+          them in date order; events on the same day keep the order you added them.
+        </p>
+        <p>
+          Write down what happened and where the supporting record lives. “Agent said a return label
+          would arrive by Friday” is more useful than “They were unhelpful again.” If you are unsure
+          of a detail, say so. Keep remembered wording separate from exact quotations.
+        </p>
+        <h2>Keep the originals alongside the timeline</h2>
+        <p>
+          This is a working summary, not a replacement for receipts, messages, or documents. It does
+          not upload attachments. Use the record-reference field for a filename, email subject, or
+          folder name you can find again.
+        </p>
+        <p>
+          Download or print the summary before leaving. Put the copy with the records it refers to,
+          then set any reminder yourself. The follow-up date records your plan; it does not schedule
+          a notification or calculate a deadline.
+        </p>
+        <h2>Make the next step specific</h2>
+        <p>
+          “Check the email thread on Friday, then ask about the promised return label” gives you
+          something to do. “Resolve this” does not. Keep open questions separate from promises
+          already made, and update the record when an answer arrives.
+        </p>
+        <h2>Keep going</h2>
+        <div class="pw-related">
+          <a class="pw-link-card" href="/guides/how-to-organize-a-paper-trail/"
+            ><strong>How to organize a paper trail</strong
+            ><span>A full walkthrough with examples and a checklist.</span></a
+          ><a class="pw-link-card" href="/blog/what-to-record-after-customer-service-call/"
+            ><strong>What to record after a customer service call</strong
+            ><span>Practical ways to make the next conversation easier.</span></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span>CyberScryb</span>
+            <p>Free tools for everyday paperwork, writing, and building.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a><a href="/guides/">Guides</a><a href="/blog/">Blog</a
+            ><a href="/about/">About</a><a href="/contact/">Contact</a
+            ><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a
+            ><a href="/disclosure/">Disclosure</a>
+          </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+      </div>
+    </footer>
+    <pre id="pw-print" hidden></pre>
+  </body>
+</html>

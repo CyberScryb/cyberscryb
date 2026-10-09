@@ -1370,6 +1370,8 @@ function generateSitemap(generatedPages) {
     'privacy-generator',
     'product-description',
     'qr-generator',
+    'refund-request',
+    'paper-trail',
     'regex-tester',
     'resume-bullets',
     'sap-appeal-letter',
@@ -1441,6 +1443,8 @@ function generateSitemap(generatedPages) {
 
   // Static guides
   const staticGuides = [
+    'how-to-write-a-refund-request',
+    'how-to-organize-a-paper-trail',
     'caregiver-shift-handoff-standards',
     'css-glassmorphism-generator-guide',
     'documenting-cognitive-decline-for-doctors-and-courts',
@@ -1504,6 +1508,8 @@ function generateSitemap(generatedPages) {
   const blogPosts = [
     'how-to-calculate-macros-2026',
     'how-overtime-pay-is-calculated-2026',
+    'refund-request-mistakes',
+    'what-to-record-after-customer-service-call',
     'behavioral-spike-tracking-memory-care-2026',
     'cron-expression-builder-online-2026',
     'dementia-custody-evidence-guide-2026',
@@ -1578,6 +1584,8 @@ function manageRobotsMeta() {
     'privacy-generator',
     'product-description',
     'qr-generator',
+    'refund-request',
+    'paper-trail',
     'regex-tester',
     'resume-bullets',
     'sap-appeal-letter',

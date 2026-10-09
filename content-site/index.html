@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20261006audit1" />
+  <link rel="stylesheet" href="/css/style.css?v=20261009paperwork" />
   <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
 
   <meta name="google-adsense-account" content="ca-pub-5721233331247292">
@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
-<body>
+<body class="home-page">
 <header>
   <nav class="navbar" aria-label="Primary">
     <div class="nav-container">
@@ -56,35 +56,57 @@
       <div class="continue-box" id="continue-box"><p><strong>Pick up where you left off</strong><span id="continue-text"></span></p><a id="continue-link" href="#">Continue →</a></div>
       <div class="intent-finder">
         <div class="intent-finder-box">
-          <input id="intent-input" type="search" autocomplete="off" placeholder="Try: “My insurance denied my claim” or “make this AI text sound human”" aria-label="Describe what you need help with" />
+          <input id="intent-input" type="search" autocomplete="off" placeholder="What do you need to get done?" aria-label="Describe what you need help with" />
           <button id="intent-submit" class="cta-button" type="button">Find my tool</button>
         </div>
         <div class="intent-examples" aria-label="Examples">
-          <button class="intent-example" type="button" data-example="make this AI writing sound like me">Make AI writing sound human</button>
-          <button class="intent-example" type="button" data-example="my insurance denied a claim">Appeal an insurance denial</button>
-          <button class="intent-example" type="button" data-example="I need to respond to a freelance job">Write a proposal</button>
+          <button class="intent-example" type="button" data-example="make this AI writing sound like me">Improve a draft</button>
+          <button class="intent-example" type="button" data-example="I need a refund for a damaged order">Request a refund</button>
+          <button class="intent-example" type="button" data-example="organize my emails and phone calls into a timeline">Organize my records</button>
           <button class="intent-example" type="button" data-example="convert JSON to CSV">Convert JSON to CSV</button>
         </div>
         <div class="finder-result" id="finder-result" role="status" aria-live="polite"></div>
       </div>
       <h2 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Choose a starting point</h2>
       <div class="intent-grid" aria-label="Choose a starting point">
-        <a class="intent-card" href="/tools/humanizer/" data-tool="writing">
+        <a class="intent-card" href="/tools/?cat=writing" data-tool="writing">
           <div class="icon">✍</div><h3>I need to write or improve something</h3><p>Humanize, paraphrase, summarize, draft emails, proposals, and more.</p>
         </a>
-        <a class="intent-card" href="/tools/utility-shutoff-letter/" data-tool="life">
+        <a class="intent-card" href="/tools/?cat=life" data-tool="life">
           <div class="icon">◎</div><h3>I have a real-life problem</h3><p>Appeals, hardship letters, disputes, landlord issues, caregiving, and payment problems.</p>
         </a>
-        <a class="intent-card" href="/tools/json-csv-converter/" data-tool="developer">
+        <a class="intent-card" href="/tools/?cat=developer" data-tool="developer">
           <div class="icon">⌘</div><h3>I need to build or fix something</h3><p>Format, convert, encode, test, calculate, and troubleshoot developer tasks.</p>
         </a>
       </div>
     </div>
   </section>
 
+  <section class="section paperwork-section" aria-labelledby="paperwork-heading">
+    <div class="container">
+      <div class="section-head"><div><span class="section-kicker">Everyday paperwork</span><h2 id="paperwork-heading">A clear request. A record you can follow.</h2><p>A damaged order, a missing refund, another call that went nowhere. Put the facts in order and decide what to send next.</p></div></div>
+      <div class="paperwork-grid">
+        <article class="paperwork-card">
+          <span class="paperwork-label">Write the request</span>
+          <h3><a href="/tools/refund-request/">Refund Request Builder</a></h3>
+          <p>Turn the order details, the problem, and the outcome you want into an editable request. Start with a sample or use your own facts.</p>
+          <p class="paperwork-note">Free · Runs in your browser · No account</p>
+          <div class="paperwork-links"><a class="cta-button" href="/tools/refund-request/">Build a refund request →</a><a href="/guides/how-to-write-a-refund-request/">Read the refund guide</a></div>
+        </article>
+        <article class="paperwork-card">
+          <span class="paperwork-label">Keep the record</span>
+          <h3><a href="/tools/paper-trail/">Paper Trail Timeline</a></h3>
+          <p>Put calls, emails, promises, and receipts in date order. Build a timeline you can review, copy, or print before your next follow-up.</p>
+          <p class="paperwork-note">Free · Runs in your browser · No account</p>
+          <div class="paperwork-links"><a class="cta-button" href="/tools/paper-trail/">Organize a paper trail →</a><a href="/guides/how-to-organize-a-paper-trail/">Read the paper trail guide</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section featured-posts" aria-labelledby="popular-heading">
     <div class="container">
-      <div class="section-head"><div><span class="section-kicker">Start here</span><h2 id="popular-heading">Popular right now</h2></div><a href="/tools/" class="cta-secondary">See all tools →</a></div>
+      <div class="section-head"><div><span class="section-kicker">Start here</span><h2 id="popular-heading">Useful starting points</h2></div><a href="/tools/" class="cta-secondary">See all tools →</a></div>
       <div class="posts-grid">
         <article class="blog-card"><div class="blog-card-content"><span class="tag-free">Free</span><h3><a href="/tools/humanizer/">AI Humanizer</a></h3><p>Take stiff AI-written text and make it sound more natural and personal.</p><a href="/tools/humanizer/" class="read-more">Use it →</a></div></article>
         <article class="blog-card"><div class="blog-card-content"><span class="tag-free">Free</span><h3><a href="/tools/gig-auto-pilot/">Free AI Upwork Proposal Generator</a></h3><p>Paste an Upwork job post and get a proposal written for that job. No account needed.</p><a href="/tools/gig-auto-pilot/" class="read-more">Use it →</a></div></article>
@@ -176,6 +198,8 @@
 <script>
 (function(){
   var routes=[
+    {keys:['refund','return item','damaged order','wrong item','missing order','money back','overcharged','cancel order'],name:'Refund Request Builder',url:'/tools/refund-request/',desc:'Organize the purchase, explain the problem, and draft an editable refund request in your browser.'},
+    {keys:['paper trail','timeline','phone calls','emails and','organize my records','organise my records','follow up','follow-up','keep a record','document what happened'],name:'Paper Trail Timeline',url:'/tools/paper-trail/',desc:'Put calls, messages, promises, and receipts in date order, then copy or print your record.'},
     {keys:['human','humanize','ai writing','chatgpt','ai text','sounds like me','robotic'],name:'AI Humanizer',url:'/tools/humanizer/',desc:'Rewrite stiff AI-generated text so it reads more naturally and personally.'},
     {keys:['proposal','upwork','freelance','freelancer','job post','client pitch','gig','upwork proposal'],name:'Free AI Upwork Proposal Generator',url:'/tools/gig-auto-pilot/',desc:'Paste an Upwork job post and get a tailored proposal. No account needed.'},
     {keys:['insurance','denied claim','denial','prior authorization','prior auth','medical necessity'],name:'Insurance Appeal',url:'/tools/insurance-denial-appeal/',desc:'Build an organized written response to an insurance denial or prior-authorization issue.'},
@@ -190,10 +214,17 @@
     {keys:['seo','meta description','open graph','og tags'],name:'SEO Meta Generator',url:'/tools/seo-tag-generator/',desc:'Generate copy-ready SEO and social metadata.'}
   ];
   var input=document.getElementById('intent-input'),button=document.getElementById('intent-submit'),result=document.getElementById('finder-result');
-  function find(){var q=(input.value||'').toLowerCase().trim();if(!q){result.classList.remove('show');return}var best=null,score=0;routes.forEach(function(r){var s=0;r.keys.forEach(function(k){if(q.indexOf(k)>=0)s+=k.length>5?3:2});if(s>score){score=s;best=r}});if(!best){best={name:'All tools',url:'/tools/',desc:'I could not find an exact match yet. Browse the full tool collection or try describing the problem another way.'}}result.innerHTML='<strong>'+best.name+'</strong><span>'+best.desc+'</span><br><a href="'+best.url+'" data-tool-link="'+best.name+'">Open '+best.name+' →</a>';result.classList.add('show');localStorage.setItem('cs_last_tool',JSON.stringify({name:best.name,url:best.url}));}
+  function find(){var q=(input.value||'').toLowerCase().trim();if(!q){result.classList.remove('show');return}var best=null,score=0;routes.forEach(function(r){var s=0;r.keys.forEach(function(k){if(q.indexOf(k)>=0)s+=k.length>5?3:2});if(s>score){score=s;best=r}});if(!best){best={name:'All tools',url:'/tools/',desc:'I could not find an exact match yet. Browse the full tool collection or try describing the problem another way.'}}result.innerHTML='<strong>'+best.name+'</strong><span>'+best.desc+'</span><br><a href="'+best.url+'" data-tool-link="'+best.name+'">Open '+best.name+' →</a>';result.classList.add('show');}
   button.addEventListener('click',find);input.addEventListener('keydown',function(e){if(e.key==='Enter')find()});document.querySelectorAll('.intent-example').forEach(function(b){b.addEventListener('click',function(){input.value=b.dataset.example;find();input.focus()})});
-  document.querySelectorAll('a[href^="/tools/"]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('cs_last_tool',JSON.stringify({name:(a.textContent||'Tool').replace(/→/g,'').trim(),url:a.getAttribute('href')}))}catch(e){}})});
-  try{var last=JSON.parse(localStorage.getItem('cs_last_tool'));if(last&&last.url){var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');text.textContent=' '+last.name;link.href=last.url;box.classList.add('show')}}catch(e){}
+  document.addEventListener('click',function(event){
+    var link=event.target.closest('a[href^="/tools/"]');
+    if(!link||!/^\/tools\/[a-z0-9-]+\/$/.test(link.getAttribute('href')))return;
+    var card=link.closest('article,.intent-card,.finder-result');
+    var heading=card&&card.querySelector('h3,strong');
+    var name=link.dataset.toolLink||(heading?heading.textContent:link.textContent);
+    try{localStorage.setItem('cs_last_tool',JSON.stringify({name:name.replace(/→/g,'').trim(),url:link.getAttribute('href')}))}catch(e){}
+  });
+  try{var last=JSON.parse(localStorage.getItem('cs_last_tool'));if(last&&/^\/tools\/[a-z0-9-]+\/$/.test(last.url)&&typeof last.name==='string'){var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');text.textContent=' '+last.name;link.href=last.url;box.classList.add('show')}}catch(e){}
 })();
 </script>
 </body>

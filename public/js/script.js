@@ -259,6 +259,7 @@ document
 
 // ─── Automatic Draft Persistence (User Retention) ───
 (function () {
+  if (document.body.hasAttribute('data-no-draft')) return;
   if (typeof window === 'undefined' || !window.localStorage) return;
 
   var path = window.location.pathname;

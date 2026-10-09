@@ -2111,3 +2111,115 @@ main li a,
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
+
+/* Everyday paperwork discovery; scoped to home and the tools catalog. */
+.paperwork-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.paperwork-card {
+  min-width: 0;
+  padding: 1.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+.paperwork-card.blog-card {
+  padding: 0;
+}
+.paperwork-label {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--primary-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.paperwork-card h3 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+.paperwork-card h3 a {
+  color: var(--text);
+  text-decoration: none;
+}
+.paperwork-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.paperwork-card .paperwork-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+.paperwork-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.2rem;
+  align-items: center;
+  margin-top: 1.35rem;
+}
+.paperwork-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9rem;
+}
+.paperwork-links a:not(.cta-button) {
+  color: var(--primary-soft);
+  text-underline-offset: 0.2em;
+}
+.catalog-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.2rem;
+}
+.catalog-result-count {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.catalog-feedback [hidden],
+.catalog-page main .section[hidden] {
+  display: none;
+}
+@media (max-width: 760px) {
+  .paperwork-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .paperwork-card {
+    padding: 1.3rem;
+  }
+  .home-page .intent-hero {
+    padding-top: 2rem;
+  }
+  .home-page .intent-grid {
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+  .home-page .intent-card {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0 0.75rem;
+    padding: 1rem;
+    text-align: left;
+  }
+  .home-page .intent-card .icon {
+    grid-row: 1 / 3;
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  .home-page .intent-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .home-page .intent-card p {
+    font-size: 0.85rem;
+  }
+  .catalog-page .hero {
+    padding-block: 2rem;
+  }
+}
