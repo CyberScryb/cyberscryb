@@ -1835,6 +1835,37 @@ DELIVERY TIPS (2-3 bullets after the answer): pacing note, the line to land hard
 
 Return ONLY the answer + tips.`,
   },
+  'performance-review-writer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a senior HR business partner who has written and reviewed thousands of performance reviews. Write a complete ${params.reviewType || 'manager'} performance review.
+
+${input}
+
+Review type: ${params.reviewType || 'manager'}
+Overall rating: ${params.rating || 'Meets expectations'}
+
+NON-NEGOTIABLE RULES:
+1. OBSERVABLE BEHAVIOR ONLY. Describe what the person did, delivered, or missed -- never personality traits. "Is a team player" is banned; "Volunteered to onboard two new hires and built the onboarding checklist the team now uses" is the standard.
+2. EVERY CLAIM NEEDS AN EXAMPLE. Tie each strength and growth area to a concrete example, project, metric, or incident the user supplied. If the user gave no example for a claim, rewrite the claim around what WAS supplied -- never invent projects, numbers, dates, or outcomes.
+3. FLAG VAGUE INPUTS. If a supplied strength or growth area is too vague to support ("works hard", "needs to improve communication"), say so in one short bracketed note at the top -- e.g. [Note: "works hard" needs a concrete example to be defensible] -- then write the review from the specific material available. Do not pad.
+4. GROWTH AREAS ARE BEHAVIOR + IMPACT + PATH. Name the behavior, the observable impact on work or team, and one concrete change to make next period. No character judgments, no surprises that were never raised during the period.
+5. GOALS ARE SMART. Convert the user's next-period goals into Specific, Measurable, Achievable, Relevant, Time-bound goals. If a goal has no metric or date in the input, phrase the measurable part as a bracketed placeholder like [set target %] for the writer to fill in -- never fabricate the number.
+6. RATING MUST MATCH THE WORDS. The narrative has to justify the ${params.rating || 'Meets expectations'} rating. If the examples contradict the rating, add one bracketed note flagging the mismatch instead of silently smoothing it over.
+
+STRUCTURE:
+- Opening summary (2-3 sentences: overall performance this period, tied to the rating)
+- Key strengths (each: behavior, example, impact)
+- Growth areas (each: behavior, impact, concrete next step)
+- Goals for next period (SMART format, numbered)
+- Closing (1-2 sentences: forward-looking, specific)
+
+VOICE: direct, fair, professional. Written for a real human to read in a real meeting. No corporate filler ("leverages synergies", "rockstar", "guru"), no rating inflation, no legal exposure -- nothing discriminatory, nothing about protected characteristics, health, age, or family status.
+
+Return ONLY the review with those section headings. No preamble, no commentary.`,
+  },
 };
 
 exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {

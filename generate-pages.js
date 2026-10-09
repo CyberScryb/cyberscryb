@@ -1416,6 +1416,7 @@ function generateSitemap(generatedPages) {
     'dating-profile-writer',
     'wedding-vow-generator',
     'interview-answer-coach',
+    'performance-review-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1486,6 +1487,8 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-dating-profile',
     'how-to-write-wedding-vows',
     'how-to-answer-interview-questions',
+    'how-to-write-a-performance-review',
+    'how-to-choose-between-medicare-advantage-and-medigap',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1621,6 +1624,7 @@ function manageRobotsMeta() {
     'dating-profile-writer',
     'wedding-vow-generator',
     'interview-answer-coach',
+    'performance-review-writer',
   ]);
 
   const dirsToProcess = [
