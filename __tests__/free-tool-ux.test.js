@@ -55,6 +55,32 @@ test('anonymous visitors receive the entire AI result immediately, with safe tex
   jest.useRealTimers();
 });
 
+test('copy button updates text and aria-label to Copied to clipboard and resets after timeout', () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<button id="copy-btn" title="Copy output">Copy</button><div id="output-text">Generated result text</div>';
+
+  delete navigator.clipboard;
+  document.execCommand = jest.fn().mockReturnValue(true);
+
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'summarizer', collectInput: () => 'test' });
+
+  const copyBtn = document.querySelector('#copy-btn');
+  copyBtn.click();
+
+  expect(document.execCommand).toHaveBeenCalledWith('copy');
+  expect(copyBtn.textContent).toBe('Copied! ✓');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copied to clipboard');
+
+  jest.advanceTimersByTime(1600);
+
+  expect(copyBtn.textContent).toBe('Copy');
+  expect(copyBtn.getAttribute('aria-label')).toBeNull();
+
+  jest.useRealTimers();
+});
+
 test('mobile navigation opens the styled menu and Escape returns focus', () => {
   document.body.innerHTML =
     '<header><button id="nav-toggle" class="hamburger" aria-expanded="false">Menu</button><ul id="nav-menu" class="nav-menu"><li><a href="/tools/">Tools</a></li></ul></header><main></main><script></script>';

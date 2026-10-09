@@ -55,16 +55,52 @@
 
     if (copyBtn) {
       copyBtn.addEventListener('click', function () {
-        const text = outputContent.innerText;
-        if (text && !text.toLowerCase().includes('will appear here')) {
-          navigator.clipboard.writeText(text).then(function () {
-            trackEvent('result_copied', { tool_id: toolId });
-            const orig = copyBtn.innerText;
-            copyBtn.innerText = 'Copied! ✓';
-            setTimeout(function () {
-              copyBtn.innerText = orig;
-            }, 1600);
+        const text = outputContent.innerText || outputContent.textContent;
+        if (!text || text.toLowerCase().includes('will appear here')) return;
+
+        function handleSuccess() {
+          trackEvent('result_copied', { tool_id: toolId });
+          if (copyBtn._resetTimer) {
+            clearTimeout(copyBtn._resetTimer);
+          } else {
+            copyBtn._origText = copyBtn.textContent;
+            copyBtn._origAria = copyBtn.getAttribute('aria-label');
+          }
+          copyBtn.textContent = 'Copied! ✓';
+          copyBtn.setAttribute('aria-label', 'Copied to clipboard');
+          copyBtn._resetTimer = setTimeout(function () {
+            copyBtn.textContent = copyBtn._origText;
+            if (copyBtn._origAria) {
+              copyBtn.setAttribute('aria-label', copyBtn._origAria);
+            } else {
+              copyBtn.removeAttribute('aria-label');
+            }
+            copyBtn._resetTimer = null;
+          }, 1600);
+        }
+
+        function fallbackCopy(str) {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = str;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            handleSuccess();
+          } catch {
+            /* non-fatal fallback failure */
+          }
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(handleSuccess).catch(function () {
+            fallbackCopy(text);
           });
+        } else {
+          fallbackCopy(text);
         }
       });
     }
