@@ -118,7 +118,8 @@
             font-family: 'Inter', sans-serif; font-size: 0.75rem; padding: 0.45rem 0.8rem;
             border-radius: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
         }
-        .copy-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .copy-btn:hover:not(:disabled) { border-color: var(--primary-soft); color: var(--primary-soft); }
+        .copy-btn:disabled { opacity: 0.4; cursor: not-allowed; border-color: var(--border); }
         .copy-btn.copied { border-color: #10b981; color: #10b981; }
 
         @media (max-width: 700px) {
@@ -197,22 +198,22 @@
             <div class="hash-row weak">
                 <div class="hash-label">MD5</div>
                 <div class="hash-value empty" id="hash-md5">&mdash;</div>
-                <button class="copy-btn" data-copy="hash-md5">📋 Copy</button>
+                <button class="copy-btn" data-copy="hash-md5" aria-label="Copy MD5 hash" disabled>📋 Copy</button>
             </div>
             <div class="hash-row weak">
                 <div class="hash-label">SHA-1</div>
                 <div class="hash-value empty" id="hash-sha1">&mdash;</div>
-                <button class="copy-btn" data-copy="hash-sha1">📋 Copy</button>
+                <button class="copy-btn" data-copy="hash-sha1" aria-label="Copy SHA-1 hash" disabled>📋 Copy</button>
             </div>
             <div class="hash-row strong">
                 <div class="hash-label">SHA-256</div>
                 <div class="hash-value empty" id="hash-sha256">&mdash;</div>
-                <button class="copy-btn" data-copy="hash-sha256">📋 Copy</button>
+                <button class="copy-btn" data-copy="hash-sha256" aria-label="Copy SHA-256 hash" disabled>📋 Copy</button>
             </div>
             <div class="hash-row strong">
                 <div class="hash-label">SHA-512</div>
                 <div class="hash-value empty" id="hash-sha512">&mdash;</div>
-                <button class="copy-btn" data-copy="hash-sha512">📋 Copy</button>
+                <button class="copy-btn" data-copy="hash-sha512" aria-label="Copy SHA-512 hash" disabled>📋 Copy</button>
             </div>
 
             <div class="faq-section">
@@ -369,6 +370,13 @@
             }
         }
 
+        function updateButtonsState() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                const el = document.getElementById(btn.dataset.copy);
+                btn.disabled = !el || el.classList.contains('empty');
+            });
+        }
+
         let currentRun = 0;
         async function compute() {
             const text = input.value;
@@ -378,6 +386,7 @@
                 sha1El.textContent = '&mdash;'; sha1El.classList.add('empty');
                 sha256El.textContent = '&mdash;'; sha256El.classList.add('empty');
                 sha512El.textContent = '&mdash;'; sha512El.classList.add('empty');
+                updateButtonsState();
                 return;
             }
 
@@ -394,6 +403,7 @@
             sha1El.textContent = h1; sha1El.classList.remove('empty');
             sha256El.textContent = h256; sha256El.classList.remove('empty');
             sha512El.textContent = h512; sha512El.classList.remove('empty');
+            updateButtonsState();
 
             if (typeof gtag === 'function') {
                 gtag('event', 'tool_used', { tool_name: 'hash_generator' });
@@ -412,10 +422,19 @@
                 const el = document.getElementById(btn.dataset.copy);
                 if (!el || el.classList.contains('empty')) return;
                 navigator.clipboard.writeText(el.textContent);
-                const orig = btn.textContent;
+                const row = btn.closest('.hash-row');
+                const label = row ? row.querySelector('.hash-label') : null;
+                const algName = label ? label.textContent : 'hash';
+                const origText = btn.textContent;
+                const origLabel = btn.getAttribute('aria-label') || `Copy ${algName} hash`;
                 btn.textContent = '✓ Copied';
+                btn.setAttribute('aria-label', `Copied ${algName} hash to clipboard`);
                 btn.classList.add('copied');
-                setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1200);
+                setTimeout(() => {
+                    btn.textContent = origText;
+                    btn.setAttribute('aria-label', origLabel);
+                    btn.classList.remove('copied');
+                }, 1200);
             });
         });
 
