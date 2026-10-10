@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const count = text
         .split('\n')
         .map(l => l.trim())
-        .filter(l => /^(\d+[\).\:\-]|\-|\*|•)/.test(l)).length;
+        .filter(l => /^(\d+[).:-]|-|\*|•)/.test(l)).length;
       const el = document.getElementById('word-count');
       if (el) el.textContent = count + ' icebreakers';
     },
