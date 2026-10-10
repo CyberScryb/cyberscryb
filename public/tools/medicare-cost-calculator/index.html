@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Cost Calculator — Compare Total Yearly Cost | CyberScryb</title>
+<meta name="description" content="Free Medicare plan total-cost estimator for 2027: compare Medicare Advantage vs Original Medicare plus Medigap and Part D on premium, expected out-of-pocket, and worst-case cost. No signup, runs in your browser.">
+<link rel="canonical" href="https://cyberscryb.com/tools/medicare-cost-calculator/">
+<meta property="og:title" content="Medicare Cost Calculator — Compare Total Yearly Cost">
+<meta property="og:description" content="Premium is not total cost. Estimate your 2027 Medicare total for Advantage vs Medigap plus Part D, with worst-case caps side by side. Free, no signup.">
+<meta property="og:url" content="https://cyberscryb.com/tools/medicare-cost-calculator/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CyberScryb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Medicare Cost Calculator — Compare Total Yearly Cost">
+<meta name="twitter:description" content="Compare 2027 Medicare Advantage vs Medigap total yearly cost, not just the premium. Free estimator, no signup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
+<link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261006audit1">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "WebApplication",
+    "name": "CyberScryb Medicare Cost Calculator",
+    "url": "https://cyberscryb.com/tools/medicare-cost-calculator/",
+    "description": "Free Medicare plan total-cost estimator for 2027. Compare estimated total yearly cost for Medicare Advantage, Original Medicare plus Medigap and Part D, and Original Medicare plus Part D without Medigap. Client-side only, no signup.",
+    "applicationCategory": "FinanceApplication", "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "CyberScryb", "url": "https://cyberscryb.com" }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://cyberscryb.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Medicare Cost Calculator", "item": "https://cyberscryb.com/tools/medicare-cost-calculator/" }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [
+        { "@type": "Question", "name": "How do I estimate my total Medicare cost for 2027?", "acceptedAnswer": { "@type": "Answer", "text": "Add 12 months of premiums (Part B plus any plan, Medigap, or Part D premium and any IRMAA surcharge) to the out-of-pocket cost you expect in a normal year. Then compare that total to the worst case: premiums plus the plan out-of-pocket maximum. This calculator does that math for three common paths side by side." } },
+        { "@type": "Question", "name": "What are the confirmed 2027 Part D numbers?", "acceptedAnswer": { "@type": "Answer", "text": "For 2027 the Part D maximum deductible is $700 and the Part D annual out-of-pocket cap is $2,400. Both figures are final from CMS as of October 2026." } },
+        { "@type": "Question", "name": "What is the 2027 Part B premium?", "acceptedAnswer": { "@type": "Answer", "text": "CMS has not published the final 2027 Part B standard premium yet. This calculator defaults to $209.50 per month, the 2026 Medicare Trustees projection, and labels it as a projection. Edit the field when CMS publishes the official figure in November, or if your premium differs." } },
+        { "@type": "Question", "name": "What are the IRMAA thresholds for 2027?", "acceptedAnswer": { "@type": "Answer", "text": "The projected 2027 first IRMAA thresholds are about $113,000 single and $226,000 married, pending CMS confirmation. The final 2026 first threshold is $109,000 single and $218,000 married filing jointly. If your income is near a threshold, enter your actual IRMAA surcharge as a monthly amount." } },
+        { "@type": "Question", "name": "Does this calculator check doctors, drugs, or plan availability?", "acceptedAnswer": { "@type": "Answer", "text": "No. This is an estimator, not a plan finder. It does not check doctor networks, drug formularies, or county availability. Verify plan-specific doctors, drugs, and prices at medicare.gov/plan-compare before you enroll." } },
+        { "@type": "Question", "name": "Is this Medicare calculator free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is free with no signup, and all math runs in your browser. Nothing you enter is sent to a server." } }
+    ]
+}
+</script>
+<style>
+    .mc-app { padding: 6rem 0 4rem; background: var(--bg-elevated); min-height: 100vh; }
+    .mc-container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+    .mc-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
+    .mc-panel-title { font-size: 1.05rem; font-weight: 800; color: var(--text); font-family: var(--font-brand), Georgia, serif; margin: 0 0 1.25rem; }
+    .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 640px) { .mc-grid { grid-template-columns: 1fr; } }
+    .mc-field { margin-bottom: 0.9rem; }
+    .mc-field label { display: block; font-size: 0.8rem; color: var(--text-faint); margin-bottom: 0.4rem; font-weight: 600; }
+    .mc-field input { width: 100%; box-sizing: border-box; padding: 0.8rem 1rem; font-size: 1.05rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 11px; color: var(--text); font-family: var(--font); outline: none; }
+    .mc-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+    .mc-hint { font-size: 0.78rem; color: var(--text-faint); margin-top: 0.35rem; line-height: 1.5; }
+    .mc-input-wrap { position: relative; }
+    .mc-input-wrap .mc-symbol { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); pointer-events: none; }
+    .mc-input-wrap input { padding-left: 2.1rem; }
+    .mc-table-wrap { overflow-x: auto; margin-top: 1rem; }
+    .mc-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 640px; }
+    .mc-table th, .mc-table td { padding: 0.7rem 0.75rem; text-align: right; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+    .mc-table th { color: var(--text-faint); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .mc-table th:first-child, .mc-table td:first-child { text-align: left; }
+    .mc-table td { color: var(--text-muted); }
+    .mc-table td.hl { color: var(--primary-soft); font-weight: 800; }
+    .mc-table tr.cheapest td { background: var(--primary-soft); background: rgba(248,113,113,0.08); }
+    .mc-verdict { margin-top: 1rem; padding: 1.25rem; border-radius: 12px; background: var(--bg-elevated); border: 1px solid var(--primary); color: var(--text-muted); line-height: 1.6; }
+    .mc-verdict strong { color: var(--primary-soft); }
+    .mc-note-box { margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 12px; font-size: 0.88rem; line-height: 1.6; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-muted); }
+    .mc-note-box strong { color: var(--primary-soft); }
+    .rel-card { display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); }
+    .rel-card strong { color: var(--primary-soft); display:block; margin-bottom:0.25rem; }
+    .rel-card span { font-size:0.85rem; }
+</style>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mc-app">
+        <div class="mc-container">
+            <div class="breadcrumb">
+                <a href="/">Home</a><span>›</span>
+                <a href="/tools/">Tools</a><span>›</span>
+                Medicare Cost Calculator
+            </div>
+            <div style="padding: 1.5rem 0 0;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Medicare Cost Calculator</h1>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Compare estimated total yearly cost, not just the premium. Three paths for 2027: Medicare Advantage, Original Medicare plus Medigap and Part D, and Original Medicare plus Part D with no Medigap. Free, no signup, and all math runs in your browser. 2027 figures as of October 2026.</p>
+            </div>
+
+            <div class="mc-note-box">
+                <strong>Estimator, not a plan finder.</strong> This tool does not check doctor networks, drug formularies, or county availability, and it does not recommend a plan. Use it to compare total-cost math, then verify your doctors, drugs, and exact prices at <a href="https://www.medicare.gov/plan-compare/" target="_blank" rel="noopener" style="color: var(--primary);">medicare.gov/plan-compare</a> before you enroll. Open enrollment runs October 15 to December 7, 2026, for coverage starting January 1, 2027.
+            </div>
+
+            <section class="mc-panel" aria-label="Shared Medicare inputs">
+                <h2 class="mc-panel-title">Shared inputs (all paths)</h2>
+                <div class="mc-grid">
+                    <div class="mc-field">
+                        <label for="mc-partb">Part B monthly premium</label>
+                        <div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-partb" type="number" min="0" step="0.01" value="209.50"></div>
+                        <p class="mc-hint">Trustees projection for 2027. CMS finalizes the official figure in November. Edit it if yours differs. Do not treat $209.50 as final.</p>
+                    </div>
+                    <div class="mc-field">
+                        <label for="mc-partb-deductible">Part B annual deductible</label>
+                        <div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-partb-deductible" type="number" min="0" step="1" value="292"></div>
+                        <p class="mc-hint">Projected range in current sources is about $292 to $310. Editable and labeled as projected.</p>
+                    </div>
+                    <div class="mc-field">
+                        <label for="mc-irmaa">IRMAA surcharge per month (Part B plus Part D combined)</label>
+                        <div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-irmaa" type="number" min="0" step="0.01" value="0"></div>
+                        <p class="mc-hint">Enter 0 if IRMAA does not apply. Projected 2027 first thresholds: about $113,000 single / $226,000 married, pending CMS confirmation. Final 2026 first threshold: $109,000 single / $218,000 married filing jointly.</p>
+                    </div>
+                    <div class="mc-field">
+                        <label for="mc-drug-spend">Yearly drug spending at plan prices</label>
+                        <div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-drug-spend" type="number" min="0" step="1" value="1200"></div>
+                        <p class="mc-hint">Used for the Part D paths. For 2027, the confirmed Part D maximum deductible is $700 and the confirmed Part D out-of-pocket cap is $2,400.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mc-panel" aria-label="Medicare Advantage inputs">
+                <h2 class="mc-panel-title">Path A: Medicare Advantage</h2>
+                <div class="mc-grid">
+                    <div class="mc-field"><label for="mc-ma-premium">Medicare Advantage plan premium per month (on top of Part B)</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-ma-premium" type="number" min="0" step="0.01" value="0"></div><p class="mc-hint">Enter your plan premium from its Annual Notice of Change. Many plans are $0, but $0 premium is not $0 total cost.</p></div>
+                    <div class="mc-field"><label for="mc-ma-moop">Medicare Advantage in-network maximum out-of-pocket (MOOP)</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-ma-moop" type="number" min="0" step="1" value="8850"></div><p class="mc-hint">Enter your plan MOOP. This is the worst-case cap for covered in-network medical cost-sharing in the estimate.</p></div>
+                    <div class="mc-field"><label for="mc-ma-copays">Expected yearly medical copays and coinsurance</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-ma-copays" type="number" min="0" step="1" value="800"></div><p class="mc-hint">Doctor, specialist, hospital, imaging, and therapy cost-sharing you expect in a normal year.</p></div>
+                    <div class="mc-field"><label for="mc-ma-drugs">Expected yearly drug out-of-pocket under the Advantage plan</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-ma-drugs" type="number" min="0" step="1" value="600"></div><p class="mc-hint">Drug costs vary by formulary tier. Capped in this estimate at the 2027 Part D out-of-pocket cap of $2,400 where Part D rules apply.</p></div>
+                </div>
+            </section>
+
+            <section class="mc-panel" aria-label="Medigap inputs">
+                <h2 class="mc-panel-title">Path B: Original Medicare + Medigap + standalone Part D</h2>
+                <div class="mc-grid">
+                    <div class="mc-field"><label for="mc-medigap-premium">Medigap monthly premium</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-medigap-premium" type="number" min="0" step="0.01" value="180"></div><p class="mc-hint">Enter the quote for the letter plan you are considering. Premiums vary by state, age, and plan letter.</p></div>
+                    <div class="mc-field"><label for="mc-partd-premium-b">Standalone Part D monthly premium (Path B)</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-partd-premium-b" type="number" min="0" step="0.01" value="35"></div></div>
+                    <div class="mc-field"><label for="mc-medigap-oop">Expected yearly medical out-of-pocket with Medigap</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-medigap-oop" type="number" min="0" step="1" value="292"></div><p class="mc-hint">Default equals the projected Part B deductible. Many Medigap plans leave little medical cost-sharing after that, but enter what your plan leaves to you.</p></div>
+                </div>
+            </section>
+
+            <section class="mc-panel" aria-label="Original Medicare without Medigap inputs">
+                <h2 class="mc-panel-title">Path C: Original Medicare + Part D, no Medigap (warning case)</h2>
+                <div class="mc-grid">
+                    <div class="mc-field"><label for="mc-partd-premium-c">Standalone Part D monthly premium (Path C)</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-partd-premium-c" type="number" min="0" step="0.01" value="35"></div></div>
+                    <div class="mc-field"><label for="mc-nomedigap-oop">Expected yearly 20 percent coinsurance and deductibles with no Medigap</label><div class="mc-input-wrap"><span class="mc-symbol">$</span><input id="mc-nomedigap-oop" type="number" min="0" step="1" value="1500"></div><p class="mc-hint">Original Medicare has no annual out-of-pocket cap. A major hospital or specialist year can move this number sharply.</p></div>
+                </div>
+            </section>
+
+            <section class="mc-panel" aria-label="Results">
+                <h2 class="mc-panel-title">Estimated total yearly cost</h2>
+                <div id="mc-results" aria-live="polite"></div>
+                <div class="mc-note-box"><strong>How to read this:</strong> Expected total is premiums for 12 months plus the out-of-pocket cost you entered. Worst case is premiums plus the cap where a cap exists. Path C has no medical out-of-pocket cap, so its worst case is not a finite number. Drug out-of-pocket in Paths B and C is capped at $2,400 for 2027 in this estimate, after the $700 maximum Part D deductible framework. Confirm exact drug pricing in the Medicare Plan Finder.</div>
+            </section>
+
+            <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use This Estimator</h2>
+                <p><strong style="color:var(--text);">1. Start with Part B.</strong> Keep $209.50 only as the Trustees projection, or replace it with the figure on your notice. Add any IRMAA surcharge you actually pay.</p>
+                <p><strong style="color:var(--text);">2. Enter real plan prices.</strong> For Medicare Advantage, use the premium and MOOP from the plan Annual Notice of Change mailed by September 30. For Medigap and Part D, use the quotes for your ZIP code.</p>
+                <p><strong style="color:var(--text);">3. Estimate a normal year honestly.</strong> Count last year doctor and specialist visits, hospital stays, imaging, therapy, and drug spending at plan prices. Then look at the worst-case column before you decide.</p>
+                <p><strong style="color:var(--text);">4. Verify before enrolling.</strong> Check every doctor, hospital, and prescription at medicare.gov/plan-compare. This estimator does not check networks or formularies.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">When Each Path Tends to Win</h2>
+                <p>Medicare Advantage tends to win the expected-total column in a light-use year because the extra premium can be $0 or low. It loses predictability: copays rise with use, networks and prior authorization apply, and the worst case runs to the plan MOOP.</p>
+                <p>Original Medicare plus Medigap tends to win the worst-case column. You pay Medigap and Part D premiums every month, but a bad health year adds little beyond the Part B deductible on many popular Medigap plans. It also keeps nationwide access to providers who accept Medicare.</p>
+                <p>Original Medicare plus Part D with no Medigap can look cheap in a healthy year and turn expensive without warning. There is no cap on the 20 percent Part B coinsurance. Treat Path C as the exposure warning, not the safe default.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">The 2027 Numbers Used Here</h2>
+                <p>Confirmed for 2027 as of October 2026: Part D maximum deductible $700 and Part D out-of-pocket cap $2,400. Projected, not final: Part B premium $209.50 per month from the Trustees report and the first IRMAA thresholds of about $113,000 single and $226,000 married. The final 2026 first IRMAA threshold is $109,000 single and $218,000 married filing jointly. CMS publishes final Part B and IRMAA figures in November, so revisit the estimate then.</p>
+            </section>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <details><summary>How do I estimate my total Medicare cost for 2027?</summary><p>Add 12 months of premiums to the out-of-pocket cost you expect in a normal year, then compare that total to the worst case: premiums plus the out-of-pocket maximum where one exists.</p></details>
+                <details><summary>What are the confirmed 2027 Part D numbers?</summary><p>Part D maximum deductible $700 and Part D annual out-of-pocket cap $2,400. Both are final from CMS as of October 2026.</p></details>
+                <details><summary>What is the 2027 Part B premium?</summary><p>Not final yet. This calculator defaults to the Trustees projection of $209.50 per month and labels it as a projection. CMS confirms the official figure in November.</p></details>
+                <details><summary>What are the IRMAA thresholds for 2027?</summary><p>Projected at about $113,000 single and $226,000 married, pending CMS confirmation. Final 2026 first threshold: $109,000 single and $218,000 married filing jointly.</p></details>
+                <details><summary>Does this calculator check doctors, drugs, or plan availability?</summary><p>No. It is an estimator, not a plan finder. It does not check networks, formularies, or county availability. Verify at medicare.gov/plan-compare.</p></details>
+                <details><summary>Is this Medicare calculator free and private?</summary><p>Yes, free with no signup. All math runs in your browser and nothing you enter is sent to a server.</p></details>
+            </div>
+
+            <section style="margin-top:2.5rem;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+                    <a class="rel-card" href="/tools/budget-planner/"><strong>Budget Planner</strong><span>Fit the winning premium into a monthly budget.</span></a>
+                    <a class="rel-card" href="/tools/retirement-drawdown-calculator/"><strong>Retirement Drawdown Calculator</strong><span>Plan how long retirement savings last.</span></a>
+                    <a class="rel-card" href="/tools/percentage-calculator/"><strong>Percentage Calculator</strong><span>Check coinsurance percentages fast.</span></a>
+                    <a class="rel-card" href="/guides/how-to-choose-between-medicare-advantage-and-medigap/"><strong>Medicare Advantage vs Medigap Guide</strong><span>Total-cost framing, networks, and the underwriting window.</span></a>
+                </div>
+            </section>
+
+            <section style="margin-top:2.5rem; padding:1.5rem; background: var(--card); border: 1px solid var(--border); border-radius:12px; text-align:center;">
+                <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:0.5rem;">Need the decision framework first?</h2>
+                <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Premium is not total cost, the MOOP vs no-cap difference, and the one-time Medigap underwriting window.</p>
+                <a href="/guides/how-to-choose-between-medicare-advantage-and-medigap/" style="display:inline-block;padding:0.8rem 1.8rem;background:var(--primary);color:var(--text);font-weight:700;border-radius:10px;text-decoration:none;">Read the Medicare Advantage vs Medigap Guide</a>
+            </section>
+
+            <div class="mc-note-box"><strong>Disclaimer:</strong> Educational estimator only, not insurance, medical, or financial advice. Plan premiums, networks, formularies, and availability vary by ZIP code and change yearly. Confirm current figures at Medicare.gov and with a licensed agent or your State Health Insurance Assistance Program before enrolling. 2027 figures as of October 2026.</div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/support.js"></script>
+    <script>
+    (function () {
+        "use strict";
+        var PART_D_CAP_2027 = 2400;
+        var ids = ["mc-partb","mc-partb-deductible","mc-irmaa","mc-drug-spend","mc-ma-premium","mc-ma-moop","mc-ma-copays","mc-ma-drugs","mc-medigap-premium","mc-partd-premium-b","mc-medigap-oop","mc-partd-premium-c","mc-nomedigap-oop"];
+        var els = {};
+        ids.forEach(function (id) { els[id] = document.getElementById(id); });
+        var resultsEl = document.getElementById("mc-results");
+        function num(id) { var v = parseFloat(els[id].value); return isNaN(v) || v < 0 ? 0 : v; }
+        function money(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+        function calc() {
+            var partBYear = num("mc-partb") * 12;
+            var irmaaYear = num("mc-irmaa") * 12;
+            var drugSpend = num("mc-drug-spend");
+            var partDCapped = Math.min(drugSpend, PART_D_CAP_2027);
+            var maPremiums = partBYear + irmaaYear + num("mc-ma-premium") * 12;
+            var maExpectedOop = Math.min(num("mc-ma-copays"), num("mc-ma-moop")) + Math.min(num("mc-ma-drugs"), PART_D_CAP_2027);
+            var maExpected = maPremiums + maExpectedOop;
+            var maWorst = maPremiums + num("mc-ma-moop") + PART_D_CAP_2027;
+            var bPremiums = partBYear + irmaaYear + num("mc-medigap-premium") * 12 + num("mc-partd-premium-b") * 12;
+            var bExpected = bPremiums + num("mc-medigap-oop") + partDCapped;
+            var bWorst = bPremiums + num("mc-medigap-oop") + PART_D_CAP_2027;
+            var cPremiums = partBYear + irmaaYear + num("mc-partd-premium-c") * 12;
+            var cExpected = cPremiums + num("mc-nomedigap-oop") + partDCapped;
+            var rows = [
+                { name: "A. Medicare Advantage", premiums: maPremiums, oop: maExpectedOop, total: maExpected, worst: money(maWorst), worstNote: "premiums + MOOP + drug cap" },
+                { name: "B. Original + Medigap + Part D", premiums: bPremiums, oop: num("mc-medigap-oop") + partDCapped, total: bExpected, worst: money(bWorst), worstNote: "premiums + medical OOP + drug cap" },
+                { name: "C. Original + Part D, no Medigap", premiums: cPremiums, oop: num("mc-nomedigap-oop") + partDCapped, total: cExpected, worst: "No cap", worstNote: "20% coinsurance is uncapped" }
+            ];
+            var cheapest = rows.slice().sort(function (a, b) { return a.total - b.total; })[0];
+            var html = '<div class="mc-table-wrap"><table class="mc-table"><thead><tr><th>Path</th><th>Premiums / yr</th><th>Expected OOP</th><th>Estimated total</th><th>Worst case</th></tr></thead><tbody>';
+            rows.forEach(function (r) {
+                var cls = r.name === cheapest.name ? ' class="cheapest"' : "";
+                html += "<tr" + cls + "><td>" + r.name + (r.name === cheapest.name ? " <strong>(lowest expected)</strong>" : "") + "</td><td>" + money(r.premiums) + "</td><td>" + money(r.oop) + "</td><td class=\"hl\">" + money(r.total) + "</td><td>" + r.worst + "<br><span style=\"font-size:0.75rem;\">" + r.worstNote + "</span></td></tr>";
+            });
+            html += "</tbody></table></div>";
+            html += '<div class="mc-verdict"><strong>Lowest expected total: ' + cheapest.name + " at " + money(cheapest.total) + ' per year.</strong> Check the worst-case column before deciding. A path that wins in a healthy year can lose in a hospital year.</div>';
+            resultsEl.innerHTML = html;
+        }
+        ids.forEach(function (id) { els[id].addEventListener("input", calc); });
+        calc();
+    })();
+    </script>
+</body>
+</html>

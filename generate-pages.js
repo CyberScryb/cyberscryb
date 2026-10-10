@@ -1419,6 +1419,7 @@ function generateSitemap(generatedPages) {
     'wedding-vow-generator',
     'interview-answer-coach',
     'performance-review-writer',
+    'medicare-cost-calculator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1633,6 +1634,7 @@ function manageRobotsMeta() {
     'wedding-vow-generator',
     'interview-answer-coach',
     'performance-review-writer',
+    'medicare-cost-calculator',
   ]);
 
   const dirsToProcess = [
