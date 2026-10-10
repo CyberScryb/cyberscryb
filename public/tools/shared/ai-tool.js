@@ -98,7 +98,7 @@
           return;
         }
 
-        loadingIndicator.classList.remove('hidden');
+        if (loadingIndicator) loadingIndicator.classList.remove('hidden');
         generateBtn.disabled = true;
         outputContent.innerHTML = '';
         outputContent.setAttribute('aria-busy', 'true');
@@ -172,7 +172,7 @@
           outputContent.appendChild(errEl);
         } finally {
           outputContent.setAttribute('aria-busy', 'false');
-          loadingIndicator.classList.add('hidden');
+          if (loadingIndicator) loadingIndicator.classList.add('hidden');
           // 3-second cooldown to prevent accidental rapid double clicking
           setTimeout(function () {
             generateBtn.disabled = false;

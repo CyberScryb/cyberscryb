@@ -23,6 +23,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261006audit1">
 
 
 
@@ -170,7 +171,7 @@
                                 <option value="Extended, about 400 to 600 words, suitable for a funeral program or online memorial">Extended (program / memorial page)</option>
                             </select>
                         </div>
-                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #dc2626, #ef4444); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                        <button id="generate-btn" class="primary-btn" style="background: #ef4444; border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
                             <span class="btn-text">Write the Obituary</span>
                             <span class="btn-icon">&rarr;</span>
                         </button>
@@ -185,12 +186,20 @@
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
                                 <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
+                                <button id="share-btn" class="icon-btn" title="Share result" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Share</button>
                             </div>
                         </div>
                         <div class="output-wrapper">
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your obituary draft will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Writing your obituary with Gemini 3.1 Pro...</p>
+                            </div>
+                        </div>
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                            <span id="word-count"></span>
                         </div>
                     </div>
                 </div>

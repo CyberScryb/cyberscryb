@@ -42,4 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
       if (wordCountEl) wordCountEl.textContent = words + ' words';
     },
   });
+
+  // Share button: Web Share API with clipboard fallback
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const text = document.getElementById('output-text').innerText;
+      if (!text || text.toLowerCase().includes('will appear here')) return;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'AI Email Writer', text });
+        } catch (e) {
+          /* user dismissed */
+        }
+      } else {
+        try {
+          await navigator.clipboard.writeText(text);
+          const orig = shareBtn.innerText;
+          shareBtn.innerText = 'Copied!';
+          setTimeout(() => {
+            shareBtn.innerText = orig;
+          }, 1600);
+        } catch (e) {
+          /* clipboard unavailable */
+        }
+      }
+    });
+  }
 });

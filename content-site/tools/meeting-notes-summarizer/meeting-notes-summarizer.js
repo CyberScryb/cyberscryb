@@ -35,4 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el) el.textContent = words + ' words';
     },
   });
+
+  // Share button: Web Share API with clipboard fallback
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const text = document.getElementById('output-text').innerText;
+      if (!text || text.toLowerCase().includes('will appear here')) return;
+      const shareData = { title: 'AI Meeting Notes Summarizer', text };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (e) {
+          /* user dismissed */
+        }
+      } else {
+        try {
+          await navigator.clipboard.writeText(text);
+          const orig = shareBtn.innerText;
+          shareBtn.innerText = 'Copied!';
+          setTimeout(() => {
+            shareBtn.innerText = orig;
+          }, 1600);
+        } catch (e) {
+          /* clipboard unavailable */
+        }
+      }
+    });
+  }
 });

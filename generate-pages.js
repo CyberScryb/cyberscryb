@@ -1430,6 +1430,11 @@ function generateSitemap(generatedPages) {
     'icebreaker-generator',
     'toast-generator',
     'salary-negotiation-email-writer',
+    'bedtime-story-generator',
+    'letter-of-recommendation-writer',
+    'baby-name-generator',
+    'personal-statement-writer',
+    'dream-interpreter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1514,6 +1519,11 @@ function generateSitemap(generatedPages) {
     'how-to-write-icebreakers',
     'how-to-give-a-toast',
     'how-to-negotiate-a-higher-salary',
+    'personalized-bedtime-stories-guide',
+    'how-to-write-a-letter-of-recommendation-guide',
+    'unique-baby-names-guide',
+    'college-personal-statement-guide',
+    'common-dream-meanings-guide',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1665,6 +1675,11 @@ function manageRobotsMeta() {
     'icebreaker-generator',
     'toast-generator',
     'salary-negotiation-email-writer',
+    'bedtime-story-generator',
+    'letter-of-recommendation-writer',
+    'baby-name-generator',
+    'personal-statement-writer',
+    'dream-interpreter',
   ]);
 
   const dirsToProcess = [
