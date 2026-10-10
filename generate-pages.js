@@ -1425,6 +1425,11 @@ function generateSitemap(generatedPages) {
     'self-evaluation-writer',
     'meeting-notes-summarizer',
     'wedding-speech-writer',
+    'poem-generator',
+    'wedding-hashtag-generator',
+    'icebreaker-generator',
+    'toast-generator',
+    'salary-negotiation-email-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1504,6 +1509,11 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-self-evaluation',
     'how-to-turn-meeting-notes-into-action-items',
     'how-to-write-a-wedding-speech',
+    'how-to-write-a-poem',
+    'how-to-create-a-wedding-hashtag',
+    'how-to-write-icebreakers',
+    'how-to-give-a-toast',
+    'how-to-negotiate-a-higher-salary',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1650,6 +1660,11 @@ function manageRobotsMeta() {
     'self-evaluation-writer',
     'meeting-notes-summarizer',
     'wedding-speech-writer',
+    'poem-generator',
+    'wedding-hashtag-generator',
+    'icebreaker-generator',
+    'toast-generator',
+    'salary-negotiation-email-writer',
   ]);
 
   const dirsToProcess = [
