@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+<meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Meeting Notes Summarizer &mdash; Free Action Items Generator | CyberScryb</title>
+    <meta name="description" content="Paste meeting notes or a transcript and get a summary, key decisions, and action items with owners. Free AI meeting notes summarizer, no signup, no bot to install.">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta property="og:title" content="AI Meeting Notes Summarizer &mdash; Free Action Items Generator | CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Meeting Notes Summarizer &mdash; Free Action Items Generator | CyberScryb">
+    <meta name="twitter:description" content="Paste meeting notes, get summary, decisions, and action items with owners. Free, no signup.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <link rel="canonical" href="https://cyberscryb.com/tools/meeting-notes-summarizer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+
+
+
+    <!-- Google AdSense -->
+
+
+    <link rel="icon" type="image/png" href="/mascot-icon.png">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I turn meeting notes into action items?",
+      "acceptedAnswer": {
+        "text": "Paste your raw notes or transcript into the tool. The AI returns a short summary, the decisions that were actually made, and an action-item list with owners and due dates where stated — plus a follow-up email draft you can send to attendees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it invent action items that were not discussed?",
+      "acceptedAnswer": {
+        "text": "No. The tool is instructed to use only what is in your notes. When an owner or due date was not stated, it says so instead of guessing — so the action list is one you can trust in a standup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of notes can I paste?",
+      "acceptedAnswer": {
+        "text": "Anything: a Zoom or Teams transcript, messy bullet notes you typed during the call, or a voice-memo transcription. The messier the input, the more value the structuring adds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this meeting notes summarizer free?",
+      "acceptedAnswer": {
+        "text": "Yes. 100% free with no accounts, no signup, and no meeting bot to install."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is what I paste kept private?",
+      "acceptedAnswer": {
+        "text": "Your input is sent securely to our AI service to generate the summary and is not stored after the request completes. Do not paste confidential company information, credentials, or personal data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a generic summarizer?",
+      "acceptedAnswer": {
+        "text": "A generic summarizer compresses text. This tool is built for meetings specifically: it separates decisions from discussion, extracts action items with owners, flags open questions, and drafts the follow-up email — the four things you actually need after a meeting."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                                                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:1rem auto 0; padding:0 1.5rem; font-size:0.85rem; color:var(--text-faint); display:flex; align-items:center; gap:8px;">
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <span style="color: var(--primary);">Meeting Notes Summarizer</span>
+    </nav>
+
+    <main>
+        <section class="hero" style="min-height: 40vh; padding-top: 80px;">
+            <div class="hero-container">
+                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    AI-Powered
+                </div>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: var(--primary);">Meeting Notes</span> Summarizer</h1>
+                <p class="hero-subtitle">Paste the mess. Get the meeting back: summary, decisions, action items with owners, and a follow-up email draft.</p>
+            </div>
+        </section>
+
+        <section class="tool-content" style="padding: 2rem 0;">
+            <div class="container">
+                <div class="humanizer-container" style="background: transparent; box-shadow: none;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                Raw Notes
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load realistic sample notes" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" style="background: var(--primary); color: #000;">Step 1</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="meeting-title" style="color: var(--text-muted);">Meeting Title (optional)</label>
+                            <input id="meeting-title" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-size:0.9rem;" placeholder="e.g. Q4 planning sync">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="tool-input" style="color: var(--text-muted);">Notes or Transcript</label>
+                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Paste your transcript, bullet notes, or voice-memo transcription. Messy is fine."></textarea>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="notes-detail" style="color: var(--text-muted);">Detail Level</label>
+                            <select id="notes-detail" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                <option value="Concise: tight summary, decisions, and action items only" selected>Concise</option>
+                                <option value="Detailed: fuller summary with key discussion points, decisions, action items, open questions, and a follow-up email draft">Detailed (with follow-up email draft)</option>
+                            </select>
+                        </div>
+                        <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #dc2626, #ef4444); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                            <span class="btn-text">Summarize My Meeting</span>
+                            <span class="btn-icon">&rarr;</span>
+                        </button>
+                    </div>
+
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
+                                Meeting Recap
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
+                            </div>
+                        </div>
+                        <div class="output-wrapper">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
+                                <span class="placeholder" style="color:var(--text-faint);">Your meeting recap will appear here...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Meetings End. The Work Evaporates.</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Everyone has lived this: a good meeting, real decisions, clear next steps &mdash; and by Thursday nobody remembers who owned what. The notes sit in a doc nobody reopens. The action items lived in someone's head until they didn't. The cost is not the meeting. It is the re-meeting.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">This tool closes that gap in about ten seconds. Paste whatever you have &mdash; a transcript, bullet notes, a rambling voice memo transcription &mdash; and get back the four things a meeting actually owes you: what it was about, what was decided, who owns what by when, and the follow-up email that makes it all official. No bot joining your calls. No signup. No subscription.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">One rule the tool follows strictly: it only uses what is in your notes. If an owner or deadline was never stated, it says "not stated" instead of inventing one. An action list you can trust beats a polished one you can't.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">How It Works</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 1: Paste your notes.</strong> Transcript, bullets, chaos &mdash; all fine. Add the meeting title if you want it labeled.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 2: Pick your detail level.</strong> Concise for a quick recap, detailed when you need the follow-up email draft too.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 3: Get the recap.</strong> Summary, decisions, action items with owners, open questions.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 4: Send it.</strong> Copy the follow-up into Slack or email before the next meeting starts and watch the re-meeting disappear.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Real Ways People Use It</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Team standups and syncs:</strong> Turn the weekly call into an action list before anyone closes the tab.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Client calls:</strong> Decisions and commitments, documented while they are fresh, in language you can forward.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Missed meetings:</strong> Paste a colleague's notes and get the recap in seconds instead of a 40-minute recording.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">1:1s:</strong> Keep a running record of what you and your manager actually agreed to.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <div class="faq-item"><h4>How do I turn meeting notes into action items?</h4><p>Paste your notes or transcript. The AI returns a summary, the decisions made, and action items with owners and due dates where stated, plus a follow-up email draft.</p></div>
+                    <div class="faq-item"><h4>Does it invent action items that were not discussed?</h4><p>No. It uses only what is in your notes, and marks unstated owners or dates as not stated instead of guessing.</p></div>
+                    <div class="faq-item"><h4>What kind of notes can I paste?</h4><p>Anything: transcripts, bullet notes, voice-memo transcriptions. The messier the input, the more the structuring helps.</p></div>
+                    <div class="faq-item"><h4>Is this meeting notes summarizer free?</h4><p>Yes. 100% free with no accounts, no signup, and no meeting bot to install.</p></div>
+                    <div class="faq-item"><h4>Is what I paste kept private?</h4><p>Your input is sent securely to our AI service to generate the summary and is not stored after the request completes. Do not paste confidential company information.</p></div>
+                    <div class="faq-item"><h4>How is this different from a generic summarizer?</h4><p>It separates decisions from discussion, extracts action items with owners, flags open questions, and drafts the follow-up email &mdash; the four things you need after a meeting.</p></div>
+                    <p style="margin-top:1.5rem; color: var(--text-muted);">Want the full playbook? Read our guide: <a href="/guides/how-to-turn-meeting-notes-into-action-items/" style="color: var(--primary-soft);">How to Turn Meeting Notes Into Action Items</a>.</p>
+                </div>
+
+                <div class="related-tools" style="text-align: center; margin-top: 2rem;">
+                    <p>Related: <a href="/tools/summarizer/">AI Summarizer</a> | <a href="/tools/email-writer/">AI Email Writer</a> | <a href="/tools/paraphraser/">AI Paraphraser</a> | <a href="/tools/humanizer/">AI Humanizer</a></p>
+                </div>
+            </div>
+        </section>
+
+
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Compress any long text to its essentials.</span>
+            </a>
+            <a href="/tools/email-writer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Email Writer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Follow-ups that write themselves.</span>
+            </a>
+            <a href="/tools/paraphraser/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Paraphraser</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Rephrase the recap for different audiences.</span>
+            </a>
+            <a href="/tools/humanizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Humanizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Make the follow-up sound like you.</span>
+            </a>
+        </div>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CyberScryb AI Meeting Notes Summarizer",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/meeting-notes-summarizer/meeting-notes-summarizer.js"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+
+</body>
+
+</html>

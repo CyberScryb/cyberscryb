@@ -1420,6 +1420,11 @@ function generateSitemap(generatedPages) {
     'interview-answer-coach',
     'performance-review-writer',
     'medicare-cost-calculator',
+    'obituary-writer',
+    'eulogy-writer',
+    'self-evaluation-writer',
+    'meeting-notes-summarizer',
+    'wedding-speech-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1494,6 +1499,11 @@ function generateSitemap(generatedPages) {
     'how-to-answer-interview-questions',
     'how-to-write-a-performance-review',
     'how-to-choose-between-medicare-advantage-and-medigap',
+    'how-to-write-an-obituary',
+    'how-to-write-a-eulogy',
+    'how-to-write-a-self-evaluation',
+    'how-to-turn-meeting-notes-into-action-items',
+    'how-to-write-a-wedding-speech',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1635,6 +1645,11 @@ function manageRobotsMeta() {
     'interview-answer-coach',
     'performance-review-writer',
     'medicare-cost-calculator',
+    'obituary-writer',
+    'eulogy-writer',
+    'self-evaluation-writer',
+    'meeting-notes-summarizer',
+    'wedding-speech-writer',
   ]);
 
   const dirsToProcess = [
