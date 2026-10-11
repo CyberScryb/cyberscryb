@@ -208,6 +208,7 @@ describe('KEYBOARD_PATTERNS', () => {
 // ── Security: Math.random() usage ───────────────────────
 
 describe('honest local analysis copy', () => {
+  const fs = require('fs');
   const path = require('path');
   const html = fs.readFileSync(
     path.join(__dirname, '../content-site/tools/password-checker/index.html'),
