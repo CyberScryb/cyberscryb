@@ -37,7 +37,7 @@
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "isAccessibleForFree": true,
         "description": "Check how strong your password is and how long it would take to crack. Free, no account, and it runs in your browser so your password never leaves your device.",
-        "featureList": ["Entropy calculation in bits", "Strength estimate from entropy", "Crack time estimation at 10B guesses/sec", "Keyboard pattern detection", "Local common-password list check", "CyberScryb Verification ID"],
+        "featureList": ["Entropy calculation in bits", "Strength score from local analysis", "Crack time estimation at 10B guesses/sec", "Keyboard pattern detection", "Local common-password list check"],
         "author": { "@type": "Organization", "name": "CyberScryb LLC", "url": "https://cyberscryb.com" }
     }
     </script>
@@ -126,7 +126,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -180,9 +179,9 @@
                         <div class="stat-unit">bits</div>
                     </div>
                     <div class="stat-card stat-card-accent">
-                        <div class="stat-label">Percentile</div>
+                        <div class="stat-label">Strength score</div>
                         <div class="stat-value" id="percentile">&mdash;</div>
-                        <div class="stat-unit" id="percentileContext">vs. all passwords checked</div>
+                        <div class="stat-unit" id="percentileContext">out of 100, from local analysis</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Crack Time</div>
@@ -225,13 +224,11 @@
                 </div>
             </div>
 
-            <!-- Verification ID -->
+            <!-- Local summary. This is not a verification against other passwords or a breach list. -->
             <div class="verification-badge" id="verificationBadge" style="display:none">
                 <div class="verify-header">
-                    <span class="verify-icon">🛡️</span>
-                    <span class="verify-title">CYBERSCRYB VERIFICATION</span>
+                    <span class="verify-title">Local analysis</span>
                 </div>
-                <div class="verify-id" id="verifyId">&mdash;</div>
                 <div class="verify-summary" id="verifySummary">&mdash;</div>
             </div>
             </div>
@@ -374,7 +371,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
