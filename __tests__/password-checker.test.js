@@ -26,7 +26,6 @@ document.body.innerHTML = `
         <div id="warnings" class="hidden"><ul id="warningList"></ul></div>
         <ul id="tipsList"></ul>
         <div id="verificationBadge" style="display:none">
-            <span id="verifyId"></span>
             <span id="verifySummary"></span>
         </div>
     </div>
@@ -41,7 +40,7 @@ const {
   COMMON_PASSWORDS,
   KEYBOARD_PATTERNS,
   PERCENTILE_TABLE,
-} = require('../public/tools/password-checker/script');
+} = require('../content-site/tools/password-checker/script');
 
 // ── formatTime ──────────────────────────────────────────
 
@@ -207,6 +206,44 @@ describe('KEYBOARD_PATTERNS', () => {
 });
 
 // ── Security: Math.random() usage ───────────────────────
+
+describe('honest local analysis copy', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const html = fs.readFileSync(
+    path.join(__dirname, '../content-site/tools/password-checker/index.html'),
+    'utf8'
+  );
+  const source = fs.readFileSync(
+    path.join(__dirname, '../content-site/tools/password-checker/script.js'),
+    'utf8'
+  );
+
+  test('labels the score as local analysis, not a comparison with other passwords', () => {
+    expect(html).toContain('Strength score');
+    expect(html).toContain('out of 100, from local analysis');
+    expect(html).toContain('Local analysis');
+    expect(html).not.toMatch(/vs\. all passwords checked/i);
+    expect(html).not.toMatch(/CYBERSCRYB VERIFICATION/);
+    expect(source).not.toMatch(/passwords analyzed/);
+    expect(source).not.toMatch(/passwords checked/);
+    expect(source).not.toMatch(/Top \$\{/);
+  });
+
+  test('typing a password fills crack time and a local strength summary', () => {
+    const inputEl = document.getElementById('passwordInput');
+    inputEl.value = 'correct horse battery staple!!';
+    inputEl.dispatchEvent(new Event('input'));
+    expect(document.getElementById('percentileContext').textContent).toBe(
+      'out of 100, from local analysis'
+    );
+    expect(document.getElementById('percentile').textContent).toMatch(/^\d+$/);
+    expect(document.getElementById('crackTime').textContent.length).toBeGreaterThan(0);
+    expect(document.getElementById('verifySummary').textContent).toMatch(/Crack time:/);
+    expect(document.getElementById('verifySummary').textContent).not.toMatch(/Top /);
+    expect(document.getElementById('verificationBadge').style.display).toBe('block');
+  });
+});
 
 describe('security audit', () => {
   test('FLAGGED: generatePassword uses Math.random() (not crypto-secure)', () => {

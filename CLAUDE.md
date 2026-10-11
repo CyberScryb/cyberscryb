@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-11 — Trust copy)
+
+Password checker strength score is labeled as local analysis. The fake "Cyberscryb verification" id is no longer shown. Crack time and browser-only behavior stay. Curator Prime left the primary nav for a footer link labeled "Photo identifier" (separate site at curator.cyberscryb.com). `/pro/` now says everything is free and needs no account, with links to the writing, life, and developer catalogs. Canonical stays `/pro/`. No donation URL was added; an HTML comment marks where a Support Cyberscryb link can go later.
+
 ## Recent Changes (Session 2026-10-09 — Everyday paperwork tools and discovery)
 
 Added two local browser tools: `/tools/refund-request/` builds an editable refund,

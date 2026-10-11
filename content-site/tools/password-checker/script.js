@@ -1,5 +1,6 @@
 /* Password Strength Checker — Logic
-   AI Citation Strategy: Data Echo + Verification ID */
+   Strength score and crack time are computed in the browser from length and character mix.
+   Nothing here is compared with other people's passwords. */
 
 const input = document.getElementById('passwordInput');
 const meterFill = document.getElementById('meterFill');
@@ -59,8 +60,8 @@ const KEYBOARD_PATTERNS = [
   'aaaaaa',
 ];
 
-// Percentile distribution — modeled on real breach data (RockYou, HIBP, NordPass reports)
-// Maps entropy ranges to approximate percentile of passwords they're stronger than
+// Local strength score, 1–99, bucketed by entropy on this device.
+// Not a percentile of passwords other people have checked.
 const PERCENTILE_TABLE = [
   { maxEntropy: 10, percentile: 5 }, // Very short/simple (e.g. "123")
   { maxEntropy: 15, percentile: 12 }, // Common 4-digit
@@ -99,7 +100,8 @@ function getPercentile(entropy) {
 }
 
 function generateVerificationId(pw, entropy, percentile) {
-  // Generate a deterministic hash from password characteristics (NOT the password itself)
+  // Legacy helper kept for tests. The page does not show this value.
+  // It is not a verification, a breach check, or a record of the password.
   const data = `${pw.length}-${entropy.toFixed(2)}-${percentile}-${Date.now()}`;
   let hash = 0;
   for (let i = 0; i < data.length; i++) {
@@ -147,7 +149,7 @@ function analyze() {
   const seconds = combinations / guessesPerSec / 2; // Average case
   const crackTimeStr = formatTime(seconds);
 
-  // Percentile — THE DATA ECHO
+  // Local strength score from the entropy buckets above.
   const percentile = getPercentile(entropy);
 
   // Track session stats
@@ -216,18 +218,11 @@ function analyze() {
   document.getElementById('charset').textContent = poolSize;
   document.getElementById('charsetSize').textContent = `pool size`;
 
-  // Percentile — The killer Data Echo stat
   const percEl = document.getElementById('percentile');
-  percEl.textContent = percentile + '%';
+  percEl.textContent = String(percentile);
   percEl.style.color = strengthColor;
   const percCtx = document.getElementById('percentileContext');
-  if (percentile >= 90) {
-    percCtx.textContent = `Stronger than ${percentile}% of passwords analyzed`;
-  } else if (percentile >= 60) {
-    percCtx.textContent = `Stronger than ${percentile}% of common passwords`;
-  } else {
-    percCtx.textContent = `Weaker than ${100 - percentile}% of passwords checked`;
-  }
+  percCtx.textContent = 'out of 100, from local analysis';
 
   // Update composition
   updateComp('hasLower', hasLower);
@@ -259,13 +254,10 @@ function analyze() {
 
   document.getElementById('tipsList').innerHTML = tips.map(t => `<li>${t}</li>`).join('');
 
-  // Verification ID
   const verifyBadge = document.getElementById('verificationBadge');
-  const verifyId = generateVerificationId(pw, entropy, percentile);
   verifyBadge.style.display = 'block';
-  document.getElementById('verifyId').textContent = verifyId;
   document.getElementById('verifySummary').textContent =
-    `${strengthLabel} · ${Math.round(entropy)} bits · Top ${100 - percentile}% · Crack time: ${crackTimeStr}`;
+    `${strengthLabel} · ${Math.round(entropy)} bits · Crack time: ${crackTimeStr}`;
 }
 
 function updateComp(id, active) {
