@@ -1435,6 +1435,7 @@ function generateSitemap(generatedPages) {
     'baby-name-generator',
     'personal-statement-writer',
     'dream-interpreter',
+    'apology-letter-generator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1524,6 +1525,8 @@ function generateSitemap(generatedPages) {
     'unique-baby-names-guide',
     'college-personal-statement-guide',
     'common-dream-meanings-guide',
+    'how-to-write-an-apology-letter',
+    'how-to-write-a-complaint-letter',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1680,6 +1683,7 @@ function manageRobotsMeta() {
     'baby-name-generator',
     'personal-statement-writer',
     'dream-interpreter',
+    'apology-letter-generator',
   ]);
 
   const dirsToProcess = [
