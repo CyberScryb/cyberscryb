@@ -123,3 +123,47 @@ test('catalog search filters every section and clear filters restores the tools'
     'false'
   );
 });
+
+test('restored draft notice has proper aria attributes and clear button label', () => {
+  window.history.pushState({}, '', '/tools/email-writer/');
+  window.CSSupport = { showResult: jest.fn() };
+  document.body.innerHTML =
+    '<header></header><main><textarea id="tool-input"></textarea></main><footer></footer><script src="/tools/shared/support.js"></script>';
+  localStorage.setItem('cs_draft_/tools/email-writer', 'Saved draft text');
+  window.matchMedia = jest.fn(() => ({ matches: true }));
+  load('js/script.js');
+  const banner = document.querySelector('.cs-draft-notice');
+  expect(banner).not.toBeNull();
+  expect(banner.getAttribute('role')).toBe('status');
+  expect(banner.getAttribute('aria-live')).toBe('polite');
+  const clearBtn = banner.querySelector('button');
+  expect(clearBtn.getAttribute('aria-label')).toBe('Clear restored draft');
+});
+
+test('copy button updates aria-label on success and restores it afterwards', async () => {
+  jest.useFakeTimers();
+  document.body.innerHTML =
+    '<div id="output-text">Generated result text</div><button id="copy-btn" aria-label="Copy result to clipboard">Copy</button>';
+  let resolvePromise;
+  const writePromise = new Promise(res => {
+    resolvePromise = res;
+  });
+  Object.defineProperty(navigator, 'clipboard', {
+    value: { writeText: jest.fn().mockImplementation(() => writePromise) },
+    writable: true,
+    configurable: true,
+  });
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'input' });
+  const copyBtn = document.querySelector('#copy-btn');
+  copyBtn.click();
+  resolvePromise();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copied to clipboard');
+  expect(copyBtn.textContent).toBe('Copied! ✓');
+  jest.advanceTimersByTime(1600);
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy result to clipboard');
+  expect(copyBtn.textContent).toBe('Copy');
+  jest.useRealTimers();
+});

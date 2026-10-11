@@ -55,14 +55,23 @@
 
     if (copyBtn) {
       copyBtn.addEventListener('click', function () {
-        const text = outputContent.innerText;
+        const text = outputContent.innerText || outputContent.textContent;
         if (text && !text.toLowerCase().includes('will appear here')) {
           navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: toolId });
-            const orig = copyBtn.innerText;
+            const origText = copyBtn.innerText || copyBtn.textContent;
+            const origAria = copyBtn.getAttribute('aria-label');
             copyBtn.innerText = 'Copied! ✓';
+            copyBtn.textContent = 'Copied! ✓';
+            copyBtn.setAttribute('aria-label', 'Copied to clipboard');
             setTimeout(function () {
-              copyBtn.innerText = orig;
+              copyBtn.innerText = origText;
+              copyBtn.textContent = origText;
+              if (origAria !== null) {
+                copyBtn.setAttribute('aria-label', origAria);
+              } else {
+                copyBtn.removeAttribute('aria-label');
+              }
             }, 1600);
           });
         }
