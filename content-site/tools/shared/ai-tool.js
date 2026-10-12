@@ -53,6 +53,39 @@
       return fallback || 'Request failed.';
     }
 
+    // Inline validation — replaces jarring native alert() dialogs.
+    // Shows a styled message near the generate button, auto-dismisses.
+    let validationTimer = null;
+    function showValidation(message, focusInput) {
+      let errEl = document.getElementById('tool-validation-error');
+      if (!errEl) {
+        errEl = document.createElement('div');
+        errEl.id = 'tool-validation-error';
+        errEl.setAttribute('role', 'alert');
+        errEl.style.cssText =
+          'display:none;margin:0.75rem 0 0;padding:0.7rem 1rem;border-radius:10px;' +
+          'background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.35);' +
+          'color:#fca5a5;font-size:0.9rem;line-height:1.5;';
+        const anchor = generateBtn || outputContent;
+        if (anchor && anchor.parentNode) {
+          anchor.parentNode.insertBefore(errEl, anchor.nextSibling);
+        }
+      }
+      errEl.textContent = message;
+      errEl.style.display = 'block';
+      if (validationTimer) clearTimeout(validationTimer);
+      validationTimer = setTimeout(function () {
+        errEl.style.display = 'none';
+      }, 5000);
+      if (focusInput) {
+        const inputEl =
+          document.getElementById('tool-input') ||
+          document.querySelector('textarea[id$="-input"]') ||
+          document.querySelector('textarea');
+        if (inputEl) inputEl.focus();
+      }
+    }
+
     if (copyBtn) {
       copyBtn.addEventListener('click', function () {
         const text = outputContent.innerText;
@@ -88,13 +121,16 @@
         const params = config.collectParams ? config.collectParams() : {};
 
         if (!input || (typeof input === 'string' && !input.trim())) {
-          alert(config.emptyMessage || 'Please provide some input.');
+          showValidation(config.emptyMessage || 'Please provide some input to continue.', true);
           return;
         }
 
         const inputString = typeof input === 'string' ? input : JSON.stringify(input);
         if (inputString.length > 4000) {
-          alert('Maximum input length is 4,000 characters. Please shorten your text.');
+          showValidation(
+            'Maximum input length is 4,000 characters. Please shorten your text.',
+            true
+          );
           return;
         }
 
@@ -166,9 +202,18 @@
         } catch (error) {
           console.error('[ai-tool]', error);
           outputContent.innerHTML = '';
-          const errEl = document.createElement('span');
-          errEl.style.color = '#ef4444';
-          errEl.textContent = error.message || 'Request failed.';
+          const errEl = document.createElement('div');
+          errEl.style.cssText =
+            'padding:1rem 1.25rem;border-radius:12px;background:rgba(239,68,68,0.08);' +
+            'border:1px solid rgba(239,68,68,0.3);color:#fca5a5;font-size:0.95rem;line-height:1.6;';
+          errEl.setAttribute('role', 'alert');
+          const errTitle = document.createElement('strong');
+          errTitle.textContent = 'Something went wrong. ';
+          errTitle.style.color = '#f87171';
+          errEl.appendChild(errTitle);
+          errEl.appendChild(
+            document.createTextNode(error.message || 'Request failed. Please try again.')
+          );
           outputContent.appendChild(errEl);
         } finally {
           outputContent.setAttribute('aria-busy', 'false');
@@ -182,6 +227,39 @@
     }
 
     updateUsageDisplay();
+    initCharCounter();
+
+    // Live character counter — shows "X / 4,000" near the input.
+    // Uses existing #char-count if the page has its own; otherwise creates one.
+    function initCharCounter() {
+      const inputEl =
+        document.getElementById('tool-input') ||
+        document.querySelector('textarea[id$="-input"]') ||
+        document.querySelector('textarea');
+      if (!inputEl) return;
+
+      // Page already has its own counter — leave it alone.
+      if (document.getElementById('char-count')) return;
+
+      const counter = document.createElement('div');
+      counter.id = 'char-count';
+      counter.className = 'cs-char-counter';
+      counter.setAttribute('aria-live', 'polite');
+      counter.style.cssText =
+        'font-size:0.78rem;color:var(--text-faint);text-align:right;' +
+        'margin-top:0.35rem;font-variant-numeric:tabular-nums;';
+      if (inputEl.parentNode) {
+        inputEl.parentNode.insertBefore(counter, inputEl.nextSibling);
+      }
+
+      function update() {
+        const len = inputEl.value.length;
+        counter.textContent = len.toLocaleString() + ' / 4,000';
+        counter.style.color = len > 4000 ? '#f87171' : '';
+      }
+      inputEl.addEventListener('input', update);
+      update();
+    }
 
     function applyExample(triggerRun) {
       const ex = window.CSExamples && window.CSExamples[toolId];

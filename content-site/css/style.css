@@ -93,6 +93,34 @@ body {
   font-size: 16px;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+  Premium micro-details — selection, scrollbar, placeholders.
+*/
+::selection {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
 }
 
 /*
@@ -367,6 +395,13 @@ header {
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
     0 12px 32px rgba(22, 20, 17, 0.14),
     0 0 28px rgba(239, 68, 68, 0.3);
+}
+.cta-button:active,
+.btn-primary:active,
+.pro-cta-btn:active,
+.btn-cta:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
 }
 
 /* Amber attention — rare pay moments */
