@@ -111,8 +111,8 @@
       }
       existing.querySelector('summary').textContent =
         'Previous results (' + (resultHistory.length - 1) + ')';
-      var list = existing.querySelector('#result-history-list');
-      list.innerHTML = '';
+      var historyList = existing.querySelector('#result-history-list');
+      historyList.innerHTML = '';
       resultHistory.slice(1).forEach(function (item, idx) {
         var btn = document.createElement('button');
         btn.type = 'button';
@@ -128,7 +128,7 @@
           updateOutputCount(item.text);
           outputContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
-        list.appendChild(btn);
+        historyList.appendChild(btn);
       });
     }
 
@@ -324,7 +324,9 @@
             generateBtn.click();
           }
         });
-        dlBtn.parentNode.insertBefore(regenBtn, dlBtn.nextSibling);
+        var dlBtnEl = document.getElementById('download-btn');
+        var anchor = dlBtnEl || copyBtn;
+        anchor.parentNode.insertBefore(regenBtn, anchor.nextSibling);
       }
 
       // Chain tools — "Send to..." dropdown for using output in another tool.
@@ -374,7 +376,9 @@
             chainSelect.value = '';
           });
           chainWrap.appendChild(chainSelect);
-          regenBtn.parentNode.insertBefore(chainWrap, regenBtn.nextSibling);
+          var regenBtnEl = document.getElementById('regen-btn');
+          var chainAnchor = regenBtnEl || copyBtn;
+          chainAnchor.parentNode.insertBefore(chainWrap, chainAnchor.nextSibling);
         }
       }
     }
