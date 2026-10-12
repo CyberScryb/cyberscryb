@@ -295,4 +295,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateUsageDisplay();
   updateCharCounter();
+
+  // Hide the mobile sticky bar when the footer scrolls into view,
+  // so it never covers footer content or the Privacy preferences button.
+  (function () {
+    var mobileBar = document.getElementById('hz-mobile-bar');
+    var footer = document.querySelector('footer');
+    if (!mobileBar || !footer || !('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          mobileBar.style.transform = entry.isIntersecting ? 'translateY(110%)' : '';
+          mobileBar.style.transition = 'transform 0.25s ease';
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(footer);
+  })();
 });

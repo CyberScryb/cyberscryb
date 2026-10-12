@@ -348,7 +348,11 @@ header {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 6px;
+  padding: 11px 10px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 .hamburger span {
   width: 22px;
@@ -356,6 +360,16 @@ header {
   background: var(--text);
   border-radius: 1px;
   transition: var(--transition);
+}
+/* Animate to X when menu is open */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ─── Buttons ─── */
@@ -480,6 +494,8 @@ header {
   font-weight: 700;
   font-size: 0.92rem;
   text-decoration: none;
+  padding: 0.6rem 0;
+  min-height: 44px;
   transition:
     gap var(--transition),
     color var(--transition);
@@ -1150,6 +1166,10 @@ footer {
 .footer-links a {
   color: var(--text-muted);
   font-size: 0.9rem;
+  display: inline-block;
+  padding: 0.5rem 0.25rem;
+  min-height: 44px;
+  line-height: 1.4;
 }
 .footer-links a:hover {
   color: var(--primary-soft);
@@ -1231,7 +1251,7 @@ select {
 .search-wrapper input {
   width: 100%;
   min-height: 52px;
-  padding: 0.9rem 1.25rem 0.9rem 2.75rem;
+  padding: 0.9rem 1.25rem 0.9rem 3rem;
   background: var(--card-glass);
   border: 1px solid var(--border);
   border-radius: 99px;
