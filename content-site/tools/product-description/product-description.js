@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = this.scrollHeight + 'px';
   });
   toneSelect.addEventListener('change', () => {
-    toneLabel.textContent = 'Tone: ' + toneSelect.value;
+    if (toneLabel) toneLabel.textContent = 'Tone: ' + toneSelect.value;
   });
 
   const sampleBtn = document.getElementById('sample-btn');
