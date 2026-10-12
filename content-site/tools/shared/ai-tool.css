@@ -460,3 +460,96 @@ label:has(input[type='radio']:checked) {
 label:has(input[type='checkbox']:checked) {
   border-color: rgba(239, 68, 68, 0.5) !important;
 }
+
+/*
+  Skeleton loading — shimmering placeholder lines shown in the output
+  while the AI generates. Feels faster and more intentional than a spinner.
+*/
+.cs-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+.cs-skeleton-line {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: cs-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.cs-skeleton-line.short {
+  width: 62%;
+}
+.cs-skeleton-line.medium {
+  width: 84%;
+}
+@keyframes cs-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-skeleton-line {
+    animation: none;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/*
+  Sticky input panel on desktop — keeps the input and Generate button
+  visible while scrolling through long outputs.
+*/
+@media (min-width: 1024px) {
+  .input-panel {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+}
+
+/*
+  Print stylesheet — for letter/document tools, prints only the output.
+*/
+@media print {
+  header,
+  footer,
+  nav,
+  .navbar,
+  .input-panel,
+  #generate-btn,
+  #shortcut-hint,
+  #clear-btn,
+  #sample-btn,
+  #result-history,
+  .cs-loading-tip,
+  #loading-indicator,
+  .adsbygoogle,
+  .geo-card,
+  .faq-item {
+    display: none !important;
+  }
+  .output-panel {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .output-content {
+    border: none !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}

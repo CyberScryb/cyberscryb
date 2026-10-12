@@ -48,6 +48,21 @@
       });
     })();
 
+    // Keyboard shortcut hint — shows "Ctrl+Enter" under the Generate button.
+    (function initShortcutHint() {
+      if (!generateBtn || document.getElementById('shortcut-hint')) return;
+      var hint = document.createElement('div');
+      hint.id = 'shortcut-hint';
+      hint.style.cssText =
+        'font-size:0.75rem;color:var(--text-faint);text-align:center;margin-top:0.5rem;';
+      hint.innerHTML =
+        'Press <kbd style="background:var(--bg-elevated);border:1px solid var(--border);' +
+        'border-radius:4px;padding:1px 6px;font-family:inherit;font-size:0.7rem;">Ctrl</kbd> + ' +
+        '<kbd style="background:var(--bg-elevated);border:1px solid var(--border);' +
+        'border-radius:4px;padding:1px 6px;font-family:inherit;font-size:0.7rem;">Enter</kbd> to generate';
+      generateBtn.parentNode.insertBefore(hint, generateBtn.nextSibling);
+    })();
+
     function updateUsageDisplay() {
       if (!usageCounter) return;
       usageCounter.textContent = 'Free · up to 4,000 chars';
@@ -64,16 +79,122 @@
       if (config.onStats) config.onStats(text);
     }
 
+    // Output history — keeps the last 5 results in memory for comparison.
+    var resultHistory = [];
+    function pushHistory(text) {
+      resultHistory.unshift({
+        text: text,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      });
+      if (resultHistory.length > 5) resultHistory.pop();
+      renderHistory();
+    }
+    function renderHistory() {
+      var existing = document.getElementById('result-history');
+      if (resultHistory.length < 2) {
+        if (existing) existing.remove();
+        return;
+      }
+      if (!existing) {
+        existing = document.createElement('details');
+        existing.id = 'result-history';
+        existing.style.cssText = 'margin-top:1rem;font-size:0.85rem;';
+        var summary = document.createElement('summary');
+        summary.style.cssText =
+          'cursor:pointer;color:var(--text-muted);font-weight:600;padding:0.5rem 0;';
+        existing.appendChild(summary);
+        var list = document.createElement('div');
+        list.id = 'result-history-list';
+        existing.appendChild(list);
+        var panel = outputContent.closest('.output-panel') || outputContent.parentNode;
+        panel.appendChild(existing);
+      }
+      existing.querySelector('summary').textContent =
+        'Previous results (' + (resultHistory.length - 1) + ')';
+      var list = existing.querySelector('#result-history-list');
+      list.innerHTML = '';
+      resultHistory.slice(1).forEach(function (item, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.style.cssText =
+          'display:block;width:100%;text-align:left;background:var(--bg-elevated);' +
+          'border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.8rem;' +
+          'margin-bottom:0.5rem;cursor:pointer;color:var(--text-muted);font-size:0.8rem;';
+        var preview = item.text.length > 80 ? item.text.slice(0, 80) + '…' : item.text;
+        btn.textContent = item.time + ' — ' + preview;
+        btn.addEventListener('click', function () {
+          outputContent.textContent = item.text;
+          outputContent.style.whiteSpace = 'pre-wrap';
+          updateOutputCount(item.text);
+          outputContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        list.appendChild(btn);
+      });
+    }
+
     function showFullResult(fullText) {
       outputContent.textContent = fullText;
       outputContent.style.whiteSpace = 'pre-wrap';
       updateStats(fullText);
       updateOutputCount(fullText);
+      pushHistory(fullText);
+      // Reveal the Regenerate button now that a result exists.
+      var regenBtn = document.getElementById('regen-btn');
+      if (regenBtn) regenBtn.style.display = '';
+      var chainSelect = document.getElementById('chain-select');
+      if (chainSelect) chainSelect.style.display = '';
       document.dispatchEvent(
         new CustomEvent('cs:tool-result', {
           detail: { toolId, outputId: 'output-text' },
         })
       );
+    }
+
+    // Skeleton loading — shimmering placeholder lines in the output area.
+    function showSkeleton(container) {
+      var skeleton = document.createElement('div');
+      skeleton.className = 'cs-skeleton';
+      skeleton.setAttribute('aria-hidden', 'true');
+      var widths = ['', 'medium', '', 'short', '', 'medium'];
+      widths.forEach(function (w) {
+        var line = document.createElement('div');
+        line.className = 'cs-skeleton-line' + (w ? ' ' + w : '');
+        skeleton.appendChild(line);
+      });
+      container.appendChild(skeleton);
+    }
+
+    // Rotating tips shown under the skeleton during generation.
+    var tipTimer = null;
+    var loadingTips = [
+      'Tip: Shorter inputs usually get tighter, more focused results.',
+      'Tip: You can regenerate for a different take on the same input.',
+      'Tip: Press Ctrl+Enter from the input to generate without clicking.',
+      'Tip: The Download button saves your result as a .txt file.',
+    ];
+    function startTips(container) {
+      stopTips();
+      var tipEl = document.createElement('div');
+      tipEl.className = 'cs-loading-tip';
+      tipEl.style.cssText =
+        'font-size:0.82rem;color:var(--text-muted);text-align:center;' +
+        'margin-top:1rem;min-height:1.4em;';
+      container.appendChild(tipEl);
+      var i = 0;
+      function show() {
+        tipEl.textContent = loadingTips[i % loadingTips.length];
+        i++;
+      }
+      show();
+      tipTimer = setInterval(show, 3500);
+    }
+    function stopTips() {
+      if (tipTimer) {
+        clearInterval(tipTimer);
+        tipTimer = null;
+      }
+      var old = document.querySelector('.cs-loading-tip');
+      if (old) old.remove();
     }
 
     // Output word count — shows "X words" near the output header.
@@ -186,6 +307,76 @@
         });
         copyBtn.parentNode.insertBefore(dlBtn, copyBtn.nextSibling);
       }
+
+      // Regenerate button — appears after the first result, re-runs generation.
+      // Placed next to Download so users can roll again without scrolling up.
+      if (!document.getElementById('regen-btn')) {
+        const regenBtn = document.createElement('button');
+        regenBtn.id = 'regen-btn';
+        regenBtn.type = 'button';
+        regenBtn.title = 'Generate again for a different result';
+        regenBtn.innerHTML = '↻ Regenerate';
+        regenBtn.className = copyBtn.className;
+        regenBtn.style.cssText = copyBtn.style.cssText + 'display:none;';
+        regenBtn.addEventListener('click', function () {
+          if (generateBtn && !generateBtn.disabled) {
+            trackEvent('result_regenerated', { tool_id: toolId });
+            generateBtn.click();
+          }
+        });
+        dlBtn.parentNode.insertBefore(regenBtn, dlBtn.nextSibling);
+      }
+
+      // Chain tools — "Send to..." dropdown for using output in another tool.
+      if (!document.getElementById('chain-select')) {
+        var chainTargets = [
+          { id: 'humanizer', name: 'AI Humanizer' },
+          { id: 'summarizer', name: 'Summarizer' },
+          { id: 'paraphraser', name: 'Paraphraser' },
+          { id: 'grammar-checker', name: 'Grammar Checker' },
+          { id: 'email-writer', name: 'Email Writer' },
+          { id: 'word-counter', name: 'Word Counter' },
+        ].filter(function (t) {
+          return t.id !== toolId;
+        });
+        if (chainTargets.length) {
+          var chainWrap = document.createElement('span');
+          chainWrap.style.cssText = 'position:relative;display:inline-block;';
+          var chainSelect = document.createElement('select');
+          chainSelect.id = 'chain-select';
+          chainSelect.title = 'Send this result to another tool';
+          chainSelect.className = copyBtn.className;
+          chainSelect.style.cssText = copyBtn.style.cssText + 'display:none;';
+          var defaultOpt = document.createElement('option');
+          defaultOpt.value = '';
+          defaultOpt.textContent = 'Send to…';
+          chainSelect.appendChild(defaultOpt);
+          chainTargets.forEach(function (t) {
+            var opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.name;
+            chainSelect.appendChild(opt);
+          });
+          chainSelect.addEventListener('change', function () {
+            var target = chainSelect.value;
+            if (!target) return;
+            var text = outputContent.innerText;
+            if (text && !text.toLowerCase().includes('will appear here')) {
+              try {
+                localStorage.setItem(
+                  'cs-chain-input',
+                  JSON.stringify({ text: text, from: toolId, at: Date.now() })
+                );
+              } catch (e) {}
+              trackEvent('tool_chained', { from: toolId, to: target });
+              window.location.href = '/tools/' + target + '/';
+            }
+            chainSelect.value = '';
+          });
+          chainWrap.appendChild(chainSelect);
+          regenBtn.parentNode.insertBefore(chainWrap, regenBtn.nextSibling);
+        }
+      }
     }
 
     // Keyboard shortcut: Cmd/Ctrl + Enter to trigger generation
@@ -223,6 +414,8 @@
         if (loadingIndicator) loadingIndicator.classList.remove('hidden');
         generateBtn.disabled = true;
         outputContent.innerHTML = '';
+        showSkeleton(outputContent);
+        startTips(outputContent);
         outputContent.setAttribute('aria-busy', 'true');
 
         if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
@@ -303,6 +496,7 @@
           outputContent.appendChild(errEl);
         } finally {
           outputContent.setAttribute('aria-busy', 'false');
+          stopTips();
           if (loadingIndicator) loadingIndicator.classList.add('hidden');
           // 3-second cooldown to prevent accidental rapid double clicking
           setTimeout(function () {
@@ -314,6 +508,28 @@
 
     updateUsageDisplay();
     initCharCounter();
+    initChainedInput();
+
+    // Pick up text sent from another tool via the "Send to..." chain.
+    function initChainedInput() {
+      try {
+        var raw = localStorage.getItem('cs-chain-input');
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        // Only use if fresh (5 min) and not from this same tool.
+        if (!data || !data.text || data.from === toolId) return;
+        if (Date.now() - (data.at || 0) > 5 * 60 * 1000) return;
+        var inputEl =
+          document.getElementById('tool-input') ||
+          document.querySelector('textarea[id$="-input"]') ||
+          document.querySelector('textarea');
+        if (inputEl && !inputEl.value.trim()) {
+          inputEl.value = data.text;
+          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        localStorage.removeItem('cs-chain-input');
+      } catch (e) {}
+    }
 
     // Live character counter — shows "X / 4,000" near the input.
     // Uses existing #char-count if the page has its own; otherwise creates one.
@@ -341,7 +557,10 @@
       function update() {
         const len = inputEl.value.length;
         counter.textContent = len.toLocaleString() + ' / 4,000';
-        counter.style.color = len > 4000 ? '#f87171' : '';
+        // Amber warning at 3,500, red at/over limit.
+        if (len > 4000) counter.style.color = '#f87171';
+        else if (len >= 3500) counter.style.color = '#fbbf24';
+        else counter.style.color = '';
       }
       inputEl.addEventListener('input', update);
       update();
