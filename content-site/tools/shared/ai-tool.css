@@ -447,3 +447,16 @@ select:focus {
   vertical-align: middle;
   color: #dc2626;
 }
+
+/*
+  Radio pill selected state — works for both .radio-group and inline-styled
+  radio labels. The selected option gets a red border and subtle glow.
+*/
+label:has(input[type='radio']:checked) {
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+}
+label:has(input[type='checkbox']:checked) {
+  border-color: rgba(239, 68, 68, 0.5) !important;
+}

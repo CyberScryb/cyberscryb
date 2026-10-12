@@ -15,6 +15,39 @@
     const copyBtn = document.getElementById('copy-btn');
     const usageCounter = document.getElementById('usage-counter');
 
+    // Clear input button — placed next to "Try Sample" if present.
+    (function initClearButton() {
+      if (document.getElementById('clear-btn')) return;
+      const inputEl =
+        document.getElementById('tool-input') ||
+        document.querySelector('textarea[id$="-input"]') ||
+        document.querySelector('textarea');
+      if (!inputEl) return;
+      const sampleBtn = document.getElementById('sample-btn');
+      const clearBtn = document.createElement('button');
+      clearBtn.id = 'clear-btn';
+      clearBtn.type = 'button';
+      clearBtn.title = 'Clear input';
+      clearBtn.textContent = 'Clear';
+      if (sampleBtn) {
+        clearBtn.className = sampleBtn.className;
+        clearBtn.style.cssText = sampleBtn.style.cssText;
+        sampleBtn.parentNode.insertBefore(clearBtn, sampleBtn.nextSibling);
+      } else {
+        clearBtn.style.cssText =
+          'background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);' +
+          'padding:4px 10px;font-size:0.8rem;border-radius:6px;cursor:pointer;font-weight:500;';
+        if (inputEl.parentNode) {
+          inputEl.parentNode.insertBefore(clearBtn, inputEl);
+        }
+      }
+      clearBtn.addEventListener('click', function () {
+        inputEl.value = '';
+        inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+        inputEl.focus();
+      });
+    })();
+
     function updateUsageDisplay() {
       if (!usageCounter) return;
       usageCounter.textContent = 'Free · up to 4,000 chars';
@@ -35,11 +68,32 @@
       outputContent.textContent = fullText;
       outputContent.style.whiteSpace = 'pre-wrap';
       updateStats(fullText);
+      updateOutputCount(fullText);
       document.dispatchEvent(
         new CustomEvent('cs:tool-result', {
           detail: { toolId, outputId: 'output-text' },
         })
       );
+    }
+
+    // Output word count — shows "X words" near the output header.
+    function updateOutputCount(text) {
+      let counter = document.getElementById('output-word-count');
+      if (!counter) {
+        const header = outputContent.closest('.output-panel')?.querySelector('.panel-header');
+        const anchor = header || outputContent;
+        counter = document.createElement('span');
+        counter.id = 'output-word-count';
+        counter.style.cssText =
+          'font-size:0.75rem;color:var(--text-faint);font-variant-numeric:tabular-nums;';
+        if (header) {
+          header.appendChild(counter);
+        } else if (anchor.parentNode) {
+          anchor.parentNode.insertBefore(counter, anchor);
+        }
+      }
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      counter.textContent = words ? words.toLocaleString() + ' words' : '';
     }
 
     function friendlyError(status, fallback) {
@@ -100,6 +154,38 @@
           });
         }
       });
+
+      // Download button — saves output as .txt, placed next to Copy.
+      if (!document.getElementById('download-btn')) {
+        const dlBtn = document.createElement('button');
+        dlBtn.id = 'download-btn';
+        dlBtn.type = 'button';
+        dlBtn.title = 'Download as .txt';
+        dlBtn.textContent = 'Download';
+        // Mirror the copy button's classes and inline style for visual match.
+        dlBtn.className = copyBtn.className;
+        dlBtn.style.cssText = copyBtn.style.cssText;
+        dlBtn.addEventListener('click', function () {
+          const text = outputContent.innerText;
+          if (!text || text.toLowerCase().includes('will appear here')) return;
+          const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = toolId + '-result.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          trackEvent('result_downloaded', { tool_id: toolId });
+          const orig = dlBtn.innerText;
+          dlBtn.innerText = 'Saved! ✓';
+          setTimeout(function () {
+            dlBtn.innerText = orig;
+          }, 1600);
+        });
+        copyBtn.parentNode.insertBefore(dlBtn, copyBtn.nextSibling);
+      }
     }
 
     // Keyboard shortcut: Cmd/Ctrl + Enter to trigger generation
