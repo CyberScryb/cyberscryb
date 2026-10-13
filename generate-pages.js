@@ -1330,6 +1330,8 @@ function generateSitemap(generatedPages) {
     { path: '/privacy/', priority: '0.3', freq: 'yearly' },
     { path: '/terms/', priority: '0.3', freq: 'yearly' },
     { path: '/disclosure/', priority: '0.3', freq: 'yearly' },
+    { path: '/new/', priority: '0.8', freq: 'weekly' },
+    { path: '/free-resources/ai-detection-survival-guide/', priority: '0.7', freq: 'monthly' },
   ];
   const indexableTools = [
     'ai-detector',

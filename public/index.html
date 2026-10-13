@@ -40,7 +40,7 @@
     <div class="nav-container">
       <div class="nav-logo"><a href="/"><img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" /><span class="brand-mark">CyberScryb</span></a></div>
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="/" class="active">Home</a></li><li><a href="/tools/">Tools</a></li><li><a href="/guides/">Guides</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li>
+        <li><a href="/" class="active">Home</a></li><li><a href="/tools/">Tools</a></li><li><a href="/guides/">Guides</a></li><li><a href="/blog/">Blog</a></li><li><a href="/new/">New</a></li><li><a href="/about/">About</a></li>
       </ul>
       <button type="button" class="hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
@@ -78,6 +78,13 @@
           <div class="icon">⌘</div><h3>I need to build or fix something</h3><p>Format, convert, encode, test, calculate, and troubleshoot developer tasks.</p>
         </a>
       </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="new-this-week-heading" style="padding-top: 0.5rem;">
+    <div class="container">
+      <div class="section-head"><div><span class="section-kicker">Fresh off the bench</span><h2 id="new-this-week-heading">New this week</h2></div><a href="/new/" class="cta-secondary">Full changelog →</a></div>
+      <div class="posts-grid" id="new-this-week-grid" aria-live="polite"></div>
     </div>
   </section>
 
@@ -248,6 +255,20 @@
     try{localStorage.setItem('cs_last_tool',JSON.stringify({name:name.replace(/→/g,'').trim(),url:link.getAttribute('href')}))}catch(e){}
   });
   try{var last=JSON.parse(localStorage.getItem('cs_last_tool'));if(last&&/^\/tools\/[a-z0-9-]+\/$/.test(last.url)&&typeof last.name==='string'){var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');text.textContent=' '+last.name;link.href=last.url;box.classList.add('show')}}catch(e){}
+})();
+</script>
+<script>
+(function(){
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  var grid=document.getElementById('new-this-week-grid');
+  if(!grid||typeof fetch==='undefined')return;
+  fetch('/data/changelog.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('fetch failed');return r.json();}).then(function(data){
+    var entries=((data&&data.entries)||[]).slice(0,3);
+    if(!entries.length){grid.style.display='none';return;}
+    grid.innerHTML=entries.map(function(e){
+      return '<article class="blog-card"><div class="blog-card-content"><span class="tag-free">New</span><h3><a href="'+esc(e.link)+'">'+esc(e.title)+'</a></h3><p>'+esc(e.description)+'</p><a href="'+esc(e.link)+'" class="read-more">Open →</a></div></article>';
+    }).join('');
+  }).catch(function(){grid.style.display='none';});
 })();
 </script>
 </body>
