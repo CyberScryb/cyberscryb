@@ -381,6 +381,55 @@
           chainAnchor.parentNode.insertBefore(chainWrap, chainAnchor.nextSibling);
         }
       }
+
+      // Share button — native share sheet where supported, clipboard fallback.
+      // Placed next to Download so users can send the result anywhere.
+      if (!document.getElementById('share-btn')) {
+        const shareBtn = document.createElement('button');
+        shareBtn.id = 'share-btn';
+        shareBtn.type = 'button';
+        shareBtn.title = 'Share this result';
+        shareBtn.textContent = 'Share';
+        // Mirror the copy button's classes and inline style for visual match.
+        shareBtn.className = copyBtn.className;
+        shareBtn.style.cssText = copyBtn.style.cssText;
+        shareBtn.addEventListener('click', function () {
+          const text = outputContent.innerText;
+          if (!text || text.toLowerCase().includes('will appear here')) return;
+          const orig = shareBtn.innerText;
+          function flash(msg) {
+            shareBtn.innerText = msg;
+            setTimeout(function () {
+              shareBtn.innerText = orig;
+            }, 1600);
+          }
+          if (navigator.share) {
+            navigator
+              .share({ title: document.title || 'CyberScryb result', text: text })
+              .then(function () {
+                trackEvent('result_shared', { tool_id: toolId });
+                flash('Shared!');
+              })
+              .catch(function () {
+                // Dismissed by the user or share unavailable — restore quietly.
+                shareBtn.innerText = orig;
+              });
+          } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(
+              function () {
+                trackEvent('result_shared_fallback', { tool_id: toolId });
+                flash('Copied!');
+              },
+              function () {
+                shareBtn.innerText = orig;
+              }
+            );
+          }
+        });
+        var shareAnchorBtn = document.getElementById('download-btn');
+        var shareAnchor = shareAnchorBtn || copyBtn;
+        shareAnchor.parentNode.insertBefore(shareBtn, shareAnchor.nextSibling);
+      }
     }
 
     // Keyboard shortcut: Cmd/Ctrl + Enter to trigger generation

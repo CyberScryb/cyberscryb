@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -93,7 +93,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
             </div>
@@ -183,6 +182,10 @@
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your bio options will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Writing your bio...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,6 +203,10 @@
 
                 <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>Is what I type private?</summary>
+                        <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
+                    </details>
                     <div class="faq-item"><h4>Which platforms are supported?</h4><p>LinkedIn (160), Twitter (160), Instagram (150), and TikTok (80) &mdash; each bio respects the platform's character limit.</p></div>
                     <div class="faq-item"><h4>How many bios do I get?</h4><p>You can choose 3 or 5 distinct options per generation, each with a different angle.</p></div>
                     <div class="faq-item"><h4>Is it free?</h4><p>Yes. 100% free with unlimited generations, no accounts, and no email or signup required.</p></div>
@@ -258,7 +265,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
         </div>
@@ -281,7 +289,7 @@
     </script>
 
     <script src="/js/script.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/bio-generator/bio-generator.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 

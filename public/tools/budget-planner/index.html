@@ -26,7 +26,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -56,7 +56,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -141,6 +140,10 @@
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your budget plan will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Building your budget plan...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -148,6 +151,10 @@
                 <!-- FAQ -->
                 <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>Is what I type private?</summary>
+                        <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
+                    </details>
                     <div class="faq-item"><h4>What is a survival budget?</h4><p>A survival budget is a stripped-down spending plan focused on keeping you housed, fed, and operational during a financial crisis. It ranks your expenses by necessity, identifies what can be cut or deferred, and tells you exactly how long your current cash will last at current burn rate. It's not a long-term financial plan &mdash; it's a triage document for when things go wrong.</p></div>
                     <div class="faq-item"><h4>How specific should I be in my description?</h4><p>The more specific, the better. Give actual dollar amounts where you can &mdash; current checking balance, each bill and its due date, your monthly income or unemployment benefit, any debt minimums you have to hit. Vague inputs like "I'm struggling" produce generic output. Specific inputs like "$612 checking, $1,100 rent due May 1, $230 car note, $0 income since April 15" produce a plan you can actually use.</p></div>
                     <div class="faq-item"><h4>Does the AI store my financial information?</h4><p>Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device.</p></div>
@@ -221,7 +228,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
@@ -333,7 +341,7 @@
     </script>
 
     <script src="/js/script.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/budget-planner/budget-planner.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 </body>

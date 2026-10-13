@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -67,7 +67,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -158,6 +157,10 @@
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your structured shift report will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Drafting your report...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,6 +188,10 @@
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+            <details>
+                <summary>Is what I type private?</summary>
+                <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
+            </details>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a caregiver shift report include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: date and shift time, patient/client name, vital signs if applicable, meals eaten, medications administered (with times), activities completed, behavioral observations, any incidents or falls, pain levels, bowel/bladder output if relevant, and what was left unfinished for the next shift."}},{"@type":"Question","name":"Who reads caregiver shift reports?","acceptedAnswer":{"@type":"Answer","text":"The incoming caregiver or nurse, the patient's family, the supervising nurse or care coordinator, and in some cases medical staff or insurance reviewers. Write it for someone who wasn't there and needs to understand exactly what happened."}},{"@type":"Question","name":"How detailed should a shift report be?","acceptedAnswer":{"@type":"Answer","text":"Detailed enough that the next caregiver doesn't have to guess. If the patient refused lunch, say so — and note what you offered instead. If there was a behavioral change, describe what triggered it and how long it lasted. Vague reports create gaps that lead to mistakes."}},{"@type":"Question","name":"Is this report format accepted by care agencies?","acceptedAnswer":{"@type":"Answer","text":"The output follows standard caregiver documentation conventions and covers the same elements most agencies require. However, your specific agency may have a required form or format — use this as a draft and transfer the information to their template."}},{"@type":"Question","name":"Can I use this for home care, memory care, or skilled nursing?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool adapts to the level of care described. For memory care, include behavioral and cognitive observations. For skilled nursing, include vital signs and wound/medication notes. Describe your specific situation and the output will reflect it."}},{"@type":"Question","name":"Who is this for?","acceptedAnswer":{"@type":"Answer","text":"CNAs, home health aides, family caregivers, hospice workers — anyone who needs to document care. Built by a former CNA who wanted something that actually helped after a long shift."}},{"@type":"Question","name":"Is patient information stored?","acceptedAnswer":{"@type":"Answer","text":"Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device."}},{"@type":"Question","name":"Can I use this for official reports?","acceptedAnswer":{"@type":"Answer","text":"It generates a structured draft. Always review the output for accuracy before submitting to your agency or facility — a first pass that saves you time, not a replacement for your clinical judgment."}},{"@type":"Question","name":"What if I forgot to note something?","acceptedAnswer":{"@type":"Answer","text":"Just add it to your notes and regenerate, or edit the output directly. The report is yours to adjust however you need."}},{"@type":"Question","name":"Does this replace charting software?","acceptedAnswer":{"@type":"Answer","text":"No — it helps you write better reports faster, especially when you're tired after a long shift. Paste the output into your EMR, agency form, or care log."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
@@ -287,7 +294,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
@@ -319,7 +327,7 @@
 
     <script src="/js/script.js?v=20261006audit1"></script>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/caregiver-report/caregiver-report.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 

@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -67,7 +67,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -159,6 +158,10 @@
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your document draft will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Drafting your document...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,6 +175,10 @@
 
     <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h2 style="font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+            <details>
+                <summary>Is what I type private?</summary>
+                <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
+            </details>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is an AI-generated parenting plan legally valid?","acceptedAnswer":{"@type":"Answer","text":"The document itself is not legally binding until a court approves it. But a clearly written parenting plan is exactly what courts and mediators want to see. Use this tool to draft it, then work with a family law attorney or mediator to get it filed and signed off. A well-drafted plan speeds that process up significantly."}},{"@type":"Question","name":"What should a parenting plan include?","acceptedAnswer":{"@type":"Answer","text":"At minimum: physical custody schedule (regular weeks, holidays, school breaks), legal custody (who makes decisions about school, medical, religion), communication rules between parents, how disputes get resolved, and how the plan gets modified if circumstances change."}},{"@type":"Question","name":"Can I use this if we agree on everything already?","acceptedAnswer":{"@type":"Answer","text":"Yes — this is actually the best use case. If you and the other parent are on the same page, this tool helps you get that agreement into a clear, written document that a court can approve without a fight. Informal agreements are unenforceable; written plans are not."}},{"@type":"Question","name":"What if we disagree on custody?","acceptedAnswer":{"@type":"Answer","text":"This tool drafts what you describe — if you're in a contested situation, use it to draft your preferred arrangement and bring it to mediation or your attorney. Having a written starting point is better than going in with nothing."}},{"@type":"Question","name":"How specific should I be about the schedule?","acceptedAnswer":{"@type":"Answer","text":"As specific as possible. Vague plans ('we'll figure out holidays as they come') create conflict. Spell out which parent has the child on each holiday, who handles pickups and dropoffs, and what happens when the schedule changes due to illness or travel."}},{"@type":"Question","name":"Is this legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. This is a drafting assistant designed to help you organize your thoughts and structure your documents. It does not constitute legal advice — always consult a qualified family law attorney before taking legal action."}},{"@type":"Question","name":"Will a court accept this document?","acceptedAnswer":{"@type":"Answer","text":"Courts want clear, well-organized documents. This tool helps you create a strong starting point, but a family law attorney should review your draft before filing anything with the court."}},{"@type":"Question","name":"Is my family's information stored?","acceptedAnswer":{"@type":"Answer","text":"Inputs are sent to our backend and Google Gemini for generation. CyberScryb does not intentionally store prompts or results in our application database or use them to train our own models. Provider processing and retention follow the policies described on our privacy page. Some tools save drafts locally on your device."}},{"@type":"Question","name":"What's a parenting plan?","acceptedAnswer":{"@type":"Answer","text":"A written agreement covering the custody schedule, holiday and vacation arrangements, decision-making responsibilities (education, healthcare, religion), communication guidelines, and how future disputes will be resolved."}},{"@type":"Question","name":"Can I use this if I can't afford a lawyer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many courts accept self-filed (pro se) documents. This tool helps you create organized, clear drafts. Legal aid organizations in your area may also review your draft for free or at reduced cost."}}]}</script>
         <div style="display:flex; flex-direction:column; gap:1rem;">
             <details style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; padding:1rem;">
@@ -274,7 +281,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
@@ -305,7 +313,7 @@
     </script>
 
     <script src="/js/script.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/custody-document/custody-document.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 

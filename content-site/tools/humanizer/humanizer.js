@@ -103,6 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Clear input button — placed next to "Try sample", mirrors its classes.
+  if (trySampleBtn && roboticText && !document.getElementById('clear-btn')) {
+    const clearBtn = document.createElement('button');
+    clearBtn.id = 'clear-btn';
+    clearBtn.type = 'button';
+    clearBtn.className = trySampleBtn.className;
+    clearBtn.textContent = 'Clear';
+    clearBtn.title = 'Clear input';
+    clearBtn.addEventListener('click', function () {
+      roboticText.value = '';
+      roboticText.dispatchEvent(new Event('input', { bubbles: true }));
+      roboticText.focus();
+    });
+    trySampleBtn.parentNode.insertBefore(clearBtn, trySampleBtn.nextSibling);
+  }
+
   if (roboticText) {
     roboticText.addEventListener('input', function () {
       this.style.height = 'auto';
@@ -158,6 +174,51 @@ document.addEventListener('DOMContentLoaded', () => {
       URL.revokeObjectURL(url);
       trackEvent('result_download', { tool_id: TOOL_ID });
     });
+  }
+
+  // Share button — native share sheet where supported, clipboard fallback.
+  // Mirrors the download button's classes; placed right after it.
+  if (downloadBtn && !document.getElementById('share-btn')) {
+    const shareBtn = document.createElement('button');
+    shareBtn.id = 'share-btn';
+    shareBtn.type = 'button';
+    shareBtn.className = downloadBtn.className;
+    shareBtn.textContent = 'Share';
+    shareBtn.title = 'Share this result';
+    shareBtn.addEventListener('click', function () {
+      const text = getPlainOutput();
+      if (!text || text.indexOf('Nothing here yet') !== -1) return;
+      const orig = shareBtn.innerText;
+      function flash(msg) {
+        shareBtn.innerText = msg;
+        setTimeout(function () {
+          shareBtn.innerText = orig;
+        }, 1600);
+      }
+      if (navigator.share) {
+        navigator
+          .share({ title: document.title || 'CyberScryb result', text: text })
+          .then(function () {
+            trackEvent('result_shared', { tool_id: TOOL_ID });
+            flash('Shared!');
+          })
+          .catch(function () {
+            // Dismissed by the user or share unavailable — restore quietly.
+            shareBtn.innerText = orig;
+          });
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(
+          function () {
+            trackEvent('result_shared_fallback', { tool_id: TOOL_ID });
+            flash('Copied!');
+          },
+          function () {
+            shareBtn.innerText = orig;
+          }
+        );
+      }
+    });
+    downloadBtn.parentNode.insertBefore(shareBtn, downloadBtn.nextSibling);
   }
 
   if (againBtn) {
