@@ -1070,7 +1070,7 @@ Remember: this is a starting point, not a final plan. Call 211 for local assista
 
 Raw material (never invent employers, titles, dates, or numbers -- if a number isn't here, use scope instead):
 "${input}"
-${params.role ? `Target role: ${params.role}` : ''}
+${params.targetRole ? `Target role: ${params.targetRole}` : ''}
 
 FORMULA (every bullet): [Strong past-tense verb] + [what you built or owned, with scope] + [measurable result].
 Example: "Rebuilt checkout API serving 2M daily checkouts, cutting p95 latency from 1.2s to 380ms and lifting conversion 8%."
@@ -1594,11 +1594,7 @@ Return ONLY the letter + documents list + disclaimer.`;
       const modeLabel = params.modeLabel || params.mode || 'landlord-tenant';
       let tone = 'professional and firm but civil';
       let modeExtra = '';
-      if (mode.includes('deposit')) {
-        tone = 'firm, precise, businesslike';
-        modeExtra =
-          'Demand itemized deductions and return of remaining deposit. Do NOT invent the statutory number of days — say "within the time required by [state] law" or use a deadline only if facts provide one.';
-      } else if (mode.includes('habit')) {
+      if (mode.includes('habit')) {
         tone = 'urgent, factual, non-threatening';
         modeExtra =
           'Document condition timeline. Request repair by a clear deadline from facts or a reasonable short window. Do not advise rent withholding. One optional line: tenant may contact local housing code enforcement if unresolved.';

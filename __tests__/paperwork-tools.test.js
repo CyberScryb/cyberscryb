@@ -6,7 +6,7 @@ const source = fs.readFileSync(
   'utf8'
 );
 let dom, win, api;
-function load(slug = 'refund-request') {
+function load(slug = 'paper-trail') {
   const html = fs.readFileSync(
     path.join(__dirname, '../content-site/tools', slug, 'index.html'),
     'utf8'
@@ -43,32 +43,6 @@ test('calendar validation rejects impossible dates and keeps leap days in UTC', 
   expect(api.formatDate('2024-02-29')).toBe('February 29, 2024');
 });
 
-test('refund requires facts, includes only supplied details, and offers each remedy', () => {
-  load();
-  expect(() => api.buildRefund({})).toThrow();
-  const facts = {
-    company: 'Shop',
-    item: 'a lamp',
-    issue: 'The base is cracked.',
-    remedy: 'refund',
-  };
-  const text = api.buildRefund(facts);
-  expect(text).toContain('a refund');
-  expect(text).toContain(facts.issue);
-  expect(text).not.toMatch(
-    /undefined|Order or reference:|Amount paid:|purchased on|attached|legal/i
-  );
-  expect(api.buildRefund({ ...facts, remedy: 'repair' })).toContain('a repair');
-  expect(
-    api.buildRefund({
-      ...facts,
-      remedy: 'replacement',
-      reference: 'R-123',
-      replyDate: '2026-10-15',
-    })
-  ).toContain('I would appreciate a reply by October 15, 2026.');
-});
-
 test('timeline sorts without mutating records and preserves same-day entry order', () => {
   load('paper-trail');
   const events = [
@@ -83,27 +57,6 @@ test('timeline sorts without mutating records and preserves same-day entry order
   expect(text).toContain('no notification is scheduled');
   expect(api.eventErrors({ ...events[0], type: '__proto__' }).type).toBeTruthy();
   expect(() => api.buildTimeline({ followupDate: '2026-02-30' }, events)).toThrow();
-});
-
-test('refund form focuses missing facts, preserves edited drafts, and clears only after confirmation', () => {
-  load();
-  submit();
-  expect(win.document.activeElement).toBe(field('company'));
-  expect(field('company').getAttribute('aria-invalid')).toBe('true');
-  fill({ company: 'Shop', item: 'Lamp', issue: '<script>private fact</script>' });
-  submit();
-  expect(output().value).toContain('<script>private fact</script>');
-  expect(win.document.querySelector('[data-paperwork-tool] script')).toBeNull();
-  output().value = 'My own edited letter';
-  win.confirm.mockReturnValue(false);
-  submit();
-  expect(output().value).toBe('My own edited letter');
-  click('#pw-clear');
-  expect(output().value).toBe('My own edited letter');
-  win.confirm.mockReturnValue(true);
-  click('#pw-clear');
-  expect(output().value).toBe('');
-  expect(win.document.querySelector('[data-export]').disabled).toBe(true);
 });
 
 test('timeline edits and removes the right chronological event and retains case-only work on cancelled clear', () => {

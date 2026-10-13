@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const typeLabels = {
     unemployment: 'Unemployment Denial',
-    insurance: 'Insurance Claim Denial',
-    landlord: 'Landlord/Housing Dispute',
     academic: 'School/Academic Decision',
     'medical-billing': 'Medical Billing Dispute',
     'parking-ticket': 'Parking/Traffic Ticket',
@@ -31,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
       toolInput.value =
-        "My health insurance claim (Claim #HC-98214) for an out-of-network MRI was denied on February 12, 2026. The insurer stated the scan was 'not medically necessary'. However, my attending physician Dr. Sarah Chen documented urgent progressive neurological symptoms requiring immediate diagnostic imaging. Prior conservative treatment had failed, and in-network imaging facilities had a 6-week scheduling backlog that posed a severe health risk. I am requesting a full reversal of this denial and coverage under my in-network benefit tier.";
-      appealType.value = 'insurance';
-      if (appealTypeLabel) appealTypeLabel.textContent = 'Type: Insurance Claim Denial';
-      addressedTo.value = 'Aetna Health Claims Appeals Committee';
+        'My unemployment claim was denied on March 15, 2026 (Case #UI-48291). They said I left voluntarily, but I was laid off due to downsizing on February 28, 2026. I have my termination letter and an HR email confirming the layoff was due to position elimination, not misconduct. I am requesting a reversal of this denial and approval of my unemployment benefits.';
+      appealType.value = 'unemployment';
+      if (appealTypeLabel) appealTypeLabel.textContent = 'Type: Unemployment Denial';
+      addressedTo.value = 'State Unemployment Appeals Board';
       toolInput.dispatchEvent(new Event('input'));
     });
   }

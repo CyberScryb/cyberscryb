@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fieldIds: ['landlord', 'property', 'dates', 'ask', 'prior', 'lease_note'],
     modeLabels: {
       repair: 'Repair request',
-      deposit: 'Security deposit',
       'rent-plan': 'Late rent plan',
       habitability: 'Habitability / conditions',
       'move-out': 'Move-out notice',
@@ -19,10 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
       repair: {
         title: 'Repair request',
         body: 'State the defect, when it started, prior notices (texts/emails), and a clear deadline for access/repair. Attach photos. Stay factual \u2014 courts and housing agencies love timelines.',
-      },
-      deposit: {
-        title: 'Security deposit',
-        body: 'Include move-out date, forwarding address, and demand itemized deductions + return of remaining deposit by the statutory window for your state. Do not invent the number of days \u2014 check local law.',
       },
       'rent-plan': {
         title: 'Late rent plan',
