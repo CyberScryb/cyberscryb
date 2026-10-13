@@ -595,10 +595,14 @@ label:has(input[type='checkbox']:checked) {
 
 /*
   Sticky input panel on desktop — keeps the input and Generate button
-  visible while scrolling through long outputs.
+  visible while scrolling through long outputs. Scoped to the two-column
+  .ai-tool-container grid: on single-column pages (e.g. .humanizer-container,
+  which has no grid CSS) the stuck panel would slide UNDER the later-in-DOM
+  .output-wrapper (position:relative, z-index auto) and its buttons would
+  become unclickable.
 */
 @media (min-width: 1024px) {
-  .input-panel {
+  .ai-tool-container .input-panel {
     position: sticky;
     top: 80px;
     align-self: start;
