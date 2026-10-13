@@ -1797,8 +1797,17 @@ console.log(`\n🔥 CyberScryb SEO Page Generator`);
 console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
 
 pages.forEach(page => {
-  const html = generatePage(page);
   const filePath = path.join(guidesDir, `${page.slug}.html`);
+  // Source-of-truth guard (2026-10-13): content-site guides are authoritative.
+  // Never overwrite an existing content-site guide with embedded generator
+  // data; the sync step copies content-site to public/ first, so the
+  // authoritative copy is what deploys. New slugs (no content-site file yet)
+  // still generate into both directories.
+  if (fs.existsSync(filePath)) {
+    console.log(`  ⏭️  ${page.slug}.html exists in content-site; skipped (source of truth)`);
+    return;
+  }
+  const html = generatePage(page);
   const publicFilePath = path.join(publicGuidesDir, `${page.slug}.html`);
 
   fs.writeFileSync(filePath, html, 'utf-8');
