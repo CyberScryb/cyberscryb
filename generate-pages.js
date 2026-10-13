@@ -1442,6 +1442,9 @@ function generateSitemap(generatedPages) {
     'dream-interpreter',
     'apology-letter-generator',
     'complaint-letter-generator',
+    'promotion-request-letter-writer',
+    'roommate-agreement-builder',
+    'jury-duty-letter-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1532,6 +1535,12 @@ function generateSitemap(generatedPages) {
     'college-personal-statement-guide',
     'common-dream-meanings-guide',
     'how-to-write-an-apology-letter',
+    'how-to-ask-for-a-promotion',
+    'promotion-request-letter-examples',
+    'roommate-agreement-guide',
+    'splitting-rent-fairly-guide',
+    'jury-duty-excuse-letter-guide',
+    'jury-duty-hardship-angles-guide',
     'how-to-write-a-complaint-letter',
     'how-to-write-a-thank-you-note',
   ];
@@ -1568,6 +1577,12 @@ function generateSitemap(generatedPages) {
     'how-to-get-security-deposit-back-state-deadlines-2026',
     'how-to-cancel-gym-membership-ftc-click-to-cancel-2026',
     'how-to-dispute-hoa-fines-selective-enforcement-2026',
+    'asking-for-a-promotion-script-2026',
+    'promotion-vs-raise-what-to-ask-for-2026',
+    'roommate-agreement-template-2026',
+    'questions-to-ask-a-roommate-2026',
+    'jury-duty-deferral-vs-excusal-2026',
+    'what-happens-if-you-skip-jury-duty-2026',
   ];
   blogPosts.forEach(post => {
     const slug = post.replace(/\.html$/, '');
@@ -1692,6 +1707,9 @@ function manageRobotsMeta() {
     'dream-interpreter',
     'apology-letter-generator',
     'complaint-letter-generator',
+    'promotion-request-letter-writer',
+    'roommate-agreement-builder',
+    'jury-duty-letter-writer',
   ]);
 
   const dirsToProcess = [
