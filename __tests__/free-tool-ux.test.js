@@ -47,6 +47,7 @@ test('anonymous visitors receive the entire AI result immediately, with safe tex
     ok: true,
     headers: { get: () => 'application/json' },
     body: null,
+    text: async () => JSON.stringify({ result }),
     json: async () => ({ result }),
   });
   load('tools/shared/ai-tool.js');
@@ -59,6 +60,36 @@ test('anonymous visitors receive the entire AI result immediately, with safe tex
   expect(document.querySelector('#output-text img')).toBeNull();
   expect(document.querySelector('#output-text').getAttribute('aria-busy')).toBe('false');
   expect(document.querySelector('input[type=email]')).toBeNull();
+  expect(window.fetch).toHaveBeenCalledTimes(1);
+  jest.runOnlyPendingTimers();
+  jest.useRealTimers();
+});
+
+test('SSE body with a rewritten content-type is parsed without a second request', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<textarea id="tool-input">An example request</textarea><button id="generate-btn">Generate</button><div id="loading-indicator" class="hidden"></div><div id="output-text"></div>';
+  // Mirrors production: the Cloudflare worker forces application/json while
+  // delivering the SSE event body (previously this threw in response.json()
+  // and triggered a second non-streaming generation).
+  const sseBody =
+    ': ' +
+    ' '.repeat(16) +
+    '\n\ndata: {"text":"Hello "}\n\ndata: {"text":"world"}\n\ndata: {"done":true}\n\n';
+  window.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    headers: { get: () => 'application/json' },
+    body: null,
+    text: async () => sseBody,
+  });
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'An example request' });
+  document.querySelector('#generate-btn').click();
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(document.querySelector('#output-text').textContent).toBe('Hello world');
+  // No non-streaming retry: exactly one request.
   expect(window.fetch).toHaveBeenCalledTimes(1);
   jest.runOnlyPendingTimers();
   jest.useRealTimers();

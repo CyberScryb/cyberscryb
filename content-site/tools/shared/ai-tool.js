@@ -542,6 +542,44 @@
       }
 
       // Reads our simplified SSE event stream: data: {"text":"..."} ... data: {"done":true}
+      // Parses one SSE event block (the lines between blank lines). Returns
+      // 'done' when the terminal event arrived; throws on error events.
+      function handleSSEEvent(evt, onText) {
+        const lines = evt.split('\n');
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (line.indexOf('data:') !== 0) continue;
+          let obj;
+          try {
+            obj = JSON.parse(line.slice(5).trim());
+          } catch (e) {
+            continue;
+          }
+          if (obj && typeof obj.text === 'string' && obj.text) onText(obj.text);
+          if (obj && obj.done) return 'done';
+          if (obj && obj.error) throw new Error(obj.error);
+        }
+        return undefined;
+      }
+
+      // Parses a complete, already-buffered SSE body (used when a proxy strips
+      // the SSE content-type but still delivers an SSE body).
+      function parseSSEText(text, onText) {
+        const events = text.split('\n\n');
+        for (let i = 0; i < events.length; i++) {
+          if (handleSSEEvent(events[i], onText) === 'done') return;
+        }
+      }
+
+      // True when a response body is our SSE event format rather than JSON.
+      // The server always opens the stream with a ':' padding comment, so a
+      // body starting with ':' or 'data:' is SSE even when the content-type
+      // was rewritten upstream (e.g. the Cloudflare worker forces
+      // application/json).
+      function isSSEBody(text) {
+        return /^\s*(:|data:)/.test(text);
+      }
+
       async function readSSEStream(body, onText) {
         const reader = body.getReader();
         const decoder = new TextDecoder();
@@ -554,20 +592,7 @@
           while ((idx = buffer.indexOf('\n\n')) >= 0) {
             const evt = buffer.slice(0, idx);
             buffer = buffer.slice(idx + 2);
-            const lines = evt.split('\n');
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i];
-              if (line.indexOf('data:') !== 0) continue;
-              let obj;
-              try {
-                obj = JSON.parse(line.slice(5).trim());
-              } catch (e) {
-                continue;
-              }
-              if (obj && typeof obj.text === 'string' && obj.text) onText(obj.text);
-              if (obj && obj.done) return;
-              if (obj && obj.error) throw new Error(obj.error);
-            }
+            if (handleSSEEvent(evt, onText) === 'done') return;
           }
         }
       }
@@ -732,12 +757,22 @@
               streamed = true;
               await readSSEStream(response.body, onToken);
             } else {
-              // Server answered without SSE (old deploy or proxy stripped it): JSON fallback.
-              const data = await response.json();
-              const result = data.result || '';
-              if (!result) throw new Error('Empty response. Please try again.');
-              fullText = result;
-              firstToken = true;
+              // Server answered without the SSE content-type. A proxy may have
+              // rewritten it (the Cloudflare worker forces application/json)
+              // while still delivering an SSE body: sniff the body and parse
+              // SSE when present, so we don't JSON-parse an event stream,
+              // throw, and pay for a second non-streaming generation.
+              const text = await response.text();
+              if (isSSEBody(text)) {
+                streamed = true;
+                parseSSEText(text, onToken);
+              } else {
+                const data = JSON.parse(text);
+                const result = data.result || '';
+                if (!result) throw new Error('Empty response. Please try again.');
+                fullText = result;
+                firstToken = true;
+              }
             }
           } catch (streamErr) {
             // User pressed Stop: keep partial output, no retry.
