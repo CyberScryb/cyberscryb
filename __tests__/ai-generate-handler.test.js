@@ -1,5 +1,8 @@
 process.env.NODE_ENV = 'test';
 
+const fs = require('fs');
+const path = require('path');
+
 // Mock firebase deps to prevent initializeApp side effects
 jest.mock('firebase-admin', () => ({
   initializeApp: jest.fn(),
@@ -235,6 +238,14 @@ describe('parseGeminiSSELine', () => {
   test('tolerates missing space after data:', () => {
     const line = 'data:{"candidates": [{"content": {"parts": [{"text": "x"}]}}]}';
     expect(parseGeminiSSELine(line)).toBe('x');
+  });
+
+  test('upstream stream URL requests SSE format (alt=sse)', () => {
+    // Gemini streamGenerateContent returns a raw JSON array stream unless
+    // alt=sse is set; without it the SSE parser sees zero data: lines and the
+    // client gets only the done event. Guard against regressing this.
+    const src = fs.readFileSync(path.join(__dirname, '..', 'functions', 'index.js'), 'utf8');
+    expect(src).toMatch(/streamGenerateContent\?alt=sse&key=/);
   });
 });
 
