@@ -68,6 +68,9 @@ jest.mock('firebase-functions/v1', () => ({
     })),
   },
 }));
+jest.mock('firebase-functions/v2/https', () => ({
+  onRequest: jest.fn((opts, handler) => handler),
+}));
 
 describe('Firestore-backed rate limiting', () => {
   let checkFirestoreRateLimit, getIpHash, getDateString, GLOBAL_DAILY_CAP, FIRESTORE_TIER_CAPS;
