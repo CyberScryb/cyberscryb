@@ -57,6 +57,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Clear inputs button — placed next to "Try Sample", mirrors its classes.
+  if (sampleBtn && !document.getElementById('clear-btn')) {
+    const clearBtn = document.createElement('button');
+    clearBtn.id = 'clear-btn';
+    clearBtn.type = 'button';
+    clearBtn.className = sampleBtn.className;
+    const sampleStyle = sampleBtn.getAttribute('style');
+    if (sampleStyle) clearBtn.setAttribute('style', sampleStyle);
+    clearBtn.textContent = 'Clear';
+    clearBtn.title = 'Clear inputs';
+    clearBtn.addEventListener('click', () => {
+      if (jobInput) {
+        jobInput.value = '';
+        jobInput.dispatchEvent(new Event('input'));
+      }
+      if (profileInput) {
+        profileInput.value = '';
+        profileInput.dispatchEvent(new Event('input'));
+      }
+      if (jobInput) jobInput.focus();
+    });
+    sampleBtn.parentNode.insertBefore(clearBtn, sampleBtn.nextSibling);
+  }
+
   // Generate Button Logic
   generateBtn.addEventListener('click', async () => {
     if (generateBtn.disabled) return;
@@ -110,6 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       outputProposal.innerHTML = formatText(data.proposal);
       outputDraft.innerHTML = formatText(data.draftWork);
       outputInterview.innerHTML = formatText(data.interviewQuestions);
+      gigWordCountUpdaters.forEach(fn => fn());
 
       if (typeof gtag === 'function') {
         gtag('event', 'tool_used', { tool_id: 'gig-auto-pilot' });
@@ -159,6 +184,99 @@ document.addEventListener('DOMContentLoaded', async () => {
         setTimeout(() => (btn.innerText = originalText), 2000);
       });
     });
+  });
+
+  // Download + Share + word count — one set per output, next to each Copy button.
+  const GIG_FILES = {
+    'output-proposal': 'gig-proposal.txt',
+    'output-draft': 'gig-draft.txt',
+    'output-interview': 'gig-interview-questions.txt',
+  };
+  const gigWordCountUpdaters = [];
+  function gigHasRealOutput(el) {
+    if (!el) return false;
+    return !!el.innerText.trim() && !el.querySelector('.placeholder');
+  }
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    const targetId = btn.dataset.target;
+    const targetEl = targetId && document.getElementById(targetId);
+    if (!targetEl) return;
+    const baseStyle = btn.getAttribute('style') || '';
+
+    // Word count — small span after the action buttons, updated on render and edit.
+    const wc = document.createElement('span');
+    wc.className = 'gig-word-count';
+    wc.style.cssText = 'margin-left:10px;font-size:0.78rem;color:var(--text-faint);';
+    function updateWordCount() {
+      const text = gigHasRealOutput(targetEl) ? targetEl.innerText.trim() : '';
+      const words = text ? text.split(/\s+/).length : 0;
+      wc.textContent = words ? words.toLocaleString() + ' words' : '';
+    }
+    gigWordCountUpdaters.push(updateWordCount);
+    targetEl.addEventListener('input', updateWordCount);
+    updateWordCount();
+
+    // Download button — saves this output as .txt.
+    const dlBtn = document.createElement('button');
+    dlBtn.type = 'button';
+    if (baseStyle) dlBtn.setAttribute('style', baseStyle);
+    dlBtn.textContent = 'Download .txt';
+    dlBtn.title = 'Download as .txt';
+    dlBtn.addEventListener('click', () => {
+      if (!gigHasRealOutput(targetEl)) return;
+      const text = targetEl.innerText;
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = GIG_FILES[targetId] || 'gig-result.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (typeof gtag === 'function')
+        gtag('event', 'result_downloaded', { tool_id: 'gig-auto-pilot' });
+      const orig = dlBtn.innerText;
+      dlBtn.innerText = 'Saved!';
+      setTimeout(() => (dlBtn.innerText = orig), 1600);
+    });
+    btn.parentNode.insertBefore(dlBtn, btn.nextSibling);
+
+    // Share button — native share sheet where supported, clipboard fallback.
+    const shareBtn = document.createElement('button');
+    shareBtn.type = 'button';
+    if (baseStyle) shareBtn.setAttribute('style', baseStyle);
+    shareBtn.textContent = 'Share';
+    shareBtn.title = 'Share this result';
+    shareBtn.addEventListener('click', () => {
+      if (!gigHasRealOutput(targetEl)) return;
+      const text = targetEl.innerText;
+      const orig = shareBtn.innerText;
+      const flash = msg => {
+        shareBtn.innerText = msg;
+        setTimeout(() => (shareBtn.innerText = orig), 1600);
+      };
+      if (navigator.share) {
+        navigator
+          .share({ title: document.title || 'CyberScryb result', text: text })
+          .then(() => {
+            if (typeof gtag === 'function')
+              gtag('event', 'result_shared', { tool_id: 'gig-auto-pilot' });
+            flash('Shared!');
+          })
+          .catch(() => {
+            shareBtn.innerText = orig;
+          });
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(
+          () => flash('Copied!'),
+          () => (shareBtn.innerText = orig)
+        );
+      }
+    });
+    dlBtn.parentNode.insertBefore(shareBtn, dlBtn.nextSibling);
+
+    btn.parentNode.insertBefore(wc, shareBtn.nextSibling);
   });
 
   // Helper: Simple markdown-to-html formatter

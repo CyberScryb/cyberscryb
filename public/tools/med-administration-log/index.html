@@ -21,7 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -104,7 +104,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -250,6 +249,10 @@
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your safety audit, potential drug-drug interaction warning profile, compliance analytics, and a professional shift handoff report will appear here...</span>
                             </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Generating your log entry...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -257,6 +260,10 @@
                 <!-- FAQ -->
                 <div class="geo-card" style="background: #18181b; border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
                     <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>Is what I type private?</summary>
+                        <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
+                    </details>
                     <div class="faq-item"><h4>What is a Medication Administration Record (MAR)?</h4><p>A MAR is a professional grid sheet used by nurses and caregivers to document every medication dose given to a patient. Accurate recording prevents double-dosing and ensures medication compliance.</p></div>
                     <div class="faq-item"><h4>How does the drug interaction audit work?</h4><p>The AI model reviews the active medications, dosages, and routes listed on your MAR grid, references standard clinical safety criteria, and alerts you to possible drug-drug interactions or side-effect risks.</p></div>
                     <div class="faq-item"><h4>Can I print my completed MAR and report?</h4><p>Yes. Clicking the "Print / PDF" button will format the MAR grid and completed handoff notes into a clean, printer-friendly layout suitable for physical care files or medical binder inserts.</p></div>
@@ -293,7 +300,28 @@
 
 
 
-    </main>
+        <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/tools/nurse-brain-sheet/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Nurse Brain Sheet Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Printable shift handoff organizer for patients, vitals, meds, tasks, and notes. Built for RNs and students.</span>
+            </a>
+            <a href="/tools/blood-sugar-log-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Blood Sugar Log Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Printable glucose log for fasting, before and after meals, and bedtime readings.</span>
+            </a>
+            <a href="/tools/soap-note-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SOAP Note Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Build a clean, printable SOAP note in seconds: Subjective, Objective, Assessment, Plan.</span>
+            </a>
+            <a href="/tools/caregiver-report/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Caregiver Shift Report Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Turn messy shift notes into a professional, structured care report for CNAs, home health aides, and family caregivers.</span>
+            </a>
+        </div>
+    </section>
+</main>
 <footer>
         <div class="footer-container">
             <div class="footer-content">
@@ -311,7 +339,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
@@ -336,7 +365,7 @@
     </script>
 
     <script src="/js/script.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/med-administration-log/med-administration-log.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
