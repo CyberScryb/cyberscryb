@@ -347,6 +347,7 @@
           var chainSelect = document.createElement('select');
           chainSelect.id = 'chain-select';
           chainSelect.title = 'Send this result to another tool';
+          chainSelect.setAttribute('aria-label', 'Send result to another tool');
           chainSelect.className = copyBtn.className;
           chainSelect.style.cssText = copyBtn.style.cssText + 'display:none;';
           var defaultOpt = document.createElement('option');
