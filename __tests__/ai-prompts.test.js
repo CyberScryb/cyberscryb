@@ -20,9 +20,6 @@ jest.mock('firebase-functions/v1', () => ({
     })),
   },
 }));
-jest.mock('firebase-functions/v2/https', () => ({
-  onRequest: jest.fn((opts, handler) => handler),
-}));
 
 const { AI_PROMPTS } = require('../functions/index.js').__testing;
 

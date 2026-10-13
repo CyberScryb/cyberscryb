@@ -11,9 +11,6 @@ jest.mock('firebase-functions/v1', () => ({
   runWith: () => ({ https: { onRequest: callback => callback } }),
   pubsub: { schedule: () => ({ timeZone: () => ({ onRun: callback => callback }) }) },
 }));
-jest.mock('firebase-functions/v2/https', () => ({
-  onRequest: jest.fn((opts, handler) => handler),
-}));
 const { privacyStatus } = require('../functions/index.js');
 
 test('privacy status never looks up or discloses arbitrary email membership', async () => {

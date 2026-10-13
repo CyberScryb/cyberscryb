@@ -1,5 +1,4 @@
 const functions = require('firebase-functions/v1');
-const { onRequest } = require('firebase-functions/v2/https');
 const cors = require('cors')({ origin: true });
 const admin = require('firebase-admin');
 const { getFirestore, FieldValue } = require('firebase-admin/firestore');
@@ -2556,7 +2555,7 @@ async function streamGeneration(req, res, ctx) {
   }
 }
 
-const generateAIHandler = (req, res) => {
+exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
   cors(req, res, async () => {
     if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method Not Allowed' });
@@ -2717,20 +2716,7 @@ const generateAIHandler = (req, res) => {
       });
     }
   });
-};
-
-// v2 (Cloud Run): required for true SSE streaming — v1 buffers the entire
-// response before delivery. Region, timeout, memory, and public invoker
-// match the v1 deployment exactly.
-exports.generateAI = onRequest(
-  {
-    region: 'us-central1',
-    timeoutSeconds: 120,
-    memory: '256MiB',
-    invoker: 'public',
-  },
-  generateAIHandler
-);
+});
 
 // ─── Privacy Status Endpoint ───────────────────────────
 // Public documentation only: never disclose an arbitrary email's membership.
