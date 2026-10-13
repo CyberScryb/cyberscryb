@@ -153,23 +153,23 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="promo-current-role" style="color: var(--text-muted);">Your current role</label>
-                            <input type="text" id="promo-current-role" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Customer Support Specialist">
+                            <label for="promo-current-role" style="color: var(--text-muted);">Your current role <span class="cs-req" aria-hidden="true">*</span></label>
+                            <input type="text" id="promo-current-role" aria-required="true" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Customer Support Specialist">
                         </div>
 
                         <div class="input-group">
-                            <label for="promo-target-role" style="color: var(--text-muted);">The role you want</label>
-                            <input type="text" id="promo-target-role" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Senior Customer Support Specialist">
+                            <label for="promo-target-role" style="color: var(--text-muted);">The role you want <span class="cs-req" aria-hidden="true">*</span></label>
+                            <input type="text" id="promo-target-role" aria-required="true" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Senior Customer Support Specialist">
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Quantified achievements</label>
+                            <label for="tool-input" style="color: var(--text-muted);">Quantified achievements <span class="cs-req" aria-hidden="true">*</span></label>
                             <p style="font-size:0.8rem; color: var(--text-faint); margin:0 0 8px; line-height:1.5;">One per line. Use numbers wherever you can, even rough ones: "Grew activation 22% in Q2" or "Cut average ticket resolution from 3 days to 1." Duties do not count; results do.</p>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:150px;" placeholder="Grew activation 22% in Q2&#10;Trained 4 new hires on the onboarding flow&#10;Rewrote the top 20 help articles, cutting repeat tickets 18%"></textarea>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:150px;" placeholder="Grew activation 22% in Q2&#10;Trained 4 new hires on the onboarding flow&#10;Rewrote the top 20 help articles, cutting repeat tickets 18%"></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="promo-tenure" style="color: var(--text-muted);">Time in current role</label>
+                            <label for="promo-tenure" style="color: var(--text-muted);">Time in current role <span class="cs-optional">(optional)</span></label>
                             <select id="promo-tenure" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="Less than a year" selected>Less than a year</option>
                                 <option value="1 to 2 years">1 to 2 years</option>
@@ -179,7 +179,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="promo-manager" style="color: var(--text-muted);">Manager's name (optional)</label>
+                            <label for="promo-manager" style="color: var(--text-muted);">Manager's name <span class="cs-optional">(optional)</span></label>
                             <input type="text" id="promo-manager" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Priya Sharma">
                         </div>
 
@@ -199,7 +199,7 @@
                             <summary style="cursor:pointer; font-weight:600; font-size:0.9rem; color: var(--text-muted);">Advanced options</summary>
                             <div style="margin-top:12px;">
                                 <div class="input-group">
-                                    <label for="promo-length" style="color: var(--text-muted);">Length</label>
+                                    <label for="promo-length" style="color: var(--text-muted);">Length <span class="cs-optional">(optional)</span></label>
                                     <select id="promo-length" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="Concise letter, about 150 to 200 words">Concise (~150&ndash;200 words)</option>
                                         <option value="Standard letter, about 250 to 350 words" selected>Standard (~250&ndash;350 words)</option>
@@ -207,12 +207,12 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="promo-outcome" style="color: var(--text-muted);">What are you asking for? (optional)</label>
+                                    <label for="promo-outcome" style="color: var(--text-muted);">What are you asking for? <span class="cs-optional">(optional)</span></label>
                                     <input type="text" id="promo-outcome" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. title change and pay adjustment, or larger scope in current role">
                                 </div>
                                 <div class="input-group">
                                     <label style="display:inline-flex; align-items:center; gap:8px; font-size:0.9rem; color: var(--text-muted); cursor:pointer;">
-                                        <input type="checkbox" id="promo-transition" checked style="accent-color: var(--primary-soft); width:1rem; height:1rem;"> Include a transition plan for my current duties
+                                        <input type="checkbox" id="promo-transition" checked style="accent-color: var(--primary-soft); width:1rem; height:1rem;"> Include a transition plan for my current duties <span class="cs-optional">(optional)</span>
                                     </label>
                                 </div>
                             </div>

@@ -23,6 +23,8 @@ jest.mock('firebase-functions/v1', () => ({
 
 const { isAllowedReferer, sanitizeParams, AI_PROMPTS, ALLOWED_HOSTS } =
   require('../functions/index.js').__testing;
+const { parseGeminiSSELine, sseDataEvent, geminiRequestBody } =
+  require('../functions/index.js').__testing;
 
 // ─── isAllowedReferer ────────────────────────────────────
 
@@ -188,5 +190,90 @@ describe('AI_PROMPTS — no missing tool handler (error branch guard)', () => {
 
   test('missing tool returns undefined (would trigger 400 in handler)', () => {
     expect(AI_PROMPTS['nonexistent-tool']).toBeUndefined();
+  });
+});
+
+// ─── Streaming helpers (SSE) ───────────────────────────────────────────────
+
+describe('parseGeminiSSELine', () => {
+  test('extracts text from a realistic streamGenerateContent chunk', () => {
+    const line =
+      'data: {"candidates": [{"content": {"parts": [{"text": "Hello "}], "role": "model"}, "finishReason": null}]}';
+    expect(parseGeminiSSELine(line)).toBe('Hello ');
+  });
+
+  test('joins multiple parts in one chunk', () => {
+    const line = 'data: {"candidates": [{"content": {"parts": [{"text": "a"}, {"text": "b"}]}}]}';
+    expect(parseGeminiSSELine(line)).toBe('ab');
+  });
+
+  test('extracts text from a final chunk with finishReason STOP', () => {
+    const line =
+      'data: {"candidates": [{"content": {"parts": [{"text": "done."}], "role": "model"}, "finishReason": "STOP"}], "usageMetadata": {"promptTokenCount": 10}}';
+    expect(parseGeminiSSELine(line)).toBe('done.');
+  });
+
+  test('returns null for [DONE] marker', () => {
+    expect(parseGeminiSSELine('data: [DONE]')).toBeNull();
+  });
+
+  test('returns null for comment/heartbeat lines', () => {
+    expect(parseGeminiSSELine(': ping')).toBeNull();
+    expect(parseGeminiSSELine('')).toBeNull();
+  });
+
+  test('returns null for malformed JSON', () => {
+    expect(parseGeminiSSELine('data: {not json')).toBeNull();
+  });
+
+  test('returns null when candidates carry no text parts', () => {
+    expect(parseGeminiSSELine('data: {"candidates": []}')).toBeNull();
+    expect(parseGeminiSSELine('data: {"candidates": [{"content": {}}]}')).toBeNull();
+    expect(parseGeminiSSELine('data: {"promptFeedback": {}}')).toBeNull();
+  });
+
+  test('tolerates missing space after data:', () => {
+    const line = 'data:{"candidates": [{"content": {"parts": [{"text": "x"}]}}]}';
+    expect(parseGeminiSSELine(line)).toBe('x');
+  });
+});
+
+describe('sseDataEvent', () => {
+  test('formats a text event as an SSE data frame', () => {
+    expect(sseDataEvent({ text: 'hi' })).toBe('data: {"text":"hi"}\n\n');
+  });
+
+  test('formats done and error events', () => {
+    expect(sseDataEvent({ done: true })).toBe('data: {"done":true}\n\n');
+    expect(sseDataEvent({ error: 'boom' })).toBe('data: {"error":"boom"}\n\n');
+  });
+
+  test('escapes embedded newlines and quotes in text', () => {
+    const out = sseDataEvent({ text: 'a"b\nc' });
+    expect(out.startsWith('data: ')).toBe(true);
+    expect(out.endsWith('\n\n')).toBe(true);
+    // Must be a single data frame: no raw newlines inside the JSON payload line.
+    expect(out.split('\n').length).toBe(3);
+    expect(JSON.parse(out.slice(6).trim()).text).toBe('a"b\nc');
+  });
+});
+
+describe('geminiRequestBody', () => {
+  test('builds the shared request shape with model defaults', () => {
+    const body = geminiRequestBody('PROMPT');
+    expect(body.contents).toEqual([{ parts: [{ text: 'PROMPT' }] }]);
+    expect(body.generationConfig.maxOutputTokens).toBe(8192);
+  });
+
+  test('omits deprecated temperature/top_p/top_k/thinking_budget params', () => {
+    const body = geminiRequestBody('PROMPT');
+    const cfg = body.generationConfig;
+    expect(cfg.temperature).toBeUndefined();
+    expect(cfg.top_p).toBeUndefined();
+    expect(cfg.topP).toBeUndefined();
+    expect(cfg.top_k).toBeUndefined();
+    expect(cfg.topK).toBeUndefined();
+    expect(cfg.thinking_budget).toBeUndefined();
+    expect(cfg.thinkingBudget).toBeUndefined();
   });
 });

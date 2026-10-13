@@ -2367,6 +2367,183 @@ Write the letter now.`,
   },
 };
 
+// ─── Streaming helpers (SSE) ────────────────────────────────────────────────
+// The client asks for streaming with { stream: true } in the POST body. The
+// server calls Gemini's streamGenerateContent and re-emits a simplified event
+// stream the client can render progressively:
+//   data: {"text":"...chunk..."}
+//   ...
+//   data: {"done":true}
+// A mid-stream failure is signaled as: data: {"error":"message"}
+// The non-streaming JSON path is unchanged and remains the fallback.
+
+function sseDataEvent(obj) {
+  return 'data: ' + JSON.stringify(obj) + '\n\n';
+}
+
+// Extracts generated text from one Gemini streamGenerateContent SSE line.
+// Returns the text string, or null when the line carries no text.
+function parseGeminiSSELine(line) {
+  const payload = line.replace(/^data:\s*/, '');
+  if (!payload || payload === '[DONE]') return null;
+  let obj;
+  try {
+    obj = JSON.parse(payload);
+  } catch (e) {
+    return null;
+  }
+  const parts =
+    obj.candidates && obj.candidates[0] && obj.candidates[0].content
+      ? obj.candidates[0].content.parts
+      : null;
+  if (!Array.isArray(parts)) return null;
+  const text = parts.map(p => (typeof p.text === 'string' ? p.text : '')).join('');
+  return text || null;
+}
+
+function geminiRequestBody(prompt) {
+  return {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: {
+      // Google deprecated temperature/top_p/top_k and thinking_budget (2026-10-06 notice):
+      // upcoming Gemini models 400-error on them, so we omit them and use model defaults.
+      maxOutputTokens: 8192,
+    },
+  };
+}
+
+// Pipes a Gemini streamGenerateContent response to the client as simplified SSE.
+// Handles its own response lifecycle; the caller must return afterwards.
+async function streamGeneration(req, res, ctx) {
+  const { tool, tier, prompt, model, apiKey } = ctx;
+  const upstreamController = new AbortController();
+  const onClientClose = () => {
+    try {
+      upstreamController.abort();
+    } catch (e) {}
+  };
+  req.on('close', onClientClose);
+  const send = obj => {
+    try {
+      res.write(sseDataEvent(obj));
+    } catch (e) {}
+  };
+  const finish = () => {
+    try {
+      req.removeListener('close', onClientClose);
+    } catch (e) {}
+    try {
+      res.end();
+    } catch (e) {}
+  };
+
+  try {
+    const upstream = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(geminiRequestBody(prompt)),
+        signal: upstreamController.signal,
+      }
+    );
+
+    // Upstream failed before streaming began: headers not committed yet, so the
+    // normal JSON error contract still applies (same mapping as non-streaming).
+    if (!upstream.ok) {
+      let userMessage = 'AI service temporarily unavailable. Please try again.';
+      try {
+        const errorData = await upstream.json();
+        console.error(`Gemini Stream Error (${tool}):`, errorData);
+        if (upstream.status === 429) {
+          userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
+        } else if (upstream.status === 400) {
+          userMessage = 'Invalid input. Please check your text and try again.';
+        } else if (errorData.error && errorData.error.message) {
+          userMessage = errorData.error.message;
+        }
+      } catch (e) {}
+      await phCapture(getClientIdentifier(req), 'ai_generation_failed', {
+        tool,
+        tier,
+        status: upstream.status,
+        mode: 'stream',
+      });
+      try {
+        req.removeListener('close', onClientClose);
+      } catch (e) {}
+      return res.status(upstream.status).json({
+        error: userMessage,
+        retryable: upstream.status === 429 || upstream.status >= 500,
+        retryAfter: upstream.status === 429 ? 30 : null,
+      });
+    }
+
+    // Commit to SSE only after the upstream accepted the request.
+    res.set({
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-store',
+      'X-Accel-Buffering': 'no',
+      Connection: 'keep-alive',
+    });
+    res.status(200);
+
+    const reader = upstream.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let fullText = '';
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let idx;
+      while ((idx = buffer.indexOf('\n')) >= 0) {
+        const line = buffer.slice(0, idx).trim();
+        buffer = buffer.slice(idx + 1);
+        if (!line || line.charAt(0) === ':') continue; // heartbeat/comment
+        if (!line.startsWith('data:')) continue;
+        const text = parseGeminiSSELine(line);
+        if (text) {
+          fullText += text;
+          send({ text });
+        }
+      }
+    }
+    send({ done: true });
+
+    await logEvent('ai_success', {
+      tool,
+      tier,
+      mode: 'stream',
+      outputLength: fullText.length > 1000 ? '1000+' : fullText.length > 500 ? '500-1000' : '0-500',
+    });
+    await phCapture(getClientIdentifier(req), 'ai_tool_used', {
+      tool,
+      tier,
+      mode: 'stream',
+      output_length_bucket:
+        fullText.length > 1000 ? '1000+' : fullText.length > 500 ? '500-1000' : '0-500',
+    });
+    finish();
+  } catch (error) {
+    // Client went away (Stop button): end quietly, no error event.
+    if (upstreamController.signal.aborted) {
+      finish();
+      return;
+    }
+    console.error(`Function Stream Error (${tool}):`, error);
+    await phCapture(getClientIdentifier(req), 'ai_generation_failed', {
+      tool,
+      tier,
+      mode: 'stream',
+      error_type: error.name || 'unknown',
+    });
+    // Mid-stream failure: the client keeps whatever text already arrived.
+    send({ error: 'Stream interrupted. Showing what arrived so far.' });
+    finish();
+  }
+}
+
 exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest((req, res) => {
   cors(req, res, async () => {
     if (req.method !== 'POST') {
@@ -2441,19 +2618,18 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
       const prompt = toolConfig.build(input, sanitizeParams(params));
       const model = toolConfig.model || 'gemini-3.1-pro-preview';
 
+      // Streaming path: progressive SSE tokens. Non-streaming JSON stays the default.
+      if (req.body.stream === true) {
+        await streamGeneration(req, res, { tool, tier, prompt, model, apiKey });
+        return;
+      }
+
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: {
-              // Google deprecated temperature/top_p/top_k and thinking_budget (2026-10-06 notice):
-              // upcoming Gemini models 400-error on them, so we omit them and use model defaults.
-              maxOutputTokens: 8192,
-            },
-          }),
+          body: JSON.stringify(geminiRequestBody(prompt)),
         }
       );
 
@@ -3165,5 +3341,8 @@ if (process.env.NODE_ENV === 'test') {
     GLOBAL_DAILY_CAP,
     FIRESTORE_TIER_CAPS,
     getUserTier,
+    parseGeminiSSELine,
+    sseDataEvent,
+    geminiRequestBody,
   };
 }

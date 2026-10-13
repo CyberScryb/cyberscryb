@@ -153,20 +153,20 @@
                             <h3 style="font-size: 0.95rem; color: var(--text); margin-top:0; margin-bottom:0.75rem;">Add New Medication</h3>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                                 <div class="input-group">
-                                    <label for="med-name" style="font-size:0.8rem; color: var(--text-muted);">Medication Name</label>
-                                    <input type="text" id="med-name" placeholder="e.g. Donepezil" required style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
+                                    <label for="med-name" style="font-size:0.8rem; color: var(--text-muted);">Medication Name <span class="cs-req" aria-hidden="true">*</span></label>
+                                    <input type="text" id="med-name" aria-required="true" placeholder="e.g. Donepezil" required style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-dosage" style="font-size:0.8rem; color: var(--text-muted);">Dosage</label>
-                                    <input type="text" id="med-dosage" placeholder="e.g. 5mg" required style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
+                                    <label for="med-dosage" style="font-size:0.8rem; color: var(--text-muted);">Dosage <span class="cs-req" aria-hidden="true">*</span></label>
+                                    <input type="text" id="med-dosage" aria-required="true" placeholder="e.g. 5mg" required style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
                                 <div class="input-group">
-                                    <label for="med-route" style="font-size:0.8rem; color: var(--text-muted);">Route</label>
+                                    <label for="med-route" style="font-size:0.8rem; color: var(--text-muted);">Route <span class="cs-optional">(optional)</span></label>
                                     <select id="med-route" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
-                                        <option value="Oral">Oral (PO)</option>
+                                        <option value="Oral" selected>Oral (PO)</option>
                                         <option value="Sublingual">Sublingual (SL)</option>
                                         <option value="Transdermal">Transdermal (Patch)</option>
                                         <option value="Subcutaneous">Subcutaneous (SubQ)</option>
@@ -175,9 +175,9 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-frequency" style="font-size:0.8rem; color: var(--text-muted);">Frequency</label>
+                                    <label for="med-frequency" style="font-size:0.8rem; color: var(--text-muted);">Frequency <span class="cs-optional">(optional)</span></label>
                                     <select id="med-frequency" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%;">
-                                        <option value="Daily">Once Daily</option>
+                                        <option value="Daily" selected>Once Daily</option>
                                         <option value="Twice Daily">Twice Daily (BID)</option>
                                         <option value="Three Times Daily">3x Daily (TID)</option>
                                         <option value="Every 8 Hours">Every 8 Hours</option>
@@ -185,7 +185,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="med-time" style="font-size:0.8rem; color: var(--text-muted);">Scheduled Time</label>
+                                    <label for="med-time" style="font-size:0.8rem; color: var(--text-muted);">Scheduled Time <span class="cs-optional">(optional)</span></label>
                                     <input type="text" id="med-time" placeholder="e.g. 08:00" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; width:100%; box-sizing:border-box;">
                                 </div>
                             </div>
@@ -213,16 +213,16 @@
 
                         <!-- Report/Audit Type -->
                         <div class="input-group" style="margin-bottom: 1.25rem;">
-                            <label for="audit-type" style="color: var(--text-muted);">Audit Report Type</label>
+                            <label for="audit-type" style="color: var(--text-muted);">Audit Report Type <span class="cs-optional">(optional)</span></label>
                             <select id="audit-type" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
-                                <option value="safety-audit">Drug Safety Audit (Interactions, side-effects, risk check)</option>
+                                <option value="safety-audit" selected>Drug Safety Audit (Interactions, side-effects, risk check)</option>
                                 <option value="handoff-summary">Handoff & shift summary report (Next-shift briefing)</option>
                             </select>
                         </div>
 
                         <!-- Handoff shift context -->
                         <div class="input-group">
-                            <label for="caregiver-notes" style="color: var(--text-muted);">Caregiver Shift Handoff Context (PRN Reasons, Refusals, Vitals, etc.)</label>
+                            <label for="caregiver-notes" style="color: var(--text-muted);">Caregiver Shift Handoff Context (PRN Reasons, Refusals, Vitals, etc.) <span class="cs-optional">(optional)</span></label>
                             <textarea id="caregiver-notes" placeholder="e.g. Patient refused morning Donepezil until breakfast was served. Blood pressure checked at 08:00 was 118/74. Complained of mild dizziness after Metoprolol." style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; height: 100px; resize: vertical;"></textarea>
                         </div>
 

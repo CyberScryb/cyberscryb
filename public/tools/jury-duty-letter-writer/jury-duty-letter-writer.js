@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.CSAITool.init({
     toolId: 'jury-duty-letter-writer',
-    emptyMessage:
-      'Please describe your situation so we can write the letter.',
+    emptyMessage: 'Please describe your situation so we can write the letter.',
     collectInput: () => {
       const court = courtInput.value.trim();
       const summonsDate = summonsInput.value.trim();
@@ -39,9 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const hardship = document.querySelector('input[name="hardship"]:checked');
       const hardshipVal = hardship ? hardship.value : 'Medical';
       const situation = toolInput.value.trim();
-      const docs = Array.from(
-        document.querySelectorAll('input[name="support-docs"]:checked')
-      )
+      const docs = Array.from(document.querySelectorAll('input[name="support-docs"]:checked'))
         .map(el => el.value)
         .join(', ');
       const deferralDate = deferralInput.value.trim();
@@ -52,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (jurorNo) header += 'Juror number: ' + jurorNo + '\n';
       header += 'Hardship category: ' + hardshipVal + '\n';
       if (docs) header += 'Supporting documents available: ' + docs + '\n';
-      if (deferralDate)
-        header += 'Preferred deferral date: ' + deferralDate + '\n';
+      if (deferralDate) header += 'Preferred deferral date: ' + deferralDate + '\n';
 
       return header + '\nSituation in the writer\u2019s own words:\n' + situation;
     },
@@ -62,9 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ? document.querySelector('input[name="hardship"]:checked').value
         : 'Medical',
       deferralDate: deferralInput.value.trim(),
-      documents: Array.from(
-        document.querySelectorAll('input[name="support-docs"]:checked')
-      )
+      documents: Array.from(document.querySelectorAll('input[name="support-docs"]:checked'))
         .map(el => el.value)
         .join(', '),
     }),

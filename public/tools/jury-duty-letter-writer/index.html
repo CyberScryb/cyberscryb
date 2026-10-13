@@ -156,17 +156,17 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="court-name" style="color: var(--text-muted);">Court name / county</label>
+                            <label for="court-name" style="color: var(--text-muted);">Court name / county <span class="cs-optional">(optional)</span></label>
                             <input type="text" id="court-name" class="text-input" placeholder="e.g. Superior Court of Bonner County">
                         </div>
 
                         <div class="input-group" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                             <div>
-                                <label for="summons-date" style="color: var(--text-muted);">Summons date</label>
+                                <label for="summons-date" style="color: var(--text-muted);">Summons date <span class="cs-optional">(optional)</span></label>
                                 <input type="date" id="summons-date" class="date-input">
                             </div>
                             <div>
-                                <label for="juror-number" style="color: var(--text-muted);">Juror number (if shown on summons)</label>
+                                <label for="juror-number" style="color: var(--text-muted);">Juror number (if shown on summons) <span class="cs-optional">(optional)</span></label>
                                 <input type="text" id="juror-number" class="text-input" placeholder="e.g. 1029347">
                             </div>
                         </div>
@@ -189,8 +189,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Your situation, in plain words</label>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:130px;" placeholder="Describe the hardship honestly: what makes serving on this date impossible or extremely difficult, and what you are asking for instead. Stick to facts..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Your situation, in plain words <span class="cs-req" aria-hidden="true">*</span></label>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:130px;" placeholder="Describe the hardship honestly: what makes serving on this date impossible or extremely difficult, and what you are asking for instead. Stick to facts..."></textarea>
                         </div>
 
                         <div class="input-group">
@@ -211,7 +211,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="deferral-date" style="color: var(--text-muted);">Preferred deferral date <span style="font-size:0.78rem;">(optional, for deferral requests)</span></label>
+                            <label for="deferral-date" style="color: var(--text-muted);">Preferred deferral date <span style="font-size:0.78rem;">(optional, for deferral requests)</span> <span class="cs-optional">(optional)</span></label>
                             <input type="date" id="deferral-date" class="date-input">
                             <p class="field-note">Naming a specific future date makes deferrals easy to approve: the court just moves your name. Leave blank if you are asking for excusal instead.</p>
                         </div>

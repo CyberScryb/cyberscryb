@@ -111,14 +111,14 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Describe your custody situation, children's ages, current arrangement, and what you'd like to change or establish</label>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Example: I have two children, ages 7 and 4. We currently have an informal 50/50 arrangement but nothing in writing. I'd like to formalize a schedule that includes holidays, summer breaks, and decision-making responsibilities..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Describe your custody situation, children's ages, current arrangement, and what you'd like to change or establish <span class="cs-req" aria-hidden="true">*</span></label>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Example: I have two children, ages 7 and 4. We currently have an informal 50/50 arrangement but nothing in writing. I'd like to formalize a schedule that includes holidays, summer breaks, and decision-making responsibilities..."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="doc-type" style="color: var(--text-muted);">Document Type</label>
+                            <label for="doc-type" style="color: var(--text-muted);">Document Type <span class="cs-optional">(optional)</span></label>
                             <select id="doc-type" style="width:100%; padding:10px 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:6px; color: var(--text-muted); font-family:'Inter',sans-serif; font-size:0.9rem; cursor:pointer;">
-                                <option value="parenting-plan">Parenting Plan</option>
+                                <option value="parenting-plan" selected>Parenting Plan</option>
                                 <option value="custody-declaration">Custody Declaration</option>
                                 <option value="modification-request">Modification Request</option>
                                 <option value="visitation-schedule">Visitation Schedule Proposal</option>
@@ -126,7 +126,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="children-ages" style="color: var(--text-muted);">Children's Ages</label>
+                            <label for="children-ages" style="color: var(--text-muted);">Children's Ages <span class="cs-optional">(optional)</span></label>
                             <input type="text" id="children-ages" style="width:100%; padding:10px 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:6px; color: var(--text-muted); font-family:'Inter',sans-serif; font-size:0.9rem; box-sizing:border-box;" placeholder='e.g., "7 and 4" or "12, 9, 3"'>
                         </div>
 

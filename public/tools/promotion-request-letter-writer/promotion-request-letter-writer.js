@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.CSAITool.init({
     toolId: 'promotion-request-letter-writer',
-    emptyMessage: 'Please enter your current role, the role you want, and at least one achievement.',
+    emptyMessage:
+      'Please enter your current role, the role you want, and at least one achievement.',
     collectInput: () => {
       const parts = [];
       const current = currentRoleInput.value.trim();

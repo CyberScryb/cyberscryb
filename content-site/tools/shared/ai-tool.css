@@ -502,6 +502,95 @@ label:has(input[type='checkbox']:checked) {
     animation: none;
     background: rgba(255, 255, 255, 0.08);
   }
+  .cs-stream-cursor {
+    animation: none;
+  }
+}
+
+/* Streaming output: blinking cursor while tokens arrive. */
+.cs-stream-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: #f87171;
+  animation: cs-cursor-blink 0.9s steps(2, start) infinite;
+}
+@keyframes cs-cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Stop mode: the Generate button becomes the Stop button during a run. */
+.primary-btn.cs-stopping {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+.primary-btn.cs-stopping:hover:not(:disabled) {
+  background: #991b1b;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Elapsed-time line inside the loading indicator. */
+.cs-elapsed {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #fca5a5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Persistent generation status line above the output. */
+.cs-gen-status {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.2em;
+  margin-bottom: 0.4rem;
+}
+
+/* Notice appended when a stream is interrupted mid-way. */
+.cs-interrupted-note {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fcd34d;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Form clarity: required marker and optional tag. */
+.cs-req {
+  color: #f87171;
+  font-weight: 700;
+  margin-left: 2px;
+}
+.cs-optional {
+  color: var(--text-faint, #8a8a93);
+  font-weight: 400;
+  font-size: 0.78em;
+  margin-left: 6px;
+}
+
+/* Run-example button: injected by the shared core, styled to match icon-btn. */
+.cs-example-btn {
+  background: transparent;
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.16));
+  color: #f87171;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.cs-example-btn:hover {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
 }
 
 /*

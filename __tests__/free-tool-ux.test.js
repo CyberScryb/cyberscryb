@@ -1,6 +1,10 @@
 /** @jest-environment jsdom */
 const fs = require('fs');
 const path = require('path');
+// jsdom does not provide TextDecoder; real browsers do. Shim from Node.
+if (typeof TextDecoder === 'undefined') {
+  global.TextDecoder = require('util').TextDecoder;
+}
 const load = file =>
   window.eval(fs.readFileSync(path.join(__dirname, '..', 'content-site', file), 'utf8'));
 
@@ -39,7 +43,12 @@ test('anonymous visitors receive the entire AI result immediately, with safe tex
   document.querySelector('main').innerHTML =
     '<textarea id="tool-input">An example request</textarea><button id="generate-btn">Generate</button><div id="loading-indicator" class="hidden"></div><div id="output-text"></div>';
   const result = '<img src=x onerror=alert(1)>\n' + 'A complete response. '.repeat(120);
-  window.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ result }) });
+  window.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    headers: { get: () => 'application/json' },
+    body: null,
+    json: async () => ({ result }),
+  });
   load('tools/shared/ai-tool.js');
   window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'An example request' });
   document.querySelector('#generate-btn').click();
@@ -122,4 +131,124 @@ test('catalog search filters every section and clear filters restores the tools'
   expect(document.querySelector('[data-category="all"]').getAttribute('aria-pressed')).toBe(
     'false'
   );
+});
+
+test('streaming renders tokens progressively and Stop keeps partial output', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<textarea id="tool-input">An example request</textarea><button id="generate-btn">Generate</button><div id="loading-indicator" class="hidden"></div><div id="output-text"></div>';
+
+  // Minimal ReadableStream-backed SSE response mock.
+  const sseBody = 'data: {"text":"Hello "}\n\ndata: {"text":"world"}\n\ndata: {"done":true}\n\n';
+  const chunks = [Buffer.from(sseBody, 'utf8')];
+  const fakeBody = {
+    getReader() {
+      let i = 0;
+      return {
+        read: async () => {
+          if (i >= chunks.length) return { done: true, value: undefined };
+          return { done: false, value: chunks[i++] };
+        },
+      };
+    },
+  };
+  window.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    headers: { get: () => 'text/event-stream' },
+    body: fakeBody,
+    json: async () => {
+      throw new Error('should not parse JSON on SSE path');
+    },
+  });
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'An example request' });
+
+  const btn = document.querySelector('#generate-btn');
+  const origHTML = btn.innerHTML;
+  btn.click();
+  // Let the async streaming flow run to completion.
+  for (let i = 0; i < 20; i++) await Promise.resolve();
+  jest.runOnlyPendingTimers();
+
+  // Full streamed text rendered, cursor removed, button restored.
+  expect(document.querySelector('#output-text').textContent).toBe('Hello world');
+  expect(document.querySelector('#output-text .cs-stream-cursor')).toBeNull();
+  expect(btn.innerHTML).toBe(origHTML);
+  expect(btn.classList.contains('cs-stopping')).toBe(false);
+  expect(document.querySelector('#output-text').getAttribute('aria-busy')).toBe('false');
+  expect(window.fetch).toHaveBeenCalledTimes(1);
+  const sentBody = JSON.parse(window.fetch.mock.calls[0][1].body);
+  expect(sentBody.stream).toBe(true);
+  jest.useRealTimers();
+});
+
+test('Stop button aborts the stream and keeps partial text', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<textarea id="tool-input">An example request</textarea><button id="generate-btn">Generate</button><div id="loading-indicator" class="hidden"></div><div id="output-text"></div>';
+
+  // Never-resolving stream: the test stops it mid-flight.
+  let abortSignal = null;
+  const fakeBody = {
+    getReader() {
+      return {
+        read: () =>
+          new Promise((resolve, reject) => {
+            if (abortSignal && abortSignal.aborted) {
+              const err = new Error('aborted');
+              err.name = 'AbortError';
+              reject(err);
+              return;
+            }
+            // First chunk, then hang until abort.
+            setTimeout(() => {
+              if (abortSignal && abortSignal.aborted) {
+                const err = new Error('aborted');
+                err.name = 'AbortError';
+                reject(err);
+              } else {
+                resolve({
+                  done: false,
+                  value: Buffer.from('data: {"text":"Partial "}\n\n', 'utf8'),
+                });
+              }
+            }, 10);
+          }),
+      };
+    },
+  };
+  window.fetch = jest.fn().mockImplementation((url, opts) => {
+    abortSignal = opts.signal;
+    // Abort the in-flight read when the signal fires.
+    opts.signal.addEventListener('abort', () => {});
+    return Promise.resolve({
+      ok: true,
+      headers: { get: () => 'text/event-stream' },
+      body: fakeBody,
+      json: async () => ({}),
+    });
+  });
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'An example request' });
+
+  const btn = document.querySelector('#generate-btn');
+  btn.click();
+  for (let i = 0; i < 10; i++) await Promise.resolve();
+  jest.advanceTimersByTime(20);
+  for (let i = 0; i < 10; i++) await Promise.resolve();
+
+  // Button is now in Stop mode; clicking it aborts.
+  expect(btn.classList.contains('cs-stopping')).toBe(true);
+  expect(btn.textContent).toContain('Stop');
+  btn.click();
+  for (let i = 0; i < 20; i++) await Promise.resolve();
+  jest.runOnlyPendingTimers();
+  // Let the abort rejection propagate through the client's await chain.
+  for (let i = 0; i < 30; i++) await Promise.resolve();
+
+  // Partial text kept, button restored to Generate.
+  expect(document.querySelector('#output-text').textContent).toContain('Partial');
+  expect(btn.classList.contains('cs-stopping')).toBe(false);
+  expect(document.querySelector('#output-text').getAttribute('aria-busy')).toBe('false');
+  jest.useRealTimers();
 });

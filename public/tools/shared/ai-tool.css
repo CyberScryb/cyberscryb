@@ -1,8 +1,8 @@
 /* Shared AI Tool Styles — used by summarizer, email-writer, bio-generator, code-explainer, product-description */
-/* Linen & Terracotta (2026-08-06): panels/inputs/outputs match the site brand — no dark surfaces. */
+/* Digital Obsidian: panels/inputs/outputs use the dark theme tokens. */
 :root {
   --bg-panel: rgba(255, 252, 247, 0.94);
-  --border-highlight: rgba(220,38,38, 0.4);
+  --border-highlight: rgba(220, 38, 38, 0.4);
 }
 
 .ai-tool-container {
@@ -112,7 +112,7 @@ input[type='text']:focus,
 select:focus {
   outline: none;
   border-color: #dc2626;
-  box-shadow: 0 0 0 3px rgba(220,38,38, 0.18);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
 }
 
 .radio-group,
@@ -192,9 +192,9 @@ select:focus {
 }
 
 .primary-btn:hover:not(:disabled) {
-  background: #9a3412;
+  background: var(--primary-hover, #dc2626);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220,38,38, 0.25);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
 }
 
 .primary-btn:disabled {
@@ -239,7 +239,7 @@ select:focus {
 
 .icon-btn:hover {
   border-color: #dc2626;
-  background: rgba(220,38,38, 0.08);
+  background: rgba(220, 38, 38, 0.08);
 }
 
 .stats-bar {
@@ -273,7 +273,7 @@ select:focus {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(220,38,38, 0.25);
+  border: 4px solid rgba(220, 38, 38, 0.25);
   border-radius: 50%;
   border-top-color: #dc2626;
   animation: spin 1s linear infinite;
@@ -353,7 +353,7 @@ select:focus {
 .gate-form input:focus {
   outline: none;
   border-color: #dc2626;
-  box-shadow: 0 0 0 3px rgba(220,38,38, 0.18);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
 }
 .gate-form input::placeholder {
   color: var(--text-faint, #5c4a3d);
@@ -374,9 +374,9 @@ select:focus {
   white-space: nowrap;
 }
 .gate-form button:hover {
-  background: #9a3412;
+  background: var(--primary-hover, #dc2626);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220,38,38, 0.25);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
 }
 @media (max-width: 500px) {
   .gate-form {
@@ -446,4 +446,199 @@ select:focus {
   height: 34px;
   vertical-align: middle;
   color: #dc2626;
+}
+
+/*
+  Radio pill selected state — works for both .radio-group and inline-styled
+  radio labels. The selected option gets a red border and subtle glow.
+*/
+label:has(input[type='radio']:checked) {
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+}
+label:has(input[type='checkbox']:checked) {
+  border-color: rgba(239, 68, 68, 0.5) !important;
+}
+
+/*
+  Skeleton loading — shimmering placeholder lines shown in the output
+  while the AI generates. Feels faster and more intentional than a spinner.
+*/
+.cs-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+.cs-skeleton-line {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: cs-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.cs-skeleton-line.short {
+  width: 62%;
+}
+.cs-skeleton-line.medium {
+  width: 84%;
+}
+@keyframes cs-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-skeleton-line {
+    animation: none;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .cs-stream-cursor {
+    animation: none;
+  }
+}
+
+/* Streaming output: blinking cursor while tokens arrive. */
+.cs-stream-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: #f87171;
+  animation: cs-cursor-blink 0.9s steps(2, start) infinite;
+}
+@keyframes cs-cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Stop mode: the Generate button becomes the Stop button during a run. */
+.primary-btn.cs-stopping {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+.primary-btn.cs-stopping:hover:not(:disabled) {
+  background: #991b1b;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Elapsed-time line inside the loading indicator. */
+.cs-elapsed {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #fca5a5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Persistent generation status line above the output. */
+.cs-gen-status {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.2em;
+  margin-bottom: 0.4rem;
+}
+
+/* Notice appended when a stream is interrupted mid-way. */
+.cs-interrupted-note {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fcd34d;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Form clarity: required marker and optional tag. */
+.cs-req {
+  color: #f87171;
+  font-weight: 700;
+  margin-left: 2px;
+}
+.cs-optional {
+  color: var(--text-faint, #8a8a93);
+  font-weight: 400;
+  font-size: 0.78em;
+  margin-left: 6px;
+}
+
+/* Run-example button: injected by the shared core, styled to match icon-btn. */
+.cs-example-btn {
+  background: transparent;
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.16));
+  color: #f87171;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.cs-example-btn:hover {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/*
+  Sticky input panel on desktop — keeps the input and Generate button
+  visible while scrolling through long outputs.
+*/
+@media (min-width: 1024px) {
+  .input-panel {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+}
+
+/*
+  Print stylesheet — for letter/document tools, prints only the output.
+*/
+@media print {
+  header,
+  footer,
+  nav,
+  .navbar,
+  .input-panel,
+  #generate-btn,
+  #shortcut-hint,
+  #clear-btn,
+  #sample-btn,
+  #result-history,
+  .cs-loading-tip,
+  #loading-indicator,
+  .adsbygoogle,
+  .geo-card,
+  .faq-item {
+    display: none !important;
+  }
+  .output-panel {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .output-content {
+    border: none !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
 }

@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -231,7 +231,6 @@
                     <li><a href="/guides/">Guides</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/about/">About</a></li>
-                    <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
                 </ul>
                 <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
                     <span></span>
@@ -276,8 +275,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Paste Text to Check</label>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:220px;" placeholder="Paste the text you want to check for AI patterns. The more text you provide, the more accurate the detection..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Paste Text to Check <span class="cs-req" aria-hidden="true">*</span></label>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:220px;" placeholder="Paste the text you want to check for AI patterns. The more text you provide, the more accurate the detection..."></textarea>
                         </div>
 
                         <button id="generate-btn" class="primary-btn" style="background: linear-gradient(135deg, #dc2626, #ef4444); border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
@@ -302,6 +301,10 @@
                         <div class="output-wrapper">
                             <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
                                 <span class="placeholder" style="color:var(--text-faint);">Your AI detection result will appear here...</span>
+                            </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Analyzing your text...</p>
                             </div>
                             <!-- Score gauge, markers, analysis, and CTA are injected by JS -->
                             <div id="score-display" class="hidden" style="padding: 0 1rem 1rem;">
@@ -436,7 +439,8 @@
                     <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                </div>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
@@ -467,7 +471,7 @@
     </script>
 
     <script src="/js/script.js?v=20261006audit1"></script>
-    <script src="/tools/shared/ai-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261012ux3"></script>
     <script src="/tools/ai-detector/ai-detector.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 

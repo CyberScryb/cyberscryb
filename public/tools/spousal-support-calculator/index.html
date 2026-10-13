@@ -151,9 +151,9 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="calc-state" style="color: var(--text-muted);">Select State Guidelines</label>
+                            <label for="calc-state" style="color: var(--text-muted);">Select State Guidelines <span class="cs-optional">(optional)</span></label>
                             <select id="calc-state" data-cs-share="state" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
-                                <option value="California">California (Santa Clara Guideline Formula)</option>
+                                <option value="California" selected>California (Santa Clara Guideline Formula)</option>
                                 <option value="Texas">Texas (Strict 20% Net Income Cap)</option>
                                 <option value="New York">New York (Statutory Maintenance Formula)</option>
                                 <option value="Florida">Florida (Statutory Duration Factors)</option>
@@ -164,18 +164,18 @@
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                             <div class="input-group">
-                                <label for="income-a" style="color: var(--text-muted);">Spouse A Income ($/mo)</label>
-                                <input type="number" id="income-a" value="8000" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="income-a" style="color: var(--text-muted);">Spouse A Income ($/mo) <span class="cs-req" aria-hidden="true">*</span></label>
+                                <input type="number" id="income-a" value="8000" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                             <div class="input-group">
-                                <label for="income-b" style="color: var(--text-muted);">Spouse B Income ($/mo)</label>
-                                <input type="number" id="income-b" value="2000" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                                <label for="income-b" style="color: var(--text-muted);">Spouse B Income ($/mo) <span class="cs-req" aria-hidden="true">*</span></label>
+                                <input type="number" id="income-b" value="2000" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                             </div>
                         </div>
 
                         <div class="input-group">
-                            <label for="marriage-duration" style="color: var(--text-muted);">Length of Marriage (Years)</label>
-                            <input type="number" id="marriage-duration" value="8" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
+                            <label for="marriage-duration" style="color: var(--text-muted);">Length of Marriage (Years) <span class="cs-req" aria-hidden="true">*</span></label>
+                            <input type="number" id="marriage-duration" value="8" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;">
                         </div>
 
                         <!-- Local calculation outcome card -->

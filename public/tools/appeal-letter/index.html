@@ -114,14 +114,14 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Describe what happened and what you're appealing (include dates, reference numbers if you have them)</label>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Example: My unemployment claim was denied on March 15, 2026 (Case #UI-48291). They said I left voluntarily, but I was laid off due to downsizing. I have my termination letter and HR email confirming the layoff..."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Describe what happened and what you're appealing (include dates, reference numbers if you have them) <span class="cs-req" aria-hidden="true">*</span></label>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Example: My unemployment claim was denied on March 15, 2026 (Case #UI-48291). They said I left voluntarily, but I was laid off due to downsizing. I have my termination letter and HR email confirming the layoff..."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="appeal-type" style="color: var(--text-muted);">Appeal Type</label>
+                            <label for="appeal-type" style="color: var(--text-muted);">Appeal Type <span class="cs-optional">(optional)</span></label>
                             <select id="appeal-type" style="width:100%; padding:10px 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:6px; color: var(--text-muted); font-family:'Inter',sans-serif; font-size:0.9rem;">
-                                <option value="unemployment">Unemployment Denial</option>
+                                <option value="unemployment" selected>Unemployment Denial</option>
                                 <option value="academic">School/Academic Decision</option>
                                 <option value="medical-billing">Medical Billing Dispute</option>
                                 <option value="parking-ticket">Parking/Traffic Ticket</option>
@@ -130,7 +130,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="addressed-to" style="color: var(--text-muted);">Addressed To <span style="color:var(--text-faint); font-weight:normal;">(optional)</span></label>
+                            <label for="addressed-to" style="color: var(--text-muted);">Addressed To <span class="cs-optional">(optional)</span></label>
                             <input type="text" id="addressed-to" data-cs-share="recipient" style="width:100%; padding:10px 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:6px; color: var(--text-muted); font-family:'Inter',sans-serif; font-size:0.9rem; box-sizing:border-box;" placeholder="e.g. Claims Review Board, Office of Financial Aid">
                         </div>
 

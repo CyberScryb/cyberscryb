@@ -114,19 +114,19 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="tool-input" style="color: var(--text-muted);">Type or paste your shift notes (informal is fine &mdash; we'll structure it for you)</label>
-                            <textarea id="tool-input" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
+                            <label for="tool-input" style="color: var(--text-muted);">Type or paste your shift notes (informal is fine &mdash; we'll structure it for you) <span class="cs-req" aria-hidden="true">*</span></label>
+                            <textarea id="tool-input" aria-required="true" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:180px;" placeholder="Mrs. Johnson had a good morning. Ate half her breakfast around 8am. Gave her metformin and lisinopril. She was a little confused around 10 but settled down after we watched her show. Helped her shower. BP was 138/85. Daughter called at noon. She napped from 1-3."></textarea>
                         </div>
 
                         <div class="input-group">
-                            <label for="patient-name" style="color: var(--text-muted);">Patient/Client Name (optional)</label>
+                            <label for="patient-name" style="color: var(--text-muted);">Patient/Client Name <span class="cs-optional">(optional)</span></label>
                             <input type="text" id="patient-name" data-cs-share="patientName" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box;" placeholder="Leave blank to use [Patient Name]">
                         </div>
 
                         <div class="input-group">
-                            <label for="shift-type" style="color: var(--text-muted);">Shift Type</label>
+                            <label for="shift-type" style="color: var(--text-muted);">Shift Type <span class="cs-optional">(optional)</span></label>
                             <select id="shift-type" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; width: 100%; box-sizing: border-box; cursor: pointer;">
-                                <option value="Day Shift">Day Shift</option>
+                                <option value="Day Shift" selected>Day Shift</option>
                                 <option value="Evening Shift">Evening Shift</option>
                                 <option value="Night Shift">Night Shift</option>
                                 <option value="24-Hour">24-Hour</option>

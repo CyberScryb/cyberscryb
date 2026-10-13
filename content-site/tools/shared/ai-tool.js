@@ -446,7 +446,361 @@
     });
 
     if (generateBtn) {
-      generateBtn.addEventListener('click', async function () {
+      // ── Streaming generation state ──────────────────────────────────────
+      // The Generate button doubles as the Stop button during a run
+      // (ChatGPT/Claude convention): clicking it aborts the request and keeps
+      // whatever text already streamed in.
+      let genController = null;
+      let genTimerId = null;
+      let genStartMs = 0;
+      let genOrigBtnHTML = null;
+      let genActive = false;
+
+      function genElapsedText() {
+        const s = Math.floor((Date.now() - genStartMs) / 1000);
+        return 'Generating... ' + s + 's';
+      }
+
+      function ensureElapsedEl() {
+        let el = document.getElementById('cs-elapsed');
+        if (!el && loadingIndicator) {
+          el = document.createElement('p');
+          el.id = 'cs-elapsed';
+          el.className = 'cs-elapsed';
+          loadingIndicator.appendChild(el);
+        }
+        return el;
+      }
+
+      function ensureStatusEl() {
+        let el = document.getElementById('cs-gen-status');
+        if (!el) {
+          el = document.createElement('div');
+          el.id = 'cs-gen-status';
+          el.className = 'cs-gen-status';
+          el.setAttribute('role', 'status');
+          const panel = outputContent.closest('.output-panel');
+          const header = panel ? panel.querySelector('.panel-header') : null;
+          if (header && header.parentNode) {
+            header.parentNode.insertBefore(el, header.nextSibling);
+          } else if (outputContent.parentNode) {
+            outputContent.parentNode.insertBefore(el, outputContent);
+          }
+        }
+        return el;
+      }
+
+      function startElapsedTimer() {
+        stopElapsedTimer();
+        genStartMs = Date.now();
+        const tick = function () {
+          const t = genElapsedText();
+          const el = document.getElementById('cs-elapsed');
+          if (el) el.textContent = t;
+          const st = document.getElementById('cs-gen-status');
+          if (st && genActive) st.textContent = t;
+        };
+        tick();
+        genTimerId = setInterval(tick, 500);
+      }
+
+      function stopElapsedTimer() {
+        if (genTimerId) {
+          clearInterval(genTimerId);
+          genTimerId = null;
+        }
+      }
+
+      function setStopMode() {
+        genOrigBtnHTML = generateBtn.innerHTML;
+        generateBtn.innerHTML = '<span aria-hidden="true">■</span> Stop';
+        generateBtn.classList.add('cs-stopping');
+        generateBtn.setAttribute('aria-label', 'Stop generation');
+      }
+
+      function restoreGenerateMode() {
+        if (genOrigBtnHTML !== null) generateBtn.innerHTML = genOrigBtnHTML;
+        genOrigBtnHTML = null;
+        generateBtn.classList.remove('cs-stopping');
+        generateBtn.removeAttribute('aria-label');
+      }
+
+      function clearStreamCursor() {
+        const c = outputContent.querySelector('.cs-stream-cursor');
+        if (c) c.remove();
+      }
+
+      function renderStreaming(text) {
+        clearStreamCursor();
+        outputContent.textContent = text;
+        const cursor = document.createElement('span');
+        cursor.className = 'cs-stream-cursor';
+        cursor.setAttribute('aria-hidden', 'true');
+        outputContent.appendChild(cursor);
+        const wrap = outputContent.closest('.output-wrapper');
+        if (wrap) wrap.scrollTop = wrap.scrollHeight;
+      }
+
+      // Reads our simplified SSE event stream: data: {"text":"..."} ... data: {"done":true}
+      async function readSSEStream(body, onText) {
+        const reader = body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          let idx;
+          while ((idx = buffer.indexOf('\n\n')) >= 0) {
+            const evt = buffer.slice(0, idx);
+            buffer = buffer.slice(idx + 2);
+            const lines = evt.split('\n');
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i];
+              if (line.indexOf('data:') !== 0) continue;
+              let obj;
+              try {
+                obj = JSON.parse(line.slice(5).trim());
+              } catch (e) {
+                continue;
+              }
+              if (obj && typeof obj.text === 'string' && obj.text) onText(obj.text);
+              if (obj && obj.done) return;
+              if (obj && obj.error) throw new Error(obj.error);
+            }
+          }
+        }
+      }
+
+      async function doNonStreamingFetch(payload) {
+        const response = await fetch('/api/ai-generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: genController.signal,
+        });
+        if (!response.ok) {
+          let errMsg = '';
+          try {
+            const errData = await response.json();
+            errMsg = errData.error || '';
+          } catch {}
+          throw new Error(friendlyError(response.status, errMsg));
+        }
+        const data = await response.json();
+        const result = data.result || '';
+        if (!result) throw new Error('Empty response. Please try again.');
+        return result;
+      }
+
+      function showChainIfReady(text) {
+        if (window.CSWorkspace && typeof window.CSWorkspace.notifyResult === 'function') {
+          try {
+            window.CSWorkspace.notifyResult(toolId, text);
+          } catch (e) {
+            /* non-fatal */
+          }
+        } else if (window.CSWorkspace && typeof window.CSWorkspace.showChainBar === 'function') {
+          try {
+            window.CSWorkspace.showChainBar(toolId, text);
+          } catch (e) {
+            /* non-fatal */
+          }
+        }
+      }
+
+      function showErrorUI(message) {
+        console.error('[ai-tool]', message);
+        outputContent.innerHTML = '';
+        const errEl = document.createElement('div');
+        errEl.style.cssText =
+          'padding:1rem 1.25rem;border-radius:12px;background:rgba(239,68,68,0.08);' +
+          'border:1px solid rgba(239,68,68,0.3);color:#fca5a5;font-size:0.95rem;line-height:1.6;';
+        errEl.setAttribute('role', 'alert');
+        const errTitle = document.createElement('strong');
+        errTitle.textContent = 'Something went wrong. ';
+        errTitle.style.color = '#f87171';
+        errEl.appendChild(errTitle);
+        errEl.appendChild(document.createTextNode(message || 'Request failed. Please try again.'));
+        outputContent.appendChild(errEl);
+      }
+
+      function showStoppedNote(seconds) {
+        const st = ensureStatusEl();
+        st.textContent = 'Stopped after ' + seconds + 's. Partial result kept below.';
+        setTimeout(function () {
+          if (st.textContent.indexOf('Stopped after') === 0) st.textContent = '';
+        }, 6000);
+      }
+
+      function showInterruptedNote() {
+        const note = document.createElement('div');
+        note.className = 'cs-interrupted-note';
+        note.setAttribute('role', 'alert');
+        note.textContent =
+          'The stream was interrupted, so this is a partial result. Press Generate again for a fresh result.';
+        outputContent.appendChild(note);
+      }
+
+      function endGeneration(mode) {
+        // mode: 'done' | 'stopped' | 'error'
+        genActive = false;
+        stopElapsedTimer();
+        stopTips();
+        outputContent.setAttribute('aria-busy', 'false');
+        if (loadingIndicator) loadingIndicator.classList.add('hidden');
+        restoreGenerateMode();
+        const st = document.getElementById('cs-gen-status');
+        if (st && mode === 'done') st.textContent = '';
+        if (mode === 'done') {
+          // 3-second cooldown to prevent accidental rapid double clicking.
+          generateBtn.disabled = true;
+          setTimeout(function () {
+            generateBtn.disabled = false;
+          }, 3000);
+        } else {
+          generateBtn.disabled = false;
+        }
+      }
+
+      async function runGeneration(input, params) {
+        genActive = true;
+        genController = new AbortController();
+        let fullText = '';
+        let firstToken = false;
+        let timeToFirstToken = null;
+        const t0 = performance.now();
+
+        if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+        ensureElapsedEl();
+        setStopMode();
+        outputContent.innerHTML = '';
+        showSkeleton(outputContent);
+        startTips(outputContent);
+        outputContent.setAttribute('aria-busy', 'true');
+        startElapsedTimer();
+        ensureStatusEl().textContent = '';
+
+        if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+          try {
+            var draftFields = {};
+            var mainIn =
+              document.getElementById('tool-input') ||
+              document.querySelector('textarea[id$="-input"]') ||
+              document.querySelector('textarea');
+            if (mainIn) draftFields[mainIn.id || 'tool-input'] = mainIn.value;
+            window.CSWorkspace.save(toolId, { fields: draftFields });
+          } catch (wsErr) {
+            /* non-fatal */
+          }
+        }
+
+        function onToken(chunk) {
+          if (!firstToken) {
+            firstToken = true;
+            timeToFirstToken = Math.round(performance.now() - t0);
+            if (loadingIndicator) loadingIndicator.classList.add('hidden');
+            stopTips();
+            outputContent.innerHTML = '';
+          }
+          fullText += chunk;
+          renderStreaming(fullText);
+          updateOutputCount(fullText);
+        }
+
+        try {
+          let streamed = false;
+          try {
+            const response = await fetch('/api/ai-generate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+              body: JSON.stringify({ tool: toolId, input, params, stream: true }),
+              signal: genController.signal,
+            });
+            if (!response.ok) {
+              let errMsg = '';
+              try {
+                const errData = await response.json();
+                errMsg = errData.error || '';
+              } catch {}
+              throw new Error(friendlyError(response.status, errMsg));
+            }
+            const headers = response.headers;
+            const ct =
+              headers && typeof headers.get === 'function' ? headers.get('content-type') || '' : '';
+            if (response.body && ct.indexOf('text/event-stream') >= 0) {
+              streamed = true;
+              await readSSEStream(response.body, onToken);
+            } else {
+              // Server answered without SSE (old deploy or proxy stripped it): JSON fallback.
+              const data = await response.json();
+              const result = data.result || '';
+              if (!result) throw new Error('Empty response. Please try again.');
+              fullText = result;
+              firstToken = true;
+            }
+          } catch (streamErr) {
+            // User pressed Stop: keep partial output, no retry.
+            if (streamErr && streamErr.name === 'AbortError') throw streamErr;
+            // Stream failed before any token arrived: one non-streaming retry.
+            if (!firstToken && !streamed) {
+              fullText = await doNonStreamingFetch({ tool: toolId, input, params });
+              firstToken = true;
+            } else {
+              throw streamErr;
+            }
+          }
+
+          if (!fullText) throw new Error('Empty response. Please try again.');
+          clearStreamCursor();
+          trackEvent('tool_used', { tool_id: toolId, user_type: 'free' });
+          if (timeToFirstToken !== null) {
+            trackEvent('tool_ttft_ms', { tool_id: toolId, value: timeToFirstToken });
+          }
+          showFullResult(fullText);
+          showChainIfReady(fullText);
+          endGeneration('done');
+        } catch (error) {
+          if (error && error.name === 'AbortError') {
+            // Stopped by the user: keep whatever streamed in.
+            clearStreamCursor();
+            const seconds = Math.floor((Date.now() - genStartMs) / 1000);
+            if (fullText) {
+              outputContent.textContent = fullText;
+              updateOutputCount(fullText);
+              updateStats(fullText);
+              pushHistory(fullText);
+            }
+            endGeneration('stopped');
+            showStoppedNote(seconds);
+            return;
+          }
+          if (firstToken && fullText) {
+            // Error mid-stream: keep the partial text with an honest notice.
+            clearStreamCursor();
+            outputContent.textContent = fullText;
+            updateOutputCount(fullText);
+            updateStats(fullText);
+            pushHistory(fullText);
+            showInterruptedNote();
+            endGeneration('error');
+            return;
+          }
+          showErrorUI(error.message);
+          endGeneration('error');
+        }
+      }
+
+      generateBtn.addEventListener('click', function () {
+        // Stop mode: the button aborts the in-flight request.
+        if (genActive && genController) {
+          try {
+            genController.abort();
+          } catch (e) {}
+          return;
+        }
+        if (genActive) return;
+
         const input = config.collectInput();
         const params = config.collectParams ? config.collectParams() : {};
 
@@ -464,101 +818,18 @@
           return;
         }
 
-        if (loadingIndicator) loadingIndicator.classList.remove('hidden');
-        generateBtn.disabled = true;
-        outputContent.innerHTML = '';
-        showSkeleton(outputContent);
-        startTips(outputContent);
-        outputContent.setAttribute('aria-busy', 'true');
+        runGeneration(input, params);
+      });
 
-        if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+      // Escape also stops an in-flight generation.
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && genActive && genController) {
           try {
-            var draftFields = {};
-            var mainIn =
-              document.getElementById('tool-input') ||
-              document.querySelector('textarea[id$="-input"]') ||
-              document.querySelector('textarea');
-            if (mainIn) draftFields[mainIn.id || 'tool-input'] = mainIn.value;
-            window.CSWorkspace.save(toolId, { fields: draftFields });
-          } catch (wsErr) {
-            /* non-fatal */
-          }
-        }
-
-        try {
-          const response = await fetch('/api/ai-generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tool: toolId, input, params }),
-          });
-
-          if (!response.ok) {
-            let errMsg = '';
-            try {
-              const errData = await response.json();
-              errMsg = errData.error || '';
-            } catch (e) {}
-            throw new Error(friendlyError(response.status, errMsg));
-          }
-
-          const data = await response.json();
-          const result = data.result || '';
-
-          if (!result) {
-            throw new Error('Empty response. Please try again.');
-          }
-
-          function showChainIfReady(text) {
-            if (window.CSWorkspace && typeof window.CSWorkspace.notifyResult === 'function') {
-              try {
-                window.CSWorkspace.notifyResult(toolId, text);
-              } catch (e) {
-                /* non-fatal */
-              }
-            } else if (
-              window.CSWorkspace &&
-              typeof window.CSWorkspace.showChainBar === 'function'
-            ) {
-              try {
-                window.CSWorkspace.showChainBar(toolId, text);
-              } catch (e) {
-                /* non-fatal */
-              }
-            }
-          }
-
-          // ── Direct Full Result (Unlocked) ─────────────────────
-          trackEvent('tool_used', { tool_id: toolId, user_type: 'free' });
-          showFullResult(result);
-          showChainIfReady(result);
-        } catch (error) {
-          console.error('[ai-tool]', error);
-          outputContent.innerHTML = '';
-          const errEl = document.createElement('div');
-          errEl.style.cssText =
-            'padding:1rem 1.25rem;border-radius:12px;background:rgba(239,68,68,0.08);' +
-            'border:1px solid rgba(239,68,68,0.3);color:#fca5a5;font-size:0.95rem;line-height:1.6;';
-          errEl.setAttribute('role', 'alert');
-          const errTitle = document.createElement('strong');
-          errTitle.textContent = 'Something went wrong. ';
-          errTitle.style.color = '#f87171';
-          errEl.appendChild(errTitle);
-          errEl.appendChild(
-            document.createTextNode(error.message || 'Request failed. Please try again.')
-          );
-          outputContent.appendChild(errEl);
-        } finally {
-          outputContent.setAttribute('aria-busy', 'false');
-          stopTips();
-          if (loadingIndicator) loadingIndicator.classList.add('hidden');
-          // 3-second cooldown to prevent accidental rapid double clicking
-          setTimeout(function () {
-            generateBtn.disabled = false;
-          }, 3000);
+            genController.abort();
+          } catch (err) {}
         }
       });
     }
-
     updateUsageDisplay();
     initCharCounter();
     initChainedInput();

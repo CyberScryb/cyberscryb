@@ -137,22 +137,22 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-names" style="color: var(--text-muted);">Roommate names (2 to 4, comma-separated)</label>
-                            <input id="ra-names" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Alex Chen, Jordan Lee, Sam Rivera">
+                            <label for="ra-names" style="color: var(--text-muted);">Roommate names (2 to 4, comma-separated) <span class="cs-req" aria-hidden="true">*</span></label>
+                            <input id="ra-names" type="text" aria-required="true" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Alex Chen, Jordan Lee, Sam Rivera">
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-address" style="color: var(--text-muted);">Rental address</label>
+                            <label for="ra-address" style="color: var(--text-muted);">Rental address <span class="cs-optional">(optional)</span></label>
                             <input id="ra-address" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. 123 Main St, Apt 4B, Spokane, WA 99201">
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-rent-total" style="color: var(--text-muted);">Total monthly rent (USD)</label>
-                            <input id="ra-rent-total" type="number" min="0" step="1" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. 1800">
+                            <label for="ra-rent-total" style="color: var(--text-muted);">Total monthly rent (USD) <span class="cs-req" aria-hidden="true">*</span></label>
+                            <input id="ra-rent-total" type="number" min="0" step="1" aria-required="true" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. 1800">
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-rent-split" style="color: var(--text-muted);">Rent split method</label>
+                            <label for="ra-rent-split" style="color: var(--text-muted);">Rent split method <span class="cs-optional">(optional)</span></label>
                             <select id="ra-rent-split" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="Equal split among all roommates" selected>Equal split among all roommates</option>
                                 <option value="By room size (proportional to square footage)">By room size (proportional to square footage)</option>
@@ -162,17 +162,17 @@
                         </div>
 
                         <div class="input-group" id="ra-rent-custom-group" style="display:none;">
-                            <label for="ra-rent-custom" style="color: var(--text-muted);">Custom amounts per roommate</label>
+                            <label for="ra-rent-custom" style="color: var(--text-muted);">Custom amounts per roommate <span class="cs-optional">(optional)</span></label>
                             <input id="ra-rent-custom" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Alex $700, Jordan $600, Sam $500">
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-utilities" style="color: var(--text-muted);">Utilities to share</label>
+                            <label for="ra-utilities" style="color: var(--text-muted);">Utilities to share <span class="cs-optional">(optional)</span></label>
                             <input id="ra-utilities" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Electric, gas, water, internet, trash">
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-utility-split" style="color: var(--text-muted);">Utility split method</label>
+                            <label for="ra-utility-split" style="color: var(--text-muted);">Utility split method <span class="cs-optional">(optional)</span></label>
                             <select id="ra-utility-split" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="Equal split among all roommates" selected>Equal split among all roommates</option>
                                 <option value="Proportional to each person's rent share">Proportional to each person's rent share</option>
@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-lease-term" style="color: var(--text-muted);">Lease term</label>
+                            <label for="ra-lease-term" style="color: var(--text-muted);">Lease term <span class="cs-optional">(optional)</span></label>
                             <select id="ra-lease-term" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="Month-to-month" selected>Month-to-month</option>
                                 <option value="6-month fixed term">6-month fixed term</option>
@@ -193,7 +193,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="ra-notice" style="color: var(--text-muted);">Move-out notice period</label>
+                            <label for="ra-notice" style="color: var(--text-muted);">Move-out notice period <span class="cs-optional">(optional)</span></label>
                             <select id="ra-notice" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                 <option value="30 days" selected>30 days</option>
                                 <option value="15 days">15 days</option>
@@ -206,7 +206,7 @@
                             <summary style="cursor: pointer; font-weight: 600; color: var(--text); font-size: 1rem;">House rules <span style="font-weight: 400; color: var(--text-muted); font-size: 0.85rem;">(optional, click to expand)</span></summary>
                             <div style="margin-top: 1rem;">
                                 <div class="input-group">
-                                    <label for="ra-guests" style="color: var(--text-muted);">Guest and overnight policy</label>
+                                    <label for="ra-guests" style="color: var(--text-muted);">Guest and overnight policy <span class="cs-optional">(optional)</span></label>
                                     <select id="ra-guests" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="No fixed rule (decide together)" selected>No fixed rule (decide together)</option>
                                         <option value="Overnight guests OK with 24-hour notice">Overnight guests OK with 24-hour notice</option>
@@ -216,7 +216,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="ra-quiet" style="color: var(--text-muted);">Quiet hours</label>
+                                    <label for="ra-quiet" style="color: var(--text-muted);">Quiet hours <span class="cs-optional">(optional)</span></label>
                                     <select id="ra-quiet" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="10 PM to 8 AM" selected>10 PM to 8 AM</option>
                                         <option value="11 PM to 7 AM">11 PM to 7 AM</option>
@@ -226,7 +226,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="ra-cleaning" style="color: var(--text-muted);">Cleaning rotation</label>
+                                    <label for="ra-cleaning" style="color: var(--text-muted);">Cleaning rotation <span class="cs-optional">(optional)</span></label>
                                     <select id="ra-cleaning" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="Weekly rotating schedule" selected>Weekly rotating schedule</option>
                                         <option value="Everyone cleans up their own mess">Everyone cleans up their own mess</option>
@@ -235,7 +235,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="ra-food" style="color: var(--text-muted);">Food sharing</label>
+                                    <label for="ra-food" style="color: var(--text-muted);">Food sharing <span class="cs-optional">(optional)</span></label>
                                     <select id="ra-food" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="Shared basics, personal items labeled" selected>Shared basics, personal items labeled</option>
                                         <option value="Everything shared">Everything shared</option>
@@ -244,7 +244,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="ra-disputes" style="color: var(--text-muted);">How disputes get resolved</label>
+                                    <label for="ra-disputes" style="color: var(--text-muted);">How disputes get resolved <span class="cs-optional">(optional)</span></label>
                                     <select id="ra-disputes" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
                                         <option value="Talk it out directly, then a house meeting" selected>Talk it out directly, then a house meeting</option>
                                         <option value="Majority vote at a house meeting">Majority vote at a house meeting</option>
@@ -253,7 +253,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group">
-                                    <label for="ra-extra" style="color: var(--text-muted);">Additional rules (anything else)</label>
+                                    <label for="ra-extra" style="color: var(--text-muted);">Additional rules (anything else) <span class="cs-optional">(optional)</span></label>
                                     <textarea id="ra-extra" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); height:100px;" placeholder="Smoking policy, pets, parking, thermostat setting, security deposit split..."></textarea>
                                 </div>
                             </div>
