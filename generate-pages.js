@@ -1444,6 +1444,8 @@ function generateSitemap(generatedPages) {
     'promotion-request-letter-writer',
     'roommate-agreement-builder',
     'jury-duty-letter-writer',
+    'farewell-message-generator',
+    'thank-you-note-generator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1542,6 +1544,8 @@ function generateSitemap(generatedPages) {
     'jury-duty-hardship-angles-guide',
     'how-to-write-a-complaint-letter',
     'how-to-write-a-thank-you-note',
+    'how-to-write-a-farewell-message',
+    'how-to-write-a-farewell-speech',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1708,6 +1712,8 @@ function manageRobotsMeta() {
     'promotion-request-letter-writer',
     'roommate-agreement-builder',
     'jury-duty-letter-writer',
+    'farewell-message-generator',
+    'thank-you-note-generator',
   ]);
 
   const dirsToProcess = [
