@@ -254,7 +254,7 @@ Nathan handed down `Rebuild.CLAUDE.md` (repo root) as a full rebuild/redesign ma
 
 ## 🎯 THE MISSION — What We're Actually Building
 
-This isn't a side project. This is a real business built on a real story — a CNA on night shifts who shipped 29 AI tools between patient rounds. That story is the competitive moat. No VC-backed competitor can replicate it. No agency can fake it. It's the kind of authentic origin that Google, Reddit, and real humans respond to, and it needs to be everywhere.
+This isn't a side project. This is a real business built on a real story — a CNA on night shifts who shipped 65+ free AI tools between patient rounds. That story is the competitive moat. No VC-backed competitor can replicate it. No agency can fake it. It's the kind of authentic origin that Google, Reddit, and real humans respond to, and it needs to be everywhere.
 
 **The north star:** Build tools so genuinely useful that users would miss them if they disappeared. Not "another AI wrapper" — tools that solve real problems for real people who are struggling, working, hustling, and need help fast. The humanizer helps a student avoid a failing grade. The hardship letter helps someone keep their lights on. The CNA shift report helps an exhausted healthcare worker go home ten minutes earlier. That's what we're doing. Those people are the point.
 
@@ -530,15 +530,7 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 
 ## Pricing (canonical — keep site-wide)
 
-| Tier           | Price                                    | Link                                           |
-| -------------- | ---------------------------------------- | ---------------------------------------------- |
-| Monthly        | $5/mo                                    | cyberscryb.com/pro                             |
-| Lifetime       | $29 one-time (first 50 buyers, then $49) | cyberscryb.com/pro                             |
-| CNA Resume Kit | $39 one-time                             | https://buy.stripe.com/00w3cx56m3mueKF3oV0sU01 |
-
-**Stripe Payment Links:** Monthly `https://buy.stripe.com/fZu4gBbuKg9geKFaRn0sU0b` · Lifetime `https://buy.stripe.com/eVq6oJ7eucX4aupaRn0sU08`
-
-**Do not advertise annual/$29/yr or $9/mo.** Historical notes: old $9 monthly copy was fixed to $5; stale tool pages once said "Pro Annual $29/yr" while `/pro/` sold lifetime — fixed to Lifetime $29 site-wide.
+All CyberScryb tools are 100% free. No accounts, no signup gates, no paywalls, no Pro tier. Voluntary Ko-fi donations support hosting and AI costs and never unlock features. Any historical Pro/pricing notes elsewhere in this file are superseded and must not be used in site copy, metadata, or schema.
 
 ## Automated Systems (Scheduled Tasks)
 
@@ -564,13 +556,13 @@ JSON↔CSV, regex tester, cron builder, base64, markdown→HTML, color palette, 
 - **Personal brand = SEO** — Google E-E-A-T rewards real human expertise/story
 - **80.5% of AI tool traffic is direct** — brand + repeat users > search
 - **Reddit ranks on Google** for commercial intent queries — authentic comments compound over weeks
-- **Your wedge:** "CNA on night shift who shipped 29 AI tools between patient rounds" — no competitor can copy this angle
+- **Your wedge:** "CNA on night shift who shipped 65+ free AI tools between patient rounds" — no competitor can copy this angle
 - **ChatGPT/Claude cite Reddit** at 7% conversion vs Google's 5%
 
 ## Active Revenue Channels
 
-- CyberScryb Pro ($5/mo or $29 lifetime)
-- CNA Resume Kit ($39)
+- Ko-fi donations (voluntary — unlock nothing)
+- CNA Resume Kit ($39, separate product)
 - AdSense on tool pages (revenue = traffic indicator; amount unknown)
 - Stripe product ID prefix: `fce2083b` (when Stripe MCP reconnected)
 
