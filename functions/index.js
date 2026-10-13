@@ -2480,6 +2480,13 @@ async function streamGeneration(req, res, ctx) {
     }
 
     // Commit to SSE only after the upstream accepted the request.
+    // Disable Nagle buffering so token writes flush immediately instead of
+    // coalescing into one burst at the end.
+    try {
+      if (res.socket && typeof res.socket.setNoDelay === 'function') {
+        res.socket.setNoDelay(true);
+      }
+    } catch (e) {}
     res.set({
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-store',
@@ -2487,6 +2494,10 @@ async function streamGeneration(req, res, ctx) {
       Connection: 'keep-alive',
     });
     res.status(200);
+    // Padding comment primes the stream so headers flush before tokens arrive.
+    try {
+      res.write(':' + ' '.repeat(2048) + '\n\n');
+    } catch (e) {}
 
     const reader = upstream.body.getReader();
     const decoder = new TextDecoder();
