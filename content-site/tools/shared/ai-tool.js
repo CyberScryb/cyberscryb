@@ -88,6 +88,15 @@
       });
       if (resultHistory.length > 5) resultHistory.pop();
       renderHistory();
+      if (window.CSRecentDrafts && text) {
+        var heading = document.querySelector('h1');
+        window.CSRecentDrafts.remember({
+          href: '/tools/' + toolId + '/',
+          name: heading ? heading.textContent : document.title,
+          preview: text,
+          source: 'result',
+        });
+      }
     }
     function renderHistory() {
       var existing = document.getElementById('result-history');

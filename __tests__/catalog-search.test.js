@@ -27,6 +27,13 @@ test('task search survives a shared URL and clearing restores the collection', (
   ]);
   doc.querySelector('#tool-filter-reset').click();
   expect(dom.window.location.search).toBe('');
+  const cards = [...doc.querySelectorAll('.posts-grid .blog-card')];
+  expect(cards.length).toBeGreaterThan(70);
+  // The full catalog stays in the HTML and folds to a short preview until Show all.
+  expect(visible(doc).length).toBeLessThan(cards.length);
+  doc.querySelectorAll('.catalog-show-all').forEach(button => {
+    if (!button.hidden) button.click();
+  });
   expect(visible(doc).length).toBeGreaterThan(70);
 });
 test('filtered results remove repeated shortcuts but retain tools unique to quick starts', () => {

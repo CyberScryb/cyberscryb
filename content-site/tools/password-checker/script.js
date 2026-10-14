@@ -283,7 +283,9 @@ function formatTime(seconds) {
 function toggleVisibility() {
   const type = input.type === 'password' ? 'text' : 'password';
   input.type = type;
-  toggleBtn.textContent = type === 'password' ? '👁' : '👁‍🗨';
+  toggleBtn.textContent = type === 'password' ? 'Show' : 'Hide';
+  toggleBtn.setAttribute('aria-label', type === 'password' ? 'Show password' : 'Hide password');
+  toggleBtn.title = type === 'password' ? 'Show password' : 'Hide password';
 }
 
 function generatePassword() {
@@ -322,7 +324,9 @@ function generatePassword() {
 
   input.value = password;
   input.type = 'text';
-  toggleBtn.textContent = '👁‍🗨';
+  toggleBtn.textContent = 'Hide';
+  toggleBtn.setAttribute('aria-label', 'Hide password');
+  toggleBtn.title = 'Hide password';
   analyze();
 }
 

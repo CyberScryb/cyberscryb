@@ -257,6 +257,56 @@ document
   });
 })();
 
+// Browser-only index of recent drafts and generated results.
+// Nothing here is sent to a server. Homepage reads the same key.
+(function () {
+  var KEY = 'cs_recent_drafts';
+  function read() {
+    try {
+      var value = JSON.parse(localStorage.getItem(KEY) || '[]');
+      return Array.isArray(value) ? value : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function write(list) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(list.slice(0, 8)));
+    } catch (e) {}
+  }
+  function remember(entry) {
+    if (!entry || typeof entry.href !== 'string') return;
+    if (!/^\/tools\/[a-z0-9-]+\/$/.test(entry.href)) return;
+    var preview = String(entry.preview || '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 140);
+    if (!preview) return;
+    var list = read().filter(function (item) {
+      return item && item.href !== entry.href;
+    });
+    list.unshift({
+      href: entry.href,
+      name: String(entry.name || 'Saved draft')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 80),
+      preview: preview,
+      at: Date.now(),
+      source: entry.source === 'result' ? 'result' : 'draft',
+    });
+    write(list);
+  }
+  function forgetDraft(href) {
+    write(
+      read().filter(function (item) {
+        return !(item && item.href === href && item.source !== 'result');
+      })
+    );
+  }
+  window.CSRecentDrafts = { remember: remember, forgetDraft: forgetDraft, read: read };
+})();
+
 // ─── Automatic Draft Persistence (User Retention) ───
 (function () {
   if (document.body.hasAttribute('data-no-draft')) return;
@@ -266,6 +316,10 @@ document
   if (!path.includes('/tools/')) return;
 
   var storageKey = 'cs_draft_' + path.replace(/\/+$/, '');
+  function toolHref() {
+    var slug = path.split('/').filter(Boolean).pop() || '';
+    return /^[a-z0-9-]+$/.test(slug) ? '/tools/' + slug + '/' : '';
+  }
 
   function findInput() {
     return (
@@ -299,6 +353,7 @@ document
 
         banner.querySelector('button').addEventListener('click', function () {
           localStorage.removeItem(storageKey);
+          if (window.CSRecentDrafts) window.CSRecentDrafts.forgetDraft(toolHref());
           input.value = '';
           input.dispatchEvent(new Event('input', { bubbles: true }));
           banner.remove();
@@ -319,8 +374,18 @@ document
           var val = input.value.trim();
           if (val) {
             localStorage.setItem(storageKey, val);
+            if (window.CSRecentDrafts) {
+              var heading = document.querySelector('h1');
+              window.CSRecentDrafts.remember({
+                href: toolHref(),
+                name: heading ? heading.textContent : document.title,
+                preview: val,
+                source: 'draft',
+              });
+            }
           } else {
             localStorage.removeItem(storageKey);
+            if (window.CSRecentDrafts) window.CSRecentDrafts.forgetDraft(toolHref());
           }
         } catch (e) {}
       }, 500);

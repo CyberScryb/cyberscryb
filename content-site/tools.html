@@ -26,7 +26,7 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux">
     <meta name="google-adsense-account" content="ca-pub-5721233331247292">
     <!-- JSON-LD ItemList -->
     <script type="application/ld+json">
@@ -413,7 +413,7 @@
   box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 0 0 1px rgba(220,38,38,0.45),0 0 0 5px rgba(220,38,38,0.14),0 0 28px rgba(220,38,38,0.28),0 22px 48px rgba(44,24,16,0.12)!important;
 }
 </style>
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 <body class="catalog-page">
@@ -451,7 +451,7 @@
                 </ul>
             </div>
         </section>
-        <div class="container" style="margin-bottom: 1.25rem;">
+        <div class="container catalog-toolbar" style="margin-bottom: 1.25rem;">
             <div class="search-wrapper">
                 <input type="text" id="tool-search" aria-label="Search free tools" placeholder="Search by tool or task…" />
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1502,7 +1502,7 @@
             </div>
         </div>
     </footer>
-    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/js/script.js?v=20261014ux"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Every section follows the same search and category selection.
@@ -1725,6 +1725,36 @@
             reset.hidden = currentCategory === 'all' && !searchQuery;
             const count = visibleLinks.size;
             countEl.textContent = count ? count + ' tool' + (count === 1 ? '' : 's') + (reset.hidden ? ' to explore' : ' shown') : 'No tools match. Try fewer words or clear the filters.';
+            // Fold long sections to the first 6 visible cards. Every link stays in the HTML.
+            document.querySelectorAll('.posts-grid[data-filter-scope="catalog"]').forEach(grid => {
+                const shown = Array.from(grid.querySelectorAll('.blog-card')).filter(card => card.style.display !== 'none');
+                let toggle = Array.from(grid.parentElement.children).find(el => el.classList.contains('catalog-show-all'));
+                if (!toggle) {
+                    toggle = document.createElement('button');
+                    toggle.type = 'button';
+                    toggle.className = 'catalog-show-all';
+                    grid.after(toggle);
+                    toggle.addEventListener('click', () => {
+                        grid.dataset.expanded = grid.dataset.expanded === 'true' ? 'false' : 'true';
+                        filterTools();
+                    });
+                }
+                const expanded = grid.dataset.expanded === 'true';
+                // Fold only the full catalog. A category or search already shortens the page,
+                // and every matching tool should stay visible. Links remain in the HTML either way.
+                if (shown.length <= 6 || query || currentCategory !== 'all') {
+                    toggle.hidden = true;
+                    return;
+                }
+                toggle.hidden = false;
+                toggle.setAttribute('aria-expanded', String(expanded));
+                toggle.textContent = expanded ? 'Show fewer' : 'Show all ' + shown.length;
+                if (!expanded) {
+                    shown.forEach((card, index) => {
+                        if (index >= 6) card.style.display = 'none';
+                    });
+                }
+            });
         }
         function updateUrl(mode) {
             const url = new URL(window.location.href);
