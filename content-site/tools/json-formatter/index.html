@@ -169,7 +169,7 @@
             </div>
 
             <div class="jf-btnrow">
-                <button class="jf-btn" id="jf-copy">Copy Output</button>
+                <button class="jf-btn" id="jf-copy" aria-label="Copy output to clipboard">Copy Output</button>
             </div>
 
             <div class="faq-section">
@@ -350,10 +350,20 @@
         $('jf-clear').addEventListener('click', () => {
             input.value = ''; output.value = ''; clearStatus(); updateCounts();
         });
+        let copyTimeout = null;
         $('jf-copy').addEventListener('click', () => {
             if (!output.value) return;
             navigator.clipboard.writeText(output.value);
             showOk('Output copied to clipboard.');
+            const copyBtn = $('jf-copy');
+            copyBtn.textContent = 'Copied!';
+            copyBtn.setAttribute('aria-label', 'Copied output to clipboard');
+            if (copyTimeout) clearTimeout(copyTimeout);
+            copyTimeout = setTimeout(() => {
+                copyBtn.textContent = 'Copy Output';
+                copyBtn.setAttribute('aria-label', 'Copy output to clipboard');
+                copyTimeout = null;
+            }, 2000);
         });
         input.addEventListener('input', updateCounts);
         updateCounts();
