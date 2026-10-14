@@ -103,6 +103,21 @@ describe('tools catalog and recent drafts', () => {
     expect(home).toContain('Your recent drafts');
     expect(home).toContain("localStorage.getItem('cs_recent_drafts')");
     expect(home).toContain("key.indexOf('cs_draft_/tools/')");
+    expect(home).not.toContain('a.href=item.href');
+    expect(home).not.toContain('link.href=last.url');
+    expect(home).toContain("return '/tools/'+TOOL_SLUGS[i]+'/'");
+    const listed = (home.match(/var TOOL_SLUGS=\('([^']+)'\)/) || [])[1].split(' ').sort();
+    const slugs = fs
+      .readdirSync(path.join(__dirname, '..', 'content-site/tools'), { withFileTypes: true })
+      .filter(
+        entry =>
+          entry.isDirectory() &&
+          entry.name !== 'shared' &&
+          fs.existsSync(path.join(__dirname, '..', 'content-site/tools', entry.name, 'index.html'))
+      )
+      .map(entry => entry.name)
+      .sort();
+    expect(listed).toEqual(slugs);
     expect(shared).toContain('CSRecentDrafts');
     expect(shared).toContain("source: 'result'");
   });
@@ -129,5 +144,37 @@ describe('recent draft index', () => {
     expect(saved[0].preview).toContain('private note');
     expect(saved[0].source).toBe('draft');
     jest.useRealTimers();
+  });
+
+  test('links recent drafts only through the known tool allowlist', () => {
+    localStorage.clear();
+    localStorage.setItem(
+      'cs_recent_drafts',
+      JSON.stringify([
+        { href: 'javascript:alert(1)', name: 'Bad <b>name</b>', preview: '<img src=x>' },
+        { href: '/tools/appeal-letter/', name: 'Appeal Letter', preview: 'a private note' },
+        { href: '/tools/not-a-real-tool/', name: 'Missing', preview: 'nope' },
+        { href: 'https://evil.example/tools/humanizer/', name: 'Evil', preview: 'nope' },
+      ])
+    );
+    localStorage.setItem('cs_draft_/tools/password-checker', 'stays in the browser');
+    localStorage.setItem('cs_draft_/tools/not-a-real-tool', 'should not link');
+    localStorage.setItem(
+      'cs_last_tool',
+      JSON.stringify({ name: 'Stolen', url: 'javascript:alert(1)' })
+    );
+    document.open();
+    document.write(read('content-site/index.html'));
+    document.close();
+    const links = [...document.querySelectorAll('#recent-drafts-list a')];
+    expect(links.map(link => link.getAttribute('href'))).toEqual([
+      '/tools/appeal-letter/',
+      '/tools/password-checker/',
+    ]);
+    expect(links[0].textContent).toBe('Appeal Letter');
+    expect(document.getElementById('recent-drafts-list').innerHTML).not.toContain('<b>');
+    expect(document.getElementById('recent-drafts-list').textContent).toContain('a private note');
+    expect(document.getElementById('recent-drafts').hidden).toBe(false);
+    expect(document.getElementById('continue-link').getAttribute('href')).toBe('#');
   });
 });

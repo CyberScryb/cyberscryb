@@ -255,20 +255,43 @@
     var name=link.dataset.toolLink||(heading?heading.textContent:link.textContent);
     try{localStorage.setItem('cs_last_tool',JSON.stringify({name:name.replace(/→/g,'').trim(),url:link.getAttribute('href')}))}catch(e){}
   });
-  try{var last=JSON.parse(localStorage.getItem('cs_last_tool'));if(last&&/^\/tools\/[a-z0-9-]+\/$/.test(last.url)&&typeof last.name==='string'){var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');text.textContent=' '+last.name;link.href=last.url;box.classList.add('show')}}catch(e){}
+  // Known tool directories. A stored path is only a lookup key; the href is built from this list.
+  var TOOL_SLUGS=('age-calculator ai-detector ai-writing-suite apology-letter-generator appeal-letter baby-name-generator base64-tool bedtime-story-generator behavioral-log bio-generator blood-sugar-log-generator bmi-calculator budget-planner business-name-generator caregiver-printable-pack caregiver-report caregiver-timesheet case-converter child-support-calculator cna-resume-kit code-explainer color-palette complaint-letter-generator compound-interest-calculator contrast-checker cover-letter-generator cron-builder custody-document dating-profile-writer debt-payoff-calculator dream-interpreter email-writer epoch-converter eulogy-writer farewell-message-generator fluid-sim gig-auto-pilot glassmorphism-generator grammar-checker gym-cancellation-letter hardship-letter hash-generator hipaa-release-generator hoa-dispute-letter html-entity humanizer icebreaker-generator insurance-denial-appeal interview-answer-coach json-csv-converter json-formatter jury-duty-letter-writer jwt-decoder landlord-tenant-letter letter-of-recommendation-writer lorem-ipsum macro-calculator markdown-html med-administration-log medical-debt-dispute medicare-cost-calculator meeting-notes-summarizer meta-description mortgage-calculator nurse-brain-sheet obituary-writer overtime-pay-calculator paper-trail paraphraser password-checker payment-demand-letter percentage-calculator performance-review-writer personal-statement-writer poem-generator privacy-generator product-description promotion-request-letter-writer qr-generator regex-tester resignation-letter-generator resume-bullets retirement-drawdown-calculator roommate-agreement-builder roth-ira-calculator salary-converter salary-negotiation-email-writer sap-appeal-letter sat-score-calculator security-deposit-demand self-evaluation-writer seo-tag-generator sleep-cycle-calculator slug-generator soap-note-generator spousal-support-calculator subnet-calculator summarizer tdee-calculator text-diff thank-you-note-generator thesis-statement-generator tip-calculator toast-generator tweet-generator unit-converter url-encoder utility-shutoff-letter uuid-generator voice-writer wedding-hashtag-generator wedding-speech-writer wedding-vow-generator word-counter').split(' ');
+  function safeToolHref(value){
+    var match=/^\/tools\/([a-z0-9-]+)\/$/.exec(typeof value==='string'?value:'');
+    if(!match) return '';
+    var slug=match[1];
+    for(var i=0;i<TOOL_SLUGS.length;i++){
+      if(TOOL_SLUGS[i]===slug) return '/tools/'+TOOL_SLUGS[i]+'/';
+    }
+    return '';
+  }
+  try{
+    var last=JSON.parse(localStorage.getItem('cs_last_tool'));
+    var continueHref=last&&safeToolHref(last.url);
+    if(continueHref&&typeof last.name==='string'){
+      var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');
+      text.textContent=' '+last.name;
+      link.href=continueHref;
+      box.classList.add('show');
+    }
+  }catch(e){}
   try{
     var drafts=[];
     var saved=JSON.parse(localStorage.getItem('cs_recent_drafts')||'[]');
-    if(Array.isArray(saved)) drafts=saved.filter(function(item){return item&&/^\/tools\/[a-z0-9-]+\/$/.test(item.href)&&typeof item.name==='string';});
+    if(Array.isArray(saved)) drafts=saved.filter(function(item){return item&&typeof item.href==='string'&&typeof item.name==='string';});
     var seen={};
-    drafts.forEach(function(item){seen[item.href]=true;});
+    drafts.forEach(function(item){
+      var href=safeToolHref(item.href);
+      if(href) seen[href]=true;
+    });
     for(var i=0;i<localStorage.length;i++){
       var key=localStorage.key(i);
       if(!key||key.indexOf('cs_draft_/tools/')!==0) continue;
       var slug=key.slice('cs_draft_/tools/'.length).replace(/\/+$/,'');
       if(!/^[a-z0-9-]+$/.test(slug)) continue;
-      var href='/tools/'+slug+'/';
-      if(seen[href]) continue;
+      var href=safeToolHref('/tools/'+slug+'/');
+      if(!href||seen[href]) continue;
       var raw=localStorage.getItem(key)||'';
       if(!raw.trim()) continue;
       seen[href]=true;
@@ -276,12 +299,16 @@
     }
     var list=document.getElementById('recent-drafts-list');
     var box=document.getElementById('recent-drafts');
-    if(list&&box&&drafts.length){
-      drafts.slice(0,6).forEach(function(item){
+    if(list&&box){
+      var shown=0;
+      for(var n=0;n<drafts.length&&shown<6;n++){
+        var item=drafts[n];
+        var safeHref=safeToolHref(item&&item.href);
+        if(!safeHref) continue;
         var li=document.createElement('li');
         var a=document.createElement('a');
-        a.href=item.href;
-        a.textContent=String(item.name).replace(/\s+/g,' ').trim();
+        a.href=safeHref;
+        a.textContent=String(item.name||'').replace(/\s+/g,' ').trim();
         li.appendChild(a);
         if(item.preview){
           var span=document.createElement('span');
@@ -289,8 +316,9 @@
           li.appendChild(span);
         }
         list.appendChild(li);
-      });
-      box.hidden=false;
+        shown++;
+      }
+      if(shown) box.hidden=false;
     }
   }catch(e){}
 })();
