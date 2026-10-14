@@ -30,8 +30,8 @@ for (const f of walk(root)) {
   c = c.replace(/rgba\(0,\s*212,\s*255/gi, 'rgba(26, 24, 20');
   c = c.replace(/rgba\(123,\s*44,\s*255/gi, 'rgba(26, 24, 20');
   // Cache-bust shared style if old version pin
-  c = c.replace(/\/css\/style\.css\?v=\d+/g, '/css/style.css?v=20261011polish2');
-  c = c.replace(/href="\/css\/style\.css"/g, 'href="/css/style.css?v=20261011polish2"');
+  c = c.replace(/\/css\/style\.css\?v=\d+/g, '/css/style.css?v=20261014ux');
+  c = c.replace(/href="\/css\/style\.css"/g, 'href="/css/style.css?v=20261014ux"');
   if (c !== o) {
     fs.writeFileSync(f, c);
     n++;

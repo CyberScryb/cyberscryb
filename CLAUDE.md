@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-14 — UX batch)
+
+Proposal generator result tabs use Copy, Download, Print/PDF, Regenerate, and Share. Loading hides the placeholder and keeps the generate label readable. The privacy banner is a full-width bar pinned to the bottom. Password-checker labels are sentence case without emoji. Decorative badge and heading icons that left a blank gap are removed on the same tool pattern. The parenting-plan page title, social tags, and H1 now say Free Parenting Plan Generator. The tools catalog folds the full list to six cards per section with a Show all control; category and search results stay expanded, and every tool link stays in the HTML. Homepage “Your recent drafts” reads only `cs_recent_drafts` and `cs_draft_*` from this browser.
+
 ## Recent Changes (Session 2026-10-11 — Trust copy)
 
 Password checker strength score is labeled as local analysis. The fake "Cyberscryb verification" id is no longer shown. Crack time and browser-only behavior stay. Curator Prime left the primary nav for a footer link labeled "Photo identifier" (separate site at curator.cyberscryb.com). `/pro/` now says everything is free and needs no account, with links to the writing, life, and developer catalogs. Canonical stays `/pro/`. No donation URL was added; an HTML comment marks where a Support Cyberscryb link can go later.

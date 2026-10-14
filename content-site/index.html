@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=20261011polish2" />
+  <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
   <meta name="google-site-verification" content="40UhuvQCBj2dtn1E2FNte0dCBASfDc91zI-FTjEKQ24" />
 
   <meta name="google-adsense-account" content="ca-pub-5721233331247292">
@@ -31,7 +31,7 @@
   </script>
 
 
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 <body class="home-page">
@@ -53,6 +53,7 @@
       <h1>Free tools for work and everyday life.</h1>
       <p class="lead">Write a better draft, prepare a letter, or finish a developer task. Describe what you need below, or choose a starting point.</p>
       <div class="continue-box" id="continue-box"><p><strong>Pick up where you left off</strong><span id="continue-text"></span></p><a id="continue-link" href="#">Continue →</a></div>
+      <nav class="recent-drafts" id="recent-drafts" hidden aria-label="Your recent drafts"><p><strong>Your recent drafts</strong></p><ul id="recent-drafts-list"></ul></nav>
       <div class="intent-finder">
         <div class="intent-finder-box">
           <input id="intent-input" type="search" autocomplete="off" placeholder="What do you need to get done?" aria-label="Describe what you need help with" />
@@ -224,7 +225,7 @@
             </div>
         </div>
     </footer>
-<script src="/js/script.js?v=20261006audit1" defer></script>
+<script src="/js/script.js?v=20261014ux" defer></script>
 <script>
 (function(){
   var routes=[
@@ -255,6 +256,43 @@
     try{localStorage.setItem('cs_last_tool',JSON.stringify({name:name.replace(/→/g,'').trim(),url:link.getAttribute('href')}))}catch(e){}
   });
   try{var last=JSON.parse(localStorage.getItem('cs_last_tool'));if(last&&/^\/tools\/[a-z0-9-]+\/$/.test(last.url)&&typeof last.name==='string'){var box=document.getElementById('continue-box'),text=document.getElementById('continue-text'),link=document.getElementById('continue-link');text.textContent=' '+last.name;link.href=last.url;box.classList.add('show')}}catch(e){}
+  try{
+    var drafts=[];
+    var saved=JSON.parse(localStorage.getItem('cs_recent_drafts')||'[]');
+    if(Array.isArray(saved)) drafts=saved.filter(function(item){return item&&/^\/tools\/[a-z0-9-]+\/$/.test(item.href)&&typeof item.name==='string';});
+    var seen={};
+    drafts.forEach(function(item){seen[item.href]=true;});
+    for(var i=0;i<localStorage.length;i++){
+      var key=localStorage.key(i);
+      if(!key||key.indexOf('cs_draft_/tools/')!==0) continue;
+      var slug=key.slice('cs_draft_/tools/'.length).replace(/\/+$/,'');
+      if(!/^[a-z0-9-]+$/.test(slug)) continue;
+      var href='/tools/'+slug+'/';
+      if(seen[href]) continue;
+      var raw=localStorage.getItem(key)||'';
+      if(!raw.trim()) continue;
+      seen[href]=true;
+      drafts.push({href:href,name:slug.split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' '),preview:raw.trim().slice(0,140),at:0});
+    }
+    var list=document.getElementById('recent-drafts-list');
+    var box=document.getElementById('recent-drafts');
+    if(list&&box&&drafts.length){
+      drafts.slice(0,6).forEach(function(item){
+        var li=document.createElement('li');
+        var a=document.createElement('a');
+        a.href=item.href;
+        a.textContent=String(item.name).replace(/\s+/g,' ').trim();
+        li.appendChild(a);
+        if(item.preview){
+          var span=document.createElement('span');
+          span.textContent=String(item.preview).replace(/\s+/g,' ').trim();
+          li.appendChild(span);
+        }
+        list.appendChild(li);
+      });
+      box.hidden=false;
+    }
+  }catch(e){}
 })();
 </script>
 <script>
