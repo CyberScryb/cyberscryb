@@ -1448,6 +1448,7 @@ function generateSitemap(generatedPages) {
     'jury-duty-letter-writer',
     'farewell-message-generator',
     'thank-you-note-generator',
+    'condolence-message-generator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1548,6 +1549,8 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-thank-you-note',
     'how-to-write-a-farewell-message',
     'how-to-write-a-farewell-speech',
+    'how-to-write-a-condolence-message',
+    'sympathy-card-message-examples',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1716,6 +1719,7 @@ function manageRobotsMeta() {
     'jury-duty-letter-writer',
     'farewell-message-generator',
     'thank-you-note-generator',
+    'condolence-message-generator',
   ]);
 
   const dirsToProcess = [
