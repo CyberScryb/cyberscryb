@@ -1449,6 +1449,7 @@ function generateSitemap(generatedPages) {
     'farewell-message-generator',
     'thank-you-note-generator',
     'condolence-message-generator',
+    'study-plan-generator',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1551,6 +1552,8 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-farewell-speech',
     'how-to-write-a-condolence-message',
     'sympathy-card-message-examples',
+    'how-to-make-a-study-plan',
+    'how-to-study-for-an-exam',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1720,6 +1723,7 @@ function manageRobotsMeta() {
     'farewell-message-generator',
     'thank-you-note-generator',
     'condolence-message-generator',
+    'study-plan-generator',
   ]);
 
   const dirsToProcess = [

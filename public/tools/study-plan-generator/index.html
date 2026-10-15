@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Plan Generator &mdash; Free Study Schedule Maker | CyberScryb</title>
+    <meta name="description" content="Free AI study plan generator: enter your subjects, exam dates, and weak areas. Get a day-by-day study schedule with topics, a downloadable calendar file, and progress tracking. No signup.">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta property="og:title" content="AI Study Plan Generator &mdash; Free Study Schedule Maker | CyberScryb">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Study Plan Generator &mdash; Free Study Schedule Maker | CyberScryb">
+    <meta name="twitter:description" content="Free AI study plan generator: subjects, exam dates, weak areas in, day-by-day study schedule out. No signup.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <link rel="canonical" href="https://cyberscryb.com/tools/study-plan-generator/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1">
+
+    <!-- Google AdSense -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is what I type into the study plan generator private?",
+      "acceptedAnswer": {
+        "text": "Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your study plans are stored only in your own browser's localStorage, on your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the tool split study time between subjects?",
+      "acceptedAnswer": {
+        "text": "Time is weighted by your self-rated level: weak subjects get 3 shares, average subjects 2, strong subjects 1, with a guaranteed floor of 10% of your total study time for every subject so nothing gets dropped. Within each subject, topics run from foundational basics to practice and mock review, and weak areas you named get the most granular coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if two exams are on the same day or close together?",
+      "acceptedAnswer": {
+        "text": "The schedule is built backward from each subject's own exam date, so a subject with a nearer exam naturally gets its sessions front-loaded. Once an exam passes, that subject drops out of the rotation and its sessions go to the remaining subjects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How far ahead should I start studying?",
+      "acceptedAnswer": {
+        "text": "Two to four weeks before your earliest exam is the sweet spot for most students. That is enough time for the plan's foundations-to-mock arc to work. If you have less time, lower the daily hours honestly and the planner will compress the same arc into what you have."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I fall behind on the schedule?",
+      "acceptedAnswer": {
+        "text": "Tick off the days you complete so you can see your progress bar honestly. If you fall more than a couple of days behind, regenerate the plan with your real remaining time and updated weak areas, the planner will rebuild the schedule from the new dates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this study plan generator free?",
+      "acceptedAnswer": {
+        "text": "Yes. 100% free with no accounts and no signup required."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:1rem auto 0; padding:0 1.5rem; font-size:0.85rem; color:var(--text-faint); display:flex; align-items:center; gap:8px;">
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <span style="color: var(--primary);">Study Plan Generator</span>
+    </nav>
+
+    <main>
+        <section class="hero" style="min-height: 40vh; padding-top: 80px;">
+            <div class="hero-container">
+                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M2 4h20"/><path d="M2 8h20"/><path d="M8 4v16"/><path d="M14 8v12"/></svg>
+                    AI-Powered
+                </div>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: var(--primary);">Study Plan</span> Generator</h1>
+                <p class="hero-subtitle">Exams coming and no idea where to start? Enter your subjects, exam dates, and weak areas. Get a day-by-day study schedule with real topics, a downloadable calendar, and progress tracking. Free, no signup.</p>
+            </div>
+        </section>
+
+        <section class="tool-content" style="padding: 2rem 0;">
+            <div class="container">
+                <div class="humanizer-container" style="background: transparent; box-shadow: none;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Your Study Details
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load a realistic sample plan" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample</button>
+                                <span class="step-badge" id="step-badge" style="background: var(--primary); color: var(--text);">Step 1 of 3</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; gap:6px; margin-bottom:1.25rem;" aria-hidden="true">
+                            <span class="sp-step-dot sp-step-dot-active" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                            <span class="sp-step-dot" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                            <span class="sp-step-dot" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                        </div>
+                        <style>
+                            .sp-step-dot-active { background: var(--primary) !important; }
+                            .sp-restday { accent-color: var(--primary); width: 16px; height: 16px; }
+                        </style>
+
+                        <!-- Step 1: plan basics -->
+                        <div id="sp-step-1">
+                            <div class="input-group">
+                                <label for="sp-plan-name" style="color: var(--text-muted);">Plan name <span class="cs-req" aria-hidden="true">*</span></label>
+                                <input id="sp-plan-name" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Spring finals sprint">
+                            </div>
+                            <div class="input-group">
+                                <label for="sp-exam-label" style="color: var(--text-muted);">What are you studying for? <span class="cs-optional">(optional)</span></label>
+                                <input id="sp-exam-label" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. SAT, Spring finals, Bar exam, Nursing boards">
+                            </div>
+                            <button type="button" class="primary-btn sp-next" data-goto="1" style="background: #ef4444; border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                                <span class="btn-text">Continue</span>
+                                <span class="btn-icon">&rarr;</span>
+                            </button>
+                        </div>
+
+                        <!-- Step 2: subjects -->
+                        <div id="sp-step-2" class="hidden">
+                            <p style="color: var(--text-muted); font-size:0.9rem; margin:0 0 0.75rem;">Add every subject, its exam date, and how strong you are in it. Weak subjects automatically get more sessions.</p>
+                            <div id="subject-rows"></div>
+                            <button id="add-subject-btn" type="button" style="background: var(--bg-elevated); border: 1px dashed var(--border); color: var(--text-muted); padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; width: 100%; margin-bottom: 1rem;">+ Add another subject</button>
+                            <div style="display:flex; gap:8px;">
+                                <button type="button" class="primary-btn sp-back" data-goto="0" style="flex:1; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                                    <span class="btn-text">&larr; Back</span>
+                                </button>
+                                <button type="button" class="primary-btn sp-next" data-goto="2" style="flex:2; background: #ef4444; border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                                    <span class="btn-text">Continue</span>
+                                    <span class="btn-icon">&rarr;</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: schedule settings -->
+                        <div id="sp-step-3" class="hidden">
+                            <div class="input-group">
+                                <label for="sp-hours" style="color: var(--text-muted);">Study hours per day</label>
+                                <input id="sp-hours" type="number" min="0.5" max="12" step="0.5" value="2" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            </div>
+                            <div class="input-group">
+                                <label for="sp-session" style="color: var(--text-muted);">Session length</label>
+                                <select id="sp-session" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                    <option value="25">25 minutes (Pomodoro)</option>
+                                    <option value="30">30 minutes</option>
+                                    <option value="45" selected>45 minutes</option>
+                                    <option value="60">1 hour</option>
+                                    <option value="90">90 minutes</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <span style="color: var(--text-muted); display:block; margin-bottom:8px;">Rest days (no sessions scheduled)</span>
+                                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="0" checked> Sun</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="1"> Mon</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="2"> Tue</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="3"> Wed</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="4"> Thu</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="5"> Fri</label>
+                                    <label style="color: var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:5px;"><input type="checkbox" class="sp-restday" value="6" checked> Sat</label>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px;">
+                                <button type="button" class="primary-btn sp-back" data-goto="1" style="flex:1; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                                    <span class="btn-text">&larr; Back</span>
+                                </button>
+                                <button id="generate-btn" class="primary-btn" style="flex:2; background: #ef4444; border: none; color: #000; font-family: var(--font-brand), Georgia, serif; font-weight: 600;">
+                                    <span class="btn-text">Build My Study Plan</span>
+                                    <span class="btn-icon">&rarr;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
+                                Your Study Plan
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span id="usage-counter" style="font-size:0.7rem; color: var(--text-muted); font-family:'JetBrains Mono',monospace;"></span>
+                                <button id="copy-btn" class="icon-btn" title="Copy to Clipboard" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">Copy</button>
+                            </div>
+                        </div>
+                        <div class="output-wrapper">
+                            <div id="output-text" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
+                                <span class="placeholder" style="color:var(--text-faint);">Your AI-generated topic plan will appear here...</span>
+                            </div>
+                            <div id="loading-indicator" class="hidden">
+                                <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                <p style="color: var(--primary);">Building your study plan with Gemini 3.1 Pro...</p>
+                            </div>
+                        </div>
+                        <div id="parse-notice" class="hidden" style="margin:0.75rem 0 0; padding:0.75rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; color: var(--text-muted); font-size:0.85rem;"></div>
+                        <div id="schedule-section" class="hidden" style="margin-top:1.5rem;"></div>
+                        <div class="stats-bar" style="border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);">
+                            <span id="word-count"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Your Saved Plans</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Every plan you generate is stored on this device, in your browser only. Reload any of them later to pick up where you left off.</p>
+                    <div id="saved-plans-list"></div>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Why Most Study Plans Fail</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Most study plans fail for one reason: they are a list, not a plan. "Study chemistry Tuesday" tells you nothing. It does not say what about chemistry, for how long, or what to do when Tuesday is gone and chemistry never happened. A list gives you the illusion of preparation. A plan gives you sessions, topics, and a way to see whether you are behind while there is still time to fix it.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">The second failure is the even-split fallacy. Students give every subject equal time because it feels fair. It is not fair to your grades. A subject you are weak in costs you more points per hour than a subject you are strong in earns you. This planner weights your time 3-2-1, weak to strong, and guarantees every subject keeps at least 10% of your time so nothing is abandoned. Strong subjects get maintenance sessions, not equal sessions.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">The third failure is starting at the wrong end. Cramming practice tests before you have rebuilt the foundations just teaches you what you do not know under time pressure. A working plan runs foundations first, core topics second, practice third, and review plus mock exams last. That is the arc this tool builds into every subject.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">How It Works</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 1: Name your plan and your exams.</strong> Finals, SAT, bar exam, nursing boards, whatever is on the calendar. This is what gets written into your downloaded calendar file.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 2: Add each subject with its exam date and your level.</strong> Rate yourself honestly: weak, average, or strong. Name your weak areas per subject. This is the most important input. The AI breaks each subject into an ordered topic roadmap that leans into what you said you struggle with.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 3: Set your real schedule.</strong> Hours per day, session length, and which days you actually rest. The schedule math is deterministic: it counts your real study days, splits your minutes by subject weight, and rotates subjects across days so you never study the same thing for six hours straight.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 4: Work the plan, tick off days.</strong> Check off each day as you finish it and watch the progress bar. Download the .ics to put every session in your calendar, or copy the whole plan as Markdown for your notes app.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">Real Ways People Use It</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Finals week:</strong> The classic use. Four or five subjects, exams a week or two out, one clear weak area per class. Enter everything, set 3 hours a day, and you have a session-by-session map instead of panic.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">SAT and ACT prep:</strong> Two subjects, one date, months of runway. Mark Math weak and Reading strong and the weighting keeps you from spending equal time on both. The review-and-mock phase lands in the final weeks, which is where practice tests belong.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Professional exams:</strong> Bar, CPA, nursing boards, certifications. These have fixed dates and broad syllabi, exactly the case for backward planning with a weighted topic arc.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Language learning:</strong> Exam date optional but the arc works anyway. Foundations are grammar basics, core topics are vocabulary domains, practice is conversation, review is mock tests.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>Is what I type into the study plan generator private?</summary>
+                        <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your saved plans live in your browser's localStorage, on your device only. Your text is never sold.</p>
+                    </details>
+                    <div class="faq-item"><h4>How does the tool split study time between subjects?</h4><p>Weak subjects get 3 shares of your time, average subjects 2, strong subjects 1, with a 10% floor per subject so nothing gets dropped entirely. Topics run foundations to practice to review and mock, and the weak areas you name get the most detailed coverage.</p></div>
+                    <div class="faq-item"><h4>What if two exams are on the same day or close together?</h4><p>The schedule counts backward from each subject's own exam date, so nearer exams get front-loaded sessions. Once an exam passes, that subject leaves the rotation and its time goes to the remaining subjects.</p></div>
+                    <div class="faq-item"><h4>How far ahead should I start studying?</h4><p>Two to four weeks before your earliest exam is the sweet spot for most students. That gives the foundations-to-mock arc room to work. Shorter runway? Set your daily hours honestly and the planner compresses the same arc.</p></div>
+                    <div class="faq-item"><h4>What happens if I fall behind on the schedule?</h4><p>Tick off finished days to keep the progress bar honest. If you fall more than a couple of days behind, regenerate the plan with your real remaining time and updated weak areas. The schedule rebuilds from the new dates.</p></div>
+                    <div class="faq-item"><h4>Is this study plan generator free?</h4><p>Yes. 100% free with no accounts and no signup required.</p></div>
+                    <p style="margin-top:1.5rem; color: var(--text-muted);">Want the full method behind the tool? Read our guide: <a href="/guides/how-to-make-a-study-plan/" style="color: var(--primary-soft);">How to Make a Study Plan</a>. Prepping for the SAT? See <a href="/guides/how-digital-sat-scoring-works/" style="color: var(--primary-soft);">How Digital SAT Scoring Works</a>.</p>
+                </div>
+
+                <div class="related-tools" style="text-align: center; margin-top: 2rem;">
+                    <p>Related: <a href="/tools/sat-score-calculator/">SAT Score Calculator</a> | <a href="/tools/summarizer/">AI Summarizer</a> | <a href="/tools/ai-writing-suite/">AI Writing Suite</a> | <a href="/tools/word-counter/">Word Counter</a></p>
+                </div>
+            </div>
+        </section>
+
+    <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/tools/sat-score-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SAT Score Calculator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Score your practice test, set the target.</span>
+            </a>
+            <a href="/tools/summarizer/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Summarizer</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Condense long chapters fast.</span>
+            </a>
+            <a href="/tools/ai-writing-suite/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">AI Writing Suite</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Draft essays that read clean.</span>
+            </a>
+            <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Hit the word count exactly.</span>
+            </a>
+        </div>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <section style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CyberScryb AI Study Plan Generator",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261013sse1"></script>
+    <script src="/tools/study-plan-generator/study-plan-generator.js"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+
+</body>
+
+</html>
