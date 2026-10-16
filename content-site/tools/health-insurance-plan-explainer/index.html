@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#09090b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Insurance Plan Explainer &mdash; Decode Costs &amp; Jargon Free | CyberScryb</title>
+    <meta name="description" content="Decode any health insurance plan: plain-English jargon decoder plus step-by-step premium, deductible, and coinsurance math. Free, runs 100% in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cyberscryb.com/tools/health-insurance-plan-explainer/">
+    <meta property="og:title" content="AI Health Insurance Plan Explainer &mdash; Decode Costs &amp; Jargon Free | CyberScryb">
+    <meta property="og:description" content="Decode any health insurance plan: plain-English jargon decoder plus step-by-step premium, deductible, and coinsurance math. Free, runs 100% in your browser.">
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Health Insurance Plan Explainer &mdash; Decode Costs &amp; Jargon Free | CyberScryb">
+    <meta name="twitter:description" content="Decode plan jargon into plain English and verify the cost math step by step. Free, 100% client-side.">
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png">
+    <link rel="canonical" href="https://cyberscryb.com/tools/health-insurance-plan-explainer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1">
+    <style>
+        .hi-step-dot-active { background: var(--primary) !important; }
+        mark.hi-term {
+            background: rgba(220,38,38,0.28);
+            color: var(--text);
+            border-bottom: 2px solid var(--primary);
+            padding: 0 2px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        mark.hi-term:hover { background: rgba(220,38,38,0.45); }
+        .hi-math-line { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text); background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin: 8px 0; line-height: 1.6; }
+        .hi-math-line .hi-result { color: var(--primary-soft); font-weight: 700; }
+        .term-card-flash { animation: hi-flash 1.6s ease; }
+        @keyframes hi-flash {
+            0% { box-shadow: 0 0 0 3px var(--primary); }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+        .hi-compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .hi-compare-table th, .hi-compare-table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+        .hi-compare-table th { background: var(--bg-elevated); color: var(--text); }
+        .hi-compare-table td { color: var(--text-muted); }
+        .hi-compare-table td.hi-num { font-family: 'JetBrains Mono', monospace; color: var(--text); white-space: nowrap; }
+        @media print {
+            header, footer, nav, .no-print, .hero, .related-tools, .hi-cta-banner { display: none !important; }
+            .tool-content { padding: 0 !important; }
+            body { background: #fff; color: #000; }
+        }
+    </style>
+
+    <!-- Google AdSense -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this health insurance plan explainer giving me insurance advice?",
+      "acceptedAnswer": {
+        "text": "No. This tool is educational only. It decodes insurance terms into plain English and does the arithmetic on the numbers you enter. It does not recommend a plan and is not insurance advice. For enrollment decisions, check healthcare.gov or talk to a licensed broker."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the information I enter into the tool private?",
+      "acceptedAnswer": {
+        "text": "Yes. This tool runs 100% in your browser with zero network requests. Nothing you type is sent to any server, and nothing is linked to your identity. Saved plans are stored only in your own browser's localStorage, on your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a deductible and an out-of-pocket maximum?",
+      "acceptedAnswer": {
+        "text": "The deductible is what you pay first each year before the plan starts sharing costs. The out-of-pocket maximum is the cap on everything you pay in cost-sharing for covered in-network care in a year: deductible plus copays plus coinsurance. After you hit it, the plan pays 100% of covered costs for the rest of the year. Premiums count toward neither."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do copays count toward the deductible?",
+      "acceptedAnswer": {
+        "text": "On most ACA marketplace plans, no: copays count toward the out-of-pocket maximum but do not satisfy the deductible. Some plans work differently, so your plan's Summary of Benefits and Coverage is the final word. This tool's scenario math states its assumptions line by line so you can check them against your plan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are the quiet, typical, and rough year totals computed?",
+      "acceptedAnswer": {
+        "text": "Every total is deterministic arithmetic shown line by line. A quiet year is annual premiums plus two PCP copays. A typical year is premiums plus six PCP visits, three specialist visits, and twelve generic prescriptions, with cost-sharing capped at the out-of-pocket maximum. A rough year assumes a $25,000 surgery bill: the deductible applies first, then your coinsurance percentage on the remainder, plus the ER copay, capped at the out-of-pocket maximum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this tool free?",
+      "acceptedAnswer": {
+        "text": "Yes. 100% free with no accounts and no signup required."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+                        <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+                        <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--text); margin-left: 10px;">CyberScryb</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tools/" class="active">Tools</a></li>
+                    <li><a href="/guides/">Guides</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/about/">About</a></li>
+                </ul>
+                <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <nav aria-label="Breadcrumb" style="max-width:1200px; margin:1rem auto 0; padding:0 1.5rem; font-size:0.85rem; color:var(--text-faint); display:flex; align-items:center; gap:8px;">
+        <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
+        <span style="color:var(--border-strong); margin:0 4px;">&rsaquo;</span>
+        <span style="color: var(--primary);">Health Insurance Plan Explainer</span>
+    </nav>
+
+    <main>
+        <section class="hero" style="min-height: 40vh; padding-top: 80px;">
+            <div class="hero-container">
+                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    100% Client-Side &middot; Zero Network Calls
+                </div>
+                <h1 class="hero-title" style="font-size: 2.5rem;">AI <span style="color: var(--primary);">Health Insurance Plan</span> Explainer</h1>
+                <p class="hero-subtitle">Paste in the jargon from your plan's summary and get plain-English definitions. Enter your premium, deductible, and copays and get verified cost math, line by line. Free, no signup, nothing leaves your browser.</p>
+            </div>
+        </section>
+
+        <section class="hi-cta-banner" style="max-width:1200px; margin:0 auto; padding:0 1.5rem;">
+            <div style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+                <p style="color: var(--text-muted); margin:0; font-size:0.95rem; line-height:1.6;"><strong style="color: var(--text);">Comparing plans for open enrollment?</strong> This tool decodes one plan at a time. Read the companion guide first to learn what actually matters when plans go head to head.</p>
+                <a href="/guides/how-to-compare-health-insurance-plans/" class="primary-btn" style="background: #ef4444; border: none; color: #09090b; font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 10px 20px; border-radius: 8px; text-decoration: none; white-space: nowrap;">Read the Comparison Guide &rarr;</a>
+            </div>
+        </section>
+
+        <section class="tool-content" style="padding: 2rem 0;">
+            <div class="container">
+                <div class="humanizer-container" style="background: transparent; box-shadow: none;">
+                    <div class="panel input-panel no-print" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                Your Plan Details
+                            </h2>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button id="sample-btn" type="button" class="icon-btn" title="Load a realistic sample plan" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500;">Try Sample Plan</button>
+                                <span class="step-badge" id="step-badge" style="background: var(--primary); color: #09090b; padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; font-weight: 600;">Step 1 of 3</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; gap:6px; margin-bottom:1.25rem;" aria-hidden="true">
+                            <span class="hi-step-dot hi-step-dot-active" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                            <span class="hi-step-dot" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                            <span class="hi-step-dot" style="flex:1; height:4px; border-radius:2px; background: var(--border);"></span>
+                        </div>
+
+                        <!-- Step 1: plan basics -->
+                        <div id="hi-step-1">
+                            <div class="input-group">
+                                <label for="hi-plan-name" style="color: var(--text-muted);">Plan name</label>
+                                <input id="hi-plan-name" type="text" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;" placeholder="e.g. Silver Choice Plus">
+                            </div>
+                            <div class="input-group">
+                                <span style="color: var(--text-muted); display:block; margin-bottom:8px;">Coverage type</span>
+                                <div style="display:flex; gap:16px;">
+                                    <label style="color: var(--text-muted); font-size:0.9rem; display:flex; align-items:center; gap:6px;"><input type="radio" name="hi-coverage" value="individual" checked style="accent-color: var(--primary);"> Individual</label>
+                                    <label style="color: var(--text-muted); font-size:0.9rem; display:flex; align-items:center; gap:6px;"><input type="radio" name="hi-coverage" value="family" style="accent-color: var(--primary);"> Family</label>
+                                </div>
+                            </div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                <div class="input-group">
+                                    <label for="hi-premium" style="color: var(--text-muted);">Monthly premium ($)</label>
+                                    <input id="hi-premium" type="number" min="0" step="0.01" placeholder="412.00" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-deductible" style="color: var(--text-muted);">Annual deductible ($)</label>
+                                    <input id="hi-deductible" type="number" min="0" step="0.01" placeholder="3500" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-oopmax" style="color: var(--text-muted);">Annual out-of-pocket max ($)</label>
+                                    <input id="hi-oopmax" type="number" min="0" step="0.01" placeholder="9100" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-coinsurance" style="color: var(--text-muted);">Coinsurance after deductible (%)</label>
+                                    <input id="hi-coinsurance" type="number" min="0" max="100" step="1" placeholder="20" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                            </div>
+                            <button type="button" class="primary-btn hi-next" data-goto="1" style="background: #ef4444; border: none; color: #09090b; font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">
+                                <span class="btn-text">Continue</span>
+                                <span class="btn-icon">&rarr;</span>
+                            </button>
+                        </div>
+
+                        <!-- Step 2: common costs -->
+                        <div id="hi-step-2" class="hidden">
+                            <p style="color: var(--text-muted); font-size:0.9rem; margin:0 0 0.75rem;">Enter the flat copays from your plan's summary. Leave any you do not know at 0.</p>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                <div class="input-group">
+                                    <label for="hi-pcp" style="color: var(--text-muted);">PCP visit copay ($)</label>
+                                    <input id="hi-pcp" type="number" min="0" step="0.01" placeholder="30" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-spec" style="color: var(--text-muted);">Specialist visit copay ($)</label>
+                                    <input id="hi-spec" type="number" min="0" step="0.01" placeholder="60" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-er" style="color: var(--text-muted);">ER visit copay ($)</label>
+                                    <input id="hi-er" type="number" min="0" step="0.01" placeholder="400" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-uc" style="color: var(--text-muted);">Urgent care copay ($)</label>
+                                    <input id="hi-uc" type="number" min="0" step="0.01" placeholder="50" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-genrx" style="color: var(--text-muted);">Generic Rx copay ($)</label>
+                                    <input id="hi-genrx" type="number" min="0" step="0.01" placeholder="15" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                                <div class="input-group">
+                                    <label for="hi-brandrx" style="color: var(--text-muted);">Brand Rx copay ($)</label>
+                                    <input id="hi-brandrx" type="number" min="0" step="0.01" placeholder="50" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px; margin-top: 0.5rem;">
+                                <button type="button" class="primary-btn hi-back" data-goto="0" style="flex:1; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                                    <span class="btn-text">&larr; Back</span>
+                                </button>
+                                <button type="button" class="primary-btn hi-next" data-goto="2" style="flex:2; background: #ef4444; border: none; color: #09090b; font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                                    <span class="btn-text">Continue</span>
+                                    <span class="btn-icon">&rarr;</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: term decoder + sample bill -->
+                        <div id="hi-step-3" class="hidden">
+                            <div class="input-group">
+                                <label for="hi-sample-bill" style="color: var(--text-muted);">Sample medical bill ($) <span style="font-size:0.8rem;">for the remaining-deductible math</span></label>
+                                <input id="hi-sample-bill" type="number" min="0" step="0.01" value="2800" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem;">
+                            </div>
+                            <div class="input-group">
+                                <label for="hi-jargon" style="color: var(--text-muted);">Paste plan jargon (from your Summary of Benefits)</label>
+                                <textarea id="hi-jargon" rows="5" style="width:100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding:12px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9rem; resize: vertical;" placeholder="Paste the dense paragraph from your plan summary here. Known terms get highlighted; click one to jump to its plain-English card."></textarea>
+                            </div>
+                            <div class="input-group">
+                                <span style="color: var(--text-muted); display:block; margin-bottom:8px;">Highlighted terms (click one to jump to its plain-English card)</span>
+                                <div id="decode-output" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); min-height: 80px; font-size: 0.9rem; line-height: 1.8;">
+                                    <span class="placeholder" style="color:var(--text-faint);">Highlighted terms will appear here as you paste. Click a highlighted term to jump to its plain-English card below.</span>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px;">
+                                <button type="button" class="primary-btn hi-back" data-goto="1" style="flex:1; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                                    <span class="btn-text">&larr; Back</span>
+                                </button>
+                                <button id="analyze-btn" type="button" class="primary-btn" style="flex:2; background: #ef4444; border: none; color: #09090b; font-family: var(--font-brand), Georgia, serif; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                                    <span class="btn-text">Explain My Plan</span>
+                                    <span class="btn-icon">&rarr;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border);">
+                        <div class="panel-header">
+                            <h2 style="font-size: 1.5rem; margin: 0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px; margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>
+                                Your Plan, Decoded
+                            </h2>
+                        </div>
+                        <div class="output-wrapper">
+                            <div id="results-empty" class="output-content" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);">
+                                <span class="placeholder" style="color:var(--text-faint);">Enter your plan numbers and hit "Explain My Plan" to see the verified math, year scenarios, and decoded terms.</span>
+                            </div>
+                            <div id="results-section" class="hidden">
+                                <div id="disclaimer-box" style="background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.35); border-radius: 8px; padding: 12px 14px; margin-bottom: 1rem;">
+                                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; margin: 0;"><strong style="color: var(--text);">Educational only.</strong> This tool decodes terms and does the math on numbers you enter. It does not recommend a plan and is not insurance advice. For enrollment decisions, check healthcare.gov or talk to a licensed broker.</p>
+                                </div>
+                                <div id="loading-indicator" class="hidden">
+                                    <div class="spinner" style="border-top-color: var(--primary-soft);"></div>
+                                    <p style="color: var(--primary);">Crunching the numbers...</p>
+                                </div>
+                                <div id="results-output"></div>
+                                <div class="no-print" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:1.25rem;">
+                                    <button id="save-plan-btn" type="button" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Save this plan to compare</button>
+                                    <button id="print-btn" type="button" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Print / save as PDF</button>
+                                    <button id="download-btn" type="button" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Download summary</button>
+                                </div>
+                                <div id="save-notice" style="margin-top:0.75rem; font-size:0.85rem; color: var(--primary-soft);" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:0.5rem;">Term Decoder: Plain-English Cards</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Every term this tool recognizes, decoded. Click a highlighted term in your pasted text above to jump straight to its card.</p>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+                        <div id="term-card-deductible" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Deductible</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">What you pay out of pocket each year before the plan starts paying its share for most services. Copays and preventive care often skip the deductible. A $3,500 deductible means the first $3,500 of covered bills are yours.</p>
+                        </div>
+                        <div id="term-card-oopmax" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Out-of-Pocket Maximum</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">The most you pay in a year for covered, in-network care: deductible + copays + coinsurance, added up. After you hit it, the plan pays 100% of covered costs for the rest of the year. Premiums do <strong>not</strong> count toward it.</p>
+                        </div>
+                        <div id="term-card-coinsurance" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Coinsurance</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">Your percentage share of a bill after the deductible. 20% coinsurance on a $1,000 covered bill means you pay $200 and the plan pays $800.</p>
+                        </div>
+                        <div id="term-card-copay" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Copay / Copayment</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">A flat fee you pay at the visit or pharmacy, like $30 for a primary-care visit. Usually counts toward the out-of-pocket maximum, usually does <strong>not</strong> count toward the deductible.</p>
+                        </div>
+                        <div id="term-card-premium" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Premium</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">The monthly bill that keeps your coverage active, whether you use care or not. Annual cost = monthly premium &times; 12. Premiums count toward neither the deductible nor the out-of-pocket maximum.</p>
+                        </div>
+                        <div id="term-card-network" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">In-Network vs Out-of-Network</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">In-network providers have a contract with your plan: lower negotiated prices, and your spending counts toward the deductible and out-of-pocket max. Out-of-network care costs more and may not count at all; some plans cover almost none of it.</p>
+                        </div>
+                        <div id="term-card-priorauth" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Prior Authorization</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">Your plan's advance permission for certain services, drugs, or procedures. Without it the claim can be denied even when the care itself is covered in theory. Your doctor's office usually files it.</p>
+                        </div>
+                        <div id="term-card-formulary" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Formulary</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">The plan's list of covered drugs, split into tiers. Generic tier = cheapest copay; brand and specialty tiers cost more. A drug not on the formulary may cost you full price.</p>
+                        </div>
+                        <div id="term-card-hsafsa" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">HSA / FSA</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">HSA (Health Savings Account): a tax-advantaged account paired with high-deductible plans; the money rolls over and is yours. FSA (Flexible Spending Account): a similar tax break through an employer, but funds usually expire each year ("use it or lose it"). Both can pay deductibles, copays, and coinsurance.</p>
+                        </div>
+                        <div id="term-card-preventive" style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                            <h3 style="color: var(--text); font-size: 1rem; margin: 0 0 0.5rem;">Preventive Care</h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin: 0;">Screenings, vaccines, and annual checkups that most plans must cover at $0 before the deductible: no copay, no coinsurance, as long as the visit is in-network and coded as preventive.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="compare-section" class="geo-card no-print" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:0.5rem;">Saved Plans: Side-by-Side Comparison</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;">Plans you save are stored on this device only, in your browser. Save up to 3 to compare their numbers and year scenarios side by side. This is a neutral comparison of your own numbers, not a recommendation.</p>
+                    <div id="compare-empty" style="color: var(--text-faint); font-size: 0.9rem; padding: 1rem; background: var(--bg-elevated); border: 1px dashed var(--border); border-radius: 8px;">No saved plans yet. Run the explainer above, then hit "Save this plan to compare".</div>
+                    <div id="compare-table-wrap" class="hidden" style="overflow-x:auto;">
+                        <table class="hi-compare-table" id="compare-table"></table>
+                    </div>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-family: var(--font-brand), Georgia, serif; font-size:1.3rem; margin-bottom:1rem;">How It Works</h2>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 1: Enter the plan basics.</strong> Plan name, monthly premium, annual deductible, annual out-of-pocket maximum, and the coinsurance percentage you pay after the deductible. These come straight from the plan's summary page.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 2: Enter the common copays.</strong> What a primary-care visit, specialist visit, ER visit, urgent care visit, and generic or brand prescription cost you out of pocket. Unknowns can stay at 0.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Step 3: Decode the jargon.</strong> Paste the dense paragraph from your Summary of Benefits. Known terms get highlighted; click any highlighted term to jump to its plain-English card below. Set a sample bill amount and hit "Explain My Plan".</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:1rem;"><strong style="color: var(--text);">Read the verified math.</strong> Every number is computed in your browser from the numbers you entered, with each arithmetic step shown: annual premium total, what a sample bill does to your deductible, the out-of-pocket cap, and three year scenarios (quiet, typical, rough). Assumptions are printed next to the math, not buried.</p>
+                    <p style="color: var(--text-muted); line-height:1.8; margin-bottom:0;"><strong style="color: var(--text);">Save, print, download.</strong> Save up to 3 plans to compare side by side, print the results as a PDF, or download a plain-text summary to bring to a broker or HR meeting.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 2rem; padding: 2rem; border-radius: 12px;">
+                    <h3 style="color: var(--primary-soft); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+                    <details>
+                        <summary>Is this health insurance plan explainer giving me insurance advice?</summary>
+                        <p>No. This tool is educational only. It decodes insurance terms into plain English and does the arithmetic on the numbers you enter. It does not recommend a plan and is not insurance advice. For enrollment decisions, check healthcare.gov or talk to a licensed broker.</p>
+                    </details>
+                    <details>
+                        <summary>Is the information I enter into the tool private?</summary>
+                        <p>Yes. This tool runs 100% in your browser with zero network requests: no fetch calls, no AI service, no tracking of your inputs. Nothing you type leaves your device. Saved plans live in your browser's localStorage, on your device only.</p>
+                    </details>
+                    <details>
+                        <summary>What is the difference between a deductible and an out-of-pocket maximum?</summary>
+                        <p>The deductible is what you pay first each year before the plan starts sharing costs. The out-of-pocket maximum caps everything you pay in cost-sharing for covered in-network care in a year: deductible plus copays plus coinsurance. After you hit it, the plan pays 100% of covered costs for the rest of the year. Premiums count toward neither.</p>
+                    </details>
+                    <details>
+                        <summary>Do copays count toward the deductible?</summary>
+                        <p>On most ACA marketplace plans, no: copays count toward the out-of-pocket maximum but do not satisfy the deductible. Some plans work differently, so your plan's Summary of Benefits and Coverage is the final word. This tool prints its assumptions next to the math so you can check them against your plan.</p>
+                    </details>
+                    <details>
+                        <summary>How are the quiet, typical, and rough year totals computed?</summary>
+                        <p>Deterministic arithmetic, shown line by line. A quiet year is annual premiums plus two PCP copays. A typical year is premiums plus six PCP visits, three specialist visits, and twelve generic prescriptions, with cost-sharing capped at the out-of-pocket maximum. A rough year assumes a $25,000 surgery bill: the deductible applies first, then your coinsurance percentage on the remainder, plus the ER copay, capped at the out-of-pocket maximum.</p>
+                    </details>
+                    <details>
+                        <summary>Is this tool free?</summary>
+                        <p>Yes. 100% free with no accounts and no signup required.</p>
+                    </details>
+                    <p style="margin-top:1.5rem; color: var(--text-muted);">Comparing plans for open enrollment? Start with <a href="/guides/how-to-compare-health-insurance-plans/" style="color: var(--primary-soft);">How to Compare Health Insurance Plans</a>. On Medicare? Use the <a href="/tools/medicare-cost-calculator/" style="color: var(--primary-soft);">Medicare Cost Calculator</a> and read <a href="/guides/how-to-choose-between-medicare-advantage-and-medigap/" style="color: var(--primary-soft);">How to Choose Between Medicare Advantage and Medigap</a>.</p>
+                </div>
+
+                <div class="related-tools" style="text-align: center; margin-top: 2rem;">
+                    <p>Related: <a href="/tools/medicare-cost-calculator/">Medicare Cost Calculator</a> | <a href="/guides/how-to-compare-health-insurance-plans/">How to Compare Health Insurance Plans</a> | <a href="/guides/how-to-choose-between-medicare-advantage-and-medigap/">Medicare Advantage vs Medigap</a></p>
+                </div>
+            </div>
+        </section>
+
+    <section class="no-print" style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <section class="no-print" style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
+        <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools &amp; Guides</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <a href="/tools/medicare-cost-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Medicare Cost Calculator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Estimate your Medicare premiums and cost-sharing.</span>
+            </a>
+            <a href="/guides/how-to-compare-health-insurance-plans/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">How to Compare Health Insurance Plans</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">The companion guide: what actually matters, plan vs plan.</span>
+            </a>
+            <a href="/guides/how-to-choose-between-medicare-advantage-and-medigap/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Medicare Advantage vs Medigap</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Which Medicare path fits your situation.</span>
+            </a>
+        </div>
+    </section>
+
+    </main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+</div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <section class="no-print" style="max-width:900px; margin:1rem auto; padding:0 1rem; text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CyberScryb AI Health Insurance Plan Explainer",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/health-insurance-plan-explainer/health-insurance-plan-explainer.js"></script>
+
+</body>
+
+</html>

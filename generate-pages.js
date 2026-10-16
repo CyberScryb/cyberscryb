@@ -1450,6 +1450,7 @@ function generateSitemap(generatedPages) {
     'thank-you-note-generator',
     'condolence-message-generator',
     'study-plan-generator',
+    'health-insurance-plan-explainer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1554,6 +1555,8 @@ function generateSitemap(generatedPages) {
     'sympathy-card-message-examples',
     'how-to-make-a-study-plan',
     'how-to-study-for-an-exam',
+    'how-to-compare-health-insurance-plans',
+    'how-to-write-an-invitation-letter-for-visitor-visa',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1724,6 +1727,7 @@ function manageRobotsMeta() {
     'thank-you-note-generator',
     'condolence-message-generator',
     'study-plan-generator',
+    'health-insurance-plan-explainer',
   ]);
 
   const dirsToProcess = [

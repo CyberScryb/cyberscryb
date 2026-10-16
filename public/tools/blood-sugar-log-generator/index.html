@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -59,11 +59,35 @@
         "@type": "Answer",
         "text": "No. This generator runs entirely in your browser. Nothing is uploaded, logged, or stored — it's safe to use for private health information."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to log my blood sugar if my meter stores readings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A meter stores numbers, not context. A written log adds the meal, the timing, medication, and symptoms alongside each reading — which is what turns a number into a pattern your doctor can act on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I write in the notes column?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anything that might explain the number: what you ate, exercise, illness, stress, a missed or changed medication dose, and symptoms like shakiness or sweating. Two words is enough — 'skipped lunch' explains a 63 better than a blank box ever will."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this log for gestational diabetes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Gestational diabetes usually means testing fasting and 1–2 hours after each meal, which matches this log's columns. Ask your doctor for your pregnancy-specific target ranges and print those on the log instead of the defaults."
+      }
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
@@ -104,9 +128,7 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    Healthcare &amp; Caregiving Tools
+                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">Healthcare &amp; Caregiving Tools
                 </div>
                 <h1 class="hero-title" style="font-size: 2.5rem;">Blood Sugar <span style="color: var(--primary);">Log Generator</span></h1>
                 <p class="hero-subtitle">Build a printable glucose log in seconds — fasting, before/after meals, bedtime. Free, private, no sign-up. Made for patients, families, and caregivers.</p>
@@ -188,6 +210,30 @@
         <section style="padding: 1rem 0 2rem;">
             <div class="container" style="max-width: 760px;">
                 <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px;">
+                    <h2 style="color: var(--primary-soft); font-size: 1.4rem; margin-bottom: 0.75rem;">Who This Blood Sugar Log Is For</h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">A blood sugar log solves a simple but painful problem: glucose numbers are useless without context. Meters store readings, but they don't record that the 214 was an hour after your birthday cake, or that the 63 happened on a day you skipped lunch. Writing readings down with the time, the meal, and a quick note turns raw numbers into a pattern your doctor can actually act on — which is why endocrinologists ask for logs before they change a medication dose.</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 0.75rem;">This generator is built for people managing diabetes on paper: newly diagnosed patients still learning the routine, family caregivers tracking readings for a parent or spouse, and anyone who shows up to appointments with readings scattered across a meter, a phone, and a sticky note. Generate the log, print it, and keep it next to the meter. Everything runs in your browser — no account, no upload, nothing leaves your device.</p>
+                </div>
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
+                    <h2 style="color: var(--primary-soft); font-size: 1.4rem; margin-bottom: 0.75rem;">How to Use This Generator</h2>
+                    <ol style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding-left: 1.25rem; margin: 0;">
+                        <li><strong style="color: var(--text);">Enter a name and period.</strong> Optional, but it keeps multi-person households from mixing up logs — one for you, one for mom.</li>
+                        <li><strong style="color: var(--text);">Pick your length.</strong> 7 days works for a check-in; 30 days gives your doctor a full month of trends to review.</li>
+                        <li><strong style="color: var(--text);">Check the columns that match your testing schedule.</strong> Only test fasting and bedtime? Uncheck the meal columns so you're not staring at empty boxes.</li>
+                        <li><strong style="color: var(--text);">Set your target range.</strong> The defaults (70–180) are common starting points — replace them with the range your doctor gave you so out-of-range readings are obvious at a glance.</li>
+                        <li><strong style="color: var(--text);">Generate, print, or download.</strong> Hit Generate Log, then Print for paper or Download .txt for a digital copy. Record each reading in the moment — backfilled numbers from memory are worth far less than readings written down at the time.</li>
+                    </ol>
+                </div>
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
+                    <h2 style="color: var(--primary-soft); font-size: 1.4rem; margin-bottom: 0.75rem;">Real Ways People Use This Log</h2>
+                    <div style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+                        <p style="margin-bottom: 0.75rem;"><strong style="color: var(--text);">Newly diagnosed and finding your routine.</strong> Your doctor says "test fasting and two hours after meals," and suddenly you're testing four times a day with no system. A 30-day log with the full meal columns gives the first month of data structure — and answers the two questions every newly diagnosed patient asks: how often should I test, and what do I write down.</p>
+                        <p style="margin-bottom: 0.75rem;"><strong style="color: var(--text);">Caregivers tracking a parent's readings.</strong> When you're managing a parent's diabetes, the doctor asks "what have the numbers been?" and you're digging through texts. One printed sheet on the fridge becomes the shared record — any family member can write down the morning fasting number, and the notes column captures medication and symptoms for the next appointment.</p>
+                        <p style="margin-bottom: 0.75rem;"><strong style="color: var(--text);">Spotting meal-driven patterns.</strong> Numbers that keep running high after dinner but are fine at breakfast tell a story a single reading never could. A month of before-and-after meal columns makes it obvious which meals are the problem — which is exactly what you and your care team need to adjust diet or timing instead of guessing.</p>
+                        <p><strong style="color: var(--text);">Preparing for an endocrinology visit.</strong> A completed log is the most productive thing you can bring to an appointment. Instead of reciting numbers from memory, you hand over weeks of timestamped readings with notes — and walk out with medication decisions based on evidence, not estimates.</p>
+                    </div>
+                </div>
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
                     <h3 style="color: var(--primary-soft); margin-bottom: 0.75rem;">Clinical Guide: Understanding Glucose Target Ranges</h3>
                     <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">Regular blood glucose tracking is a cornerstone of effective diabetes self-management and clinical care planning. Maintaining an accurate log helps identify trends such as postprandial glycemic spikes, dawn phenomenon, or nocturnal hypoglycemia.</p>
                     <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-top: 0.5rem; padding-left: 1.25rem;">
@@ -202,9 +248,12 @@
                     <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Is this the same as a diabetes log book?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Yes — it's a free printable version of the glucose tracking pages in a diabetes log book, with the common columns and a place to note medication or insulin.</p></div>
                     <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>How often should blood sugar be tested?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">That depends on your diabetes type and treatment. Your doctor sets the schedule — this log has room for fasting, before/after each meal, and bedtime readings.</p></div>
                     <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Can my care team use this?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Yes. Print the completed log and bring it to appointments — the clear layout makes patterns easy for a doctor or nurse to spot.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Do I need to log my blood sugar if my meter stores readings?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">A meter stores numbers, not context. A written log adds the meal, the timing, medication, and symptoms alongside each reading — which is what turns a number into a pattern your doctor can act on.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>What should I write in the notes column?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Anything that might explain the number: what you ate, exercise, illness, stress, a missed or changed medication dose, and symptoms like shakiness or sweating. Two words is enough — "skipped lunch" explains a 63 better than a blank box ever will.</p></div>
+                    <div class="faq-item" style="padding:0.85rem 0;"><h4>Can I use this log for gestational diabetes?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Yes. Gestational diabetes usually means testing fasting and 1–2 hours after each meal, which matches this log's columns. Ask your doctor for your pregnancy-specific target ranges and print those on the log instead of the defaults.</p></div>
                 </div>
                 <p style="font-size:0.75rem; color:var(--text-faint); margin-top:1rem;">Disclaimer: This is a tracking tool, not medical advice. Always follow your doctor's testing schedule and glucose targets; they may differ from the printed default range.</p>
-                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;">Related: <a href="/tools/caregiver-printable-pack/" style="color:var(--primary);">Caregiver Printable Pack</a> &middot; <a href="/tools/caregiver-report/" style="color:var(--primary);">Caregiver Report</a> &middot; <a href="/tools/soap-note-generator/" style="color:var(--primary);">SOAP Note Generator</a></p>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;">Related: <a href="/tools/caregiver-printable-pack/" style="color:var(--primary);">Caregiver Printable Pack</a> &middot; <a href="/tools/caregiver-report/" style="color:var(--primary);">Caregiver Report</a> &middot; <a href="/tools/soap-note-generator/" style="color:var(--primary);">SOAP Note Generator</a> &middot; <a href="/guides/caregiver-shift-handoff-standards.html" style="color:var(--primary);">Caregiver Shift Handoff Standards</a> &middot; <a href="/blog/what-goes-in-a-caregiver-shift-report-2026/" style="color:var(--primary);">What Goes in a Caregiver Shift Report</a></p>
             </div>
         </section>
 
@@ -290,7 +339,7 @@
     }
     </style>
 
-    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/blood-sugar-log-generator/blood-sugar-log.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
