@@ -81,6 +81,7 @@ describe('AI_PROMPTS dispatch table', () => {
     'apology-letter-generator',
     'complaint-letter-generator',
     'promotion-request-letter-writer',
+    'rental-application-letter-writer',
     'roommate-agreement-builder',
     'jury-duty-letter-writer',
     'farewell-message-generator',

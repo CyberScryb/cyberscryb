@@ -1451,6 +1451,7 @@ function generateSitemap(generatedPages) {
     'condolence-message-generator',
     'study-plan-generator',
     'health-insurance-plan-explainer',
+    'rental-application-letter-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1557,6 +1558,8 @@ function generateSitemap(generatedPages) {
     'how-to-study-for-an-exam',
     'how-to-compare-health-insurance-plans',
     'how-to-write-an-invitation-letter-for-visitor-visa',
+    'how-to-write-a-rental-application-letter',
+    'what-landlords-look-for-in-rental-applications',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1728,6 +1731,7 @@ function manageRobotsMeta() {
     'condolence-message-generator',
     'study-plan-generator',
     'health-insurance-plan-explainer',
+    'rental-application-letter-writer',
   ]);
 
   const dirsToProcess = [
