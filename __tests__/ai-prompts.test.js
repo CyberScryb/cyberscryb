@@ -88,11 +88,12 @@ describe('AI_PROMPTS dispatch table', () => {
     'thank-you-note-generator',
     'condolence-message-generator',
     'study-plan-generator',
+    'ai-logic-model-builder',
   ];
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-  test('has exactly 62 keys', () => {
+  test('has exactly 63 keys', () => {
     expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
   });
 

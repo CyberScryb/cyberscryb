@@ -6,25 +6,25 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Encoder Decoder &mdash; Free Online Tool | CyberScryb</title>
-    <meta name="description" content="Percent-encode or decode query strings client-side using our URL encoder decoder tool. Free, instant, runs in your browser. No signup.">
+    <title>URL Encoder / Decoder &mdash; Percent-Encode Text & Decode URLs | CyberScryb</title>
+    <meta name="description" content="Paste text or a URL to percent-encode it with encodeURIComponent/encodeURI, or decode %20, %2520 and other escaped sequences back to readable text. Free, instant, entirely client-side. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/url-encoder/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <meta property="og:title" content="URL Encoder Decoder &mdash; Free Online Tool | CyberScryb">
-    <meta property="og:description" content="Percent-encode or decode query strings client-side using our URL encoder decoder tool. Free, instant, runs in your browser. No signup.">
+    <meta property="og:title" content="URL Encoder / Decoder &mdash; Percent-Encode Text & Decode URLs | CyberScryb">
+    <meta property="og:description" content="Paste text or a URL to percent-encode it with encodeURIComponent/encodeURI, or decode %20, %2520 and other escaped sequences back to readable text. Free, instant, entirely client-side. No signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/url-encoder/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="URL Encoder Decoder &mdash; Free Online Tool | CyberScryb">
-    <meta name="twitter:description" content="Percent-encode or decode query strings client-side using our URL encoder decoder tool. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:title" content="URL Encoder / Decoder &mdash; Percent-Encode Text & Decode URLs | CyberScryb">
+    <meta name="twitter:description" content="Paste text or a URL to percent-encode it with encodeURIComponent/encodeURI, or decode %20, %2520 and other escaped sequences back to readable text. Free, instant, entirely client-side. No signup.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux">
 
 
 
@@ -61,7 +61,10 @@
             { "@type": "Question", "name": "What is the difference between encodeURIComponent and encodeURI?", "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent encodes every reserved character, making it safe for query parameter values. encodeURI preserves URL structure characters like :/?#& so it is used for encoding a full URL." }},
             { "@type": "Question", "name": "Is this URL encoder safe to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All encoding and decoding happens entirely in your browser. Your text is never sent to any server." }},
             { "@type": "Question", "name": "Why would a URL have %20 in it?", "acceptedAnswer": { "@type": "Answer", "text": "%20 is the percent-encoded representation of a space character. URLs cannot contain literal spaces, so they must be encoded." }},
-            { "@type": "Question", "name": "Can I decode a URL that was encoded multiple times?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, just decode repeatedly. If a string contains %2520 for example, decoding once yields %20, and decoding again yields a space." }}
+            { "@type": "Question", "name": "Can I decode a URL that was encoded multiple times?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, just decode repeatedly. If a string contains %2520 for example, decoding once yields %20, and decoding again yields a space." }},
+            { "@type": "Question", "name": "What is the difference between %20 and + for spaces?", "acceptedAnswer": { "@type": "Answer", "text": "%20 is the RFC 3986 way to encode a space and is safe everywhere in a URL. The + sign means space only in query strings submitted by HTML forms (application/x-www-form-urlencoded). In a path segment, a literal + is just a plus sign, so %20 is the safer choice. This tool's decode mode converts + to spaces, matching form behavior." }},
+            { "@type": "Question", "name": "Do I need to encode non-English characters and emoji?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Non-ASCII characters are first converted to their UTF-8 byte sequence, then each byte is percent-encoded. For example, café becomes caf%C3%A9 and an emoji becomes a four-byte escape like %F0%9F%9A%80. encodeURIComponent handles this automatically, and this tool does the same." }},
+            { "@type": "Question", "name": "Why is there %2520 in my URL instead of %20?", "acceptedAnswer": { "@type": "Answer", "text": "%2520 means the string was encoded twice. The space became %20, then the percent sign itself was encoded as %25, producing %2520. Decode it twice to recover the original text, then fix the code path that encoded it more than once." }}
         ]
     }
     </script>
@@ -81,7 +84,7 @@
             font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
             padding: 0.55rem 1.4rem; border-radius: 7px; cursor: pointer; transition: all 0.2s;
         }
-        .mode-toggle button.active { background: var(--primary); color: #fff; }
+        .mode-toggle button.active { background: var(--primary); color: var(--primary-ink); }
 
         .radio-row { display: flex; gap: 1.5rem; margin: 0.5rem 0 1rem; flex-wrap: wrap; }
         .radio-row label { color: var(--text-muted); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
@@ -130,7 +133,7 @@
     </style>
 
 
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
@@ -165,7 +168,7 @@
         <div class="ue-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">URL Encoder / Decoder</h1>
-                <p style="color:var(--text-faint); margin-bottom: 0;">Encode special characters for URLs or decode percent-encoded strings. Supports <code>encodeURIComponent</code> and <code>encodeURI</code>. 100% client-side.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0; max-width: 640px;">Percent-encode text for URLs (spaces to <code>%20</code>, <code>&amp;</code> to <code>%26</code>) or decode escaped URLs back to readable text. Paste your text, pick Encode or Decode, and copy the result. Choose <code>encodeURIComponent</code> for single values or <code>encodeURI</code> for full URLs. Everything happens in your browser. Nothing is sent to a server.</p>
             </div>
 
             <div class="mode-toggle" role="tablist">
@@ -199,12 +202,51 @@
             </div>
 
             <div class="faq-section">
+                <h2>How to Use This Tool</h2>
+                <ol style="color: var(--text-muted); line-height: 2; padding-left: 1.5rem; margin: 0 0 2rem;">
+                    <li><strong style="color: var(--text);">Paste your input.</strong> Drop text, a URL, or a percent-encoded string into the Input box. Encoding happens live as you type.</li>
+                    <li><strong style="color: var(--text);">Pick a mode.</strong> Keep <em>Encode</em> to turn text into percent-encoded form, or switch to <em>Decode</em> to turn <code>%XX</code> sequences back into readable characters.</li>
+                    <li><strong style="color: var(--text);">Choose the encode function.</strong> In Encode mode, <code>encodeURIComponent</code> is the default and the right pick for query parameter values and path segments. Select <code>encodeURI</code> when you are encoding a complete URL whose structure (<code>://?#&amp;</code>) must stay intact.</li>
+                    <li><strong style="color: var(--text);">Copy, swap, or clear.</strong> Use Copy Output to grab the result, Swap In/Out to run it through another pass, or Clear to start over.</li>
+                </ol>
+            </div>
+
+            <div class="faq-section">
+                <h2>Real-World Use Cases</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem;">
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:10px; padding:1.1rem;">
+                        <strong style="color: var(--text); display:block; margin-bottom:0.4rem;">Building search URLs from user input</strong>
+                        <span style="font-size:0.85rem; color: var(--text-muted);">A search box typed <code>cats &amp; dogs</code> must become <code>?q=cats%20%26%20dogs</code>. Without encoding, the <code>&amp;</code> would split the query into two parameters.</span>
+                    </div>
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:10px; padding:1.1rem;">
+                        <strong style="color: var(--text); display:block; margin-bottom:0.4rem;">Fixing OAuth and login redirect links</strong>
+                        <span style="font-size:0.85rem; color: var(--text-muted);">A <code>redirect_uri</code> parameter carries a whole second URL inside the outer one. Its <code>?</code> and <code>&amp;</code> characters must be encoded so they do not corrupt the outer URL.</span>
+                    </div>
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:10px; padding:1.1rem;">
+                        <strong style="color: var(--text); display:block; margin-bottom:0.4rem;">Decoding links from server logs and emails</strong>
+                        <span style="font-size:0.85rem; color: var(--text-muted);">Paste a percent-encoded URL from a log line into Decode mode to see the real parameter values instantly, instead of eyeballing <code>%3D</code> and <code>%26</code>.</span>
+                    </div>
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:10px; padding:1.1rem;">
+                        <strong style="color: var(--text); display:block; margin-bottom:0.4rem;">Untangling double-encoded strings</strong>
+                        <span style="font-size:0.85rem; color: var(--text-muted);">Seeing <code>%2520</code>? Hit Swap In/Out and decode twice to confirm the string was encoded more than once, then fix the code path that did it.</span>
+                    </div>
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius:10px; padding:1.1rem;">
+                        <strong style="color: var(--text); display:block; margin-bottom:0.4rem;">Handling non-English text in URLs</strong>
+                        <span style="font-size:0.85rem; color: var(--text-muted);">Accented characters and emoji must be UTF-8 encoded first, then percent-encoded byte by byte. This tool shows exactly what the encoded form looks like.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is URL encoding?</summary><p>URL encoding (also called percent-encoding) converts special characters into a format safe for URLs. For example, a space becomes <code>%20</code> and <code>&amp;</code> becomes <code>%26</code>.</p></details>
                 <details><summary>What is the difference between encodeURIComponent and encodeURI?</summary><p><code>encodeURIComponent</code> encodes every reserved character, making it safe for a single query parameter value. <code>encodeURI</code> preserves URL structure characters like <code>:/?#&amp;</code>, so it is used when encoding a full URL.</p></details>
                 <details><summary>Is this URL encoder safe?</summary><p>Yes. All encoding and decoding happens entirely in your browser using the built-in <code>encodeURIComponent</code>, <code>encodeURI</code>, and <code>decodeURIComponent</code> functions. Nothing is sent anywhere.</p></details>
                 <details><summary>Why does my URL show %20 instead of spaces?</summary><p><code>%20</code> is the percent-encoded representation of a space. URLs cannot contain literal spaces, so they are encoded whenever the URL is transmitted.</p></details>
                 <details><summary>Can I decode double-encoded URLs?</summary><p>Yes. If your string contains <code>%2520</code>, decode once to get <code>%20</code>, then decode again to get a space.</p></details>
+                <details><summary>What is the difference between %20 and + for spaces?</summary><p><code>%20</code> is the RFC 3986 way to encode a space and is safe everywhere in a URL. The <code>+</code> sign means space only in query strings submitted by HTML forms (<code>application/x-www-form-urlencoded</code>). In a path segment, a literal <code>+</code> is just a plus sign, so <code>%20</code> is the safer choice. This tool's Decode mode converts <code>+</code> to spaces, matching form behavior.</p></details>
+                <details><summary>Do I need to encode non-English characters and emoji?</summary><p>Yes. Non-ASCII characters are first converted to their UTF-8 byte sequence, then each byte is percent-encoded. For example, <code>café</code> becomes <code>caf%C3%A9</code> and an emoji becomes a four-byte escape like <code>%F0%9F%9A%80</code>. <code>encodeURIComponent</code> handles this automatically, and this tool does the same.</p></details>
+                <details><summary>Why is there %2520 in my URL instead of %20?</summary><p><code>%2520</code> means the string was encoded twice. The space became <code>%20</code>, then the percent sign itself was encoded as <code>%25</code>, producing <code>%2520</code>. Decode it twice to recover the original text, then fix the code path that encoded it more than once.</p></details>
             </div>
         </div>
 
@@ -264,7 +306,7 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </section>
 
-    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/js/script.js?v=20261014ux"></script>
     <script>
     (function() {
         const input = document.getElementById('ue-input');

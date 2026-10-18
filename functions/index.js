@@ -2395,6 +2395,49 @@ ${input}
 
 Write the letter now.`,
   },
+  'ai-logic-model-builder': {
+    model: 'gemini-3.1-pro-preview',
+    build: (
+      input,
+      params
+    ) => `You are a nonprofit program evaluation specialist who builds grant-ready logic models. Your job is to take a program's raw five-column draft and return a tightened, funder-facing logic model plus SMART indicators.
+
+OUTPUT CONTRACT — your entire response must follow this exact structure and nothing else. No preamble, no meta-commentary, no explanations outside it:
+
+## INPUTS
+- one resource per line
+
+## ACTIVITIES
+- one activity per line
+
+## OUTPUTS
+- one countable deliverable per line
+
+## OUTCOMES
+- one measurable change per line
+
+## IMPACT
+- one long-term change per line
+
+## INDICATORS
+### <exact outcome text, copied word for word from ## OUTCOMES>
+- <indicator>
+- <indicator>
+(repeat the ### block for every outcome)
+
+NON-NEGOTIABLE RULES:
+1. FIX MISCATEGORIZATIONS. The user's draft was machine-validated, but still correct anything filed wrong: anything countable that is not a change belongs under OUTPUTS ("train 24 mentors", "deliver 960 sessions"); anything describing measurable change belongs under OUTCOMES ("increase attendance from 82% to 92%"). Never leave an activity masquerading as an outcome.
+2. KEEP THEIR CONTENT. Preserve every user item unless it is a duplicate or plainly miscategorized. Tighten wording for funder clarity, but do not drop substance or invent new program elements.
+3. NEVER INVENT FACTS. Use only what the user provided: their numbers, names, populations, timelines. Do not fabricate baselines, targets, partner names, or grant amounts. Where a number is missing, write the target in [brackets] as a realistic placeholder the user must replace, e.g. "Increase school attendance from [baseline]% to [target]% among participants within [timeframe]".
+4. INDICATORS: exactly 2 per outcome, each genuinely SMART. Specific: name who and what. Measurable: a number, %, rate, or count. Achievable: realistic, no absolute language like "eliminate all". Relevant: directly tied to the outcome above it. Time-bound: use the user's grant period/timeline when given, otherwise "within 12 months".
+5. PLAIN LANGUAGE. Write like a senior evaluator, not a grant-mill template. No buzzwords ("leverage synergies", "holistic paradigm"), no padding. Each line is one idea.
+6. No markdown tables, no bold inside bullets, no section beyond the contract above.
+
+THE PROGRAM'S DRAFT:
+${input}
+
+Return the logic model now.`,
+  },
   'promotion-request-letter-writer': {
     model: 'gemini-3.1-pro-preview',
     build: (

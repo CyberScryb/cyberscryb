@@ -1452,6 +1452,7 @@ function generateSitemap(generatedPages) {
     'study-plan-generator',
     'health-insurance-plan-explainer',
     'rental-application-letter-writer',
+    'ai-logic-model-builder',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1560,6 +1561,8 @@ function generateSitemap(generatedPages) {
     'how-to-write-an-invitation-letter-for-visitor-visa',
     'how-to-write-a-rental-application-letter',
     'what-landlords-look-for-in-rental-applications',
+    'how-to-write-a-logic-model',
+    'smart-objectives-examples-nonprofit-grants',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1732,6 +1735,7 @@ function manageRobotsMeta() {
     'study-plan-generator',
     'health-insurance-plan-explainer',
     'rental-application-letter-writer',
+    'ai-logic-model-builder',
   ]);
 
   const dirsToProcess = [

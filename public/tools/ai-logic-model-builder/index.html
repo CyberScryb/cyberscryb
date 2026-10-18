@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Logic Model Builder &mdash; Free Nonprofit Logic Model Maker | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI logic model builder for nonprofits and grant proposals. Turn your program into a 5-column logic model (inputs, activities, outputs, outcomes, impact) with SMART indicators checked automatically. No signup."
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta
+      property="og:title"
+      content="AI Logic Model Builder &mdash; Free Nonprofit Logic Model Maker | CyberScryb"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Logic Model Builder &mdash; Free Nonprofit Logic Model Maker | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Turn your nonprofit program into a grant-ready 5-column logic model with SMART indicators checked automatically. Free, no signup."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-logic-model-builder/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+
+    <!-- Google AdSense -->
+
+    <link rel="icon" href="/favicon.svg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a logic model?",
+            "acceptedAnswer": {
+              "text": "A logic model is a one-page map of how your program works: what resources you invest (inputs), what you do (activities), what you produce (outputs), what changes as a result (outcomes), and the long-term difference you aim for (impact). Funders use it to see whether your program's logic holds together before they fund it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between outputs and outcomes in a logic model?",
+            "acceptedAnswer": {
+              "text": "Outputs are countable deliverables your program produces: 200 meals served, 12 workshops held, 50 volunteers trained. Outcomes are the measurable changes those deliverables cause: 30% fewer missed meals, 15-point gains in food-security scores, 40% higher volunteer retention. Outputs count what you did; outcomes measure what changed. Confusing the two is the most common logic model mistake in grant proposals."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do grant funders require a logic model?",
+            "acceptedAnswer": {
+              "text": "Federal funders (USDA, HHS, Department of Education) almost always do, and most large foundations expect one or reward applications that include one. Even when it is not required, a tight logic model makes your narrative stronger because it forces your objectives, activities, and evaluation plan to line up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a SMART indicator?",
+            "acceptedAnswer": {
+              "text": "A SMART indicator is a measure that is Specific (names who and what), Measurable (has a number), Achievable (realistic), Relevant (tied to the outcome), and Time-bound (has a deadline). 'Increase program enrollment' is not SMART. 'Enroll 120 youth ages 12-17 by December 2027' is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the 5 components of a logic model?",
+            "acceptedAnswer": {
+              "text": "Inputs (resources like funding, staff, partners), Activities (what the program does, like workshops or mentoring), Outputs (countable deliverables like sessions held or people served), Outcomes (measurable changes like higher graduation rates), and Impact (the long-term systemic change, like breaking the cycle of poverty in a community)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this logic model in a grant proposal?",
+            "acceptedAnswer": {
+              "text": "Yes. The model is built from your own program details, and the markdown export is formatted for pasting into proposals or appendices. Always review the AI's draft against your actual program before submitting: it organizes and tightens your thinking, but you own the facts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this logic model builder free?",
+            "acceptedAnswer": {
+              "text": "Yes. 100% free with no accounts and no signup required."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+    <style>
+      .lm-col-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 1.25rem 0 0.25rem;
+      }
+      .lm-col-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #09090b;
+        font-weight: 700;
+        font-size: 0.8rem;
+        flex: none;
+      }
+      .lm-valid {
+        font-size: 0.8rem;
+        margin-top: 6px;
+        min-height: 1.2em;
+        color: var(--text-faint);
+      }
+      .lm-valid.ok {
+        color: #22c55e;
+      }
+      .lm-valid.bad {
+        color: var(--primary-soft);
+      }
+      .lm-line-warn {
+        font-size: 0.78rem;
+        color: #f59e0b;
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+      .lm-diagram {
+        display: grid;
+        grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr;
+        gap: 6px;
+        align-items: stretch;
+        margin: 1rem 0;
+      }
+      .lm-diagram-col {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.75rem;
+        min-width: 0;
+      }
+      .lm-diagram-col h4 {
+        margin: 0 0 0.5rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--primary-soft);
+      }
+      .lm-diagram-col ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .lm-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-soft);
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+      @media (max-width: 900px) {
+        .lm-diagram {
+          grid-template-columns: 1fr;
+        }
+        .lm-arrow {
+          transform: rotate(90deg);
+          padding: 2px 0;
+        }
+      }
+      .smart-badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+        margin-right: 4px;
+        border: 1px solid var(--border);
+      }
+      .smart-pass {
+        color: #22c55e;
+        border-color: rgba(34, 197, 94, 0.4);
+      }
+      .smart-warn {
+        color: #f59e0b;
+        border-color: rgba(245, 158, 11, 0.4);
+      }
+      .smart-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.75rem 0.9rem;
+        margin-bottom: 0.6rem;
+      }
+      .smart-reason {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin-top: 0.35rem;
+        line-height: 1.55;
+      }
+      .lm-table-wrap {
+        overflow-x: auto;
+      }
+      table.lm-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+        margin-top: 0.75rem;
+      }
+      table.lm-table th {
+        text-align: left;
+        color: var(--primary-soft);
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      table.lm-table td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-muted);
+        vertical-align: top;
+        line-height: 1.6;
+      }
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #logic-model-section,
+        #logic-model-section * {
+          visibility: visible;
+        }
+        #logic-model-section {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 1in;
+          background: #fff;
+          color: #000;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Logic Model Builder</span>
+    </nav>
+
+    <main>
+      <section class="hero" style="min-height: 40vh; padding-top: 80px">
+        <div class="hero-container">
+          <div
+            class="badge"
+            style="
+              background: rgba(220, 38, 38, 0.1);
+              color: var(--primary-soft);
+              padding: 5px 10px;
+              border-radius: 4px;
+              display: inline-block;
+              margin-bottom: 1rem;
+              border: 1px solid rgba(220, 38, 38, 0.3);
+            "
+          >
+            AI-Powered
+          </div>
+          <h1 class="hero-title" style="font-size: 2.5rem">
+            AI <span style="color: var(--primary)">Logic Model</span> Builder
+          </h1>
+          <p class="hero-subtitle">
+            Grant reviewers read your logic model before they read your narrative. Enter your
+            program's five columns &mdash; inputs, activities, outputs, outcomes, impact &mdash; and
+            get a grant-ready model with SMART indicators that are automatically checked against
+            every SMART rule. Free, no signup.
+          </p>
+        </div>
+      </section>
+
+      <section class="tool-content" style="padding: 2rem 0">
+        <div class="container">
+          <div class="humanizer-container" style="background: transparent; box-shadow: none">
+            <div
+              class="panel input-panel"
+              style="background: var(--card); border: 1px solid var(--border)"
+            >
+              <div class="panel-header">
+                <h2 style="font-size: 1.5rem; margin: 0">Your Program</h2>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <button
+                    id="sample-btn"
+                    type="button"
+                    class="icon-btn"
+                    title="Load a realistic sample program"
+                    style="
+                      background: var(--bg-elevated);
+                      border: 1px solid var(--border);
+                      color: var(--text);
+                      padding: 4px 10px;
+                      font-size: 0.8rem;
+                      border-radius: 6px;
+                      cursor: pointer;
+                      font-weight: 500;
+                    "
+                  >
+                    Try Sample
+                  </button>
+                  <span class="step-badge" style="background: var(--primary); color: #09090b"
+                    >5 Columns</span
+                  >
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="lm-name" style="color: var(--text-muted)"
+                  >Program name <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <input
+                  type="text"
+                  id="lm-name"
+                  aria-required="true"
+                  style="
+                    width: 100%;
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.9rem;
+                  "
+                  placeholder="e.g. Riverside Youth Mentoring Program"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="lm-org" style="color: var(--text-muted)"
+                  >Organization <span class="cs-optional">(optional)</span></label
+                >
+                <input
+                  type="text"
+                  id="lm-org"
+                  style="
+                    width: 100%;
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.9rem;
+                  "
+                  placeholder="e.g. Riverside Community Alliance"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="lm-population" style="color: var(--text-muted)"
+                  >Target population <span class="cs-optional">(optional)</span></label
+                >
+                <input
+                  type="text"
+                  id="lm-population"
+                  style="
+                    width: 100%;
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.9rem;
+                  "
+                  placeholder="e.g. At-risk youth ages 12-17 in Riverside County"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="lm-timeframe" style="color: var(--text-muted)"
+                  >Grant period or timeline <span class="cs-optional">(optional)</span></label
+                >
+                <input
+                  type="text"
+                  id="lm-timeframe"
+                  style="
+                    width: 100%;
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 0.9rem;
+                  "
+                  placeholder="e.g. 24 months, Jan 2027 - Dec 2028"
+                />
+              </div>
+
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 1rem 0 0">
+                One item per line. The tool checks every line as you type.
+              </p>
+
+              <div class="lm-col-head">
+                <span class="lm-col-num">1</span>
+                <label for="lm-inputs" style="color: var(--text); font-weight: 600">Inputs</label>
+              </div>
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 0 0 0.5rem">
+                Resources you invest: funding, staff, volunteers, partners, facilities, curriculum.
+              </p>
+              <textarea
+                id="lm-inputs"
+                style="
+                  width: 100%;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  color: var(--text);
+                  height: 110px;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                placeholder="$250,000 USDA grant&#10;12 trained volunteer mentors&#10;Partnership with Riverside Unified School District"
+              ></textarea>
+              <div class="lm-valid" id="lm-valid-inputs"></div>
+
+              <div class="lm-col-head">
+                <span class="lm-col-num">2</span>
+                <label for="lm-activities" style="color: var(--text); font-weight: 600"
+                  >Activities</label
+                >
+              </div>
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 0 0 0.5rem">
+                What the program does: workshops, mentoring sessions, screenings, distributions.
+              </p>
+              <textarea
+                id="lm-activities"
+                style="
+                  width: 100%;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  color: var(--text);
+                  height: 110px;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                placeholder="Weekly 1:1 mentoring sessions (2 hours)&#10;Monthly group life-skills workshops&#10;Quarterly family engagement nights"
+              ></textarea>
+              <div class="lm-valid" id="lm-valid-activities"></div>
+
+              <div class="lm-col-head">
+                <span class="lm-col-num">3</span>
+                <label for="lm-outputs" style="color: var(--text); font-weight: 600">Outputs</label>
+              </div>
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 0 0 0.5rem">
+                Countable deliverables: numbers of sessions, people served, materials distributed.
+                Every line must be countable.
+              </p>
+              <textarea
+                id="lm-outputs"
+                style="
+                  width: 100%;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  color: var(--text);
+                  height: 110px;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                placeholder="Train 24 volunteer mentors&#10;Deliver 960 mentoring sessions per year&#10;Enroll 120 youth participants"
+              ></textarea>
+              <div class="lm-valid" id="lm-valid-outputs"></div>
+
+              <div class="lm-col-head">
+                <span class="lm-col-num">4</span>
+                <label for="lm-outcomes" style="color: var(--text); font-weight: 600"
+                  >Outcomes</label
+                >
+              </div>
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 0 0 0.5rem">
+                Measurable change: increases, decreases, improvements with a target. Every line must
+                describe change, not just activity.
+              </p>
+              <textarea
+                id="lm-outcomes"
+                style="
+                  width: 100%;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  color: var(--text);
+                  height: 110px;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                placeholder="Increase school attendance from 82% to 92% among participants&#10;Reduce disciplinary referrals by 40% within 12 months"
+              ></textarea>
+              <div class="lm-valid" id="lm-valid-outcomes"></div>
+
+              <div class="lm-col-head">
+                <span class="lm-col-num">5</span>
+                <label for="lm-impact" style="color: var(--text); font-weight: 600">Impact</label>
+              </div>
+              <p style="color: var(--text-faint); font-size: 0.8rem; margin: 0 0 0.5rem">
+                The long-term difference: the systemic or generational change this program
+                contributes to.
+              </p>
+              <textarea
+                id="lm-impact"
+                style="
+                  width: 100%;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  color: var(--text);
+                  height: 90px;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                placeholder="Break the cycle of youth disengagement in Riverside County"
+              ></textarea>
+              <div class="lm-valid" id="lm-valid-impact"></div>
+
+              <div
+                id="lm-validation-summary"
+                class="hidden"
+                style="
+                  margin-top: 1rem;
+                  padding: 0.9rem 1.1rem;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  color: var(--text-muted);
+                  font-size: 0.85rem;
+                  line-height: 1.7;
+                "
+              ></div>
+
+              <button
+                id="generate-btn"
+                class="primary-btn"
+                style="
+                  margin-top: 1rem;
+                  background: #ef4444;
+                  border: none;
+                  color: #09090b;
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 600;
+                "
+              >
+                <span class="btn-text">Build My Logic Model</span>
+                <span class="btn-icon">&rarr;</span>
+              </button>
+            </div>
+            <div
+              class="panel output-panel"
+              style="background: var(--card); border: 1px solid var(--border)"
+            >
+              <div class="panel-header">
+                <h2 style="font-size: 1.5rem; margin: 0">Your Logic Model</h2>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span
+                    id="usage-counter"
+                    style="
+                      font-size: 0.7rem;
+                      color: var(--text-muted);
+                      font-family: 'JetBrains Mono', monospace;
+                    "
+                  ></span>
+                  <button
+                    id="copy-btn"
+                    class="icon-btn"
+                    title="Copy to Clipboard"
+                    style="
+                      background: var(--bg-elevated);
+                      border: 1px solid var(--border);
+                      color: var(--text);
+                    "
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+              <div class="output-wrapper">
+                <div
+                  id="output-text"
+                  class="output-content"
+                  style="
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                  "
+                >
+                  <span class="placeholder" style="color: var(--text-faint)"
+                    >Your AI-built logic model will appear here...</span
+                  >
+                </div>
+                <div id="loading-indicator" class="hidden">
+                  <div class="spinner" style="border-top-color: var(--primary-soft)"></div>
+                  <p style="color: var(--primary)">
+                    Building your logic model with Gemini 3.1 Pro...
+                  </p>
+                </div>
+              </div>
+              <div
+                id="parse-notice"
+                class="hidden"
+                style="
+                  margin: 0.75rem 0 0;
+                  padding: 0.75rem 1rem;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  color: var(--text-muted);
+                  font-size: 0.85rem;
+                "
+              ></div>
+              <div id="logic-model-section" class="hidden" style="margin-top: 1.5rem"></div>
+              <div
+                class="stats-bar"
+                style="border-top: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted)"
+              >
+                <span id="word-count"></span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Your Saved Models
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              Every model you build is stored on this device, in your browser only. Reopen any of
+              them to keep working or to export again.
+            </p>
+            <div id="saved-models-list"></div>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              The One Test Your Logic Model Has to Pass
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              A grant reviewer reads your logic model before your narrative, and they are running
+              one test: does the chain hold? Inputs fund activities, activities produce outputs,
+              outputs cause outcomes, outcomes add up to impact. The moment one link is actually two
+              ideas crammed together, the reviewer stops trusting the rest of the proposal.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              The link that breaks most often is outputs versus outcomes. Programs write
+              &ldquo;increased community awareness&rdquo; under outputs because it sounds
+              impressive, but awareness is a change, not a deliverable. Or they write &ldquo;held 12
+              workshops&rdquo; under outcomes, which is activity, not change. Reviewers at federal
+              agencies see this mix-up constantly, and it reads as &ldquo;this organization does not
+              know what it is measuring.&rdquo; This builder enforces the distinction line by line:
+              outputs must be countable, outcomes must describe measurable change.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              The second failure is indicators that cannot be evaluated. &ldquo;Improve youth
+              outcomes&rdquo; is not an indicator, it is a wish. An indicator needs a who, a number,
+              and a when. Every indicator this tool generates is checked against the five SMART
+              rules automatically &mdash; specific, measurable, achievable, relevant, time-bound
+              &mdash; with a plain-English reason for each check, so you can fix the weak ones
+              before a reviewer finds them.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              How It Works
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 1: Fill the five columns.</strong> Name your
+              program, then list inputs, activities, outputs, outcomes, and impact, one item per
+              line. The form validates as you type: outputs must be countable, outcomes must
+              describe change.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 2: Generate.</strong> The AI tightens your
+              model &mdash; fixing items you filed in the wrong column &mdash; and writes two SMART
+              indicators per outcome. It never invents your facts; where you gave no numbers,
+              proposed targets appear in [brackets] for you to replace.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 3: Check the SMART report.</strong> Every
+              indicator gets checked against specific, measurable, achievable, relevant, and
+              time-bound rules with the reason shown. Fix any flagged indicator before it goes into
+              a proposal.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 4: Export and reuse.</strong> Copy the model
+              as a formatted Markdown table, download the .md file for your proposal appendix, or
+              print the visual diagram. Models save automatically in your browser for the next
+              grant.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Real Ways People Use It
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Federal grant applications:</strong> USDA, HHS, and
+              Department of Education proposals almost always require a logic model. Build it here,
+              export the table, and drop it straight into the appendix.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Foundation proposals:</strong> Large foundations
+              reward applications whose objectives, activities, and evaluation line up. The
+              output-vs-outcome check catches the mix-ups that make reviewers doubt your evaluation
+              plan.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Board presentations:</strong> A one-page visual
+              diagram explains a program faster than a twenty-slide deck. Print the diagram for the
+              board packet.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Program planning:</strong> Before the grant is even
+              written, the five columns force the team to agree on what success actually looks like.
+              Disagreements surface in the form, not in year two of the grant.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Evaluation design:</strong> The SMART-checked
+              indicators become your evaluation plan's measure list. Hand the indicators table to
+              your evaluator and the methods section practically writes itself.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h3 style="color: var(--primary-soft); margin-bottom: 1.5rem">
+              Frequently Asked Questions
+            </h3>
+            <details>
+              <summary>Is what I type private?</summary>
+              <p>
+                Your input is sent to our AI service to generate your result. No account, no signup,
+                and nothing is linked to your identity. Your drafts and saved models stay in your
+                own browser's localStorage, on your device. We count anonymous usage per tool for
+                analytics. Your text is never sold.
+              </p>
+            </details>
+            <div class="faq-item">
+              <h4>What is a logic model?</h4>
+              <p>
+                A one-page map of how your program works: inputs (resources), activities (what you
+                do), outputs (countable deliverables), outcomes (measurable change), and impact
+                (long-term difference). Funders use it to check whether your program's logic holds
+                together before they fund it.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>What is the difference between outputs and outcomes?</h4>
+              <p>
+                Outputs are countable: 200 meals served, 12 workshops held. Outcomes are change: 30%
+                fewer missed meals, 15-point gains in food-security scores. Outputs count what you
+                did; outcomes measure what changed. This tool enforces the distinction on every
+                line.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>Do grant funders require a logic model?</h4>
+              <p>
+                Federal funders almost always do, and most large foundations expect one or reward
+                proposals that include one. Even when not required, a tight logic model makes your
+                narrative stronger.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>What is a SMART indicator?</h4>
+              <p>
+                A measure that is Specific, Measurable, Achievable, Relevant, and Time-bound.
+                &ldquo;Increase enrollment&rdquo; is not SMART; &ldquo;Enroll 120 youth ages 12-17
+                by December 2027&rdquo; is. Every generated indicator is checked against all five
+                rules here.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>Can I use this model in a grant proposal?</h4>
+              <p>
+                Yes. It is built from your own program details, and the Markdown export is formatted
+                for proposals and appendices. Review the AI's draft against your actual program
+                before submitting; you own the facts.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>Is this logic model builder free?</h4>
+              <p>Yes. 100% free with no accounts and no signup required.</p>
+            </div>
+            <p style="margin-top: 1.5rem; color: var(--text-muted)">
+              Want the full playbook? Read our guide:
+              <a href="/guides/how-to-write-a-logic-model/" style="color: var(--primary-soft)"
+                >How to Write a Logic Model for a Grant Proposal</a
+              >.
+            </p>
+          </div>
+
+          <div class="related-tools" style="text-align: center; margin-top: 2rem">
+            <p>
+              Related:
+              <a href="/tools/budget-planner/">Budget Planner</a> |
+              <a href="/tools/ai-writing-suite/">AI Writing Suite</a> |
+              <a href="/tools/summarizer/">AI Summarizer</a> |
+              <a href="/tools/word-counter/">Word Counter</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+
+      <section
+        style="
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 2rem;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+        "
+      >
+        <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text)">
+          Related Tools You Might Like
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+          "
+        >
+          <a
+            href="/tools/budget-planner/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Budget Planner</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Build the budget narrative behind the model.</span
+            >
+          </a>
+          <a
+            href="/tools/ai-writing-suite/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >AI Writing Suite</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Draft the proposal narrative around it.</span
+            >
+          </a>
+          <a
+            href="/tools/summarizer/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >AI Summarizer</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Condense needs assessments and reports.</span
+            >
+          </a>
+          <a
+            href="/tools/word-counter/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Word Counter</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Hit the proposal page limit exactly.</span
+            >
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+      </div>
+    </footer>
+
+    <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+      <ins
+        class="adsbygoogle"
+        style="display: block"
+        data-ad-client="ca-pub-5721233331247292"
+        data-ad-slot="9198647442"
+        data-ad-format="rectangle"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb AI Logic Model Builder",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261013sse1"></script>
+    <script src="/tools/ai-logic-model-builder/ai-logic-model-builder.js"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+  </body>
+</html>
