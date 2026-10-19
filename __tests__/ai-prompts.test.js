@@ -89,6 +89,7 @@ describe('AI_PROMPTS dispatch table', () => {
     'condolence-message-generator',
     'study-plan-generator',
     'ai-logic-model-builder',
+    'ai-medicare-advantage-medigap-explainer',
   ];
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];

@@ -1453,6 +1453,7 @@ function generateSitemap(generatedPages) {
     'health-insurance-plan-explainer',
     'rental-application-letter-writer',
     'ai-logic-model-builder',
+    'ai-medicare-advantage-medigap-explainer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1563,6 +1564,8 @@ function generateSitemap(generatedPages) {
     'what-landlords-look-for-in-rental-applications',
     'how-to-write-a-logic-model',
     'smart-objectives-examples-nonprofit-grants',
+    'medicare-advantage-vs-medigap-cost-scenarios',
+    'how-to-write-a-tenant-repair-demand-letter',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1736,6 +1739,7 @@ function manageRobotsMeta() {
     'health-insurance-plan-explainer',
     'rental-application-letter-writer',
     'ai-logic-model-builder',
+    'ai-medicare-advantage-medigap-explainer',
   ]);
 
   const dirsToProcess = [

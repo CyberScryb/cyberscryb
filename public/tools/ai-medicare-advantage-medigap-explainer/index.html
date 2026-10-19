@@ -1,0 +1,1192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Medicare Advantage vs Medigap Explainer: Free Cost Comparison | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI plain-English comparison of Medicare Advantage vs Medigap with quiet/typical/rough-year cost scenarios, for open enrollment (window closes Dec 7). No signup."
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta
+      property="og:title"
+      content="AI Medicare Advantage vs Medigap Explainer: Free Cost Comparison | CyberScryb"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Medicare Advantage vs Medigap Explainer: Free Cost Comparison | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Plain-English Medicare Advantage vs Medigap comparison with quiet/typical/rough-year cost scenarios. Built for open enrollment (closes Dec 7). Free, no signup."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-medicare-advantage-medigap-explainer/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+
+    <!-- Google AdSense -->
+
+    <link rel="icon" href="/favicon.svg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between Medicare Advantage and Medigap?",
+            "acceptedAnswer": {
+              "text": "Medicare Advantage (Part C) replaces Original Medicare with a private plan that bundles hospital, doctor, and usually drug coverage, often with low or $0 premiums but a provider network and an annual out-of-pocket cap. Medigap is supplemental insurance you buy on top of Original Medicare; it pays most of what Original Medicare does not, such as the Part B deductible and 20% coinsurance, for a higher monthly premium but almost no surprise costs. Estimates for comparison only, built from national averages you can edit. Not medical or financial advice. Verify your doctors and drugs at medicare.gov/plan-compare before enrolling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does Medigap Plan G cost per month?",
+            "acceptedAnswer": {
+              "text": "Nationally, Medigap Plan G averages around $150 per month at age 65, but the real number varies a lot by state and age: in some states it runs under $110, in others over $200, and it typically rises as you age. This tool defaults to $150 so you can see the shape of the tradeoff, but you should replace it with real quotes from your state. Estimates for comparison only, built from national averages you can edit. Not medical or financial advice. Verify your doctors and drugs at medicare.gov/plan-compare before enrolling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When is Medicare open enrollment?",
+            "acceptedAnswer": {
+              "text": "Medicare open enrollment runs October 15 to December 7 each year. During this window you can join, switch, or drop a Medicare Advantage plan, or change your Part D drug plan. Changes take effect January 1. Medigap has different enrollment rules that vary by state, so check your state's rules before assuming you can buy or switch Medigap freely. Estimates for comparison only, built from national averages you can edit. Not medical or financial advice. Verify your doctors and drugs at medicare.gov/plan-compare before enrolling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I switch from Medicare Advantage back to Original Medicare with Medigap?",
+            "acceptedAnswer": {
+              "text": "You can switch from Medicare Advantage back to Original Medicare during open enrollment (Oct 15 to Dec 7), but your right to buy Medigap depends on your state. Outside your initial 6-month Medigap open enrollment period (which starts when you turn 65 and enroll in Part B), insurers in most states can charge more or deny you based on health through medical underwriting. Some states allow year-round or birthday-rule Medigap switching. Check your state rules first. Estimates for comparison only, built from national averages you can edit. Not medical or financial advice. Verify your doctors and drugs at medicare.gov/plan-compare before enrolling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Medicare Advantage include prescription drug coverage?",
+            "acceptedAnswer": {
+              "text": "Most Medicare Advantage plans include Part D drug coverage (called MAPD plans), so your drugs are covered under the same plan premium. Medigap does not cover drugs at all, so people with Medigap buy a separate standalone Part D plan, which adds roughly $20 to $70 per month depending on the plan and your state. This tool compares medical costs only; add a Part D estimate to the Medigap side when you run your numbers. Estimates for comparison only, built from national averages you can edit. Not medical or financial advice. Verify your doctors and drugs at medicare.gov/plan-compare before enrolling."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+    <style>
+      .ma-step-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--border-strong);
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .ma-step-dot-active {
+        background: var(--primary);
+      }
+      .ma-radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .ma-radio-group label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg-elevated);
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      .ma-radio-group label:has(input:checked) {
+        border-color: var(--primary);
+        color: var(--text);
+        background: rgba(220, 38, 38, 0.08);
+      }
+      .ma-field-label {
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.92rem;
+        margin: 1.25rem 0 0.25rem;
+        display: block;
+      }
+      .ma-note {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        margin: 4px 0 0;
+        line-height: 1.55;
+      }
+      .ma-num {
+        width: 100%;
+        max-width: 220px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+      }
+      .ma-select {
+        width: 100%;
+        max-width: 340px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+      }
+      .ma-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 1.75rem;
+      }
+      .ma-btn {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .ma-btn-primary {
+        background: var(--primary);
+        border: none;
+        color: #09090b;
+      }
+      .ma-scenario-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        margin-top: 0.75rem;
+      }
+      .ma-scenario-table th,
+      .ma-scenario-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        vertical-align: top;
+      }
+      .ma-scenario-table th {
+        color: var(--primary-soft);
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+      }
+      .ma-scenario-table td {
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .ma-scenario-table td.num {
+        text-align: right;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+        color: var(--text);
+        font-weight: 600;
+      }
+      .ma-disclaimer {
+        margin-top: 1rem;
+        padding: 0.9rem 1.1rem;
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        border-radius: 8px;
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        line-height: 1.7;
+      }
+      .ma-section-title {
+        color: var(--text);
+        font-size: 1.1rem;
+        margin: 1.5rem 0 0.5rem;
+      }
+      .ma-ai-section h3 {
+        color: var(--primary-soft);
+        font-size: 1.05rem;
+        margin: 1.5rem 0 0.5rem;
+      }
+      .ma-ai-section p,
+      .ma-ai-section li {
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-size: 0.9rem;
+      }
+      .ma-ai-section ul {
+        padding-left: 1.2rem;
+      }
+      .ma-verdict {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--primary);
+        border-radius: 8px;
+        padding: 0.9rem 1.1rem;
+        margin: 1rem 0;
+      }
+      .ma-verdict p {
+        color: var(--text);
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+      .ma-saved-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.7rem 0.9rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+      .ma-saved-row strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.9rem;
+      }
+      .ma-saved-row span.meta {
+        font-size: 0.75rem;
+        color: var(--text-faint);
+      }
+      .ma-compare-wrap {
+        overflow-x: auto;
+      }
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #ma-print-section,
+        #ma-print-section * {
+          visibility: visible;
+        }
+        #ma-print-section {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 0.75in;
+          background: #fff;
+          color: #000;
+        }
+        #ma-print-section * {
+          color: #000 !important;
+          border-color: #ccc !important;
+          background: #fff !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Medicare Advantage vs Medigap Explainer</span>
+    </nav>
+
+    <main>
+      <section class="hero" style="min-height: 40vh; padding-top: 80px">
+        <div class="hero-container">
+          <div
+            class="badge"
+            style="
+              background: rgba(220, 38, 38, 0.1);
+              color: var(--primary-soft);
+              padding: 5px 10px;
+              border-radius: 4px;
+              display: inline-block;
+              margin-bottom: 1rem;
+              border: 1px solid rgba(220, 38, 38, 0.3);
+            "
+          >
+            AI-Powered
+          </div>
+          <h1 class="hero-title" style="font-size: 2.5rem">
+            AI <span style="color: var(--primary)">Medicare Advantage vs Medigap</span> Explainer
+          </h1>
+          <p class="hero-subtitle">
+            Open enrollment closes December 7. Answer four short questions about your age, health,
+            and budget, and get a plain-English comparison of Medicare Advantage vs Medigap Plan G
+            with quiet-year, typical-year, and rough-year cost scenarios. Free, no signup.
+          </p>
+        </div>
+      </section>
+
+      <section class="tool-content" style="padding: 2rem 0">
+        <div class="container">
+          <div class="humanizer-container" style="background: transparent; box-shadow: none">
+            <div
+              class="panel input-panel"
+              style="background: var(--card); border: 1px solid var(--border)"
+            >
+              <div class="panel-header">
+                <h2 style="font-size: 1.5rem; margin: 0">Your Situation</h2>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <button
+                    id="sample-btn"
+                    type="button"
+                    class="icon-btn"
+                    title="Load a representative sample profile"
+                    style="
+                      background: var(--bg-elevated);
+                      border: 1px solid var(--border);
+                      color: var(--text);
+                      padding: 4px 10px;
+                      font-size: 0.8rem;
+                      border-radius: 6px;
+                      cursor: pointer;
+                      font-weight: 500;
+                    "
+                  >
+                    Try Sample
+                  </button>
+                  <span class="step-badge" id="step-badge" style="background: var(--primary); color: #09090b"
+                    >Step 1 of 4</span
+                  >
+                </div>
+              </div>
+
+              <div style="margin: 0.5rem 0 1rem">
+                <span class="ma-step-dot ma-step-dot-active" aria-hidden="true"></span>
+                <span class="ma-step-dot" aria-hidden="true"></span>
+                <span class="ma-step-dot" aria-hidden="true"></span>
+                <span class="ma-step-dot" aria-hidden="true"></span>
+              </div>
+
+              <!-- STEP 1 -->
+              <div id="ma-step-1" class="ma-step">
+                <h3 class="ma-section-title" style="margin-top: 0">Step 1: About you</h3>
+
+                <span class="ma-field-label">Age band</span>
+                <div class="ma-radio-group" role="radiogroup" aria-label="Age band">
+                  <label><input type="radio" name="ma-age" value="65-69" /> 65-69</label>
+                  <label><input type="radio" name="ma-age" value="70-74" /> 70-74</label>
+                  <label><input type="radio" name="ma-age" value="75+" /> 75+</label>
+                </div>
+
+                <span class="ma-field-label">State</span>
+                <select id="ma-state" class="ma-select" aria-label="State">
+                  <option value="">Select your state</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <p class="ma-note">
+                  Medigap rules and prices vary by state, so this matters for switching rights.
+                </p>
+
+                <span class="ma-field-label">Your situation</span>
+                <div class="ma-radio-group" role="radiogroup" aria-label="Situation">
+                  <label
+                    ><input type="radio" name="ma-situation" value="turning 65 soon" /> Turning 65
+                    soon</label
+                  >
+                  <label
+                    ><input type="radio" name="ma-situation" value="switching during open enrollment" />
+                    Switching during open enrollment</label
+                  >
+                  <label
+                    ><input type="radio" name="ma-situation" value="reviewing my current plan" />
+                    Reviewing my current plan</label
+                  >
+                </div>
+
+                <div class="ma-nav">
+                  <span></span>
+                  <button type="button" class="ma-btn ma-btn-primary ma-next" data-goto="1">
+                    Next: Health profile &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 2 -->
+              <div id="ma-step-2" class="ma-step hidden">
+                <h3 class="ma-section-title" style="margin-top: 0">Step 2: Health profile</h3>
+
+                <span class="ma-field-label">Doctor visits per year</span>
+                <div class="ma-radio-group" role="radiogroup" aria-label="Doctor visits per year">
+                  <label><input type="radio" name="ma-visits" value="0-2" /> 0-2</label>
+                  <label><input type="radio" name="ma-visits" value="3-6" /> 3-6</label>
+                  <label><input type="radio" name="ma-visits" value="7+" /> 7+</label>
+                </div>
+
+                <span class="ma-field-label">Regular prescriptions</span>
+                <div class="ma-radio-group" role="radiogroup" aria-label="Regular prescriptions">
+                  <label><input type="radio" name="ma-rx" value="0" /> 0</label>
+                  <label><input type="radio" name="ma-rx" value="1-3" /> 1-3</label>
+                  <label><input type="radio" name="ma-rx" value="4+" /> 4+</label>
+                </div>
+
+                <span class="ma-field-label">Health outlook</span>
+                <div class="ma-radio-group" role="radiogroup" aria-label="Health outlook">
+                  <label
+                    ><input type="radio" name="ma-outlook" value="generally healthy" /> Generally
+                    healthy</label
+                  >
+                  <label
+                    ><input type="radio" name="ma-outlook" value="managing a chronic condition" />
+                    Managing a chronic condition</label
+                  >
+                  <label
+                    ><input
+                      type="radio"
+                      name="ma-outlook"
+                      value="expecting surgery or hospital care"
+                    />
+                    Expecting surgery or hospital care</label
+                  >
+                </div>
+
+                <div class="ma-nav">
+                  <button type="button" class="ma-btn ma-back" data-goto="0">
+                    &larr; Back
+                  </button>
+                  <button type="button" class="ma-btn ma-btn-primary ma-next" data-goto="2">
+                    Next: Budget &amp; assumptions &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 3 -->
+              <div id="ma-step-3" class="ma-step hidden">
+                <h3 class="ma-section-title" style="margin-top: 0">Step 3: Budget and assumptions</h3>
+
+                <span class="ma-field-label"
+                  >Max monthly premium you are willing to pay ($)</span
+                >
+                <input
+                  id="ma-maxbudget"
+                  type="number"
+                  class="ma-num"
+                  min="0"
+                  step="1"
+                  value="200"
+                  aria-label="Max monthly premium you are willing to pay"
+                />
+                <p class="ma-note">
+                  Used only to flag whether each path fits your budget. Nothing is submitted.
+                </p>
+
+                <h4 class="ma-section-title" style="font-size: 1rem">
+                  Assumptions (national-average estimates you can edit)
+                </h4>
+                <p class="ma-note" style="margin-bottom: 0.75rem">
+                  These defaults are national averages, not your plan numbers. Replace them with the
+                  real figures from any plan you are considering before you enroll.
+                </p>
+
+                <span class="ma-field-label">Medicare Advantage plan premium ($/month)</span>
+                <input id="ma-ma-premium" type="number" class="ma-num" min="0" step="1" value="0" />
+                <p class="ma-note">Many Advantage plans have a $0 premium, which is the default.</p>
+
+                <span class="ma-field-label"
+                  >Medicare Advantage in-network out-of-pocket max ($/year)</span
+                >
+                <input id="ma-ma-oopmax" type="number" class="ma-num" min="0" step="1" value="9850" />
+                <p class="ma-note">
+                  The legal maximum for in-network cost sharing. Your plan may set a lower cap.
+                </p>
+
+                <span class="ma-field-label">Medigap Plan G premium ($/month)</span>
+                <input id="ma-plan-g" type="number" class="ma-num" min="0" step="1" value="150" />
+                <p class="ma-note">
+                  National average around age 65; varies a lot by state and age. Replace with a real
+                  quote.
+                </p>
+
+                <span class="ma-field-label">Medicare Part B premium ($/month)</span>
+                <input id="ma-part-b" type="number" class="ma-num" min="0" step="1" value="185" />
+                <p class="ma-note">
+                  CMS sets this yearly; the 2027 figure is still pending at time of writing.
+                </p>
+
+                <span class="ma-field-label">Medicare Part B annual deductible ($/year)</span>
+                <input id="ma-part-b-ded" type="number" class="ma-num" min="0" step="1" value="257" />
+                <p class="ma-note">2025 figure; CMS updates it yearly.</p>
+
+                <div class="ma-disclaimer">
+                  <strong style="color: var(--text)">Estimate disclaimer:</strong> all cost figures
+                  are estimates for comparison only, built from national averages you can edit. This
+                  is not medical or financial advice. Drug costs are not included in either path,
+                  and Medigap requires a separate Part D plan. Verify your doctors and drugs at
+                  medicare.gov/plan-compare before enrolling.
+                </div>
+
+                <div class="ma-nav">
+                  <button type="button" class="ma-btn ma-back" data-goto="1">
+                    &larr; Back
+                  </button>
+                  <button type="button" class="ma-btn ma-btn-primary ma-next" data-goto="3">
+                    Next: Review &amp; generate &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 4 -->
+              <div id="ma-step-4" class="ma-step hidden">
+                <h3 class="ma-section-title" style="margin-top: 0">Step 4: Review</h3>
+                <div id="ma-review-summary"></div>
+                <h4 class="ma-section-title" style="font-size: 1rem">
+                  Your deterministic cost scenarios
+                </h4>
+                <p class="ma-note">
+                  Computed instantly from your assumptions. The AI explains what they mean; the math
+                  below does not change no matter what the AI says.
+                </p>
+                <div id="ma-scenario-table-wrap" class="ma-compare-wrap"></div>
+                <div class="ma-disclaimer">
+                  Estimates for comparison only, built from national averages you can edit. Not
+                  medical or financial advice. Verify your doctors and drugs at
+                  medicare.gov/plan-compare before enrolling.
+                </div>
+                <div
+                  id="ma-review-errors"
+                  class="hidden"
+                  style="
+                    margin-top: 1rem;
+                    padding: 0.9rem 1.1rem;
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    color: var(--text-muted);
+                    font-size: 0.85rem;
+                    line-height: 1.7;
+                  "
+                ></div>
+
+                <div class="ma-nav">
+                  <button type="button" class="ma-btn ma-back" data-goto="2">
+                    &larr; Back
+                  </button>
+                </div>
+
+                <button
+                  id="generate-btn"
+                  class="primary-btn"
+                  style="
+                    margin-top: 1.25rem;
+                    background: #ef4444;
+                    border: none;
+                    color: #09090b;
+                    font-family: var(--font-brand), Georgia, serif;
+                    font-weight: 600;
+                  "
+                >
+                  <span class="btn-text">Explain My Medicare Options</span>
+                  <span class="btn-icon">&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="panel output-panel"
+              style="background: var(--card); border: 1px solid var(--border)"
+            >
+              <div class="panel-header">
+                <h2 style="font-size: 1.5rem; margin: 0">Your Comparison</h2>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span
+                    id="usage-counter"
+                    style="
+                      font-size: 0.7rem;
+                      color: var(--text-muted);
+                      font-family: 'JetBrains Mono', monospace;
+                    "
+                  ></span>
+                  <button
+                    id="copy-btn"
+                    class="icon-btn"
+                    title="Copy to Clipboard"
+                    style="
+                      background: var(--bg-elevated);
+                      border: 1px solid var(--border);
+                      color: var(--text);
+                    "
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+              <div class="output-wrapper">
+                <div
+                  id="output-text"
+                  class="output-content"
+                  style="
+                    background: var(--bg-elevated);
+                    border: 1px solid var(--border);
+                    color: var(--text);
+                  "
+                >
+                  <span class="placeholder" style="color: var(--text-faint)"
+                    >Finish the 4 steps and hit Generate. Your plain-English Advantage vs Medigap
+                    comparison will appear here...</span
+                  >
+                </div>
+                <div id="loading-indicator" class="hidden">
+                  <div class="spinner" style="border-top-color: var(--primary-soft)"></div>
+                  <p style="color: var(--primary)">
+                    Comparing your Medicare options with Gemini 3.1 Pro...
+                  </p>
+                </div>
+              </div>
+              <div
+                id="parse-notice"
+                class="hidden"
+                style="
+                  margin: 0.75rem 0 0;
+                  padding: 0.75rem 1rem;
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  color: var(--text-muted);
+                  font-size: 0.85rem;
+                "
+              ></div>
+              <div id="ma-result-section" class="hidden" style="margin-top: 1.5rem"></div>
+              <div
+                class="stats-bar"
+                style="border-top: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted)"
+              >
+                <span id="word-count"></span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Your Saved Scenarios
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              Save any comparison to this device and reopen it later. Everything stays in your
+              browser's localStorage, on your device. No account, no signup.
+            </p>
+            <div id="ma-saved-list"></div>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              The One Question That Settles Advantage vs Medigap
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              Everyone asks which plan is cheaper, and the honest answer is that it depends on the
+              year you are about to have. Medicare Advantage usually wins the quiet year: low or $0
+              premiums, a few copays, done. Medigap Plan G usually wins the rough year: you paid
+              more every month, but a hospital bill that would have run to thousands under Advantage
+              costs you the Part B deductible and nothing else. The question that settles it is not
+              "which costs less" but "can I afford the worst year, and do I care about networks?"
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              That is why this tool shows three years side by side instead of one number. The quiet
+              year is checkups and a couple of prescriptions. The typical year is regular specialist
+              visits and ongoing meds. The rough year is the one nobody plans: surgery, an ER visit,
+              a hospital stay. Advantage has an annual out-of-pocket cap, so the rough year is
+              bounded, but that cap is often close to $10,000, and your drugs are not the only thing
+              sitting outside it. Medigap's rough year looks almost identical to its quiet year,
+              because that is what the monthly premium buys you: predictability.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              The second thing people miss is that the two paths are not equally reversible. If you
+              leave Medigap for an Advantage plan during open enrollment, coming back later is not
+              guaranteed: outside your initial enrollment window, insurers in most states can deny
+              you or charge more based on your health. Switching into Advantage is easy; switching
+              back to Medigap is where people get stuck. Before December 7, know your state's
+              Medigap switching rules, not just the premiums.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 0">
+              For the full walkthrough, read our guides:
+              <a
+                href="/guides/how-to-choose-between-medicare-advantage-and-medigap/"
+                style="color: var(--primary-soft)"
+                >How to Choose Between Medicare Advantage and Medigap</a
+              >
+              and
+              <a
+                href="/guides/medicare-advantage-vs-medigap-cost-scenarios/"
+                style="color: var(--primary-soft)"
+                >Medicare Advantage vs Medigap Cost Scenarios</a
+              >.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              How It Works
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 1: About you.</strong> Your age band, state,
+              and situation (turning 65, switching during open enrollment, or reviewing your plan).
+              State matters because Medigap prices and switching rules differ by state.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 2: Health profile.</strong> Doctor visits,
+              prescriptions, and your health outlook. This shapes the explanation, not the math.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 3: Budget and assumptions.</strong> Set your
+              monthly premium ceiling, then check the editable national-average assumptions (Advantage
+              premium, Advantage out-of-pocket max, Plan G premium, Part B premium and deductible).
+              Replace them with real plan numbers before you enroll.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Step 4: Review and generate.</strong> The
+              deterministic cost scenarios are computed instantly and shown before you generate.
+              Then the AI writes a plain-English comparison keyed to your situation, with the
+              questions to ask before December 7.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h3 style="color: var(--primary-soft); margin-bottom: 1.5rem">
+              Frequently Asked Questions
+            </h3>
+            <details>
+              <summary>Is what I type private?</summary>
+              <p>
+                Your prompt is sent to our AI service to generate your result. No account, no
+                signup, and nothing is linked to your identity. Your saved scenarios stay in your
+                own browser's localStorage, on your device. We count anonymous usage per tool for
+                analytics. Your text is never sold.
+              </p>
+            </details>
+            <div class="faq-item">
+              <h4>What is the difference between Medicare Advantage and Medigap?</h4>
+              <p>
+                Medicare Advantage (Part C) replaces Original Medicare with a private plan that
+                bundles hospital, doctor, and usually drug coverage, often with low or $0 premiums
+                but a provider network and an annual out-of-pocket cap. Medigap is supplemental
+                insurance on top of Original Medicare; it pays most of what Original Medicare does
+                not, for a higher monthly premium but almost no surprise costs.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>How much does Medigap Plan G cost per month?</h4>
+              <p>
+                Nationally it averages around $150 per month at age 65, but it varies a lot by state
+                and age, and it usually rises as you get older. This tool defaults to $150 so you
+                can see the shape of the tradeoff; replace it with real quotes from your state.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>When is Medicare open enrollment?</h4>
+              <p>
+                October 15 to December 7 each year. You can join, switch, or drop a Medicare
+                Advantage plan or change your Part D drug plan, with changes effective January 1.
+                Medigap has different enrollment rules that vary by state.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>Can I switch from Medicare Advantage back to Medigap?</h4>
+              <p>
+                You can return to Original Medicare during open enrollment, but your right to buy
+                Medigap depends on your state. Outside your initial 6-month Medigap enrollment
+                period, insurers in most states can charge more or deny you based on health. Some
+                states allow year-round or birthday-rule Medigap switching.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4>Does Medicare Advantage include drug coverage?</h4>
+              <p>
+                Most Advantage plans include Part D drug coverage (MAPD). Medigap does not cover
+                drugs at all, so Medigap users buy a separate Part D plan, roughly $20 to $70 per
+                month extra. This tool compares medical costs only; add a Part D estimate to the
+                Medigap side when you run your numbers.
+              </p>
+            </div>
+            <p style="margin-top: 1.5rem; color: var(--text-muted)">
+              Want the full walkthrough? Read our guides:
+              <a
+                href="/guides/how-to-choose-between-medicare-advantage-and-medigap/"
+                style="color: var(--primary-soft)"
+                >How to Choose Between Medicare Advantage and Medigap</a
+              >
+              and
+              <a
+                href="/guides/medicare-advantage-vs-medigap-cost-scenarios/"
+                style="color: var(--primary-soft)"
+                >Medicare Advantage vs Medigap Cost Scenarios</a
+              >.
+            </p>
+          </div>
+
+          <div class="related-tools" style="text-align: center; margin-top: 2rem">
+            <p>
+              Related:
+              <a href="/tools/health-insurance-plan-explainer/">Health Insurance Plan Explainer</a>
+              |
+              <a href="/tools/budget-planner/">Budget Planner</a> |
+              <a href="/tools/summarizer/">AI Summarizer</a> |
+              <a href="/tools/word-counter/">Word Counter</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+
+      <section
+        style="
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 2rem;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+        "
+      >
+        <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text)">
+          Related Tools You Might Like
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+          "
+        >
+          <a
+            href="/tools/health-insurance-plan-explainer/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Health Insurance Plan Explainer</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Decode your current plan's numbers before you compare.</span
+            >
+          </a>
+          <a
+            href="/tools/budget-planner/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Budget Planner</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Fit the monthly premium into your real budget.</span
+            >
+          </a>
+          <a
+            href="/tools/summarizer/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >AI Summarizer</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Condense plan brochures and benefit summaries.</span
+            >
+          </a>
+          <a
+            href="/tools/word-counter/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Word Counter</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Keep your broker questions short and sharp.</span
+            >
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+      </div>
+    </footer>
+
+    <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+      <ins
+        class="adsbygoogle"
+        style="display: block"
+        data-ad-client="ca-pub-5721233331247292"
+        data-ad-slot="9198647442"
+        data-ad-format="rectangle"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CyberScryb AI Medicare Advantage vs Medigap Explainer",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261013sse1"></script>
+    <script src="/tools/ai-medicare-advantage-medigap-explainer/ai-medicare-advantage-medigap-explainer.js"></script>
+    <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
+  </body>
+</html>
