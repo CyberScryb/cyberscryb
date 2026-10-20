@@ -160,10 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgBtns = document.querySelectorAll('.bg-btn');
   bgBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Remove active classes
-      bgBtns.forEach(b => b.classList.remove('active'));
-      // Set active class
+      // Remove active classes and set aria-pressed to false
+      bgBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      // Set active class and set aria-pressed to true
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       // Extract selected class name and reset canvas box class list
       const targetBg = btn.getAttribute('data-bg');
@@ -196,12 +200,16 @@ document.addEventListener('DOMContentLoaded', () => {
       .writeText(text)
       .then(() => {
         const originalText = buttonElement.textContent;
+        const originalAriaLabel = buttonElement.getAttribute('aria-label') || '';
+        const copiedLabel = originalAriaLabel.replace('Copy ', '').replace(' to clipboard', '') + ' copied to clipboard';
         buttonElement.textContent = 'Copied!';
+        buttonElement.setAttribute('aria-label', copiedLabel);
         buttonElement.style.borderColor = '#10b981';
         buttonElement.style.color = '#10b981';
 
         setTimeout(() => {
           buttonElement.textContent = originalText;
+          buttonElement.setAttribute('aria-label', originalAriaLabel);
           buttonElement.style.borderColor = '';
           buttonElement.style.color = '';
         }, 1500);
