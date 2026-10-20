@@ -1566,6 +1566,7 @@ function generateSitemap(generatedPages) {
     'smart-objectives-examples-nonprofit-grants',
     'medicare-advantage-vs-medigap-cost-scenarios',
     'how-to-write-a-tenant-repair-demand-letter',
+    'how-to-negotiate-a-rent-increase',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
