@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Rent Increase Negotiation Letter &mdash; Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI rent increase negotiation letter. Counter a rent hike with verified rent math, an affordability breakdown, and a firm but fair draft letter. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-rent-increase-negotiation-letter/"
+    />
+    <meta
+      property="og:title"
+      content="AI Rent Increase Negotiation Letter — Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI rent increase negotiation letter. Counter a rent hike with verified rent math, an affordability breakdown, and a firm but fair draft letter. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-rent-increase-negotiation-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Rent Increase Negotiation Letter — Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI rent increase negotiation letter. Counter a rent hike with verified rent math, an affordability breakdown, and a firm but fair draft letter. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .math-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .math-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .math-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.32rem 0;
+        border-top: 1px dashed var(--border);
+      }
+      .math-row:first-of-type {
+        border-top: none;
+      }
+      .math-row .k {
+        color: var(--text-muted);
+      }
+      .math-row .v {
+        font-weight: 700;
+        color: var(--text);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .math-band {
+        display: inline-block;
+        padding: 1px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .math-band.ok {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+      }
+      .math-band.warn {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+      }
+      .math-band.bad {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+      }
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+    </style>
+    <!-- Google AdSense -->
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a letter first, then print');
+          else alert('Generate a letter first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Rent Increase Negotiation Letter",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-rent-increase-negotiation-letter/",
+        "description": "Free AI rent increase negotiation letter. Counter a rent hike with verified rent math, an affordability breakdown, and a firm but fair draft letter. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I negotiate a rent increase?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. There is no law that says you must accept the first number your landlord offers. Landlords negotiate more often than tenants expect, because a vacant unit costs far more than a small concession to a reliable tenant who pays on time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much notice does a landlord have to give before raising rent?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on your state and lease type. Many states require 30 days' notice for month-to-month tenancies, and some require 60 or 90 days, especially for larger increases. Look up your state's rule the day you receive the notice; the letter tool shows your notice window in days so you can compare."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a reasonable rent increase percentage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no national rule, but typical annual increases run 3 to 5 percent in most markets. A double-digit jump in one year is the kind of increase tenants most often challenge, especially with comparable listings nearby showing lower market rents."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I say when negotiating rent?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lead with numbers, not feelings: state the current rent, the proposed increase, the percentage, and your counter-offer. Mention your on-time payment record, length of tenancy, and anything concrete (maintenance handled, improvements made). End with one specific ask: your proposed rent, a phased increase, or a delayed effective date."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a landlord raise rent during a lease?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "During a fixed-term lease, rent usually cannot be raised until the lease ends, unless the lease itself allows it. On a month-to-month tenancy, the landlord can generally raise rent with proper written notice under your state's rules. Check your lease first; it controls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool drafts a negotiation letter from the facts you enter. Rent rules, notice periods, and rent-control protections vary by state and city. Verify your state's notice requirements and talk to a local tenants' rights organization or attorney for advice about your situation."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to use the Rent Increase Negotiation Letter",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Pick mode",
+            "text": "Counter-offer, hardship objection, or short notice \u2014 each changes the ask."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Enter the numbers",
+            "text": "Current rent, proposed rent, notice and effective dates, monthly income. The rent math is computed on your device, never by guesswork."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate & send",
+            "text": "Copy/print the letter, send it with proof, and get any new agreement in writing."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Rent Increase Negotiation Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            Rent increase negotiation <span style="color: var(--primary)">letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Got a rent hike notice? Enter the numbers, get your increase and affordability math
+            verified on this device, and generate a firm, factual letter that proposes a number you
+            can actually pay.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Rent math verified on your device</span>
+          <span><i></i> Draft autosaved on this device</span>
+          <span><i></i> Copy &middot; print &middot; download</span>
+          <span><i></i> Not legal advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick mode</strong
+            ><span>Counter-offer, hardship objection, or short notice, each changes the ask.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter the numbers</strong
+            ><span
+              >Current and proposed rent, notice and effective dates, monthly income. The math is
+              computed locally, never guessed by the AI.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Generate &amp; send</strong
+            ><span
+              >Copy or print the letter, send it with proof, and get any new agreement in
+              writing.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Mode</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Facts</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your letter</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Letter mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="counter-offer"
+                  aria-pressed="false"
+                >
+                  Counter-offer
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="hardship-objection"
+                  aria-pressed="false"
+                >
+                  Hardship objection
+                </button>
+                <button type="button" class="lt-chip" data-mode="short-notice" aria-pressed="false">
+                  Short notice
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="counter-offer" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Counter-offer mode</strong>Landlords negotiate more than tenants expect: a
+                vacant unit costs more than a small concession. Lead with one specific number, your
+                payment record, and a reason the number is fair.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add a few key facts to unlock a strong draft.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="current_rent"
+                    >Current monthly rent <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="current_rent"
+                    type="text"
+                    inputmode="decimal"
+                    aria-required="true"
+                    placeholder="e.g. 1450"
+                    data-label="Current monthly rent"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="proposed_rent"
+                    >Proposed monthly rent <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="proposed_rent"
+                    type="text"
+                    inputmode="decimal"
+                    aria-required="true"
+                    placeholder="e.g. 1725"
+                    data-label="Proposed monthly rent"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="counter_offer"
+                    >Your counter-offer rent <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="counter_offer"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 1550, the most you can pay"
+                    data-label="Counter-offer rent"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="lease_type">Lease type</label
+                  ><select class="lt-input" id="lease_type" data-label="Lease type">
+                    <option value="month-to-month">Month-to-month</option>
+                    <option value="fixed-term ending">Fixed-term (ending)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_date"
+                    >Date you received the notice
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="notice_date"
+                    type="date"
+                    aria-required="true"
+                    data-label="Notice received date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="effective_date"
+                    >Increase effective date <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="effective_date"
+                    type="date"
+                    aria-required="true"
+                    data-label="Increase effective date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="monthly_income"
+                    >Your gross monthly income
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="monthly_income"
+                    type="text"
+                    inputmode="decimal"
+                    aria-required="true"
+                    placeholder="e.g. 3800"
+                    data-label="Gross monthly income"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="state"
+                    >State <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="state"
+                    type="text"
+                    placeholder="e.g. ID, CA, TX"
+                    data-label="State (optional)"
+                    autocomplete="off"
+                    data-cs-share="state"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="landlord_name"
+                    >Landlord / manager name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="landlord_name"
+                    type="text"
+                    placeholder="e.g. Apex Property Group"
+                    data-label="Landlord / manager name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="property_address"
+                    >Property address <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="property_address"
+                    type="text"
+                    placeholder="e.g. 120 Pine St, Apt 4, Sandpoint, ID"
+                    data-label="Property address"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Grounds for negotiation <span class="cs-optional">(optional)</span></label
+                >
+                <div class="pill-group" role="group" aria-label="Grounds for negotiation">
+                  <input
+                    type="checkbox"
+                    id="g-hardship"
+                    name="grounds-cb"
+                    value="financial-hardship"
+                  /><label class="pill" for="g-hardship">Financial hardship</label>
+                  <input
+                    type="checkbox"
+                    id="g-comparable"
+                    name="grounds-cb"
+                    value="below-market-comparable"
+                  /><label class="pill" for="g-comparable">Below-market comparable</label>
+                  <input
+                    type="checkbox"
+                    id="g-tenant"
+                    name="grounds-cb"
+                    value="long-term-good-tenant"
+                  /><label class="pill" for="g-tenant">Long-term reliable tenant</label>
+                  <input
+                    type="checkbox"
+                    id="g-maintenance"
+                    name="grounds-cb"
+                    value="maintenance-issues-unaddressed"
+                  /><label class="pill" for="g-maintenance">Unaddressed maintenance</label>
+                  <input
+                    type="checkbox"
+                    id="g-jump"
+                    name="grounds-cb"
+                    value="sudden-large-jump"
+                  /><label class="pill" for="g-jump">Sudden large jump</label>
+                </div>
+                <input type="hidden" id="grounds" data-label="Grounds for negotiation" value="" />
+                <input
+                  type="hidden"
+                  id="rent_math"
+                  data-label="Verified rent math (computed on device)"
+                  value=""
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Situation details (facts, dates, amounts)
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="lt-examples" aria-label="Example scenarios">
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "counter-offer", "fields": {"current_rent": "1450", "proposed_rent": "1725", "counter_offer": "1550", "lease_type": "month-to-month", "notice_date": "2026-10-12", "effective_date": "2026-12-01", "monthly_income": "3800", "state": "ID", "landlord_name": "Apex Property Group", "property_address": "120 Pine St, Apt 4, Sandpoint, ID"}, "grounds": ["below-market-comparable", "long-term-good-tenant"], "story": "Tenant 4 years, never late on rent. Similar 2-bed units in Sandpoint listed at $1,500-1,550. Landlord proposed $1,725 from December 1, a 19% jump with no improvements to the unit. Counter-offering $1,550, which matches the local market and keeps the unit occupied.", "addressedTo": "Apex Property Group, Property Manager", "sender": "Jordan Lee"}'
+                  >
+                    19% jump, tenant 4 years
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "hardship-objection", "fields": {"current_rent": "1200", "proposed_rent": "1380", "counter_offer": "1250", "lease_type": "month-to-month", "notice_date": "2026-10-15", "effective_date": "2026-12-01", "monthly_income": "2900", "state": "CA", "landlord_name": "R. Alvarez", "property_address": "77 Cedar Ave, Unit B, Redding, CA"}, "grounds": ["financial-hardship", "long-term-good-tenant"], "story": "Single income household, $2,900/month gross. Hours cut at work in September. The proposed $1,380 rent would take 47.6% of gross income, up from 41.4%. Can stretch to $1,250. Asking landlord to hold the increase at $1,250 or phase it over six months. Paid on time every month for 3 years.", "addressedTo": "R. Alvarez", "sender": "A. Rivera"}'
+                  >
+                    Can't afford the hike
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "short-notice", "fields": {"current_rent": "1600", "proposed_rent": "1760", "counter_offer": "", "lease_type": "month-to-month", "notice_date": "2026-10-18", "effective_date": "2026-11-01", "monthly_income": "5200", "state": "TX", "landlord_name": "Hillcrest Rentals LLC", "property_address": "9 Hillcrest Ln, Fort Worth, TX"}, "grounds": ["sudden-large-jump"], "story": "Notice arrived October 18 saying rent goes up November 1, only 14 days. Tenant believes the state requires longer notice for an increase of this size. Asking for the increase to be delayed until a proper notice period has passed, and to negotiate the amount during that time.", "addressedTo": "Hillcrest Rentals LLC", "sender": "Sam Okonkwo"}'
+                  >
+                    14 days' notice
+                  </button>
+                </div>
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  aria-required="true"
+                  placeholder="Example: Rent going from $1,450 to $1,725 effective December 1. Notice arrived October 12. Tenant 4 years, never late. Similar units nearby list at $1,500. Countering at $1,550."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; Use real dates and amounts only,
+                  leave blanks if you do not know.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="sender-name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="sender-name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Sender"
+                    autocomplete="name"
+                    data-cs-share="senderName"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="addressed-to"
+                    >Addressed to <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="addressed-to"
+                    type="text"
+                    placeholder="Landlord, manager, or company"
+                    data-label="Addressed to"
+                    autocomplete="off"
+                    data-cs-share="recipient"
+                  />
+                </div>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not legal advice.</strong> This drafts a
+                negotiation letter from your facts. Verify your state's notice rules before sending.
+                The AI will not invent lease terms, statutes, or payment history.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="math-panel" aria-live="polite">
+              <h3>Rent math, verified here</h3>
+              <div class="math-row">
+                <span class="k">Increase</span><span class="v" id="m-increase">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Increase %</span><span class="v" id="m-pct">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Annual impact</span><span class="v" id="m-annual">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">New rent share of income</span
+                ><span class="v" id="m-burden">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Affordability</span><span class="v" id="m-band">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Notice period</span><span class="v" id="m-notice">&mdash;</span>
+              </div>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Computed on your device from your numbers. The letter quotes these exact figures,
+                never AI-guessed math.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting with care&hellip;</p>
+                  <small>Using verified rent math, not generic filler</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your letter will appear here.<br /><br />1. Pick a mode<br />2. Enter the
+                    numbers (or load an example)<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past letters</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No letters yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Do this with the letter</h2></div>
+            <div class="lt-body">
+              <p class="lt-side-note">
+                The letter is half the job. Tap items as you finish them, progress saves on this
+                device.
+              </p>
+              <ul class="lt-check">
+                <li>
+                  Look up your state's required notice period for rent increases before you send
+                  anything
+                </li>
+                <li>
+                  Send the letter with proof: email read receipt, certified mail, or a signed copy
+                  if hand-delivered
+                </li>
+                <li>Keep paying your current rent on time while you negotiate, no gaps</li>
+                <li>Get any new agreement in writing and signed before the effective date</li>
+                <li>Keep a copy of the notice, the letter, and every reply in one folder</li>
+                <li>
+                  Talk to a local tenants' rights organization if the increase looks extreme or
+                  retaliatory
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually works
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Why landlords say yes</h3>
+              <p>
+                A vacant unit costs a landlord far more than a small concession: turnover, cleaning,
+                advertising, lost rent. A reliable tenant who pays on time and asks for one specific
+                number is cheap to keep. Frame your ask as their math, not your feelings.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The 30% line</h3>
+              <p>
+                Housing that takes up to 30% of gross income is considered manageable, 30 to 40% is
+                stretched, and over 40% is a severe burden by standard budgeting rules. If the
+                increase pushes you past 30%, say so plainly: it is the most legible argument a
+                landlord has seen a hundred times.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Notice periods are state rules</h3>
+              <p>
+                Month-to-month tenants usually get 30 days minimum, some states require 60 or 90 for
+                large increases, and fixed-term leases generally cannot be raised mid-term. Check
+                your state's rule the day the notice arrives. The letter names your notice window in
+                days; it never quotes law.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Specifics beat feelings</h3>
+              <p>
+                Exact current rent, exact proposed increase, the percentage, your counter-offer,
+                your payment record. Letters that open with numbers get a response. Letters that
+                open with how stressed you are get filed.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>Can I negotiate a rent increase?</summary>
+              <p>
+                Yes. There is no law that says you must accept the first number your landlord
+                offers. Landlords negotiate more often than tenants expect, because a vacant unit
+                costs far more than a small concession to a reliable tenant who pays on time.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How much notice does a landlord have to give before raising rent?</summary>
+              <p>
+                It depends on your state and lease type. Many states require 30 days' notice for
+                month-to-month tenancies, and some require 60 or 90 days, especially for larger
+                increases. Look up your state's rule the day you receive the notice; the rent math
+                panel above shows your notice window in days so you can compare.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What is a reasonable rent increase percentage?</summary>
+              <p>
+                There is no national rule, but typical annual increases run 3 to 5 percent in most
+                markets. A double-digit jump in one year is the kind of increase tenants most often
+                challenge, especially with comparable listings nearby showing lower market rents.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should I say when negotiating rent?</summary>
+              <p>
+                Lead with numbers, not feelings: state the current rent, the proposed increase, the
+                percentage, and your counter-offer. Mention your on-time payment record, length of
+                tenancy, and anything concrete, like maintenance you handled or improvements you
+                made. End with one specific ask: your proposed rent, a phased increase, or a delayed
+                effective date.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can a landlord raise rent during a lease?</summary>
+              <p>
+                During a fixed-term lease, rent usually cannot be raised until the lease ends,
+                unless the lease itself allows it. On a month-to-month tenancy, the landlord can
+                generally raise rent with proper written notice under your state's rules. Check your
+                lease first; it controls.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool drafts a negotiation letter from the facts you enter. Rent rules,
+                notice periods, and rent-control protections vary by state and city. Verify your
+                state's notice requirements and talk to a local tenants' rights organization or
+                attorney for advice about your situation.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools
+          </h3>
+          <div class="lt-related">
+            <a href="/tools/hardship-letter/"
+              ><strong>Hardship Letter</strong><small>Financial hardship drafts that work</small></a
+            >
+            <a href="/tools/budget-planner/"
+              ><strong>Budget Planner</strong
+              ><small>Map what rent you can actually afford</small></a
+            >
+            <a href="/tools/appeal-letter/"
+              ><strong>Appeal Letter Writer</strong
+              ><small>Other formal appeals and disputes</small></a
+            >
+            <a href="/tools/landlord-tenant-letter/"
+              ><strong>Landlord Tenant Letter</strong
+              ><small>Repairs, deposits, and tenant notices</small></a
+            >
+            <a href="/guides/how-to-negotiate-a-rent-increase/"
+              ><strong>How to Negotiate a Rent Increase</strong
+              ><small>Strategy, scripts, and the math before you send</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. Review every letter before you send it.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-rent-increase-negotiation-letter/ai-rent-increase-negotiation-letter.js?v=20261020a1"></script>
+  </body>
+</html>
