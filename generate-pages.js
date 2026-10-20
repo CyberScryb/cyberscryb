@@ -1454,6 +1454,7 @@ function generateSitemap(generatedPages) {
     'rental-application-letter-writer',
     'ai-logic-model-builder',
     'ai-medicare-advantage-medigap-explainer',
+    'ai-rent-increase-negotiation-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1741,6 +1742,7 @@ function manageRobotsMeta() {
     'rental-application-letter-writer',
     'ai-logic-model-builder',
     'ai-medicare-advantage-medigap-explainer',
+    'ai-rent-increase-negotiation-letter',
   ]);
 
   const dirsToProcess = [
