@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-20 — Two blog posts)
+
+Published `/blog/hipaa-myths-family-medical-information/` (Oct 20) and `/blog/year-2038-problem-already-happening/` (Oct 19) in both `content-site/blog/` and `public/blog/`. HIPAA is the first card in `#blog-posts`; the 2038 card is second. Sitemap entries are in both `sitemap.xml` files and in `generate-pages.js` `blogPosts`, so the deploy generator keeps them. Did not run `sync_and_build.py`.
+
 ## Recent Changes (Session 2026-10-14 — UX batch)
 
 Proposal generator result tabs use Copy, Download, Print/PDF, Regenerate, and Share. Loading hides the placeholder and keeps the generate label readable. The privacy banner is a full-width bar pinned to the bottom. Password-checker labels are sentence case without emoji. Decorative badge and heading icons that left a blank gap are removed on the same tool pattern. The parenting-plan page title, social tags, and H1 now say Free Parenting Plan Generator. The tools catalog folds the full list to six cards per section with a Show all control; category and search results stay expanded, and every tool link stays in the HTML. Homepage “Your recent drafts” reads only `cs_recent_drafts` and `cs_draft_*` from this browser. Stored paths are lookup keys; the link href is built from a fixed list of known tool slugs.

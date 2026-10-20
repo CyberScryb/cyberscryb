@@ -1581,6 +1581,8 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'hipaa-myths-family-medical-information',
+    'year-2038-problem-already-happening',
     'how-to-calculate-macros-2026',
     'how-overtime-pay-is-calculated-2026',
     'refund-request-mistakes',
