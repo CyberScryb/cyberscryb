@@ -201,7 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(() => {
         const originalText = buttonElement.textContent;
         const originalAriaLabel = buttonElement.getAttribute('aria-label') || '';
-        const copiedLabel = originalAriaLabel.replace('Copy ', '').replace(' to clipboard', '') + ' copied to clipboard';
+        const copiedLabel =
+          originalAriaLabel.replace('Copy ', '').replace(' to clipboard', '') +
+          ' copied to clipboard';
         buttonElement.textContent = 'Copied!';
         buttonElement.setAttribute('aria-label', copiedLabel);
         buttonElement.style.borderColor = '#10b981';
