@@ -1335,6 +1335,7 @@ function generateSitemap(generatedPages) {
   ];
   const indexableTools = [
     'ai-detector',
+    'ai-or-human-writer',
     'ai-writing-suite',
     'appeal-letter',
     'base64-tool',
@@ -1639,6 +1640,7 @@ function generateSitemap(generatedPages) {
 function manageRobotsMeta() {
   const indexableTools = new Set([
     'ai-detector',
+    'ai-or-human-writer',
     'ai-writing-suite',
     'appeal-letter',
     'base64-tool',
