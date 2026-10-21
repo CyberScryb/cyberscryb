@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Which Tech Era Are You?)
+
+Added `/tools/which-tech-era/` in `content-site/` only. Browser-only personality quiz: 12 questions on notes, phones, music, fixes, games, and related habits, mapped to seven eras (1980s home computer, 1990s dial-up and CD-ROM, 2000s flip phone and MP3, early 2010s smartphone and social, late 2010s streaming and smart home, 2020s AI and remote work, and Future). Each result is an era-styled card (CSS color and type only), a description, era facts, a tech soulmate, and a percent match across every era. Copyable share line and a canvas PNG download. The last result is the only localStorage write (`cs_tech_era_result_v1`, choice ids only), with a Clear button. No network calls from the quiz. Registered under Security & Quizzes (`security`) in the tools catalog, with a quiz keyword, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with Tech Myth or Fact, the password habit quiz, Prompt Battle, and the Digital Footprint Check.
+
 ## Recent Changes (Session 2026-10-21 — Prompt Battle)
 
 Added `/tools/prompt-battle/` in `content-site/` only. Browser-only head-to-head game: 20 battles, rounds of 8, a task plus prompts A and B, then a pre-written sample of what each prompt tends to produce and the principle that won (role, context, constraints, examples, format, iteration, audience, specificity, steps, sources). Score, principles mastered, and a copyable result line. Prompt Builder fills role, task, context, constraints, and format, assembles the prompt, and scores it with a live checklist. No network calls and no AI API. Best score, seen battle ids, and mastered principle ids are the only localStorage writes. Builder text is not stored. Registered under AI Tools (`ai`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the humanizer, AI detector, Upwork proposal generator, code explainer, and Tech Myth or Fact.
