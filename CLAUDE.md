@@ -15,6 +15,10 @@ _Last updated: 2026-09-30_
 
 Added `/tools/choose-your-own-hack/` in `content-site/` only. Browser-only branching story: four fictional scenarios (bank text, public Wi-Fi, tech-support call, number-change alert), lessons after each choice, multiple endings, a recap with a defense checklist, and a copyable share line. Discovered ending ids are the only localStorage write. No network calls. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the phishing inbox simulator and Is This Link Safe.
 
+## Recent Changes (Session 2026-10-21 — Tech Myth or Fact)
+
+Added `/tools/tech-myth-or-fact/` in `content-site/` only. Browser-only swipe quiz: 35 checked tech claims, rounds of 10, Myth or Fact by tap, swipe, or the M and F keys, an instant explanation plus a why-it-matters line, a streak, a score and rank, a copyable result line, and Play again. Best score and seen claim ids are the only localStorage writes. Answers are not stored or sent. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the phishing inbox, Is This Link Safe, Choose Your Own Hack, and the password checker.
+
 ## Recent Changes (Session 2026-10-21 — Phishing Inbox Simulator)
 
 Added `/tools/phishing-inbox-simulator/` in `content-site/` only. Browser-only fictional inbox: 14 sample emails, Safe or Phish, sender address, real link address on hover, focus, and tap, red-flag highlights after each answer, score, trick breakdown, copyable result line, and Play again shuffle. Best score is the only localStorage write. Answers are not stored or sent. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from Is This Link Safe.

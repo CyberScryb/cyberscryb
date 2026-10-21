@@ -16,6 +16,7 @@ const TARGET_PAGES = [
   'public/tools/is-this-link-safe/index.html',
   'public/tools/phishing-inbox-simulator/index.html',
   'public/tools/choose-your-own-hack/index.html',
+  'public/tools/tech-myth-or-fact/index.html',
   'public/guides/how-to-write-a-refund-request.html',
   'public/guides/how-to-organize-a-paper-trail.html',
   'public/blog/refund-request-mistakes.html',
