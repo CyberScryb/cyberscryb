@@ -12,6 +12,7 @@ const TARGET_PAGES = [
   'public/tools.html',
   'public/tools/refund-request/index.html',
   'public/tools/paper-trail/index.html',
+  'public/tools/subscription-leak-calculator/index.html',
   'public/guides/how-to-write-a-refund-request.html',
   'public/guides/how-to-organize-a-paper-trail.html',
   'public/blog/refund-request-mistakes.html',
