@@ -109,6 +109,12 @@ describe('scoring and the cleanup plan', () => {
     expect(logic.exposureWord(3, 6)).toBe('some');
     expect(logic.exposureWord(4, 6)).toBe('open');
     expect(logic.exposureWord(null, 6)).toBe('unanswered');
+    const factor = logic.itemById('breaches-factor');
+    expect(factor.states.find(state => state.id === 'partial').label).toContain('Text messages');
+    expect(factor.states.find(state => state.id === 'handled').label).toContain(
+      'Not a text message'
+    );
+    expect(factor.detail).toContain('text message is a partial step');
     const partial = logic.scoreAudit(answersFor('partial'));
     expect(partial.score).toBe(27);
     expect(partial.tier).toBe('Some trails');
@@ -364,6 +370,30 @@ describe('page and catalog', () => {
       expect(doc.querySelector('#df-card input[type="radio"]:checked')).toBeNull();
       dom.window.close();
     });
+  });
+
+  test('warns when a cleanup check cannot be saved', () => {
+    const dom = boot({ stored: { v: 1, answers: answersFor('open'), done: [] } });
+    const doc = dom.window.document;
+    doc.querySelector('[data-action="saved"]').click();
+    expect(doc.querySelector('#df-saved').textContent).toContain('Saved on this device');
+    const proto = Object.getPrototypeOf(dom.window.localStorage);
+    const original = proto.setItem;
+    proto.setItem = function () {
+      throw new Error('blocked');
+    };
+    try {
+      const box = doc.querySelector('input[type="checkbox"]');
+      box.checked = true;
+      box.dispatchEvent(new dom.window.Event('change', { bubbles: true }));
+      expect(doc.querySelector('#df-done-count').textContent).toContain('1 of 27');
+      expect(doc.querySelector('#df-saved').textContent).toContain('not keeping the latest');
+      expect(doc.querySelector('#df-saved').textContent).not.toContain('Saved on this device');
+      expect(doc.querySelector('#df-recall-text').textContent).toContain('not keeping the latest');
+    } finally {
+      proto.setItem = original;
+      dom.window.close();
+    }
   });
 
   test('leaves the saved checklist in place when clearing is blocked', () => {

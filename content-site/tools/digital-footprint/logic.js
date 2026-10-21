@@ -683,11 +683,15 @@
           'breaches-factor',
           'Second factor',
           'Do mail and banking ask for a second step when the password is already known?',
-          'Handled means an app, a prompt, or a passkey. A text message is a partial step.',
+          'Handled means an app, a prompt, or a passkey on both mail and the bank. A text message is a partial step.',
           96,
           [
-            handled('Yes. An app, a prompt, or a passkey, not only the password.'),
-            partial('Some accounts do. Mail or the bank does not.'),
+            handled(
+              'Yes. An app, a prompt, or a passkey on mail and the bank. Not a text message.'
+            ),
+            partial(
+              'Text messages on mail and the bank, or one of those accounts has no second step.'
+            ),
             open('No second step, or I approve every prompt without looking.'),
           ],
           guide(

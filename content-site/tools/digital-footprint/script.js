@@ -117,7 +117,10 @@
     }
     var saved = $('df-saved');
     if (saved) {
-      if (stored && stored.complete) {
+      if (!storageOk) {
+        saved.textContent =
+          'This browser is not keeping the latest checklist. Nothing is uploaded.';
+      } else if (stored && stored.complete) {
         saved.textContent =
           'Saved on this device: ' + stored.tier + ', ' + stored.score + ' of ' + stored.max + '.';
       } else if (stored) {
@@ -127,8 +130,6 @@
           ' of ' +
           totalItems +
           ' answered.';
-      } else if (!storageOk) {
-        saved.textContent = 'This browser is not keeping a checklist. Nothing is uploaded.';
       } else {
         saved.textContent = 'Nothing saved on this device yet.';
       }
@@ -142,15 +143,17 @@
     var recallText = $('df-recall-text');
     if (recall) recall.hidden = !stored;
     if (recallText && stored) {
-      recallText.textContent = stored.complete
-        ? 'A saved result is on this device: ' +
-          stored.tier +
-          ', ' +
-          stored.score +
-          ' of ' +
-          stored.max +
-          '.'
-        : 'A checklist is in progress on this device.';
+      recallText.textContent = !storageOk
+        ? 'This browser is not keeping the latest checklist. Nothing is uploaded.'
+        : stored.complete
+          ? 'A saved result is on this device: ' +
+            stored.tier +
+            ', ' +
+            stored.score +
+            ' of ' +
+            stored.max +
+            '.'
+          : 'A checklist is in progress on this device.';
     }
     var recallSee = document.querySelector('[data-action="saved"]');
     if (recallSee) {
@@ -656,6 +659,7 @@
         result.fixes.length +
         ' cleanup steps.'
     );
+    renderStatus();
   }
 
   function onClick(event) {
