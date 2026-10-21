@@ -1,0 +1,715 @@
+/* Subscription Leak Calculator
+   Scoped to this page. Uses the site obsidian tokens from css/style.css. */
+
+.sl-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4rem;
+  color: var(--text);
+}
+
+.sl-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.sl-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.sl-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.sl-hero {
+  max-width: 42rem;
+  margin-bottom: 1.5rem;
+}
+
+.sl-badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--primary-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sl-hero h1 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.sl-hero p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.sl-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.sl-catalog,
+.sl-summary,
+.sl-group,
+.sl-add,
+.sl-note,
+.sl-cut,
+.sl-equiv {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.sl-catalog {
+  padding: 1rem;
+}
+
+.sl-catalog-head h2,
+.sl-summary h2,
+.sl-prose h2,
+.sl-faq h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.sl-estimate,
+.sl-storage,
+.sl-count,
+.sl-filter-status,
+.sl-add-error {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.sl-estimate {
+  margin: 0 0 1rem;
+}
+
+.sl-toolbar {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.sl-search input,
+.sl-price input,
+.sl-add input,
+.sl-add select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 11px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+}
+
+.sl-search input:focus,
+.sl-price input:focus,
+.sl-add input:focus,
+.sl-add select:focus,
+.sl-filters button:focus-visible,
+.sl-actions button:focus-visible,
+.sl-toolbar-actions button:focus-visible,
+.sl-usage input:focus-visible + span,
+.sl-check input:focus-visible + span,
+.sl-remove:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+.sl-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sl-filters button,
+.sl-toolbar-actions button,
+.sl-actions button,
+.sl-remove,
+.sl-add button {
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+}
+
+.sl-filters button[aria-pressed='true'],
+.sl-toolbar-actions button[aria-pressed='true'] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+.sl-toolbar-actions,
+.sl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sl-toolbar-actions button:hover,
+.sl-actions button:hover,
+.sl-filters button:hover,
+.sl-add button:hover,
+.sl-remove:hover {
+  border-color: var(--primary-soft);
+}
+
+.sl-filter-status {
+  min-height: 1.4em;
+  margin: 0 0 0.75rem;
+}
+
+.sl-group {
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.35rem 0.5rem;
+  background: transparent;
+}
+
+.sl-group h3 {
+  margin: 0.35rem 0.6rem 0.45rem;
+  color: var(--text-faint);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sl-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sl-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem 0.75rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+}
+
+.sl-row.is-on {
+  border-color: rgba(239, 68, 68, 0.55);
+  background: rgba(239, 68, 68, 0.08);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.sl-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.sl-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  accent-color: var(--primary);
+  flex: 0 0 auto;
+}
+
+.sl-name {
+  display: block;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sl-plan {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.sl-price {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.sl-price input {
+  width: 5.6rem;
+  min-height: 44px;
+  text-align: right;
+}
+
+.sl-usage {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sl-usage label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--card);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.sl-usage input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.sl-usage label:has(input:checked) {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+.sl-usage label:has(input:focus-visible) {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+.sl-remove {
+  justify-self: start;
+  border-radius: 11px;
+}
+
+.sl-add {
+  margin-top: 0.5rem;
+  padding: 1rem;
+}
+
+.sl-add h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.sl-add p {
+  margin: 0 0 0.8rem;
+}
+
+.sl-add-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.sl-add label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.sl-add button[type='submit'] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+.sl-add-error {
+  min-height: 1.3em;
+  margin: 0.6rem 0 0;
+  color: var(--primary-soft);
+}
+
+.sl-summary {
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+  padding: 1.1rem 1rem 1rem;
+}
+
+.sl-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.8rem 0;
+}
+
+.sl-total {
+  padding: 0.8rem 0.7rem;
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.sl-total-year {
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.sl-total-value {
+  display: block;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(1.7rem, 3vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.sl-total-label {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sl-summary h3 {
+  margin: 1.1rem 0 0.45rem;
+  font-size: 0.95rem;
+}
+
+.sl-equiv-list,
+.sl-cut-list,
+.sl-overlap-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sl-equiv,
+.sl-note,
+.sl-cut {
+  padding: 0.7rem 0.75rem;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.sl-note.is-flag {
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+.sl-note strong,
+.sl-cut strong {
+  color: var(--text);
+}
+
+.sl-cut {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.sl-save {
+  color: #86efac;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sl-meter {
+  margin-top: 0.8rem;
+}
+
+.sl-meter-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.sl-meter-fill {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: #22c55e;
+  transition: width 0.6s ease;
+}
+
+.sl-meter p,
+.sl-kept,
+.sl-empty {
+  margin: 0.45rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.sl-kept strong {
+  color: var(--text);
+}
+
+.sl-actions {
+  margin-top: 1rem;
+}
+
+.sl-storage {
+  margin: 0.8rem 0 0;
+}
+
+.sl-copy-status {
+  min-height: 1.3em;
+  margin: 0.4rem 0 0;
+  color: var(--primary-soft);
+  font-size: 0.88rem;
+}
+
+.sl-dock {
+  display: none;
+}
+
+.sl-prose,
+.sl-faq,
+.sl-related {
+  max-width: 760px;
+  margin: 2.5rem auto 0;
+}
+
+.sl-prose p,
+.sl-faq p,
+.sl-related p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.sl-prose a,
+.sl-faq a,
+.sl-related a {
+  color: var(--primary-soft);
+}
+
+.sl-faq details {
+  margin-top: 0.6rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.sl-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sl-faq summary:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 3px;
+}
+
+.sl-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+}
+
+.sl-related-grid a {
+  display: block;
+  padding: 0.9rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.sl-related-grid a:hover,
+.sl-related-grid a:focus-visible {
+  border-color: var(--primary-soft);
+}
+
+.sl-related-grid strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--primary-soft);
+}
+
+.sl-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (min-width: 720px) {
+  .sl-row.is-on {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .sl-row.is-on .sl-usage {
+    grid-column: auto;
+  }
+
+  .sl-add-grid {
+    grid-template-columns: 1.4fr 1fr 0.7fr auto;
+    align-items: end;
+  }
+}
+
+@media (max-width: 860px) {
+  .sl-page {
+    padding-bottom: 6.5rem;
+  }
+
+  .sl-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .sl-summary {
+    position: static;
+    max-height: none;
+    order: 2;
+  }
+
+  .sl-dock {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: rgba(18, 18, 21, 0.96);
+    border-top: 1px solid var(--border-strong);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  body:has(#cs-cookie-banner) .sl-dock {
+    bottom: 4.5rem;
+  }
+
+  .sl-dock strong {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sl-dock a {
+    color: var(--primary-ink);
+    background: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.55rem 0.8rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  body:has(#cs-cookie-banner) .sl-dock {
+    bottom: 8.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-meter-fill {
+    transition: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .sl-dock,
+  .sl-toolbar,
+  .sl-add,
+  .sl-actions,
+  .sl-crumb,
+  .adsbygoogle,
+  .cs-support-card {
+    display: none !important;
+  }
+
+  .sl-page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .sl-workspace,
+  .sl-summary {
+    display: block;
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .sl-row:not(.is-on),
+  .sl-group:not(:has(.sl-row.is-on)) {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .sl-catalog,
+  .sl-summary,
+  .sl-row,
+  .sl-total,
+  .sl-note,
+  .sl-cut,
+  .sl-equiv {
+    background: #fff;
+    color: #111;
+    border-color: #ccc;
+  }
+}

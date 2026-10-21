@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Subscription Leak Calculator)
+
+Added `/tools/subscription-leak-calculator/` in `content-site/` only. Browser-only checklist with editable estimated prices, live monthly and yearly totals, overlap flags, usage-based cut suggestions, copy/print, and a labeled localStorage reset. Registered in the tools catalog (finance), homepage tool allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from the budget planner and gym cancellation letter. Default prices are labeled estimates.
+
 ## Recent Changes (Session 2026-10-20 — Two blog posts)
 
 Published `/blog/hipaa-myths-family-medical-information/` (Oct 20) and `/blog/year-2038-problem-already-happening/` (Oct 19) in both `content-site/blog/` and `public/blog/`. HIPAA is the first card in `#blog-posts`; the 2038 card is second. Sitemap entries are in both `sitemap.xml` files and in `generate-pages.js` `blogPosts`, so the deploy generator keeps them. Did not run `sync_and_build.py`.
