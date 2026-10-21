@@ -1604,6 +1604,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'qr-code-scams-fake-parking-codes',
     'hipaa-myths-family-medical-information',
     'year-2038-problem-already-happening',
     'how-to-calculate-macros-2026',
