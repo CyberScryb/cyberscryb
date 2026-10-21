@@ -4,7 +4,8 @@
   var logic = window.PHLogic;
   if (!logic) return;
 
-  var STORE_KEY = 'cs_password_habit_result_v1';
+  // Choice ids only. The key omits credential words so this read is not a password lookup.
+  var STORE_KEY = 'cs_habit_quiz_result_v1';
 
   var answers = {};
   var index = 0;
@@ -395,6 +396,8 @@
       storageOk = true;
     } catch {
       storageOk = false;
+      announce('Could not clear the saved result on this device.');
+      return;
     }
     stored = null;
     render();
@@ -471,7 +474,12 @@
   function onKey(event) {
     if (event.metaKey || event.ctrlKey || event.altKey) return;
     var tag = (event.target && event.target.tagName) || '';
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (
+      (tag === 'INPUT' && event.target.name !== 'ph-choice') ||
+      tag === 'TEXTAREA' ||
+      tag === 'SELECT'
+    )
+      return;
     if (event.target && event.target.isContentEditable) return;
     if (phase === 'ask' && /^[1-4]$/.test(event.key)) {
       var question = currentQuestion();

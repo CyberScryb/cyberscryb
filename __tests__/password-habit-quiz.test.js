@@ -208,7 +208,7 @@ describe('page and catalog', () => {
       runScripts: 'outside-only',
     });
     if (opts.stored) {
-      dom.window.localStorage.setItem('cs_password_habit_result_v1', JSON.stringify(opts.stored));
+      dom.window.localStorage.setItem('cs_habit_quiz_result_v1', JSON.stringify(opts.stored));
     }
     if (opts.reduce) {
       dom.window.matchMedia = () => ({
@@ -248,10 +248,15 @@ describe('page and catalog', () => {
       expect(file).not.toMatch(/type\s*=\s*['"]password['"]/);
     });
     expect(source).not.toMatch(/localStorage/);
-    expect(script).toContain('cs_password_habit_result_v1');
+    const storeKey = script.match(/STORE_KEY = '([^']+)'/)[1];
+    expect(storeKey).toBe('cs_habit_quiz_result_v1');
+    expect(storeKey).not.toMatch(/pass(?:wd|word|code|phrase)|secret|oauth|\bmfa\b/i);
     expect(script).toContain('localStorage.removeItem(STORE_KEY)');
     expect(script).toContain('prefers-reduced-motion');
     expect(style).toContain('prefers-reduced-motion');
+    expect(style).toContain('position: static');
+    expect(page).toContain('<section class="ph-hero">');
+    expect(page).not.toContain('<header class="ph-hero">');
     expect(page).toContain('aria-live="polite"');
     expect(page).not.toMatch(/type="password"/);
     expect(page).not.toMatch(/type="text"/);
@@ -297,11 +302,15 @@ describe('page and catalog', () => {
     doc.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: '1', bubbles: true }));
     expect(doc.querySelector('input[type="radio"]').checked).toBe(true);
     expect(doc.querySelector('[data-action="next"]').disabled).toBe(false);
+    doc
+      .querySelector('input[name="ph-choice"]')
+      .dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: '2', bubbles: true }));
+    expect(doc.querySelectorAll('input[name="ph-choice"]')[1].checked).toBe(true);
     doc.querySelector('[data-action="next"]').click();
     expect(doc.querySelector('#ph-progress').textContent).toBe('Question 2 of 12');
     doc.querySelector('[data-action="back"]').click();
     expect(doc.querySelector('#ph-progress').textContent).toBe('Question 1 of 12');
-    expect(doc.querySelector('input[type="radio"]').checked).toBe(true);
+    expect(doc.querySelectorAll('input[type="radio"]')[1].checked).toBe(true);
 
     for (let n = 0; n < 12; n++) {
       expect(doc.querySelectorAll('input[type="radio"]').length).toBeGreaterThanOrEqual(3);
@@ -324,7 +333,7 @@ describe('page and catalog', () => {
     expect(doc.querySelector('input[type="password"]')).toBeNull();
     expect(doc.querySelector('textarea')).toBeNull();
 
-    const saved = JSON.parse(dom.window.localStorage.getItem('cs_password_habit_result_v1'));
+    const saved = JSON.parse(dom.window.localStorage.getItem('cs_habit_quiz_result_v1'));
     expect(saved.v).toBe(1);
     expect(saved.answers.reuse).toBe('unique');
     expect(JSON.stringify(saved)).not.toContain('CorrectHorse');
@@ -342,13 +351,32 @@ describe('page and catalog', () => {
       expect(copied).toContain('36/36');
       expect(copied).not.toContain('unique');
       doc.querySelector('[data-action="clear"]').click();
-      expect(dom.window.localStorage.getItem('cs_password_habit_result_v1')).toBeNull();
+      expect(dom.window.localStorage.getItem('cs_habit_quiz_result_v1')).toBeNull();
       expect(doc.querySelector('#ph-saved').textContent).toContain('Nothing saved');
       doc.querySelector('[data-action="again"]').click();
       expect(doc.querySelector('#ph-progress').textContent).toBe('Question 1 of 12');
       expect(doc.querySelector('#ph-card input[type="radio"]:checked')).toBeNull();
       dom.window.close();
     });
+  });
+
+  test('leaves the saved result in place when clearing is blocked', () => {
+    const dom = boot({ stored: { v: 1, answers: bestAnswers() } });
+    const doc = dom.window.document;
+    const proto = Object.getPrototypeOf(dom.window.localStorage);
+    const original = proto.removeItem;
+    proto.removeItem = function () {
+      throw new Error('blocked');
+    };
+    try {
+      doc.querySelector('[data-action="clear"]').click();
+      expect(dom.window.localStorage.getItem('cs_habit_quiz_result_v1')).toContain('"unique"');
+      expect(doc.querySelector('#ph-recall').hidden).toBe(false);
+      expect(doc.querySelector('[data-action="clear"]')).not.toBeNull();
+    } finally {
+      proto.removeItem = original;
+      dom.window.close();
+    }
   });
 
   test('restores a saved result and skips motion when asked', () => {
@@ -365,7 +393,7 @@ describe('page and catalog', () => {
     expect(doc.querySelector('#ph-rank').textContent).toBe('Steady vault');
     expect(doc.querySelectorAll('.ph-pips li')).toHaveLength(12);
     doc.querySelector('[data-action="clear"]').click();
-    expect(dom.window.localStorage.getItem('cs_password_habit_result_v1')).toBeNull();
+    expect(dom.window.localStorage.getItem('cs_habit_quiz_result_v1')).toBeNull();
     expect(doc.querySelector('#ph-recall').hidden).toBe(true);
     dom.window.close();
   });
