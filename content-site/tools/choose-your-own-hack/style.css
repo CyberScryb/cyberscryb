@@ -1,0 +1,533 @@
+/* Choose Your Own Hack
+   Scoped to this page. Uses the site obsidian tokens from css/style.css. */
+
+.cyh-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4.5rem;
+  color: var(--text);
+}
+
+.cyh-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.cyh-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.cyh-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.cyh-hero {
+  position: static;
+  top: auto;
+  z-index: auto;
+  max-width: 44rem;
+  margin-bottom: 1.25rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.cyh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.16));
+  border-radius: 999px;
+  color: var(--primary-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cyh-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45);
+  animation: cyh-pulse 2.8s ease-out infinite;
+}
+
+.cyh-hero h1,
+.cyh-prose h2,
+.cyh-faq h2,
+.cyh-related h2,
+.cyh-scene-title,
+.cyh-pick-heading {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+}
+
+.cyh-hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.1rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.cyh-hero p,
+.cyh-prose p,
+.cyh-faq p,
+.cyh-scene-body,
+.cyh-lesson-body,
+.cyh-found,
+.cyh-step,
+.cyh-device-count,
+.cyh-copy-status {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.cyh-hero p {
+  margin: 0 0 0.9rem;
+}
+
+.cyh-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cyh-steps li {
+  margin: 0;
+  padding: 0.75rem 0.8rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.cyh-steps strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--text);
+}
+
+.cyh-stage {
+  position: relative;
+  margin-top: 1.35rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background:
+    radial-gradient(900px 220px at 8% -20%, rgba(239, 68, 68, 0.18), transparent 55%),
+    linear-gradient(180deg, #141418 0%, #101013 100%);
+  box-shadow: var(--shadow);
+}
+
+.cyh-stage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.cyh-found {
+  margin: 0.2rem 0 0.85rem;
+}
+
+.cyh-pick {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cyh-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 1rem 1rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(9, 9, 11, 0.45);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.cyh-card:hover {
+  border-color: var(--primary-soft);
+  transform: translateY(-2px);
+}
+
+.cyh-card-kicker,
+.cyh-kicker,
+.cyh-step-tone {
+  color: var(--primary-soft);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cyh-card-title {
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.cyh-card-blurb,
+.cyh-card-score {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.cyh-story {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0.4rem 0.35rem 0.2rem;
+}
+
+.cyh-story.is-entering .cyh-scene-block {
+  animation: cyh-in 320ms ease;
+}
+
+.cyh-menu,
+.cyh-continue,
+.cyh-copy,
+.cyh-again,
+.cyh-choice {
+  font: inherit;
+}
+
+.cyh-menu {
+  margin-bottom: 0.8rem;
+  padding: 0.35rem 0.2rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.cyh-scene-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.cyh-scene-body {
+  margin: 0.35rem 0 0.8rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.cyh-prompt {
+  margin: 0.2rem 0 0.55rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.cyh-choices {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.cyh-choice {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-faint);
+  border-radius: 12px;
+  background: rgba(9, 9, 11, 0.4);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.cyh-choice:hover:not(:disabled) {
+  border-color: var(--primary-soft);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.cyh-choice:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.cyh-lesson,
+.cyh-ending {
+  margin-top: 0.9rem;
+  padding: 0.95rem 1rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(9, 9, 11, 0.55);
+}
+
+.cyh-lesson[data-tone='safer'] {
+  border-left: 3px solid var(--success, #22c55e);
+}
+
+.cyh-lesson[data-tone='riskier'],
+.cyh-ending[data-tone='compromised'] {
+  border-left: 3px solid var(--primary);
+}
+
+.cyh-ending[data-tone='safe'] {
+  border-left: 3px solid var(--success, #22c55e);
+}
+
+.cyh-ending[data-tone='close'] {
+  border-left: 3px solid var(--attention, #38bdf8);
+}
+
+.cyh-lesson-title,
+.cyh-ending h3,
+.cyh-prose h3 {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.cyh-lesson-title {
+  margin-top: 0;
+}
+
+.cyh-tone {
+  display: inline-block;
+  margin: 0 0 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.cyh-recap,
+.cyh-lessons,
+.cyh-check {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-muted);
+}
+
+.cyh-recap li,
+.cyh-lessons li,
+.cyh-check li {
+  margin: 0.45rem 0;
+  line-height: 1.45;
+}
+
+.cyh-recap strong {
+  display: block;
+  color: var(--text);
+}
+
+.cyh-step-tone,
+.cyh-step-lesson {
+  display: block;
+}
+
+.cyh-step-lesson {
+  color: var(--text-muted);
+}
+
+.cyh-share {
+  margin: 0.3rem 0 0.7rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: #09090b;
+  color: var(--text-muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.cyh-continue,
+.cyh-copy,
+.cyh-again {
+  min-height: 44px;
+  margin: 0.35rem 0.5rem 0.35rem 0;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.cyh-continue,
+.cyh-copy {
+  background: var(--primary);
+  color: var(--primary-ink, #09090b);
+  font-weight: 700;
+}
+
+.cyh-again {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.cyh-hint {
+  margin: 0.8rem 0 0;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}
+
+.cyh-prose,
+.cyh-faq,
+.cyh-related {
+  max-width: 44rem;
+  margin-top: 2.2rem;
+}
+
+.cyh-prose h2,
+.cyh-faq h2,
+.cyh-related h2 {
+  font-size: 1.8rem;
+}
+
+.cyh-prose a,
+.cyh-faq a {
+  color: var(--primary-soft);
+}
+
+.cyh-faq details {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cyh-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.cyh-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+
+.cyh-related a {
+  display: block;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.cyh-related strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.cyh-card:focus-visible,
+.cyh-choice:focus-visible,
+.cyh-continue:focus-visible,
+.cyh-copy:focus-visible,
+.cyh-again:focus-visible,
+.cyh-menu:focus-visible,
+.cyh-crumb a:focus-visible,
+.cyh-related a:focus-visible,
+.cyh-prose a:focus-visible,
+.cyh-faq summary:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+.cyh-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes cyh-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cyh-pulse {
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+@media (max-width: 720px) {
+  .cyh-page {
+    padding-inline: 0.8rem;
+  }
+
+  .cyh-steps,
+  .cyh-pick {
+    grid-template-columns: 1fr;
+  }
+
+  .cyh-stage {
+    padding: 0.85rem;
+    border-radius: 18px;
+  }
+
+  .cyh-card {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyh-dot,
+  .cyh-story.is-entering .cyh-scene-block,
+  .cyh-card,
+  .cyh-choice {
+    animation: none;
+    transition: none;
+  }
+
+  .cyh-card:hover {
+    transform: none;
+  }
+}
