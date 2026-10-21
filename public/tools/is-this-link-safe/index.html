@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Is This Link Safe? Free URL Checker | CyberScryb</title>
+    <meta
+      name="description"
+      content="Paste a link and see lookalike domains, shorteners, and other red flags. The check runs in your browser and never opens or uploads the address."
+    />
+    <meta
+      name="keywords"
+      content="is this link safe, phishing link checker, suspicious URL, lookalike domain, punycode, URL shortener check"
+    />
+    <meta property="og:title" content="Is This Link Safe? Free URL Checker | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Paste a link and see lookalike domains, shorteners, and other red flags. The check runs in your browser and never opens or uploads the address."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/is-this-link-safe/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Is This Link Safe? Free URL Checker | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Paste a link and see lookalike domains, shorteners, and other red flags. The check runs in your browser and never opens or uploads the address."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/is-this-link-safe/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/is-this-link-safe/style.css?v=20261021link" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Is This Link Safe",
+        "url": "https://cyberscryb.com/tools/is-this-link-safe/",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "Paste a link and get a plain-language reading of the address: the real site name, lookalike letters, punycode, shorteners, and other red flags. The check runs in the browser. The link is not opened or uploaded.",
+        "featureList": [
+          "Verdict of Looks OK, Be careful, or Likely dangerous",
+          "Plain-language reading of the real domain",
+          "Lookalike, homoglyph, and punycode checks",
+          "Brand names hiding in subdomains",
+          "IP addresses, http, shorteners, @ tricks, long hosts, suspicious endings, misleading paths, and encoded characters",
+          "Example gallery of tricky links",
+          "No network request for the pasted address"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this open the link or send it anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The address is read in your browser and then discarded. This page does not fetch the URL, follow redirects, or send the text to an analytics event. You can confirm that in the browser network panel: checking a link adds no request."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Looks OK a guarantee?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This is a heuristic check, not a guarantee. It only inspects the characters in the address. A link can look ordinary and still lead to a harmful page, and a flagged link can belong to a real organization. When money, a password, or a download is involved, open the site from your own bookmark instead."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you read the real domain?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the host from the right. The website is the registrable name just before the ending, such as example.com. Words to the left are a subdomain and can say anything. Text before an @ sign is a username, not the site. The page highlights that split for the link you paste."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the @ trick?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In a web address, the host is the text after the last @. A link can put a familiar name in front of that sign, as in https://paypal.com@signin.example/login. The browser opens signin.example. paypal.com is only a username."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is punycode?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Punycode is the xn-- form browsers use for letters outside basic English. It is how many real international sites are stored, and it is also how lookalike letters from another alphabet hide inside a familiar word. This check decodes those labels and shows the letters you would actually be trusting."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why are shorteners flagged?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A shortener such as bit.ly replaces the destination with a short token. The page you will land on is not written in the address, so the other checks cannot see it. Be careful is a prompt to ask for the full link, not a claim that the shortener company is malicious."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Is This Link Safe",
+            "item": "https://cyberscryb.com/tools/is-this-link-safe/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="ls-page">
+      <nav class="ls-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Is This Link Safe</span>
+      </nav>
+
+      <header class="ls-hero">
+        <p class="ls-badge">Free · In this browser · The link stays here</p>
+        <h1>Is This Link Safe</h1>
+        <p>
+          Paste an address and get a plain-language reading of it: which part is the real site, and
+          which tricks are sitting in the text. The check is instant and never opens the link.
+        </p>
+      </header>
+
+      <noscript>
+        <p>This check needs JavaScript. It still runs only in your browser and does not send the link anywhere.</p>
+      </noscript>
+
+      <section class="ls-block" aria-labelledby="ls-check-heading">
+        <h2 id="ls-check-heading">Check a link</h2>
+        <div class="ls-form">
+          <label for="ls-url">Link to check</label>
+          <div class="ls-form-row">
+            <input
+              id="ls-url"
+              type="text"
+              inputmode="url"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder="https://"
+              aria-describedby="ls-heuristic"
+            />
+            <button type="button" id="ls-check">Check this link</button>
+          </div>
+        </div>
+        <p id="ls-heuristic" class="ls-heuristic">
+          This is a heuristic check, not a guarantee. A clean address can still be harmful, and a
+          flagged address can belong to a real organization. Nothing you paste is opened, stored, or
+          sent anywhere.
+        </p>
+        <div id="ls-result" class="ls-result ls-result-empty">
+          <p>Paste a link, or try one of the tricky examples. The check stays in this browser.</p>
+        </div>
+        <p id="ls-copy-status" class="ls-copy-status" role="status"></p>
+      </section>
+
+      <section class="ls-block" aria-labelledby="ls-examples-heading">
+        <h2 id="ls-examples-heading">Try a tricky link</h2>
+        <p class="ls-explain">
+          These are made-up addresses using the reserved example name, a documentation IP, or a
+          shortener token that does not need to be opened. Choosing one fills the box and runs the
+          same check.
+        </p>
+        <div id="ls-examples" class="ls-examples"></div>
+      </section>
+
+      <section class="ls-prose">
+        <h2>How a link is read</h2>
+        <p>
+          A web address is a sentence with a strict grammar, and phishing works by hoping you will
+          not parse it. The website is not the first familiar word. It is the registrable name: the
+          label just before the ending, read from the right. In
+          <code>https://accounts.example/login</code>, the site is <code>example</code>.
+          <code>accounts</code> is a subdomain. Anyone who owns example can write whatever they want
+          on the left.
+        </p>
+        <figure class="ls-figure">
+          <figcaption>The @ sign moves the real site to the right</figcaption>
+          <p class="ls-bits">
+            <span class="ls-bit ls-bit-scheme">https</span>
+            <span class="ls-bit ls-bit-punct">://</span>
+            <span class="ls-bit ls-bit-decoy">paypal.com</span>
+            <span class="ls-bit ls-bit-at">@</span>
+            <span class="ls-bit ls-bit-name">signin</span>
+            <span class="ls-bit ls-bit-punct">.</span>
+            <span class="ls-bit ls-bit-suffix">example</span>
+            <span class="ls-bit ls-bit-path">/webapps/login</span>
+          </p>
+          <p>
+            The browser opens <strong>signin.example</strong>. paypal.com is a username. The same
+            rule catches a brand parked in a subdomain, as in paypal.com.account-verify.example: the
+            owner is example, and the PayPal words are decoration.
+          </p>
+        </figure>
+        <h3>What the checks look for</h3>
+        <p>
+          Lookalike names swap a letter for a digit or a hyphen, so paypa1.com and pay-pal.com are
+          not PayPal. Homoglyphs and punycode go further: a character from another alphabet can draw
+          an a, an o, or a p that is a different code point. The xn-- form is how a browser stores
+          those letters. This page decodes it and shows you the letters themselves.
+        </p>
+        <p>
+          A raw IP address has no name to recognize. http leaves the connection open. A shortener
+          hides the destination, so the rest of the checks cannot see it. A very long address, a
+          pile of subdomains, or an ending that shows up constantly on throwaway sites is a reason
+          to slow down, not a conviction on its own. A path or query can spell a famous company, or
+          hide a second address inside percent-encoding. Folders do not change who owns the host.
+        </p>
+        <h3>What a verdict means</h3>
+        <p>
+          <strong>Looks OK</strong> means none of these patterns fired.
+          <strong>Be careful</strong> means at least one weak or situational flag fired, such as
+          http, a shortener, or a risky ending. <strong>Likely dangerous</strong> means the address
+          uses a trick that exists to misname the site: an @ sign, a lookalike, a brand in the
+          subdomain, a public IP, or a company name hiding in the path. None of the three is a
+          promise. This is a heuristic check, not a guarantee, and it never visits the page.
+        </p>
+        <p>
+          If the link is asking for a password, a payment, or a download, ignore the text you were
+          sent and open the service from a bookmark you already trust. For the password you would
+          type there, the
+          <a href="/tools/password-checker/">password strength checker</a> stays on this device too.
+          <a href="/tools/choose-your-own-hack/">Choose Your Own Hack</a> puts the same decision
+          inside a fictional text, call, or cafe network.
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> is the short quiz for the claims
+          around private browsing, the padlock, and passwords. The
+          <a href="/tools/password-habit-quiz/">Password Habit Quiz</a> scores reuse, a manager,
+          and a second factor, and it never asks for a password. The
+          <a href="/tools/digital-footprint/">Digital Footprint Check</a> covers people-search
+          sites, location, and photos, and it never asks for a name.
+        </p>
+        <p>
+          The
+          <a href="/tools/spot-the-scam-call/">scam call simulator</a> plays fictional phone calls
+          as text, including a voice-clone family emergency, and it never places a call.
+        </p>
+      </section>
+
+      <section class="ls-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this open the link or send it anywhere?</summary>
+          <p>
+            No. The address is read in your browser and then discarded. This page does not fetch the
+            URL, follow redirects, or send the text to an analytics event. You can confirm that in
+            the browser network panel: checking a link adds no request.
+          </p>
+        </details>
+        <details>
+          <summary>Is Looks OK a guarantee?</summary>
+          <p>
+            No. This is a heuristic check, not a guarantee. It only inspects the characters in the
+            address. A link can look ordinary and still lead to a harmful page, and a flagged link
+            can belong to a real organization. When money, a password, or a download is involved,
+            open the site from your own bookmark instead.
+          </p>
+        </details>
+        <details>
+          <summary>How do you read the real domain?</summary>
+          <p>
+            Read the host from the right. The website is the registrable name just before the
+            ending, such as example.com. Words to the left are a subdomain and can say anything.
+            Text before an @ sign is a username, not the site. The page highlights that split for
+            the link you paste.
+          </p>
+        </details>
+        <details>
+          <summary>What is the @ trick?</summary>
+          <p>
+            In a web address, the host is the text after the last @. A link can put a familiar name
+            in front of that sign, as in https://paypal.com@signin.example/login. The browser opens
+            signin.example. paypal.com is only a username.
+          </p>
+        </details>
+        <details>
+          <summary>What is punycode?</summary>
+          <p>
+            Punycode is the xn-- form browsers use for letters outside basic English. It is how many
+            real international sites are stored, and it is also how lookalike letters from another
+            alphabet hide inside a familiar word. This check decodes those labels and shows the
+            letters you would actually be trusting.
+          </p>
+        </details>
+        <details>
+          <summary>Why are shorteners flagged?</summary>
+          <p>
+            A shortener such as bit.ly replaces the destination with a short token. The page you
+            will land on is not written in the address, so the other checks cannot see it. Be
+            careful is a prompt to ask for the full link, not a claim that the shortener company is
+            malicious.
+          </p>
+        </details>
+      </section>
+
+      <section class="ls-related">
+        <h2>Related tools</h2>
+        <div class="ls-related-grid">
+          <a href="/tools/would-you-click-it/">
+            <strong>Would You Click It?</strong>
+            <span>Click or skip fictional popups, ads, and permission prompts.</span>
+          </a>
+          <a href="/tools/spot-the-scam-call/">
+            <strong>Spot the Scam Call</strong>
+            <span>Play fictional phone calls as text. Hang up or reply, then see the red flags.</span>
+          </a>
+          <a href="/tools/password-checker/">
+            <strong>Password Strength Checker</strong>
+            <span>Estimate a password on this device. It never leaves the browser.</span>
+          </a>
+          <a href="/tools/password-habit-quiz/">
+            <strong>Password Habit Quiz</strong>
+            <span>Score reuse, a manager, and a second factor. It never asks for a password.</span>
+          </a>
+          <a href="/tools/digital-footprint/">
+            <strong>Digital Footprint Check</strong>
+            <span>Audit people-search sites, location, and photos. It never asks for a name.</span>
+          </a>
+          <a href="/tools/phishing-inbox-simulator/">
+            <strong>Phishing Inbox Simulator</strong>
+            <span>Practice the same cues on fictional emails. Answers stay in the browser.</span>
+          </a>
+          <a href="/tools/choose-your-own-hack/">
+            <strong>Choose Your Own Hack</strong>
+            <span>Play the target in a fictional scam. Choices stay in the browser.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on privacy, batteries, and password claims.</span>
+          </a>
+          <a href="/tools/hash-generator/">
+            <strong>Hash Generator</strong>
+            <span>Fingerprint a piece of text locally when you need a checksum.</span>
+          </a>
+          <a href="/tools/url-encoder/">
+            <strong>URL Encoder</strong>
+            <span>See what percent-encoding does to an address, still in the browser.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="ls-live" class="ls-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/is-this-link-safe/logic.js?v=20261021link"></script>
+    <script src="/tools/is-this-link-safe/script.js?v=20261021link"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>

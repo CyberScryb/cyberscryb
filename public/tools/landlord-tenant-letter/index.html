@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+<link rel="stylesheet" href="/css/style.css?v=20261014ux">
 <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1">
 <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2">
@@ -51,13 +51,13 @@
         window.print();
     }
     </script>
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Landlord Tenant Letter Generator", "applicationCategory": "LifestyleApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://cyberscryb.com/tools/landlord-tenant-letter/", "description": "Free AI landlord tenant letter generator for repair requests, late rent payment plans, and habitability complaints. Not legal advice."}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is this a court filing?", "acceptedAnswer": {"@type": "Answer", "text": "No. These are communication drafts. Court, small claims, or legal aid may be needed for formal claims."}}, {"@type": "Question", "name": "Should I stop paying rent?", "acceptedAnswer": {"@type": "Answer", "text": "Rules vary widely. Do not withhold rent without understanding local law. The letter can request repair while you stay current if that is your plan."}}, {"@type": "Question", "name": "Certified mail?", "acceptedAnswer": {"@type": "Answer", "text": "Often wise for habitability notices. Check your lease and local practice."}}, {"@type": "Question", "name": "Is this legal advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. Housing law is local. Use this as a draft and verify rights for your city/state."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I write a repair request letter to my landlord?", "acceptedAnswer": {"@type": "Answer", "text": "State the defect, the date it started, every prior notice you gave, and one specific ask: the repair and a reasonable deadline. Send it in writing and keep a dated copy."}}, {"@type": "Question", "name": "What should a late rent payment plan letter include?", "acceptedAnswer": {"@type": "Answer", "text": "The amount due, what you can pay now, the exact dates and amounts for the rest, and a request for written acceptance. Landlords accept plans with specifics."}}, {"@type": "Question", "name": "Can I write a habitability complaint letter myself?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Describe the conditions, when they started, what you already reported, who is affected, and what you want fixed by when. Keep the letter; code enforcement and courts ask for it."}}, {"@type": "Question", "name": "Should I send a move-out notice in writing?", "acceptedAnswer": {"@type": "Answer", "text": "Always. A written move-out notice with the date starts the clock on your deposit return and creates proof the landlord was told."}}, {"@type": "Question", "name": "Should I stop paying rent during a repair dispute?", "acceptedAnswer": {"@type": "Answer", "text": "Do not withhold rent without understanding your state's law. The letter can request the repair while you stay current, unless a lawyer or legal-aid clinic advises otherwise."}}, {"@type": "Question", "name": "Is this legal advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. Housing law is local. Use this as a draft and verify your rights for your city/state."}}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to use the Landlord Tenant Letter", "step": [{"@type": "HowToStep", "position": 1, "name": "Choose letter type", "text": "Repair, rent plan, habitability, move-out."}, {"@type": "HowToStep", "position": 2, "name": "Dates + unit", "text": "When it started, what you already said, exact ask."}, {"@type": "HowToStep", "position": 3, "name": "Send & save", "text": "Trackable delivery + photos + this letter on file."}]}</script>
 
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 <body>
@@ -95,9 +95,10 @@
 <main>
   <section class="hero" style="min-height:auto;padding:2.25rem 1.25rem 0.75rem;">
     <div class="hero-container">
-      <div class="hero-eyebrow">AI life tool · free to try · Pro unlimited</div>
+      <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
       <h1 class="hero-title" style="font-size:clamp(1.75rem,4vw,2.45rem);">Landlord &amp; tenant <span style="color:var(--primary);">letter generator</span></h1>
       <p class="hero-subtitle" style="max-width:38rem;">Repair requests, late-rent plans, habitability notices, and move-out letters — calm, specific, and dated.</p>
+      <p class="hero-subtitle" style="max-width:40rem;font-size:0.95rem;color:var(--text-muted);">Use it when you need one formal letter fast: a repair the landlord keeps ignoring, a rent payment you cannot make in full, living conditions that are not safe, or a move-out notice you want on the record. If the problem is becoming a case with deadlines and follow-ups, run it in the <a href="/tools/ai-tenant-case-companion/" style="color:var(--primary-soft);">tenant case companion</a> instead.</p>
     </div>
   </section>
 
@@ -191,7 +192,7 @@
             </div>
           </div>
           <div class="lt-body" style="position:relative;">
-            <div id="loading-indicator" class="lt-loading">
+            <div id="loading-indicator" class="lt-loading hidden">
               <div class="lt-spin"></div>
               <p>Drafting with care…</p>
               <small>Using structured facts — not generic filler</small>
@@ -226,23 +227,34 @@
     </div>
 
     <div class="lt-card" style="margin-top:1.25rem;">
+      <div class="lt-card-h"><h2>Real situations this handles</h2></div>
+      <div class="lt-body">
+        <div class="lt-know-grid">
+          <div class="lt-know-card"><h3>The leaking radiator</h3><p>Defect started weeks ago, two texts sent, nothing fixed. The repair mode turns that into a dated demand with a deadline and a record of prior contact — the first letter of a real case file.</p></div>
+          <div class="lt-know-card"><h3>Hours cut, rent short</h3><p>You can pay part now and the rest in two weeks. The late-rent-plan mode proposes specific dates and amounts and asks for written acceptance, so a verbal "okay" does not become an eviction filing.</p></div>
+          <div class="lt-know-card"><h3>No heat in winter</h3><p>The habitability mode states the conditions, the dates you reported them, the household impact, and the next step you will take — the letter code enforcement and courts expect to see.</p></div>
+          <div class="lt-know-card"><h3>A clean move-out</h3><p>The move-out mode gives written notice with the date and your forwarding address, which starts the clock on the deposit return and protects you from "we never got notice" claims.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lt-card" style="margin-top:1.25rem;">
       <div class="lt-card-h"><h2>FAQ</h2></div>
       <div class="lt-body">
-<details>
-    <summary>Is what I type private?</summary>
-    <p>Your input is sent to our AI service to generate your result. No account, no signup, and nothing is linked to your identity. We count anonymous usage per tool for analytics. Your text is never sold.</p>
-</details>
-<details class="lt-faq-item"><summary>Is this a court filing?</summary><p>No. These are communication drafts. Court, small claims, or legal aid may be needed for formal claims.</p></details>
-<details class="lt-faq-item"><summary>Should I stop paying rent?</summary><p>Rules vary widely. Do not withhold rent without understanding local law. The letter can request repair while you stay current if that is your plan.</p></details>
-<details class="lt-faq-item"><summary>Certified mail?</summary><p>Often wise for habitability notices. Check your lease and local practice.</p></details>
-<details class="lt-faq-item"><summary>Is this legal advice?</summary><p>No. Housing law is local. Use this as a draft and verify rights for your city/state.</p></details></div>
+<details class="lt-faq-item"><summary>How do I write a repair request letter to my landlord?</summary><p>State the defect, the date it started, every prior notice you gave (texts, calls, work orders), and one specific ask: the repair and a reasonable deadline. Pick the repair mode, fill in the property and the key dates, and generate. Send it in writing and keep a dated copy — that record is the first entry in your case file.</p></details>
+<details class="lt-faq-item"><summary>What should a late rent payment plan letter include?</summary><p>The amount due, what you can pay now, the exact dates and amounts for the rest, and a request for written acceptance. Landlords accept plans with specifics; vague promises get filed. Keep paying what you promised on the dates you promised.</p></details>
+<details class="lt-faq-item"><summary>Can I write a habitability complaint letter myself?</summary><p>Yes. Describe the conditions, when they started, what you already reported, who is affected, and what you want fixed by when. Serious conditions (no heat, no water, sewage) can also go to your city's code enforcement after written notice — keep the letter, agencies ask for it.</p></details>
+<details class="lt-faq-item"><summary>Should I send a move-out notice in writing?</summary><p>Always. A written move-out notice with the date starts the clock on your deposit return and creates proof the landlord was told. Email counts; keep the sent copy in your case file with your forwarding address.</p></details>
+<details class="lt-faq-item"><summary>Should I stop paying rent during a repair dispute?</summary><p>Do not withhold rent without understanding your state's law — in most places it hands the landlord a clean eviction case. The letter can request the repair while you stay current, unless a lawyer or legal-aid clinic advises otherwise.</p></details>
+<details class="lt-faq-item"><summary>Is this legal advice?</summary><p>No. Housing law is local. Use this as a draft and verify your rights for your city and state before sending.</p></details></div>
     </div>
 
     <div style="margin-top:1.5rem;">
       <h3 style="text-align:center;margin-bottom:0.85rem;color:var(--text);">Related tools</h3>
-      <div class="lt-related"><a href="/tools/payment-demand-letter/"><strong>Payment Demand Letter</strong><small>When someone owes you money</small></a>
-<a href="/tools/hardship-letter/"><strong>Hardship Letter</strong><small>Broader hardship narratives</small></a>
-<a href="/tools/appeal-letter/"><strong>Appeal Letter</strong><small>Housing denial appeals</small></a></div>
+      <div class="lt-related"><a href="/tools/ai-tenant-case-companion/"><strong>Tenant Case Companion</strong><small>Deadlines, letter sequence, landlord log, evidence pack</small></a>
+<a href="/tools/ai-rent-increase-negotiation-letter/"><strong>Rent Increase Negotiation Letter</strong><small>Counter a rent hike with verified rent math</small></a>
+<a href="/tools/security-deposit-demand/"><strong>Security Deposit Demand</strong><small>Get your deposit back with a formal demand</small></a>
+<a href="/guides/how-to-track-a-tenant-case/"><strong>How to Track a Tenant Case</strong><small>The paper-trail method behind these letters</small></a></div>
     </div>
   </div>
 
@@ -273,16 +285,12 @@
                     <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo identifier</a>
 </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. Review every letter before you send it.</p></div>
@@ -290,7 +298,7 @@
     </footer>
 
 <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
-<script src="/tools/shared/ai-tool.js?v=20261013sse1"></script>
+<script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
 <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
 <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
 <script src="/tools/landlord-tenant-letter/landlord-tenant-letter.js?v=20261006audit1"></script>

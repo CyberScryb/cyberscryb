@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI or Human? The Writing Test | CyberScryb</title>
+    <meta
+      name="description"
+      content="Read a short passage and say whether a person or an AI wrote it. Public-domain excerpts, a score, and an accuracy gauge stay in this browser."
+    />
+    <meta
+      name="keywords"
+      content="AI or human writing test, AI writing quiz, public domain excerpts, detect AI writing, human or AI passage"
+    />
+    <meta property="og:title" content="AI or Human? The Writing Test | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Read a short passage and say whether a person or an AI wrote it. Public-domain excerpts, a score, and an accuracy gauge stay in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-or-human-writer/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI or Human? The Writing Test | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Read a short passage and say whether a person or an AI wrote it. Public-domain excerpts, a score, and an accuracy gauge stay in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-or-human-writer/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/ai-or-human-writer/style.css?v=20261021writer" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI or Human? The Writing Test",
+        "url": "https://cyberscryb.com/tools/ai-or-human-writer/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser quiz of 24 short passages. Decide whether each one was written by a person or by AI. Human passages are public-domain excerpts published in 1928 or earlier. AI passages were written for this game. Rounds are 10. The best score stays in this browser.",
+        "featureList": [
+          "24 passages mixing prose, poetry, letters, and short descriptions",
+          "Human excerpts from public-domain works published in 1928 or earlier, with author, work, and year",
+          "Original AI passages written for this game",
+          "Rounds of 10",
+          "A reveal with the source and one or two tells",
+          "Score, detector accuracy gauge, and a copyable result line",
+          "Best score stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this upload my answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The test runs in your browser. The only thing saved is your best score, in this browser's local storage. The passage you saw and the choice you made are not stored and are not sent anywhere. The page does not call an AI."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the human passages public domain?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Each human passage is a short excerpt from a work first published in 1928 or earlier, which puts it in the public domain in the United States. The reveal names the author, the work, and the year. The source notes on this page list them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Were the AI passages written live by a model?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The AI passages are original text written ahead of time for this game. The reveal labels them Written by AI for this game. Playing does not send the passage to an API."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does a round work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each round is 10 passages drawn from a deck of 24. You choose Human or AI, then see the source and one or two tells. Play again deals another 10. Your detector accuracy is the share of the round you got right."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the tells reliable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Hedging, symmetry, generic imagery, and specific detail are habits, not proof. A person can write a tidy sentence, and a model can land on a particular one. The note under each reveal says so."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is saved on this device?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only your best score. Clearing site data for cyberscryb.com removes it. The test does not ask for an account, and leaving the page drops the current round."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "AI or Human? The Writing Test",
+            "item": "https://cyberscryb.com/tools/ai-or-human-writer/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="ah-page">
+      <nav class="ah-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>AI or Human? The Writing Test</span>
+      </nav>
+
+      <header class="ah-hero">
+        <p class="ah-badge">Free · In this browser · No AI call</p>
+        <h1>AI or Human? The Writing Test</h1>
+        <hr class="ah-rule" />
+        <p>
+          Read one passage and say who wrote it. Some of the human lines are public-domain sentences
+          that sound strangely modern. Some of the AI lines are dressed up like a nineteenth-century
+          page. A round is 10. The reveal names the source, then one or two habits to notice.
+          Detection is unreliable, and the page says so.
+        </p>
+        <ol class="ah-steps">
+          <li><strong>Read</strong> Prose, a poem, a letter, or a short description. Two to five sentences.</li>
+          <li><strong>Choose</strong> Human or AI. Press H or A, or use the buttons.</li>
+          <li><strong>See the source</strong> Author, work, and year, or a line that says the passage was written by AI for this game.</li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This test needs JavaScript. It still runs only in your browser and does not send your
+          answers anywhere.
+        </p>
+      </noscript>
+
+      <div class="ah-client" id="ah-client">
+        <div class="ah-status">
+          <div class="ah-status-row">
+            <p id="ah-progress">Passage 1 of 10</p>
+            <p id="ah-best">Best on this device: none yet.</p>
+          </div>
+          <div class="ah-gauge-block">
+            <div class="ah-gauge-head">
+              <span id="ah-gauge-name">Your detector accuracy</span>
+              <span id="ah-gauge-value">No answers yet</span>
+            </div>
+            <div
+              class="ah-gauge-track"
+              id="ah-gauge"
+              role="meter"
+              aria-labelledby="ah-gauge-name"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="No answers yet"
+            >
+              <div class="ah-gauge-fill" id="ah-gauge-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ah-stage" id="ah-stage">
+          <article class="ah-sheet" id="ah-card">
+            <p>The test loads in this browser.</p>
+          </article>
+        </div>
+        <p class="ah-hint" id="ah-hint">Press H for Human or A for AI. The buttons do the same thing.</p>
+      </div>
+
+      <section class="ah-prose" id="sources">
+        <h2>Source notes</h2>
+        <p>
+          The human passages are short excerpts from works first published in 1928 or earlier. In
+          the United States those works are in the public domain. Each one is quoted with the
+          author, the work, and the year. The wording was checked against public-domain editions.
+          The AI passages were written for this game. They are original, and the reveal labels them
+          Written by AI for this game. Nothing on this page is fetched from a model when you play.
+        </p>
+        <ul class="ah-sources">
+          <li>Jane Austen, Pride and Prejudice, 1813</li>
+          <li>Charles Dickens, A Tale of Two Cities, 1859</li>
+          <li>Mark Twain, Adventures of Huckleberry Finn, 1885</li>
+          <li>Edgar Allan Poe, The Tell-Tale Heart, 1843</li>
+          <li>Virginia Woolf, Mrs. Dalloway, 1925</li>
+          <li>Charlotte Perkins Gilman, The Yellow Wallpaper, 1892</li>
+          <li>Mary Shelley, Frankenstein, 1818</li>
+          <li>Henry David Thoreau, Walden, 1854</li>
+          <li>Emily Dickinson, Poems, 1890</li>
+          <li>Walt Whitman, Song of Myself, 1892</li>
+          <li>W. E. B. Du Bois, The Souls of Black Folk, 1903</li>
+          <li>Aesop, The Hare and the Tortoise, translated by George Fyler Townsend, 1867</li>
+        </ul>
+        <h3>Why a tidy sentence is not proof</h3>
+        <p>
+          Hedging, a matched set of three, and a landscape with no measurement show up often in
+          generated prose. So does a last line that announces a lesson. People do all of those
+          things too. Dickens opens a novel with paired opposites. Austen states a neighborhood
+          rule as if it were a law. A model can also mention a red mitten or a clock stopped at a
+          particular minute, then take the detail back. The tells under each reveal are there to
+          practice a close reading. They are not a verdict you could use on someone else's work.
+        </p>
+        <p>
+          If you want a different kind of practice, the
+          <a href="/tools/prompt-battle/">Prompt Battle</a> compares two prompts without calling a
+          model, the <a href="/tools/ai-detector/">AI detector</a> reads text you paste, and the
+          <a href="/tools/humanizer/">AI humanizer</a> rewrites stiff paste. Those two send text to
+          an AI. This page does not. The
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> deck is the short quiz for claims
+          people repeat, and it stays in the browser too. The
+          <a href="/tools/real-photo-or-ai/">Real Photo or AI</a> quiz asks the same kind of question
+          about pictures.
+        </p>
+      </section>
+
+      <section class="ah-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this upload my answers?</summary>
+          <p>
+            No. The test runs in your browser. The only thing saved is your best score, in this
+            browser's local storage. The passage you saw and the choice you made are not stored and
+            are not sent anywhere. The page does not call an AI.
+          </p>
+        </details>
+        <details>
+          <summary>Are the human passages public domain?</summary>
+          <p>
+            Yes. Each human passage is a short excerpt from a work first published in 1928 or
+            earlier, which puts it in the public domain in the United States. The reveal names the
+            author, the work, and the year. The source notes on this page list them.
+          </p>
+        </details>
+        <details>
+          <summary>Were the AI passages written live by a model?</summary>
+          <p>
+            No. The AI passages are original text written ahead of time for this game. The reveal
+            labels them Written by AI for this game. Playing does not send the passage to an API.
+          </p>
+        </details>
+        <details>
+          <summary>How does a round work?</summary>
+          <p>
+            Each round is 10 passages drawn from a deck of 24. You choose Human or AI, then see the
+            source and one or two tells. Play again deals another 10. Your detector accuracy is the
+            share of the round you got right.
+          </p>
+        </details>
+        <details>
+          <summary>Are the tells reliable?</summary>
+          <p>
+            No. Hedging, symmetry, generic imagery, and specific detail are habits, not proof. A
+            person can write a tidy sentence, and a model can land on a particular one. The note
+            under each reveal says so.
+          </p>
+        </details>
+        <details>
+          <summary>What is saved on this device?</summary>
+          <p>
+            Only your best score. Clearing site data for cyberscryb.com removes it. The test does
+            not ask for an account, and leaving the page drops the current round.
+          </p>
+        </details>
+      </section>
+
+      <section class="ah-related">
+        <h2>Related tools</h2>
+        <div class="ah-related-grid">
+          <a href="/tools/prompt-battle/">
+            <strong>Prompt Battle</strong>
+            <span>Pick the stronger prompt, then build your own. It does not call an AI.</span>
+          </a>
+          <a href="/tools/ai-detector/">
+            <strong>AI Detector</strong>
+            <span>Paste text and see which sentences get flagged.</span>
+          </a>
+          <a href="/tools/humanizer/">
+            <strong>AI Humanizer</strong>
+            <span>Rewrite stiff AI paste so it sounds more like a person.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe through tech claims and read a short explanation.</span>
+          </a>
+          <a href="/tools/real-photo-or-ai/">
+            <strong>Real Photo or AI</strong>
+            <span>Look at one picture and say whether a camera or an AI made it.</span>
+          </a>
+          <a href="/tools/which-tech-era/">
+            <strong>Which Tech Era Are You?</strong>
+            <span>Twelve questions, seven eras, and a card that stays in this browser.</span>
+          </a>
+          <a href="/tools/paraphraser/">
+            <strong>Paraphraser</strong>
+            <span>Restate a passage in another wording.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="ah-live" class="ah-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/ai-or-human-writer/logic.js?v=20261021writer"></script>
+    <script src="/tools/ai-or-human-writer/script.js?v=20261021writer"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>

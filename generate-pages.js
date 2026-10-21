@@ -1475,6 +1475,7 @@ function generateSitemap(generatedPages) {
     'ai-logic-model-builder',
     'ai-medicare-advantage-medigap-explainer',
     'ai-rent-increase-negotiation-letter',
+    'ai-tenant-case-companion',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1588,6 +1589,8 @@ function generateSitemap(generatedPages) {
     'medicare-advantage-vs-medigap-cost-scenarios',
     'how-to-write-a-tenant-repair-demand-letter',
     'how-to-negotiate-a-rent-increase',
+    'how-to-track-a-tenant-case',
+    'how-to-respond-to-an-eviction-notice',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1785,6 +1788,7 @@ function manageRobotsMeta() {
     'ai-logic-model-builder',
     'ai-medicare-advantage-medigap-explainer',
     'ai-rent-increase-negotiation-letter',
+    'ai-tenant-case-companion',
   ]);
 
   const dirsToProcess = [

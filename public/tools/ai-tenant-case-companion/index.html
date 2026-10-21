@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Tenant Case Companion &mdash; Track a Repair, Deposit or Rent Case | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI tenant case companion: run a repair, deposit, rent-increase or lease-break case as one workflow, with verified deadline math, a landlord log, and a letter sequence. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-tenant-case-companion/" />
+    <meta
+      property="og:title"
+      content="AI Tenant Case Companion — Track a Repair, Deposit or Rent Case | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Run your tenant case as one workflow: intake, state notice deadlines, letter sequence, landlord log, and a printable evidence pack. Free, no signup. Not legal advice."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-tenant-case-companion/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Tenant Case Companion — Track a Repair, Deposit or Rent Case | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Run your tenant case as one workflow: intake, state notice deadlines, letter sequence, landlord log, and a printable evidence pack. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .math-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .math-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .math-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.32rem 0;
+        border-top: 1px dashed var(--border);
+      }
+      .math-row:first-of-type {
+        border-top: none;
+      }
+      .math-row .k {
+        color: var(--text-muted);
+      }
+      .math-row .v {
+        font-weight: 700;
+        color: var(--text);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .math-band {
+        display: inline-block;
+        padding: 1px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .math-band.ok {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+      }
+      .math-band.warn {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+      }
+      .math-band.bad {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+      }
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .log-entry {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .log-entry .log-date {
+        font-weight: 700;
+        color: var(--text);
+        display: block;
+        font-size: 0.78rem;
+      }
+      .log-entry .log-note {
+        color: var(--text-muted);
+      }
+      .log-entry .log-track {
+        color: var(--text-faint);
+        font-size: 0.75rem;
+      }
+      .mini-form {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+      .mini-form input,
+      .mini-form textarea {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 0.82rem;
+        padding: 0.5rem 0.65rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .mini-form .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      .deadline-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        font-size: 0.83rem;
+      }
+      .deadline-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.45rem 0.65rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg-elevated);
+      }
+      .deadline-list .dl-name {
+        color: var(--text-muted);
+      }
+      .deadline-list .dl-date {
+        font-weight: 700;
+        color: var(--text);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .deadline-list li.due-soon {
+        border-color: #dc2626;
+      }
+      .deadline-list li.due-soon .dl-date {
+        color: #f87171;
+      }
+      .pack-row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+      }
+      /* Canonical red contrast: dark text on #ef4444 (5.58:1, passes AA) */
+      .lt-gen {
+        color: #09090b;
+      }
+      .lt-chip.is-on {
+        color: #09090b;
+      }
+    </style>
+    <!-- Google AdSense -->
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #evidence-pack-print,
+      #evidence-pack-print * {
+        visibility: visible !important;
+      }
+      #evidence-pack-print {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 11pt;
+        color: #000;
+        background: #fff;
+        padding: 0.7in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Tenant Case Companion",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-tenant-case-companion/",
+        "description": "Free AI tenant case companion: run a repair, deposit, rent-increase or lease-break case as one workflow, with verified deadline math, a landlord log, and a letter sequence. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I document a repair request so the landlord has to act?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Put it in writing with a date, describe the problem and what you have already tried, keep a copy, and log every follow-up with its date. The written record plus a timeline of follow-ups is what turns a complaint into a case. The case companion builds this record for you as you go."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a landlord have to return a security deposit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on your state: common windows run 14 to 60 days after move-out, with 21 and 30 days the most common. The tool computes your follow-up dates from the move-out date you enter and flags when the window passes. This is general information, not legal advice; verify your state's rule."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I break my lease because of maintenance problems?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only with a documented record: written repair requests, the dates they went unanswered, any health or safety impact, and often a final written notice before leaving. Without that paper trail, breaking a lease usually means owing the remaining rent. The companion walks you through building that record first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What proof do I need to win a deposit dispute?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Move-in and move-out condition photos, the lease's deposit clause, written communications with dates, receipts for anything you paid to fix, and a ledger showing what you paid versus what was withheld. Small claims judges decide these cases on documents, not stories."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool organizes your facts, computes your deadlines and rent math, and drafts letters from what you enter. Tenant law varies by state and city. Verify your state's rules and talk to a local tenants' rights organization or attorney for advice about your situation."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to run a tenant case with the companion",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Open a case",
+            "text": "Pick the case type (repair, deposit, rent increase, lease break), enter the parties, the property, and the date the issue started."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Check your deadlines",
+            "text": "The state notice engine computes your planning dates from your state and event date. Verify the benchmark against your state's current rule."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate each letter in sequence",
+            "text": "Draft the first letter, log it, follow up on schedule, and generate the next letter only when the record supports it."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Build the evidence pack",
+            "text": "Combine the letters, the timeline, the landlord log, and the math into one printable pack."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Tenant Case Companion</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI case tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            Tenant <span style="color: var(--primary)">case companion</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 40rem">
+            One letter rarely wins a tenant dispute. The record wins. Open a case for your repair
+            issue, deposit fight, rent increase, or lease break: the companion tracks your
+            deadlines, drafts each letter in sequence, logs every exchange, and bundles the whole
+            thing into a printable evidence pack.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> One case file across visits</span>
+          <span><i></i> Deadlines computed on your device</span>
+          <span><i></i> Letter sequence, not one-offs</span>
+          <span><i></i> Not legal advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Open a case</strong
+            ><span
+              >Case type, parties, property, and the date the issue started. Autosaves on this
+              device.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Watch the deadlines</strong
+            ><span
+              >The notice engine computes your planning dates from your state. Verify the
+              benchmark, then follow the timeline.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Build the record</strong
+            ><span
+              >Generate each letter in sequence, log every reply, and export the evidence pack when
+              the case closes.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Case</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Deadlines</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letters</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Open your case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="case-label">Case type</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="case-label">
+                <button type="button" class="lt-chip" data-mode="repair" aria-pressed="false">
+                  Repair issue
+                </button>
+                <button type="button" class="lt-chip" data-mode="deposit" aria-pressed="false">
+                  Deposit dispute
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="rent-increase"
+                  aria-pressed="false"
+                >
+                  Rent increase
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="lease-break"
+                  aria-pressed="false"
+                >
+                  Lease break
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="repair" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Repair issue case</strong>Document the problem in writing first, log every
+                follow-up with its date, and only escalate on paper once the record shows the
+                landlord had time and notice.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Case strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the parties, the date, and the facts to open a solid case file.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="tenant_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="tenant_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Tenant name"
+                    autocomplete="name"
+                    data-cs-share="senderName"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="landlord_name"
+                    >Landlord / manager name <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="landlord_name"
+                    type="text"
+                    aria-required="true"
+                    placeholder="e.g. Apex Property Group"
+                    data-label="Landlord / manager name"
+                    autocomplete="off"
+                    data-cs-share="recipient"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="property_address"
+                    >Property address <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="property_address"
+                    type="text"
+                    placeholder="e.g. 120 Pine St, Apt 4, Sandpoint, ID"
+                    data-label="Property address"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="state"
+                    >State <span class="cs-req" aria-hidden="true">*</span></label
+                  ><select class="lt-input" id="state" aria-required="true" data-label="State" style="color-scheme: dark">
+                    <option value="">Select&hellip;</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="event_date"
+                    >Date the issue started or notice arrived
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="event_date"
+                    type="date"
+                    aria-required="true"
+                    data-label="Event date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field" id="rent-fields" style="display: none">
+                  <label class="lt-label" for="current_rent"
+                    >Current monthly rent <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="current_rent"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 1450"
+                    data-label="Current monthly rent"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field" id="proposed-rent-field" style="display: none">
+                  <label class="lt-label" for="proposed_rent"
+                    >Proposed monthly rent <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="proposed_rent"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 1725"
+                    data-label="Proposed monthly rent"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field" id="income-field" style="display: none">
+                  <label class="lt-label" for="monthly_income"
+                    >Your gross monthly income
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="monthly_income"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 3800"
+                    data-label="Gross monthly income"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field" id="deposit-field" style="display: none">
+                  <label class="lt-label" for="deposit_amount"
+                    >Security deposit amount <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="deposit_amount"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 1450"
+                    data-label="Security deposit amount"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field" id="deductions-field" style="display: none">
+                  <label class="lt-label" for="deductions_claimed"
+                    >Deductions the landlord claimed
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="deductions_claimed"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 300"
+                    data-label="Deductions claimed"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label">Letter to generate</label>
+                <div class="pill-group" role="group" aria-label="Letter to generate">
+                  <input type="radio" id="doc-repair" name="doc-rb" value="repair-demand" checked /><label
+                    class="pill"
+                    for="doc-repair"
+                    >Repair demand</label
+                  >
+                  <input type="radio" id="doc-deposit" name="doc-rb" value="deposit-recovery" /><label
+                    class="pill"
+                    for="doc-deposit"
+                    >Deposit recovery</label
+                  >
+                  <input type="radio" id="doc-leasebreak" name="doc-rb" value="lease-break-notice" /><label
+                    class="pill"
+                    for="doc-leasebreak"
+                    >Lease-break notice</label
+                  >
+                  <input type="radio" id="doc-rentincrease" name="doc-rb" value="rent-increase-response" /><label
+                    class="pill"
+                    for="doc-rentincrease"
+                    >Rent-increase response</label
+                  >
+                </div>
+                <input type="hidden" id="document" data-label="Letter to generate" value="Repair demand" />
+                <p class="lt-hint" style="margin-top: 0.4rem">
+                  Generate letters in sequence as the case develops: first the demand, then the
+                  follow-up, then the final notice. Each new letter references the earlier record.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Case details (facts, dates, amounts)
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="lt-examples" aria-label="Example cases">
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "repair", "fields": {"tenant_name": "Jordan Lee", "landlord_name": "Apex Property Group", "property_address": "120 Pine St, Apt 4, Sandpoint, ID", "state": "ID", "event_date": "2026-09-28"}, "document": "repair-demand", "story": "Furnace stopped heating on September 28. Texted landlord same day, called October 2 and October 9, no response. Nighttime temperatures below freezing. Two children in the unit. Need heat restored immediately and rent credited for the days without heat."}'
+                  >
+                    Furnace out since Sept 28
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "deposit", "fields": {"tenant_name": "A. Rivera", "landlord_name": "R. Alvarez", "property_address": "77 Cedar Ave, Unit B, Redding, CA", "state": "CA", "event_date": "2026-09-01", "deposit_amount": "1800", "deductions_claimed": "450"}, "document": "deposit-recovery", "story": "Moved out August 31, returned keys September 1. Landlord deducted $450 for carpet cleaning and painting, but the carpet was professionally cleaned before move-out (receipt kept) and painting is normal wear. No itemized statement received within the return window. Demanding the $450 back."}'
+                  >
+                    $450 deposit withheld
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "rent-increase", "fields": {"tenant_name": "Sam Okonkwo", "landlord_name": "Hillcrest Rentals LLC", "property_address": "9 Hillcrest Ln, Fort Worth, TX", "state": "TX", "event_date": "2026-10-18", "current_rent": "1600", "proposed_rent": "1760", "monthly_income": "5200"}, "document": "rent-increase-response", "story": "Notice arrived October 18 raising rent to $1,760 effective December 1. Tenant 3 years, never late. Similar units in the area list at $1,600-1,650. Responding in writing with a counter-offer of $1,650 and asking for the increase to be delayed until proper notice has passed."}'
+                  >
+                    Rent hike response
+                  </button>
+                </div>
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  aria-required="true"
+                  placeholder="Example: Furnace stopped working September 28. Texted landlord the same day, called twice since, no reply. Two kids in the unit, nights below freezing. Need heat restored and a credit for days without heat."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; Real dates, real amounts, real
+                  names only. Leave blanks if you do not know.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not legal advice.</strong> This drafts letters
+                from your facts and computes planning dates from general state benchmarks, which
+                you must verify. The AI will not invent lease terms, statutes, or payment history.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="math-panel" aria-live="polite">
+              <h3>Deadline calendar</h3>
+              <p
+                style="margin: 0 0 0.6rem; font-size: 0.75rem; color: var(--text-faint)"
+                id="dl-benchmark-note"
+              >
+                Pick a state and an event date to compute planning dates.
+              </p>
+              <ul class="deadline-list" id="deadline-list">
+                <li>
+                  <span class="dl-name">Waiting on input</span><span class="dl-date">&mdash;</span>
+                </li>
+              </ul>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Computed on your device from general benchmarks. Verify your state's current notice
+                rules before relying on any date.
+              </p>
+            </div>
+            <div class="math-panel" aria-live="polite" id="math-panel">
+              <h3>Case math, verified here</h3>
+              <div class="math-row">
+                <span class="k">Increase</span><span class="v" id="m-increase">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Increase %</span><span class="v" id="m-pct">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Annual impact</span><span class="v" id="m-annual">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">New rent share of income</span
+                ><span class="v" id="m-burden">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Deposit owed back</span
+                ><span class="v" id="m-deposit-owed">&mdash;</span>
+              </div>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Computed on your device from your numbers. Letters quote these exact figures, never
+                AI-guessed math.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" id="pack-print-btn" class="lt-icon-btn">
+                    Print pack
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting with care&hellip;</p>
+                  <small>Using your case facts and verified math, not generic filler</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your letter will appear here.<br /><br />1. Pick a case type<br />2. Enter the
+                    facts (or load an example)<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Evidence pack</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Bundles the latest letter, the deadline calendar, the landlord log, the mail log,
+                  and the verified math into one printable pack.
+                </p>
+                <div class="pack-row">
+                  <button type="button" class="lt-ghost" id="pack-download-btn">
+                    Download pack (.txt)
+                  </button>
+                  <button type="button" class="lt-ghost" id="pack-print-btn2">Print pack</button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past letters</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No letters yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Landlord log</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Every call, text, email, and visit, with its date. This log is the record that
+                  wins disputes. Saved on this device.
+                </p>
+                <div class="hist-list" id="landlord-log-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No entries yet.</li>
+                </div>
+                <div class="mini-form">
+                  <div class="two">
+                    <input type="date" id="log-date" style="color-scheme: dark" aria-label="Log date" />
+                    <input type="text" id="log-channel" placeholder="Call, text, email…" aria-label="Channel" />
+                  </div>
+                  <textarea
+                    id="log-note"
+                    rows="2"
+                    placeholder="What happened, in one or two sentences."
+                    aria-label="Log note"
+                  ></textarea>
+                  <button type="button" class="lt-ghost" id="log-add-btn">Add log entry</button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Certified-mail log</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Certified mail with return receipt proves the landlord got your letter. Log each
+                  sending here.
+                </p>
+                <div class="hist-list" id="mail-log-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No mailings logged.</li>
+                </div>
+                <div class="mini-form">
+                  <div class="two">
+                    <input type="date" id="mail-date" style="color-scheme: dark" aria-label="Mail date" />
+                    <input type="text" id="mail-tracking" placeholder="Tracking #" aria-label="Tracking number" />
+                  </div>
+                  <input type="text" id="mail-title" placeholder="Letter title, e.g. Second repair demand" aria-label="Letter title" />
+                  <button type="button" class="lt-ghost" id="mail-add-btn">Add mailing</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Case checklist</h2></div>
+            <div class="lt-body">
+              <p class="lt-side-note">
+                Tap items as you finish them, progress saves on this device.
+              </p>
+              <ul class="lt-check" id="case-checklist">
+                <li data-check="notice-written">
+                  Sent the first written notice with a date on it (not just a phone call)
+                </li>
+                <li data-check="photos-kept">
+                  Kept photos, receipts, and every written reply in one folder
+                </li>
+                <li data-check="deadlines-verified">
+                  Looked up my state's actual notice and deadline rules (not just the benchmark)
+                </li>
+                <li data-check="certified-sent">
+                  Sent at least one key letter by certified mail with return receipt
+                </li>
+                <li data-check="pack-built">
+                  Built the evidence pack before any hearing, mediation, or move-out
+                </li>
+                <li data-check="help-contacted">
+                  Talked to a local tenants' rights organization if the case escalated
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually wins tenant disputes
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>The record beats the argument</h3>
+              <p>
+                Small-claims judges and mediators decide on documents, not stories. A dated written
+                request, a logged follow-up, a certified-mail receipt: that chain is the whole case.
+                Start every dispute by opening a case file the same day the problem starts.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Escalate in writing, in order</h3>
+              <p>
+                First notice, follow-up, final notice, then the outside step. Skipping straight to
+                threats or withholding rent usually backfires, because there is no record the
+                landlord was given a fair chance. Each letter in the sequence references the ones
+                before it.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Deadlines are state rules</h3>
+              <p>
+                Notice periods, deposit return windows, and repair timelines all vary by state and
+                lease. The calendar on this page uses general benchmarks to plan from; verify your
+                state's current rules the day you open the case, and never quote a statute you have
+                not read yourself.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Keep paying rent during the fight</h3>
+              <p>
+                Unless a tenants' rights advisor tells you otherwise in writing, keep paying rent on
+                time through the whole dispute. Unpaid rent gives the landlord a clean eviction
+                case that erases your leverage on the repair or deposit issue.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>How do I document a repair request so the landlord has to act?</summary>
+              <p>
+                Put it in writing with a date, describe the problem and what you have already tried,
+                keep a copy, and log every follow-up with its date. The written record plus a
+                timeline of follow-ups is what turns a complaint into a case. The companion builds
+                this record for you as you go.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How long does a landlord have to return a security deposit?</summary>
+              <p>
+                It depends on your state: common windows run 14 to 60 days after move-out, with 21
+                and 30 days the most common. The tool computes your follow-up dates from the date
+                you enter and flags when the window passes. This is general information, not legal
+                advice; verify your state's rule.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I break my lease because of maintenance problems?</summary>
+              <p>
+                Only with a documented record: written repair requests, the dates they went
+                unanswered, any health or safety impact, and often a final written notice before
+                leaving. Without that paper trail, breaking a lease usually means owing the
+                remaining rent. The companion walks you through building that record first.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What proof do I need to win a deposit dispute?</summary>
+              <p>
+                Move-in and move-out condition photos, the lease's deposit clause, written
+                communications with dates, receipts for anything you paid to fix, and a ledger
+                showing what you paid versus what was withheld. Small claims judges decide these
+                cases on documents, not stories.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool organizes your facts, computes your deadlines and rent math, and
+                drafts letters from what you enter. Tenant law varies by state and city. Verify
+                your state's rules and talk to a local tenants' rights organization or attorney for
+                advice about your situation.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools
+          </h3>
+          <div class="lt-related">
+            <a href="/tools/ai-rent-increase-negotiation-letter/"
+              ><strong>Rent Increase Negotiation Letter</strong
+              ><small>Counter a rent hike with verified rent math</small></a
+            >
+            <a href="/tools/landlord-tenant-letter/"
+              ><strong>Landlord &amp; Tenant Letters</strong
+              ><small>One-off repair, deposit, and tenant notices</small></a
+            >
+            <a href="/guides/how-to-track-a-tenant-case/"
+              ><strong>How to Track a Tenant Case</strong
+              ><small>The paper-trail method behind this tool</small></a
+            >
+            <a href="/guides/how-to-write-a-tenant-repair-demand-letter/"
+              ><strong>Tenant Repair Demand Letter Guide</strong
+              ><small>Writing the first letter of the sequence</small></a
+            >
+            <a href="/guides/how-to-negotiate-a-rent-increase/"
+              ><strong>How to Negotiate a Rent Increase</strong
+              ><small>Strategy and scripts before you send</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <div id="evidence-pack-print" aria-hidden="true" style="display: none"></div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. Review every letter before you send it.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-tenant-case-companion/ai-tenant-case-companion.js?v=20261021a1"></script>
+  </body>
+</html>

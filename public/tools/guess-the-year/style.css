@@ -1,0 +1,579 @@
+/* Guess the Year: Tech Edition
+   Scoped to this page. Uses the site obsidian tokens from css/style.css. */
+
+.gy-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4.5rem;
+  color: var(--text);
+}
+
+.gy-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.gy-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.gy-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.gy-hero {
+  max-width: 42rem;
+  margin-bottom: 1.25rem;
+}
+
+.gy-badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--primary-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.gy-hero h1,
+.gy-prose h2,
+.gy-faq h2,
+.gy-related h2,
+.gy-card-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+}
+
+.gy-hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.gy-hero p,
+.gy-prose p,
+.gy-faq p,
+.gy-hint,
+.gy-lead,
+.gy-prompt,
+.gy-note,
+.gy-fact,
+.gy-share,
+.gy-decade-line,
+.gy-compare {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.gy-hero p {
+  margin: 0 0 0.9rem;
+}
+
+.gy-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gy-steps li {
+  margin: 0;
+  padding: 0.75rem 0.8rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.gy-steps strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--text);
+}
+
+.gy-client {
+  margin: 1.25rem 0 2rem;
+}
+
+.gy-status {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.gy-status p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+#gy-progress,
+#gy-points {
+  color: var(--text);
+  font-weight: 650;
+}
+
+#gy-points {
+  text-align: right;
+}
+
+.gy-meter {
+  grid-column: 1 / -1;
+  height: 6px;
+  margin-top: 0.35rem;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+}
+
+.gy-meter-fill {
+  width: 0;
+  height: 100%;
+  background: var(--primary);
+  transition: width 160ms ease;
+}
+
+.gy-card {
+  min-height: 280px;
+  padding: 1.25rem 1.2rem 1.15rem;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(239, 68, 68, 0.16), transparent 42%), var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.gy-card.is-fresh {
+  animation: gy-in 180ms ease;
+}
+
+.gy-card.is-exact {
+  border-color: #86efac;
+}
+
+.gy-card.is-off {
+  border-color: var(--primary-soft);
+}
+
+.gy-art {
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  margin-bottom: 0.85rem;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.16), transparent 55%),
+    var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.28);
+}
+
+.gy-mark {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.gy-art[data-art='floppy'],
+.gy-art[data-art='disc'],
+.gy-art[data-art='coin'],
+.gy-art[data-art='wifi'],
+.gy-art[data-art='handheld'],
+.gy-art[data-art='pong'] {
+  position: relative;
+}
+
+.gy-art[data-art='wifi']::after,
+.gy-art[data-art='floppy']::after,
+.gy-art[data-art='coin']::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.gy-art[data-art='wifi']::after {
+  right: 0.35rem;
+  bottom: 0.45rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-right: 2px solid var(--primary-soft);
+  border-bottom: 2px solid var(--primary-soft);
+  border-radius: 0 0 0.7rem 0;
+}
+
+.gy-art[data-art='floppy']::after {
+  top: 0.4rem;
+  right: 0.45rem;
+  width: 0.55rem;
+  height: 0.7rem;
+  background: var(--text-faint);
+  border-radius: 1px;
+}
+
+.gy-art[data-art='coin']::after {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 2px solid var(--primary-soft);
+  border-radius: 50%;
+}
+
+.gy-kicker {
+  margin: 0 0 0.4rem;
+  color: var(--primary-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gy-card-title {
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.15;
+}
+
+.gy-prompt,
+.gy-lead,
+.gy-fact,
+.gy-note,
+.gy-share,
+.gy-decade-line,
+.gy-compare {
+  margin: 0.35rem 0 0.85rem;
+}
+
+.gy-readout {
+  margin: 0.2rem 0 0.15rem;
+  color: var(--text);
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(3.2rem, 12vw, 5.4rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.gy-slider-label,
+.gy-number-label {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.gy-slider {
+  width: 100%;
+  height: 44px;
+  margin: 0.15rem 0 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.gy-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.35rem;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.gy-number {
+  width: 8.5rem;
+  margin: 0.35rem 0 0.8rem;
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 1.05rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+}
+
+.gy-nudges,
+.gy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.2rem 0 0.85rem;
+}
+
+.gy-nudge,
+.gy-primary,
+.gy-secondary,
+.gy-text-button {
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-weight: 650;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.gy-nudge,
+.gy-secondary,
+.gy-text-button {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+}
+
+.gy-primary {
+  color: var(--primary-ink);
+  background: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.gy-primary:hover,
+.gy-secondary:hover,
+.gy-nudge:hover,
+.gy-text-button:hover {
+  border-color: var(--primary-soft);
+}
+
+.gy-text-button {
+  margin-top: 0.2rem;
+  padding-inline: 0.2rem;
+  color: var(--text-muted);
+  border-color: transparent;
+  border-radius: 8px;
+}
+
+.gy-judgement {
+  margin: 0.2rem 0 0.7rem;
+  color: var(--text);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.gy-track {
+  position: relative;
+  height: 28px;
+  margin: 0.2rem 0 0.7rem;
+  background: linear-gradient(90deg, var(--bg-elevated), var(--border-strong));
+  border-radius: 999px;
+}
+
+.gy-pin {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gy-pin.is-guess {
+  background: var(--attention);
+}
+
+.gy-pin.is-actual {
+  background: var(--primary);
+}
+
+.gy-you,
+.gy-real {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.gy-decade {
+  display: inline-block;
+  margin: 0 0 0.9rem;
+  padding: 0.2rem 0.55rem;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+}
+
+.gy-score-num {
+  margin: 0.2rem 0;
+  color: var(--text);
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
+  line-height: 0.95;
+}
+
+.gy-rank-name {
+  margin: 0 0 0.6rem;
+  color: var(--primary-soft);
+  font-weight: 700;
+}
+
+.gy-review {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gy-review li {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.gy-review-title {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.gy-review-detail {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.gy-nudge:focus-visible,
+.gy-primary:focus-visible,
+.gy-secondary:focus-visible,
+.gy-text-button:focus-visible,
+.gy-slider:focus-visible,
+.gy-number:focus-visible,
+.gy-card-title:focus-visible,
+.gy-judgement:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 3px;
+}
+
+.gy-prose,
+.gy-faq,
+.gy-related {
+  max-width: 42rem;
+  margin: 2rem 0;
+}
+
+.gy-prose h3 {
+  margin: 1.4rem 0 0.4rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.gy-prose a,
+.gy-faq a {
+  color: var(--primary-soft);
+}
+
+.gy-faq details {
+  border-top: 1px solid var(--border);
+}
+
+.gy-faq summary {
+  padding: 0.85rem 0;
+  color: var(--text);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.gy-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.gy-related-grid a {
+  display: block;
+  padding: 0.9rem 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.gy-related-grid a:hover {
+  border-color: var(--primary-soft);
+}
+
+.gy-related-grid strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.gy-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes gy-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .gy-page {
+    padding: 1rem 0.9rem 4rem;
+  }
+
+  .gy-steps,
+  .gy-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gy-status {
+    grid-template-columns: 1fr;
+  }
+
+  #gy-points {
+    text-align: left;
+  }
+
+  .gy-card {
+    padding: 1rem 0.9rem;
+  }
+
+  .gy-nudges {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .gy-nudge {
+    padding-inline: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gy-card,
+  .gy-card.is-fresh,
+  .gy-meter-fill,
+  .gy-primary,
+  .gy-secondary,
+  .gy-nudge {
+    animation: none;
+    transition: none;
+  }
+}

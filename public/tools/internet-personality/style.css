@@ -1,0 +1,733 @@
+/* What's Your Internet Personality?
+   Scoped to this page. Uses the site tokens from css/style.css.
+   Type colors live on the result card only. The scenes stay on the site chrome. */
+
+.ip-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4.5rem;
+  color: var(--text);
+}
+
+.ip-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.ip-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.ip-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.ip-hero {
+  position: static;
+  top: auto;
+  z-index: auto;
+  max-width: 44rem;
+  margin-bottom: 1.25rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.ip-badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--attention);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ip-hero h1,
+.ip-prose h2,
+.ip-faq h2,
+.ip-related h2 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+}
+
+.ip-hero h1 {
+  font-size: clamp(2.3rem, 6vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.ip-hero p,
+.ip-prose p,
+.ip-faq p,
+.ip-hint,
+.ip-detail,
+.ip-summary,
+.ip-share,
+.ip-description,
+.ip-tagline,
+.ip-pair-why,
+.ip-privacy-text {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.ip-hero p {
+  margin: 0 0 0.9rem;
+}
+
+.ip-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ip-steps li {
+  margin: 0;
+  padding: 0.8rem 0.85rem 0.8rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px 18px 18px 6px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.ip-steps strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--text);
+}
+
+.ip-steps span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--attention);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.ip-client {
+  margin: 1.25rem 0 2rem;
+}
+
+.ip-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.ip-status p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.ip-pips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.8rem;
+}
+
+.ip-pip {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 99px;
+  background: var(--border-strong);
+}
+
+.ip-pip.is-done {
+  background: var(--primary);
+}
+
+.ip-pip.is-now {
+  background: var(--attention);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+.ip-meter {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.ip-recall {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border-strong);
+  border-radius: 16px;
+}
+
+.ip-recall p {
+  margin: 0;
+  color: var(--text);
+}
+
+.ip-recall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.ip-card {
+  position: relative;
+  padding: 1.2rem 1.15rem 1.15rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.ip-card:not(.ip-result)::before {
+  content: '';
+  display: block;
+  height: 14px;
+  margin: -1.2rem -1.15rem 1rem;
+  background: radial-gradient(circle at 12px 0, var(--bg) 7px, transparent 8px) left top / 24px 14px
+    repeat-x;
+  border-bottom: 1px dashed var(--border-strong);
+}
+
+.ip-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--attention);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ip-prompt {
+  padding: 0;
+  color: var(--text);
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.ip-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.ip-detail {
+  margin: 0.4rem 0 0.95rem;
+}
+
+.ip-choices {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ip-choice {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.75rem 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.ip-choice:has(input:checked) {
+  border-color: var(--attention);
+  box-shadow: inset 0 0 0 1px var(--attention);
+}
+
+.ip-choice:has(input:focus-visible) {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+.ip-choice input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--primary);
+}
+
+.ip-choice-text {
+  line-height: 1.4;
+}
+
+.ip-choice-key {
+  color: var(--text-faint);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.ip-actions,
+.ip-recall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.ip-actions {
+  margin-top: 1rem;
+}
+
+.ip-actions button,
+.ip-recall button {
+  min-height: 44px;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ip-next,
+.ip-copy,
+.ip-download {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fffaf5;
+}
+
+.ip-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ip-result {
+  background: var(--ip-paper);
+  color: var(--ip-ink);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ip-result .ip-kicker,
+.ip-result .ip-type-meta,
+.ip-result .ip-tagline,
+.ip-result .ip-description,
+.ip-result .ip-summary,
+.ip-result .ip-pair-why,
+.ip-result .ip-privacy-text,
+.ip-result .ip-share,
+.ip-result .ip-copy-status,
+.ip-result .ip-pair-pct {
+  color: var(--ip-muted);
+}
+
+.ip-result .ip-type-name,
+.ip-result .ip-subhead,
+.ip-result .ip-bar-name,
+.ip-result .ip-bar-pct,
+.ip-result .ip-pair-name,
+.ip-result li {
+  color: var(--ip-ink);
+}
+
+.ip-result-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.1rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.ip-medallion {
+  display: grid;
+  width: 7.25rem;
+  height: 7.25rem;
+  place-items: center;
+  border: 2px solid var(--ip-accent);
+  border-radius: 50%;
+  background: var(--ip-track);
+  color: var(--ip-accent);
+}
+
+.ip-emblem {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.ip-type-name {
+  margin: 0;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 0.95;
+}
+
+.ip-type-meta {
+  margin: 0.35rem 0 0;
+  font-weight: 700;
+}
+
+.ip-tagline {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.35rem;
+  font-style: italic;
+}
+
+.ip-description,
+.ip-summary,
+.ip-share,
+.ip-pair-why,
+.ip-privacy-text {
+  margin: 0 0 0.8rem;
+}
+
+.ip-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin: 0.2rem 0 0.9rem;
+}
+
+.ip-panel,
+.ip-privacy,
+.ip-pairs {
+  padding: 0.85rem 0.9rem;
+  border-radius: 16px;
+  background: var(--ip-track);
+}
+
+.ip-privacy {
+  margin-bottom: 0.7rem;
+  border-left: 4px solid var(--ip-accent);
+}
+
+.ip-pairs {
+  margin-bottom: 0.9rem;
+}
+
+.ip-subhead {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.ip-strengths,
+.ip-blinds,
+.ip-pair-list,
+.ip-bars {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ip-strengths li,
+.ip-blinds li,
+.ip-pair {
+  margin: 0.35rem 0;
+  line-height: 1.4;
+}
+
+.ip-pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.3rem 0.8rem;
+}
+
+.ip-pair-name {
+  font-weight: 700;
+}
+
+.ip-bars {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.ip-bar-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+}
+
+.ip-bar.is-winner .ip-bar-name {
+  color: var(--ip-accent);
+}
+
+.ip-track {
+  height: 0.45rem;
+  margin-top: 0.25rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ip-ink) 16%, var(--ip-paper));
+}
+
+.ip-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ip-accent);
+}
+
+.ip-share {
+  padding: 0.75rem 0.8rem;
+  border-radius: 12px;
+  background: var(--ip-track);
+  overflow-wrap: anywhere;
+}
+
+.ip-result .ip-actions button {
+  background: transparent;
+  border-color: var(--ip-accent);
+  color: var(--ip-ink);
+}
+
+.ip-result .ip-copy,
+.ip-result .ip-download {
+  background: var(--ip-accent);
+  color: var(--ip-paper);
+}
+
+.ip-type-lurker {
+  --ip-paper: #1b1430;
+  --ip-ink: #f7f2ff;
+  --ip-accent: #e4ccff;
+  --ip-muted: #ddd0f0;
+  --ip-track: #322652;
+}
+
+.ip-type-tabs {
+  --ip-paper: #2b1a10;
+  --ip-ink: #fff6ec;
+  --ip-accent: #ffd29a;
+  --ip-muted: #f0d8c4;
+  --ip-track: #4a3222;
+}
+
+.ip-type-checker {
+  --ip-paper: #0f241c;
+  --ip-ink: #edfff6;
+  --ip-accent: #b6ffd4;
+  --ip-muted: #cfe8db;
+  --ip-track: #1d3d30;
+}
+
+.ip-type-glue {
+  --ip-paper: #2c141c;
+  --ip-ink: #fff1f5;
+  --ip-accent: #ffc2d0;
+  --ip-muted: #f3d5de;
+  --ip-track: #4c2834;
+}
+
+.ip-type-diver {
+  --ip-paper: #0d1c2e;
+  --ip-ink: #eef6ff;
+  --ip-accent: #b9dcff;
+  --ip-muted: #cddff0;
+  --ip-track: #1b334e;
+}
+
+.ip-type-meme {
+  --ip-paper: #2a1608;
+  --ip-ink: #fff6ea;
+  --ip-accent: #ffe0a3;
+  --ip-muted: #f3dcc4;
+  --ip-track: #4a2e16;
+}
+
+.ip-type-minimal {
+  --ip-paper: #f6f3ec;
+  --ip-ink: #1c1915;
+  --ip-accent: #8a2e12;
+  --ip-muted: #4e463c;
+  --ip-track: #e6dfd4;
+}
+
+.ip-type-owl {
+  --ip-paper: #141226;
+  --ip-ink: #f4f1ff;
+  --ip-accent: #d4c7ff;
+  --ip-muted: #d9d2ee;
+  --ip-track: #2a2744;
+}
+
+.ip-prose,
+.ip-faq,
+.ip-related {
+  max-width: 44rem;
+  margin: 2rem 0;
+}
+
+.ip-prose h3 {
+  margin: 1.2rem 0 0.35rem;
+  color: var(--text);
+  font-size: 1.15rem;
+}
+
+.ip-roster {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ip-roster li {
+  margin: 0;
+  padding: 0.7rem 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.ip-roster strong {
+  display: block;
+  color: var(--text);
+}
+
+.ip-faq details {
+  margin: 0.45rem 0;
+  padding: 0.7rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.ip-faq summary {
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.ip-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.ip-related-grid a {
+  display: block;
+  padding: 0.9rem 0.95rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.ip-related-grid a:hover,
+.ip-related-grid a:focus-visible {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.ip-related-grid strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.ip-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  .ip-steps,
+  .ip-related-grid,
+  .ip-split,
+  .ip-roster,
+  .ip-result-head {
+    grid-template-columns: 1fr;
+  }
+
+  .ip-page {
+    padding-inline: 0.9rem;
+  }
+
+  .ip-choice {
+    grid-template-columns: auto 1fr;
+    border-radius: 16px;
+  }
+
+  .ip-choice-key {
+    display: none;
+  }
+
+  .ip-result-head {
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ip-fill,
+  .ip-pip {
+    transition:
+      width 0.35s ease,
+      background 0.35s ease;
+  }
+
+  .ip-card.is-fresh {
+    animation: ip-rise 0.35s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ip-card,
+  .ip-fill,
+  .ip-pip,
+  .ip-choice,
+  .ip-result {
+    transition: none;
+    animation: none;
+  }
+}
+
+@keyframes ip-rise {
+  from {
+    opacity: 0.45;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

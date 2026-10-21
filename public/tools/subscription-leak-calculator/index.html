@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Subscription Leak Calculator | CyberScryb</title>
+    <meta
+      name="description"
+      content="Check the subscriptions you pay for, edit the estimated prices, and see the monthly and yearly total plus what to cut. Free, in your browser, no account."
+    />
+    <meta
+      name="keywords"
+      content="subscription calculator, subscription tracker, monthly subscriptions cost, cancel unused subscriptions, streaming overlap"
+    />
+    <meta property="og:title" content="Free Subscription Leak Calculator | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Check the subscriptions you pay for, edit the estimated prices, and see the monthly and yearly total plus what to cut. Free, in your browser, no account."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/subscription-leak-calculator/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Free Subscription Leak Calculator | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Check the subscriptions you pay for, edit the estimated prices, and see the monthly and yearly total plus what to cut. Free, in your browser, no account."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/subscription-leak-calculator/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/subscription-leak-calculator/style.css?v=20261021leak" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free Subscription Leak Calculator",
+        "url": "https://cyberscryb.com/tools/subscription-leak-calculator/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "Add the paid services you have, edit the estimated monthly price, and see the monthly and yearly total, overlap flags, and optional cuts. Runs in the browser. No account.",
+        "featureList": [
+          "Checklist of common subscriptions with editable estimated prices",
+          "Add your own service",
+          "Live monthly and yearly totals",
+          "Overlap flags for services that do the same job",
+          "Cut suggestions based on how often you use each service",
+          "Copy or print a summary",
+          "Optional save in this browser only"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this send my subscription list to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The math runs in your browser. If you leave the list in place, it is saved in this browser's local storage so you can come back to it. That copy never leaves the device. Clear saved list deletes it. You can confirm there is no upload in the browser network panel."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the starting prices exact?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Each default is a typical US estimate for the plan named on that row, not a quote from the company. Promos, annual billing, student plans, bundles, and taxes change the real charge. Edit every price to match your bill before you treat the total as yours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What counts as an overlap?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An overlap is two or more selected services that do the same job, such as several video streaming services, two music apps, or two meal-delivery memberships. A game subscription and a music app are not treated as overlap. Three or more in one group is flagged. A separate note appears when one plan already includes another, such as YouTube Premium and YouTube Music, or when a bundle may cost less than the separate plans."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the calculator decide what to cut?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It suggests a cut when you mark a service as rarely used, when you are paying for a plan that another selected plan already includes, or when three or more services in the same group are selected and this one is only used sometimes while another is used often. Anything you mark as used often stays, unless you are paying twice for a plan that is already included. The suggestions are optional. Change the use if a suggestion is wrong."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it free, and does it cancel anything for me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is free, with no account and no signup. It does not cancel, pause, or contact any company. You cancel with each service yourself. Some plans bill annually, charge a cancellation fee, or are cheaper in a bundle, so check the real terms before you drop one."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Subscription Leak Calculator",
+            "item": "https://cyberscryb.com/tools/subscription-leak-calculator/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="sl-page">
+      <nav class="sl-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Subscription Leak Calculator</span>
+      </nav>
+
+      <header class="sl-hero">
+        <p class="sl-badge">Free · In this browser · No account</p>
+        <h1>Subscription Leak Calculator</h1>
+        <p>
+          Check the paid services you actually have. Edit the estimated price, mark how often you
+          use each one, and watch the monthly and yearly totals move. Then see which ones overlap
+          and what you would keep if you cut the idle ones.
+        </p>
+      </header>
+
+      <noscript>
+        <p>
+          This calculator needs JavaScript. It still runs only in your browser and does not send the
+          list anywhere.
+        </p>
+      </noscript>
+
+      <div class="sl-workspace">
+        <section class="sl-catalog" aria-labelledby="sl-services-heading">
+          <div class="sl-catalog-head">
+            <h2 id="sl-services-heading">Your services</h2>
+            <p class="sl-estimate">
+              Default prices are typical US estimates for the plan named on each row. Annual plans
+              are often cheaper than the month-to-month sticker. Change any price to match the
+              charge on your statement.
+            </p>
+          </div>
+          <div class="sl-toolbar">
+            <label class="sl-search">
+              <span class="sl-sr">Search services</span>
+              <input
+                id="sl-search"
+                type="search"
+                placeholder="Search services"
+                autocomplete="off"
+              />
+            </label>
+            <div
+              class="sl-filters"
+              id="sl-filters"
+              role="group"
+              aria-label="Filter by category"
+            ></div>
+            <div class="sl-toolbar-actions">
+              <button type="button" id="sl-selected-only" aria-pressed="false">
+                Selected only
+              </button>
+              <button type="button" id="sl-sample">Try a sample household</button>
+            </div>
+          </div>
+          <p id="sl-filter-status" class="sl-filter-status" role="status"></p>
+          <div id="sl-list"></div>
+          <form class="sl-add" id="sl-add">
+            <h3>Add your own</h3>
+            <p class="sl-estimate">
+              A Patreon, a niche app, a second gym. It joins the totals, and the category is used
+              only to spot overlaps.
+            </p>
+            <div class="sl-add-grid">
+              <label
+                >Service name
+                <input id="sl-custom-name" type="text" maxlength="60" autocomplete="off" />
+              </label>
+              <label
+                >Category
+                <select id="sl-custom-kind"></select>
+              </label>
+              <label
+                >Monthly price
+                <input
+                  id="sl-custom-price"
+                  type="text"
+                  inputmode="decimal"
+                  placeholder="0.00"
+                  autocomplete="off"
+                />
+              </label>
+              <button type="submit">Add service</button>
+            </div>
+            <p id="sl-add-error" class="sl-add-error" role="alert"></p>
+          </form>
+        </section>
+
+        <aside class="sl-summary" id="sl-plan" aria-labelledby="sl-plan-heading">
+          <h2 id="sl-plan-heading">The plan</h2>
+          <div class="sl-totals">
+            <p class="sl-total">
+              <span class="sl-total-value" id="sl-monthly">$0.00</span>
+              <span class="sl-total-label">per month</span>
+            </p>
+            <p class="sl-total sl-total-year">
+              <span class="sl-total-value" id="sl-yearly">$0.00</span>
+              <span class="sl-total-label">per year</span>
+            </p>
+          </div>
+          <p class="sl-count" id="sl-count">Nothing selected yet.</p>
+          <h3>What a year of this equals</h3>
+          <p class="sl-estimate">
+            Rough comparisons, not a budget. Coffee at $4.50, groceries at $125 a week, dinner out
+            at $60.
+          </p>
+          <ul class="sl-equiv-list" id="sl-equivalents"></ul>
+          <h3>Overlaps</h3>
+          <ul class="sl-overlap-list" id="sl-overlaps"></ul>
+          <h3>What to cut</h3>
+          <ul class="sl-cut-list" id="sl-cuts"></ul>
+          <div class="sl-meter" id="sl-meter" hidden>
+            <div class="sl-meter-track" aria-hidden="true">
+              <div class="sl-meter-fill" id="sl-meter-fill"></div>
+            </div>
+            <p id="sl-meter-label"></p>
+          </div>
+          <p class="sl-kept" id="sl-kept" hidden></p>
+          <div class="sl-actions">
+            <button type="button" id="sl-copy">Copy summary</button>
+            <button type="button" id="sl-print">Print</button>
+            <button type="button" id="sl-reset">Clear saved list</button>
+          </div>
+          <p class="sl-copy-status" id="sl-copy-status" role="status"></p>
+          <p class="sl-storage" id="sl-storage">
+            Saved in this browser only, so you can come back to it. Nothing is uploaded. Clear saved
+            list removes it from this device.
+          </p>
+        </aside>
+      </div>
+
+      <div class="sl-dock" id="sl-dock">
+        <div>
+          <strong id="sl-dock-monthly">$0.00</strong> <span>/mo</span>
+          <strong id="sl-dock-yearly">$0.00</strong> <span>/yr</span>
+        </div>
+        <a href="#sl-plan">See the plan</a>
+      </div>
+      <p id="sl-live" class="sl-sr" aria-live="polite"></p>
+
+      <section class="sl-prose">
+        <h2>Where the quiet money goes</h2>
+        <p>
+          A subscription leak is a charge that keeps clearing after the habit that justified it has
+          faded. One streaming service is a choice. Four of them, plus a music app you opened last
+          spring and a delivery membership on a second phone, is a pile of small drafts that never
+          show up as a single bill. This page adds those drafts up in front of you.
+        </p>
+        <p>
+          Check only what you pay for. The starting price is an estimate for one common US plan, and
+          the row says which plan that estimate refers to. If your statement says something else,
+          type that number. A promo, a student plan, an annual prepay, or a family seat will not
+          match the default, and the yearly total is only as honest as the prices you leave in
+          place.
+        </p>
+        <p>
+          Then mark how often you actually open each one: often, sometimes, or rarely. The overlap
+          list is about the same job, not about owning both a game library and a newspaper. Three
+          video services is a flag. A game pass and a music app is not. If a plan already includes
+          another one on your list, such as YouTube Premium and YouTube Music, or Creative Cloud and
+          a separate Photoshop seat, the included one is called out even if you use it. A Disney
+          bundle note shows up when Disney+ and Hulu are both selected, because the bundle can cost
+          less than dropping one at random.
+        </p>
+        <p>
+          The cut list is a suggestion, not an order. Rarely used services come off first. In a
+          crowded group, a service you only use sometimes is suggested when another one in that
+          group is the one you use often. Anything marked often stays, unless you are paying a
+          second time for something already included. If a suggestion is wrong, change the use. The
+          savings line updates with it.
+        </p>
+        <p>
+          Nothing here cancels a plan, and nothing is sent to a server. The optional save stays in
+          this browser under a label you can clear. Before you drop a service, look for an annual
+          commitment or a cancellation fee, and put the money you free somewhere on purpose. The
+          <a href="/tools/budget-planner/">budget planner</a> is the place to seat that surplus. If
+          it should attack a balance, the
+          <a href="/tools/debt-payoff-calculator/">debt payoff calculator</a> shows what the extra
+          payment does. If a gym membership is the line you are done with, the
+          <a href="/tools/gym-cancellation-letter/">gym cancellation letter</a> is the note to send.
+        </p>
+      </section>
+
+      <section class="sl-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this send my subscription list to a server?</summary>
+          <p>
+            No. The math runs in your browser. If you leave the list in place, it is saved in this
+            browser's local storage so you can come back to it. That copy never leaves the device.
+            Clear saved list deletes it. You can confirm there is no upload in the browser network
+            panel.
+          </p>
+        </details>
+        <details>
+          <summary>Are the starting prices exact?</summary>
+          <p>
+            No. Each default is a typical US estimate for the plan named on that row, not a quote
+            from the company. Promos, annual billing, student plans, bundles, and taxes change the
+            real charge. Edit every price to match your bill before you treat the total as yours.
+          </p>
+        </details>
+        <details>
+          <summary>What counts as an overlap?</summary>
+          <p>
+            An overlap is two or more selected services that do the same job, such as several video
+            streaming services, two music apps, or two meal-delivery memberships. A game
+            subscription and a music app are not treated as overlap. Three or more in one group is
+            flagged. A separate note appears when one plan already includes another, such as YouTube
+            Premium and YouTube Music, or when a bundle may cost less than the separate plans.
+          </p>
+        </details>
+        <details>
+          <summary>How does the calculator decide what to cut?</summary>
+          <p>
+            It suggests a cut when you mark a service as rarely used, when you are paying for a plan
+            that another selected plan already includes, or when three or more services in the same
+            group are selected and this one is only used sometimes while another is used often.
+            Anything you mark as used often stays, unless you are paying twice for a plan that is
+            already included. The suggestions are optional. Change the use if a suggestion is wrong.
+          </p>
+        </details>
+        <details>
+          <summary>Is it free, and does it cancel anything for me?</summary>
+          <p>
+            It is free, with no account and no signup. It does not cancel, pause, or contact any
+            company. You cancel with each service yourself. Some plans bill annually, charge a
+            cancellation fee, or are cheaper in a bundle, so check the real terms before you drop
+            one.
+          </p>
+        </details>
+      </section>
+
+      <section class="sl-related">
+        <h2>Related tools</h2>
+        <div class="sl-related-grid">
+          <a href="/tools/budget-planner/">
+            <strong>Budget Planner</strong>
+            <span>Put the money you free into the rest of the month.</span>
+          </a>
+          <a href="/tools/debt-payoff-calculator/">
+            <strong>Debt Payoff Calculator</strong>
+            <span>See what those saved dollars do against a balance.</span>
+          </a>
+          <a href="/tools/gym-cancellation-letter/">
+            <strong>Gym Cancellation Letter</strong>
+            <span>Write the note if a fitness membership is the one to end.</span>
+          </a>
+          <a href="/tools/dream-setup-builder/">
+            <strong>Build Your Dream Setup</strong>
+            <span>Plan a desk from generic pieces, with an estimate and an ergonomics score.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/subscription-leak-calculator/logic.js?v=20261021leak"></script>
+    <script src="/tools/subscription-leak-calculator/script.js?v=20261021leak"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>

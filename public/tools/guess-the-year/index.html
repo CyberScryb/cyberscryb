@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Year: Tech Edition | CyberScryb</title>
+    <meta
+      name="description"
+      content="Guess the year of the iPhone, YouTube, the floppy disk, and ChatGPT. Ten cards a round, a shared daily set, and scores stay in this browser."
+    />
+    <meta
+      name="keywords"
+      content="guess the year, tech quiz, when was the iPhone, YouTube launch year, first website, Game Boy, Wi-Fi, ChatGPT, floppy disk, daily quiz"
+    />
+    <meta property="og:title" content="Guess the Year: Tech Edition | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Guess the year of the iPhone, YouTube, the floppy disk, and ChatGPT. Ten cards a round, a shared daily set, and scores stay in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/guess-the-year/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guess the Year: Tech Edition | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Guess the year of the iPhone, YouTube, the floppy disk, and ChatGPT. Ten cards a round, a shared daily set, and scores stay in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/guess-the-year/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/guess-the-year/style.css?v=20261021year" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Guess the Year: Tech Edition",
+        "url": "https://cyberscryb.com/tools/guess-the-year/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser timeline game. Each card describes a tech milestone. Drag a year or use the arrow keys, then see how close you were. Rounds are 10 cards. Daily mode deals the same 10 cards to everyone on that UTC date. The best score and the daily score stay in this browser.",
+        "featureList": [
+          "About 50 tech milestones with a one-line fact",
+          "Year slider, typed year, and keyboard arrows",
+          "Closeness score, exact year worth 100 points",
+          "Rounds of 10 random cards",
+          "Daily mode with a fixed set per UTC date",
+          "Total score, rank, and the decade you know best",
+          "Copyable result line",
+          "Best score and daily score stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this upload my guesses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The game runs in your browser. The only things saved are your best score and the daily score for the UTC date you played, in this browser's local storage. Individual guesses are not stored and are not sent anywhere."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the score calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An exact year is 100 points. The score then falls with distance: each year off multiplies the remaining score by a curve that is about 37 points at 12 years away, and anything that would round below 1 point becomes 0. A round is 10 cards, so the top score is 1000."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is daily mode?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Today's 10 is a fixed set of cards chosen from the UTC calendar date, computed in this browser. A friend who opens the game on that same UTC date gets the same cards in the same order. There is no server and no account. Play again on the same date keeps the higher daily score."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the years checked?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Each card uses a widely documented calendar year, and the reveal adds a one-line fact. Where a day is settled, the fact names it. Where historians split a public unveiling from lab work, the card says which event the year marks. It is a quiz, not a citation list."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do the slider and keyboard work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Drag the slider or type a four-digit year. Arrow keys move one year, and Shift plus an arrow, or Page Up and Page Down, moves ten. Enter locks the year. The same steps are buttons, so a screen reader can play without dragging. After the reveal, Next card moves on, and Enter does too when focus is not already on a button."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the best score and the daily score live?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only in this browser. Clear saved scores deletes both. Clearing site data for cyberscryb.com removes them too. The game does not ask for an account, and leaving the page drops the current round."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Guess the Year: Tech Edition",
+            "item": "https://cyberscryb.com/tools/guess-the-year/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="gy-page">
+      <nav class="gy-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Guess the Year</span>
+      </nav>
+
+      <header class="gy-hero">
+        <p class="gy-badge">Free · In this browser · Guesses stay here</p>
+        <h1>Guess the Year: Tech Edition</h1>
+        <p>
+          A timeline game of 10 tech milestones. Read the card, drag the year, and see how far off
+          you were. Play a random round, or today's shared 10. Nothing you guess is uploaded.
+        </p>
+        <ol class="gy-steps">
+          <li><strong>Read the card</strong> A milestone in words, plus a small drawing. No logos.</li>
+          <li><strong>Name the year</strong> Drag the slider, type it, or use the arrow keys.</li>
+          <li><strong>See the gap</strong> Exact is 100. The fact tells you what the year marks.</li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This game needs JavaScript. It still runs only in your browser and does not send your
+          guesses anywhere.
+        </p>
+      </noscript>
+
+      <div class="gy-client" id="gy-client">
+        <div class="gy-status">
+          <p id="gy-progress">Choose a round</p>
+          <p id="gy-points">Up to 100 a card</p>
+          <p id="gy-best">Best on this device: none yet.</p>
+          <p id="gy-daily">No daily score yet for this UTC date.</p>
+          <div class="gy-meter" aria-hidden="true">
+            <div class="gy-meter-fill" id="gy-meter-fill"></div>
+          </div>
+        </div>
+        <div class="gy-stage" id="gy-stage">
+          <article class="gy-card" id="gy-card" aria-labelledby="gy-card-title">
+            <h2 class="gy-card-title" id="gy-card-title">Pick a round</h2>
+            <p>The game loads in this browser.</p>
+          </article>
+        </div>
+        <p class="gy-hint" id="gy-hint">
+          Today's 10 use the UTC date, so friends on that calendar day get the same cards.
+        </p>
+      </div>
+
+      <section class="gy-prose">
+        <h2>A timeline you can play</h2>
+        <p>
+          Each card is one milestone, told in a sentence or two. The drawing is type, color, and a
+          generic mark. There are no product logos and no borrowed photos. The year is the thing
+          you supply. Lock it in and the card names the documented year, how many years you missed
+          by, and one fact about that date.
+        </p>
+        <p>
+          An exact year is 100 points. The score falls as the gap grows: a miss of about a dozen
+          years is still worth a few dozen points, and a miss large enough to round under one point
+          scores zero. Ten cards make a round, so a perfect round is 1000. The rank is that total.
+          The decade line looks at the real years, averages your points inside each decade, and
+          names the decade you know best. A tie goes to the decade with more cards, then to the
+          earlier one.
+        </p>
+        <h3>The same ten, on purpose</h3>
+        <p>
+          Daily mode does not call a server. This page hashes the UTC date and deals 10 cards from
+          that number, so two people on the same UTC calendar day get the same order. A random
+          round is a fresh shuffle. Play again on a daily date keeps the higher score for that
+          date. The best score is the best round on this device, daily or random.
+        </p>
+        <p>
+          The set runs from the telephone and the bulb through networks, games, discs, and the
+          recent chat tools. Where a lab date and a public date disagree, the fact says which one
+          the year marks. The first-website card is one of those: the reveal separates the day the
+          page was already running from the day the wider internet was told.
+        </p>
+        <h3>What a round keeps</h3>
+        <p>
+          Guesses disappear when you leave or deal again. This browser can keep the best total and
+          the daily total, and Clear saved scores deletes both. If a later save fails, the status
+          says this browser is not keeping the latest score.
+        </p>
+        <p>
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> is the swipe quiz for the claims
+          people repeat.
+          <a href="/tools/which-tech-era/">Which Tech Era Are You?</a> maps habits to seven eras.
+          <a href="/tools/prompt-battle/">Prompt Battle</a> is the head-to-head on writing a better
+          prompt, and the
+          <a href="/tools/password-habit-quiz/">Password Habit Quiz</a> scores reuse and a second
+          factor without asking for a password.
+          <a href="/tools/emoji-translator-challenge/">Emoji Translator Challenge</a> decodes a
+          phrase from emoji, or turns a sentence into emoji, and it stays in the browser too.
+        </p>
+      </section>
+
+      <section class="gy-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this upload my guesses?</summary>
+          <p>
+            No. The game runs in your browser. The only things saved are your best score and the
+            daily score for the UTC date you played, in this browser's local storage. Individual
+            guesses are not stored and are not sent anywhere.
+          </p>
+        </details>
+        <details>
+          <summary>How is the score calculated?</summary>
+          <p>
+            An exact year is 100 points. The score then falls with distance: each year off
+            multiplies the remaining score by a curve that is about 37 points at 12 years away, and
+            anything that would round below 1 point becomes 0. A round is 10 cards, so the top
+            score is 1000.
+          </p>
+        </details>
+        <details>
+          <summary>What is daily mode?</summary>
+          <p>
+            Today's 10 is a fixed set of cards chosen from the UTC calendar date, computed in this
+            browser. A friend who opens the game on that same UTC date gets the same cards in the
+            same order. There is no server and no account. Play again on the same date keeps the
+            higher daily score.
+          </p>
+        </details>
+        <details>
+          <summary>Are the years checked?</summary>
+          <p>
+            Yes. Each card uses a widely documented calendar year, and the reveal adds a one-line
+            fact. Where a day is settled, the fact names it. Where historians split a public
+            unveiling from lab work, the card says which event the year marks. It is a quiz, not a
+            citation list.
+          </p>
+        </details>
+        <details>
+          <summary>How do the slider and keyboard work?</summary>
+          <p>
+            Drag the slider or type a four-digit year. Arrow keys move one year, and Shift plus an
+            arrow, or Page Up and Page Down, moves ten. Enter locks the year. The same steps are
+            buttons, so a screen reader can play without dragging. After the reveal, Next card
+            moves on, and Enter does too when focus is not already on a button.
+          </p>
+        </details>
+        <details>
+          <summary>Where do the best score and the daily score live?</summary>
+          <p>
+            Only in this browser. Clear saved scores deletes both. Clearing site data for
+            cyberscryb.com removes them too. The game does not ask for an account, and leaving the
+            page drops the current round.
+          </p>
+        </details>
+      </section>
+
+      <section class="gy-related">
+        <h2>Related tools</h2>
+        <div class="gy-related-grid">
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on password, privacy, and battery claims.</span>
+          </a>
+          <a href="/tools/which-tech-era/">
+            <strong>Which Tech Era Are You?</strong>
+            <span>Twelve questions, seven eras, and a card that stays in this browser.</span>
+          </a>
+          <a href="/tools/prompt-battle/">
+            <strong>Prompt Battle</strong>
+            <span>Pick the stronger prompt, then build one with a live checklist.</span>
+          </a>
+          <a href="/tools/password-habit-quiz/">
+            <strong>Password Habit Quiz</strong>
+            <span>Score reuse, a manager, and a second factor. It never asks for a password.</span>
+          </a>
+          <a href="/tools/emoji-translator-challenge/">
+            <strong>Emoji Translator Challenge</strong>
+            <span>Decode a phrase from emoji, or turn a sentence into emoji.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="gy-live" class="gy-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/guess-the-year/logic.js?v=20261021year"></script>
+    <script src="/tools/guess-the-year/script.js?v=20261021year"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>

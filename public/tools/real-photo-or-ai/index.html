@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Photo or AI | CyberScryb</title>
+    <meta
+      name="description"
+      content="Look at one picture and say whether a camera or an AI made it. Public-domain photos, a score, and a share line stay in this browser."
+    />
+    <meta
+      name="keywords"
+      content="real photo or AI, AI image quiz, public domain photos, spot AI photos, camera or AI"
+    />
+    <meta property="og:title" content="Real Photo or AI | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Look at one picture and say whether a camera or an AI made it. Public-domain photos, a score, and a share line stay in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/real-photo-or-ai/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Real Photo or AI | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Look at one picture and say whether a camera or an AI made it. Public-domain photos, a score, and a share line stay in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/real-photo-or-ai/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/real-photo-or-ai/style.css?v=20261021photo" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Real Photo or AI",
+        "url": "https://cyberscryb.com/tools/real-photo-or-ai/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser quiz of 20 pictures. Decide whether each one is a real photograph or an AI image. The real photos are public domain or CC0. The AI images were generated for this game. Rounds are 10. The best score stays in this browser.",
+        "featureList": [
+          "20 pictures mixing real photographs and AI images on the same subjects",
+          "Real photos from public-domain U.S. government works and CC0 files, with author, license, and source",
+          "AI images generated for this game",
+          "Shuffled rounds of 10, one image at a time",
+          "A reveal with one or two tells",
+          "Score and a copyable result line",
+          "Best score stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this upload my answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The quiz runs in your browser. The only thing saved is your best score, in this browser's local storage. The photo you saw and the choice you made are not stored and are not sent anywhere. The page does not call an AI."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the real photos come from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each real photo is a public-domain U.S. government image or a CC0 file. The Credits section names the author, the license, and the Wikimedia Commons file page where that license is recorded. The pictures are stored with this page. Playing does not fetch them from those sites."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Were the AI photos made live by a model?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The AI photos were generated ahead of time for this game and saved on this site. The reveal labels them Generated by AI for this site. Playing does not send the picture to an API."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does a round work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each round is 10 pictures, five real and five AI, drawn from a deck of 20 and shuffled. You choose Real or AI, then see the source and one or two tells. Play again deals another 10. Your eye accuracy is the share of the round you got right."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the tells reliable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Even lighting, repeated shapes, and a too-clean center are habits, not proof. A camera can make a tidy picture, and a model can copy a crooked one. The note under each reveal says so."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is saved on this device?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only your best score. Clearing site data for cyberscryb.com removes it. The quiz does not ask for an account, and leaving the page drops the current round."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Real Photo or AI",
+            "item": "https://cyberscryb.com/tools/real-photo-or-ai/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="rp-page">
+      <nav class="rp-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Real Photo or AI</span>
+      </nav>
+
+      <header class="rp-hero">
+        <p class="rp-badge">Free · In this browser · No AI call</p>
+        <h1>Real Photo or AI</h1>
+        <hr class="rp-rule" />
+        <p>
+          Look at one picture and say whether a camera or an AI made it. The real photos are
+          public-domain or CC0 pictures of a forest, a cup of coffee, an alley, a fox, a coast, a
+          loaf, a field of stars, a desk, a bee, and a barn. The AI pictures cover the same
+          subjects and were generated for this page. A round is 10, shuffled, five of each. The
+          reveal names the source, then one or two habits to notice. Detection is unreliable, and
+          the page says so.
+        </p>
+        <ol class="rp-steps">
+          <li><strong>Look</strong> One picture. The description does not give the answer away.</li>
+          <li><strong>Choose</strong> Real or AI. Press R or A, or use the buttons.</li>
+          <li><strong>See the source</strong> Author and license, or a line that says the picture was generated by AI for this site.</li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This quiz needs JavaScript. It still runs only in your browser and does not send your
+          answers anywhere. The credits below list every real photo without it.
+        </p>
+      </noscript>
+
+      <div class="rp-client" id="rp-client">
+        <div class="rp-status">
+          <div class="rp-status-row">
+            <p id="rp-progress">Photo 1 of 10</p>
+            <p id="rp-best">Best on this device: none yet.</p>
+          </div>
+          <div class="rp-gauge-block">
+            <div class="rp-gauge-head">
+              <span id="rp-gauge-name">Your eye accuracy</span>
+              <span id="rp-gauge-value">No answers yet</span>
+            </div>
+            <div
+              class="rp-gauge-track"
+              id="rp-gauge"
+              role="meter"
+              aria-labelledby="rp-gauge-name"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="No answers yet"
+            >
+              <div class="rp-gauge-fill" id="rp-gauge-fill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="rp-stage" id="rp-stage">
+          <article class="rp-sheet" id="rp-card">
+            <p>The quiz loads in this browser.</p>
+          </article>
+        </div>
+        <p class="rp-hint" id="rp-hint">Press R for Real or A for AI. The buttons do the same thing.</p>
+      </div>
+
+      <section class="rp-prose" id="credits">
+        <h2>Credits</h2>
+        <p>
+          The real photographs below are public domain or CC0. The source link is the Wikimedia
+          Commons file page where that license is recorded. Thumbnails are the same files the quiz
+          uses, stored on this site. Nothing is fetched from Commons, Flickr, NASA, or the National
+          Archives while you play. The ten AI pictures (forest, coffee, alley, fox, coast, bread,
+          stars, desk, bee, and barn) were generated for this site. They are not from these
+          archives, and the reveal labels them Generated by AI for this site.
+        </p>
+        <ul class="rp-credits">
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-01.webp" alt="" width="960" height="638" loading="lazy" decoding="async" />
+            <p>
+              <strong>Nurse log on the Hoh Trail, Olympic National Park.</strong>
+              Olympic National Park, National Park Service. Public domain, U.S. government work (PD-USGov-NPS).
+              <a href="https://commons.wikimedia.org/wiki/File:Nurse_Log_Hoh_Trail_rain_forest_NPS_Photo_MP1_(23074100775).jpg">https://commons.wikimedia.org/wiki/File:Nurse_Log_Hoh_Trail_rain_forest_NPS_Photo_MP1_(23074100775).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-02.webp" alt="" width="960" height="640" loading="lazy" decoding="async" />
+            <p>
+              <strong>Cup of coffee on a wooden table.</strong>
+              Wendelin Jacober. CC0 1.0 Universal.
+              <a href="https://commons.wikimedia.org/wiki/File:Another_Cup_Of_Coffee_(_Public_Domain_).jpg">https://commons.wikimedia.org/wiki/File:Another_Cup_Of_Coffee_(_Public_Domain_).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-03.webp" alt="" width="960" height="678" loading="lazy" decoding="async" />
+            <p>
+              <strong>Chinatown alley, San Francisco, circa 1906.</strong>
+              Unknown photographer, circa 1906. Public domain (PD-US). The Bancroft Library holds the scan, digital ID cubcic brk7484.
+              <a href="https://commons.wikimedia.org/wiki/File:San_Francisco_Chinatown_alley.jpg">https://commons.wikimedia.org/wiki/File:San_Francisco_Chinatown_alley.jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-04.webp" alt="" width="960" height="856" loading="lazy" decoding="async" />
+            <p>
+              <strong>Red fox at Kodiak National Wildlife Refuge.</strong>
+              Lisa Hupp, U.S. Fish and Wildlife Service. Public domain, U.S. government work (PD-USGov-FWS).
+              <a href="https://commons.wikimedia.org/wiki/File:Red_fox_(8385104980).jpg">https://commons.wikimedia.org/wiki/File:Red_fox_(8385104980).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-05.webp" alt="" width="960" height="540" loading="lazy" decoding="async" />
+            <p>
+              <strong>Waves at sunset, Rialto Beach.</strong>
+              Brent Lawrence, U.S. Fish and Wildlife Service. Public domain, U.S. government work (PD-USGov-FWS). Still from a USFWS video of Rialto Beach.
+              <a href="https://commons.wikimedia.org/wiki/File:Rialto_Beach_sunset_(53676352325).jpg">https://commons.wikimedia.org/wiki/File:Rialto_Beach_sunset_(53676352325).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-06.webp" alt="" width="960" height="720" loading="lazy" decoding="async" />
+            <p>
+              <strong>Seeded sourdough, Sonoma, California.</strong>
+              Sarah Stierch. CC0 1.0 Universal.
+              <a href="https://commons.wikimedia.org/wiki/File:Sourdough_bread_-_January_2026_-_Sarah_Stierch_01.jpg">https://commons.wikimedia.org/wiki/File:Sourdough_bread_-_January_2026_-_Sarah_Stierch_01.jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-07.webp" alt="" width="960" height="692" loading="lazy" decoding="async" />
+            <p>
+              <strong>Galactic center in infrared, Spitzer Space Telescope.</strong>
+              NASA/JPL-Caltech/S. Stolovy (Spitzer Science Center/Caltech). Public domain, U.S. government work (PD-USGov-NASA).
+              <a href="https://commons.wikimedia.org/wiki/File:Milky_Way_IR_Spitzer.jpg">https://commons.wikimedia.org/wiki/File:Milky_Way_IR_Spitzer.jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-08.webp" alt="" width="960" height="640" loading="lazy" decoding="async" />
+            <p>
+              <strong>Laptop and notebook on a wooden desk.</strong>
+              Pixel.la Free Stock Photos. CC0 1.0 Universal.
+              <a href="https://commons.wikimedia.org/wiki/File:Coffee-desk-notes-workspace_(24243718641).jpg">https://commons.wikimedia.org/wiki/File:Coffee-desk-notes-workspace_(24243718641).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-09.webp" alt="" width="960" height="646" loading="lazy" decoding="async" />
+            <p>
+              <strong>Bumble bee on a blanket flower, Big Stone National Wildlife Refuge.</strong>
+              Mike Budd, U.S. Fish and Wildlife Service. Public domain, U.S. government work (PD-USGov-FWS).
+              <a href="https://commons.wikimedia.org/wiki/File:Bumble_bee_on_blanket_flower_(54015636001).jpg">https://commons.wikimedia.org/wiki/File:Bumble_bee_on_blanket_flower_(54015636001).jpg</a>
+            </p>
+          </li>
+          <li>
+            <img src="/tools/real-photo-or-ai/img/real-10.webp" alt="" width="960" height="720" loading="lazy" decoding="async" />
+            <p>
+              <strong>Red barn at River Road Farm, Millstone Valley, New Jersey.</strong>
+              Lardner/Klein Landscape Architects, for the Federal Highway Administration. Public domain, U.S. government work (PD-USGov-DOT). U.S. National Archives NAID 7720407.
+              <a href="https://commons.wikimedia.org/wiki/File:Millstone_Valley_Scenic_Byway_-_Red_Barn_of_River_Road_Farm_-_NARA_-_7720407.jpg">https://commons.wikimedia.org/wiki/File:Millstone_Valley_Scenic_Byway_-_Red_Barn_of_River_Road_Farm_-_NARA_-_7720407.jpg</a>
+            </p>
+          </li>
+        </ul>
+        <h3>Why a tidy picture is not proof</h3>
+        <p>
+          A centered path, a heart in the foam, and a barn with even boards show up often in
+          generated pictures. So does a sky with no dust and no streak. Cameras do all of those
+          things too. The Hoh Trail photo is messy because a log fell there, not because mess is a
+          seal of authenticity. The Spitzer picture is dazzling and still a real NASA exposure. The
+          tells under each reveal are there to practice a close look. They are not a verdict you
+          could use on someone else.
+        </p>
+        <p>
+          If you want a different kind of practice, the
+          <a href="/tools/ai-or-human-writer/">AI or Human writing test</a> asks you to read a
+          passage, the <a href="/tools/prompt-battle/">Prompt Battle</a> compares two prompts without
+          calling a model, and the <a href="/tools/ai-detector/">AI detector</a> reads text you
+          paste. The detector and the <a href="/tools/humanizer/">AI humanizer</a> send text to an
+          AI. This page does not. The
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> deck stays in the browser too.
+        </p>
+      </section>
+
+      <section class="rp-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this upload my answers?</summary>
+          <p>
+            No. The quiz runs in your browser. The only thing saved is your best score, in this
+            browser's local storage. The photo you saw and the choice you made are not stored and
+            are not sent anywhere. The page does not call an AI.
+          </p>
+        </details>
+        <details>
+          <summary>Where do the real photos come from?</summary>
+          <p>
+            Each real photo is a public-domain U.S. government image or a CC0 file. The Credits
+            section names the author, the license, and the Wikimedia Commons file page where that
+            license is recorded. The pictures are stored with this page. Playing does not fetch them
+            from those sites.
+          </p>
+        </details>
+        <details>
+          <summary>Were the AI photos made live by a model?</summary>
+          <p>
+            No. The AI photos were generated ahead of time for this game and saved on this site. The
+            reveal labels them Generated by AI for this site. Playing does not send the picture to
+            an API.
+          </p>
+        </details>
+        <details>
+          <summary>How does a round work?</summary>
+          <p>
+            Each round is 10 pictures, five real and five AI, drawn from a deck of 20 and shuffled.
+            You choose Real or AI, then see the source and one or two tells. Play again deals
+            another 10. Your eye accuracy is the share of the round you got right.
+          </p>
+        </details>
+        <details>
+          <summary>Are the tells reliable?</summary>
+          <p>
+            No. Even lighting, repeated shapes, and a too-clean center are habits, not proof. A
+            camera can make a tidy picture, and a model can copy a crooked one. The note under each
+            reveal says so.
+          </p>
+        </details>
+        <details>
+          <summary>What is saved on this device?</summary>
+          <p>
+            Only your best score. Clearing site data for cyberscryb.com removes it. The quiz does
+            not ask for an account, and leaving the page drops the current round.
+          </p>
+        </details>
+      </section>
+
+      <section class="rp-related">
+        <h2>Related tools</h2>
+        <div class="rp-related-grid">
+          <a href="/tools/ai-or-human-writer/">
+            <strong>AI or Human? The Writing Test</strong>
+            <span>Read a passage and say whether a person or an AI wrote it.</span>
+          </a>
+          <a href="/tools/prompt-battle/">
+            <strong>Prompt Battle</strong>
+            <span>Pick the stronger prompt, then build your own. It does not call an AI.</span>
+          </a>
+          <a href="/tools/ai-detector/">
+            <strong>AI Detector</strong>
+            <span>Paste text and see which sentences get flagged.</span>
+          </a>
+          <a href="/tools/humanizer/">
+            <strong>AI Humanizer</strong>
+            <span>Rewrite stiff AI paste so it sounds more like a person.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe through tech claims and read a short explanation.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="rp-live" class="rp-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/real-photo-or-ai/logic.js?v=20261021photo"></script>
+    <script src="/tools/real-photo-or-ai/script.js?v=20261021photo"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
