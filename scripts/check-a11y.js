@@ -24,6 +24,7 @@ const TARGET_PAGES = [
   'public/tools/prompt-battle/index.html',
   'public/tools/ai-or-human-writer/index.html',
   'public/tools/which-tech-era/index.html',
+  'public/tools/internet-personality/index.html',
   'public/tools/guess-the-year/index.html',
   'public/tools/screen-time-reality-check/index.html',
   'public/tools/dream-setup-builder/index.html',
