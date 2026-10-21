@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Battle | Free Prompt Quiz | CyberScryb</title>
+    <meta
+      name="description"
+      content="Pick the stronger AI prompt in rounds of 8, read what each one tends to write, then build your own with a live checklist. It stays in this browser."
+    />
+    <meta
+      name="keywords"
+      content="prompt battle, prompt engineering quiz, better AI prompt, prompt builder, role context constraints format"
+    />
+    <meta property="og:title" content="Prompt Battle | Free Prompt Quiz | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Pick the stronger AI prompt in rounds of 8, read what each one tends to write, then build your own with a live checklist. It stays in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/prompt-battle/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prompt Battle | Free Prompt Quiz | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Pick the stronger AI prompt in rounds of 8, read what each one tends to write, then build your own with a live checklist. It stays in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/prompt-battle/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/prompt-battle/style.css?v=20261021battle" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Prompt Battle",
+        "url": "https://cyberscryb.com/tools/prompt-battle/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser game that teaches prompting. Each round shows a task and two prompts. Pick the stronger one, then read a written sample of what each prompt tends to produce and the principle that won. A builder assembles a prompt from role, task, context, constraints, and format, with a live checklist. Nothing is sent to an AI.",
+        "featureList": [
+          "20 head-to-head prompt battles",
+          "Rounds of 8",
+          "Written samples of what each prompt tends to produce",
+          "Principles such as role, context, constraints, examples, format, and iteration",
+          "Score, principles mastered, and a copyable result line",
+          "Prompt builder with a live checklist",
+          "Best score, seen battles, and mastered principles stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this call an AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The battles, the samples, and the builder checklist all run in your browser. The page does not send a prompt to an API, and it does not wait on a model."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the samples live model output?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Each sample is a short piece written ahead of time to show what that prompt tends to produce. A real model can still wander. The sample is the lesson, not a guarantee of the next reply."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does a round work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each round is 8 battles drawn from a deck of 20. You pick prompt A or prompt B, then see both samples and the principle that decided it. Battles you have already seen wait until every battle has been shown, then the deck starts over."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the builder checklist score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It scores the five slots on this page: a specific role, a task with a deliverable, context the model cannot guess, a constraint, and a format. The score updates as you type. It does not judge the writing with an AI, and it does not save what you typed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is saved on this device?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only your best score, the ids of battles you have seen, and the ids of principles you have mastered. The prompts you picked, and anything you type in the builder, are not stored and are not sent anywhere."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will a perfect score write the prompt for my job?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. A perfect round means you spotted the stronger prompt in these examples. Your real task still needs the facts only you have. The builder is a way to put those facts in the slots before you paste the prompt into a tool you trust."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Prompt Battle",
+            "item": "https://cyberscryb.com/tools/prompt-battle/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pb-page">
+      <nav class="pb-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Prompt Battle</span>
+      </nav>
+
+      <section class="pb-hero">
+        <p class="pb-badge">Free · In this browser · No AI call</p>
+        <h1>Prompt Battle</h1>
+        <p>
+          A head-to-head round of 8. Each battle shows a task and two prompts. Pick the one that
+          gets the better result, then read a short sample of what each prompt tends to produce and
+          the principle that won. When you want to write your own, the builder scores the slots as
+          you fill them. Nothing you type is uploaded.
+        </p>
+        <ol class="pb-steps">
+          <li><strong>Read the task</strong> A cover letter, a bug, a meal plan, a summary, a product line.</li>
+          <li><strong>Pick A or B</strong> Buttons, or the A and B keys. Then the samples open.</li>
+          <li><strong>Build one</strong> Role, task, context, constraints, and format, with a live checklist.</li>
+        </ol>
+      </section>
+
+      <noscript>
+        <p>
+          This game needs JavaScript. It still runs only in your browser and does not send a prompt
+          anywhere.
+        </p>
+      </noscript>
+
+      <div class="pb-client" id="pb-client">
+        <div class="pb-modes" role="tablist" aria-label="Prompt Battle modes">
+          <button
+            type="button"
+            class="pb-tab"
+            id="pb-tab-battle"
+            role="tab"
+            aria-selected="true"
+            aria-controls="pb-panel-battle"
+          >
+            Prompt Battle
+          </button>
+          <button
+            type="button"
+            class="pb-tab"
+            id="pb-tab-builder"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pb-panel-builder"
+            tabindex="-1"
+          >
+            Prompt Builder
+          </button>
+        </div>
+
+        <div id="pb-panel-battle" role="tabpanel" aria-labelledby="pb-tab-battle">
+          <div class="pb-status">
+            <p id="pb-progress">Battle 1 of 8</p>
+            <p id="pb-running">Score 0 of 0</p>
+            <p id="pb-best">Best on this device: none yet.</p>
+            <p id="pb-known">Principles mastered on this device: 0 of 10.</p>
+            <div class="pb-meter" aria-hidden="true">
+              <div class="pb-meter-fill" id="pb-meter-fill"></div>
+            </div>
+          </div>
+          <div class="pb-stage" id="pb-stage">
+            <article class="pb-card" id="pb-card" aria-label="Prompt battle">
+              <p>The battle loads in this browser.</p>
+            </article>
+          </div>
+          <p class="pb-hint" id="pb-hint">
+            Press A or B, or use the buttons. The samples are written ahead of time.
+          </p>
+        </div>
+
+        <div id="pb-panel-builder" role="tabpanel" aria-labelledby="pb-tab-builder" hidden>
+          <form class="pb-builder" id="pb-builder">
+            <div class="pb-builder-head">
+              <h2>Prompt Builder</h2>
+              <p id="pb-builder-score">Checklist 0 of 5. Blank page.</p>
+              <div class="pb-builder-meter" aria-hidden="true">
+                <div class="pb-builder-fill" id="pb-builder-fill"></div>
+              </div>
+            </div>
+            <div class="pb-field">
+              <label for="pb-role">Role</label>
+              <p class="pb-help" id="pb-role-help">Who should answer. A job beats the word assistant.</p>
+              <textarea id="pb-role" name="role" rows="2" aria-describedby="pb-role-help"></textarea>
+            </div>
+            <div class="pb-field">
+              <label for="pb-task">Task</label>
+              <p class="pb-help" id="pb-task-help">What to produce, starting with a verb.</p>
+              <textarea id="pb-task" name="task" rows="2" aria-describedby="pb-task-help"></textarea>
+            </div>
+            <div class="pb-field">
+              <label for="pb-context">Context</label>
+              <p class="pb-help" id="pb-context-help">
+                Facts the model cannot guess: who, a number, a place, a deadline.
+              </p>
+              <textarea id="pb-context" name="context" rows="3" aria-describedby="pb-context-help"></textarea>
+            </div>
+            <div class="pb-field">
+              <label for="pb-constraints">Constraints</label>
+              <p class="pb-help" id="pb-constraints-help">
+                A length, a tone, or something the answer must leave out.
+              </p>
+              <textarea
+                id="pb-constraints"
+                name="constraints"
+                rows="3"
+                aria-describedby="pb-constraints-help"
+              ></textarea>
+            </div>
+            <div class="pb-field">
+              <label for="pb-format">Format</label>
+              <p class="pb-help" id="pb-format-help">The shape: bullets, a table, an email, paragraphs, JSON.</p>
+              <textarea id="pb-format" name="format" rows="2" aria-describedby="pb-format-help"></textarea>
+            </div>
+            <ul class="pb-checks" id="pb-checks" aria-label="Prompt checklist"></ul>
+            <div class="pb-builder-actions">
+              <button type="button" class="pb-example" id="pb-example">Try an example</button>
+              <button type="button" class="pb-clear" id="pb-clear-builder">Clear</button>
+              <button type="button" class="pb-copy-prompt" id="pb-copy-prompt">Copy prompt</button>
+            </div>
+            <p class="pb-prompt-status" id="pb-prompt-status" role="status"></p>
+            <h3 class="pb-kicker">Assembled prompt</h3>
+            <pre class="pb-assembled" id="pb-assembled">Your prompt will appear here as you fill the slots.</pre>
+            <p class="pb-builder-note">
+              The checklist scores these slots in the browser. It does not send the prompt to an AI,
+              and clearing the form is the only way the text leaves the page.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <section class="pb-prose">
+        <h2>What makes one prompt stronger</h2>
+        <p>
+          A short prompt can still be the better one when it carries the fact the model would
+          otherwise invent. Role names the reader or the expert. Context is the empty list, the
+          budget, the rain, the city. Constraints delete the answers you do not want: the shellfish,
+          the extra apology, the word premium. Examples show a finished sentence in the voice you
+          mean. Format is the container, so an open question has a slot to land in.
+        </p>
+        <p>
+          Iteration asks for the next draft and the fact still missing, instead of a single jump to
+          a polished line. Audience is the person who already has the problem. Specificity puts a
+          number on the page. Steps put the work in order. Sources say which notes the model may
+          use, and tell it to stop when those notes run out. The samples on this page were written
+          to show those differences. They are not a live reply.
+        </p>
+        <h3>Use the prompt somewhere else</h3>
+        <p>
+          Copy the builder result into a tool you already trust. The
+          <a href="/tools/humanizer/">AI humanizer</a> rewrites stiff paste, the
+          <a href="/tools/gig-auto-pilot/">Upwork proposal generator</a> turns a job post into a
+          draft, and the <a href="/tools/ai-detector/">AI detector</a> flags patterns in text you
+          paste. The <a href="/tools/code-explainer/">code explainer</a> walks through a snippet.
+          Those tools send text to an AI. This page does not. For a different kind of quiz, the
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> deck stays in the browser too.
+        </p>
+      </section>
+
+      <section class="pb-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this call an AI?</summary>
+          <p>
+            No. The battles, the samples, and the builder checklist all run in your browser. The
+            page does not send a prompt to an API, and it does not wait on a model.
+          </p>
+        </details>
+        <details>
+          <summary>Are the samples live model output?</summary>
+          <p>
+            No. Each sample is a short piece written ahead of time to show what that prompt tends to
+            produce. A real model can still wander. The sample is the lesson, not a guarantee of the
+            next reply.
+          </p>
+        </details>
+        <details>
+          <summary>How does a round work?</summary>
+          <p>
+            Each round is 8 battles drawn from a deck of 20. You pick prompt A or prompt B, then see
+            both samples and the principle that decided it. Battles you have already seen wait until
+            every battle has been shown, then the deck starts over.
+          </p>
+        </details>
+        <details>
+          <summary>What does the builder checklist score?</summary>
+          <p>
+            It scores the five slots on this page: a specific role, a task with a deliverable,
+            context the model cannot guess, a constraint, and a format. The score updates as you
+            type. It does not judge the writing with an AI, and it does not save what you typed.
+          </p>
+        </details>
+        <details>
+          <summary>What is saved on this device?</summary>
+          <p>
+            Only your best score, the ids of battles you have seen, and the ids of principles you
+            have mastered. The prompts you picked, and anything you type in the builder, are not
+            stored and are not sent anywhere.
+          </p>
+        </details>
+        <details>
+          <summary>Will a perfect score write the prompt for my job?</summary>
+          <p>
+            No. A perfect round means you spotted the stronger prompt in these examples. Your real
+            task still needs the facts only you have. The builder is a way to put those facts in the
+            slots before you paste the prompt into a tool you trust.
+          </p>
+        </details>
+      </section>
+
+      <section class="pb-related">
+        <h2>Related tools</h2>
+        <div class="pb-related-grid">
+          <a href="/tools/humanizer/">
+            <strong>AI Humanizer</strong>
+            <span>Rewrite stiff AI paste so it sounds more like a person.</span>
+          </a>
+          <a href="/tools/gig-auto-pilot/">
+            <strong>Upwork Proposal Generator</strong>
+            <span>Paste a job post and get a proposal draft for that job.</span>
+          </a>
+          <a href="/tools/ai-detector/">
+            <strong>AI Detector</strong>
+            <span>Paste text and see which sentences get flagged.</span>
+          </a>
+          <a href="/tools/code-explainer/">
+            <strong>Code Explainer</strong>
+            <span>Walk through a snippet in plain language.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe through tech claims and read a short explanation.</span>
+          </a>
+          <a href="/tools/ai-writing-suite/">
+            <strong>AI Writing Suite</strong>
+            <span>Detect patterns, then clean the lines that got flagged.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="pb-live" class="pb-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/prompt-battle/logic.js?v=20261021battle"></script>
+    <script src="/tools/prompt-battle/script.js?v=20261021battle"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
