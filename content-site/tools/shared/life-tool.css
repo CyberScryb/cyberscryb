@@ -511,12 +511,12 @@
   transition: all 0.2s;
 }
 .lt-step.on {
-  color: var(--primary-hover, #dc2626);
+  color: var(--text); /* AA: var(--text) on dark tint passes; #dc2626 text did not (4.10:1) */
   border-color: rgba(220, 38, 38, 0.35);
   background: rgba(220, 38, 38, 0.08);
 }
 .lt-step.done {
-  color: #166534;
+  color: #4ade80; /* AA: matches .math-band.ok dark-theme green; #166534 was light-theme */
   border-color: rgba(22, 163, 74, 0.35);
   background: rgba(22, 163, 74, 0.08);
 }
