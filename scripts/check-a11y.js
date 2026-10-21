@@ -15,6 +15,7 @@ const TARGET_PAGES = [
   'public/tools/subscription-leak-calculator/index.html',
   'public/tools/is-this-link-safe/index.html',
   'public/tools/phishing-inbox-simulator/index.html',
+  'public/tools/spot-the-scam-call/index.html',
   'public/tools/choose-your-own-hack/index.html',
   'public/tools/tech-myth-or-fact/index.html',
   'public/tools/password-habit-quiz/index.html',
