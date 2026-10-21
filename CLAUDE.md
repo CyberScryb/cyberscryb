@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Digital Footprint Check)
+
+Added `/tools/digital-footprint/` in `content-site/` only. Browser-only self-audit across nine areas: social visibility, people-search sites, old accounts, location sharing, photo metadata, public reviews, breach habits, smart devices, and app permissions. No name, email, phone, or address field, and no network calls. The result is an exposure meter, a per-area radar and bars, and a prioritized cleanup plan with a short how-to and official opt-out links. Checked cleanup steps and choice ids are the only localStorage write (`cs_footprint_audit_v1`), with a Clear button. A text-message second factor counts as partial. If a later save fails, the status says this browser is not keeping the latest checklist. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the password habit quiz, password checker, phishing inbox, Is This Link Safe, Tech Myth or Fact, and Choose Your Own Hack.
+
 ## Recent Changes (Session 2026-10-21 — Password Habit Quiz)
 
 Added `/tools/password-habit-quiz/` in `content-site/` only. Browser-only habit quiz: 12 multiple-choice questions on reuse, length, a password manager, 2FA, backup codes, sharing, breaches, security questions, and related habits. No password field. The result is a score, a tier, and a prioritized fix-it plan with the top 3 actions first, each with a why and a how, plus a copyable result line. The last result is the only localStorage write (`cs_habit_quiz_result_v1`, choice ids only), with a Clear button. The storage key omits credential words so the saved habit ids are not treated as a password. No network calls from the quiz. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the password checker, phishing inbox, Is This Link Safe, Tech Myth or Fact, and Choose Your Own Hack.
