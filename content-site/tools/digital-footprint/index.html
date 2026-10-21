@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Footprint Check | Free Audit | CyberScryb</title>
+    <meta
+      name="description"
+      content="See how exposed you are online without typing a name, email, or address. A private checklist, an exposure meter, and a cleanup plan in this browser."
+    />
+    <meta
+      name="keywords"
+      content="digital footprint check, people search opt out, online privacy checklist, data broker removal, location sharing, photo metadata"
+    />
+    <meta property="og:title" content="Digital Footprint Check | Free Audit | CyberScryb" />
+    <meta
+      property="og:description"
+      content="See how exposed you are online without typing a name, email, or address. A private checklist, an exposure meter, and a cleanup plan in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/digital-footprint/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Digital Footprint Check | Free Audit | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="See how exposed you are online without typing a name, email, or address. A private checklist, an exposure meter, and a cleanup plan in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/digital-footprint/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/digital-footprint/style.css?v=20261021foot2" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Digital Footprint Check",
+        "url": "https://cyberscryb.com/tools/digital-footprint/",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A private checklist of social visibility, people-search sites, old accounts, location sharing, photo metadata, reviews, breaches, smart devices, and app permissions. The result is an exposure meter and a prioritized cleanup plan. No name, email, phone, or address is asked for.",
+        "featureList": [
+          "Nine areas: social media, data brokers, old accounts, location, photos, reviews, breaches, smart devices, and app permissions",
+          "No name, email, phone, or address field",
+          "Exposure meter with a per-area chart",
+          "Prioritized cleanup plan with a short how-to and official links",
+          "Cleanup steps you can check off, saved only in this browser, with a Clear button"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this ask for my name, email, or address?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Every row is a choice about a habit, such as whether a profile is public or whether you have opted out of people-search sites. There is no field for a name, an email, a phone number, or an address. An answer that is not one of the choices is ignored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this look me up or upload my answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The check runs in your browser. It does not search your name, open the links for you, or send the answers anywhere. The official opt-out and settings pages are ordinary links you open yourself. The only thing saved is the checklist and the steps you check off, in this browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the exposure meter mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each row is worth 0, 1, or 2 exposure points. The total is out of 54. Lower is quieter. The tier is Quiet footprint, Mostly tucked in, Some trails, Easy to find, or Wide open. The chart shows the same score for each area. It describes what you reported. It is not a search result and it is not a guarantee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the cleanup plan ordered?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Open items that expose more come first: a reused password after a breach, a missing second factor, and a people-search listing you have not opted out of. The first three are the ones to do before the rest. Each step has a why, a how, and links to official settings or opt-out pages. A row you already handled stays off the fix list."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the checked steps live, and what does Clear do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only in this browser. The checklist and the steps you tick are stored as ids in local storage. Clear deletes that saved checklist and the ticks. Clearing site data for cyberscryb.com removes it too. The page does not ask for an account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a quiet score mean I am hard to find?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. These are general habits. A quiet routine can still miss a people-search site, a photo, or a setting this page does not see. The links go to the official pages, and you complete the opt-out there. This check never looks you up."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Digital Footprint Check",
+            "item": "https://cyberscryb.com/tools/digital-footprint/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="df-page">
+      <nav class="df-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Digital Footprint Check</span>
+      </nav>
+
+      <section class="df-hero">
+        <p class="df-badge">Free · In this browser · No name or email</p>
+        <h1>Digital Footprint Check</h1>
+        <p>
+          A self-audit of how exposed you are online. Nine areas: social profiles, people-search
+          sites, old accounts, location sharing, photo metadata, public reviews, breach habits,
+          smart devices, and app permissions. You get an exposure meter, a chart for each area, and
+          a cleanup plan. Nothing you answer is uploaded, and the page never asks for a name, an
+          email, a phone number, or an address.
+        </p>
+        <ol class="df-steps">
+          <li>
+            <strong>Mark each row</strong> Handled, partly, or still open. There is nothing to type.
+          </li>
+          <li>
+            <strong>Read the meter</strong> Lower is quieter. The chart shows which area is loudest.
+          </li>
+          <li>
+            <strong>Check off the plan</strong> Each step has a how-to and a link you open yourself.
+          </li>
+        </ol>
+      </section>
+
+      <noscript>
+        <p>
+          This check needs JavaScript. It still runs only in your browser, does not ask for a name
+          or an email, and does not send your answers anywhere.
+        </p>
+      </noscript>
+
+      <div class="df-client" id="df-client">
+        <div class="df-status">
+          <p id="df-progress">Area 1 of 9</p>
+          <p id="df-saved">Nothing saved on this device yet.</p>
+          <div
+            class="df-meter"
+            id="df-meter"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="27"
+            aria-valuenow="0"
+            aria-labelledby="df-progress"
+          >
+            <div class="df-meter-fill" id="df-meter-fill"></div>
+          </div>
+        </div>
+        <div class="df-recall" id="df-recall" hidden>
+          <p id="df-recall-text">A saved checklist is on this device.</p>
+          <div class="df-recall-actions">
+            <button type="button" data-action="saved">See saved result</button>
+            <button type="button" data-action="clear">Clear saved checklist</button>
+          </div>
+        </div>
+        <div class="df-stage" id="df-stage">
+          <article class="df-card" id="df-card" aria-label="Digital footprint checklist">
+            <p>The checklist loads in this browser.</p>
+          </article>
+        </div>
+        <p class="df-hint" id="df-hint">
+          Pick the closest fit for each row. Keys 1 to 3 select a choice in the row you are on.
+          Nothing here is typed or looked up.
+        </p>
+      </div>
+
+      <section class="df-prose">
+        <h2>A checklist, not a lookup</h2>
+        <p>
+          People-search sites, public profiles, and a photo that still carries a location are
+          different doors into the same problem. This page asks which doors you have already
+          closed. It does not search a name, open an account, or store an address. The opt-out
+          forms live on the other sites. The links in the plan are the official pages, and you
+          follow them yourself.
+        </p>
+        <p>
+          A public friends list and a people-search listing reinforce each other. The listing often
+          starts from public records, then picks up a phone number and the names of relatives. The
+          FTC describes the opt-out as something you do on each site, then repeat, because a listing
+          can come back. Google’s Results about you page is the request path for a search result
+          that shows contact details. This check does not file that request for you.
+        </p>
+        <h3>The trails that are easy to forget</h3>
+        <p>
+          Old accounts still hold a card, an address, or a reset that lands in an inbox you no
+          longer open. Location history is a diary stored with the phone account. A live share from
+          a trip keeps updating. A photo can carry coordinates in the file, and the picture itself
+          can show a house number even after the file data is gone. Reviews and old comments are a
+          timeline under a name. A breach notice is the moment a password stopped being a secret.
+          Have I Been Pwned is where you check an address you control. You do that in your own
+          browser. A second factor on mail and banking is what limits the damage when the password
+          is already out.
+        </p>
+        <p>
+          Smart speakers and cameras stay on the account after you stop thinking about them. Voice
+          history can include a conversation you did not mean to keep. An app you tried once can
+          still read contacts or follow you across other apps. The plan names the settings pages for
+          those, including Android permissions, iPhone app access, Alexa privacy, and Google Home.
+        </p>
+        <h3>What the meter is not</h3>
+        <p>
+          A quiet score means the habits you reported are already narrow. It does not mean a
+          stranger cannot find you. A wide-open score means the first three steps are the ones to
+          do before the rest. None of it is a promise. When a password is involved, the
+          <a href="/tools/password-habit-quiz/">Password Habit Quiz</a> scores reuse and a second
+          factor, and the
+          <a href="/tools/password-checker/">password strength checker</a> can estimate one password
+          on this device. The
+          <a href="/tools/phishing-inbox-simulator/">phishing inbox</a> and
+          <a href="/tools/is-this-link-safe/">link checker</a> practice the message and the address.
+          <a href="/tools/choose-your-own-hack/">Choose Your Own Hack</a> walks a scam as a story,
+          and <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> covers the claims people
+          repeat about privacy and private browsing.
+        </p>
+      </section>
+
+      <section class="df-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this ask for my name, email, or address?</summary>
+          <p>
+            No. Every row is a choice about a habit, such as whether a profile is public or whether
+            you have opted out of people-search sites. There is no field for a name, an email, a
+            phone number, or an address. An answer that is not one of the choices is ignored.
+          </p>
+        </details>
+        <details>
+          <summary>Does this look me up or upload my answers?</summary>
+          <p>
+            No. The check runs in your browser. It does not search your name, open the links for
+            you, or send the answers anywhere. The official opt-out and settings pages are ordinary
+            links you open yourself. The only thing saved is the checklist and the steps you check
+            off, in this browser.
+          </p>
+        </details>
+        <details>
+          <summary>What does the exposure meter mean?</summary>
+          <p>
+            Each row is worth 0, 1, or 2 exposure points. The total is out of 54. Lower is quieter.
+            The tier is Quiet footprint, Mostly tucked in, Some trails, Easy to find, or Wide open.
+            The chart shows the same score for each area. It describes what you reported. It is not
+            a search result and it is not a guarantee.
+          </p>
+        </details>
+        <details>
+          <summary>How is the cleanup plan ordered?</summary>
+          <p>
+            Open items that expose more come first: a reused password after a breach, a missing
+            second factor, and a people-search listing you have not opted out of. The first three
+            are the ones to do before the rest. Each step has a why, a how, and links to official
+            settings or opt-out pages. A row you already handled stays off the fix list.
+          </p>
+        </details>
+        <details>
+          <summary>Where do the checked steps live, and what does Clear do?</summary>
+          <p>
+            Only in this browser. The checklist and the steps you tick are stored as ids in local
+            storage. Clear deletes that saved checklist and the ticks. Clearing site data for
+            cyberscryb.com removes it too. The page does not ask for an account.
+          </p>
+        </details>
+        <details>
+          <summary>Does a quiet score mean I am hard to find?</summary>
+          <p>
+            No. These are general habits. A quiet routine can still miss a people-search site, a
+            photo, or a setting this page does not see. The links go to the official pages, and you
+            complete the opt-out there. This check never looks you up.
+          </p>
+        </details>
+      </section>
+
+      <section class="df-related">
+        <h2>Related tools</h2>
+        <div class="df-related-grid">
+          <a href="/tools/password-habit-quiz/">
+            <strong>Password Habit Quiz</strong>
+            <span>Score reuse, a manager, and a second factor. It never asks for a password.</span>
+          </a>
+          <a href="/tools/password-checker/">
+            <strong>Password Strength Checker</strong>
+            <span>Estimate a password on this device. It never leaves the browser.</span>
+          </a>
+          <a href="/tools/is-this-link-safe/">
+            <strong>Is This Link Safe</strong>
+            <span>Paste one address and read the real site, still without opening it.</span>
+          </a>
+          <a href="/tools/phishing-inbox-simulator/">
+            <strong>Phishing Inbox Simulator</strong>
+            <span>Mark fictional emails safe or phish and read the real link address.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on privacy, password, and battery claims.</span>
+          </a>
+          <a href="/tools/choose-your-own-hack/">
+            <strong>Choose Your Own Hack</strong>
+            <span>Play the target in a fictional scam and see which choice keeps the code.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="df-live" class="df-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/digital-footprint/logic.js?v=20261021foot2"></script>
+    <script src="/tools/digital-footprint/script.js?v=20261021foot2"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
