@@ -24,6 +24,7 @@ const TARGET_PAGES = [
   'public/tools/digital-footprint/index.html',
   'public/tools/prompt-battle/index.html',
   'public/tools/ai-or-human-writer/index.html',
+  'public/tools/real-photo-or-ai/index.html',
   'public/tools/which-tech-era/index.html',
   'public/tools/internet-personality/index.html',
   'public/tools/guess-the-year/index.html',
