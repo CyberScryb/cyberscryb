@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen Time Reality Check | Free Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="See daily screen hours as a week, a year, and a lifetime, then what cutting a slice gives back. Books, languages, and a small plan. Stays in this browser."
+    />
+    <meta
+      name="keywords"
+      content="screen time calculator, screen time reality check, hours a year, phone screen time, digital wellbeing, lifetime screen time"
+    />
+    <meta property="og:title" content="Screen Time Reality Check | Free Tool | CyberScryb" />
+    <meta
+      property="og:description"
+      content="See daily screen hours as a week, a year, and a lifetime, then what cutting a slice gives back. Books, languages, and a small plan. Stays in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/screen-time-reality-check/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Screen Time Reality Check | Free Tool | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="See daily screen hours as a week, a year, and a lifetime, then what cutting a slice gives back. Books, languages, and a small plan. Stays in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/screen-time-reality-check/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/screen-time-reality-check/style.css?v=20261021screen" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Screen Time Reality Check",
+        "url": "https://cyberscryb.com/tools/screen-time-reality-check/",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser calculator that turns daily screen hours into a week, a month, a year, and a lifetime. It also shows book, language, marathon, and movie comparisons, a reclaim slider, and a small plan. Hours stay in this browser.",
+        "featureList": [
+          "Daily hours by category or one total from a phone screen-time report",
+          "Hours per week, month, and year, plus days per year",
+          "Lifetime years from an age and a life expectancy you set",
+          "Book, language, marathon, and movie comparisons with the assumption stated",
+          "A reclaim slider and a small plan with a tip for the largest categories",
+          "Copyable summary and share line",
+          "Numbers stored only in this browser, with a Clear button"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this send my hours to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The math runs in your browser. The numbers you enter can be saved in this browser's local storage so you can come back to them. That copy never leaves the device. Clear removes it. You can confirm there is no upload in the browser network panel."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are the week, the year, and the lifetime calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A week is 7 days. A month is counted as 30 days. A year is counted as 365 days, and leap days are left out so the math stays simple. Days in a year are the yearly hours divided by 24. Lifetime years are the daily hours divided by 24, then multiplied by the years from the age you enter to the life expectancy you enter. If the expectancy is not above the age, the lifetime line is zero."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do the books, languages, marathons, and movies assume?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They describe a year at the daily pace you entered. One book is 8 hours, about a novel read at an easy pace. One language is 600 hours, a common estimate for everyday conversation in a language close to one you already speak. A harder language takes longer. One marathon is 80 hours of training, about a 16-week beginner plan, and race day is extra. One movie is 2 hours. They are comparisons, not a promise that you would finish each one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the reclaim slider do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It shows what you would get back by cutting the daily total by that percent. It does not change the hours you entered. At 20%, a 4-hour day gives back 0.8 hours a day. The plan uses the same percent on the largest categories."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the numbers live, and what does Clear do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only in this browser, under a local storage key for this page. Clear deletes that saved copy and resets the sliders. Clearing site data for cyberscryb.com removes it too. The page does not ask for an account, a name, or an email."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this a verdict on my habits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is straight math from the hours you type, plus a few comparisons with the assumptions written next to them. A big number is information you can use. It is not a grade, and the plan is a suggestion you can ignore."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Screen Time Reality Check",
+            "item": "https://cyberscryb.com/tools/screen-time-reality-check/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="st-page">
+      <nav class="st-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Screen Time Reality Check</span>
+      </nav>
+
+      <section class="st-hero">
+        <p class="st-badge">Free · In this browser · No account</p>
+        <h1>Screen Time Reality Check</h1>
+        <p>
+          Turn a daily number into a week, a year, and the years ahead. Use the categories, or paste
+          in the one total from your phone. Then see what giving a slice of it back would look like.
+        </p>
+        <ol class="st-steps">
+          <li><strong>1. Enter the hours</strong> Seven categories, or one total from the phone report.</li>
+          <li><strong>2. See the year</strong> Days, books, languages, and the years ahead.</li>
+          <li><strong>3. Give a slice back</strong> A percent, a plan, and a line you can copy.</li>
+        </ol>
+      </section>
+
+      <noscript>
+        <p>
+          This check needs JavaScript. It still runs only in your browser and does not send the
+          hours anywhere.
+        </p>
+      </noscript>
+
+      <div class="st-workspace">
+        <section class="st-panel" aria-labelledby="st-hours-heading">
+          <h2 id="st-hours-heading">Your hours</h2>
+          <p class="st-hint">
+            A quarter hour is 15 minutes. On an iPhone the daily average is under Settings, Screen
+            Time. On Android it is under Settings, Digital Wellbeing. Use whichever number you
+            actually have.
+          </p>
+          <fieldset class="st-modes">
+            <legend>How to enter the hours</legend>
+            <label>
+              <input type="radio" name="st-mode" value="categories" checked />
+              By category
+            </label>
+            <label>
+              <input type="radio" name="st-mode" value="total" />
+              One total from my phone
+            </label>
+          </fieldset>
+
+          <fieldset class="st-categories" id="st-categories">
+            <legend>Daily hours by category</legend>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-social">Social</label>
+                <output id="st-social-out" for="st-social">0 hours</output>
+              </div>
+              <input
+                id="st-social"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-social-hint"
+              />
+              <p id="st-social-hint" class="st-hint">Feeds, posts, and stories.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-video">Video</label>
+                <output id="st-video-out" for="st-video">0 hours</output>
+              </div>
+              <input
+                id="st-video"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-video-hint"
+              />
+              <p id="st-video-hint" class="st-hint">Shows, clips, and streams.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-games">Games</label>
+                <output id="st-games-out" for="st-games">0 hours</output>
+              </div>
+              <input
+                id="st-games"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-games-hint"
+              />
+              <p id="st-games-hint" class="st-hint">Matches, levels, and puzzles.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-news">News</label>
+                <output id="st-news-out" for="st-news">0 hours</output>
+              </div>
+              <input
+                id="st-news"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-news-hint"
+              />
+              <p id="st-news-hint" class="st-hint">Headlines and updates.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-messaging">Messaging</label>
+                <output id="st-messaging-out" for="st-messaging">0 hours</output>
+              </div>
+              <input
+                id="st-messaging"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-messaging-hint"
+              />
+              <p id="st-messaging-hint" class="st-hint">Chats and threads.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-work">Work</label>
+                <output id="st-work-out" for="st-work">0 hours</output>
+              </div>
+              <input
+                id="st-work"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-work-hint"
+              />
+              <p id="st-work-hint" class="st-hint">Mail, docs, and job apps.</p>
+            </div>
+            <div class="st-row">
+              <div class="st-row-top">
+                <label for="st-other">Other</label>
+                <output id="st-other-out" for="st-other">0 hours</output>
+              </div>
+              <input
+                id="st-other"
+                type="range"
+                min="0"
+                max="16"
+                step="0.25"
+                value="0"
+                aria-describedby="st-other-hint"
+              />
+              <p id="st-other-hint" class="st-hint">Everything else on the report.</p>
+            </div>
+          </fieldset>
+
+          <div class="st-total-panel" id="st-total-panel" hidden>
+            <div class="st-row-top">
+              <label for="st-total">Daily total from the phone</label>
+              <output id="st-total-out" for="st-total">0 hours</output>
+            </div>
+            <input
+              id="st-total"
+              type="range"
+              min="0"
+              max="24"
+              step="0.25"
+              value="0"
+              aria-describedby="st-total-hint"
+            />
+            <p id="st-total-hint" class="st-hint">
+              The single daily average on the report. Categories stay filled in if you switch back.
+            </p>
+          </div>
+
+          <fieldset class="st-life-fields">
+            <legend>For the lifetime line</legend>
+            <label>
+              Your age
+              <input id="st-age" type="number" inputmode="numeric" min="10" max="100" step="1" value="30" />
+            </label>
+            <label>
+              Life expectancy
+              <input
+                id="st-expectancy"
+                type="number"
+                inputmode="numeric"
+                min="40"
+                max="120"
+                step="1"
+                value="80"
+              />
+            </label>
+          </fieldset>
+          <div class="st-actions">
+            <button type="button" id="st-sample" class="st-primary">Try a sample day</button>
+          </div>
+        </section>
+
+        <section class="st-reality" id="st-reality" aria-labelledby="st-reality-heading">
+          <h2 id="st-reality-heading">The picture</h2>
+          <div class="st-dial-wrap">
+            <div class="st-dial" id="st-dial" aria-hidden="true"></div>
+            <div class="st-dial-readout">
+              <p class="st-dial-value" id="st-daily">0</p>
+              <p class="st-dial-unit" id="st-daily-caption">0 hours a day</p>
+            </div>
+            <p class="st-day-share" id="st-day-share">0% of a 24-hour day</p>
+          </div>
+          <p id="st-over" class="st-note" hidden></p>
+          <dl class="st-stats">
+            <div>
+              <dt>A week</dt>
+              <dd id="st-week">0 hours</dd>
+            </div>
+            <div>
+              <dt>A month</dt>
+              <dd id="st-month">0 hours</dd>
+            </div>
+            <div>
+              <dt>A year</dt>
+              <dd id="st-year">0 hours</dd>
+            </div>
+            <div>
+              <dt>Days a year</dt>
+              <dd id="st-days">0 days</dd>
+            </div>
+            <div class="st-stat-wide">
+              <dt>Years ahead</dt>
+              <dd id="st-life">About 0 years of the 50 years from age 30 to 80</dd>
+            </div>
+          </dl>
+          <div class="st-year-meter">
+            <div class="st-year-top">
+              <span>Share of a 365-day year</span>
+              <span id="st-year-label">0 days of 365</span>
+            </div>
+            <div class="st-year-track" aria-hidden="true">
+              <div class="st-year-fill" id="st-year-fill"></div>
+            </div>
+          </div>
+          <p id="st-life-note" class="st-note" hidden></p>
+          <p class="st-math" id="st-math">
+            A week is 7 days. A month is counted as 30 days. A year is counted as 365 days, so leap
+            days are left out. Days in a year are the yearly hours divided by 24. Lifetime years are
+            the daily hours divided by 24, multiplied by the years from your age to the life
+            expectancy.
+          </p>
+          <h3>What a year of this could also be</h3>
+          <ul class="st-equiv" id="st-equiv" hidden></ul>
+          <div class="st-reclaim">
+            <h3>Give some of it back</h3>
+            <div class="st-reclaim-top">
+              <label for="st-reclaim">Cut the daily total by</label>
+              <output id="st-reclaim-out" for="st-reclaim">20%</output>
+            </div>
+            <input
+              id="st-reclaim"
+              type="range"
+              min="0"
+              max="60"
+              step="5"
+              value="20"
+              aria-describedby="st-reclaim-hint"
+            />
+            <p id="st-reclaim-hint" class="st-hint">
+              This does not change the hours you entered. It only shows the slice.
+            </p>
+            <p id="st-reclaim-result">Move a slider and this line shows what that percent gives back.</p>
+            <ul class="st-equiv" id="st-reclaim-equiv" hidden></ul>
+          </div>
+        </section>
+      </div>
+
+      <section class="st-plan" id="st-plan" aria-labelledby="st-plan-heading">
+        <h2 id="st-plan-heading">A small plan</h2>
+        <p id="st-plan-intro">
+          Add your hours and a small plan shows up here, aimed at the largest slices first.
+        </p>
+        <ol id="st-plan-steps" hidden></ol>
+      </section>
+
+      <section class="st-copy-card" aria-labelledby="st-copy-heading">
+        <h2 id="st-copy-heading">Take it with you</h2>
+        <p class="st-hint">The summary includes the math. The share line is the short version.</p>
+        <pre class="st-summary" id="st-summary">Screen Time Reality Check</pre>
+        <p class="st-share" id="st-share">
+          Screen Time Reality Check https://cyberscryb.com/tools/screen-time-reality-check/
+        </p>
+        <div class="st-copy-actions">
+          <button type="button" id="st-copy" class="st-primary">Copy summary</button>
+          <button type="button" id="st-copy-share">Copy share line</button>
+          <button type="button" id="st-clear">Clear</button>
+        </div>
+        <p class="st-copy-status" id="st-copy-status" role="status"></p>
+        <p class="st-storage" id="st-storage">
+          Numbers stay in this browser only. Nothing is uploaded. Clear removes them from this
+          device.
+        </p>
+      </section>
+      <p id="st-live" class="st-sr" aria-live="polite"></p>
+      <div class="st-dock" id="st-dock">
+        <strong id="st-dock-daily">0 hours a day</strong>
+        <a href="#st-plan">See the plan</a>
+      </div>
+
+      <section class="st-prose">
+        <h2>A number you can actually use</h2>
+        <p>
+          A screen-time report is a pile of small sessions. Four hours a day does not feel like
+          much when it arrives five minutes at a time. Spread across a year it is easier to see,
+          and spread across the years ahead it is easier to decide what you want some of that time
+          to be instead.
+        </p>
+        <p>
+          Enter the categories if you have them: social, video, games, news, messaging, work, and
+          other. The daily total is their sum. If the phone only gave you one number, switch to
+          that total and the picture uses it directly. Switching back keeps the categories you
+          already set. If the categories add up to more than 24 hours, that usually means two apps
+          were open together, or a guess ran long. The math still uses the number you entered.
+        </p>
+        <p>
+          The lifetime line is the same daily pace, carried forward. It is your age, a life
+          expectancy you can change, and the hours divided by 24. It is not a prediction about your
+          health, and it is not a claim that every one of those years would be spent this way. Move
+          either number and the line moves with it. A month on this page is 30 days, and a year is
+          365, so a leap day is left out on purpose.
+        </p>
+        <p>
+          The comparisons are a way to feel the size of a year. A book is 8 hours. A language is
+          600 hours, which is a common estimate for everyday conversation in a language close to
+          one you already speak, not a hard language and not fluency. A marathon is 80 hours of
+          training, about a beginner plan, with race day left out. A movie is 2 hours. None of
+          these is a dare. They are rulers.
+        </p>
+        <p>
+          The reclaim slider cuts a percent off the daily total and shows the hours and the days
+          that come back. The plan starts with the three largest categories and offers one tip
+          each. If you entered a single total, the plan asks you to name the largest slice on the
+          phone report and apply the percent there. You can ignore every tip. The picture still
+          stands.
+        </p>
+        <p>
+          Nothing here is uploaded. The optional save stays in this browser, and Clear deletes it.
+          If you want the hours you get back to land next to sleep, the
+          <a href="/tools/sleep-cycle-calculator/">sleep cycle calculator</a> can place a bedtime.
+          If some of that time should become study, the
+          <a href="/tools/study-plan-generator/">study plan generator</a> can hold a schedule. The
+          <a href="/tools/digital-footprint/">digital footprint check</a> is the privacy side of the
+          same phone, and
+          <a href="/tools/which-tech-era/">Which Tech Era Are You?</a> is a lighter read on the
+          habits underneath the hours.
+        </p>
+      </section>
+
+      <section class="st-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this send my hours to a server?</summary>
+          <p>
+            No. The math runs in your browser. The numbers you enter can be saved in this browser's
+            local storage so you can come back to them. That copy never leaves the device. Clear
+            removes it. You can confirm there is no upload in the browser network panel.
+          </p>
+        </details>
+        <details>
+          <summary>How are the week, the year, and the lifetime calculated?</summary>
+          <p>
+            A week is 7 days. A month is counted as 30 days. A year is counted as 365 days, and
+            leap days are left out so the math stays simple. Days in a year are the yearly hours
+            divided by 24. Lifetime years are the daily hours divided by 24, then multiplied by the
+            years from the age you enter to the life expectancy you enter. If the expectancy is not
+            above the age, the lifetime line is zero.
+          </p>
+        </details>
+        <details>
+          <summary>What do the books, languages, marathons, and movies assume?</summary>
+          <p>
+            They describe a year at the daily pace you entered. One book is 8 hours, about a novel
+            read at an easy pace. One language is 600 hours, a common estimate for everyday
+            conversation in a language close to one you already speak. A harder language takes
+            longer. One marathon is 80 hours of training, about a 16-week beginner plan, and race
+            day is extra. One movie is 2 hours. They are comparisons, not a promise that you would
+            finish each one.
+          </p>
+        </details>
+        <details>
+          <summary>What does the reclaim slider do?</summary>
+          <p>
+            It shows what you would get back by cutting the daily total by that percent. It does
+            not change the hours you entered. At 20%, a 4-hour day gives back 0.8 hours a day. The
+            plan uses the same percent on the largest categories.
+          </p>
+        </details>
+        <details>
+          <summary>Where do the numbers live, and what does Clear do?</summary>
+          <p>
+            Only in this browser, under a local storage key for this page. Clear deletes that saved
+            copy and resets the sliders. Clearing site data for cyberscryb.com removes it too. The
+            page does not ask for an account, a name, or an email.
+          </p>
+        </details>
+        <details>
+          <summary>Is this a verdict on my habits?</summary>
+          <p>
+            No. It is straight math from the hours you type, plus a few comparisons with the
+            assumptions written next to them. A big number is information you can use. It is not a
+            grade, and the plan is a suggestion you can ignore.
+          </p>
+        </details>
+      </section>
+
+      <section class="st-related">
+        <h2>Related tools</h2>
+        <div class="st-related-grid">
+          <a href="/tools/sleep-cycle-calculator/">
+            <strong>Sleep Cycle Calculator</strong>
+            <span>Place a bedtime once the last hour is free.</span>
+          </a>
+          <a href="/tools/study-plan-generator/">
+            <strong>Study Plan Generator</strong>
+            <span>Give some of the reclaimed hours a schedule.</span>
+          </a>
+          <a href="/tools/digital-footprint/">
+            <strong>Digital Footprint Check</strong>
+            <span>The privacy side of the same phone. It never asks for a name.</span>
+          </a>
+          <a href="/tools/which-tech-era/">
+            <strong>Which Tech Era Are You?</strong>
+            <span>Twelve questions on notes, phones, and music. It stays in this browser.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/screen-time-reality-check/logic.js?v=20261021screen"></script>
+    <script src="/tools/screen-time-reality-check/script.js?v=20261021screen"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
