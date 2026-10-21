@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Prompt Battle)
+
+Added `/tools/prompt-battle/` in `content-site/` only. Browser-only head-to-head game: 20 battles, rounds of 8, a task plus prompts A and B, then a pre-written sample of what each prompt tends to produce and the principle that won (role, context, constraints, examples, format, iteration, audience, specificity, steps, sources). Score, principles mastered, and a copyable result line. Prompt Builder fills role, task, context, constraints, and format, assembles the prompt, and scores it with a live checklist. No network calls and no AI API. Best score, seen battle ids, and mastered principle ids are the only localStorage writes. Builder text is not stored. Registered under AI Tools (`ai`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the humanizer, AI detector, Upwork proposal generator, code explainer, and Tech Myth or Fact.
+
 ## Recent Changes (Session 2026-10-21 — Digital Footprint Check)
 
 Added `/tools/digital-footprint/` in `content-site/` only. Browser-only self-audit across nine areas: social visibility, people-search sites, old accounts, location sharing, photo metadata, public reviews, breach habits, smart devices, and app permissions. No name, email, phone, or address field, and no network calls. The result is an exposure meter, a per-area radar and bars, and a prioritized cleanup plan with a short how-to and official opt-out links. Checked cleanup steps and choice ids are the only localStorage write (`cs_footprint_audit_v1`), with a Clear button. A text-message second factor counts as partial. If a later save fails, the status says this browser is not keeping the latest checklist. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the password habit quiz, password checker, phishing inbox, Is This Link Safe, Tech Myth or Fact, and Choose Your Own Hack.
