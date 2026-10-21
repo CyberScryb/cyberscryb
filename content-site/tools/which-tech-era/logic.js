@@ -588,6 +588,9 @@
     if (winner) {
       summary = winner.summary;
       if (tied.length) {
+        var sameDirect = tied.every(function (id) {
+          return direct[id] === direct[eraId];
+        });
         summary +=
           ' You tied on points with ' +
           tied
@@ -595,7 +598,9 @@
               return eraById(id).name;
             })
             .join(' and ') +
-          '. The card shows the earlier era.';
+          (sameDirect
+            ? '. The card shows the earlier era.'
+            : '. The card shows the era you picked more often.');
       } else {
         summary += ' That era holds ' + match + '% of the points.';
       }

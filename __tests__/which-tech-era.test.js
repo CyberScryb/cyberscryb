@@ -45,6 +45,20 @@ describe('scoring and mapping', () => {
     expect(tied.percents.find(bar => bar.id === 'nineties').percent).toBe(42);
     expect(sum(tied.percents)).toBe(100);
     expect(tied.summary).toContain('tied on points');
+    expect(tied.summary).toContain('earlier era');
+
+    const uneven = {};
+    logic.QUESTIONS.forEach((question, index) => {
+      if (index < 5) uneven[question.id] = 'late2010s';
+      else if (index < 9) uneven[question.id] = 'nineties';
+      else uneven[question.id] = 'eighties';
+    });
+    const directTie = logic.scoreQuiz(uneven);
+    expect(directTie.scores.late2010s).toBe(directTie.scores.nineties);
+    expect(directTie.direct.late2010s).toBeGreaterThan(directTie.direct.nineties);
+    expect(directTie.eraId).toBe('late2010s');
+    expect(directTie.summary).toContain('picked more often');
+    expect(directTie.summary).not.toContain('earlier era');
 
     const secret = '<script>alert(1)</script>';
     const dropped = logic.scoreQuiz({
