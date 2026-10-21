@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Password Habit Quiz)
+
+Added `/tools/password-habit-quiz/` in `content-site/` only. Browser-only habit quiz: 12 multiple-choice questions on reuse, length, a password manager, 2FA, backup codes, sharing, breaches, security questions, and related habits. No password field. The result is a score, a tier, and a prioritized fix-it plan with the top 3 actions first, each with a why and a how, plus a copyable result line. The last result is the only localStorage write, with a Clear button. No network calls from the quiz. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the password checker, phishing inbox, Is This Link Safe, Tech Myth or Fact, and Choose Your Own Hack.
+
 ## Recent Changes (Session 2026-10-21 — Choose Your Own Hack)
 
 Added `/tools/choose-your-own-hack/` in `content-site/` only. Browser-only branching story: four fictional scenarios (bank text, public Wi-Fi, tech-support call, number-change alert), lessons after each choice, multiple endings, a recap with a defense checklist, and a copyable share line. Discovered ending ids are the only localStorage write. No network calls. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Cross-linked with the phishing inbox simulator and Is This Link Safe.

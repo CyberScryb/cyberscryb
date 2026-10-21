@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Habit Quiz | Free Quiz | CyberScryb</title>
+    <meta
+      name="description"
+      content="Score your password habits and get a prioritized fix-it plan. Twelve questions, no password field, and the result stays in this browser."
+    />
+    <meta
+      name="keywords"
+      content="password habit quiz, password reuse, password manager habits, 2FA habits, backup codes, security questions"
+    />
+    <meta property="og:title" content="Password Habit Quiz | Free Quiz | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Score your password habits and get a prioritized fix-it plan. Twelve questions, no password field, and the result stays in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/password-habit-quiz/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Password Habit Quiz | Free Quiz | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Score your password habits and get a prioritized fix-it plan. Twelve questions, no password field, and the result stays in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/password-habit-quiz/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/password-habit-quiz/style.css?v=20261021habit" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Password Habit Quiz",
+        "url": "https://cyberscryb.com/tools/password-habit-quiz/",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "Twelve multiple-choice questions about password habits. The result is a score, a tier, and a prioritized fix-it plan. The quiz never asks for a password. The last result stays in this browser.",
+        "featureList": [
+          "12 questions on reuse, length, a password manager, 2FA, backup codes, sharing, breaches, and security questions",
+          "No password field",
+          "Habit score and a tier",
+          "Prioritized fix-it plan with the top 3 actions first, each with a why and a how",
+          "Copyable result line",
+          "Last result stored only in this browser, with a Clear button"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this ask for my password?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Every question is multiple choice about a habit, such as whether accounts share a password or where backup codes are kept. There is no field for a password, and an answer that is not one of the choices is ignored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this upload my answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The quiz runs in your browser and does not send the answers anywhere. The only thing saved is the last completed result, as choice ids in this browser's local storage. Clear removes that saved result."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the score mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each question is worth up to 3 points. The total is out of 36, and the tier is Steady vault, Solid habits, A few open doors, Worth a weekend, or Start here. The score describes the habits you reported. It is not a test of any real password and it is not a guarantee about your accounts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the plan ordered?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Weaker habits that open more accounts come first: a reused password, the inbox that receives resets, and a missing second factor outrank a short password or a scheduled change. The first three are the ones to do before the rest. Each action has a why and a how. If a habit is already strong, it stays off the fix list."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where does the last result live, and what does Clear do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only in this browser. Finish a quiz and the result replaces whatever was saved. Clear deletes that saved result from local storage. Clearing site data for cyberscryb.com removes it too. The quiz does not ask for an account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a high score mean my accounts are safe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. These are general habits. A strong routine still loses to a fake login page, and a real account can have a setting this quiz does not see. When a password is involved, open the service from a bookmark you already trust. The password strength checker on this site can estimate one password locally, and this quiz never asks you to type it."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Password Habit Quiz",
+            "item": "https://cyberscryb.com/tools/password-habit-quiz/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="ph-page">
+      <nav class="ph-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Password Habit Quiz</span>
+      </nav>
+
+      <header class="ph-hero">
+        <p class="ph-badge">Free · In this browser · No password field</p>
+        <h1>Password Habit Quiz</h1>
+        <p>
+          Twelve questions about how you handle passwords: reuse, length, a manager, a second
+          factor, backup codes, sharing, and what you do after a breach. You get a score, a tier,
+          and a fix-it plan with the first three actions spelled out. Nothing you answer is
+          uploaded, and the page never asks for a password.
+        </p>
+        <ol class="ph-steps">
+          <li>
+            <strong>Answer the habit</strong> Pick the closest choice. There is nothing to type.
+          </li>
+          <li><strong>See the tier</strong> The score is out of 36. The name is the short version.</li>
+          <li>
+            <strong>Do three things</strong> Each of the first actions has a why and a how.
+          </li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This quiz needs JavaScript. It still runs only in your browser, does not ask for a
+          password, and does not send your answers anywhere.
+        </p>
+      </noscript>
+
+      <div class="ph-client" id="ph-client">
+        <div class="ph-status">
+          <p id="ph-progress">Question 1 of 12</p>
+          <p id="ph-saved">Nothing saved on this device yet.</p>
+          <div
+            class="ph-meter"
+            id="ph-meter"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="12"
+            aria-valuenow="0"
+            aria-labelledby="ph-progress"
+          >
+            <div class="ph-meter-fill" id="ph-meter-fill"></div>
+          </div>
+        </div>
+        <div class="ph-recall" id="ph-recall" hidden>
+          <p id="ph-recall-text">A saved result is on this device.</p>
+          <div class="ph-recall-actions">
+            <button type="button" data-action="saved">See saved result</button>
+            <button type="button" data-action="clear">Clear saved result</button>
+          </div>
+        </div>
+        <div class="ph-stage" id="ph-stage">
+          <article class="ph-card" id="ph-card" aria-label="Password habit question">
+            <p>The quiz loads in this browser.</p>
+          </article>
+        </div>
+        <p class="ph-hint" id="ph-hint">
+          Pick the closest habit. Keys 1 to 4 select a choice. This page has no password field.
+        </p>
+      </div>
+
+      <section class="ph-prose">
+        <h2>Habits, not a password</h2>
+        <p>
+          A strength checker can look at one password. It cannot see that the same password also
+          opens your email, or that the backup codes for that email are sitting in the inbox. Those
+          are habits. This quiz asks about the habits and then stops. It does not want the
+          password, a username, or the name of a bank.
+        </p>
+        <p>
+          Reuse is the habit that turns one breach into many. Attackers try a leaked password on
+          mail first, because mail can reset the other accounts. A different password on each
+          account limits that. Length is the other half: a word plus the year is an early guess,
+          and a capital letter with a symbol on the end does not change the pattern. Sixteen
+          characters, or four unrelated words, is a practical target when something else remembers
+          them.
+        </p>
+        <h3>The account that resets the others</h3>
+        <p>
+          The email that receives password resets is the floor under everything else. It needs its
+          own password and a second step that does not arrive in that same inbox. An authenticator
+          app, a passkey, or a hardware key still works when someone only has the password. A text
+          message is better than nothing, and a SIM swap can redirect it. Backup codes are the
+          spare key for a lost phone. They belong in a password manager or on paper, not in the
+          camera roll and not in the inbox they protect.
+        </p>
+        <p>
+          Security questions are a second password that is often already public. A first pet or a
+          street name can be guessed from records and family posts. Nonsense stored in the manager,
+          or a second factor instead of the question, closes that door. Sharing a mail or bank
+          password by text leaves a copy in a chat thread. A streaming login shared in a household
+          is a smaller risk, as long as that password is not also the email password.
+        </p>
+        <h3>When a password should change</h3>
+        <p>
+          Change a password when there is a reason: a breach notice, another person learned it, or
+          you typed it into a page you reached from a message. NIST 800-63B tells organizations not
+          to require a change every 30, 60, or 90 days, because the usual result is a predictable
+          edit, such as a new digit on the end. A breach you ignore leaves the stolen copy working.
+          Change the named account, then change every other account that used the same password.
+        </p>
+        <p>
+          The plan on this page is general. It is not a promise that an account is safe, and a fake
+          login page still beats a strong habit if the password gets typed there. Open the real
+          service from a bookmark. The
+          <a href="/tools/password-checker/">password strength checker</a> can estimate one password
+          on this device, and it never uploads it. The
+          <a href="/tools/phishing-inbox-simulator/">phishing inbox</a> and
+          <a href="/tools/is-this-link-safe/">link checker</a> practice the message and the address.
+          <a href="/tools/choose-your-own-hack/">Choose Your Own Hack</a> walks a scam as a story,
+          and
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> covers the claims people repeat
+          about passwords, private browsing, and the padlock.
+        </p>
+      </section>
+
+      <section class="ph-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this ask for my password?</summary>
+          <p>
+            No. Every question is multiple choice about a habit, such as whether accounts share a
+            password or where backup codes are kept. There is no field for a password, and an
+            answer that is not one of the choices is ignored.
+          </p>
+        </details>
+        <details>
+          <summary>Does this upload my answers?</summary>
+          <p>
+            No. The quiz runs in your browser and does not send the answers anywhere. The only
+            thing saved is the last completed result, as choice ids in this browser's local
+            storage. Clear removes that saved result.
+          </p>
+        </details>
+        <details>
+          <summary>What does the score mean?</summary>
+          <p>
+            Each question is worth up to 3 points. The total is out of 36, and the tier is Steady
+            vault, Solid habits, A few open doors, Worth a weekend, or Start here. The score
+            describes the habits you reported. It is not a test of any real password and it is not
+            a guarantee about your accounts.
+          </p>
+        </details>
+        <details>
+          <summary>How is the plan ordered?</summary>
+          <p>
+            Weaker habits that open more accounts come first: a reused password, the inbox that
+            receives resets, and a missing second factor outrank a short password or a scheduled
+            change. The first three are the ones to do before the rest. Each action has a why and a
+            how. If a habit is already strong, it stays off the fix list.
+          </p>
+        </details>
+        <details>
+          <summary>Where does the last result live, and what does Clear do?</summary>
+          <p>
+            Only in this browser. Finish a quiz and the result replaces whatever was saved. Clear
+            deletes that saved result from local storage. Clearing site data for cyberscryb.com
+            removes it too. The quiz does not ask for an account.
+          </p>
+        </details>
+        <details>
+          <summary>Does a high score mean my accounts are safe?</summary>
+          <p>
+            No. These are general habits. A strong routine still loses to a fake login page, and a
+            real account can have a setting this quiz does not see. When a password is involved,
+            open the service from a bookmark you already trust. The password strength checker on
+            this site can estimate one password locally, and this quiz never asks you to type it.
+          </p>
+        </details>
+      </section>
+
+      <section class="ph-related">
+        <h2>Related tools</h2>
+        <div class="ph-related-grid">
+          <a href="/tools/password-checker/">
+            <strong>Password Strength Checker</strong>
+            <span>Estimate a password on this device. It never leaves the browser.</span>
+          </a>
+          <a href="/tools/phishing-inbox-simulator/">
+            <strong>Phishing Inbox Simulator</strong>
+            <span>Mark fictional emails safe or phish and read the real link address.</span>
+          </a>
+          <a href="/tools/is-this-link-safe/">
+            <strong>Is This Link Safe</strong>
+            <span>Paste one address and read the real site, still without opening it.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on password, privacy, and battery claims.</span>
+          </a>
+          <a href="/tools/choose-your-own-hack/">
+            <strong>Choose Your Own Hack</strong>
+            <span>Play the target in a fictional scam and see which choice keeps the code.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="ph-live" class="ph-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/password-habit-quiz/logic.js?v=20261021habit"></script>
+    <script src="/tools/password-habit-quiz/script.js?v=20261021habit"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
