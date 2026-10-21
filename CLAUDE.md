@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Phishing Inbox Simulator)
+
+Added `/tools/phishing-inbox-simulator/` in `content-site/` only. Browser-only fictional inbox: 14 sample emails, Safe or Phish, sender address, real link address on hover, focus, and tap, red-flag highlights after each answer, score, trick breakdown, copyable result line, and Play again shuffle. Best score is the only localStorage write. Answers are not stored or sent. Registered under Security & Quizzes (`security`) in the tools catalog, homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from Is This Link Safe.
+
 ## Recent Changes (Session 2026-10-21 — Is This Link Safe)
 
 Added `/tools/is-this-link-safe/` in `content-site/` only. Browser-only URL reading: lookalike and punycode hosts, brand names in subdomains, IP hosts, http, shorteners, @ tricks, long or deeply nested hosts, suspicious endings, misleading paths, and encoded characters. Verdicts are Looks OK, Be careful, and Likely dangerous. The pasted address is never fetched, stored, or sent. A visible note says the check is a heuristic, not a guarantee. New tools-catalog filter `security` (“Security & Quizzes”). Registered in the homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from the password checker.
