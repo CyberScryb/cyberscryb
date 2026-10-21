@@ -22,6 +22,7 @@ const TARGET_PAGES = [
   'public/tools/digital-footprint/index.html',
   'public/tools/prompt-battle/index.html',
   'public/tools/which-tech-era/index.html',
+  'public/tools/guess-the-year/index.html',
   'public/tools/screen-time-reality-check/index.html',
   'public/guides/how-to-write-a-refund-request.html',
   'public/guides/how-to-organize-a-paper-trail.html',
