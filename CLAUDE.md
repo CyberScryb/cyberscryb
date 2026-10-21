@@ -11,6 +11,10 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-10-21 — Is This Link Safe)
+
+Added `/tools/is-this-link-safe/` in `content-site/` only. Browser-only URL reading: lookalike and punycode hosts, brand names in subdomains, IP hosts, http, shorteners, @ tricks, long or deeply nested hosts, suspicious endings, misleading paths, and encoded characters. Verdicts are Looks OK, Be careful, and Likely dangerous. The pasted address is never fetched, stored, or sent. A visible note says the check is a heuristic, not a guarantee. New tools-catalog filter `security` (“Security & Quizzes”). Registered in the homepage allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from the password checker.
+
 ## Recent Changes (Session 2026-10-21 — Subscription Leak Calculator)
 
 Added `/tools/subscription-leak-calculator/` in `content-site/` only. Browser-only checklist with editable estimated prices, live monthly and yearly totals, overlap flags, usage-based cut suggestions, copy/print, and a labeled localStorage reset. Registered in the tools catalog (finance), homepage tool allowlist, `llms.txt`, both `generate-pages.js` indexable lists, and `content-site/sitemap.xml`. Linked from the budget planner and gym cancellation letter. Default prices are labeled estimates.
