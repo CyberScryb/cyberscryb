@@ -20,6 +20,7 @@ const TARGET_PAGES = [
   'public/tools/choose-your-own-hack/index.html',
   'public/tools/tech-myth-or-fact/index.html',
   'public/tools/password-habit-quiz/index.html',
+  'public/tools/how-long-to-crack-it/index.html',
   'public/tools/digital-footprint/index.html',
   'public/tools/prompt-battle/index.html',
   'public/tools/ai-or-human-writer/index.html',

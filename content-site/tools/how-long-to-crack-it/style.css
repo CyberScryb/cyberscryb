@@ -1,0 +1,493 @@
+/* How Long to Crack It?
+   Scoped to this page. Uses the site tokens from css/style.css. */
+
+.hc-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4.5rem;
+  color: var(--text);
+}
+
+.hc-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.hc-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.hc-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.hc-hero {
+  position: static;
+  top: auto;
+  z-index: auto;
+  max-width: 42rem;
+  margin-bottom: 1.25rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.hc-badge {
+  display: inline-block;
+  margin: 0 0 0.9rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #166534;
+  border-radius: 999px;
+  background: #052e16;
+  color: #bbf7d0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.hc-hero h1,
+.hc-block h2,
+.hc-prose h2,
+.hc-faq h2,
+.hc-related h2,
+.hc-share h2,
+.hc-card h3,
+.hc-whatif h3,
+.hc-phrase-card h3 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+}
+
+.hc-hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.hc-hero p,
+.hc-prose p,
+.hc-quiet,
+.hc-card p,
+.hc-faq p,
+.hc-lesson,
+.hc-phrase-note,
+.hc-share p {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.hc-steps {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hc-steps li {
+  padding-left: 0.15rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.hc-steps strong {
+  color: var(--text);
+}
+
+.hc-block,
+.hc-card,
+.hc-whatif,
+.hc-phrase-card,
+.hc-share,
+.hc-related a {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.hc-block {
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.hc-block h2,
+.hc-prose h2,
+.hc-faq h2,
+.hc-related h2 {
+  font-size: clamp(1.45rem, 3vw, 1.8rem);
+}
+
+.hc-field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.hc-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.55rem;
+  align-items: stretch;
+}
+
+.hc-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.hc-actions button,
+.hc-inline button,
+.hc-share button {
+  min-height: 48px;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.hc-actions button[aria-pressed='true'],
+.hc-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.hc-hint {
+  margin: 0.55rem 0 0;
+  color: var(--text-faint);
+  font-size: 0.92rem;
+}
+
+.hc-summary {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.hc-scale {
+  position: relative;
+  height: 1.4rem;
+  margin: 0.2rem 0 0.8rem;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.hc-scale span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.hc-scale span:first-child {
+  transform: none;
+}
+
+.hc-scale span:last-child {
+  transform: translateX(-100%);
+}
+
+.hc-scenarios {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hc-card {
+  padding: 0.95rem 1rem 1rem;
+}
+
+.hc-card h3 {
+  font-size: 1.25rem;
+}
+
+.hc-time {
+  margin: 0.15rem 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.hc-card.is-instant .hc-time {
+  color: #fecaca;
+}
+
+.hc-card.is-short .hc-time {
+  color: #fde68a;
+}
+
+.hc-card.is-human .hc-time {
+  color: #fcd34d;
+}
+
+.hc-card.is-history .hc-time {
+  color: #99f6e4;
+}
+
+.hc-card.is-universe .hc-time {
+  color: #bbf7d0;
+}
+
+.hc-compare,
+.hc-assume,
+.hc-detail {
+  margin: 0.2rem 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.hc-assume {
+  color: var(--text-faint);
+  font-size: 0.88rem;
+}
+
+.hc-track {
+  position: relative;
+  height: 14px;
+  margin-top: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #ef4444 0%,
+    #f59e0b 30%,
+    #facc15 50%,
+    #2dd4bf 74%,
+    #4ade80 100%
+  );
+}
+
+.hc-marker {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  margin-left: -8px;
+  border: 2px solid #0a0a0a;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transition: left 0.55s ease;
+}
+
+.hc-patterns {
+  margin: 0.7rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+}
+
+.hc-patterns:empty {
+  display: none;
+}
+
+.hc-whatif-grid,
+.hc-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.7rem;
+}
+
+.hc-whatif {
+  padding: 0.85rem;
+}
+
+.hc-whatif h3,
+.hc-phrase-card h3 {
+  font-size: 1.05rem;
+}
+
+.hc-example {
+  margin: 0.25rem 0;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.hc-phrase-card,
+.hc-share {
+  padding: 1rem;
+  margin-top: 0.8rem;
+}
+
+.hc-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: end;
+  margin-bottom: 0.8rem;
+}
+
+.hc-controls label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.hc-controls select {
+  min-height: 48px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.hc-phrase {
+  margin: 0.3rem 0 0.7rem;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.hc-inline,
+.hc-share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.hc-status {
+  min-height: 1.2rem;
+  margin: 0.45rem 0 0;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+}
+
+.hc-prose,
+.hc-faq,
+.hc-related {
+  margin-top: 2rem;
+}
+
+.hc-prose a,
+.hc-faq a,
+.hc-lesson a {
+  color: var(--primary-soft);
+}
+
+.hc-faq details {
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+.hc-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.hc-related-grid a {
+  display: block;
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+}
+
+.hc-related-grid strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.hc-related-grid span {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.hc-related-grid a:hover {
+  border-color: var(--primary);
+}
+
+.hc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hc-input:focus-visible,
+.hc-actions button:focus-visible,
+.hc-inline button:focus-visible,
+.hc-share button:focus-visible,
+.hc-controls select:focus-visible,
+.hc-faq summary:focus-visible,
+.hc-related-grid a:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .hc-page {
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+  .hc-entry {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hc-input {
+    grid-column: 1 / -1;
+  }
+
+  .hc-scale span {
+    position: static;
+    transform: none;
+  }
+
+  .hc-scale {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    gap: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-marker,
+  .hc-card,
+  .hc-whatif,
+  .hc-actions button,
+  .hc-inline button {
+    transition: none;
+    animation: none;
+  }
+}
+
+.hc-reduce .hc-marker {
+  transition: none;
+}

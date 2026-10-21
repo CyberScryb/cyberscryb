@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Long to Crack It? | Free Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Compare crack time for a rate-limited login, one GPU, a GPU cluster, and bcrypt. The estimate stays on your device and is never sent."
+    />
+    <meta
+      name="keywords"
+      content="how long to crack a password, password crack time, bcrypt guessing speed, gpu password guess rate, online vs offline attack"
+    />
+    <meta property="og:title" content="How Long to Crack It? | Free Tool | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Compare crack time for a rate-limited login, one GPU, a GPU cluster, and bcrypt. The estimate stays on your device and is never sent."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/how-long-to-crack-it/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How Long to Crack It? | Free Tool | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Compare crack time for a rate-limited login, one GPU, a GPU cluster, and bcrypt. The estimate stays on your device and is never sent."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/how-long-to-crack-it/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/how-long-to-crack-it/style.css?v=20261021crack" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "How Long to Crack It?",
+        "url": "https://cyberscryb.com/tools/how-long-to-crack-it/",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser-only attacker simulator. It estimates crack time for a rate-limited login, one GPU, a GPU cluster, and a slow hash such as bcrypt. What you type stays on the device.",
+        "featureList": [
+          "Four labeled attacker speeds with stated guesses per second",
+          "Pattern penalties for common guesses, leetspeak, keyboard walks, repeats, sequences, dates, and names plus digits",
+          "A timeline from instantly to longer than the universe",
+          "A what-if panel that uses a generated example, not what you typed",
+          "A passphrase generator using a bundled word list and the browser random source",
+          "Nothing you type is sent, stored, or put in the share line"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is what I type sent anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The estimate runs in this browser. What you type is not sent, stored, or put in the share line. The page does not check a breach list or call an API with the field. If you accept cookies, site analytics can load, and that request does not include the field."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do the four rows disagree?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They are different speeds, written next to each row. A rate-limited login is 10 guesses per second. One GPU on a fast hash is 100 billion per second. A GPU cluster is 100 trillion per second. Bcrypt at a high cost is 10,000 per second. These are labeled assumptions, not a measurement of your accounts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do the pattern notes mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A character-pool count treats every character as random. Attackers try cheaper models first: a common guess, leetspeak, a keyboard walk, repeats, a sequence, a date, a name plus digits, or words from a list. The shortest honest model sets the times. The note names the model. It does not repeat what you typed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a long time mean an account is safe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This is a math sketch of guessing. It cannot see a reused password, a fake login page, a stolen session, or the hash a real site chose. The password habit quiz covers reuse, a manager, and a second factor, and it never asks you to type a password."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the passphrase generator pick words?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It uses the browser crypto.getRandomValues source and a bundled list of 512 words. Six words from that list is about 54 bits. A longer public list, such as a 7,776-word diceware list, gives more entropy per word. The phrase is not stored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is this different from the password strength checker?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The strength checker scores one password and a single crack-time guess. This page is the attacker view: the same kind of secret under four speeds, with the assumptions written on each row. Both stay on your device."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "How Long to Crack It?",
+            "item": "https://cyberscryb.com/tools/how-long-to-crack-it/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="hc-page">
+      <nav class="hc-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>How Long to Crack It?</span>
+      </nav>
+
+      <section class="hc-hero">
+        <p class="hc-badge" id="hc-privacy">Checked on your device. Never sent anywhere.</p>
+        <h1>How Long to Crack It?</h1>
+        <p>
+          Watch one secret against four attacker speeds: a login that slows down, a fast hash on
+          one GPU, that same hash on a GPU cluster, and a slow hash such as bcrypt. The marker runs
+          from instantly to longer than the universe. The
+          <a href="/tools/password-checker/">password strength checker</a> scores a single guess
+          rate. This page is the comparison.
+        </p>
+        <ol class="hc-steps">
+          <li><strong>Type</strong> Dots stay on unless you press Show.</li>
+          <li><strong>Read the rows</strong> Each one names its guesses per second.</li>
+          <li><strong>Try a change</strong> The what-if panel uses a generated example.</li>
+        </ol>
+      </section>
+
+      <noscript>
+        <p>
+          This estimate needs JavaScript. It still would not send what you type. There is no
+          account and no breach lookup.
+        </p>
+      </noscript>
+
+      <section class="hc-block" aria-labelledby="hc-setups">
+        <h2 id="hc-setups">Four attacker setups</h2>
+        <div class="hc-field">
+          <label for="hc-input">Password to estimate</label>
+          <div class="hc-entry">
+            <input
+              id="hc-input"
+              class="hc-input"
+              type="password"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
+              data-1p-ignore="true"
+              data-lpignore="true"
+              data-form-type="other"
+              aria-describedby="hc-privacy hc-hint"
+            />
+            <div class="hc-actions">
+              <button type="button" id="hc-toggle" aria-pressed="false" aria-controls="hc-input">
+                Show
+              </button>
+            </div>
+            <div class="hc-actions">
+              <button type="button" id="hc-clear">Clear</button>
+            </div>
+          </div>
+          <p class="hc-hint" id="hc-hint">
+            Shown as dots. Show reveals it on this screen only. It is not saved, not put in the
+            address bar, and not included when you copy the share line.
+          </p>
+        </div>
+        <p class="hc-summary" id="hc-summary">The four timelines update as you type. Nothing is saved.</p>
+        <div class="hc-scale" aria-hidden="true">
+          <span>Instantly</span>
+          <span>A day</span>
+          <span>A lifetime</span>
+          <span>Universe</span>
+        </div>
+        <div class="hc-scenarios">
+          <article class="hc-card" data-scenario="online-limited">
+            <h3 id="hc-name-online">Online, rate limited</h3>
+            <p class="hc-detail">A login form that slows down or locks after a few tries.</p>
+            <p class="hc-time" data-field="time">Waiting</p>
+            <p class="hc-compare" data-field="compare">Type to place this marker.</p>
+            <p class="hc-assume">10 guesses per second. Many real sites allow fewer than this.</p>
+            <div
+              class="hc-track"
+              data-field="meter"
+              role="meter"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="Online, rate limited: waiting."
+              aria-labelledby="hc-name-online"
+            >
+              <span class="hc-marker" data-field="marker"></span>
+            </div>
+          </article>
+          <article class="hc-card" data-scenario="offline-gpu">
+            <h3 id="hc-name-gpu">Offline, fast hash, one GPU</h3>
+            <p class="hc-detail">A stolen fast hash, such as MD5 or NTLM, on one high-end GPU.</p>
+            <p class="hc-time" data-field="time">Waiting</p>
+            <p class="hc-compare" data-field="compare">Type to place this marker.</p>
+            <p class="hc-assume">
+              100 billion guesses per second. A labeled assumption for a fast hash, not a benchmark
+              of a named card.
+            </p>
+            <div
+              class="hc-track"
+              data-field="meter"
+              role="meter"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="Offline, fast hash, one GPU: waiting."
+              aria-labelledby="hc-name-gpu"
+            >
+              <span class="hc-marker" data-field="marker"></span>
+            </div>
+          </article>
+          <article class="hc-card" data-scenario="offline-cluster">
+            <h3 id="hc-name-cluster">Offline, fast hash, GPU cluster</h3>
+            <p class="hc-detail">The same fast hash on about a thousand of those GPUs.</p>
+            <p class="hc-time" data-field="time">Waiting</p>
+            <p class="hc-compare" data-field="compare">Type to place this marker.</p>
+            <p class="hc-assume">
+              100 trillion guesses per second. About a thousand times the single-GPU rate.
+            </p>
+            <div
+              class="hc-track"
+              data-field="meter"
+              role="meter"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="Offline, fast hash, GPU cluster: waiting."
+              aria-labelledby="hc-name-cluster"
+            >
+              <span class="hc-marker" data-field="marker"></span>
+            </div>
+          </article>
+          <article class="hc-card" data-scenario="offline-bcrypt">
+            <h3 id="hc-name-bcrypt">Offline, slow hash (bcrypt)</h3>
+            <p class="hc-detail">A slow hash such as bcrypt at a high cost, on one strong GPU.</p>
+            <p class="hc-time" data-field="time">Waiting</p>
+            <p class="hc-compare" data-field="compare">Type to place this marker.</p>
+            <p class="hc-assume">
+              10,000 guesses per second. A labeled assumption for bcrypt at a high cost. Argon2 can
+              be slower. A fast hash is not this row.
+            </p>
+            <div
+              class="hc-track"
+              data-field="meter"
+              role="meter"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-valuetext="Offline, slow hash (bcrypt): waiting."
+              aria-labelledby="hc-name-bcrypt"
+            >
+              <span class="hc-marker" data-field="marker"></span>
+            </div>
+          </article>
+        </div>
+        <p class="hc-quiet" id="hc-pattern-note"></p>
+        <ul class="hc-patterns" id="hc-patterns">
+          <li>None yet.</li>
+        </ul>
+        <p class="hc-quiet">
+          Times are an average: a lucky early guess can land sooner. This is a teaching sketch, not
+          a promise about a real site.
+        </p>
+      </section>
+
+      <section class="hc-block" aria-labelledby="hc-whatif-title">
+        <h2 id="hc-whatif-title">What if</h2>
+        <p class="hc-quiet">
+          Generated example. Not what you typed. Each card is a fresh string from this browser, then
+          a longer string, a word, or a symbol.
+        </p>
+        <div class="hc-whatif-grid">
+          <article class="hc-whatif" data-whatif="base">
+            <h3>Eight random letters</h3>
+            <p class="hc-example" data-field="example">…</p>
+            <p data-field="gpu">One GPU: …</p>
+            <p data-field="slow">Bcrypt: …</p>
+          </article>
+          <article class="hc-whatif" data-whatif="length">
+            <h3>Four more random letters</h3>
+            <p class="hc-example" data-field="example">…</p>
+            <p data-field="gpu">One GPU: …</p>
+            <p data-field="slow">Bcrypt: …</p>
+          </article>
+          <article class="hc-whatif" data-whatif="word">
+            <h3>A word on the end</h3>
+            <p class="hc-example" data-field="example">…</p>
+            <p data-field="gpu">One GPU: …</p>
+            <p data-field="slow">Bcrypt: …</p>
+          </article>
+          <article class="hc-whatif" data-whatif="symbol">
+            <h3>A symbol on the end</h3>
+            <p class="hc-example" data-field="example">…</p>
+            <p data-field="gpu">One GPU: …</p>
+            <p data-field="slow">Bcrypt: …</p>
+          </article>
+        </div>
+        <p class="hc-lesson" id="hc-lesson"></p>
+        <div class="hc-inline">
+          <button type="button" id="hc-whatif-refresh">New example</button>
+        </div>
+      </section>
+
+      <section class="hc-block" aria-labelledby="hc-phrase-title">
+        <h2 id="hc-phrase-title">Make a passphrase</h2>
+        <p class="hc-quiet">
+          Words come from a bundled list of 512. The picker is
+          <code>crypto.getRandomValues</code>, the browser's cryptographic random source. The
+          phrase is not stored.
+        </p>
+        <div class="hc-phrase-card">
+          <div class="hc-controls">
+            <label>
+              Words
+              <select id="hc-count">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </label>
+            <label>
+              Separator
+              <select id="hc-sep">
+                <option value="-" selected>Hyphen</option>
+                <option value=" ">Space</option>
+                <option value=".">Period</option>
+              </select>
+            </label>
+            <button type="button" id="hc-generate" class="hc-primary">New phrase</button>
+          </div>
+          <p class="hc-phrase" id="hc-phrase"></p>
+          <p class="hc-phrase-note" id="hc-phrase-bits"></p>
+          <div class="hc-inline">
+            <button type="button" id="hc-copy-phrase">Copy phrase</button>
+            <button type="button" id="hc-use-phrase">Time this example</button>
+          </div>
+          <p class="hc-status" id="hc-phrase-status" role="status"></p>
+        </div>
+      </section>
+
+      <section class="hc-prose">
+        <h2>What to do with this</h2>
+        <p>
+          Length moves the marker more than a clever swap. A letter turned into a lookalike digit
+          is a small list, not a new alphabet. If you do not know how a site stores the secret,
+          believe the fast-hash rows. A slow hash such as bcrypt or Argon2 changes the offline
+          math, and you usually do not pick that hash.
+        </p>
+        <p>
+          A lockout can stop a short password on a live login. A stolen database does not wait. One
+          password per account matters more than a decoration on the end. The
+          <a href="/tools/password-habit-quiz/">Password Habit Quiz</a> scores reuse, a manager, and
+          a second factor, and it never asks you to type a password. The
+          <a href="/tools/password-checker/">password strength checker</a> is the single-password
+          score, still only on this device.
+        </p>
+        <p>
+          This passphrase list has 512 words, so four words are about 36 bits and can fall quickly
+          to a fast hash. Six is a start on this page. A longer public list, such as a 7,776-word
+          diceware list, gives more per word. Do not reuse a phrase that showed up in an article.
+        </p>
+        <p>
+          A long time here is not a safe account. It cannot see a reused password, a fake login
+          page, or a stolen session. Open the real site from a bookmark you already trust.
+        </p>
+      </section>
+
+      <section class="hc-share">
+        <h2>Share the page, not the field</h2>
+        <p id="hc-share-text">I compared crack times for four attacker setups. The estimate stayed on this device. https://cyberscryb.com/tools/how-long-to-crack-it/</p>
+        <div class="hc-share-row">
+          <button type="button" id="hc-share">Copy share line</button>
+        </div>
+        <p class="hc-status" id="hc-share-status" role="status"></p>
+      </section>
+
+      <section class="hc-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Is what I type sent anywhere?</summary>
+          <p>
+            No. The estimate runs in this browser. What you type is not sent, stored, or put in the
+            share line. The page does not check a breach list or call an API with the field. If you
+            accept cookies, site analytics can load, and that request does not include the field.
+          </p>
+        </details>
+        <details>
+          <summary>Why do the four rows disagree?</summary>
+          <p>
+            They are different speeds, written next to each row. A rate-limited login is 10 guesses
+            per second. One GPU on a fast hash is 100 billion per second. A GPU cluster is 100
+            trillion per second. Bcrypt at a high cost is 10,000 per second. These are labeled
+            assumptions, not a measurement of your accounts.
+          </p>
+        </details>
+        <details>
+          <summary>What do the pattern notes mean?</summary>
+          <p>
+            A character-pool count treats every character as random. Attackers try cheaper models
+            first: a common guess, leetspeak, a keyboard walk, repeats, a sequence, a date, a name
+            plus digits, or words from a list. The shortest honest model sets the times. The note
+            names the model. It does not repeat what you typed.
+          </p>
+        </details>
+        <details>
+          <summary>Does a long time mean an account is safe?</summary>
+          <p>
+            No. This is a math sketch of guessing. It cannot see a reused password, a fake login
+            page, a stolen session, or the hash a real site chose. The
+            <a href="/tools/password-habit-quiz/">password habit quiz</a> covers reuse, a manager,
+            and a second factor, and it never asks you to type a password.
+          </p>
+        </details>
+        <details>
+          <summary>How does the passphrase generator pick words?</summary>
+          <p>
+            It uses the browser <code>crypto.getRandomValues</code> source and a bundled list of
+            512 words. Six words from that list is about 54 bits. A longer public list, such as a
+            7,776-word diceware list, gives more entropy per word. The phrase is not stored.
+          </p>
+        </details>
+        <details>
+          <summary>How is this different from the password strength checker?</summary>
+          <p>
+            The strength checker scores one password and a single crack-time guess. This page is
+            the attacker view: the same kind of secret under four speeds, with the assumptions
+            written on each row. Both stay on your device.
+          </p>
+        </details>
+      </section>
+
+      <section class="hc-related">
+        <h2>Related tools</h2>
+        <div class="hc-related-grid">
+          <a href="/tools/password-habit-quiz/">
+            <strong>Password Habit Quiz</strong>
+            <span>Score reuse, a manager, and a second factor. It never asks for a password.</span>
+          </a>
+          <a href="/tools/password-checker/">
+            <strong>Password Strength Checker</strong>
+            <span>One local score and a single crack-time guess. It stays on this device.</span>
+          </a>
+          <a href="/tools/phishing-inbox-simulator/">
+            <strong>Phishing Inbox Simulator</strong>
+            <span>Mark fictional emails safe or phish and read the real link address.</span>
+          </a>
+          <a href="/tools/is-this-link-safe/">
+            <strong>Is This Link Safe</strong>
+            <span>Paste one address and read the real site, still without opening it.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on password, privacy, and battery claims.</span>
+          </a>
+          <a href="/tools/digital-footprint/">
+            <strong>Digital Footprint Check</strong>
+            <span>Audit people-search sites, location, and photos. It never asks for a name.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="hc-live" class="hc-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/how-long-to-crack-it/logic.js?v=20261021crack"></script>
+    <script src="/tools/how-long-to-crack-it/script.js?v=20261021crack"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
