@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phishing Inbox Simulator | Free Quiz | CyberScryb</title>
+    <meta
+      name="description"
+      content="Practice spotting phishing in a fake inbox. Mark each sample safe or phish, check the real link address, and get a score. Nothing you answer is uploaded."
+    />
+    <meta
+      name="keywords"
+      content="phishing inbox simulator, phishing email quiz, spot the phish, spoofed sender, fake email test"
+    />
+    <meta property="og:title" content="Phishing Inbox Simulator | Free Quiz | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Practice spotting phishing in a fake inbox. Mark each sample safe or phish, check the real link address, and get a score. Nothing you answer is uploaded."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/phishing-inbox-simulator/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Phishing Inbox Simulator | Free Quiz | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Practice spotting phishing in a fake inbox. Mark each sample safe or phish, check the real link address, and get a score. Nothing you answer is uploaded."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/phishing-inbox-simulator/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/phishing-inbox-simulator/style.css?v=20261021phish" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Phishing Inbox Simulator",
+        "url": "https://cyberscryb.com/tools/phishing-inbox-simulator/",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A fictional inbox for practicing phishing cues. Mark each sample email safe or phish, read the sender address, and hover links to see the real URL. The quiz runs in the browser. Answers are not uploaded.",
+        "featureList": [
+          "14 fictional emails, a mix of legitimate mail and phishing",
+          "Safe or Phish on each message",
+          "Sender address shown beside the display name",
+          "Real link address on hover, focus, and tap",
+          "Red flags highlighted in the email after each answer",
+          "Score and a breakdown by trick type",
+          "Shareable result line",
+          "Best score stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this upload my answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The quiz runs in your browser. The only thing saved is your best score, in this browser's local storage. Individual answers are not stored and are not sent to analytics. You can confirm that in the network panel: marking an email adds no request."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the companies or people real?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The brands are fictional, and the only person named is Alex Example, a placeholder. Every domain uses .example, which is reserved for examples and is not a live website."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will a link in the inbox open?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Choosing a link shows the real address and stays on this page. The simulator does not fetch the address, follow a redirect, or download an attachment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I inspect before I answer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Read the sender address after the @ sign, then the real address under each link. Look for a file you did not ask for, a hurry, a prize, a request for a password, or a note that tells you to keep a secret. The display name is not the sender."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a perfect score mean I will catch a real phish?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This is practice on a fixed set of cues. A real message can be fake without these patterns, and a real company can send a deadline. When money or a password is involved, open the service from a bookmark you already trust."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where does the best score live, and can I play again?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Play again shuffles the same fictional mailbox. Your best score stays in this browser only. Clearing site data for cyberscryb.com removes it. The round itself is forgotten when you leave or shuffle."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Phishing Inbox Simulator",
+            "item": "https://cyberscryb.com/tools/phishing-inbox-simulator/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pi-page">
+      <nav class="pi-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Phishing Inbox Simulator</span>
+      </nav>
+
+      <header class="pi-hero">
+        <p class="pi-badge">Free · In this browser · Answers stay here</p>
+        <h1>Phishing Inbox Simulator</h1>
+        <p>
+          Fourteen fictional emails. Some are ordinary, some are phishing. Mark each one Safe or
+          Phish, then read why. The sender address is on the message, and the real link address
+          shows when you hover, focus, or tap. Nothing is uploaded.
+        </p>
+        <ol class="pi-steps">
+          <li><strong>Read the address</strong> The name is a costume. The part after the @ sign is the sender.</li>
+          <li><strong>Check the link</strong> The button text can lie. The real address is the one that would open.</li>
+          <li><strong>Name the pressure</strong> A hurry, a prize, a file, or a secret is a cue, not proof by itself.</li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This inbox needs JavaScript. It still runs only in your browser and does not send your
+          answers anywhere.
+        </p>
+      </noscript>
+
+      <div class="pi-client" id="pi-client">
+        <div class="pi-chrome" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <p>Sample mailbox · you@mailbox.example</p>
+        </div>
+        <section class="pi-list" aria-labelledby="pi-inbox-heading">
+          <div class="pi-list-head">
+            <div class="pi-list-tools">
+              <h2 id="pi-inbox-heading">Inbox</h2>
+              <button type="button" id="pi-show-score" class="pi-show-score" hidden>See score</button>
+            </div>
+            <p id="pi-progress">Answered 0 of 14</p>
+            <p id="pi-best">Best on this device: none yet.</p>
+            <div class="pi-meter" aria-hidden="true">
+              <div class="pi-meter-fill" id="pi-meter-fill"></div>
+            </div>
+          </div>
+          <ol class="pi-messages" id="pi-messages"></ol>
+        </section>
+        <section class="pi-read" aria-label="Open message">
+          <button type="button" class="pi-back" id="pi-back">Back to inbox</button>
+          <div id="pi-message">
+            <p>The sample inbox loads in this browser.</p>
+          </div>
+          <div id="pi-results" hidden></div>
+        </section>
+      </div>
+
+      <section class="pi-prose">
+        <h2>How to read a message before you trust it</h2>
+        <p>
+          The display name is the costume. The address next to it is the sender. A note can say
+          Northwind Security and still arrive from a site you have never used. Read the part after
+          the @ sign, then read that host from the right. In this inbox the company is the name
+          just before .example. In real mail it is the name just before .com, .org, or the country
+          ending. Extra words glued on, such as northwind-alerts.example instead of
+          northwind.example, are a different site that borrowed the brand.
+        </p>
+        <p>
+          Then look at the link, not the label. The words on a button can say rivermark.example
+          while the real address is another host. This page prints that real address under the
+          link. On a computer, hover or focus the link and it lights up. On a phone it is already
+          on the screen, and a tap pins it open. Nothing here navigates. The domains use .example,
+          which is reserved for examples, so there is no live site on the other end and no file to
+          download.
+        </p>
+        <h3>A hurry is not evidence</h3>
+        <p>
+          “Locked in two hours” and “disconnects tomorrow” are there to make you skip the address.
+          A real date can be legitimate too: a library hold, or benefits enrollment that closes on
+          a calendar day. The rest of the message is the difference. A matching sender, a matching
+          link, and no demand for a password or a gift card is a different shape from a threat.
+        </p>
+        <p>
+          Attachments are files you did not ask for. A bill that arrives as a web page, named like
+          Invoice-1044.htm, is not a PDF. A note that tells you to enable content is asking the
+          computer to run something. You do not need to open it to see that the shape is wrong.
+        </p>
+        <h3>Quiet mail can still be fake</h3>
+        <p>
+          A prize that expires at midnight, or a desk that wants gift-card codes and asks you not
+          to tell anyone, is a script. Calm mail can be fake too. One note in this set does not
+          shout. It only wants a password on a host that looks like the company if you stop reading
+          early. The brand sits on the left. The site you would actually open sits on the right.
+        </p>
+        <p>
+          A password reset from the real domain, with a link to that same domain, is not
+          automatically a phish. If you did not request it, you still do not have to click. Ignore
+          it and open the service from a bookmark. This exercise marks that kind of note as
+          legitimate because the cues match, and the explanation says so after you answer.
+        </p>
+        <p>
+          Your best score stays in this browser. The individual answers are not saved and are not
+          sent. When a real link shows up outside this page, the
+          <a href="/tools/is-this-link-safe/">link checker</a> reads the address the same way,
+          still without opening it. The password you would have typed belongs in the
+          <a href="/tools/password-checker/">password strength checker</a>, which also stays on
+          this device.
+        </p>
+      </section>
+
+      <section class="pi-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this upload my answers?</summary>
+          <p>
+            No. The quiz runs in your browser. The only thing saved is your best score, in this
+            browser's local storage. Individual answers are not stored and are not sent to
+            analytics. You can confirm that in the network panel: marking an email adds no request.
+          </p>
+        </details>
+        <details>
+          <summary>Are the companies or people real?</summary>
+          <p>
+            No. The brands are fictional, and the only person named is Alex Example, a placeholder.
+            Every domain uses .example, which is reserved for examples and is not a live website.
+          </p>
+        </details>
+        <details>
+          <summary>Will a link in the inbox open?</summary>
+          <p>
+            No. Choosing a link shows the real address and stays on this page. The simulator does
+            not fetch the address, follow a redirect, or download an attachment.
+          </p>
+        </details>
+        <details>
+          <summary>What should I inspect before I answer?</summary>
+          <p>
+            Read the sender address after the @ sign, then the real address under each link. Look
+            for a file you did not ask for, a hurry, a prize, a request for a password, or a note
+            that tells you to keep a secret. The display name is not the sender.
+          </p>
+        </details>
+        <details>
+          <summary>Does a perfect score mean I will catch a real phish?</summary>
+          <p>
+            No. This is practice on a fixed set of cues. A real message can be fake without these
+            patterns, and a real company can send a deadline. When money or a password is involved,
+            open the service from a bookmark you already trust.
+          </p>
+        </details>
+        <details>
+          <summary>Where does the best score live, and can I play again?</summary>
+          <p>
+            Play again shuffles the same fictional mailbox. Your best score stays in this browser
+            only. Clearing site data for cyberscryb.com removes it. The round itself is forgotten
+            when you leave or shuffle.
+          </p>
+        </details>
+      </section>
+
+      <section class="pi-related">
+        <h2>Related tools</h2>
+        <div class="pi-related-grid">
+          <a href="/tools/is-this-link-safe/">
+            <strong>Is This Link Safe</strong>
+            <span>Paste one address and read the real site, still without opening it.</span>
+          </a>
+          <a href="/tools/password-checker/">
+            <strong>Password Strength Checker</strong>
+            <span>Estimate a password on this device. It never leaves the browser.</span>
+          </a>
+          <a href="/tools/hash-generator/">
+            <strong>Hash Generator</strong>
+            <span>Fingerprint a piece of text locally when you need a checksum.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="pi-live" class="pi-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/phishing-inbox-simulator/logic.js?v=20261021phish"></script>
+    <script src="/tools/phishing-inbox-simulator/script.js?v=20261021phish"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
