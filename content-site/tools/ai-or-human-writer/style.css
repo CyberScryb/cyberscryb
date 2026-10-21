@@ -1,0 +1,574 @@
+/* AI or Human? The Writing Test
+   Scoped to this page. The passage sits on a paper sheet; the shell stays obsidian. */
+
+.ah-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 4.5rem;
+  color: var(--text);
+}
+
+.ah-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.ah-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.ah-crumb a:hover {
+  color: var(--primary-soft);
+}
+
+.ah-hero {
+  position: static;
+  top: auto;
+  z-index: auto;
+  max-width: 42rem;
+  margin-bottom: 1.25rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.ah-badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--primary-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ah-hero h1,
+.ah-prose h2,
+.ah-faq h2,
+.ah-related h2,
+.ah-score-heading {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+}
+
+.ah-hero h1 {
+  font-size: clamp(2.3rem, 6vw, 3.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+}
+
+.ah-rule {
+  width: 4.5rem;
+  height: 2px;
+  margin: 0.85rem 0 1rem;
+  background: var(--primary);
+  border: 0;
+}
+
+.ah-hero p,
+.ah-prose p,
+.ah-faq p,
+.ah-hint,
+.ah-summary,
+.ah-share {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.ah-hero p {
+  margin: 0 0 0.9rem;
+}
+
+.ah-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-steps li {
+  margin: 0;
+  padding: 0.75rem 0.8rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.ah-steps strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--text);
+}
+
+.ah-client {
+  margin: 1.5rem 0 2rem;
+}
+
+.ah-status {
+  max-width: 40rem;
+  margin: 0 auto 0.75rem;
+}
+
+.ah-status p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.ah-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  margin-bottom: 0.65rem;
+}
+
+#ah-progress {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.ah-gauge-block {
+  padding: 0.75rem 0.85rem 0.8rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.ah-gauge-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+#ah-gauge-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.ah-gauge-track {
+  height: 10px;
+  overflow: hidden;
+  background: var(--bg);
+  border-radius: 999px;
+}
+
+.ah-gauge-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #f4efe4, var(--primary-soft));
+  transition: width 180ms ease;
+}
+
+.ah-sheet {
+  position: relative;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.8rem 1.45rem 1.3rem 1.7rem;
+  color: #1c140e;
+  background: linear-gradient(90deg, rgba(127, 29, 29, 0.16), rgba(127, 29, 29, 0) 16px), #f4efe4;
+  border-radius: 2px 16px 16px 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.ah-sheet.is-fresh {
+  animation: ah-in 180ms ease;
+}
+
+.ah-kicker {
+  margin: 0 0 0.7rem;
+  color: #7f1d1d;
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ah-quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ah-passage {
+  margin: 0;
+  color: #1c140e;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(1.28rem, 2.4vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.ah-passage.is-prose::first-letter,
+.ah-passage.is-description::first-letter,
+.ah-passage.is-letter::first-letter {
+  float: left;
+  margin: 0.08em 0.08em 0 0;
+  color: #7f1d1d;
+  font-size: 3.15rem;
+  line-height: 0.78;
+}
+
+.ah-passage.is-poetry {
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.ah-actions,
+.ah-score-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.ah-choice,
+.ah-next,
+.ah-copy,
+.ah-again {
+  min-height: 56px;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ah-choice {
+  color: #1c140e;
+  background: transparent;
+  border: 1px solid rgba(28, 20, 14, 0.28);
+}
+
+.ah-human {
+  color: #f4efe4;
+  background: #1c140e;
+  border-color: #1c140e;
+}
+
+.ah-choice:hover,
+.ah-copy:hover {
+  border-color: #7f1d1d;
+}
+
+.ah-judgement,
+.ah-score-num,
+.ah-accuracy-line,
+.ah-copy-status {
+  margin: 0.85rem 0 0;
+  font-family: var(--font), system-ui, sans-serif;
+  font-weight: 650;
+}
+
+.ah-judgement.is-right,
+.ah-review li.is-right .ah-review-mark {
+  color: #14532d;
+}
+
+.ah-judgement.is-wrong,
+.ah-review li.is-wrong .ah-review-mark {
+  color: #9f1239;
+}
+
+.ah-source,
+.ah-summary,
+.ah-accuracy-line {
+  margin: 0.45rem 0 0;
+  color: #3f3228;
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.ah-source-label,
+.ah-tells-label {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #7f1d1d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ah-tells {
+  margin-top: 0.9rem;
+  padding: 0.8rem 0.85rem 0.7rem;
+  background: rgba(28, 20, 14, 0.05);
+  border-left: 3px solid #7f1d1d;
+}
+
+.ah-tell-list {
+  margin: 0.2rem 0 0;
+  padding-left: 1.1rem;
+  color: #1c140e;
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.ah-tell-list li + li {
+  margin-top: 0.35rem;
+}
+
+.ah-note {
+  margin: 0.65rem 0 0;
+  color: #3f3228;
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.ah-next,
+.ah-again {
+  color: #f4efe4;
+  background: #7f1d1d;
+  border: 1px solid #7f1d1d;
+}
+
+.ah-next {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.ah-copy {
+  color: #1c140e;
+  background: transparent;
+  border: 1px solid rgba(28, 20, 14, 0.28);
+}
+
+.ah-score-heading {
+  color: #1c140e;
+}
+
+.ah-copy-status {
+  color: #3f3228;
+}
+
+.ah-score-num {
+  color: #1c140e;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ah-share {
+  margin-top: 0.8rem;
+  padding: 0.75rem 0.8rem;
+  color: #1c140e;
+  background: rgba(28, 20, 14, 0.05);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+.ah-review {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ah-review li {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(28, 20, 14, 0.12);
+}
+
+.ah-review-mark {
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ah-review-claim {
+  color: #1c140e;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.ah-review-answer {
+  color: #3f3228;
+  font-family: var(--font), system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+
+.ah-choice:focus-visible,
+.ah-next:focus-visible,
+.ah-copy:focus-visible,
+.ah-again:focus-visible,
+.ah-passage:focus-visible,
+.ah-judgement:focus-visible,
+.ah-score-heading:focus-visible {
+  outline: 2px solid #7f1d1d;
+  outline-offset: 3px;
+}
+
+.ah-hint {
+  max-width: 40rem;
+  margin: 0.75rem auto 0;
+  color: var(--text-faint);
+  font-size: 0.88rem;
+}
+
+.ah-prose,
+.ah-faq,
+.ah-related {
+  max-width: 42rem;
+  margin: 2rem auto;
+}
+
+.ah-prose h3 {
+  margin: 1.4rem 0 0.4rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.ah-prose a,
+.ah-faq a {
+  color: var(--primary-soft);
+}
+
+.ah-sources {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-muted);
+}
+
+.ah-sources li {
+  margin: 0.35rem 0;
+  line-height: 1.45;
+}
+
+.ah-faq details {
+  border-top: 1px solid var(--border);
+}
+
+.ah-faq summary {
+  padding: 0.85rem 0;
+  color: var(--text);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.ah-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.ah-related-grid a {
+  display: block;
+  padding: 0.9rem 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.ah-related-grid a:hover,
+.ah-related-grid a:focus-visible {
+  border-color: var(--primary-soft);
+}
+
+.ah-related-grid a:focus-visible {
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 3px;
+}
+
+.ah-related-grid strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.ah-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes ah-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .ah-page {
+    padding: 1rem 0.9rem 4rem;
+  }
+
+  .ah-steps,
+  .ah-related-grid,
+  .ah-actions,
+  .ah-score-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .ah-sheet {
+    padding: 1.35rem 1rem 1.1rem 1.15rem;
+  }
+
+  .ah-passage.is-prose::first-letter,
+  .ah-passage.is-description::first-letter,
+  .ah-passage.is-letter::first-letter {
+    font-size: 2.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ah-sheet,
+  .ah-sheet.is-fresh,
+  .ah-gauge-fill,
+  .ah-choice,
+  .ah-next,
+  .ah-copy,
+  .ah-again {
+    animation: none;
+    transition: none;
+  }
+}

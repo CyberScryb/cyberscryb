@@ -22,6 +22,7 @@ const TARGET_PAGES = [
   'public/tools/password-habit-quiz/index.html',
   'public/tools/digital-footprint/index.html',
   'public/tools/prompt-battle/index.html',
+  'public/tools/ai-or-human-writer/index.html',
   'public/tools/which-tech-era/index.html',
   'public/tools/guess-the-year/index.html',
   'public/tools/screen-time-reality-check/index.html',
