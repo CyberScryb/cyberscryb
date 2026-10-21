@@ -26,6 +26,7 @@ const TARGET_PAGES = [
   'public/tools/which-tech-era/index.html',
   'public/tools/internet-personality/index.html',
   'public/tools/guess-the-year/index.html',
+  'public/tools/emoji-translator-challenge/index.html',
   'public/tools/screen-time-reality-check/index.html',
   'public/tools/dream-setup-builder/index.html',
   'public/guides/how-to-write-a-refund-request.html',

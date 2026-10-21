@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emoji Translator Challenge | CyberScryb</title>
+    <meta
+      name="description"
+      content="Decode emoji puzzles for phrases, idioms, and tech terms, or turn a sentence into emoji. Ten a round, a daily set, and scores stay in this browser."
+    />
+    <meta
+      name="keywords"
+      content="emoji translator, emoji quiz, decode emoji, rebus puzzle, phrase to emoji, daily emoji game, idiom emoji"
+    />
+    <meta property="og:title" content="Emoji Translator Challenge | CyberScryb" />
+    <meta
+      property="og:description"
+      content="Decode emoji puzzles for phrases, idioms, and tech terms, or turn a sentence into emoji. Ten a round, a daily set, and scores stay in this browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta property="og:url" content="https://cyberscryb.com/tools/emoji-translator-challenge/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Emoji Translator Challenge | CyberScryb" />
+    <meta
+      name="twitter:description"
+      content="Decode emoji puzzles for phrases, idioms, and tech terms, or turn a sentence into emoji. Ten a round, a daily set, and scores stay in this browser."
+    />
+    <meta name="twitter:image" content="https://cyberscryb.com/og-image.png" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/emoji-translator-challenge/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/emoji-translator-challenge/style.css?v=20261021emoji" />
+    <link rel="icon" type="image/png" href="/mascot-icon.png" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Emoji Translator Challenge",
+        "url": "https://cyberscryb.com/tools/emoji-translator-challenge/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isAccessibleForFree": true,
+        "description": "A browser game and translator. Decode an emoji string into a phrase, idiom, tech term, or proverb, or type a sentence and see a local emoji translation. Rounds are 10 puzzles. Daily mode deals the same 10 from the UTC date. The best score and the daily score stay in this browser.",
+        "featureList": [
+          "About 60 emoji puzzles across easy, medium, and hard",
+          "Forgiving guesses for case, punctuation, articles, and close typos",
+          "Hints for first letters, then word count, then the answer",
+          "Rounds of 10 with a streak and a score",
+          "Daily mode with a fixed set per UTC date",
+          "Copyable result with the emoji grid",
+          "Sentence translator from a local word list",
+          "Best score and daily score stored only in this browser"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb LLC",
+          "url": "https://cyberscryb.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this upload my guesses or sentences?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Both modes run in your browser. The only things saved are your best score and the daily score for the UTC date you played, in this browser's local storage. Guesses and sentences are not stored and are not sent anywhere."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How close does a guess have to be?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Case does not matter. Extra punctuation is ignored. The words a, an, and the can be present or missing. A small typo in a word still counts. A different phrase does not."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do hints change the score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A solve with no hint is 100 points. The first hint shows the first letter of each word and caps the puzzle at 70. The next hint adds the word count and caps it at 40. Reveal shows the answer and scores 0. A miss or a reveal ends the streak."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is daily mode?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Today's 10 is a fixed set of puzzles chosen from the UTC calendar date, computed in this browser. A friend who opens the game on that same UTC date gets the same puzzles in the same order. There is no server and no account. Play again on the same date keeps the higher daily score."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the translator work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Translate uses a word list of a few hundred common words and short phrases that ships with this page. It never calls a network. Words with no emoji stay as text, and you can copy the line. The sentence is not saved."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do the best score and the daily score live?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only in this browser. Clear saved scores deletes both. Clearing site data for cyberscryb.com removes them too. The game does not ask for an account, and leaving the page drops the current round."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cyberscryb.com/" },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://cyberscryb.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Emoji Translator Challenge",
+            "item": "https://cyberscryb.com/tools/emoji-translator-challenge/"
+          }
+        ]
+      }
+    </script>
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body data-no-draft>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="et-page">
+      <nav class="et-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/tools/">Tools</a>
+        <span aria-hidden="true">›</span>
+        <span>Emoji Translator</span>
+      </nav>
+
+      <header class="et-hero">
+        <p class="et-badge">Free · In this browser · Guesses stay here</p>
+        <h1>Emoji Translator Challenge</h1>
+        <p>
+          Decode an emoji string into a phrase, or turn your own sentence into emoji. Ten puzzles a
+          round, a shared daily set, and a translator that never leaves this page.
+        </p>
+        <ol class="et-steps">
+          <li><strong>Read the emoji</strong> A phrase, idiom, tech term, or proverb in pictures.</li>
+          <li><strong>Type a guess</strong> Case, punctuation, and small typos are forgiven.</li>
+          <li><strong>Or translate</strong> Type any sentence and copy the emoji line.</li>
+        </ol>
+      </header>
+
+      <noscript>
+        <p>
+          This game needs JavaScript. It still runs only in your browser and does not send your
+          guesses or sentences anywhere.
+        </p>
+      </noscript>
+
+      <div class="et-client" id="et-client">
+        <div class="et-tabs" role="tablist" aria-label="Modes">
+          <button
+            type="button"
+            class="et-tab"
+            id="et-tab-decode"
+            role="tab"
+            aria-selected="true"
+            aria-controls="et-decode"
+            data-panel="decode"
+          >
+            Decode
+          </button>
+          <button
+            type="button"
+            class="et-tab"
+            id="et-tab-translate"
+            role="tab"
+            aria-selected="false"
+            aria-controls="et-translate"
+            data-panel="translate"
+          >
+            Translate
+          </button>
+        </div>
+
+        <div id="et-decode" role="tabpanel" aria-labelledby="et-tab-decode">
+          <div class="et-status">
+            <p id="et-progress">Choose a round</p>
+            <p id="et-points">Up to 100 a puzzle</p>
+            <p id="et-best">Best on this device: none yet.</p>
+            <p id="et-streak">Hints lower the points</p>
+            <p id="et-daily">No daily score yet for this UTC date.</p>
+            <div class="et-meter" aria-hidden="true">
+              <div class="et-meter-fill" id="et-meter-fill"></div>
+            </div>
+          </div>
+          <div class="et-stage" id="et-stage">
+            <article class="et-card" id="et-card" aria-labelledby="et-card-title">
+              <h2 class="et-card-title" id="et-card-title">Pick a round</h2>
+              <p>The game loads in this browser.</p>
+            </article>
+          </div>
+        </div>
+
+        <div id="et-translate" role="tabpanel" aria-labelledby="et-tab-translate" hidden>
+          <div class="et-translate">
+            <h2>Translate a sentence</h2>
+            <label class="et-guess-label" for="et-source">Your sentence</label>
+            <textarea id="et-source" rows="4" maxlength="500" placeholder="Type a sentence"></textarea>
+            <h3 id="et-output-label">Emoji translation</h3>
+            <p id="et-output">Type a sentence to see it in emoji.</p>
+            <div class="et-actions">
+              <button type="button" class="et-secondary" data-action="copy-translation">
+                Copy translation
+              </button>
+              <button type="button" class="et-secondary" data-action="clear-translation">Clear</button>
+            </div>
+            <p class="et-note">
+              Words without an emoji stay as text. This sentence is not saved and is not sent.
+            </p>
+          </div>
+        </div>
+
+        <p class="et-hint" id="et-hint">
+          Today's 10 use the UTC date, so friends on that calendar day get the same puzzles.
+        </p>
+      </div>
+
+      <section class="et-prose">
+        <h2>Pictures for phrases</h2>
+        <p>
+          Each decode puzzle is a short string of emoji. It stands for a phrase, an idiom, a tech
+          term, a proverb, or a story shape such as a time loop or a heist plan. The phrases are
+          generic, public domain, or written for this page. There are no song lyrics and no film
+          titles. The pictures are the emoji already on your device, so the page does not load an
+          image for them.
+        </p>
+        <p>
+          Type what you think it says. Capital letters, extra punctuation, and the words a, an, and
+          the do not change the result. A letter or two out of place in a longer word still counts.
+          A different phrase does not. If you are stuck, Hint first shows the first letter of each
+          word, then the word count. A third step, or Reveal, shows the answer. Each step lowers
+          the points: 100 with no hint, 70 after the letters, 40 after the word count, and 0 if the
+          answer is revealed. A clean run of solves builds a streak. A miss or a reveal sets it
+          back to zero.
+        </p>
+        <h3>The same ten, on purpose</h3>
+        <p>
+          A round is 10 puzzles, so a perfect round is 1000. Daily mode does not call a server.
+          This page hashes the UTC date and deals 10 puzzles from that number, so two people on the
+          same UTC calendar day get the same order. A random round is a fresh shuffle. Play again
+          on a daily date keeps the higher score for that date. The best score is the best round on
+          this device, daily or random. The result you copy includes the emoji from the round and a
+          row of marks: green for a clean solve, yellow when a hint was used, red for a miss.
+        </p>
+        <h3>A translator that stays on the page</h3>
+        <p>
+          Translate is the other mode. Type any sentence and the page swaps words it knows for
+          emoji, using a few hundred common words and short phrases that ship with the file. A word
+          it does not know stays as text, so the line is still readable. Copy takes that line.
+          Nothing you type is written to storage. The screen-reader name for a puzzle, before you
+          answer, is the emoji count and a level. It does not speak the solution.
+        </p>
+        <p>
+          Guesses disappear when you leave or deal again. This browser can keep the best total and
+          the daily total, and Clear saved scores deletes both. If a later save fails, the status
+          says this browser is not keeping the latest score.
+        </p>
+        <p>
+          <a href="/tools/guess-the-year/">Guess the Year: Tech Edition</a> is the timeline game.
+          <a href="/tools/tech-myth-or-fact/">Tech Myth or Fact</a> swipes claims people repeat.
+          <a href="/tools/prompt-battle/">Prompt Battle</a> compares two ways to ask for writing,
+          and
+          <a href="/tools/ai-or-human-writer/">AI or Human? The Writing Test</a> asks you to name
+          who wrote a passage.
+        </p>
+      </section>
+
+      <section class="et-faq" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Does this upload my guesses or sentences?</summary>
+          <p>
+            No. Both modes run in your browser. The only things saved are your best score and the
+            daily score for the UTC date you played, in this browser's local storage. Guesses and
+            sentences are not stored and are not sent anywhere.
+          </p>
+        </details>
+        <details>
+          <summary>How close does a guess have to be?</summary>
+          <p>
+            Case does not matter. Extra punctuation is ignored. The words a, an, and the can be
+            present or missing. A small typo in a word still counts. A different phrase does not.
+          </p>
+        </details>
+        <details>
+          <summary>How do hints change the score?</summary>
+          <p>
+            A solve with no hint is 100 points. The first hint shows the first letter of each word
+            and caps the puzzle at 70. The next hint adds the word count and caps it at 40. Reveal
+            shows the answer and scores 0. A miss or a reveal ends the streak.
+          </p>
+        </details>
+        <details>
+          <summary>What is daily mode?</summary>
+          <p>
+            Today's 10 is a fixed set of puzzles chosen from the UTC calendar date, computed in this
+            browser. A friend who opens the game on that same UTC date gets the same puzzles in the
+            same order. There is no server and no account. Play again on the same date keeps the
+            higher daily score.
+          </p>
+        </details>
+        <details>
+          <summary>How does the translator work?</summary>
+          <p>
+            Translate uses a word list of a few hundred common words and short phrases that ships
+            with this page. It never calls a network. Words with no emoji stay as text, and you can
+            copy the line. The sentence is not saved.
+          </p>
+        </details>
+        <details>
+          <summary>Where do the best score and the daily score live?</summary>
+          <p>
+            Only in this browser. Clear saved scores deletes both. Clearing site data for
+            cyberscryb.com removes them too. The game does not ask for an account, and leaving the
+            page drops the current round.
+          </p>
+        </details>
+      </section>
+
+      <section class="et-related">
+        <h2>Related tools</h2>
+        <div class="et-related-grid">
+          <a href="/tools/guess-the-year/">
+            <strong>Guess the Year: Tech Edition</strong>
+            <span>Drag a year onto tech milestones. The daily set stays in this browser.</span>
+          </a>
+          <a href="/tools/tech-myth-or-fact/">
+            <strong>Tech Myth or Fact</strong>
+            <span>Swipe Myth or Fact on password, privacy, and battery claims.</span>
+          </a>
+          <a href="/tools/prompt-battle/">
+            <strong>Prompt Battle</strong>
+            <span>Pick the stronger prompt, then build one with a live checklist.</span>
+          </a>
+          <a href="/tools/ai-or-human-writer/">
+            <strong>AI or Human? The Writing Test</strong>
+            <span>Read a passage and say whether a person or an AI wrote it.</span>
+          </a>
+        </div>
+      </section>
+
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free browser tools and AI writers for freelancers and builders.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/tools/">Tools</a>
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/guides/">Guides</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <p id="et-live" class="et-sr" aria-live="polite"></p>
+    <script src="/js/script.js?v=20261014ux"></script>
+    <script src="/tools/emoji-translator-challenge/logic.js?v=20261021emoji"></script>
+    <script src="/tools/emoji-translator-challenge/script.js?v=20261021emoji"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
