@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btnAutoAA = document.getElementById('btnAutoAA');
   const btnAutoAAA = document.getElementById('btnAutoAAA');
+  const btnSwap = document.getElementById('btnSwap');
+  const a11yStatus = document.getElementById('a11yStatus');
 
   // Attach listeners
   fgPicker.addEventListener('input', () => {
@@ -55,6 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
   btnAutoAA.addEventListener('click', () => optimizeContrast(4.5));
   btnAutoAAA.addEventListener('click', () => optimizeContrast(7.0));
 
+  if (btnSwap) {
+    btnSwap.addEventListener('click', () => {
+      const tempFg = fgPicker.value;
+      fgPicker.value = bgPicker.value;
+      fgHex.value = bgPicker.value.toUpperCase();
+      bgPicker.value = tempFg;
+      bgHex.value = tempFg.toUpperCase();
+      calculateContrast();
+      if (a11yStatus) {
+        a11yStatus.textContent = `Swapped colors. Text color is now ${fgHex.value}, background color is now ${bgHex.value}.`;
+      }
+    });
+  }
+
   // Initial calculation
   calculateContrast();
 
@@ -83,6 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStatusCard(cardNormalAAA, badgeNormalAAA, ratio >= 7.0);
     updateStatusCard(cardLargeAA, badgeLargeAA, ratio >= 3.0);
     updateStatusCard(cardLargeAAA, badgeLargeAAA, ratio >= 4.5);
+
+    if (a11yStatus && document.activeElement && document.activeElement !== document.body) {
+      a11yStatus.textContent = `Contrast ratio ${ratio.toFixed(2)} to 1. Normal text AA: ${ratio >= 4.5 ? 'Pass' : 'Fail'}.`;
+    }
   }
 
   function updateStatusCard(card, badge, passes) {
