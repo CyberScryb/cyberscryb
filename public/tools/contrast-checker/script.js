@@ -25,13 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSwap = document.getElementById('btnSwap');
   const a11yStatus = document.getElementById('a11yStatus');
 
+  let isProgrammatic = false;
+
   // Attach listeners
   fgPicker.addEventListener('input', () => {
+    if (isProgrammatic) return;
     fgHex.value = fgPicker.value.toUpperCase();
     calculateContrast();
   });
 
   bgPicker.addEventListener('input', () => {
+    if (isProgrammatic) return;
     bgHex.value = bgPicker.value.toUpperCase();
     calculateContrast();
   });
@@ -59,11 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnSwap) {
     btnSwap.addEventListener('click', () => {
-      const tempFg = fgPicker.value;
-      fgPicker.value = bgPicker.value;
-      fgHex.value = bgPicker.value.toUpperCase();
+      isProgrammatic = true;
+      const tempFg = fgHex.value;
+      const tempBg = bgHex.value;
+      fgPicker.value = tempBg;
       bgPicker.value = tempFg;
+      fgHex.value = tempBg.toUpperCase();
       bgHex.value = tempFg.toUpperCase();
+      isProgrammatic = false;
       calculateContrast();
       if (a11yStatus) {
         a11yStatus.textContent = `Swapped colors. Text color is now ${fgHex.value}, background color is now ${bgHex.value}.`;
@@ -75,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
   calculateContrast();
 
   function calculateContrast() {
-    const fg = fgPicker.value;
-    const bg = bgPicker.value;
+    const fg = fgHex.value.trim() || fgPicker.value;
+    const bg = bgHex.value.trim() || bgPicker.value;
 
     const fgRgb = hexToRgb(fg);
     const bgRgb = hexToRgb(bg);

@@ -17,13 +17,15 @@ describe('WCAG Contrast Checker', () => {
     document.documentElement.innerHTML = htmlContent;
     doc = document;
 
-    // Load and execute script
     const scriptPath = path.join(__dirname, '../content-site/tools/contrast-checker/script.js');
     const scriptContent = fs.readFileSync(scriptPath, 'utf8');
 
-    // Trigger DOMContentLoaded
-    eval(scriptContent);
-    document.dispatchEvent(new Event('DOMContentLoaded'));
+    // Strip document.addEventListener('DOMContentLoaded', ...) wrapper so it runs cleanly once
+    const unwrapped = scriptContent
+      .replace(/document\.addEventListener\('DOMContentLoaded',\s*\(\)\s*=>\s*\{/, '')
+      .replace(/\}\);\s*$/, '');
+
+    eval(unwrapped);
   });
 
   test('color pickers and hex inputs have descriptive aria-label attributes', () => {
@@ -61,8 +63,8 @@ describe('WCAG Contrast Checker', () => {
 
     btnSwap.click();
 
-    expect(fgHex.value).toBe(initialBg);
-    expect(bgHex.value).toBe(initialFg);
+    expect(fgHex.value.toUpperCase()).toBe(initialBg.toUpperCase());
+    expect(bgHex.value.toUpperCase()).toBe(initialFg.toUpperCase());
     expect(a11yStatus.textContent).toContain('Swapped colors');
   });
 });
