@@ -283,3 +283,77 @@ test('Stop button aborts the stream and keeps partial text', async () => {
   expect(document.querySelector('#output-text').getAttribute('aria-busy')).toBe('false');
   jest.useRealTimers();
 });
+
+test('action controls set and update aria-label during success feedback states', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<div><textarea id="tool-input">Sample text</textarea>' +
+    '<button id="copy-btn">Copy</button>' +
+    '<button id="generate-btn">Generate</button>' +
+    '<div id="loading-indicator" class="hidden"></div>' +
+    '<div id="output-text">Result text to copy</div></div>';
+
+  Object.assign(navigator, {
+    clipboard: {
+      writeText: jest.fn().mockResolvedValue(undefined),
+    },
+  });
+
+  if (typeof URL.createObjectURL !== 'function') {
+    URL.createObjectURL = jest.fn(() => 'blob:test');
+  }
+  if (typeof URL.revokeObjectURL !== 'function') {
+    URL.revokeObjectURL = jest.fn();
+  }
+
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'Sample text' });
+
+  const clearBtn = document.querySelector('#clear-btn');
+  const copyBtn = document.querySelector('#copy-btn');
+  const dlBtn = document.querySelector('#download-btn');
+  const shareBtn = document.querySelector('#share-btn');
+  const regenBtn = document.querySelector('#regen-btn');
+  const chainSelect = document.querySelector('#chain-select');
+
+  expect(clearBtn.getAttribute('aria-label')).toBe('Clear input field');
+  expect(dlBtn.getAttribute('aria-label')).toBe('Download result as text file');
+  expect(shareBtn.getAttribute('aria-label')).toBe('Share result');
+  expect(regenBtn.getAttribute('aria-label')).toBe('Regenerate result');
+  expect(chainSelect.getAttribute('aria-label')).toBe('Send result to another tool');
+
+  // Trigger copy
+  copyBtn.click();
+  expect(navigator.clipboard.writeText).toHaveBeenCalledWith('Result text to copy');
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(copyBtn.textContent).toBe('Copied! ✓');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copied to clipboard');
+
+  // Fast-forward success timeout
+  jest.advanceTimersByTime(1700);
+  expect(copyBtn.textContent).toBe('Copy');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy');
+
+  // Trigger download
+  dlBtn.click();
+  expect(dlBtn.textContent).toBe('Saved! ✓');
+  expect(dlBtn.getAttribute('aria-label')).toBe('Result saved to text file');
+
+  jest.advanceTimersByTime(1700);
+  expect(dlBtn.textContent).toBe('Download');
+  expect(dlBtn.getAttribute('aria-label')).toBe('Download result as text file');
+
+  // Trigger share fallback
+  shareBtn.click();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(shareBtn.textContent).toBe('Copied!');
+  expect(shareBtn.getAttribute('aria-label')).toBe('Copied link to clipboard');
+
+  jest.advanceTimersByTime(1700);
+  expect(shareBtn.textContent).toBe('Share');
+  expect(shareBtn.getAttribute('aria-label')).toBe('Share result');
+
+  jest.useRealTimers();
+});
