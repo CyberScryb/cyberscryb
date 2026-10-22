@@ -1476,6 +1476,7 @@ function generateSitemap(generatedPages) {
     'ai-medicare-advantage-medigap-explainer',
     'ai-rent-increase-negotiation-letter',
     'ai-tenant-case-companion',
+    'ai-medicare-decision-companion',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1587,6 +1588,7 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-logic-model',
     'smart-objectives-examples-nonprofit-grants',
     'medicare-advantage-vs-medigap-cost-scenarios',
+    'medicare-open-enrollment-2027-checklist',
     'how-to-write-a-tenant-repair-demand-letter',
     'how-to-negotiate-a-rent-increase',
     'how-to-track-a-tenant-case',
@@ -1790,6 +1792,7 @@ function manageRobotsMeta() {
     'ai-medicare-advantage-medigap-explainer',
     'ai-rent-increase-negotiation-letter',
     'ai-tenant-case-companion',
+    'ai-medicare-decision-companion',
   ]);
 
   const dirsToProcess = [

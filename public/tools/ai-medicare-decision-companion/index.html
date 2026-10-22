@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Medicare Decision Companion &mdash; Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI Medicare decision companion. Answer a few questions about your coverage, drugs, and doctors, get personalized 2027 open-enrollment guidance built on verified CMS figures, plus a printable report for your SHIP counselor."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-medicare-decision-companion/"
+    />
+    <meta
+      property="og:title"
+      content="AI Medicare Decision Companion — Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI Medicare decision companion. Answer a few questions about your coverage, drugs, and doctors, get personalized 2027 open-enrollment guidance built on verified CMS figures, plus a printable report for your SHIP counselor."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-medicare-decision-companion/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Medicare Decision Companion — Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI Medicare decision companion. Personalized 2027 open-enrollment guidance on verified CMS figures, with a printable SHIP counselor report."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .math-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .math-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .math-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.32rem 0;
+        border-top: 1px dashed var(--border);
+      }
+      .math-row:first-of-type {
+        border-top: none;
+      }
+      .math-row .k {
+        color: var(--text-muted);
+      }
+      .math-row .v {
+        font-weight: 700;
+        color: var(--text);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .lt-checkline {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        margin: 0.55rem 0;
+        font-size: 0.92rem;
+      }
+      .lt-checkline input {
+        margin-top: 0.25rem;
+        accent-color: var(--primary);
+        width: 1rem;
+        height: 1rem;
+        flex: none;
+      }
+      #ship-report-wrap {
+        display: none;
+      }
+      #ship-report {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #ship-report h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #ship-report table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #ship-report td,
+      #ship-report th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #ship-report .report-guidance {
+        white-space: pre-wrap;
+      }
+      @media print {
+        body.printing-ship header,
+        body.printing-ship nav,
+        body.printing-ship footer,
+        body.printing-ship .lt-sticky-gen,
+        body.printing-ship .lt-toolbar,
+        body.printing-ship .email-gate,
+        body.printing-ship .adsbygoogle,
+        body.printing-ship section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-ship .lt-grid,
+        body.printing-ship .lt-checklist-band,
+        body.printing-ship .lt-know,
+        body.printing-ship .lt-faq,
+        body.printing-ship .lt-related,
+        body.printing-ship .lt-how,
+        body.printing-ship .lt-trust,
+        body.printing-ship .hero {
+          display: none !important;
+        }
+        body.printing-ship #ship-report-wrap {
+          display: block !important;
+        }
+        #ship-report {
+          border: none !important;
+        }
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+    </style>
+    <script>
+      function printShipReport() {
+        var wrap = document.getElementById('ship-report-wrap');
+        if (!wrap || wrap.style.display === 'none' || !wrap.querySelector('#ship-report').innerHTML.trim()) {
+          if (window.LifeTool) LifeTool.toast('Generate your guidance first, then build the report');
+          else alert('Generate your guidance first, then build the report.');
+          return;
+        }
+        document.body.classList.add('printing-ship');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-ship');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Medicare Decision Companion",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-medicare-decision-companion/",
+        "description": "Free AI Medicare decision companion. Personalized 2027 open-enrollment guidance on verified CMS figures, with a printable SHIP counselor report. Educational only, not insurance advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When is Medicare open enrollment for 2027 coverage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Medicare open enrollment runs October 15 through December 7, 2026, and any change you make takes effect January 1, 2027. If you miss it, the Medicare Advantage open enrollment period (January 1 to March 31) lets people already in an Advantage plan switch plans or return to Original Medicare."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the 2026 Medicare Part B premium and deductible?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CMS set the 2026 standard Part B premium at $202.90 per month and the annual Part B deductible at $283. The Part A hospital deductible is $1,736 per benefit period. Higher-income beneficiaries pay more through IRMAA."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I choose Medicare Advantage or Original Medicare with Medigap?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Medicare Advantage often costs less in a healthy year but limits you to a plan network, requires prior authorization for some services, and can reach a high out-of-pocket maximum in a bad year. Original Medicare plus Medigap Plan G costs more every month but covers nearly all cost-sharing after the Part B deductible and lets you see any doctor who accepts Medicare nationwide. The right answer depends on your health, drugs, doctors, and budget."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I switch from Medicare Advantage to Medigap later?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can switch during open enrollment, but in most states Medigap insurers can use medical underwriting outside your one-time Medigap open enrollment window at 65, which means they can charge more or deny you based on health. A few states have birthday rules or broader guaranteed-issue rights. That is why the initial decision matters so much."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is SHIP and is it really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SHIP (State Health Insurance Assistance Programs) provides free, unbiased Medicare counseling in every state. Counselors do not sell insurance. You can find yours through medicare.gov contacts or by searching for your state's SHIP program. Bring your drug list and current plan details to the appointment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Part D out-of-pocket cap?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For 2026 the Part D out-of-pocket cap is $2,100 per year. Once your covered drug spending reaches the cap, you pay $0 for covered drugs for the rest of the year. The maximum Part D deductible for 2026 is $615."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Medicare Decision Companion</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI Medicare decision <span style="color: var(--primary)">companion</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Medicare open enrollment for 2027 runs October 15 to December 7. Answer a few
+            questions about your coverage, drugs, and doctors. Get personalized guidance built on
+            verified CMS figures, plus a printable report you can take to a free SHIP counselor.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Figures verified against CMS 2026 release</span>
+          <span><i></i> Draft autosaved on this device</span>
+          <span><i></i> Printable SHIP counselor report</span>
+          <span><i></i> Educational only, not insurance advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick your situation</strong
+            ><span>New to Medicare, reviewing for 2027, switching paths, or helping a parent.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter the facts</strong
+            ><span>Current coverage, ZIP, prescriptions, doctor priorities, budget. Takes 3 minutes.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get guidance + report</strong
+            ><span>Personalized 2027 path guidance on verified figures, then print the SHIP report.</span>
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Situation</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Facts</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Guidance</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your situation</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Which describes you?</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="new-to-medicare"
+                  aria-pressed="false"
+                >
+                  New to Medicare
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="reviewing-oe"
+                  aria-pressed="false"
+                >
+                  Reviewing for 2027
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="switching-paths"
+                  aria-pressed="false"
+                >
+                  Switching paths
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="helping-parent"
+                  aria-pressed="false"
+                >
+                  Helping a parent
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="reviewing-oe" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add a few key facts to unlock strong guidance.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="coverage_type"
+                    >Current coverage <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <select class="lt-input" id="coverage_type" data-label="Current coverage">
+                    <option value="">Choose one</option>
+                    <option value="original-medicare">Original Medicare (Parts A and B)</option>
+                    <option value="medicare-advantage">A Medicare Advantage plan</option>
+                    <option value="employer">Employer or union coverage</option>
+                    <option value="medicaid-dual">Medicaid (dual eligible)</option>
+                    <option value="none-new">None yet (newly eligible)</option>
+                  </select>
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="zip">ZIP code</label>
+                  <input
+                    class="lt-input"
+                    id="zip"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="5"
+                    placeholder="83864"
+                    data-label="ZIP code"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="rx_count"
+                    >Regular prescriptions <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <select class="lt-input" id="rx_count" data-label="Prescription count">
+                    <option value="">Choose one</option>
+                    <option value="0">None</option>
+                    <option value="1-3">1 to 3</option>
+                    <option value="4-plus">4 or more</option>
+                  </select>
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="doctor_priority"
+                    >Keeping my doctors <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <select class="lt-input" id="doctor_priority" data-label="Doctor priority">
+                    <option value="">Choose one</option>
+                    <option value="critical">Is critical to me</option>
+                    <option value="somewhat">Somewhat important</option>
+                    <option value="not-priority">Not a priority</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="health_profile"
+                    >Health profile <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <select class="lt-input" id="health_profile" data-label="Health profile">
+                    <option value="">Choose one</option>
+                    <option value="healthy">Generally healthy, little care</option>
+                    <option value="some-care">Some ongoing care</option>
+                    <option value="frequent-care">Frequent visits or specialist care</option>
+                  </select>
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="budget">Monthly budget</label>
+                  <select class="lt-input" id="budget" data-label="Budget">
+                    <option value="">Choose one</option>
+                    <option value="lowest">Keep monthly costs as low as possible</option>
+                    <option value="predictable">Predictable costs matter most</option>
+                    <option value="flexible">Flexible budget</option>
+                  </select>
+                </div>
+              </div>
+              <label class="lt-checkline"
+                ><input type="checkbox" id="rx_expensive" data-label="Expensive or specialty drugs" />
+                <span>One or more <strong>expensive or specialty drugs</strong></span></label
+              >
+              <label class="lt-checkline"
+                ><input type="checkbox" id="travel" data-label="Travels or lives in two states" />
+                <span>I <strong>travel or live in two states</strong> during the year</span></label
+              >
+              <label class="lt-checkline"
+                ><input type="checkbox" id="extra_help" data-label="Has Medicaid or Extra Help" />
+                <span>I have <strong>Medicaid or Extra Help</strong> (low-income subsidy)</span></label
+              >
+              <input type="hidden" id="flags_summary" data-label="Extra flags" />
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my guidance</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not insurance advice.</strong> This is
+                educational guidance built from your answers and verified national CMS figures.
+                It does not recommend a specific plan or insurer. Confirm every number at
+                medicare.gov and talk to a free SHIP counselor before you decide.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="math-panel" aria-live="polite">
+              <h3>Verified CMS figures (2026)</h3>
+              <div class="math-row">
+                <span class="k">Part B premium</span><span class="v">$202.90/mo</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Part B deductible</span><span class="v">$283/yr</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Part A deductible</span
+                ><span class="v">$1,736 / benefit period</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Part D max deductible</span><span class="v">$615</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Part D out-of-pocket cap</span><span class="v">$2,100/yr</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Medigap Plan G</span
+                ><span class="v">pays nearly all cost-sharing after the $283 deductible</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Open enrollment</span
+                ><span class="v">Oct 15 – Dec 7, 2026</span>
+              </div>
+              <div class="math-row">
+                <span class="k">New coverage starts</span><span class="v">Jan 1, 2027</span>
+              </div>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Announced by CMS November 2025. 2027 figures arrive November 2026. The AI quotes
+                these exact figures and never invents plan-specific costs.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your guidance</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Working through your situation&hellip;</p>
+                  <small>Using verified CMS figures, not generic filler</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your guidance will appear here.<br /><br />1. Pick your situation<br />2. Enter
+                    the facts<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>SHIP counselor report</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  SHIP (State Health Insurance Assistance Programs) gives free, unbiased Medicare
+                  counseling in every state. Build a one-page report of your answers, the verified
+                  figures, and your guidance, then print it for the appointment.
+                </p>
+                <div id="ship-report-wrap">
+                  <div id="ship-report" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-report-btn">
+                    Build SHIP report
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printShipReport()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved scenarios</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Compare paths side by side, then reload
+                  the one you want to discuss with SHIP.
+                </p>
+                <ul class="hist-list" id="scenario-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No scenarios yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Your 2027 open-enrollment checklist</h2></div>
+            <div class="lt-body">
+              <p class="lt-side-note">
+                Do this before December 7. Tap items as you finish them, progress saves on this
+                device.
+              </p>
+              <ul class="lt-check">
+                <li>
+                  Read your plan's Annual Notice of Change (ANOC), mailed by September 30. Look for
+                  premium, deductible, formulary, and network changes.
+                </li>
+                <li>
+                  Run your exact drug list through medicare.gov/plan-compare with your pharmacy,
+                  including tiers and total annual cost.
+                </li>
+                <li>
+                  Confirm every doctor and specialist is still in-network for 2027 if you are in or
+                  considering an Advantage plan.
+                </li>
+                <li>
+                  Compare total annual cost (premiums plus worst-case out-of-pocket), not just the
+                  monthly premium.
+                </li>
+                <li>
+                  If you are considering leaving Advantage for Original Medicare plus Medigap,
+                  check your state's underwriting rules before you disenroll.
+                </li>
+                <li>
+                  Book a free SHIP counseling appointment early in open enrollment, slots fill up.
+                  Bring this page's report.
+                </li>
+                <li>Decide and enroll by December 7. Coverage starts January 1, 2027.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>The underwriting window</h3>
+              <p>
+                Your one-time Medigap open enrollment period starts when you turn 65 and enroll in
+                Part B. In most states that is the only time insurers must sell you any Medigap
+                policy without medical underwriting. Wait, and they can charge more or deny you
+                for health reasons. A few states have birthday rules or broader guaranteed-issue
+                rights, check yours.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The quiet-year vs rough-year test</h3>
+              <p>
+                Judge every path on two numbers: a quiet year and a rough year. Advantage often
+                wins the quiet year on premiums, then spikes to the plan's out-of-pocket maximum
+                in a rough year. Original plus Medigap Plan G costs more every month but barely
+                moves: after the $283 Part B deductible, cost-sharing is nearly zero either way.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The $2,100 drug cap</h3>
+              <p>
+                Part D now has a hard out-of-pocket cap: $2,100 in 2026. Once your covered drug
+                spending hits it, you pay $0 for covered drugs the rest of the year. If you take
+                expensive drugs, run your exact list through plan-compare. The cap is the single
+                biggest protection the Inflation Reduction Act added.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Prior authorization is the real network</h3>
+              <p>
+                Advantage plans can require prior authorization before covering some services, and
+                denials happen. Original Medicare has no prior authorization and no referrals. If
+                you have ongoing specialist care, this matters more than the premium difference.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Late penalties are permanent</h3>
+              <p>
+                Delay Part B without creditable coverage and you pay 10% more for every full
+                12-month period you were late, for life. Delay Part D and you pay 1% of the base
+                premium per month late, for life. If you are still working with employer coverage,
+                confirm it counts as creditable before you delay.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>SHIP is free and unbiased</h3>
+              <p>
+                State Health Insurance Assistance Programs counselors do not sell insurance and do
+                not take commissions. They will walk through your ANOC, your drugs, and your
+                options with no sales pitch. Find yours through medicare.gov or search for your
+                state's SHIP. It is the one free second opinion worth getting.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>When is Medicare open enrollment for 2027 coverage?</summary>
+            <div class="faq-a">
+              October 15 through December 7, 2026. Changes take effect January 1, 2027. If you
+              miss it, the Medicare Advantage open enrollment period (January 1 to March 31)
+              lets people already in an Advantage plan switch plans or return to Original
+              Medicare, but it does not help everyone.
+            </div>
+          </details>
+          <details>
+            <summary>What is the 2026 Medicare Part B premium and deductible?</summary>
+            <div class="faq-a">
+              CMS set the 2026 standard Part B premium at $202.90 per month and the annual Part B
+              deductible at $283. The Part A hospital deductible is $1,736 per benefit period.
+              Higher earners pay more through IRMAA, based on 2024 tax returns.
+            </div>
+          </details>
+          <details>
+            <summary>Should I choose Medicare Advantage or Original Medicare with Medigap?</summary>
+            <div class="faq-a">
+              It depends on your health, drugs, doctors, and budget. Advantage often costs less in
+              a healthy year but restricts you to a network, uses prior authorization, and can hit
+              a high out-of-pocket maximum in a bad year. Original plus Medigap Plan G costs more
+              monthly but covers nearly all cost-sharing after the $283 deductible and works with
+              any doctor who accepts Medicare nationwide. The tool above walks you through the
+              tradeoffs for your situation.
+            </div>
+          </details>
+          <details>
+            <summary>Can I switch from Medicare Advantage to Medigap later?</summary>
+            <div class="faq-a">
+              You can switch during open enrollment, but in most states Medigap insurers can use
+              medical underwriting once your initial open enrollment window has passed, meaning
+              they can charge more or deny you based on health. A few states have birthday rules
+              or broader guaranteed-issue protections. Decide with this in mind the first time.
+            </div>
+          </details>
+          <details>
+            <summary>Does Medicare cover dental, vision, and hearing?</summary>
+            <div class="faq-a">
+              Original Medicare does not routinely cover dental, vision, or hearing. Many
+              Advantage plans bundle limited versions of these benefits. With Original Medicare
+              you would buy separate coverage or pay out of pocket. If these matter to you, price
+              them into the comparison.
+            </div>
+          </details>
+          <details>
+            <summary>What is the Part D out-of-pocket cap for 2026?</summary>
+            <div class="faq-a">
+              $2,100 per year. Once your covered drug spending reaches the cap, you pay $0 for
+              covered drugs for the rest of the year. The maximum Part D deductible for 2026 is
+              $615. Both come from the Inflation Reduction Act changes.
+            </div>
+          </details>
+          <details>
+            <summary>What happens if I do nothing during open enrollment?</summary>
+            <div class="faq-a">
+              If you are in Original Medicare, nothing changes and you keep your coverage. If you
+              are in an Advantage or Part D plan, you are usually auto-renewed into next year's
+              version of your plan, which may have different premiums, drugs covered, or doctors
+              in-network. That is why reviewing the ANOC matters even when you plan to stay put.
+            </div>
+          </details>
+          <details>
+            <summary>What should I bring to a SHIP appointment?</summary>
+            <div class="faq-a">
+              Your Medicare card, a complete list of your prescriptions with dosages, your current
+              plan details and ANOC, and the names of your doctors. The SHIP report on this page
+              packages your situation, the verified figures, and your AI guidance into one
+              printable page for the counselor.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/tools/ai-medicare-advantage-medigap-explainer/"
+              ><strong>Medicare Advantage vs Medigap Explainer</strong
+              ><small>Personalized comparison with verified cost scenarios</small></a
+            >
+            <a href="/tools/medicare-cost-calculator/"
+              ><strong>Medicare Cost Calculator</strong
+              ><small>Estimate your annual Medicare costs</small></a
+            >
+            <a href="/guides/medicare-advantage-vs-medigap-cost-scenarios/"
+              ><strong>Advantage vs Medigap Cost Scenarios</strong
+              ><small>Quiet, typical, and rough year numbers</small></a
+            >
+            <a href="/guides/how-to-choose-between-medicare-advantage-and-medigap/"
+              ><strong>How to Choose: Advantage vs Medigap</strong
+              ><small>The full decision walkthrough</small></a
+            >
+            <a href="/guides/medicare-open-enrollment-2027-checklist/"
+              ><strong>2027 Open Enrollment Checklist</strong
+              ><small>Every step before December 7</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">
+          Generate guidance &rarr;
+        </button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. Confirm every figure at medicare.gov before you decide.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-medicare-decision-companion/ai-medicare-decision-companion.js?v=20261022a1"></script>
+  </body>
+</html>
