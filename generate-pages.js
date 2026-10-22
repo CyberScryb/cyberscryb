@@ -1591,6 +1591,7 @@ function generateSitemap(generatedPages) {
     'medicare-open-enrollment-2027-checklist',
     'how-to-write-a-tenant-repair-demand-letter',
     'how-to-negotiate-a-rent-increase',
+    'how-to-write-a-debt-validation-letter',
     'how-to-track-a-tenant-case',
     'how-to-respond-to-an-eviction-notice',
   ];
