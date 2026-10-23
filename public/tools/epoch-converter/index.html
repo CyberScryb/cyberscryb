@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unix Timestamp Converter &mdash; Free & Online | CyberScryb</title>
-    <meta name="description" content="Convert timestamps to dates and vice versa with this unix timestamp converter. Free, instant, runs in your browser. No signup.">
+    <title>Epoch &amp; Unix Timestamp Converter &mdash; Seconds to Date Online, Free | CyberScryb</title>
+    <meta name="description" content="Free epoch converter: turn Unix timestamps into readable dates and back. Paste a 10 or 13-digit timestamp to get UTC, local time, and ISO 8601 instantly. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/epoch-converter/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
-    <meta property="og:title" content="Unix Timestamp Converter &mdash; Free & Online | CyberScryb">
-    <meta property="og:description" content="Convert timestamps to dates and vice versa with this unix timestamp converter. Free, instant, runs in your browser. No signup.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:title" content="Epoch &amp; Unix Timestamp Converter &mdash; Free & Online | CyberScryb">
+    <meta property="og:description" content="Convert Unix timestamps to readable dates and back. Paste a timestamp and get UTC, local time, and ISO 8601 instantly. Free, no signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/epoch-converter/">
     <meta property="og:site_name" content="CyberScryb">
@@ -26,38 +26,38 @@
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CyberScryb Epoch Converter","url":"https://cyberscryb.com/tools/epoch-converter/","description":"Convert Unix/Epoch timestamps to human-readable dates and vice versa.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"CyberScryb","url":"https://cyberscryb.com"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cyberscryb.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://cyberscryb.com/tools/"},{"@type":"ListItem","position":3,"name":"Epoch Converter","item":"https://cyberscryb.com/tools/epoch-converter/"}]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (also called Epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's widely used in programming to represent dates and times as a single number."}},{"@type":"Question","name":"What is the Year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Systems using 32-bit signed integers to store Unix timestamps will overflow on January 19, 2038 at 03:14:07 UTC. Modern systems use 64-bit integers which won't overflow for billions of years."}},{"@type":"Question","name":"Does this tool support milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool auto-detects whether your input is in seconds or milliseconds. It displays both formats in the output."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp (also called Epoch time) is the number of seconds that have elapsed since January 1, 1970, 00:00:00 UTC. It's widely used in programming to represent dates and times as a single number."}},{"@type":"Question","name":"How do I convert a Unix timestamp to a readable date?","acceptedAnswer":{"@type":"Answer","text":"Paste the timestamp into the Timestamp to Date box on this page and click Convert to Date. You'll instantly see the UTC time, your local time, ISO 8601 format, and the day of the week. The converter auto-detects seconds and milliseconds."}},{"@type":"Question","name":"Why does my timestamp show January 1, 1970?","acceptedAnswer":{"@type":"Answer","text":"A date of January 1, 1970 means the timestamp was 0 or empty. Common causes: a failed database query returning NULL that got cast to 0, a timestamp divided twice (seconds to milliseconds twice over), or an uninitialized variable. If you see a far-future date instead (year 2500+), you've mixed up seconds and milliseconds."}},{"@type":"Question","name":"What is the Year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Systems using 32-bit signed integers to store Unix timestamps will overflow on January 19, 2038 at 03:14:07 UTC. Modern systems use 64-bit integers which won't overflow for billions of years."}},{"@type":"Question","name":"What is the maximum Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"On 64-bit systems there is effectively no practical maximum, but the famous limit is 2147483647 (January 19, 2038 03:14:07 UTC), the largest value a 32-bit signed integer can hold. Any timestamp larger than that was stored on a 64-bit system."}},{"@type":"Question","name":"How do I convert a Unix timestamp in Excel or Google Sheets?","acceptedAnswer":{"@type":"Answer","text":"Use the formula =((A1/86400)+DATE(1970,1,1)) and format the cell as a date, where A1 holds the timestamp in seconds. For milliseconds, divide by 86400000 instead. Note that Excel's DATE function caps at year 9999."}},{"@type":"Question","name":"Does this tool support milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Yes! The tool auto-detects whether your input is in seconds or milliseconds. It displays both formats in the output."}}]}</script>
     <style>
         .epoch-app{padding:6rem 0 4rem;background:var(--bg-elevated);min-height:100vh}
         .epoch-container{max-width:900px;margin:0 auto;padding:0 2rem}
         .live-clock{background:linear-gradient(135deg,rgba(220,38,38,0.08),rgba(220,38,38,0.05));border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
         .clock-epoch{font-family: var(--font-brand), Georgia, serif;font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#dc2626,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:0.05em}
         .clock-human{font-family:'JetBrains Mono',monospace;font-size:1rem;color: var(--text-muted);margin-top:0.5rem}
-        .clock-label{font-size:0.75rem;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem}
+        .clock-label{font-size:0.75rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem}
         .converter-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
         .conv-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
         .conv-card h2{font-size:1rem;margin-bottom:1rem;color: var(--text-muted)}
         .conv-input{width:100%;background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);font-family:'JetBrains Mono',monospace;font-size:1rem;padding:0.75rem;border-radius:8px;outline:none;transition:border-color 0.3s}
         .conv-input:focus{border-color: var(--primary-soft);box-shadow:0 0 15px rgba(220,38,38,0.08)}
-        .conv-btn{background:linear-gradient(135deg,#dc2626,#0088ff);border:none;color:#000;font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;transition:all 0.3s;margin-top:0.75rem;width:100%}
+        .conv-btn{background:linear-gradient(135deg,#dc2626,#0088ff);border:none;color:#09090b;font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;padding:0.6rem 1.5rem;border-radius:8px;cursor:pointer;transition:all 0.3s;margin-top:0.75rem;width:100%}
         .conv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(220,38,38,0.3)}
         .conv-result{margin-top:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem}
         .result-row{display:flex;justify-content:space-between;padding:0.3rem 0;border-bottom:1px solid #151515}
         .result-row:last-child{border-bottom:none}
-        .result-label{font-size:0.8rem;color:#555}
+        .result-label{font-size:0.8rem;color:var(--text-faint)}
         .result-value{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color: var(--primary-soft);cursor:pointer}
         .result-value:hover{color: var(--text)}
         .date-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
         .date-inputs input,.time-inputs input{width:100%;background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);font-family:'JetBrains Mono',monospace;font-size:0.9rem;padding:0.5rem;border-radius:6px;outline:none;text-align:center}
         .time-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.75rem}
-        .input-label{font-size:0.65rem;color:#444;text-align:center;margin-top:2px}
+        .input-label{font-size:0.65rem;color:var(--text-faint);text-align:center;margin-top:2px}
         .faq-section{margin-top:3rem}.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
         .faq-section details{background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;margin-bottom:0.5rem}
         .faq-section summary{padding:1rem;cursor:pointer;color: var(--text-muted);font-weight:500;list-style:none;display:flex;justify-content:space-between}
         .faq-section summary::after{content:'+';color: var(--primary-soft);font-weight:700}
         .faq-section details[open] summary::after{content:'−'}
         .faq-section details p{padding:0 1rem 1rem;color: var(--text-muted);line-height:1.6;margin:0}
-        .breadcrumb{padding:1rem 0 0;font-size:0.8rem;color:#555;max-width:900px;margin:0 auto;padding-left:2rem}
+        .breadcrumb{padding:1rem 0 0;font-size:0.8rem;color:var(--text-faint);max-width:900px;margin:0 auto;padding-left:2rem}
         .breadcrumb a{color: var(--primary-soft);text-decoration:none}.breadcrumb a:hover{color: var(--text)}.breadcrumb span{margin:0 0.4rem}
         @media(max-width:768px){.converter-grid{grid-template-columns:1fr}.clock-epoch{font-size:1.5rem}}
     </style>
@@ -89,7 +89,7 @@
     <main class="epoch-app">
         <div class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/tools/">Tools</a><span>›</span>Epoch Converter</div>
         <div class="epoch-container">
-            <div style="padding:1.5rem 0 0"><h1 style="font-size:2rem;margin-bottom:0.5rem">Epoch / Unix Timestamp Converter</h1><p style="color:var(--text-faint);margin-bottom:0">Convert Unix timestamps to human dates & back. Live clock included. 100% client-side.</p></div>
+            <div style="padding:1.5rem 0 0"><h1 style="font-size:2rem;margin-bottom:0.5rem">Epoch / Unix Timestamp Converter</h1><p style="color:var(--text-faint);margin-bottom:0">Convert Unix timestamps to human dates &amp; back. Live clock included. 100% client-side.</p><p style="color:var(--text-muted);line-height:1.7;max-width:70ch;margin:0">Got a number like <code>1792759416</code> from an API, a database, or a log file and need to know what date it is? Or need the timestamp for a specific date to feed into your code? This free epoch converter works in both directions, right in your browser: paste a 10-digit (seconds) or 13-digit (milliseconds) timestamp and instantly get the UTC time, your local time, ISO 8601, the day of the week, and a relative "3 days ago" reading. Nothing leaves your device and nothing is logged.</p></div>
 
             <div class="live-clock">
                 <div class="clock-label">Current Unix Timestamp</div>
@@ -123,6 +123,29 @@
 
         </div>
         <section style="max-width:760px;margin:3rem auto 1rem;padding:0 1.5rem 3rem;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use This Epoch Converter</h2>
+        <ol style="padding-left:1.25rem;line-height:1.8;">
+            <li><strong style="color: var(--text);">Timestamp to date:</strong> paste any 10-digit (seconds) or 13-digit (milliseconds) timestamp into the "Timestamp &rarr; Date" box and click <em>Convert to Date</em>. The tool auto-detects the unit and shows UTC, your local time, ISO 8601, day of week, and a relative reading. Click any result to copy it.</li>
+            <li><strong style="color: var(--text);">Date to timestamp:</strong> enter a year, month, day, and time in the "Date &rarr; Timestamp" box and click <em>Convert to Timestamp</em>. You get the epoch value in both seconds and milliseconds, plus the UTC and ISO equivalents.</li>
+            <li><strong style="color: var(--text);">Check the live clock:</strong> the clock at the top of the page always shows the current Unix timestamp, updating every second &mdash; useful when you need a "right now" timestamp for a token, a test record, or a cache-buster.</li>
+        </ol>
+
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Who Uses Unix Timestamps (and Why)</h2>
+        <p>Unix timestamps show up far beyond server code. <strong style="color: var(--text);">Backend developers</strong> read them in API responses, JWT expiry claims (<code>exp</code>/<code>iat</code>), and database rows when a dashboard shows a raw number instead of a date. <strong style="color: var(--text);">Data engineers</strong> use them to sort and filter billions of rows without date-parsing overhead. <strong style="color: var(--text);">DevOps and support engineers</strong> decode timestamps in log files to line up incidents across timezones &mdash; a 10-digit number in a log becomes an exact second once converted. <strong style="color: var(--text);">Frontend developers</strong> hit them constantly because JavaScript's <code>Date.now()</code> returns milliseconds, the most common source of seconds-vs-milliseconds bugs. Even <strong style="color: var(--text);">analysts and marketers</strong> meet them in exported CSVs from analytics platforms and ad networks, where event times arrive as epoch integers.</p>
+
+        <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Notable Timestamps, for Reference</h2>
+        <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:0.5rem;">
+            <thead><tr style="text-align:left;color: var(--text);border-bottom:1px solid var(--border);"><th style="padding:0.5rem;">Event</th><th style="padding:0.5rem;">Timestamp (s)</th><th style="padding:0.5rem;">UTC date</th></tr></thead>
+            <tbody>
+                <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Unix epoch begins</td><td style="padding:0.5rem;font-family:'JetBrains Mono',monospace;">0</td><td style="padding:0.5rem;">1970-01-01 00:00:00</td></tr>
+                <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">Y2K</td><td style="padding:0.5rem;font-family:'JetBrains Mono',monospace;">946684800</td><td style="padding:0.5rem;">2000-01-01 00:00:00</td></tr>
+                <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">One billion seconds</td><td style="padding:0.5rem;font-family:'JetBrains Mono',monospace;">1000000000</td><td style="padding:0.5rem;">2001-09-09 01:46:40</td></tr>
+                <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">32-bit max (Year 2038 problem)</td><td style="padding:0.5rem;font-family:'JetBrains Mono',monospace;">2147483647</td><td style="padding:0.5rem;">2038-01-19 03:14:07</td></tr>
+            </tbody>
+        </table>
+        </div>
+
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">What Is a Unix Timestamp?</h2>
         <p>A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970, 00:00:00 UTC &mdash; a date referred to as the Unix epoch. This convention was established in the early days of Unix operating systems as a simple, unambiguous way to represent any point in time using a single integer, with no dependence on locale, calendar format, or timezone.</p>
         <p>Every major programming language has built-in support for Unix timestamps. In JavaScript, <code>Date.now()</code> returns the current timestamp in milliseconds. In Python, <code>time.time()</code> returns it in seconds. In databases, Unix timestamps are often preferred for storing dates because integer comparisons are faster than string comparisons, and there is no ambiguity about date format (no DD/MM/YYYY vs MM/DD/YYYY confusion).</p>
@@ -132,6 +155,22 @@
         <p>When in doubt, check the magnitude: 10 digits = seconds, 13 digits = milliseconds. Convert accordingly before passing timestamps between systems that may use different conventions.</p>
 
         <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Frequently Asked Questions</h2>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">How do I convert a Unix timestamp to a readable date?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Paste the timestamp into the "Timestamp &rarr; Date" box above and click Convert to Date. You'll instantly see the UTC time, your local time, ISO 8601 format, and the day of the week. The converter auto-detects seconds and milliseconds, so you don't need to know which one you have.</p>
+        </details>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">Why does my timestamp show January 1, 1970?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">January 1, 1970 is timestamp 0 &mdash; it means the value you fed in was 0 or empty. Common causes: a failed database query returning NULL that got cast to 0, an uninitialized variable, or a timestamp that was divided down to nothing. If you see a far-future date (year 2500+) instead, you've mixed up seconds and milliseconds &mdash; check the digit count: 10 digits means seconds, 13 means milliseconds.</p>
+        </details>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">What is the maximum Unix timestamp?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">On 64-bit systems there is effectively no practical maximum. The famous limit is 2,147,483,647 (January 19, 2038 at 03:14:07 UTC), the largest value a 32-bit signed integer can hold &mdash; that's the Year 2038 problem. Any timestamp larger than that was stored on a 64-bit system, which extends the range to roughly 292 billion years in the future.</p>
+        </details>
+        <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
+            <summary style="cursor:pointer;font-weight:600;color: var(--text);">How do I convert a Unix timestamp in Excel or Google Sheets?</summary>
+            <p style="margin-top:0.75rem;color: var(--text-muted);">Use the formula <code>=((A1/86400)+DATE(1970,1,1))</code> and format the cell as a date, where A1 holds the timestamp in seconds. For milliseconds, divide by 86,400,000 instead. Note that Excel's DATE function caps out at the year 9999, so 64-bit far-future timestamps can error there.</p>
+        </details>
         <details style="margin-bottom:1rem;background: var(--bg-elevated); border: 1px solid var(--border);border-radius:8px;padding:1rem;">
             <summary style="cursor:pointer;font-weight:600;color: var(--text);">Does Unix time account for timezones?</summary>
             <p style="margin-top:0.75rem;color: var(--text-muted);">Unix timestamps are always in UTC &mdash; they represent an absolute point in time with no timezone information embedded. Converting a timestamp to a human-readable date always requires specifying a timezone. The same timestamp will display as different local times in different timezones, but the underlying number is identical. This is a feature, not a bug: storing timestamps as UTC integers avoids all daylight saving time and timezone offset complications in your database.</p>
@@ -172,9 +211,13 @@
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JSON &harr; CSV Converter</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Convert timestamped datasets between JSON and CSV.</span>
             </a>
-            <a href="/tools/regex-tester/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
-                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
-                <span style="font-size:0.85rem; color: var(--text-muted);">Test regex patterns for parsing timestamps from logs.</span>
+            <a href="/tools/jwt-decoder/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Decode JWT tokens and read their exp/iat timestamp claims.</span>
+            </a>
+            <a href="/tools/cron-builder/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Cron Expression Builder</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Build cron schedules for jobs you time with epoch values.</span>
             </a>
         </div>
     </section>
