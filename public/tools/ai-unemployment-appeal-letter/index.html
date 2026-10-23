@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Unemployment Appeal Letter Generator &mdash; Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Denied unemployment benefits? Generate a formal, denial-specific appeal letter in minutes. Pick your denial category (voluntary quit, misconduct, wages, availability, refusal of work), track your filing deadline, and get a printable letter plus a filing checklist."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-unemployment-appeal-letter/"
+    />
+    <meta
+      property="og:title"
+      content="AI Unemployment Appeal Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Denied unemployment benefits? Get a formal, denial-specific appeal letter in minutes, with a filing deadline tracker and a printable filing checklist. Free, no signup."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-unemployment-appeal-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Unemployment Appeal Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Denied unemployment? Generate a formal, denial-specific appeal letter with a deadline tracker and filing checklist. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .deadline-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .deadline-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .deadline-count {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      .deadline-count small {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+      .deadline-note {
+        margin: 0.5rem 0 0;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+      }
+      .deadline-urgent .deadline-count {
+        color: #f87171;
+      }
+      .deadline-safe .deadline-count {
+        color: var(--text);
+      }
+      #appeal-letter-wrap {
+        display: none;
+      }
+      #appeal-letter {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #appeal-letter h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #appeal-letter table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #appeal-letter td,
+      #appeal-letter th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #appeal-letter .report-guidance {
+        white-space: pre-wrap;
+      }
+      @media print {
+        body.printing-appeal header,
+        body.printing-appeal nav,
+        body.printing-appeal footer,
+        body.printing-appeal .lt-sticky-gen,
+        body.printing-appeal .lt-toolbar,
+        body.printing-appeal .email-gate,
+        body.printing-appeal .adsbygoogle,
+        body.printing-appeal section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-appeal .lt-grid,
+        body.printing-appeal .lt-checklist-band,
+        body.printing-appeal .lt-know,
+        body.printing-appeal .lt-faq,
+        body.printing-appeal .lt-related,
+        body.printing-appeal .lt-how,
+        body.printing-appeal .lt-trust,
+        body.printing-appeal .hero {
+          display: none !important;
+        }
+        body.printing-appeal #appeal-letter-wrap {
+          display: block !important;
+        }
+        #appeal-letter {
+          border: none !important;
+        }
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .lt-story {
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+      }
+    </style>
+    <script>
+      function printAppealLetter() {
+        var wrap = document.getElementById('appeal-letter-wrap');
+        if (!wrap || wrap.style.display === 'none' || !wrap.querySelector('#appeal-letter').innerHTML.trim()) {
+          if (window.LifeTool) LifeTool.toast('Generate your letter first, then print it');
+          else alert('Generate your letter first, then print it.');
+          return;
+        }
+        document.body.classList.add('printing-appeal');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-appeal');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Unemployment Appeal Letter Generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-unemployment-appeal-letter/",
+        "description": "Free AI tool that drafts a formal unemployment benefits appeal letter tailored to your denial category, with a filing deadline tracker and printable filing checklist. Educational only, not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long do I have to appeal an unemployment denial?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most states allow about 30 days from the date of the determination (denial) notice, but the exact window varies by state. The exact deadline is printed on your denial notice. Read it the day you receive it and file as early as possible, because a late appeal is usually dismissed no matter how strong your case is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does a good unemployment appeal letter include?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A formal business letter that identifies you (name, claim or confirmation number, denial date), quotes the state's stated reason for denial, answers that reason with specific facts tied to the legal standard, lists the evidence you are enclosing, and respectfully requests reversal of the determination. Keep it factual and calm, and sign it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I quit my job. Can I still appeal a denial?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, but in most states a voluntary quit is only eligible when it was for good cause connected with the work, such as unsafe conditions, a major change in pay or hours, or harassment. Your appeal should show what made the job untenable and that you tried to fix it before quitting, such as complaints to a supervisor or requests for a transfer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I was fired for misconduct. What counts as misconduct?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For unemployment purposes, misconduct generally means a willful or wanton disregard of the employer's interests, not ordinary mistakes, poor performance, or one bad day. The employer usually has to prove it. Your appeal should explain the facts calmly and show the conduct was not intentional or reckless."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I keep filing weekly claims while I appeal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Keep filing your weekly certification every week during the appeal. The state will not pay anything while the appeal is pending, but if you win you only receive back-pay for weeks you actually certified. Two minutes a week can preserve thousands of dollars."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I send my appeal letter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Follow the instructions on your denial notice exactly. If you mail it, send it certified with return receipt requested and keep a copy of everything. Note the confirmation number. Keep proof of the mailing date, because timeliness is the first thing the appeals office checks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens after I file the appeal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The appeal usually goes to a hearing before an administrative law judge, often by phone. You can present witnesses, documents, and testimony. Bring evidence tied to the legal standard for your denial category, not secondhand stories. If you lose, most states allow one more level of review, and the notice will explain it."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Unemployment Appeal Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI unemployment appeal <span style="color: var(--primary)">letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Denied unemployment benefits? Pick your denial category, tell us what happened, and
+            get a formal appeal letter written to the legal standard for that denial, plus a
+            filing deadline tracker and a printable filing checklist.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Tailored to your denial category</span>
+          <span><i></i> Draft autosaved on this device</span>
+          <span><i></i> Printable letter and checklist</span>
+          <span><i></i> Educational only, not legal advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick your denial category</strong
+            ><span>Voluntary quit, misconduct, wages, availability, or refusal of work.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter the facts</strong
+            ><span>Denial date, claim number, what happened. Takes 3 minutes.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get letter + checklist</strong
+            ><span>A formal appeal letter and a filing checklist, ready to print and mail.</span>
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Denial category</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Facts</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your denial</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label"
+                >Why were your benefits denied? <span class="cs-req" aria-hidden="true">*</span></label
+              >
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="voluntary-quit"
+                  aria-pressed="false"
+                >
+                  I quit voluntarily
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="misconduct"
+                  aria-pressed="false"
+                >
+                  Fired for misconduct
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="insufficient-wages"
+                  aria-pressed="false"
+                >
+                  Not enough wages
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="availability"
+                  aria-pressed="false"
+                >
+                  Availability / job search
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="refusal-of-work"
+                  aria-pressed="false"
+                >
+                  Refused work
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="voluntary-quit" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Letter strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the key facts to unlock a strong letter.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="denial_date"
+                    >Denial notice date <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="denial_date"
+                    type="date"
+                    data-label="Denial notice date"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="state">State (optional)</label>
+                  <input
+                    class="lt-input"
+                    id="state"
+                    type="text"
+                    maxlength="40"
+                    placeholder="Idaho"
+                    data-label="State"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="claim_number"
+                    >Claim / confirmation number</label
+                  >
+                  <input
+                    class="lt-input"
+                    id="claim_number"
+                    type="text"
+                    maxlength="60"
+                    placeholder="From your denial notice"
+                    data-label="Claim or confirmation number"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="employer">Employer name</label>
+                  <input
+                    class="lt-input"
+                    id="employer"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your former employer"
+                    data-label="Employer name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="sender-name">Your name</label>
+                  <input
+                    class="lt-input"
+                    id="sender-name"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="addressed-to">Address the letter to</label>
+                  <input
+                    class="lt-input"
+                    id="addressed-to"
+                    type="text"
+                    maxlength="120"
+                    placeholder="Appeals office, from your denial notice"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="tool-input"
+                  >What happened, in your own words <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="tool-input"
+                  data-label="Facts of the separation"
+                  placeholder="Example: My hours were cut from 40 to 20 without notice. I asked my supervisor twice for a schedule change and got no response, so I resigned on May 2. The denial says I quit without good cause."
+                ></textarea>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="evidence">Evidence you can enclose (optional)</label>
+                <input
+                  class="lt-input"
+                  id="evidence"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Pay stubs, emails, texts, witness names"
+                  data-label="Evidence available"
+                  autocomplete="off"
+                />
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my appeal letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not legal advice.</strong> This tool drafts a
+                formal letter from your own facts. It is not a lawyer, and it does not decide
+                whether you qualify for benefits. Your prompt is sent to our AI service to
+                generate the letter; nothing is filed for you. Confirm deadlines and procedures
+                with your state workforce agency.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="deadline-panel" id="deadline-panel" aria-live="polite">
+              <h3>Filing deadline</h3>
+              <div class="deadline-count" id="deadline-count">
+                <small>Enter your denial notice date to see your window.</small>
+              </div>
+              <p class="deadline-note">
+                Most states allow about 30 days from the denial notice. The exact deadline is
+                printed on your denial notice. File early: late appeals are usually dismissed no
+                matter how strong the case.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your appeal letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your appeal letter&hellip;</p>
+                  <small>Framed to the legal standard for your denial category</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your appeal letter will appear here.<br /><br />1. Pick your denial
+                    category<br />2. Enter the facts<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Filing checklist</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Do these the day you file. Tap items as you finish them; progress saves on this
+                  device.
+                </p>
+                <ul class="lt-check">
+                  <li>
+                    Send the letter the way your denial notice says: mail, fax, or online
+                    portal. If you mail it, send it certified with return receipt requested.
+                  </li>
+                  <li>
+                    Keep a copy of the signed letter and every page you enclose, paper or
+                    digital.
+                  </li>
+                  <li>
+                    Note the confirmation number the state gives you, or keep the certified mail
+                    receipt. Timeliness is the first thing the appeals office checks.
+                  </li>
+                  <li>
+                    Keep filing your weekly certification every week during the appeal. You only
+                    get back-pay for weeks you certified.
+                  </li>
+                  <li>
+                    Start gathering evidence for the hearing now: pay stubs, schedules, emails,
+                    texts, and witness names with phone numbers.
+                  </li>
+                  <li>
+                    Read the hearing preparation checklist below so you know what the judge
+                    expects before the notice arrives.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Printable letter</h2>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Build a clean, one-document version of your letter and checklist, then print
+                  it or save it as a PDF for your records.
+                </p>
+                <div id="appeal-letter-wrap">
+                  <div id="appeal-letter" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-letter-btn">
+                    Build printable letter
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printAppealLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Reload a draft to refine it or print
+                  it later.
+                </p>
+                <ul class="hist-list" id="draft-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            How appeals actually get won
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Timeliness beats everything</h3>
+              <p>
+                The first thing the appeals office checks is the filing date. Most states allow
+                about 30 days from the denial notice, and a late appeal is usually dismissed
+                before anyone reads the facts. File early, then make the case perfect.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Quit cases need good cause</h3>
+              <p>
+                A voluntary quit is usually only eligible when it was for good cause connected
+                with the work: unsafe conditions, a major pay or hours cut, harassment, or a
+                material change to the job. Show what changed, and that you tried to fix it
+                before you left.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Misconduct means willful</h3>
+              <p>
+                For unemployment purposes, misconduct generally means a willful or wanton
+                disregard of the employer's interests. Honest mistakes, ordinary negligence, and
+                poor performance usually do not qualify. The employer normally has to prove it,
+                so facts beat conclusions.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The letter gets you the hearing</h3>
+              <p>
+                The appeal letter is the door, not the room. It just needs to identify you, the
+                denial, and why it was wrong. The hearing before the administrative law judge is
+                where evidence, witnesses, and testimony decide the outcome.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Keep certifying every week</h3>
+              <p>
+                While the appeal is pending, the state pays nothing, but a win brings back-pay
+                only for weeks you actually certified. Missing a weekly certification while you
+                wait can cost you thousands. It takes two minutes.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Paper beats memory at the hearing</h3>
+              <p>
+                Judges decide on evidence. Pay stubs, schedules, texts, emails, and named
+                witnesses with phone numbers weigh far more than your word alone. Secondhand
+                testimony is hearsay and carries almost no weight. Start the folder today.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>How long do I have to appeal an unemployment denial?</summary>
+            <div class="faq-a">
+              Most states allow about 30 days from the date of the determination (denial) notice,
+              but the exact window varies. The exact deadline is printed on your denial notice.
+              Enter the notice date above and the tracker shows your typical 30-day window. File
+              as early as you can.
+            </div>
+          </details>
+          <details>
+            <summary>What does a good unemployment appeal letter include?</summary>
+            <div class="faq-a">
+              A formal business letter that identifies you (name, claim or confirmation number,
+              denial date), quotes the state's stated reason for denial, answers that reason
+              with specific facts tied to the legal standard, lists the evidence you are
+              enclosing, and respectfully requests reversal. Keep it factual and calm, and sign
+              it.
+            </div>
+          </details>
+          <details>
+            <summary>I quit my job. Can I still appeal a denial?</summary>
+            <div class="faq-a">
+              Yes, but in most states a voluntary quit is only eligible when it was for good
+              cause connected with the work, such as unsafe conditions, a major change in pay or
+              hours, or harassment. Your appeal should show what made the job untenable and that
+              you tried to fix it before quitting, such as complaints to a supervisor or
+              requests for a transfer.
+            </div>
+          </details>
+          <details>
+            <summary>I was fired for misconduct. What counts as misconduct?</summary>
+            <div class="faq-a">
+              For unemployment purposes, misconduct generally means a willful or wanton
+              disregard of the employer's interests, not ordinary mistakes, poor performance, or
+              one bad day. The employer usually has to prove it. Your appeal should explain the
+              facts calmly and show the conduct was not intentional or reckless.
+            </div>
+          </details>
+          <details>
+            <summary>Should I keep filing weekly claims while I appeal?</summary>
+            <div class="faq-a">
+              Yes. Keep filing your weekly certification every week during the appeal. The state
+              will not pay anything while the appeal is pending, but if you win you only receive
+              back-pay for weeks you actually certified. Two minutes a week can preserve
+              thousands of dollars.
+            </div>
+          </details>
+          <details>
+            <summary>How should I send my appeal letter?</summary>
+            <div class="faq-a">
+              Follow the instructions on your denial notice exactly: mail, fax, or online
+              portal. If you mail it, send it certified with return receipt requested and keep a
+              copy of everything. Note the confirmation number or keep the certified mail
+              receipt, because timeliness is the first thing the appeals office checks.
+            </div>
+          </details>
+          <details>
+            <summary>What happens after I file the appeal?</summary>
+            <div class="faq-a">
+              The appeal usually goes to a hearing before an administrative law judge, often by
+              phone. You can present witnesses, documents, and testimony. Bring evidence tied to
+              the legal standard for your denial category, not secondhand stories. If you lose,
+              most states allow one more level of review, and the notice will explain it.
+            </div>
+          </details>
+          <details>
+            <summary>What is the base period and why was I denied for insufficient wages?</summary>
+            <div class="faq-a">
+              The base period is the set of past calendar quarters the state uses to measure
+              whether you earned enough to qualify, usually the first four of the last five
+              completed quarters. If your earnings in that window fall short, you can be denied
+              even after a real job loss. Some states let you use an alternate base period with
+              more recent earnings, so an appeal is worth checking if you worked recently.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/guides/how-to-appeal-an-unemployment-denial/"
+              ><strong>How to Appeal an Unemployment Denial</strong
+              ><small>The full appeal walkthrough, from deadline to hearing</small></a
+            >
+            <a href="/blog/unemployment-hearing-checklist-2026/"
+              ><strong>Unemployment Hearing Checklist 2026</strong
+              ><small>What to bring and expect at the hearing</small></a
+            >
+            <a href="/blog/how-to-appeal-unemployment-denial-2026/"
+              ><strong>How to Appeal an Unemployment Denial (2026)</strong
+              ><small>The step-by-step appeal guide with deadlines</small></a
+            >
+            <a href="/tools/appeal-letter/"
+              ><strong>General Appeal Letter Writer</strong
+              ><small>Appeal letters for other denials and decisions</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">
+          Generate letter &rarr;
+        </button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Confirm deadlines and procedures with your state workforce
+            agency before you file.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/ai-unemployment-appeal-letter/ai-unemployment-appeal-letter.js?v=20261023a1"></script>
+  </body>
+</html>

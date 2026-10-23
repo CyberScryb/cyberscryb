@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20261011polish2">
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux">
     <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1">
 
 
@@ -28,7 +28,7 @@
     <!-- Google AdSense -->
 
 
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 
 <script type="application/ld+json">
@@ -59,11 +59,51 @@
         "@type": "Answer",
         "text": "No. Everything stays in your browser. Nothing is uploaded, logged, or stored — safe even in a clinical environment where privacy matters."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What should go on a brain sheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The essentials: patient room and name or initials, diagnosis, allergies, vitals, medications, pending tasks, and anything the next shift must follow up on. Keep it one page and glanceable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this with my hospital's EMR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The brain sheet is a personal reference tool, not part of the medical record. Always document the official chart in your EMR — use this for your own shift organization."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it HIPAA safe to use the browser version?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The generator never uploads anything. All processing happens in your browser. Still, follow your facility's policy: many nurses use initials or room numbers instead of full names on personal notes, keep the sheet on their person, and shred it before leaving."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do nursing students use brain sheets differently than staff nurses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Staff nurses use brain sheets for speed: managing a multi-patient assignment without losing anything. Students use them for learning: connecting assessment data to diagnoses, tracking clinical reasoning, and meeting rotation objectives. Check your program's clinical phone policy before using a digital version on the floor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I print my brain sheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use the Print button to send a clean, print-formatted copy to your printer. You can also download it as a .txt file or copy it to paste into your own notes or a document."
+      }
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<link rel="stylesheet" href="/css/consent.css?v=20261014ux">
 <script src="/js/consent.js?v=20261006audit1" defer></script>
 </head>
 
@@ -104,9 +144,7 @@
     <main>
         <section class="hero" style="min-height: 40vh; padding-top: 80px;">
             <div class="hero-container">
-                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px; margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                    Nursing &amp; Clinical Tools
+                <div class="badge" style="background: rgba(220,38,38, 0.1); color: var(--primary-soft); padding: 5px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(220,38,38, 0.3);">Nursing &amp; Clinical Tools
                 </div>
                 <h1 class="hero-title" style="font-size: 2.5rem;">Nurse Brain <span style="color: var(--primary);">Sheet</span></h1>
                 <p class="hero-subtitle">Build a one-page shift handoff in seconds — patients, vitals, meds, tasks, notes. Free, private, no sign-up. Built for RNs, LPNs, CNAs, and students.</p>
@@ -117,7 +155,7 @@
             <div class="container">
                 <div class="humanizer-container" style="grid-template-columns: 1fr 1fr; background: transparent; box-shadow: none; gap: 2rem;">
 
-                    <div class="panel input-panel" style="background: #18181b; border: 1px solid var(--border); width:100%;">
+                    <div class="panel input-panel" style="background: var(--card); border: 1px solid var(--border); width:100%;">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">Build Your Sheet</h2>
                             <span class="step-badge" style="background: var(--primary); color: #000;">1</span>
@@ -158,7 +196,7 @@
                         </div>
                     </div>
 
-                    <div class="panel output-panel" style="background: #18181b; border: 1px solid var(--border); width:100%;">
+                    <div class="panel output-panel" style="background: var(--card); border: 1px solid var(--border); width:100%;">
                         <div class="panel-header">
                             <h2 style="font-size: 1.5rem; margin: 0;">Your Brain Sheet</h2>
                             <span class="step-badge" style="background: var(--primary); color: #000;">2</span>
@@ -171,23 +209,54 @@
 
         <section style="padding: 1rem 0 2rem;">
             <div class="container" style="max-width: 760px;">
-                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px;">
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 12px;">
+                    <h2 style="color: var(--text); margin-bottom:1rem;">Why Nurses Keep a Brain Sheet on Every Shift</h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">A brain sheet (also called a report sheet) is the one-page organizer nurses build at the start of a shift: patient room and name, diagnosis, allergies, vitals, scheduled meds, tasks, and the follow-ups the next shift needs to know. It is not the chart. It is your working memory, kept glanceable so nothing gets lost across a multi-patient assignment. This generator builds one in seconds from your unit, shift, and patient count, then you print it and write on it all shift. Free, private, no sign-up, and nothing ever leaves your browser.</p>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 12px; margin-top: 1.5rem;">
+                    <h2 style="color: var(--text); margin-bottom:1rem;">How to Build Your Brain Sheet</h2>
+                    <ol style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding-left: 1.25rem; margin: 0;">
+                        <li><strong>Set your unit, shift, and patient count.</strong> Choose the floor you are working, the shift window, and how many patients you are carrying.</li>
+                        <li><strong>Hit Generate Sheet.</strong> The tool lays out one section per patient with blank fields for room, name, diagnosis, allergies, vitals, meds, tasks, and handoff notes.</li>
+                        <li><strong>Print or copy it.</strong> Use the Print button for a clean paper copy, Download for a text file, or Copy to paste into your own notes or a document.</li>
+                        <li><strong>Fill it as the shift unfolds.</strong> The blanks are intentional: jot vitals, med times, lab results, and concerns as they happen, then hand the filled sheet to the next shift as your report.</li>
+                    </ol>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 12px; margin-top: 1.5rem;">
+                    <h2 style="color: var(--text); margin-bottom:1rem;">Who This Is For</h2>
+                    <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding-left: 1.25rem; margin: 0;">
+                        <li><strong>Med-surg and telemetry nurses</strong> carrying 4 to 6 patients: track meds due, pending labs, and follow-ups across the whole assignment on one page.</li>
+                        <li><strong>Nursing students in clinicals:</strong> use the structure to connect assessment data to diagnoses and meet rotation objectives. Check your program's phone policy before using a digital version on the floor.</li>
+                        <li><strong>ICU and step-down nurses:</strong> keep code status, drips, and critical values visible without digging through the EMR.</li>
+                        <li><strong>Long-term care nurses and CNAs:</strong> hold high-resident assignments, baselines, skin concerns, and family notes in one place.</li>
+                        <li><strong>Float and travel nurses:</strong> get oriented fast on any unit with a consistent sheet instead of the unit's improvised template.</li>
+                    </ul>
+                </div>
+
+                <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
                     <h3 style="color: var(--primary-soft); margin-bottom: 0.75rem;">Clinical Guide: Mastering the Nursing Shift Handoff</h3>
                     <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">A structured nursing brain sheet is your cognitive safety net during complex clinical shifts. According to The Joint Commission, communication breakdowns during handoffs remain a leading root cause of sentinel events in acute and subacute care.</p>
                     <ul style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-top: 0.5rem; padding-left: 1.25rem;">
                         <li><strong>SBAR Framework Integration:</strong> Organize each patient section using Situation, Background, Assessment, and Recommendation to deliver crisp, focused shift reports at the bedside.</li>
-                        <li><strong>Time-Sensitive Meds & Tasks:</strong> Highlight critical scheduled interventions: IV antibiotic due times, heparin flushes, insulin sliding scales, stat lab draws, and telemetry checks.</li>
-                        <li><strong>Safety & Fall Risk Indicators:</strong> Track code status, mobility assist levels (e.g., 1-person assist, sit-to-stand, mechanical lift), allergy alerts, and isolation precautions at a glance.</li>
+                        <li><strong>Time-Sensitive Meds &amp; Tasks:</strong> Highlight critical scheduled interventions: IV antibiotic due times, heparin flushes, insulin sliding scales, stat lab draws, and telemetry checks.</li>
+                        <li><strong>Safety &amp; Fall Risk Indicators:</strong> Track code status, mobility assist levels (e.g., 1-person assist, sit-to-stand, mechanical lift), allergy alerts, and isolation precautions at a glance.</li>
                     </ul>
                 </div>
                 <div class="geo-card" style="background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
                     <h3 style="color: var(--primary-soft); margin-bottom: 0.75rem;">Frequently Asked Questions</h3>
-                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>What should go on a brain sheet?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">The essentials: patient room and name, diagnosis, allergies, vitals, meds, pending tasks, and anything the next shift must follow up on. Keep it one page and glanceable.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>What is a nurse brain sheet?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">A brain sheet (also called a report sheet) is a one-page organizer nurses use to track their patients for a shift: room, name, vitals, meds, tasks, and handoff notes. It is a personal reference tool that keeps the important details at a glance.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Is the brain sheet generator free?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Yes. It runs entirely in your browser, has no sign-up and no limits. Print as many sheets as you need for every clinical shift.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Is my patient data stored anywhere?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">No. Everything stays in your browser. Nothing is uploaded, logged, or stored on any server.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>What should go on a brain sheet?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">The essentials: patient room and name or initials, diagnosis, allergies, vitals, meds, pending tasks, and anything the next shift must follow up on. Keep it one page and glanceable.</p></div>
                     <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Can I use this with my hospital's EMR?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">The brain sheet is a personal reference tool, not part of the medical record. Always document the official chart in your EMR — use this for your own shift organization.</p></div>
-                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Is it HIPAA safe to use the browser version?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">The generator never uploads anything — all processing is in your browser. Still, follow your facility's policy about writing patient identifiers on personal notes.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Is it HIPAA safe to use the browser version?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">The generator never uploads anything. All processing happens in your browser. Still, follow your facility's policy: many nurses use initials or room numbers instead of full names on personal notes, keep the sheet on their person, and shred it before leaving.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>How do nursing students use brain sheets differently than staff nurses?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Staff nurses use brain sheets for speed: managing a multi-patient assignment without losing anything. Students use them for learning: connecting assessment data to diagnoses, tracking clinical reasoning, and meeting rotation objectives. Check your program's clinical phone policy before using a digital version on the floor.</p></div>
+                    <div class="faq-item" style="border-bottom:1px solid var(--border); padding:0.85rem 0;"><h4>Can I print my brain sheet?</h4><p style="color:var(--text-muted); margin-top:0.4rem;">Yes. Use the Print button for a clean, print-formatted copy, Download for a .txt file, or Copy to paste the sheet into your own notes or a document.</p></div>
                 </div>
                 <p style="font-size:0.75rem; color:var(--text-faint); margin-top:1rem;">Disclaimer: This is an organizational tool, not part of the official medical record. Follow your facility's charting and privacy policies.</p>
-                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;">Related: <a href="/tools/soap-note-generator/" style="color:var(--primary);">SOAP Note Generator</a> &middot; <a href="/tools/blood-sugar-log-generator/" style="color:var(--primary);">Blood Sugar Log</a> &middot; <a href="/tools/caregiver-timesheet/" style="color:var(--primary);">Caregiver Timesheet</a></p>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;">Related: <a href="/tools/caregiver-report/" style="color:var(--primary);">Caregiver Shift Report</a> &middot; <a href="/tools/caregiver-timesheet/" style="color:var(--primary);">Caregiver Timesheet</a> &middot; <a href="/tools/cna-resume-kit/" style="color:var(--primary);">CNA Resume Kit</a></p>
             </div>
         </section>
 
@@ -208,21 +277,21 @@
         <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
-            <a href="/tools/med-administration-log/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
-                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Medication Administration Log</strong>
-                <span style="font-size:0.85rem; color: var(--text-muted);">Track meds given, refused, or held. A printable MAR-style log for CNAs and family caregivers.</span>
-            </a>
-            <a href="/tools/soap-note-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
-                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">SOAP Note Generator</strong>
-                <span style="font-size:0.85rem; color: var(--text-muted);">Build a clean, printable SOAP note in seconds: Subjective, Objective, Assessment, Plan.</span>
-            </a>
             <a href="/tools/caregiver-report/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Caregiver Shift Report Generator</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Turn messy shift notes into a professional, structured care report for CNAs, home health aides, and family caregivers.</span>
             </a>
-            <a href="/tools/blood-sugar-log-generator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
-                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Blood Sugar Log Generator</strong>
-                <span style="font-size:0.85rem; color: var(--text-muted);">Printable glucose log for fasting, before and after meals, and bedtime readings.</span>
+            <a href="/tools/caregiver-timesheet/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Caregiver Timesheet Generator</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Build a clean, printable caregiver timesheet with hours, tasks, and pay totals.</span>
+            </a>
+            <a href="/tools/cna-resume-kit/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">CNA Resume Kit</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">A complete CNA resume builder with clinical keywords, cover letter, and interview prep.</span>
+            </a>
+            <a href="/tools/med-administration-log/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Medication Administration Log</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Track meds given, refused, or held. A printable MAR-style log for CNAs and family caregivers.</span>
             </a>
         </div>
     </section>
@@ -273,7 +342,7 @@
     }
     </style>
 
-    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/nurse-brain-sheet/nurse-brain-sheet.js"></script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 </body>

@@ -1477,6 +1477,7 @@ function generateSitemap(generatedPages) {
     'ai-rent-increase-negotiation-letter',
     'ai-tenant-case-companion',
     'ai-medicare-decision-companion',
+    'ai-unemployment-appeal-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1794,6 +1795,7 @@ function manageRobotsMeta() {
     'ai-rent-increase-negotiation-letter',
     'ai-tenant-case-companion',
     'ai-medicare-decision-companion',
+    'ai-unemployment-appeal-letter',
   ]);
 
   const dirsToProcess = [

@@ -93,6 +93,34 @@ body {
   font-size: 16px;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+  Premium micro-details — selection, scrollbar, placeholders.
+*/
+::selection {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
 }
 
 /*
@@ -299,7 +327,7 @@ header {
   box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.22);
 }
 
-/* Curator Prime — visible cross-sell (not demoted under Blog) */
+/* Photo identifier used to sit in the primary nav. It now lives in the footer. */
 .nav-menu a.nav-curator,
 .nav-menu a[href*='curator.cyberscryb.com'] {
   color: var(--attention) !important;
@@ -320,7 +348,11 @@ header {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 6px;
+  padding: 11px 10px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 .hamburger span {
   width: 22px;
@@ -328,6 +360,16 @@ header {
   background: var(--text);
   border-radius: 1px;
   transition: var(--transition);
+}
+/* Animate to X when menu is open */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ─── Buttons ─── */
@@ -367,6 +409,13 @@ header {
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
     0 12px 32px rgba(22, 20, 17, 0.14),
     0 0 28px rgba(239, 68, 68, 0.3);
+}
+.cta-button:active,
+.btn-primary:active,
+.pro-cta-btn:active,
+.btn-cta:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
 }
 
 /* Amber attention — rare pay moments */
@@ -445,6 +494,8 @@ header {
   font-weight: 700;
   font-size: 0.92rem;
   text-decoration: none;
+  padding: 0.6rem 0;
+  min-height: 44px;
   transition:
     gap var(--transition),
     color var(--transition);
@@ -1115,6 +1166,10 @@ footer {
 .footer-links a {
   color: var(--text-muted);
   font-size: 0.9rem;
+  display: inline-block;
+  padding: 0.5rem 0.25rem;
+  min-height: 44px;
+  line-height: 1.4;
 }
 .footer-links a:hover {
   color: var(--primary-soft);
@@ -1196,7 +1251,7 @@ select {
 .search-wrapper input {
   width: 100%;
   min-height: 52px;
-  padding: 0.9rem 1.25rem 0.9rem 2.75rem;
+  padding: 0.9rem 1.25rem 0.9rem 3rem;
   background: var(--card-glass);
   border: 1px solid var(--border);
   border-radius: 99px;
@@ -1439,8 +1494,7 @@ select:focus-visible,
   padding: 3.25rem 1.25rem 1.75rem;
 }
 .blog-hero .hero-title {
-  font-family: var(--font-brand);
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: -0.02em;
 }
 .blog-toolbar {
@@ -1604,9 +1658,8 @@ select:focus-visible,
   min-height: 0;
 }
 .blog-featured-main h2 {
-  font-family: var(--font-brand);
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
   margin: 0 0 0.75rem;
@@ -1938,6 +1991,78 @@ section.ads-slot,
 .continue-box a {
   font-weight: 700;
   white-space: nowrap;
+}
+.recent-drafts {
+  margin: 0 auto 1.25rem;
+  max-width: 760px;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  text-align: left;
+}
+.recent-drafts[hidden] {
+  display: none;
+}
+.recent-drafts p {
+  margin: 0 0 0.45rem;
+}
+.recent-drafts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.recent-drafts a {
+  color: var(--primary-soft);
+  font-weight: 650;
+}
+.recent-drafts li span {
+  display: block;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.catalog-toolbar {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 30;
+  background: rgba(9, 9, 11, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+.catalog-show-all {
+  display: block;
+  margin: 1rem auto 0;
+  min-height: 44px;
+  padding: 0.45rem 1.1rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+.catalog-show-all[hidden] {
+  display: none;
+}
+.catalog-show-all:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
+}
+.badge > svg,
+.panel-header h2 > svg {
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  overflow: visible;
+  vertical-align: -0.15em;
 }
 @media (max-width: 760px) {
   .intent-grid,

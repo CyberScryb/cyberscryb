@@ -1545,6 +1545,62 @@ ATTACHMENTS I WILL PROVIDE
 Return ONLY the appeal letter.`;
     },
   },
+  'ai-unemployment-appeal-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'unemployment appeal';
+      let categoryFraming = '';
+      if (mode.includes('quit')) {
+        categoryFraming =
+          'DENIAL CATEGORY: VOLUNTARY QUIT. The legal standard in most states is that a voluntary quit is only eligible when it was for GOOD CAUSE CONNECTED WITH THE WORK (unsafe conditions, a major pay or hours cut, harassment, or a material change to the job), not personal reasons. Frame the letter around what changed about the job itself, what the claimant did to try to fix it before quitting (complaints to a supervisor, requests for transfer or schedule change, grievances), and why continuing was no longer reasonable. If the facts show no employer-caused problem and no attempt to resolve it, say so plainly and keep the letter short rather than inventing good cause.';
+      } else if (mode.includes('misconduct')) {
+        categoryFraming =
+          "DENIAL CATEGORY: MISCONDUCT. For unemployment purposes misconduct generally means a WILLFUL or WANTON DISREGARD of the employer's interests, not ordinary mistakes, ordinary negligence, poor performance, or a single lapse in judgment. The employer usually bears the burden of proving misconduct. Frame the letter around the actual facts: was the conduct intentional or reckless, or was it an honest mistake, a misunderstanding, or poor performance? Do not concede misconduct in the letter; describe the facts calmly and let them speak.";
+      } else if (mode.includes('wages') || mode.includes('base')) {
+        categoryFraming =
+          'DENIAL CATEGORY: INSUFFICIENT WAGES / BASE PERIOD. The state measured earnings in its base period (usually the first four of the last five completed calendar quarters) and found them below the minimum. Frame the letter around the earnings facts: if the user earned wages more recently than the base period covers, note them explicitly and ask the state to consider an alternate base period or recomputation where allowed. Never invent wage figures; use only stated earnings.';
+      } else if (mode.includes('availability') || mode.includes('search')) {
+        categoryFraming =
+          'DENIAL CATEGORY: AVAILABILITY / WORK SEARCH. The legal standard in most states is that the claimant must be ABLE, AVAILABLE, and ACTIVELY SEEKING full-time work. Frame the letter around concrete evidence: restrictions that have been lifted, the number and type of job contacts or applications made, willingness to accept suitable hours and shifts, and transportation or childcare arrangements. General assertions without specifics are weak; name the efforts from the facts.';
+      } else if (mode.includes('refusal')) {
+        categoryFraming =
+          'DENIAL CATEGORY: REFUSAL OF WORK. The legal standard in most states is that refusing SUITABLE work without good cause disqualifies the claimant. Frame the letter around suitability and cause: was the pay far below prior earnings, were the hours, distance, or conditions unreasonable, or was the offer unsafe? Or did the claimant refuse for good cause, such as a medical restriction or a conflicting recall? Use only stated facts.';
+      } else {
+        categoryFraming =
+          "DENIAL CATEGORY: as stated by the user. Frame the letter around the state's stated denial reason quoted from the facts, and answer it point by point with the user's own facts.";
+      }
+      return `You are a formal legal correspondence writer who drafts unemployment benefits appeal letters that real people can file with real state workforce agencies. You write one letter, from the supplied facts only, in a tone that is formal, respectful, and plain.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided. Do not fabricate claim numbers, confirmation numbers, dates, employer names, wage figures, statutes, or legal citations of any kind. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert claim number].
+2. NEVER CITE SPECIFIC LAW. Do not name statutes, code sections, administrative rules, or case law. Refer only to the legal standard for the denial category in general terms ("good cause connected with the work," "willful disregard") and to the state's determination notice in general terms.
+3. NEVER INVENT DEADLINES. Do not state any state's specific appeal deadline in days. If the user gave a denial notice date, you may reference it; any deadline language must say the exact deadline is printed on the denial notice and the appeal should be filed promptly. Most states allow about 30 days, and you may say that only as a general, qualified observation.
+4. NO DISHONEST FRAMING. Do not coach the user to misrepresent anything, do not exaggerate, and do not invent employer misconduct, medical conditions, or witness statements beyond what was stated. Stick to their words, formalized.
+5. FORMAL AGENCY TONE. Address the letter to the appeals office named by the user, or to "Unemployment Insurance Appeals" generally. Plain, dignified sentences. No slang, no pleading, no threats, no flattery. Sound like a competent adult writing to an institution, not like a template.
+6. CATEGORY FRAMING. ${categoryFraming}
+7. LENGTH: 200 to 400 words for the letter body, excluding headers and the checklist. Hit it within 20%.
+8. Output ONLY the letter followed by the filing checklist and the if-denied note. No preamble, no "here is your letter," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Letter
+A formal business letter: a header block with the claimant name, claim or confirmation number, and denial notice date (only facts given), a salutation ("Dear Appeals Officer:"), three to four short paragraphs: (a) the appeal stated plainly, identifying the determination and the stated denial reason quoted from the user's facts, (b) the facts of the separation in the user's own terms, formalized and tied to the legal standard for the denial category, (c) the evidence available or enclosed (only what the user marked) and the specific request to reverse the determination, then a respectful close and a signature line left as "Respectfully, [Your Name]".
+
+## Filing Checklist
+A short bullet list: send the letter the way the denial notice instructs (mail, fax, or online portal); if mailing, send certified with return receipt requested; keep a signed copy of the letter and every enclosed page; note the confirmation number or keep the certified mail receipt; keep filing weekly certifications every week during the appeal, because back-pay only covers certified weeks; and a reminder that the exact deadline is printed on the denial notice and a late appeal is usually dismissed.
+
+## If Your Appeal Is Denied
+Two or three sentences: the appeal usually leads to a hearing before an administrative law judge where evidence and witnesses decide the outcome, so keep gathering evidence; if the hearing decision goes against the claimant, most states allow one further level of review, which the hearing notice will explain. This is general information, not legal advice.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Denial category (from the tool intake): ${modeLabel}
+
+Write the letter now.`;
+    },
+  },
   'sap-appeal-letter': {
     model: 'gemini-3.1-pro-preview',
     build: (input, params) => {
