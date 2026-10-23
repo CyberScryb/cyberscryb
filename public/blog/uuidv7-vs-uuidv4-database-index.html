@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUIDv7 vs UUIDv4: Why Your Database Index Cares | CyberScryb</title>
+<meta name="description" content="UUIDv7 vs UUIDv4: random keys scatter inserts across your index and bloat WAL. See why v7 fixes it, what it leaks, and when v4 still wins.">
+<link rel="canonical" href="https://cyberscryb.com/blog/uuidv7-vs-uuidv4-database-index/">
+<meta property="og:title" content="UUIDv7 vs UUIDv4: Why Your Database Index Cares">
+<meta property="og:description" content="UUIDv7 vs UUIDv4: random keys scatter inserts across your index and bloat WAL. See why v7 fixes it, what it leaks, and when v4 still wins.">
+<meta property="og:url" content="https://cyberscryb.com/blog/uuidv7-vs-uuidv4-database-index/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-10-23">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="icon" href="/mascot-icon.png" type="image/png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "UUIDv7 vs UUIDv4: Why Your Database Index Cares",
+  "description": "UUIDv7 vs UUIDv4: random keys scatter inserts across your index and bloat WAL. See why v7 fixes it, what it leaks, and when v4 still wins.",
+  "datePublished": "2026-10-23",
+  "dateModified": "2026-10-23",
+  "author": {
+    "@type": "Organization",
+    "name": "CyberScryb"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CyberScryb",
+    "url": "https://cyberscryb.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cyberscryb.com/blog/uuidv7-vs-uuidv4-database-index/"
+  },
+  "image": "https://cyberscryb.com/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is UUIDv7 safe to use in URLs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's as hard to guess as you need for most IDs, with 74 random bits per key. But it reveals its creation time to anyone who sees it. If that time is sensitive, expose a v4 or a separate token instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I mix UUIDv4 and UUIDv7 in the same column?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Both are 128-bit UUIDs, and the column doesn't care which version it holds. Index locality improves for new rows, and old rows keep their random order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does PostgreSQL 17 have uuidv7()?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The function arrived in PostgreSQL 18. On older versions, generate v7 in your application and store it in the same uuid column."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+<style>
+.article-wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7}
+.article-wrap h1{font-family: var(--font-brand), Georgia, serif;font-size:2.2rem;line-height:1.2;margin:0 0 8px;background: var(--primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.article-wrap .meta{color: var(--text-muted);font-size:0.9rem;margin-bottom:32px}
+.article-wrap h2{font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;margin-top:40px;color: var(--primary-soft)}
+.article-wrap h3{font-size:1.15rem;margin-top:24px;color: var(--text-muted)}
+.article-wrap p,.article-wrap li{color: var(--text-muted)}
+.article-wrap a{color: var(--primary-soft)}
+.article-wrap blockquote{border-left:3px solid #dc2626;padding:0 0 0 16px;margin:24px 0;color: var(--text-muted);font-style:italic}
+.article-wrap code{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:0.9em}
+.article-wrap .cta-box{background:linear-gradient(135deg,rgba(220,38,38, 0.08),rgba(220,38,38, 0.06));border:1px solid rgba(220,38,38, 0.3);border-radius:14px;padding:24px;margin:32px 0}
+.article-wrap .cta-box .cta-btn{display:inline-block;background: var(--primary);color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-family: var(--font-brand), Georgia, serif;font-weight:700;margin-top:12px}
+.article-wrap table{width:100%;border-collapse:collapse;font-size:.9rem;margin:24px 0}
+.article-wrap th,.article-wrap td{padding:10px 12px;border:1px solid var(--border);text-align:left}
+.article-wrap thead th{background:rgba(255,255,255,.04);color:var(--text)}
+.article-wrap .article-figure{margin:32px 0}
+.article-wrap .article-figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);display:block}
+.article-wrap figcaption{font-size:.85rem;color:var(--text-muted);margin-top:8px}
+.article-wrap pre{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;overflow-x:auto;font-family:Consolas,monospace;font-size:0.85rem;line-height:1.5;color: var(--text-muted)}
+.article-wrap pre code{background:none;padding:0}
+</style>
+</head>
+<body>
+<header>
+  <nav class="navbar"><div class="nav-container">
+    <div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none;">
+      <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+      <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color: var(--text);margin-left:10px;">CyberScryb</span>
+    </a></div>
+    <ul class="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">Tools</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+    </ul>
+  </div></nav>
+</header>
+
+<main>
+  <article class="article-wrap">
+    <p><a href="/blog/">&larr; Back to blog</a></p>
+<h1>UUIDv7 vs UUIDv4: Why Your Database Index Cares</h1>
+<p class="meta">Published October 23, 2026 &middot; 9 min read</p>
+<p>Your table of UUID keys was fast at launch. A year later, inserts are slow, the disks are busy, and nothing in the code changed. In a 2018 PostgreSQL benchmark, insert throughput with random UUIDs fell to <a href="https://www.enterprisedb.com/blog/sequential-uuid-generators" rel="noopener">less than 30% of its starting speed</a> once the index outgrew the database's memory cache. Sequential keys on the same hardware barely slowed down.</p>
+<p>That's the whole UUIDv7 vs UUIDv4 story in one test. Version 4 is pure randomness, so every new key lands somewhere random in your index. Version 7 starts with a timestamp, so new keys line up at the end, the way auto-increment integers do. My take: if your database creates lots of UUID primary keys, make them v7. Keep v4 where a record's creation time should stay private.</p>
+<p>Below: what a random key does to a B-tree, where the time goes, how v7 is built, the SQL for PostgreSQL 18 and MySQL, what v7 leaks, and when v4 is still the right call.</p>
+<h2>What a B-tree does with a random key</h2>
+<p>Most database indexes are B-trees: sorted lists of keys, split into fixed-size pages. In MySQL's InnoDB engine, a page is <a href="https://dev.mysql.com/doc/refman/8.4/en/innodb-physical-structure.html" rel="noopener">16KB by default</a>. The sorting is the point. To find a key, the database walks down a few levels of the tree to the one page that should hold it.</p>
+<p>Inserting works the same way. A new key has exactly one correct page. With an ever-increasing key, that's always the last page, which is already in memory because you wrote to it a millisecond ago.</p>
+<p>A v4 UUID has 122 random bits. Its correct page could be any page in the index. So each insert needs a different page, and on a big table that page is probably not in memory. Yves Trudeau at Percona laid out the cost for InnoDB: on tables much larger than the buffer pool, <a href="https://www.percona.com/blog/uuids-are-popular-but-bad-for-performance-lets-discuss/" rel="noopener">most inserts cause two I/O operations</a>, one read to fetch the page and one write to flush it later.</p>
+<p>Then there are page splits. When a key must go into a full page, the database splits that page in two. MySQL's documentation spells out the result. Insert in sequential order and pages end up <a href="https://dev.mysql.com/doc/refman/8.4/en/innodb-physical-structure.html" rel="noopener">about 15/16 full</a>. Insert in random order and they end up anywhere from 1/2 to 15/16 full. Same rows, more pages, less of your index fits in memory.</p>
+<figure class="article-figure">
+<img src="/blog/images/uuidv7-vs-uuidv4-btree-inserts.svg" width="960" height="400" loading="lazy" alt="Two B-trees side by side. On the left, UUIDv4 inserts land on random leaf pages across the index, causing page splits and half-empty pages. On the right, UUIDv7 inserts all land on the rightmost leaf page, which stays hot in memory and fills to about 15/16.">
+<figcaption>Random v4 keys land all over the index; v7 keys land on the last page. Diagram: CyberScryb.</figcaption>
+</figure>
+<h2>Where the time goes: cache misses and extra WAL</h2>
+<p>The 2018 benchmark came from Tomas Vondra, a PostgreSQL contributor, writing on the <a href="https://www.enterprisedb.com/blog/sequential-uuid-generators" rel="noopener">2ndQuadrant blog</a> (now hosted by EDB). His test was deliberately simple: insert rows into a table with one UUID column and a unique index, on a slow 3-disk SATA array, for four hours.</p>
+<p>When everything fit in the 4GB of shared buffers, the key type made almost no difference. Once the index outgrew shared buffers, random UUIDs dropped below 30% of their small-scale throughput. His time-prefixed and sequence-prefixed generators held their speed. Those weren't v7, but they used the same idea: put something increasing at the front of the key.</p>
+<p>The write-ahead log (WAL) told the same story. PostgreSQL's WAL is the journal it writes before changing data files. With the default <code>full_page_writes</code> setting, PostgreSQL <a href="https://www.postgresql.org/docs/18/runtime-config-wal.html" rel="noopener">writes the entire page to WAL</a> the first time that page changes after a checkpoint. Random keys touch a different page on almost every insert, so almost every insert pays that tax. In Vondra's medium-size test, random UUIDs generated more than 20GB of WAL, most of it full-page images. The time-based generator produced about 2.5GB. And the random run did that at 260 transactions per second versus 840.</p>
+<p>WAL volume matters more than it sounds. Replicas, backups, and point-in-time recovery all ship or store it. Buildkite saw this firsthand. After switching to time-ordered UUIDs, along with several other changes over six weeks, it measured a <a href="https://buildkite.com/resources/blog/goodbye-integers-hello-uuids/" rel="noopener">50% drop in the WAL rate</a> of its primary database, with a similar drop in write I/O. That made read replicas easy to set up.</p>
+<p>The UUID standard itself puts it bluntly: the difference between ordered and random inserts <a href="https://www.rfc-editor.org/rfc/rfc9562.html#section-6.11" rel="noopener">"can be one order of magnitude or more"</a>.</p>
+<h2>How UUIDv7 works, in 128 bits</h2>
+<p>UUIDv7 was defined in <a href="https://www.rfc-editor.org/rfc/rfc9562.html" rel="noopener">RFC 9562</a>, published in May 2024. It replaced RFC 4122, the 2005 spec most UUID libraries grew up on. The layout is simple:</p>
+<ul>
+<li><strong>48 bits:</strong> milliseconds since January 1, 1970 (UTC), the classic Unix time</li>
+<li><strong>4 bits:</strong> the version, which is <code>7</code></li>
+<li><strong>12 bits:</strong> random, or extra clock precision</li>
+<li><strong>2 bits:</strong> the variant</li>
+<li><strong>62 bits:</strong> random</li>
+</ul>
+<p>Forty-eight bits of milliseconds last until about the year 10889, so v7 has no <a href="/blog/year-2038-problem-already-happening/">Year 2038 problem</a> hiding in it.</p>
+<p>The timestamp sits in the most significant bits, so sorting the raw bytes sorts by creation time. The RFC says the text form sorts correctly too. That's the entire trick. Two keys made a second apart are neighbors in the index, and the newest key always goes on the right edge.</p>
+<p>Here's the example from the RFC:</p>
+<pre><code>017F22E2-79B0-7CC3-98C4-DC0C0C07398F
+</code></pre>
+<p>The first 12 hex digits, <code>017F22E279B0</code>, are the timestamp. In decimal that's <code>1645557742000</code> milliseconds. Paste that number into CyberScryb's <a href="/tools/epoch-converter/">epoch converter</a>, which auto-detects milliseconds, and you get February 22, 2022, 19:22:22 UTC. The <code>7</code> that opens the third group is the version.</p>
+<p>You still get 74 bits of randomness per key (or a mix of counter and random bits, which the RFC allows). That's plenty to keep separate machines from colliding without any coordination, which is why people reach for UUIDs in the first place.</p>
+<h2>UUIDv7 vs UUIDv4 in PostgreSQL 18 and MySQL</h2>
+<h3>PostgreSQL 18: it's built in</h3>
+<p>PostgreSQL 18 shipped on <a href="https://www.postgresql.org/about/news/postgresql-18-released-3142/" rel="noopener">September 25, 2025</a> with a native <code>uuidv7()</code> function, plus <code>uuidv4()</code> as a clearer name for <code>gen_random_uuid()</code>. <a href="https://www.postgresql.org/docs/17/functions-uuid.html" rel="noopener">PostgreSQL 17</a> doesn't have <code>uuidv7()</code>. The <a href="https://www.postgresql.org/docs/18/functions-uuid.html" rel="noopener">PostgreSQL 18 docs</a> cover it:</p>
+<pre><code>CREATE TABLE orders (
+  id uuid PRIMARY KEY DEFAULT uuidv7(),
+  total_cents integer NOT NULL
+);
+
+SELECT id,
+       uuid_extract_version(id)   AS version,  -- 7
+       uuid_extract_timestamp(id) AS made_at
+FROM orders
+ORDER BY id DESC
+LIMIT 5;
+</code></pre>
+<p>Two nice details. First, <code>uuidv7()</code> takes an optional <code>shift</code> interval, so a backfill can stamp keys with an older time, like <code>uuidv7(interval '-30 days')</code>. Second, PostgreSQL's version uses those 12 spare bits for sub-millisecond time. As Brandur Leach <a href="https://brandur.org/fragments/uuid-v7-monotonicity" rel="noopener">points out</a>, this keeps IDs strictly increasing within one database connection, even if the system clock goes backward. Across connections, there's no such promise.</p>
+<p>PostgreSQL stores table rows in a heap, not in key order, so the damage from v4 shows up in the index and the WAL rather than the table itself. That's exactly what Vondra measured.</p>
+<h3>MySQL: generate in the app, store as BINARY(16)</h3>
+<p>InnoDB hurts more. Its primary key is a <a href="https://dev.mysql.com/doc/refman/8.4/en/innodb-index-types.html" rel="noopener">clustered index</a>: the table's rows live in the primary key's B-tree. So a random key scatters the rows themselves, not only an index. And every secondary index stores a copy of the primary key, which MySQL's docs say is why a short primary key pays off.</p>
+<p>MySQL's built-in <code>UUID()</code> returns a <a href="https://dev.mysql.com/doc/refman/8.4/en/miscellaneous-functions.html" rel="noopener">version 1 UUID</a>, not v7, so generate v7 in your application. Python 3.14 added <a href="https://docs.python.org/3/library/uuid.html" rel="noopener"><code>uuid.uuid7()</code></a> to the standard library. Then store the 16 bytes, not the 36-character string:</p>
+<pre><code>CREATE TABLE orders (
+  id BINARY(16) PRIMARY KEY,
+  total_cents INT NOT NULL
+);
+
+INSERT INTO orders (id, total_cents)
+VALUES (UUID_TO_BIN('017f22e2-79b0-7cc3-98c4-dc0c0c07398f'), 1299);
+</code></pre>
+<p>Leave off <code>UUID_TO_BIN</code>'s swap flag. It rearranges version 1 timestamps, and MySQL says for UUIDs that aren't version 1, it provides no benefit. A v7 is already in the right order.</p>
+<p>The string-versus-bytes choice is bigger than it looks. Trudeau's example: a billion-row table with a <code>char(36)</code> UUID key and five secondary indexes stores that key six times per row, about 216GB of key values alone. In one schema he analyzed, about 70% of storage was UUID values. The RFC agrees: where you can, store UUIDs <a href="https://www.rfc-editor.org/rfc/rfc9562.html#section-6.13" rel="noopener">as the underlying 128-bit binary value</a>.</p>
+<h2>What UUIDv7 leaks: the creation time</h2>
+<p>Here's the catch. Anyone who can see a v7 ID can read when it was made. You did it with the RFC example a few minutes ago.</p>
+<p>A developer who blogs as MikeNotThePope ran into this while building an applicant tracking system. His user IDs were v7, so <a href="https://mikenotthepope.com/primary-keys-using-uuid-v7-are-potentially-an-hr-violation/" rel="noopener">anyone could pull out when an account was created</a>. The older the account, the older the applicant must be, which opens the door to age discrimination. He moved applicant IDs to v4. His words: "The database team will grumble about performance. I'll sleep well."</p>
+<p>The same logic covers anything where timing is sensitive. When an account was opened. When a document was uploaded. How many orders you took this week, if someone collects enough IDs. Aiven's write-up on PostgreSQL 18 recommends keeping v7 <a href="https://aiven.io/blog/exploring-postgresql-18-new-uuidv7-support" rel="noopener">for internal keys</a> and exposing a random v4 as the public identifier.</p>
+<p>The RFC's own security section is calm about it. It calls the embedded timestamp <a href="https://www.rfc-editor.org/rfc/rfc9562.html#section-8" rel="noopener">"a very small attack surface"</a>. It also says if a UUID plays any part in a security operation, use v4. And it says no UUID should be a security capability, meaning an ID whose mere possession grants access. A secret link needs a random token plus an access check, not any flavor of UUID.</p>
+<h2>When UUIDv4 is still the right call</h2>
+<p><strong>The ID is public and its timestamp says too much.</strong> Applicant records, medical records, anything where "when" is personal. Use v4 for the public ID. You can still put a v7 or an integer primary key underneath.</p>
+<p><strong>Your database splits data by key range across servers.</strong> Ordered keys are a gift to one B-tree and a curse to a distributed one. Google's Spanner docs warn a key that <a href="https://cloud.google.com/spanner/docs/schema-design" rel="noopener">always increases sends all new writes to the same server</a>, and they recommend UUID version 4 for that reason. Check your database's docs before copying advice written for PostgreSQL or MySQL.</p>
+<p><strong>The table is small.</strong> In Vondra's test, when everything fit in memory, there was almost no difference. A settings table with 300 rows doesn't care.</p>
+<p><strong>You only need a few IDs.</strong> For test fixtures, config files, and one-off records, any version works. CyberScryb's free <a href="/tools/uuid-generator/">UUID generator</a> makes v4 UUIDs in your browser using <code>crypto.getRandomValues()</code>, up to 100 at a time.</p>
+<h2>Switching from UUIDv4 to UUIDv7 without a migration</h2>
+<p>Good news: v7 is still a UUID. Same 128 bits, same column type. Buildkite noted this lets you keep an existing PostgreSQL <code>uuid</code> column and <a href="https://buildkite.com/resources/blog/goodbye-integers-hello-uuids/" rel="noopener">switch it from storing v4 values to v7</a>. On PostgreSQL 18 that's one statement:</p>
+<pre><code>ALTER TABLE orders ALTER COLUMN id SET DEFAULT uuidv7();
+</code></pre>
+<p>Old rows stay where they are. New rows start appending at the right edge of the index. Two things change. You can't sort old rows by ID to get creation order, since v4 IDs carry no time. And any code that validates UUIDs by checking for version 4 will reject the new ones. Buildkite hit exactly that: when it first tried version <code>7</code>, some customers' systems that validated UUIDs <a href="https://buildkite.com/resources/blog/goodbye-integers-hello-uuids/" rel="noopener">broke because they didn't know v7 yet</a>. Grep your codebase and your API clients for UUID regexes before you flip the switch.</p>
+<p>A few more mistakes worth skipping:</p>
+<ul>
+<li><strong>Treating the ID as <code>created_at</code>.</strong> The PostgreSQL docs warn the extracted timestamp isn't necessarily the exact creation time, and the RFC advises treating UUIDs as opaque. Keep a real timestamp column for anything that matters.</li>
+<li><strong>Assuming global order.</strong> v7 is ordered by the generating machine's clock. Several app servers with drifting clocks give you "roughly ordered," which is fine for an index and wrong for an audit trail.</li>
+<li><strong>Storing UUIDs as text in MySQL.</strong> Use <code>BINARY(16)</code>. PostgreSQL's <code>uuid</code> type is already 16 bytes.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>Is UUIDv7 safe to use in URLs?</h3>
+<p>It's as hard to guess as you need for most IDs, with 74 random bits per key. But it reveals its creation time to anyone who sees it. If that time is sensitive, expose a v4 or a separate token instead.</p>
+<h3>Can I mix UUIDv4 and UUIDv7 in the same column?</h3>
+<p>Yes. Both are 128-bit UUIDs, and the column doesn't care which version it holds. Index locality improves for new rows, and old rows keep their random order.</p>
+<h3>Does PostgreSQL 17 have uuidv7()?</h3>
+<p>No. The function arrived in PostgreSQL 18. On older versions, generate v7 in your application and store it in the same <code>uuid</code> column.</p>
+<h2>Let the keys line up</h2>
+<p>A random key asks your database to keep the whole index in memory forever. A v7 key asks it to remember the last page. That's the difference you pay for in RAM, disk, and WAL.</p>
+<p>Pick one table that gets the most inserts, check what generates its IDs, and if it's v4 with nothing sensitive in the timing, make v7 the default.</p>
+  </article>
+</main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+</body>
+</html>

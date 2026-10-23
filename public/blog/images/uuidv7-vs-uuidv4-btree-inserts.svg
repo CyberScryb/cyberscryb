@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="t d">
+  <title id="t">UUIDv4 vs UUIDv7 inserts into a B-tree index</title>
+  <desc id="d">Left: UUIDv4 keys are random, so new inserts land on leaf pages all across the index, forcing pages to be read from disk and split, leaving pages from one half to fifteen sixteenths full. Right: UUIDv7 keys start with a timestamp, so every new insert lands on the rightmost leaf page, which stays in memory, and older pages stay about fifteen sixteenths full.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/></marker></defs>
+  <rect width="960" height="400" rx="18" fill="#111114"/>
+  <g font-family="Outfit, Helvetica, Arial, sans-serif">
+    <text x="40" y="52" fill="#f4f4f5" font-size="24" font-weight="700">Where new keys land in a B-tree index</text>
+    <text x="40" y="80" fill="#a1a1aa" font-size="15">Simplified view of one index. Page fill figures: MySQL 8.4 InnoDB manual.</text>
+    <g transform="translate(40,104)">
+      <rect width="420" height="270" rx="14" fill="#18181b" stroke="#3f3f46"/>
+      <text x="20" y="34" fill="#f4f4f5" font-size="19" font-weight="700">UUIDv4: random keys</text>
+      <text x="20" y="56" fill="#a1a1aa" font-size="13">122 random bits, no order</text>
+      <rect x="160" y="74" width="100" height="26" rx="5" fill="#27272a" stroke="#52525b"/><text x="210" y="92" fill="#a1a1aa" font-size="12" text-anchor="middle">root page</text>
+      <path d="M210 100 L42 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="22" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="25" y="172.8" width="34" height="34.2" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L90 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="70" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="73" y="177.0" width="34" height="30.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L138 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="118" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="121" y="168.0" width="34" height="39.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L186 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="166" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="169" y="156.0" width="34" height="51.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L234 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="214" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="217" y="180.0" width="34" height="27.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L282 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="262" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="265" y="180.0" width="34" height="27.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L330 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="310" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="313" y="153.6" width="34" height="53.4" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M210 100 L378 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="358" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="361" y="162.0" width="34" height="45.0" rx="2" fill="#dc2626" opacity="0.75"/>
+      <path d="M28 120 L42 146" stroke="#dc2626" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M172 120 L186 146" stroke="#dc2626" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M268 120 L282 146" stroke="#dc2626" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M316 120 L330 146" stroke="#dc2626" stroke-width="2" marker-end="url(#a)"/>
+      <text x="22" y="116" fill="#dc2626" font-size="12">new keys, anywhere</text>
+      <text x="186" y="228" fill="#facc15" font-size="11" text-anchor="middle" font-weight="700">SPLIT</text>
+      <text x="20" y="246" fill="#f4f4f5" font-size="14" font-weight="600">Each insert needs a different page</text>
+      <text x="20" y="264" fill="#a1a1aa" font-size="13">Cache misses, page splits, pages 1/2 to 15/16 full.</text>
+    </g>
+    <g transform="translate(500,104)">
+      <rect width="420" height="270" rx="14" fill="#18181b" stroke="#3f3f46"/>
+      <text x="20" y="34" fill="#f4f4f5" font-size="19" font-weight="700">UUIDv7: time-ordered keys</text>
+      <text x="20" y="56" fill="#a1a1aa" font-size="13">48-bit millisecond timestamp first</text>
+      <rect x="160" y="74" width="100" height="26" rx="5" fill="#27272a" stroke="#52525b"/><text x="210" y="92" fill="#a1a1aa" font-size="12" text-anchor="middle">root page</text>
+      <path d="M210 100 L42 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="22" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="25" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L90 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="70" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="73" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L138 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="118" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="121" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L186 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="166" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="169" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L234 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="214" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="217" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L282 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="262" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="265" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L330 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="310" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#52525b" stroke-width="1"/>
+      <rect x="313" y="153.8" width="34" height="53.2" rx="2" fill="#71717a" opacity="0.75"/>
+      <path d="M210 100 L378 150" stroke="#3f3f46" stroke-width="1"/>
+      <rect x="358" y="150" width="40" height="60" rx="4" fill="#202024" stroke="#facc15" stroke-width="2"/>
+      <rect x="361" y="183.0" width="34" height="24.0" rx="2" fill="#facc15" opacity="0.9"/>
+      <path d="M340 116 L367 146" stroke="#facc15" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M364 112 L373 146" stroke="#facc15" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M388 112 L379 146" stroke="#facc15" stroke-width="2" marker-end="url(#a)"/>
+      <path d="M412 116 L385 146" stroke="#facc15" stroke-width="2" marker-end="url(#a)"/>
+      <text x="326" y="120" fill="#facc15" font-size="12" text-anchor="end">new keys</text>
+      <text x="20" y="236" fill="#f4f4f5" font-size="14" font-weight="600">Every insert hits the rightmost page</text>
+      <text x="20" y="256" fill="#a1a1aa" font-size="13">It stays hot in memory. Older pages fill to about 15/16.</text>
+    </g>
+  </g>
+</svg>

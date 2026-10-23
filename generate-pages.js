@@ -1609,6 +1609,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'uuidv7-vs-uuidv4-database-index',
     'qr-code-scams-fake-parking-codes',
     'hipaa-myths-family-medical-information',
     'year-2038-problem-already-happening',
