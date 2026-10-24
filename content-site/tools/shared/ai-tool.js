@@ -271,15 +271,21 @@
     }
 
     if (copyBtn) {
+      if (!copyBtn.hasAttribute('aria-label')) {
+        copyBtn.setAttribute('aria-label', 'Copy result to clipboard');
+      }
       copyBtn.addEventListener('click', function () {
         const text = outputContent.innerText;
         if (text && !text.toLowerCase().includes('will appear here')) {
           navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: toolId });
             const orig = copyBtn.innerText;
+            const origLabel = copyBtn.getAttribute('aria-label') || 'Copy result to clipboard';
             copyBtn.innerText = 'Copied! ✓';
+            copyBtn.setAttribute('aria-label', 'Copied to clipboard');
             setTimeout(function () {
               copyBtn.innerText = orig;
+              copyBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           });
         }
@@ -291,6 +297,7 @@
         dlBtn.id = 'download-btn';
         dlBtn.type = 'button';
         dlBtn.title = 'Download as .txt';
+        dlBtn.setAttribute('aria-label', 'Download result as text file');
         dlBtn.textContent = 'Download';
         // Mirror the copy button's classes and inline style for visual match.
         dlBtn.className = copyBtn.className;
@@ -309,9 +316,12 @@
           URL.revokeObjectURL(url);
           trackEvent('result_downloaded', { tool_id: toolId });
           const orig = dlBtn.innerText;
+          const origLabel = dlBtn.getAttribute('aria-label') || 'Download result as text file';
           dlBtn.innerText = 'Saved! ✓';
+          dlBtn.setAttribute('aria-label', 'Result saved');
           setTimeout(function () {
             dlBtn.innerText = orig;
+            dlBtn.setAttribute('aria-label', origLabel);
           }, 1600);
         });
         copyBtn.parentNode.insertBefore(dlBtn, copyBtn.nextSibling);
@@ -398,6 +408,7 @@
         shareBtn.id = 'share-btn';
         shareBtn.type = 'button';
         shareBtn.title = 'Share this result';
+        shareBtn.setAttribute('aria-label', 'Share this result');
         shareBtn.textContent = 'Share';
         // Mirror the copy button's classes and inline style for visual match.
         shareBtn.className = copyBtn.className;
@@ -406,10 +417,13 @@
           const text = outputContent.innerText;
           if (!text || text.toLowerCase().includes('will appear here')) return;
           const orig = shareBtn.innerText;
-          function flash(msg) {
+          const origLabel = shareBtn.getAttribute('aria-label') || 'Share this result';
+          function flash(msg, label) {
             shareBtn.innerText = msg;
+            shareBtn.setAttribute('aria-label', label || msg);
             setTimeout(function () {
               shareBtn.innerText = orig;
+              shareBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           }
           if (navigator.share) {
@@ -417,20 +431,22 @@
               .share({ title: document.title || 'CyberScryb result', text: text })
               .then(function () {
                 trackEvent('result_shared', { tool_id: toolId });
-                flash('Shared!');
+                flash('Shared!', 'Result shared');
               })
               .catch(function () {
                 // Dismissed by the user or share unavailable — restore quietly.
                 shareBtn.innerText = orig;
+                shareBtn.setAttribute('aria-label', origLabel);
               });
           } else if (navigator.clipboard) {
             navigator.clipboard.writeText(text).then(
               function () {
                 trackEvent('result_shared_fallback', { tool_id: toolId });
-                flash('Copied!');
+                flash('Copied!', 'Copied result to clipboard');
               },
               function () {
                 shareBtn.innerText = orig;
+                shareBtn.setAttribute('aria-label', origLabel);
               }
             );
           }

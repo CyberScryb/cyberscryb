@@ -213,6 +213,54 @@ test('streaming renders tokens progressively and Stop keeps partial output', asy
   jest.useRealTimers();
 });
 
+test('Copy button updates aria-label dynamically when clicked', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<textarea id="tool-input">An example request</textarea><button id="generate-btn">Generate</button><button id="copy-btn">Copy</button><div id="loading-indicator" class="hidden"></div><div id="output-text">Some generated result</div>';
+
+  Object.assign(navigator, {
+    clipboard: {
+      writeText: jest.fn().mockResolvedValue(undefined),
+    },
+  });
+
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'email-writer', collectInput: () => 'An example request' });
+
+  const outputEl = document.querySelector('#output-text');
+  Object.defineProperty(outputEl, 'innerText', {
+    get: () => 'Some generated result',
+    configurable: true,
+  });
+
+  const copyBtn = document.querySelector('#copy-btn');
+  Object.defineProperty(copyBtn, 'innerText', {
+    get() {
+      return this.textContent;
+    },
+    set(v) {
+      this.textContent = v;
+    },
+    configurable: true,
+  });
+
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy result to clipboard');
+
+  copyBtn.click();
+  for (let i = 0; i < 10; i++) await Promise.resolve();
+
+  expect(navigator.clipboard.writeText).toHaveBeenCalledWith('Some generated result');
+  expect(copyBtn.textContent).toBe('Copied! ✓');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copied to clipboard');
+
+  jest.advanceTimersByTime(1600);
+
+  expect(copyBtn.textContent).toBe('Copy');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy result to clipboard');
+
+  jest.useRealTimers();
+});
+
 test('Stop button aborts the stream and keeps partial text', async () => {
   jest.useFakeTimers();
   document.querySelector('main').innerHTML =
