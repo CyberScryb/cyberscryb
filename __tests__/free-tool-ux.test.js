@@ -235,8 +235,12 @@ test('Copy button updates aria-label dynamically when clicked', async () => {
 
   const copyBtn = document.querySelector('#copy-btn');
   Object.defineProperty(copyBtn, 'innerText', {
-    get() { return this.textContent; },
-    set(v) { this.textContent = v; },
+    get() {
+      return this.textContent;
+    },
+    set(v) {
+      this.textContent = v;
+    },
     configurable: true,
   });
 
