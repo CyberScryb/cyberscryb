@@ -54,6 +54,7 @@ describe('AI_PROMPTS dispatch table', () => {
     'landlord-tenant-letter',
     'payment-demand-letter',
     'ai-unemployment-appeal-letter',
+    'ai-eviction-notice-response-letter',
     'sap-appeal-letter',
     'utility-shutoff-letter',
     'cover-letter-generator',

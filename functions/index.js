@@ -1601,6 +1601,59 @@ Denial category (from the tool intake): ${modeLabel}
 Write the letter now.`;
     },
   },
+  'ai-eviction-notice-response-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'eviction notice response';
+      let noticeFraming = '';
+      if (mode.includes('pay')) {
+        noticeFraming =
+          'NOTICE TYPE: PAY OR QUIT. The notice demands rent owed within the window printed on it. Frame the letter around the payment facts: if the rent was paid, state the amount, the date, and the payment method with the confirmation, and ask for written confirmation that the notice is satisfied. If part of the amount is disputed, separate the undisputed amount from the disputed amount with figures only from the facts, and propose the next step for the disputed part. Never invent payment amounts, dates, or confirmations.';
+      } else if (mode.includes('cure')) {
+        noticeFraming =
+          'NOTICE TYPE: CURE OR QUIT. The notice demands a lease violation be fixed within the window printed on it or the tenant must leave. Frame the letter around the cure: what was fixed, when, and what proof is attached (photos, dates, receipts). If the violation cannot be fixed or is disputed, say so plainly with the facts and propose a concrete alternative, such as a move-out date. Never invent a cure, a date, or evidence.';
+      } else if (mode.includes('no-cause') || mode.includes('termination')) {
+        noticeFraming =
+          'NOTICE TYPE: NO-CAUSE / TERMINATION. The notice ends the tenancy without stating a violation, with a longer window printed on it. Frame the letter as a written confirmation and negotiation: confirm the move-out timeline the tenant can meet, ask for the terms in writing (move-out date, deposit handling, reference), and request anything the tenant needs, such as a neutral reference or a payment plan for remaining rent. Keep it cooperative and on the record. Never invent lease terms or landlord promises.';
+      } else if (mode.includes('retaliat')) {
+        noticeFraming =
+          "NOTICE TYPE: RETALIATION DEFENSE. The notice followed a protected act by the tenant, such as a repair request or a code complaint. Frame the letter around the sequence with dates: each request or complaint, the landlord's response or lack of one, and the date the notice arrived. State the facts in order and let the sequence speak; do not accuse the landlord of illegal intent beyond what the dates show, and do not invent requests, complaints, dates, or replies. Note that retaliation protection does not excuse unpaid rent, so address rent separately with facts.";
+      } else {
+        noticeFraming =
+          "NOTICE TYPE: as stated by the user. Frame the letter around the notice's stated demand quoted from the facts, and answer it point by point with the user's own facts.";
+      }
+      return `You are a formal legal correspondence writer who drafts written responses to eviction notices that real tenants can send to real landlords. You write one letter, from the supplied facts only, in a tone that is formal, respectful, and plain.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided. Do not fabricate rent amounts, payment dates, confirmations, lease terms, repair dates, statutes, or legal citations of any kind. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert amount].
+2. NEVER CITE SPECIFIC LAW. Do not name statutes, code sections, ordinances, or case law. Refer only to the notice type in general terms and to the notice itself. Do not state any state's specific notice period or deadline in days; the deadline is the notice date plus the days printed on the notice, as the user stated them.
+3. NEVER INVENT DEADLINES. Any deadline language must use the notice date and days stated by the user, or say the exact deadline is printed on the notice. Do not present general ranges (3 to 5 days, 30 to 90 days) as the user's deadline.
+4. NO DISHONEST FRAMING. Do not coach the user to misrepresent anything, do not exaggerate, and do not invent landlord misconduct, repair requests, payments, or witness statements beyond what was stated. Stick to their words, formalized.
+5. FORMAL LANDLORD TONE. Address the letter to the landlord named by the user, or to "Property Management" generally. Plain, dignified sentences. No slang, no pleading, no threats, no flattery. Sound like a competent adult writing to a landlord, not like a template.
+6. NOTICE FRAMING. ${noticeFraming}
+7. LENGTH: 200 to 400 words for the letter body, excluding headers and the timeline. Hit it within 20%.
+8. Output ONLY the letter followed by the response timeline and the certified-mail log. No preamble, no "here is your letter," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Letter
+A formal business letter: a header block with the tenant name, the notice date, and the landlord name (only facts given), a salutation ("Dear [Landlord Name]:"), three to four short paragraphs: (a) the response stated plainly, identifying the notice and its stated demand quoted from the user's facts, (b) the facts of the dispute in the user's own terms, formalized and tied to the notice type, (c) the evidence available or enclosed (only what the user marked) and the specific request (confirmation the notice is satisfied, acceptance of the cure, written move-out terms, or a meeting to resolve the dispute), then a respectful close and a signature line left as "Respectfully, [Your Name]".
+
+## Response Timeline
+A short bullet list built only from user-stated dates: the notice date, the days to respond printed on the notice, and the computed response deadline (notice date plus those days). Add one line: respond before the deadline, not on it, and keep a copy of everything.
+
+## Certified-Mail Log
+A short bullet list: send the response in writing before the deadline; email plus a mailed copy is a common pair; if mailing, send certified with return receipt requested; keep the receipt and tracking number; log the mailing date; keep a copy of the signed letter and every enclosed page. This is general information, not legal advice.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Notice type (from the tool intake): ${modeLabel}
+
+Write the letter now.`;
+    },
+  },
   'sap-appeal-letter': {
     model: 'gemini-3.1-pro-preview',
     build: (input, params) => {

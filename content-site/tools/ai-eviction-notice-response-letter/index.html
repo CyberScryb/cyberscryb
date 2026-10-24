@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Eviction Notice Response Letter Generator &mdash; Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Got an eviction notice? Generate a formal written response in minutes. Pick your notice type (pay or quit, cure or quit, no-cause, retaliation defense), get your response deadline from the days on your notice, and get a printable letter plus a deadline timeline and certified-mail log."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-eviction-notice-response-letter/"
+    />
+    <meta
+      property="og:title"
+      content="AI Eviction Notice Response Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Got an eviction notice? Get a formal written response in minutes, with a response-deadline calculator, a printable letter, and a certified-mail log. Free, no signup."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-eviction-notice-response-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Eviction Notice Response Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Got an eviction notice? Generate a formal written response with a deadline calculator and certified-mail log. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .deadline-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .deadline-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .deadline-count {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      .deadline-count small {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+      .deadline-note {
+        margin: 0.5rem 0 0;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+      }
+      .deadline-urgent .deadline-count {
+        color: #f87171;
+      }
+      .deadline-safe .deadline-count {
+        color: var(--text);
+      }
+      #response-letter-wrap {
+        display: none;
+      }
+      #response-letter {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #response-letter h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #response-letter table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #response-letter td,
+      #response-letter th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #response-letter .report-guidance {
+        white-space: pre-wrap;
+      }
+      @media print {
+        body.printing-response header,
+        body.printing-response nav,
+        body.printing-response footer,
+        body.printing-response .lt-sticky-gen,
+        body.printing-response .lt-toolbar,
+        body.printing-response .email-gate,
+        body.printing-response .adsbygoogle,
+        body.printing-response section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-response .lt-grid,
+        body.printing-response .lt-checklist-band,
+        body.printing-response .lt-know,
+        body.printing-response .lt-faq,
+        body.printing-response .lt-related,
+        body.printing-response .lt-how,
+        body.printing-response .lt-trust,
+        body.printing-response .hero {
+          display: none !important;
+        }
+        body.printing-response #response-letter-wrap {
+          display: block !important;
+        }
+        #response-letter {
+          border: none !important;
+        }
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .lt-story {
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+      }
+    </style>
+    <script>
+      function printResponseLetter() {
+        var wrap = document.getElementById('response-letter-wrap');
+        if (!wrap || wrap.style.display === 'none' || !wrap.querySelector('#response-letter').innerHTML.trim()) {
+          if (window.LifeTool) LifeTool.toast('Generate your letter first, then print it');
+          else alert('Generate your letter first, then print it.');
+          return;
+        }
+        document.body.classList.add('printing-response');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-response');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Eviction Notice Response Letter Generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-eviction-notice-response-letter/",
+        "description": "Free AI tool that drafts a formal written response to an eviction notice tailored to your notice type, with a response-deadline calculator, printable letter, and certified-mail log. Educational only, not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I have to move out when I get an eviction notice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually not. An eviction notice is a landlord's demand, not a court order. Only a judge can order you out. Read the notice to find what it asks for and by when, respond in writing before the deadline, and do not move out before you understand the deadline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a pay or quit notice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A pay-or-quit notice tells the tenant to pay the rent owed within the window printed on the notice, often 3 to 5 days, or vacate. If you pay the full amount within the window, the notice is generally satisfied. Keep the receipt and respond in writing stating that you paid."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a cure or quit notice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A cure-or-quit notice tells the tenant to fix a lease violation, such as an unauthorized pet or noise, within the window printed on the notice or leave. If you can fix the violation, do it fast, document the fix with photos and dates, and respond in writing stating what was cured and when."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can my landlord evict me for asking for repairs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Retaliation for exercising a legal right, such as requesting repairs or reporting a code violation, is illegal in most states, but the protection usually covers a limited window after the protected act and does not excuse unpaid rent. A retaliation defense needs dates: when you requested repairs, what the landlord did, and when the notice arrived. Put those dates in your written response and keep the proof."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate my response deadline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Take the date the notice was served and add the number of days printed on the notice. This tool does that math for you: enter the notice date and the days stated on the notice, and it shows the deadline date and how many days are left. The notice itself states the deadline; never guess it from a general rule."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I send my response letter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In writing, by a method you can prove. Email plus a mailed copy is a common pair. If you mail it, send it certified with return receipt requested, keep the receipt and the tracking number, and log the mailing date. Your response creates the record the notice started, so keep a copy of everything."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if the landlord files in court anyway?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A court filing starts a case, not an eviction. Appear at every hearing with your case file: the notice, your written response, payment receipts, repair requests, and the certified-mail log. Missing a court date is the fastest way to lose by default."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Eviction Notice Response Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI eviction notice response <span style="color: var(--primary)">letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Got an eviction notice? Pick your notice type, tell us what the notice claims and
+            what actually happened, and get a formal written response, plus a response-deadline
+            timeline and a certified-mail log you can hand to legal aid.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Tailored to your notice type</span>
+          <span><i></i> Draft autosaved on this device</span>
+          <span><i></i> Printable letter, timeline, mail log</span>
+          <span><i></i> Educational only, not legal advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick your notice type</strong
+            ><span>Pay or quit, cure or quit, no-cause, or retaliation defense.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter the facts</strong
+            ><span>Notice date, days on the notice, what happened. Takes 3 minutes.</span>
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get letter + timeline</strong
+            ><span>A formal response letter, deadline timeline, and mail log, ready to print.</span>
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Notice type</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Facts</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter + timeline</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your notice</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label"
+                >What kind of notice did you get? <span class="cs-req" aria-hidden="true">*</span></label
+              >
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="pay-or-quit"
+                  aria-pressed="false"
+                >
+                  Pay or quit
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="cure-or-quit"
+                  aria-pressed="false"
+                >
+                  Cure or quit
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="no-cause"
+                  aria-pressed="false"
+                >
+                  No-cause / termination
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="retaliation"
+                  aria-pressed="false"
+                >
+                  Retaliation defense
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="pay-or-quit" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Letter strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the key facts to unlock a strong letter.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_date"
+                    >Notice date (date served) <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="notice_date"
+                    type="date"
+                    data-label="Notice date"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="state">State (optional)</label>
+                  <input
+                    class="lt-input"
+                    id="state"
+                    type="text"
+                    maxlength="40"
+                    placeholder="Idaho"
+                    data-label="State"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="respond_days"
+                    >Days to respond (printed on the notice) <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="respond_days"
+                    type="number"
+                    min="1"
+                    max="365"
+                    placeholder="e.g. 3, 10, 30"
+                    data-label="Days to respond stated on the notice"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="landlord">Landlord / property manager</label>
+                  <input
+                    class="lt-input"
+                    id="landlord"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Name on the notice"
+                    data-label="Landlord name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="sender-name">Your name</label>
+                  <input
+                    class="lt-input"
+                    id="sender-name"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="addressed-to">Address the letter to</label>
+                  <input
+                    class="lt-input"
+                    id="addressed-to"
+                    type="text"
+                    maxlength="120"
+                    placeholder="Landlord, from the notice"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="tool-input"
+                  >What happened, in your own words <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="tool-input"
+                  data-label="Facts of the dispute"
+                  placeholder="Example: The notice says I owe $1,400 for October, but I paid it by bank transfer on October 3 and have the confirmation. I also asked for a plumbing repair on September 12 and again on September 28, and got no response."
+                ></textarea>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="evidence">Evidence you can enclose (optional)</label>
+                <input
+                  class="lt-input"
+                  id="evidence"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Payment receipts, repair requests, photos, lease pages"
+                  data-label="Evidence available"
+                  autocomplete="off"
+                />
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my response letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not legal advice.</strong> This tool drafts a
+                formal letter from your own facts. It is not a lawyer, and it does not decide
+                whether the notice is valid. Your prompt is sent to our AI service to
+                generate the letter; nothing is filed for you. Confirm deadlines and procedures
+                with a local tenants&#39; rights organization or legal aid office.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="deadline-panel" id="deadline-panel" aria-live="polite">
+              <h3>Response deadline</h3>
+              <div class="deadline-count" id="deadline-count">
+                <small>Enter the notice date and the days printed on the notice to see your deadline.</small>
+              </div>
+              <p class="deadline-note">
+                The deadline is the notice date plus the days printed on the notice. This panel
+                does that math for you. Respond before the deadline, not on it: a late or missing
+                response turns a notice into a court filing.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your response letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your response letter&hellip;</p>
+                  <small>Framed to the notice type, from your own facts</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your response letter will appear here.<br /><br />1. Pick your notice
+                    type<br />2. Enter the facts<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Filing checklist</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Do these the day you file. Tap items as you finish them; progress saves on this
+                  device.
+                </p>
+                <ul class="lt-check">
+                  <li>
+                    Send the response in writing before the deadline: email plus a mailed copy
+                    is a common pair. If you mail it, send it certified with return receipt
+                    requested.
+                  </li>
+                  <li>
+                    Keep a copy of the signed letter and every page you enclose, paper or
+                    digital.
+                  </li>
+                  <li>
+                    Log the mailing in the certified-mail log below: date sent, method, and
+                    tracking number. Keep the receipt; proof of sending is what the record
+                    turns on.
+                  </li>
+                  <li>
+                    Keep paying rent if you stay. Unpaid rent is the cleanest eviction case a
+                    landlord can bring.
+                  </li>
+                  <li>
+                    Contact legal aid or a tenants' rights organization in the first 48 hours
+                    with the notice, your lease, payment records, and repair requests.
+                  </li>
+                  <li>
+                    If the landlord files in court, appear at every hearing with your case file.
+                    Missing a court date is the fastest way to lose by default.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Printable letter + mail log</h2>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Build a clean, one-document version of your letter, deadline timeline, and
+                  certified-mail log, then print it or save it as a PDF for your records.
+                </p>
+                <div id="response-letter-wrap">
+                  <div id="response-letter" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-letter-btn">
+                    Build printable letter + log
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printResponseLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Reload a draft to refine it or print
+                  it later.
+                </p>
+                <ul class="hist-list" id="draft-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            How eviction responses actually work
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>A notice is not an eviction</h3>
+              <p>
+                Only a court can evict you. A notice is the landlord's demand that starts the
+                process. Do not move out before you understand the deadline: leaving early can
+                surrender defenses you did not know you had, and it does not erase rent you owe.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Pay-or-quit ends with payment</h3>
+              <p>
+                If the notice is pay-or-quit and you can pay the full amount within the window,
+                pay it by a traceable method and keep the receipt. A satisfied pay-or-quit
+                generally ends that notice. Your written response should state that you paid,
+                when, and how.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Cure-or-quit ends with proof</h3>
+              <p>
+                If the violation is fixable, fix it fast and document it: photos, dates, and a
+                short written response stating what was cured and when. The fix without the
+                letter is invisible; the letter without the fix is empty.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Retaliation needs dates</h3>
+              <p>
+                A retaliation defense turns on sequence: repair requests or complaints first,
+                notice second. Dates, copies of the requests, and the landlord's replies are the
+                defense. A claim without dates is just an accusation.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Everything in writing</h3>
+              <p>
+                Phone calls get logged, not relied on. Every substantive statement goes in
+                writing, and every mailing goes certified with return receipt. The written
+                response plus the mail log is the record a judge or a legal aid attorney reads.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Keep the case file</h3>
+              <p>
+                The notice, your response, receipts, repair requests, and the mail log, in one
+                file. If the dispute ends in a payment plan, a settlement, or a court date, the
+                file is what decides it. The tenant case companion runs the same file across a
+                longer dispute.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>Do I have to move out when I get an eviction notice?</summary>
+            <div class="faq-a">
+              Usually not. An eviction notice is a landlord's demand, not a court order. Only a
+              judge can order you out. Read the notice to find what it asks for and by when,
+              respond in writing before the deadline, and do not move out before you understand
+              the deadline.
+            </div>
+          </details>
+          <details>
+            <summary>What is a pay or quit notice?</summary>
+            <div class="faq-a">
+              A pay-or-quit notice tells you to pay the rent owed within the window printed on
+              the notice, often 3 to 5 days, or vacate. If you pay the full amount within the
+              window, the notice is generally satisfied. Keep the receipt and respond in writing
+              stating that you paid.
+            </div>
+          </details>
+          <details>
+            <summary>What is a cure or quit notice?</summary>
+            <div class="faq-a">
+              A cure-or-quit notice tells you to fix a lease violation, such as an unauthorized
+              pet or noise, within the window printed on the notice or leave. If you can fix
+              the violation, do it fast, document it with photos and dates, and respond in
+              writing stating what was cured and when.
+            </div>
+          </details>
+          <details>
+            <summary>Can my landlord evict me for asking for repairs?</summary>
+            <div class="faq-a">
+              Retaliation for exercising a legal right, such as requesting repairs or reporting
+              a code violation, is illegal in most states, but the protection usually covers a
+              limited window after the protected act and does not excuse unpaid rent. A
+              retaliation defense needs dates: when you requested repairs, what the landlord
+              did, and when the notice arrived. Put those dates in your written response.
+            </div>
+          </details>
+          <details>
+            <summary>How do I calculate my response deadline?</summary>
+            <div class="faq-a">
+              Take the date the notice was served and add the number of days printed on the
+              notice. Enter both above and the deadline panel shows the deadline date and how
+              many days are left. The notice itself states the deadline; never guess it from a
+              general rule.
+            </div>
+          </details>
+          <details>
+            <summary>How should I send my response letter?</summary>
+            <div class="faq-a">
+              In writing, by a method you can prove. Email plus a mailed copy is a common pair.
+              If you mail it, send it certified with return receipt requested, keep the receipt
+              and the tracking number, and log the mailing date in the log below. Keep a copy
+              of everything.
+            </div>
+          </details>
+          <details>
+            <summary>What happens if the landlord files in court anyway?</summary>
+            <div class="faq-a">
+              A court filing starts a case, not an eviction. Appear at every hearing with your
+              case file: the notice, your written response, payment receipts, repair requests,
+              and the certified-mail log. Missing a court date is the fastest way to lose by
+              default.
+            </div>
+          </details>
+          <details>
+            <summary>Can my landlord change the locks or shut off utilities?</summary>
+            <div class="faq-a">
+              In most places, no: lockouts, utility shutoffs, and removing your belongings
+              without a court order are illegal self-help evictions in most states. If it
+              happens, document it immediately and contact a tenants' rights organization or
+              attorney. Do not break back in yourself.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/guides/how-to-respond-to-an-eviction-notice/"
+              ><strong>How to Respond to an Eviction Notice: The First 48 Hours</strong
+              ><small>The companion guide: read the notice type, calendar the deadline, respond in writing</small></a
+            >
+            <a href="/tools/ai-tenant-case-companion/"
+              ><strong>AI Tenant Case Companion</strong
+              ><small>Run the full case: deadlines, letter sequence, and evidence pack across a longer dispute</small></a
+            >
+            <a href="/tools/ai-rent-increase-negotiation-letter/"
+              ><strong>AI Rent Increase Negotiation Letter</strong
+              ><small>Negotiate a rent increase in writing before it becomes a notice</small></a
+            >
+            <a href="/guides/how-to-track-a-tenant-case/"
+              ><strong>How to Track a Tenant Case</strong
+              ><small>The method behind the file: notice, responses, receipts, one folder</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">
+          Generate letter &rarr;
+        </button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Confirm deadlines and procedures with a local tenants' rights
+            organization or legal aid office before your deadline.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/ai-eviction-notice-response-letter/ai-eviction-notice-response-letter.js?v=20261024a1"></script>
+  </body>
+</html>

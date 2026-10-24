@@ -1478,6 +1478,7 @@ function generateSitemap(generatedPages) {
     'ai-tenant-case-companion',
     'ai-medicare-decision-companion',
     'ai-unemployment-appeal-letter',
+    'ai-eviction-notice-response-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1798,6 +1799,7 @@ function manageRobotsMeta() {
     'ai-tenant-case-companion',
     'ai-medicare-decision-companion',
     'ai-unemployment-appeal-letter',
+    'ai-eviction-notice-response-letter',
   ]);
 
   const dirsToProcess = [
