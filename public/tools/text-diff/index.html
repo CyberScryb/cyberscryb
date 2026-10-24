@@ -7,20 +7,20 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Diff Checker &mdash; Free Online Comparison | CyberScryb</title>
-    <meta name="description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
+    <title>Text Diff Checker &mdash; Compare Two Texts Online Free | CyberScryb</title>
+    <meta name="description" content="Paste two versions of any text and instantly see every added, removed, and unchanged line. Free online diff checker that runs 100% in your browser. No signup, no upload.">
     <link rel="canonical" href="https://cyberscryb.com/tools/text-diff/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <meta property="og:title" content="Text Diff Checker &mdash; Free Online Comparison | CyberScryb">
-    <meta property="og:description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
+    <meta property="og:title" content="Text Diff Checker &mdash; Compare Two Texts Online Free | CyberScryb">
+    <meta property="og:description" content="Paste two versions of any text and instantly see every added, removed, and unchanged line. Free online diff checker that runs 100% in your browser. No signup, no upload.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/text-diff/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Text Diff Checker &mdash; Free Online Comparison | CyberScryb">
-    <meta name="twitter:description" content="Compare two files and view highlighted character differences using our text diff checker. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:title" content="Text Diff Checker &mdash; Compare Two Texts Online Free | CyberScryb">
+    <meta name="twitter:description" content="Paste two versions of any text and instantly see every added, removed, and unchanged line. Free online diff checker that runs 100% in your browser. No signup, no upload.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,11 +58,14 @@
     {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
-            { "@type": "Question", "name": "How does the text diff checker work?", "acceptedAnswer": { "@type": "Answer", "text": "Paste your original text on the left and the modified text on the right, then click Compare. The tool runs a line-based LCS (longest common subsequence) diff in your browser and highlights added lines in green, removed lines in red, and unchanged lines in gray." }},
-            { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. All comparison runs 100% client-side in vanilla JavaScript. Your text never leaves your browser." }},
-            { "@type": "Question", "name": "What's the difference between line-level and character-level diffs?", "acceptedAnswer": { "@type": "Answer", "text": "Line-level diff treats each line as a unit: if a single character in a line changes, the whole line is marked as removed and the new version as added. Character-level diff highlights individual characters. This tool uses line-level comparison, which is the format Git and most code review tools use." }},
-            { "@type": "Question", "name": "Can I diff code files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the old version and new version of your source code. The tool handles any plain text input — code, markdown, config files, prose, logs." }},
-            { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but the LCS algorithm is O(n*m). For best performance keep each side under a few thousand lines." }}
+            { "@type": "Question", "name": "How does the text diff checker work?", "acceptedAnswer": { "@type": "Answer", "text": "It runs a line-based LCS (longest common subsequence) algorithm in your browser to find the longest matching sequence of lines. Anything not in that sequence is marked as added or removed." }},
+            { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. All processing is 100% client-side in vanilla JavaScript. Your text never leaves your device." }},
+            { "@type": "Question", "name": "What's the difference between line-level and character-level diffs?", "acceptedAnswer": { "@type": "Answer", "text": "Line-level compares whole lines as units, which is faster and matches how Git and most code review tools display diffs. Character-level highlights individual characters." }},
+            { "@type": "Question", "name": "Can I diff code files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the old and new versions of any plain text — source code, config, markdown, or logs." }},
+            { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but LCS is O(n*m). Keep each side under a few thousand lines for instant results." }},
+            { "@type": "Question", "name": "Can I compare two Word documents or PDFs?", "acceptedAnswer": { "@type": "Answer", "text": "Not directly. Copy the plain text out of each document and paste it into the two panes. The tool compares text only, so fonts, colors, images, and formatting are not compared." }},
+            { "@type": "Question", "name": "Can I ignore whitespace or letter-case differences?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool compares lines exactly, so an indentation change or a capitalization change shows up as a changed line. Nothing is silently hidden, so no real edit slips past." }},
+            { "@type": "Question", "name": "Why does a moved paragraph show as deleted and added?", "acceptedAnswer": { "@type": "Answer", "text": "Line-level diffs do not detect moves. When a block disappears from one place and reappears elsewhere, it is reported once as removed and once as added. That is the same behavior as Git's default diff." }}
         ]
     }
     </script>
@@ -182,7 +185,8 @@
         <div class="td-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Text Diff Checker</h1>
-                <p style="color:var(--text-faint); margin-bottom: 0;">Compare two blocks of text and see added, removed, and unchanged lines &mdash; line-level LCS diff, 100% client-side.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0.75rem;">Paste two versions of the same text and instantly see exactly what changed. Added lines show in green, removed lines in red, and unchanged lines stay neutral, with a count of each above the result.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Built for code reviews, draft revisions, config files, and contract redlines. The comparison runs entirely in your browser, so the text you paste is never uploaded, stored, or sent anywhere.</p>
             </div>
 
             <div class="td-grid">
@@ -214,6 +218,29 @@
                 <div class="td-placeholder">Paste text in both panes and click Compare to see the diff.</div>
             </div>
 
+            <section style="margin-top: 3rem;">
+                <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">How to Compare Two Texts</h2>
+                <ol style="color: var(--text-muted); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                    <li><strong style="color: var(--text);">Paste the original</strong> in the left pane and the revised version in the right pane. Open a file, select all, copy, and paste if you are comparing files.</li>
+                    <li><strong style="color: var(--text);">Click Compare.</strong> The tool runs a line-based LCS diff and lines the two versions up, even when whole blocks were added or removed.</li>
+                    <li><strong style="color: var(--text);">Read the colors.</strong> Green lines with a + were added, red lines with a &minus; were removed, and neutral lines are unchanged.</li>
+                    <li><strong style="color: var(--text);">Check the counts</strong> above the result for a quick summary of lines added, removed, and unchanged.</li>
+                    <li><strong style="color: var(--text);">Reuse the result.</strong> Swap Sides reverses the comparison, Copy Diff copies the marked-up result, and Clear resets both panes.</li>
+                </ol>
+            </section>
+
+            <section style="margin-top: 3rem;">
+                <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">What You Can Compare</h2>
+                <ul style="color: var(--text-muted); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                    <li><strong style="color: var(--text);">Code revisions:</strong> check what changed between two versions of a function, script, or config file before committing or reviewing.</li>
+                    <li><strong style="color: var(--text);">Drafts and essays:</strong> see every edit between drafts of an article, resume, or cover letter at a glance.</li>
+                    <li><strong style="color: var(--text);">Contracts and policies:</strong> spot added or deleted clauses between two versions of an agreement.</li>
+                    <li><strong style="color: var(--text);">Data and lists:</strong> find missing or extra rows between two CSV exports, inventories, or changelogs.</li>
+                    <li><strong style="color: var(--text);">Logs and output:</strong> compare a before-and-after run to isolate what a change actually did.</li>
+                </ul>
+                <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">This is a read-only comparison: it shows differences, it does not merge them. Line-level diffs also do not detect moved blocks, so a paragraph moved elsewhere appears once as removed and once as added, the same behavior as Git&apos;s default diff.</p>
+            </section>
+
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>How does the text diff checker work?</summary><p>It runs a line-based LCS (longest common subsequence) algorithm in your browser to find the longest matching sequence of lines. Anything not in that sequence is marked as added or removed.</p></details>
@@ -221,6 +248,9 @@
                 <details><summary>What's the difference between line-level and character-level diffs?</summary><p>Line-level compares whole lines as units, which is faster and matches how Git and most code review tools display diffs. Character-level highlights individual characters.</p></details>
                 <details><summary>Can I diff code files?</summary><p>Yes. Paste the old and new versions of any plain text &mdash; source code, config, markdown, or logs.</p></details>
                 <details><summary>Is there a size limit?</summary><p>No hard limit, but LCS is O(n*m). Keep each side under a few thousand lines for instant results.</p></details>
+                <details><summary>Can I compare two Word documents or PDFs?</summary><p>Not directly. Copy the plain text out of each document and paste it into the two panes. The tool compares text only, so fonts, colors, images, and formatting are not compared.</p></details>
+                <details><summary>Can I ignore whitespace or letter-case differences?</summary><p>No. This tool compares lines exactly, so an indentation change or a capitalization change shows up as a changed line. Nothing is silently hidden, so no real edit slips past.</p></details>
+                <details><summary>Why does a moved paragraph show as deleted and added?</summary><p>Line-level diffs do not detect moves. When a block disappears from one place and reappears elsewhere, it is reported once as removed and once as added. That is the same behavior as Git&apos;s default diff.</p></details>
             </div>
         </div>
 
@@ -246,6 +276,10 @@
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Regex Tester</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Test regular expressions with live match highlighting.</span>
             </a>
+            <a href="/tools/case-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Case Converter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Change text case before you compare, so casing noise does not swamp real edits.</span>
+            </a>
         </div>
     </section>
 
@@ -258,16 +292,12 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
 </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
