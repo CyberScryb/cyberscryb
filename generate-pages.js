@@ -1613,6 +1613,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'catastrophic-backtracking-regex-redos',
     'uuidv7-vs-uuidv4-database-index',
     'qr-code-scams-fake-parking-codes',
     'hipaa-myths-family-medical-information',

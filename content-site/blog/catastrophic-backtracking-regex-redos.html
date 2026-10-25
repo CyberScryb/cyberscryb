@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#09090b">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catastrophic Backtracking: How One Regex Broke Cloudflare | CyberScryb</title>
+<meta name="description" content="Catastrophic backtracking let one regex take down Cloudflare in 2019. See why it happens, how to measure it, and three fixes that stop ReDoS.">
+<link rel="canonical" href="https://cyberscryb.com/blog/catastrophic-backtracking-regex-redos/">
+<meta property="og:title" content="Catastrophic Backtracking: How One Regex Broke Cloudflare">
+<meta property="og:description" content="Catastrophic backtracking let one regex take down Cloudflare in 2019. See why it happens, how to measure it, and three fixes that stop ReDoS.">
+<meta property="og:url" content="https://cyberscryb.com/blog/catastrophic-backtracking-regex-redos/">
+<meta property="og:image" content="https://cyberscryb.com/og-image.png">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-10-25">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=20261006audit1">
+<link rel="icon" href="/mascot-icon.png" type="image/png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Catastrophic Backtracking: How One Regex Broke Cloudflare",
+  "description": "Catastrophic backtracking let one regex take down Cloudflare in 2019. See why it happens, how to measure it, and three fixes that stop ReDoS.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "author": {
+    "@type": "Organization",
+    "name": "CyberScryb"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CyberScryb",
+    "url": "https://cyberscryb.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cyberscryb.com/blog/catastrophic-backtracking-regex-redos/"
+  },
+  "image": "https://cyberscryb.com/og-image.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are lazy quantifiers a fix for catastrophic backtracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not reliably. Cloudflare's post-mortem shows .*?.*?=.*? cutting steps for one input shape, but the semicolon version .*?.*?=.*?; took exactly as many steps as the greedy one. Laziness changes the order the engine tries things, not how many things it might try."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a WAF protect me from ReDoS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not by itself. Cloudflare's WAF was the thing that fell over. Your own input limits and a safe engine protect you no matter what sits in front."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ReDoS a real security vulnerability or only a performance bug?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both, and it gets CVEs. The semver advisory, CVE-2022-25883, was rated high severity. If an attacker can send the input, a slow regex is a denial-of-service hole."
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+<style>
+.article-wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px;color: var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7}
+.article-wrap h1{font-family: var(--font-brand), Georgia, serif;font-size:2.2rem;line-height:1.2;margin:0 0 8px;background: var(--primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.article-wrap .meta{color: var(--text-muted);font-size:0.9rem;margin-bottom:32px}
+.article-wrap h2{font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;margin-top:40px;color: var(--primary-soft)}
+.article-wrap h3{font-size:1.15rem;margin-top:24px;color: var(--text-muted)}
+.article-wrap p,.article-wrap li{color: var(--text-muted)}
+.article-wrap a{color: var(--primary-soft)}
+.article-wrap blockquote{border-left:3px solid #dc2626;padding:0 0 0 16px;margin:24px 0;color: var(--text-muted);font-style:italic}
+.article-wrap code{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:0.9em}
+.article-wrap .cta-box{background:linear-gradient(135deg,rgba(220,38,38, 0.08),rgba(220,38,38, 0.06));border:1px solid rgba(220,38,38, 0.3);border-radius:14px;padding:24px;margin:32px 0}
+.article-wrap .cta-box .cta-btn{display:inline-block;background: var(--primary);color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-family: var(--font-brand), Georgia, serif;font-weight:700;margin-top:12px}
+.article-wrap table{width:100%;border-collapse:collapse;font-size:.9rem;margin:24px 0}
+.article-wrap th,.article-wrap td{padding:10px 12px;border:1px solid var(--border);text-align:left}
+.article-wrap thead th{background:rgba(255,255,255,.04);color:var(--text)}
+.article-wrap .article-figure{margin:32px 0}
+.article-wrap .article-figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);display:block}
+.article-wrap figcaption{font-size:.85rem;color:var(--text-muted);margin-top:8px}
+.article-wrap pre{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;overflow-x:auto;font-family:Consolas,monospace;font-size:0.85rem;line-height:1.5;color: var(--text-muted)}
+.article-wrap pre code{background:none;padding:0}
+</style>
+</head>
+<body>
+<header>
+  <nav class="navbar"><div class="nav-container">
+    <div class="nav-logo"><a href="/" style="display:flex;align-items:center;text-decoration:none;">
+      <img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" class="logo">
+      <span style="font-family: var(--font-brand), Georgia, serif;font-weight:700;font-size:1.2rem;color: var(--text);margin-left:10px;">CyberScryb</span>
+    </a></div>
+    <ul class="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">Tools</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="https://curator.cyberscryb.com" target="_blank" style="color:var(--attention);font-weight:600;">Curator Prime</a></li>
+    </ul>
+  </div></nav>
+</header>
+
+<main>
+  <article class="article-wrap">
+    <p><a href="/blog/">&larr; Back to blog</a></p>
+<h1>Catastrophic Backtracking: How One Regex Broke Cloudflare</h1>
+<p class="meta">Published October 25, 2026 &middot; 10 min read</p>
+<p>On July 2, 2019, a Cloudflare engineer shipped a small change to a firewall rule. Within minutes, every CPU core serving HTTP traffic on Cloudflare's network was pinned near 100%, and visitors to Cloudflare-backed sites got 502 errors for <a href="https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/" rel="noopener">27 minutes</a>. The cause was one regular expression doing catastrophic backtracking.</p>
+<p>The scary part is that the regex was ordinary. It passed review and it passed the test suite. You have patterns like it in your codebase right now, and so do your dependencies.</p>
+<p>Here's what you'll get: what happened at Cloudflare, timings I measured myself so you can see the blowup, how to spot a risky pattern, how to test for one, and the three fixes that work. My take up front: rewriting a regex helps, but the fix that lets you stop worrying is an engine that can't backtrack.</p>
+<h2>What happened at Cloudflare on July 2, 2019</h2>
+<p>John Graham-Cumming, who had written the original WAF code, published a <a href="https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/" rel="noopener">detailed post-mortem</a> ten days later. The short version: at 13:42 UTC, an automated process deployed an updated XSS detection rule to Cloudflare's web application firewall (WAF). WAF rules went out through a key-value store that pushes changes worldwide in seconds, so there was no gradual rollout. Graham-Cumming was told they had "lost 80% of our traffic." The team killed the WAF globally at 14:07, and traffic was back to normal by 14:09.</p>
+<p>The rule contained this, which you don't need to read closely:</p>
+<pre><code>(?:(?:\&quot;|'|\]|\}|\\|\d|(?:nan|infinity|true|false|null|undefined|symbol|math)|\`|\-|\+)+[)]*;?((?:\s|-|~|!|{}|\|\||\+)*.*(?:.*=.*)))
+</code></pre>
+<p>The post-mortem narrows the trouble to one fragment, <code>.*(?:.*=.*)</code>, which behaves like <code>.*.*=.*</code>. Two "match anything" pieces in a row give the engine many ways to split the same text, and when a match fails it tries them all.</p>
+<p>What I like about this write-up is that it refuses to blame one engineer. It lists 11 things that went wrong. Three are about the regex itself: a pattern that could backtrack enormously, a CPU-limit safeguard that had been <a href="https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/" rel="noopener">removed by mistake</a> during a refactor weeks earlier, and an engine (PCRE, called from Lua) with no complexity guarantee. A fourth is about testing: the suite checked which requests got blocked, but never measured CPU. Cloudflare's fix list included manually reviewing all 3,868 WAF rules, adding performance profiling to tests, and switching to RE2 or the Rust regex engine, "which both have run-time guarantees."</p>
+<h2>Thirty characters, five seconds: catastrophic backtracking you can measure</h2>
+<p>The textbook evil regex is <code>^(a+)+$</code>. It reads as "one or more a's, one or more times, then the end." It matches the same strings as <code>^a+$</code>. The difference shows up when the input almost matches.</p>
+<p>I ran both against a string of a's followed by one <code>!</code>, on Node 20.19.2 (V8) on an 8-core cloud VM. Times are for a single <code>test()</code> call:</p>
+<table>
+<thead>
+<tr>
+<th>Input length (a's)</th>
+<th><code>/^(a+)+$/</code></th>
+<th><code>/^a+$/</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>5.2 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+<tr>
+<td>22</td>
+<td>21 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+<tr>
+<td>24</td>
+<td>101 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+<tr>
+<td>26</td>
+<td>359 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+<tr>
+<td>28</td>
+<td>1,360 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+<tr>
+<td>30</td>
+<td>5,451 ms</td>
+<td>under 0.01 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Every two extra characters multiply the time by about four. At 30 characters, one call blocks Node's main thread for over five seconds. On the same curve, 40 characters would take about an hour and a half. The fixed version chewed through 100,000 a's in 0.2 ms.</p>
+<p>Wall-clock time depends on hardware, so I also counted work. PCRE2 10.46, the C library behind PHP's <code>preg_</code> functions, can report how many internal match steps a search needed. For <code>^(a+)+$</code> on the same inputs, it needed 80 steps at 5 a's, 2,560 at 10, 81,920 at 15, and 2,621,440 at 20. That's a doubling with every character. For <code>^a+$</code>, it needed 2 steps at every length I tried, up to 1,000 characters.</p>
+<p>Python 3.13 behaves the same way: 24 a's and a <code>!</code> took 502 ms with <code>re.match</code>.</p>
+<h2>Why the engine tries every split</h2>
+<p>The regex engines in Perl, PCRE, Python, JavaScript's V8, and .NET (by default) are backtracking engines. When one path fails, they back up to the last choice they made and try the next option.</p>
+<p>In <code>(a+)+</code>, every a can either extend the current inner group or start a new one. Four a's can be grouped as <code>aaaa</code>, <code>aaa|a</code>, <code>a|aaa</code>, <code>aa|aa</code>, and so on: eight ways in total, or 2 to the power of (n − 1). If the string ends in <code>a</code>, the first grouping succeeds and nobody notices. If it ends in <code>!</code>, nothing can succeed, and the engine has to prove that by trying every grouping. <a href="https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS" rel="noopener">OWASP's ReDoS page</a> puts it as 16 paths for <code>aaaaX</code> and 65,536 for sixteen a's and an X.</p>
+<figure class="article-figure"><img src="/blog/images/catastrophic-backtracking-steps.svg" width="960" height="440" loading="lazy" alt="Left: the eight ways a backtracking engine can split &quot;aaaa&quot; between the inner and outer groups of (a+)+, each of which it must try before failing on a trailing exclamation mark. Right: a log-scale bar chart of PCRE2 match steps for ^(a+)+$ against a's plus &quot;!&quot;: 80 at 5 characters, 2,560 at 10, 81,920 at 15, and 2,621,440 at 20, compared with 2 steps for ^a+$ at every length."><figcaption>Step counts measured with PCRE2 10.46 on an almost-matching input. Diagram: CyberScryb.</figcaption></figure>
+<p>That's the whole bug: an ambiguous pattern plus an input that fails late. Attackers call it ReDoS, regular expression denial of service. You don't need a botnet. You need one request with the right string.</p>
+<h2>It doesn't have to be exponential to take you down</h2>
+<p><code>(a+)+</code> is exponential. Plenty of real outages came from patterns that are "only" polynomial, which sounds safe until your input is long.</p>
+<p>Stack Overflow went down for <a href="https://stackstatus.tumblr.com/post/147710624694/outage-postmortem-july-20-2016" rel="noopener">34 minutes on July 20, 2016</a>. A post contained roughly 20,000 consecutive whitespace characters, and a regex meant to trim whitespace from the ends of lines ran on every home page view. Their simplified version of the problem is <code>\s+$</code>. The engine starts at the first space, runs to the end of the spaces, hits a non-space, fails, then starts over from the second space. That's about 200 million character checks. The home page was also the load balancer's health check, so the load balancer pulled every web server out of rotation. Their fix: replace the regex with a substring function.</p>
+<p>I measured <code>/\s+$/</code> in Node against a run of spaces followed by an <code>x</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Spaces</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5,000</td>
+<td>14 ms</td>
+</tr>
+<tr>
+<td>10,000</td>
+<td>58 ms</td>
+</tr>
+<tr>
+<td>20,000</td>
+<td>234 ms</td>
+</tr>
+<tr>
+<td>40,000</td>
+<td>919 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Double the input, quadruple the time. That's quadratic. JavaScript's built-in <code>trimEnd()</code> handled the 40,000-space string in 0.6 ms.</p>
+<p>Cloudflare's reduced pattern is worse. The post-mortem points out that adding a literal semicolon, <code>.*.*=.*;</code>, would have been far more catastrophic, and walks through the step counts. I timed that version in Node on <code>x=</code> followed by x's: 30 ms at 500 characters, 238 ms at 1,000, and 1,830 ms at 2,000. Each doubling costs about eight times more, which is cubic. Two kilobytes is a small request body.</p>
+<h2>How to spot an evil regex</h2>
+<p>OWASP's rule of thumb: be suspicious of a repeated group that contains its own repetition or overlapping alternatives. Their examples:</p>
+<ul>
+<li><code>(a+)+$</code> (nested quantifiers)</li>
+<li><code>([a-zA-Z]+)*$</code> (same thing with a character class)</li>
+<li><code>(a|aa)+$</code> and <code>(a|a?)+$</code> (alternatives that can match the same text)</li>
+</ul>
+<p>To those I'd add two shapes from the outages above: two adjacent pieces that can match the same characters, like <code>.*.*</code> or <code>\s*\s+</code>, and an unanchored pattern that ends with something the input might not have, like <code>\s+$</code>.</p>
+<p>Don't trust your eyes too much, though. A 2018 study by James Davis and colleagues scanned <a href="https://davisjam.github.io/files/publications/DavisCoghlanServantLee-EcosystemREDOS-ESECFSE18.pdf" rel="noopener">375,652 npm modules and 72,750 PyPI modules</a> and found that about 1% of unique regexes had super-linear worst cases, affecting over 10,000 modules. Nearly 300 were exponential. The same study found these anti-pattern rules "necessary, but not sufficient": nearly every slow regex fits one, but lots of fast ones do too. Treat a match as a reason to test, not a verdict.</p>
+<p>This isn't academic. In June 2023, GitHub's advisory database added <a href="https://github.com/advisories/GHSA-c2qf-rxjj-qqgw" rel="noopener">CVE-2022-25883</a>, a high-severity ReDoS in <code>semver</code>, the npm version-parsing package. Versions before 7.5.2 were vulnerable when untrusted input reached <code>new Range</code>.</p>
+<h2>How to test a regex for catastrophic backtracking</h2>
+<p>The test that catches this is simple: make the input almost match, then make it longer.</p>
+<ol>
+<li>Pick a string your pattern accepts, like <code>aaaa</code>.</li>
+<li>Add one character at the end that breaks the match, like <code>!</code>.</li>
+<li>Repeat the matching part at 10, 15, 20, and 25 characters and watch the time.</li>
+</ol>
+<p>If time grows in proportion to length, you're fine. If it doubles per character or quadruples when the input doubles, you've found one.</p>
+<p>You can do this by hand in the CyberScryb <a href="/tools/regex-tester/">regex tester</a>. It runs your pattern in your browser with JavaScript's own engine as you type, so what you see is what V8 does. It has no time limit, which makes it a decent smoke detector. If the page starts to lag when you paste 25 characters, you found the bug at your desk instead of in production. Keep test strings short until you know.</p>
+<p>For code, a few lines of Node do the same job:</p>
+<pre><code>const re = /^(a+)+$/;
+for (const n of [10, 15, 20, 25]) {
+  const s = 'a'.repeat(n) + '!';
+  const t0 = performance.now();
+  re.test(s);
+  console.log(n, (performance.now() - t0).toFixed(2), 'ms');
+}
+</code></pre>
+<p>Then automate it, because nobody tests by hand twice. <a href="https://ota-meshi.github.io/eslint-plugin-regexp/rules/no-super-linear-backtracking.html" rel="noopener">eslint-plugin-regexp</a> has a <code>no-super-linear-backtracking</code> rule that's on in its recommended config. GitHub's CodeQL ships an <a href="https://codeql.github.com/codeql-query-help/javascript/js-redos/" rel="noopener">inefficient regex query</a> for JavaScript. <a href="https://makenowjust-labs.github.io/recheck/" rel="noopener">recheck</a> combines static analysis and fuzzing to find attack strings.</p>
+<p>And steal Cloudflare's lesson: add a test that fails when a rule gets slow, not only when it gets the wrong answer. Their suite passed because nobody was timing it.</p>
+<h2>Three fixes, in the order I'd use them</h2>
+<h3>1. Remove the ambiguity, then measure the fix</h3>
+<p>Most evil regexes have a calmer twin. <code>^(a+)+$</code> is <code>^a+$</code>. For key-value text, <code>.*.*=.*;</code> can become <code>[^=]*=[^;]*;</code>: each piece now stops at a specific character instead of grabbing everything and backing up.</p>
+<p>Measure the fix anyway. My first rewrite, <code>/[^=]*=[^;]*;/</code> without an anchor, still took 268 ms at 20,000 characters and 29.6 seconds at 200,000. Unanchored, the engine retries the whole thing from every starting position. Adding <code>^</code> dropped 200,000 characters to 0.45 ms. Same idea, one character, from 30 seconds to under a millisecond.</p>
+<p>Some engines can also lock in a match so it's never revisited. Atomic groups <code>(?&gt;...)</code> and possessive quantifiers like <code>a++</code> exist in PCRE and .NET, and Python's <code>re</code> <a href="https://docs.python.org/3/whatsnew/3.11.html" rel="noopener">gained both in 3.11</a>. In Python 3.13, <code>^(?&gt;a+)+$</code> and <code>^(a++)+$</code> finished the 24-character attack string in well under a millisecond, versus 502 ms. JavaScript doesn't have them: Node 20 rejects <code>(?&gt;a+)</code> as an invalid group.</p>
+<p>Also ask whether you need a regex at all. Stack Overflow swapped theirs for a substring call. For trimming, use <code>trim()</code>.</p>
+<h3>2. Cap the input, and set a time limit where you can</h3>
+<p>A backtracking regex's worst case depends on input length, so cut the input before it reaches the regex. An email field doesn't need 10,000 characters. Neither does a username or a header value. A length check is boring, and it's the only defense that works the same in every language.</p>
+<p>.NET lets you set a match timeout per regex or process-wide. The default is <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex" rel="noopener"><code>Regex.InfiniteMatchTimeout</code></a>, meaning no limit, and Microsoft recommends always setting one when a pattern can backtrack. Their docs also say timeouts and non-backtracking mode guard against accidental slowness in patterns you wrote, and are "not intended as a security boundary" against malicious patterns. So never build a regex from user input, and escape user text with <code>Regex.Escape</code> if you must embed it.</p>
+<h3>3. Use an engine that can't backtrack</h3>
+<p>This is the fix Cloudflare chose, and it's the one I'd pick for anything handling untrusted input at volume. Some engines are built so match time grows linearly with input, no matter the pattern:</p>
+<ul>
+<li><a href="https://github.com/google/re2" rel="noopener">RE2</a> (C++) guarantees match time "linear in the length of the input string" and was built to handle regexes from untrusted users.</li>
+<li>Go's <a href="https://pkg.go.dev/regexp" rel="noopener">regexp package</a> is "guaranteed to run in time linear in the size of the input."</li>
+<li>Rust's <a href="https://docs.rs/regex/latest/regex/" rel="noopener">regex crate</a> promises worst-case O(m × n) time, where m is the regex size and n is the input size.</li>
+<li>.NET 7 added <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-regex" rel="noopener"><code>RegexOptions.NonBacktracking</code></a>, which guarantees linear-time processing.</li>
+<li>Node can use RE2 through the <a href="https://github.com/uhop/node-re2" rel="noopener">node-re2</a> bindings.</li>
+</ul>
+<p>The price is features. RE2 <a href="https://github.com/google/re2" rel="noopener">doesn't support backreferences or lookaround</a>, because those have no known non-backtracking solution. The Rust crate drops them too. Most validation and parsing patterns don't need them.</p>
+<p>V8 also has an <a href="https://v8.dev/blog/non-backtracking-regexp" rel="noopener">experimental linear-time engine</a>, shipped in V8 8.8 behind flags. With <code>--enable-experimental-regexp-engine</code>, I ran <code>/^(a+)+$/l</code> on 100,000 a's and a <code>!</code> in Node 20: 10 ms, where the normal engine needs over five seconds at 30 characters. It's experimental and flag-only, so treat it as a demo of the idea, not a production setting.</p>
+<div class="cta-box"><strong>Try it on your own pattern.</strong><p>Paste a regex into the CyberScryb regex tester and feed it a string that almost matches. It runs in your browser with JavaScript's own engine, so you see what V8 sees.</p><a href="/tools/regex-tester/" class="cta-btn">Open the regex tester</a></div>
+<h2>FAQ</h2>
+<h3>Are lazy quantifiers a fix for catastrophic backtracking?</h3>
+<p>Not reliably. Cloudflare's post-mortem shows <code>.*?.*?=.*?</code> cutting steps for one input shape, but the semicolon version <code>.*?.*?=.*?;</code> took exactly as many steps as the greedy one. Laziness changes the order the engine tries things, not how many things it might try.</p>
+<h3>Does a WAF protect me from ReDoS?</h3>
+<p>Not by itself. Cloudflare's WAF was the thing that fell over. Your own input limits and a safe engine protect you no matter what sits in front.</p>
+<h3>Is ReDoS a real security vulnerability or only a performance bug?</h3>
+<p>Both, and it gets CVEs. The <code>semver</code> advisory, CVE-2022-25883, was rated high severity. If an attacker can send the input, a slow regex is a denial-of-service hole.</p>
+<h2>Find the slow one before your traffic does</h2>
+<p>Catastrophic backtracking is not a freak event. It's what a backtracking engine does with an ambiguous pattern and an input that almost fits. Cloudflare's rule passed code review and CI. The suite never timed anything.</p>
+<p>Pick the regex in your code that touches the most user input, paste it into the <a href="/tools/regex-tester/">regex tester</a>, and feed it a string that almost matches at 10, 20, and 30 characters. If the timing climbs fast, you know your next fix. Like the <a href="/blog/year-2038-problem-already-happening/">Year 2038 problem</a>, it's a bug that sits quietly until the input shows up. And like <a href="/blog/uuidv7-vs-uuidv4-database-index/">random UUID keys</a>, it looks fine in testing and falls over at scale.</p>
+  </article>
+</main>
+<footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span style="font-family: var(--font-brand), Georgia, serif; font-weight: 700; font-size: 1rem; color: var(--text);">CyberScryb</span>
+                    <p>Free browser tools and AI writers for freelancers and builders.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/tools/">Tools</a>
+                    <a href="/blog/">Blog</a>
+                    <a href="/about/">About</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                    <a href="/disclosure/">Affiliate Disclosure</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/contact/">Contact</a>
+                    <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
+        </div>
+    </footer>
+</body>
+</html>
