@@ -283,3 +283,61 @@ test('Stop button aborts the stream and keeps partial text', async () => {
   expect(document.querySelector('#output-text').getAttribute('aria-busy')).toBe('false');
   jest.useRealTimers();
 });
+
+test('action buttons in ai-tool.js have valid aria-labels and update aria-label on feedback', async () => {
+  jest.useFakeTimers();
+  document.querySelector('main').innerHTML =
+    '<button id="sample-btn">Try Sample</button>' +
+    '<textarea id="tool-input">Sample text</textarea>' +
+    '<button id="generate-btn">Generate</button>' +
+    '<div id="output-text">Output result</div>' +
+    '<button id="copy-btn">Copy</button>';
+
+  Object.defineProperty(HTMLElement.prototype, 'innerText', {
+    get() {
+      return this.textContent;
+    },
+    set(val) {
+      this.textContent = val;
+    },
+    configurable: true,
+  });
+
+  Object.defineProperty(navigator, 'clipboard', {
+    value: {
+      writeText: jest.fn().mockResolvedValue(),
+    },
+    configurable: true,
+  });
+
+  load('tools/shared/ai-tool.js');
+  window.CSAITool.init({ toolId: 'summarizer', collectInput: () => 'Sample text' });
+
+  const clearBtn = document.querySelector('#clear-btn');
+  const copyBtn = document.querySelector('#copy-btn');
+  const dlBtn = document.querySelector('#download-btn');
+  const regenBtn = document.querySelector('#regen-btn');
+  const shareBtn = document.querySelector('#share-btn');
+
+  expect(clearBtn.getAttribute('aria-label')).toBe('Clear input');
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy to Clipboard');
+  expect(dlBtn.getAttribute('aria-label')).toBe('Download as .txt');
+  expect(regenBtn.getAttribute('aria-label')).toBe('Generate again for a different result');
+  expect(shareBtn.getAttribute('aria-label')).toBe('Share this result');
+
+  // Trigger copy
+  copyBtn.click();
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copied to clipboard');
+  expect(copyBtn.textContent).toBe('Copied! ✓');
+
+  jest.advanceTimersByTime(1700);
+
+  expect(copyBtn.getAttribute('aria-label')).toBe('Copy to Clipboard');
+  expect(copyBtn.textContent).toBe('Copy');
+
+  jest.useRealTimers();
+});

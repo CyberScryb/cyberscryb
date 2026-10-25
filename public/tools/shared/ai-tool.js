@@ -28,6 +28,7 @@
       clearBtn.id = 'clear-btn';
       clearBtn.type = 'button';
       clearBtn.title = 'Clear input';
+      clearBtn.setAttribute('aria-label', 'Clear input');
       clearBtn.textContent = 'Clear';
       if (sampleBtn) {
         clearBtn.className = sampleBtn.className;
@@ -271,15 +272,21 @@
     }
 
     if (copyBtn) {
+      if (!copyBtn.hasAttribute('aria-label')) {
+        copyBtn.setAttribute('aria-label', 'Copy to Clipboard');
+      }
       copyBtn.addEventListener('click', function () {
         const text = outputContent.innerText;
         if (text && !text.toLowerCase().includes('will appear here')) {
           navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: toolId });
             const orig = copyBtn.innerText;
+            const origLabel = copyBtn.getAttribute('aria-label') || 'Copy to Clipboard';
             copyBtn.innerText = 'Copied! ✓';
+            copyBtn.setAttribute('aria-label', 'Copied to clipboard');
             setTimeout(function () {
               copyBtn.innerText = orig;
+              copyBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           });
         }
@@ -291,6 +298,7 @@
         dlBtn.id = 'download-btn';
         dlBtn.type = 'button';
         dlBtn.title = 'Download as .txt';
+        dlBtn.setAttribute('aria-label', 'Download as .txt');
         dlBtn.textContent = 'Download';
         // Mirror the copy button's classes and inline style for visual match.
         dlBtn.className = copyBtn.className;
@@ -309,9 +317,12 @@
           URL.revokeObjectURL(url);
           trackEvent('result_downloaded', { tool_id: toolId });
           const orig = dlBtn.innerText;
+          const origLabel = dlBtn.getAttribute('aria-label') || 'Download as .txt';
           dlBtn.innerText = 'Saved! ✓';
+          dlBtn.setAttribute('aria-label', 'Downloaded result as text file');
           setTimeout(function () {
             dlBtn.innerText = orig;
+            dlBtn.setAttribute('aria-label', origLabel);
           }, 1600);
         });
         copyBtn.parentNode.insertBefore(dlBtn, copyBtn.nextSibling);
@@ -324,6 +335,7 @@
         regenBtn.id = 'regen-btn';
         regenBtn.type = 'button';
         regenBtn.title = 'Generate again for a different result';
+        regenBtn.setAttribute('aria-label', 'Generate again for a different result');
         regenBtn.innerHTML = '↻ Regenerate';
         regenBtn.className = copyBtn.className;
         regenBtn.style.cssText = copyBtn.style.cssText + 'display:none;';
@@ -398,6 +410,7 @@
         shareBtn.id = 'share-btn';
         shareBtn.type = 'button';
         shareBtn.title = 'Share this result';
+        shareBtn.setAttribute('aria-label', 'Share this result');
         shareBtn.textContent = 'Share';
         // Mirror the copy button's classes and inline style for visual match.
         shareBtn.className = copyBtn.className;
@@ -406,10 +419,13 @@
           const text = outputContent.innerText;
           if (!text || text.toLowerCase().includes('will appear here')) return;
           const orig = shareBtn.innerText;
+          const origLabel = shareBtn.getAttribute('aria-label') || 'Share this result';
           function flash(msg) {
             shareBtn.innerText = msg;
+            shareBtn.setAttribute('aria-label', msg);
             setTimeout(function () {
               shareBtn.innerText = orig;
+              shareBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           }
           if (navigator.share) {
