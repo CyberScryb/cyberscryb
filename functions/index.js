@@ -1654,6 +1654,56 @@ Notice type (from the tool intake): ${modeLabel}
 Write the letter now.`;
     },
   },
+  'ai-irs-installment-agreement-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'IRS installment agreement request';
+      let situationFraming = '';
+      if (mode.includes('after-notice') || mode.includes('notice')) {
+        situationFraming =
+          'SITUATION: AFTER A BALANCE-DUE NOTICE. The taxpayer received an IRS notice stating a balance due and is responding to it. Reference the notice and its stated balance, confirm the taxpayer is responding rather than ignoring it, and propose the monthly payment in the same letter. Use only the notice reference, balance, and tax years the user supplied.';
+      } else if (mode.includes('reinstat')) {
+        situationFraming =
+          'SITUATION: REINSTATE A DEFAULTED PLAN. A prior installment agreement defaulted. State what defaulted and why, using only the facts supplied, state what has changed since, and propose the new monthly payment. Address the cause of the default directly; do not ignore it and do not invent a reason for it.';
+      } else if (mode.includes('hardship')) {
+        situationFraming =
+          'SITUATION: HARDSHIP-BASED LOWER PAYMENT. The taxpayer cannot sustain a standard payment. Frame the letter around plain financial facts: income, essential expenses, and the monthly figure the taxpayer can actually sustain, all from the facts supplied. Ask for the lower amount with the numbers attached; do not ask for sympathy and do not invent income or expense figures.';
+      } else {
+        situationFraming =
+          'SITUATION: FIRST-TIME REQUEST. The taxpayer owes a balance, cannot pay it in full, and asks to pay it over time. Frame the letter around the tax years, the total balance from the notice, and the monthly payment proposed, with a commitment to stay current on new tax years.';
+      }
+      return `You are a formal tax correspondence writer who drafts IRS installment agreement request letters that real taxpayers can send with Form 9465. You write one letter, from the supplied facts only, in a tone that is formal, respectful, and plain.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided. Do not fabricate balances, tax years, payment amounts, payment dates, notice numbers, income figures, expense figures, or IRS responses of any kind. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert amount].
+2. NEVER CITE SPECIFIC LAW, RATES, OR THRESHOLDS. Do not name statutes, code sections, penalty rates, interest rates, eligibility dollar caps, fee amounts, or approval timelines. Refer only to the installment agreement in general terms and to Form 9465 by name as the request form. Do not state any deadline, cap, or fee as a fact.
+3. NEVER INVENT A DECISION. The letter requests an agreement; it does not claim one is approved, guaranteed, or pre-approved. Do not promise an outcome.
+4. NO TAX ADVICE. Do not advise the taxpayer which option is best, do not recommend a payment amount beyond what the user proposed, and do not interpret their tax situation. Draft the request they asked for, from their figures.
+5. NO DISHONEST FRAMING. Do not coach the user to misrepresent anything, do not exaggerate hardship, and do not invent payments, filings, or IRS contact beyond what was stated. Stick to their words, formalized.
+6. SITUATION FRAMING. ${situationFraming}
+7. LENGTH: 200 to 400 words for the letter body, excluding headers and the schedule. Hit it within 20%.
+8. Output ONLY the letter followed by the proposed payment schedule and the before-you-send checklist. No preamble, no "here is your letter," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Letter
+A formal business letter: a header block with the taxpayer name, the tax years owed, and the total balance (only facts given), a salutation ("Dear Sir or Madam:"), three to four short paragraphs: (a) the request stated plainly, identifying the balance and tax years from the user's facts and asking for an installment agreement, (b) the reason full payment is not possible in the user's own terms, formalized, (c) the proposed monthly payment and term from the user's figures, the preferred payment day if given, and a commitment to stay current on new tax years and to contact the IRS before any payment fails, then a respectful close and a signature line left as "Respectfully, [Your Name]". Add one line after the letter: "General information only, not tax advice. Enclose Form 9465 if applying by mail."
+
+## Proposed Payment Schedule
+A short bullet list built only from user-stated figures: the total balance, the proposed term in months, the monthly payment computed as balance divided by months, and the final payment adjusted for rounding. Add one line: interest and penalties are not included in this schedule and generally continue until the balance is paid.
+
+## Before You Send Checklist
+A short bullet list: every required tax return is filed; balance, tax years, and notice reference copied exactly from the IRS notice; Form 9465 enclosed if applying by mail; copy of the signed letter and every enclosed page kept; new tax years filed on time and new balances kept current, or the agreement can default.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Situation (from the tool intake): ${modeLabel}
+
+Write the letter now.`;
+    },
+  },
   'sap-appeal-letter': {
     model: 'gemini-3.1-pro-preview',
     build: (input, params) => {

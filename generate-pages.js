@@ -1479,6 +1479,7 @@ function generateSitemap(generatedPages) {
     'ai-medicare-decision-companion',
     'ai-unemployment-appeal-letter',
     'ai-eviction-notice-response-letter',
+    'ai-irs-installment-agreement-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1597,6 +1598,7 @@ function generateSitemap(generatedPages) {
     'how-to-track-a-tenant-case',
     'how-to-respond-to-an-eviction-notice',
     'how-to-request-an-irs-installment-agreement',
+    'how-to-respond-to-an-irs-notice-cp14',
     'how-to-respond-to-a-performance-improvement-plan',
   ];
   staticGuides.forEach(slug => {
@@ -1801,6 +1803,7 @@ function manageRobotsMeta() {
     'ai-medicare-decision-companion',
     'ai-unemployment-appeal-letter',
     'ai-eviction-notice-response-letter',
+    'ai-irs-installment-agreement-letter',
   ]);
 
   const dirsToProcess = [

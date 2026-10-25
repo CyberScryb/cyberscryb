@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI IRS Installment Agreement Request Letter Generator &mdash; Free AI Tool | CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Owe the IRS and cannot pay in full? Generate a formal installment agreement request letter in minutes. Enter the balance you owe and the monthly payment you can afford, get a proposed payment schedule computed from your own figures, and get a printable letter plus a payment schedule you can send with Form 9465."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-irs-installment-agreement-letter/"
+    />
+    <meta
+      property="og:title"
+      content="AI IRS Installment Agreement Request Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Owe the IRS and cannot pay in full? Get a formal installment agreement request letter, with a proposed payment schedule computed from your own figures. Free, no signup."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-irs-installment-agreement-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI IRS Installment Agreement Request Letter Generator — Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Owe the IRS and cannot pay in full? Generate a formal installment agreement request letter with a proposed payment schedule. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .payment-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .payment-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .payment-amount {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      .payment-amount small {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+      .payment-note {
+        margin: 0.5rem 0 0;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+      }
+      #request-letter-wrap {
+        display: none;
+      }
+      #request-letter {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #request-letter h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #request-letter table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #request-letter td,
+      #request-letter th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #request-letter .report-guidance {
+        white-space: pre-wrap;
+      }
+      @media print {
+        body.printing-request header,
+        body.printing-request nav,
+        body.printing-request footer,
+        body.printing-request .lt-sticky-gen,
+        body.printing-request .lt-toolbar,
+        body.printing-request .email-gate,
+        body.printing-request .adsbygoogle,
+        body.printing-request section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-request .lt-grid,
+        body.printing-request .lt-checklist-band,
+        body.printing-request .lt-know,
+        body.printing-request .lt-faq,
+        body.printing-request .lt-related,
+        body.printing-request .lt-how,
+        body.printing-request .lt-trust,
+        body.printing-request .hero {
+          display: none !important;
+        }
+        body.printing-request #request-letter-wrap {
+          display: block !important;
+        }
+        #request-letter {
+          border: none !important;
+        }
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .lt-story {
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+      }
+    </style>
+    <script>
+      function printRequestLetter() {
+        var wrap = document.getElementById('request-letter-wrap');
+        if (
+          !wrap ||
+          wrap.style.display === 'none' ||
+          !wrap.querySelector('#request-letter').innerHTML.trim()
+        ) {
+          if (window.LifeTool) LifeTool.toast('Generate your letter first, then print it');
+          else alert('Generate your letter first, then print it.');
+          return;
+        }
+        document.body.classList.add('printing-request');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-request');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI IRS Installment Agreement Request Letter Generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-irs-installment-agreement-letter/",
+        "description": "Free AI tool that drafts a formal IRS installment agreement request letter from the taxpayer's own figures, with a proposed payment schedule computed from the balance and term entered, plus a printable letter and payment schedule. General information only, not tax advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an IRS installment agreement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An installment agreement is a payment plan that lets you pay a tax balance over time in monthly payments instead of all at once. You propose a monthly amount, the IRS reviews it, and if it is accepted you pay that amount each month until the balance is paid. Interest and penalties generally keep accruing until the balance is paid in full."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I request an IRS installment agreement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "File every required tax return first, then apply through the IRS Online Payment Agreement tool or by mailing Form 9465, Installment Agreement Request, with your return or separately. A written request letter like the one this tool drafts goes with a mailed Form 9465 and states the balance, the tax years, and the monthly payment you propose."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Form 9465?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Form 9465 is the IRS form titled Installment Agreement Request. It asks for the tax years involved, the amount owed, and the monthly payment amount and payment date you propose. This tool drafts the cover letter that accompanies it; it does not replace the form itself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What monthly payment should I propose?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Propose an amount you can actually pay every month without fail, based on your own budget. This tool computes the monthly figure from the balance and the number of months you enter, so you can test terms before you commit: a longer term means a smaller monthly payment but more interest over time. Never propose an amount you cannot sustain, because a missed payment can put the agreement into default."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I miss a payment on an IRS installment agreement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A missed payment puts the agreement at risk of default, and default can let the IRS resume collection action. If you know a payment will be late, contact the IRS before the due date. Reinstating a defaulted agreement is possible but may involve an additional fee, so treat the payment date as fixed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do penalties and interest stop once my installment agreement is approved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Interest and penalties generally continue to accrue on the unpaid balance until it is paid in full, even while an agreement is active. That is why paying extra when you can, and paying the agreement off early if possible, reduces the total you pay."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I request a payment plan if I owe for more than one tax year?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. List every tax year and the balance for each in your request, and propose one monthly payment covering the combined balance. The IRS treats the combined balance as one agreement, so enter the total balance you owe across all years in the tool above."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I change my monthly payment after the agreement starts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can ask the IRS to change the amount, through your IRS online account or by phone. A change or restructuring may involve a fee. Try to propose a sustainable amount the first time, and contact the IRS before a payment fails rather than after."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">IRS Installment Agreement Request Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI IRS installment agreement <span style="color: var(--primary)">request letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Owe the IRS and cannot pay in full? Pick your situation, enter the balance from your
+            notice and the monthly payment you can sustain, and get a formal request letter plus a
+            proposed payment schedule computed from your own figures, ready to send with Form 9465.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Tailored to your situation</span>
+          <span><i></i> Draft autosaved on this device</span>
+          <span><i></i> Printable letter and payment schedule</span>
+          <span><i></i> General information only, not tax advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick your situation</strong
+            ><span
+              >First request, after a balance-due notice, reinstatement, or hardship-based
+              amount.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter your figures</strong
+            ><span
+              >Balance from your notice, tax years, and the term you want. Takes 3 minutes.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get letter + schedule</strong
+            ><span>A formal request letter and a proposed payment schedule, ready to print.</span>
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Situation</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Figures</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter + schedule</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your request</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label"
+                >What is your situation? <span class="cs-req" aria-hidden="true">*</span></label
+              >
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="first-request"
+                  aria-pressed="false"
+                >
+                  First-time request
+                </button>
+                <button type="button" class="lt-chip" data-mode="after-notice" aria-pressed="false">
+                  After a balance-due notice
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="reinstatement"
+                  aria-pressed="false"
+                >
+                  Reinstate a defaulted plan
+                </button>
+                <button type="button" class="lt-chip" data-mode="hardship" aria-pressed="false">
+                  Hardship-based lower payment
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="first-request" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Letter strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the key facts to unlock a strong letter.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="tax_years"
+                    >Tax years owed <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="tax_years"
+                    type="text"
+                    maxlength="60"
+                    placeholder="e.g. 2024, or 2023 and 2024"
+                    data-label="Tax years owed"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="total_balance"
+                    >Total balance owed ($) <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="total_balance"
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    placeholder="From your IRS notice"
+                    data-label="Total balance owed"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="pay_months"
+                    >Proposed term (months) <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="pay_months"
+                    type="number"
+                    min="1"
+                    max="120"
+                    placeholder="e.g. 24, 36, 72"
+                    data-label="Proposed term in months"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="payment_day">Preferred payment day of month</label>
+                  <input
+                    class="lt-input"
+                    id="payment_day"
+                    type="number"
+                    min="1"
+                    max="28"
+                    placeholder="e.g. 15"
+                    data-label="Preferred payment day"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="sender-name">Your name</label>
+                  <input
+                    class="lt-input"
+                    id="sender-name"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_ref"
+                    >Notice or account reference (optional)</label
+                  >
+                  <input
+                    class="lt-input"
+                    id="notice_ref"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Notice number from your letter, if any"
+                    data-label="Notice reference"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="tool-input"
+                  >Why you cannot pay in full, in your own words
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="tool-input"
+                  data-label="Reason full payment is not possible"
+                  placeholder="Example: I owe $8,400 for 2024. I lost my second job in March and my monthly take-home is now $2,600 against $2,400 in essential expenses. I can sustain $200 a month and want to pay the balance off rather than fall further behind."
+                ></textarea>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="evidence">Supporting facts (optional)</label>
+                <input
+                  class="lt-input"
+                  id="evidence"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Returns filed, prior payments made, income change"
+                  data-label="Supporting facts"
+                  autocomplete="off"
+                />
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my request letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not tax advice.</strong> This tool drafts a
+                formal letter from your own facts. It is not a tax professional, and it does not
+                decide whether the IRS will accept your proposal. Your prompt is sent to our AI
+                service to generate the letter; nothing is filed for you. Use the figures from your
+                own IRS notice, and confirm the process with a tax professional or the IRS before
+                you send anything.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="payment-panel" id="payment-panel" aria-live="polite">
+              <h3>Proposed monthly payment</h3>
+              <div class="payment-amount" id="payment-amount">
+                <small
+                  >Enter the total balance and the proposed term in months to see the monthly
+                  payment computed from your figures.</small
+                >
+              </div>
+              <p class="payment-note">
+                Monthly payment equals the balance divided by the number of months, using only the
+                figures you enter. The final payment is adjusted for rounding so the schedule totals
+                exactly your balance. Interest and penalties are not included in this panel; they
+                continue to accrue on the unpaid balance until it is paid.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your request letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your request letter&hellip;</p>
+                  <small>Framed to your situation, from your own figures</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your request letter will appear here.<br /><br />1. Pick your situation
+                    <br />2. Enter your figures<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Filing checklist</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Do these the day you file. Tap items as you finish them; progress saves on this
+                  device.
+                </p>
+                <ul class="lt-check">
+                  <li>
+                    File every required tax return before you request the agreement. An unfiled
+                    return blocks approval.
+                  </li>
+                  <li>
+                    Copy the balance, tax years, and notice reference exactly from your IRS notice.
+                    Do not guess the figures.
+                  </li>
+                  <li>
+                    Send the letter with Form 9465 if you apply by mail, or apply through the IRS
+                    Online Payment Agreement tool. Keep a copy of everything you send.
+                  </li>
+                  <li>
+                    Keep paying what you proposed while you wait, if you can. Falling behind while
+                    the request is pending does not help it.
+                  </li>
+                  <li>
+                    Stay current on everything new: file on time and pay new balances, or the
+                    agreement can default.
+                  </li>
+                  <li>
+                    If a payment will be late, contact the IRS before the due date, not after.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Printable letter + payment schedule</h2>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Build a clean, one-document version of your letter and proposed payment schedule,
+                  then print it or save it as a PDF for your records.
+                </p>
+                <div id="request-letter-wrap">
+                  <div id="request-letter" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-letter-btn">
+                    Build printable letter + schedule
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printRequestLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Reload a draft to refine it or print it
+                  later.
+                </p>
+                <ul class="hist-list" id="draft-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            How IRS installment requests actually work
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>A payment plan is a proposal, not a promise</h3>
+              <p>
+                You propose a monthly amount; the IRS reviews it and either accepts it, asks for
+                different terms, or asks for more information. A letter that states the balance, the
+                tax years, and a sustainable monthly figure gives the reviewer something concrete to
+                say yes to. A vague request gives them a reason to ask again.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>File first, then ask</h3>
+              <p>
+                Every required return must be filed before an agreement can be approved. File on
+                time even when you cannot pay in full: filing late adds a separate problem to the
+                one you are already solving.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The monthly figure must survive contact with your budget</h3>
+              <p>
+                The figure that gets accepted is the one you can pay every month without fail. Test
+                terms in the panel above: a longer term lowers the monthly payment but means more
+                interest over the life of the plan. Propose the amount you can sustain, not the
+                amount you wish you could pay.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Interest does not pause</h3>
+              <p>
+                Interest and penalties generally keep accruing on the unpaid balance until it is
+                paid in full, even while an agreement is active. Paying extra when you can, and
+                paying the plan off early when possible, cuts the total you pay.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Stay current or the plan dies</h3>
+              <p>
+                New tax years must be filed on time and new balances paid, or the agreement can
+                default. A payment plan covers the past; it does not excuse the present.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Everything in writing, everything kept</h3>
+              <p>
+                The notice, your request letter, Form 9465, payment confirmations, and every IRS
+                reply, in one file. If the agreement is ever questioned, the file is what decides
+                it. Keep it until the balance is zero and the IRS confirms it.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>What is an IRS installment agreement?</summary>
+            <div class="faq-a">
+              An installment agreement is a payment plan that lets you pay a tax balance over time
+              in monthly payments instead of all at once. You propose a monthly amount, the IRS
+              reviews it, and if it is accepted you pay that amount each month until the balance is
+              paid. Interest and penalties generally keep accruing until the balance is paid in
+              full.
+            </div>
+          </details>
+          <details>
+            <summary>How do I request an IRS installment agreement?</summary>
+            <div class="faq-a">
+              File every required tax return first, then apply through the IRS Online Payment
+              Agreement tool or by mailing Form 9465, Installment Agreement Request. A written
+              request letter like the one this tool drafts goes with a mailed Form 9465 and states
+              the balance, the tax years, and the monthly payment you propose.
+            </div>
+          </details>
+          <details>
+            <summary>What is Form 9465?</summary>
+            <div class="faq-a">
+              Form 9465 is the IRS form titled Installment Agreement Request. It asks for the tax
+              years involved, the amount owed, and the monthly payment amount and payment date you
+              propose. This tool drafts the cover letter that accompanies it; it does not replace
+              the form itself.
+            </div>
+          </details>
+          <details>
+            <summary>What monthly payment should I propose?</summary>
+            <div class="faq-a">
+              Propose an amount you can actually pay every month without fail, based on your own
+              budget. This tool computes the monthly figure from the balance and the number of
+              months you enter, so you can test terms before you commit: a longer term means a
+              smaller monthly payment but more interest over time. Never propose an amount you
+              cannot sustain, because a missed payment can put the agreement into default.
+            </div>
+          </details>
+          <details>
+            <summary>What happens if I miss a payment?</summary>
+            <div class="faq-a">
+              A missed payment puts the agreement at risk of default, and default can let the IRS
+              resume collection action. If you know a payment will be late, contact the IRS before
+              the due date. Reinstating a defaulted agreement is possible but may involve an
+              additional fee.
+            </div>
+          </details>
+          <details>
+            <summary>Do penalties and interest stop once my agreement is approved?</summary>
+            <div class="faq-a">
+              No. Interest and penalties generally continue to accrue on the unpaid balance until it
+              is paid in full, even while an agreement is active. That is why paying extra when you
+              can, and paying the agreement off early if possible, reduces the total you pay.
+            </div>
+          </details>
+          <details>
+            <summary>Can I request a payment plan if I owe for more than one tax year?</summary>
+            <div class="faq-a">
+              Yes. List every tax year and the balance for each in your request, and propose one
+              monthly payment covering the combined balance. Enter the total balance you owe across
+              all years in the tool above.
+            </div>
+          </details>
+          <details>
+            <summary>Can I change my monthly payment after the agreement starts?</summary>
+            <div class="faq-a">
+              You can ask the IRS to change the amount, through your IRS online account or by phone.
+              A change or restructuring may involve a fee. Try to propose a sustainable amount the
+              first time, and contact the IRS before a payment fails rather than after.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/guides/how-to-request-an-irs-installment-agreement/"
+              ><strong>How to Request an IRS Installment Agreement</strong
+              ><small
+                >The companion guide: the online flow, Form 9465, and staying current while you
+                pay</small
+              ></a
+            >
+            <a href="/guides/how-to-respond-to-an-irs-notice-cp14/"
+              ><strong>How to Respond to an IRS Notice CP14</strong
+              ><small
+                >Got a balance-due notice first? Read it, verify the amount, then decide: pay,
+                dispute, or request a plan</small
+              ></a
+            >
+            <a href="/tools/debt-payoff-calculator/"
+              ><strong>Debt Payoff Calculator</strong
+              ><small
+                >Compare payoff orders across your other debts while the tax balance runs on its own
+                plan</small
+              ></a
+            >
+            <a href="/tools/hardship-letter/"
+              ><strong>Hardship Letter</strong
+              ><small
+                >Explain a financial hardship in writing to another creditor, in the same formal
+                style</small
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or financial advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. General information only, not tax advice. Confirm the process
+            with a tax professional or the IRS before you send anything.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/ai-irs-installment-agreement-letter/ai-irs-installment-agreement-letter.js?v=20261025a1"></script>
+  </body>
+</html>
