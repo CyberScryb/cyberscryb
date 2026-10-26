@@ -1601,6 +1601,7 @@ function generateSitemap(generatedPages) {
     'how-to-request-an-irs-installment-agreement',
     'how-to-respond-to-an-irs-notice-cp14',
     'how-to-write-an-offer-in-compromise-letter',
+    'how-to-prepare-for-an-exit-interview',
     'how-to-respond-to-a-performance-improvement-plan',
   ];
   staticGuides.forEach(slug => {
