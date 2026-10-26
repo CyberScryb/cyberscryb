@@ -7,20 +7,20 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb</title>
-    <meta name="description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
+    <title>Free Hash Generator: MD5, SHA-256, SHA-512 | CyberScryb</title>
+    <meta name="description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes instantly in your browser. Free hash generator, no signup, nothing uploaded.">
     <link rel="canonical" href="https://cyberscryb.com/tools/hash-generator/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <meta property="og:title" content="SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb">
-    <meta property="og:description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
+    <meta property="og:title" content="Free Hash Generator: MD5, SHA-256, SHA-512 | CyberScryb">
+    <meta property="og:description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes instantly in your browser. Free hash generator, no signup, nothing uploaded.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/hash-generator/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SHA256 Hash Generator &mdash; Free Online Tool | CyberScryb">
-    <meta name="twitter:description" content="Calculate secure checksums locally on your computer with our SHA256 hash generator. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:title" content="Free Hash Generator: MD5, SHA-256, SHA-512 | CyberScryb">
+    <meta name="twitter:description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes instantly in your browser. Free hash generator, no signup, nothing uploaded.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +62,12 @@
             { "@type": "Question", "name": "Which hash algorithm should I use?", "acceptedAnswer": { "@type": "Answer", "text": "Use SHA-256 or SHA-512 for anything security-related. MD5 and SHA-1 are cryptographically broken and should only be used for simple data integrity checks, never for passwords or signatures." }},
             { "@type": "Question", "name": "Is this hash generator private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. SHA-1, SHA-256, and SHA-512 use the browser's built-in Web Crypto API, and MD5 is computed in JavaScript. Your input never leaves your browser." }},
             { "@type": "Question", "name": "Why is MD5 considered broken?", "acceptedAnswer": { "@type": "Answer", "text": "MD5 is vulnerable to practical collision attacks — attackers can produce two different inputs that hash to the same value. It should not be used for signatures, password storage, or integrity checks against an adversary." }},
-            { "@type": "Question", "name": "Can I hash a file?", "acceptedAnswer": { "@type": "Answer", "text": "This tool hashes text input. Paste any string and all four hashes are computed instantly. For file hashing use a dedicated tool or command-line utility." }}
+            { "@type": "Question", "name": "Can I hash a file?", "acceptedAnswer": { "@type": "Answer", "text": "This tool hashes text input. Paste any string and all four hashes are computed instantly. For file hashing use a dedicated tool or command-line utility." }},
+            { "@type": "Question", "name": "What is the difference between SHA-256 and SHA-512?", "acceptedAnswer": { "@type": "Answer", "text": "Output length and internal block size. SHA-256 produces a 64-character hex digest, SHA-512 a 128-character one. Both are in the SHA-2 family and neither is broken. For ordinary checksums the choice rarely matters, so SHA-256 is the usual default." }},
+            { "@type": "Question", "name": "Can a hash be reversed to recover the original text?", "acceptedAnswer": { "@type": "Answer", "text": "No, not directly. A hash is one-way: you cannot compute the input from the digest. But short or predictable inputs can be guessed by hashing candidate values until one matches, which is why hashing a weak password with plain SHA-256 does not protect it." }},
+            { "@type": "Question", "name": "Is SHA-256 safe for storing passwords?", "acceptedAnswer": { "@type": "Answer", "text": "No. SHA-256 is fast, which is the opposite of what password storage needs. Store passwords with a slow, salted function designed for the job, such as bcrypt or Argon2, never with a plain hash." }},
+            { "@type": "Question", "name": "How do I verify a downloaded file's checksum?", "acceptedAnswer": { "@type": "Answer", "text": "Find the SHA-256 checksum the publisher lists on the download page, hash your downloaded file with sha256sum on Linux or macOS or certutil on Windows, then compare the two strings character by character. An exact match means the file is intact." }},
+            { "@type": "Question", "name": "Why do two nearly identical inputs give totally different hashes?", "acceptedAnswer": { "@type": "Answer", "text": "That is the avalanche effect, and it is deliberate. Changing a single character scrambles roughly half the output bits, so similar inputs never produce similar digests. It is what makes a hash a reliable change detector." }}
         ]
     }
     </script>
@@ -141,6 +146,13 @@
         .faq-section summary::after { content: '+'; color: var(--primary-soft); font-weight: 700; }
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+        .hg-content { margin-top: 3rem; }
+        .hg-content h2 { font-size: 1.3rem; margin: 2rem 0 0.75rem; color: var(--text); }
+        .hg-content p, .hg-content li { color: var(--text-muted); line-height: 1.7; }
+        .hg-content ol, .hg-content ul { padding-left: 1.25rem; }
+        .hg-content li { margin-bottom: 0.5rem; }
+        .hg-content code { color: var(--primary-soft); font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
     </style>
 
 
@@ -179,7 +191,8 @@
         <div class="hg-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Hash Generator</h1>
-                <p style="color:var(--text-faint); margin-bottom: 0;">Instantly compute MD5, SHA-1, SHA-256, and SHA-512 hashes in your browser. Nothing is uploaded.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0.75rem; max-width: 720px; line-height: 1.7;">Paste any text and get its MD5, SHA-1, SHA-256, and SHA-512 hashes at once. Use it to verify a download checksum, prove a file has not changed, or generate a fingerprint for a string in your code. The hashes are computed on your device with your browser's built-in cryptography, so your input never leaves the page. Free, no signup, nothing stored.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0; max-width: 720px; line-height: 1.7;">One rule before you start: SHA-256 is the safe default. MD5 and SHA-1 are shown for legacy checksums only, and a plain hash is not encryption and not a password store, as explained below.</p>
             </div>
 
             <div class="warning-banner">
@@ -214,6 +227,35 @@
                 <button class="copy-btn" data-copy="hash-sha512">📋 Copy</button>
             </div>
 
+            <div class="hg-content">
+                <h2>How to Use the Hash Generator</h2>
+                <ol>
+                    <li><strong>Paste your text.</strong> Type or paste anything into the box: a password candidate, a license key, a block of code, a sentence you want to fingerprint.</li>
+                    <li><strong>Read all four hashes at once.</strong> MD5, SHA-1, SHA-256, and SHA-512 appear instantly below the box, no button press needed.</li>
+                    <li><strong>Copy the one you need.</strong> Hit Copy beside SHA-256 for most jobs. The others are there for legacy systems and cross-checking.</li>
+                    <li><strong>Compare, do not trust.</strong> To verify a download, paste the checksum the publisher lists and compare it character by character with the hash you computed. One differing character means a different file.</li>
+                </ol>
+
+                <h2>Which Algorithm Should You Pick</h2>
+                <ul>
+                    <li><strong>SHA-256: the default.</strong> The standard choice for checksums, signatures, and integrity checks. A 64-character hex digest, fast, and unbroken.</li>
+                    <li><strong>SHA-512: the longer digest.</strong> Same family as SHA-256 with a 128-character output. Pick it when a system or spec asks for it; for everyday checksums it buys nothing SHA-256 lacks.</li>
+                    <li><strong>SHA-1: legacy only.</strong> Still seen in old Git objects and older download pages, but collision attacks against it are practical. Never use it for anything an attacker could tamper with.</li>
+                    <li><strong>MD5: legacy checksums only.</strong> Fast and everywhere in old tooling, but collisions are trivial to produce. Fine for spotting accidental corruption in a file you already trust the source of, useless as a security guarantee.</li>
+                </ul>
+
+                <h2>Real Uses for a Hash Generator</h2>
+                <ul>
+                    <li><strong>Verify a download.</strong> Publishers post a SHA-256 checksum beside installers and disk images. Hash the file you downloaded (on your terminal, <code>sha256sum file.bin</code> on Linux or <code>certutil -hashfile file.bin SHA256</code> on Windows) and confirm it matches before you run it.</li>
+                    <li><strong>Prove nothing changed.</strong> Hash a document before sending it, and hash the copy that comes back. Identical hashes mean identical content, down to the last byte.</li>
+                    <li><strong>Fingerprint strings in code.</strong> Cache keys, deduplication IDs, and change detection all start with hashing the input string and comparing digests instead of full text.</li>
+                    <li><strong>Check two versions of a text.</strong> Paste the old version, note the hash, paste the new one. Different hash means something changed, even if the difference is invisible whitespace.</li>
+                </ul>
+
+                <h2>What Hashing Is Not</h2>
+                <p>Hashing is one-way, not encryption. There is no key and no decryption step: the same input always gives the same digest, and the digest cannot be turned back into the input. That is exactly why hashes work as fingerprints, and exactly why a plain SHA-256 hash is not password storage. Passwords need a slow, salted function built for the job, like bcrypt or Argon2, so that a leaked database cannot be reversed with a lookup table. If you are storing passwords, do not use this tool for that; use a password-hashing library.</p>
+            </div>
+
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is a cryptographic hash?</summary><p>A cryptographic hash is a fixed-length fingerprint of some input. The same input always produces the same hash, but even a one-character change produces a completely different hash.</p></details>
@@ -221,6 +263,11 @@
                 <details><summary>Is this hash generator private?</summary><p>Yes. SHA variants use the browser's built-in Web Crypto API, and MD5 is computed in JavaScript locally. Nothing is uploaded.</p></details>
                 <details><summary>Why is MD5 considered broken?</summary><p>MD5 is vulnerable to practical collision attacks &mdash; two different inputs can produce the same hash. Never use it for signatures, password hashing, or integrity against an attacker.</p></details>
                 <details><summary>Can I hash a file?</summary><p>This tool hashes text. For files, use a dedicated tool or a command like <code>sha256sum file.bin</code> on your terminal.</p></details>
+                <details><summary>What is the difference between SHA-256 and SHA-512?</summary><p>Output length and internal block size. SHA-256 produces a 64-character hex digest, SHA-512 a 128-character one. Both are in the SHA-2 family and neither is broken. SHA-512 is sometimes faster on 64-bit hardware; for ordinary checksums the choice rarely matters, so SHA-256 is the usual default.</p></details>
+                <details><summary>Can a hash be reversed to recover the original text?</summary><p>No, not directly. A hash is one-way: you cannot compute the input from the digest. But short or predictable inputs can be guessed by hashing candidate values until one matches, which is why hashing a weak password with plain SHA-256 does not protect it. Long, random inputs are not practically reversible this way.</p></details>
+                <details><summary>Is SHA-256 safe for storing passwords?</summary><p>No. SHA-256 is fast, which is the opposite of what password storage needs. Attackers can test billions of guesses per second against a fast hash. Store passwords with a slow, salted function designed for the job, such as bcrypt or Argon2, never with a plain hash from this tool.</p></details>
+                <details><summary>How do I verify a downloaded file's checksum?</summary><p>Find the SHA-256 checksum the publisher lists on the download page, hash your downloaded file with <code>sha256sum file.bin</code> on Linux or macOS, or <code>certutil -hashfile file.bin SHA256</code> on Windows, then compare the two strings character by character. An exact match means the file is intact; any difference means it is corrupted or tampered with, and you should not run it.</p></details>
+                <details><summary>Why do two nearly identical inputs give totally different hashes?</summary><p>That is the avalanche effect, and it is deliberate. Changing a single character scrambles roughly half the output bits, so similar inputs never produce similar digests. It is what makes a hash a reliable change detector: any edit, however small, shows up immediately.</p></details>
             </div>
         </div>
 
@@ -246,6 +293,14 @@
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">JWT Decoder</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Inspect JSON Web Tokens safely in your browser.</span>
             </a>
+            <a href="/tools/base64-tool/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Base64 Encoder</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Encode and decode Base64 text in your browser.</span>
+            </a>
+            <a href="/tools/text-diff/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Text Diff Checker</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Spot exactly what changed between two texts.</span>
+            </a>
         </div>
     </section>
 
@@ -258,17 +313,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
         </div>
