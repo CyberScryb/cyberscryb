@@ -22,14 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btnAutoAA = document.getElementById('btnAutoAA');
   const btnAutoAAA = document.getElementById('btnAutoAAA');
+  const btnSwap = document.getElementById('btnSwap');
+  const a11yStatus = document.getElementById('a11yStatus');
+
+  let isProgrammatic = false;
 
   // Attach listeners
   fgPicker.addEventListener('input', () => {
+    if (isProgrammatic) return;
     fgHex.value = fgPicker.value.toUpperCase();
     calculateContrast();
   });
 
   bgPicker.addEventListener('input', () => {
+    if (isProgrammatic) return;
     bgHex.value = bgPicker.value.toUpperCase();
     calculateContrast();
   });
@@ -55,12 +61,29 @@ document.addEventListener('DOMContentLoaded', () => {
   btnAutoAA.addEventListener('click', () => optimizeContrast(4.5));
   btnAutoAAA.addEventListener('click', () => optimizeContrast(7.0));
 
+  if (btnSwap) {
+    btnSwap.addEventListener('click', () => {
+      isProgrammatic = true;
+      const tempFg = fgHex.value;
+      const tempBg = bgHex.value;
+      fgPicker.value = tempBg;
+      bgPicker.value = tempFg;
+      fgHex.value = tempBg.toUpperCase();
+      bgHex.value = tempFg.toUpperCase();
+      isProgrammatic = false;
+      calculateContrast();
+      if (a11yStatus) {
+        a11yStatus.textContent = `Swapped colors. Text color is now ${fgHex.value}, background color is now ${bgHex.value}.`;
+      }
+    });
+  }
+
   // Initial calculation
   calculateContrast();
 
   function calculateContrast() {
-    const fg = fgPicker.value;
-    const bg = bgPicker.value;
+    const fg = fgHex.value.trim() || fgPicker.value;
+    const bg = bgHex.value.trim() || bgPicker.value;
 
     const fgRgb = hexToRgb(fg);
     const bgRgb = hexToRgb(bg);
@@ -83,6 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStatusCard(cardNormalAAA, badgeNormalAAA, ratio >= 7.0);
     updateStatusCard(cardLargeAA, badgeLargeAA, ratio >= 3.0);
     updateStatusCard(cardLargeAAA, badgeLargeAAA, ratio >= 4.5);
+
+    if (a11yStatus && document.activeElement && document.activeElement !== document.body) {
+      a11yStatus.textContent = `Contrast ratio ${ratio.toFixed(2)} to 1. Normal text AA: ${ratio >= 4.5 ? 'Pass' : 'Fail'}.`;
+    }
   }
 
   function updateStatusCard(card, badge, passes) {
