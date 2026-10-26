@@ -316,15 +316,19 @@ describe('page and catalog', () => {
     expect(dom.window.localStorage.length).toBe(0);
     expect(JSON.stringify(dom.window.localStorage)).not.toContain(secret);
 
-    doc.getElementById('hc-toggle').click();
+    const toggleBtn = doc.getElementById('hc-toggle');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Show password');
+    toggleBtn.click();
     expect(input.type).toBe('text');
-    expect(doc.getElementById('hc-toggle').getAttribute('aria-pressed')).toBe('true');
+    expect(toggleBtn.getAttribute('aria-pressed')).toBe('true');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Hide password');
     expect(doc.getElementById('hc-live').textContent).toBe(
       'Characters are visible on this device.'
     );
     expect(doc.getElementById('hc-live').textContent).not.toContain(secret);
-    doc.getElementById('hc-toggle').click();
+    toggleBtn.click();
     expect(input.type).toBe('password');
+    expect(toggleBtn.getAttribute('aria-label')).toBe('Show password');
 
     let copied = '';
     dom.window.navigator.clipboard = {

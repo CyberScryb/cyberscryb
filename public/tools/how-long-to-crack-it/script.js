@@ -118,6 +118,7 @@
     var showing = input.type === 'password';
     input.type = showing ? 'text' : 'password';
     toggle.setAttribute('aria-pressed', showing ? 'true' : 'false');
+    toggle.setAttribute('aria-label', showing ? 'Hide password' : 'Show password');
     toggle.textContent = showing ? 'Hide' : 'Show';
     live.textContent = showing
       ? 'Characters are visible on this device.'
