@@ -178,3 +178,18 @@ describe('recent draft index', () => {
     expect(document.getElementById('continue-link').getAttribute('href')).toBe('#');
   });
 });
+
+describe('shared AI tool ARIA accessibility', () => {
+  const shared = read('content-site/tools/shared/ai-tool.js');
+
+  test('contains ARIA labels for dynamic control buttons and elements', () => {
+    expect(shared).toContain("clearBtn.setAttribute('aria-label', 'Clear input')");
+    expect(shared).toContain("copyBtn.setAttribute('aria-label', 'Copy result')");
+    expect(shared).toContain("dlBtn.setAttribute('aria-label', 'Download result as text file')");
+    expect(shared).toContain("regenBtn.setAttribute('aria-label', 'Regenerate result')");
+    expect(shared).toContain(
+      "chainSelect.setAttribute('aria-label', 'Send result to another tool')"
+    );
+    expect(shared).toContain("shareBtn.setAttribute('aria-label', 'Share result')");
+  });
+});
