@@ -57,6 +57,7 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-eviction-notice-response-letter',
     'ai-irs-installment-agreement-letter',
     'ai-irs-offer-in-compromise-letter',
+    'ai-irs-tax-debt-case-companion',
     'sap-appeal-letter',
     'utility-shutoff-letter',
     'cover-letter-generator',

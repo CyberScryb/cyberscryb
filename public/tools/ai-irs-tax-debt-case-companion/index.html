@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI IRS Tax Debt Case Companion &mdash; Track an Installment, Offer or CP14 Case | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI IRS tax debt case companion: run an installment agreement, offer in compromise, or CP14 notice case as one workflow, with deadline math from your own dates, a contact log, and a letter sequence. General information only, not tax advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-irs-tax-debt-case-companion/" />
+    <meta
+      property="og:title"
+      content="AI IRS Tax Debt Case Companion — Track an Installment, Offer or CP14 Case | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Run your IRS tax debt case as one workflow: intake, deadlines from your own notice dates, letter sequence, contact log, and a printable case pack. Free, no signup. General information only, not tax advice."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-irs-tax-debt-case-companion/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI IRS Tax Debt Case Companion — Track an Installment, Offer or CP14 Case | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Run your IRS tax debt case as one workflow: intake, deadlines from your own notice dates, letter sequence, contact log, and a printable case pack. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .math-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .math-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .math-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.32rem 0;
+        border-top: 1px dashed var(--border);
+      }
+      .math-row:first-of-type {
+        border-top: none;
+      }
+      .math-row .k {
+        color: var(--text-muted);
+      }
+      .math-row .v {
+        font-weight: 700;
+        color: var(--text);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .math-band {
+        display: inline-block;
+        padding: 1px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .math-band.ok {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+      }
+      .math-band.warn {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+      }
+      .math-band.bad {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+      }
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .log-entry {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .log-entry .log-date {
+        font-weight: 700;
+        color: var(--text);
+        display: block;
+        font-size: 0.78rem;
+      }
+      .log-entry .log-note {
+        color: var(--text-muted);
+      }
+      .log-entry .log-track {
+        color: var(--text-faint);
+        font-size: 0.75rem;
+      }
+      .mini-form {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+      .mini-form input,
+      .mini-form textarea {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 0.82rem;
+        padding: 0.5rem 0.65rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .mini-form .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      .deadline-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        font-size: 0.83rem;
+      }
+      .deadline-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.45rem 0.65rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg-elevated);
+      }
+      .deadline-list .dl-name {
+        color: var(--text-muted);
+      }
+      .deadline-list .dl-date {
+        font-weight: 700;
+        color: var(--text);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .deadline-list li.due-soon {
+        border-color: #dc2626;
+      }
+      .deadline-list li.due-soon .dl-date {
+        color: #f87171;
+      }
+      .pack-row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+      }
+      /* Canonical red contrast: dark text on #ef4444 (5.58:1, passes AA) */
+      .lt-gen {
+        color: #09090b;
+      }
+      .lt-chip.is-on {
+        color: #09090b;
+      }
+    </style>
+    <!-- Google AdSense -->
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #evidence-pack-print,
+      #evidence-pack-print * {
+        visibility: visible !important;
+      }
+      #evidence-pack-print {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 11pt;
+        color: #000;
+        background: #fff;
+        padding: 0.7in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI IRS Tax Debt Case Companion",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-irs-tax-debt-case-companion/",
+        "description": "Free AI IRS tax debt case companion: run an installment agreement, offer in compromise, or CP14 notice case as one workflow, with deadline math from your own dates, a contact log, and a letter sequence. General information only, not tax advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is a case companion different from a single IRS letter generator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A single letter ends the job. A case companion keeps the whole case: the notice, the deadlines computed from your own dates, every letter in sequence, a log of IRS contact, and a certified-mail log, saved on your device so you can pick the case up weeks later. Use the standalone installment agreement and offer in compromise letter tools when you only need one letter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do I need to open an IRS tax debt case here?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The tax years owed, the total balance from your notice, the notice reference if you have one, the notice date, and the number of days the notice gives you to respond, copied from the notice itself. Add the monthly payment or offer amount you propose, in your own figures. Leave anything blank if you do not know it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are the deadlines computed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only from dates and day counts you enter: the response deadline is the notice date plus the days stated on your notice, computed on your device. The tool states no IRS deadline of its own, because deadlines come from your notice. Always check the notice itself before relying on any date."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool file anything with the IRS or talk to the IRS for me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It drafts letters from your facts and organizes your case file. Your prompt is sent to our AI service to draft the letter; the deadline and payment math are computed on your device. You send, mail, or file everything yourself, and you keep a copy of each letter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this tax advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool organizes your facts, computes your deadlines and payment math from your own figures, and drafts letters from what you enter. It does not advise which option is best, does not predict an IRS decision, and does not interpret your tax situation. Verify the notice and talk to a tax professional for advice about your case."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to run an IRS tax debt case with the companion",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Open a case",
+            "text": "Pick the case type (installment agreement, offer in compromise, or CP14 notice response), enter the tax years, the balance from your notice, the notice date, and the days the notice gives you to respond."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Check your deadlines",
+            "text": "The deadline calendar computes your response deadline from the notice date and the day count you entered. Verify it against the notice itself."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate each letter in sequence",
+            "text": "Draft the first letter, log it, log every IRS reply and every certified mailing, and generate the next letter only when the record supports it."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Build the case pack",
+            "text": "Combine the letters, the timeline, the contact log, the mail log, and the verified math into one printable pack."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">IRS Tax Debt Case Companion</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI case tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            IRS tax debt <span style="color: var(--primary)">case companion</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 40rem">
+            One letter rarely closes an IRS tax debt case. The record does. Open a case for your
+            installment agreement, offer in compromise, or CP14 notice: the companion tracks your
+            deadlines from your own notice dates, drafts each letter in sequence, logs every
+            exchange, and bundles the whole thing into a printable case pack.
+          </p>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> One case file across visits</span>
+          <span><i></i> Deadlines computed on your device</span>
+          <span><i></i> Letter sequence, not one-offs</span>
+          <span><i></i> General information, not tax advice</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Open a case</strong
+            ><span
+              >Case type, tax years, balance, notice date, and the days your notice gives you. Autosaves on this
+              device.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Watch the deadlines</strong
+            ><span
+              >The calendar computes your response deadline from your notice date and day count. Verify it against the notice, then follow the timeline.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Build the record</strong
+            ><span
+              >Generate each letter in sequence, log every reply and mailing, and export the case pack when
+              the case closes.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Case</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Deadlines</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letters</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Open your case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="case-label">Case type</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="case-label">
+                <button type="button" class="lt-chip" data-mode="installment-agreement" aria-pressed="false">
+                  Installment agreement
+                </button>
+                <button type="button" class="lt-chip" data-mode="offer-in-compromise" aria-pressed="false">
+                  Offer in compromise
+                </button>
+                <button type="button" class="lt-chip" data-mode="cp14-response" aria-pressed="false">
+                  CP14 notice response
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="installment-agreement" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Installment agreement case</strong>Ask to pay the balance over time, in the monthly amount you propose. The letter states the tax years, the balance, and your proposed payment, and commits you to staying current on new tax years.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Case strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the tax years, the balance, the notice date, and the facts to open a solid case file.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="taxpayer_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="taxpayer_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Taxpayer name"
+                    autocomplete="name"
+                    data-cs-share="senderName"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="tax_years"
+                    >Tax years owed <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="tax_years"
+                    type="text"
+                    aria-required="true"
+                    placeholder="e.g. 2022, 2023"
+                    data-label="Tax years owed"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="total_balance"
+                    >Total balance from the notice <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="total_balance"
+                    type="text"
+                    inputmode="decimal"
+                    aria-required="true"
+                    placeholder="e.g. 12400"
+                    data-label="Total balance"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_ref"
+                    >Notice reference <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="notice_ref"
+                    type="text"
+                    placeholder="e.g. CP14, notice dated Oct 6"
+                    data-label="Notice reference"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_date"
+                    >Notice date <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="notice_date"
+                    type="date"
+                    aria-required="true"
+                    data-label="Notice date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="response_days"
+                    >Days to respond, as stated on your notice <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="response_days"
+                    type="text"
+                    inputmode="numeric"
+                    aria-required="true"
+                    placeholder="e.g. 30"
+                    data-label="Days to respond stated on notice"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field" id="installment-fields">
+                  <label class="lt-label" for="proposed_monthly"
+                    >Proposed monthly payment <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="proposed_monthly"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 250"
+                    data-label="Proposed monthly payment"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field" id="installment-term-field">
+                  <label class="lt-label" for="proposed_term"
+                    >Proposed term in months <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="proposed_term"
+                    type="text"
+                    inputmode="numeric"
+                    placeholder="e.g. 48"
+                    data-label="Proposed term in months"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field" id="offer-fields" style="display: none">
+                  <label class="lt-label" for="offer_amount"
+                    >Offer amount you propose <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="offer_amount"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="e.g. 4000"
+                    data-label="Offer amount"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field" id="offer-term-field" style="display: none">
+                  <label class="lt-label" for="offer_term"
+                    >Offer term in months, if periodic <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="offer_term"
+                    type="text"
+                    inputmode="numeric"
+                    placeholder="e.g. 24"
+                    data-label="Offer term in months"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label">Letter to generate</label>
+                <div class="pill-group" role="group" aria-label="Letter to generate">
+                  <input type="radio" id="doc-installment" name="doc-rb" value="installment-request" checked /><label
+                    class="pill"
+                    for="doc-installment"
+                    >Installment request</label
+                  >
+                  <input type="radio" id="doc-oic" name="doc-rb" value="oic-request" /><label
+                    class="pill"
+                    for="doc-oic"
+                    >Offer in compromise request</label
+                  >
+                  <input type="radio" id="doc-cp14" name="doc-rb" value="cp14-response" /><label
+                    class="pill"
+                    for="doc-cp14"
+                    >CP14 response</label
+                  >
+                </div>
+                <input type="hidden" id="document" data-label="Letter to generate" value="Installment request" />
+                <p class="lt-hint" style="margin-top: 0.4rem">
+                  Generate letters in sequence as the case develops: first the request, then the follow-up, then the revised request if the first one is answered. Each new letter references the earlier record. For a standalone single letter, use the dedicated installment agreement or offer in compromise letter tools linked below.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Case details (facts, dates, amounts)
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="lt-examples" aria-label="Example cases">
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "installment-agreement", "fields": {"taxpayer_name": "Jordan Lee", "tax_years": "2022, 2023", "total_balance": "12400", "notice_ref": "CP14", "notice_date": "2026-10-06", "response_days": "30", "proposed_monthly": "250", "proposed_term": "48"}, "document": "installment-request", "story": "CP14 notice dated October 6 shows a balance of $12,400 for tax years 2022 and 2023. Cannot pay in full. Proposing $250 per month for 48 months and asking for an installment agreement. All required returns are filed. Will stay current on new tax years."}'
+                  >
+                    CP14 balance, pay over time
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "offer-in-compromise", "fields": {"taxpayer_name": "A. Rivera", "tax_years": "2021, 2022", "total_balance": "18000", "notice_ref": "CP504", "notice_date": "2026-09-15", "response_days": "30", "offer_amount": "4000", "offer_term": "24"}, "document": "oic-request", "story": "Balance of $18,000 for tax years 2021 and 2022 after a job loss and medical bills. Monthly income covers essential expenses only. Offering $4,000 paid over 24 months and asking for an offer in compromise. All required returns are filed."}'
+                  >
+                    $4,000 offer on $18,000
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "cp14-response", "fields": {"taxpayer_name": "Sam Okonkwo", "tax_years": "2023", "total_balance": "3200", "notice_ref": "CP14", "notice_date": "2026-10-18", "response_days": "30"}, "document": "cp14-response", "story": "CP14 notice dated October 18 shows $3,200 owed for tax year 2023. Part of the balance was already paid by check on September 30, which does not appear on the notice. Responding in writing with the payment details and asking the IRS to correct the balance before any further collection step."}'
+                  >
+                    CP14, payment missing
+                  </button>
+                </div>
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  aria-required="true"
+                  placeholder="Example: CP14 notice dated October 6 shows $12,400 owed for 2022 and 2023. Cannot pay in full. Proposing $250 a month and asking for an installment agreement. All required returns are filed."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; Real dates, real amounts, real
+                  names only. Leave blanks if you do not know.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">General information only, not tax advice.</strong> This drafts letters
+                from your facts and computes deadlines only from the notice date and day count you
+                enter, which you must check against the notice itself. Your prompt is sent to our AI
+                service to draft the letter; the deadline and payment math are computed on your
+                device. The AI will not invent balances, tax years, payments, or IRS decisions.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="math-panel" aria-live="polite">
+              <h3>Deadline calendar</h3>
+              <p
+                style="margin: 0 0 0.6rem; font-size: 0.75rem; color: var(--text-faint)"
+                id="dl-benchmark-note"
+              >
+                Enter a notice date and the days your notice gives you to compute your response deadline.
+              </p>
+              <ul class="deadline-list" id="deadline-list">
+                <li>
+                  <span class="dl-name">Waiting on input</span><span class="dl-date">&mdash;</span>
+                </li>
+              </ul>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Computed on your device from the notice date and day count you enter. The tool states no
+                IRS deadline of its own. Check the notice itself before relying on any date.
+              </p>
+            </div>
+            <div class="math-panel" aria-live="polite" id="math-panel">
+              <h3>Case math, verified here</h3>
+              <div class="math-row">
+                <span class="k">Proposed total (monthly x term)</span><span class="v" id="m-proposed-total">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Balance left after proposed term</span><span class="v" id="m-remaining">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Offer as % of balance</span><span class="v" id="m-offer-pct">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Offer monthly (offer / term)</span><span class="v" id="m-offer-monthly">&mdash;</span>
+              </div>
+              <div class="math-row">
+                <span class="k">Offer final payment (rounding-adjusted)</span><span class="v" id="m-offer-final">&mdash;</span>
+              </div>
+              <p style="margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--text-faint)">
+                Computed on your device from your numbers. Interest and penalties are not included and
+                generally continue until the balance is paid. Letters quote these exact figures, never
+                AI-guessed math.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" id="pack-print-btn" class="lt-icon-btn">
+                    Print pack
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting with care&hellip;</p>
+                  <small>Using your case facts and verified math, not generic filler</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your letter will appear here.<br /><br />1. Pick a case type<br />2. Enter the
+                    facts (or load an example)<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Case pack</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Bundles the latest letter, the deadline calendar, the contact log, the mail log,
+                  and the verified math into one printable pack.
+                </p>
+                <div class="pack-row">
+                  <button type="button" class="lt-ghost" id="pack-download-btn">
+                    Download pack (.txt)
+                  </button>
+                  <button type="button" class="lt-ghost" id="pack-print-btn2">Print pack</button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past letters</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No letters yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved cases</h2>
+                <button type="button" class="lt-ghost" id="save-case-btn" style="font-size: 0.75rem">
+                  Save this case
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  A case library on this device: save a case, come back weeks later, and reload it
+                  instead of retyping the notice. Cases hold only what you entered.
+                </p>
+                <ul class="hist-list" id="saved-cases-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No saved cases yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>IRS contact log</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Every IRS call, letter, and reply, with its date. This log is the record that
+                  keeps a multi-month case straight. Saved on this device.
+                </p>
+                <div class="hist-list" id="contact-log-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No entries yet.</li>
+                </div>
+                <div class="mini-form">
+                  <div class="two">
+                    <input type="date" id="log-date" style="color-scheme: dark" aria-label="Log date" />
+                    <input type="text" id="log-channel" placeholder="Call, letter, reply…" aria-label="Channel" />
+                  </div>
+                  <textarea
+                    id="log-note"
+                    rows="2"
+                    placeholder="What happened, in one or two sentences."
+                    aria-label="Log note"
+                  ></textarea>
+                  <button type="button" class="lt-ghost" id="log-add-btn">Add log entry</button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Certified-mail log</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Certified mail with return receipt proves the IRS got your letter. Log each
+                  sending here.
+                </p>
+                <div class="hist-list" id="mail-log-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No mailings logged.</li>
+                </div>
+                <div class="mini-form">
+                  <div class="two">
+                    <input type="date" id="mail-date" style="color-scheme: dark" aria-label="Mail date" />
+                    <input type="text" id="mail-tracking" placeholder="Tracking #" aria-label="Tracking number" />
+                  </div>
+                  <input type="text" id="mail-title" placeholder="Letter title, e.g. Second installment request" aria-label="Letter title" />
+                  <button type="button" class="lt-ghost" id="mail-add-btn">Add mailing</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Case checklist</h2></div>
+            <div class="lt-body">
+              <p class="lt-side-note">
+                Tap items as you finish them, progress saves on this device.
+              </p>
+              <ul class="lt-check" id="case-checklist">
+                <li data-check="returns-filed">
+                  Every required tax return is filed before the request goes out
+                </li>
+                <li data-check="notice-copied">
+                  Balance, tax years, and notice reference copied exactly from the IRS notice
+                </li>
+                <li data-check="deadline-checked">
+                  Response deadline checked against the notice itself, not just this page
+                </li>
+                <li data-check="certified-sent">
+                  Sent at least one key letter by certified mail with return receipt
+                </li>
+                <li data-check="copies-kept">
+                  Kept a copy of the signed letter and every enclosed page
+                </li>
+                <li data-check="current-kept">
+                  New tax years filed on time and new balances kept current through the case
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually moves an IRS tax debt case
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>The record beats the argument</h3>
+              <p>
+                A dated written request, a logged reply, a certified-mail receipt: that chain is the
+                whole case. Start every case by opening a case file the same day the notice arrives,
+                and keep a copy of everything you send.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Answer in writing, in order</h3>
+              <p>
+                First request, follow-up, revised request. Skipping straight to a second, different
+                ask usually confuses the file, because there is no record the first request was
+                answered. Each letter in the sequence references the ones before it.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Deadlines come from your notice</h3>
+              <p>
+                This page computes no IRS deadline of its own. The response deadline is the notice
+                date plus the days stated on your notice, and the notice itself is the authority.
+                Read it the day you open the case, and never quote a deadline you have not seen
+                printed there.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Stay current while the case runs</h3>
+              <p>
+                File new tax years on time and keep new balances current through the whole case.
+                A new unpaid year can undercut an installment request or an offer, so the case
+                checklist tracks that alongside the letters.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>How is a case companion different from a single IRS letter generator?</summary>
+              <p>
+                A single letter ends the job. A case companion keeps the whole case: the notice, the
+                deadlines computed from your own dates, every letter in sequence, a log of IRS
+                contact, and a certified-mail log, saved on your device so you can pick the case up
+                weeks later. Use the standalone installment agreement and offer in compromise letter
+                tools when you only need one letter.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What do I need to open an IRS tax debt case here?</summary>
+              <p>
+                The tax years owed, the total balance from your notice, the notice reference if you
+                have one, the notice date, and the number of days the notice gives you to respond,
+                copied from the notice itself. Add the monthly payment or offer amount you propose,
+                in your own figures. Leave anything blank if you do not know it.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How are the deadlines computed?</summary>
+              <p>
+                Only from dates and day counts you enter: the response deadline is the notice date
+                plus the days stated on your notice, computed on your device. The tool states no IRS
+                deadline of its own, because deadlines come from your notice. Always check the notice
+                itself before relying on any date.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Does this tool file anything with the IRS or talk to the IRS for me?</summary>
+              <p>
+                No. It drafts letters from your facts and organizes your case file. Your prompt is
+                sent to our AI service to draft the letter; the deadline and payment math are
+                computed on your device. You send, mail, or file everything yourself, and you keep a
+                copy of each letter.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this tax advice?</summary>
+              <p>
+                No. This tool organizes your facts, computes your deadlines and payment math from
+                your own figures, and drafts letters from what you enter. It does not advise which
+                option is best, does not predict an IRS decision, and does not interpret your tax
+                situation. Verify the notice and talk to a tax professional for advice about your case.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools
+          </h3>
+          <div class="lt-related">
+            <a href="/tools/ai-irs-installment-agreement-letter/"
+              ><strong>IRS Installment Agreement Letter</strong
+              ><small>One standalone installment request letter</small></a
+            >
+            <a href="/tools/ai-irs-offer-in-compromise-letter/"
+              ><strong>IRS Offer in Compromise Letter</strong
+              ><small>One standalone offer letter with offer math</small></a
+            >
+            <a href="/guides/how-to-request-an-irs-installment-agreement/"
+              ><strong>How to Request an IRS Installment Agreement</strong
+              ><small>The installment guide, paired with this tool</small></a
+            >
+            <a href="/guides/how-to-respond-to-an-irs-notice-cp14/"
+              ><strong>How to Respond to an IRS Notice CP14</strong
+              ><small>The CP14 guide, paired with this tool</small></a
+            >
+            <a href="/guides/how-to-write-an-offer-in-compromise-letter/"
+              ><strong>How to Write an Offer in Compromise Letter</strong
+              ><small>The offer guide, paired with this tool</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <div id="evidence-pack-print" aria-hidden="true" style="display: none"></div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Free AI tools. General information only, not tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. Review every letter before you send it.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-irs-tax-debt-case-companion/ai-irs-tax-debt-case-companion.js?v=20261027a1"></script>
+  </body>
+</html>

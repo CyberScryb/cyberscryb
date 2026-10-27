@@ -1481,6 +1481,7 @@ function generateSitemap(generatedPages) {
     'ai-eviction-notice-response-letter',
     'ai-irs-installment-agreement-letter',
     'ai-irs-offer-in-compromise-letter',
+    'ai-irs-tax-debt-case-companion',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1601,6 +1602,7 @@ function generateSitemap(generatedPages) {
     'how-to-request-an-irs-installment-agreement',
     'how-to-respond-to-an-irs-notice-cp14',
     'how-to-write-an-offer-in-compromise-letter',
+    'how-to-negotiate-a-severance-package',
     'how-to-prepare-for-an-exit-interview',
     'how-to-respond-to-a-performance-improvement-plan',
   ];
@@ -1809,6 +1811,7 @@ function manageRobotsMeta() {
     'ai-eviction-notice-response-letter',
     'ai-irs-installment-agreement-letter',
     'ai-irs-offer-in-compromise-letter',
+    'ai-irs-tax-debt-case-companion',
   ]);
 
   const dirsToProcess = [
