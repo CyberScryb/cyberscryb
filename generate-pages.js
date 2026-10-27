@@ -1618,6 +1618,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    '31-subnet-point-to-point-links',
     'catastrophic-backtracking-regex-redos',
     'uuidv7-vs-uuidv4-database-index',
     'qr-code-scams-fake-parking-codes',

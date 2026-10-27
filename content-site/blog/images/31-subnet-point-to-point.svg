@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440" role="img" aria-labelledby="t d">
+  <title id="t">/30 versus /31 on a point-to-point link</title>
+  <desc id="d">Top: a /30 point-to-point link spends four addresses, 10.0.0.0 to 10.0.0.3. The network address .0 and broadcast address .3 go unused, and .1 and .2 go to routers R1 and R2. Middle: a /31 link spends two addresses, 10.0.0.0 for R1 and 10.0.0.1 for R2, with nothing wasted. Bottom: one /24 yields 64 links as /30s and 128 links as /31s.</desc>
+  <rect width="960" height="440" rx="18" fill="#111114"/>
+  <g font-family="Outfit, Helvetica, Arial, sans-serif">
+    <text x="40" y="52" fill="#f4f4f5" font-size="24" font-weight="700">Same two routers, half the addresses</text>
+    <text x="40" y="80" fill="#a1a1aa" font-size="15">A /31 drops the network and broadcast addresses a point-to-point link never uses (RFC 3021).</text>
+    <!-- /30 row -->
+    <text x="40" y="132" fill="#f4f4f5" font-size="20" font-weight="700">/30</text>
+    <text x="40" y="154" fill="#a1a1aa" font-size="13">4 addresses</text>
+    <g font-family="Consolas, monospace" font-size="15" text-anchor="middle">
+      <rect x="140" y="106" width="170" height="56" rx="8" fill="#27272a" stroke="#52525b" stroke-dasharray="5 4"/>
+      <text x="225" y="130" fill="#71717a">10.0.0.0</text>
+      <text x="225" y="150" fill="#71717a" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">network (unused)</text>
+      <rect x="320" y="106" width="170" height="56" rx="8" fill="#dc2626" fill-opacity="0.22" stroke="#dc2626"/>
+      <text x="405" y="130" fill="#f4f4f5">10.0.0.1</text>
+      <text x="405" y="150" fill="#fca5a5" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">R1</text>
+      <rect x="500" y="106" width="170" height="56" rx="8" fill="#dc2626" fill-opacity="0.22" stroke="#dc2626"/>
+      <text x="585" y="130" fill="#f4f4f5">10.0.0.2</text>
+      <text x="585" y="150" fill="#fca5a5" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">R2</text>
+      <rect x="680" y="106" width="170" height="56" rx="8" fill="#27272a" stroke="#52525b" stroke-dasharray="5 4"/>
+      <text x="765" y="130" fill="#71717a">10.0.0.3</text>
+      <text x="765" y="150" fill="#71717a" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">broadcast (unused)</text>
+    </g>
+    <!-- /31 row -->
+    <text x="40" y="222" fill="#f4f4f5" font-size="20" font-weight="700">/31</text>
+    <text x="40" y="244" fill="#a1a1aa" font-size="13">2 addresses</text>
+    <g font-family="Consolas, monospace" font-size="15" text-anchor="middle">
+      <rect x="140" y="196" width="170" height="56" rx="8" fill="#dc2626" fill-opacity="0.22" stroke="#dc2626"/>
+      <text x="225" y="220" fill="#f4f4f5">10.0.0.0</text>
+      <text x="225" y="240" fill="#fca5a5" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">R1</text>
+      <rect x="320" y="196" width="170" height="56" rx="8" fill="#dc2626" fill-opacity="0.22" stroke="#dc2626"/>
+      <text x="405" y="220" fill="#f4f4f5">10.0.0.1</text>
+      <text x="405" y="240" fill="#fca5a5" font-size="12" font-family="Outfit, Helvetica, Arial, sans-serif">R2</text>
+    </g>
+    <text x="510" y="230" fill="#a1a1aa" font-size="14">Both addresses are hosts. No broadcast address.</text>
+    <!-- /24 comparison -->
+    <rect x="40" y="290" width="880" height="122" rx="14" fill="#18181b" stroke="#3f3f46"/>
+    <text x="60" y="322" fill="#f4f4f5" font-size="17" font-weight="700">One /24 carved into point-to-point links</text>
+    <text x="60" y="356" fill="#a1a1aa" font-size="14">as /30s</text>
+    <rect x="140" y="342" width="330" height="20" rx="4" fill="#52525b"/>
+    <text x="482" y="357" fill="#f4f4f5" font-size="14" font-weight="600">64 links</text>
+    <text x="60" y="392" fill="#a1a1aa" font-size="14">as /31s</text>
+    <rect x="140" y="378" width="660" height="20" rx="4" fill="#dc2626"/>
+    <text x="812" y="393" fill="#f4f4f5" font-size="14" font-weight="600">128 links</text>
+  </g>
+</svg>
