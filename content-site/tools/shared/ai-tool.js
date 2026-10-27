@@ -271,7 +271,8 @@
     }
 
     if (copyBtn) {
-      const origCopyLabel = copyBtn.getAttribute('aria-label') || copyBtn.title || 'Copy to Clipboard';
+      const origCopyLabel =
+        copyBtn.getAttribute('aria-label') || copyBtn.title || 'Copy to Clipboard';
       if (!copyBtn.getAttribute('aria-label')) {
         copyBtn.setAttribute('aria-label', origCopyLabel);
       }
