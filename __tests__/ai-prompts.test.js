@@ -122,4 +122,19 @@ describe('AI_PROMPTS dispatch table', () => {
       }
     });
   });
+
+  test('does not describe a lump-sum OIC as a one-payment offer', () => {
+    const prompt = AI_PROMPTS['ai-irs-offer-in-compromise-letter'].build('TEST_INPUT_42', {
+      mode: 'lump-sum',
+    });
+    expect(prompt).toContain('Do not call it a one-payment offer');
+    expect(prompt).not.toContain('proposes paying the offered amount in one payment');
+  });
+
+  test('requires the validated periodic OIC term in the request framing', () => {
+    const prompt = AI_PROMPTS['ai-irs-offer-in-compromise-letter'].build('TEST_INPUT_42', {
+      mode: 'periodic-payment',
+    });
+    expect(prompt).toContain('validated 6-to-24-month term');
+  });
 });

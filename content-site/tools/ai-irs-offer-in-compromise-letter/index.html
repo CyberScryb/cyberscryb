@@ -227,7 +227,7 @@
             "name": "What is the difference between a lump-sum offer and a periodic-payment offer?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A lump-sum offer proposes paying the offered amount in one payment. A periodic-payment offer proposes paying the offered amount over a term of months. They are different commitments: state which one you are making in the letter, and make sure the terms you state are terms you can actually meet. This tool shows the monthly figure for a periodic offer computed from your own offer amount and term only."
+              "text": "A lump-sum offer is paid in five or fewer payments within five months after acceptance; a periodic-payment offer is paid in monthly installments over six to 24 months. The required initial payment and continuing-payment rules have exceptions for taxpayers who qualify for the IRS low-income certification, so confirm the current Form 656 instructions before filing. This tool shows the monthly figure for a periodic offer computed from your own offer amount and term only."
             }
           },
           {
@@ -461,18 +461,19 @@
                 </div>
                 <div class="lt-field">
                   <label class="lt-label" for="pay_months"
-                    >Proposed term (months, periodic offers only)</label
+                    >Proposed term (6–24 months, periodic offers only)</label
                   >
                   <input
                     class="lt-input"
                     id="pay_months"
                     type="number"
-                    min="1"
-                    max="120"
+                    min="6"
+                    max="24"
                     placeholder="e.g. 24, for a periodic-payment offer"
                     data-label="Proposed term in months"
                     autocomplete="off"
                   />
+                  <small class="lt-help">Periodic-payment offers must be paid in 6–24 months under Form 656.</small>
                 </div>
               </div>
               <div class="lt-row">

@@ -1712,7 +1712,7 @@ Write the letter now.`;
       let situationFraming = '';
       if (mode.includes('periodic')) {
         situationFraming =
-          'SITUATION: PERIODIC-PAYMENT OFFER. The taxpayer proposes paying the offered amount over a term of months. State the tax years, the total balance from the notice, the offer amount, and the term in months, and make sure the monthly figure stated is the one computed from the offer and term supplied. The letter must make the periodic terms unmistakable: amount, term, and monthly figure. Use only the figures the user supplied.';
+          'SITUATION: PERIODIC-PAYMENT OFFER. The taxpayer proposes paying the offered amount over a validated 6-to-24-month term. State the tax years, the total balance from the notice, the offer amount, and the term in months, and make sure the monthly figure stated is the one computed from the offer and term supplied. The letter must make the periodic terms unmistakable: amount, term, and monthly figure. Use only the figures the user supplied.';
       } else if (mode.includes('after-notice') || mode.includes('notice')) {
         situationFraming =
           'SITUATION: OFFER AFTER A COLLECTION NOTICE. The taxpayer received an IRS collection notice stating a balance due and is responding to it with an offer. Reference the notice and its stated balance, confirm the taxpayer is responding rather than ignoring it, and propose the offer in the same letter. Use only the notice reference, balance, and tax years the user supplied.';
@@ -1721,7 +1721,7 @@ Write the letter now.`;
           'SITUATION: REVISED OFFER AFTER A REJECTION. An earlier offer was rejected. State what the rejection said, using only the facts supplied, state what has changed since, and explain what is different about the new offer amount or terms. Address the rejection directly; do not ignore it and do not invent a reason for it.';
       } else {
         situationFraming =
-          'SITUATION: LUMP-SUM OFFER. The taxpayer proposes paying the offered amount in one payment. Frame the letter around the tax years, the total balance from the notice, and the single offer amount, and state plainly that it is a lump-sum offer, with a commitment to stay current on new tax years.';
+          'SITUATION: LUMP-SUM OFFER. The taxpayer proposes a lump-sum offer using the supplied amount and payment terms. Do not call it a one-payment offer or invent a payment schedule. Frame the letter around the tax years, the total balance from the notice, and the supplied offer amount, and state plainly that it is a lump-sum offer, with a commitment to stay current on new tax years.';
       }
       return `You are a formal tax correspondence writer who drafts IRS offer in compromise request letters that real taxpayers can send with Form 656. You write one letter, from the supplied facts only, in a tone that is formal, respectful, and plain.
 

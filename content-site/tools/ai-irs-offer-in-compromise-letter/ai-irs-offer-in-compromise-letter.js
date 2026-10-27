@@ -44,9 +44,15 @@
     return isNaN(n) || n <= 0 ? null : n;
   }
 
+  function isPeriodicOffer() {
+    return (($('mode-value') || {}).value || '') === 'periodic-payment';
+  }
+
   function parseMonths(value) {
-    var n = parseInt(value, 10);
-    return isNaN(n) || n < 1 ? null : n;
+    var text = String(value || '').trim();
+    if (!/^\d+$/.test(text)) return null;
+    var n = Number(text);
+    return n >= 6 && n <= 24 ? n : null;
   }
 
   function computeOffer() {
@@ -54,7 +60,7 @@
     var offer = parseMoney(($('proposed_offer') || {}).value || '');
     if (balance == null || offer == null) return null;
     var pct = Math.round((offer / balance) * 1000) / 10;
-    var months = parseMonths(($('pay_months') || {}).value || '');
+    var months = isPeriodicOffer() ? parseMonths(($('pay_months') || {}).value || '') : null;
     var res = { balance: balance, offer: offer, pct: pct, months: months };
     if (months != null) {
       var monthly = Math.round((offer / months) * 100) / 100;
@@ -93,6 +99,13 @@
         ', final payment ' +
         esc(money(res.finalPayment)) +
         ' (adjusted for rounding so the schedule totals your offer amount).';
+      html +=
+        ' Form 656 generally requires the first payment with a periodic offer and continued monthly payments while it is reviewed, unless the low-income certification exception applies.';
+    } else if (!isPeriodicOffer()) {
+      html +=
+        ' A Form 656 lump-sum offer may use up to five payments within five months after acceptance and generally requires a 20% initial payment, unless the low-income certification exception applies.';
+    } else if ((($('pay_months') || {}).value || '').trim()) {
+      html += ' Periodic-payment offers must use a whole-number term from 6 to 24 months.';
     }
     html +=
       ' Interest and penalties are not included here; they continue until the balance is paid. This is arithmetic on your figures only, not an eligibility result or a recommendation.</small>';
@@ -290,11 +303,11 @@
       modeTips: {
         'lump-sum': {
           title: 'Lump-sum offer',
-          body: 'You propose paying the offered amount in one payment. State the tax years, the total balance from your notice, and the single offer amount, and state plainly that it is a lump-sum offer. The letter should make the one-payment commitment unmistakable.',
+          body: 'A Form 656 lump-sum offer is paid in five or fewer payments within five months after acceptance. The initial-payment requirement has a low-income certification exception. State only the terms you can support from your own facts and confirm the current Form 656 instructions before filing.',
         },
         'periodic-payment': {
           title: 'Periodic-payment offer',
-          body: 'You propose paying the offered amount over a term of months. State the tax years, the total balance, the offer amount, and the term, and make sure the monthly figure is one you can pay every month. The panel above computes the monthly figure from your own offer and term.',
+          body: 'A Form 656 periodic-payment offer must be paid in 6 to 24 months. State the tax years, total balance, offer amount, and term, and make sure the monthly figure is one you can pay every month. The first and continuing-payment requirements have a low-income certification exception; confirm the current Form 656 instructions before filing.',
         },
         'after-notice': {
           title: 'Offer after a collection notice',
@@ -316,6 +329,42 @@
         el.addEventListener('input', updatePayment);
       }
     });
+    var payMonths = $('pay_months');
+    function validatePeriodicTerm() {
+      if (!payMonths) return true;
+      var raw = payMonths.value.trim();
+      var valid = !isPeriodicOffer() || (parseMonths(raw) != null && raw !== '');
+      payMonths.setCustomValidity(
+        valid ? '' : 'Periodic-payment offers require a whole-number term from 6 to 24 months.'
+      );
+      return valid;
+    }
+    if (payMonths) {
+      payMonths.addEventListener('input', validatePeriodicTerm);
+      payMonths.addEventListener('change', validatePeriodicTerm);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('#mode-chips .lt-chip'), function (chip) {
+      chip.addEventListener('click', function () {
+        setTimeout(function () {
+          validatePeriodicTerm();
+          updatePayment();
+        }, 0);
+      });
+    });
+    var generateBtn = $('generate-btn');
+    if (generateBtn)
+      generateBtn.addEventListener(
+        'click',
+        function (event) {
+          if (!validatePeriodicTerm()) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            updatePayment();
+            payMonths.reportValidity();
+          }
+        },
+        true
+      );
     updatePayment();
 
     // Build printable letter button.
