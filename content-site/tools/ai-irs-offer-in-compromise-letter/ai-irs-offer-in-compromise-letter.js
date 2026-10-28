@@ -343,14 +343,17 @@
       payMonths.addEventListener('input', validatePeriodicTerm);
       payMonths.addEventListener('change', validatePeriodicTerm);
     }
-    Array.prototype.forEach.call(document.querySelectorAll('#mode-chips .lt-chip'), function (chip) {
-      chip.addEventListener('click', function () {
-        setTimeout(function () {
-          validatePeriodicTerm();
-          updatePayment();
-        }, 0);
-      });
-    });
+    Array.prototype.forEach.call(
+      document.querySelectorAll('#mode-chips .lt-chip'),
+      function (chip) {
+        chip.addEventListener('click', function () {
+          setTimeout(function () {
+            validatePeriodicTerm();
+            updatePayment();
+          }, 0);
+        });
+      }
+    );
     var generateBtn = $('generate-btn');
     if (generateBtn)
       generateBtn.addEventListener(
