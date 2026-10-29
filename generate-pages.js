@@ -1483,6 +1483,7 @@ function generateSitemap(generatedPages) {
     'ai-irs-offer-in-compromise-letter',
     'ai-irs-tax-debt-case-companion',
     'ai-severance-negotiation-letter',
+    'ai-immigration-hardship-waiver-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1604,6 +1605,8 @@ function generateSitemap(generatedPages) {
     'how-to-respond-to-an-irs-notice-cp14',
     'how-to-write-an-offer-in-compromise-letter',
     'how-to-negotiate-a-severance-package',
+    'how-to-write-an-immigration-hardship-waiver-letter',
+    'how-to-write-an-esa-accommodation-request-letter',
     'how-to-report-workplace-harassment-to-hr',
     'how-to-prepare-for-an-exit-interview',
     'how-to-respond-to-a-performance-improvement-plan',
@@ -1816,6 +1819,7 @@ function manageRobotsMeta() {
     'ai-irs-offer-in-compromise-letter',
     'ai-irs-tax-debt-case-companion',
     'ai-severance-negotiation-letter',
+    'ai-immigration-hardship-waiver-letter',
   ]);
 
   const dirsToProcess = [
