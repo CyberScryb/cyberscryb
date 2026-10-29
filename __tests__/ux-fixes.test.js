@@ -178,3 +178,24 @@ describe('recent draft index', () => {
     expect(document.getElementById('continue-link').getAttribute('href')).toBe('#');
   });
 });
+
+describe('accessible micro-UX feedback for AI tools and draft notice', () => {
+  const aiToolSource = read('content-site/tools/shared/ai-tool.js');
+  const scriptSource = read('content-site/js/script.js');
+
+  test('ai-tool action buttons and clear button include aria-label and aria-live', () => {
+    expect(aiToolSource).toContain("clearBtn.setAttribute('aria-label', 'Clear input text')");
+    expect(aiToolSource).toContain("copyBtn.setAttribute('aria-live', 'polite')");
+    expect(aiToolSource).toContain("copyBtn.setAttribute('aria-label', 'Copied to clipboard')");
+    expect(aiToolSource).toContain("dlBtn.setAttribute('aria-label', 'Download result as text file')");
+    expect(aiToolSource).toContain("dlBtn.setAttribute('aria-live', 'polite')");
+    expect(aiToolSource).toContain("shareBtn.setAttribute('aria-label', 'Share this result')");
+    expect(aiToolSource).toContain("shareBtn.setAttribute('aria-live', 'polite')");
+  });
+
+  test('restored draft notice has status role, live region, and labeled clear button', () => {
+    expect(scriptSource).toContain("banner.setAttribute('role', 'status')");
+    expect(scriptSource).toContain("banner.setAttribute('aria-live', 'polite')");
+    expect(scriptSource).toContain('aria-label="Clear restored draft"');
+  });
+});

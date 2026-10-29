@@ -28,6 +28,7 @@
       clearBtn.id = 'clear-btn';
       clearBtn.type = 'button';
       clearBtn.title = 'Clear input';
+      clearBtn.setAttribute('aria-label', 'Clear input text');
       clearBtn.textContent = 'Clear';
       if (sampleBtn) {
         clearBtn.className = sampleBtn.className;
@@ -271,15 +272,19 @@
     }
 
     if (copyBtn) {
+      copyBtn.setAttribute('aria-live', 'polite');
       copyBtn.addEventListener('click', function () {
         const text = outputContent.innerText;
         if (text && !text.toLowerCase().includes('will appear here')) {
           navigator.clipboard.writeText(text).then(function () {
             trackEvent('result_copied', { tool_id: toolId });
-            const orig = copyBtn.innerText;
+            const origText = copyBtn.innerText;
+            const origLabel = copyBtn.getAttribute('aria-label') || 'Copy output';
             copyBtn.innerText = 'Copied! ✓';
+            copyBtn.setAttribute('aria-label', 'Copied to clipboard');
             setTimeout(function () {
-              copyBtn.innerText = orig;
+              copyBtn.innerText = origText;
+              copyBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           });
         }
@@ -291,6 +296,8 @@
         dlBtn.id = 'download-btn';
         dlBtn.type = 'button';
         dlBtn.title = 'Download as .txt';
+        dlBtn.setAttribute('aria-label', 'Download result as text file');
+        dlBtn.setAttribute('aria-live', 'polite');
         dlBtn.textContent = 'Download';
         // Mirror the copy button's classes and inline style for visual match.
         dlBtn.className = copyBtn.className;
@@ -308,10 +315,13 @@
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
           trackEvent('result_downloaded', { tool_id: toolId });
-          const orig = dlBtn.innerText;
+          const origText = dlBtn.innerText;
+          const origLabel = dlBtn.getAttribute('aria-label');
           dlBtn.innerText = 'Saved! ✓';
+          dlBtn.setAttribute('aria-label', 'Result saved to downloads');
           setTimeout(function () {
-            dlBtn.innerText = orig;
+            dlBtn.innerText = origText;
+            dlBtn.setAttribute('aria-label', origLabel);
           }, 1600);
         });
         copyBtn.parentNode.insertBefore(dlBtn, copyBtn.nextSibling);
@@ -398,6 +408,8 @@
         shareBtn.id = 'share-btn';
         shareBtn.type = 'button';
         shareBtn.title = 'Share this result';
+        shareBtn.setAttribute('aria-label', 'Share this result');
+        shareBtn.setAttribute('aria-live', 'polite');
         shareBtn.textContent = 'Share';
         // Mirror the copy button's classes and inline style for visual match.
         shareBtn.className = copyBtn.className;
@@ -405,11 +417,14 @@
         shareBtn.addEventListener('click', function () {
           const text = outputContent.innerText;
           if (!text || text.toLowerCase().includes('will appear here')) return;
-          const orig = shareBtn.innerText;
+          const origText = shareBtn.innerText;
+          const origLabel = shareBtn.getAttribute('aria-label');
           function flash(msg) {
             shareBtn.innerText = msg;
+            shareBtn.setAttribute('aria-label', msg);
             setTimeout(function () {
-              shareBtn.innerText = orig;
+              shareBtn.innerText = origText;
+              shareBtn.setAttribute('aria-label', origLabel);
             }, 1600);
           }
           if (navigator.share) {
