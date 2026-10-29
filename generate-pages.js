@@ -1623,6 +1623,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'soap-note-documentation-audit-flags',
     '31-subnet-point-to-point-links',
     'catastrophic-backtracking-regex-redos',
     'uuidv7-vs-uuidv4-database-index',
