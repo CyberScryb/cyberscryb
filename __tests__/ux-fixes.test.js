@@ -187,7 +187,9 @@ describe('accessible micro-UX feedback for AI tools and draft notice', () => {
     expect(aiToolSource).toContain("clearBtn.setAttribute('aria-label', 'Clear input text')");
     expect(aiToolSource).toContain("copyBtn.setAttribute('aria-live', 'polite')");
     expect(aiToolSource).toContain("copyBtn.setAttribute('aria-label', 'Copied to clipboard')");
-    expect(aiToolSource).toContain("dlBtn.setAttribute('aria-label', 'Download result as text file')");
+    expect(aiToolSource).toContain(
+      "dlBtn.setAttribute('aria-label', 'Download result as text file')"
+    );
     expect(aiToolSource).toContain("dlBtn.setAttribute('aria-live', 'polite')");
     expect(aiToolSource).toContain("shareBtn.setAttribute('aria-label', 'Share this result')");
     expect(aiToolSource).toContain("shareBtn.setAttribute('aria-live', 'polite')");

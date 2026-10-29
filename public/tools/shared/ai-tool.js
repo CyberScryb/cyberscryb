@@ -436,7 +436,8 @@
               })
               .catch(function () {
                 // Dismissed by the user or share unavailable — restore quietly.
-                shareBtn.innerText = orig;
+                shareBtn.innerText = origText;
+                if (origLabel) shareBtn.setAttribute('aria-label', origLabel);
               });
           } else if (navigator.clipboard) {
             navigator.clipboard.writeText(text).then(
@@ -445,7 +446,8 @@
                 flash('Copied!');
               },
               function () {
-                shareBtn.innerText = orig;
+                shareBtn.innerText = origText;
+                if (origLabel) shareBtn.setAttribute('aria-label', origLabel);
               }
             );
           }
