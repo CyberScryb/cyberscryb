@@ -1484,6 +1484,7 @@ function generateSitemap(generatedPages) {
     'ai-irs-tax-debt-case-companion',
     'ai-severance-negotiation-letter',
     'ai-immigration-hardship-waiver-letter',
+    'ai-pip-response-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1610,6 +1611,7 @@ function generateSitemap(generatedPages) {
     'how-to-report-workplace-harassment-to-hr',
     'how-to-prepare-for-an-exit-interview',
     'how-to-respond-to-a-performance-improvement-plan',
+    'how-to-write-a-traffic-court-mitigation-letter',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
@@ -1821,6 +1823,7 @@ function manageRobotsMeta() {
     'ai-irs-tax-debt-case-companion',
     'ai-severance-negotiation-letter',
     'ai-immigration-hardship-waiver-letter',
+    'ai-pip-response-letter',
   ]);
 
   const dirsToProcess = [
