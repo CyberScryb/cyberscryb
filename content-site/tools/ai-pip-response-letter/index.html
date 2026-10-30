@@ -559,8 +559,21 @@
                     <option value="5b">5 business days</option>
                     <option value="7">7 calendar days</option>
                     <option value="14">14 calendar days</option>
+                    <option value="notice">Use the exact deadline in my PIP</option>
                   </select>
                 </div>
+              </div>
+              <div class="lt-field" id="notice-deadline-field" hidden>
+                <label class="lt-label" for="notice_deadline"
+                  >Exact deadline stated in the PIP <span class="cs-req" aria-hidden="true">*</span></label
+                ><input
+                  class="lt-input"
+                  id="notice_deadline"
+                  type="date"
+                  data-label="Exact response deadline stated in the PIP"
+                  style="color-scheme: dark"
+                />
+                <p class="lt-hint">Use the date in your PIP. This tool will not estimate it.</p>
               </div>
               <div class="lt-row">
                 <div class="lt-field">
@@ -575,8 +588,8 @@
                 </div>
               </div>
               <div class="deadline-box" id="deadline-box" aria-live="polite">
-                <strong>Deadline:</strong> enter the PIP issue date and your response window above,
-                and your exact response deadline is computed here automatically.
+                <strong>Deadline:</strong> select the response window in your PIP, or enter its exact
+                stated deadline. Calculations do not account for employer holidays.
               </div>
               <input type="hidden" id="pip_deadline" data-label="Computed response deadline" />
               <input type="hidden" id="pip_review_end" data-label="Computed PIP review end" />

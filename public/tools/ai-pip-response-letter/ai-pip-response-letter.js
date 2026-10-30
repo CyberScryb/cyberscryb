@@ -62,6 +62,8 @@
     var issue = parseIssueDate();
     var win = $('response_window');
     var winVal = win ? win.value : '';
+    var noticeDeadline = $('notice_deadline');
+    var noticeDeadlineField = $('notice-deadline-field');
     var box = $('deadline-box');
     var deadlineHidden = $('pip_deadline');
     var reviewHidden = $('pip_review_end');
@@ -70,7 +72,20 @@
     var deadlineText = '';
     var reviewText = '';
 
-    if (issue && winVal) {
+    if (noticeDeadlineField) noticeDeadlineField.hidden = winVal !== 'notice';
+
+    if (winVal === 'notice') {
+      if (noticeDeadline && noticeDeadline.value) {
+        var noticeDate = new Date(noticeDeadline.value + 'T12:00:00');
+        if (!isNaN(noticeDate.getTime())) {
+          deadlineText = fmtDate(noticeDate) + ' (deadline stated in the PIP)';
+          if (deadlineHidden) {
+            deadlineHidden.value = deadlineText;
+            deadlineHidden.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }
+    } else if (issue && winVal) {
       var business = winVal.slice(-1) === 'b';
       var n = parseInt(winVal, 10);
       if (!isNaN(n) && n > 0) {
@@ -101,7 +116,7 @@
       }
     }
 
-    if (!issue || !winVal) {
+    if ((!issue && winVal !== 'notice') || !winVal || (winVal === 'notice' && !deadlineText)) {
       if (deadlineHidden) {
         deadlineHidden.value = '';
         deadlineHidden.dispatchEvent(new Event('input', { bubbles: true }));
@@ -124,8 +139,8 @@
         box.innerHTML = html;
       } else {
         box.innerHTML =
-          '<strong>Deadline:</strong> enter the PIP issue date and your response window ' +
-          'above, and your exact response deadline is computed here automatically.';
+          '<strong>Deadline:</strong> select the response window in your PIP, or enter its exact ' +
+          'stated deadline. Calculations do not account for employer holidays.';
       }
     }
   }
@@ -146,6 +161,7 @@
     'department',
     'pip_issue_date',
     'response_window',
+    'notice_deadline',
     'review_period',
     'allegation_points',
     'employee_rebuttal',
@@ -390,6 +406,7 @@
         'department',
         'pip_issue_date',
         'response_window',
+        'notice_deadline',
         'pip_deadline',
         'review_period',
         'pip_review_end',
@@ -425,7 +442,7 @@
     });
 
     // Deadline math is fully client-side and deterministic.
-    ['pip_issue_date', 'response_window', 'review_period'].forEach(function (id) {
+    ['pip_issue_date', 'response_window', 'notice_deadline', 'review_period'].forEach(function (id) {
       var el = $(id);
       if (el) {
         el.addEventListener('change', computeDeadlines);
