@@ -1485,6 +1485,7 @@ function generateSitemap(generatedPages) {
     'ai-severance-negotiation-letter',
     'ai-immigration-hardship-waiver-letter',
     'ai-pip-response-letter',
+    'ai-traffic-court-mitigation-letter',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1824,6 +1825,7 @@ function manageRobotsMeta() {
     'ai-severance-negotiation-letter',
     'ai-immigration-hardship-waiver-letter',
     'ai-pip-response-letter',
+    'ai-traffic-court-mitigation-letter',
   ]);
 
   const dirsToProcess = [
