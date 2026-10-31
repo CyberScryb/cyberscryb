@@ -833,6 +833,7 @@
                     facts (or load an example)<br />3. Hit Generate</span
                   >
                 </div>
+                <div id="handoff-mount"></div>
               </div>
             </div>
             <div class="lt-card">
@@ -1139,6 +1140,36 @@
     </footer>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var mount = document.getElementById('handoff-mount');
+        if (!mount || !window.ToolHandoff) return;
+        function factsPayload() {
+          var input = document.getElementById('tool-input');
+          var text = input ? input.value.trim() : '';
+          return text ? { story: text } : null;
+        }
+        function onEmpty() {
+          if (window.LifeTool) window.LifeTool.toast('Enter your case facts first, then send them.');
+          else alert('Enter your case facts first, then send them.');
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'security-deposit-demand',
+            label: 'Deposit Demand',
+            getPayload: factsPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'landlord-tenant-letter',
+            label: 'Landlord Letter',
+            getPayload: factsPayload,
+            onEmpty: onEmpty
+          }
+        ]);
+      });
+    </script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
     <script src="/tools/ai-tenant-case-companion/ai-tenant-case-companion.js?v=20261021a1"></script>

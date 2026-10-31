@@ -1522,6 +1522,7 @@ function generateSitemap(generatedPages) {
     'how-to-appeal-an-insurance-claim-denial',
     'how-to-appeal-an-unemployment-denial',
     'how-to-write-a-medical-hardship-letter',
+    'medical-billing-dispute-kit',
     'how-to-write-a-mortgage-hardship-letter',
     'how-to-write-a-parenting-plan',
     'how-to-write-a-student-loan-hardship-letter',

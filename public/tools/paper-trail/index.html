@@ -32,6 +32,7 @@
     <script src="/js/consent.js?v=20261006audit1" defer></script>
     <script src="/js/script.js?v=20261009paperwork" defer></script>
     <script src="/tools/shared/paperwork-tools.js?v=20261009" defer></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -363,6 +364,7 @@
               Download</button
             ><button type="button" class="pw-secondary" data-export="print" disabled>Print</button>
           </div>
+          <div id="pw-handoff"></div>
           <p class="pw-hint pw-privacy">
             Your details stay in this page. They are not sent to AI or saved by this tool. Download
             a copy before refreshing or leaving. The tool does not send messages, store evidence, or
@@ -500,5 +502,62 @@
       </div>
     </footer>
     <pre id="pw-print" hidden></pre>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var mount = document.getElementById('pw-handoff');
+        if (!mount || !window.ToolHandoff) return;
+        function summaryPayload() {
+          var out = document.getElementById('pw-output');
+          var text = out ? out.value.trim() : '';
+          if (!text) return null;
+          var title = document.getElementById('pw-title');
+          return { story: text, title: title ? title.value.trim() : '' };
+        }
+        function onEmpty() {
+          var status = document.getElementById('pw-status');
+          if (status)
+            status.textContent =
+              'Add at least one event to your timeline before sending it to another tool.';
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'complaint-letter-generator',
+            label: 'Complaint Letter',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'insurance-denial-appeal',
+            label: 'Insurance Appeal',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'medical-debt-dispute',
+            label: 'Medical Debt Dispute',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'appeal-letter',
+            label: 'Appeal Letter',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'hardship-letter',
+            label: 'Hardship Letter',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'landlord-tenant-letter',
+            label: 'Landlord Letter',
+            getPayload: summaryPayload,
+            onEmpty: onEmpty
+          }
+        ]);
+      });
+    </script>
   </body>
 </html>
