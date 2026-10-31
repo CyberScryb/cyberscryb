@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Traffic Court Mitigation Letter &mdash; Free Draft Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI draft of a traffic court mitigation letter: admit the violation, explain the circumstances, and ask the judge for a reduced fine, traffic school, or a payment plan from your facts. Not legal advice. Never promises an outcome."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-traffic-court-mitigation-letter/"
+    />
+    <meta
+      property="og:title"
+      content="AI Traffic Court Mitigation Letter — Free Draft Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI draft of a traffic court mitigation letter: admit the violation, explain the circumstances, and ask the judge for a reduced fine, traffic school, or a payment plan. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-traffic-court-mitigation-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Traffic Court Mitigation Letter — Free Draft Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI draft of a traffic court mitigation letter. Admit the violation, explain the circumstances, ask the judge for leniency. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a letter first, then print');
+          else alert('Generate a letter first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Traffic Court Mitigation Letter",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-traffic-court-mitigation-letter/",
+        "description": "Free AI draft of a traffic court mitigation letter: admit the violation, explain the circumstances, and ask the judge for a reduced fine, traffic school, or a payment plan from your facts. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a traffic court mitigation letter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A mitigation letter means you admit the traffic violation and ask the judge for leniency: a reduced fine, traffic school, or a payment plan. It is the opposite of contesting the ticket, where you argue you are not guilty. This tool drafts the mitigation letter from your facts. It is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between mitigation and contesting a ticket?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mitigation admits the violation and asks for a lighter penalty; contesting denies it and argues for dismissal. They are different lanes in most traffic courts. Picking mitigation means giving up the fight over guilt, so only choose it if you cannot honestly contest the ticket. This tool drafts mitigation letters only."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a mitigation letter get my ticket dismissed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Mitigation asks for leniency, not dismissal, and no letter can promise any outcome. A judge may reduce the fine, grant traffic school, or set up a payment plan, or may change nothing. If you want the ticket dismissed, that is a contested hearing, a different process."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for a reckless driving or DUI charge?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool is for routine moving violations like speeding or stop-sign tickets. Serious charges such as reckless driving, DUI, or driving on a suspended license can carry license suspension or jail time; talk to a traffic attorney before your court date, not an AI draft."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will traffic school keep the ticket off my record?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In many courts, completing an approved traffic school keeps the conviction off your driving record, but eligibility rules and effects vary by state and court. The letter asks the judge for permission; it does not guarantee it. Confirm the rules with your court clerk."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should a mitigation letter include?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The case facts (ticket number, violation, date), a clear admission of responsibility, a short explanation of the circumstances, what has changed since (for example a completed driving course), one specific request (reduced fine, traffic school, or payment plan), and any supporting evidence. Keep it to one page and never blame the officer or the equipment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long should the letter be?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One page. Judges read dozens of these; a tight, honest, one-page letter with a specific ask beats a long story. This tool targets 200 to 300 words for the letter body."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool drafts a mitigation letter from the facts you enter. It does not tell you whether to mitigate or contest, whether you are eligible for traffic school, or what the judge will decide. Review the draft with a traffic attorney before submitting."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to draft a traffic court mitigation letter with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter the ticket facts",
+            "text": "Add the violation, the violation date, the ticket number, the court name, and the hearing or response date from your ticket."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Describe the circumstances and mitigation",
+            "text": "Give a short honest account of what happened, then list the mitigation factors: clean record, completed driving course, financial hardship, or changed behavior."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate and review before submitting",
+            "text": "Pick the specific request (reduced fine, traffic school, or payment plan), generate the one-page letter, and have a traffic attorney review before submitting."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Traffic Court Mitigation Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI traffic court <span style="color: var(--primary)">mitigation letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Admit the violation, explain the circumstances, and ask the judge for leniency: a reduced
+            fine, traffic school, or a payment plan. Drafted from your ticket facts, one page, in a
+            respectful tone.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal advice, and not a parking-ticket appeal.</strong> This drafts a
+            mitigation letter: you admit the violation and ask for leniency. It does not contest
+            the ticket and it never promises dismissal, a reduced fine, traffic school, or any
+            outcome. Serious charges such as reckless driving or DUI need a traffic attorney, not
+            this form.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Admission-first, judge-ready framing</span>
+          <span><i></i> Deadline math, computed on this device</span>
+          <span><i></i> One page, one specific request</span>
+          <span><i></i> Drafts library saves on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter the ticket facts</strong
+            ><span
+              >Violation, violation date, ticket number, court name, and the hearing or response
+              date from your ticket.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Add the circumstances</strong
+            ><span
+              >A short honest account of what happened, plus the mitigation factors: clean record,
+              course taken, hardship.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Generate &amp; review</strong
+            ><span
+              >Get the one-page letter, then have a traffic attorney review before submitting it to
+              the court.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Ticket facts</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Mitigation</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your letter</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Your request</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="reduced-fine"
+                  aria-pressed="false"
+                >
+                  Reduced fine
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="traffic-school"
+                  aria-pressed="false"
+                >
+                  Traffic school
+                </button>
+                <button type="button" class="lt-chip" data-mode="payment-plan" aria-pressed="false">
+                  Payment plan
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="reduced-fine" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Reduced fine mode</strong>Asks the judge to lower the fine amount based on
+                your circumstances and record.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Enter the violation, the dates, and what happened.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="driver_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="driver_name"
+                    type="text"
+                    placeholder="e.g. Alex Chen"
+                    data-label="Driver name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="ticket_number"
+                    >Ticket / citation number <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="ticket_number"
+                    type="text"
+                    placeholder="e.g. T-88213"
+                    data-label="Ticket number"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="violation"
+                  >Violation <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <p class="lt-hint">
+                  As stated on the ticket. Routine moving violations only; not for reckless
+                  driving, DUI, or suspended-license charges.
+                </p>
+                <input
+                  class="lt-input"
+                  id="violation"
+                  type="text"
+                  placeholder="e.g. Speeding, 48 mph in a 35 mph zone"
+                  data-label="Violation"
+                  aria-required="true"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="violation_date"
+                    >Violation date <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="violation_date"
+                    type="date"
+                    data-label="Violation date"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="hearing_date"
+                    >Hearing or response date
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="hearing_date"
+                    type="date"
+                    data-label="Hearing or response date"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                  <p class="lt-hint">The date shown on your ticket or court notice.</p>
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="court_name"
+                  >Court name <span class="cs-optional">(optional)</span></label
+                ><input
+                  class="lt-input"
+                  id="court_name"
+                  type="text"
+                  placeholder="e.g. King County District Court"
+                  data-label="Court name"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="deadline-box" id="deadline-box" aria-live="polite">
+                <strong>Time remaining:</strong> enter the hearing or response date from your
+                ticket. This counts the days on your device; it does not know court closures.
+              </div>
+              <input type="hidden" id="days_remaining" data-label="Days until hearing or response date" />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" for="circumstances"
+                  >What happened <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <p class="lt-hint">
+                  A short, honest account. Mitigation admits the violation; this is where you
+                  explain the circumstances without blaming the officer or the equipment.
+                </p>
+                <div class="lt-examples" aria-label="Example scenarios">
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "traffic-school", "fields": {"driver_name": "Alex Chen", "ticket_number": "T-88213", "violation": "Speeding, 48 mph in a 35 mph zone", "violation_date": "2026-10-12", "hearing_date": "2026-12-01", "court_name": "King County District Court", "circumstances": "I was cited for 48 in a 35 zone on a downhill stretch where I let my speed drift up without noticing. I admit the violation; I was not watching my speedometer. I have no excuse beyond my own inattention.", "mitigation_factors": "Clean driving record for 11 years: no tickets, no accidents. I enrolled in a defensive driving course the week after the ticket and completed it. The car is now fitted with a speed-limit alert.", "request_details": "I am asking for permission to attend an approved traffic school so the conviction does not stay on my record."}, "story": "First-ever ticket, 11 years clean. Asking for traffic school to keep the record clean.", "addressedTo": "The Honorable Judge", "sender": "Alex Chen"}'
+                  >
+                    First ticket, clean record
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode": "payment-plan", "fields": {"driver_name": "Jordan Rivera", "ticket_number": "S-41029", "violation": "Failure to stop at a stop sign", "violation_date": "2026-10-05", "hearing_date": "2026-11-25", "court_name": "Spokane Municipal Court", "circumstances": "I rolled through a stop sign in a residential area on my way to work. I admit I did not come to a full stop; I was rushing after a shift change and misjudged. There was no other traffic in the intersection.", "mitigation_factors": "Single-income household with two kids; the full fine paid at once would be a genuine hardship. No prior moving violations in six years. My schedule is now arranged so I am never driving against the clock.", "request_details": "I am asking for a payment plan of no more than $75 a month, which is what my budget can carry."}, "story": "Stop-sign ticket. Asking for a payment plan because the full fine is a hardship.", "addressedTo": "The Honorable Judge", "sender": "Jordan Rivera"}'
+                  >
+                    Stop sign, hardship, payment plan
+                  </button>
+                </div>
+                <textarea
+                  id="circumstances"
+                  class="lt-area"
+                  data-label="Circumstances of the violation"
+                  aria-required="true"
+                  placeholder="Example: Cited for 48 in a 35 zone on a downhill stretch where I let my speed drift up. I admit the violation; I was not watching my speedometer."
+                ></textarea>
+                <p class="lt-hint"><span id="char-live">0</span> characters</p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="mitigation_factors"
+                  >Mitigation factors <span class="cs-optional">(optional)</span></label
+                >
+                <p class="lt-hint">
+                  Clean record, course completed, hardship, changed behavior. One dated fact beats
+                  three adjectives.
+                </p>
+                <textarea
+                  id="mitigation_factors"
+                  class="lt-area"
+                  data-label="Mitigation factors"
+                  style="min-height: 70px"
+                  placeholder="e.g. Clean driving record for 11 years: no tickets, no accidents. Completed a defensive driving course after the ticket. The car now has a speed-limit alert."
+                ></textarea>
+                <p class="lt-hint"><span id="char-live-2">0</span> characters</p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="request_details"
+                  >Request details <span class="cs-optional">(optional)</span></label
+                ><textarea
+                  id="request_details"
+                  class="lt-area"
+                  data-label="Request details"
+                  style="min-height: 70px"
+                  placeholder="e.g. Asking for permission to attend approved traffic school. If a payment plan is needed: no more than $75 a month."
+                ></textarea>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Situation summary <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: First-ever ticket, 11 years clean. Asking for traffic school to keep the record clean."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live-3">0</span> characters &middot; One or two sentences is
+                  enough.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="sender-name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="sender-name"
+                    type="text"
+                    placeholder="e.g. Alex Chen"
+                    data-label="Sender"
+                    autocomplete="name"
+                    data-cs-share="senderName"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="addressed-to"
+                    >Addressed to <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="addressed-to"
+                    type="text"
+                    placeholder="The Honorable Judge"
+                    data-label="Addressed to"
+                    autocomplete="off"
+                    data-cs-share="recipient"
+                  />
+                </div>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal advice. This is a draft for a traffic attorney to review.</strong
+                >
+                It drafts a mitigation letter from your facts only. It does not advise whether to
+                mitigate or contest, whether you are eligible for traffic school, or what the judge
+                will decide. It will not invent facts, dates, or evidence. Your prompt is sent to
+                our AI service to generate the letter; the deadline math and drafts stay on this
+                device. Never promises dismissal or any outcome.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your letter</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your letter&hellip;</p>
+                  <small>From your ticket facts, for attorney review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your letter will appear here.<br /><br />1. Enter the violation and dates from
+                    your ticket<br />2. Describe what happened and the mitigation factors (or load an
+                    example)<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts library</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a draft to save this exact form, on this device. Reload it anytime to keep
+                  working.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Draft name, e.g. Speeding ticket v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save draft</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No saved drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past letters</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No letters yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You got a routine moving violation (speeding, stop sign, red light) and cannot
+                  honestly contest it, so you want to admit it and ask the judge for leniency
+                </li>
+                <li>
+                  You have a clean driving record and want to ask for traffic school so the
+                  conviction does not stay on your record
+                </li>
+                <li>
+                  The fine is a genuine hardship and you want to ask for a payment plan you can
+                  actually carry
+                </li>
+                <li>
+                  You already took a step since the ticket (defensive driving course, fixed the
+                  equipment, changed the habit) and want that on the record
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Admit first, ask second</h3>
+              <p>
+                Mitigation only works when the letter owns the violation in the first paragraph.
+                Judges read hundreds of these; anything that reads like an excuse or blames the
+                officer or the equipment gets skimmed. State it plainly: what you did, that you
+                accept it, then the ask.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>One page, one specific request</h3>
+              <p>
+                Pick the request up front: reduced fine, traffic school, or payment plan. A letter
+                that asks for everything asks for nothing. The tool targets 200 to 300 words and
+                frames the request the court actually grants.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The deadline is the easy part to miss</h3>
+              <p>
+                Your ticket or court notice states the response date. Miss it and the letter is
+                moot. Enter the date above and the tool counts the days on your device, so the
+                letter names the date precisely. It does not know court closures.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Changed behavior is your evidence</h3>
+              <p>
+                "It will not happen again" is a promise, not evidence. A completed defensive
+                driving course, a repaired speedometer, a changed route or schedule is evidence. Put
+                what you did after the ticket in the letter; that is what the judge remembers.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>What is a traffic court mitigation letter?</summary>
+              <p>
+                A mitigation letter means you admit the traffic violation and ask the judge for
+                leniency: a reduced fine, traffic school, or a payment plan. It is the opposite of
+                contesting the ticket, where you argue you are not guilty. This tool drafts the
+                mitigation letter from your facts. It is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>
+                What is the difference between mitigation and contesting a ticket?
+              </summary>
+              <p>
+                Mitigation admits the violation and asks for a lighter penalty; contesting denies it
+                and argues for dismissal. They are different lanes in most traffic courts. Picking
+                mitigation means giving up the fight over guilt, so only choose it if you cannot
+                honestly contest the ticket. This tool drafts mitigation letters only.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can a mitigation letter get my ticket dismissed?</summary>
+              <p>
+                No. Mitigation asks for leniency, not dismissal, and no letter can promise any
+                outcome. A judge may reduce the fine, grant traffic school, or set up a payment
+                plan, or may change nothing. If you want the ticket dismissed, that is a contested
+                hearing, a different process.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I use this for a reckless driving or DUI charge?</summary>
+              <p>
+                No. This tool is for routine moving violations like speeding or stop-sign tickets.
+                Serious charges such as reckless driving, DUI, or driving on a suspended license can
+                carry license suspension or jail time. Talk to a traffic attorney before your court
+                date, not an AI draft.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Will traffic school keep the ticket off my record?</summary>
+              <p>
+                In many courts, completing an approved traffic school keeps the conviction off your
+                driving record, but eligibility rules and effects vary by state and court. The
+                letter asks the judge for permission; it does not guarantee it. Confirm the rules
+                with your court clerk.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should a mitigation letter include?</summary>
+              <p>
+                The case facts (ticket number, violation, date), a clear admission of
+                responsibility, a short explanation of the circumstances, what has changed since
+                (for example a completed driving course), one specific request (reduced fine,
+                traffic school, or payment plan), and any supporting evidence. Keep it to one page
+                and never blame the officer or the equipment.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How long should the letter be?</summary>
+              <p>
+                One page. Judges read dozens of these; a tight, honest, one-page letter with a
+                specific ask beats a long story. This tool targets 200 to 300 words for the letter
+                body.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool drafts a mitigation letter from the facts you enter. It does not tell
+                you whether to mitigate or contest, whether you are eligible for traffic school, or
+                what the judge will decide. Review the draft with a traffic attorney before
+                submitting.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-write-a-traffic-court-mitigation-letter/"
+              ><strong>How to Write a Traffic Court Mitigation Letter</strong
+              ><small>The companion guide: mitigation strategy, templates, and examples</small></a
+            >
+            <a href="/tools/apology-letter-generator/"
+              ><strong>Apology Letter Generator</strong
+              ><small>Write regret that sounds like an adult, not a performance</small></a
+            >
+            <a href="/tools/hardship-letter/"
+              ><strong>Hardship Letter</strong
+              ><small>Document financial hardship in the court's language</small></a
+            >
+            <a href="/guides/how-to-write-an-apology-letter/"
+              ><strong>How to Write an Apology Letter</strong
+              ><small>The remorse paragraph is what judges read closest</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">
+          Generate letter &rarr;
+        </button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal advice. Review every mitigation letter with a traffic
+            attorney before submitting.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-traffic-court-mitigation-letter/ai-traffic-court-mitigation-letter.js?v=20261031a1"></script>
+  </body>
+</html>
