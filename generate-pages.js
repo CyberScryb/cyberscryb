@@ -1488,6 +1488,7 @@ function generateSitemap(generatedPages) {
     'ai-traffic-court-mitigation-letter',
     'small-business-funding-finder',
     'ai-grant-application-writer',
+    'grant-application-tracker',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1831,6 +1832,7 @@ function manageRobotsMeta() {
     'ai-traffic-court-mitigation-letter',
     'small-business-funding-finder',
     'ai-grant-application-writer',
+    'grant-application-tracker',
   ]);
 
   const dirsToProcess = [

@@ -442,13 +442,15 @@
     });
 
     // Deadline math is fully client-side and deterministic.
-    ['pip_issue_date', 'response_window', 'notice_deadline', 'review_period'].forEach(function (id) {
-      var el = $(id);
-      if (el) {
-        el.addEventListener('change', computeDeadlines);
-        el.addEventListener('input', computeDeadlines);
+    ['pip_issue_date', 'response_window', 'notice_deadline', 'review_period'].forEach(
+      function (id) {
+        var el = $(id);
+        if (el) {
+          el.addEventListener('change', computeDeadlines);
+          el.addEventListener('input', computeDeadlines);
+        }
       }
-    });
+    );
     computeDeadlines();
 
     // Drafts library: save/load/delete named drafts.

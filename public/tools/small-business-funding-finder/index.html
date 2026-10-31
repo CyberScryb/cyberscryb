@@ -244,6 +244,193 @@
         color: var(--text-muted);
         line-height: 1.6;
       }
+      .fund-view-toggle {
+        display: inline-flex;
+        gap: 0.35rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px;
+        margin: 1.25rem 0 0;
+      }
+      .fund-view-btn {
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        font-weight: 700;
+        padding: 0.5rem 1.1rem;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+      .fund-view-btn.is-on {
+        background: #dc2626;
+        color: var(--text);
+      }
+      .quiz-wrap {
+        max-width: 760px;
+        margin: 1.25rem auto 0;
+        padding: 0 1.5rem;
+      }
+      .quiz-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem 1.6rem;
+      }
+      .quiz-progress {
+        height: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+      .quiz-progress-fill {
+        height: 100%;
+        width: 0;
+        background: #ef4444;
+        border-radius: 999px;
+        transition: width 0.25s;
+      }
+      .quiz-step-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-faint);
+        margin: 0 0 0.6rem;
+      }
+      .quiz-q {
+        margin: 0 0 1rem;
+        font-size: 1.25rem;
+        color: var(--text);
+        line-height: 1.4;
+      }
+      .quiz-opts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.6rem;
+      }
+      .quiz-opt {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.7rem 0.85rem;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+      .quiz-opt:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .quiz-opt.is-on {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.12);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .quiz-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+      .quiz-next {
+        background: #dc2626;
+        color: var(--text);
+        border: none;
+        border-radius: 10px;
+        padding: 0.7rem 1.6rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .quiz-next:hover {
+        background: #ef4444;
+      }
+      .quiz-next:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .quiz-back {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        border-radius: 10px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .quiz-back:hover {
+        color: var(--text);
+        border-color: #dc2626;
+      }
+      .match-head {
+        max-width: 1200px;
+        margin: 1.25rem auto 0;
+        padding: 0 1.5rem;
+      }
+      .match-head h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: var(--text);
+      }
+      .match-head p {
+        margin: 0.35rem 0 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      .match-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 800;
+        border-radius: 999px;
+        padding: 3px 12px;
+        background: rgba(239, 68, 68, 0.14);
+        border: 1px solid rgba(239, 68, 68, 0.45);
+        color: var(--text);
+      }
+      .match-reasons {
+        margin: 0.35rem 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .match-reasons li {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+      }
+      .match-reasons li::before {
+        content: "✓ ";
+        color: #f87171;
+        font-weight: 700;
+      }
+      .fund-track {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        border-radius: 8px;
+        padding: 0.35rem 0.8rem;
+        font-size: 0.83rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .fund-track:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .fund-track.is-tracked {
+        border-color: #ef4444;
+        color: var(--text);
+        cursor: pointer;
+      }
     </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script type="application/ld+json">
@@ -374,6 +561,27 @@
         </div>
       </section>
       <div class="fund-filters">
+        <div class="fund-view-toggle" role="tablist" aria-label="Finder view">
+          <button
+            type="button"
+            class="fund-view-btn is-on"
+            data-view="browse"
+            role="tab"
+            aria-selected="true"
+          >
+            Browse all
+          </button>
+          <button
+            type="button"
+            class="fund-view-btn"
+            data-view="quiz"
+            role="tab"
+            aria-selected="false"
+          >
+            Match me
+          </button>
+        </div>
+        <div id="browse-controls">
         <div class="fund-search-row">
           <input
             class="fund-search"
@@ -393,6 +601,24 @@
         </div>
         <div class="fund-cats" id="fund-cats" role="group" aria-label="Filter by category"></div>
         <p class="fund-count" id="fund-count" aria-live="polite"></p>
+        </div>
+      </div>
+      <section class="quiz-wrap" id="quiz-wrap" hidden aria-label="Eligibility quiz">
+        <div class="quiz-card">
+          <div class="quiz-progress" aria-hidden="true">
+            <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+          </div>
+          <p class="quiz-step-label" id="quiz-step-label"></p>
+          <div id="quiz-body"></div>
+          <div class="quiz-actions">
+            <button type="button" class="quiz-back" id="quiz-back">Back</button>
+            <button type="button" class="quiz-next" id="quiz-next" disabled>Next</button>
+          </div>
+        </div>
+      </section>
+      <div class="match-head" id="match-head" hidden>
+        <h2>Your best matches</h2>
+        <p id="match-sub"></p>
       </div>
       <div class="fund-grid" id="fund-results"></div>
       <div class="fund-note-band">
@@ -404,7 +630,14 @@
             >AI Grant Application Writer</a
           >
           drafts your application from your facts, or hit "Draft application" on any card to jump
-          straight in with that opportunity selected.
+          straight in with that opportunity selected. Use "Track" on any card to add it to your
+          <a href="/tools/grant-application-tracker/" style="color: var(--primary-soft)"
+            >application tracker</a
+          >, or take the two-minute
+          <a href="#quiz-wrap" id="note-quiz-link" style="color: var(--primary-soft)"
+            >eligibility quiz</a
+          >
+          to see your best matches first.
         </div>
       </div>
       <!-- AdSense: Below Tool -->
@@ -478,6 +711,7 @@
     </footer>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/shared/grants-data.js?v=20261031g1"></script>
-    <script src="/tools/small-business-funding-finder/small-business-funding-finder.js?v=20261031g1"></script>
+    <script src="/tools/shared/grant-vault.js?v=20261031g2"></script>
+    <script src="/tools/small-business-funding-finder/small-business-funding-finder.js?v=20261031g2"></script>
   </body>
 </html>

@@ -16,6 +16,9 @@
     'business_name',
     'business_type',
     'city_state',
+    'employees',
+    'annual_revenue',
+    'mission',
     'amount_requested',
     'use_of_funds',
     'business_background',
@@ -424,5 +427,174 @@
       });
 
     renderHistory();
+  });
+})();
+
+// ── Phase 2: business profile vault, document checklist, tracker link ──
+(function () {
+  'use strict';
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  // field id on the writer form <- vault key
+  var VAULT_TO_FORM = {
+    business_name: 'business_name',
+    business_type: 'business_type',
+    city_state: 'city_state',
+    employees: 'employees',
+    annual_revenue: 'annual_revenue',
+    mission: 'mission',
+    contact_name: 'contact_name',
+    contact_email: 'contact_email',
+  };
+
+  function loadVaultIntoInputs() {
+    if (!window.GrantVault) return;
+    var p = window.GrantVault.profile.get();
+    Object.keys(VAULT_TO_FORM).forEach(function (key) {
+      var el = $('vault_' + key);
+      if (el && p[key]) el.value = p[key];
+    });
+    ['contact_phone', 'website', 'founded_year'].forEach(function (key) {
+      var el = $('vault_' + key);
+      if (el && p[key]) el.value = p[key];
+    });
+  }
+
+  function saveVaultFromInputs() {
+    if (!window.GrantVault) return false;
+    var obj = {};
+    window.GrantVault.profile.fields.forEach(function (key) {
+      var el = $('vault_' + key);
+      obj[key] = el ? el.value.trim() : '';
+    });
+    return window.GrantVault.profile.save(obj);
+  }
+
+  function applyVaultToForm() {
+    if (!window.GrantVault) return;
+    var p = window.GrantVault.profile.get();
+    var filled = 0;
+    Object.keys(VAULT_TO_FORM).forEach(function (key) {
+      var el = $(VAULT_TO_FORM[key]);
+      if (el && p[key] && String(p[key]).trim() !== '') {
+        el.value = p[key];
+        el.classList.add('is-filled');
+        filled++;
+      }
+    });
+    if (window.LifeTool) {
+      window.LifeTool.toast(
+        filled
+          ? 'Profile applied to the form (' + filled + ' fields)'
+          : 'Vault is empty — save a profile first'
+      );
+    }
+  }
+
+  function renderDocs(entry) {
+    var box = $('docs-box');
+    var list = $('docs-list');
+    if (!box || !list || !window.GrantVault) return;
+    if (!entry) {
+      box.hidden = true;
+      return;
+    }
+    box.hidden = false;
+    var docs = window.GrantVault.docs.list(entry);
+    var checked = window.GrantVault.docs.checked(entry.id);
+    list.innerHTML = '';
+    docs.forEach(function (d) {
+      var label = document.createElement('label');
+      label.className = 'docs-item' + (checked[d[0]] ? ' is-done' : '');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = !!checked[d[0]];
+      cb.setAttribute('aria-label', d[1]);
+      cb.addEventListener('change', function () {
+        window.GrantVault.docs.set(entry.id, d[0], cb.checked);
+        label.classList.toggle('is-done', cb.checked);
+        updateDocsProgress(entry);
+      });
+      var span = document.createElement('span');
+      span.textContent = d[1];
+      label.appendChild(cb);
+      label.appendChild(span);
+      list.appendChild(label);
+    });
+    updateDocsProgress(entry);
+  }
+
+  function updateDocsProgress(entry) {
+    var fill = $('docs-progress-fill');
+    var count = $('docs-count');
+    if (!fill || !count || !window.GrantVault) return;
+    var p = window.GrantVault.docs.progress(entry.id, entry);
+    var pct = p.total ? Math.round((p.done / p.total) * 100) : 0;
+    fill.style.width = pct + '%';
+    count.textContent = p.done + ' of ' + p.total + ' documents ready';
+  }
+
+  function refreshTrackButton() {
+    var btn = $('track-app-btn');
+    var sel = $('opportunity_id');
+    if (!btn || !sel) return;
+    var id = sel.value;
+    btn.hidden = !id;
+    if (id && window.GrantVault) {
+      btn.textContent = window.GrantVault.pipeline.has(id)
+        ? 'Open in application tracker'
+        : 'Track this application';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    loadVaultIntoInputs();
+
+    var saveBtn = $('vault-save-btn');
+    if (saveBtn)
+      saveBtn.addEventListener('click', function () {
+        if (saveVaultFromInputs()) {
+          if (window.LifeTool) window.LifeTool.toast('Profile saved on this device');
+        } else if (window.LifeTool) {
+          window.LifeTool.toast('Could not save — browser storage blocked');
+        }
+      });
+    var applyBtn = $('vault-apply-btn');
+    if (applyBtn) applyBtn.addEventListener('click', applyVaultToForm);
+    var clearBtn = $('vault-clear-btn');
+    if (clearBtn)
+      clearBtn.addEventListener('click', function () {
+        if (!confirm('Delete the saved business profile on this device?')) return;
+        if (window.GrantVault) window.GrantVault.profile.clear();
+        window.GrantVault.profile.fields.forEach(function (key) {
+          var el = $('vault_' + key);
+          if (el) el.value = '';
+        });
+        if (window.LifeTool) window.LifeTool.toast('Profile cleared');
+      });
+
+    var sel = $('opportunity_id');
+    if (sel) {
+      var rerender = function () {
+        var entry = window.GrantVault ? window.GrantVault.findOpportunity(sel.value) : null;
+        renderDocs(entry);
+        refreshTrackButton();
+      };
+      sel.addEventListener('change', rerender);
+      // initial (after the main boot populates the select)
+      setTimeout(rerender, 300);
+    }
+
+    var trackBtn = $('track-app-btn');
+    if (trackBtn)
+      trackBtn.addEventListener('click', function () {
+        var id = sel ? sel.value : '';
+        if (!id || !window.GrantVault) return;
+        window.GrantVault.pipeline.add(id, 'drafting');
+        window.location.href = '/tools/grant-application-tracker/';
+      });
   });
 })();

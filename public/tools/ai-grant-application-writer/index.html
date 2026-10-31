@@ -118,6 +118,129 @@
         font-size: 0.88rem;
         color: var(--text);
       }
+      .vault-box {
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        background: rgba(239, 68, 68, 0.05);
+        border-radius: 12px;
+        padding: 1rem 1.1rem;
+        margin-bottom: 1.1rem;
+      }
+      .vault-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.5rem 0.9rem;
+        margin-bottom: 0.8rem;
+      }
+      .vault-head strong {
+        color: var(--text);
+        font-size: 0.98rem;
+      }
+      .vault-sub {
+        font-size: 0.8rem;
+        color: var(--text-faint);
+      }
+      .vault-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.85rem;
+      }
+      .vault-save {
+        background: #dc2626;
+        color: var(--text);
+        border: none;
+        border-radius: 9px;
+        padding: 0.6rem 1.3rem;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .vault-save:hover {
+        background: #ef4444;
+      }
+      .vault-apply {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 9px;
+        padding: 0.6rem 1.3rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .vault-apply:hover {
+        border-color: #dc2626;
+      }
+      .vault-clear {
+        background: none;
+        border: none;
+        color: var(--text-faint);
+        font-size: 0.82rem;
+        cursor: pointer;
+        padding: 0.6rem 0.4rem;
+      }
+      .vault-clear:hover {
+        color: #f87171;
+      }
+      .docs-box {
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        border-radius: 10px;
+        padding: 0.9rem 1.05rem;
+        margin-top: 0.6rem;
+      }
+      .docs-box strong {
+        color: var(--text);
+        font-size: 0.92rem;
+      }
+      .docs-note {
+        margin: 0.3rem 0 0.7rem;
+        font-size: 0.8rem;
+        color: var(--text-faint);
+        line-height: 1.5;
+      }
+      .docs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .docs-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        line-height: 1.45;
+      }
+      .docs-item input {
+        margin-top: 0.2rem;
+        accent-color: #ef4444;
+      }
+      .docs-item.is-done {
+        color: var(--text-faint);
+        text-decoration: line-through;
+      }
+      .docs-progress {
+        height: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 0.8rem;
+      }
+      .docs-progress-fill {
+        height: 100%;
+        width: 0;
+        background: #ef4444;
+        border-radius: 999px;
+        transition: width 0.25s;
+      }
+      .docs-count {
+        margin: 0.4rem 0 0;
+        font-size: 0.8rem;
+        color: var(--text-faint);
+      }
     </style>
     <style media="print">
       * {
@@ -339,6 +462,139 @@
               <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
             </div>
             <div class="lt-body">
+              <div class="vault-box" id="vault-box">
+                <div class="vault-head">
+                  <strong>Business profile vault</strong>
+                  <span class="vault-sub"
+                    >Saved on this device only. Fill once — reuse in every draft and quiz.</span
+                  >
+                </div>
+                <div class="lt-row">
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_business_name">Business name</label
+                    ><input
+                      class="lt-input"
+                      id="vault_business_name"
+                      type="text"
+                      placeholder="e.g. Ponderay Woodworks LLC"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_business_type">Business type</label
+                    ><input
+                      class="lt-input"
+                      id="vault_business_type"
+                      type="text"
+                      placeholder="e.g. LLC, S-corp, nonprofit"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div class="lt-row">
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_city_state">City, State</label
+                    ><input
+                      class="lt-input"
+                      id="vault_city_state"
+                      type="text"
+                      placeholder="e.g. Sandpoint, ID"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_founded_year">Founded</label
+                    ><input
+                      class="lt-input"
+                      id="vault_founded_year"
+                      type="text"
+                      placeholder="e.g. 2021"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div class="lt-row">
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_employees">Employees</label
+                    ><input
+                      class="lt-input"
+                      id="vault_employees"
+                      type="text"
+                      placeholder="e.g. 4"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_annual_revenue">Annual revenue</label
+                    ><input
+                      class="lt-input"
+                      id="vault_annual_revenue"
+                      type="text"
+                      placeholder="e.g. $180k"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="vault_mission">Mission / one-liner</label
+                  ><textarea
+                    class="lt-input"
+                    id="vault_mission"
+                    rows="2"
+                    placeholder="e.g. Custom hardwood furniture built in rural Idaho, sold wholesale across the Northwest"
+                  ></textarea>
+                </div>
+                <div class="lt-row">
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_contact_name">Contact name</label
+                    ><input
+                      class="lt-input"
+                      id="vault_contact_name"
+                      type="text"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_contact_email">Contact email</label
+                    ><input
+                      class="lt-input"
+                      id="vault_contact_email"
+                      type="email"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div class="lt-row">
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_contact_phone">Contact phone</label
+                    ><input
+                      class="lt-input"
+                      id="vault_contact_phone"
+                      type="tel"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="lt-field">
+                    <label class="lt-label" for="vault_website">Website</label
+                    ><input
+                      class="lt-input"
+                      id="vault_website"
+                      type="text"
+                      placeholder="e.g. example.com"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div class="vault-actions">
+                  <button type="button" class="vault-save" id="vault-save-btn">Save profile</button>
+                  <button type="button" class="vault-apply" id="vault-apply-btn">
+                    Apply profile to form
+                  </button>
+                  <button type="button" class="vault-clear" id="vault-clear-btn">
+                    Clear vault
+                  </button>
+                </div>
+              </div>
               <label class="lt-label" id="mode-label">Draft type</label>
               <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
                 <button
@@ -389,6 +645,18 @@
                 <input type="hidden" id="opportunity_facts" data-label="Opportunity details" />
               </div>
               <div class="opp-box" id="opportunity-details" hidden></div>
+              <div class="docs-box" id="docs-box" hidden>
+                <strong>Documents this application usually needs</strong>
+                <p class="docs-note">
+                  Standard checklist for this opportunity type — tick off what you have ready, and
+                  verify the exact requirements on the funder's official page before filing.
+                </p>
+                <div class="docs-list" id="docs-list"></div>
+                <div class="docs-progress" aria-hidden="true">
+                  <div class="docs-progress-fill" id="docs-progress-fill"></div>
+                </div>
+                <p class="docs-count" id="docs-count"></p>
+              </div>
               <div class="lt-row">
                 <div class="lt-field">
                   <label class="lt-label" for="business_name"
@@ -440,6 +708,43 @@
                     autocomplete="off"
                   />
                 </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="employees"
+                    >Employees <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="employees"
+                    type="text"
+                    placeholder="e.g. 4"
+                    data-label="Employees"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="annual_revenue"
+                    >Annual revenue <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="annual_revenue"
+                    type="text"
+                    placeholder="e.g. $180,000"
+                    data-label="Annual revenue"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="mission"
+                  >Mission / one-liner <span class="cs-optional">(optional)</span></label
+                ><textarea
+                  class="lt-input"
+                  id="mission"
+                  rows="2"
+                  placeholder="e.g. Custom hardwood furniture built in rural Idaho, sold wholesale across the Northwest"
+                  data-label="Mission"
+                ></textarea>
               </div>
               <div class="lt-field">
                 <label class="lt-label" for="use_of_funds"
@@ -524,6 +829,9 @@
               </p>
               <div class="lt-actions">
                 <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+                <button type="button" class="lt-ghost" id="track-app-btn" hidden>
+                  Track this application
+                </button>
               </div>
               <div class="lt-disc">
                 <strong style="color: var(--danger)"
@@ -735,6 +1043,10 @@
               ><strong>Small Business Funding Finder</strong
               ><small>Browse and filter all 43 Idaho funding opportunities</small></a
             >
+            <a href="/tools/grant-application-tracker/"
+              ><strong>Grant Application Tracker</strong
+              ><small>Track deadlines, documents, and every application in one pipeline</small></a
+            >
             <a href="/tools/business-name-generator/"
               ><strong>Business Name Generator</strong
               ><small>Naming the business you are funding</small></a
@@ -823,9 +1135,10 @@
     </footer>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/shared/grants-data.js?v=20261031g1"></script>
+    <script src="/tools/shared/grant-vault.js?v=20261031g2"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
-    <script src="/tools/ai-grant-application-writer/ai-grant-application-writer.js?v=20261031g1"></script>
+    <script src="/tools/ai-grant-application-writer/ai-grant-application-writer.js?v=20261031g2"></script>
   </body>
 </html>
