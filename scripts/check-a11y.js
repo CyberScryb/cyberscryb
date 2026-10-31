@@ -10,7 +10,7 @@ const TARGET_PAGES = [
   'public/blog/index.html',
   'public/guides/index.html',
   'public/tools.html',
-  'public/tools/refund-request/index.html',
+  'public/tools/complaint-letter-generator/index.html',
   'public/tools/paper-trail/index.html',
   'public/tools/subscription-leak-calculator/index.html',
   'public/tools/is-this-link-safe/index.html',
