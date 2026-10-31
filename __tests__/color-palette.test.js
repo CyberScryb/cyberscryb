@@ -67,7 +67,9 @@ describe('Color Palette Generator — UX & Accessibility', () => {
     // Simulate clicking or pressing Enter on the swatch
     firstSwatch.click();
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(expect.stringMatching(/^#[0-9A-F]{6}$/i));
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      expect.stringMatching(/^#[0-9A-F]{6}$/i)
+    );
     expect(firstSwatch.getAttribute('aria-label')).toMatch(/^Copied #[0-9A-F]{6}!$/i);
 
     const statusEl = document.getElementById('palette-status');
