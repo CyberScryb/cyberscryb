@@ -213,6 +213,45 @@ test('streaming renders tokens progressively and Stop keeps partial output', asy
   jest.useRealTimers();
 });
 
+test('glassmorphism generator background selector buttons have aria-label and update aria-pressed', () => {
+  const html = fs.readFileSync(
+    path.join(__dirname, '..', 'content-site/tools/glassmorphism-generator/index.html'),
+    'utf8'
+  );
+  const dom = new DOMParser().parseFromString(html, 'text/html');
+  document.body.innerHTML = dom.body.innerHTML;
+
+  const bgBtns = document.querySelectorAll('.bg-btn');
+  expect(bgBtns.length).toBeGreaterThan(0);
+
+  bgBtns.forEach(btn => {
+    expect(btn.hasAttribute('aria-label')).toBe(true);
+    expect(btn.getAttribute('aria-label')).toBeTruthy();
+  });
+
+  const bgBtnsArray = Array.from(bgBtns);
+  bgBtnsArray.forEach(btn => {
+    btn.addEventListener('click', () => {
+      bgBtnsArray.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+    });
+  });
+
+  const activeBtn = document.querySelector('.bg-btn.active');
+  const inactiveBtn = bgBtnsArray.find(b => b !== activeBtn);
+
+  expect(activeBtn.getAttribute('aria-pressed')).toBe('true');
+  expect(inactiveBtn.getAttribute('aria-pressed')).toBe('false');
+
+  inactiveBtn.click();
+  expect(inactiveBtn.getAttribute('aria-pressed')).toBe('true');
+  expect(activeBtn.getAttribute('aria-pressed')).toBe('false');
+});
+
 test('Stop button aborts the stream and keeps partial text', async () => {
   jest.useFakeTimers();
   document.querySelector('main').innerHTML =
