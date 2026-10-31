@@ -1617,6 +1617,16 @@ function generateSitemap(generatedPages) {
     'how-to-respond-to-a-performance-improvement-plan',
     'how-to-write-a-traffic-court-mitigation-letter',
     'how-to-prepare-for-an-unemployment-hearing',
+    'what-to-type-to-get-a-good-answer-from-ai',
+    'what-ai-actually-is-and-isnt',
+    'why-ai-makes-things-up',
+    'is-it-safe-to-paste-personal-info-into-ai',
+    'how-to-get-ai-to-write-like-you',
+    'ai-vs-google-search-when-to-use-which',
+    'what-ai-is-good-at-and-terrible-at',
+    'why-the-first-ai-answer-is-usually-the-worst',
+    'how-to-spot-ai-written-text',
+    'stop-paying-for-things-free-ai-does',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;

@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#09090b" />
+    <title>Why AI Makes Things Up (and How to Catch It) | CyberScryb</title>
+    <meta
+      name="description"
+      content="AI lies to your face with total confidence and has no idea it's doing it. Here's why hallucinations happen, the 4 places it invents facts most, and how to catch it before a made-up fact costs you."
+    />
+    <meta
+      name="keywords"
+      content="AI hallucinations, why AI lies, AI makes up facts, catch AI mistakes, verify AI answers, AI confident wrong"
+    />
+    <meta property="og:title" content="Why AI Makes Things Up (and How to Catch It)" />
+    <meta
+      property="og:description"
+      content="It lies with total confidence and has no idea. Why hallucinations happen and how to catch them before they cost you."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://cyberscryb.com/guides/why-ai-makes-things-up/" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Why AI Makes Things Up (and How to Catch It)" />
+    <meta
+      name="twitter:description"
+      content="It lies with total confidence and has no idea. Why hallucinations happen and how to catch them before they cost you."
+    />
+    <meta name="author" content="CyberScryb" />
+    <link rel="canonical" href="https://cyberscryb.com/guides/why-ai-makes-things-up/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    /></noscript>
+    <link rel="stylesheet" href="/css/style.css?v=20261011polish2" />
+    <link rel="stylesheet" href="/guides/guide.css" />
+    <link rel="stylesheet" href="/tools/shared/support.css" />
+    <!-- Google AdSense -->
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Why AI Makes Things Up (and How to Catch It)",
+        "description": "AI lies to your face with total confidence and has no idea it's doing it. Here's why hallucinations happen, the 4 places it invents facts most, and how to catch it before a made-up fact costs you.",
+        "author": {
+          "@type": "Organization",
+          "name": "CyberScryb",
+          "url": "https://cyberscryb.com/about/",
+          "sameAs": ["https://github.com/cyberscryb"]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CyberScryb",
+          "url": "https://cyberscryb.com"
+        },
+        "datePublished": "2026-10-31",
+        "dateModified": "2026-10-31",
+        "mainEntityOfPage": "https://cyberscryb.com/guides/why-ai-makes-things-up/",
+        "about": [{ "@type": "Thing", "name": "AI hallucinations" }],
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".tldr-box", ".guide-subtitle", "h1"]
+        },
+        "citation": []
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why does AI make up facts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because it predicts plausible-sounding text, not verified facts. When it doesn't have the answer, it generates what an answer would sound like. There's no internal alarm that goes off when it's inventing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I trust anything an AI tool tells me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Trust the structure, verify the facts. Drafts, ideas, explanations, and rephrasing are usually fine. Dates, names, numbers, quotes, laws, medical facts, and anything you can't afford to get wrong need an independent check."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does asking for sources stop hallucinations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It helps but it's not bulletproof. AI can invent plausible-looking sources too, including real-sounding article titles and URLs that don't exist. Click the link. If it doesn't load, it was made up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does it sound so confident when it's wrong?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because confidence is a writing style it learned, not a measure of accuracy. It writes wrong answers in the exact same confident tone as right ones. The tone tells you nothing."
+            }
+          }
+        ]
+      }
+    </script>
+    <!-- iubenda cookie consent banner -->
+
+    <link rel="stylesheet" href="/css/consent.css?v=20261006audit1" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+
+  <body>
+    <div class="bg-grid"></div>
+
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img src="/mascot-icon.webp" alt="CyberScryb" width="32" height="32" class="logo" />
+              <span
+                style="
+                  font-family: 'Orbitron';
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: #fff;
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/guides/" class="active">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="guide" itemscope itemtype="https://schema.org/Article">
+        <div class="guide-header">
+          <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/guides/">Guides</a>
+            <span>/</span>
+            <span>Guide</span>
+          </div>
+          <h1 itemprop="headline">
+            Why AI <span class="accent">Makes Things Up</span> (and How to Catch It)
+          </h1>
+          <p class="guide-subtitle" itemprop="description">
+            It'll lie to your face with total confidence and have no idea it's doing it. Here's why
+            that happens, where it invents facts most, and how to catch it before one costs you.
+          </p>
+          <div class="guide-meta">
+            <span>By <a href="/about/" itemprop="author" rel="author">CyberScryb</a></span>
+            <span
+              >📅 Updated
+              <time datetime="2026-10-31" itemprop="dateModified">October 31, 2026</time></span
+            >
+            <span>⏱ 4 min read</span>
+          </div>
+        </div>
+
+        <div class="tldr-box" role="region" aria-label="Key Takeaways">
+          <div class="tldr-header">
+            <span class="tldr-icon">⚡</span>
+            <strong>Key Takeaways (TL;DR)</strong>
+          </div>
+          <p>
+            AI predicts plausible text, not verified facts, so it invents things with total
+            confidence and no awareness. Watch dates, names, numbers, and sources most closely. Ask
+            for sources, click them, and verify anything that matters independently. Trust the
+            structure, check the facts.
+          </p>
+        </div>
+
+        <div class="cta-box">
+          <div class="cta-text">
+            <strong>Free tool: AI Detector</strong>
+            <span
+              >Suspicious text? Run it through the detector and see the tells. Free, no
+              signup.</span
+            >
+          </div>
+          <a href="/tools/ai-detector/" class="cta-btn">Open AI Detector &rarr;</a>
+        </div>
+
+        <div class="guide-content" itemprop="articleBody">
+          <h2>The uncomfortable truth</h2>
+          <p>
+            Here's the uncomfortable truth: AI doesn't know it's lying, because it doesn't know
+            anything. It's generating the most plausible-sounding next sentence, and sometimes the
+            most plausible-sounding sentence is completely made up. It'll cite a study that doesn't
+            exist, quote a person who never said it, and give you a date with total confidence. And
+            the whole time, it has no idea. There's no little voice in there saying "wait, I'm not
+            sure about this one."
+          </p>
+
+          <h2>Where it invents facts most</h2>
+          <p>Hallucinations aren't random. They cluster in four places:</p>
+          <ul>
+            <li>
+              <strong>Specific numbers.</strong> Statistics, dates, dollar amounts, measurements.
+              The more precise it sounds, the more suspicious you should be.
+            </li>
+            <li>
+              <strong>Names and quotes.</strong> "As Einstein said..." He probably didn't. AI loves
+              attributing punchy quotes to famous people.
+            </li>
+            <li>
+              <strong>Sources and links.</strong> It'll invent article titles, authors, and URLs
+              that look real. Click the link. If it 404s, it was fiction.
+            </li>
+            <li>
+              <strong>Niche facts.</strong> Obscure laws, rare medical details, local regulations.
+              The less common the knowledge, the more it improvises.
+            </li>
+          </ul>
+
+          <h2>How to catch it</h2>
+          <p>
+            You don't need to fact-check every word. You need a habit for the stuff that matters:
+          </p>
+          <ul>
+            <li>
+              <strong>Ask for sources, then click them.</strong> Real sources load. Invented ones
+              don't. This one step catches most hallucinations.
+            </li>
+            <li>
+              <strong>Interrogate the specifics.</strong> "Where did you get that number?" "What's
+              the actual statute?" Vague answers to follow-ups are a tell.
+            </li>
+            <li>
+              <strong>Cross-check anything load-bearing.</strong> If a fact affects money, health,
+              legal rights, or a deadline, verify it somewhere that isn't AI. One search. Thirty
+              seconds.
+            </li>
+          </ul>
+
+          <h2>The rule</h2>
+          <p>
+            Trust the structure, verify the facts. Let AI draft your letter, outline your argument,
+            explain the concept. Then you check the names, the numbers, and the claims before
+            anything leaves your hands. That's not distrust, that's just how you drive a machine
+            that guesses. You're the fact-checker. It never will be.
+          </p>
+
+          <h2 id="related-guides">Related Guides</h2>
+          <ul>
+            <li>
+              <a href="/guides/what-ai-actually-is-and-isnt/">What AI Actually Is (and Isn't)</a>
+              &mdash; why a prediction machine invents facts in the first place.
+            </li>
+            <li>
+              <a href="/guides/how-to-spot-ai-written-text/">How to Spot AI-Written Text</a>
+              &mdash; the stylistic tells that give generated text away.
+            </li>
+            <li>
+              <a href="/guides/what-to-type-to-get-a-good-answer-from-ai/"
+                >What to Type to Get a Good Answer From an AI Tool</a
+              >
+              &mdash; better prompts in, fewer surprises out.
+            </li>
+          </ul>
+        </div>
+
+        <div class="guide-faq">
+          <h2>FAQ</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Why does AI make up facts?</summary>
+              <p>
+                Because it predicts plausible-sounding text, not verified facts. When it doesn't
+                have the answer, it generates what an answer would sound like. There's no internal
+                alarm that goes off when it's inventing.
+              </p>
+            </details>
+            <details>
+              <summary>Can I trust anything an AI tool tells me?</summary>
+              <p>
+                Trust the structure, verify the facts. Drafts, ideas, explanations, and rephrasing
+                are usually fine. Dates, names, numbers, quotes, laws, medical facts, and anything
+                you can't afford to get wrong need an independent check.
+              </p>
+            </details>
+            <details>
+              <summary>Does asking for sources stop hallucinations?</summary>
+              <p>
+                It helps but it's not bulletproof. AI can invent plausible-looking sources too,
+                including real-sounding article titles and URLs that don't exist. Click the link. If
+                it doesn't load, it was made up.
+              </p>
+            </details>
+            <details>
+              <summary>Why does it sound so confident when it's wrong?</summary>
+              <p>
+                Because confidence is a writing style it learned, not a measure of accuracy. It
+                writes wrong answers in the exact same confident tone as right ones. The tone tells
+                you nothing.
+              </p>
+            </details>
+          </div>
+        </div>
+
+        <div class="cta-box bottom">
+          <div class="cta-text">
+            <strong>Check suspicious text</strong>
+            <span
+              >Got text you're not sure about? Run it through the detector and look for the tells.
+              Free, no signup.</span
+            >
+          </div>
+          <a href="/tools/ai-detector/" class="cta-btn">Open AI Detector &rarr;</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- AdSense: Before Footer -->
+    <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+      <ins
+        class="adsbygoogle"
+        style="display: block"
+        data-ad-client="ca-pub-5721233331247292"
+        data-ad-slot="9198647442"
+        data-ad-format="rectangle"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span style="font-family: 'Orbitron'; font-weight: 700; font-size: 1rem; color: #fff"
+              >CyberScryb</span
+            >
+            <p>Free, privacy-first developer tools.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CyberScryb. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/script.js?v=20261006audit1"></script>
+    <script src="/tools/shared/support.js"></script>
+  </body>
+</html>
