@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Small Business Funding Finder &mdash; Idaho Grants, Loans & Pitch Competitions | CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Free Idaho small business funding finder: filter 43 verified grants, loans, microloans, tax incentives, workforce training funds, and pitch competitions by category and deadline. Free, no signup."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/small-business-funding-finder/" />
+    <meta
+      property="og:title"
+      content="Small Business Funding Finder — Idaho Grants, Loans & Pitch Competitions | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Filter 43 verified Idaho grants, loans, microloans, tax incentives, and pitch competitions by category and deadline. Free, no signup."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/small-business-funding-finder/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Small Business Funding Finder — Idaho Grants, Loans & Pitch Competitions | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Filter 43 verified Idaho grants, loans, microloans, tax incentives, and pitch competitions by category and deadline."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <style>
+      .fund-filters {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .fund-search-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        margin: 1.25rem 0 0.75rem;
+      }
+      .fund-search {
+        flex: 1 1 260px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.65rem 0.9rem;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+      .fund-search::placeholder {
+        color: var(--text-faint);
+      }
+      .fund-select {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.65rem 0.9rem;
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+      .fund-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+      .fund-cats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.5rem 0 0.25rem;
+      }
+      .fund-pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .fund-pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .fund-pill.is-on {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .fund-count {
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        margin: 0.75rem 0 0;
+      }
+      .fund-grid {
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1rem;
+      }
+      .fund-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.1rem 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .fund-card:hover {
+        border-color: #dc2626;
+      }
+      .fund-card-top {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .fund-cat {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--primary-soft);
+      }
+      .fund-closed {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        border-radius: 999px;
+        padding: 2px 10px;
+      }
+      .fund-card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--text);
+        line-height: 1.35;
+      }
+      .fund-org {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+      .fund-meta {
+        margin: 0.25rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .fund-meta div {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 0.5rem;
+        font-size: 0.83rem;
+      }
+      .fund-meta dt {
+        color: var(--text-faint);
+      }
+      .fund-meta dd {
+        margin: 0;
+        color: var(--text);
+      }
+      .fund-notes {
+        margin: 0.25rem 0 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+      }
+      .fund-actions {
+        margin-top: auto;
+        padding-top: 0.6rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .fund-apply {
+        color: var(--primary-soft);
+        font-weight: 700;
+        font-size: 0.88rem;
+        text-decoration: none;
+      }
+      .fund-apply:hover {
+        text-decoration: underline;
+      }
+      .fund-draft {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .fund-draft:hover {
+        color: var(--text);
+      }
+      .fund-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: var(--text-muted);
+        padding: 2rem 1rem;
+      }
+      .fund-note-band {
+        max-width: 1200px;
+        margin: 0 auto 1.5rem;
+        padding: 0 1.5rem;
+      }
+      .fund-note-band .inner {
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        border-radius: 12px;
+        padding: 0.9rem 1.15rem;
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Small Business Funding Finder",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/small-business-funding-finder/",
+        "description": "Free Idaho small business funding finder: filter 43 verified grants, loans, microloans, tax incentives, workforce training funds, and pitch competitions by category and deadline."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Where does the funding data come from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The CyberScryb Idaho funding dataset: 43 opportunities from the Idaho Department of Commerce, Idaho Workforce Development Council, SBA, USDA, regional development organizations, CDFIs, pitch competitions, and foundations. Each entry's official page was opened and verified on October 31, 2026."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How current is the information?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every entry was verified on October 31, 2026. Deadlines and amounts change, so always confirm on the funder's official page (linked on every card) before you apply. Entries whose latest round has closed are flagged."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I apply through this site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Every card links to the funder's official application page, where you apply directly. The companion AI Grant Application Writer can draft your application narrative from your facts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this only for Idaho?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This pilot dataset covers Idaho, including federal programs open to Idaho businesses. More states are being added."
+            }
+          }
+        ]
+      }
+    </script>
+  <link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">Small Business Funding Finder</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">Business tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            Small business funding <span style="color: var(--primary)">finder</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            43 verified Idaho grants, loans, microloans, tax incentives, workforce training funds,
+            and pitch competitions — each one checked against its official page. Filter by category,
+            search, and open the real application.
+          </p>
+        </div>
+      </section>
+      <div class="fund-filters">
+        <div class="fund-search-row">
+          <input
+            class="fund-search"
+            id="fund-search"
+            type="search"
+            placeholder="Search: veteran, rural, manufacturing, export…"
+            aria-label="Search funding opportunities"
+            autocomplete="off"
+          />
+          <select class="fund-select" id="fund-sort" aria-label="Sort opportunities">
+            <option value="name">Sort: A–Z</option>
+            <option value="deadline">Sort: open first</option>
+          </select>
+          <label class="fund-check"
+            ><input type="checkbox" id="fund-hide-closed" /> Hide closed rounds</label
+          >
+        </div>
+        <div class="fund-cats" id="fund-cats" role="group" aria-label="Filter by category"></div>
+        <p class="fund-count" id="fund-count" aria-live="polite"></p>
+      </div>
+      <div class="fund-grid" id="fund-results"></div>
+      <div class="fund-note-band">
+        <div class="inner">
+          <strong style="color: var(--text)">Verify before you apply.</strong> Every entry was
+          checked on October 31, 2026, but deadlines and amounts change. Each card links to the
+          funder's official page — confirm the current round there. Found a match? The
+          <a href="/tools/ai-grant-application-writer/" style="color: var(--primary-soft)"
+            >AI Grant Application Writer</a
+          >
+          drafts your application from your facts, or hit "Draft application" on any card to jump
+          straight in with that opportunity selected.
+        </div>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Funding data verified October 31, 2026 — confirm current details
+            on each funder's official page.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/grants-data.js?v=20261031g1"></script>
+    <script src="/tools/small-business-funding-finder/small-business-funding-finder.js?v=20261031g1"></script>
+  </body>
+</html>

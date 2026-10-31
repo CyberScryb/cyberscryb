@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Grant Application Writer &mdash; Free Small Business Funding Draft Tool | CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Free AI grant application writer for small businesses: pick a real Idaho grant, loan, or pitch competition from our verified funding dataset and get a tailored application draft from your facts. Free, no signup."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-grant-application-writer/" />
+    <meta
+      property="og:title"
+      content="AI Grant Application Writer — Free Small Business Funding Draft Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Pick a real Idaho grant, loan, or pitch competition from our verified funding dataset and get a tailored application draft from your facts. Free, no signup."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-grant-application-writer/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Grant Application Writer — Free Small Business Funding Draft Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Pick a real Idaho grant, loan, or pitch competition from our verified funding dataset and get a tailored application draft from your facts."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .opp-box {
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a draft first, then print');
+          else alert('Generate a draft first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Grant Application Writer",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-grant-application-writer/",
+        "description": "Free AI grant application writer: pick a real Idaho grant, loan, or pitch competition from a verified funding dataset and get a tailored application draft from your facts."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Where do the funding opportunities come from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every opportunity in the picker comes from the CyberScryb Idaho funding dataset: 43 state grants, federal programs, tax incentives, workforce training funds, loans, microloans, pitch competitions, and foundation grants. Each entry's page was opened and verified, and entries are marked when their latest round has closed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the draft guarantee I get the grant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The tool writes a draft from the facts you enter; it never predicts whether you will be approved and never invents qualifications, revenue, or impact numbers. Funders decide, and every draft should be reviewed and customized before you submit it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this only for Idaho businesses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The opportunity dataset currently covers Idaho, including federal programs open to Idaho businesses. More states are being added. The writer itself works for any opportunity — pick the closest match and edit the draft."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my business information sent anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your prompt is sent to our AI service to generate the draft. Drafts and history are saved only on your device, in your browser. Nothing is submitted to any funder — you file the application yourself."
+            }
+          }
+        ]
+      }
+    </script>
+  <link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
+<script src="/js/consent.js?v=20261006audit1" defer></script>
+</head>
+  <body>
+    <div id="lt-toast" role="status" aria-live="polite"></div>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Grant Application Writer</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI business tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI grant application <span style="color: var(--primary)">writer</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Pick a real Idaho grant, loan, or pitch competition from our verified funding dataset,
+            describe your business and what the money is for, and get an application draft tailored
+            to that opportunity.
+          </p>
+          <div class="not-lawyer">
+            <strong>Drafts only, no guarantees.</strong> This writes an application draft from the
+            facts you enter. It never predicts whether you will be approved, never invents revenue
+            or qualifications, and never submits anything. You review, customize, and file the
+            application yourself.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> 43 verified Idaho funding opportunities</span>
+          <span><i></i> Draft matched to the opportunity you pick</span>
+          <span><i></i> Full narrative, cover letter, or summary</span>
+          <span><i></i> Drafts library saves on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Pick the opportunity</strong
+            ><span
+              >Choose a grant, loan, or competition from the verified dataset. Its details feed the
+              draft.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Describe your business</strong
+            ><span
+              >What you do, what the money is for, and why you fit. Facts only — nothing is
+              invented.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Generate and file</strong
+            ><span
+              >Get the draft, customize it, and submit it on the funder's official page
+              yourself.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Opportunity</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Your business</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Draft</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your application</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Draft type</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="full-application"
+                  aria-pressed="false"
+                >
+                  Full application narrative
+                </button>
+                <button type="button" class="lt-chip" data-mode="cover-letter" aria-pressed="false">
+                  Cover letter to the funder
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="executive-summary"
+                  aria-pressed="false"
+                >
+                  One-page executive summary
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="full-application" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Full application narrative mode</strong>A complete draft application matched
+                to the opportunity you picked.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick a funding opportunity and describe what the money is for.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="opportunity_id"
+                  >Funding opportunity <span class="cs-req" aria-hidden="true">*</span></label
+                ><select
+                  class="lt-input"
+                  id="opportunity_id"
+                  data-label="Funding opportunity"
+                  aria-required="true"
+                >
+                  <option value="">Loading opportunities&hellip;</option>
+                </select>
+                <input type="hidden" id="opportunity_facts" data-label="Opportunity details" />
+              </div>
+              <div class="opp-box" id="opportunity-details" hidden></div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="business_name"
+                    >Business name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="business_name"
+                    type="text"
+                    placeholder="e.g. Ponderay Woodworks LLC"
+                    data-label="Business name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="business_type"
+                    >Business type <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="business_type"
+                    type="text"
+                    placeholder="e.g. LLC, sole proprietorship"
+                    data-label="Business type"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="city_state"
+                    >City, State <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="city_state"
+                    type="text"
+                    placeholder="e.g. Sandpoint, ID"
+                    data-label="Location"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="amount_requested"
+                    >Amount requested <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="amount_requested"
+                    type="text"
+                    placeholder="e.g. $25,000"
+                    data-label="Amount requested"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="use_of_funds"
+                  >What the money is for <span class="cs-req" aria-hidden="true">*</span></label
+                ><textarea
+                  class="lt-input"
+                  id="use_of_funds"
+                  rows="3"
+                  placeholder="e.g. $15,000 for a commercial planer and dust collection, $10,000 for six months of shop rent while I take on wholesale accounts"
+                  data-label="Use of funds"
+                  aria-required="true"
+                ></textarea>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="business_background"
+                  >Your business background <span class="cs-req" aria-hidden="true">*</span></label
+                ><textarea
+                  class="lt-input"
+                  id="business_background"
+                  rows="4"
+                  placeholder="What you do, how long you have done it, customers or revenue so far, and any relevant experience. Stick to facts you can prove."
+                  data-label="Business background"
+                  aria-required="true"
+                ></textarea>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="why_fit"
+                  >Why you fit this opportunity <span class="cs-optional">(optional)</span></label
+                ><textarea
+                  class="lt-input"
+                  id="why_fit"
+                  rows="3"
+                  placeholder="e.g. Rural manufacturer creating 3 jobs in Bonner County; the fund targets rural job creation"
+                  data-label="Why this opportunity fits"
+                ></textarea>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="jobs_impact"
+                    >Jobs / community impact <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="jobs_impact"
+                    type="text"
+                    placeholder="e.g. 3 new full-time jobs in year one"
+                    data-label="Jobs and community impact"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="contact_name"
+                    >Contact name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="contact_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Contact name"
+                    autocomplete="name"
+                  />
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="contact_email"
+                  >Contact email <span class="cs-optional">(optional)</span></label
+                ><input
+                  class="lt-input"
+                  id="contact_email"
+                  type="email"
+                  placeholder="you@example.com"
+                  data-label="Contact email"
+                  autocomplete="email"
+                />
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate draft</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Drafts only. This is not financial or legal advice.</strong
+                >
+                It drafts an application from your facts only. It does not predict approval, does
+                not invent qualifications or numbers, and does not submit anything. Verify the
+                opportunity's current deadline and requirements on the funder's official page before
+                you apply.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your draft</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your application&hellip;</p>
+                  <small>Matched to the opportunity you picked</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your draft will appear here.<br /><br />1. Pick a funding opportunity<br />2.
+                    Describe your business and the use of funds<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts library</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a draft to save this exact form, on this device. Reload it anytime to keep
+                  working.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Draft name, e.g. STEP grant v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save draft</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No saved drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You run a small Idaho business and a grant or loan looks right, but the
+                  application asks for a narrative and you are staring at a blank page
+                </li>
+                <li>
+                  You want to pitch at Boise Entrepreneur Week or a regional competition and need a
+                  tight executive summary of the business first
+                </li>
+                <li>
+                  A workforce training fund would reimburse your training costs, and you need a
+                  clear statement of what the training is for
+                </li>
+                <li>
+                  You found three or four opportunities in the
+                  <a href="/tools/small-business-funding-finder/">funding finder</a> and want a
+                  tailored draft for each one without starting over
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Match the funder's language</h3>
+              <p>
+                Every opportunity in the dataset carries its eligibility and purpose. The draft is
+                built around those: a rural infrastructure grant wants jobs and public benefit, a
+                pitch competition wants growth story. Pick the right opportunity first — the
+                <a href="/tools/small-business-funding-finder/">finder</a> helps you compare.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Specific use of funds wins</h3>
+              <p>
+                "$25,000 for operations" loses to "$15,000 for a commercial planer, $10,000 for six
+                months of shop rent while onboarding wholesale accounts." Name the items, the
+                amounts, and what changes because of them. The draft only uses what you enter.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Deadlines move — verify</h3>
+              <p>
+                Every dataset entry was verified on October 31, 2026, and rounds close. Before you
+                submit, open the funder's official page from the opportunity card and confirm the
+                deadline, amount, and requirements are current.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Never invent qualifications</h3>
+              <p>
+                Funders verify. The tool drafts strictly from your facts and will not invent
+                revenue, employees, or impact numbers. If a fact is missing, the draft omits it —
+                which tells you what to nail down before applying.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>Where do the funding opportunities come from?</summary>
+              <p>
+                The CyberScryb Idaho funding dataset: 43 state grants, federal programs, tax
+                incentives, workforce training funds, loans, microloans, pitch competitions, and
+                foundation grants. Each entry's page was opened and verified, and entries are
+                flagged when their latest round has closed. More states are being added.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Does the draft guarantee I get the grant?</summary>
+              <p>
+                No. It writes a draft from the facts you enter. It never predicts approval, never
+                invents qualifications or numbers, and never submits anything. Review and customize
+                every draft before filing.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I use it for opportunities outside Idaho?</summary>
+              <p>
+                The picker currently covers Idaho. The writer works for any opportunity — pick the
+                closest match and edit the draft to the real funder's requirements.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is my business information sent anywhere?</summary>
+              <p>
+                Your prompt is sent to our AI service to generate the draft. Drafts and history are
+                saved only on your device. Nothing is submitted to any funder — you file the
+                application yourself on their official page.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/tools/small-business-funding-finder/"
+              ><strong>Small Business Funding Finder</strong
+              ><small>Browse and filter all 43 Idaho funding opportunities</small></a
+            >
+            <a href="/tools/business-name-generator/"
+              ><strong>Business Name Generator</strong
+              ><small>Naming the business you are funding</small></a
+            >
+            <a href="/tools/cover-letter-generator/"
+              ><strong>Cover Letter Generator</strong
+              ><small>General-purpose cover letters</small></a
+            >
+            <a href="/tools/budget-planner/"
+              ><strong>Budget Planner</strong><small>Plan the numbers behind your ask</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate draft &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo Identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Drafts only — review every application with a qualified
+            professional before submitting.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/grants-data.js?v=20261031g1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-grant-application-writer/ai-grant-application-writer.js?v=20261031g1"></script>
+  </body>
+</html>

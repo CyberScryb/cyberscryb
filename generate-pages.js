@@ -1486,6 +1486,8 @@ function generateSitemap(generatedPages) {
     'ai-immigration-hardship-waiver-letter',
     'ai-pip-response-letter',
     'ai-traffic-court-mitigation-letter',
+    'small-business-funding-finder',
+    'ai-grant-application-writer',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1827,6 +1829,8 @@ function manageRobotsMeta() {
     'ai-immigration-hardship-waiver-letter',
     'ai-pip-response-letter',
     'ai-traffic-court-mitigation-letter',
+    'small-business-funding-finder',
+    'ai-grant-application-writer',
   ]);
 
   const dirsToProcess = [
