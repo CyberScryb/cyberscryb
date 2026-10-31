@@ -315,10 +315,20 @@ select:focus {
   align-items: center;
   justify-content: flex-end;
   padding-bottom: 16px;
+  border: none;
+  font-family: inherit;
+  outline: none;
 }
 
-.color-swatch:hover {
+.color-swatch:hover,
+.color-swatch:focus-visible {
   flex: 1.5;
+}
+
+.color-swatch:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -2px;
+  z-index: 2;
 }
 
 .swatch-hex {
@@ -334,7 +344,8 @@ select:focus {
   pointer-events: none;
 }
 
-.color-swatch:hover .swatch-hex {
+.color-swatch:hover .swatch-hex,
+.color-swatch:focus-visible .swatch-hex {
   opacity: 1;
 }
 
