@@ -272,8 +272,12 @@
               eventKeys.forEach(key => {
                 get(key).value = event[key] || '';
               });
-              root.querySelector('#pw-add-event').textContent = 'Save event';
-              root.querySelector('#pw-cancel-edit').hidden = false;
+              const addBtn = root.querySelector('#pw-add-event');
+              const cancelBtn = root.querySelector('#pw-cancel-edit');
+              addBtn.textContent = 'Save event';
+              addBtn.setAttribute('aria-label', 'Save event changes');
+              cancelBtn.hidden = false;
+              cancelBtn.setAttribute('aria-label', 'Cancel editing event');
               errorsFor({});
               get('date').focus();
               announce('Editing event. Save your changes to update the timeline.');
@@ -299,8 +303,12 @@
         get(key).value = key === 'type' ? 'contact' : '';
       });
       editIndex = -1;
-      root.querySelector('#pw-add-event').textContent = 'Add event';
-      root.querySelector('#pw-cancel-edit').hidden = true;
+      const addBtn = root.querySelector('#pw-add-event');
+      const cancelBtn = root.querySelector('#pw-cancel-edit');
+      addBtn.textContent = 'Add event';
+      addBtn.setAttribute('aria-label', 'Add event to timeline');
+      cancelBtn.hidden = true;
+      cancelBtn.removeAttribute('aria-label');
       errorsFor({});
     }
     form.addEventListener('submit', event => {
