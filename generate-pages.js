@@ -1612,6 +1612,7 @@ function generateSitemap(generatedPages) {
     'how-to-prepare-for-an-exit-interview',
     'how-to-respond-to-a-performance-improvement-plan',
     'how-to-write-a-traffic-court-mitigation-letter',
+    'how-to-prepare-for-an-unemployment-hearing',
   ];
   staticGuides.forEach(slug => {
     xml += `  <url><loc>${baseUrl}/guides/${slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
