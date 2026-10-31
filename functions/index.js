@@ -162,12 +162,24 @@ function getABVariant(testName, identifier) {
 
 // ─── Client Identifier & Tier Helpers ───────────────────
 
+// Extract the real client IP. Google's load balancer appends the true client IP
+// as the LAST entry of X-Forwarded-For; earlier entries are client-controlled
+// and trivially spoofable, so the first entry must never be trusted.
+function getClientIp(req) {
+  const xff = req.headers['x-forwarded-for'];
+  if (xff) {
+    const parts = xff
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+    if (parts.length) return parts[parts.length - 1];
+  }
+  return req.connection?.remoteAddress || 'unknown';
+}
+
 // Extract anonymous client identifier (hashed IP only - privacy-first)
 function getClientIdentifier(req) {
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.connection?.remoteAddress ||
-    'unknown';
+  const ip = getClientIp(req);
 
   // Hash the IP to prevent storing raw IPs (privacy-first approach)
   const crypto = require('crypto');
@@ -190,10 +202,7 @@ function getUserTier() {
 const burstLimitStore = new Map();
 
 function checkBurstRateLimit(req) {
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.connection?.remoteAddress ||
-    'unknown';
+  const ip = getClientIp(req);
   const now = Date.now();
   const windowMs = 60000;
   const maxBurst = 5;
@@ -233,10 +242,7 @@ function getDateString(date = new Date()) {
 }
 
 function getIpHash(req) {
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.connection?.remoteAddress ||
-    'unknown';
+  const ip = getClientIp(req);
   const crypto = require('crypto');
   return crypto
     .createHash('sha256')
@@ -259,6 +265,11 @@ async function checkFirestoreRateLimit(req) {
       const ipSnap = await tx.get(ipRef);
       const globalCount = globalSnap.exists ? globalSnap.data().count || 0 : 0;
       const ipCount = ipSnap.exists ? ipSnap.data().count || 0 : 0;
+      if (globalCount >= 400) {
+        console.warn(
+          `[RATE_LIMIT_ANOMALY] Global daily AI usage at ${globalCount}/${GLOBAL_DAILY_CAP} — possible abuse burst.`
+        );
+      }
       if (globalCount >= GLOBAL_DAILY_CAP) {
         return {
           allowed: false,
@@ -452,10 +463,7 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
         } else if (response.status === 400) {
           userMessage =
             '❌ Invalid input detected. Please check your text for special characters or try shortening it.';
-        } else if (errorData.error?.message) {
-          userMessage = '⚠️ ' + errorData.error.message;
         }
-
         return res.status(response.status).json({
           error: userMessage,
           retryable: response.status === 429 || response.status >= 500,
@@ -720,8 +728,6 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
         let userMessage = 'AI generation failed. Please try again.';
         if (response.status === 429) {
           userMessage = 'AI service is busy. Please wait 30 seconds and try again.';
-        } else if (errorData.error?.message) {
-          userMessage = errorData.error.message;
         }
 
         return res.status(response.status).json({
@@ -3074,8 +3080,6 @@ async function streamGeneration(req, res, ctx) {
           userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
         } else if (upstream.status === 400) {
           userMessage = 'Invalid input. Please check your text and try again.';
-        } else if (errorData.error && errorData.error.message) {
-          userMessage = errorData.error.message;
         }
       } catch (e) {}
       await phCapture(getClientIdentifier(req), 'ai_generation_failed', {
@@ -3273,8 +3277,6 @@ exports.generateAI = functions.runWith({ timeoutSeconds: 120 }).https.onRequest(
           userMessage = 'AI service is overloaded. Please wait 30 seconds and try again.';
         } else if (response.status === 400) {
           userMessage = 'Invalid input. Please check your text and try again.';
-        } else if (errorData.error?.message) {
-          userMessage = errorData.error.message;
         }
 
         return res.status(response.status).json({

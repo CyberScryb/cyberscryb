@@ -799,7 +799,7 @@
           clearStreamCursor();
           trackEvent('tool_used', { tool_id: toolId, user_type: 'free' });
           if (timeToFirstToken !== null) {
-            trackEvent('tool_ttft_ms', { tool_id: toolId, value: timeToFirstToken });
+            trackEvent('tool_ttft_ms', { tool_id: toolId, ttft_ms: timeToFirstToken });
           }
           showFullResult(fullText);
           showChainIfReady(fullText);
