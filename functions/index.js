@@ -162,9 +162,10 @@ function getABVariant(testName, identifier) {
 
 // ─── Client Identifier & Tier Helpers ───────────────────
 
-// Extract the real client IP. Google's load balancer appends the true client IP
-// as the LAST entry of X-Forwarded-For; earlier entries are client-controlled
-// and trivially spoofable, so the first entry must never be trusted.
+// Extract the real client IP. Google's load balancer appends two addresses to
+// X-Forwarded-For: the client IP, then the load balancer IP. Any values before
+// those can be client-controlled, so use the second-to-last entry when both
+// platform-added values are present.
 function getClientIp(req) {
   const xff = req.headers['x-forwarded-for'];
   if (xff) {
@@ -172,7 +173,8 @@ function getClientIp(req) {
       .split(',')
       .map(s => s.trim())
       .filter(Boolean);
-    if (parts.length) return parts[parts.length - 1];
+    if (parts.length >= 2) return parts[parts.length - 2];
+    if (parts.length === 1) return parts[0];
   }
   return req.connection?.remoteAddress || 'unknown';
 }

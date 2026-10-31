@@ -181,6 +181,16 @@ describe('Firestore-backed rate limiting', () => {
     expect(hashA).not.toBe(hashB);
   });
 
+  test('uses the client IP before the load-balancer IP, ignoring spoofed prefixes', () => {
+    const loadBalancerIp = '35.191.0.1';
+    const clientA = makeReq({ ip: '203.0.113.10, ' + loadBalancerIp });
+    const clientB = makeReq({ ip: '198.51.100.20, ' + loadBalancerIp });
+    const spoofedPrefix = makeReq({ ip: '192.0.2.99, 203.0.113.10, ' + loadBalancerIp });
+
+    expect(getIpHash(clientA)).not.toBe(getIpHash(clientB));
+    expect(getIpHash(clientA)).toBe(getIpHash(spoofedPrefix));
+  });
+
   test('global cap check fails CLOSED on Firestore error', async () => {
     mockFakeDb.runTransaction = async () => {
       throw new Error('Firestore unavailable');
