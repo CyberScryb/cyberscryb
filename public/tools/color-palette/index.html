@@ -165,14 +165,14 @@
         <section class="generator-card" id="generator">
             <div class="controls">
                 <div class="control-group">
-                    <label>Base Color <span class="cs-req" aria-hidden="true">*</span></label>
+                    <label for="baseColor">Base Color <span class="cs-req" aria-hidden="true">*</span></label>
                     <div class="color-input-wrap">
                         <input type="color" id="baseColor" value="#dc2626">
-                        <input type="text" id="hexInput" value="#dc2626" maxlength="7" spellcheck="false" aria-required="true">
+                        <input type="text" id="hexInput" value="#dc2626" maxlength="7" spellcheck="false" aria-required="true" aria-label="Hex color value">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label>Harmony <span class="cs-optional">(optional)</span></label>
+                    <label for="harmony">Harmony <span class="cs-optional">(optional)</span></label>
                     <select id="harmony">
                         <option value="complementary">Complementary</option>
                         <option value="analogous">Analogous</option>
@@ -183,7 +183,7 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label>Count <span class="cs-optional">(optional)</span></label>
+                    <label for="count">Count <span class="cs-optional">(optional)</span></label>
                     <select id="count">
                         <option value="5" selected>5 colors</option>
                         <option value="6">6 colors</option>
@@ -197,6 +197,7 @@
 
             <!-- Palette Display -->
             <div class="palette" id="palette"></div>
+            <p id="palette-status" class="cs-sr-only" aria-live="polite" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;"></p>
 
             <!-- Export Section -->
             <div class="export-section">

@@ -155,10 +155,10 @@ function renderPalette() {
   container.innerHTML = currentPalette
     .map(
       (c, i) => `
-        <div class="color-swatch" style="background: ${c.hex}" onclick="copySwatch(${i})" title="Click to copy">
-            <span class="swatch-hex">${c.hex}</span>
-            <span class="swatch-copied" id="copied-${i}">Copied!</span>
-        </div>
+        <button type="button" class="color-swatch" id="swatch-${i}" style="background: ${c.hex}" onclick="copySwatch(${i})" aria-label="Copy color ${c.hex}" title="Click to copy ${c.hex}">
+            <span class="swatch-hex" aria-hidden="true">${c.hex}</span>
+            <span class="swatch-copied" id="copied-${i}" aria-hidden="true">Copied!</span>
+        </button>
     `
     )
     .join('');
@@ -166,10 +166,19 @@ function renderPalette() {
 
 function copySwatch(index) {
   const hex = currentPalette[index].hex;
-  navigator.clipboard.writeText(hex);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(hex);
+  }
   const el = document.getElementById(`copied-${index}`);
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 1200);
+  const btn = document.getElementById(`swatch-${index}`);
+  const status = document.getElementById('palette-status');
+  if (el) el.classList.add('show');
+  if (btn) btn.setAttribute('aria-label', `Copied ${hex}!`);
+  if (status) status.textContent = `Copied ${hex} to clipboard.`;
+  setTimeout(() => {
+    if (el) el.classList.remove('show');
+    if (btn) btn.setAttribute('aria-label', `Copy color ${hex}`);
+  }, 1200);
 }
 
 function switchExport(mode) {
