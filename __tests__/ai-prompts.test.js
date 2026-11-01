@@ -100,6 +100,7 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-severance-negotiation-letter',
     'ai-immigration-hardship-waiver-letter',
     'ai-pip-response-letter',
+    'ai-fmla-request-letter',
     'ai-traffic-court-mitigation-letter',
     'ai-tenant-case-companion',
     'ai-grant-application-writer',
@@ -107,7 +108,7 @@ describe('AI_PROMPTS dispatch table', () => {
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-  test('has exactly 73 keys', () => {
+  test('has exactly 74 keys', () => {
     expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
   });
 
