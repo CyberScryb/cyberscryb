@@ -1554,6 +1554,7 @@ function generateSitemap(generatedPages) {
     'insurance-prior-auth-appeal-letter',
     'landlord-tenant-repair-request-letter',
     'payment-demand-letter-for-unpaid-invoice',
+    'how-to-write-an-unpaid-wages-demand-letter',
     'sap-financial-aid-appeal-letter-guide',
     'upwork-proposal-template-that-wins',
     'utility-shutoff-payment-arrangement-letter',
