@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#09090b" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Grant Application Tracker &mdash; Deadlines, Documents & Pipeline | CyberScryb
-    </title>
+    <title>Grant Application Tracker &mdash; Deadlines, Documents & Pipeline | CyberScryb</title>
     <meta
       name="description"
       content="Free grant application tracker for small businesses: track every Idaho funding application through saved, drafting, applied, pending, and won, with deadline radar, document checklists, and direct portal links. Free, no signup — saved on your device."
@@ -99,6 +97,7 @@
       }
       .trk-add-btn:hover {
         background: #ef4444;
+        color: #09090b;
       }
       .trk-board {
         display: grid;
@@ -298,6 +297,7 @@
       }
       .trk-cta:hover {
         background: #ef4444;
+        color: #09090b;
       }
       /* Deadline radar */
       .trk-radar-list {
@@ -355,8 +355,8 @@
         flex: 1 1 100%;
         margin-top: 0.25rem;
       }
-      .trk-remind-form input[type="date"],
-      .trk-remind-form input[type="text"] {
+      .trk-remind-form input[type='date'],
+      .trk-remind-form input[type='text'] {
         background: var(--bg-elevated);
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -449,7 +449,7 @@
             "name": "Where is my tracking data stored?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Only in your browser, on your device (localStorage). There is no account and nothing is sent anywhere. Clearing your browser data removes it."
+              "text": "Only in your browser, on your device (localStorage). There is no account and nothing is sent anywhere. Clearing your browser data removes it, and it does not sync between devices."
             }
           },
           {
@@ -457,7 +457,7 @@
             "name": "Where do the funding opportunities come from?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The CyberScryb Idaho funding dataset: 43 verified grants, loans, microloans, tax incentives, workforce training funds, and pitch competitions, each checked against its official page."
+              "text": "The CyberScryb Idaho funding dataset: 43 verified grants, loans, microloans, tax incentives, workforce training funds, and pitch competitions, each checked against its official page. It is Idaho-focused, not national."
             }
           },
           {
@@ -465,15 +465,31 @@
             "name": "How do deadline reminders work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Set a reminder date on any upcoming deadline and it is saved on your device. The radar highlights anything due within 14 days so nothing slips."
+              "text": "Set a reminder date on any upcoming deadline and it is saved on your device. The deadline radar lists everything soonest first and highlights anything due within 14 days so nothing slips."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I share a pipeline with my team?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not directly — your data lives in one browser on one device with no account behind it. For team use, each person runs their own copy, or one person keeps the master pipeline and reports from it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the deadlines guaranteed current?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No — funding rounds change. The dataset was verified October 31, 2026, but always confirm the current round on the funder's official page before you file. Every tracker entry links straight there."
             }
           }
         ]
       }
     </script>
-  <link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
-<script src="/js/consent.js?v=20261006audit1" defer></script>
-</head>
+    <link rel="stylesheet" href="/css/consent.css?v=20261006audit1" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
   <body>
     <header>
       <nav class="navbar">
@@ -541,22 +557,34 @@
           </h1>
           <p class="hero-subtitle" style="max-width: 40rem">
             Every funding application in one pipeline — saved, drafting, applied, pending, won —
-            with a deadline radar, document checklists, reminders, and direct links to each
-            funder's official portal. Everything stays on your device.
+            with a deadline radar, document checklists, reminders, and direct links to each funder's
+            official portal. Everything stays on your device.
           </p>
           <div class="trk-hard-rule">
-            <strong>You submit, not the tool.</strong> The tracker organizes and drafts; every
-            entry links straight to the funder's official page, where you log in and file the
-            application yourself. Nothing here ever submits anything on your behalf.
+            <strong>You submit, not the tool.</strong> The tracker organizes and drafts; every entry
+            links straight to the funder's official page, where you log in and file the application
+            yourself. Nothing here ever submits anything on your behalf.
           </div>
         </div>
       </section>
       <div class="trk-wrap">
         <div class="trk-tabs" role="tablist" aria-label="Tracker view">
-          <button type="button" class="trk-tab is-on" data-tab="pipeline" role="tab" aria-selected="true">
+          <button
+            type="button"
+            class="trk-tab is-on"
+            data-tab="pipeline"
+            role="tab"
+            aria-selected="true"
+          >
             Pipeline
           </button>
-          <button type="button" class="trk-tab" data-tab="deadlines" role="tab" aria-selected="false">
+          <button
+            type="button"
+            class="trk-tab"
+            data-tab="deadlines"
+            role="tab"
+            aria-selected="false"
+          >
             Deadline radar
           </button>
         </div>
@@ -594,6 +622,320 @@
             >.
           </div>
         </div>
+
+        <section style="max-width: 900px; margin: 3rem auto 0; padding: 0 1rem">
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Who this tracker is for
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 0">
+              If you are a small business owner, nonprofit staffer, or freelancer chasing grant
+              money, you already know the real problem is not finding grants &mdash; it is keeping
+              the paperwork straight. Deadlines stack up, every portal wants a different login, and
+              the document checklist you swore you finished is half empty. This tracker is built for
+              one person running several applications at once: a five-stage pipeline, a deadline
+              radar that flags anything due within 14 days, per-grant document checklists, and a
+              direct link to each funder's official application page. Everything lives on your
+              device, so there is no account and nothing to leak.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              How to use it
+            </h2>
+            <ol
+              style="color: var(--text-muted); line-height: 1.9; padding-left: 1.25rem; margin: 0"
+            >
+              <li>
+                <strong style="color: var(--text)">Add your opportunities.</strong> Pick from the
+                verified Idaho funding dataset (43 grants, loans, microloans, tax incentives,
+                workforce funds, and pitch competitions) using the dropdown on the Pipeline tab.
+              </li>
+              <li>
+                <strong style="color: var(--text)">Move cards through the pipeline.</strong> Every
+                application travels saved &rarr; drafting &rarr; applied &rarr; pending &rarr; won.
+                Drag or change the stage on each card so you always know where things stand at a
+                glance.
+              </li>
+              <li>
+                <strong style="color: var(--text)">Work each card's checklist.</strong> Open a card
+                to find the funder's official portal link, the current deadline, a document
+                checklist (budget narrative, tax docs, logic model, and more), and a notes field for
+                your own reminders.
+              </li>
+              <li>
+                <strong style="color: var(--text)">Watch the deadline radar.</strong> Switch to the
+                Deadline radar tab for every upcoming deadline soonest first, with anything due
+                within 14 days flagged, and set personal reminders for key dates.
+              </li>
+              <li>
+                <strong style="color: var(--text)">Submit on the funder's portal.</strong> The
+                tracker never files anything for you &mdash; click through to the official page, log
+                in, and submit yourself. Then mark the card applied and keep tracking the decision.
+              </li>
+            </ol>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Real situations this fits
+            </h2>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Applying to several grants in one cycle.</strong>
+              Four deadlines in three weeks, each with its own portal and paperwork. The pipeline
+              shows you exactly which ones are still drafts and which are already under review, so
+              nothing gets filed half-finished or missed.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">A deadline that keeps slipping.</strong> Rolling
+              applications are the ones that quietly expire. Put them in the tracker, set a reminder
+              a month out, and the 14-day radar will flag them before the window closes.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem">
+              <strong style="color: var(--text)">Keeping the documents straight.</strong> Budgets,
+              board resolutions, tax returns, letters of support &mdash; each card's checklist
+              tracks what you have gathered and what is still missing per grant, with notes for
+              where each file lives.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 0">
+              <strong style="color: var(--text)">Reapplying next year.</strong> Cards marked won or
+              lost stay in your history, with your notes on what worked. Next cycle you start from a
+              playbook instead of a blank page.
+            </p>
+          </div>
+
+          <div
+            class="geo-card"
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                color: var(--primary-soft);
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Related tools and guides
+            </h2>
+            <ul
+              style="color: var(--text-muted); line-height: 1.9; padding-left: 1.25rem; margin: 0"
+            >
+              <li>
+                <a
+                  href="/tools/small-business-funding-finder/"
+                  style="color: var(--primary-soft); font-weight: 600"
+                  >Small Business Funding Finder</a
+                >
+                &mdash; browse all 43 verified Idaho funding opportunities and take the two-minute
+                eligibility quiz.
+              </li>
+              <li>
+                <a
+                  href="/tools/ai-grant-application-writer/"
+                  style="color: var(--primary-soft); font-weight: 600"
+                  >AI Grant Application Writer</a
+                >
+                &mdash; draft the narrative answers funders actually ask for, in your voice.
+              </li>
+              <li>
+                <a
+                  href="/guides/smart-objectives-examples-nonprofit-grants/"
+                  style="color: var(--primary-soft); font-weight: 600"
+                  >SMART Objectives Examples for Nonprofit Grants</a
+                >
+                &mdash; write measurable goals that survive a reviewer.
+              </li>
+              <li>
+                <a
+                  href="/guides/how-to-write-a-logic-model/"
+                  style="color: var(--primary-soft); font-weight: 600"
+                  >How to Write a Logic Model</a
+                >
+                &mdash; the one-page diagram most grant applications quietly require.
+              </li>
+            </ul>
+          </div>
+
+          <div
+            style="
+              background: var(--card);
+              border: 1px solid var(--border);
+              margin-top: 2rem;
+              padding: 2rem;
+              border-radius: 12px;
+            "
+          >
+            <h2
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-size: 1.3rem;
+                color: var(--primary-soft);
+                margin-bottom: 1.5rem;
+              "
+            >
+              Frequently Asked Questions
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem">
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  Does the tracker submit applications for me?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  No. The tracker organizes your applications, deadlines, documents, and reminders.
+                  Every entry links straight to the funder's official application page, where you
+                  log in and submit yourself.
+                </p>
+              </details>
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  Where is my tracking data stored?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  Only in your browser, on your device (localStorage). There is no account and
+                  nothing is sent anywhere. The trade-off: clearing your browser data removes it,
+                  and it does not sync between devices.
+                </p>
+              </details>
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  Where do the funding opportunities come from?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  The CyberScryb Idaho funding dataset: 43 verified grants, loans, microloans, tax
+                  incentives, workforce training funds, and pitch competitions, each checked against
+                  its official page. It is Idaho-focused, not national.
+                </p>
+              </details>
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  How do deadline reminders work?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  Set a reminder date on any upcoming deadline and it is saved on your device. The
+                  deadline radar lists everything soonest first and highlights anything due within
+                  14 days so nothing slips.
+                </p>
+              </details>
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  Can I share a pipeline with my team?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  Not directly &mdash; your data lives in one browser on one device with no account
+                  behind it. For team use, each person runs their own copy, or one person keeps the
+                  master pipeline and reports from it.
+                </p>
+              </details>
+              <details
+                style="
+                  background: var(--bg-elevated);
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  padding: 1rem;
+                "
+              >
+                <summary style="font-weight: 600; color: var(--text); cursor: pointer">
+                  Are the deadlines guaranteed current?
+                </summary>
+                <p style="margin: 0.75rem 0 0; color: var(--text-muted); font-size: 0.95rem">
+                  No &mdash; funding rounds change. The dataset was verified October 31, 2026, but
+                  always confirm the current round on the funder's official page before you file.
+                  Every tracker entry links straight there.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
       </div>
       <!-- AdSense: Below Tool -->
       <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
