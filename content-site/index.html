@@ -40,7 +40,7 @@
     <div class="nav-container">
       <div class="nav-logo"><a href="/"><img src="/mascot-icon.webp" alt="" aria-hidden="true" width="32" height="32" /><span class="brand-mark">CyberScryb</span></a></div>
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="/" class="active">Home</a></li><li><a href="/tools/">Tools</a></li><li><a href="/guides/">Guides</a></li><li><a href="/blog/">Blog</a></li><li><a href="/new/">New</a></li><li><a href="/about/">About</a></li>
+        <li><a href="/" class="active">Home</a></li><li><a href="/tools/">Tools</a></li><li><a href="/guides/">Guides</a></li><li><a href="/blog/">Blog</a></li><li><a href="/new/">New</a></li><li><a href="/search/">Search</a></li><li><a href="/about/">About</a></li>
       </ul>
       <button type="button" class="hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
     </div>
@@ -226,46 +226,41 @@
         </div>
     </footer>
 <script src="/js/script.js?v=20261014ux" defer></script>
+<script src="/js/site-search.js?v=20261102search1" defer></script>
 <script>
 (function(){
-  var routes=[
-    {keys:['refund','return item','damaged order','wrong item','missing order','money back','overcharged','cancel order'],name:'AI Complaint Letter Generator',url:'/tools/complaint-letter-generator/',desc:'Write a firm complaint letter asking for a refund, replacement, repair, or credit.'},
-    {keys:['paper trail','timeline','phone calls','emails and','organize my records','organise my records','follow up','follow-up','keep a record','document what happened'],name:'Paper Trail Timeline',url:'/tools/paper-trail/',desc:'Put calls, messages, promises, and receipts in date order, then copy or print your record.'},
-    {keys:['human','humanize','ai writing','chatgpt','ai text','sounds like me','robotic'],name:'AI Humanizer',url:'/tools/humanizer/',desc:'Rewrite stiff AI-generated text so it reads more naturally and personally.'},
-    {keys:['proposal','upwork','freelance','freelancer','job post','client pitch','gig','upwork proposal'],name:'Free AI Upwork Proposal Generator',url:'/tools/gig-auto-pilot/',desc:'Paste an Upwork job post and get a tailored proposal. No account needed.'},
-    {keys:['insurance','denied claim','denial','prior authorization','prior auth','medical necessity'],name:'Insurance Appeal',url:'/tools/insurance-denial-appeal/',desc:'Build an organized written response to an insurance denial or prior-authorization issue.'},
-    {keys:['hardship','financial hardship','mortgage','student loan','payment arrangement'],name:'Hardship Letter',url:'/tools/hardship-letter/',desc:'Explain a financial hardship clearly and make a specific request.'},
-    {keys:['subscription','subscriptions','netflix','spotify','streaming bills','monthly subscriptions','unused subscriptions','recurring charges'],name:'Subscription Leak Calculator',url:'/tools/subscription-leak-calculator/',desc:'Add the subscriptions you pay for, see the yearly total, and find the overlaps worth cutting.'},
-    {keys:['phishing','suspicious link','is this link safe','lookalike domain','shortened link','scam link','punycode'],name:'Is This Link Safe',url:'/tools/is-this-link-safe/',desc:'Paste a link and see lookalike domains, shorteners, and other red flags without opening it.'},
-    {keys:['phishing email','phishing quiz','fake inbox','spot the phish','email scam','phish'],name:'Phishing Inbox Simulator',url:'/tools/phishing-inbox-simulator/',desc:'Mark fictional emails safe or phish, check the real link address, and see your score.'},
-    {keys:['scam call','spot the scam','voice clone','gift card scam','fake irs','caller id','tech support call','grandparent scam'],name:'Spot the Scam Call',url:'/tools/spot-the-scam-call/',desc:'Play fictional phone calls as text. Hang up or reply, then see the red flags.'},
-    {keys:['would you click','fake popup','scareware','clickfix','fake download','oauth permission','qr code scam','cookie dark pattern'],name:'Would You Click It?',url:'/tools/would-you-click-it/',desc:'Click or skip fictional popups, ads, and permission prompts, then see what gave each one away.'},
-    {keys:['choose your own hack','scam story','tech support scam','sim swap','public wifi','fake bank text','account takeover'],name:'Choose Your Own Hack',url:'/tools/choose-your-own-hack/',desc:'Play a branching scam story. Your choices decide the ending, and each one explains the trick.'},
-    {keys:['tech myth','myth or fact','incognito myth','mac virus','5g myth','password myth','phone battery myth'],name:'Tech Myth or Fact',url:'/tools/tech-myth-or-fact/',desc:'Swipe Myth or Fact on tech claims, then read a short explanation. The quiz stays in your browser.'},
-    {keys:['which tech era','tech era','tech personality','tech era quiz','what era am i'],name:'Which Tech Era Are You?',url:'/tools/which-tech-era/',desc:'Answer 12 questions about notes, phones, and music, then get a tech era and a soulmate. The quiz stays in your browser.'},
-    {keys:['internet personality','online personality','tab hoarder','lurker quiz','what kind of internet','group chat personality','night owl scroller'],name:"What's Your Internet Personality?",url:'/tools/internet-personality/',desc:'Answer 14 scenes about tabs, chats, and comments, then get a type and a privacy tip. The quiz stays in your browser.'},
-    {keys:['guess the year','what year','tech timeline','when was the iphone','youtube year','floppy disk year','chatgpt year'],name:'Guess the Year: Tech Edition',url:'/tools/guess-the-year/',desc:'Drag a year onto tech milestones, then see how close you were. The daily set stays in your browser.'},
-    {keys:['emoji translator','emoji quiz','decode emoji','rebus','phrase to emoji','emoji puzzle'],name:'Emoji Translator Challenge',url:'/tools/emoji-translator-challenge/',desc:'Decode emoji phrases or turn a sentence into emoji. The daily set stays in your browser.'},
-    {keys:['password habit','password habits','password quiz','reuse password','password manager quiz','2fa habit','backup codes','recovery codes'],name:'Password Habit Quiz',url:'/tools/password-habit-quiz/',desc:'Answer 12 questions about how you handle passwords and get a fix-it plan. No password is asked for.'},
-    {keys:['how long to crack','crack time','password crack time','bcrypt crack','gpu password','attacker simulator'],name:'How Long to Crack It?',url:'/tools/how-long-to-crack-it/',desc:'Compare crack time for a rate-limited login, one GPU, a GPU cluster, and bcrypt. The estimate stays on your device.'},
-    {keys:['digital footprint','people search','data broker','opt out','location sharing','photo metadata','online privacy'],name:'Digital Footprint Check',url:'/tools/digital-footprint/',desc:'See how exposed you are online and get a cleanup plan. No name or email is asked for.'},
-    {keys:['screen time','screen-time','phone hours','digital wellbeing','hours a year','doomscroll','reality check'],name:'Screen Time Reality Check',url:'/tools/screen-time-reality-check/',desc:'Turn daily screen hours into a week, a year, and a lifetime, then see what giving a slice back looks like.'},
-    {keys:['notification detox','too many notifications','do not disturb','quiet hours','scheduled summary','notification planner','pings'],name:'Notification Detox Planner',url:'/tools/notification-detox-planner/',desc:'Sort the apps that ping you into Keep, Batch, or Silence, then copy a quiet-hours plan.'},
-    {keys:['dream setup','desk setup','work from home desk','gaming setup','monitor chair','ergonomic desk','setup builder'],name:'Build Your Dream Setup',url:'/tools/dream-setup-builder/',desc:'Pick a use and a budget, then build a desk from generic pieces and see an estimate, an ergonomics score, and a vibe.'},
-    {keys:['prompt battle','prompt engineering','better prompt','which prompt','prompt builder','ai prompt','write a prompt'],name:'Prompt Battle',url:'/tools/prompt-battle/',desc:'Pick the stronger AI prompt, then build your own with a live checklist. The game stays in your browser.'},
-    {keys:['ai or human','writing test','human or ai','who wrote this','public domain writing','ai writing quiz'],name:'AI or Human? The Writing Test',url:'/tools/ai-or-human-writer/',desc:'Read a passage and say whether a person or an AI wrote it. The test stays in your browser.'},
-    {keys:['real photo or ai','ai image quiz','camera or ai','public domain photo','spot the ai photo'],name:'Real Photo or AI',url:'/tools/real-photo-or-ai/',desc:'Look at one picture and say whether a camera or an AI made it. The quiz stays in your browser.'},
-    {keys:['utility','shutoff','disconnect','electric bill','water bill'],name:'Utility Shutoff Letter',url:'/tools/utility-shutoff-letter/',desc:'Draft a payment-arrangement or hardship request after a utility notice.'},
-    {keys:['medical debt','hospital bill','medical bill','collections','fdcpa'],name:'Medical Debt Dispute',url:'/tools/medical-debt-dispute/',desc:'Organize a written dispute and request the information needed to review a medical debt.'},
-    {keys:['landlord','security deposit','deposit','rental','wear and tear'],name:'Security Deposit Demand',url:'/tools/security-deposit-demand/',desc:'Put a deposit dispute and requested resolution into a clear letter.'},
-    {keys:['caregiver','shift report','care notes','handoff'],name:'Caregiver Shift Report',url:'/tools/caregiver-report/',desc:'Turn rough care notes into a structured handoff report.'},
-    {keys:['json','csv','spreadsheet','convert data'],name:'JSON ↔ CSV',url:'/tools/json-csv-converter/',desc:'Convert JSON and CSV data in the browser.'},
-    {keys:['cron','schedule expression','cron job'],name:'Cron Builder',url:'/tools/cron-builder/',desc:'Build a cron schedule with a plain-English preview.'},
-    {keys:['regex','regular expression','pattern matching'],name:'Regex Tester',url:'/tools/regex-tester/',desc:'Test regular expressions with live matching.'},
-    {keys:['seo','meta description','open graph','og tags'],name:'SEO Meta Generator',url:'/tools/seo-tag-generator/',desc:'Generate copy-ready SEO and social metadata.'}
-  ];
   var input=document.getElementById('intent-input'),button=document.getElementById('intent-submit'),result=document.getElementById('finder-result');
-  function find(){var q=(input.value||'').toLowerCase().trim();if(!q){result.classList.remove('show');return}var best=null,score=0;routes.forEach(function(r){var s=0;r.keys.forEach(function(k){if(q.indexOf(k)>=0)s+=k.length>5?3:2});if(s>score){score=s;best=r}});if(!best){best={name:'All tools',url:'/tools/',desc:'I could not find an exact match yet. Browse the full tool collection or try describing the problem another way.'}}result.innerHTML='<strong>'+best.name+'</strong><span>'+best.desc+'</span><br><a href="'+best.url+'" data-tool-link="'+best.name+'">Open '+best.name+' →</a>';result.classList.add('show');}
+  var searchEntries=null,searchFailed=false;
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function cleanTitle(t){return String(t||'').replace(/\s*\|\s*CyberScryb\s*$/,'')}
+  function warmIndex(){if(searchEntries||searchFailed||!window.CyberScrybSearch)return;fetch('/search-index.json',{credentials:'same-origin'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.entries)searchEntries=d.entries;else searchFailed=true}).catch(function(){searchFailed=true})}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',warmIndex);else warmIndex();
+  function legacyFind(q){
+    // Fallback when the search index cannot load: send them to the search page.
+    result.innerHTML='<strong>Search CyberScryb</strong><span>I could not load search just now.</span><br><a href="/search/?q='+encodeURIComponent(q)+'">Search for &quot;'+esc(q)+'&quot; →</a>';
+    result.classList.add('show');
+  }
+  function showHits(q,hits){
+    if(!hits.length){legacyFind(q);return}
+    var best=hits[0];
+    var shown=hits.slice(0,3);
+    var html=shown.map(function(r){
+      return '<strong>'+esc(cleanTitle(r.title))+'</strong><span>'+esc((r.description||'').slice(0,140))+'</span><br><a href="'+esc(r.url)+'" data-tool-link="'+esc(cleanTitle(r.title))+'">Open '+esc(cleanTitle(r.title))+' →</a>';
+    }).join('<br>');
+    html+='<br><a href="/search/?q='+encodeURIComponent(q)+'" style="font-size:.9em">See all results →</a>';
+    result.innerHTML=html;
+    result.classList.add('show');
+  }
+  function find(){
+    var q=(input.value||'').trim();
+    if(!q){result.classList.remove('show');return}
+    if(!window.CyberScrybSearch){legacyFind(q);return}
+    if(searchEntries){showHits(q,window.CyberScrybSearch.search(searchEntries,q,8));return}
+    if(searchFailed){legacyFind(q);return}
+    result.classList.add('show');
+    result.innerHTML='<span>Searching…</span>';
+    window.CyberScrybSearch.searchIndex(q,8).then(function(hits){showHits(q,hits)}).catch(function(){legacyFind(q)});
+  }
   button.addEventListener('click',find);input.addEventListener('keydown',function(e){if(e.key==='Enter')find()});document.querySelectorAll('.intent-example').forEach(function(b){b.addEventListener('click',function(){input.value=b.dataset.example;find();input.focus()})});
   document.addEventListener('click',function(event){
     var link=event.target.closest('a[href^="/tools/"]');

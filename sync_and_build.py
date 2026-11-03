@@ -49,6 +49,9 @@ def run_build():
         
     res.check_returncode()
 
+    print("\nStep 2.5: Building site-wide search index...")
+    subprocess.run(["node", "scripts/build-search-index.js", "public"], cwd=root, check=True)
+
     print("\nStep 3: Bumping version cache buster...")
     # Import bump_version inline or run it directly
     from bump_version import bump_version
