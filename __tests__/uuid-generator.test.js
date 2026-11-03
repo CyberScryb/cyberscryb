@@ -82,3 +82,25 @@ describe('security audit', () => {
     expect(source).toContain('crypto.getRandomValues');
   });
 });
+
+// ── UX & Accessibility ───────────────────────────────────
+
+describe('uuid-generator UX and accessibility', () => {
+  [
+    'content-site/tools/uuid-generator/index.html',
+    'public/tools/uuid-generator/index.html',
+  ].forEach(filePath => {
+    test(`${filePath} has accessible label and keyboard-navigable display`, () => {
+      const fullPath = path.resolve(__dirname, '..', filePath);
+      const html = fs.readFileSync(fullPath, 'utf8');
+      expect(html).toContain('<label for="uuid-count">Quantity:</label>');
+      expect(html).toContain('id="uuid-display"');
+      expect(html).toContain('role="button"');
+      expect(html).toContain('tabindex="0"');
+      expect(html).toContain(
+        'aria-label="Generated UUID. Click or press Enter to copy to clipboard."'
+      );
+      expect(html).toContain("e.key === 'Enter' || e.key === ' '");
+    });
+  });
+});

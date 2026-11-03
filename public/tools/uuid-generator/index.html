@@ -176,14 +176,14 @@
             </div>
 
             <div class="uuid-hero">
-                <div class="uuid-display" id="uuid-display" title="Click to copy"></div>
+                <div class="uuid-display" id="uuid-display" role="button" tabindex="0" title="Click to copy" aria-label="Generated UUID. Click or press Enter to copy to clipboard."></div>
                 <div class="uuid-actions">
                     <button class="uuid-btn primary" id="btn-generate">⚡ Generate New</button>
                     <button class="uuid-btn" id="btn-copy">📋 Copy</button>
                 </div>
                 <div class="options-row">
                     <div class="opt-group">
-                        <label>Quantity:</label>
+                        <label for="uuid-count">Quantity:</label>
                         <input type="number" id="uuid-count" value="1" min="1" max="100">
                     </div>
                     <div class="opt-group">
@@ -364,12 +364,20 @@
         document.getElementById('btn-copy-all').addEventListener('click', () => {
             navigator.clipboard.writeText(allUuids.join('\n'));
         });
-        display.addEventListener('click', () => {
+        function copyPrimary() {
             navigator.clipboard.writeText(display.textContent);
             display.classList.add('copied');
             const orig = display.textContent;
             display.textContent = '✓ Copied!';
             setTimeout(() => { display.textContent = orig; display.classList.remove('copied'); }, 800);
+        }
+
+        display.addEventListener('click', copyPrimary);
+        display.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                copyPrimary();
+            }
         });
 
         // Generate on load
