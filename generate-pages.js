@@ -1614,6 +1614,7 @@ function generateSitemap(generatedPages) {
     'how-to-request-an-irs-installment-agreement',
     'how-to-respond-to-an-irs-notice-cp14',
     'how-to-write-an-offer-in-compromise-letter',
+    'how-to-write-an-irs-penalty-abatement-letter',
     'how-to-negotiate-a-severance-package',
     'how-to-write-an-immigration-hardship-waiver-letter',
     'how-to-write-an-esa-accommodation-request-letter',
