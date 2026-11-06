@@ -79,7 +79,7 @@
             padding: 1.25rem 1.5rem; outline: none; transition: border-color 0.3s;
         }
         .sg-input:focus { border-color: var(--primary-soft); }
-        .sg-input::placeholder { color: #333; }
+        .sg-input::placeholder { color: #a1a1aa; }
 
         .sg-output-box {
             margin-top: 1.5rem; background: var(--card);
@@ -91,7 +91,7 @@
             font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; color: var(--primary-soft);
             word-break: break-all; flex: 1 1 300px;
         }
-        .sg-output.empty { color: #444; font-size: 1rem; }
+        .sg-output.empty { color: #a1a1aa; font-size: 1rem; }
 
         .sg-options {
             margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -128,7 +128,7 @@
         .faq-section details[open] summary::after { content: '−'; }
         .faq-section details p { padding: 0 1rem 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
-        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #a1a1aa; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
         .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
         .breadcrumb a:hover { color: var(--text); }
         .breadcrumb span { margin: 0 0.4rem; }
@@ -203,14 +203,14 @@
             <div class="sg-options">
                 <div class="sg-option">
                     <label>Separator</label>
-                    <select id="sg-sep">
+                    <select id="sg-sep" aria-label="Slug word separator">
                         <option value="-">Hyphen ( - )</option>
                         <option value="_">Underscore ( _ )</option>
                     </select>
                 </div>
                 <div class="sg-option">
                     <label>Max Length</label>
-                    <input type="number" id="sg-max" value="60" min="1" max="500">
+                    <input type="number" id="sg-max" aria-label="Maximum slug length" value="60" min="1" max="500">
                 </div>
                 <div class="sg-option">
                     <label>Lowercase</label>

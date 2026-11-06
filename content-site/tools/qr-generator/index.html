@@ -148,7 +148,7 @@
 
         .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
         .input-label {
-            font-family: var(--font-brand), Georgia, serif; font-size: 0.7rem; color: #555;
+            font-family: var(--font-brand), Georgia, serif; font-size: 0.7rem; color: #a1a1aa;
             text-transform: uppercase; letter-spacing: 0.1em;
         }
 
@@ -163,7 +163,7 @@
         .type-tab.active {
             background: rgba(220,38,38, 0.12); border-color: var(--primary-soft); color: var(--primary-soft);
         }
-        .type-tab:hover { border-color: #555; }
+        .type-tab:hover { border-color: #a1a1aa; }
 
         #qr-text-input {
             width: 100%; min-height: 120px; background: var(--bg-elevated); border: 1px solid var(--border);
@@ -172,7 +172,7 @@
             transition: border-color 0.3s;
         }
         #qr-text-input:focus { border-color: var(--primary-soft); box-shadow: 0 0 20px rgba(220,38,38,0.08); }
-        #qr-text-input::placeholder { color: #333; }
+        #qr-text-input::placeholder { color: #a1a1aa; }
 
         .color-row { display: flex; gap: 1rem; }
         .color-group { display: flex; align-items: center; gap: 0.5rem; flex: 1; }
@@ -233,7 +233,7 @@
         .faq-section details p { padding: 0 1rem 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
         /* Breadcrumb */
-        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #555; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
+        .breadcrumb { padding: 1rem 0 0; font-size: 0.8rem; color: #a1a1aa; max-width: 900px; margin: 0 auto; padding-left: 2rem; }
         .breadcrumb a { color: var(--primary-soft); text-decoration: none; }
         .breadcrumb a:hover { color: var(--text); }
         .breadcrumb span { margin: 0 0.4rem; }
@@ -314,18 +314,18 @@
                         <div class="color-row">
                             <div class="color-group">
                                 <label>Foreground</label>
-                                <input type="color" id="qr-fg" value="#000000">
+                                <input type="color" id="qr-fg" aria-label="QR code foreground color" value="#000000">
                             </div>
                             <div class="color-group">
                                 <label>Background</label>
-                                <input type="color" id="qr-bg" value="#ffffff">
+                                <input type="color" id="qr-bg" aria-label="QR code background color" value="#ffffff">
                             </div>
                         </div>
                     </div>
                     <div class="input-group">
                         <div class="input-label">Size</div>
                         <div class="size-slider">
-                            <input type="range" id="qr-size" min="128" max="512" value="256" step="32">
+                            <input type="range" id="qr-size" aria-label="QR code size in pixels" min="128" max="512" value="256" step="32">
                             <span class="size-val" id="qr-size-val">256px</span>
                         </div>
                     </div>
@@ -578,7 +578,7 @@
                 }
             } catch (e) {
                 ctx.clearRect(0, 0, size, size);
-                ctx.fillStyle = '#333';
+                ctx.fillStyle = '#a1a1aa';
                 ctx.font = '14px Inter';
                 ctx.textAlign = 'center';
                 ctx.fillText('Too much data for QR code', size / 2, size / 2);

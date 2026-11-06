@@ -110,7 +110,7 @@
             outline: none;
         }
 
-        #regex-input::placeholder { color: #444; }
+        #regex-input::placeholder { color: #a1a1aa; }
 
         .flag-toggles {
             display: flex;
@@ -137,7 +137,7 @@
             color: var(--primary-soft);
         }
 
-        .flag-btn:hover { border-color: #555; }
+        .flag-btn:hover { border-color: #a1a1aa; }
 
         /* Error Bar */
         .regex-error {
@@ -173,7 +173,7 @@
             font-family: var(--font-brand), Georgia, serif;
             font-size: 0.75rem;
             font-weight: 700;
-            color: #555;
+            color: #a1a1aa;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
@@ -198,7 +198,7 @@
             outline: none;
         }
 
-        #test-string::placeholder { color: #333; }
+        #test-string::placeholder { color: #a1a1aa; }
 
         /* Highlight Output */
         .highlight-output {
@@ -243,7 +243,7 @@
             padding: 0.5rem 1rem;
             font-family: var(--font-brand), Georgia, serif;
             font-size: 0.7rem;
-            color: #555;
+            color: #a1a1aa;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             border-bottom: 1px solid var(--border);
@@ -281,7 +281,7 @@
         .no-matches {
             padding: 2rem 1rem;
             text-align: center;
-            color: #444;
+            color: #a1a1aa;
             font-size: 0.9rem;
         }
 
@@ -305,7 +305,7 @@
         .cheat-section-title {
             font-family: var(--font-brand), Georgia, serif;
             font-size: 0.65rem;
-            color: #555;
+            color: #a1a1aa;
             text-transform: uppercase;
             letter-spacing: 0.12em;
             margin-bottom: 0.5rem;
@@ -332,7 +332,7 @@
 
         .cheat-desc {
             font-size: 0.7rem;
-            color: #555;
+            color: #a1a1aa;
             text-align: right;
             max-width: 60%;
         }
@@ -357,7 +357,7 @@
         .breadcrumb {
             padding: 1rem 0 0;
             font-size: 0.8rem;
-            color: #555;
+            color: #a1a1aa;
             max-width: 1200px;
             margin: 0 auto;
             padding-left: 2rem;
@@ -391,7 +391,7 @@
             { "@type": "Question", "name": "Why is my regex not matching anything?", "acceptedAnswer": { "@type": "Answer", "text": "The most common causes are a missing flag (use the g flag for all matches, not just the first), an unescaped special character such as a dot or parenthesis, and an anchor (^ or $) that does not fit your test text. Check the error bar under the pattern field: an invalid pattern shows its JavaScript error message there." } },
             { "@type": "Question", "name": "What do the g, i, m, and s regex flags do?", "acceptedAnswer": { "@type": "Answer", "text": "g (global) finds every match instead of stopping at the first. i makes matching case-insensitive. m makes ^ and $ match the start and end of each line, not just the whole string. s (dotAll) lets . match newline characters too." } },
             { "@type": "Question", "name": "What is the difference between greedy and lazy matching?", "acceptedAnswer": { "@type": "Answer", "text": "Greedy quantifiers like .* match as much as possible; lazy ones like .*? match as little as possible. For example, /<div>.*<\/div>/ on a line with two divs matches from the first opening tag to the last closing tag, while /<div>.*?<\/div>/ stops at the first closing tag." } },
-            { "@type": "Question", "name": "Can I use this regex tester to validate an email address?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Try /^[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}$/ against sample addresses to see what passes and what fails. Note that no regex can fully validate email addresses per RFC 5322, so use it as a sanity check, not proof an address exists." } },
+            { "@type": "Question", "name": "Can I use this regex tester to validate an email address?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Try /^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$/ against sample addresses to see what passes and what fails. Note that no regex can fully validate email addresses per RFC 5322, so use it as a sanity check, not proof an address exists." } },
             { "@type": "Question", "name": "Is this regex tester the same as JavaScript, Python, or PCRE regex?", "acceptedAnswer": { "@type": "Answer", "text": "This tester uses JavaScript regular expressions, the flavor built into browsers. Most everyday patterns work the same in Python and PCRE, but lookbehind, named groups, and some escape sequences differ between flavors, so always re-test a pattern in the language you will ship it in." } },
             { "@type": "Question", "name": "Does my test text leave my browser?", "acceptedAnswer": { "@type": "Answer", "text": "No. Matching runs entirely in your browser with JavaScript. Your pattern and test string are never sent to a server, so it is safe to test patterns against real log lines or sample data." } }
         ]
@@ -466,7 +466,7 @@
                     <div class="panel-header">
                         <span class="panel-title">Highlighted Matches</span>
                     </div>
-                    <div class="highlight-output" id="highlight-output"><span style="color:#333;">Matches will appear here...</span></div>
+                    <div class="highlight-output" id="highlight-output"><span style="color:#a1a1aa;">Matches will appear here...</span></div>
                 </div>
 
                 <!-- Match Details -->
@@ -691,7 +691,7 @@
             errorEl.textContent = '';
 
             if (!pattern || !text) {
-                highlightOutput.innerHTML = '<span style="color:#333;">Matches will appear here...</span>';
+                highlightOutput.innerHTML = '<span style="color:#a1a1aa;">Matches will appear here...</span>';
                 matchCount.textContent = '0 matches';
                 matchDetailsBody.innerHTML = '<div class="no-matches">Enter a pattern and test string to see matches.</div>';
                 return;

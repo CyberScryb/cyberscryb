@@ -421,7 +421,7 @@
             <div class="affiliate-links">
                 ${linksHtml}
             </div>
-            <p style="font-size:0.7rem; color:var(--text-muted,#5C4A3D); margin-top:12px; margin-bottom:0;">
+            <p style="font-size:0.7rem; color:#a1a1aa; margin-top:12px; margin-bottom:0;">
                 ${config.disclosure}
             </p>
         `;
@@ -435,19 +435,19 @@
                     max-width: 900px;
                     margin: 2rem auto;
                     padding: 2rem;
-                    background: #FFFCF7;
-                    border: 1px solid #E4D9C8;
+                    background: var(--bg-elevated, #18181b);
+                    border: 1px solid var(--border, #27272a);
                     border-radius: 12px;
                     text-align: center;
                 }
                 .affiliate-header {
                     font-size: 1.2rem;
                     font-weight: 700;
-                    color: #2C1810;
+                    color: var(--text, #fafafa);
                     margin-bottom: 0.75rem;
                 }
                 .affiliate-panel p {
-                    color: #5C4A3D;
+                    color: #a1a1aa;
                     font-size: 0.9rem;
                     line-height: 1.6;
                     margin-bottom: 1rem;
@@ -468,13 +468,13 @@
                     font-weight: 700;
                     font-size: 0.85rem;
                     transition: all 0.2s;
-                    border: 1px solid #E4D9C8;
-                    color: #3D2B1F;
-                    background: #FFFFFF;
+                    background: var(--card, #121215);
+                    color: var(--text, #fafafa);
+                    border: 1px solid var(--border, #27272a);
                 }
                 .affiliate-link.primary {
                     background: #dc2626;
-                    color: #FFFCF7;
+                    color: #ffffff;
                     border-color: transparent;
                 }
                 .affiliate-link:hover {

@@ -40,6 +40,9 @@ const TARGET_PAGES = [
   'public/blog/how-to-get-security-deposit-back-state-deadlines-2026.html',
   'public/blog/how-to-cancel-gym-membership-ftc-click-to-cancel-2026.html',
   'public/blog/how-to-dispute-hoa-fines-selective-enforcement-2026.html',
+  'public/tools/ai-workplace-accommodation-companion/index.html',
+  'public/guides/how-to-request-an-ada-workplace-accommodation.html',
+  'public/blog/ada-interactive-process-workplace-accommodations-2026.html',
 ];
 
 async function runAudit() {

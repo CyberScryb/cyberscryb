@@ -12,20 +12,23 @@ function walk(d, a = []) {
 
 let emptyAlt = 0,
   noAlt = 0;
-const samples = [];
+const noAltSamples = [];
+const emptyAltSamples = [];
 for (const f of walk('public')) {
-  const h = fs.readFileSync(f, 'utf8');
+  const h = fs.readFileSync(f, 'utf8').replace(/<script[\s\S]*?<\/script>/gi, '');
   const imgs = [...h.matchAll(/<img\b[^>]*>/gi)];
   for (const m of imgs) {
     const tag = m[0];
     if (!/\balt\s*=/.test(tag)) {
       noAlt++;
-      if (samples.length < 15) samples.push('no-alt ' + f + ': ' + tag.slice(0, 100));
+      if (noAltSamples.length < 15) noAltSamples.push('no-alt ' + f + ': ' + tag.slice(0, 100));
     } else if (/\balt\s*=\s*["']\s*["']/.test(tag)) {
       emptyAlt++;
-      if (samples.length < 20) samples.push('empty ' + f + ': ' + tag.slice(0, 100));
+      if (emptyAltSamples.length < 20)
+        emptyAltSamples.push('empty ' + f + ': ' + tag.slice(0, 100));
     }
   }
 }
 console.log({ noAlt, emptyAlt });
-samples.forEach(s => console.log(s));
+noAltSamples.forEach(s => console.log(s));
+emptyAltSamples.forEach(s => console.log(s));

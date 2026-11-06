@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
     const len = this.value.length;
-    charCount.textContent = len + ' / 500 characters';
-    charCount.style.color = len > 450 ? '#ef4444' : '#555';
+    charCount.textContent = len + ' / 4,000 characters';
+    charCount.style.color = len > 3600 ? '#ef4444' : '#a1a1aa';
   });
 
   // Voice mode visual selection
@@ -23,8 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     radio.addEventListener('change', () => {
       Object.entries(voiceLabels).forEach(([key, el]) => {
         const isActive = key === radio.value;
-        el.style.border = isActive ? '2px solid #a78bfa' : '1px solid #E4D9C8';
-        el.style.background = '#FFFFFF';
+        el.style.border = isActive
+          ? '2px solid var(--primary, #ef4444)'
+          : '1px solid var(--border, #27272a)';
+        el.style.background = isActive ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-elevated, #18181b)';
       });
     });
   });
