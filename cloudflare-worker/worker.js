@@ -41,6 +41,23 @@ export default {
     if (request.method !== 'POST') {
       return jsonResponse({ error: 'Method Not Allowed' }, 405, origin);
     }
+    const referer = request.headers.get('Referer');
+    let refererOrigin = null;
+    if (referer) {
+      try {
+        const parsedReferer = new URL(referer);
+        if (ALLOWED_ORIGINS.has(parsedReferer.origin)) {
+          refererOrigin = parsedReferer.origin;
+        }
+      } catch {
+        // Ignore malformed Referer
+      }
+    }
+    const validOrigin = origin && ALLOWED_ORIGINS.has(origin) ? origin : null;
+    if (!validOrigin && !refererOrigin) {
+      return jsonResponse({ error: 'Forbidden' }, 403);
+    }
+    const upstreamReferer = refererOrigin ? referer : `${validOrigin}/`;
     let body;
     try {
       const text = await request.text();
@@ -63,14 +80,14 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Referer: 'https://cyberscryb.com/',
+          Referer: upstreamReferer,
           // Cloudflare supplies this header; never trust client X-Forwarded-For.
           'X-Forwarded-For': request.headers.get('CF-Connecting-IP') || '',
         },
         body: JSON.stringify(body),
       });
       const headers = new Headers({
-        'Content-Type': 'application/json',
+        'Content-Type': response.headers.get('Content-Type') || 'application/json',
         'Cache-Control': 'no-store',
         Vary: 'Origin',
         'X-Provider': 'firebase',

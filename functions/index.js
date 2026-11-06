@@ -391,6 +391,9 @@ exports.rewriteText = functions.runWith({ timeoutSeconds: 120 }).https.onRequest
     if (text.length > 4000) {
       return res.status(400).json({ error: 'Input text exceeds 4,000 character limit' });
     }
+    if (style !== undefined && (typeof style !== 'string' || style.length > 1500)) {
+      return res.status(400).json({ error: 'Invalid style parameter (max 1,500 characters).' });
+    }
 
     // Firestore-backed cross-instance rate limit check (global + per-IP daily caps)
     const fsRateCheck = await checkFirestoreRateLimit(req);
@@ -522,17 +525,43 @@ exports.analyticsEvent = functions.https.onRequest((req, res) => {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const { event, funnel, step, metadata } = req.body;
+    if (!isAllowedReferer(req.get('Referer'))) {
+      return res.status(403).json({ error: 'Unauthorized origin.' });
+    }
 
-    if (!event) {
+    const burst = checkBurstRateLimit(req);
+    if (!burst || burst.allowed === false) {
+      return res.status(429).json({ error: 'Too many requests.' });
+    }
+
+    const { event, funnel, step, metadata } = req.body || {};
+
+    if (!event || typeof event !== 'string' || event.length > 64) {
       return res.status(400).json({ error: 'Event type required' });
     }
 
+    const cleanFunnel = typeof funnel === 'string' ? funnel.slice(0, 64) : '';
+    const cleanStep = typeof step === 'string' ? step.slice(0, 64) : '';
+    const cleanMetadata = {};
+    if (metadata && typeof metadata === 'object' && !Array.isArray(metadata)) {
+      const entries = Object.entries(metadata).slice(0, 5);
+      for (const [k, v] of entries) {
+        const key = String(k).slice(0, 64);
+        if (typeof v === 'string') {
+          cleanMetadata[key] = v.slice(0, 100);
+        } else if (typeof v === 'number' && Number.isFinite(v)) {
+          cleanMetadata[key] = v;
+        } else if (typeof v === 'boolean') {
+          cleanMetadata[key] = v;
+        }
+      }
+    }
+
     // Log the event (aggregate only)
-    if (event === 'conversion' && funnel && step) {
-      await logConversion(funnel, step, metadata || {});
+    if (event === 'conversion' && cleanFunnel && cleanStep) {
+      await logConversion(cleanFunnel, cleanStep, cleanMetadata);
     } else {
-      await logEvent(event, metadata || {});
+      await logEvent(event, cleanMetadata);
     }
 
     return res.status(200).json({ ok: true });
@@ -742,6 +771,9 @@ exports.generateGigWork = functions.https.onRequest((req, res) => {
       const data = await response.json();
       const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
       const resultJson = JSON.parse(rawText); // Parse the internal JSON
+      if (!resultJson || typeof resultJson !== 'object' || Array.isArray(resultJson)) {
+        throw new Error('Invalid JSON object returned from model');
+      }
 
       await logEvent('ai_success', { tool: 'gig-work', tier });
       await phCapture(getClientIdentifier(req), 'ai_tool_used', { tool: 'gig-work', tier });
@@ -3079,6 +3111,101 @@ ${input}
 
 Write the draft now.`,
   },
+  'ai-workplace-accommodation-companion': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      if (mode === 'accommodation-request') {
+        return `You are a workplace correspondence specialist drafting ONE employee-side workplace accommodation request letter from the supplied facts only. You are a letter drafter, not a lawyer, not HR, and not a medical provider. You never predict an outcome and never advise whether the user has a covered disability or whether an accommodation is legally required.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: employee name, job title and department, employer name, HR contact, process stage, essential job duties, the user's self-check answers (stated only as the user's own context, never as a legal qualification finding), the functional limitations mapped to Option A (primary) and Option B (alternative) adjustments, the client-computed timeline and trial review dates, and workplace context. If a fact is missing, omit it; never invent facts and never write placeholder brackets like [insert date].
+2. NEVER GIVE LEGAL OR MEDICAL ADVICE. Do not cite statutes or regulations as legal conclusions, do not state that the employer must approve the request, and do not diagnose or embellish medical conditions. Include one sentence near the close recommending the draft be reviewed by HR, the Job Accommodation Network (JAN), or an employment attorney before sending.
+3. FUNCTIONAL LANGUAGE FIRST. Frame the request around how each functional limitation interacts with a specific workplace barrier and how Option A (or Option B as an effective alternative) enables the employee to perform all essential job duties.
+4. DATES ARE GIVEN, NEVER RECOMPUTED. State the planned request date, target start date, 7-day HR acknowledgment follow-up date, and trial review check-in date exactly as supplied in the facts.
+
+OUTPUT STRUCTURE: a formal business letter with a header block (employee, job title, employer, HR contact, request date, target start date, and trial review window from the supplied facts), a professional salutation, and four concise paragraphs: (a) a clear request for a workplace accommodation to support full performance of essential job duties, (b) the functional limitation(s) and workplace barrier(s) stated in plain functional terms without unnecessary clinical detail, (c) the proposed Option A primary adjustment and Option B backup adjustment, plus the proposed trial review window and check-in date, and (d) an offer to engage in the interactive process and provide focused functional documentation from the treating clinician if needed, followed by the review reminder sentence and "Sincerely, [Employee Name]". No preamble, no meta-commentary.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Write the formal accommodation request letter now.`;
+      }
+      if (mode === 'provider-checklist') {
+        return `You are a workplace documentation organizer building a one-page DOCTOR DOCUMENTATION SHEET that an employee can hand to their treating health care provider so the clinician's support letter addresses the functional questions HR actually asks. You work strictly from the supplied facts and never give medical or legal advice.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS OR DIAGNOSES. Use only the employee details, essential job duties, functional limitations, Option A and Option B adjustments, target dates, and context supplied. Never invent clinical findings, medications, or medical history.
+2. PRIVACY-PROTECTIVE FUNCTIONAL FOCUS. Remind the clinician in plain terms that HR needs verification of the functional limitation, the workplace barrier it interacts with, why the proposed adjustment (Option A or Option B) is effective, and the expected duration or trial review window — not raw psychotherapy notes or unrelated medical records.
+3. DATES ARE GIVEN, NEVER RECOMPUTED. Quote any appointment date, start date, or trial window exactly as supplied.
+
+OUTPUT STRUCTURE, with exactly these section headers:
+--- PROVIDER BRIEFING SHEET ---
+(Employee name, job title, core job duties, and documentation target date from the supplied facts)
+--- FUNCTIONAL LIMITATIONS & WORKPLACE BARRIERS TO VERIFY ---
+(Bullet list mapping each supplied functional limitation to the job barrier it triggers)
+--- PROPOSED ACCOMMODATION OPTIONS (OPTION A & OPTION B) ---
+(Each supplied Option A primary adjustment and Option B alternative, plus the proposed trial/duration window)
+--- FOUR ITEMS FOR THE CLINICIAN'S LETTER ---
+(A concise 4-point checklist for the provider's letterhead: 1. Confirmation of impairment without unrelated chart history; 2. Functional limitation at work; 3. Connection between the limitation and the proposed Option A/B adjustments; 4. Expected duration or recommended trial review date.)
+
+No preamble, no meta-commentary.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Write the doctor documentation sheet now.`;
+      }
+      if (mode === 'complete-packet') {
+        return `You are a workplace accommodation organizer assembling ONE printable ACCOMMODATION CASE PACKET from the supplied facts only. If an interactive process plan is included in the facts, preserve its core points; never contradict it. You never predict legal outcomes or give legal or medical advice.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only the employee details, job duties, self-check context, functional limitation and Option A/B rows, client-computed timeline dates, interactive process plan (if supplied), and workplace notes. Omit missing items rather than guessing or writing placeholder brackets.
+2. NEVER PREDICT APPROVAL OR LEGAL ELIGIBILITY. Treat self-check answers strictly as user-reported context.
+3. DATES ARE GIVEN, NEVER RECOMPUTED. State every date, countdown, 7-day follow-up, and trial review check-in date verbatim as supplied.
+
+OUTPUT STRUCTURE, with exactly these section headers:
+--- CASE SUMMARY & TIMELINE ---
+(Employee, role, employer, HR contact, process stage, and verbatim client-computed timeline dates)
+--- FUNCTIONAL LIMITATION TO OPTION A / OPTION B MAP ---
+(Structured summary of each limitation, workplace barrier, Option A primary adjustment, and Option B fallback)
+--- FORMAL HR ACCOMMODATION REQUEST DRAFT ---
+(Complete, ready-to-review written request letter incorporating the Option A/B map and trial review date)
+--- CLINICIAN DOCUMENTATION SUMMARY ---
+(Five-bullet functional summary to share with the treating provider)
+--- INTERACTIVE PROCESS FOLLOW-UP CADENCE ---
+(Concrete next steps: written submission, 7-day HR acknowledgment check-in, post-meeting written recap, and trial review check-in, plus a reminder to review with HR, JAN, or an employment attorney.)
+
+No preamble, no meta-commentary.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Write the complete accommodation packet now.`;
+      }
+      return `You are a workplace accommodation organizer reviewing an employee's INTERACTIVE PROCESS PLAN from the supplied facts only. You audit their essential job duties, functional limitations, Option A and Option B adjustments, and timeline dates so they can enter the HR conversation prepared, constructive, and focused on essential functions. You never give legal or medical advice and never predict whether the request will be approved.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: job title, employer, essential duties, self-check answers (treated strictly as user-reported context, never a qualification finding), functional limitation and Option A/B rows, client-computed dates, and notes. If a detail is missing, flag it as a preparation item rather than inventing it.
+2. NEVER PREDICT OUTCOMES OR CITE STATUTES AS LEGAL ADVICE. Frame everything as practical preparation for a collaborative workplace conversation.
+3. DATES ARE GIVEN, NEVER RECOMPUTED. State all supplied dates and countdowns verbatim.
+
+OUTPUT STRUCTURE: three sections with exactly these headers:
+WHAT IS STRONG IN YOUR DRAFT
+(How each supplied functional limitation connects to essential job duties and why having both Option A and Option B keeps the discussion constructive)
+GAPS TO TIGHTEN BEFORE YOU SEND
+(Any missing specifics in the limitation-to-barrier link, backup Option B, trial review window, or clinician documentation timing, using the supplied dates)
+INTERACTIVE MEETING TALKING POINTS
+(5 concise, plain-English talking points the employee can use with HR or their manager to keep the meeting anchored on essential job outcomes, a time-boxed trial review, and written follow-up).
+
+No preamble, no meta-commentary.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Write the interactive process plan now.`;
+    },
+  },
 };
 
 // ─── Streaming helpers (SSE) ────────────────────────────────────────────────
@@ -3862,14 +3989,29 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
       return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const { email, source } = req.body;
+    if (!isAllowedReferer(req.get('Referer'))) {
+      return res.status(403).json({ error: 'Unauthorized origin.' });
+    }
+
+    const burst = checkBurstRateLimit(req);
+    if (!burst || burst.allowed === false) {
+      return res.status(429).json({ error: 'Too many requests.' });
+    }
+
+    const { email, source } = req.body || {};
 
     // Validate email
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (
+      !email ||
+      typeof email !== 'string' ||
+      email.length > 254 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
       return res.status(400).json({ error: 'Valid email is required' });
     }
 
     const normalizedEmail = email.toLowerCase().trim();
+    const cleanSource = typeof source === 'string' ? source.slice(0, 64) : 'site';
 
     try {
       // Check for duplicate in our DB
@@ -3911,7 +4053,7 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
       // Store the subscriber (no IP tracking - privacy-first)
       await db.collection('subscribers').add({
         email: normalizedEmail,
-        source: source || 'homepage',
+        source: cleanSource,
         subscribedAt: FieldValue.serverTimestamp(),
         substackSynced: !!substack.ok,
         substackSyncedAt: FieldValue.serverTimestamp(),
@@ -3928,11 +4070,11 @@ exports.subscribeEmail = functions.https.onRequest((req, res) => {
 
       // Log conversion (anonymous)
       await logConversion('email_capture', 'subscribed', {
-        source: source || 'homepage',
+        source: cleanSource,
         substack: substack.ok ? 'ok' : 'fail',
       });
       await phCapture(getClientIdentifier(req), 'email_captured', {
-        source: source || 'homepage',
+        source: cleanSource,
         substack_synced: !!substack.ok,
       });
 
@@ -4057,6 +4199,9 @@ if (process.env.NODE_ENV === 'test') {
     isAllowedReferer,
     ALLOWED_HOSTS,
     checkFirestoreRateLimit,
+    checkBurstRateLimit,
+    burstLimitStore,
+    analyticsStore,
     getIpHash,
     getDateString,
     GLOBAL_DAILY_CAP,

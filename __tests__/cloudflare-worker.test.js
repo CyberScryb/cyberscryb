@@ -79,6 +79,50 @@ test('rejects other origins without wildcard CORS or upstream work', async () =>
   expect(upstream).not.toHaveBeenCalled();
 });
 
+test('rejects POST requests missing both Origin and Referer headers', async () => {
+  const req = new Request('https://cyberscryb.com/api/ai-generate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'CF-Connecting-IP': '192.0.2.1',
+    },
+    body: JSON.stringify({ tool: 'summarizer', input: 'Example input' }),
+  });
+  const response = await worker.fetch(req);
+  expect(response.status).toBe(403);
+  expect(await response.json()).toEqual({ error: 'Forbidden' });
+  expect(upstream).not.toHaveBeenCalled();
+});
+
+test('accepts POST requests with a valid Referer when Origin is absent and forwards Referer', async () => {
+  const req = new Request('https://cyberscryb.com/api/ai-generate', {
+    method: 'POST',
+    headers: {
+      Referer: 'https://www.cyberscryb.com/tools/summarizer/',
+      'Content-Type': 'application/json',
+      'CF-Connecting-IP': '192.0.2.1',
+    },
+    body: JSON.stringify({ tool: 'summarizer', input: 'Example input' }),
+  });
+  const response = await worker.fetch(req);
+  expect(response.status).toBe(200);
+  expect(upstream.mock.calls[0][1].headers.Referer).toBe(
+    'https://www.cyberscryb.com/tools/summarizer/'
+  );
+});
+
+test('preserves upstream text/event-stream Content-Type for SSE streaming responses', async () => {
+  upstream.mockResolvedValue(
+    new Response('data: {"text":"Hello"}\n\ndata: {"done":true}\n\n', {
+      status: 200,
+      headers: { 'Content-Type': 'text/event-stream; charset=utf-8' },
+    })
+  );
+  const response = await worker.fetch(request());
+  expect(response.status).toBe(200);
+  expect(response.headers.get('Content-Type')).toBe('text/event-stream; charset=utf-8');
+});
+
 test('returns a non-cacheable service error when the backend is unavailable', async () => {
   upstream.mockRejectedValue(new Error('Network unavailable'));
   const response = await worker.fetch(request());

@@ -237,6 +237,13 @@
 
     // ── Draft autosave ────────────────────────────────────
     var saveTimer = null;
+    function isDraftOptOut() {
+      return (
+        typeof document !== 'undefined' &&
+        document.body &&
+        document.body.hasAttribute('data-no-draft')
+      );
+    }
     function collectDraft() {
       var fields = {};
       fieldIds.concat(['addressed-to', 'sender-name']).forEach(function (id) {
@@ -250,19 +257,23 @@
         ts: Date.now(),
       };
     }
+    function saveDraft() {
+      if (isDraftOptOut()) return;
+      try {
+        localStorage.setItem(draftKey, JSON.stringify(collectDraft()));
+        if (draftBadge) draftBadge.classList.add('show');
+        if (saveHint) saveHint.textContent = 'Draft saved locally';
+      } catch (e) {
+        /* private mode */
+      }
+    }
     function scheduleSave() {
+      if (isDraftOptOut()) return;
       clearTimeout(saveTimer);
-      saveTimer = setTimeout(function () {
-        try {
-          localStorage.setItem(draftKey, JSON.stringify(collectDraft()));
-          if (draftBadge) draftBadge.classList.add('show');
-          if (saveHint) saveHint.textContent = 'Draft saved locally';
-        } catch (e) {
-          /* private mode */
-        }
-      }, 400);
+      saveTimer = setTimeout(saveDraft, 400);
     }
     function restoreDraft() {
+      if (isDraftOptOut()) return false;
       try {
         var raw = localStorage.getItem(draftKey);
         if (!raw) return false;
@@ -294,6 +305,7 @@
         return false;
       }
     }
+    var loadDraft = restoreDraft;
 
     if (clearBtn) {
       clearBtn.addEventListener('click', function () {

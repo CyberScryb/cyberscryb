@@ -261,10 +261,26 @@ document
 // Nothing here is sent to a server. Homepage reads the same key.
 (function () {
   var KEY = 'cs_recent_drafts';
+  var TTL_MS = 14 * 24 * 60 * 60 * 1000;
+  function isDraftOptOut() {
+    return (
+      typeof document !== 'undefined' &&
+      document.body &&
+      document.body.hasAttribute('data-no-draft')
+    );
+  }
   function read() {
     try {
       var value = JSON.parse(localStorage.getItem(KEY) || '[]');
-      return Array.isArray(value) ? value : [];
+      if (!Array.isArray(value)) return [];
+      var now = Date.now();
+      var fresh = value.filter(function (entry) {
+        return entry && !(entry.at && now - entry.at > TTL_MS);
+      });
+      if (fresh.length !== value.length) {
+        write(fresh);
+      }
+      return fresh;
     } catch (e) {
       return [];
     }
@@ -275,6 +291,7 @@ document
     } catch (e) {}
   }
   function remember(entry) {
+    if (isDraftOptOut()) return;
     if (!entry || typeof entry.href !== 'string') return;
     if (!/^\/tools\/[a-z0-9-]+\/$/.test(entry.href)) return;
     var preview = String(entry.preview || '')
@@ -309,7 +326,14 @@ document
 
 // ─── Automatic Draft Persistence (User Retention) ───
 (function () {
-  if (document.body.hasAttribute('data-no-draft')) return;
+  function isDraftOptOut() {
+    return (
+      typeof document !== 'undefined' &&
+      document.body &&
+      document.body.hasAttribute('data-no-draft')
+    );
+  }
+  if (isDraftOptOut()) return;
   if (typeof window === 'undefined' || !window.localStorage) return;
 
   var path = window.location.pathname;
@@ -334,6 +358,10 @@ document
   }
 
   function initDraft() {
+    if (isDraftOptOut()) return;
+    if (window.CSRecentDrafts && typeof window.CSRecentDrafts.read === 'function') {
+      window.CSRecentDrafts.read();
+    }
     var input = findInput();
     if (!input) return;
 
@@ -368,8 +396,10 @@ document
     // Debounced autosave
     var saveTimeout = null;
     input.addEventListener('input', function () {
+      if (isDraftOptOut()) return;
       clearTimeout(saveTimeout);
       saveTimeout = setTimeout(function () {
+        if (isDraftOptOut()) return;
         try {
           var val = input.value.trim();
           if (val) {

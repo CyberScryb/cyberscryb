@@ -79,9 +79,18 @@
       if (config.onStats) config.onStats(text);
     }
 
+    function isDraftOptOut() {
+      return (
+        typeof document !== 'undefined' &&
+        document.body &&
+        document.body.hasAttribute('data-no-draft')
+      );
+    }
+
     // Output history — keeps the last 5 results in memory for comparison.
     var resultHistory = [];
     function pushHistory(text) {
+      if (isDraftOptOut()) return;
       resultHistory.unshift({
         text: text,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -715,7 +724,11 @@
         startElapsedTimer();
         ensureStatusEl().textContent = '';
 
-        if (window.CSWorkspace && typeof window.CSWorkspace.save === 'function') {
+        if (
+          !isDraftOptOut() &&
+          window.CSWorkspace &&
+          typeof window.CSWorkspace.save === 'function'
+        ) {
           try {
             var draftFields = {};
             var mainIn =

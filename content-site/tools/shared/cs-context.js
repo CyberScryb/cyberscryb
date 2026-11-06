@@ -133,7 +133,16 @@
     return Array.prototype.slice.call(document.querySelectorAll('[data-cs-share]'));
   }
 
+  function isDraftOptOut() {
+    return (
+      typeof document !== 'undefined' &&
+      document.body &&
+      document.body.hasAttribute('data-no-draft')
+    );
+  }
+
   function save(toolId) {
+    if (isDraftOptOut()) return;
     const profile = readProfile();
     let changed = false;
     sharedFields().forEach(function (el) {
@@ -172,6 +181,7 @@
   }
 
   function autofill(toolId) {
+    if (isDraftOptOut()) return;
     const profile = readProfile();
     sharedFields().forEach(function (el) {
       const key = el.getAttribute('data-cs-share');
@@ -235,6 +245,9 @@
   window.CSWorkspace = window.CSWorkspace || {};
   window.CSWorkspace.save = save;
   window.CSWorkspace.autofill = autofill;
+  window.CSProfile = window.CSProfile || {};
+  window.CSProfile.save = save;
+  window.CSProfile.autofill = autofill;
 
   guardSampleButton();
 })();

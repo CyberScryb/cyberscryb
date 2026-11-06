@@ -48,19 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
     AIDetector.init();
   }
 
-  // ── Auto-save restore ──
-  const saved = localStorage.getItem('aws_draft');
-  if (saved) {
-    textarea.value = saved;
-    runAnalysis();
-  }
-
   // ── Event Listeners ──
   textarea.addEventListener('input', () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       runAnalysis();
-      localStorage.setItem('aws_draft', textarea.value);
     }, 400);
   });
 
@@ -567,12 +559,4 @@ But honestly? When I first tried training a model on my laptop, it sounded like 
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
   }
-
-  // ═══ AUTO-SAVE INDICATOR ═══
-  textarea.addEventListener('input', () => {
-    clearTimeout(window._saveTimer);
-    window._saveTimer = setTimeout(() => {
-      localStorage.setItem('aws_draft', textarea.value);
-    }, 2000);
-  });
 });

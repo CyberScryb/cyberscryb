@@ -428,9 +428,9 @@
 
     <nav aria-label="Breadcrumb" style="max-width:1200px; margin:0 auto; padding:0.75rem 2rem 0; font-size:0.85rem; color:var(--text-faint);">
         <a href="/" style="color: var(--text-muted); text-decoration:none;">Home</a>
-        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="margin:0 8px; color:var(--text-faint, #a1a1aa);">›</span>
         <a href="/tools/" style="color: var(--text-muted); text-decoration:none;">Tools</a>
-        <span style="margin:0 8px; color:#444;">›</span>
+        <span style="margin:0 8px; color:var(--text-faint, #a1a1aa);">›</span>
         <span style="color: var(--primary);">Privacy Policy Generator</span>
     </nav>
 
@@ -553,7 +553,7 @@
                 <div class="preview-header">
                     <h2>Live Preview</h2>
                     <div class="preview-actions">
-                        <select class="format-select" id="format-select" onchange="updatePreviewFormat()">
+                        <select class="format-select" id="format-select" aria-label="Output format" onchange="updatePreviewFormat()">
                             <option value="html">HTML</option>
                             <option value="text">Plain Text</option>
                             <option value="markdown">Markdown</option>
@@ -963,6 +963,11 @@
 
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i];
+            if (line.trim() === '') {
+                if (inList) { html += '</ul>'; inList = false; }
+                continue;
+            }
+            line = escHtml(line.trim());
 
             if (line.startsWith('- ')) {
                 if (!inList) { html += '<ul>'; inList = true; }
@@ -971,12 +976,8 @@
                 html += `<li>${item}</li>`;
             } else {
                 if (inList) { html += '</ul>'; inList = false; }
-                if (line.trim() === '') {
-                    continue;
-                } else {
-                    line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-                    html += `<p>${line}</p>`;
-                }
+                line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                html += `<p>${line}</p>`;
             }
         }
         if (inList) html += '</ul>';

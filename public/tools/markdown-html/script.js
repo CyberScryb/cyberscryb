@@ -16,13 +16,27 @@ function convert() {
   updateStats();
 }
 
+function sanitizeUrl(url) {
+  if (!url || typeof url !== 'string') return '#';
+  const cleaned = url.replace(/^(?:&quot;|&#39;|\s)+|(?:&quot;|&#39;|\s)+$/g, '').trim();
+  if (/^(?:https?:\/\/|mailto:|\/|#)/i.test(cleaned)) {
+    return cleaned;
+  }
+  return '#';
+}
+
 function markdownToHtml(md) {
   if (!md.trim()) return '';
 
   let html = md;
 
   // Escape HTML entities in input (but preserve markdown)
-  html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  html = html
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
   // Fenced code blocks (``` ... ```)
   html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
@@ -98,12 +112,15 @@ function markdownToHtml(md) {
   });
 
   // Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  html = html.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    (_, alt, src) => `<img src="${sanitizeUrl(src)}" alt="${alt}">`
+  );
 
   // Links
   html = html.replace(
     /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener">$1</a>'
+    (_, text, url) => `<a href="${sanitizeUrl(url)}" target="_blank" rel="noopener">${text}</a>`
   );
 
   // Bold + Italic
