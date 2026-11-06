@@ -1492,6 +1492,8 @@ function generateSitemap(generatedPages) {
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
+    'refund-request',
+    'ai-workplace-accommodation-companion',
   ];
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -1516,6 +1518,7 @@ function generateSitemap(generatedPages) {
 
   // Static guides
   const staticGuides = [
+    'how-to-request-an-ada-workplace-accommodation',
     'how-to-write-a-refund-request',
     'how-to-organize-a-paper-trail',
     'caregiver-shift-handoff-standards',
@@ -1648,6 +1651,7 @@ function generateSitemap(generatedPages) {
   // Blog posts
   xml += '\n  <!-- Blog Posts -->\n';
   const blogPosts = [
+    'ada-interactive-process-workplace-accommodations-2026',
     'soap-note-documentation-audit-flags',
     '31-subnet-point-to-point-links',
     'catastrophic-backtracking-regex-redos',
@@ -1854,6 +1858,8 @@ function manageRobotsMeta() {
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
+    'refund-request',
+    'ai-workplace-accommodation-companion',
   ]);
 
   const dirsToProcess = [

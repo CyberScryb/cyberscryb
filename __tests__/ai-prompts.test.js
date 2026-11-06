@@ -1,4 +1,4 @@
-﻿process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 
 // Mock firebase deps to prevent initializeApp side effects
 jest.mock('firebase-admin', () => ({
@@ -106,11 +106,12 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-tenant-case-companion',
     'ai-grant-application-writer',
     'ai-rental-application-companion',
+    'ai-workplace-accommodation-companion',
   ];
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-  test('has exactly 76 keys', () => {
+  test('has exactly 77 keys', () => {
     expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
   });
 
@@ -144,5 +145,24 @@ describe('AI_PROMPTS dispatch table', () => {
       mode: 'periodic-payment',
     });
     expect(prompt).toContain('validated 6-to-24-month term');
+  });
+
+  test('supports all 4 modes in ai-workplace-accommodation-companion', () => {
+    const planPrompt = AI_PROMPTS['ai-workplace-accommodation-companion'].build('TEST_INPUT_42', {
+      mode: 'interactive-plan',
+    });
+    const reqPrompt = AI_PROMPTS['ai-workplace-accommodation-companion'].build('TEST_INPUT_42', {
+      mode: 'accommodation-request',
+    });
+    const docPrompt = AI_PROMPTS['ai-workplace-accommodation-companion'].build('TEST_INPUT_42', {
+      mode: 'provider-checklist',
+    });
+    const packPrompt = AI_PROMPTS['ai-workplace-accommodation-companion'].build('TEST_INPUT_42', {
+      mode: 'complete-packet',
+    });
+    expect(planPrompt).toContain('INTERACTIVE PROCESS PLAN');
+    expect(reqPrompt).toContain('Option A (primary) and Option B (alternative)');
+    expect(docPrompt).toContain('DOCTOR DOCUMENTATION SHEET');
+    expect(packPrompt).toContain('ACCOMMODATION CASE PACKET');
   });
 });

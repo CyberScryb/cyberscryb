@@ -1,0 +1,1418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Workplace Accommodation Companion (ADA Title I) &mdash; Free Request Letter, Provider Sheet
+      &amp; Interactive Process Tracker | CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Free AI workplace accommodation companion: map functional limitations to Option A and Option B accommodations, draft a formal ADA request letter, build a doctor documentation checklist, and track interactive process follow-ups. General information, not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-workplace-accommodation-companion/"
+    />
+    <meta
+      property="og:title"
+      content="AI Workplace Accommodation Companion (ADA Title I) — Free Request Letter, Provider Sheet & Tracker | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Map functional limitations to Option A & B accommodations, draft a formal ADA workplace request letter, build a provider documentation sheet, and track HR follow-ups. Free, no signup. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-workplace-accommodation-companion/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Workplace Accommodation Companion (ADA Title I) — Free Request Letter & Tracker | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Map functional limitations to Option A & B accommodations, draft a formal ADA workplace request letter, build a provider documentation sheet, and track HR follow-ups."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .self-check {
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        border-radius: 12px;
+        padding: 0.9rem 1.1rem;
+        margin-top: 0.9rem;
+      }
+      .self-check h3 {
+        margin: 0 0 0.25rem;
+        font-size: 0.98rem;
+        color: var(--text);
+      }
+      .self-check .lt-hint {
+        margin-bottom: 0.6rem;
+      }
+      .self-check-q {
+        margin-top: 0.7rem;
+      }
+      .self-check-q .lt-label {
+        margin-bottom: 0.15rem;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        line-height: 1.55;
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .lim-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+        margin-top: 0.6rem;
+        padding: 0.7rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg-elevated);
+      }
+      .lim-row-top {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .lim-row-top .lt-input {
+        flex: 1;
+      }
+      .lim-row-opts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      @media (max-width: 640px) {
+        .lim-row-opts {
+          grid-template-columns: 1fr;
+        }
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      .app-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .app-item {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.65rem 0.8rem;
+      }
+      .app-item.app-overdue {
+        border-color: rgba(239, 68, 68, 0.55);
+      }
+      .app-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .app-top strong {
+        color: var(--text);
+        font-size: 0.88rem;
+      }
+      .app-status {
+        width: auto;
+        min-width: 8.5rem;
+        font-size: 0.78rem;
+        padding: 0.3rem 0.5rem;
+      }
+      .app-meta {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.35rem;
+        line-height: 1.5;
+      }
+      .app-item.app-overdue .app-meta {
+        color: #f87171;
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+      .lt-gen {
+        color: #09090b;
+      }
+      .lt-chip.is-on {
+        color: #09090b;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate an output first, then print');
+          else alert('Generate an output first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Workplace Accommodation Companion (ADA Title I)",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-workplace-accommodation-companion/",
+        "description": "Free AI workplace accommodation companion: map functional limitations to Option A and Option B accommodations, draft a formal ADA request letter, build a doctor documentation checklist, and track interactive process follow-ups. General information, not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I have to use the words 'ADA' or 'reasonable accommodation' in my request?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Under EEOC Enforcement Guidance (Question 1), you only need to let your employer know in plain English that you need an adjustment or change at work for a reason related to a medical condition. However, stating clearly in writing that you are requesting a workplace accommodation creates an unmistakable date-stamped record."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I have to disclose my full medical diagnosis or medical records to my manager?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Generally no. Employers are entitled to know that you have a covered condition and how the resulting functional limitation affects your job duties, not your entire clinical history. Route medical documentation directly to HR or the designated leave/disability administrator, where it must be kept in a confidential medical file separate from your personnel file under 29 C.F.R. § 1630.14(c)(1)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why should I propose both an Option A and an Option B accommodation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under ADA Title I, an employer does not have to grant your exact preferred accommodation if another effective accommodation removes the workplace barrier. Offering a primary Option A and a practical Option B keeps you in control of the alternatives and shows good-faith participation in the interactive process."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should my doctor include in an accommodation support letter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ask your clinician to focus on four specifics: (1) confirmation of an underlying medical impairment, (2) the specific functional limitation it causes (such as difficulty concentrating under fluorescent glare or lifting over 20 pounds), (3) which job duty or workplace condition triggers that limitation, and (4) why the requested adjustment enables you to perform your essential job functions, along with the expected duration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my employer says my requested accommodation is an undue hardship or against policy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under EEOC guidance, modifying a neutral workplace policy is often the very definition of a reasonable accommodation, and undue hardship requires significant difficulty or expense relative to the employer's overall resources. If your primary option is declined, ask in writing what alternative effective accommodation HR proposes and offer a 60- or 90-day trial period with objective review metrics."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is an ADA workplace accommodation different from FMLA leave?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "FMLA provides up to 12 weeks of job-protected leave for eligible employees at 50+ employee worksites after 12 months and 1,250 hours of service. ADA Title I covers employers with 15+ employees from day one of employment (or application) and focuses on workplace adjustments—or limited leave when effective—that allow you to perform essential job functions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this tool legal or medical advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool organizes your workplace facts, maps functional limitations to accommodation options, and drafts letters and checklists from the information you enter. It does not determine whether you have a covered disability, whether an accommodation is reasonable, or what legal outcome to expect. Review your draft with HR, the Job Accommodation Network (JAN), or an employment attorney before sending."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to prepare and track an ADA workplace accommodation request",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Map your functional limitations to Option A and Option B adjustments",
+            "text": "Describe the specific workplace barrier in functional terms (what happens at work) and pair it with a primary Option A adjustment and a backup Option B adjustment."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Generate your interactive process plan, request letter, and provider sheet",
+            "text": "Run the interactive process plan first, then generate the formal HR request letter and the one-page functional documentation checklist for your health care provider."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Log every HR touchpoint and trial review date",
+            "text": "Record your submission date, 7-day HR acknowledgment follow-up, interactive meeting notes, and 60- or 90-day trial review date in the on-device tracker."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Workplace Accommodation Companion</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI workplace accommodation <span style="color: var(--primary)">companion</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 40rem">
+            Need a workplace adjustment for a health condition without oversharing your medical
+            chart? Map each functional limitation to a primary Option A and backup Option B
+            accommodation, generate a formal ADA Title I request letter and a one-page doctor
+            documentation sheet, and track every step of the interactive process on your device.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal or medical advice.</strong> This is a workplace-documentation and
+            drafting tool, not legal or medical advice. It organizes your functional limitations,
+            computes planning dates from the dates you enter, and drafts letters and provider sheets
+            from your facts. It never decides whether you have a covered disability or whether an
+            accommodation is legally required. Review every draft with HR, the Job Accommodation
+            Network (JAN), or an employment attorney before sending.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Functional limitation &rarr; Option A/B mapper</span>
+          <span><i></i> Formal HR letter + doctor checklist</span>
+          <span><i></i> Interactive process &amp; trial-date math</span>
+          <span><i></i> On-device tracker &amp; printable packet</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Map limitations &amp; options</strong
+            ><span
+              >Describe what happens at work in functional terms and pair each barrier with a
+              primary Option A and backup Option B adjustment.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Draft HR letter &amp; doctor sheet</strong
+            ><span
+              >Run the interactive process plan first, then generate the formal HR request letter
+              and the one-page functional checklist for your clinician.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Track the interactive process</strong
+            ><span
+              >Log every HR reply, provider note, and 60- or 90-day trial review date, then export
+              the complete printable accommodation packet.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Functional intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Plan, letter &amp; doctor sheet</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Tracker &amp; packet</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your accommodation case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Companion mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="interactive-plan"
+                  aria-pressed="false"
+                >
+                  Interactive process plan
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="accommodation-request"
+                  aria-pressed="false"
+                >
+                  Formal request letter
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="provider-checklist"
+                  aria-pressed="false"
+                >
+                  Doctor documentation sheet
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="complete-packet"
+                  aria-pressed="false"
+                >
+                  Complete packet
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="interactive-plan" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Interactive process plan mode</strong>Run this first: audits your functional
+                limitations, essential duties, Option A/B adjustments, and dates to prepare your
+                talking points and spot documentation gaps before you message HR.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Case readiness</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add your job role, essential duties, and at least one functional limitation row.
+                </p>
+              </div>
+              <div class="self-check" aria-label="ADA workplace self-check">
+                <h3>Workplace accommodation self-check (plain English)</h3>
+                <p class="lt-hint" style="margin-bottom: 0">
+                  These three questions reflect the baseline questions that come up in ADA Title I
+                  and state workplace accommodation requests.
+                  <strong
+                    >Your answers are collected into your draft for context &mdash; this tool never
+                    decides legal coverage or eligibility.</strong
+                  >
+                </p>
+                <div class="self-check-q">
+                  <span class="lt-label" id="sc-size-label"
+                    >Does your employer have 15 or more employees (or fewer under a stricter state
+                    or local law)?</span
+                  >
+                  <div class="pill-group" role="group" aria-labelledby="sc-size-label">
+                    <input type="radio" id="sc_size_yes" name="sc_size" value="Yes" /><label
+                      class="pill"
+                      for="sc_size_yes"
+                      >Yes</label
+                    >
+                    <input type="radio" id="sc_size_no" name="sc_size" value="No" /><label
+                      class="pill"
+                      for="sc_size_no"
+                      >No</label
+                    >
+                    <input type="radio" id="sc_size_unsure" name="sc_size" value="Not sure" /><label
+                      class="pill"
+                      for="sc_size_unsure"
+                      >Not sure</label
+                    >
+                  </div>
+                </div>
+                <div class="self-check-q">
+                  <span class="lt-label" id="sc-essential-label"
+                    >Can you perform the core duties of your role if the workplace barrier is
+                    adjusted?</span
+                  >
+                  <div class="pill-group" role="group" aria-labelledby="sc-essential-label">
+                    <input
+                      type="radio"
+                      id="sc_essential_yes"
+                      name="sc_essential"
+                      value="Yes"
+                    /><label class="pill" for="sc_essential_yes">Yes</label>
+                    <input
+                      type="radio"
+                      id="sc_essential_no"
+                      name="sc_essential"
+                      value="No"
+                    /><label class="pill" for="sc_essential_no">No</label>
+                    <input
+                      type="radio"
+                      id="sc_essential_unsure"
+                      name="sc_essential"
+                      value="Not sure"
+                    /><label class="pill" for="sc_essential_unsure">Not sure</label>
+                  </div>
+                </div>
+                <div class="self-check-q">
+                  <span class="lt-label" id="sc-provider-label"
+                    >Can a clinician or rehabilitation professional verify your functional
+                    limitation if HR asks?</span
+                  >
+                  <div class="pill-group" role="group" aria-labelledby="sc-provider-label">
+                    <input
+                      type="radio"
+                      id="sc_provider_yes"
+                      name="sc_provider"
+                      value="Yes"
+                    /><label class="pill" for="sc_provider_yes">Yes</label>
+                    <input type="radio" id="sc_provider_no" name="sc_provider" value="No" /><label
+                      class="pill"
+                      for="sc_provider_no"
+                      >No</label
+                    >
+                    <input
+                      type="radio"
+                      id="sc_provider_unsure"
+                      name="sc_provider"
+                      value="Not sure"
+                    /><label class="pill" for="sc_provider_unsure">Not sure</label>
+                  </div>
+                </div>
+                <input
+                  type="hidden"
+                  id="ada_selfcheck"
+                  data-label="Workplace self-check answers (user-reported, not a legal finding)"
+                />
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="employee_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="employee_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Employee name"
+                    autocomplete="name"
+                    data-cs-share="senderName"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="job_title"
+                    >Job title &amp; department
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="job_title"
+                    type="text"
+                    placeholder="e.g. Senior Revenue Analyst, Finance"
+                    data-label="Job title and department"
+                    aria-required="true"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="employer_name"
+                    >Employer name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="employer_name"
+                    type="text"
+                    placeholder="e.g. Northstar Logistics Inc."
+                    data-label="Employer name"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="hr_contact"
+                    >HR / accommodation contact <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="hr_contact"
+                    type="text"
+                    placeholder="e.g. Pat Rivera, Leave &amp; Accommodations Specialist"
+                    data-label="HR or accommodation contact"
+                    autocomplete="off"
+                    data-cs-share="recipient"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="request_date"
+                    >Planned request date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="request_date"
+                    type="date"
+                    data-label="Planned request date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="start_date"
+                    >Target accommodation start date
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="start_date"
+                    type="date"
+                    data-label="Target accommodation start date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="provider_appt_date"
+                    >Provider appointment / documentation date
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="provider_appt_date"
+                    type="date"
+                    data-label="Provider documentation target date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="trial_days"
+                    >Proposed trial review window</label
+                  ><select
+                    class="lt-input"
+                    id="trial_days"
+                    data-label="Proposed trial review window"
+                    style="color-scheme: dark"
+                  >
+                    <option value="60">60-day trial review (recommended)</option>
+                    <option value="30">30-day trial review</option>
+                    <option value="90">90-day trial review</option>
+                    <option value="ongoing">Ongoing / annual review</option>
+                  </select>
+                </div>
+              </div>
+              <div class="deadline-box" id="timeline-box" aria-live="polite">
+                <strong>Interactive process timeline:</strong> enter a planned request date, target
+                start date, or provider appointment date to compute your 7-day HR acknowledgment
+                follow-up and trial review check-in date.
+              </div>
+              <input
+                type="hidden"
+                id="timeline_math"
+                data-label="Computed interactive process timeline and trial review dates"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="stage-label">Where are you in the process?</label>
+                <div class="pill-group" role="group" aria-labelledby="stage-label">
+                  <input
+                    type="radio"
+                    id="stg_initial"
+                    name="process_stage"
+                    value="Initial written request"
+                  /><label class="pill" for="stg_initial">Initial written request</label>
+                  <input
+                    type="radio"
+                    id="stg_provider"
+                    name="process_stage"
+                    value="Responding to HR medical documentation request"
+                  /><label class="pill" for="stg_provider">HR asked for doctor note</label>
+                  <input
+                    type="radio"
+                    id="stg_counter"
+                    name="process_stage"
+                    value="Proposing alternative after initial pushback"
+                  /><label class="pill" for="stg_counter">Counter-proposing after pushback</label>
+                  <input
+                    type="radio"
+                    id="stg_trial"
+                    name="process_stage"
+                    value="Checking in on active trial accommodation"
+                  /><label class="pill" for="stg_trial">Trial review check-in</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="process_stage"
+                  data-label="Current interactive process stage"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="essential_duties"
+                  >Core job duties you perform
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <input
+                  class="lt-input"
+                  id="essential_duties"
+                  type="text"
+                  aria-required="true"
+                  placeholder="e.g. Monthly revenue forecasting, SQL reporting, stakeholder budget reviews"
+                  data-label="Essential job duties"
+                  autocomplete="off"
+                />
+                <p class="lt-hint">
+                  List the core outcomes of your job so the letter and provider sheet show how your
+                  proposed adjustment keeps every essential function intact.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Functional limitations &amp; Option A / Option B accommodations
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div id="limitations-list"></div>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="limitations-add"
+                  style="margin-top: 0.5rem"
+                >
+                  + Add limitation &amp; accommodation row
+                </button>
+                <p class="lt-hint">
+                  Describe the functional limitation and workplace barrier (no full clinical history
+                  required), your preferred Option A adjustment, and a practical Option B fallback.
+                </p>
+                <input
+                  type="hidden"
+                  id="limitations_summary"
+                  data-label="Functional limitations mapped to Option A and Option B accommodations"
+                />
+              </div>
+              <input
+                type="hidden"
+                id="interactive_review"
+                data-label="Interactive process plan from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Additional workplace context &amp; sample scenarios
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <div class="lt-examples" aria-label="Sample workplace accommodation scenarios">
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode":"interactive-plan","stage":"Initial written request","selfCheck":{"sc_size":"Yes","sc_essential":"Yes","sc_provider":"Yes"},"fields":{"employee_name":"Jordan Lee","job_title":"Senior Revenue Analyst, Finance","employer_name":"Northstar Logistics Inc.","hr_contact":"Pat Rivera, HR Accommodations Specialist","request_date":"2026-11-10","start_date":"2026-11-24","provider_appt_date":"2026-11-14","trial_days":"60","essential_duties":"Quarterly revenue modeling, SQL variance reporting, and weekly executive deck preparation"},"limitations":[{"limit":"Photophobia and vestibular migraine episodes triggered by overhead fluorescent glare and back-to-back video calls","opta":"Relocate workstation to perimeter window bay with overhead ballast off + anti-glare monitor filter + two 90-minute camera-off focus blocks daily","optb":"Approved task lighting + polarized screen hood + 2 days/week remote work on heavy modeling days"}],"story":"I meet all deliverables and received an Exceeds Expectations rating last quarter. Since our floor moved to high-density open seating in October, the overhead fluorescent glare and constant visual motion have triggered three multi-day migraines. My neurologist supports these adjustments and can sign a functional documentation form on November 14."}'
+                  >
+                    Migraine &amp; sensory ergonomics
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode":"accommodation-request","stage":"Initial written request","selfCheck":{"sc_size":"Yes","sc_essential":"Yes","sc_provider":"Yes"},"fields":{"employee_name":"Marcus Vance","job_title":"Inventory Control Lead, Distribution","employer_name":"Ridgeline Supply Co.","hr_contact":"Dana Chen, People Operations","request_date":"2026-11-09","start_date":"2026-11-16","provider_appt_date":"2026-11-11","trial_days":"90","essential_duties":"Cycle-count auditing, barcode discrepancy resolution, vendor receiving sign-off, and shift handoff briefings"},"limitations":[{"limit":"Post-surgical lumbar lifting restriction (no repetitive lifting over 20 lbs or prolonged standing >45 minutes without a brief sit/lean break) for 12 weeks","opta":"Assign powered pallet jack / Adjustable height sit-stand receiving podium + swap manual bulk-pallet breakdown above 20 lbs with dock floater during 90-day recovery","optb":"Temporary reassignment to Small-Parts & High-Value Cage auditing where all bins are under 15 lbs for 90 days"}],"story":"Returning from outpatient lumbar surgery with clearance for full-time work subject to a 90-day 20-pound lifting cap and a sit-stand stool at the receiving desk. Core job is inventory auditing and vendor sign-off; heavy pallet breakdown is less than 10% of shift time and shared across a 6-person team."}'
+                  >
+                    Post-surgery lifting &amp; ergonomic station
+                  </button>
+                  <button
+                    type="button"
+                    class="lt-ex"
+                    data-payload='{"mode":"provider-checklist","stage":"Responding to HR medical documentation request","selfCheck":{"sc_size":"Yes","sc_essential":"Yes","sc_provider":"Yes"},"fields":{"employee_name":"Elena Rostova","job_title":"Client Implementation Coordinator","employer_name":"Veridian Cloud Systems","hr_contact":"Samir Patel, HR Business Partner","request_date":"2026-11-08","start_date":"2026-11-23","provider_appt_date":"2026-11-13","trial_days":"60","essential_duties":"Client onboarding schedules, configuration QA checklists, and weekly status reports across 12 accounts"},"limitations":[{"limit":"Auditory processing and working-memory interference during unscheduled verbal task changes in open-plan bullpen","opta":"Written recap of priority changes in Asana/Slack + noise-canceling headset allowance + quiet focus block from 9:00–11:00 AM daily","optb":"Seat assignment in quiet corner zone away from sales call pod + 15-minute written agenda before ad-hoc scope reviews"}],"story":"HR asked for a letter from my clinician explaining why I requested written task confirmation and a quiet morning block. I want a crisp one-page sheet for my provider so they document the functional executive-function and auditory-processing barriers and proposed adjustments without sending my entire therapy file."}'
+                  >
+                    ADHD / written workflow &amp; focus block
+                  </button>
+                </div>
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: Since our floor moved to open seating in October, overhead fluorescent lighting and unscheduled verbal task switches have triggered severe migraines. I meet all deadlines and want to propose a 60-day trial with perimeter seating, an anti-glare filter, and written priority recaps."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; Plain workplace facts only: how
+                  you perform your core job, what changed or what barrier gets in the way, and any
+                  prior conversations with your manager or HR.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal or medical advice. Review every draft with HR, JAN, or an employment
+                  attorney before sending.</strong
+                >
+                This tool organizes your functional limitations, computes planning dates from the
+                dates you enter, and drafts workplace accommodation letters and clinician checklists
+                from your facts only. It does not assess legal eligibility, medical necessity, or
+                undue hardship, and will never invent medical facts or statutes. When you generate,
+                your prompt is sent to our AI service to produce the draft.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your accommodation document&hellip;</p>
+                  <small>From your functional limitations and Option A/B choices</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your interactive process plan, formal request letter, or doctor documentation
+                    sheet will appear here.<br /><br />1. Map your functional limitations to Option
+                    A &amp; Option B adjustments (or click a sample scenario)<br />2. Run the
+                    Interactive process plan first<br />3. Generate your formal HR request letter,
+                    provider sheet, or complete packet</span
+                  >
+                </div>
+                <div id="handoff-mount"></div>
+              </div>
+            </div>
+            <div class="lt-card" id="tracker-card">
+              <div class="lt-card-h">
+                <h2>Interactive process log</h2>
+                <span class="lt-draft-badge show" id="tracker-badge">On this device</span>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Good-faith participation in the ADA interactive process is proven by the paper
+                  trail. Log each request, HR reply, provider letter, and trial check-in date;
+                  overdue follow-ups highlight in red.
+                </p>
+                <ul class="app-list" id="tracker-list" style="margin: 0.6rem 0 0">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No interactive process steps logged yet. Add one below.
+                  </li>
+                </ul>
+                <div style="margin-top: 0.75rem; display: grid; gap: 0.5rem">
+                  <div class="lt-row" style="margin: 0">
+                    <div class="lt-field">
+                      <label class="lt-label" for="track-step">Step or milestone</label>
+                      <input
+                        class="lt-input"
+                        id="track-step"
+                        type="text"
+                        placeholder="e.g. Sent initial ADA request email to HR"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="lt-field">
+                      <label class="lt-label" for="track-contact">HR / provider contact</label>
+                      <input
+                        class="lt-input"
+                        id="track-contact"
+                        type="text"
+                        placeholder="e.g. Pat Rivera, HR"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="lt-row" style="margin: 0">
+                    <div class="lt-field">
+                      <label class="lt-label" for="track-date">Date completed</label>
+                      <input
+                        class="lt-input"
+                        id="track-date"
+                        type="date"
+                        style="color-scheme: dark"
+                      />
+                    </div>
+                    <div class="lt-field">
+                      <label class="lt-label" for="track-followup">Follow-up / review due</label>
+                      <input
+                        class="lt-input"
+                        id="track-followup"
+                        type="date"
+                        style="color-scheme: dark"
+                      />
+                    </div>
+                  </div>
+                  <button type="button" class="lt-ghost" id="tracker-add" style="width: 100%">
+                    + Log interactive process step
+                  </button>
+                </div>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download accommodation packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved sessions</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a session to save this intake, your Option A/B rows, and your generated plan
+                  or packet on this device.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Session name, e.g. Q4 Ergonomic Request v1"
+                    aria-label="Session name"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save session</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved sessions yet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap any item to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You need an ergonomic, sensory, or schedule adjustment to keep performing your
+                  core duties without disclosing your entire medical chart to your supervisor
+                </li>
+                <li>
+                  HR asked for medical documentation from your doctor and you want a focused
+                  one-page functional checklist so your clinician writes what HR actually needs
+                </li>
+                <li>
+                  Your manager pushed back on your first idea ("we don't do that here") and you want
+                  to counter-propose an Option B adjustment or a 60-day trial period in writing
+                </li>
+                <li>
+                  You are returning from surgery or medical treatment with temporary lifting,
+                  standing, or schedule restrictions and want the transition documented cleanly
+                </li>
+                <li>
+                  You want one dated interactive-process log and printable packet in case HR stalls
+                  or changes contacts mid-stream
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually makes workplace accommodation requests succeed
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Lead with functional limitations, not raw chart notes</h3>
+              <p>
+                HR and supervisors do not need your full clinical history to evaluate an adjustment.
+                They need to know the functional limitation (for example, photophobia triggered by
+                overhead fluorescent glare or a 20-pound lifting restriction) and how your proposed
+                change removes the workplace barrier so you can perform your essential duties.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Always bring an Option A and an Option B</h3>
+              <p>
+                Under EEOC Enforcement Guidance, an employer may choose among effective
+                accommodations. Offering two concrete, workable options (Option A as your primary
+                request and Option B as a practical fallback) keeps you in the driver's seat of the
+                interactive process if HR rejects your first preference.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Propose a 60- or 90-day trial period</h3>
+              <p>
+                When a manager worries an adjustment might disrupt team workflow, a time-boxed
+                60-day trial with a scheduled review date lowers the stakes. If the trial works, you
+                have objective proof from your own deliverables that the accommodation caused zero
+                hardship.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Send a written recap after every verbal meeting</h3>
+              <p>
+                The interactive process often happens in hallway chats or Zoom calls. After every
+                conversation, send a polite five-line email summarizing what was discussed, what
+                alternative options were offered, and who owes the next step by what date.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>
+                Do I have to use the words "ADA" or "reasonable accommodation" in my request?
+              </summary>
+              <p>
+                No. Under EEOC Enforcement Guidance (Question 1), you only need to let your employer
+                know in plain English that you need an adjustment or change at work for a reason
+                related to a medical condition. However, stating clearly in writing that you are
+                requesting a workplace accommodation creates an unmistakable date-stamped record.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>
+                Do I have to disclose my full medical diagnosis or medical records to my manager?
+              </summary>
+              <p>
+                Generally no. Employers are entitled to know that you have a covered condition and
+                how the resulting functional limitation affects your job duties, not your entire
+                clinical history. Route medical documentation directly to HR or the designated
+                leave/disability administrator, where it must be kept in a confidential medical file
+                separate from your personnel file under 29 C.F.R. &sect; 1630.14(c)(1).
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>
+                Why should I propose both an Option A and an Option B accommodation?
+              </summary>
+              <p>
+                Under ADA Title I, an employer does not have to grant your exact preferred
+                accommodation if another effective accommodation removes the workplace barrier.
+                Offering a primary Option A and a practical Option B keeps you in control of the
+                alternatives and demonstrates good-faith participation in the interactive process.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should my doctor include in an accommodation support letter?</summary>
+              <p>
+                Ask your clinician to focus on four specifics: (1) confirmation of an underlying
+                medical impairment, (2) the specific functional limitation it causes, (3) which job
+                duty or workplace condition triggers that limitation, and (4) why the requested
+                adjustment enables you to perform your essential job functions, along with the
+                expected duration. Use the Doctor documentation sheet mode above to print a
+                one-page summary for your visit.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>
+                What if my employer says my requested accommodation is an undue hardship or against
+                policy?
+              </summary>
+              <p>
+                Modifying a neutral workplace policy is often the very definition of a reasonable
+                accommodation, and undue hardship requires significant difficulty or expense
+                relative to the employer's overall resources. If your primary option is declined,
+                ask in writing what alternative effective accommodation HR proposes and offer a 60-
+                or 90-day trial period with objective review metrics.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>
+                How is an ADA workplace accommodation different from FMLA leave?
+              </summary>
+              <p>
+                FMLA provides up to 12 weeks of job-protected leave for eligible employees at 50+
+                employee worksites after 12 months and 1,250 hours of service. ADA Title I covers
+                employers with 15+ employees from day one and focuses on workplace adjustments—or
+                targeted leave when effective—that allow you to perform essential job functions. If
+                you need continuous or intermittent medical leave, see our
+                <a href="/tools/ai-fmla-request-letter/">AI FMLA Request Letter</a> tool.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this tool legal or medical advice?</summary>
+              <p>
+                No. This tool organizes your workplace facts, maps functional limitations to
+                accommodation options, and drafts letters and checklists from the information you
+                enter. It does not determine whether you have a covered disability, whether an
+                accommodation is reasonable, or what legal outcome to expect. Review your draft with
+                HR, the Job Accommodation Network (JAN), or an employment attorney before sending.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-request-an-ada-workplace-accommodation/"
+              ><strong>How to Request an ADA Workplace Accommodation</strong
+              ><small
+                >The companion guide: functional language, JAN mapping, and doctor letters</small
+              ></a
+            >
+            <a href="/blog/ada-interactive-process-workplace-accommodations-2026/"
+              ><strong>The ADA Interactive Process in 2026</strong
+              ><small
+                >What EEOC guidance actually requires when HR delays or pushes back</small
+              ></a
+            >
+            <a href="/tools/ai-fmla-request-letter/"
+              ><strong>AI FMLA Request Letter</strong
+              ><small
+                >Need continuous or intermittent medical leave instead? Draft your FMLA notice</small
+              ></a
+            >
+            <a href="/tools/appeal-letter/"
+              ><strong>AI Appeal Letter Generator</strong
+              ><small>Appeal a formal workplace or benefits denial with structured facts</small></a
+            >
+            <a href="/tools/paper-trail/"
+              ><strong>Paper Trail Timeline</strong
+              ><small>Build a chronological log of workplace events and evidence</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal or medical advice. Review every accommodation request
+            with HR, the Job Accommodation Network (JAN), or an employment attorney before sending.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-workplace-accommodation-companion/ai-workplace-accommodation-companion.js?v=20261106a1"></script>
+  </body>
+</html>

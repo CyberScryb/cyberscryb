@@ -11,6 +11,31 @@ _Last updated: 2026-09-30_
 
 ---
 
+## Recent Changes (Session 2026-11-06 — Autonomous Flagship Upgrade: Workplace Accommodation Companion, ADA Interactive Process Guide & Blog Post, Security & Contrast Hardening, Subnet RFC 3021 /31 & /32 Support, and Cross-Tool Handoff Expansion)
+
+Comprehensive autonomous upgrade executed across code, UI/UX, tools, content, and security:
+- **Flagship Tool (`/tools/ai-workplace-accommodation-companion/`):** Built interactive 4-mode accommodation companion in both `content-site/` and `public/` (Initial formal request, Medical provider documentation cover sheet, Interactive process meeting recap, and Denial / delay pushback counter-proposal) with deterministic client-side interactive-process stage tracking, preset scenarios, named draft manager, copy/download/print actions, and cross-tool handoff hooks (`sendToTool` / `receiveHandoff`). Added backend prompt in `functions/index.js` and dedicated Jest test suite in `__tests__/ai-workplace-accommodation-companion.test.js` (7/7 tests passing).
+- **Companion Guide (`/guides/how-to-request-an-ada-workplace-accommodation.html`):** Deep 2,500+ word practical guide covering statutory frameworks (ADA 42 U.S.C. § 12112, 29 C.F.R. § 1630.2(o)(3), PWFA 42 U.S.C. § 2000gg, Title VII religious accommodations), the interactive process, medical documentation boundaries, JAN research data, negotiation scripts, FAQPage and Article JSON-LD, AdSense slot `9198647442`, and cross-tool links. Added to both `content-site/` and `public/`.
+- **Authoritative Blog Post + Diagram (`/blog/ada-interactive-process-workplace-accommodations-2026.html`):** In-depth source-cited field guide covering 29 C.F.R. § 1630.2(o)(3), EEOC enforcement guidelines, Job Accommodation Network (JAN) workplace cost study (56% cost $0), employer undue hardship standards under 42 U.S.C. § 12111(10), and an interactive process timeline. Custom SVG workflow diagram created at `/blog/images/ada-interactive-process-flow.svg` in both trees. Article and FAQPage schema, AdSense slot, and registered across catalogs.
+- **Security & Privacy Remediation:**
+  - Fixed DOM XSS in `privacy-generator` (`escHtml` before markdown bold/list formatting) and `markdown-html` (`sanitizeUrl` filtering `javascript:`, `data:`, `vbscript:` schemes).
+  - Hardened Cloudflare Worker (`cloudflare-worker/worker.js`) with strict origin validation, forwarded referer, and SSE content-type preservation.
+  - Hardened Firebase Cloud Functions (`functions/index.js`) with strict input caps, referer checks, rate limits, and plain-object validation.
+  - Enforced `data-no-draft` (`isDraftOptOut()`) and 14-day TTL across all tool scripts and `cs_recent_drafts`.
+  - Added `__tests__/security-hardening.test.js` (63/63 tests passing across 5 suites).
+- **Subnet Calculator Upgrade (`/tools/subnet-calculator/`):** Pure helper `computeSubnet` supporting RFC 3021 `/31` point-to-point links (2 usable hosts, no separate net/broadcast) and `/32` single-host routes. Updated UI, visible FAQ, FAQPage JSON-LD, removed legacy styles and fonts, and created `__tests__/subnet-calculator.test.js` (14/14 tests passing).
+- **Tool Enrichment & Cross-Tool Handoffs (`tool-handoff.js`):**
+  - Enriched `sap-appeal-letter` and `utility-shutoff-letter` with expanded guides, sample presets, 8 synced FAQs, and stripped all lingering `Pro unlimited` labels.
+  - Expanded `tool-handoff.js` and wired 4 complete multi-step user workflows: (1) Unemployment Hearing Prep Coach ↔ Unemployment Appeal Letter, (2) Behavioral Log / Med Log → Caregiver Report → SOAP Note Generator, (3) Rental Application Companion → Rental Application Letter Writer & Tenant Case Companion → Eviction Notice / Rent Increase Letter, and (4) IRS Tax Debt Case Companion → Installment / Offer letters, plus Medical Debt Dispute → Hardship / Insurance Appeal.
+- **Verification Gates Passed:**
+  - `npm test`: 50 test suites passed, 937 tests passed.
+  - `pytest freelance-pipeline/tests/`: 24 tests passed.
+  - `npm run format:check`: 100% clean formatting.
+  - `npm run lint`: 0 errors.
+  - `npm run test:a11y`: 39 key pages tested, 0 violations.
+  - `_audit-broken-links.js` & `_audit-img-alt.js`: 0 broken internal links, 0 missing image alts.
+  - `build-search-index.js`: 334 index entries regenerated.
+
 ## Recent Changes (Session 2026-10-29 — SOAP note documentation blog post)
 
 Added blog post `/blog/soap-note-documentation-audit-flags/` ("SOAP Note Documentation: What Auditors Actually Flag") in both `content-site/blog/` and `public/blog/`, edited by hand in both trees (no sync script run). Covers Medicare FY2025 CERT error categories (53% insufficient documentation) and root causes, the CMS definition of insufficient documentation (MLN909160), cloned notes (CMS EHR decision table, Joint Commission Quick Safety 10, OIG OEI-01-11-00571), late entries/addenda/corrections (PIM ch. 3 §3.3.2.5, Noridian), signature rules and the AI-transcription concurrence line (PIM §3.3.2.4), an illustrative weak vs audit-ready SOAP note, and a pre-sign checklist. Original diagram at `blog/images/soap-note-cert-2025-errors.svg` in both trees. Blog index card added first in `#blog-posts` (Life) in both `blog/index.html` files; sitemap entry in both `sitemap.xml` files and at the top of the `generate-pages.js` `blogPosts` array. Article and FAQPage JSON-LD. Links to the SOAP Note Generator, the cognitive-decline documentation guide, the caregiver shift report post, and the medical bill coding dispute post.
