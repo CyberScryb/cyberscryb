@@ -1625,6 +1625,7 @@ function generateSitemap(generatedPages) {
     'how-to-prepare-for-an-unemployment-hearing',
     'how-to-write-a-pet-resume-for-a-rental-application',
     'how-to-write-a-goodwill-letter-to-remove-a-late-payment',
+    'how-to-appeal-a-social-security-disability-denial',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
