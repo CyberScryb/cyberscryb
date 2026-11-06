@@ -579,6 +579,7 @@
                     category<br />2. Enter the facts<br />3. Hit Generate</span
                   >
                 </div>
+                <div id="handoff-mount"></div>
               </div>
             </div>
             <div class="lt-card">
@@ -901,6 +902,47 @@
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/ai-unemployment-appeal-letter/ai-unemployment-appeal-letter.js?v=20261023a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'tool-input',
+          denial_date: 'denial_date',
+          state: 'state',
+          sender: 'sender-name',
+          evidence: 'evidence',
+        });
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        function val(id) {
+          var el = document.getElementById(id);
+          return el && el.value ? el.value.trim() : '';
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'ai-unemployment-hearing-prep-coach',
+            label: 'Hearing Prep Coach',
+            getPayload: function () {
+              var story = val('tool-input');
+              if (!story) return null;
+              return {
+                story: story,
+                denial_date: val('denial_date'),
+                state: val('state'),
+                sender: val('sender-name'),
+                evidence: val('evidence') || story,
+              };
+            },
+            onEmpty: function () {
+              if (window.LifeTool && window.LifeTool.toast) {
+                window.LifeTool.toast('Enter your denial facts in the story box first.');
+              }
+            },
+          },
+        ]);
+      })();
+    </script>
   </body>
 </html>

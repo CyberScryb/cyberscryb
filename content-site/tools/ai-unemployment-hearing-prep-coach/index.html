@@ -836,6 +836,7 @@
                     first<br />3. Then generate the full prep packet</span
                   >
                 </div>
+                <div id="handoff-mount"></div>
               </div>
             </div>
             <div class="lt-card" id="mock-card">
@@ -864,6 +865,7 @@
                     class="lt-input"
                     id="mock-answer"
                     type="text"
+                    aria-label="Your answer to the judge's question"
                     placeholder="Type your answer, then ask the next question"
                     autocomplete="off"
                   />
@@ -911,6 +913,7 @@
                     class="lt-input"
                     id="draft-name"
                     type="text"
+                    aria-label="Session name"
                     placeholder="Session name, e.g. Nov hearing prep v1"
                     autocomplete="off"
                   />
@@ -1195,6 +1198,62 @@
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/ai-unemployment-hearing-prep-coach/ai-unemployment-hearing-prep-coach.js?v=20261102a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'employer_allegations',
+          denial_date: 'denial_date',
+          state: 'claimant_state',
+          sender: 'claimant_name',
+          evidence: 'tool-input',
+        });
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        function val(id) {
+          var el = document.getElementById(id);
+          return el && el.value ? el.value.trim() : '';
+        }
+        function buildPayload() {
+          var allegations = val('employer_allegations');
+          var notes = val('tool-input');
+          var ev = val('evidence_summary');
+          var parts = [];
+          if (allegations) parts.push('Employer / agency allegations: ' + allegations);
+          if (notes) parts.push('Rebuttal & facts: ' + notes);
+          if (ev) parts.push('Evidence: ' + ev);
+          var story = parts.join('\n\n');
+          if (!story) return null;
+          return {
+            story: story,
+            denial_date: val('denial_date'),
+            state: val('claimant_state'),
+            sender: val('claimant_name'),
+            evidence: ev || notes,
+          };
+        }
+        function onEmpty() {
+          if (window.LifeTool && window.LifeTool.toast) {
+            window.LifeTool.toast('Enter your employer allegations or case facts first.');
+          }
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'ai-unemployment-appeal-letter',
+            label: 'Unemployment Appeal Letter',
+            getPayload: buildPayload,
+            onEmpty: onEmpty,
+          },
+          {
+            slug: 'appeal-letter',
+            label: 'General Appeal Letter',
+            getPayload: buildPayload,
+            onEmpty: onEmpty,
+          },
+        ]);
+      })();
+    </script>
   </body>
 </html>

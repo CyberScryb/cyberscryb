@@ -1037,6 +1037,20 @@
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/ai-rent-increase-negotiation-letter/ai-rent-increase-negotiation-letter.js?v=20261020a1"></script>
+    <script>
+      window.ToolHandoff &&
+        window.ToolHandoff.receiveHandoff({
+          story: 'tool-input',
+          current_rent: 'current_rent',
+          proposed_rent: 'proposed_rent',
+          monthly_income: 'monthly_income',
+          state: 'state',
+          landlord_name: 'landlord_name',
+          property_address: 'property_address',
+          sender: 'sender-name',
+        });
+    </script>
   </body>
 </html>

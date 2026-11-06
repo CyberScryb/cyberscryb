@@ -256,6 +256,7 @@
             <span id="word-count">0 words</span>
             <span>Tip: Text in this box is directly editable.</span>
           </div>
+          <div id="handoff-mount"></div>
         </div>
       </div>
     </div>
@@ -353,6 +354,42 @@
 <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
 <script>
   window.ToolHandoff && window.ToolHandoff.receiveHandoff({ story: 'specific-details' });
+  document.addEventListener('DOMContentLoaded', function () {
+    var mount = document.getElementById('handoff-mount');
+    if (!mount || !window.ToolHandoff) return;
+    function debtPayload() {
+      var details = (document.getElementById('specific-details') || {}).value || '';
+      var provider = (document.getElementById('provider-name') || {}).value || '';
+      var amount = (document.getElementById('disputed-amount') || {}).value || '';
+      var account = (document.getElementById('account-no') || {}).value || '';
+      var date = (document.getElementById('service-date') || {}).value || '';
+      if (!details.trim() && !provider.trim() && !amount.trim()) return null;
+      var lines = [];
+      if (provider.trim()) lines.push('Provider: ' + provider.trim());
+      if (amount.trim()) lines.push('Disputed Amount: ' + amount.trim());
+      if (account.trim()) lines.push('Account / Ref #: ' + account.trim());
+      if (date.trim()) lines.push('Service Date(s): ' + date.trim());
+      if (details.trim()) lines.push('Details: ' + details.trim());
+      return { story: lines.join('\n') };
+    }
+    function onEmpty() {
+      alert('Enter your medical billing details first, then send them.');
+    }
+    window.ToolHandoff.renderSendRow(mount, [
+      {
+        slug: 'hardship-letter',
+        label: 'Hardship Letter',
+        getPayload: debtPayload,
+        onEmpty: onEmpty
+      },
+      {
+        slug: 'insurance-denial-appeal',
+        label: 'Insurance Denial Appeal',
+        getPayload: debtPayload,
+        onEmpty: onEmpty
+      }
+    ]);
+  });
 </script>
 <script>
 (function() {

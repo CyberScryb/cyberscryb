@@ -221,6 +221,7 @@
                                 <p style="color: var(--primary);">Generating your log entry...</p>
                             </div>
                         </div>
+                        <div id="handoff-mount"></div>
                     </div>
                 </div>
 
@@ -333,7 +334,57 @@
 
     <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/behavioral-log/behavioral-log.js"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'caregiver-report',
+            label: 'Caregiver Shift Report',
+            getPayload: function () {
+              var infoEl = document.getElementById('resident-info');
+              var info = infoEl && infoEl.value ? infoEl.value.trim() : '';
+              var logs = [];
+              try {
+                logs = JSON.parse(localStorage.getItem('cs_behavioral_logs') || '[]');
+              } catch {}
+              var outEl = document.getElementById('output-text');
+              var outText =
+                outEl && !outEl.querySelector('.placeholder') ? outEl.innerText.trim() : '';
+              var parts = [];
+              if (info) parts.push('Resident context: ' + info);
+              if (logs && logs.length) {
+                parts.push(
+                  'ABC Behavioral Log entries:\n' +
+                    logs
+                      .map(function (l) {
+                        return (
+                          '- ' +
+                          l.time +
+                          ' | Trigger: ' +
+                          l.antecedent +
+                          ' | Behavior: ' +
+                          l.behavior +
+                          ' | Response: ' +
+                          l.consequence
+                        );
+                      })
+                      .join('\n')
+                );
+              }
+              if (outText) parts.push('Care Plan Summary:\n' + outText);
+              var story = parts.join('\n\n').trim();
+              if (!story) return null;
+              return { story: story };
+            },
+          },
+        ]);
+      })();
+    </script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 </body>

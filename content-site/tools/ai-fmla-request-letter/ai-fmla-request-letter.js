@@ -496,5 +496,8 @@
       });
 
     renderHistory();
+    if (window.ToolHandoff && typeof window.ToolHandoff.receiveHandoff === 'function') {
+      window.ToolHandoff.receiveHandoff({ story: 'tool-input', name: 'employee_name' });
+    }
   });
 })();

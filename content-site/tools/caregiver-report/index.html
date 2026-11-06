@@ -156,6 +156,7 @@
                                 <p style="color: var(--primary);">Drafting your report...</p>
                             </div>
                         </div>
+                        <div id="handoff-mount"></div>
                     </div>
                 </div>
 
@@ -322,7 +323,40 @@
     <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/caregiver-report/caregiver-report.js"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'tool-input',
+          patient: 'patient-name',
+        });
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'soap-note-generator',
+            label: 'SOAP Note Generator',
+            getPayload: function () {
+              var outEl = document.getElementById('output-text');
+              var outText =
+                outEl && !outEl.querySelector('.placeholder') ? outEl.innerText.trim() : '';
+              var inEl = document.getElementById('tool-input');
+              var inText = inEl && inEl.value ? inEl.value.trim() : '';
+              var patEl = document.getElementById('patient-name');
+              var patient = patEl && patEl.value ? patEl.value.trim() : '';
+              var story = outText || inText;
+              if (!story) return null;
+              return {
+                story: story,
+                patient: patient,
+              };
+            },
+          },
+        ]);
+      })();
+    </script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 </body>

@@ -894,6 +894,16 @@
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/ai-eviction-notice-response-letter/ai-eviction-notice-response-letter.js?v=20261024a1"></script>
+    <script>
+      window.ToolHandoff &&
+        window.ToolHandoff.receiveHandoff({
+          story: 'tool-input',
+          landlord_name: 'landlord',
+          sender: 'sender-name',
+          addressed_to: 'addressed-to',
+        });
+    </script>
   </body>
 </html>

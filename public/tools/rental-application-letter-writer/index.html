@@ -492,6 +492,7 @@
                 <input
                   type="text"
                   id="rent-pets-details"
+                  aria-label="Pet details"
                   class="hidden"
                   style="
                     width: 100%;
@@ -1157,7 +1158,25 @@
     <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/rental-application-letter-writer/rental-application-letter-writer.js"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'rent-history',
+          name: 'rent-name',
+          property: 'rent-property',
+          pets: 'rent-pets-details',
+        });
+        var petDetails = document.getElementById('rent-pets-details');
+        var petSelect = document.getElementById('rent-pets');
+        if (petDetails && petDetails.value && petSelect) {
+          petSelect.value = 'yes';
+          petDetails.classList.remove('hidden');
+        }
+      })();
+    </script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
     <style media="print">

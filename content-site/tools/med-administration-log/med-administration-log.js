@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (meds.length === 0) {
       marBody.innerHTML = `
                 <tr>
-                    <td colspan="6" style="text-align: center; color: #666; padding: 2rem;">
+                    <td colspan="6" style="text-align: center; color: #a1a1aa; padding: 2rem;">
                         No medications listed. Add a medication above to start.
                     </td>
                 </tr>

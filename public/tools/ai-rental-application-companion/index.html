@@ -843,6 +843,7 @@
                     Then build the pet resume or the full application packet</span
                   >
                 </div>
+                <div id="handoff-mount"></div>
               </div>
             </div>
             <div class="lt-card" id="tracker-card">
@@ -942,6 +943,7 @@
                     class="lt-input"
                     id="draft-name"
                     type="text"
+                    aria-label="Session name"
                     placeholder="Session name, e.g. Maple Ave application v1"
                     autocomplete="off"
                   />
@@ -1216,6 +1218,42 @@
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/ai-rental-application-companion/ai-rental-application-companion.js?v=20261103a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        function val(id) {
+          var el = document.getElementById(id);
+          return el && el.value ? el.value.trim() : '';
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'rental-application-letter-writer',
+            label: 'Application Cover Letter',
+            getPayload: function () {
+              var story = val('tool-input');
+              var name = val('applicant_name');
+              var property = val('property_address');
+              var pets = val('pets_summary');
+              if (!story && !property && !name && !pets) return null;
+              return {
+                story: story || property,
+                name: name,
+                property: property,
+                pets: pets,
+              };
+            },
+            onEmpty: function () {
+              if (window.LifeTool && window.LifeTool.toast) {
+                window.LifeTool.toast('Enter your property or application facts first.');
+              }
+            },
+          },
+        ]);
+      })();
+    </script>
   </body>
 </html>

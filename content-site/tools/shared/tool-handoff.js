@@ -28,6 +28,14 @@
     '/tools/medical-debt-dispute/': 'Medical Debt Dispute',
     '/tools/small-business-funding-finder/': 'Funding Finder',
     '/tools/complaint-letter-generator/': 'Complaint Letter Generator',
+    '/tools/ai-unemployment-hearing-prep-coach/': 'Unemployment Hearing Prep Coach',
+    '/tools/ai-unemployment-appeal-letter/': 'Unemployment Appeal Letter',
+    '/tools/behavioral-log/': 'Behavioral Log (ABC)',
+    '/tools/med-administration-log/': 'Medication Administration Log',
+    '/tools/caregiver-report/': 'Caregiver Shift Report',
+    '/tools/ai-rental-application-companion/': 'Rental Application Companion',
+    '/tools/ai-irs-tax-debt-case-companion/': 'IRS Tax Debt Case Companion',
+    '/tools/ai-workplace-accommodation-companion/': 'Workplace Accommodation Companion',
   };
 
   function sourceLabel(path) {

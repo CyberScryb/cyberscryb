@@ -1145,10 +1145,20 @@
       document.addEventListener('DOMContentLoaded', function () {
         var mount = document.getElementById('handoff-mount');
         if (!mount || !window.ToolHandoff) return;
+        function val(id) {
+          var el = document.getElementById(id);
+          return el && el.value ? el.value.trim() : '';
+        }
         function factsPayload() {
-          var input = document.getElementById('tool-input');
-          var text = input ? input.value.trim() : '';
-          return text ? { story: text } : null;
+          var text = val('tool-input');
+          if (!text) return null;
+          return {
+            story: text,
+            landlord_name: val('landlord_name') || val('addressed-to'),
+            property_address: val('property_address'),
+            state: val('state') || val('tenant_state'),
+            sender: val('sender-name') || val('tenant_name'),
+          };
         }
         function onEmpty() {
           if (window.LifeTool) window.LifeTool.toast('Enter your case facts first, then send them.');
@@ -1164,6 +1174,18 @@
           {
             slug: 'landlord-tenant-letter',
             label: 'Landlord Letter',
+            getPayload: factsPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'ai-eviction-notice-response-letter',
+            label: 'Eviction Response Letter',
+            getPayload: factsPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'ai-rent-increase-negotiation-letter',
+            label: 'Rent Increase Letter',
             getPayload: factsPayload,
             onEmpty: onEmpty
           }

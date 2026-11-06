@@ -248,6 +248,7 @@
                                 <p style="color: var(--primary);">Generating your log entry...</p>
                             </div>
                         </div>
+                        <div id="handoff-mount"></div>
                     </div>
                 </div>
 
@@ -360,7 +361,67 @@
 
     <script src="/js/script.js?v=20261014ux"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/med-administration-log/med-administration-log.js"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        var mount = document.getElementById('handoff-mount');
+        if (!mount) return;
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'caregiver-report',
+            label: 'Caregiver Shift Report',
+            getPayload: function () {
+              var notesEl = document.getElementById('caregiver-notes');
+              var notes = notesEl && notesEl.value ? notesEl.value.trim() : '';
+              var meds = [];
+              try {
+                meds = JSON.parse(localStorage.getItem('cs_mar_meds') || '[]');
+              } catch {}
+              var outEl = document.getElementById('output-text');
+              var outText =
+                outEl && !outEl.querySelector('.placeholder') ? outEl.innerText.trim() : '';
+              var parts = [];
+              if (meds && meds.length) {
+                parts.push(
+                  'Medication Administration Record (MAR):\n' +
+                    meds
+                      .map(function (m) {
+                        var given = Object.keys(m.log || {})
+                          .filter(function (k) {
+                            return m.log[k];
+                          })
+                          .map(function (k) {
+                            return k + ' (' + m.log[k] + ')';
+                          })
+                          .join(', ');
+                        return (
+                          '- ' +
+                          m.name +
+                          ' ' +
+                          m.dosage +
+                          ' (' +
+                          m.route +
+                          ', ' +
+                          m.frequency +
+                          ') — Administered: ' +
+                          (given || 'None logged')
+                        );
+                      })
+                      .join('\n')
+                );
+              }
+              if (notes) parts.push('Caregiver MAR Notes: ' + notes);
+              if (outText) parts.push('MAR Audit Summary:\n' + outText);
+              var story = parts.join('\n\n').trim();
+              if (!story) return null;
+              return { story: story };
+            },
+          },
+        ]);
+      })();
+    </script>
     <script src="/tools/shared/affiliate-panel.js?v=20261006audit1"></script>
 
 </body>

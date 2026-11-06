@@ -816,6 +816,7 @@
                     facts (or load an example)<br />3. Hit Generate</span
                   >
                 </div>
+                <div id="handoff-mount"></div>
               </div>
             </div>
             <div class="lt-card">
@@ -1139,8 +1140,51 @@
     </footer>
     <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
     <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
     <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
     <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
     <script src="/tools/ai-irs-tax-debt-case-companion/ai-irs-tax-debt-case-companion.js?v=20261027a1"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var mount = document.getElementById('handoff-mount');
+        if (!mount || !window.ToolHandoff) return;
+        function taxPayload() {
+          var story = (document.getElementById('tool-input') || {}).value || '';
+          var years = (document.getElementById('tax_years') || {}).value || '';
+          var balance = (document.getElementById('total_balance') || {}).value || '';
+          var notice = (document.getElementById('notice_ref') || {}).value || '';
+          var sender = (document.getElementById('taxpayer_name') || {}).value || '';
+          var term = (document.getElementById('proposed_term') || {}).value || '';
+          var offer = (document.getElementById('offer_amount') || {}).value || '';
+          if (!story.trim() && !years.trim() && !balance.trim()) return null;
+          return {
+            story: story.trim(),
+            tax_years: years.trim(),
+            total_balance: balance.trim(),
+            pay_months: term.trim(),
+            proposed_offer: offer.trim(),
+            notice_ref: notice.trim(),
+            sender: sender.trim()
+          };
+        }
+        function onEmpty() {
+          if (window.LifeTool) window.LifeTool.toast('Enter your IRS tax debt details first, then send them.');
+        }
+        window.ToolHandoff.renderSendRow(mount, [
+          {
+            slug: 'ai-irs-installment-agreement-letter',
+            label: 'Installment Agreement Letter',
+            getPayload: taxPayload,
+            onEmpty: onEmpty
+          },
+          {
+            slug: 'ai-irs-offer-in-compromise-letter',
+            label: 'Offer in Compromise Letter',
+            getPayload: taxPayload,
+            onEmpty: onEmpty
+          }
+        ]);
+      });
+    </script>
   </body>
 </html>

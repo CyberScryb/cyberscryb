@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           // Build URL with truncated query param as fallback
           const encoded = encodeURIComponent(originalInput.slice(0, 2000));
-          window.location.href = '../humanizer/index.html?prefill=' + encoded;
+          window.location.href = '/tools/humanizer/?prefill=' + encoded;
         },
         { once: true }
       );

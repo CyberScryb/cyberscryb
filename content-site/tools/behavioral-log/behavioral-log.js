@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logs.length === 0) {
       logBody.innerHTML = `
                 <tr>
-                    <td colspan="5" style="text-align: center; color: #666; padding: 2rem;">
+                    <td colspan="5" style="text-align: center; color: #a1a1aa; padding: 2rem;">
                         No behavior log entries. Add an entry above to start tracking.
                     </td>
                 </tr>
