@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Exit Interview Prep Coach &mdash; Free Exit Interview Prep Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI coach for your exit interview: an interview strategy from your facts, a full prep packet (answer scripts, tenure timeline, opening statement, mock Q&A), and a mock interview with an AI HR interviewer. Not HR advice and not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-exit-interview-prep-coach/" />
+    <meta
+      property="og:title"
+      content="AI Exit Interview Prep Coach — Free Exit Interview Prep Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI coach for your exit interview: interview strategy, a full prep packet, and a mock interview with an AI HR interviewer. Not HR advice and not legal advice."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-exit-interview-prep-coach/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Exit Interview Prep Coach — Free Exit Interview Prep Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI coach for your exit interview: interview strategy, a full prep packet, and a mock interview with an AI HR interviewer. Not HR advice and not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      .mock-transcript {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: 340px;
+        overflow-y: auto;
+        margin-bottom: 0.75rem;
+      }
+      .mock-bubble {
+        padding: 0.6rem 0.85rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .mock-bubble.alj {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: var(--text);
+      }
+      .mock-bubble.alj strong {
+        color: #f87171;
+      }
+      .mock-bubble.user {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        align-self: flex-end;
+        max-width: 92%;
+      }
+      .mock-bubble.user strong {
+        color: var(--text);
+      }
+      .mock-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.6rem;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a packet first, then print');
+          else alert('Generate a packet first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Exit Interview Prep Coach",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-exit-interview-prep-coach/",
+        "description": "Free AI coach for exit interviews: interview strategy, a full prep packet, and a mock interview with an AI HR interviewer. Not HR advice and not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an exit interview?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A short meeting with HR on or near your last day where they ask why you are leaving and what could have been better. It is your employer's record of the departure, and it is also your chance to leave a clear, professional final impression. Nothing you say is off the record, so go in with a plan. This is general information, not HR or legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I have to attend an exit interview?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually no one can force you to attend, and many people skip it. But attending with a plan is often the better move: you control the story of why you left, you can raise genuine feedback calmly, and you leave on professional terms with people who may be references. Decide before the meeting, not in it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I say in an exit interview?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One clear reason for leaving, two or three calm, specific points of feedback, and practical questions about pay, benefits, and equipment return. Keep answers short and factual. Do not badmouth a manager by name, do not raise new accusations, and do not sign anything on the spot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I not say in an exit interview?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Do not vent, do not name people to blame, do not exaggerate, and do not make claims you cannot back up. Avoid anything you would not want repeated to your next employer. If a topic is sensitive, decide your one calm sentence about it before the meeting and do not go further."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can what I say in an exit interview be used against me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HR takes notes and the interview goes on file, and what you say can be repeated inside the company. That is why the tool focuses on short, factual, professional answers and on rehearsing the sensitive topics in advance. This is general information, not legal advice; if a sensitive issue is involved, review it with an employment attorney or legal aid first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this HR advice or legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool prepares you for an exit interview from the facts you enter: strategy, a prep packet, and mock practice. It does not assess your situation, predict any outcome, or cite law. For a sensitive dispute or anything that could affect a reference or a claim, review with an employment attorney or legal aid before the interview."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to prepare for an exit interview with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your exit interview facts",
+            "text": "Your role, employer, tenure dates, reason for leaving, sensitive topics, what you want to get across, and what you want to avoid saying."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Generate your strategy and packet",
+            "text": "Get the interview strategy first, then the full prep packet: answer scripts, tenure timeline, opening statement draft, and a mock Q&A set."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Practice the mock interview",
+            "text": "Rehearse with the AI as the HR interviewer: one question at a time, a short note on each answer, up to 8 exchanges."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Exit Interview Prep Coach</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI exit interview <span style="color: var(--primary)">prep coach</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Last day coming up and HR wants an exit interview? Enter your facts once and get an
+            interview strategy that spots the questions HR will ask, a full prep packet with answer
+            scripts and an opening statement, and a mock interview so you rehearse the answers
+            before they count.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not HR advice and not legal advice.</strong> This is an exit-interview
+            preparation tool, not HR advice and not legal advice. It builds strategy, a prep packet,
+            and mock practice from the facts you enter. It does not assess your situation, predict
+            any outcome, or state what the law requires. If a sensitive issue is involved, review it
+            with an employment attorney or legal aid office before the interview.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Interview strategy from your facts</span>
+          <span><i></i> Full prep packet artifact</span>
+          <span><i></i> Mock interview with an AI HR interviewer</span>
+          <span><i></i> Prep sessions save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your hearing facts</strong
+            ><span
+              >Your role, employer, tenure dates, reason for leaving, sensitive topics, what you
+              want to get across, and what you want to avoid saying.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Generate strategy &amp; packet</strong
+            ><span
+              >Get the interview strategy first, then the full prep packet: answer scripts, tenure
+              timeline, opening statement draft, and a mock Q&amp;A set.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Practice the mock hearing</strong
+            ><span
+              >Rehearse with the AI as the HR interviewer: one question at a time, a short note on
+              each answer, up to 8 exchanges.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Strategy &amp; packet</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Mock interview</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Coaching mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="interview-strategy"
+                  aria-pressed="false"
+                >
+                  Interview strategy
+                </button>
+                <button type="button" class="lt-chip" data-mode="prep-packet" aria-pressed="false">
+                  Prep packet
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="mock-cross-exam"
+                  aria-pressed="false"
+                >
+                  Mock interview
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="interview-strategy" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Interview strategy mode</strong>Issue-spotting from your facts: the
+                questions HR will likely ask, your strongest points, and how to handle the sensitive
+                topics. Run this first; the prep packet reuses it.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick your reason for leaving, then add your employer, role, and what you want to
+                  get across.
+                </p>
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="employee_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="employee_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Employee name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="job_title"
+                    >Job title / role <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="job_title"
+                    type="text"
+                    placeholder="e.g. Warehouse associate"
+                    data-label="Job title / role"
+                    aria-required="true"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="employer_name"
+                    >Employer <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="employer_name"
+                    type="text"
+                    placeholder="e.g. Acme Logistics"
+                    data-label="Employer"
+                    aria-required="true"
+                    autocomplete="organization"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="hr_interviewer"
+                    >HR interviewer name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="hr_interviewer"
+                    type="text"
+                    placeholder="e.g. Sam from HR"
+                    data-label="HR interviewer name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="start_date"
+                    >Start date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="start_date"
+                    type="date"
+                    data-label="Start date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="last_day"
+                    >Last day <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="last_day"
+                    type="date"
+                    data-label="Last day"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="interview_date"
+                    >Interview date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="interview_date"
+                    type="date"
+                    data-label="Interview date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="deadline-box" id="countdown-box" aria-live="polite">
+                <strong>Interview countdown:</strong> enter your interview date to see how many days
+                you have to prepare. Calendar math from the date you entered.
+              </div>
+              <input
+                type="hidden"
+                id="countdown_math"
+                data-label="Computed interview countdown (calendar math from your date)"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="reason-label"
+                  >Reason for leaving <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="reason-label">
+                  <input
+                    type="radio"
+                    id="rsn_newjob"
+                    name="reason_for_leaving"
+                    value="New job"
+                  /><label class="pill" for="rsn_newjob">New job</label>
+                  <input
+                    type="radio"
+                    id="rsn_layoff"
+                    name="reason_for_leaving"
+                    value="Layoff"
+                  /><label class="pill" for="rsn_layoff">Layoff</label>
+                  <input
+                    type="radio"
+                    id="rsn_resign"
+                    name="reason_for_leaving"
+                    value="Resignation"
+                  /><label class="pill" for="rsn_resign">Resignation</label>
+                  <input
+                    type="radio"
+                    id="rsn_term"
+                    name="reason_for_leaving"
+                    value="Termination"
+                  /><label class="pill" for="rsn_term">Termination</label>
+                  <input
+                    type="radio"
+                    id="rsn_retire"
+                    name="reason_for_leaving"
+                    value="Retirement"
+                  /><label class="pill" for="rsn_retire">Retirement</label>
+                  <input
+                    type="radio"
+                    id="rsn_other"
+                    name="reason_for_leaving"
+                    value="Other"
+                  /><label class="pill" for="rsn_other">Other</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="reason_for_leaving"
+                  data-label="Reason for leaving"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Sensitive topics <span class="cs-optional">(optional)</span></label
+                >
+                <div id="topics-list"></div>
+                <button type="button" class="lt-ghost" id="topics-add" style="margin-top: 0.5rem">
+                  + Add sensitive topic
+                </button>
+                <p class="lt-hint">
+                  Anything you expect HR to ask about that needs a calm, rehearsed answer: a pay
+                  dispute, a manager conflict, a layoff, the reason for a termination.
+                </p>
+                <input type="hidden" id="topics_summary" data-label="Sensitive topics" />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="points_to_make"
+                  >What you want to get across
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="points_to_make"
+                  class="lt-area"
+                  data-label="What you want to get across"
+                  aria-required="true"
+                  placeholder="Example: I liked the team and I learned a lot here. I am leaving for a role closer to home, and I want to leave on good terms."
+                ></textarea>
+                <p class="lt-hint">
+                  Your one clear reason for leaving plus the two or three points you want HR to
+                  remember. Short and factual.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="avoid_saying"
+                  >What you want to avoid saying <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="avoid_saying"
+                  class="lt-area"
+                  data-label="What you want to avoid saying"
+                  placeholder="Example: I do not want to badmouth my manager by name, and I do not want to get into the scheduling argument from last month."
+                ></textarea>
+                <p class="lt-hint">
+                  Names, venting, accusations, anything you would not want repeated to your next
+                  employer. The coach plans around these.
+                </p>
+              </div>
+              <input
+                type="hidden"
+                id="interview_strategy"
+                data-label="Interview strategy from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Anything else <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: My last day is Friday. I still have a company laptop to return and a final paycheck question."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; One or two sentences is enough.
+                  Plain facts, in your own words.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not HR advice and not legal advice. This is an exit-interview preparation
+                  tool.</strong
+                >
+                It builds strategy, a prep packet, and mock practice from your facts only. It does
+                not assess your situation, predict any outcome, or state what the law requires. It
+                will not invent facts or cite law. When you generate, your prompt is sent to our AI
+                service to produce the output. Review anything sensitive with an employment attorney
+                or legal aid office before the interview.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Building your prep&hellip;</p>
+                  <small>From your hearing facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your strategy and prep packet will appear here.<br /><br />1. Enter your role,
+                    employer, and reason for leaving<br />2. Generate the interview strategy
+                    first<br />3. Then generate the full prep packet</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card" id="mock-card">
+              <div class="lt-card-h">
+                <h2>Mock interview room</h2>
+                <span class="lt-draft-badge" id="mock-status">Not started</span>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  The AI plays the HR interviewer: one question at a time, a short note on each
+                  answer, up to 8 exchanges. Fill in your intake first so the questions fit your
+                  situation.
+                </p>
+                <div id="mock-transcript" class="mock-transcript" aria-live="polite">
+                  <p class="lt-side-note" id="mock-empty" style="margin: 0">
+                    No mock interview yet. Press &ldquo;Start mock interview&rdquo; when your intake
+                    is ready.
+                  </p>
+                </div>
+                <div class="draft-row" style="margin-top: 0">
+                  <button type="button" class="lt-gen" id="mock-start-btn" style="flex: 1">
+                    <span class="btn-text">Start mock interview</span>
+                  </button>
+                </div>
+                <div id="mock-answer-row" class="draft-row" hidden>
+                  <input
+                    class="lt-input"
+                    id="mock-answer"
+                    type="text"
+                    placeholder="Type your answer, then ask the next question"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="mock-next-btn">
+                    Ask next question
+                  </button>
+                </div>
+                <div class="mock-meta">
+                  <span id="mock-count">0 of 8 exchanges</span>
+                  <button type="button" class="lt-ghost" id="mock-end-btn" hidden>
+                    End mock hearing
+                  </button>
+                </div>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download prep packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved prep sessions</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a session to save this exact intake plus your generated strategy, packet, and
+                  mock transcript, on this device. Reload it anytime to keep preparing.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Session name, e.g. Nov exit interview prep v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save session</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved sessions yet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You are leaving for a new job and want one clean, professional reason for leaving
+                  that you can repeat without hesitating
+                </li>
+                <li>
+                  You were laid off and expect HR to ask what happened, and you want the answer
+                  short, factual, and free of bitterness
+                </li>
+                <li>
+                  You resigned over a manager conflict or a pay dispute and need a calm sentence for
+                  it that does not name names or vent
+                </li>
+                <li>
+                  You were terminated and need to talk about it honestly without torpedoing your
+                  reference or your next application
+                </li>
+                <li>
+                  You have feedback worth giving but no plan for saying it without sounding like a
+                  complaint
+                </li>
+                <li>
+                  You want to rehearse the hard questions out loud before the real meeting, with a
+                  short note on each answer
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>One clear reason for leaving</h3>
+              <p>
+                HR will ask why you are leaving, and the answer you give becomes the record. Pick
+                one reason before the meeting, say it the same way every time, and do not add a
+                second reason when the first one lands. A single clear reason sounds confident;
+                three shifting reasons sound like a story you are still writing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Nothing you say is off the record</h3>
+              <p>
+                HR takes notes and the interview goes on file. Assume anything you say can be
+                repeated inside the company, and anything you say about a person can reach that
+                person. Keep answers short and factual, give feedback about processes and patterns
+                instead of naming people, and do not sign anything on the spot.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Rehearse the sensitive topic once, calmly</h3>
+              <p>
+                Every exit interview has one question you are dreading: the pay dispute, the manager
+                conflict, the reason for the termination. Decide your one calm sentence about it
+                before the meeting, say it, and stop. The mock interview room exists for exactly
+                that sentence.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Leave on terms that protect the reference</h3>
+              <p>
+                The interview is also your last impression. A professional exit keeps your
+                references warm and your next application clean. Ask the practical questions: final
+                pay, benefits end date, equipment return, and who to list as a reference. Then thank
+                them and go.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>What is an exit interview?</summary>
+              <p>
+                A short meeting with HR on or near your last day where they ask why you are leaving
+                and what could have been better. It is your employer's record of the departure, and
+                your chance to leave a clear, professional final impression. The mock interview room
+                above lets you rehearse the question-and-answer rhythm before the real one. This is
+                general information, not HR or legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Do I have to attend an exit interview?</summary>
+              <p>
+                Usually no one can force you to attend, and many people skip it. But attending with
+                a plan is often the better move: you control the story of why you left, you can
+                raise genuine feedback calmly, and you leave on professional terms with people who
+                may be references. Decide before the meeting, not in it.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should I say in an exit interview?</summary>
+              <p>
+                One clear reason for leaving, two or three calm, specific points of feedback, and
+                practical questions about pay, benefits, and equipment return. Keep answers short
+                and factual. Do not badmouth a manager by name, do not raise new accusations, and do
+                not sign anything on the spot. The prep packet mode drafts your answer scripts from
+                your facts.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should I not say in an exit interview?</summary>
+              <p>
+                Do not vent, do not name people to blame, do not exaggerate, and do not make claims
+                you cannot back up. Avoid anything you would not want repeated to your next
+                employer. If a topic is sensitive, decide your one calm sentence about it before the
+                meeting and do not go further. List those topics in the sensitive topics section
+                above; the strategy mode plans around them.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can what I say in an exit interview be used against me?</summary>
+              <p>
+                HR takes notes and the interview goes on file, and what you say can be repeated
+                inside the company. That is why the tool focuses on short, factual, professional
+                answers and on rehearsing the sensitive topics in advance. This is general
+                information, not legal advice; if a sensitive issue is involved, review it with an
+                employment attorney or legal aid first.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this HR advice or legal advice?</summary>
+              <p>
+                No. This tool prepares you for an exit interview from the facts you enter: strategy,
+                a prep packet, and mock practice. It does not assess your situation, predict any
+                outcome, or cite law. For a sensitive dispute or anything that could affect a
+                reference or a claim, review with an employment attorney or legal aid before the
+                interview.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-prepare-for-an-exit-interview/"
+              ><strong>How to Prepare for an Exit Interview</strong
+              ><small>The companion guide: what HR asks, what to say, what to never say</small></a
+            >
+            <a href="/tools/ai-unemployment-hearing-prep-coach/"
+              ><strong>AI Unemployment Hearing Prep Coach</strong
+              ><small
+                >Denied unemployment? Strategy, prep packet, and mock hearing practice</small
+              ></a
+            >
+            <a href="/tools/resignation-letter-generator/"
+              ><strong>Resignation Letter Generator</strong
+              ><small>Write the resignation letter that starts the exit cleanly</small></a
+            >
+            <a href="/tools/ai-severance-negotiation-letter/"
+              ><strong>AI Severance Negotiation Letter</strong
+              ><small>Negotiate the terms of your departure in writing</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not HR advice and not legal advice. Review anything sensitive
+            with an employment attorney or legal aid office before your interview.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-exit-interview-prep-coach/ai-exit-interview-prep-coach.js?v=20261105a1"></script>
+  </body>
+</html>

@@ -9,7 +9,7 @@
     <title>HTML Entity Encoder Decoder &mdash; Free Online | CyberScryb</title>
     <meta name="description" content="Convert special characters for clean code using this HTML entity encoder decoder. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/html-entity/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <meta property="og:title" content="HTML Entity Encoder Decoder &mdash; Free Online | CyberScryb">
     <meta property="og:description" content="Convert special characters for clean code using this HTML entity encoder decoder. Free, instant, runs in your browser. No signup.">
@@ -61,7 +61,22 @@
             { "@type": "Question", "name": "When should I encode HTML entities?", "acceptedAnswer": { "@type": "Answer", "text": "Always encode user-supplied content before injecting it into HTML to prevent XSS attacks. Also encode any reserved characters (< > & \" ') inside attribute values and text content." }},
             { "@type": "Question", "name": "What's the difference between named and numeric entities?", "acceptedAnswer": { "@type": "Answer", "text": "Named entities use short labels like &copy; for the copyright symbol. Numeric entities use the Unicode code point in decimal (&#169;) or hex (&#xA9;). Numeric entities work everywhere, while named entities depend on HTML4/5 support." }},
             { "@type": "Question", "name": "Does this tool handle emoji and non-Latin characters?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The 'All special chars' mode encodes every non-ASCII character to a numeric entity using its full Unicode code point, including emoji and CJK characters with correct surrogate-pair handling." }},
-            { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs 100% client-side in your browser with vanilla JavaScript. Nothing is transmitted to any server." }}
+            { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs 100% client-side in your browser with vanilla JavaScript. Nothing is transmitted to any server." }},
+            { "@type": "Question", "name": "Is entity encoding the same as HTML sanitization?", "acceptedAnswer": { "@type": "Answer", "text": "No. Encoding safely represents text in one specific context, such as an HTML body or an attribute value. Sanitization parses markup and filters it against an allowed policy, removing tags and attributes it does not trust. Encoding is the right tool for displaying text; sanitization is the right tool when you need to allow some markup and strip the rest." }},
+            { "@type": "Question", "name": "What is double encoding, and how do I avoid it?", "acceptedAnswer": { "@type": "Answer", "text": "Double encoding happens when already-encoded text gets encoded again: &lt; becomes &amp;lt;, which renders literally on the page instead of as &lt;. It usually comes from pasting between CMS editors. Avoid it by decoding first whenever you are unsure whether the input is already encoded, then encoding exactly once." }},
+            { "@type": "Question", "name": "Should I encode every non-ASCII character?", "acceptedAnswer": { "@type": "Answer", "text": "Usually not. A page served as UTF-8 renders characters like café, ©, and emoji directly, so encoding them adds noise. Use this tool's All special chars mode only when you need an ASCII-only representation, for example legacy systems or transports that do not handle UTF-8. For everyday HTML, the Only reserved mode is the right default." }}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "HowTo",
+        "name": "How to encode or decode HTML entities",
+        "description": "Convert text to HTML entities or decode entities back to readable text in three steps.",
+        "step": [
+            { "@type": "HowToStep", "name": "Pick a direction", "text": "Choose Encode to turn text into entities, or Decode to turn entities back into readable text. In Encode mode, pick All special chars to convert every non-ASCII character too, or Only reserved to escape just the five characters that break HTML." },
+            { "@type": "HowToStep", "name": "Paste your text", "text": "Drop in code, user input, a CMS export, or an email template. The output updates live as you type, and the character counts under the output box show exactly what changed." },
+            { "@type": "HowToStep", "name": "Copy and paste it where it belongs", "text": "Use Copy Output, or Use Output as Input to run the text back through the other direction. If the output shows double-encoded entities, decode first, then encode once." }
         ]
     }
     </script>
@@ -153,7 +168,7 @@
         <div class="he-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">HTML Entity Encoder/Decoder</h1>
-                <p style="color:var(--text-faint); margin-bottom: 0;">Convert special characters to HTML entities and back. Supports named and numeric entities. 100% client-side.</p>
+                <p style="color:var(--text-muted); margin-bottom: 0; line-height: 1.6;">Encode text into HTML entities or decode entities back to readable text. Paste code, user input, or a CMS export and get safe, paste-ready HTML in one click. The five characters that break pages, <code>&lt; &gt; &amp; " '</code>, become harmless codes like <code>&amp;lt;</code> and <code>&amp;amp;</code>, so browsers display them as text instead of running them as markup. Free, instant, and 100% client-side: nothing you paste leaves your browser.</p>
             </div>
 
             <div class="he-mode">
@@ -183,6 +198,47 @@
                 </div>
             </div>
 
+            <div style="margin-top: 2.5rem;">
+                <h2 style="color: var(--text); margin-bottom: 1rem;">How to Encode or Decode HTML Entities</h2>
+                <ol style="color: var(--text-muted); line-height: 1.7; padding-left: 1.25rem; margin: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Pick a direction.</strong> Choose Encode to turn text into entities, or Decode to turn entities back into readable text. In Encode mode, pick "All special chars" to convert every non-ASCII character too, or "Only reserved" to escape just the five characters that break HTML: <code>&lt; &gt; &amp; " '</code>.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Paste your text.</strong> Drop in code, user input, a CMS export, or an email template. The output updates live as you type, and the character counts under the output box show exactly what changed.</li>
+                    <li><strong style="color: var(--text);">Copy and paste it where it belongs.</strong> Use Copy Output, or Use Output as Input to run the text back through the other direction. If the output shows <code>&amp;amp;lt;</code>, the input was already encoded once: decode it first, then encode once, to avoid double encoding.</li>
+                </ol>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h2 style="color: var(--text); margin-bottom: 1rem;">Who Uses an HTML Entity Encoder</h2>
+                <ul style="color: var(--text-muted); line-height: 1.7; padding-left: 1.25rem; margin: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Developers writing documentation.</strong> Code samples on a docs page must be encoded, or the browser tries to render the example instead of displaying it as text. Encode the snippet, paste it into the page, and the example shows up verbatim.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Anyone escaping user input.</strong> Encoding user-supplied content before it goes into HTML is the first line of defense against cross-site scripting (XSS): a submitted <code>&lt;script&gt;</code> tag becomes harmless text. Encoding is one layer of a real security strategy, not the whole thing, and different contexts (HTML body, attributes, JavaScript, URLs) have different escaping rules.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Blog and CMS authors moving content.</strong> Pasting between editors and content systems is the classic source of mangled text: literal <code>&amp;lt;</code> showing on the live page, or double-encoded <code>&amp;amp;lt;</code>. Decode first to see what you actually have, then encode once.</li>
+                    <li><strong style="color: var(--text);">Email and template builders.</strong> Dynamic content in email templates, names, prices, user text, gets encoded before injection so a stray <code>&amp;</code> or quote cannot break the template or smuggle markup into the message.</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h2 style="color: var(--text); margin-bottom: 1rem;">The Most Common Entities</h2>
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 1px solid var(--border);">
+                            <th style="padding: 0.5rem 0.75rem 0.5rem 0; color: var(--text);">Character</th>
+                            <th style="padding: 0.5rem 0.75rem; color: var(--text);">Named</th>
+                            <th style="padding: 0.5rem 0.75rem; color: var(--text);">Numeric</th>
+                            <th style="padding: 0.5rem 0 0.5rem 0.75rem; color: var(--text);">When to encode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>&lt;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;lt;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#60;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Always, it would otherwise start a tag</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>&gt;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;gt;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#62;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Inside text content</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>&amp;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;amp;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#38;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Always, it would otherwise start an entity</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>"</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;quot;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#34;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Inside double-quoted attributes</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>'</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#39;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#39;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Inside single-quoted attributes</td></tr>
+                        <tr><td style="padding: 0.5rem 0.75rem 0.5rem 0;"><code>&copy;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;copy;</code></td><td style="padding: 0.5rem 0.75rem;"><code>&amp;#169;</code></td><td style="padding: 0.5rem 0 0.5rem 0.75rem;">Legacy or ASCII-only systems; modern UTF-8 pages can use the character directly</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is an HTML entity?</summary><p>A special code used to display reserved characters that would otherwise be interpreted as HTML markup. For example, &amp;lt; renders the &lt; sign without triggering a tag, and &amp;amp; displays an ampersand.</p></details>
@@ -190,6 +246,9 @@
                 <details><summary>What's the difference between named and numeric entities?</summary><p>Named entities use labels like &amp;copy; for ©. Numeric entities use the Unicode code point in decimal (&amp;#169;) or hex (&amp;#xA9;). Numeric entities work everywhere.</p></details>
                 <details><summary>Does this tool handle emoji and non-Latin characters?</summary><p>Yes. "All special chars" mode encodes every non-ASCII character using its full Unicode code point, including emoji and CJK text (with surrogate-pair handling).</p></details>
                 <details><summary>Is my text uploaded anywhere?</summary><p>No. Everything runs 100% client-side with vanilla JavaScript. Nothing is transmitted.</p></details>
+                <details><summary>Is entity encoding the same as HTML sanitization?</summary><p>No. Encoding safely represents text in one specific context, such as an HTML body or an attribute value. Sanitization parses markup and filters it against an allowed policy, removing tags and attributes it does not trust. Encoding is the right tool for displaying text; sanitization is the right tool when you need to allow some markup and strip the rest.</p></details>
+                <details><summary>What is double encoding, and how do I avoid it?</summary><p>Double encoding happens when already-encoded text gets encoded again: &lt; becomes &amp;amp;lt;, which renders literally on the page instead of as &lt;. It usually comes from pasting between CMS editors. Avoid it by decoding first whenever you are unsure whether the input is already encoded, then encoding exactly once.</p></details>
+                <details><summary>Should I encode every non-ASCII character?</summary><p>Usually not. A page served as UTF-8 renders characters like café, ©, and emoji directly, so encoding them adds noise. Use this tool's All special chars mode only when you need an ASCII-only representation, for example legacy systems or transports that do not handle UTF-8. For everyday HTML, the Only reserved mode is the right default.</p></details>
             </div>
         </div>
 
@@ -227,17 +286,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
         </div>
