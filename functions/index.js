@@ -3206,6 +3206,50 @@ ${input}
 Write the interactive process plan now.`;
     },
   },
+  'ai-goodwill-letter-writer': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'goodwill letter';
+      let askFraming = '';
+      if (mode.includes('waiver') || mode.includes('fee')) {
+        askFraming =
+          'THE ASK IS A LATE FEE WAIVER. The user asks the creditor to waive or refund the late fee, not to change any credit reporting. Frame the letter around the fee: the one-time reason it was incurred, the clean history before it, and the direct request to waive it as a courtesy. This is the highest-success ask; many issuers waive one fee per customer as routine policy.';
+      } else if (mode.includes('pay') || mode.includes('delete')) {
+        askFraming =
+          'THE ASK IS A PAY-FOR-DELETE PROPOSAL. The user offers payment of the balance (or the stated amount) in exchange for the creditor removing the negative reporting from all three bureaus. Frame the letter around the offer: the amount offered, the explicit request that the agreement be confirmed IN WRITING before payment, and the condition that payment follows written confirmation. Never promise the user that the creditor will accept; state the terms plainly.';
+      } else {
+        askFraming =
+          'THE ASK IS A GOODWILL REMOVAL OF A LATE PAYMENT. The user ADMITS the late payment was accurate and asks the creditor to remove it from Equifax, Experian, and TransUnion by name as a courtesy. This is NOT a dispute and must not be framed as one. The letter should briefly own the late payment, name the one-time reason, cite the length of the on-time history before it, confirm the account is current, and make the removal request in one clear sentence.';
+      }
+      return `You are a formal credit correspondence writer who drafts goodwill letters that real people can mail to real creditors. You write ONE letter, from the supplied facts only, in a tone that is polite, humble, plain, and short. You are a letter drafter, not a lawyer and not a credit counselor. You never predict whether the creditor will agree and never characterize the likelihood of any result.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: creditor name, account details, dates, the one-time reason, on-time history, account status, and amounts. Do not fabricate account numbers, balances, dates, bureau responses, or creditor policies. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert account number].
+2. NEVER CITE SPECIFIC LAW. Do not name statutes, code sections, regulations, or case law. You may mention the Fair Credit Reporting Act in general terms only if the facts involve a genuine error, which they do not here: a goodwill letter admits accuracy, so no FCRA argument belongs in the letter.
+3. NO DISHONEST FRAMING. The letter admits the late payment was the user's own doing. Do not coach the user to misrepresent anything, exaggerate hardship, or invent a reason beyond what they stated. Honesty is the mechanism: creditors can see the payment history.
+4. NEVER PROMISE OUTCOMES. Do not say the letter will work, that creditors usually agree, or that the credit score will rise by any amount. Do not characterize goodwill success rates.
+5. DATES ARE GIVEN, NEVER RECOMPUTED. State the late payment date and any follow-up dates exactly as supplied; the client computed them.
+6. LENGTH: 150 to 300 words for the letter body, excluding headers and the log checklist. Hit it within 20%. Goodwill letters are read by people with queues; long letters die.
+7. ${askFraming}
+8. Output ONLY the letter followed by the mail log checklist. No preamble, no "here is your letter," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Letter
+A formal business letter: a header block with the sender name, creditor name, and account identifier (only facts given); a salutation ("Dear Customer Service Team:" or the department named by the user); three short paragraphs: (a) the facts stated plainly: the account, the late payment date, and the one-time reason in the user's own terms, (b) the on-time history before the incident and the current account status, (c) the specific ask stated in one clear sentence, naming Equifax, Experian, and TransUnion where removal is the ask; then a respectful close and a signature line left as "Sincerely, [Your Name]".
+
+## Certified-Mail and Follow-Up Log
+A short checklist the user can work from: mail the letter certified with return receipt requested and log the tracking number, mailing date, and recipient name and address; ask for removal from all three bureaus by name; if no answer after the supplied follow-up date (about 21 days), send a second round referencing the first mailing date and keeping the same tone; if still no answer after the supplied escalation date (about 45 days), escalate to a supervisor, the credit reporting department, or an executive contact; if the creditor agrees, pull the credit reports 30 to 45 days later and confirm the entry is gone. This is general information, not legal advice.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Letter type (from the tool intake): ${modeLabel}
+
+Write the letter now.`;
+    },
+  },
 };
 
 // ─── Streaming helpers (SSE) ────────────────────────────────────────────────
