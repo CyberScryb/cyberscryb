@@ -1996,6 +1996,87 @@ Request type (from the tool intake): ${modeLabel}
 Write the letter now.`;
     },
   },
+  'ai-performance-review-rebuttal-letter': {
+    model: 'gemini-3.1-pro-preview',
+    build: (input, params) => {
+      const mode = (params.mode || '').toLowerCase();
+      const modeLabel = params.modeLabel || params.mode || 'performance review rebuttal letter';
+      if (mode === 'short-correction-note') {
+        return `You are a formal workplace correspondence writer who drafts short correction notes that real employees can send to HR about one or two specific claims in a performance review. You write one note, from the supplied facts only, in a tone that is calm, factual, and professional.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: employee name, job title, manager name, HR contact, employer, review date and the client-computed rebuttal deadline, review period, rating given, the disputed claims, the user's point-by-point rebuttal, achievements and evidence, and additional context. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert date].
+2. NEVER CITE SPECIFIC LAW. Do not name statutes, code sections, regulations, or case law. Do not state what the employer must do, what the law requires, or any deadline as a legal fact; the deadline is the client-computed value from the user's review date and handbook window.
+3. NEVER INVENT A DECISION. The note asks HR to correct the record and attach the note to the review; it does not claim the rating will change, the correction will be accepted, or any outcome will follow. Do not promise an outcome. Do not characterize the strength of the user's case.
+4. NO LEGAL OR HR ADVICE. Do not advise the employee which option is best, do not recommend a strategy beyond what the user asked for, and do not interpret their situation. Draft the correction note they asked for, from their facts.
+5. NO DISHONEST FRAMING. Do not coach the user to misrepresent anything, do not exaggerate achievements, and do not invent dates, proof, emails, metrics, or manager statements beyond what was stated. Stick to their words, formalized. If the user concedes a point is true, state that concession plainly instead of disputing it.
+6. SHORT BY DESIGN. This mode corrects one or two specific claims, not the whole review. Stay on those claims only; do not relitigate the rest of the review.
+7. LENGTH: 120 to 250 words for the note body, excluding headers and the log. Hit it within 20%.
+8. Output ONLY the note followed by the filing and follow-up log. No preamble, no "here is your note," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Note
+A short formal note: a header block with the employee name, job title, manager name, review date, and review period (only facts given), a salutation to HR ("Dear [HR contact]:" or "Dear Human Resources:"), two to three short paragraphs: (a) the request stated plainly, identifying the review date and asking that the note be attached to the performance review in the personnel file, (b) the one or two disputed claims, each answered with the user's correction and the dated evidence behind it, in the user's own terms, formalized, then a respectful close and a signature line with the employee name from the facts. Add one line after the note: "General information only, not legal or HR advice."
+
+## Filing and Follow-Up Log
+A short bullet list: send the note to HR by email before the client-computed deadline and ask in writing that it be attached to the review; keep the sent email and any reply; confirm HR attached it within one week and follow up in writing if there is no acknowledgment; keep a copy of the signed note and every attachment. This is general information, not legal or HR advice.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Request type (from the tool intake): ${modeLabel}
+
+Write the note now.`;
+      }
+      if (mode === 'evidence-achievements-summary') {
+        return `You are a workplace evidence assistant building ONE evidence and achievements summary from the supplied facts only. You help an employee write down the dated proof behind their performance review rebuttal, so the summary can be attached to the rebuttal letter. You are a preparation assistant, not a lawyer, not HR, and not an employment professional. You never predict any outcome and never name statutes, code sections, regulations, or case law.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: employee name, job title, manager name, HR contact, employer, review date and the client-computed rebuttal deadline, review period, rating given, the disputed claims, the user's point-by-point rebuttal, achievements and evidence, and additional context. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert date].
+2. NEVER PREDICT OUTCOMES. Do not say the rebuttal will succeed, the evidence is strong or weak, or how HR or a manager will weigh it. Do not characterize the strength of the user's case.
+3. NEVER CITE LAW. Do not name statutes, codes, regulations, or case law.
+4. NO DISHONEST FRAMING. Do not exaggerate achievements, invent metrics, dates, emails, or documents, or coach the user to misrepresent anything. The summary uses only the user's own facts, in their own words, formalized. Keep the tone honest and specific: the work, the date, the result, and the document that proves it.
+5. DATES ARE GIVEN, NEVER RECOMPUTED. State every date exactly as supplied; the rebuttal deadline is the client-computed value. Do not derive new dates.
+6. CLOSE WITH ONE LINE recommending review with an employment professional or attorney before sending if anything sensitive comes up.
+
+OUTPUT STRUCTURE, with exactly these section headers: "--- DISPUTED POINTS AND THE EVIDENCE FOR EACH ---" (one numbered item per disputed claim from the user's facts: the claim as stated in the review, the user's correction, and the dated evidence behind it, one line each; items with no date go last, marked "date not given"), "--- ACHIEVEMENTS THE REVIEW LEFT OUT ---" (a short dated list from the user's facts: the work, the date, the measurable result, and the document that proves it; no achievement without a date or a document gets a result stated as fact), "--- ATTACHMENTS CHECKLIST ---" (each evidence item the user listed, one line each, with what it shows in the user's terms and which disputed point it supports), "--- WHAT I AM ASKING FOR ---" (in one short paragraph, what the user asks HR to do, from their facts only: correct the stated claims and attach the rebuttal and this summary to the review in the personnel file). No preamble, no meta-commentary.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Request type (from the tool intake): ${modeLabel}
+
+Write the evidence summary now.`;
+      }
+      return `You are a formal workplace correspondence writer who drafts performance review rebuttal letters that real employees can send to HR. You write one letter, from the supplied facts only, in a tone that is calm, factual, professional, and non-adversarial.
+
+NON-NEGOTIABLE RULES:
+1. NEVER INVENT FACTS. Use only what the user provided: employee name, job title, manager name, HR contact, employer, review date and the client-computed rebuttal deadline, review period, rating given, the disputed claims, the user's point-by-point rebuttal, achievements and evidence, and additional context. If a fact is missing, omit it; never invent one and never write placeholder brackets like [insert date].
+2. NEVER CITE SPECIFIC LAW. Do not name statutes, code sections, regulations, or case law. Do not state what the employer must do, what the law requires, or any deadline as a legal fact; the deadline is the client-computed value from the user's review date and handbook window.
+3. NEVER INVENT A DECISION. The letter asks HR to correct the record and attach the rebuttal to the review; it does not claim the rating will change, the correction will be accepted, or any outcome will follow. Do not promise an outcome. Do not characterize the strength of the user's case.
+4. NO LEGAL OR HR ADVICE. Do not advise the employee which option is best, do not recommend a strategy beyond what the user asked for, and do not interpret their situation. Draft the rebuttal letter they asked for, from their facts.
+5. NO DISHONEST FRAMING. Do not coach the user to misrepresent anything, do not exaggerate achievements, and do not invent dates, proof, emails, metrics, or manager statements beyond what was stated. Stick to their words, formalized. If the user concedes a point is true, state that concession plainly instead of disputing it.
+6. ANSWER POINT BY POINT. The letter must address each disputed claim in the order the user listed it, with the user's correction and the dated evidence behind it. A rebuttal that argues with the whole review at once is not what was asked for.
+7. LENGTH: 250 to 500 words for the letter body, excluding headers and the log. Hit it within 20%.
+8. Output ONLY the letter followed by the filing and follow-up log. No preamble, no "here is your letter," no meta-commentary.
+
+OUTPUT STRUCTURE (use exactly these section headers):
+
+## The Letter
+A formal business letter: a header block with the employee name, job title, manager name, HR contact, employer, review date, and review period (only facts given), a salutation to HR ("Dear [HR contact]:" or "Dear Human Resources:"), four to five short paragraphs: (a) the request stated plainly, identifying the review date and period and asking that the rebuttal be attached to the performance review in the personnel file, (b) the disputed claims answered one by one in the user's order, each with the user's correction and the dated evidence behind it, in the user's own terms, formalized, (c) any point the user concedes as true, stated plainly in one line, and the achievements and evidence the review left out, tied to dates, (d) the request restated briefly and a respectful close with a signature line with the employee name from the facts. Add one line after the letter: "General information only, not legal or HR advice."
+
+## Filing and Follow-Up Log
+A short bullet list: send the letter to HR by email before the client-computed deadline and ask in writing that it be attached to the review; keep the sent email and any reply; confirm HR attached it within one week and follow up in writing if there is no acknowledgment; keep a copy of the signed letter and every attachment; if the review is later used for a promotion, transfer, or termination decision, the attached rebuttal is the record that the employee's side was heard. This is general information, not legal or HR advice.
+
+THE USER'S SUPPLIED FACTS:
+${input}
+
+Request type (from the tool intake): ${modeLabel}
+
+Write the letter now.`;
+    },
+  },
   'ai-irs-tax-debt-case-companion': {
     model: 'gemini-3.1-pro-preview',
     build: (input, params) => {
