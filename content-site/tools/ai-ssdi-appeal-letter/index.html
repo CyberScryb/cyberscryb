@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI SSDI Appeal Letter Generator - Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Denied Social Security disability? Draft a formal SSDI appeal letter from your own facts: a reconsideration request (Form SSA-561), an ALJ hearing request (Form HA-501), or an evidence and function statement. Includes the 60-day deadline math from your denial date. Free, no signup. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-ssdi-appeal-letter/" />
+    <meta
+      property="og:title"
+      content="AI SSDI Appeal Letter Generator - Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Denied SSDI? Draft a reconsideration request, an ALJ hearing request, or an evidence statement from your facts, with the 60-day deadline worked out. Free, no signup. Not legal advice."
+    />
+    <meta property="og:url" content="https://cyberscryb.com/tools/ai-ssdi-appeal-letter/" />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI SSDI Appeal Letter Generator - Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Denied SSDI? Draft a reconsideration request, an ALJ hearing request, or an evidence statement from your facts. Free, no signup. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .deadline-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .deadline-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+      }
+      .deadline-date {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      .deadline-note {
+        margin: 0.5rem 0 0;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      #appeal-letter-wrap {
+        display: none;
+      }
+      #appeal-letter {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #appeal-letter h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #appeal-letter table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #appeal-letter td,
+      #appeal-letter th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #appeal-letter .report-guidance {
+        white-space: pre-wrap;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .lt-story {
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+      }
+      @media print {
+        body.printing-appeal header,
+        body.printing-appeal nav,
+        body.printing-appeal footer,
+        body.printing-appeal .lt-sticky-gen,
+        body.printing-appeal .lt-toolbar,
+        body.printing-appeal .email-gate,
+        body.printing-appeal .adsbygoogle,
+        body.printing-appeal section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-appeal .lt-grid,
+        body.printing-appeal .lt-checklist-band,
+        body.printing-appeal .lt-know,
+        body.printing-appeal .lt-faq,
+        body.printing-appeal .lt-related,
+        body.printing-appeal .lt-how,
+        body.printing-appeal .lt-trust,
+        body.printing-appeal .hero {
+          display: none !important;
+        }
+        body.printing-appeal #appeal-letter-wrap {
+          display: block !important;
+        }
+      }
+    </style>
+    <script>
+      function printAppealLetter() {
+        var wrap = document.getElementById('appeal-letter-wrap');
+        var box = document.getElementById('appeal-letter');
+        if (!wrap || !box || box.innerHTML.trim() === '') {
+          if (window.LifeTool) LifeTool.toast('Build the printable letter first');
+          else alert('Build the printable letter first.');
+          return;
+        }
+        document.body.classList.add('printing-appeal');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-appeal');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI SSDI Appeal Letter",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-ssdi-appeal-letter/",
+        "description": "Free AI tool that drafts an SSDI appeal letter from your facts: a reconsideration request (Form SSA-561), an ALJ hearing request (Form HA-501), or an evidence and function statement. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long does a Social Security disability appeal take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Reconsideration usually takes three to seven months. If you go to an ALJ hearing, expect another eight to fourteen months or more after you request it, depending on your hearing office backlog. The full path from denial to a hearing decision commonly runs well over a year, which is why filing the appeal immediately matters more than filing it perfectly. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a lawyer to appeal an SSDI denial?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, you can appeal on your own at every level, and many people do. A disability representative or attorney usually works on contingency, taking a percentage of past-due benefits only if you win, with the fee capped by SSA rules, so there is generally no upfront cost. Representation tends to help most at the hearing stage. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I miss the 60-day appeal deadline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you miss the 60-day window without a good reason, the denial becomes final and you lose the right to appeal that claim. SSA may accept a late appeal if you can show good cause, such as a serious illness, a death in the family, or never receiving the notice. Without good cause, your only option is filing a brand-new application, which usually means a new filing date and lost back pay. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What evidence helps most in a disability appeal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The evidence that wins appeals describes what you cannot do, not just what diagnosis you have. Strongest items: treatment records showing ongoing care, a residual functional capacity (RFC) form completed by your treating doctor, your own function report describing a typical day in concrete terms, statements from people who see your limits daily, and a record of failed work attempts. A new diagnosis alone rarely changes a decision; new proof of functional limits does."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool drafts an appeal letter from the facts you enter. It does not decide whether you are disabled, predict any outcome, or state what the law requires. It will not invent facts or cite law. For anything that could affect your claim, review with a licensed disability representative or attorney before you file."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to appeal an SSDI denial with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your denial date and reason",
+            "text": "The date printed on the denial letter and the reason it gives. The tool works out your 60-day appeal deadline from that date."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Add your conditions, doctor, and new evidence",
+            "text": "Your conditions, your treating doctor, the new evidence since the denial, and what a typical day actually looks like for you."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate the letter and file it",
+            "text": "Get the formal letter for the appeal level you need, print it, and file it with Form SSA-561 or Form HA-501 before the deadline."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI SSDI Appeal Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI SSDI <span style="color: var(--primary)">appeal letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Social Security denied your disability claim? You have 60 days from the date you receive
+            the decision to appeal, and the appeal is what keeps your original filing date alive.
+            Enter the denial reason from your letter, your conditions, and the new evidence since
+            the denial, and get a formal appeal letter for the level you are at: reconsideration, an
+            ALJ hearing request, or an evidence and function statement.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not a lawyer, not legal advice.</strong> This tool drafts a letter from the
+            facts you enter. It is not a lawyer or a disability representative, it does not decide
+            whether you are disabled, and it does not predict any outcome. Appeal; do not file a new
+            application. Review anything sensitive with a licensed disability representative or
+            attorney before you file.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> 60-day deadline worked out for you</span>
+          <span><i></i> Formal letter from your facts</span>
+          <span><i></i> Evidence and function statement prep</span>
+          <span><i></i> Drafts save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your denial date</strong
+            ><span
+              >The date printed on the denial letter. The tool counts your 60-day appeal deadline
+              from it.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Add your facts and new evidence</strong
+            ><span
+              >The denial reason, your conditions, your treating doctor, and what has changed since
+              the denial. Takes 5 minutes.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get the letter, file it</strong
+            ><span
+              >A formal appeal letter with a filing checklist and a mail log, ready to print and
+              file with Form SSA-561 or Form HA-501.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Denial facts</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Evidence</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter + filing</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your appeal letter</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label"
+                >What do you need? <span class="cs-req" aria-hidden="true">*</span></label
+              >
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="reconsideration-request"
+                  aria-pressed="false"
+                >
+                  Reconsideration request letter
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="alj-hearing-request"
+                  aria-pressed="false"
+                >
+                  ALJ hearing request
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="evidence-statement-prep"
+                  aria-pressed="false"
+                >
+                  Evidence / statement prep
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="reconsideration-request" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Letter strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the key facts to unlock a strong letter.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="claimant_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="claimant_name"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    data-label="Claimant name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="denial_date"
+                    >Denial letter date <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="denial_date"
+                    type="date"
+                    data-label="Denial letter date"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                  <p class="lt-hint">
+                    The date printed on the denial letter, not the day it arrived.
+                  </p>
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="denial-reason-label"
+                  >Why did SSA deny the claim?
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="denial-reason-label">
+                  <input
+                    type="radio"
+                    id="dr_medical"
+                    name="denial_reason"
+                    value="Medical: SSA decided I can still work (RFC finding)"
+                  /><label class="pill" for="dr_medical">Says I can still work</label>
+                  <input
+                    type="radio"
+                    id="dr_duration"
+                    name="denial_reason"
+                    value="Duration: condition not expected to last 12 months or result in death"
+                  /><label class="pill" for="dr_duration">Condition will not last 12 months</label>
+                  <input
+                    type="radio"
+                    id="dr_credits"
+                    name="denial_reason"
+                    value="Technical: not enough work credits for SSDI"
+                  /><label class="pill" for="dr_credits">Not enough work credits</label>
+                  <input
+                    type="radio"
+                    id="dr_ssi"
+                    name="denial_reason"
+                    value="Technical: income or resources above the limit for SSI"
+                  /><label class="pill" for="dr_ssi">Income or resources too high (SSI)</label>
+                  <input
+                    type="radio"
+                    id="dr_other"
+                    name="denial_reason"
+                    value="Other reason stated in the denial letter"
+                  /><label class="pill" for="dr_other">Other reason in the letter</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="denial_reason"
+                  data-label="Denial reason"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="conditions"
+                    >Your conditions <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="conditions"
+                    type="text"
+                    maxlength="200"
+                    placeholder="e.g. chronic back pain, depression"
+                    data-label="Conditions"
+                    aria-required="true"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="onset_date"
+                    >When did you become unable to work?
+                    <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="onset_date"
+                    type="date"
+                    data-label="Onset date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="treating_doctor"
+                    >Treating doctor <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="treating_doctor"
+                    type="text"
+                    maxlength="80"
+                    placeholder="e.g. Dr. Patel, family medicine"
+                    data-label="Treating doctor"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="claim_number"
+                    >Claim or Social Security number on the letter
+                    <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="claim_number"
+                    type="text"
+                    maxlength="40"
+                    placeholder="As printed on the denial letter"
+                    data-label="Claim number"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label"
+                  >New evidence since the denial <span class="cs-optional">(optional)</span></label
+                >
+                <div id="evidence-list"></div>
+                <button type="button" class="lt-ghost" id="evidence-add" style="margin-top: 0.5rem">
+                  + Add new evidence
+                </button>
+                <p class="lt-hint">
+                  New treatment records, a new diagnosis, a new specialist, a treating doctor's RFC
+                  form, a failed work attempt. A reconsideration that submits the same file SSA
+                  already denied will get the same answer.
+                </p>
+                <input type="hidden" id="evidence_summary" data-label="New evidence" />
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" for="tool-input"
+                  >What can you no longer do, in a typical day?
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="tool-input"
+                  data-label="Daily limits"
+                  aria-required="true"
+                  placeholder="Example: I can stand for about ten minutes before my back forces me to sit. I need to lie down for 30 minutes after standing or walking. I cannot lift more than 10 pounds and I cannot sit at a desk for more than an hour without severe pain."
+                ></textarea>
+                <p class="lt-hint">
+                  Specific, not general: the task, how long it takes, what you have to stop doing,
+                  and how long recovery takes. Do not exaggerate and do not minimize.
+                </p>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="failed_work"
+                  >Failed work attempt <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="failed_work"
+                  data-label="Failed work attempt"
+                  placeholder="Example: I tried to return to my warehouse job in June 2026, worked three shifts of four hours, and had to stop because I could not stand the full shift. My supervisor moved me to light duty and it still did not work."
+                ></textarea>
+                <p class="lt-hint">
+                  Dates, hours, duties, what went wrong, and why it ended. A failed work attempt is
+                  strong evidence that you cannot sustain full-time work.
+                </p>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="supporting_docs"
+                  >Supporting documents you can attach
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <input
+                  class="lt-input"
+                  id="supporting_docs"
+                  type="text"
+                  maxlength="300"
+                  placeholder="RFC form from treating doctor, treatment records, third-party statements"
+                  data-label="Supporting documents"
+                  autocomplete="off"
+                />
+              </div>
+              <input
+                type="hidden"
+                id="deadline_math"
+                data-label="Computed appeal deadline (client-side calendar math from your denial date)"
+              />
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my appeal letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)">Not a lawyer, not legal advice.</strong>
+                This tool drafts a letter from your own facts. It does not decide whether you are
+                disabled and it does not predict any outcome. Your prompt is sent to our AI service
+                to generate the letter; nothing is filed for you. File the appeal yourself before
+                the deadline, and review anything sensitive with a licensed disability
+                representative or attorney before you file.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="deadline-panel" id="deadline-panel" aria-live="polite">
+              <h3>Your appeal deadline</h3>
+              <div class="deadline-date" id="deadline-date">
+                <small
+                  >Enter the date printed on your denial letter to see your appeal deadline worked
+                  out from your date.</small
+                >
+              </div>
+              <p class="deadline-note">
+                You have 60 days from the date you receive the decision to appeal, at every level.
+                SSA assumes you received the notice 5 days after the date printed on it, unless you
+                can show you got it later, so the deadline shown is the printed date plus 65 days.
+                This is calendar math from your date only, not legal advice. File early, not
+                perfectly; a thin appeal filed on day 20 beats a perfect appeal filed on day 66.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your appeal letter&hellip;</p>
+                  <small>From your denial facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your appeal letter will appear here.<br /><br />1. Pick what you need:
+                    reconsideration, ALJ hearing, or evidence prep<br />2. Enter your denial date
+                    and reason<br />3. Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Filing checklist</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Do these the day you file. Tap items as you finish them; progress saves on this
+                  device.
+                </p>
+                <ul class="lt-check">
+                  <li>
+                    Calendar the deadline first: the date printed on the denial letter, plus 5 days
+                    for mailing, plus 60 days. Write it on the envelope the letter came in.
+                  </li>
+                  <li>
+                    Appeal, do not file a new application. A new application gets a new filing date
+                    and can cost you months of back pay.
+                  </li>
+                  <li>
+                    For reconsideration, file Form SSA-561 and, if the appeal is about the medical
+                    decision, Form SSA-3441-BK, the Disability Report Appeal.
+                  </li>
+                  <li>
+                    For a hearing, file Form HA-501 within 60 days of the reconsideration denial.
+                  </li>
+                  <li>
+                    Attach the new evidence, not the same file SSA already denied: new treatment
+                    records, an RFC form from your treating doctor, third-party statements.
+                  </li>
+                  <li>
+                    Keep a copy of everything you send, and the mailing receipt. If you are already
+                    late, file anyway and explain the reason in writing.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Printable letter + mail log</h2>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Build a clean, one-document version of your letter and filing log, then print it
+                  or save it as a PDF for your records.
+                </p>
+                <div id="appeal-letter-wrap">
+                  <div id="appeal-letter" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-letter-btn">
+                    Build printable letter + log
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printAppealLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a draft to save this exact intake plus your generated output, on this device.
+                  Reload it anytime to refine it or print it later.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Draft name, e.g. reconsideration v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save draft</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No saved drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  SSA said you can still do light work, but your treating doctor documented that you
+                  cannot stand for more than 15 minutes at a time, and that RFC finding was not in
+                  the file
+                </li>
+                <li>
+                  Your condition has worsened since the original application: a new diagnosis, a new
+                  medication with side effects, or a failed work attempt with dates
+                </li>
+                <li>
+                  The denial letter lists a doctor you never saw, or misses your main treating
+                  doctor entirely, and that gap is part of your appeal
+                </li>
+                <li>
+                  Reconsideration denied you and you need a hearing request, with the new evidence
+                  and your testimony framed for a judge who never saw the earlier decisions
+                </li>
+                <li>
+                  You were denied on a technical ground, not enough work credits or income over the
+                  limit, and you need to correct the record instead of arguing the medical case
+                </li>
+                <li>
+                  You are preparing the evidence statement itself: a function report in your own
+                  words, a daily diary in dated form, and third-party statements from people who see
+                  your limits
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            How an SSDI appeal actually works
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Appeal, do not reapply</h3>
+              <p>
+                The most common and most expensive mistake after a denial is starting over with a
+                fresh application. A new application gets a new filing date, which can cost you
+                months of back pay, and sends you back to the start of the same queue with the same
+                file. An appeal keeps your original filing date and moves your existing claim up the
+                ladder, where a new decision-maker looks at it.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Reconsideration is a paper review, not the place cases are won</h3>
+              <p>
+                A different reviewer at your state Disability Determination Services office, someone
+                who had no role in the original decision, looks at your entire file plus any new
+                evidence. There is no hearing and no live testimony. Expect a wait of three to seven
+                months, and published figures put approval somewhere around 10 to 15 percent. For
+                most people, reconsideration is a required step on the way to the hearing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The hearing is where denials reverse</h3>
+              <p>
+                If reconsideration denies you, a judge who had no part in the earlier decisions
+                hears the case in person, by video, or by phone. Advocates commonly cite approval
+                rates near 45 to 55 percent at the hearing stage. The judge sees you, hears your
+                testimony, and weighs your treating doctor's opinion directly. The wait is long,
+                roughly 286 days on average, and all written evidence must reach the judge no later
+                than five business days before the hearing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>SSA decides on function, not diagnosis</h3>
+              <p>
+                Two people with the same diagnosis get different answers because one can still work
+                a desk job and the other cannot sit for an hour. Your evidence has to prove what you
+                cannot do, in concrete terms, day after day. A diagnosis alone almost never wins an
+                appeal. The RFC form from your treating doctor, stating your limits in work terms,
+                is the single most useful document in most appeals.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>New evidence is the whole strategy</h3>
+              <p>
+                A reconsideration that submits the same file SSA already denied will get the same
+                answer. Quote the decision back, name the specific new evidence, and tie both to a
+                date. New treatment records, a new diagnosis, a new specialist, or a treating
+                doctor's statement that was not in the original file are what give the new reviewer
+                something different to decide on.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Keep treating, keep the diary, keep the record straight</h3>
+              <p>
+                Gaps in treatment are read as proof you got better. If you cannot afford care, say
+                so in writing and keep every free-clinic, ER, or urgent-care visit on the record. A
+                dated notebook of symptoms, sleep, medication side effects, and what you could and
+                could not do that day turns vague complaints into a dated record. Describe your
+                limits the same way to SSA, to your doctors, and in your diary; inconsistencies are
+                the fastest way to lose credibility.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>How long does a Social Security disability appeal take?</summary>
+            <div class="faq-a">
+              Reconsideration usually takes three to seven months. If you go to an ALJ hearing,
+              expect another eight to fourteen months or more after you request it, depending on
+              your hearing office backlog. The full path from denial to a hearing decision commonly
+              runs well over a year, which is why filing the appeal immediately matters more than
+              filing it perfectly. This tool does not predict any timeline for your case.
+            </div>
+          </details>
+          <details>
+            <summary>What are my chances of winning a disability appeal?</summary>
+            <div class="faq-a">
+              Reconsideration approves roughly 10 to 15 percent of claims, so most people who win do
+              so later. At the ALJ hearing stage, advocates commonly cite approval rates near 45 to
+              55 percent. Your odds depend on your medical evidence, not on how forcefully you
+              argue, so the work that moves the number is new evidence and a clear record of your
+              functional limits. This tool does not assess your chances or predict any outcome.
+            </div>
+          </details>
+          <details>
+            <summary>Do I need a lawyer to appeal an SSDI denial?</summary>
+            <div class="faq-a">
+              No, you can appeal on your own at every level, and many people do. A disability
+              representative or attorney usually works on contingency, taking a percentage of
+              past-due benefits only if you win, with the fee capped by SSA rules, so there is
+              generally no upfront cost. Representation tends to help most at the hearing stage,
+              where cross-examining a vocational expert and framing the medical record matter. If
+              your case is straightforward and your records are strong, self-representation at
+              reconsideration is reasonable.
+            </div>
+          </details>
+          <details>
+            <summary>Can I work while my disability appeal is pending?</summary>
+            <div class="faq-a">
+              Working while you appeal is risky. Earning above substantial gainful activity levels
+              signals to SSA that you can work, which undercuts the claim that you cannot.
+              Short-term or very part-time work below those levels does not automatically kill a
+              claim, but any work activity will be examined. Talk to a representative before taking
+              a job during an appeal, and keep records of any work attempt, including hours, duties,
+              and why it did or did not last.
+            </div>
+          </details>
+          <details>
+            <summary>What happens if I miss the 60-day appeal deadline?</summary>
+            <div class="faq-a">
+              If you miss the 60-day window without a good reason, the denial becomes final and you
+              lose the right to appeal that claim. SSA may accept a late appeal if you can show good
+              cause, such as a serious illness, a death in the family, or never receiving the
+              notice. Without good cause, your only option is filing a brand-new application, which
+              usually means a new filing date and lost back pay for the months in between. If you
+              are already late, file anyway and explain the reason in writing. The deadline panel
+              above works the date out from your denial letter.
+            </div>
+          </details>
+          <details>
+            <summary>What is the difference between SSDI and SSI when appealing?</summary>
+            <div class="faq-a">
+              SSDI is based on your work history and the Social Security taxes you paid; SSI is
+              needs-based, for people with limited income and resources. The appeal process is the
+              same for both: reconsideration, ALJ hearing, Appeals Council, and federal court, each
+              with a 60-day deadline. The difference shows up in the denial reason. A technical
+              denial for SSDI often means not enough work credits, while for SSI it often means
+              income or resources above the limit. Read your letter to see which kind of denial you
+              got, and pick that reason in the form above.
+            </div>
+          </details>
+          <details>
+            <summary>What evidence helps most in a disability appeal?</summary>
+            <div class="faq-a">
+              The evidence that wins appeals describes what you cannot do, not just what diagnosis
+              you have. Strongest items: treatment records showing ongoing care, a residual
+              functional capacity (RFC) form completed by your treating doctor, your own function
+              report describing a typical day in concrete terms, statements from people who see your
+              limits daily, and a record of failed work attempts. A new diagnosis alone rarely
+              changes a decision; new proof of functional limits does. The evidence prep mode above
+              drafts the function statement from your facts.
+            </div>
+          </details>
+          <details>
+            <summary>Is this legal advice?</summary>
+            <div class="faq-a">
+              No. This tool drafts an appeal letter from the facts you enter. It does not decide
+              whether you are disabled, predict any outcome, or state what the law requires. It will
+              not invent facts or cite law. For anything that could affect your claim, review with a
+              licensed disability representative or attorney before you file.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/guides/how-to-appeal-a-social-security-disability-denial/"
+              ><strong>How to Appeal a Social Security Disability Denial</strong
+              ><small
+                >The companion guide: read the denial letter, calendar the deadline, file
+                reconsideration, build the evidence, and prepare for the ALJ hearing</small
+              ></a
+            >
+            <a href="/tools/ai-unemployment-hearing-prep-coach/"
+              ><strong>AI Unemployment Hearing Prep Coach</strong
+              ><small
+                >Denied unemployment and facing a hearing? Strategy, prep packet, and mock hearing
+                practice</small
+              ></a
+            >
+            <a href="/tools/ai-unemployment-appeal-letter/"
+              ><strong>AI Unemployment Appeal Letter</strong
+              ><small>Appeal an unemployment denial in writing, from your own facts</small></a
+            >
+            <a href="/tools/ai-fmla-request-letter/"
+              ><strong>AI FMLA Request Letter</strong
+              ><small
+                >Still employed and need protected leave while a condition keeps you from full
+                duties? Start here</small
+              ></a
+            >
+            <a href="/guides/how-to-write-a-medical-hardship-letter/"
+              ><strong>How to Write a Medical Hardship Letter</strong
+              ><small
+                >When the reason you cannot work is also the reason bills are piling up, this is how
+                to document the hardship</small
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not a lawyer and not legal advice. Review anything sensitive
+            with a licensed disability representative or attorney before you file.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/ai-ssdi-appeal-letter/ai-ssdi-appeal-letter.js?v=20261107a1"></script>
+  </body>
+</html>
