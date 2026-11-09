@@ -21,7 +21,7 @@
     <meta name="twitter:title" content="Free Privacy Policy Generator &mdash; No Signup | CyberScryb">
     <meta name="twitter:description"
         content="Draft GDPR-compliant site terms and disclosures with our free privacy policy generator. Free, instant, runs in your browser. No signup.">
-    <link rel="icon" href="/mascot-icon.png" type="image/png">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
                 "name": "Is this privacy policy generator free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, this privacy policy generator is completely free with no signup required. Generate as many policies as you need."
+                    "text": "Yes, this privacy policy generator is completely free with no signup required. Generate as many policies as you need for your websites and apps."
                 }
             },
             {
@@ -58,7 +58,7 @@
                 "name": "Is the generated privacy policy legally binding?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The generated policy provides a solid starting point based on common legal requirements. However, we recommend having a qualified attorney review your privacy policy to ensure it meets all applicable laws for your specific situation."
+                    "text": "The generated policy provides a solid starting point based on common legal requirements for data protection. However, we strongly recommend having a qualified attorney review your privacy policy to ensure it fully meets all applicable laws for your specific situation and jurisdiction."
                 }
             },
             {
@@ -66,7 +66,7 @@
                 "name": "Does this generator support GDPR and CCPA?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. You can enable GDPR and/or CCPA compliance options, and the generator will include the appropriate legal sections covering user rights under those regulations."
+                    "text": "Yes. You can enable GDPR and/or CCPA compliance options, and the generator will include the appropriate legal sections covering user rights under those regulations, including rights to access, deletion, and data portability."
                 }
             },
             {
@@ -74,7 +74,47 @@
                 "name": "What output formats are available?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The generator supports three output formats: formatted HTML, plain text, and Markdown. You can copy or download in any format."
+                    "text": "The generator supports three output formats: formatted HTML (ready to paste into your website), plain text (for documents or emails), and Markdown (for GitHub, documentation sites, etc.). You can copy to clipboard or download as a file in any format."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is COPPA and do I need it?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "COPPA (Children's Online Privacy Protection Act) is a US federal law that applies to websites and online services that are directed at children under 13 or that knowingly collect personal information from children under 13. If your site may be used by children, enable the COPPA option to include the required Children's Privacy section."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I customize the generated policy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The generated policy is yours to edit freely. Copy or download the output in your preferred format and modify it as needed to match your specific business practices and legal requirements."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need a privacy policy if I do not collect personal data?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Almost every site collects something: analytics, server logs, cookies, or a contact form. If your site genuinely collects nothing and sets no cookies, a short policy that says so is still worth having. If you use any third-party service, that service collects data on your behalf, and the policy has to name it."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is a generated policy enough for GDPR?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It is a solid starting point, not a guarantee. A generated policy covers the standard GDPR sections, but it cannot verify that your actual data practices match what the policy says. Read the generated policy against your real setup, fix anything that does not match, and have an attorney review it if you handle European visitors at any scale."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How often should I update my privacy policy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Every time you add or remove a service that touches visitor data, and at least once a year even if nothing changed. Keep a dated copy of each version so you can show what the policy said on any given date."
                 }
             }
         ]
@@ -571,6 +611,29 @@
             </div>
         </div>
 
+        <!-- How a privacy policy works -->
+        <section style="max-width: 900px; margin: 3rem auto 0; padding: 0 1rem;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text);">What a privacy policy has to cover</h2>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+                A privacy policy is the document that tells visitors what personal data you collect, why you collect it, who you share it with, and how long you keep it. If your site uses analytics, contact forms, cookies, embedded videos, payment processing, or email signup, you are collecting data, and the policy has to say so in plain language. The sections that matter most are the ones visitors actually read when something goes wrong: what you collect, what you do with it, who else sees it, and how someone asks you to delete it. A policy that hides those answers in vague language is worse than no policy at all, because it creates a record that you promised something you did not do.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+                The most common mistake is copying a policy from another site and changing the name. That policy describes someone else's data practices, not yours, and it will be wrong about what you collect, which tools you use, and where the data goes. The generator on this page builds the policy from the details you enter: your site name, your contact email, the services you use, and the regulations you need to cover. Answer the form honestly and the output will describe your actual site. If you are not sure what a service collects, check that service's own privacy page before you publish.
+            </p>
+            <h2 style="font-size: 1.5rem; margin: 1.5rem 0 1rem; color: var(--text);">GDPR, CCPA, and COPPA: which one applies to you</h2>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+                GDPR is the European regulation. It applies if you have visitors from the European Union or the UK, even if your business is in the United States, and it gives those visitors rights to access, correct, and delete their data. CCPA, the California Consumer Privacy Act, applies if you do business in California and meet its thresholds for revenue or the volume of personal information you handle, and it gives California residents the right to know what you collect and to opt out of its sale. COPPA, the Children's Online Privacy Protection Act, applies if your site is directed at children under 13 or you knowingly collect personal information from them. Most small sites need GDPR and CCPA coverage; only sites aimed at children need COPPA. When in doubt, enable the regulation and read the section it adds, because the cost of including a rights section you do not strictly need is far lower than the cost of missing one you do.
+            </p>
+            <h2 style="font-size: 1.5rem; margin: 1.5rem 0 1rem; color: var(--text);">How to publish and maintain the policy</h2>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+                Put the policy on its own page at a stable address, usually /privacy/, and link to it from your footer on every page. A policy buried three clicks deep or hidden behind a login is a policy nobody can find, and the regulations that require one also require it to be accessible. When you add a new tool, an analytics service, a payment provider, or an email list, update the policy the same week: list the new service, what it collects, and why. Review the whole document at least once a year, and every time you change how the site works. Keep a dated copy of each version so you can show what the policy said on any given date.
+            </p>
+            <h2 style="font-size: 1.5rem; margin: 1.5rem 0 1rem; color: var(--text);">What this generator does not do</h2>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">
+                This generator builds a policy from the facts you enter, and everything it produces stays in your browser: nothing you type is sent to a server. That is the privacy guarantee, and it is also the limit. The generator does not know your jurisdiction, your contracts, or the edge cases in your data practices, and it cannot tell you whether the policy it produces is sufficient for your situation. A generated policy is a starting point, not a legal opinion. If your site handles health data, financial data, children's data, or data from a regulated industry, have a qualified attorney review the policy before you publish it. The review costs less than the dispute the policy was supposed to prevent.
+            </p>
+        </section>
+
         <!-- FAQ Section -->
         <section class="faq" id="faq">
             <h2>Frequently Asked Questions</h2>
@@ -598,6 +661,18 @@
                 <details class="faq-item">
                     <summary>Can I customize the generated policy?</summary>
                     <p>The generated policy is yours to edit freely. Copy or download the output in your preferred format and modify it as needed to match your specific business practices and legal requirements.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do I need a privacy policy if I do not collect personal data?</summary>
+                    <p>Almost every site collects something: analytics, server logs, cookies, or a contact form. If your site genuinely collects nothing and sets no cookies, a short policy that says so is still worth having, because it answers the question before anyone asks it. If you use any third-party service, analytics, fonts, embedded video, or a payment button, that service collects data on your behalf, and the policy has to name it.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is a generated policy enough for GDPR?</summary>
+                    <p>It is a solid starting point, not a guarantee. A generated policy covers the standard GDPR sections: what you collect, why, who you share it with, and the rights visitors have. What it cannot do is verify that your actual data practices match what the policy says, or that your consent banner, your data retention, and your deletion process work the way the policy claims. Read the generated policy against your real setup, fix anything that does not match, and have an attorney review it if you handle European visitors at any scale.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How often should I update my privacy policy?</summary>
+                    <p>Every time you add or remove a service that touches visitor data, and at least once a year even if nothing changed. New analytics, a new email provider, a new payment processor, or a new embedded widget all change what the policy has to disclose. Keep a dated copy of each version so you can show what the policy said on any given date.</p>
                 </details>
             </div>
         </section>
@@ -646,17 +721,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo identifier</a>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>
