@@ -1494,10 +1494,10 @@ function generateSitemap(generatedPages) {
     'ai-ssdi-appeal-letter',
     'ai-performance-review-rebuttal-letter',
     'ai-traffic-court-mitigation-letter',
+    'ai-lemon-law-demand-letter',
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
-    'refund-request',
     'ai-workplace-accommodation-companion',
   ];
 
@@ -1637,6 +1637,7 @@ function generateSitemap(generatedPages) {
     'how-to-appeal-a-social-security-disability-denial',
     'how-to-write-a-performance-review-rebuttal-letter',
     'how-to-write-a-lemon-law-demand-letter',
+    'how-to-write-a-snap-benefits-appeal-letter',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
@@ -1869,10 +1870,10 @@ function manageRobotsMeta() {
     'ai-ssdi-appeal-letter',
     'ai-performance-review-rebuttal-letter',
     'ai-traffic-court-mitigation-letter',
+    'ai-lemon-law-demand-letter',
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
-    'refund-request',
     'ai-workplace-accommodation-companion',
   ]);
 
