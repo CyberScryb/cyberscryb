@@ -408,7 +408,7 @@
         color: var(--text-muted);
       }
       .match-reasons li::before {
-        content: "✓ ";
+        content: '✓ ';
         color: #f87171;
         font-weight: 700;
       }
@@ -481,13 +481,45 @@
               "@type": "Answer",
               "text": "This pilot dataset covers Idaho, including federal programs open to Idaho businesses. More states are being added."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I have to pay back a grant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Grants do not get repaid. Most come with conditions: spend the money on the approved purpose, file reports, and hit the milestones you promised. Break the terms and the funder can claw the money back."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What credit score do I need for an SBA loan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The SBA sets no minimum credit score. Individual lenders set their own floors, and better credit gets better terms. Collateral and a real business plan matter as much as the score itself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a microloan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A small loan, often up to $50,000, made through nonprofit intermediaries and CDFIs rather than banks. They are built for businesses too small or too new for conventional loans. Several Idaho programs in this finder work that way."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a brand-new business get a grant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rarely. Most grants target specific industries, research, or established businesses. New businesses usually do better with microloans, pitch competitions, or SBA-backed startup loans. The Match me quiz will point you in the right direction."
+            }
           }
         ]
       }
     </script>
-  <link rel="stylesheet" href="/css/consent.css?v=20261006audit1">
-<script src="/js/consent.js?v=20261006audit1" defer></script>
-</head>
+    <link rel="stylesheet" href="/css/consent.css?v=20261006audit1" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
   <body>
     <header>
       <nav class="navbar">
@@ -582,25 +614,25 @@
           </button>
         </div>
         <div id="browse-controls">
-        <div class="fund-search-row">
-          <input
-            class="fund-search"
-            id="fund-search"
-            type="search"
-            placeholder="Search: veteran, rural, manufacturing, export…"
-            aria-label="Search funding opportunities"
-            autocomplete="off"
-          />
-          <select class="fund-select" id="fund-sort" aria-label="Sort opportunities">
-            <option value="name">Sort: A–Z</option>
-            <option value="deadline">Sort: open first</option>
-          </select>
-          <label class="fund-check"
-            ><input type="checkbox" id="fund-hide-closed" /> Hide closed rounds</label
-          >
-        </div>
-        <div class="fund-cats" id="fund-cats" role="group" aria-label="Filter by category"></div>
-        <p class="fund-count" id="fund-count" aria-live="polite"></p>
+          <div class="fund-search-row">
+            <input
+              class="fund-search"
+              id="fund-search"
+              type="search"
+              placeholder="Search: veteran, rural, manufacturing, export…"
+              aria-label="Search funding opportunities"
+              autocomplete="off"
+            />
+            <select class="fund-select" id="fund-sort" aria-label="Sort opportunities">
+              <option value="name">Sort: A–Z</option>
+              <option value="deadline">Sort: open first</option>
+            </select>
+            <label class="fund-check"
+              ><input type="checkbox" id="fund-hide-closed" /> Hide closed rounds</label
+            >
+          </div>
+          <div class="fund-cats" id="fund-cats" role="group" aria-label="Filter by category"></div>
+          <p class="fund-count" id="fund-count" aria-live="polite"></p>
         </div>
       </div>
       <section class="quiz-wrap" id="quiz-wrap" hidden aria-label="Eligibility quiz">
@@ -640,6 +672,323 @@
           to see your best matches first.
         </div>
       </div>
+      <!-- SEO content -->
+      <div
+        class="geo-card"
+        style="
+          background: var(--card);
+          border: 1px solid var(--border);
+          max-width: 1200px;
+          margin: 2rem auto 0;
+          padding: 2rem;
+          border-radius: 12px;
+        "
+      >
+        <h2 style="color: var(--text); margin-bottom: 1rem">Find Idaho small business funding</h2>
+        <p style="color: var(--text-muted); line-height: 1.7">
+          If you are searching for Idaho small business grants, you already know the problem. The
+          money exists, but it is scattered across state agencies, federal programs, CDFIs,
+          foundations, and pitch competitions, each with its own page, its own deadline, and its own
+          application. This finder puts 43 verified Idaho funding opportunities in one place so you
+          can filter by category and deadline instead of opening 43 tabs.
+        </p>
+        <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem">
+          How to use the funding finder
+        </h2>
+        <ol style="color: var(--text-muted); line-height: 1.8; padding-left: 1.4rem; margin: 0">
+          <li>
+            <strong style="color: var(--text)">Search or browse.</strong> Type a keyword like
+            veteran, rural, or manufacturing, or just scroll the cards.
+          </li>
+          <li>
+            <strong style="color: var(--text)">Filter by category.</strong> Grants, loans,
+            microloans, tax incentives, workforce training funds, and pitch competitions each have
+            their own pill.
+          </li>
+          <li>
+            <strong style="color: var(--text)">Sort open first.</strong> Or check "Hide closed
+            rounds" to see only what you can still apply for.
+          </li>
+          <li>
+            <strong style="color: var(--text)">Take the Match me quiz.</strong> Answer a few
+            questions about your business and get a shortlist ranked to your situation.
+          </li>
+          <li>
+            <strong style="color: var(--text)">Track or draft.</strong> Hit "Track" to save an
+            opportunity to your application tracker, "Draft application" to start your narrative, or
+            apply directly on the funder's official page.
+          </li>
+        </ol>
+        <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem">
+          What is in the dataset
+        </h2>
+        <p style="color: var(--text-muted); line-height: 1.7">
+          43 opportunities, each checked against its official page on October 31, 2026: grants, SBA
+          and state loans, microloans made through nonprofit intermediaries, tax incentives,
+          workforce training funds, and pitch competitions. This is an Idaho pilot, including
+          federal programs open to Idaho businesses. More states are being added.
+        </p>
+        <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem">Who this is for</h2>
+        <p style="color: var(--text-muted); line-height: 1.7">
+          A pre-revenue founder in Boise is not looking for the same money as a rural manufacturer
+          hiring ten people. Pitch competitions and microloans beat bank loans when you have no
+          revenue yet. Several programs target rural Idaho specifically. Veteran, woman, and
+          minority-owned businesses have dedicated programs, so search those terms. Manufacturers
+          and exporters can cut costs without debt through tax incentives and export grants. And if
+          you are hiring, workforce training funds cover training costs that loans will not.
+        </p>
+        <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem">Before you apply</h2>
+        <p style="color: var(--text-muted); line-height: 1.7">
+          Verify the deadline on the funder's official page before you do anything else. Deadlines
+          move and amounts change. Read the eligibility rules twice, because most applications die
+          on eligibility, not on the quality of the idea. One rule that never changes: never pay
+          anyone a fee to apply for a government grant. Applications are free. If a "grant" asks for
+          money upfront, it is not a grant.
+        </p>
+      </div>
+
+      <!-- FAQ -->
+      <div
+        class="geo-card"
+        style="
+          background: var(--card);
+          border: 1px solid var(--border);
+          max-width: 1200px;
+          margin: 2rem auto 0;
+          padding: 2rem;
+          border-radius: 12px;
+        "
+      >
+        <h3 style="color: var(--primary-soft); margin-bottom: 1.5rem">
+          Frequently Asked Questions
+        </h3>
+        <div class="faq-item">
+          <h4>Where does the funding data come from?</h4>
+          <p>
+            The CyberScryb Idaho funding dataset: 43 opportunities from the Idaho Department of
+            Commerce, Idaho Workforce Development Council, SBA, USDA, regional development
+            organizations, CDFIs, pitch competitions, and foundations. Each entry's official page
+            was opened and verified on October 31, 2026.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>How current is the information?</h4>
+          <p>
+            Every entry was verified on October 31, 2026. Deadlines and amounts change, so always
+            confirm on the funder's official page (linked on every card) before you apply. Entries
+            whose latest round has closed are flagged.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I apply through this site?</h4>
+          <p>
+            No. Every card links to the funder's official application page, where you apply
+            directly. The
+            <a href="/tools/ai-grant-application-writer/" style="color: var(--primary)"
+              >AI Grant Application Writer</a
+            >
+            can draft your application narrative from your facts.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>Is this only for Idaho?</h4>
+          <p>
+            This pilot dataset covers Idaho, including federal programs open to Idaho businesses.
+            More states are being added.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>Do I have to pay back a grant?</h4>
+          <p>
+            No. Grants do not get repaid. That is the whole point. Most come with conditions though:
+            spend the money on the approved purpose, file reports, and hit the milestones you
+            promised. Break the terms and the funder can claw the money back.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>What credit score do I need for an SBA loan?</h4>
+          <p>
+            The SBA sets no minimum credit score. Individual lenders set their own floors, and
+            better credit gets better terms. Collateral and a real business plan matter as much as
+            the score itself.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>What is a microloan?</h4>
+          <p>
+            A small loan, often up to $50,000, made through nonprofit intermediaries and CDFIs
+            rather than banks. They are built for businesses too small or too new for conventional
+            loans. Several Idaho programs in this finder work that way.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>Can a brand-new business get a grant?</h4>
+          <p>
+            Rarely. Most grants target specific industries, research, or established businesses. New
+            businesses usually do better with microloans, pitch competitions, or SBA-backed startup
+            loans. The Match me quiz will point you in the right direction.
+          </p>
+        </div>
+      </div>
+
+      <!-- Related tools -->
+      <section
+        style="
+          max-width: 1200px;
+          margin: 2rem auto 0;
+          padding: 2rem;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+        "
+      >
+        <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text)">
+          Related Tools You Might Like
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+          "
+        >
+          <a
+            href="/tools/ai-grant-application-writer/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >AI Grant Application Writer</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Draft your grant narrative from your facts &rarr;</span
+            >
+          </a>
+          <a
+            href="/tools/grant-application-tracker/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Grant Application Tracker</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Track deadlines, documents, and your pipeline &rarr;</span
+            >
+          </a>
+          <a
+            href="/tools/business-name-generator/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >Business Name Generator</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Name the business before you apply &rarr;</span
+            >
+          </a>
+        </div>
+      </section>
+
+      <!-- Related guides -->
+      <section
+        style="
+          max-width: 1200px;
+          margin: 2rem auto 0;
+          padding: 2rem;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+        "
+      >
+        <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text)">
+          Related Guides
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+          "
+        >
+          <a
+            href="/guides/smart-objectives-examples-nonprofit-grants/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >SMART Objectives Examples for Nonprofit Grants</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Write grant objectives funders actually fund &rarr;</span
+            >
+          </a>
+          <a
+            href="/guides/how-to-pick-a-business-name/"
+            style="
+              display: block;
+              padding: 1rem;
+              background: var(--bg-elevated);
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              text-decoration: none;
+              color: var(--text-muted);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor = '#dc2626'"
+            onmouseout="this.style.borderColor = 'var(--border)'"
+          >
+            <strong style="color: var(--primary-soft); display: block; margin-bottom: 0.25rem"
+              >How to Pick a Business Name</strong
+            >
+            <span style="font-size: 0.85rem; color: var(--text-muted)"
+              >Checklist, trademark, and domain tips &rarr;</span
+            >
+          </a>
+        </div>
+      </section>
+
       <!-- AdSense: Below Tool -->
       <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
         <ins
