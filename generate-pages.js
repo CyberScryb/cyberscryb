@@ -1638,6 +1638,7 @@ function generateSitemap(generatedPages) {
     'how-to-write-a-performance-review-rebuttal-letter',
     'how-to-write-a-lemon-law-demand-letter',
     'how-to-write-a-snap-benefits-appeal-letter',
+    'how-to-prepare-for-small-claims-court',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
