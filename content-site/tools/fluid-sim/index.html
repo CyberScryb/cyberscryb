@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/css/style.css?v=20261014ux">
 
 
@@ -26,7 +26,7 @@
     {"@context":"https://schema.org","@type":"WebApplication","name":"CyberScryb Fluid Dynamics Simulator","url":"https://cyberscryb.com/tools/fluid-sim/","description":"Interactive real-time fluid dynamics simulation using Navier-Stokes equations.","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isPartOf":{"@type":"WebSite","name":"CyberScryb","url":"https://cyberscryb.com"}}
     </script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a real physics simulation or just an animation?","acceptedAnswer":{"@type":"Answer","text":"This is a genuine numerical simulation solving the Navier-Stokes equations for incompressible flow. The velocity field, pressure projection, diffusion, and advection are all computed each frame using established CFD methods."}},{"@type":"Question","name":"What do the viscosity and diffusion controls actually change?","acceptedAnswer":{"@type":"Answer","text":"Viscosity controls the fluid's internal friction. At zero viscosity, swirls persist indefinitely. At high viscosity, the fluid behaves like honey. Diffusion controls how quickly the dye spreads through the fluid."}},{"@type":"Question","name":"Is my data sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The entire simulation runs 100% in your browser using JavaScript and Canvas 2D. No data is transmitted to any server."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a real physics simulation?","acceptedAnswer":{"@type":"Answer","text":"Yes. It solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software."}},{"@type":"Question","name":"What do the viscosity and diffusion controls actually change?","acceptedAnswer":{"@type":"Answer","text":"Viscosity controls the fluid's internal friction. At zero viscosity, swirls persist indefinitely. At high viscosity, the fluid behaves like honey. Diffusion controls how quickly the dye spreads through the fluid."}},{"@type":"Question","name":"How do I make the most dramatic swirls?","acceptedAnswer":{"@type":"Answer","text":"Set viscosity and diffusion near zero, pick a high-contrast palette like Fire or Plasma, raise the Force slider, and drag in fast, tight circles. Short, quick flicks create small vortices; long sweeping drags create large rolling waves. Pause the simulation when a pattern looks right, then save it as a screenshot."}},{"@type":"Question","name":"Why does the simulation slow down on my device?","acceptedAnswer":{"@type":"Answer","text":"The solver runs a 128 by 128 grid with a pressure solve every frame, which is heavy work for low-end phones and older laptops. If the frame rate drops, clear the canvas, lower the brush size, and close other tabs. The FPS counter in the top-left corner of the canvas shows your current frame rate."}},{"@type":"Question","name":"Is my data sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs 100% in your browser. Screenshots are generated locally via the Canvas API."}},{"@type":"Question","name":"Can I use screenshots commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any images you export are yours to use however you wish."}},{"@type":"Question","name":"What is the difference between viscosity and diffusion?","acceptedAnswer":{"@type":"Answer","text":"Viscosity affects motion: it damps velocity, so swirls decay faster. Diffusion affects color: it spreads dye from high-concentration areas to low-concentration ones, blurring sharp edges. A fluid can be thick and slow-moving but still hold crisp color boundaries if diffusion is low, or thin and fast with colors that blend quickly if diffusion is high."}},{"@type":"Question","name":"Can I use this simulator on my phone or tablet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Touch and drag works the same as a mouse. On small screens the controls stack below the canvas. Performance depends on your device; modern phones typically hold a smooth frame rate at the default settings."}},{"@type":"Question","name":"How is this different from professional CFD software?","acceptedAnswer":{"@type":"Answer","text":"Professional CFD tools solve the same equations in 3D, on grids with millions of cells, with precise boundary conditions, turbulence models, and quantitative output for engineering decisions. This simulator is a 2D teaching and visualization tool on a 128 by 128 grid. It shows the same physics qualitatively, but it is not a substitute for engineering-grade simulation."}}]}
     </script>
     <style>
         .fluid-app{padding:5rem 0 2rem;background:var(--bg-elevated);min-height:100vh}
@@ -122,7 +122,29 @@
         <!-- SEO Content -->
         <section style="max-width:900px;margin:3rem auto 0;padding:0 2rem;">
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">What Are the Navier-Stokes Equations?</h2>
-            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color: var(--text);">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary);">seven Millennium Prize Problems</a> in mathematics.</p>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The Navier-Stokes equations are a set of partial differential equations that describe the motion of viscous fluid substances. First developed by Claude-Louis Navier and George Gabriel Stokes in the 19th century, these equations form the foundation of <strong style="color: var(--text);">computational fluid dynamics (CFD)</strong> &mdash; one of the most important fields in modern engineering and physics. They remain one of the <a href="https://www.claymath.org/millennium-problems/navier-stokes-equation" rel="noopener" style="color: var(--primary);">seven Millennium Prize Problems</a> in mathematics. In plain terms, the equations track two things at every point in a fluid: how fast it is moving, and how pressure pushes it around. Solve those two quantities over and over, fast enough, and you get smoke curling, water swirling, and dye blooming exactly the way real fluids behave.</p>
+
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">How to Use the Simulator</h2>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">No setup, no account, no install. The simulation starts the moment the page loads. Follow these steps to get the most out of it:</p>
+            <ol style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
+                <li><strong style="color: var(--text);">Click and drag on the canvas.</strong> Your pointer injects dye and force into the fluid. The direction and speed of your drag set the direction and strength of the flow.</li>
+                <li><strong style="color: var(--text);">Try short flicks for vortices.</strong> Quick, tight circles spin up small whirlpools that drift and merge. Long, slow sweeps create broad rolling waves.</li>
+                <li><strong style="color: var(--text);">Pick a palette.</strong> Cyber, Fire, Plasma, Ocean, and Mono each inject different dye colors. Switching mid-drag blends palettes in the same swirl.</li>
+                <li><strong style="color: var(--text);">Tune the physics.</strong> Lower viscosity for wild, long-lasting swirls. Raise it to calm the fluid down. Raise diffusion to soften edges and blend colors.</li>
+                <li><strong style="color: var(--text);">Pause and save.</strong> Hit Pause when a pattern looks right, then use Save to download a 1024 by 1024 PNG of the frame.</li>
+                <li><strong style="color: var(--text);">Clear and start over.</strong> The Clear button resets the grid instantly so you can try a new idea without reloading the page.</li>
+            </ol>
+
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">What Each Control Does</h2>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">Every slider changes a real parameter of the solver, not a visual filter. Here is what each one means:</p>
+            <ul style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
+                <li><strong style="color: var(--text);">Viscosity (0 to 0.001).</strong> The fluid's internal friction. At zero, swirls spin almost forever. At the top of the range, the fluid thickens and motion dies out quickly, like stirring honey. Water sits near the low end; oil and syrup sit near the high end.</li>
+                <li><strong style="color: var(--text);">Diffusion (0 to 0.001).</strong> How fast dye spreads through the fluid. Low diffusion keeps sharp, crisp color boundaries. High diffusion blurs edges and mixes colors into soft gradients.</li>
+                <li><strong style="color: var(--text);">Force (50 to 500).</strong> How hard your drag pushes the fluid. Low force makes gentle currents; high force throws dye across the canvas and spins up tight vortices.</li>
+                <li><strong style="color: var(--text);">Brush Size (1 to 8).</strong> The radius of the area your pointer affects. A small brush paints fine detail and thin streams. A large brush stirs broad regions at once.</li>
+                <li><strong style="color: var(--text);">Color Palette.</strong> Five dye palettes: Cyber (red tones), Fire (orange to yellow), Plasma (magenta to cyan), Ocean (blue to teal), and Mono (white to gray). The two endpoints of each palette are blended randomly as dye is injected, so no two strokes look identical.</li>
+                <li><strong style="color: var(--text);">Pause, Clear, Save.</strong> Pause freezes the frame so you can study a pattern. Clear wipes the grid. Save exports the current frame as a PNG image you own outright.</li>
+            </ul>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">How This Simulator Works</h2>
             <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">This tool implements <strong style="color: var(--text);">Jos Stam's "Stable Fluids" algorithm</strong> (1999), widely used in VFX and game dev. Each frame performs four operations:</p>
@@ -132,22 +154,47 @@
                 <li><strong style="color: var(--primary);">Advect</strong> &mdash; The velocity field moves itself and dye through back-tracing</li>
                 <li><strong style="color: var(--primary);">Project</strong> &mdash; Pressure solve ensures divergence-free (mass-conserving) flow</li>
             </ol>
-            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color: var(--text);">128×128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side.</p>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">The simulation runs on a <strong style="color: var(--text);">128 by 128 grid</strong> with Gauss-Seidel relaxation. RGB dye channels are tracked independently, allowing natural color mixing. Runs at 60+ FPS entirely client-side. The "stable" in Stable Fluids matters: older solvers blew up numerically when forces got large, producing NaN values and a frozen screen. Stam's semi-Lagrangian advection keeps the simulation stable no matter how hard you drag, which is why you can fling the fluid around at full force without breaking it.</p>
+
+            <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Ways to Use This Simulator</h2>
+            <p style="color: var(--text-muted);line-height:1.8;margin-bottom:1rem;">It is a physics toy, but people put it to real work. A few proven uses:</p>
+            <ul style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
+                <li><strong style="color: var(--text);">Teaching fluid dynamics.</strong> A live, hands-on demo beats a textbook diagram. Show students how viscosity damps a vortex, then let them change the slider and watch it happen. Laminar versus turbulent flow stops being abstract the moment they can see it.</li>
+                <li><strong style="color: var(--text);">VFX and motion reference.</strong> Animators and game developers use fluid sims to study how smoke curls, how ink blooms in water, and how fire rolls before they build the same effect in their own tools.</li>
+                <li><strong style="color: var(--text);">Generative art.</strong> Pause at the right moment and save the frame. The dye patterns are unique every time, and the PNG export is yours to use in posters, album covers, wallpapers, and social posts.</li>
+                <li><strong style="color: var(--text);">Design inspiration.</strong> Swirling color fields make strong backgrounds and textures. Export a frame, drop it into a design tool, and you have an original backdrop no stock site sells.</li>
+                <li><strong style="color: var(--text);">Science demos for kids.</strong> It is the digital version of dropping food coloring into a glass of water, except you control the currents. A good way to show a curious kid what "viscosity" means without a mess.</li>
+                <li><strong style="color: var(--text);">A calm visual break.</strong> Sometimes it is just satisfying to stir colors around for a minute. No goal, no score, no feed.</li>
+            </ul>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Real-World Applications</h2>
             <ul style="color: var(--text-muted);line-height:2;margin-bottom:1.5rem;padding-left:1.5rem;">
-                <li><strong style="color: var(--text);">Aerospace</strong> &mdash; Airflow optimization reducing fuel consumption by up to 15%</li>
-                <li><strong style="color: var(--text);">Weather</strong> &mdash; Atmospheric fluid models predict storms days in advance</li>
-                <li><strong style="color: var(--text);">Medical</strong> &mdash; Blood flow simulation for heart valve design</li>
-                <li><strong style="color: var(--text);">Film & VFX</strong> &mdash; Realistic water, fire, and smoke effects</li>
-                <li><strong style="color: var(--text);">Games</strong> &mdash; Real-time fluid effects in modern titles</li>
+                <li><strong style="color: var(--text);">Aerospace</strong> &mdash; Airflow optimization reducing fuel consumption by up to 15%. Wing and fuselage shapes are refined in simulation long before a physical prototype is built.</li>
+                <li><strong style="color: var(--text);">Weather</strong> &mdash; Atmospheric fluid models predict storms days in advance. The same equations govern wind, ocean currents, and storm systems at planetary scale.</li>
+                <li><strong style="color: var(--text);">Medical</strong> &mdash; Blood flow simulation for heart valve design. Surgeons plan procedures by modeling how blood moves through a specific patient's vessels.</li>
+                <li><strong style="color: var(--text);">Film &amp; VFX</strong> &mdash; Realistic water, fire, and smoke effects. The Stable Fluids algorithm this page uses came out of graphics research and still powers effects in films and games.</li>
+                <li><strong style="color: var(--text);">Games</strong> &mdash; Real-time fluid effects in modern titles, from splashing water to drifting smoke and magical spell effects.</li>
+                <li><strong style="color: var(--text);">Automotive</strong> &mdash; Drag and cooling airflow around cars, trucks, and race cars, tuned in simulation before wind-tunnel testing.</li>
+                <li><strong style="color: var(--text);">Architecture</strong> &mdash; Wind loads on tall buildings and airflow through ventilation systems, modeled before construction begins.</li>
             </ul>
 
             <h2 style="font-size:1.5rem;margin-bottom:1rem;color: var(--text);">Frequently Asked Questions</h2>
             <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
                 <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is this a real physics simulation?</summary>
-                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes &mdash; it solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes. It solves the Navier-Stokes equations for incompressible flow each frame. While simplified to 2D, the underlying mathematics are identical to professional CFD software.</p>
+                </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">What do the viscosity and diffusion controls actually change?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Viscosity controls the fluid's internal friction. At zero viscosity, swirls persist indefinitely. At high viscosity, the fluid behaves like honey. Diffusion controls how quickly the dye spreads through the fluid.</p>
+                </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">How do I make the most dramatic swirls?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Set viscosity and diffusion near zero, pick a high-contrast palette like Fire or Plasma, raise the Force slider, and drag in fast, tight circles. Short, quick flicks create small vortices; long sweeping drags create large rolling waves. Pause the simulation when a pattern looks right, then save it as a screenshot.</p>
+                </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Why does the simulation slow down on my device?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">The solver runs a 128 by 128 grid with a pressure solve every frame, which is heavy work for low-end phones and older laptops. If the frame rate drops, clear the canvas, lower the brush size, and close other tabs. The FPS counter in the top-left corner of the canvas shows your current frame rate.</p>
                 </details>
                 <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Is my data sent anywhere?</summary>
@@ -157,9 +204,20 @@
                     <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Can I use screenshots commercially?</summary>
                     <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes. Any images you export are yours to use however you wish.</p>
                 </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">What is the difference between viscosity and diffusion?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Viscosity affects motion: it damps velocity, so swirls decay faster. Diffusion affects color: it spreads dye from high-concentration areas to low-concentration ones, blurring sharp edges. A fluid can be thick and slow-moving but still hold crisp color boundaries if diffusion is low, or thin and fast with colors that blend quickly if diffusion is high.</p>
+                </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">Can I use this simulator on my phone or tablet?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Yes. Touch and drag works the same as a mouse. On small screens the controls stack below the canvas. Performance depends on your device; modern phones typically hold a smooth frame rate at the default settings.</p>
+                </details>
+                <details style="background: var(--bg-elevated); border: 1px solid var(--border);border-radius:10px;padding:1rem;">
+                    <summary style="cursor:pointer;color: var(--text);font-weight:600;font-size:0.95rem;">How is this different from professional CFD software?</summary>
+                    <p style="color: var(--text-muted);line-height:1.7;margin:0.75rem 0 0;">Professional CFD tools solve the same equations in 3D, on grids with millions of cells, with precise boundary conditions, turbulence models, and quantitative output for engineering decisions. This simulator is a 2D teaching and visualization tool on a 128 by 128 grid. It shows the same physics qualitatively, but it is not a substitute for engineering-grade simulation.</p>
+                </details>
             </div>
         </section>
-
 
         <section style="max-width:900px; margin:3rem auto; padding:2rem; background: var(--card); border: 1px solid var(--border); border-radius:12px;">
         <h3 style="text-align:center; margin-bottom:1.5rem; color: var(--text);">Related Tools You Might Like</h3>
@@ -191,16 +249,12 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
 </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
