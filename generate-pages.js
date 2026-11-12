@@ -1644,6 +1644,7 @@ function generateSitemap(generatedPages) {
     'how-to-prepare-for-small-claims-court',
     'how-to-prepare-for-a-social-security-disability-hearing',
     'how-to-defend-a-debt-collection-lawsuit',
+    'how-to-prepare-for-a-workers-compensation-hearing',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
