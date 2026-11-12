@@ -10,7 +10,7 @@
     <title>Cron Expression Generator &mdash; Free Online | CyberScryb</title>
     <meta name="description" content="Build or decode scheduling syntax easily using our cron expression generator. Free, instant, runs in your browser. No signup.">
     <link rel="canonical" href="https://cyberscryb.com/tools/cron-builder/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Cron Expression Generator &mdash; Free Online | CyberScryb">
@@ -90,7 +90,71 @@
                     "@type": "Answer",
                     "text": "In standard cron, Sunday is 0 and Saturday is 6. Some systems also accept 7 for Sunday. This tool uses the standard 0-6 numbering."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data sent anywhere?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. The entire builder runs 100% in your browser using JavaScript. The expression parsing, the plain-English description, and the next-run calculation all happen on this page. Nothing you type is transmitted to any server."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between standard cron and Quartz cron?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Standard cron uses five fields: minute, hour, day of month, month, day of week. Quartz adds a seconds field first, so it takes six or seven fields, and it requires a question mark in either the day-of-month or day-of-week field. An expression written for one will not run correctly in the other, so check which flavor your scheduler uses before pasting."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why does my job run on days I did not expect?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "In standard cron, when both the day-of-month and day-of-week fields are restricted, the job runs when either one matches, not both. The expression 0 0 15 * 5 runs on the 15th of every month and on every Friday. If you need both conditions to be true at once, test the date inside the script instead."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do cron expressions include a timezone?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. A cron expression is just a schedule pattern with no timezone attached. The scheduler's timezone decides when it fires, so a job set for 9 AM runs at 9 AM in the server's timezone. GitHub Actions, for example, always runs in UTC. Check your platform's timezone before assuming a local time."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I schedule a job for February 29?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. The expression 0 0 29 2 * runs at midnight on February 29, which only exists in leap years, so the job fires once every four years. The same rule applies to any date that does not exist every year: cron accepts the date and simply never fires in years that skip it."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What happens to my job during daylight saving time?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It depends on the clock change. On spring-forward day, 2:30 AM never happens, so a 2:30 AM job is skipped. On fall-back day, 2:30 AM happens twice, so the job can run twice. For jobs that must run exactly once, schedule them in UTC or pick a time daylight saving never touches, such as 3:30 AM."
+                }
             }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to build a cron expression",
+        "description": "Build a cron schedule visually, check the next five run times, and copy the expression into your crontab.",
+        "step": [
+            { "@type": "HowToStep", "name": "Pick the minute and hour", "text": "Use the Visual Builder dropdowns to set the minute and hour. For a nightly backup at 2:30 AM, set minute to 30 and hour to 2." },
+            { "@type": "HowToStep", "name": "Set the day and month fields", "text": "Leave day of month, month, and day of week on Every for a daily job, or restrict them: 1-5 in day of week limits the job to weekdays." },
+            { "@type": "HowToStep", "name": "Check the next five runs", "text": "Read the plain-English description under the expression bar and the Next 5 Runs panel. If the dates are not what you meant, the expression is wrong." },
+            { "@type": "HowToStep", "name": "Copy it into your crontab", "text": "Copy the expression and add your command after it, for example: 30 2 * * * /usr/local/bin/backup-database.sh. In a user crontab the command follows the schedule directly." }
         ]
     }
     </script>
@@ -814,6 +878,50 @@
             </aside>
         </div>
 
+        <!-- SEO content -->
+        <section style="max-width: 900px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px;">
+            <h2 style="color: var(--text); margin-bottom: 1rem;">How to Build a Cron Expression</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">There are two ways to build a schedule on this page. The Visual Builder is the default: pick each field from the dropdowns and the expression assembles itself in the bar at the top, with a plain-English description underneath saying what it means. Switch to Manual Input to type or paste an expression directly; the dropdowns sync back when you return to the visual builder. The presets cover the schedules people actually use, so click one and the whole builder fills in.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Before you save anything, check the Next 5 Runs panel. It lists the next five times the expression fires, in your local time. If those dates are not what you meant, the expression is wrong, not the scheduler. Copy the expression from the bar at the top once it reads right.</p>
+
+            <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Worked Example: A Nightly Backup at 2:30 AM</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">Say you want a database backup every night at 2:30 AM. That is minute 30, hour 2, every day of the month, every month, every day of the week:</p>
+            <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--primary-soft);">30 2 * * *</div>
+            <p style="color: var(--text-muted); line-height: 1.7;">Read it left to right: at minute 30, of hour 2, on every day of the month, in every month, on every day of the week. Click the <span style="font-family: 'JetBrains Mono', monospace; color: var(--primary-soft);">30 2 * * *</span> example in the cheat sheet sidebar and it loads straight into the builder: the Means line reads "At 2:30 AM" and Next 5 Runs lists the next five nights. Then add your command after the schedule to make a crontab line:</p>
+            <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted);">30 2 * * * /usr/local/bin/backup-database.sh</div>
+            <p style="color: var(--text-muted); line-height: 1.7;">In your own crontab (<span style="font-family: 'JetBrains Mono', monospace;">crontab -e</span>) the command follows the schedule directly. In the system crontab at /etc/crontab there is a username field between the schedule and the command, so the same line there reads <span style="font-family: 'JetBrains Mono', monospace;">30 2 * * * root /usr/local/bin/backup-database.sh</span>.</p>
+
+            <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Reading a Cron Expression, Field by Field</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">Five fields, left to right: minute (0-59), hour (0-23), day of month (1-31), month (1-12), day of week (0-6, Sunday is 0). Each field takes a single value, a list (<span style="font-family: 'JetBrains Mono', monospace;">1,15</span>), a range (<span style="font-family: 'JetBrains Mono', monospace;">1-5</span>), a step (<span style="font-family: 'JetBrains Mono', monospace;">*/15</span>), or <span style="font-family: 'JetBrains Mono', monospace;">*</span> for every value. Combine them: <span style="font-family: 'JetBrains Mono', monospace;">0 9,17 * * *</span> is 9 AM and 5 PM every day, while <span style="font-family: 'JetBrains Mono', monospace;">0 9 * * 1-5</span> is 9 AM on weekdays only.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Month and weekday names work on some systems (<span style="font-family: 'JetBrains Mono', monospace;">MON</span>, <span style="font-family: 'JetBrains Mono', monospace;">JAN</span>), but numbers work everywhere, which is why this builder uses numbers only. The cheat sheet on the right lists every field range and the four special characters, so you rarely need to look anything up elsewhere.</p>
+
+            <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Cron Flavors Are Not the Same</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">Standard cron, the kind this builder targets, is five fields. Quartz, used by many Java schedulers, adds seconds as a sixth field first, so <span style="font-family: 'JetBrains Mono', monospace;">0 30 2 * * *</span> in Quartz means 2:30:00 AM, while <span style="font-family: 'JetBrains Mono', monospace;">30 2 * * *</span> pasted into Quartz is a different schedule or an error. Quartz also refuses to let you restrict both day-of-month and day-of-week; one of them must be a question mark. GitHub Actions uses five fields but always runs in UTC. AWS EventBridge uses six fields with question-mark wildcards. If an expression that works here misbehaves elsewhere, the flavor changed, not the math.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">The trap that bites most often is the day-of-month and day-of-week rule in standard cron: when both fields are restricted, the job runs when either one matches, not both. <span style="font-family: 'JetBrains Mono', monospace;">0 0 15 * 5</span> runs on the 15th of every month and on every Friday. If you wanted only Fridays that fall on the 15th, cron cannot express that in one line; test the date inside the script instead.</p>
+
+            <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Common Mistakes</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;"><span style="font-family: 'JetBrains Mono', monospace;">0 0 31 2 *</span> never runs, because February has no 31st, and cron silently accepts impossible dates without complaint. <span style="font-family: 'JetBrains Mono', monospace;">* * * * *</span> runs every minute, which is fine for a health check and a pile-up for anything slow: a job that takes 90 seconds but runs every minute stacks overlapping copies until the machine chokes. Schedule heavy jobs with room to finish, or guard them with a lock file.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Cron expressions carry no timezone. The daemon's timezone decides, and a server set to UTC runs your "9 AM" job at 9 AM UTC, not 9 AM your time. Daylight saving is the same story: a 2:30 AM job is skipped on spring-forward day because 2:30 never happens, and can run twice on fall-back day because 2:30 happens twice. For anything that must run exactly once, schedule it in UTC or pick a time daylight saving never touches, like 3:30 AM.</p>
+
+            <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Privacy: Everything Runs in Your Browser</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">This builder runs entirely in your browser. The expression parsing, the plain-English description, and the next-run calculation are all JavaScript on this page; nothing you type is sent to a server, and there is no account, no log, and no AI call behind it. That is the whole privacy story: there is nothing to leak because nothing leaves the machine.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section style="max-width: 900px; margin: 2rem auto; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px;">
+            <h3 style="color: var(--primary-soft); margin-bottom: 1.5rem;">Frequently Asked Questions</h3>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>What is a cron expression?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">A cron expression is a string of five fields separated by spaces that defines a schedule for automated tasks. The fields represent minute, hour, day of month, month, and day of week.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>What does * mean in a cron expression?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">The asterisk (*) is a wildcard that means 'every' or 'any value'. For example, * in the minute field means every minute.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>How do I schedule a cron job to run every 5 minutes?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">Use the expression */5 * * * * which means every 5th minute, every hour, every day.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>What is the difference between cron day of week numbering?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">In standard cron, Sunday is 0 and Saturday is 6. Some systems also accept 7 for Sunday. This tool uses the standard 0-6 numbering.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>Is my data sent anywhere?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">No. The entire builder runs 100% in your browser using JavaScript. The expression parsing, the plain-English description, and the next-run calculation all happen on this page. Nothing you type is transmitted to any server.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>What is the difference between standard cron and Quartz cron?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">Standard cron uses five fields: minute, hour, day of month, month, day of week. Quartz adds a seconds field first, so it takes six or seven fields, and it requires a question mark in either the day-of-month or day-of-week field. An expression written for one will not run correctly in the other, so check which flavor your scheduler uses before pasting.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>Why does my job run on days I did not expect?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">In standard cron, when both the day-of-month and day-of-week fields are restricted, the job runs when either one matches, not both. The expression 0 0 15 * 5 runs on the 15th of every month and on every Friday. If you need both conditions to be true at once, test the date inside the script instead.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>Do cron expressions include a timezone?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">No. A cron expression is just a schedule pattern with no timezone attached. The scheduler's timezone decides when it fires, so a job set for 9 AM runs at 9 AM in the server's timezone. GitHub Actions, for example, always runs in UTC. Check your platform's timezone before assuming a local time.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>Can I schedule a job for February 29?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">Yes. The expression 0 0 29 2 * runs at midnight on February 29, which only exists in leap years, so the job fires once every four years. The same rule applies to any date that does not exist every year: cron accepts the date and simply never fires in years that skip it.</p></div>
+            <div class="faq-item" style="border-bottom: 1px solid var(--border); padding: 0.85rem 0;"><h4>What happens to my job during daylight saving time?</h4><p style="color: var(--text-muted); margin-top: 0.4rem;">It depends on the clock change. On spring-forward day, 2:30 AM never happens, so a 2:30 AM job is skipped. On fall-back day, 2:30 AM happens twice, so the job can run twice. For jobs that must run exactly once, schedule them in UTC or pick a time daylight saving never touches, such as 3:30 AM.</p></div>
+        </section>
+
     <!-- AdSense: Below Tool -->
     <section style="max-width:900px; margin:2rem auto; padding:0 1rem; text-align:center;">
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5721233331247292" data-ad-slot="9198647442" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -858,17 +966,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo identifier</a>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CyberScryb. All rights reserved.</p>

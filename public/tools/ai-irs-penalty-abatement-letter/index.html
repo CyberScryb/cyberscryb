@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI IRS Penalty Abatement Letter Generator - Free AI Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Got an IRS penalty you should not have to pay? Check first-time abatement eligibility first, then generate a formal reasonable-cause abatement letter with Form 843 guidance. Enter the penalty from your notice and the abatement you are requesting, get the remaining balance computed from your own figures, and get a printable letter ready to mail."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-irs-penalty-abatement-letter/" />
+    <meta
+      property="og:title"
+      content="AI IRS Penalty Abatement Letter Generator - Free AI Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Check first-time abatement eligibility, then get a formal reasonable-cause letter with Form 843 guidance. Free, no signup. Not tax advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-irs-penalty-abatement-letter/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI IRS Penalty Abatement Letter Generator - Free AI Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Check first-time abatement eligibility, then get a formal reasonable-cause letter with Form 843 guidance. Free, no signup."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .abatement-panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 0.9rem 1rem;
+        font-size: 0.88rem;
+      }
+      .abatement-panel h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .abatement-amount {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      .abatement-amount small {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+      .abatement-note {
+        margin: 0.5rem 0 0;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+      }
+      .not-tax-pro {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-tax-pro strong {
+        color: #f87171;
+      }
+      #request-letter-wrap {
+        display: none;
+      }
+      #request-letter {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elevated);
+        padding: 1.25rem 1.4rem;
+        font-size: 0.92rem;
+      }
+      #request-letter h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      #request-letter table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.6rem 0 1rem;
+        font-size: 0.88rem;
+      }
+      #request-letter td,
+      #request-letter th {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      #request-letter .report-guidance {
+        white-space: pre-wrap;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .lt-faq details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.6rem;
+        background: var(--bg-elevated);
+      }
+      .lt-faq summary {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .lt-faq .faq-a {
+        padding: 0 1rem 0.9rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .lt-story {
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+      }
+      @media print {
+        body.printing-request header,
+        body.printing-request nav,
+        body.printing-request footer,
+        body.printing-request .lt-sticky-gen,
+        body.printing-request .lt-toolbar,
+        body.printing-request .email-gate,
+        body.printing-request .adsbygoogle,
+        body.printing-request section[style*='max-width: 900px'] {
+          display: none !important;
+        }
+        body.printing-request .lt-grid,
+        body.printing-request .lt-checklist-band,
+        body.printing-request .lt-know,
+        body.printing-request .lt-faq,
+        body.printing-request .lt-related,
+        body.printing-request .lt-how,
+        body.printing-request .lt-trust,
+        body.printing-request .hero {
+          display: none !important;
+        }
+        body.printing-request #request-letter-wrap {
+          display: block !important;
+        }
+        #request-letter {
+          border: none !important;
+        }
+      }
+    </style>
+    <script>
+      function printRequestLetter() {
+        var wrap = document.getElementById('request-letter-wrap');
+        if (
+          !wrap ||
+          wrap.style.display === 'none' ||
+          !wrap.querySelector('#request-letter').innerHTML.trim()
+        ) {
+          if (window.LifeTool) LifeTool.toast('Generate your letter first, then print it');
+          else alert('Generate your letter first, then print it.');
+          return;
+        }
+        document.body.classList.add('printing-request');
+        window.print();
+        setTimeout(function () {
+          document.body.classList.remove('printing-request');
+        }, 500);
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI IRS Penalty Abatement Letter Generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-irs-penalty-abatement-letter/",
+        "description": "Free AI tool that checks first-time penalty abatement eligibility, then drafts a formal IRS reasonable-cause penalty abatement letter from the taxpayer's own facts, with Form 843 filing guidance and a printable letter. General information only, not tax advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who qualifies for first-time penalty abatement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "First-time abatement is for a taxpayer with a clean compliance history, generally no penalties in the prior three years, who has filed every required return and paid or arranged to pay the tax owed. Starting with the 2026 filing season, the IRS automatically applies first-time abatement to failure-to-file, failure-to-pay, and failure-to-deposit penalties on qualifying 2025 and later returns, with no request needed. You still need a written request if your penalty is for a tax year before 2025, if you do not have a clean three-year history, or if you are claiming reasonable cause instead."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What counts as reasonable cause for IRS penalty abatement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Reasonable cause means something outside your control kept you from filing or paying on time: a serious illness or injury, a death in the family, a natural disaster, a fire, an inability to obtain records, bad advice from a tax professional you relied on, or an IRS error. The letter has to state the facts with dates, explain how the event caused the late filing or payment, and attach whatever proof you have, such as medical records, a death certificate, or a letter from your tax professional."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does the IRS take to decide a penalty abatement request?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A phone request for first-time abatement can be approved on the spot. A written reasonable-cause request sent with Form 843 usually takes 6 to 12 weeks for an initial answer, and complex cases take longer. If the request is denied and you appeal, the appeal can take 6 to 12 months. This tool does not predict any outcome or timeline for your case."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I use Form 843 or just write a letter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Form 843, Claim for Refund and Request for Abatement, is the form for claiming a refund of a penalty already paid or requesting abatement of a penalty still owed. The form alone is a claim; the letter is the argument that supports it. Send the letter with the form, state the tax year, the penalty type, and the amount, and keep a copy of everything. This tool drafts the letter and walks through the form; it does not file anything for you."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if my penalty abatement request is denied?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A denial is not the end. You can appeal the decision, and the appeal is reviewed by an IRS appeals officer rather than the person who denied the request. The appeal usually has to be filed within the time printed on the denial notice, so read that notice carefully and do not miss the window. If the penalty is for a year before 2025 and first-time abatement did not apply, a reasonable-cause argument is the usual next step."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I already paid the penalty. Can I still ask for abatement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Form 843 is the form for claiming a refund of a penalty already paid as well as for requesting abatement of a penalty still owed. The letter states the same facts: the tax year, the penalty type, the amount paid, and the reason the penalty should be removed. Keep your payment confirmation and the original notice, and send the request to the address printed on the notice or on the form instructions."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">IRS Penalty Abatement Letter</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI IRS penalty <span style="color: var(--primary)">abatement letter</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Got an IRS penalty you should not have to pay? Start with the first-time abatement
+            check: for 2025 and later returns the IRS now applies it automatically for many
+            taxpayers, so you may not need a letter at all. If you do need one, enter the penalty
+            from your notice and the facts behind it, and get a formal reasonable-cause letter with
+            Form 843 guidance, ready to mail.
+          </p>
+          <div class="not-tax-pro">
+            <strong>Not a tax professional, not tax advice.</strong> This tool drafts a letter from
+            the facts you enter. It is not a tax professional, it does not decide whether the IRS
+            will abate your penalty, and it does not predict any outcome. Consult a tax professional
+            before you send anything.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> First-time check comes first</span>
+          <span><i></i> Formal letter from your facts</span>
+          <span><i></i> Form 843 filing guidance</span>
+          <span><i></i> Drafts save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Check first-time abatement</strong
+            ><span
+              >Clean three-year history? Penalty for 2025 or later? You may already qualify with no
+              letter needed.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Enter your penalty facts</strong
+            ><span
+              >Tax year, penalty type and amount, notice details, and the reasonable-cause facts
+              with dates. Takes 3 minutes.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Get letter + Form 843 guide</strong
+            ><span
+              >A formal abatement letter, a certified-mail log, and filing guidance, ready to
+              print.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-hidden="true">
+          <span class="lt-step" id="lt-step-1">1 &middot; Eligibility check</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Penalty facts</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Letter + Form 843</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Your abatement request</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label"
+                >What do you need? <span class="cs-req" aria-hidden="true">*</span></label
+              >
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="first-time-check"
+                  aria-pressed="false"
+                >
+                  First-time abatement check
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="reasonable-cause-letter"
+                  aria-pressed="false"
+                >
+                  Reasonable-cause letter
+                </button>
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="form-843-guidance"
+                  aria-pressed="false"
+                >
+                  Form 843 guidance
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="first-time-check" />
+              <div class="lt-mode-tip" id="lt-mode-tip"></div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Letter strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Add the key facts to unlock a strong letter.
+                </p>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="tax_year"
+                    >Tax year <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="tax_year"
+                    type="text"
+                    maxlength="9"
+                    placeholder="e.g. 2024"
+                    data-label="Tax year"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="sender_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="sender_name"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your full name"
+                    data-label="Taxpayer name"
+                    autocomplete="name"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="penalty-type-label"
+                  >Penalty type <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="penalty-type-label">
+                  <input
+                    type="radio"
+                    id="pt_ftf"
+                    name="penalty_type"
+                    value="Failure to file"
+                  /><label class="pill" for="pt_ftf">Failure to file</label>
+                  <input
+                    type="radio"
+                    id="pt_ftp"
+                    name="penalty_type"
+                    value="Failure to pay"
+                  /><label class="pill" for="pt_ftp">Failure to pay</label>
+                  <input
+                    type="radio"
+                    id="pt_acc"
+                    name="penalty_type"
+                    value="Accuracy-related"
+                  /><label class="pill" for="pt_acc">Accuracy-related</label>
+                  <input
+                    type="radio"
+                    id="pt_dep"
+                    name="penalty_type"
+                    value="Failure to deposit"
+                  /><label class="pill" for="pt_dep">Failure to deposit</label>
+                  <input type="radio" id="pt_est" name="penalty_type" value="Estimated tax" /><label
+                    class="pill"
+                    for="pt_est"
+                    >Estimated tax</label
+                  >
+                  <input type="radio" id="pt_other" name="penalty_type" value="Other" /><label
+                    class="pill"
+                    for="pt_other"
+                    >Other</label
+                  >
+                </div>
+                <input
+                  type="hidden"
+                  id="penalty_type"
+                  data-label="Penalty type"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="penalty_amount"
+                    >Penalty amount ($) <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="penalty_amount"
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    placeholder="From your IRS notice"
+                    data-label="Penalty amount"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="abatement_amount"
+                    >Abatement you are requesting ($)
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="abatement_amount"
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    placeholder="Usually the full penalty"
+                    data-label="Proposed abatement amount"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_number"
+                    >Notice number <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="notice_number"
+                    type="text"
+                    maxlength="40"
+                    placeholder="e.g. CP14"
+                    data-label="IRS notice number"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="notice_date"
+                    >Notice date <span class="cs-optional">(optional)</span></label
+                  >
+                  <input
+                    class="lt-input"
+                    id="notice_date"
+                    type="date"
+                    data-label="Notice date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="cause-label"
+                  >What caused the late filing or payment?
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="cause-label">
+                  <input
+                    type="radio"
+                    id="cs_ill"
+                    name="cause_category"
+                    value="Serious illness or injury"
+                  /><label class="pill" for="cs_ill">Illness or injury</label>
+                  <input
+                    type="radio"
+                    id="cs_dis"
+                    name="cause_category"
+                    value="Natural disaster, fire, or casualty"
+                  /><label class="pill" for="cs_dis">Natural disaster</label>
+                  <input
+                    type="radio"
+                    id="cs_death"
+                    name="cause_category"
+                    value="Death in the family"
+                  /><label class="pill" for="cs_death">Death in family</label>
+                  <input
+                    type="radio"
+                    id="cs_adv"
+                    name="cause_category"
+                    value="Bad advice from a tax professional"
+                  /><label class="pill" for="cs_adv">Bad tax advice</label>
+                  <input
+                    type="radio"
+                    id="cs_irserr"
+                    name="cause_category"
+                    value="IRS error"
+                  /><label class="pill" for="cs_irserr">IRS error</label>
+                  <input
+                    type="radio"
+                    id="cs_rec"
+                    name="cause_category"
+                    value="Unable to obtain records"
+                  /><label class="pill" for="cs_rec">Could not get records</label>
+                  <input
+                    type="radio"
+                    id="cs_other"
+                    name="cause_category"
+                    value="Other reasonable cause"
+                  /><label class="pill" for="cs_other">Other</label>
+                </div>
+                <input type="hidden" id="cause_category" data-label="Reasonable-cause category" />
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="compliance-label"
+                  >Your compliance history <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="compliance-label">
+                  <input
+                    type="radio"
+                    id="ch_clean"
+                    name="compliance_history"
+                    value="Clean three-year history, no penalties in the prior three years"
+                  /><label class="pill" for="ch_clean">Clean 3 years</label>
+                  <input
+                    type="radio"
+                    id="ch_pen"
+                    name="compliance_history"
+                    value="Had penalties in the prior three years"
+                  /><label class="pill" for="ch_pen">Had penalties before</label>
+                  <input
+                    type="radio"
+                    id="ch_unsure"
+                    name="compliance_history"
+                    value="Not sure about prior three-year history"
+                  /><label class="pill" for="ch_unsure">Not sure</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="compliance_history"
+                  data-label="Prior compliance history"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" for="tool-input"
+                  >Reasonable-cause facts, in your own words
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  class="lt-input lt-story"
+                  id="tool-input"
+                  data-label="Reasonable-cause facts"
+                  placeholder="Example: I was hospitalized for three weeks in March 2024 and could not file by April 15. My return was filed May 20, 2024, as soon as I was discharged. I have hospital discharge papers and a letter from my doctor."
+                ></textarea>
+                <p class="lt-hint">
+                  Dates, what happened, and how it kept you from filing or paying on time. Plain
+                  facts, in your own words. Attach proof if you have it.
+                </p>
+              </div>
+              <div class="lt-field" style="margin-top: 0.75rem">
+                <label class="lt-label" for="evidence"
+                  >Supporting documents you can attach
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <input
+                  class="lt-input"
+                  id="evidence"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Hospital records, death certificate, letter from tax professional"
+                  data-label="Supporting documents"
+                  autocomplete="off"
+                />
+              </div>
+              <input
+                type="hidden"
+                id="abatement_math"
+                data-label="Computed abatement figures (client-side math from your figures)"
+              />
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate my abatement letter</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not a tax professional, not tax advice.</strong
+                >
+                This tool drafts a letter from your own facts. It does not decide whether the IRS
+                will abate your penalty and it does not predict any outcome. Your prompt is sent to
+                our AI service to generate the letter; nothing is filed for you. Use the figures
+                from your own IRS notice, and consult a tax professional before you send anything.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="abatement-panel" id="abatement-panel" aria-live="polite">
+              <h3>Proposed abatement</h3>
+              <div class="abatement-amount" id="abatement-amount">
+                <small
+                  >Enter the penalty amount and the abatement you are requesting to see the
+                  remaining balance computed from your figures.</small
+                >
+              </div>
+              <p class="abatement-note">
+                Remaining balance equals the penalty amount minus the abatement you request, using
+                only the figures you enter. This is arithmetic on your own figures, not an
+                eligibility result and not a prediction that the IRS will grant the abatement.
+                Interest on the underlying tax is not included here.
+              </p>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="hidden">
+                  <div class="lt-spin"></div>
+                  <p>Drafting your abatement letter&hellip;</p>
+                  <small>From your penalty facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your abatement check or letter will appear here.<br /><br />1. Pick what you
+                    need: check, letter, or Form 843 guide<br />2. Enter your penalty facts<br />3.
+                    Hit Generate</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h"><h2>Filing checklist</h2></div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Do these the day you file. Tap items as you finish them; progress saves on this
+                  device.
+                </p>
+                <ul class="lt-check">
+                  <li>
+                    Check first-time abatement before you write anything. For 2025 and later returns
+                    the IRS may already apply it automatically.
+                  </li>
+                  <li>
+                    Copy the tax year, penalty type, and penalty amount exactly from your IRS
+                    notice. Do not guess the figures.
+                  </li>
+                  <li>
+                    File every required return before you ask for abatement. An unfiled return
+                    blocks the request.
+                  </li>
+                  <li>
+                    Attach proof of the reasonable cause: medical records, a death certificate, a
+                    letter from your tax professional, whatever fits your facts.
+                  </li>
+                  <li>
+                    Send the letter with Form 843 if you apply by mail, to the address on the notice
+                    or the form instructions. Keep a copy of everything you send.
+                  </li>
+                  <li>
+                    If the request is denied, read the denial notice for the appeal window and do
+                    not miss it.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Printable letter + mail log</h2>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Build a clean, one-document version of your letter and certified-mail log, then
+                  print it or save it as a PDF for your records.
+                </p>
+                <div id="request-letter-wrap">
+                  <div id="request-letter" aria-live="polite"></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem">
+                  <button type="button" class="lt-ghost" id="build-letter-btn">
+                    Build printable letter + log
+                  </button>
+                  <button type="button" class="lt-ghost" onclick="printRequestLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved drafts</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a draft to save this exact intake plus your generated output, on this device.
+                  Reload it anytime to refine it or print it later.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    placeholder="Draft name, e.g. 2024 failure-to-pay v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save draft</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No saved drafts yet.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You got a failure-to-pay penalty for 2025 and want to check whether the IRS
+                  already applied first-time abatement automatically before you write anything
+                </li>
+                <li>
+                  You were hospitalized or seriously ill and filed late, and you have the medical
+                  records to show what happened and when
+                </li>
+                <li>
+                  A death in the family kept you from filing on time, and you need a calm, formal
+                  letter that states the facts and asks for the penalty to be removed
+                </li>
+                <li>
+                  A natural disaster or fire destroyed your records, and you need to explain the
+                  delay with the dates and the proof you have
+                </li>
+                <li>
+                  Your tax professional gave you bad advice and you followed it, and you need to
+                  state that plainly with their letter attached
+                </li>
+                <li>
+                  You already paid the penalty and want it refunded, and you need the letter that
+                  goes with Form 843
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            How IRS penalty abatement actually works
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Check first-time abatement before you write anything</h3>
+              <p>
+                Starting with the 2026 filing season, the IRS automatically applies first-time
+                abatement to failure-to-file, failure-to-pay, and failure-to-deposit penalties on
+                qualifying 2025 and later returns. No request needed. If your penalty is for 2025 or
+                later and your history is clean, check whether it was already removed before you
+                spend time on a letter.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Reasonable cause is a story with dates and proof</h3>
+              <p>
+                A reasonable-cause request is not an apology. It is a sequence: what happened, the
+                dates it happened, how it kept you from filing or paying on time, and what you did
+                as soon as you could. The letter works when the facts line up with the dates and the
+                proof is attached. Vague hardship with no dates gets a vague answer.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Form 843 is the form, the letter is the argument</h3>
+              <p>
+                Form 843, Claim for Refund and Request for Abatement, is the form for claiming a
+                refund of a penalty already paid or requesting abatement of a penalty still owed.
+                The form alone is a claim with blanks. The letter is what explains the facts and
+                makes the case. Send them together.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>A clean three-year history is the first-time test</h3>
+              <p>
+                First-time abatement turns on compliance history, generally no penalties in the
+                prior three years, plus every required return filed and the tax paid or arranged to
+                be paid. If you had a penalty in the last three years, first-time abatement does not
+                fit and reasonable cause is the path. The check mode above walks through this from
+                your facts.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The penalty is separate from the tax</h3>
+              <p>
+                Abatement targets the penalty, not the tax you owe. The underlying tax still has to
+                be paid or arranged to be paid, and interest on the tax is a separate figure that
+                this tool does not compute. The abatement math panel above works only on the penalty
+                amount from your notice.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Everything in writing, everything kept</h3>
+              <p>
+                The notice, your letter, Form 843, proof of the cause, and every IRS reply, in one
+                file. Send it certified mail with return receipt requested so you can prove when it
+                arrived. If the request is denied, the denial notice prints the appeal window, and
+                the file is what decides the appeal.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-faq">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Common questions
+          </h2>
+          <details>
+            <summary>Who qualifies for first-time penalty abatement?</summary>
+            <div class="faq-a">
+              First-time abatement is for a taxpayer with a clean compliance history, generally no
+              penalties in the prior three years, who has filed every required return and paid or
+              arranged to pay the tax owed. Starting with the 2026 filing season, the IRS
+              automatically applies it to failure-to-file, failure-to-pay, and failure-to-deposit
+              penalties on qualifying 2025 and later returns, with no request needed. You still need
+              a written request if your penalty is for a tax year before 2025, if you do not have a
+              clean three-year history, or if you are claiming reasonable cause instead. Run the
+              first-time check mode above with your facts.
+            </div>
+          </details>
+          <details>
+            <summary>What counts as reasonable cause for IRS penalty abatement?</summary>
+            <div class="faq-a">
+              Reasonable cause means something outside your control kept you from filing or paying
+              on time: a serious illness or injury, a death in the family, a natural disaster, a
+              fire, an inability to obtain records, bad advice from a tax professional you relied
+              on, or an IRS error. The letter has to state the facts with dates, explain how the
+              event caused the late filing or payment, and attach whatever proof you have, such as
+              medical records, a death certificate, or a letter from your tax professional.
+            </div>
+          </details>
+          <details>
+            <summary>How long does the IRS take to decide a penalty abatement request?</summary>
+            <div class="faq-a">
+              A phone request for first-time abatement can be approved on the spot. A written
+              reasonable-cause request sent with Form 843 usually takes 6 to 12 weeks for an initial
+              answer, and complex cases take longer. If the request is denied and you appeal, the
+              appeal can take 6 to 12 months. This tool does not predict any outcome or timeline for
+              your case.
+            </div>
+          </details>
+          <details>
+            <summary>Should I use Form 843 or just write a letter?</summary>
+            <div class="faq-a">
+              Form 843, Claim for Refund and Request for Abatement, is the form for claiming a
+              refund of a penalty already paid or requesting abatement of a penalty still owed. The
+              form alone is a claim; the letter is the argument that supports it. Send the letter
+              with the form, state the tax year, the penalty type, and the amount, and keep a copy
+              of everything. This tool drafts the letter and walks through the form; it does not
+              file anything for you. The Form 843 guidance mode above covers what goes where.
+            </div>
+          </details>
+          <details>
+            <summary>What happens if my penalty abatement request is denied?</summary>
+            <div class="faq-a">
+              A denial is not the end. You can appeal the decision, and the appeal is reviewed by an
+              IRS appeals officer rather than the person who denied the request. The appeal usually
+              has to be filed within the time printed on the denial notice, so read that notice
+              carefully and do not miss the window. If the penalty is for a year before 2025 and
+              first-time abatement did not apply, a reasonable-cause argument is the usual next
+              step.
+            </div>
+          </details>
+          <details>
+            <summary>I already paid the penalty. Can I still ask for abatement?</summary>
+            <div class="faq-a">
+              Yes. Form 843 is the form for claiming a refund of a penalty already paid as well as
+              for requesting abatement of a penalty still owed. The letter states the same facts:
+              the tax year, the penalty type, the amount paid, and the reason the penalty should be
+              removed. Keep your payment confirmation and the original notice, and send the request
+              to the address printed on the notice or on the form instructions.
+            </div>
+          </details>
+        </div>
+        <div class="lt-related">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h2>
+          <div class="lt-related-grid">
+            <a href="/guides/how-to-write-an-irs-penalty-abatement-letter/"
+              ><strong>How to Write an IRS Penalty Abatement Letter</strong
+              ><small
+                >The companion guide: the automatic abatement for 2025 and later returns, a full
+                template, what counts as reasonable cause, and how long it takes</small
+              ></a
+            >
+            <a href="/tools/ai-irs-installment-agreement-letter/"
+              ><strong>AI IRS Installment Agreement Request Letter</strong
+              ><small
+                >Cannot pay the tax in full? Request a monthly payment plan with Form 9465</small
+              ></a
+            >
+            <a href="/tools/ai-irs-offer-in-compromise-letter/"
+              ><strong>AI IRS Offer in Compromise Letter</strong
+              ><small>Offer to settle the tax debt for less than the full balance</small></a
+            >
+            <a href="/tools/ai-irs-tax-debt-case-companion/"
+              ><strong>AI IRS Tax Debt Case Companion</strong
+              ><small>Map your whole IRS tax debt case: notices, options, and next steps</small></a
+            >
+            <a href="/tools/ai-hardship-letter/"
+              ><strong>AI Hardship Letter</strong
+              ><small
+                >Explain a financial hardship in writing to another creditor, in the same formal
+                style</small
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate letter &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. General information only, not tax advice. Consult a tax
+            professional before you send anything.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261011polish2"></script>
+    <script src="/tools/ai-irs-penalty-abatement-letter/ai-irs-penalty-abatement-letter.js?v=20261106a1"></script>
+  </body>
+</html>
