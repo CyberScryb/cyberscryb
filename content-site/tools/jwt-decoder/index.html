@@ -7,20 +7,20 @@
     <meta charset="UTF-8">
 <meta name="theme-color" content="#09090b">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT Decoder &mdash; Free Online Parser | CyberScryb</title>
-    <meta name="description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
+    <title>Free JWT Decoder &mdash; Decode JSON Web Tokens Online | CyberScryb</title>
+    <meta name="description" content="Decode any JWT online free. Inspect the header, payload claims, and expiry in seconds. 100% client-side, no signup, your token never leaves your browser.">
     <link rel="canonical" href="https://cyberscryb.com/tools/jwt-decoder/">
-    <link rel="icon" type="image/png" href="/mascot-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <meta property="og:title" content="JWT Decoder &mdash; Free Online Parser | CyberScryb">
-    <meta property="og:description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
+    <meta property="og:title" content="Free JWT Decoder &mdash; Decode JSON Web Tokens Online | CyberScryb">
+    <meta property="og:description" content="Decode any JWT online free. Inspect the header, payload claims, and expiry in seconds. 100% client-side, no signup, your token never leaves your browser.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cyberscryb.com/tools/jwt-decoder/">
     <meta property="og:site_name" content="CyberScryb">
     <meta property="og:image" content="https://cyberscryb.com/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JWT Decoder &mdash; Free Online Parser | CyberScryb">
-    <meta name="twitter:description" content="Parse JSON Web Tokens client-side to check headers and payloads with our JWT decoder. Free, instant, runs in your browser. No signup.">
+    <meta name="twitter:title" content="Free JWT Decoder &mdash; Decode JSON Web Tokens Online | CyberScryb">
+    <meta name="twitter:description" content="Decode any JWT online free. Inspect the header, payload claims, and expiry in seconds. 100% client-side, no signup, your token never leaves your browser.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +62,22 @@
             { "@type": "Question", "name": "Does this tool verify JWT signatures?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only DECODES the token to show its contents. Signature verification requires the signing secret or public key, which should be done on your trusted backend." }},
             { "@type": "Question", "name": "Is it safe to paste tokens here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — decoding is done entirely in your browser using vanilla JavaScript. Your token is never sent over the network. Still, avoid pasting production tokens into any online tool when possible." }},
             { "@type": "Question", "name": "What do iat, exp, and sub mean?", "acceptedAnswer": { "@type": "Answer", "text": "iat is 'issued at' (Unix timestamp when the token was created). exp is 'expiration time'. sub is the 'subject', typically a user identifier." }},
-            { "@type": "Question", "name": "Can a JWT be edited without breaking it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Changing the header or payload invalidates the signature. A properly verified server will reject any modified token." }}
+            { "@type": "Question", "name": "Can I edit a JWT without breaking it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Changing the header or payload invalidates the signature. A properly verified server will reject any modified token." }},
+            { "@type": "Question", "name": "Can I decode a JWT without the secret key?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The header and payload are only Base64URL-encoded, not encrypted, so anyone can decode them. The secret key is only needed to verify the signature; decoding never requires it." }},
+            { "@type": "Question", "name": "Is a JWT encrypted? Can anyone read the payload?", "acceptedAnswer": { "@type": "Answer", "text": "No, a standard JWT is signed, not encrypted. Base64URL is an encoding anyone can reverse, so anyone holding the token can read the payload. Never put passwords, personal data, or secrets in a JWT; if the contents must stay secret, use an encrypted token (JWE) instead." }},
+            { "@type": "Question", "name": "How do I check if a JWT is expired?", "acceptedAnswer": { "@type": "Answer", "text": "Decode the token and read the exp claim, a Unix timestamp in seconds. This decoder converts it to a readable date and flags it as expired or still valid. An expired token still decodes normally; expiry only matters when a server validates it." }}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org", "@type": "HowTo",
+        "name": "How to decode a JWT",
+        "description": "Decode a JSON Web Token to inspect its header, payload claims, and expiry in three steps.",
+        "step": [
+            { "@type": "HowToStep", "name": "Copy the token", "text": "Copy the token from your Authorization header, cookie, or log. If it starts with Bearer, strip that word off and keep only the token itself." },
+            { "@type": "HowToStep", "name": "Paste it into the decoder", "text": "Paste the token into the input box. The decoder splits it on its two dots and Base64URL-decodes the header and payload into readable JSON as you paste." },
+            { "@type": "HowToStep", "name": "Read the claims", "text": "Check the signing algorithm in the header, then the payload: subject, audience, issuer, and expiry. The metadata bar converts the Unix timestamps into plain dates and flags an expired token." }
         ]
     }
     </script>
@@ -184,7 +199,7 @@
         <div class="jwt-container">
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">JWT Decoder</h1>
-                <p style="color:var(--text-faint); margin-bottom: 0;">Decode JSON Web Tokens to inspect the header, payload, and signature. Tokens are decoded entirely in your browser.</p>
+                <p style="color:var(--text-faint); margin-bottom: 0;">Paste any JSON Web Token and instantly read its header, payload claims, and expiry. Free, no signup, decoded entirely in your browser &mdash; nothing is uploaded.</p>
             </div>
 
             <div class="warning-banner">
@@ -221,6 +236,48 @@
                 <div class="action-bar"><button class="action-btn" data-copy="jwt-signature">📋 Copy</button></div>
             </div>
 
+            <div class="seo-card" style="background: var(--card); border: 1px solid var(--border); margin-top: 3rem; padding: 2rem; border-radius: 12px;">
+                <h2 style="color: var(--text); margin-bottom: 1rem;">How to Decode a JWT</h2>
+                <ol style="color: var(--text-muted); line-height: 1.8; margin: 0 0 1rem 1.2rem; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Copy the token.</strong> Grab it from your Authorization header, cookie, or log. If it starts with <code>Bearer&nbsp;</code>, strip that word off and paste only the token itself.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Paste it above.</strong> The decoder splits the token on its two dots and Base64URL-decodes the header and payload into readable JSON the moment you paste. No button to press.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text);">Read the claims.</strong> Check the algorithm in the header, then the payload: who it is for (<code>sub</code>, <code>aud</code>), who issued it (<code>iss</code>), and whether it is still alive (<code>exp</code>). The metadata bar converts the Unix timestamps into plain dates and flags an expired token in red.</li>
+                </ol>
+                <p style="color: var(--text-muted); line-height: 1.7; margin: 0;">Stuck with a token that will not decode? Either it is truncated, it has more or fewer than three dot-separated parts, or one part is not valid Base64URL JSON. Copy it again from the source instead of retyping it &mdash; a single missing character breaks the whole string.</p>
+
+                <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">What Is a JWT? The Three Parts</h2>
+                <p style="color: var(--text-muted); line-height: 1.7;">A JSON Web Token (RFC 7519) is a compact, URL-safe way for one party to send claims to another. Every JWT is three Base64URL-encoded segments separated by dots: <code>header.payload.signature</code>.</p>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Header.</strong> Names the signing algorithm (<code>alg</code>, usually HS256 or RS256) and the token type (<code>typ</code>, usually JWT). It may also carry a key id (<code>kid</code>) telling the verifier which key to use.</p>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Payload.</strong> The claims: statements about the user and the token itself, such as the subject, issuer, audience, and expiry. This is the part you are usually debugging.</p>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Signature.</strong> Created by signing the header and payload with a secret or private key. It proves the token was not altered after it was issued. This decoder shows the raw signature segment but does not verify it &mdash; verification needs the key and belongs on your server.</p>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0;">The part most people get wrong: a JWT is <strong style="color: var(--text);">signed, not encrypted</strong>. Base64URL is an encoding anyone can reverse, so anyone holding the token can read the payload. Never put passwords, personal data, or secrets in a JWT. If the contents must stay secret, use an encrypted token (JWE) instead.</p>
+
+                <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Standard JWT Claims</h2>
+                <p style="color: var(--text-muted); line-height: 1.7;">RFC 7519 defines seven registered claims. No token carries all of them, but when they appear, this is what they mean. The time claims (<code>exp</code>, <code>nbf</code>, <code>iat</code>) are Unix timestamps in seconds since January 1, 1970 UTC, not milliseconds.</p>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                    <thead><tr style="text-align: left; border-bottom: 1px solid var(--border);"><th style="padding: 0.5rem 0.75rem; color: var(--text);">Claim</th><th style="padding: 0.5rem 0.75rem; color: var(--text);">Name</th><th style="padding: 0.5rem 0.75rem; color: var(--text);">What it means</th></tr></thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>iss</code></td><td style="padding: 0.5rem 0.75rem;">Issuer</td><td style="padding: 0.5rem 0.75rem;">Who created the token. A verifier should only accept issuers it trusts.</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>sub</code></td><td style="padding: 0.5rem 0.75rem;">Subject</td><td style="padding: 0.5rem 0.75rem;">Who the token is about, usually a user id.</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>aud</code></td><td style="padding: 0.5rem 0.75rem;">Audience</td><td style="padding: 0.5rem 0.75rem;">Who the token is intended for, usually your app or API.</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>exp</code></td><td style="padding: 0.5rem 0.75rem;">Expiration time</td><td style="padding: 0.5rem 0.75rem;">Unix timestamp after which the token must be rejected.</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>nbf</code></td><td style="padding: 0.5rem 0.75rem;">Not before</td><td style="padding: 0.5rem 0.75rem;">Unix timestamp before which the token is not valid yet.</td></tr>
+                        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 0.5rem 0.75rem;"><code>iat</code></td><td style="padding: 0.5rem 0.75rem;">Issued at</td><td style="padding: 0.5rem 0.75rem;">Unix timestamp when the token was created.</td></tr>
+                        <tr><td style="padding: 0.5rem 0.75rem;"><code>jti</code></td><td style="padding: 0.5rem 0.75rem;">JWT ID</td><td style="padding: 0.5rem 0.75rem;">A unique id for the token, used to track or revoke individual tokens.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Who Uses a JWT Decoder</h2>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Debugging a 401.</strong> An API returns Unauthorized and the token looks fine. Decode it and the answer is usually in the claims: the wrong audience, the wrong issuer, or an <code>exp</code> that passed an hour ago.</p>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Checking expiry before a demo or deploy.</strong> Paste the token you are about to use and read the expiry date in plain English instead of doing Unix-timestamp math in your head.</p>
+                <p style="color: var(--text-muted); line-height: 1.7;"><strong style="color: var(--text);">Inspecting roles and scopes.</strong> Identity providers stuff custom claims into the payload: roles, permissions, tenant ids, email. Decoding shows exactly what your app will see when it parses the same token.</p>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0;"><strong style="color: var(--text);">Learning how auth works.</strong> A JWT is the fastest way to see a real auth token from the inside. Paste the sample token with the Load Sample button and watch the header, payload, and signature fall apart into readable pieces.</p>
+
+                <h2 style="color: var(--text); margin-bottom: 1rem; margin-top: 2rem;">Decoded Does Not Mean Valid</h2>
+                <p style="color: var(--text-muted); line-height: 1.7;">Decoding only reads a token. It does not prove the token is genuine, unexpired, or meant for you. A token with a valid-looking payload and a forged signature decodes perfectly and should still be rejected. Validation means checking the signature with the secret or public key, then enforcing <code>exp</code>, <code>nbf</code>, <code>iss</code>, and <code>aud</code> &mdash; all of that happens on your server, never in a decoder.</p>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0;">Treat live tokens as credentials. Prefer an expired token, a test token, or the built-in sample when you can, and never paste a private key into any online tool.</p>
+            </div>
+
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <details><summary>What is a JWT?</summary><p>A JSON Web Token is a compact, URL-safe token format used to transmit claims between two parties. It is made of three Base64URL-encoded parts separated by dots: header, payload, and signature.</p></details>
@@ -228,6 +285,9 @@
                 <details><summary>Is it safe to paste tokens here?</summary><p>Yes &mdash; decoding is done entirely in your browser. Your token is never sent over the network. Still, avoid pasting real production tokens into any third-party tool when you can avoid it.</p></details>
                 <details><summary>What do iat, exp, and sub mean?</summary><p><code>iat</code> is "issued at" (Unix timestamp when the token was created). <code>exp</code> is the expiration timestamp. <code>sub</code> is the subject &mdash; typically a user identifier.</p></details>
                 <details><summary>Can I edit a JWT without breaking it?</summary><p>No. Any change to the header or payload invalidates the signature. A properly configured server will reject any modified token.</p></details>
+                <details><summary>Can I decode a JWT without the secret key?</summary><p>Yes. The header and payload are only Base64URL-encoded, not encrypted, so anyone can decode them. The secret key is only needed to verify the signature &mdash; decoding never requires it.</p></details>
+                <details><summary>Is a JWT encrypted? Can anyone read the payload?</summary><p>No, a standard JWT is signed, not encrypted. Base64URL is an encoding anyone can reverse, so anyone holding the token can read the payload. Never put passwords, personal data, or secrets in a JWT &mdash; if the contents must stay secret, use an encrypted token (JWE) instead.</p></details>
+                <details><summary>How do I check if a JWT is expired?</summary><p>Decode the token and read the <code>exp</code> claim, a Unix timestamp in seconds. This decoder converts it to a readable date and flags it as expired or still valid. An expired token still decodes normally &mdash; expiry only matters when a server validates it.</p></details>
             </div>
         </div>
 
@@ -253,6 +313,10 @@
                 <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Password Strength Checker</strong>
                 <span style="font-size:0.85rem; color: var(--text-muted);">Entropy analysis and crack-time estimation.</span>
             </a>
+            <a href="/tools/epoch-converter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted); transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Epoch Converter</strong>
+                <span style="font-size:0.85rem; color: var(--text-muted);">Convert JWT timestamps (iat, exp, nbf) to readable dates.</span>
+            </a>
         </div>
     </section>
 
@@ -265,17 +329,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
         </div>

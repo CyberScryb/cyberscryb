@@ -58,6 +58,9 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-eviction-notice-response-letter',
     'ai-irs-installment-agreement-letter',
     'ai-irs-offer-in-compromise-letter',
+    'ai-irs-penalty-abatement-letter',
+    'ai-ssdi-appeal-letter',
+    'ai-performance-review-rebuttal-letter',
     'ai-irs-tax-debt-case-companion',
     'sap-appeal-letter',
     'utility-shutoff-letter',
@@ -107,11 +110,14 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-grant-application-writer',
     'ai-rental-application-companion',
     'ai-workplace-accommodation-companion',
+    'ai-goodwill-letter-writer',
+    'ai-exit-interview-prep-coach',
+    'ai-lemon-law-demand-letter',
   ];
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-  test('has exactly 77 keys', () => {
+  test('has exactly 88 keys', () => {
     expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
   });
 
