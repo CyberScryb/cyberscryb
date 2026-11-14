@@ -117,11 +117,12 @@ describe('AI_PROMPTS dispatch table', () => {
     'ai-small-claims-court-prep-coach',
     'ai-ssdi-alj-hearing-prep-coach',
     'ai-workers-comp-hearing-prep-coach',
+    'ai-debt-collection-defense-prep-coach',
   ];
 
   const PARAM_DRIVEN_KEYS = ['child-support-calculator', 'spousal-support-calculator'];
 
-  test('has exactly 92 keys', () => {
+  test('has exactly 93 keys', () => {
     expect(Object.keys(AI_PROMPTS).sort()).toEqual(EXPECTED_KEYS.sort());
   });
 
