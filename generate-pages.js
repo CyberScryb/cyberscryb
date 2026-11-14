@@ -1492,7 +1492,6 @@ function generateSitemap(generatedPages) {
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
-    'refund-request',
     'ai-workplace-accommodation-companion',
   ];
 
@@ -1858,7 +1857,6 @@ function manageRobotsMeta() {
     'small-business-funding-finder',
     'ai-grant-application-writer',
     'grant-application-tracker',
-    'refund-request',
     'ai-workplace-accommodation-companion',
   ]);
 
