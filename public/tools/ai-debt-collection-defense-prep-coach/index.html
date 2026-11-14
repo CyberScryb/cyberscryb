@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Debt Collection Lawsuit Defense Prep Coach &mdash; Free Defense Prep Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI coach for your debt collection lawsuit: a defense strategy from your facts, a full prep packet (evidence checklist, debt timeline, opening statement, mock Q&A), and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-debt-collection-defense-prep-coach/" />
+    <meta
+      property="og:title"
+      content="AI Debt Collection Lawsuit Defense Prep Coach — Free Defense Prep Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI coach for your debt collection lawsuit: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-debt-collection-defense-prep-coach/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Debt Collection Lawsuit Defense Prep Coach — Free Defense Prep Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI coach for your debt collection lawsuit: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      .mock-transcript {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: 340px;
+        overflow-y: auto;
+        margin-bottom: 0.75rem;
+      }
+      .mock-bubble {
+        padding: 0.6rem 0.85rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .mock-bubble.judge {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: var(--text);
+      }
+      .mock-bubble.judge strong {
+        color: #f87171;
+      }
+      .mock-bubble.user {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        align-self: flex-end;
+        max-width: 92%;
+      }
+      .mock-bubble.user strong {
+        color: var(--text);
+      }
+      .mock-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.6rem;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a packet first, then print');
+          else alert('Generate a packet first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Debt Collection Lawsuit Defense Prep Coach",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-debt-collection-defense-prep-coach/",
+        "description": "Free AI coach for debt collection lawsuits: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What happens if I ignore a debt collection lawsuit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you do not answer the lawsuit by the deadline printed on your summons, the collector can ask the court for a default judgment, which is a ruling in the collector's favor without a hearing. After a judgment, the collector can ask the court for collection tools such as wage garnishment or a bank levy, depending on your state. Ignoring the lawsuit never makes the debt go away. Answering on time keeps your defenses alive. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I answer a debt collection summons?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You file a written answer with the court before the deadline printed on your summons. The answer responds to each numbered claim in the complaint, usually admitting, denying, or saying you do not have enough information to answer, and states your defenses, such as mistaken identity, wrong amount, or an expired time limit to sue. Send a copy to the collector or its lawyer, keep proof of everything you file and send, and keep a copy for yourself. The prep packet mode drafts your answer checklist and defenses from your facts. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the statute of limitations on debt?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The statute of limitations is the time limit for a collector to sue over a debt. It varies by state and by the type of debt, and the clock usually runs from the last payment or the last activity on the account. If the time limit has run out, that can be a defense, but you still have to raise it in your answer; the court does not raise it for you. Never admit the debt is yours or make a payment without checking the time limit first, because a payment can restart the clock in some states. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if the debt is not mine?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mistaken identity is one of the most common defenses in debt collection lawsuits: wrong person, same name, a debt that belonged to a family member, or an account that was never yours. Ask the collector for validation of the debt in writing, gather every record that shows the account is not yours, and state the defense clearly in your answer. Keep copies of everything you send and receive. Do not agree the debt is yours in court or in writing if it is not. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a default judgment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A default judgment is what the court enters when the person sued does not answer the lawsuit by the deadline. The collector wins without having to prove the debt at a hearing, and the judgment then lets the collector ask the court for wage garnishment, a bank levy, or a lien, depending on your state. Filing an answer on time is what stops a default judgment. If one was already entered, ask a legal aid organization or a consumer attorney right away about your options; some courts allow a late challenge in limited situations. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I bring to a debt collection hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bring the summons and complaint, a copy of the answer you filed, your statements and payment records for the account, any settlement or payment letters, your written validation request and the collector's reply, and a dated timeline of the debt from your own records. Bring copies for the judge and the collector's lawyer, and keep your originals. Organize it in the order the judge will ask about it: the debt, the amount, the payments, and your defense. The prep packet turns your evidence list into a checklist. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a debt collector garnish my wages or bank account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In most cases a collector cannot garnish wages or levy a bank account until it has a court judgment against you. After a judgment, the collector can ask the court for garnishment or a levy, and the rules, limits, and protected income vary by state. Some income, such as Social Security in many states, is protected, but you usually have to claim the protection. Filing an answer and showing up are what keep a judgment from being entered by default. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool prepares you for a debt collection lawsuit from the facts you enter: strategy, a prep packet, and mock practice. It does not assess your case, predict the outcome, or cite law. For a large amount, a complicated case, or if anything sensitive comes up, review with a consumer attorney or a legal aid organization before your answer deadline passes."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to prepare for a debt collection lawsuit with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your lawsuit facts",
+            "text": "The summons, the collector, the original creditor, the amount claimed, the date you were served, the answer deadline printed on your summons, your court date, your last payment date, your defense, and the evidence you have."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Generate your defense strategy and packet",
+            "text": "Get the defense strategy first, then the full prep packet: evidence checklist, debt and payment timeline, opening statement draft, and a mock Q&A set."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Practice the mock cross-examination",
+            "text": "Rehearse with the AI as the judge: one question at a time, a short note on each answer, up to 8 exchanges."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Debt Collection Lawsuit Defense Prep Coach</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI debt collection lawsuit <span style="color: var(--primary)">defense prep coach</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            You were served with a debt collection lawsuit and the clock on your answer is already
+            running. Enter your facts once and get a defense strategy that spots the issues the
+            judge must decide, a full prep packet with an evidence checklist and opening statement,
+            and a mock cross-examination so you rehearse the questions before they count.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal advice.</strong> This is a lawsuit-defense preparation tool, not
+            legal advice. It builds strategy, a prep packet, and mock practice from the facts you
+            enter. It does not tell you whether the debt is yours, whether you will win, or what
+            the law requires. Have a consumer attorney or a legal aid organization review your
+            case before your answer deadline passes.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Defense strategy from your facts</span>
+          <span><i></i> Full prep packet artifact</span>
+          <span><i></i> Mock cross-examination with an AI judge</span>
+          <span><i></i> Prep sessions save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your lawsuit facts</strong
+            ><span
+              >The summons, the collector, the original creditor, the amount claimed, the date you
+              were served, the answer deadline, your court date, and the evidence you have.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Generate strategy &amp; packet</strong
+            ><span
+              >Get the defense strategy first, then the full prep packet: evidence checklist,
+              debt and payment timeline, opening statement draft, and a mock Q&amp;A set.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Practice the mock cross-examination</strong
+            ><span
+              >Rehearse with the AI as the judge: one question at a time, a short note on each
+              answer, up to 8 exchanges.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Strategy &amp; packet</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Mock cross-examination</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your defense case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Coaching mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="defense-strategy"
+                  aria-pressed="false"
+                >
+                  Defense strategy
+                </button>
+                <button type="button" class="lt-chip" data-mode="prep-packet" aria-pressed="false">
+                  Prep packet
+                </button>
+                <button type="button" class="lt-chip" data-mode="mock-hearing" aria-pressed="false">
+                  Mock cross-examination
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="defense-strategy" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Defense strategy mode</strong>Issue-spotting from your facts: whether the
+                collector can prove the debt is yours and the amount is right, your strongest
+                defenses, and the weak spots to prepare for. Run this first; the prep packet reuses
+                it.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick your defense and state, then add the debt details and the answer deadline.
+                </p>
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="defendant_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="defendant_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Your name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="defendant_state"
+                    >State <span class="cs-req" aria-hidden="true">*</span></label
+                  ><select
+                    class="lt-input"
+                    id="defendant_state"
+                    data-label="State"
+                    aria-required="true"
+                  >
+                    <option value="">Select your state</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
+                    <option>Iowa</option>
+                    <option>Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option>Maryland</option>
+                    <option>Massachusetts</option>
+                    <option>Michigan</option>
+                    <option>Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New Hampshire</option>
+                    <option>New Jersey</option>
+                    <option>New Mexico</option>
+                    <option>New York</option>
+                    <option>North Carolina</option>
+                    <option>North Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode Island</option>
+                    <option>South Carolina</option>
+                    <option>South Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option>Washington</option>
+                    <option>West Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="collector_name"
+                  >Who is suing you (plaintiff or collector)
+                  <span class="cs-optional">(optional)</span></label
+                ><input
+                  class="lt-input"
+                  id="collector_name"
+                  type="text"
+                  placeholder="e.g. Midland Credit Management, or the law firm on the summons"
+                  data-label="Who is suing you"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="original_creditor"
+                    >Original creditor <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="original_creditor"
+                    type="text"
+                    placeholder="e.g. Chase Bank, Capital One"
+                    data-label="Original creditor"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="account_number"
+                    >Account number from the summons
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="account_number"
+                    type="text"
+                    placeholder="e.g. ending in 4821"
+                    data-label="Account number"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="amount_claimed"
+                    >Amount the lawsuit claims you owe
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="amount_claimed"
+                    type="text"
+                    placeholder="e.g. $4,382.19"
+                    data-label="Amount claimed"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="last_payment_date"
+                    >Last payment you made on this debt
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="last_payment_date"
+                    type="date"
+                    data-label="Last payment date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="served_date"
+                    >Date you were served <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="served_date"
+                    type="date"
+                    data-label="Date served"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="answer_deadline"
+                    >Answer deadline printed on your summons
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="answer_deadline"
+                    type="date"
+                    data-label="Answer deadline"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="court_date"
+                    >Court date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="court_date"
+                    type="date"
+                    data-label="Court date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="court_name"
+                    >Court name or county <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="court_name"
+                    type="text"
+                    placeholder="e.g. Bonner County District Court"
+                    data-label="Court name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="deadline-box" id="deadline-box" aria-live="polite">
+                <strong>Answer deadline countdown:</strong> enter the answer deadline printed on
+                your summons to see how many days you have left, the date you were served, and
+                your court date. Calendar math from dates you entered. Your answer deadline is
+                printed on your summons: verify it with the court clerk and get it in writing.
+              </div>
+              <input
+                type="hidden"
+                id="deadline_math"
+                data-label="Computed answer deadline countdown, days since served, and days until the court date (calendar math from your dates)"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="defense-label"
+                  >Your defense <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="defense-label">
+                  <input
+                    type="radio"
+                    id="dr_identity"
+                    name="defense_reason"
+                    value="This is not my debt"
+                  /><label class="pill" for="dr_identity">Not my debt</label>
+                  <input
+                    type="radio"
+                    id="dr_amount"
+                    name="defense_reason"
+                    value="The amount claimed is wrong"
+                  /><label class="pill" for="dr_amount">Wrong amount</label>
+                  <input
+                    type="radio"
+                    id="dr_sol"
+                    name="defense_reason"
+                    value="The time limit to sue has run out"
+                  /><label class="pill" for="dr_sol">Time limit expired</label>
+                  <input
+                    type="radio"
+                    id="dr_standing"
+                    name="defense_reason"
+                    value="The collector cannot prove it owns the debt"
+                  /><label class="pill" for="dr_standing">Cannot prove ownership</label>
+                  <input
+                    type="radio"
+                    id="dr_paid"
+                    name="defense_reason"
+                    value="I already paid or settled this debt"
+                  /><label class="pill" for="dr_paid">Already paid or settled</label>
+                  <input type="radio" id="dr_other" name="defense_reason" value="Other" /><label
+                    class="pill"
+                    for="dr_other"
+                    >Other defense</label
+                  >
+                </div>
+                <input
+                  type="hidden"
+                  id="defense_reason"
+                  data-label="Defense"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="debt_details"
+                  >The debt and what happened <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="debt_details"
+                  class="lt-area"
+                  data-label="Debt details"
+                  aria-required="true"
+                  placeholder="Example: I had a credit card with Chase in 2021. I stopped paying in early 2023 after I lost my job. I was served on October 20, 2026 by a company I have never heard of, claiming I owe $4,382.19. I do not recognize the account number on the summons."
+                ></textarea>
+                <p class="lt-hint">
+                  What the debt was, when it started, when you last paid, who is suing you now, and
+                  what does not match. Use the facts from your summons and your own records.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="payment_history"
+                  >Payments, settlement offers, and letters so far
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="payment_history"
+                  class="lt-area"
+                  data-label="Payment history"
+                  placeholder="Example: I paid $50 a month through 2022. In 2024 a collector offered to settle for $1,800 and I sent $900 before the payments stopped. I sent a written request for validation in September 2026 and got no reply."
+                ></textarea>
+                <p class="lt-hint">
+                  What you paid and when, any settlement offer or payment plan, any validation
+                  request you sent and what came back, and any letters from the collector.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Evidence you have <span class="cs-optional">(optional)</span></label
+                >
+                <div id="evidence-list"></div>
+                <button type="button" class="lt-ghost" id="evidence-add" style="margin-top: 0.5rem">
+                  + Add evidence item
+                </button>
+                <p class="lt-hint">
+                  The summons and complaint, your account statements, payment records, settlement
+                  letters, your validation request and any reply, the collector's letters, and
+                  anything that shows what the debt was and what you paid.
+                </p>
+                <input type="hidden" id="evidence_summary" data-label="Evidence you have" />
+              </div>
+              <input
+                type="hidden"
+                id="defense_strategy"
+                data-label="Defense strategy from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Anything else the judge should know
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: The summons lists an address I have not lived at since 2022. The collector called my workplace twice after I told them not to. I have a receipt for the $900 settlement payment."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; One or two sentences is enough.
+                  Plain facts, in your own words.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal advice. This is a lawsuit-defense preparation tool for a consumer
+                  attorney to review with you.</strong
+                >
+                It builds strategy, a prep packet, and mock practice from your facts only. It does
+                not assess whether the debt is yours, whether you will win, or what the law
+                requires. It will not invent facts or cite law. When you generate, your prompt is
+                sent to our AI service to produce the output. An attorney decides what fits
+                your situation before your court date.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Building your prep&hellip;</p>
+                  <small>From your lawsuit facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your defense strategy and prep packet will appear here.<br /><br />1. Enter
+                    the debt, your defense, and the answer deadline<br />2. Generate the defense
+                    strategy first<br />3. Then generate the full prep packet</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card" id="mock-card">
+              <div class="lt-card-h">
+                <h2>Mock cross-examination room</h2>
+                <span class="lt-draft-badge" id="mock-status">Not started</span>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  The AI plays the judge: one question at a time, a short note on each answer, up to
+                  8 exchanges. Fill in your intake first so the questions fit your debt and your
+                  defenses.
+                </p>
+                <div id="mock-transcript" class="mock-transcript" aria-live="polite">
+                  <p class="lt-side-note" id="mock-empty" style="margin: 0">
+                    No mock cross-examination yet. Press &ldquo;Start mock
+                    cross-examination&rdquo; when your intake is ready.
+                  </p>
+                </div>
+                <div class="draft-row" style="margin-top: 0">
+                  <button type="button" class="lt-gen" id="mock-start-btn" style="flex: 1">
+                    <span class="btn-text">Start mock cross-examination</span>
+                  </button>
+                </div>
+                <div id="mock-answer-row" class="draft-row" hidden>
+                  <input
+                    class="lt-input"
+                    id="mock-answer"
+                    type="text"
+                    aria-label="Your answer to the judge's question"
+                    placeholder="Type your answer, then ask the next question"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="mock-next-btn">
+                    Ask next question
+                  </button>
+                </div>
+                <div class="mock-meta">
+                  <span id="mock-count">0 of 8 exchanges</span>
+                  <button type="button" class="lt-ghost" id="mock-end-btn" hidden>
+                    End mock cross-examination
+                  </button>
+                </div>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download prep packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved prep sessions</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a session to save this exact intake plus your generated strategy, packet, and
+                  mock transcript, on this device. Reload it anytime to keep preparing.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    aria-label="Session name"
+                    placeholder="Session name, e.g. Nov court prep v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save session</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved sessions yet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You were served with a summons for a credit card debt you do not recognize, or a
+                  debt that was sold to a buyer you have never heard of, and you need to answer
+                  before the deadline on the summons
+                </li>
+                <li>
+                  The amount the lawsuit claims is wrong: fees, interest, or payments that were
+                  never credited, and you need the real numbers organized
+                </li>
+                <li>
+                  You already paid or settled the debt and the collector is suing anyway, and you
+                  need the payment records and settlement letters in one file
+                </li>
+                <li>
+                  Your last payment was years ago and the time limit to sue may have run out, and
+                  you need to raise that defense in your answer
+                </li>
+                <li>
+                  You want to answer the summons yourself but need the answer, the defenses, and
+                  the evidence organized first
+                </li>
+                <li>
+                  You have a court date and want to rehearse the questions the collector's lawyer
+                  will ask, with feedback on each answer
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>Answer before the deadline</h3>
+              <p>
+                The deadline to answer is printed on your summons, and it is the only date that
+                matters first. Miss it and the collector can win by default without ever proving
+                the debt. File the answer with the court, send a copy to the collector or its
+                lawyer, and keep proof of both. The countdown box above works from the date you
+                enter, so copy it straight off the summons.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The collector has to prove it</h3>
+              <p>
+                A debt collection lawsuit is the collector's case to prove, not yours to disprove.
+                It has to show the debt is yours, the amount is correct, and it has the right to
+                collect it. That is why the strongest defenses are usually the simplest: wrong
+                person, wrong amount, no proof of ownership, or a time limit that has run out.
+                Your job is to make the collector show its work.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Records beat memory</h3>
+              <p>
+                &ldquo;I think I paid that&rdquo; persuades no one. Statements that show the
+                account, payment records with dates, a settlement letter, your written validation
+                request and the reply or the silence that followed: those decide hearings. Gather
+                every record before you file anything, and send new evidence to the court the way
+                your court requires, not by guessing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Never miss the court date</h3>
+              <p>
+                A no-show can end the case against you, and getting a new hearing takes months. If
+                the date truly does not work, contact the court clerk before the hearing, not
+                after, and ask how to request a change. Treat the court date like the court date
+                it is, and keep every letter and record organized while you wait.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>What happens if I ignore a debt collection lawsuit?</summary>
+              <p>
+                If you do not answer the lawsuit by the deadline printed on your summons, the
+                collector can ask the court for a default judgment, which is a ruling in the
+                collector's favor without a hearing. After a judgment, the collector can ask the
+                court for collection tools such as wage garnishment or a bank levy, depending on
+                your state. Ignoring the lawsuit never makes the debt go away. Answering on time
+                keeps your defenses alive. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How do I answer a debt collection summons?</summary>
+              <p>
+                You file a written answer with the court before the deadline printed on your
+                summons. The answer responds to each numbered claim in the complaint, usually
+                admitting, denying, or saying you do not have enough information to answer, and
+                states your defenses, such as mistaken identity, wrong amount, or an expired time
+                limit to sue. Send a copy to the collector or its lawyer, keep proof of everything
+                you file and send, and keep a copy for yourself. The prep packet mode drafts your
+                answer checklist and defenses from your facts.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What is the statute of limitations on debt?</summary>
+              <p>
+                The statute of limitations is the time limit for a collector to sue over a debt. It
+                varies by state and by the type of debt, and the clock usually runs from the last
+                payment or the last activity on the account. If the time limit has run out, that
+                can be a defense, but you still have to raise it in your answer; the court does
+                not raise it for you. Never admit the debt is yours or make a payment without
+                checking the time limit first, because a payment can restart the clock in some
+                states. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What if the debt is not mine?</summary>
+              <p>
+                Mistaken identity is one of the most common defenses in debt collection lawsuits:
+                wrong person, same name, a debt that belonged to a family member, or an account
+                that was never yours. Ask the collector for validation of the debt in writing,
+                gather every record that shows the account is not yours, and state the defense
+                clearly in your answer. Keep copies of everything you send and receive. Do not
+                agree the debt is yours in court or in writing if it is not. This is general
+                information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What is a default judgment?</summary>
+              <p>
+                A default judgment is what the court enters when the person sued does not answer
+                the lawsuit by the deadline. The collector wins without having to prove the debt at
+                a hearing, and the judgment then lets the collector ask the court for wage
+                garnishment, a bank levy, or a lien, depending on your state. Filing an answer on
+                time is what stops a default judgment. If one was already entered, ask a legal aid
+                organization or a consumer attorney right away about your options; some courts
+                allow a late challenge in limited situations. This is general information, not
+                legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should I bring to a debt collection hearing?</summary>
+              <p>
+                Bring the summons and complaint, a copy of the answer you filed, your statements
+                and payment records for the account, any settlement or payment letters, your
+                written validation request and the collector's reply, and a dated timeline of the
+                debt from your own records. Bring copies for the judge and the collector's lawyer,
+                and keep your originals. Organize it in the order the judge will ask about it: the
+                debt, the amount, the payments, and your defense. The prep packet turns your
+                evidence list into a checklist.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can a debt collector garnish my wages or bank account?</summary>
+              <p>
+                In most cases a collector cannot garnish wages or levy a bank account until it has
+                a court judgment against you. After a judgment, the collector can ask the court for
+                garnishment or a levy, and the rules, limits, and protected income vary by state.
+                Some income, such as Social Security in many states, is protected, but you usually
+                have to claim the protection. Filing an answer and showing up are what keep a
+                judgment from being entered by default. This is general information, not legal
+                advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool prepares you for a debt collection lawsuit from the facts you enter:
+                strategy, a prep packet, and mock practice. It does not assess your case, predict
+                the outcome, or cite law. For a large amount, a complicated case, or if anything
+                sensitive comes up, review with a consumer attorney or a legal aid organization
+                before your answer deadline passes.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-defend-a-debt-collection-lawsuit/"
+              ><strong>How to Defend a Debt Collection Lawsuit</strong
+              ><small
+                >The companion guide: how debt collection lawsuits run, the defenses, the answer deadline, the full method</small
+              ></a
+            >
+            <a href="/tools/ai-small-claims-court-prep-coach/"
+              ><strong>AI Small Claims Court Prep Coach</strong
+              ><small>Prep for a different court case: same method, smaller claims</small></a
+            >
+            <a href="/tools/medical-debt-dispute/"
+              ><strong>Medical Debt Dispute</strong
+              ><small>Dispute a medical bill before it becomes a lawsuit</small></a
+            >
+            <a href="/tools/debt-payoff-calculator/"
+              ><strong>Debt Payoff Calculator</strong
+              ><small>Work out what paying a debt down actually costs, month by month</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal advice. Review every defense plan with a consumer
+            attorney or legal aid office before your court date.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script src="/tools/ai-debt-collection-defense-prep-coach/ai-debt-collection-defense-prep-coach.js?v=20261114a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'debt_details',
+          served_date: 'served_date',
+          state: 'defendant_state',
+          sender: 'defendant_name',
+          evidence: 'tool-input',
+        });
+      })();
+    </script>
+  </body>
+</html>
