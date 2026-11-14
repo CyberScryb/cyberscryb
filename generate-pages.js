@@ -1648,6 +1648,7 @@ function generateSitemap(generatedPages) {
     'how-to-defend-a-debt-collection-lawsuit',
     'how-to-prepare-for-a-workers-compensation-hearing',
     'how-to-prepare-for-an-immigration-court-hearing',
+    'how-to-prepare-for-a-va-disability-board-hearing',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
