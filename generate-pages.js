@@ -1649,6 +1649,7 @@ function generateSitemap(generatedPages) {
     'how-to-prepare-for-a-workers-compensation-hearing',
     'how-to-prepare-for-an-immigration-court-hearing',
     'how-to-prepare-for-a-va-disability-board-hearing',
+    'how-to-stop-a-wage-garnishment',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
