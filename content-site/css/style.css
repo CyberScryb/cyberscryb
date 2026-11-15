@@ -83,6 +83,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* WCAG 2.2 SC 2.4.11 Focus Not Obscured: the sticky header (~57px) must
+     not cover a focused element or anchor target scrolled into view. */
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -231,9 +234,11 @@ select:focus {
   background: var(--card);
 }
 
+/* One system focus ring (WCAG 2.2 SC 2.4.11): 2px #f87171 is 7.19:1 on page
+   bg and 6.40:1 on card bg, clearing the 3:1 minimum on every dark surface. */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--primary-soft);
   outline-offset: 2px;
 }
 
@@ -1387,15 +1392,22 @@ textarea:hover,
 select:hover {
   border-color: rgba(220, 38, 38, 0.35);
 }
-input[type='email']:focus-visible,
-input[type='text']:focus-visible,
+/* Keyboard focus on fields gets a solid ring. The old rule relied on the
+   3px glow alone, which composites to ~1.3:1 against the page bg, below the
+   WCAG 2.2 SC 2.4.11 3:1 minimum. The :not() chain ties the :focus rule's
+   specificity so this wins by source order; without it that rule's
+   outline:none would still win on text/email inputs. */
+input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):not(
+    [type='reset']
+  ):focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 .cta-button:focus-visible,
 .cta-attention:focus-visible,
 .cta-secondary:focus-visible,
 .btn-primary:focus-visible {
-  outline: none;
+  outline: 2px solid var(--primary-soft);
+  outline-offset: 2px;
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
