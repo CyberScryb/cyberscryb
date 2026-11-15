@@ -115,6 +115,17 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
 }
 
+/* Keyboard focus gets a solid ring: the :focus glow above composites to
+   ~1.1:1 against the page bg, below the WCAG 2.2 SC 2.4.11 3:1 minimum.
+   #f87171 is 7.19:1 on page bg, 6.40:1 on card bg. Same selectors, later
+   in the file, so this wins over the :focus outline:none. */
+textarea:focus-visible,
+input[type='text']:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-soft, #f87171);
+  outline-offset: 2px;
+}
+
 .radio-group,
 .toggle-group {
   display: flex;
@@ -355,6 +366,10 @@ select:focus {
   outline: none;
   border-color: #dc2626;
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+}
+.gate-form input:focus-visible {
+  outline: 2px solid var(--primary-soft, #f87171);
+  outline-offset: 2px;
 }
 .gate-form input::placeholder {
   color: var(--text-faint, #5c4a3d);
