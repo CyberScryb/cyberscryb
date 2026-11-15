@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#09090b">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Percentage Calculator — Free Online Percent Calculator | CyberScryb</title>
-<meta name="description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Instant answers in your browser, no signup.">
+<meta name="description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Work out discounts, tips, tax, and grades instantly in your browser, no signup.">
 
 <link rel="canonical" href="https://cyberscryb.com/tools/percentage-calculator/">
 <meta property="og:title" content="Percentage Calculator — Free Online Percent Calculator | CyberScryb">
-<meta property="og:description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Instant answers, no signup.">
+<meta property="og:description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Work out discounts, tips, tax, and grades instantly, no signup.">
 <meta property="og:url" content="https://cyberscryb.com/tools/percentage-calculator/">
 <meta property="og:image" content="https://cyberscryb.com/og-image.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CyberScryb">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Percentage Calculator — Free Online Percent Calculator | CyberScryb">
-<meta name="twitter:description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Instant answers, no signup.">
+<meta name="twitter:description" content="Free percentage calculator: find X% of Y, what percent X is of Y, and percent increase or decrease. Work out discounts, tips, tax, and grades instantly, no signup.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -60,7 +60,11 @@
             { "@type": "Question", "name": "How do you calculate a percentage?", "acceptedAnswer": { "@type": "Answer", "text": "Divide the part by the whole and multiply by 100. For example, to find what percent 30 is of 150: (30 / 150) x 100 = 20%." }},
             { "@type": "Question", "name": "How do I calculate percent increase or decrease?", "acceptedAnswer": { "@type": "Answer", "text": "Subtract the original value from the new value, divide by the original value, and multiply by 100. A positive result is an increase; a negative result is a decrease. Example: from 80 to 100 is ((100 - 80) / 80) x 100 = 25% increase." }},
             { "@type": "Question", "name": "What is X percent of Y?", "acceptedAnswer": { "@type": "Answer", "text": "Convert the percent to a decimal (divide by 100) and multiply by Y. Example: 15% of 200 = 0.15 x 200 = 30." }},
-            { "@type": "Question", "name": "How do I convert a percentage to a decimal?", "acceptedAnswer": { "@type": "Answer", "text": "Divide the percentage by 100, which is the same as moving the decimal point two places left. 45% becomes 0.45." }},
+            { "@type": "Question", "name": "How do I convert a percentage to a decimal?", "acceptedAnswer": { "@type": "Answer", "text": "Divide by 100, or move the decimal point two places left. 45% becomes 0.45, and 7.5% becomes 0.075. To go the other way, multiply a decimal by 100: 0.6 is 60%." }},
+            { "@type": "Question", "name": "How do I calculate a discount price?", "acceptedAnswer": { "@type": "Answer", "text": "Find the discount amount first, then subtract it from the original price. For a $60 item at 25% off: 25% of $60 is $15, so you pay $60 - $15 = $45. A shortcut: pay 100% minus the discount, so 25% off means you pay 75% of the price." }},
+            { "@type": "Question", "name": "How do I find the original price before a discount?", "acceptedAnswer": { "@type": "Answer", "text": "Divide the sale price by the percentage you paid. If a jacket costs $45 after a 25% discount, you paid 75% of the original price, so the original was $45 / 0.75 = $60." }},
+            { "@type": "Question", "name": "What is the difference between a percent and a percentage point?", "acceptedAnswer": { "@type": "Answer", "text": "A percentage point is the simple difference between two percentages. If a rate moves from 4% to 6%, that is a 2 percentage point rise. The percent change is different: (6 - 4) / 4 x 100 = 50%, so the rate rose 50% in relative terms." }},
+            { "@type": "Question", "name": "How do I calculate a 20% tip?", "acceptedAnswer": { "@type": "Answer", "text": "Move the decimal point one place left to find 10% of the bill, then double it. On a $64 bill, 10% is $6.40, so a 20% tip is $12.80 and the total is $76.80. For 15%, take the 10% figure and add half of it." }},
             { "@type": "Question", "name": "Is this percentage calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no signup. All calculations happen instantly in your browser." }},
             { "@type": "Question", "name": "Does the calculator store my numbers?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed locally in your browser. Your numbers are never sent to any server." }}
         ]
@@ -77,7 +81,7 @@
             cursor: pointer; font-family: var(--font); transition: all 0.15s;
         }
         .pc-tab:hover { border-color: var(--primary-soft); color: var(--text); }
-        .pc-tab.is-on { background: var(--primary); border-color: var(--primary); color: #fffcf7; }
+        .pc-tab.is-on { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
         .pc-panel { display: none; }
         .pc-panel.is-on { display: block; }
         .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
@@ -143,6 +147,7 @@
             <div style="padding: 1.5rem 0 0;">
                 <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Percentage Calculator</h1>
                 <p style="color:var(--text-faint); margin-bottom: 0;">Find a percent of a number, reverse it, or measure change. Instant, private, free forever.</p>
+                <p style="color:var(--text-muted); margin-top: 0.75rem; line-height: 1.7;">Percentages show up in almost every money decision: the discount on a jacket, the tip on a dinner bill, the tax added at checkout, the raise on a paycheck, the grade on a test. This calculator answers all three percentage questions in one place, shows the working so you can check it, and runs entirely in your browser. No signup, no numbers stored, no waiting.</p>
             </div>
 
             <div class="pc-tabs" role="tablist">
@@ -179,6 +184,12 @@
             </div>
 
             <section class="content-section" style="max-width:760px;margin:3rem auto 1rem;padding:0;color:var(--text-muted);font-family:'Inter',sans-serif;line-height:1.7;">
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Use This Calculator</h2>
+                <p><strong style="color:var(--text);">1. Pick the question you are asking.</strong> The three tabs cover every percentage problem: "What is X% of Y?" for a share of a number, "X is what % of Y?" for comparing a part to a whole, and "% increase / decrease" for measuring change between two numbers.</p>
+                <p><strong style="color:var(--text);">2. Type in your two numbers.</strong> The answer updates as you type, so there is nothing to submit. Use decimals for partial percents, like 7.5%.</p>
+                <p><strong style="color:var(--text);">3. Read the answer and the working.</strong> The result appears large at the top, with the full calculation shown underneath so you can follow the math and trust it. Try the example buttons under each panel to see a worked case instantly.</p>
+                <p><strong style="color:var(--text);">4. Switch tabs without losing your numbers.</strong> Each mode keeps its own inputs, so you can check a discount, then flip to percent change, then come back without retyping.</p>
+
                 <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">How to Calculate Percentages</h2>
                 <p>Every percentage problem is one of three questions. Once you know which one you're asking, the math is simple:</p>
                 <p><strong style="color:var(--text);">1. What is X% of Y?</strong> Convert the percent to a decimal and multiply. Formula: (X / 100) &times; Y. Example: 15% of 200 = 0.15 &times; 200 = 30. Use this for discounts, tips, tax, and commissions.</p>
@@ -188,6 +199,20 @@
                 <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Where Percentages Show Up Every Day</h2>
                 <p>Percentages quietly run most money decisions. A 20% tip on a $85 bill is $17. A 30% off sale on a $150 jacket saves $45. A 7.5% sales tax on $240 adds $18. Investment returns, loan interest, salary raises, grade curves, and battery levels are all percentages in disguise. Getting fluent with the three formulas above means never second-guessing a deal, a bill, or a paycheck again.</p>
                 <p>One common trap: percentage points vs. percent. If an interest rate moves from 4% to 6%, that's a 2 <em>percentage point</em> rise, but a 50% <em>percent</em> increase. Politicians and marketers mix these up on purpose. Now you won't.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Percentage Examples With Answers</h2>
+                <p><strong style="color:var(--text);">Shopping discount:</strong> a $60 shirt at 25% off. 25% of $60 is $15, so you pay $45. Use the "X% of Y" tab, then subtract the result from the price.</p>
+                <p><strong style="color:var(--text);">Restaurant tip:</strong> a $64 bill with a 20% tip. 20% of $64 is $12.80, so the total is $76.80. For a quick 20% tip in your head, move the decimal one place left ($6.40 is 10%) and double it.</p>
+                <p><strong style="color:var(--text);">Sales tax:</strong> a $240 purchase with 7.5% tax. 7.5% of $240 is $18, so the checkout total is $258.</p>
+                <p><strong style="color:var(--text);">Test grade:</strong> 42 correct answers out of 50 questions. (42 / 50) &times; 100 = 84%. Use the "X is what % of Y?" tab.</p>
+                <p><strong style="color:var(--text);">Salary raise:</strong> pay goes from $22 an hour to $24.50. ((24.50 &minus; 22) / 22) &times; 100 = 11.36% increase. Use the "% increase / decrease" tab.</p>
+                <p><strong style="color:var(--text);">Price drop:</strong> rent falls from $1,400 to $1,250 a month. ((1,250 &minus; 1,400) / 1,400) &times; 100 = &minus;10.71%, a 10.71% decrease.</p>
+
+                <h2 style="font-family: var(--font-brand), Georgia, serif;font-size:1.5rem;color: var(--primary-soft);margin-top:2rem;">Common Percentage Mistakes</h2>
+                <p><strong style="color:var(--text);">Adding percentages that have different bases.</strong> A 20% discount followed by another 10% off is not 30% off. The second discount applies to the already-reduced price: $100 becomes $80, then $72, which is 28% off in total.</p>
+                <p><strong style="color:var(--text);">Confusing "percent of" with "percent off."</strong> 30% off a $150 item means you pay 70% of the price ($105). The discount is $45; the price is $105. Keep the two numbers separate.</p>
+                <p><strong style="color:var(--text);">Treating a 100% increase as doubling, and more.</strong> A 100% increase doubles a number. A 200% increase triples it, because the original 100% is still there plus 200% more. A stock that rises 200% from $10 is worth $30, not $20.</p>
+                <p><strong style="color:var(--text);">Using the wrong base for percent change.</strong> Percent change always divides by the original value, not the new one. Going from 80 to 100 is a 25% increase, but going from 100 back to 80 is a 20% decrease, even though the gap is 20 in both directions.</p>
             </section>
 
             <div class="faq-section">
@@ -195,7 +220,11 @@
                 <details><summary>How do you calculate a percentage?</summary><p>Divide the part by the whole and multiply by 100. Example: to find what percent 30 is of 150, compute (30 / 150) &times; 100 = 20%.</p></details>
                 <details><summary>How do I calculate percent increase or decrease?</summary><p>Subtract the original value from the new value, divide by the original value, and multiply by 100. Positive means increase, negative means decrease. From 80 to 100 is a 25% increase.</p></details>
                 <details><summary>What is X percent of Y?</summary><p>Convert the percent to a decimal (divide by 100) and multiply by Y. 15% of 200 = 0.15 &times; 200 = 30.</p></details>
-                <details><summary>How do I convert a percentage to a decimal?</summary><p>Divide by 100, or move the decimal point two places left. 45% becomes 0.45.</p></details>
+                <details><summary>How do I convert a percentage to a decimal?</summary><p>Divide by 100, or move the decimal point two places left. 45% becomes 0.45, and 7.5% becomes 0.075. To go the other way, multiply a decimal by 100: 0.6 is 60%.</p></details>
+                <details><summary>How do I calculate a discount price?</summary><p>Find the discount amount first, then subtract it from the original price. For a $60 item at 25% off: 25% of $60 is $15, so you pay $60 &minus; $15 = $45. A shortcut: pay 100% minus the discount, so 25% off means you pay 75% of the price.</p></details>
+                <details><summary>How do I find the original price before a discount?</summary><p>Divide the sale price by the percentage you paid. If a jacket costs $45 after a 25% discount, you paid 75% of the original price, so the original was $45 / 0.75 = $60.</p></details>
+                <details><summary>What is the difference between a percent and a percentage point?</summary><p>A percentage point is the simple difference between two percentages. If a rate moves from 4% to 6%, that is a 2 percentage point rise. The percent change is different: (6 &minus; 4) / 4 &times; 100 = 50%, so the rate rose 50% in relative terms.</p></details>
+                <details><summary>How do I calculate a 20% tip?</summary><p>Move the decimal point one place left to find 10% of the bill, then double it. On a $64 bill, 10% is $6.40, so a 20% tip is $12.80 and the total is $76.80. For 15%, take the 10% figure and add half of it.</p></details>
                 <details><summary>Is this percentage calculator free?</summary><p>Yes, 100% free with no signup. All calculations happen instantly in your browser.</p></details>
                 <details><summary>Does the calculator store my numbers?</summary><p>No. Everything is computed locally in your browser. Your numbers are never sent to any server.</p></details>
             </div>
@@ -203,9 +232,13 @@
             <section style="margin-top:2.5rem;">
                 <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:1rem;">Related tools</h2>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
-                    <a href="/tools/word-counter/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
-                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Word Counter</strong>
-                        <span style="font-size:0.85rem;">Count words, characters, and reading time.</span>
+                    <a href="/tools/tip-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Tip Calculator</strong>
+                        <span style="font-size:0.85rem;">Work out tips and split the bill.</span>
+                    </a>
+                    <a href="/tools/compound-interest-calculator/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
+                        <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Compound Interest Calculator</strong>
+                        <span style="font-size:0.85rem;">See how savings grow over time.</span>
                     </a>
                     <a href="/tools/budget-planner/" style="display:block; padding:1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius:8px; text-decoration:none; color: var(--text-muted);" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='var(--border)'">
                         <strong style="color: var(--primary-soft); display:block; margin-bottom:0.25rem;">Budget Planner</strong>
@@ -229,17 +262,13 @@
                     <p>Free browser tools and AI writers for freelancers and builders.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="/tools/">Tools</a>
-                    <a href="/blog/">Blog</a>
-                    <a href="/about/">About</a>
                     <a href="/privacy/">Privacy Policy</a>
                     <a href="/terms/">Terms of Service</a>
                     <a href="/disclosure/">Affiliate Disclosure</a>
-                    <a href="/guides/">Guides</a>
                     <a href="/contact/">Contact</a>
                     <a href="https://ko-fi.com/cyberscryb" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Support</a>
-                                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
-</div>
+                    <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener">Photo Identifier</a>
+                </div>
             </div>
             <div class="footer-bottom"><p>&copy; 2026 CyberScryb. All rights reserved.</p></div>
         </div>
