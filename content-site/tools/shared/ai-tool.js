@@ -515,8 +515,11 @@
           const t = genElapsedText();
           const el = document.getElementById('cs-elapsed');
           if (el) el.textContent = t;
-          const st = document.getElementById('cs-gen-status');
-          if (st && genActive) st.textContent = t;
+          // Deliberately not written to #cs-gen-status: a live region
+          // updated twice a second floods screen readers (WCAG 4.1.3
+          // failure class: constant interruptions). The ticking seconds
+          // stay visual-only here; the live region gets one discrete
+          // message per state change instead.
         };
         tick();
         genTimerId = setInterval(tick, 500);
@@ -694,7 +697,14 @@
         if (loadingIndicator) loadingIndicator.classList.add('hidden');
         restoreGenerateMode();
         const st = document.getElementById('cs-gen-status');
-        if (st && mode === 'done') st.textContent = '';
+        // Completion is a status message too: announce it once and leave
+        // it until the next run, so screen reader users know the result
+        // is ready. On error the role=alert error already announced, so
+        // clear the stale "Generating..." text instead of letting the
+        // region lie. Stopped mode is untouched: showStoppedNote sets
+        // its own message right after this.
+        if (st && mode === 'done') st.textContent = 'Result ready.';
+        else if (st && mode === 'error') st.textContent = '';
         if (mode === 'done') {
           // 3-second cooldown to prevent accidental rapid double clicking.
           generateBtn.disabled = true;
@@ -722,7 +732,8 @@
         startTips(outputContent);
         outputContent.setAttribute('aria-busy', 'true');
         startElapsedTimer();
-        ensureStatusEl().textContent = '';
+        // One discrete waiting message in the live region (WCAG 4.1.3).
+        ensureStatusEl().textContent = 'Generating...';
 
         if (
           !isDraftOptOut() &&

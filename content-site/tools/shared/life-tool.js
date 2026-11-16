@@ -11,7 +11,11 @@
 (function (global) {
   'use strict';
 
-  function toast(msg, ms) {
+  // The toast live region is created once, empty, and filled later.
+  // A region created already filled is ignored by many screen readers
+  // (WCAG 4.1.3 failure class), so creation and filling never happen
+  // in the same call.
+  function ensureToastEl() {
     var el = document.getElementById('lt-toast');
     if (!el) {
       el = document.createElement('div');
@@ -20,6 +24,11 @@
       el.setAttribute('role', 'status');
       document.body.appendChild(el);
     }
+    return el;
+  }
+
+  function toast(msg, ms) {
+    var el = ensureToastEl();
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(el._t);
@@ -37,6 +46,9 @@
 
   function mount(config) {
     var toolId = config.toolId;
+    // Toast live region exists empty from mount, so later fills are
+    // announced (WCAG 4.1.3). Off-screen until .show, so no visual change.
+    ensureToastEl();
     var fieldIds = config.fieldIds || [];
     var modeLabels = config.modeLabels || {};
     var modeTips = config.modeTips || {};
