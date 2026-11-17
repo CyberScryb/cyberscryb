@@ -169,16 +169,38 @@
       else el.classList.remove('is-filled');
     }
 
+    // ── Auto-grow textareas ───────────────────────────────
+    // Native CSS field-sizing: content would do this job, but it sizes an
+    // empty field to its placeholder, and this site's placeholders are long
+    // example stories (100-270 chars): every empty field would load at
+    // max-height and jump-shrink on the first keystroke. So the JS grow
+    // stays, extended from #tool-input alone to every .lt-area field.
+    // Cap matches .lt-area max-height (280px) in life-tool.css.
+    function autoGrow(el) {
+      if (!el || el.tagName !== 'TEXTAREA') return;
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 280) + 'px';
+    }
+
     if (toolInput) {
       toolInput.addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 280) + 'px';
+        autoGrow(this);
         if (charLive) charLive.textContent = String(this.value.length);
         markFilled(this);
         updateReady();
         scheduleSave();
       });
     }
+
+    // Every detail textarea grows with its content, including ones filled
+    // by a restored draft (restore sets .value without an input event).
+    qsa('textarea.lt-area').forEach(function (el) {
+      if (el === toolInput) return;
+      el.addEventListener('input', function () {
+        autoGrow(el);
+      });
+      autoGrow(el);
+    });
 
     fieldIds.concat(['addressed-to', 'sender-name']).forEach(function (id) {
       var el = document.getElementById(id);
@@ -326,6 +348,8 @@
           var el = document.getElementById(id);
           if (el) {
             el.value = '';
+            // Drop any auto-grow height so cleared fields return to min-height.
+            if (el.tagName === 'TEXTAREA') el.style.height = '';
             markFilled(el);
           }
         });

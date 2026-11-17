@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Wage Garnishment Defense Prep Coach &mdash; Free Garnishment Defense Tool | CyberScryb</title>
+    <meta
+      name="description"
+      content="Free AI coach for a wage garnishment: a defense strategy from your facts, a full prep packet (evidence checklist, garnishment timeline, opening statement, mock Q&A), and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://cyberscryb.com/tools/ai-wage-garnishment-defense-prep-coach/" />
+    <meta
+      property="og:title"
+      content="AI Wage Garnishment Defense Prep Coach — Free Garnishment Defense Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI coach for a wage garnishment: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-wage-garnishment-defense-prep-coach/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Wage Garnishment Defense Prep Coach — Free Garnishment Defense Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI coach for a wage garnishment: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      .mock-transcript {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: 340px;
+        overflow-y: auto;
+        margin-bottom: 0.75rem;
+      }
+      .mock-bubble {
+        padding: 0.6rem 0.85rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .mock-bubble.judge {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: var(--text);
+      }
+      .mock-bubble.judge strong {
+        color: #f87171;
+      }
+      .mock-bubble.user {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        align-self: flex-end;
+        max-width: 92%;
+      }
+      .mock-bubble.user strong {
+        color: var(--text);
+      }
+      .mock-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.6rem;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a packet first, then print');
+          else alert('Generate a packet first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Wage Garnishment Defense Prep Coach",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-wage-garnishment-defense-prep-coach/",
+        "description": "Free AI coach for wage garnishments: defense strategy, a full prep packet, and a mock cross-examination with an AI judge. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much of my paycheck can be garnished?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For an ordinary creditor judgment, federal law limits garnishment to the smaller of 25 percent of your disposable earnings or the amount by which your weekly disposable earnings exceed 30 times the federal minimum wage. Child support, tax levies, and federal student loans follow different limits, and some states protect more of your pay than the federal floor. The tool checks the federal arithmetic from the pay figures you enter and tells you to verify the limit that applies to you with the court clerk or your payroll department. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I stop a wage garnishment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The usual route is a claim of exemption filed with the court that issued the garnishment, before the deadline printed on your garnishment papers. The claim states why some or all of the garnished pay is protected, such as head-of-household status, protected benefit income, or hardship, and the court sets a hearing. Other routes depend on your situation: paying or settling the judgment, challenging a judgment you were never served for, or a payment plan with the creditor. The prep packet mode drafts your exemption claim checklist and hearing points from your facts. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a claim of exemption?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A claim of exemption is a written filing that tells the court some or all of the money being garnished is protected and should not be taken. You file it with the court before the deadline on your garnishment papers, send a copy to the creditor or its lawyer, and keep proof of both. The court then sets a hearing where you explain the exemption with your pay stubs, budget, and benefit letters. The deadline to file is short, so check your papers first and ask the court clerk for the form if you do not have it. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can my wages be garnished without a court judgment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For an ordinary creditor debt, no: the creditor usually needs a court judgment first, and that means you should have been served with a lawsuit. Child support, tax debts, and federal student loans are different: those can be garnished through an administrative process without a court judgment. If you were never served for the lawsuit behind the judgment, that is something to raise with a consumer attorney or legal aid office right away, because the deadline to challenge it is short. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Social Security income protected from garnishment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Social Security benefits are protected from garnishment for most ordinary debts under federal law, but the protection is not automatic in every situation: child support and federal debts such as taxes and student loans can reach Social Security income, and a bank may freeze an account holding mixed funds until you prove which money is protected. If your only income is Social Security, say so in your claim of exemption and bring the benefit letter and bank statements that show where the money came from. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the deadline to challenge a wage garnishment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The deadline to file a claim of exemption is printed on your garnishment papers and it is short, often a matter of days from when the order was served on you or your employer. It varies by state and by court, so there is no single number this tool can give you. Read the deadline off your papers, put it in the tool, and verify it with the court clerk. Missing it usually means the garnishment keeps running while you sort out the next step. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I bring to a garnishment hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bring the garnishment order and the judgment behind it, pay stubs showing the withholding, a household budget that shows your rent, food, utilities, and other essentials, proof of any protected income such as benefit letters or bank statements, and a copy of the claim of exemption you filed. Bring copies for the judge and the creditor's lawyer, and keep your originals. Organize it in the order the judge will ask about it: the order, your pay, your exemptions, and your budget. The prep packet turns your evidence list into a checklist. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool prepares you for a wage garnishment from the facts you enter: strategy, a prep packet, and mock practice. It does not assess your case, predict the outcome, or cite law. For a large amount, a complicated case, or if anything sensitive comes up, review with a consumer attorney or a legal aid organization before your exemption deadline passes."
+            }
+          }
+                ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to prepare for a wage garnishment hearing with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your garnishment facts",
+            "text": "The garnishment order, the creditor, your employer, your pay figures, the exemptions you can claim, the deadline to file your claim of exemption, your hearing date, and the evidence you have."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Generate your defense strategy and packet",
+            "text": "Get the defense strategy first, then the full prep packet: exemption and evidence checklist, garnishment timeline, opening statement draft, and a mock Q&A set."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Practice the mock cross-examination",
+            "text": "Rehearse with the AI as the judge: one question at a time, a short note on each answer, up to 8 exchanges."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Wage Garnishment Defense Prep Coach</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI wage garnishment <span style="color: var(--primary)">defense prep coach</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            Your paycheck is being garnished, or a garnishment order just landed, and the deadline
+            to challenge it is short. Enter your facts once and get a defense strategy that spots
+            the issues the judge must decide, a full prep packet with an exemption checklist and
+            opening statement, and a mock cross-examination so you rehearse the questions before
+            they count.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal advice.</strong> This is a garnishment-defense preparation tool, not
+            legal advice. It builds strategy, a prep packet, and mock practice from the facts you
+            enter. It does not tell you whether the garnishment is valid, how much can legally be
+            taken, or what the law requires. Have a consumer attorney or a legal aid organization
+            review your case before your exemption deadline passes.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Defense strategy from your facts</span>
+          <span><i></i> Full prep packet artifact</span>
+          <span><i></i> Mock cross-examination with an AI judge</span>
+          <span><i></i> Prep sessions save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your garnishment facts</strong
+            ><span
+              >The garnishment order, the creditor, your employer, your pay figures, the
+              exemptions you can claim, the exemption deadline, your hearing date, and the evidence
+              you have.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Generate strategy &amp; packet</strong
+            ><span
+              >Get the defense strategy first, then the full prep packet: exemption and evidence
+              checklist, garnishment timeline, opening statement draft, and a mock Q&amp;A set.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Practice the mock cross-examination</strong
+            ><span
+              >Rehearse with the AI as the judge: one question at a time, a short note on each
+              answer, up to 8 exchanges.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Strategy &amp; packet</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Mock cross-examination</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your defense case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Coaching mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="defense-strategy"
+                  aria-pressed="false"
+                >
+                  Defense strategy
+                </button>
+                <button type="button" class="lt-chip" data-mode="prep-packet" aria-pressed="false">
+                  Prep packet
+                </button>
+                <button type="button" class="lt-chip" data-mode="mock-hearing" aria-pressed="false">
+                  Mock cross-examination
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="defense-strategy" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Defense strategy mode</strong>Issue-spotting from your facts: whether the
+                garnishment is valid, how much can be taken from your pay, which exemptions fit
+                your situation, and the weak spots to prepare for. Run this first; the prep packet
+                reuses it.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick your garnishment type and state, then add the garnishment details and
+                  the exemption deadline.
+                </p>
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="debtor_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="debtor_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Your name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="debtor_state"
+                    >State <span class="cs-req" aria-hidden="true">*</span></label
+                  ><select
+                    class="lt-input"
+                    id="debtor_state"
+                    data-label="State"
+                    aria-required="true"
+                  >
+                    <option value="">Select your state</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
+                    <option>Iowa</option>
+                    <option>Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option>Maryland</option>
+                    <option>Massachusetts</option>
+                    <option>Michigan</option>
+                    <option>Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New Hampshire</option>
+                    <option>New Jersey</option>
+                    <option>New Mexico</option>
+                    <option>New York</option>
+                    <option>North Carolina</option>
+                    <option>North Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode Island</option>
+                    <option>South Carolina</option>
+                    <option>South Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option>Washington</option>
+                    <option>West Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="creditor_name"
+                    >Who is garnishing your wages
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="creditor_name"
+                    type="text"
+                    placeholder="e.g. the creditor, collection agency, or government agency on the order"
+                    data-label="Who is garnishing your wages"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="employer_name"
+                    >Your employer <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="employer_name"
+                    type="text"
+                    placeholder="e.g. the employer named on the garnishment order"
+                    data-label="Your employer"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="garnishment-type-label"
+                  >Garnishment type <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="garnishment-type-label">
+                  <input
+                    type="radio"
+                    id="gt_judgment"
+                    name="garnishment_type"
+                    value="Creditor judgment garnishment"
+                  /><label class="pill" for="gt_judgment">Creditor judgment</label>
+                  <input
+                    type="radio"
+                    id="gt_support"
+                    name="garnishment_type"
+                    value="Child support garnishment"
+                  /><label class="pill" for="gt_support">Child support</label>
+                  <input
+                    type="radio"
+                    id="gt_tax"
+                    name="garnishment_type"
+                    value="Tax levy (IRS or state)"
+                  /><label class="pill" for="gt_tax">Tax levy</label>
+                  <input
+                    type="radio"
+                    id="gt_student"
+                    name="garnishment_type"
+                    value="Federal student loan garnishment"
+                  /><label class="pill" for="gt_student">Student loan</label>
+                  <input type="radio" id="gt_other" name="garnishment_type" value="Other" /><label
+                    class="pill"
+                    for="gt_other"
+                    >Other</label
+                  >
+                </div>
+                <input
+                  type="hidden"
+                  id="garnishment_type"
+                  data-label="Garnishment type"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="case_number"
+                    >Case or judgment number from the order
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="case_number"
+                    type="text"
+                    placeholder="e.g. CV-2026-0142"
+                    data-label="Case or judgment number"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="total_owed"
+                    >Total amount owed on the judgment or debt
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="total_owed"
+                    type="text"
+                    placeholder="e.g. $4,382.19"
+                    data-label="Total amount owed"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="order_date"
+                    >Date of the garnishment order
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="order_date"
+                    type="date"
+                    data-label="Date of the garnishment order"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="exemption_deadline"
+                    >Deadline to file your claim of exemption
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="exemption_deadline"
+                    type="date"
+                    data-label="Deadline to file your claim of exemption"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="hearing_date"
+                    >Hearing date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="hearing_date"
+                    type="date"
+                    data-label="Hearing date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="court_name"
+                    >Court name or county <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="court_name"
+                    type="text"
+                    placeholder="e.g. Bonner County District Court"
+                    data-label="Court name"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="pay_frequency"
+                    >How often you are paid <span class="cs-optional">(optional)</span></label
+                  ><select class="lt-input" id="pay_frequency" data-label="Pay frequency">
+                    <option value="">Select pay frequency</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="biweekly">Every 2 weeks</option>
+                    <option value="semimonthly">Twice a month</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="gross_pay"
+                    >Gross pay per paycheck <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="gross_pay"
+                    type="text"
+                    placeholder="e.g. $1,850.00"
+                    data-label="Gross pay per paycheck"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="disposable_earnings"
+                    >Disposable earnings per paycheck (after required deductions)
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="disposable_earnings"
+                    type="text"
+                    placeholder="e.g. $1,420.00"
+                    data-label="Disposable earnings per paycheck"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="withheld_per_period"
+                    >Amount currently withheld per paycheck
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="withheld_per_period"
+                    type="text"
+                    placeholder="e.g. $355.00"
+                    data-label="Amount withheld per paycheck"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="deadline-box" id="math-box" aria-live="polite">
+                <strong>Exemption deadline and withholding check:</strong> enter the deadline to
+                file your claim of exemption to see how many days you have left, and your pay
+                figures to see the withholding arithmetic from your numbers. Calendar and
+                percentage math from figures you entered only. Limits differ by garnishment type
+                and by state: verify the limit with the court clerk or your payroll department.
+              </div>
+              <input
+                type="hidden"
+                id="garnishment_math"
+                data-label="Computed exemption deadline countdown, days since the garnishment order, days until the hearing, and withholding arithmetic from your pay figures"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="exemptions-label"
+                  >Exemptions you may claim <span class="cs-optional">(optional)</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="exemptions-label">
+                  <input type="checkbox" id="ex_head" value="Head of household" /><label
+                    class="pill"
+                    for="ex_head"
+                    >Head of household</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="ex_benefits"
+                    value="Social Security, VA, or disability benefits"
+                  /><label class="pill" for="ex_benefits">Social Security / VA / disability</label>
+                  <input
+                    type="checkbox"
+                    id="ex_assistance"
+                    value="Public assistance (SNAP, SSI, TANF)"
+                  /><label class="pill" for="ex_assistance">Public assistance</label>
+                  <input
+                    type="checkbox"
+                    id="ex_hardship"
+                    value="Pay barely covers essential living expenses"
+                  /><label class="pill" for="ex_hardship">Hardship: pay barely covers essentials</label>
+                </div>
+                <input type="hidden" id="exemption_claims" data-label="Exemptions you may claim" />
+                <p class="lt-hint">
+                  Tick what applies to you. The coach uses these only to frame your exemption
+                  claim; it does not decide whether an exemption applies.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="garnishment_details"
+                  >The garnishment and what happened
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="garnishment_details"
+                  class="lt-area"
+                  data-label="Garnishment details"
+                  aria-required="true"
+                  placeholder="Example: A creditor got a judgment against me for a credit card in 2025. My employer handed me a garnishment order on November 2, 2026. It says $355 will be taken from every paycheck starting November 15. I support two children on this pay and my rent is $1,100 a month."
+                ></textarea>
+                <p class="lt-hint">
+                  What the debt was, how the judgment happened, when the order arrived, what it
+                  says will be taken, and what that leaves you with. Use the facts from your
+                  garnishment order and your own records.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="withholding_history"
+                  >What has already been withheld, and letters so far
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="withholding_history"
+                  class="lt-area"
+                  data-label="Withholding history"
+                  placeholder="Example: $355 was taken from my November 15 paycheck. I wrote to the creditor on November 5 asking for the balance and got no reply. My payroll department said the order came from the court on November 2."
+                ></textarea>
+                <p class="lt-hint">
+                  What has been taken from each paycheck and when, any letter you sent the
+                  creditor or the court, and what your payroll department told you.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Evidence you have <span class="cs-optional">(optional)</span></label
+                >
+                <div id="evidence-list"></div>
+                <button type="button" class="lt-ghost" id="evidence-add" style="margin-top: 0.5rem">
+                  + Add evidence item
+                </button>
+                <p class="lt-hint">
+                  The garnishment order, the judgment, your pay stubs showing the withholding, your
+                  household budget, proof of protected income such as benefit letters, and any
+                  letters you sent or received.
+                </p>
+                <input type="hidden" id="evidence_summary" data-label="Evidence you have" />
+              </div>
+              <input
+                type="hidden"
+                id="garnishment_strategy"
+                data-label="Garnishment defense strategy from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Anything else the judge should know
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: I am the only earner in a household of four. The order lists an employer I left in 2024. I never got the court papers for the original lawsuit."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; One or two sentences is enough.
+                  Plain facts, in your own words.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal advice. This is a garnishment-defense preparation tool for a consumer
+                  attorney to review with you.</strong
+                >
+                It builds strategy, a prep packet, and mock practice from your facts only. It does
+                not assess whether the garnishment is valid, how much can legally be taken, or
+                what the law requires. It will not invent facts or cite law. When you generate,
+                your prompt is sent to our AI service to produce the output. An attorney decides
+                what fits your situation before your exemption deadline.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Building your prep&hellip;</p>
+                  <small>From your garnishment facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your defense strategy and prep packet will appear here.<br /><br />1. Enter
+                    the garnishment, your pay figures, and the exemption deadline<br />2. Generate
+                    the defense strategy first<br />3. Then generate the full prep packet</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card" id="mock-card">
+              <div class="lt-card-h">
+                <h2>Mock cross-examination room</h2>
+                <span class="lt-draft-badge" id="mock-status">Not started</span>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  The AI plays the judge: one question at a time, a short note on each answer, up to
+                  8 exchanges. Fill in your intake first so the questions fit your garnishment and
+                  your exemptions.
+                </p>
+                <div id="mock-transcript" class="mock-transcript" aria-live="polite">
+                  <p class="lt-side-note" id="mock-empty" style="margin: 0">
+                    No mock cross-examination yet. Press &ldquo;Start mock
+                    cross-examination&rdquo; when your intake is ready.
+                  </p>
+                </div>
+                <div class="draft-row" style="margin-top: 0">
+                  <button type="button" class="lt-gen" id="mock-start-btn" style="flex: 1">
+                    <span class="btn-text">Start mock cross-examination</span>
+                  </button>
+                </div>
+                <div id="mock-answer-row" class="draft-row" hidden>
+                  <input
+                    class="lt-input"
+                    id="mock-answer"
+                    type="text"
+                    aria-label="Your answer to the judge's question"
+                    placeholder="Type your answer, then ask the next question"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="mock-next-btn">
+                    Ask next question
+                  </button>
+                </div>
+                <div class="mock-meta">
+                  <span id="mock-count">0 of 8 exchanges</span>
+                  <button type="button" class="lt-ghost" id="mock-end-btn" hidden>
+                    End mock cross-examination
+                  </button>
+                </div>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download prep packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved prep sessions</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a session to save this exact intake plus your generated strategy, packet, and
+                  mock transcript, on this device. Reload it anytime to keep preparing.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    aria-label="Session name"
+                    placeholder="Session name, e.g. Nov court prep v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save session</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved sessions yet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  A garnishment order just arrived at your employer and money is about to come out
+                  of your paycheck, and you need to file a claim of exemption before the deadline
+                  on the papers
+                </li>
+                <li>
+                  The amount being withheld leaves you short on rent, food, or utilities, and you
+                  need the exemption math and your budget organized for a hearing
+                </li>
+                <li>
+                  Part of your income is protected, such as Social Security or VA benefits, and
+                  you need to show the court which money cannot be taken
+                </li>
+                <li>
+                  You were never served with the lawsuit behind the judgment, and you need to
+                  raise that with the court before the garnishment keeps running
+                </li>
+                <li>
+                  The garnishment is for child support, a tax levy, or a student loan, and you
+                  need to prepare for the different rules that apply to those
+                </li>
+                <li>
+                  You have a garnishment hearing and want to rehearse the questions the judge will
+                  ask, with feedback on each answer
+                </li>
+                        </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>File the exemption claim before the deadline</h3>
+              <p>
+                The deadline to challenge a garnishment is printed on your garnishment papers, and
+                it is the only date that matters first. It is short, often days, and it varies by
+                state and court. Miss it and the withholding keeps running while you sort out the
+                next step. File the claim with the court, send a copy to the creditor or its
+                lawyer, and keep proof of both. The countdown box above works from the date you
+                enter, so copy it straight off your papers and verify it with the court clerk.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Some money is protected, but you have to claim it</h3>
+              <p>
+                Head-of-household status, Social Security and VA benefits, public assistance, and
+                hardship are the exemptions people usually claim, but the court does not apply
+                them for you. You file the claim, you bring the proof, and you explain it at the
+                hearing. That is why the strongest cases are usually the simplest: pay stubs that
+                show the withholding, a budget that shows what is left, and benefit letters that
+                show which income is protected.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Pay stubs and budgets beat memory</h3>
+              <p>
+                &ldquo;I cannot afford this&rdquo; persuades no one. Pay stubs that show the
+                withholding, a written budget with rent, food, and utilities, and bank statements
+                that show where protected money came from: those decide hearings. Gather every
+                record before you file anything, and send new evidence to the court the way your
+                court requires, not by guessing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Never miss the hearing date</h3>
+              <p>
+                A no-show can end the challenge against you, and the garnishment keeps running. If
+                the date truly does not work, contact the court clerk before the hearing, not
+                after, and ask how to request a change. Treat the hearing date like the hearing
+                date it is, and keep every letter and record organized while you wait.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>How much of my paycheck can be garnished?</summary>
+              <p>
+                For an ordinary creditor judgment, federal law limits garnishment to the smaller of
+                25 percent of your disposable earnings or the amount by which your weekly disposable
+                earnings exceed 30 times the federal minimum wage. Child support, tax levies, and
+                federal student loans follow different limits, and some states protect more of your
+                pay than the federal floor. The tool checks the federal arithmetic from the pay
+                figures you enter and tells you to verify the limit that applies to you with the
+                court clerk or your payroll department. This is general information, not legal
+                advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How do I stop a wage garnishment?</summary>
+              <p>
+                The usual route is a claim of exemption filed with the court that issued the
+                garnishment, before the deadline printed on your garnishment papers. The claim
+                states why some or all of the garnished pay is protected, such as head-of-household
+                status, protected benefit income, or hardship, and the court sets a hearing. Other
+                routes depend on your situation: paying or settling the judgment, challenging a
+                judgment you were never served for, or a payment plan with the creditor. The prep
+                packet mode drafts your exemption claim checklist and hearing points from your
+                facts. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What is a claim of exemption?</summary>
+              <p>
+                A claim of exemption is a written filing that tells the court some or all of the
+                money being garnished is protected and should not be taken. You file it with the
+                court before the deadline on your garnishment papers, send a copy to the creditor
+                or its lawyer, and keep proof of both. The court then sets a hearing where you
+                explain the exemption with your pay stubs, budget, and benefit letters. The
+                deadline to file is short, so check your papers first and ask the court clerk for
+                the form if you do not have it. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can my wages be garnished without a court judgment?</summary>
+              <p>
+                For an ordinary creditor debt, no: the creditor usually needs a court judgment
+                first, and that means you should have been served with a lawsuit. Child support,
+                tax debts, and federal student loans are different: those can be garnished through
+                an administrative process without a court judgment. If you were never served for
+                the lawsuit behind the judgment, that is something to raise with a consumer attorney
+                or legal aid office right away, because the deadline to challenge it is short. This
+                is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is Social Security income protected from garnishment?</summary>
+              <p>
+                Social Security benefits are protected from garnishment for most ordinary debts
+                under federal law, but the protection is not automatic in every situation: child
+                support and federal debts such as taxes and student loans can reach Social Security
+                income, and a bank may freeze an account holding mixed funds until you prove which
+                money is protected. If your only income is Social Security, say so in your claim of
+                exemption and bring the benefit letter and bank statements that show where the money
+                came from. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What is the deadline to challenge a wage garnishment?</summary>
+              <p>
+                The deadline to file a claim of exemption is printed on your garnishment papers and
+                it is short, often a matter of days from when the order was served on you or your
+                employer. It varies by state and by court, so there is no single number this tool
+                can give you. Read the deadline off your papers, put it in the tool, and verify it
+                with the court clerk. Missing it usually means the garnishment keeps running while
+                you sort out the next step. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What should I bring to a garnishment hearing?</summary>
+              <p>
+                Bring the garnishment order and the judgment behind it, pay stubs showing the
+                withholding, a household budget that shows your rent, food, utilities, and other
+                essentials, proof of any protected income such as benefit letters or bank
+                statements, and a copy of the claim of exemption you filed. Bring copies for the
+                judge and the creditor's lawyer, and keep your originals. Organize it in the order
+                the judge will ask about it: the order, your pay, your exemptions, and your budget.
+                The prep packet turns your evidence list into a checklist. This is general
+                information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool prepares you for a wage garnishment from the facts you enter:
+                strategy, a prep packet, and mock practice. It does not assess your case, predict
+                the outcome, or cite law. For a large amount, a complicated case, or if anything
+                sensitive comes up, review with a consumer attorney or a legal aid organization
+                before your exemption deadline passes.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-stop-a-wage-garnishment/"
+              ><strong>How to Stop a Wage Garnishment</strong
+              ><small
+                >The companion guide: how garnishment works, the limits, the exemptions, the claim deadline, the full method</small
+              ></a
+            >
+            <a href="/tools/ai-debt-collection-defense-prep-coach/"
+              ><strong>AI Debt Collection Lawsuit Defense Prep Coach</strong
+              ><small>Defend the lawsuit behind the garnishment: same method, earlier in the case</small></a
+            >
+            <a href="/tools/medical-debt-dispute/"
+              ><strong>Medical Debt Dispute</strong
+              ><small>Dispute a medical bill before it becomes a lawsuit</small></a
+            >
+            <a href="/tools/debt-payoff-calculator/"
+              ><strong>Debt Payoff Calculator</strong
+              ><small>Work out what paying a debt down actually costs, month by month</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal advice. Review every defense plan with a consumer
+            attorney or legal aid office before your exemption deadline.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script src="/tools/ai-wage-garnishment-defense-prep-coach/ai-wage-garnishment-defense-prep-coach.js?v=20261117a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'garnishment_details',
+          served_date: 'order_date',
+          state: 'debtor_state',
+          sender: 'debtor_name',
+          evidence: 'tool-input',
+        });
+      })();
+    </script>
+  </body>
+</html>
