@@ -1653,6 +1653,7 @@ function generateSitemap(generatedPages) {
     'how-to-stop-a-wage-garnishment',
     'how-to-prepare-for-a-dmv-hearing',
     'how-to-respond-to-an-irs-audit-notice',
+    'how-to-prepare-for-a-special-education-due-process-hearing',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',

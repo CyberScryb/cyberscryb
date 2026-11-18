@@ -900,6 +900,7 @@
     }
     updateUsageDisplay();
     initCharCounter();
+    initAutoGrow();
     initChainedInput();
 
     // Pick up text sent from another tool via the "Send to..." chain.
@@ -921,6 +922,36 @@
         }
         localStorage.removeItem('cs-chain-input');
       } catch (e) {}
+    }
+
+    // Auto-grow textareas — same pattern as life-tool.js (Nov 17) for coach
+    // pages, extended here to the plain ai-tool pages whose single
+    // #tool-input textarea is otherwise fixed at the 140px min-height in
+    // ai-tool.css and must be dragged to read long pasted input.
+    // CSS field-sizing: content was evaluated and rejected for this site:
+    // it sizes an empty textarea to its placeholder, and 121 of 170
+    // tool-page textarea placeholders run over 100 chars (median 142,
+    // max 326), so empty fields would load tall and jump-shrink on the
+    // first keystroke. JS grow measures content only. Cap 280px matches
+    // the life-tool.js cap. .lt-area fields are skipped: life-tool.js
+    // owns those on coach pages. Hidden fields are sized on input only,
+    // never at init, so a zero scrollHeight cannot collapse them.
+    function initAutoGrow() {
+      var areas = document.querySelectorAll('textarea');
+      areas.forEach(function (el) {
+        if (el.classList.contains('lt-area')) return;
+        el.addEventListener('input', function () {
+          autoGrow(el);
+        });
+        if (el.offsetParent !== null) autoGrow(el);
+      });
+    }
+
+    function autoGrow(el) {
+      if (!el || el.tagName !== 'TEXTAREA') return;
+      el.style.height = 'auto';
+      var h = el.scrollHeight;
+      if (h > 0) el.style.height = Math.min(h, 280) + 'px';
     }
 
     // Live character counter — shows "X / 4,000" near the input.
