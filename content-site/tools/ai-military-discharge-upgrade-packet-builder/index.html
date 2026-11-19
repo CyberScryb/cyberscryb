@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Military Discharge Upgrade Packet Builder &mdash; Free DD-293 / DD-149 Packet Tool |
+      CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Free AI packet builder for a military discharge upgrade: find the right form (DD-293 within 15 years, DD-149 after), build a structured packet outline, a draft personal statement, and an evidence checklist from your service facts. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-military-discharge-upgrade-packet-builder/"
+    />
+    <meta
+      property="og:title"
+      content="AI Military Discharge Upgrade Packet Builder — Free DD-293 / DD-149 Packet Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI packet builder for a military discharge upgrade: the right form, a packet outline, a draft personal statement, and an evidence checklist from your service facts. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-military-discharge-upgrade-packet-builder/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Military Discharge Upgrade Packet Builder — Free DD-293 / DD-149 Packet Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI packet builder for a military discharge upgrade: the right form, a packet outline, a draft personal statement, and an evidence checklist from your service facts. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a packet first, then print');
+          else alert('Generate a packet first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Military Discharge Upgrade Packet Builder",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-military-discharge-upgrade-packet-builder/",
+        "description": "Free AI packet builder for a military discharge upgrade: the right form (DD-293 or DD-149), a packet outline, a draft personal statement, and an evidence checklist from your service facts. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a military discharge upgrade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A discharge upgrade is a change to the characterization of your discharge on your DD-214, for example from other than honorable to general under honorable conditions. It is decided by a Discharge Review Board on a DD-293 application, or by a Board for Correction of Military Records on a DD-149 application. The board looks at whether the discharge was inequitable or improper, or whether clemency is warranted, based on the records and the evidence you submit. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "DD-293 vs DD-149: which form do I use for a discharge upgrade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use DD-293 if you separated less than 15 years ago: it goes to your service's Discharge Review Board. Use DD-149 if more than 15 years have passed since your separation, or if your discharge came from a general court-martial: it goes to your service's Board for Correction of Military Records. The 15-year line runs from your separation date, and this tool computes it from the date you enter. Confirm the right form with the board or an accredited veterans service organization before you file."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I upgrade a dishonorable discharge?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A dishonorable discharge from a general court-martial cannot be reviewed by a Discharge Review Board, so a DD-293 is not the route. Those cases go to the Board for Correction of Military Records on a DD-149. Other characterizations, including other than honorable and bad conduct from a special court-martial, can be reviewed by a Discharge Review Board within 15 years of separation. Whether any discharge can be upgraded depends on the facts and the record, and no tool can predict the outcome. An accredited veterans service organization or an attorney can review your DD-214 and tell you which route fits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a discharge upgrade take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Discharge review cases commonly take many months, and a year or more is not unusual, because the board has to pull your full service record and work through a large caseload. Some boards offer a records review on the papers only, and some offer a personal appearance hearing, which can add time. File as soon as your packet is ready rather than waiting for a perfect packet, and keep copies of everything you send. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What evidence helps a discharge upgrade application?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The strongest evidence is paper that shows what happened and who you are now: your DD-214, service treatment records, performance evaluations, awards, counseling statements, the separation paperwork, and any investigation or court-martial records. For clemency, add proof of what changed since service: steady employment, education, treatment records, sobriety or counseling records, community service, and character letters from employers, family, or community members. Buddy statements from people who served with you can fill gaps the record leaves. The packet mode turns your evidence list into a checklist."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a discharge upgrade restore VA benefits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An upgrade can help, but it does not automatically restore benefits. The VA makes its own character-of-discharge determination for benefit eligibility, separate from the military review boards, and some upgraded characterizations still need a VA decision. An other than honorable discharge blocks most VA benefits while it stands, which is why an upgrade matters, but treat the VA question as its own step: ask the VA or an accredited representative how your new characterization affects the specific benefit you need. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a lawyer for a discharge upgrade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Many veterans file with help from an accredited veterans service organization representative, such as the American Legion, VFW, DAV, or your state veterans agency, and that help is free. A representative who has filed many of these cases knows what each board wants to see and can review your packet before you send it. An attorney is worth considering when the case is complicated, such as a court-martial discharge or a case that was already denied once. This tool builds a draft packet for that review; it is not a lawyer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool builds a discharge upgrade packet from the facts you enter: the right form, a packet outline, a draft personal statement, and an evidence checklist. It does not assess your case, predict the outcome, or cite law. Have an accredited veterans service organization representative or an attorney review your packet before you file."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to build a military discharge upgrade packet with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your service facts",
+            "text": "Your branch of service, discharge characterization, separation date, the grounds for the upgrade, your service story, and the evidence you have."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Check which form fits",
+            "text": "Get the eligibility check first: the 15-year math from your separation date points to DD-293 or DD-149, and the tool explains the difference."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Generate your packet",
+            "text": "Get the full packet: a structured outline, a draft personal statement in your own words, and an evidence checklist, then have a VSO representative or attorney review it before you file."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI Military Discharge Upgrade Packet Builder</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI military discharge upgrade
+            <span style="color: var(--primary)">packet builder</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            An other than honorable discharge blocks VA benefits and jobs. Enter your service facts
+            once and get the right form (DD-293 within 15 years, DD-149 after), a structured packet
+            outline, a draft personal statement in your own words, and an evidence checklist you
+            can take to a VSO representative for review.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal advice.</strong> This is a discharge upgrade packet builder, not
+            legal advice. It builds the form check, a packet outline, a draft personal statement,
+            and an evidence checklist from the facts you enter. It does not tell you whether your
+            discharge will be upgraded or what the law requires. Have an accredited veterans
+            service organization (VSO) representative or an attorney review your packet before
+            you file.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> DD-293 vs DD-149 form check from your separation date</span>
+          <span><i></i> Full packet artifact: outline, statement, checklist</span>
+          <span><i></i> Draft personal statement from your own facts</span>
+          <span><i></i> Packets save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your service facts</strong
+            ><span
+              >Your branch, discharge characterization, separation date, the grounds for the
+              upgrade, your service story, and the evidence you have.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Check which form fits</strong
+            ><span
+              >Get the eligibility check first: the 15-year math from your separation date points
+              to DD-293 or DD-149, and explains the difference.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Generate your packet</strong
+            ><span
+              >Get the full packet: a structured outline, a draft personal statement, and an
+              evidence checklist, ready for a VSO representative or attorney to review.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Form check</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Packet</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your upgrade packet</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Packet mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="eligibility-check"
+                  aria-pressed="false"
+                >
+                  Form check (DD-293 / DD-149)
+                </button>
+                <button type="button" class="lt-chip" data-mode="prep-packet" aria-pressed="false">
+                  Full packet
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="eligibility-check" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Form check mode</strong>Which form fits your case: DD-293 to the Discharge
+                Review Board if you separated less than 15 years ago, DD-149 to the Board for
+                Correction of Military Records if more than 15 years have passed or your discharge
+                came from a general court-martial. Run this first; the packet reuses it.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick your branch and discharge characterization, then add your separation date
+                  and the grounds for the upgrade.
+                </p>
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="applicant_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="applicant_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Your name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="separation_date"
+                    >Separation date (from your DD-214)
+                    <span class="cs-req" aria-hidden="true">*</span></label
+                  ><input
+                    class="lt-input"
+                    id="separation_date"
+                    type="date"
+                    data-label="Separation date"
+                    aria-required="true"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="deadline-box" id="deadline-box" aria-live="polite">
+                <strong>15-year form check:</strong> enter your separation date to see how long it
+                has been since you separated, the date 15 years after your separation, and which
+                form the timeline points to. Calendar math from the date you entered. Confirm the
+                right form with the board or an accredited VSO representative before you file.
+              </div>
+              <input
+                type="hidden"
+                id="eligibility_math"
+                data-label="Computed years since separation, 15-year mark date, and which form the timeline points to (calendar math from your separation date)"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="branch-label"
+                  >Branch of service <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="branch-label">
+                  <input type="radio" id="br_army" name="branch_of_service" value="Army" /><label
+                    class="pill"
+                    for="br_army"
+                    >Army</label
+                  >
+                  <input
+                    type="radio"
+                    id="br_marines"
+                    name="branch_of_service"
+                    value="Marine Corps"
+                  /><label class="pill" for="br_marines">Marine Corps</label>
+                  <input type="radio" id="br_navy" name="branch_of_service" value="Navy" /><label
+                    class="pill"
+                    for="br_navy"
+                    >Navy</label
+                  >
+                  <input
+                    type="radio"
+                    id="br_airforce"
+                    name="branch_of_service"
+                    value="Air Force"
+                  /><label class="pill" for="br_airforce">Air Force</label>
+                  <input
+                    type="radio"
+                    id="br_spaceforce"
+                    name="branch_of_service"
+                    value="Space Force"
+                  /><label class="pill" for="br_spaceforce">Space Force</label>
+                  <input
+                    type="radio"
+                    id="br_coastguard"
+                    name="branch_of_service"
+                    value="Coast Guard"
+                  /><label class="pill" for="br_coastguard">Coast Guard</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="branch_of_service"
+                  data-label="Branch of service"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" id="characterization-label"
+                  >Discharge characterization on your DD-214
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="characterization-label">
+                  <input
+                    type="radio"
+                    id="dc_honorable"
+                    name="discharge_characterization"
+                    value="Honorable"
+                  /><label class="pill" for="dc_honorable">Honorable</label>
+                  <input
+                    type="radio"
+                    id="dc_general"
+                    name="discharge_characterization"
+                    value="General under honorable conditions"
+                  /><label class="pill" for="dc_general">General (under honorable conditions)</label>
+                  <input
+                    type="radio"
+                    id="dc_oth"
+                    name="discharge_characterization"
+                    value="Other than honorable"
+                  /><label class="pill" for="dc_oth">Other than honorable</label>
+                  <input
+                    type="radio"
+                    id="dc_badconduct"
+                    name="discharge_characterization"
+                    value="Bad conduct"
+                  /><label class="pill" for="dc_badconduct">Bad conduct</label>
+                  <input
+                    type="radio"
+                    id="dc_dishonorable"
+                    name="discharge_characterization"
+                    value="Dishonorable"
+                  /><label class="pill" for="dc_dishonorable">Dishonorable</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="discharge_characterization"
+                  data-label="Discharge characterization"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" id="grounds-label"
+                  >Grounds for the upgrade <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="grounds-label">
+                  <input
+                    type="radio"
+                    id="gr_inequity"
+                    name="upgrade_grounds"
+                    value="Inequity: the discharge was unfair given the circumstances"
+                  /><label class="pill" for="gr_inequity">Inequity: unfair in the circumstances</label>
+                  <input
+                    type="radio"
+                    id="gr_impropriety"
+                    name="upgrade_grounds"
+                    value="Impropriety: the discharge was based on an error or a rule that was not followed"
+                  /><label class="pill" for="gr_impropriety"
+                    >Impropriety: error or rule not followed</label
+                  >
+                  <input
+                    type="radio"
+                    id="gr_clemency"
+                    name="upgrade_grounds"
+                    value="Clemency: what has changed since service warrants a second look"
+                  /><label class="pill" for="gr_clemency">Clemency: what has changed since</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="upgrade_grounds"
+                  data-label="Grounds for the upgrade"
+                  aria-required="true"
+                />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="service_history"
+                  >Your service story <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="service_history"
+                  class="lt-area"
+                  data-label="Service story"
+                  aria-required="true"
+                  placeholder="Example: I joined the Army in 2016 and served as a wheeled vehicle mechanic at Fort Hood. I had two good years, then my mother died and I started drinking. I got two counseling statements for being late and one Article 15 for missing formation. I was separated in 2019 with an other than honorable discharge. I have been sober since 2021, finished a diesel mechanic certificate, and have held the same job for three years."
+                ></textarea>
+                <p class="lt-hint">
+                  What you did in service, what led to the discharge, and what your record looked
+                  like before that. Use the facts from your DD-214 and your own records.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="what_changed"
+                  >What has changed since you separated
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="what_changed"
+                  class="lt-area"
+                  data-label="What has changed since separation"
+                  placeholder="Example: I completed treatment in 2021 and have stayed sober. I finished a diesel mechanic certificate in 2022 and have worked at the same shop for three years. I volunteer at the food bank on Saturdays. My employer and my sponsor will write character letters."
+                ></textarea>
+                <p class="lt-hint">
+                  Treatment, sobriety, education, steady work, family, community service, and
+                  anything else that shows who you are now. This is the heart of a clemency case.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Evidence and supporting documents
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <div id="evidence-list"></div>
+                <button type="button" class="lt-ghost" id="evidence-add" style="margin-top: 0.5rem">
+                  + Add evidence item
+                </button>
+                <p class="lt-hint">
+                  Your DD-214, service treatment records, performance evaluations, awards,
+                  counseling statements, separation paperwork, treatment or sobriety records,
+                  employment records, character letters, and buddy statements from people who
+                  served with you.
+                </p>
+                <input type="hidden" id="evidence_summary" data-label="Evidence you have" />
+              </div>
+              <input
+                type="hidden"
+                id="eligibility_result"
+                data-label="Form check result from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Anything else the board should know
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: My discharge paperwork says I refused treatment, but I asked for help twice and was told to wait for a slot. The DD-214 lists the wrong separation code. I already applied once in 2021 and was denied on the papers."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; One or two sentences is enough.
+                  Plain facts, in your own words.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal advice. This is a discharge upgrade packet builder for a VSO
+                  representative or attorney to review with you.</strong
+                >
+                It builds a form check, a packet outline, a draft personal statement, and an
+                evidence checklist from your facts only. It does not assess whether your discharge
+                will be upgraded, whether you will win, or what the law requires. It will not
+                invent facts or cite law. When you generate, your prompt is sent to our AI service
+                to produce the output. A VSO representative or attorney decides what fits your
+                situation before you file.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Building your packet&hellip;</p>
+                  <small>From your service facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your form check and packet will appear here.<br /><br />1. Enter your branch,
+                    discharge characterization, and separation date<br />2. Generate the form check
+                    first (DD-293 or DD-149)<br />3. Then generate the full packet</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved packets</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a packet to save this exact intake plus your generated form check and packet,
+                  on this device. Reload it anytime to keep working on it.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    aria-label="Packet name"
+                    placeholder="Packet name, e.g. DD-293 draft v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save packet</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved packets yet.
+                  </li>
+                </ul>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  You separated with an other than honorable discharge and it is blocking VA
+                  benefits or jobs, and you need to know whether to file DD-293 or DD-149
+                </li>
+                <li>
+                  You separated less than 15 years ago and the discharge does not match what
+                  actually happened, and you need the packet organized before you file
+                </li>
+                <li>
+                  You separated more than 15 years ago and the Discharge Review Board window has
+                  closed, and you need a DD-149 packet for the Board for Correction of Military
+                  Records
+                </li>
+                <li>
+                  Your discharge was tied to behavior connected to PTSD, depression, or substance
+                  use that was never treated in service, and you need that story told with records
+                </li>
+                <li>
+                  You have been sober, employed, or in school since service and want a clemency
+                  case built on what has changed, with character letters and proof attached
+                </li>
+                <li>
+                  You were already denied once and want to reapply with a stronger packet, new
+                  evidence, and a personal statement that answers the first denial
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>The 15-year line decides the form</h3>
+              <p>
+                The Discharge Review Board hears DD-293 applications for separations less than 15
+                years ago. Past 15 years, or for a discharge from a general court-martial, the
+                case goes to the Board for Correction of Military Records on a DD-149. Filing the
+                wrong form wastes months. The form check above works from the separation date you
+                enter, so copy it straight off your DD-214.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Grounds, not grievances</h3>
+              <p>
+                Boards decide on inequity, impropriety, or clemency. Inequity means the discharge
+                was unfair in the circumstances. Impropriety means an error was made or a rule was
+                not followed. Clemency means what has changed since service warrants a second look.
+                A packet that names its grounds and proves each one with records beats a packet
+                that just says the discharge was unfair.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Records beat memory</h3>
+              <p>
+                &ldquo;I was a good soldier&rdquo; persuades no one. Evaluations, awards, counseling
+                statements, treatment records, and the separation paperwork are what the board
+                reads. Buddy statements from people who served with you fill the gaps the record
+                leaves. Gather every record before you file, and send new evidence the way the
+                board requires, not by guessing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Free help exists, use it</h3>
+              <p>
+                Accredited VSO representatives from the American Legion, VFW, DAV, and your state
+                veterans agency help veterans file these applications for free, and they have filed
+                hundreds of them. They know what each board wants to see and will review your packet
+                before you send it. Bring them a finished draft, not a blank form, and the review
+                goes faster.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>What is a military discharge upgrade?</summary>
+              <p>
+                A discharge upgrade is a change to the characterization of your discharge on your
+                DD-214, for example from other than honorable to general under honorable conditions.
+                It is decided by a Discharge Review Board on a DD-293 application, or by a Board
+                for Correction of Military Records on a DD-149 application. The board looks at
+                whether the discharge was inequitable or improper, or whether clemency is warranted,
+                based on the records and the evidence you submit. This is general information, not
+                legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>DD-293 vs DD-149: which form do I use for a discharge upgrade?</summary>
+              <p>
+                Use DD-293 if you separated less than 15 years ago: it goes to your service's
+                Discharge Review Board. Use DD-149 if more than 15 years have passed since your
+                separation, or if your discharge came from a general court-martial: it goes to your
+                service's Board for Correction of Military Records. The 15-year line runs from your
+                separation date, and this tool computes it from the date you enter. Confirm the
+                right form with the board or an accredited veterans service organization before you
+                file.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I upgrade a dishonorable discharge?</summary>
+              <p>
+                A dishonorable discharge from a general court-martial cannot be reviewed by a
+                Discharge Review Board, so a DD-293 is not the route. Those cases go to the Board
+                for Correction of Military Records on a DD-149. Other characterizations, including
+                other than honorable and bad conduct from a special court-martial, can be reviewed
+                by a Discharge Review Board within 15 years of separation. Whether any discharge
+                can be upgraded depends on the facts and the record, and no tool can predict the
+                outcome. An accredited veterans service organization or an attorney can review your
+                DD-214 and tell you which route fits.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How long does a discharge upgrade take?</summary>
+              <p>
+                Discharge review cases commonly take many months, and a year or more is not unusual,
+                because the board has to pull your full service record and work through a large
+                caseload. Some boards offer a records review on the papers only, and some offer a
+                personal appearance hearing, which can add time. File as soon as your packet is
+                ready rather than waiting for a perfect packet, and keep copies of everything you
+                send. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What evidence helps a discharge upgrade application?</summary>
+              <p>
+                The strongest evidence is paper that shows what happened and who you are now: your
+                DD-214, service treatment records, performance evaluations, awards, counseling
+                statements, the separation paperwork, and any investigation or court-martial records.
+                For clemency, add proof of what changed since service: steady employment, education,
+                treatment records, sobriety or counseling records, community service, and character
+                letters from employers, family, or community members. Buddy statements from people
+                who served with you can fill gaps the record leaves. The packet mode turns your
+                evidence list into a checklist.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Does a discharge upgrade restore VA benefits?</summary>
+              <p>
+                An upgrade can help, but it does not automatically restore benefits. The VA makes
+                its own character-of-discharge determination for benefit eligibility, separate from
+                the military review boards, and some upgraded characterizations still need a VA
+                decision. An other than honorable discharge blocks most VA benefits while it stands,
+                which is why an upgrade matters, but treat the VA question as its own step: ask the
+                VA or an accredited representative how your new characterization affects the
+                specific benefit you need. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Do I need a lawyer for a discharge upgrade?</summary>
+              <p>
+                No. Many veterans file with help from an accredited veterans service organization
+                representative, such as the American Legion, VFW, DAV, or your state veterans
+                agency, and that help is free. A representative who has filed many of these cases
+                knows what each board wants to see and can review your packet before you send it. An
+                attorney is worth considering when the case is complicated, such as a court-martial
+                discharge or a case that was already denied once. This tool builds a draft packet
+                for that review; it is not a lawyer.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool builds a discharge upgrade packet from the facts you enter: the right
+                form, a packet outline, a draft personal statement, and an evidence checklist. It
+                does not assess your case, predict the outcome, or cite law. Have an accredited
+                veterans service organization representative or an attorney review your packet
+                before you file.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-upgrade-a-military-discharge/"
+              ><strong>How to Upgrade a Military Discharge</strong
+              ><small
+                >The companion guide: DD-293 vs DD-149, the three grounds, the evidence, and the
+                full method</small
+              ></a
+            >
+            <a href="/guides/how-to-prepare-for-a-va-disability-board-hearing/"
+              ><strong>How to Prepare for a VA Disability Board Hearing</strong
+              ><small
+                >A different board, a different fight: preparing for a VA Board of Veterans&#8217;
+                Appeals hearing</small
+              ></a
+            >
+            <a href="/tools/ai-ssdi-appeal-letter/"
+              ><strong>AI SSDI Appeal Letter</strong
+              ><small>Appeal a disability denial with a letter built from your facts</small></a
+            >
+            <a href="/tools/ai-goodwill-letter-writer/"
+              ><strong>AI Goodwill Letter Writer</strong
+              ><small>Ask a creditor to remove a late payment with a goodwill letter</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal advice. Review every discharge upgrade packet with
+            an accredited VSO representative or attorney before you file.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script src="/tools/ai-military-discharge-upgrade-packet-builder/ai-military-discharge-upgrade-packet-builder.js?v=20261119a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'service_history',
+          served_date: 'separation_date',
+          state: 'branch_of_service',
+          sender: 'applicant_name',
+          evidence: 'tool-input',
+        });
+      })();
+    </script>
+  </body>
+</html>
