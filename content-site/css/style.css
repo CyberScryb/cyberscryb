@@ -175,6 +175,10 @@ h6 {
   line-height: 1.2;
   color: var(--text);
   letter-spacing: -0.02em;
+  /* Balance multi-line headings so the last line never strands one word.
+     Chromium caps balancing at 6 lines, Firefox at 10; longer headings
+     fall back to normal wrapping. Unsupported browsers ignore it. */
+  text-wrap: balance;
 }
 
 h1 {
