@@ -61,6 +61,9 @@
   line-height: 1.1;
   margin-bottom: 16px;
   text-transform: uppercase;
+  /* Balance the wrapped heading; the bottom border spans full width, so
+     rebalancing line breaks cannot leave a visual gap. */
+  text-wrap: balance;
 }
 
 .guide-subtitle {
@@ -137,6 +140,7 @@
   margin: 36px 0 14px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--steel);
+  text-wrap: balance;
 }
 
 .guide-content p {
