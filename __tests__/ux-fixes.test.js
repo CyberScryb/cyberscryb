@@ -178,3 +178,66 @@ describe('recent draft index', () => {
     expect(document.getElementById('continue-link').getAttribute('href')).toBe('#');
   });
 });
+
+describe('glassmorphism background selector accessibility', () => {
+  const html = read('content-site/tools/glassmorphism-generator/index.html');
+  const scriptContent = read('content-site/tools/glassmorphism-generator/script.js');
+
+  test('background preset buttons have type, aria-label, group role, and aria-pressed attributes', () => {
+    expect(html).toContain(
+      '<div class="bg-selector" role="group" aria-label="Canvas background presets">'
+    );
+    const bgBtns = html.match(/<button[^>]*class="[^"]*bg-btn[^"]*"[^>]*>/g) || [];
+    expect(bgBtns.length).toBe(5);
+    bgBtns.forEach(btn => {
+      expect(btn).toContain('type="button"');
+      expect(btn).toMatch(/aria-label="[^"]+ background"/);
+      expect(btn).toMatch(/aria-pressed="(true|false)"/);
+    });
+  });
+
+  test('clicking preset button toggles active class and updates aria-pressed', () => {
+    document.body.innerHTML = `
+      <input type="range" id="blurSlider" value="12">
+      <input type="range" id="opacitySlider" value="0.25">
+      <input type="range" id="borderWidthSlider" value="1">
+      <input type="range" id="borderOpacitySlider" value="0.15">
+      <input type="range" id="radiusSlider" value="16">
+      <input type="range" id="shadowOpacitySlider" value="0.20">
+      <input type="color" id="glassColor" value="#ffffff">
+      <input type="text" id="glassColorHex" value="#ffffff">
+      <input type="color" id="borderColor" value="#ffffff">
+      <input type="text" id="borderColorHex" value="#ffffff">
+      <span id="blurVal"></span>
+      <span id="opacityVal"></span>
+      <span id="borderWidthVal"></span>
+      <span id="borderOpacityVal"></span>
+      <span id="radiusVal"></span>
+      <span id="shadowOpacityVal"></span>
+      <div id="glassCard"></div>
+      <div id="canvasBox" class="canvas-container bg-neon"></div>
+      <pre id="cssOutput"></pre>
+      <pre id="htmlOutput"></pre>
+      <button id="btnCopyCss"></button>
+      <button id="btnCopyHtml"></button>
+      <div class="bg-selector" role="group" aria-label="Canvas background presets">
+        <button type="button" class="bg-btn active" data-bg="neon" title="Neon Sunset" aria-label="Neon Sunset background" aria-pressed="true">🌆</button>
+        <button type="button" class="bg-btn" data-bg="ocean" title="Deep Sea" aria-label="Deep Sea background" aria-pressed="false">🌊</button>
+      </div>
+    `;
+    window.eval(scriptContent);
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+
+    const btns = document.querySelectorAll('.bg-btn');
+    const oceanBtn = btns[1];
+    expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+    expect(oceanBtn.getAttribute('aria-pressed')).toBe('false');
+
+    oceanBtn.click();
+    expect(btns[0].classList.contains('active')).toBe(false);
+    expect(btns[0].getAttribute('aria-pressed')).toBe('false');
+    expect(oceanBtn.classList.contains('active')).toBe(true);
+    expect(oceanBtn.getAttribute('aria-pressed')).toBe('true');
+    expect(document.getElementById('canvasBox').classList.contains('bg-ocean')).toBe(true);
+  });
+});
