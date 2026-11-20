@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn.className = trySampleBtn.className;
     clearBtn.textContent = 'Clear';
     clearBtn.title = 'Clear input';
+    clearBtn.setAttribute('aria-label', 'Clear input');
     clearBtn.addEventListener('click', function () {
       roboticText.value = '';
       roboticText.dispatchEvent(new Event('input', { bubbles: true }));
@@ -162,6 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyBtn) copyBtn.addEventListener('click', copyOutput);
 
   if (downloadBtn) {
+    if (!downloadBtn.getAttribute('aria-label')) {
+      downloadBtn.setAttribute('aria-label', 'Download result as text file');
+    }
     downloadBtn.addEventListener('click', function () {
       const text = getPlainOutput();
       if (!text || text.indexOf('Nothing here yet') !== -1) return;
@@ -185,14 +189,18 @@ document.addEventListener('DOMContentLoaded', () => {
     shareBtn.className = downloadBtn.className;
     shareBtn.textContent = 'Share';
     shareBtn.title = 'Share this result';
+    shareBtn.setAttribute('aria-label', 'Share this result');
     shareBtn.addEventListener('click', function () {
       const text = getPlainOutput();
       if (!text || text.indexOf('Nothing here yet') !== -1) return;
       const orig = shareBtn.innerText;
-      function flash(msg) {
+      const origLabel = shareBtn.getAttribute('aria-label') || 'Share this result';
+      function flash(msg, labelMsg) {
         shareBtn.innerText = msg;
+        shareBtn.setAttribute('aria-label', labelMsg || msg);
         setTimeout(function () {
           shareBtn.innerText = orig;
+          shareBtn.setAttribute('aria-label', origLabel);
         }, 1600);
       }
       if (navigator.share) {
@@ -200,20 +208,22 @@ document.addEventListener('DOMContentLoaded', () => {
           .share({ title: document.title || 'CyberScryb result', text: text })
           .then(function () {
             trackEvent('result_shared', { tool_id: TOOL_ID });
-            flash('Shared!');
+            flash('Shared!', 'Result shared');
           })
           .catch(function () {
             // Dismissed by the user or share unavailable — restore quietly.
             shareBtn.innerText = orig;
+            shareBtn.setAttribute('aria-label', origLabel);
           });
       } else if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(
           function () {
             trackEvent('result_shared_fallback', { tool_id: TOOL_ID });
-            flash('Copied!');
+            flash('Copied!', 'Copied to clipboard');
           },
           function () {
             shareBtn.innerText = orig;
+            shareBtn.setAttribute('aria-label', origLabel);
           }
         );
       }
