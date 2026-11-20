@@ -1658,6 +1658,7 @@ function generateSitemap(generatedPages) {
     'how-to-prepare-for-a-special-education-due-process-hearing',
     'how-to-upgrade-a-military-discharge',
     'how-to-prepare-for-a-bankruptcy-341-meeting',
+    'how-to-prepare-for-a-traffic-court-hearing',
     'what-to-type-to-get-a-good-answer-from-ai',
     'what-ai-actually-is-and-isnt',
     'why-ai-makes-things-up',
