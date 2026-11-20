@@ -1,0 +1,1397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI VA Disability Board Hearing Prep Coach &mdash; Free Hearing Prep Tool | CyberScryb
+    </title>
+    <meta
+      name="description"
+      content="Free AI coach for your VA disability Board hearing: a hearing strategy from your facts, a full prep packet (evidence checklist, timeline, opening statement, mock Q&A), and a mock hearing with a Veterans Law Judge. Not legal advice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://cyberscryb.com/tools/ai-va-disability-board-hearing-prep-coach/"
+    />
+    <meta
+      property="og:title"
+      content="AI VA Disability Board Hearing Prep Coach — Free Hearing Prep Tool | CyberScryb"
+    />
+    <meta
+      property="og:description"
+      content="Free AI coach for your VA disability Board hearing: hearing strategy, a full prep packet, and a mock hearing with a Veterans Law Judge. Not legal advice."
+    />
+    <meta
+      property="og:url"
+      content="https://cyberscryb.com/tools/ai-va-disability-board-hearing-prep-coach/"
+    />
+    <meta property="og:image" content="https://cyberscryb.com/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CyberScryb" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI VA Disability Board Hearing Prep Coach — Free Hearing Prep Tool | CyberScryb"
+    />
+    <meta
+      name="twitter:description"
+      content="Free AI coach for your VA disability Board hearing: hearing strategy, a full prep packet, and a mock hearing with a Veterans Law Judge. Not legal advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css?v=20261014ux" />
+    <link rel="stylesheet" href="/tools/humanizer/style.css?v=20261006audit1" />
+    <link rel="stylesheet" href="/tools/shared/ai-tool.css?v=20261013sticky1" />
+    <link rel="stylesheet" href="/tools/shared/life-tool.css?v=20261011polish2" />
+    <style>
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+      }
+      .pill-group input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          color 0.15s;
+        user-select: none;
+      }
+      .pill:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .pill-group input:checked + .pill {
+        border-color: #ef4444;
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--text);
+        box-shadow: 0 0 0 1px #ef4444 inset;
+      }
+      .pill-group input:focus-visible + .pill {
+        outline: 2px solid #f87171;
+        outline-offset: 2px;
+      }
+      .hist-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .hist-item {
+        width: 100%;
+        text-align: left;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.55rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .hist-item:hover {
+        border-color: #dc2626;
+        color: var(--text);
+      }
+      .hist-item strong {
+        color: var(--text);
+        display: block;
+        font-size: 0.82rem;
+      }
+      .hist-del {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.72rem;
+        color: var(--text-faint);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: left;
+      }
+      .hist-del:hover {
+        color: #f87171;
+      }
+      .not-lawyer {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        max-width: 42rem;
+      }
+      .not-lawyer strong {
+        color: #f87171;
+      }
+      .deadline-box {
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.07);
+        border-radius: 10px;
+        padding: 0.7rem 1rem;
+        margin-top: 0.6rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .deadline-box strong {
+        color: #f87171;
+      }
+      .draft-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.6rem;
+      }
+      .draft-row .lt-input {
+        flex: 1;
+      }
+      .ev-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        align-items: center;
+      }
+      .ev-row .lt-input {
+        flex: 1;
+      }
+      .ev-del {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ev-del:hover {
+        border-color: #dc2626;
+        color: #f87171;
+      }
+      .mock-transcript {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: 340px;
+        overflow-y: auto;
+        margin-bottom: 0.75rem;
+      }
+      .mock-bubble {
+        padding: 0.6rem 0.85rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .mock-bubble.vlj {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: var(--text);
+      }
+      .mock-bubble.vlj strong {
+        color: #f87171;
+      }
+      .mock-bubble.user {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        align-self: flex-end;
+        max-width: 92%;
+      }
+      .mock-bubble.user strong {
+        color: var(--text);
+      }
+      .mock-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.6rem;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+      }
+      select.lt-input {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+          linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) 50%,
+          calc(100% - 15px) 50%;
+        background-size:
+          5px 5px,
+          5px 5px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <style media="print">
+      * {
+        visibility: hidden !important;
+      }
+      #output-text,
+      #output-text * {
+        visibility: visible !important;
+      }
+      #output-text {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: Georgia, serif;
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+        padding: 0.85in;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        border: none !important;
+        min-height: auto !important;
+      }
+      .lt-sticky-gen,
+      nav,
+      header,
+      footer,
+      .lt-toolbar,
+      .email-gate {
+        display: none !important;
+      }
+    </style>
+    <script>
+      function printLetter() {
+        var out = document.getElementById('output-text');
+        if (!out || out.innerText.trim() === '' || out.querySelector('.placeholder')) {
+          if (window.LifeTool) LifeTool.toast('Generate a packet first, then print');
+          else alert('Generate a packet first, then print.');
+          return;
+        }
+        window.print();
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI VA Disability Board Hearing Prep Coach",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "url": "https://cyberscryb.com/tools/ai-va-disability-board-hearing-prep-coach/",
+        "description": "Free AI coach for VA disability Board hearings: hearing strategy, a full prep packet, and a mock hearing with a Veterans Law Judge. Not legal advice."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What happens at a VA disability Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Board hearing is an informal, non-adversarial hearing before a Veterans Law Judge at the Board of Veterans' Appeals. You testify under oath about your service, your conditions, and how they limit your daily life and work. The judge asks most of the questions, reviews your file, and lets you and your representative make your case. There is no VA lawyer arguing against you, and no jury. The judge does not decide on the spot; a written decision comes later, usually months after the hearing. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I request a Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You request a hearing on VA Form 10182, the Decision Review Request: Board Appeal, by choosing the hearing docket. The form must reach the Board within one year of the date on the rating decision letter. Enter your decision date in the tool and it works out your one-year deadline. If you already filed, check your docket choice with your representative before you prepare. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the three Board dockets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Direct Review means the judge decides from the evidence already in your file, with no new evidence and no hearing. Evidence Submission means you can send new evidence within 90 days after the Board receives your appeal, but there is no hearing. Hearing means you get a hearing before a Veterans Law Judge, and you can send new evidence at the hearing or within 90 days after it. You pick the docket on Form 10182, and you generally cannot switch later, so talk to an accredited representative before you file."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a Board hearing last?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A hearing usually runs under an hour, though complex cases run longer. The judge works through your service history, your conditions, and your daily limits, then lets your representative ask questions. Short, specific answers about what you can and cannot do matter more than long explanations. Practice keeping answers under a minute."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I bring new evidence to my Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can bring new evidence to the hearing and hand it to the judge, and you have 90 days after the hearing to send more. Enter your hearing date in the tool and it works out when that 90-day window closes. Do not wait until the last week; send evidence as soon as you have it, and keep copies of everything you send."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I bring someone with me to my Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can bring an accredited representative, an accredited agent, or an attorney, and witnesses who know your service and your daily limits firsthand, such as a fellow service member or a spouse. Tell the Board ahead of time if a witness will attend, and tell witnesses to stick to what they personally saw and what they see you struggle with each day."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What will the judge ask me at a Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Expect questions about when each condition started, what happened in service, what your C&P exam found, what a typical day looks like, how long you can sit, stand, walk, and lift, and what work you can still do. The judge may also ask about treatment, medications and side effects, and the jobs you have held since service. Answer in plain, concrete terms: what you do, how long it takes, and what forces you to stop."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I miss my Board hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A missed hearing is treated as withdrawn, and the judge decides your appeal without your testimony, though you still have 90 days from the missed date to send evidence. If the date truly does not work, send the Board a written request with a good reason at least two weeks before the hearing. If an emergency makes you miss it, contact the Board and your representative right away. This is general information, not legal advice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this legal advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool prepares you for a hearing from the facts you enter: strategy, a prep packet, and mock practice. It does not assess your claim, predict the outcome, or cite law. For a close case or if anything sensitive comes up, review with an accredited Veterans Service Organization representative, an accredited agent, or an accredited attorney before the hearing."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to prepare for a VA disability Board hearing with this tool",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your hearing facts",
+            "text": "Your issues on appeal, Board docket, hearing date and format, service history, conditions, C&P exam, daily limits, and the evidence you have."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Generate your hearing strategy and packet",
+            "text": "Get the hearing strategy first, then the full prep packet: evidence checklist, service and treatment timeline, opening statement draft, and a mock Q&A set."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Practice the mock hearing",
+            "text": "Rehearse with the AI as the Veterans Law Judge: one question at a time, a short note on each answer, up to 8 exchanges."
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" href="/css/consent.css?v=20261014ux" />
+    <script src="/js/consent.js?v=20261006audit1" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <a href="/" style="display: flex; align-items: center; text-decoration: none">
+              <img
+                src="/mascot-icon.webp"
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="logo"
+              />
+              <span
+                style="
+                  font-family: var(--font-brand), Georgia, serif;
+                  font-weight: 700;
+                  font-size: 1.2rem;
+                  color: var(--text);
+                  margin-left: 10px;
+                "
+                >CyberScryb</span
+              >
+            </a>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/" class="active">Tools</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+          <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <nav
+      aria-label="Breadcrumb"
+      style="
+        max-width: 1200px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      "
+    >
+      <a href="/" style="color: var(--text-muted); text-decoration: none">Home</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <a href="/tools/" style="color: var(--text-muted); text-decoration: none">Tools</a>
+      <span style="color: var(--border-strong); margin: 0 4px">&rsaquo;</span>
+      <span style="color: var(--primary)">AI VA Disability Board Hearing Prep Coach</span>
+    </nav>
+    <main>
+      <section class="hero" style="min-height: auto; padding: 2.25rem 1.25rem 0.75rem">
+        <div class="hero-container">
+          <div class="hero-eyebrow">AI life tool &middot; free, no signup</div>
+          <h1 class="hero-title" style="font-size: clamp(1.75rem, 4vw, 2.45rem)">
+            AI VA disability Board hearing <span style="color: var(--primary)">prep coach</span>
+          </h1>
+          <p class="hero-subtitle" style="max-width: 38rem">
+            The VA denied your claim or rated it too low, and now you have a hearing before a
+            Veterans Law Judge at the Board of Veterans' Appeals. Enter your facts once and get a
+            hearing strategy that spots the issues the judge must decide, a full prep packet with an
+            evidence checklist and opening statement, and a mock hearing so you rehearse the
+            questions before they count.
+          </p>
+          <div class="not-lawyer">
+            <strong>Not legal advice.</strong> This is a hearing-preparation tool, not legal advice.
+            It builds strategy, a prep packet, and mock practice from the facts you enter. It does
+            not tell you whether your claim will succeed, what your rating should be, or what the
+            law requires. Have an accredited Veterans Service Organization representative, an
+            accredited agent, or an accredited attorney review your case before the hearing.
+          </div>
+        </div>
+      </section>
+      <div class="lt-wrap">
+        <div class="lt-trust" aria-label="Product promises">
+          <span><i></i> Hearing strategy from your facts</span>
+          <span><i></i> Full prep packet artifact</span>
+          <span><i></i> Mock hearing with an AI Veterans Law Judge</span>
+          <span><i></i> Prep sessions save on this device</span>
+        </div>
+        <div class="lt-how">
+          <div class="lt-how-item">
+            <span class="lt-how-n">1</span><strong>Enter your hearing facts</strong
+            ><span
+              >Your issues on appeal, Board docket, hearing date and format, service history,
+              conditions, C&amp;P exam, daily limits, and the evidence you have.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">2</span><strong>Generate strategy &amp; packet</strong
+            ><span
+              >Get the hearing strategy first, then the full prep packet: evidence checklist,
+              service and treatment timeline, opening statement draft, and a mock Q&amp;A set.</span
+            >
+          </div>
+          <div class="lt-how-item">
+            <span class="lt-how-n">3</span><strong>Practice the mock hearing</strong
+            ><span
+              >Rehearse with the AI as the Veterans Law Judge: one question at a time, a short note
+              on each answer, up to 8 exchanges.</span
+            >
+          </div>
+        </div>
+        <div class="lt-steps" aria-label="Progress">
+          <span class="lt-step on" id="lt-step-1">1 &middot; Intake</span>
+          <span class="lt-step" id="lt-step-2">2 &middot; Strategy &amp; packet</span>
+          <span class="lt-step" id="lt-step-3">3 &middot; Mock hearing</span>
+        </div>
+        <div class="lt-grid">
+          <div class="lt-card">
+            <div class="lt-card-h">
+              <h2>Build your hearing case</h2>
+              <span class="lt-draft-badge" id="lt-draft-badge">Draft saved</span>
+            </div>
+            <div class="lt-body">
+              <label class="lt-label" id="mode-label">Coaching mode</label>
+              <div class="lt-chips" id="mode-chips" role="group" aria-labelledby="mode-label">
+                <button
+                  type="button"
+                  class="lt-chip"
+                  data-mode="hearing-strategy"
+                  aria-pressed="false"
+                >
+                  Hearing strategy
+                </button>
+                <button type="button" class="lt-chip" data-mode="prep-packet" aria-pressed="false">
+                  Prep packet
+                </button>
+                <button type="button" class="lt-chip" data-mode="mock-hearing" aria-pressed="false">
+                  Mock hearing
+                </button>
+              </div>
+              <input type="hidden" id="mode-value" value="hearing-strategy" />
+              <div class="lt-mode-tip" id="lt-mode-tip">
+                <strong>Hearing strategy mode</strong>Issue-spotting from your facts: the questions
+                the Veterans Law Judge must decide, your strongest points, and the weak spots to
+                prepare for. Run this first; the prep packet reuses it.
+              </div>
+              <div class="lt-ready" id="lt-ready" aria-live="polite">
+                <div class="lt-ready-top">
+                  <span>Brief strength</span><span id="lt-ready-pct">0%</span>
+                </div>
+                <div class="lt-ready-bar"><div class="lt-ready-fill" id="lt-ready-fill"></div></div>
+                <p class="lt-ready-msg" id="lt-ready-msg">
+                  Pick your Board docket and state, then add your issues on appeal and daily limits.
+                </p>
+              </div>
+              <div class="lt-row" style="margin-top: 0.9rem">
+                <div class="lt-field">
+                  <label class="lt-label" for="veteran_name"
+                    >Your name <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="veteran_name"
+                    type="text"
+                    placeholder="e.g. Jordan Lee"
+                    data-label="Veteran name"
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="veteran_state"
+                    >State <span class="cs-req" aria-hidden="true">*</span></label
+                  ><select
+                    class="lt-input"
+                    id="veteran_state"
+                    data-label="State"
+                    aria-required="true"
+                  >
+                    <option value="">Select your state</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
+                    <option>Iowa</option>
+                    <option>Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option>Maryland</option>
+                    <option>Massachusetts</option>
+                    <option>Michigan</option>
+                    <option>Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New</option>
+                    <option>Hampshire</option>
+                    <option>New</option>
+                    <option>Jersey</option>
+                    <option>New</option>
+                    <option>Mexico</option>
+                    <option>New</option>
+                    <option>York</option>
+                    <option>North</option>
+                    <option>Carolina</option>
+                    <option>North</option>
+                    <option>Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode</option>
+                    <option>Island</option>
+                    <option>South</option>
+                    <option>Carolina</option>
+                    <option>South</option>
+                    <option>Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option>Washington</option>
+                    <option>West</option>
+                    <option>Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="decision_date"
+                    >VA rating decision date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="decision_date"
+                    type="date"
+                    data-label="VA rating decision letter date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="hearing_date"
+                    >Hearing date <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="hearing_date"
+                    type="date"
+                    data-label="Board hearing date"
+                    style="color-scheme: dark"
+                  />
+                </div>
+              </div>
+              <div class="lt-row">
+                <div class="lt-field">
+                  <label class="lt-label" for="representative_name"
+                    >Your VSO representative or attorney
+                    <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="representative_name"
+                    type="text"
+                    placeholder="e.g. DAV representative, or your attorney"
+                    data-label="VSO representative or attorney"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="lt-field">
+                  <label class="lt-label" for="claim_number"
+                    >VA file number <span class="cs-optional">(optional)</span></label
+                  ><input
+                    class="lt-input"
+                    id="claim_number"
+                    type="text"
+                    placeholder="e.g. from your rating decision letter"
+                    data-label="VA file number"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="deadline-box" id="deadline-box" aria-live="polite">
+                <strong>Board deadlines:</strong> enter your hearing date to see how many days you
+                have left, when your 90-day evidence window closes, and the date to ask for a
+                reschedule by, and enter the rating decision date to see your one-year Board Appeal
+                deadline worked out. Calendar math from dates you entered. Deadlines are general
+                reference information and change; verify the current dates with the VA or your
+                representative before you file. Contested claims can have a shorter window, so check
+                your own decision letter.
+              </div>
+              <input
+                type="hidden"
+                id="deadline_math"
+                data-label="Computed Board Appeal deadline, hearing countdown, 90-day evidence window, and reschedule date (calendar math from your dates)"
+              />
+              <div class="lt-field" style="margin-top: 0.9rem">
+                <label class="lt-label" id="docket-label"
+                  >Which Board docket did you pick on Form 10182
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="docket-label">
+                  <input
+                    type="radio"
+                    id="dk_hearing"
+                    name="board_docket"
+                    value="Hearing docket"
+                  /><label class="pill" for="dk_hearing">Hearing docket</label>
+                  <input
+                    type="radio"
+                    id="dk_evidence"
+                    name="board_docket"
+                    value="Evidence Submission docket"
+                  /><label class="pill" for="dk_evidence">Evidence Submission docket</label>
+                  <input
+                    type="radio"
+                    id="dk_direct"
+                    name="board_docket"
+                    value="Direct Review docket"
+                  /><label class="pill" for="dk_direct">Direct Review docket</label>
+                </div>
+                <input
+                  type="hidden"
+                  id="board_docket"
+                  data-label="Board docket"
+                  aria-required="true"
+                />
+                <p class="lt-hint">
+                  Hearing means you testify before a Veterans Law Judge. Evidence Submission means
+                  new evidence only, no hearing. Direct Review means the judge decides from the file
+                  as it stands. You generally cannot switch later.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" id="format-label"
+                  >How will your hearing be held <span class="cs-optional">(optional)</span></label
+                >
+                <div class="pill-group" role="group" aria-labelledby="format-label">
+                  <input
+                    type="radio"
+                    id="fm_virtual"
+                    name="hearing_format"
+                    value="Virtual tele-hearing from home"
+                  /><label class="pill" for="fm_virtual">Virtual tele-hearing</label>
+                  <input
+                    type="radio"
+                    id="fm_video"
+                    name="hearing_format"
+                    value="Videoconference at a VA location"
+                  /><label class="pill" for="fm_video">Videoconference at a VA location</label>
+                  <input
+                    type="radio"
+                    id="fm_person"
+                    name="hearing_format"
+                    value="In-person in Washington, D.C."
+                  /><label class="pill" for="fm_person">In-person in Washington, D.C.</label>
+                </div>
+                <input type="hidden" id="hearing_format" data-label="Hearing format" />
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="issues_on_appeal"
+                  >Issues on appeal <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="issues_on_appeal"
+                  class="lt-area"
+                  data-label="Issues on appeal"
+                  aria-required="true"
+                  placeholder="Example: service connection for lower back pain, denied in the March 2026 rating decision; increase for PTSD, currently rated 30%; earlier effective date for my knee claim."
+                ></textarea>
+                <p class="lt-hint">
+                  List each issue exactly as it appears on your Form 10182, with what the VA decided
+                  and what you are asking for.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="conditions"
+                  >Your conditions <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="conditions"
+                  class="lt-area"
+                  data-label="Conditions"
+                  aria-required="true"
+                  placeholder="Example: degenerative disc disease in my lower back from lifting in service, PTSD from my deployment, and tinnitus in both ears."
+                ></textarea>
+                <p class="lt-hint">
+                  List each condition on appeal and when it started. Use the diagnoses from your
+                  records, in your own words.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="service_history"
+                  >Service history: branch, dates, and what happened in service
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="service_history"
+                  class="lt-area"
+                  data-label="Service history"
+                  placeholder="Example: Army, 2018 to 2022, infantry. Injured my back lifting equipment during training at Fort Hood in 2019. Treated at the aid station and kept serving."
+                ></textarea>
+                <p class="lt-hint">
+                  Branch, dates, and what happened in service that connects to each condition. This
+                  is the link the judge will ask about.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="cp_exam"
+                  >What the C&amp;P exam found <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="cp_exam"
+                  class="lt-area"
+                  data-label="C&P exam findings"
+                  placeholder="Example: C&P exam in January 2026. The examiner wrote my back pain limits lifting to 10 pounds, but said my PTSD symptoms were mild."
+                ></textarea>
+                <p class="lt-hint">
+                  What the C&amp;P examiner found, and the exam date if you have it. The judge will
+                  have the exam report in the file.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="daily_limits"
+                  >A typical day: what you can and cannot do
+                  <span class="cs-req" aria-hidden="true">*</span></label
+                >
+                <textarea
+                  id="daily_limits"
+                  class="lt-area"
+                  data-label="Daily limits"
+                  aria-required="true"
+                  placeholder="Example: I can sit about 20 minutes before the back pain forces me to lie down. I can stand long enough to make a sandwich, then I need to sit. I cannot lift a laundry basket. I nap most afternoons because the pain medication makes me drowsy."
+                ></textarea>
+                <p class="lt-hint">
+                  Be concrete: how long you can sit, stand, and walk, what forces you to stop, and
+                  how long recovery takes. This is what the judge will ask about.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label" for="work_history"
+                  >Work history: jobs, duties, and hours lost
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="work_history"
+                  class="lt-area"
+                  data-label="Work history"
+                  placeholder="Example: Warehouse associate, 2018 to 2022: lifting 40-pound boxes, standing 8 hours, forklift. Now I work part-time at a desk, 12 hours a week, and miss shifts when the pain flares."
+                ></textarea>
+                <p class="lt-hint">
+                  Your jobs, what each one required you to do all day, and any hours cut or jobs
+                  lost since your conditions started. The judge asks about work when a rating or
+                  unemployability is at issue.
+                </p>
+              </div>
+              <div class="lt-field">
+                <label class="lt-label"
+                  >Evidence you have <span class="cs-optional">(optional)</span></label
+                >
+                <div id="evidence-list"></div>
+                <button type="button" class="lt-ghost" id="evidence-add" style="margin-top: 0.5rem">
+                  + Add evidence item
+                </button>
+                <p class="lt-hint">
+                  Service treatment records, DD-214, C&amp;P exam report, nexus letter, buddy
+                  statements, private medical records, VA treatment notes, medication list, work
+                  records: anything that shows the condition started in service and what it costs
+                  you now.
+                </p>
+                <input type="hidden" id="evidence_summary" data-label="Evidence you have" />
+              </div>
+              <input
+                type="hidden"
+                id="hearing_strategy"
+                data-label="Hearing strategy from prior step"
+              />
+              <div class="lt-field">
+                <label class="lt-label" for="tool-input"
+                  >Anything else the judge should know
+                  <span class="cs-optional">(optional)</span></label
+                >
+                <textarea
+                  id="tool-input"
+                  class="lt-area"
+                  placeholder="Example: My VA doctor wrote that I cannot sit more than 30 minutes. I use a cane on bad days. My wife helps me dress most mornings. My VSO representative is filing a new nexus letter before the hearing."
+                ></textarea>
+                <p class="lt-hint">
+                  <span id="char-live">0</span> characters &middot; One or two sentences is enough.
+                  Plain facts, in your own words.
+                </p>
+              </div>
+              <button type="button" id="generate-btn" class="lt-gen">
+                <span class="btn-text">Generate</span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              <p class="lt-gen-sub">
+                Shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> &middot;
+                <span id="lt-save-hint">Autosaves as you type</span>
+              </p>
+              <div class="lt-actions">
+                <button type="button" class="lt-ghost" id="clear-form-btn">Clear form</button>
+              </div>
+              <div class="lt-disc">
+                <strong style="color: var(--danger)"
+                  >Not legal advice. This is a hearing-preparation tool for an accredited Veterans
+                  Service Organization representative, an accredited agent, or an accredited
+                  attorney to review with you.</strong
+                >
+                It builds strategy, a prep packet, and mock practice from your facts only. It does
+                not assess whether your claim will succeed, what your rating should be, or what the
+                law requires. It will not invent facts or cite law. When you generate, your prompt
+                is sent to our AI service to produce the output. A representative or attorney
+                decides what fits your situation before your hearing.
+              </div>
+            </div>
+          </div>
+          <div class="lt-rail">
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Your output</h2>
+                <div class="lt-toolbar">
+                  <span
+                    id="usage-counter"
+                    style="font-size: 0.72rem; color: var(--text-faint)"
+                  ></span>
+                  <button type="button" id="copy-btn" class="lt-icon-btn">Copy</button>
+                  <button type="button" id="download-btn" class="lt-icon-btn" disabled>
+                    Download
+                  </button>
+                  <button type="button" class="lt-icon-btn" onclick="printLetter()">
+                    Print / PDF
+                  </button>
+                </div>
+              </div>
+              <div class="lt-body" style="position: relative">
+                <div id="loading-indicator" class="lt-loading hidden">
+                  <div class="lt-spin"></div>
+                  <p>Building your prep&hellip;</p>
+                  <small>From your hearing facts, for your review</small>
+                </div>
+                <div id="output-text" class="lt-out">
+                  <span class="placeholder"
+                    >Your strategy and prep packet will appear here.<br /><br />1. Enter your issues
+                    on appeal, Board docket, and daily limits<br />2. Generate the hearing strategy
+                    first<br />3. Then generate the full prep packet</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="lt-card" id="mock-card">
+              <div class="lt-card-h">
+                <h2>Mock hearing room</h2>
+                <span class="lt-draft-badge" id="mock-status">Not started</span>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  The AI plays the Veterans Law Judge: one question at a time, a short note on each
+                  answer, up to 8 exchanges. Fill in your intake first so the questions fit your
+                  service, conditions, and work history.
+                </p>
+                <div id="mock-transcript" class="mock-transcript" aria-live="polite">
+                  <p class="lt-side-note" id="mock-empty" style="margin: 0">
+                    No mock hearing yet. Press &ldquo;Start mock hearing&rdquo; when your intake is
+                    ready.
+                  </p>
+                </div>
+                <div class="draft-row" style="margin-top: 0">
+                  <button type="button" class="lt-gen" id="mock-start-btn" style="flex: 1">
+                    <span class="btn-text">Start mock hearing</span>
+                  </button>
+                </div>
+                <div id="mock-answer-row" class="draft-row" hidden>
+                  <input
+                    class="lt-input"
+                    id="mock-answer"
+                    type="text"
+                    aria-label="Your answer to the judge's question"
+                    placeholder="Type your answer, then ask the next question"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="mock-next-btn">
+                    Ask next question
+                  </button>
+                </div>
+                <div class="mock-meta">
+                  <span id="mock-count">0 of 8 exchanges</span>
+                  <button type="button" class="lt-ghost" id="mock-end-btn" hidden>
+                    End mock hearing
+                  </button>
+                </div>
+                <div class="draft-row">
+                  <button
+                    type="button"
+                    class="lt-ghost"
+                    id="packet-download-btn"
+                    style="width: 100%"
+                  >
+                    Download prep packet (.txt)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Saved prep sessions</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-drafts-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear all
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Name a session to save this exact intake plus your generated strategy, packet, and
+                  mock transcript, on this device. Reload it anytime to keep preparing.
+                </p>
+                <div class="draft-row">
+                  <input
+                    class="lt-input"
+                    id="draft-name"
+                    type="text"
+                    aria-label="Session name"
+                    placeholder="Session name, e.g. Nov hearing prep v1"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="lt-ghost" id="save-draft-btn">Save session</button>
+                </div>
+                <ul class="hist-list" id="drafts-list" style="margin-top: 0.75rem">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">
+                    No saved sessions yet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-card-h">
+                <h2>Past outputs</h2>
+                <button
+                  type="button"
+                  class="lt-ghost"
+                  id="clear-history-btn"
+                  style="font-size: 0.75rem"
+                >
+                  Clear history
+                </button>
+              </div>
+              <div class="lt-body">
+                <p class="lt-side-note" style="margin-top: 0">
+                  Saved on this device when you generate. Tap one to reload it.
+                </p>
+                <ul class="hist-list" id="past-letters-list">
+                  <li style="font-size: 0.8rem; color: var(--text-faint)">No outputs yet.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lt-checklist-band">
+          <div class="lt-card">
+            <div class="lt-card-h"><h2>Real situations this fits</h2></div>
+            <div class="lt-body">
+              <ul class="lt-check">
+                <li>
+                  The VA denied service connection or rated a condition too low, the Board hearing
+                  notice arrived, and you need your service records, C&amp;P exam, nexus letter, and
+                  daily limits organized around what the judge must decide
+                </li>
+                <li>
+                  The rating decision says there is no link between your condition and your service,
+                  and you need to show in concrete terms when it started and how it has limited you
+                  since
+                </li>
+                <li>
+                  Your C&amp;P exam understated your symptoms, and you need to prepare to explain
+                  the difference between the exam report and your daily life
+                </li>
+                <li>
+                  You have new evidence to send after the hearing, and you need the 90-day window
+                  worked out from your hearing date
+                </li>
+                <li>
+                  You want to rehearse answering the Veterans Law Judge's questions about your
+                  service, your conditions, and your daily life out loud before the real hearing,
+                  with feedback on each answer
+                </li>
+                <li>
+                  You need an evidence checklist, a service and treatment timeline, and a one-minute
+                  opening statement drafted from your own facts
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lt-know">
+          <h2 style="font-size: 1.15rem; margin: 0 0 0.85rem; color: var(--text)">
+            What actually matters
+          </h2>
+          <div class="lt-know-grid">
+            <div class="lt-know-card">
+              <h3>The judge decides from the file plus your testimony</h3>
+              <p>
+                A Board hearing turns on two things: what the record already shows, and what you say
+                under oath. The judge has your claims file, the C&amp;P exam, and your treatment
+                records. Your testimony fills the gaps the paper cannot: when symptoms started, how
+                they changed, what a normal day costs you. Everything you prepare must answer one
+                question: what does service have to do with this condition, and what does it cost
+                you now. The hearing strategy mode exists to lock onto that question first.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>The link to service is the fight in most cases</h3>
+              <p>
+                Service connection turns on whether your condition started in, or was made worse by,
+                your service. A diagnosis alone does not win a hearing; the connection does. Service
+                treatment records that show the same complaint visit after visit, a nexus letter
+                that explains the link in plain terms, buddy statements from people who saw it
+                happen: those decide hearings. Gather every record before the hearing, and send new
+                evidence to the judge within 90 days after the hearing.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Short, concrete answers win</h3>
+              <p>
+                Board hearings usually run under an hour and judges keep a tight docket. Answer in
+                facts: what you do, how long it takes, what forces you to stop, and how long
+                recovery takes. Do not guess, do not exaggerate, and say you do not remember when
+                you do not. Practice keeping answers under a minute; the mock hearing room is built
+                for exactly that.
+              </p>
+            </div>
+            <div class="lt-know-card">
+              <h3>Never miss the hearing</h3>
+              <p>
+                A missed hearing is treated as withdrawn, and the judge decides your appeal without
+                your testimony. If the date truly does not work, send the Board a written request
+                with a good reason at least two weeks before the hearing. Treat the hearing date
+                like the court date it is, and keep treating and keep records current while you
+                wait. After the hearing you have 90 days to send new evidence.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lt-card" style="margin-top: 1.25rem">
+          <div class="lt-card-h"><h2>FAQ</h2></div>
+          <div class="lt-body">
+            <details class="lt-faq-item">
+              <summary>What happens at a VA disability Board hearing?</summary>
+              <p>
+                A Board hearing is an informal, non-adversarial hearing before a Veterans Law Judge
+                at the Board of Veterans' Appeals. You testify under oath about your service, your
+                conditions, and how they limit your daily life and work. The judge asks most of the
+                questions, reviews your file, and lets you and your representative make your case.
+                There is no VA lawyer arguing against you, and no jury. The judge does not decide on
+                the spot; a written decision comes later, usually months after the hearing. The mock
+                hearing room above lets you rehearse the question-and-answer rhythm before the real
+                one. This is general information, not legal advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How do I request a Board hearing?</summary>
+              <p>
+                You request a hearing on VA Form 10182, the Decision Review Request: Board Appeal,
+                by choosing the hearing docket. The form must reach the Board within one year of the
+                date on the rating decision letter. Enter your decision date above and the tool
+                works out your one-year deadline. If you already filed, check your docket choice
+                with your representative before you prepare. This is general information, not legal
+                advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What are the three Board dockets?</summary>
+              <p>
+                Direct Review means the judge decides from the evidence already in your file, with
+                no new evidence and no hearing. Evidence Submission means you can send new evidence
+                within 90 days after the Board receives your appeal, but there is no hearing.
+                Hearing means you get a hearing before a Veterans Law Judge, and you can send new
+                evidence at the hearing or within 90 days after it. You pick the docket on Form
+                10182, and you generally cannot switch later, so talk to an accredited
+                representative before you file.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>How long does a Board hearing last?</summary>
+              <p>
+                A hearing usually runs under an hour, though complex cases run longer. The judge
+                works through your service history, your conditions, and your daily limits, then
+                lets your representative ask questions. Short, specific answers about what you can
+                and cannot do matter more than long explanations. Practice keeping answers under a
+                minute.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I bring new evidence to my Board hearing?</summary>
+              <p>
+                Yes. You can bring new evidence to the hearing and hand it to the judge, and you
+                have 90 days after the hearing to send more. Enter your hearing date above and the
+                tool works out when that 90-day window closes. Do not wait until the last week; send
+                evidence as soon as you have it, and keep copies of everything you send.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Can I bring someone with me to my Board hearing?</summary>
+              <p>
+                Yes. You can bring an accredited representative, an accredited agent, or an
+                attorney, and witnesses who know your service and your daily limits firsthand, such
+                as a fellow service member or a spouse. Tell the Board ahead of time if a witness
+                will attend, and tell witnesses to stick to what they personally saw and what they
+                see you struggle with each day.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What will the judge ask me at a Board hearing?</summary>
+              <p>
+                Expect questions about when each condition started, what happened in service, what
+                your C&amp;P exam found, what a typical day looks like, how long you can sit, stand,
+                walk, and lift, and what work you can still do. The judge may also ask about
+                treatment, medications and side effects, and the jobs you have held since service.
+                Answer in plain, concrete terms: what you do, how long it takes, and what forces you
+                to stop. A one-minute opening statement framing your situation helps; the prep
+                packet mode drafts one from your facts.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>What if I miss my Board hearing?</summary>
+              <p>
+                A missed hearing is treated as withdrawn, and the judge decides your appeal without
+                your testimony, though you still have 90 days from the missed date to send evidence.
+                If the date truly does not work, send the Board a written request with a good reason
+                at least two weeks before the hearing. If an emergency makes you miss it, contact
+                the Board and your representative right away. This is general information, not legal
+                advice.
+              </p>
+            </details>
+            <details class="lt-faq-item">
+              <summary>Is this legal advice?</summary>
+              <p>
+                No. This tool prepares you for a hearing from the facts you enter: strategy, a prep
+                packet, and mock practice. It does not assess your claim, predict the outcome, or
+                cite law. For a close case or if anything sensitive comes up, review with an
+                accredited Veterans Service Organization representative, an accredited agent, or an
+                accredited attorney before the hearing.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem">
+          <h3 style="text-align: center; margin-bottom: 0.85rem; color: var(--text)">
+            Related tools and guides
+          </h3>
+          <div class="lt-related">
+            <a href="/guides/how-to-prepare-for-a-va-disability-board-hearing/"
+              ><strong>How to Prepare for a VA Disability Board Hearing</strong
+              ><small
+                >The companion guide: the three Board dockets, hearing types, evidence checklist,
+                and testimony prep</small
+              ></a
+            >
+            <a href="/tools/ai-ssdi-alj-hearing-prep-coach/"
+              ><strong>AI SSDI ALJ Hearing Prep Coach</strong
+              ><small>Prep for a different hearing: same method, different program</small></a
+            >
+            <a href="/tools/ai-military-discharge-upgrade-packet-builder/"
+              ><strong>AI Military Discharge Upgrade Packet Builder</strong
+              ><small
+                >Upgrading your discharge characterization? Build the packet from your service
+                record</small
+              ></a
+            >
+            <a href="/tools/ai-unemployment-hearing-prep-coach/"
+              ><strong>AI Unemployment Hearing Prep Coach</strong
+              ><small>A hearing in a different program, same prep method</small></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lt-sticky-gen" aria-hidden="true">
+        <button type="button" id="lt-sticky-gen-btn" class="lt-gen">Generate &rarr;</button>
+      </div>
+      <!-- AdSense: Below Tool -->
+      <section style="max-width: 900px; margin: 2rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+      <!-- AdSense: After Footer -->
+      <section style="max-width: 900px; margin: 1rem auto; padding: 0 1rem; text-align: center">
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-client="ca-pub-5721233331247292"
+          data-ad-slot="9198647442"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span
+              style="
+                font-family: var(--font-brand), Georgia, serif;
+                font-weight: 700;
+                font-size: 1rem;
+                color: var(--text);
+              "
+              >CyberScryb</span
+            >
+            <p>Practical AI life tools. Not legal, medical, or tax advice.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Service</a>
+            <a href="/disclosure/">Affiliate Disclosure</a>
+            <a href="/contact/">Contact</a>
+            <a
+              href="https://ko-fi.com/cyberscryb"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--primary); font-weight: 600"
+              >Support</a
+            >
+            <a href="https://curator.cyberscryb.com" target="_blank" rel="noopener"
+              >Photo identifier</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 CyberScryb. Not legal advice. Review every hearing prep plan with an
+            accredited Veterans Service Organization representative or attorney before your hearing.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="/tools/shared/cs-context.js?v=20261006audit1"></script>
+    <script src="/tools/shared/ai-tool.js?v=20261014ux"></script>
+    <script src="/tools/shared/formal-export.js?v=20261006audit1"></script>
+    <script src="/tools/shared/life-tool.js?v=20261006audit1"></script>
+    <script src="/tools/shared/tool-handoff.js?v=20261031handoff"></script>
+    <script src="/tools/ai-va-disability-board-hearing-prep-coach/ai-va-disability-board-hearing-prep-coach.js?v=20261112a1"></script>
+    <script>
+      (function () {
+        if (!window.ToolHandoff) return;
+        window.ToolHandoff.receiveHandoff({
+          story: 'daily_limits',
+          denial_date: 'decision_date',
+          state: 'veteran_state',
+          sender: 'veteran_name',
+          evidence: 'tool-input',
+        });
+      })();
+    </script>
+  </body>
+</html>
