@@ -160,10 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgBtns = document.querySelectorAll('.bg-btn');
   bgBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Remove active classes
-      bgBtns.forEach(b => b.classList.remove('active'));
-      // Set active class
+      // Remove active classes and set aria-pressed false
+      bgBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      // Set active class and aria-pressed true
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       // Extract selected class name and reset canvas box class list
       const targetBg = btn.getAttribute('data-bg');
