@@ -93,6 +93,13 @@
   border: 1px solid rgba(220, 38, 38, 0.2);
   border-radius: var(--radius);
   margin-bottom: 40px;
+  /* Container-query context: the pill's available width is set by this box
+     (inside .guide, max 740px), not by the viewport, so the pill must react
+     to the box. inline-size containment is safe here: a block box whose
+     width comes from its parent. flex-wrap lets a pill that cannot fit
+     beside the text drop to its own line instead of overflowing. */
+  container-type: inline-size;
+  flex-wrap: wrap;
 }
 
 .cta-box.bottom {
@@ -385,7 +392,14 @@
   text-align: center;
   white-space: nowrap;
 }
-@media (max-width: 480px) {
+/* The pill wraps when its own box is narrow, not when the viewport is:
+   the longest pill measures 564px (Outfit Bold 700, 0.8rem), so below a
+   ~700px box it needs two lines. The old 480px viewport breakpoint left
+   the pill overflowing at 481-600px viewports (measured: traffic pill
+   434px overflows 481-521px; special-ed pill 564px the whole 481-600px
+   range). Browsers without @container support keep the nowrap default,
+   which is the pre-existing behaviour. */
+@container (max-width: 700px) {
   .cta-pill {
     white-space: normal;
     line-height: 1.4;
