@@ -488,7 +488,8 @@
                     margin-top: 4px;
                 }
                 .affiliate-link.primary .affiliate-subtitle {
-                    color: rgba(255, 252, 247, 0.75);
+                    color: #fff;
+                    opacity: 1;
                 }
             `;
       document.head.appendChild(style);
